@@ -1,0 +1,22 @@
+/* Anglais (en) English */
+les_jours[0]= "M";
+les_jours[1]= "T";
+les_jours[2]= "W";
+les_jours[3]= "T";
+les_jours[4]= "F";
+les_jours[5]= "S";
+les_jours[6]= "S";
+les_mois[0]= "January";
+les_mois[1]= "February";
+les_mois[2]= "March";
+les_mois[3]= "April";
+les_mois[4]= "May";
+les_mois[5]= "June";
+les_mois[6]= "July";
+les_mois[7]= "August";
+les_mois[8]= "September";
+les_mois[9]= "October";
+les_mois[10]= "November";
+les_mois[11]= "December";
+les_annees["pre"]= "";
+les_annees["post"]= "";

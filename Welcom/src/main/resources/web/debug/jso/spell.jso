@@ -1,0 +1,11 @@
+[FILES]
+spell.js
+[OPTIONS]
+-1	-1	-1	-1	0	0	-1	0
+[VARIABLES]
+instance	d	-1
+newWord	e	-1
+originalWord	f	-1
+word	c	-1
+[FUNCTIONS]
+[UNKNOWN]

@@ -1,0 +1,282 @@
+table.wide{
+	border: 0;
+	border-collapse: collapse;	
+	width:100%;
+}
+
+
+table.noborder{	
+	border: 0;
+	border-collapse: collapse;	
+	}
+
+table.noborder td {	
+	padding: 0 0 0 0;
+}
+
+input.normal {
+	background-color: transparent;
+	border: none;
+}
+
+input {
+	vertical-align : middle;
+}
+
+
+th{
+	border-right-color: #ffffff;
+	border-right-width: 1px;
+	border-right-style: solid;
+	text-align: left;
+}	
+
+th a:visited{
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	font-family: verdana, arial, helvetica;
+	font-weight:bold;
+	font-size: 11px;
+	text-align :left;  
+	color: #FFFFFF;
+}
+
+th.sort-none a{
+	background-position: right;
+	background-repeat:no-repeat;
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	font-family: verdana, arial, helvetica;
+	font-weight:bold;
+	font-size: 11px;
+	color: #FFFFFF;
+	text-align :left;
+	background-image: url(http://cmsintranet.airfrance.fr/charte_v02_001/img/picto/arTr_white_UD_sort.gif);
+}
+
+th.sort-asc a {
+	background-position: right;
+	background-repeat:no-repeat;
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	font-family: verdana, arial, helvetica;
+	font-weight:bold;
+	font-size: 11px;
+	color: #FFFFFF;
+	text-align :left;  
+  	background-image: url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_white_blueafD_UD_sort.gif);
+}
+
+th.sort-desc a {
+	background-position: right;
+	background-repeat:no-repeat;
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	font-family: verdana, arial, helvetica;
+	font-weight:bold;
+	font-size: 11px;
+	color: #FFFFFF;
+	text-align :left;
+	background-image: url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_white_blueafU_UD_sort.gif);
+}
+
+img.page{
+	border-left-style: none;
+	border-right-style: none;
+	border-top-style: none;
+	border-bottom-style: none;
+	vertical-align:middle;
+	padding-top:8px;
+}
+	
+span.upW{
+background-image: url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_white.gif);
+background-repeat: no-repeat;
+background-position: center;
+padding-left:12px;
+width:12px;
+}
+
+span.downW{
+background-image: url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_white_D.gif);
+background-repeat: no-repeat;
+background-position: center;
+padding-left:12px;
+width:12px;
+}
+
+span.upB{
+background-image: url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_blueAF.gif);
+background-repeat: no-repeat;
+background-position: center;
+padding-left:12px;
+width:12px;
+}
+
+span.downB{
+background-image: url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_blueAF_D.gif);
+background-repeat: no-repeat;
+background-position: center;
+padding-left:12px;
+width:12px;
+}
+
+.txtW a:visited{
+	color: #FFFFFF;
+	text-decoration: none;
+	width:100%;
+	font-weight:bold;
+}
+.txtW a{
+	color: #FFFFFF;
+	text-decoration: none;
+	width:100%;
+	font-weight:bold;
+}
+
+div.richbox{
+	position:absolute;
+	background-color:#F5F5FC;
+	border:1px;
+	border-style:solid;
+	border-color:#A8AFD8;
+	padding:2px
+}
+div.iconClose{
+	position:absolute;
+	right:0;
+}
+
+
+div.notsel{		
+	cursor:pointer;
+	display: block;	
+	color:#383D90;
+}
+
+div.sel{		
+	cursor:pointer;
+	background-color:#E4E7F7;	
+	display: block;	
+	color:#383D90;
+}
+
+div.ddlist{
+	position:absolute;
+	border:1px;
+	background-color:#FFFFFF;
+	border-style:solid;
+	border-color:#A8AFD8;
+	padding:2px;
+}
+
+span.deco{
+	font-weight: bold;
+}
+
+.suggest{
+	background-image: url({#easyComplete.img.ok#}) ;
+	background-position: top right;
+	background-repeat:no-repeat;
+}
+
+
+th a:hover{
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	font-family: verdana, arial, helvetica;
+	font-weight:bold;
+	font-size: 11px;
+	text-align :left;
+	color: #FFFFFF;
+}
+
+th.sort a{
+	background-position: right;
+	background-repeat:no-repeat;
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	font-family: verdana, arial, helvetica;
+	font-weight:bold;
+	font-size: 11px;
+	text-align :left;
+	color: #FFFFFF;
+}
+.trselect{
+	font-family: verdana, arial, helvetica;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000000;
+	background-color: #F8C9D1;
+	border-left-width: 0;
+	border-right-width: 0;
+	border-top-width: 0;
+	border-bottom-width: 0;
+	border-left-color: #7073AF;
+	border-right-color: #7073AF;
+	border-top-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	border-left-style: none;
+	border-right-style: none;
+	border-top-style: none;
+	border-bottom-style: solid;
+	vertical-align: middle;
+	padding: 0;
+	margin: 0
+}
+
+.trselectclair{
+	font-family: verdana, arial, helvetica;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000000;
+	background-color: #FFEFEF;
+	border-left-width: 0;
+	border-right-width: 0;
+	border-top-width: 0;
+	border-bottom-width: 0;
+	border-left-color: #7073AF;
+	border-right-color: #7073AF;
+	border-top-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	border-left-style: none;
+	border-right-style: none;
+	border-top-style: none;
+	border-bottom-style: solid;
+	vertical-align: middle;
+	padding: 0;
+	margin: 0
+}
+
+body#popup div#barrePopup {
+	background-color: #989898;
+	overflow: hidden;
+	position: absolute;
+	height: 24px;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: right;
+	color: #FFFFFF;
+	padding-top: 6px;
+	padding-right: 20px;
+}
+
+div.separateurParagraphe {
+	height: 1px;
+	width: 100%;
+	background-color: #D4D4D4;
+	overflow: hidden;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	margin-right: 0px;
+	margin-left: 0px;
+}

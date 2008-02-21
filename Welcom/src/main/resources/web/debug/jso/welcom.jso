@@ -1,0 +1,62 @@
+[FILES]
+welcom.js
+[OPTIONS]
+-1	-1	-1	-1	0	0	-1	0
+[VARIABLES]
+accent	ag	-1
+attName	ad	-1
+ch	l	-1
+cl	ae	-1
+currentForm	o	-1
+ddp	ac	-1
+ddpN	ao	-1
+dropDown	h	-1
+f	av	-1
+field	a	-1
+fName	ai	-1
+formName	u	-1
+helpWindow	aj	-1
+i	b	-1
+lien	aq	-1
+majuscule	aa	-1
+messageTag	y	-1
+mIFrame	vv	-1
+mInput	af	-1
+mParams	az	-1
+msg	w	-1
+mSpell	bb	-1
+mtype	j	-1
+myregexp	bc	-1
+myrules	bd	-1
+o	c	-1
+ob	p	-1
+obj	ak	-1
+onglet	t	-1
+opt	k	-1
+p	at	-1
+pBoite	g	-1
+pBouton	e	-1
+pBoutonAp	r	-1
+pBoutonAv	z	-1
+pOnglet	f	-1
+prem	ar	-1
+premiereMajuscule	n	-1
+pToggle	q	-1
+rep	as	-1
+returnType	ba	-1
+sel	al	-1
+xmlhttp	i	-1
+locale	ah	-1
+idTR	am	-1
+pDiv	an	-1
+idOb	ap	-1
+d	au	-1
+a	aw	-1
+m	ax	-1
+j	ay	-1
+[FUNCTIONS]
+[UNKNOWN]
+lBoite	d	-1
+old	x	-1
+oldAction	ab	-1
+champ	m	-1

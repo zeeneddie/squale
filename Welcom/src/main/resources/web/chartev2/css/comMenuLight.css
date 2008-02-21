@@ -1,0 +1,148 @@
+@charset "utf-8";
+/********************* MENU menuH **********************/
+#menuH {
+top:45px;
+	z-index: 100;
+	height: 16px;
+	margin: 0;
+	clear: both;
+	background: #ccc url(http://cmsintranet.airfrance.fr/charte_v02_002/img/baya/bayadere_novib.gif) left top no-repeat;
+}
+
+#menuH ul, #menuH li {
+	padding: 0;
+	list-style-type: none;
+	}
+	
+#menuH ul {
+	position: absolute;
+	margin: 0 0 0 25px;
+}
+
+#menuH li {
+	position: relative;
+	float: left;
+	height: 14px;
+	margin:0;
+}
+
+#menuH li a { 
+	display: block;  
+	color: #fff;
+	background: #989898;
+	font: 10px verdana;
+	font-weight:bold;
+	text-decoration: none;
+	margin: 0 0 0 25px;
+	padding: 2px 8px 2px 8px;
+}
+
+#menuH a:hover {
+	color: #fff;
+	background: #DD0426;
+}
+
+#smenuH ul {
+	margin: 0 0 0 25px;
+	display: none;
+	width: 140px;
+}
+
+#smenuH ul li {
+	float: left;
+	width: 140px;
+}
+
+#smenuH ul li a {
+	width: 140px;  /* largeur par defaut des sous menus */
+	height: 14px; /* hauteur imposée par la charte  */
+	color:#7F7F7F;
+	background-color: #D4D4D4;
+	text-align: left;
+	margin: 0;
+	border-top:1px solid #fff;
+	padding: 0px 8px 0px 0px;
+}
+#smenuH ul li a:hover, #smenuH ul li a:hover span {
+	color:#DD0426;
+	background-color: #D4D4D4;
+}
+#smenuH ul li a span{
+	background:url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_white.gif) center no-repeat ;
+	padding: 0px 7px 0px 7px;
+}
+#smenuH ul li a:hover span {
+	background:url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_red.gif) center no-repeat ;
+}
+/* !!! les sous sous menus pour un menu H ne sont normalement pas autorisés par la charte */
+#ssmenuH ul {
+	margin: -14 0 0 141px;
+	display: none;
+}
+#ssmenuH ul li a {
+	width: 140px; /* largeur par defaut des sous sous menus */
+	height:14px; /* hauteur imposée par la charte  */
+	color:#7F7F7F;
+	background-color: #D4D4D4;
+	text-align: left;
+	margin: 0;
+	border-top:1px solid #fff;
+}
+/********************* MENU VERTICAL *********************/
+#menuV {
+	position:absolute;
+	top: 110px;
+	margin:  0;
+	width:160px;
+}
+#menuV a:hover {
+	color: #DD0426;
+	background-color: #EFEFFF;
+}
+
+#menuV ul, #menuV li {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+#menuV li {
+	height:16px;	
+	float: left;
+}
+
+#menuV ul li a{ 
+	display: block;
+	color: #989898;
+	background-color: #fff;
+	font: 10px verdana;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 2px 0px 2px 20px;
+	text-align: left;
+	width: 140px;
+	height:16px;
+	border-bottom: 1px solid #D4D4D4;
+
+}
+#smenuV ul {
+	position: absolute;
+	margin: -18px 0 0 140px;
+	border-bottom: 1px solid #D4D4D4;
+	border-left: 2px solid white;
+	display: none;
+}
+#smenuV ul li a{
+	border-bottom: 0;
+	border-top: 1px solid #D4D4D4;
+	padding: 2px 8px 2px 8px;
+}
+#smenuV li a div{
+	background:url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_grey.gif) center no-repeat ;
+	position: absolute;
+	left:125px;
+	width:11px;
+}
+#smenuV li a:hover div {
+	background:url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_red.gif) center no-repeat ;
+}

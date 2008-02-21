@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>S&eacute;lectionnez une date</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="http://cmsintranetdev.airfrance.fr/charte_v03_001/css/master.css" type="text/css">
+<link rel="stylesheet" href="{#optiflux.compression.prefix.css#}css/comCalendrierPopup.css" type="text/css">
+<script type="text/javascript">
+if(screen.width>1279) document.write('<link href="comCalendrierPopupTFT.css" rel="stylesheet" type="text/css">');</script>
+<script language="JavaScript" src="{#optiflux.compression.prefix.js#}jslib/comCalendrierPopup.js"></script>
+</head>
+
+<body id="popup" bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="fabriquerCalendrier()">
+<DIV id="header"></DIV>
+<DIV class="bg_theme" id="lignage"></DIV>
+
+<form name="form1" method="post" action="" width="100%">
+  <table class="calendrier" border="0">
+    <tr>
+      <td height="16"> 
+        <table width="100%" border="0" height="100%" cellspacing="0" cellpadding="0">
+          <tr> 
+            <td class="listes" align="center"> 
+              <select name="listeMois" onchange="mois=this.value;rafraichirCalendrier()"></select>
+              &nbsp;
+	      <select name="listeAnnees" onchange="annee=this.value;rafraichirCalendrier()"></select>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" align="center"> 
+        <table border="0" cellpadding="3" cellspacing="1" id="tableCalendrier">
+        	<thead>
+          		<tr> 
+            			<th class="jour" width="28">&nbsp;</th>
+            			<th class="jour" width="28">&nbsp;</th>
+            			<th class="jour" width="28">&nbsp;</th>
+            			<th class="jour" width="28">&nbsp;</th>
+            			<th class="jour" width="28">&nbsp;</th>
+            			<th class="jour" width="28">&nbsp;</th>
+            			<th class="jour" width="28">&nbsp;</th>
+          		</tr>
+          	</thead>
+          	<tfoot>
+          		<tr>
+          			<th colspan="7">&nbsp;</th>
+          		</tr>
+          	</tfoot>
+          	<tbody>          			
+			<tr>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+          		</tr>
+          		<tr>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+          		</tr>
+          		<tr> 
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+          		</tr>
+          		<tr>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+          		</tr>
+          		<tr> 
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+          		</tr>
+          		<tr>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+          		</tr>
+          	</tbody>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+<DIV class="lien_popup"><a href="#" onClick="self.close();" style="BACKGROUND-IMAGE: url(http://cmsintranet.airfrance.fr/charte_v03_001/img/ico/neutre/close.gif)">fermer</a></DIV>
+<DIV class="bg_theme" id="footer"></DIV>
+</html>

@@ -1,0 +1,22 @@
+/* FranÃ§ais (fr) */
+les_jours[0]= "L";
+les_jours[1]= "M";
+les_jours[2]= "M";
+les_jours[3]= "J";
+les_jours[4]= "V";
+les_jours[5]= "S";
+les_jours[6]= "D";
+les_mois[0]= "Janvier";
+les_mois[1]= "Février";
+les_mois[2]= "Mars";
+les_mois[3]= "Avril";
+les_mois[4]= "Mai";
+les_mois[5]= "Juin";
+les_mois[6]= "Juillet";
+les_mois[7]= "Août";
+les_mois[8]= "Septembre";
+les_mois[9]= "Octobre";
+les_mois[10]= "Novembre";
+les_mois[11]= "Décembre";
+les_annees["pre"]= "";
+les_annees["post"]= "";

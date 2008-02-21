@@ -1,0 +1,64 @@
+
+body{
+	zoom:1;
+	font-family: Arial;
+	font-size: 12pt;
+}
+#edit
+{
+    width:16cm;
+    height:23cm;
+    margin-left:2.5cm;
+    margin-right:2.5cm;
+    margin-top:0.5cm;
+    margin-bottom:0.5cm;
+    background:white;   
+    border:1 dashed gray;
+    overflow:hidden;
+    overflow-y: hidden ;
+}
+
+p{
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;	
+}
+blockquote{
+	padding-top:0;
+	padding-bottom: 0;
+	
+}
+
+#page
+{ 
+    width:21cm;
+    height:29,7cm;
+    background:#FFFFFF;
+    margin-top:0.5cm;
+    margin-left:0.5cm;
+	border-left:1 solid gray;
+	border-top:1 solid gray;
+	border-right:4 solid gray;
+	border-bottom:4 solid gray;
+}
+
+#header
+{
+	margin-left:2.5cm;
+	margin-top:0.5cm;
+	height:1.5cm;
+    width:16cm;
+    background:white;   
+    border:1 dashed gray;
+    overflow:hidden;
+    overflow-y: hidden ;
+}
+#footer
+{
+	width:16cm;
+	margin-left:2.5cm;
+	height:1.5cm;
+	background:white;   
+    border:1 dashed gray;
+    overflow:hidden;
+    overflow-y: hidden ;
+}

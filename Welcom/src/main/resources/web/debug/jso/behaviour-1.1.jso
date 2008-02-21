@@ -1,0 +1,9 @@
+[FILES]
+behaviour-1.1.js
+[OPTIONS]
+-1	-1	-1	-1	0	0	-1	0
+[VARIABLES]
+currentContext	a	-1
+currentContextIndex	b	-1
+[FUNCTIONS]
+[UNKNOWN]

@@ -1,0 +1,23 @@
+[FILES]
+comCalendrierPopup.js
+[OPTIONS]
+-1	-1	-1	-1	0	0	-1	0
+[VARIABLES]
+tmpObj	aa	-1
+reponse	b	-1
+langue	c	-1
+tmpTD	ee	-1
+premierJour	g	-1
+anneeDebut	k	-1
+anneeFin	n	-1
+nombreDeJours	q	-1
+tmpLigne	v	-1
+chaineDate	x	-1
+test	y	-1
+[FUNCTIONS]
+fermerCalendrier	u	-1
+formaterDate	w	-1
+nombreDeJoursDuMois	r	-1
+premierJourDuMois	s	-1
+[UNKNOWN]
+tableJours	h	-1

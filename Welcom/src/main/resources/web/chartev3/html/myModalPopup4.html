@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>Calendrier Popup</TITLE>
+<link rel="stylesheet" href="http://cmsintranetdev.airfrance.fr/charte_v03_001/css/master.css" type="text/css">
+<script language=javascript src="{#optiflux.compression.prefix.js#}jslib/comCalendrierPopup.js" type=text/javascript></script>
+<script language=javascript type=text/javascript>
+	//mise en place d'un handler traitant la perte du focus
+	if (document.addEventListener) {
+		document.addEventListener("blur", window.focus, true);
+	}
+	else {
+		if (document.attachEvent) {
+			document.attachEvent("onblur", window.focus);
+		}
+	}
+</script>
+
+<link rel="stylesheet" href="{#optiflux.compression.prefix.css#}css/comCalendrierPopup.css" type="text/css">
+</HEAD>
+
+
+<body id="popup">
+<div id="header"></div>
+<div class="bg_theme" id="lignage"></div>
+<form name="form1" method="post" action="">
+  <table class="calendrier" width="100%" border="0" cellpadding="0" cellspacing="1">
+    <tr>
+      <td align="center"> 
+        <table width="100%">
+          <tr> 
+            <td class="listes" align="center"> 
+              <select name="listeMois" id="listeMois" onchange="mois=this.value;rafraichirCalendrier()"></select>
+              &nbsp;
+			  <select name="listeAnnees" id="listeAnnees" onchange="annee=this.value;rafraichirCalendrier()"></select>
+              </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" align="center"> 
+        <table border="0" cellpadding="3" cellspacing="1" id="tableCalendrier">
+        	<thead>
+          		<tr> 
+            			<th>&nbsp;</th>
+            			<th>&nbsp;</th>
+            			<th>&nbsp;</th>
+            			<th>&nbsp;</th>
+            			<th>&nbsp;</th>
+            			<th>&nbsp;</th>
+            			<th>&nbsp;</th>
+          		</tr>
+          	</thead>
+          	<tbody>          			
+			<tr>
+            			<td id="2">&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+          		</tr>
+          		<tr>
+            			<td id="3">&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+          		</tr>
+          		<tr> 
+            			<td id="4">&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+          		</tr>
+          		<tr>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+          		</tr>
+          		<tr> 
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+          		</tr>
+          		<tr>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+            			<td>&nbsp;</td>
+          		</tr>
+          	</tbody>
+          	<tfoot>
+          		<tr>
+          			<th colspan="7">&nbsp;</th>
+          		</tr>
+          	</tfoot>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<script language=javascript type=text/javascript>
+	javascript:fabriquerCalendrier();
+</script>
+<DIV class="lien_popup"><a href="#" onClick="self.close();" style="BACKGROUND-IMAGE: url(http://cmsintranet.airfrance.fr/charte_v03_001/img/ico/neutre/close.gif)">fermer</a></DIV>
+<DIV class="bg_theme" id="footer"></DIV>
+</BODY>
+</HTML>

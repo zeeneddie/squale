@@ -1,0 +1,4325 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+  "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+  <tlib-version>2.4</tlib-version>
+  <jsp-version>1.2</jsp-version>
+  <short-name>af</short-name>
+  <uri>http://www.airfrance.fr/welcom/tags-welcom</uri>
+  <display-name>Air France, Welcom Tag Library</display-name>
+  <description><![CDATA[Cette Taglib contient des tags conformes à la charte AirFrance V2. 
+Elle contient des tags susceptible de faciliter le développement de pages Web à la charte V2 (001 ou 002). 
+Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]></description>
+  
+	<tag>
+		<name>styleSheet</name>
+		<tag-class>com.airfrance.welcom.taglib.optimization.StyleSheetTag</tag-class>
+		<body-content>empty</body-content>
+		<description>Permet l'inclusion d'une css (remplace style). Ces inclusions passeront par le filtre Welcom, qui supprimera les espaces et les commentaires.</description>
+		<attribute>
+			<name>src</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>source du fichier à inclure, peut être relatif ou absolu</description>
+		</attribute>
+	</tag>
+	<tag>
+		<name>script</name>
+		<tag-class>com.airfrance.welcom.taglib.optimization.ScriptTag</tag-class>
+		<body-content>empty</body-content>
+		<description>Permet l'inclusion d'un js ou vbs (remplace link). Ces inclusions parsseront par le filtre Welcom, qui supprimera les espaces et les commentaires.</description>
+		<attribute>
+			<name>src</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>source du fichier à inclure, peut être relatif ou obsolu</description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>cleanSpaces</name>
+		<tag-class>com.airfrance.welcom.taglib.optimization.CleanSpacesTag</tag-class>
+		<body-content>JSP</body-content>
+		<description> <![CDATA[<p>Suppresion des caractères blancs inutiles dans la page.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:cleanSpaces&gt;
+	... html  ...
+&lt;/af:cleanSpaces&gt;</pre>
+    <p>Le cleanSpaces ne peut contenir le tag &lt;af:canvas&gt; ni le &lt;jsp:include...&gt; 
+      à cause d'une limitation de WAS4. Cette limitation disparait à l'utlisation 
+      de WAS5. En effet ce tag ne peut contenir un include dynamique.</p>
+    <p>Le cleanSpaces supprime les retours chariots, donc en javascript l'accolade 
+      est obligatoire:</p>
+    <pre> if (a==a)
+	{ ... }</pre>]]></description>
+	</tag>
+	
+	<tag>
+		<name>htmlarea</name>
+		<tag-class>com.airfrance.welcom.taglib.htmlarea.HtmlAreaTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[ <p>Ce tag permet de créer un éditeur permettant de saisir du 
+      texte et de le mettre en forme. il repose sur le fonctionnement de l'éditeur 
+      javascript <a href="http://www.interactivetools.com/products/htmlarea/">htmlarea</a>. 
+      Il dispose de fonctionnalités permettant d'inclure une feuille de 
+      style css à l'éditeur, pour créer un contenu de page 
+      web. L'éditeur propose 2 modes de fonctionnement : </p>
+  </div>
+</DIV>
+<ul>
+  <li>le mode HTML qui permet d'écrire un contenu de page web 
+        à la charte V2 Air France</li>
+  <li>le mode CUSTOM qui permet au développeur d'adapter l'éditeur 
+    au besoin.</li>
+</ul>
+<DIV>
+  <div class=indent>
+    <p>L'éditeur dispose de tout un panel d'outils, mais il est personnalisable, 
+      il offre la possibilité d'ajouter des contr&ocirc;le utilisateurs 
+      dans la barre d'outils.</p>
+    <p>la syntaxe est la suivante : </p>
+     
+    <pre><p>&lt;af:htmlarea  name=&quot;utilisateur&quot;&gt;<br>		    &lt;<a href="customtool.html">af:customtool</a> id=&quot;monboutton&quot; type=&quot;BUTTON&quot; action=&quot;clickhandler&quot;/&gt;
+			&lt;<a href="customtool.html">af:customtool</a> id=&quot;moncombo&quot; type=&quot;DROPDOWN&quot; action=&quot;clickhandler&quot; collection=&quot;Valeurscombo&quot;/&gt;<br>&lt;/af:htmlarea&gt;</pre>]]></description>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[le nom du bean à associer à l'éditeur.]]></description>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[la propriété du bean spécifiée dans l'attribut 
+            name à associer avec l'éditeur.]]></description>
+		</attribute>
+		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[détermine si le bean est stocké dans la 
+          session ou la request.]]></description>
+		</attribute>
+		<attribute>
+			<name>plugin</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le seul plugin disponible actuellement est le plugin &quot;CSS&quot;. 
+            Il permet d'appliquer une feuille de style au contenu de l'éditeur. 
+            La css par défaut est celle de la charte V2_001 d'Air France. 
+            le plugin propose un combo dans la barre d'outils contenant les styles 
+            de la css les plus utiles dans les applications. </p>
+          <p>Le développeur a la possibilité de changer la css par 
+            le biais de l'attribut cssurl. Dans ce cas il devra spécifier 
+            également les styles qu'il veut rendre disponibles dans le 
+            combo. Pour cela il faut redéfinir un fichier de propriétés 
+            WelcomeRessources.properties.</p>
+          <p>dans ce fichier il faut redéfinir une entrée appellée 
+            : htmlarea.default.styles de cette fa&ccedil;on : </p>
+          <p>htmlarea.default.styles = &quot;Nom du style 1&quot;:&quot;style 
+            1&quot;,&quot;Nom du style 2&quot;:&quot;style2&quot;,.....</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>cols</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[nombre de caractère en largeur de l'éditeur.]]></description>
+		</attribute>
+		<attribute>
+			<name>rows</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[nombre de caractère en heuteur de l'éditeur.]]></description>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[largeur de l'éditeur en pixel ou en pourcentage. 
+          Attention cet attribut est prioritaire sur l'attibut cols.]]></description>
+		</attribute>
+		<attribute>
+			<name>toolbarkey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>la clé du WelcomeRessources.properties redéfini, de la chaine déterminant 
+            les contr&ocirc;les de la barre d'outils. </p>
+          <p>exemple : toolbakey=&quot;maToolBar&quot;</p>
+          <p>dans le fichier WelcomeRessources.propertie : maToolBar=bold,italic,underline,space,fontname|fontsize</p>
+          <p>le contenu de cette chaine est explicité plus <a href="customtool.html">loin</a></p>]]></description>
+		</attribute>
+		<attribute>
+			<name>debug</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[passer cet attribut à true permet d'afficher le 
+          bouton 'htmlmode' dans la barre d'outil, et empèche la suppression 
+          des blancs lors de la génération du code html ce qui permet 
+          une meilleure lecture du code généré.]]></description>
+		</attribute>
+		<attribute>
+			<name>callbacksfile</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[permet de spécifier le chemin du fichier javascript 
+          contenant les fonctions de callback des contrôles personnalisés. 
+          Pour plus d'info voir le tag <a href="customtool.html">customtool</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>editorType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>permet de configurer l'éditeur rapidement : </p>
+          <ul>
+            <li>le mode HTML qui applique la css charte v2 et 
+                  qui rajoute le combo avec les styles, pour éditer une 
+                  page web</li>
+            <li>le mode CUSTOM qui permet au développeur d'adapter l'éditeur 
+              au besoin. </li>
+          </ul>]]></description>
+		</attribute>
+		<attribute>
+			<name>forceReadWrite</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[permet de forcer l'accès en lecture écriture sur 
+          le champs quand la page est en lecture seule ]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>customtool</name>
+		<tag-class>com.airfrance.welcom.taglib.htmlarea.CustomToolTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce tag ne s'utilise que dans un tag <a href="htmlarea.html">htmlarea</a>.Il 
+          ya 2 types de cont&ocirc;les disponible : </p>
+      </div>
+    </div>
+    <ul>
+      <li>BUTTON, qui crée un bouton dans la barre d'outil.
+      </li>
+      <li>DROPDOWN, qui créé une liste déroulante dans la 
+        barre d'outils.</li>
+    </ul>
+    <div> 
+      <div class=indent> 
+        <p>la syntaxe est la suivante : </p>
+        <pre><p>&lt;<a href="htmlarea.html">af:htmlarea</a>  name=&quot;utilisateur&quot;&gt;<br>		    &lt;af:customtool id=&quot;monboutton&quot; type=&quot;BUTTON&quot; action=&quot;clickhandler&quot;/&gt;
+			&lt;af:customtool id=&quot;moncombo&quot; type=&quot;DROPDOWN&quot; action=&quot;clickhandler&quot; collection=&quot;Valeurscombo&quot;/&gt;<br>&lt;/af:<a href="#htmlarea">htmlarea</a>&gt;</pre>
+        
+      <p><b>Personnalisation de la barre d'outil : </b></p>
+        <p>les noms de contr&ocirc;les sont séparés par des virgules. 
+      Pour faire plusieurs niveaux de barre d'outils insérer un &quot;|&quot; 
+      (AltGr+6).</p>
+    <table width="90%" border="0">
+      <tr class="evenRow"> 
+        <td width="9%"><b>space</b></td>
+        <td width="36%">ajoute un espace</td>
+        <td width="13%"><b>justifyleft</b></td>
+        <td width="42%">justifie le texte à gauche</td>
+      </tr>
+      <tr> 
+        <td width="9%"><b>separator</b></td>
+        <td width="36%">dessine une petite barre verticale</td>
+        <td width="13%"><b>justifycenter</b></td>
+        <td width="42%">justifie le texte au centre</td>
+      </tr>
+      <tr class="evenRow"> 
+        <td width="9%"><b>fontname</b></td>
+        <td width="36%">affiche un combo avec les polices de caractères</td>
+        <td width="13%"><b>justifyright</b></td>
+        <td width="42%">justifie le texte à droite</td>
+      </tr>
+      <tr> 
+        <td width="9%"><b>fontsize</b></td>
+        <td width="36%">affiche un combo avec les tailles de police</td>
+        <td width="13%"><b>justifyfull</b></td>
+        <td width="42%">justifie le texte sur la largeur de la page</td>
+      </tr>
+      <tr class="evenRow"> 
+        <td width="9%"><b>formatblock</b></td>
+        <td width="36%">affiche les formats de titre</td>
+        <td width="13%" height="24"><b>insertorderedlist</b></td>
+        <td width="42%">insère des puces numérotées</td>
+      </tr>
+      <tr> 
+        <td width="9%"><b>bold</b></td>
+        <td width="36%">met en gras le texte sélectionné</td>
+        <td width="13%"><b>insertunorderedlist</b></td>
+        <td width="42%">insère des puces</td>
+      </tr>
+      <tr class="evenRow"> 
+        <td width="9%"><b>italic</b></td>
+        <td width="36%">met en italiquele texte sélectionné</td>
+        <td width="13%"><b>outdent</b></td>
+        <td width="42%">réduit l'indentation du paragraphe</td>
+      </tr>
+      <tr> 
+        <td width="9%"><b>underline</b></td>
+        <td width="36%">souligne le texte sélectionné</td>
+        <td width="13%"><b>indent</b></td>
+        <td width="42%">augmente l'indentation du paragraphe</td>
+      </tr>
+      <tr class="evenRow"> 
+        <td width="9%"><b>strikethrough</b></td>
+        <td width="36%">barre le texte sélectionné</td>
+        <td width="13%"><b>forecolor</b></td>
+        <td width="42%">détermine la couleur du texte sélectionné</td>
+      </tr>
+      <tr> 
+        <td width="9%"><b>subscript</b></td>
+        <td width="36%">met en indice le texte sélectionné</td>
+        <td width="13%"><b>hilitecolor</b></td>
+        <td width="42%">détermine la couleur de fond du texte sélectionné</td>
+      </tr>
+      <tr class="evenRow"> 
+        <td width="9%"><b>superscript</b></td>
+        <td width="36%">met en exposant le texte sélectionné</td>
+        <td width="13%"><b>textindicator</b></td>
+        <td width="42%">affiche un petit &quot;A' qui prends le style du texte 
+          sélectionné. &ccedil;a sert à rien......</td>
+      </tr>
+      <tr> 
+        <td width="9%"><b>copy</b></td>
+        <td width="36%">copie le texte sélectionné dans le presse 
+          papier. </td>
+        <td width="13%"><b>inserthorizontalrule</b></td>
+        <td width="42%">insère une barre horizontale.</td>
+      </tr>
+      <tr class="evenRow"> 
+        <td width="9%"><b>cut</b></td>
+        <td width="36%">copie le texte sélectionné dans le presse 
+          papier,et l'efface</td>
+        <td width="13%"><b>createlink</b></td>
+        <td width="42%">crée un lien de type href</td>
+      </tr>
+      <tr> 
+        <td width="9%"><b>paste</b></td>
+        <td width="36%">colle à l'endroit du curseur le texte 
+          contenu dans le presse papier</td>
+        <td width="13%"><b>insertimage</b></td>
+        <td width="42%">insère une image</td>
+      </tr>
+      <tr class="evenRow"> 
+        <td width="9%"><b>undo</b></td>
+        <td width="36%">annule la dernière action</td>
+        <td width="13%"><b>inserttable</b></td>
+        <td width="42%">insère un tableau</td>
+      </tr>
+      <tr> 
+        <td width="9%"><b>redo</b></td>
+        <td width="36%">rétabli l'action annulée</td>
+        <td width="13%"><b>htmlmode</b></td>
+        <td width="42%">affiche le code source html du document</td>
+      </tr>
+      <tr class="evenRow"> 
+        <td width="9%"><b>about</b></td>
+        <td width="36%" height="15">affiche une fenêtre &quot;à propos&quot;</td>
+        <td width="13%" height="15"><b>popupeditor</b></td>
+        <td width="42%" height="15">affiche l'éditeur dans une nouvelle 
+          fenêtre en plein écran</td>
+      </tr>
+      <tr> 
+        <td width="9%"><b></b></td>
+        <td width="36%">&nbsp;</td>
+        <td width="13%"><b>showhelp</b></td>
+        <td width="42%">affiche l'aide....mais pas la notre..alors &ccedil;a ne sert 
+          à rien....</td>
+      </tr>
+    </table>
+        ]]></description>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[l'identifiant du contr&ocirc;le.]]></description>
+		</attribute>
+		<attribute>
+			<name>type</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[le type du contr&ocirc;le : BUTTON ou DROPDOWN]]></description>
+		</attribute>
+		<attribute>
+			<name>action</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>cet attribut contient la fonction javascript en ligne qui sera 
+                déclenché lorsque le contr&ocirc;le sera cliqué, 
+                ou le nom d'une fonction définie dans la portée 
+                de la page (il existe l'attribut htmlarea, callbacksfile qui permet 
+                d'inclure un fichier javascript à la page).</p>
+              <p>la fonction est du type : (en ligne) function (editor){editor.insertHTML(&quot;blabla&quot;);} 
+                (cette methode n'est pas recommandée.</p>
+              <p>dans un fichier déporté &lt;af:htmlarea callbacksfile=&quot;monjs.js&quot;.....&gt;&lt;af:customtool 
+                action=&quot;maFonction&quot; <br>
+                dans le fichier monjs.js on a : <br>
+              <pre>functoin maFonction(editor,id)<br>  { 
+     switch(id)
+      {
+        case 'monbouton': editor.insertHTML(&quot;blabla&quot;);
+        case 'moncombo': editor.insertHTML(&quot;blibli&quot;);
+      }
+  }<br>	</pre>]]></description>
+		</attribute>
+		<attribute>
+			<name>tooltip</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[détermine le texte à afficher dans l'info-bulle 
+              lorsque la souris passe au dessus du contr&ocirc;le.]]></description>
+		</attribute>
+		<attribute>
+			<name>options</name>
+			<required>flase</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>si l'attribut collection n'est pas renseigné, il est possible 
+                de définir les valeurs d'une liste déroulante par 
+                le biais de l'attribut option.</p>
+              <p>cet attribut contient soit une clé recherchée dans 
+                le fichier ApplicationResources.properties soit la valeur en ligne 
+                des options de la liste déroulante.</p>
+              <p> par exemple : options=&quot;'libellé1':'valeur1','libellé2':'valeur2'&quot;</p>
+              <p>ou options=&quot;monDropDown&quot; dans le fichier de ressources 
+                : monDropDown=&quot;libellé1&quot;:&quot;valeur1&quot;,&quot;libellé2&quot;:&quot;valeur2&quot;</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>image</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[détermine l'URL de l'imge à afficher si le contr&ocirc;le 
+                est de type BUTTON]]></description>
+		</attribute>
+		<attribute>
+			<name>refresh</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[contient à la place de l'attribut action une fonction javascript 
+                qui est déclenchée lorsque le curseur est déplacé 
+                dans l'éditeur. Cette fonction ne fonctionne que lorsque 
+                le contr&ocirc;le est de type DROPDOWN.]]></description>
+		</attribute>
+		<attribute>
+			<name>insert</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[ <p>il existe plusieurs manières d'insérer le contr&ocirc;le 
+                dans la barre d'outil : </p>
+              <p>- soit, il faut ajouter l'id du bouton dans la chaine 
+                de description de la barre d'outil</p>
+              <p>- soit valoriser l'attribut insert:</p>
+              <ul>
+                <li>BEFORE : insère le contr&ocirc;le au début de 
+                  la barre d'outils.</li>
+                <li>AFTER : insère le contr&ocirc;le à la fin de 
+                  la barre d'outils.</li>
+              </ul>]]></description>
+		</attribute>
+		<attribute>
+			<name>collection</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>le nom d'un bean de type Collection, qui est publié dans 
+                la session.Il sera utilisé pour valoriser les entrées 
+                de la liste déroulante. cet attribut n'est pris en compte 
+                que si le contr&ocirc;le est de type DROPDOWN.</p>
+              <p>cette Collection doit contenir des objets de type com.airfrance.welcom.struts.bean.WCouple.</p>
+              <p>WCouple est une classe comprenant un libellé 
+                et une valeur.</p>]]></description>
+		</attribute>
+	</tag>
+
+	<!-- Tag Menu en charte V2 -->
+	<tag>
+		<name>menu</name>
+		<tag-class>com.airfrance.welcom.taglib.menu.JSMenuTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce tag s'utilise avec les tags menuItem et menuDroitItem</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:menu&gt;
+	&lt;<a href="menuItem.html">af:menuItem</a> key=&quot;...&quot; couleur=&quot;...&quot; action=&quot;...&quot;/&gt; 
+	&lt;<a href="menuItem.html">af:menuItem</a> key=&quot;...&quot; couleur=&quot;...&quot;  width=&quot;...&quot;&gt;
+		&lt;<a href="menuItem.html">af:menuItem</a> key=&quot;...&quot; couleur=&quot;...&quot; action=&quot;...&quot; access=&quot;...&quot;/&gt;
+	&lt;/<a href="#menuItem.html">af:menuItem</a>&gt;
+&lt;/af:menu&gt;</pre>]]></description>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Nom du menu, facultatif.]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>menuItem</name>
+		<tag-class>com.airfrance.welcom.taglib.menu.JSMenuItemTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce tag doit être inclu dans un tag menu.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:<a href="#menu">menu</a>&gt;
+	&lt;af:menuItem key=&quot;...&quot; couleur=&quot;...&quot; action=&quot;...&quot;/&gt; 
+	&lt;af:menuItem key=&quot;...&quot; couleur=&quot;...&quot;  width=&quot;...&quot;&gt;
+		&lt;af:menuItem key=&quot;...&quot; couleur=&quot;...&quot; action=&quot;...&quot; accessKey=&quot;...&quot;/&gt;
+	&lt;/af:menuItem&gt;
+&lt;/<a href="menu.html">af:menu</a>&gt;</pre>]]></description>
+		<attribute>
+			<name>key</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[clé correspondant au label à afficher dans le menu 
+            définie dans le fichier de ressources.]]></description>
+		</attribute>
+		<attribute>
+			<name>color</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[détermine la couleur de l'onglet quand le curseur de la souris 
+            passe au dessus. 1: bleu, 2:rouge]]></description>
+		</attribute>
+		<attribute>
+			<name>action</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[nom de l'action que le menu appelle]]></description>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[largeur du menu]]></description>
+		</attribute>
+		<attribute>
+			<name>accessKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[indique la clé du droit d'accès habilité 
+          à afficher ce menu exemple : &quot;DRPG_PAGE1&quot; ou &quot;DRPG_PAGE1 
+          || DRPG_PAGE2&quot;]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>field</name>
+		<tag-class>com.airfrance.welcom.taglib.field.FieldTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[ <p>Ce Tag permet de créer un champs de saisie dans un formulaire, que 
+      ce soit un champs texte, un type checkbox, ou un radiobutton.Il comporte 
+      des facilités de formatage pour les champs de type date et des aides 
+      à la saisie (validation de saisie, aide de type calendrier pour les 
+      dates). Le champs peut être en lecture seul ou en lecture écriture. 
+      il doit être inclu dans un formulaire nommé comme le bean sur 
+      lequel seront faits les accès au attributs.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:field property=&quot;matricule&quot; key=&quot;pnc.matricule&quot;/&gt;
+ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du champs et une pour la valeur.</p></pre>]]></description>
+		<attribute>
+			<name>disabled</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[on le met à true si on ne veut pas ce field]]></description>
+		</attribute>
+		<attribute>
+			<name>access</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[le type d'accès au champs : READONLY 
+            (lecture seule) READWRITE (lecture écriture) READSEND (lecture 
+            seule, mais création d'un champs hidden pour que la valeur 
+            soit renvoyée lors de la validation de la page).]]></description>
+		</attribute>
+		<attribute>
+			<name>filterSpecialChar</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Empeche la saisie des caractères 
+            spéciaux : ',&quot;,&gt;,&lt;,&amp;,=.]]></description>
+		</attribute>
+		<attribute>
+			<name>forceReadWrite</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Force l'accès en lecture écriture si la page 
+            est en lecture seule.]]></description>
+		</attribute>
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[le type est important pour la validation 
+            : TEXT,EMAIL, CHECKBOX, DATE,NUMBER,TEXTAREA,DATEHEURE,PASSWORD,RADIO.]]></description>
+		</attribute>
+		<attribute>
+			<name>cols</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la largeur du champs lorsqu'il 
+            s'agit d'un TEXTAREA. la largeur est exprimée en nombre de 
+            caractères.]]></description>
+		</attribute>
+		<attribute>
+			<name>rows</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la hauteur du champs lorsqu'il 
+            s'agit d'un TEXTAREA. la hauteur est exprimée en nombre de 
+            lignes.]]></description>
+		</attribute>
+		<attribute>
+			<name>colspan</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[détermine la valeur du colspan qui 
+            sera appliquée à la balise &lt;td&gt; contenant la valeur 
+            du champs]]></description>
+		</attribute>
+		<attribute>
+			<name>colspanLabel</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[détermine le label du colspan qui 
+            sera appliquée à la balise &lt;td&gt; contenant le label 
+            du champs]]></description>
+		</attribute>
+		<attribute>
+			<name>li</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[affiche une puce devant le champs.]]></description>
+		</attribute>
+		<attribute>
+			<name>upperCase</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[passe le texte saisi en majuscule lorsque 
+            le champs perd le focus si l'attribut est à true.]]></description>
+		</attribute>
+		<attribute>
+			<name>firstUpperCase</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Met une majuscule à 
+            la première lettre du texte saisi lorsque le champs perd le 
+            focus si l'attribut est à true.]]></description>
+		</attribute>
+		<attribute>
+			<name>accent</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[supprime les accents dans le texte saisie 
+            si l'attribut est à false.]]></description>
+		</attribute>
+		<attribute>
+			<name>tabindex</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[L'ordre de tabulation pour cet élément (entiers positifs croissants).]]></description>
+		</attribute>
+		<attribute>
+			<name>key</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[ <p>définit le label à afficher. 
+              Si cet attribut est égal à &quot;&quot; aucun label 
+              ne sera affiché. Si la clé n'est pas trouvé 
+              dans le fichier properties, c'est elle qui est affichée</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>arg0</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Affiche un argument dans le label du 
+              champs. exemple : dans le fichier de ressource on définit 
+              un label </p>
+            <p>texte=Saisir un âge pour monsieur {0} entre {1} et {2}</p>
+            <p>on aura key=&quot;texte&quot; arg0=&quot;le capitaine&quot; arg1=&quot;50&quot; 
+              arg2=&quot;60&quot; </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>arg1</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Affiche un argument dans le label du champs.]]></description>
+		</attribute>
+		<attribute>
+			<name>arg2</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Affiche un argument dans le label du champs.]]></description>
+		</attribute>
+		<attribute>
+			<name>arg3</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Affiche un argument dans le label du champs.]]></description>
+		</attribute>
+		<attribute>
+			<name>arg4</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Affiche un argument dans le label du champs.]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Le nom du bean dont on veut afficher la 
+            propriété qui est spécifiée dans l'attribut 
+            property.]]></description>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Nom de la propriété à 
+              afficher. La propriété doit avoir un accesseur dans 
+              le bean spécifié (si l'attribut Name n'est pas renseigné 
+              le bean par défaut est celui spécifié dans 
+              le formulaire). </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>size</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[définit la largeur du champs. La 
+            largeur est exprimée en nombre de caractères.]]></description>
+		</attribute>
+		<attribute>
+			<name>maxlength</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit le nombre maximum de caractère 
+            pouvant être saisis dans le champs.]]></description>
+		</attribute>
+		<attribute>
+			<name>styleId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'id de l'objet]]></description>
+		</attribute>
+		<attribute>
+			<name>styleClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la classe de style du &lt;td&gt; 
+            contenant la valeur du champs.]]></description>
+		</attribute>
+		<attribute>
+			<name>styleClassLabel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la classe de style du &lt;td&gt; 
+            contenant le label du champs.]]></description>
+		</attribute>
+		<attribute>
+			<name>isRequired</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[affiche une astérisque rouge à 
+            c&ocirc;té du champs si le champs est obligatoire.]]></description>
+		</attribute>
+		<attribute>
+			<name>redisplay</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[voir documentation du <a href="http://jakarta.apache.org/struts/userGuide/struts-html.html#password" target="_blank">password 
+            tag</a> de struts]]></description>
+		</attribute>
+		<attribute>
+			<name>dateFormat</name>
+			<required>false</required>
+			<description><![CDATA[définit le format de la date si le 
+            type est DATE.]]></description>
+		</attribute>
+		<attribute>
+			<name>hourFormat</name>
+			<required>false</required>
+			<description><![CDATA[définit le format de la date si le 
+            type est DATEHEURE.]]></description>
+		</attribute>
+		<attribute>
+			<name>dateFormatKey</name>
+			<required>false</required>
+			<description><![CDATA[définit la clé du format de la date. La property du form doit etre une String contenant un long (getTime de la date)]]></description>
+		</attribute>
+		<attribute>
+			<name>hourFormatKey</name>
+			<required>false</required>
+			<description><![CDATA[définit la clé du format des heures. La property du form doit etre une String contenant un long (getTime de la date)]]></description>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit une valeur par défaut. ]]></description>
+		</attribute>
+		<attribute>
+			<name>calendarBeginYear</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[définit l'année de début 
+            dans le calendrier lorsque le champs est de type DATE ou DATEHEURE 
+            (exemple : 1900)]]></description>
+		</attribute>
+		<attribute>
+			<name>calendarEndYear</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[définit l'année de fin dans 
+            le calendrier lorsque le champs est de type DATE ou DATEHEURE (exemple 
+            : 2040)]]></description>
+		</attribute>
+		<attribute>
+			<name>autoComplete</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[valeurs possibles on ou off, gère 
+            l'autocompletion sur un champs, pour plus de détail voir la 
+            documentation html sur l'<a href="http://msdn.microsoft.com/library/default.asp?url=/workshop/author/dhtml/reference/properties/autocomplete.asp" target="_blank">autocomplete</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>writeTD</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[par défaut le field est encapsulé 
+            dans une balise &lt;td&gt;. Si cet attribut est à false le 
+            &lt;td&gt; n'est pas écrit. De ce fait le label n'est pas non 
+            plus écrit.]]></description>
+		</attribute>
+		<attribute>
+			<name>onclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste .</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>ondblclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseover</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseout</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousemove</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousedown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeydown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeyup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeypress</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onselect</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onitemselection</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Evènement lié à l'easycomplete, appelé lors de la sélection d'un élément </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onchange</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onblur</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onfocus</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le tag field supporte 
+              les évenements de la liste.</p>
+            <p>Ces évenements sont transmis à la zone de saisie 
+              du tag. </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la largeur de la colonne. (voir attribut 
+            width de la balise html &lt;td&gt;)]]></description>
+		</attribute>
+		<attribute>
+			<name>widthLabel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Définit la largeur du label]]></description>
+		</attribute>
+		<attribute>
+			<name>accessKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Clef de hashage retournant la valeur 
+              (NONE,READWRITE,READONLY) en fonction de la key via l'appel de la 
+              methode du ILogonBeanSecurity : getAccess(key) dans le pageContext 
+              sous la variable 'access'. Le logonBean étant stocké 
+              dans la session.</p>
+            <p>Si le logonBean est null, alors rediriger vers la page definit en 
+              'timeout' </p>
+            <p>Possibilite d'utiliser la combinaison ou : exemple (DRPG_PAGE1 
+              || DRPG_PAGE2)</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>overridePageAccess</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[détermine si l'accessKey du field remplace 
+            le général de la page]]></description>
+		</attribute>
+		<attribute>
+			<name>easyCompleteName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[nom de bean (en session) sur lequel on 
+            va trouver la collection]]></description>
+		</attribute>
+		<attribute>
+			<name>easyCompleteProperty</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[property du bean pour trouver la collection, 
+            si nécessaire]]></description>
+		</attribute>
+		<attribute>
+			<name>easyCompleteBeanValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[sur le Bean contenu dans la collection, 
+            la property utilisée pour la value]]></description>
+		</attribute>
+		<attribute>
+			<name>easyCompleteBeanLabel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[sur le Bean contenu dans la collection, 
+            la property utilisée pour la label, (sert au match, mais n'est 
+            pas affiché lors de la valiation)]]></description>
+		</attribute>
+		<attribute>
+			<name>easyCompleteCallBackUrl</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>spécifie que l'on désire 
+              passer par un callBack personnel,</p>
+            <p>la chaine saisie est fournie en paramètre de la request sous l'attribut 
+              'ch'</p>
+            <p>Vous devez retourner un flux xml, Vous pouvez utiliser la classe 
+              WHttpEasyCompleteResponse pour générer ce flux</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>easyCompleteDecorationClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[StyleClass utilisé pour les portions 
+            matchés ]]></description>
+		</attribute>
+		<attribute>
+			<name>unSelectValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Valeur si la case à cocher est décochée]]></description>
+		</attribute>
+		<attribute>
+			<name>spellChecked</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Definit si le ce champ est soumis a la verification orthographique. Ne fonctionne que si l'addon SpellManager a été initialisé]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>tabbedPane</name>
+		<tag-class>com.airfrance.welcom.taglib.onglet.JSOngletTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce tag s'utilise avec le tag tab</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:tabbedPane&gt;
+  &lt;<a href="tab.html">af:tab</a> key=&quot;...&quot; isTabSelected=&quot;...&quot; name=&quot;...&quot;&gt; 
+    ... html ...
+  &lt;/<a href="tab.html">af:tab</a>&gt;
+  &lt;<a href="tab.html">af:tab</a> key=&quot;...&quot; isTabSelected=&quot;...&quot; name=&quot;...&quot;&gt;
+     &lt;jsp:include page=&quot;...&quot; flush=&quot;true&quot;/&gt;
+  &lt;/<a href="tab.html">af:tab</a>&gt;
+  &lt;<a href="tab.html">af:tab</a> key=&quot;...&quot; isTabSelected=&quot;...&quot; name=&quot;...&quot; access=&quot;...&quot;&gt;
+    ... html ...
+  &lt;/<a href="tab.html">af:tab</a>&gt;
+&lt;/af:tabbedPane&gt;</pre>]]></description>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[name de l'objet html]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>tab</name>
+		<tag-class>com.airfrance.welcom.taglib.onglet.JSOngletItemTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[ <p>Ce tag doit être inclu dans un tag tabbedPane.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;<a href="tabbedPane.html">af:tabbedPane</a>&gt;
+  &lt;af:tab key=&quot;...&quot; isTabSelected=&quot;...&quot; name=&quot;...&quot;&gt; 
+    ... html ...
+  &lt;/af:tab&gt;
+  &lt;af:tab key=&quot;...&quot; isTabSelected=&quot;...&quot; name=&quot;...&quot;&gt;
+    &lt;jsp:include page=&quot;...&quot; flush=&quot;true&quot;/&gt;
+  &lt;/af:tab&gt;
+  &lt;af:tab key=&quot;...&quot; isTabSelected=&quot;...&quot; name=&quot;...&quot; access=&quot;...&quot;&gt;
+    ... html ...
+  &lt;/af:tab&gt;
+&lt;/<a href="tabbedPane.html">af:tabbedPane</a>&gt;</pre>]]></description>
+		<attribute>
+			<name>key</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[clé correspondant au label à afficher 
+              dans l'onglet défini dans le fichier de ressources.]]></description>
+		</attribute>
+		<attribute>
+			<name>isTabSelected</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[détermine l'onglet qui sera sélectionné 
+              à l'affichage de la page.]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[le nom de l'onglet]]></description>
+		</attribute>
+		<attribute>
+			<name>accessKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[indique la clé du droit d'accès habilité 
+            à afficher cet onglet exemple : &quot;DRPG_PAGE1&quot; ou &quot;DRPG_PAGE1 
+            || DRPG_PAGE2&quot;]]></description>
+		</attribute>
+		<attribute>
+			<name>lazyLoading</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[envoi seulement les onglets visibles par défaut, puis 
+            charge les suivants sur le chargement d'onglet]]></description>
+		</attribute>
+		<attribute>
+			<name>onAfterShow</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[lancement du javascript specifié apres l'affichage de l'onglet]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>canvasHeader</name>
+		<tag-class>com.airfrance.welcom.taglib.canvas.CanvasHeaderTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce Tag définit le canevas de l'entête AirFrance (spécifié 
+      dans le menu.jsp).</p>
+    <p>Définit le bayadère, l'image de tétière, les 
+      differents javascripts et feuilles de style nécessaires à welcom</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:canvasHeader ...&gt;
+  &lt;<a href="menu.html">af:menu</a>&gt;
+		... 
+  &lt;/<a href="menu.html">af:menu</a>&gt;
+&lt;/af:canvasHeader</pre>]]></description>
+		<attribute>
+			<name>headerImageURL</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Sert a définir l'image de la tétiere.]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>page</name>
+		<tag-class>com.airfrance.welcom.taglib.canvas.PageTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce tag est équivalent au tag &lt;HTML&gt; ... &lt;/HTML&gt;<br>
+      Ce tag vérifie et définit le droit d'accès à la page et permet 
+      l'utilisation des tags de vérification isPageReadWrite, isPageReadOnly, 
+      hasAccess. </p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:page accessKey=&quot;...&quot;&gt;
+   &lt;af:head&gt;
+      ... inclusion js / css ...
+   &lt;/head&gt;
+   &lt;af:body&gt;
+      ... html ...
+   &lt;/af:body&gt;
+&lt;/af:page&gt;</pre>]]></description>
+		<attribute>
+			<name>titleKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>définit la clef de titre de la page, définit la balise 
+              &lt;title&gt; du header, et passe implicitement ces parametres au 
+              tag body</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg0</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {0} de la clef de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg1</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {1} de la clef de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg2</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {2} de la clef de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg3</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {3} de la clef de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>subTitleKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la clef de sous-titre de la page ]]></description>
+		</attribute>
+		<attribute>
+			<name>subTitleKeyArg0</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {0} de la clef de sous-titre]]></description>
+		</attribute>
+		<attribute>
+			<name>subTitleKeyArg1</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {1} de la clef de sous-titre]]></description>
+		</attribute>
+		<attribute>
+			<name>subTitleKeyArg2</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {2} de la clef de sous-titre]]></description>
+		</attribute>
+		<attribute>
+			<name>subTitleKeyArg3</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {3} de la clef de sous-titre]]></description>
+		</attribute>
+		<attribute>
+			<name>accessKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Clef de hashage retournant la valeur (NONE,READWRITE,READONLY) 
+              en fonction de la key via l'appel de la methode du ILogonBeanSecurity 
+              : getAccess(key) dans le pageContext sous la variable 'access', 
+              le logonBean étant stocké dans la session.</p>
+            <p>Si le logonBean est null alors redirige vers la page definit en 
+              'timeout' </p>
+            <p>Possibilite d'utiliser la combinaison ou : exemple (DRPG_PAGE1 
+              || DRPG_PAGE2)</p>
+            <p>Si aucun accessKey n'est définit alors la page est en READWRITE 
+              implicitement </p>]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>head</name>
+		<tag-class>com.airfrance.welcom.taglib.canvas.HeadTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce Tag définit le Head HTML. Il n'est nécessaire que si le developpeur 
+      veut ajouter des inclusions spécifiques. Les inclusions nécessaires 
+      au bon fonctionnement de Welcom sont ajoutés implicitement et rendent ce 
+      tag optionnel dans la construction d'une page.</p>
+    <pre><p>&lt;af:head&gt;
+	...
+&lt;/af:head&gt;</pre>]]></description>
+		<attribute>
+			<name>titleKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la clef de titre de la page ]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg0</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {0} de la clef 
+            de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg1</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {1} de la clef 
+            de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg2</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {2} de la clef 
+            de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg3</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {3} de la clef 
+            de titre]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>body</name>
+		<tag-class>com.airfrance.welcom.taglib.canvas.CanvasTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce Tag définit le body de la page: Inclusion des pages Zone de haut 
+      ou Zone de Gauche . Il permet aux objects de changer leurs comportements d'affichage 
+      en fonction de leurs emplacements et d'inclure les object récurrents 
+      tel que le menu de fa&ccedil;on implicite.<br>
+      Ce Tag est équivalent au tag body html.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:body ...&gt;
+	&lt;<a href="canvasHeader.html">af:canvasHeader</a>&gt;
+		... menu ...
+	&lt;/<a href="canvasHeader.html">af:canvasHeader</a>&gt;
+	&lt;<a href="canvasLeft.html">af:canvasLeft</a>&gt;
+		... boutons / menu ...
+	&lt;/<a href="canvasLeft.html">af:canvasLeft</a>&gt;
+	&lt;<a href="canvasCenter.html">af:canvasCenter</a> ...&gt;
+		...
+	&lt;/<a href="canvasCenter.html">af:canvasCenter</a>&gt;
+&lt;/af:body&gt;
+
+   </pre>]]></description>
+		<attribute>
+			<name>navigationMenuKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Sert à afficher la tétière :<BR>
+              Définit le clef de menu pour la fabriquer : exemple key: 
+              'tata' affiche 'toto&gt;titi&gt;tata'</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>navigationMenuName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Sert à afficher le tétière :<BR>
+            Spécifie le nom du menu sur lequel la tétière 
+            doit être créée ]]></description>
+		</attribute>
+		<attribute>
+			<name>canvasHeaderPageInclude</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[ <p>Définit la page contenant le 
+              menu Haut, les déclarations javascripts et les css.</p>
+            <p>(Contient la balise &lt;af:canevasHeader&gt;)</p>
+            <p>Configurable dans Welcom.properties : chartev2.canvasHeader.pageInclude</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>canvasLeftPageInclude</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[<p>Définit la page contenant le menu 
+              Gauche si générique</p>
+            <p>(Contient la balise &lt;af:canevasLeft&gt;)</p>
+            <p>Configurable dans Welcom.properties : chartev2.canvasLeft.pageInclude</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onactivate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onafterprint</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforeactivate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforecut</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforedeactivate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforeeditfocus</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforepaste</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforeprint</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforeunload</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>oncontextmenu</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>oncontrolselect</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>oncut</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondblclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondeactivate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondrag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondragend</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondragenter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondragleave</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondragover</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondragstart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondrop</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onfilterchange</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onfocusin</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onfocusout</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeydown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeypress</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeyup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onload</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onlosecapture</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousedown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseenter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseleave</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousemove</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseout</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseover</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousewheel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmove</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmoveend</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmovestart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onpaste</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onpropertychange</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onreadystatechange</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onresizeend</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onresizestart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onscroll</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onselect</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onselectstart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onunload</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>canvasLeft</name>
+		<tag-class>com.airfrance.welcom.taglib.canvas.CanvasLeftMenuTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce Tag définit la zone de menu latérale gauche. Elle sert 
+      à la navigation et permet d'ajouter des boutons de type menu ou le bouton 
+      d'aide</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:canvasLeft ...&gt;
+	... html ou boutons ou menu..
+	&lt;<a href="button.html">af:button</a> .../&gt;
+	&lt;<a href="button.html">af:button</a> .../&gt;
+	&lt;<a href="button.html">af:button</a> .../&gt;
+	...
+&lt;/af:canvasLeft&gt;
+</pre>]]></description>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[définit la largeur de la colonne. (voir attribut 
+            width de la balise html &lt;td&gt;)]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>canvasCenter</name>
+		<tag-class>com.airfrance.welcom.taglib.canvas.CanvasCenterTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[ <p>Ce Tag définit la zone centrale de la page, et propose la mise 
+      en place du titre de la page</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:canvasCenter ...&gt;	
+	... html ...
+&lt;/af:canvasCenter&gt;</pre>]]></description>
+		<attribute>
+			<name>titleKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>définit la clef de titre de la page </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg0</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {0} de la clef 
+            de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg1</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {1} de la clef 
+            de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg2</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {2} de la clef 
+            de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg3</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {3} de la clef 
+            de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>subTitleKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la clef de sous-titre de la page ]]></description>
+		</attribute>
+		<attribute>
+			<name>subTitleKeyArg0</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {0} de la clef de sous-titre]]></description>
+		</attribute>
+		<attribute>
+			<name>subTitleKeyArg1</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {1} de la clef de sous-titre]]></description>
+		</attribute>
+		<attribute>
+			<name>subTitleKeyArg2</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {2} de la clef de sous-titre]]></description>
+		</attribute>
+		<attribute>
+			<name>subTitleKeyArg3</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {3} de la clef de sous-titre]]></description>
+		</attribute>
+
+
+	</tag>
+
+	<tag>
+		<name>canvasPopup</name>
+		<tag-class>com.airfrance.welcom.taglib.canvas.CanvasPopupTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Definit le canvas d'une popup, la clé à renseigner pour "fermer" est popup.fermer</description>
+		<attribute>
+			<name>titleKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la clef de titre de la page]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg0</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {0} de la clef 
+            de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg1</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {1} de la clef 
+            de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg2</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {2} de la clef 
+            de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg3</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'argument {3} de la clef 
+            de titre]]></description>
+		</attribute>
+		<attribute>
+			<name>closeKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la clef du sous titre de la page]]></description>
+		</attribute>
+		<attribute>
+			<name>onactivate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onafterprint</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforeactivate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforecut</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforedeactivate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforeeditfocus</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforepaste</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforeprint</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onbeforeunload</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>oncontextmenu</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>oncontrolselect</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>oncut</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondblclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondeactivate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondrag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondragend</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondragenter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondragleave</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondragover</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondragstart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>ondrop</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onfilterchange</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onfocusin</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onfocusout</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeydown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeypress</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeyup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onload</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onlosecapture</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousedown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseenter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseleave</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousemove</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseout</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseover</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousewheel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmove</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmoveend</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onmovestart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onpaste</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onpropertychange</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onreadystatechange</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onresizeend</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onresizestart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onscroll</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onselect</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onselectstart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+		<attribute>
+			<name>onunload</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Cf tag <body> de HTML 4.0 ]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>button</name>
+		<tag-class>com.airfrance.welcom.taglib.button.ButtonTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce Tag permet de créer un bouton de soumission du formulaire.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:button name=&quot;monBouton&quot; type=&quot;menu&quot;/&gt;</p>
+</pre>]]></description>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>définit le nom du bouton. le nom détermine 
+              le chemin vers l'image du bouton qui est déclarée dans  
+              WelcomResources.properties.</p>
+            <p>exemple en charte V2.001: chartev2.bouton.path.menu.annuler=http://cmsintranet.airfrance.fr/charte_v02_001/img/but/menu/{0}/annuler.gif</p>
+            <p>Dans ce cas là le nom du bouton sera &quot;annuler&quot;. 
+              le {0} représente la Locale.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[<p>détermine le type du bouton : 
+              &quot;form&quot; ou &quot;menu&quot;. Le tag détermine normalement 
+              automatiquement dans quel mode le bouton doit se trouver en fonction 
+              du contexte</p>
+            <p>Il existe dans le fichier WelcomResources.properties une clé 
+              qui détermine le chemin par défaut des images pour 
+              ces types en charte V2.001: </p>
+            <p>-chartev2.bouton.path.form=http://cmsintranet.airfrance.fr/charte_v02_001/img/but/form/{0} 
+              -chartev2.bouton.path.menu=http://cmsintranet.airfrance.fr/charte_v02_001/img/but/menu/{0}</p>
+            <p>si le chemin pour un bouton particulier n'est pas renseigné 
+              dans ce fichier, l'image sera recherchée dans ce chemin.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>target</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[<p>définit une cible. cet attribut 
+              est identique à l'attribut target dela balise HTML &lt;a&gt;</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>onclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>définit une action de type javascript 
+              lorsque l'on clique sur le bouton.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>forceReadWrite</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>force l'affichage du bouton si la page est en READONLY.</p>
+            <p>Dans le Welcom.properties, possiblilité de referencé 
+              des boutons par défaut (Séparateur ';') :<br>
+              -chartev2.bouton.default.forceReadWrite=rechercher;</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>callMethod</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la methode de la servlet 
+            d'action associée au bouton. Par exemple : pnc.do?action=detail. 
+            detail est une méthode de la servlet associée à 
+            l'action pnc.do. dans ce cas là callMethod=detail.]]></description>
+		</attribute>
+		<attribute>
+			<name>messageConfirmationKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[clef du message à afficher si le 
+            bouton doit afficher une confirmation]]></description>
+		</attribute>
+		<attribute>
+			<name>messageConfirmationCallBack</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Permet de renvoyer un message qui est definit en 
+              asynchrone, pour la validation du formulaire.</p>
+            <p>Sur le clic du bouton, le callBack spécifié est appelé, 
+              utilisation du wrapper WHttpConfirmationMessageResponse, pour envoyer 
+              le message à la page en cours de validation ....</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>toolTipKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[clef du message à afficher dans le 
+            tooltip du bouton.]]></description>
+		</attribute>
+		<attribute>
+			<name>singleSend</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Permet de ne poster le formulaire qu'une seule fois.<bR>
+              Disponible que pour les boutons de type formulaire 'type=form'</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>causesValidation</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[<p>Spécifie si l'action sous le bouton sera 
+              l'action par default lors de l'appuie sur la touche enter. (Rq: 
+              si plusieurs boutons ont causesValidation a true, alors c'est le 
+              premier qui sera executé).</p>
+            <p>Dans le Welcom.properties, possibilité de referencer 
+              des boutons par default (Séparateur ';') :<br>
+              -chartev2.bouton.default.causesValidation=valider;rechercher;</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>accessKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Clef de hashage retournant la valeur 
+              (NONE,READWRITE,READONLY) en fonction de la key via l'appel de la 
+              méthode du ILogonBeanSecurity : getAccess(key) dans le pageContext 
+              sous la variable 'access', le logonBean étant stocké 
+              dans la session.</p>
+            <p>Si le logonBean est null, alors redirige vers la page definit en 
+              'timeout' </p>
+            <p>Possibilité d'utiliser la combinaison ou : exemple (DRPG_PAGE1 
+              || DRPG_PAGE2)</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>overridePageAccess</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[détermine si l'accessKey du field remplace celui général de la page]]></description>
+		</attribute>
+		<attribute>
+			<name>styleId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[l'id de cet élément html]]></description>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>buttonBar</name>
+		<tag-class>com.airfrance.welcom.taglib.button.ButtonBarTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce Tag permet d'insérer des boutons d'action dans le pied de la table ou 
+      onglet ou formulaire. </p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:buttonBar&gt;
+	...tags html ou af:button...
+&lt;/af:buttonBar&gt;</pre>
+    <p>Ce tag peut contenir du html classique, cependant il est recommandé de 
+      l'utiliser avec les tags af:<a href="button.html">button</a>. Ce tag ne contient 
+      pas d'attributs</p>]]></description>
+	</tag>
+
+	<tag>
+		<name>form</name>
+		<tag-class>com.airfrance.welcom.taglib.html.FormTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Son Fonctionnement est le même que le tag Struts <a href="http://jakarta.apache.org/struts/userGuide/struts-html.html#form">html:form</a></p>
+    <p>ce tag déclare automatiquement un champs hidden nommé action 
+      renseigné avec le contenu de l'attribut callMethod du tag button.</p>
+    <p>Si le logonBean implémente l'interface WIResultAction affichage 
+      d'une popup contenant le message du getResultAction.</p>]]></description>
+		<attribute>
+			<name>action</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>enctype</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>focus</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>method</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onreset</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onsubmit</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>styleClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>styleId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>target</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#form">struts</a>]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>table</name>
+		<tag-class>com.airfrance.welcom.taglib.table.TableTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<P>Ce Tag permet l'affichage d'une liste d'éléments contenus 
+      dans un objet de type Collection.</P>
+      
+    <P>la syntaxe est la suivante : </P>
+    <pre><P>&lt;af:table name=&quot;monBean&quot;&gt; property=&quot;collection&quot;&gt;
+	&lt;<a href="cols.html">af:cols</a> id="element"&gt;
+		&lt;<a href="col.html">af:col</a> property=&quot;nom&quot; key=&quot;element.nom&quot;/&gt;
+		&lt;<a href="col.html">af:col</a> property=&quot;prenom&quot;&gt;...&lt;/af:col&gt;
+	&lt;/<a href="cols.html">af:cols</a>&gt;
+	&lt;<a href="buttonBar.html">af:buttonBar</a>&gt;
+		...tags html ou af:button...
+	&lt;/<a href="buttonBar.html">af:buttonBar</a>&gt;
+&lt;/af:table&gt;</pre>
+    <p>dans cet exemple l'objet monBean doit être une Collection. Une itération 
+      est effectuée sur la collection et le nom de chaque élement 
+      est &quot;element&quot;.</p>
+    <p>element doit contenir des accesseurs pour la propriété &quot;nom&quot;. 
+      l'en-tête de la colonne nom aura la valeur associée à 
+      l'élément &quot;element.nom&quot; définit dans l'applicationResources.property.</p>
+    <p>la colone prénom contiendra &quot;...&quot; dans chaque cellule.<br></p>]]>
+		</description>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[definit le nom de la table dans le tag (attribut 
+              &quot;name&quot; du tag HTML &lt;table&gt;)</P>
+            <P>il correspond au nom de la Collection qui contient les données 
+              à afficher dans la table, ou au nom du bean du formulaire 
+              de la page]]></description>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>définit le nom de la Collection contenant 
+              les données à afficher dans la table si l'attribut 
+              name correspond au bean du formulaire.</p>
+            <p>dans ce cas là le bean du formulaire doit contenir des accesseurs 
+              à la propriété</p>
+            <p>exemple : &lt;af:table name=&quot;monBean&quot; property=&quot;maCollection&quot;&gt;</p>
+            <p>dans cet exemple l'objet monBean devra contenir une methode getMaCollection() 
+              et une méthode setMaCollection(Collection).</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit si le bean définit dans l'attribut 
+            name doit être cherché dans la session ou dans la request. 
+            les 2 valeurs possibles sont &quot;session&quot; et &quot;request&quot;]]></description>
+		</attribute>
+		<attribute>
+			<name>optimizeHTML</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit si la table est générée 
+            avec ou sans indentations pour optimiser le flux. Ne mettre ce 
+            champs à &quot;false&quot; que pour une problèmatique 
+            de débug afin que le code html généré 
+            soit lisible.]]></description>
+		</attribute>
+		<attribute>
+			<name>displayNavigation</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>détermine si les informations de navigation 
+              sont affichées sur la table. les informations de navigations 
+              sont : </p>
+            <p>- le nombre total d'éléments dans la table</p>
+            <p>- la barre de navigation.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>totalLabelKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>définit le label à afficher pour le 
+              nombre total d'élements dans la liste. ce paramètre est à 
+              renseigner dans le ApplicationResources.property. La valeur par 
+              défaut est à renseigner sous la clé &quot;global.total&quot;</p>
+            <p>exemple : &lt;table name=&quot;monBean&quot; totalLabelKey=&quot;label.total&quot;&gt;</p>
+            <p>Dans le fichier ApplicationResources.property, la valeur à 
+              renseigner est : label.total=Nombre d'élements dans la liste 
+              : {0}</p>
+            <p>Si il y a 19 elements le résultat sera : &quot;Nombre d'élements 
+              dans la liste : 19&quot;</p>
+            <p>si la clé n'est pas trouvée, la clé cherchée 
+              global.total, si la clé global.total n'est pas trouvée, 
+              le contenu de la clé est affiché.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>offSet</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'indice de départ dans la liste 
+            à afficher : par exemple on affichera une liste en commen&ccedil;ant 
+            par le 10eme élément.]]></description>
+		</attribute>
+		<attribute>
+			<name>pageLength</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Nombre de lignes à afficher par page dans la table]]></description>
+		</attribute>
+		<attribute>
+			<name>pageForward</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit le nom du forward définit dans 
+            le strutsconfig.xml qui détermine la page cible lors du tri 
+            ou de la pagination. si cet attribut n'est pas renseigné la 
+            page cible est la page o&ugrave; se trouve le tag.]]></description>
+		</attribute>
+		<attribute>
+			<name>pagePerNavBar</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[le nombre de pages à sauter lorsque l'on clique 
+            sur le bouton &quot;suivant&quot; dans la barre de navigation.]]></description>
+		</attribute>
+		<attribute>
+			<name>totalLabelPos</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la position du label de Total. Les valeurs 
+            possibles sont : &quot;top&quot; &quot;bottom&quot; &quot;topbottom&quot;.]]></description>
+		</attribute>
+		<attribute>
+			<name>paginationPos</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la position de la barre de navigation. 
+            Les valeurs possible sont : &quot;top&quot; &quot;bottom&quot; &quot;topbottom&quot;.]]></description>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la largeur de la colonne. (voir attribut 
+            width de la balise html &lt;td&gt;)]]></description>
+		</attribute>
+		<attribute>
+			<name>emptyKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>définit la clef à afficher si la table est vide. Si aucune 
+              clef est spécifiée alors n'affiche pas la table. Si 
+              la clef n'est pas trouvée alors affiche la clef comme label.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>displayHeader</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[mettre true si on veut afficher le header de la table]]></description>
+		</attribute>
+		<attribute>
+			<name>displayFooter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[mettre true si on veut afficher le footer de la table]]></description>
+		</attribute>
+		<attribute>
+			<name>scrollHeight</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Spécifie une hauteur maximale en pixel. Si la taille de la 
+            table est plus grande alors on met en place un barre de scroll]]></description>
+		</attribute>
+		<attribute>
+			<name>callBackUrl</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Permet choisir l'action strust a implementer. Le trie et la navigation sont donc a gérer par le developpeur
+				ce qui permet d'eviter le stockage en session des beans, pour les grossses listes.]]></description>
+		</attribute>		
+	</tag>
+
+	<tag>
+		<name>cols</name>
+		<tag-class>com.airfrance.welcom.taglib.table.ColsTag</tag-class>
+		<tei-class>com.airfrance.welcom.taglib.table.ColsTei</tei-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce Tag encadre les élements de type col. il doit être impérativement 
+      dans un tag Table.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;<a href="table.html">af:table</a> name=&quot;monBean&quot;&gt;
+	&lt;af:cols id="element"&gt;
+		&lt;<a href="col.html">af:col</a> property=&quot;nom&quot; key=&quot;element.nom&quot;/&gt;
+		&lt;<a href="col.html">af:col</a> property=&quot;prenom&quot;&gt;...&lt;/af:col&gt;
+	&lt;/af:cols&gt;
+&lt;/af:table&gt;</pre>
+    <p>dans cet exemple l'objet monBean doit être une Collection. Une itération 
+      est effectuée sur la collection et le nom de chaque élement 
+      est &quot;element&quot;.</p>
+    <p>Il ya 2 modes de sélection dans la table, il sont définis 
+      dans le WelcomResources.properties sous la clef &quot;table.select.mode&quot;: 
+      checkbox et le mode tr. le mode tr est déprécié, nous 
+      recommandons d'utiliser le mode checkbox</p>]]></description>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit le nom de l'élement de la collection. Ainsi on pourra y accéder par ce nom dans les colonnes.]]></description>
+		</attribute>
+		<attribute>
+			<name>idIndex</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit le nom de la variable d'itération sur la collection. ]]></description>
+		</attribute>
+		<attribute>
+			<name>selectProperty</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Deprecated : Utiliser <a href="colSelect.html">af:colSelect</a></p>
+            <p>Définit si les colonnes seront sélectionnables sans 
+              que le bean soit en session.</p>
+          <p>La validation génère une liste de paramètres du nom : check_(property), 
+            property etant la valeur du champs property. Si la case est cochée, 
+            alors la value est égal à la valeur de la propriété 
+            passée dans le selectProperty</p>
+          <p>&nbsp;</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>selectable</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Deprecated : Utiliser <a href="colSelect.html">af:colSelect</a></p>
+            <p>Définit si les colonnes seront sélectionnable.</p>
+            <p> ajoute en début de ligne une checkbox qui permet de sélectioner 
+              la ligne. Dans ce cas l'élément de la collection doit 
+              être un WFormSelectable. Il contient une propriété 
+              selected qui est mise à true lorque l'on sélectionne 
+              la ligne. Il suffit ensuite dans la servlet de faire une itération 
+              sur la collection et de tester cette propriété pour 
+              connaitre les éléments sélectionnés. 
+              Dans ce mode il suffit de mettre selectProperty=&quot;true&quot;.</p>
+          <p>Obligation que le bean soit en session.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>enableSingleSelect</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[<p>Deprecated : Utiliser <a href="colSelect.html">af:colSelect</a></p>
+            <p>Par défault la sélection sur la table est multiple. 
+              Cette option permet de basculer la sélection en mode 
+              simple. Cette propriété n'est prise en compte que 
+              si le mode de sélection est &quot;checkbox&quot;.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>forceReadWrite</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Force le mode d'accès de la table en lecture écriture 
+          quand le mode d'acces de la page est en lecture seule.]]></description>
+		</attribute>
+		<attribute>
+			<name>splitNbLine</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Definit si on affiche la table sur plusieurs lignes.]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>col</name>
+		<tag-class>com.airfrance.welcom.taglib.table.ColTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce Tag définit l'attribut de l'élément à afficher 
+      dans la colonne.il doit être impérativement dans un tag Table.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;<a href="table.html">af:table</a> name=&quot;monBean&quot;&gt;
+	&lt;<a href="cols.html">af:cols</a> id="element"&gt;
+		&lt;af:col property=&quot;nom&quot; key=&quot;element.nom&quot;/&gt;
+		&lt;af:col property=&quot;prenom&quot;&gt;...&lt;/af:col&gt;
+	&lt;/af:cols&gt;
+&lt;/af:table&gt;</pre>
+    <p>l'element doit contenir des accesseurs pour la propriété 
+      &quot;nom&quot;. l'en-tête de la colonne nom aura la valeur associée 
+      à l'élément &quot;element.nom&quot; définit 
+      dans l'applicationResources.property.</p>
+    <p>Si un corps est spécifié dans le col, alors l'écriture de 
+      la propertie est inhibée au profit du contenu du col (s'il n'est pas 
+      vide, cf pour les cols spécialisées)</p>]]></description>
+		<attribute>
+			<name>property</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'attribut du bean à afficher dans la colonne. le bean devra contenir des accesseurs à cette propriété.]]></description>
+		</attribute>
+		<attribute>
+			<name>sortable</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[détermine si la table pourra être triée selon cette colonne.]]></description>
+		</attribute>
+		<attribute>
+			<name>editable</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[détermine si la table pourra être éditée (utilisation du tag af:colEdit).]]></description>
+		</attribute>
+		<attribute>
+			<name>key</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[correspond à la clé de l'ApplicationResources.propertie qui détermine le texte à afficher dans l'en-tête de la colonne.]]></description>
+		</attribute>
+		<attribute>
+			<name>paramId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Le nom du paramètre de la request à passer dans l'url. La valeur correspondante est définie dans l'atrribut paramName et optionnellement dans l'atribut paramProperty.]]></description>
+		</attribute>
+		<attribute>
+			<name>paramName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Le nom d'un bean JSP qui est une String contenant la valeur du paramètre de requête définit dans paramId (si paramProperty n'est pas précisé), ou un bean JSP contenant une propriété à laquelle on veut accéder.]]></description>
+		</attribute>
+		<attribute>
+			<name>paramProperty</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le nom d'une propriété du bean spécifiée 
+              dans l'attribut paramName. la valeur retournée par l'accesseur 
+              à cette propriété doit être une String 
+              .</p>
+            <p>exemple :</p>
+            <p>&lt;col property=&quot;matricule&quot; href=&quot;pnc.do?action=detail&quot; 
+              paramId=&quot;matricule&quot; paramName=&quot;pnc&quot; paramProperty=&quot;matricule&quot;/&gt;</p>
+            <p>Si le matricule est égal ) 12345678 l'url générée 
+              sera : pnc.do?action=detail&amp;matricule=12345678</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>href</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[L' URL vers laquelle renverra la valeur de la colonne. Ce lien hypertexte peut être modifié dynamiquement en modifiant les parametre "paramId", "paramName","paramProperty".]]></description>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la largeur de la colonne. (voir attribut width de la balise html &lt;td&gt;)]]></description>
+		</attribute>
+		<attribute>
+			<name>contentClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la classe de style du contenu des cases de la colonne. (voir attribut class de la balise html &lt;td&gt;)]]></description>
+		</attribute>
+		<attribute>
+			<name>contentStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit le style du contenu des cases de la colonne. (voir attribut style de la balise html &lt;td&gt;)]]></description>
+		</attribute>
+				<attribute>
+			<name>headerClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la classe de style du titre la colonne. (voir attribut class de la balise html &lt;th&gt;)]]></description>
+		</attribute>
+		<attribute>
+			<name>headerStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit le style du titre de la colonne. (voir attribut style de la balise html &lt;th&gt;)]]></description>
+		</attribute>		
+		<attribute>
+			<name>contentTruncate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit le nombre de caractères à afficher dans la colonne. Si la taille du contenu de la colonne est trop grande, le contenu est tronqué au nombre de caractères définit dans truncate et "..." sont ajoutés à la fin. (exemple : "bonjour" avec un truncate égal à 4 donne "bonj...") ]]></description>
+		</attribute>		
+		<attribute>
+			<name>headerTruncate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit le nombre de caractère à afficher dans le titre de la colonne. Si la taille du contenu du titre de la colone est trop grande, le contenu est tronqué au nombre de caractère définit dans truncate et "..." sont ajoutés à la fin. (exemple : "bonjour" avec un truncate égal à 4 donne "bonj...") ]]></description>
+		</attribute>	
+		<attribute>
+			<name>contentNoWrap</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit si le contenu de la colonne doit tenir en une seule ligne même si la taille de la colonne est réduite.]]></description>
+		</attribute>		
+		<attribute>
+			<name>headerNoWrap</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit si le titre de la colonne doit tenir en une seule ligne même si la taille de la colonne est réduite.]]></description>
+		</attribute>	
+		<attribute>
+			<name>writeTD</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Par défault le tag "col" génere les balises HTML &lt;td&gt;&lt;/td&gt;. Or si l'on veut inclure dans la colonne des tags de types field qui génerent aux même ces balises, il faut désactiver cette propriété dans la colonne.]]></description>
+		</attribute>
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[<p>Détermine le type de données affichées 
+              dans la colonne. Le type n'est utile que pour le tri, ou pour le 
+              formatage des dates.</p>
+            <p>Les trois valeurs possibles sont : STRING (default), NUMBER, DATE.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>dateFormat</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Définit le format d'affichage et de tri de la date. Le format est calqué sur celui du java.text.SimpleDateFormat. default : dd/MM/yyyy hh:mm]]></description>
+		</attribute>
+		<attribute>
+			<name>dateFormatKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Définit la clé du format d'affichage et de tri de la date. Le format est calqué sur celui du java.text.SimpleDateFormat. default : dd/MM/yyyy hh:mm. dateFormatKey est prioritaire sur dateFormat]]></description>
+		</attribute>
+		<attribute>
+			<name>emptyKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[]]>Valeur par défaut de la colonne, si elle n'est pas définie pour la ligne associée</description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>dropDownPanel</name>
+		<tag-class>com.airfrance.welcom.taglib.dropdownpanel.DropDownPanelTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce Tag permet d'afficher et de faire disparaitre une zone. Via les css, 
+      il est très facilement paramètrable.</p>
+    <pre><p>&lt;af:dropDownPanel ...&gt;
+	  ... html ...
+&lt;/af:dropDownPanel&gt;</pre>]]></description>
+		<attribute>
+			<name>titleKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>titre du panel, </p>
+            <p>si le ddp est inclus dans une colonne d'un tableau, alors le ddp 
+              récupère la valeur de la colonne comme titre s'il est omis.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[nom du ddp, s'il est omis alors on le génère automatiquement<]]></description>
+		</attribute>
+		<attribute>
+			<name>topMode</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Spécifie si la position est relative ou absolue]]></description>
+		</attribute>
+		<attribute>
+			<name>expanded</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[force l'ouverture du panel à l'initialisation]]></description>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la largeur de la colonne. (voir attribut 
+            width de la balise html &lt;td&gt;)]]></description>
+		</attribute>
+		<attribute>
+			<name>headerClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[nom du style à appliquer sur le header]]></description>
+		</attribute>
+		<attribute>
+			<name>headerStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[style à ajouter dans le header]]></description>
+		</attribute>
+		<attribute>
+			<name>contentClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[nom du style pour le contenu du ddp]]></description>
+		</attribute>
+		<attribute>
+			<name>contentStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>style à ajouter pour le body</p>
+            <p>généralement, un padding-left:15px est à ajouter</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>iconColor</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[couleur de l'icon sur lequel on clique pour voir le drop down panel]]></description>
+		</attribute>
+		<attribute>
+			<name>filter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[encode les caracteres superieurs, inferieurs, etc ...]]></description>
+		</attribute>
+		<attribute>
+			<name>lazyLoading</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[charge le contenu de l'onglet à la demande]]></description>
+		</attribute>
+		<attribute>
+			<name>onExpand</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Evènement sur ouverture du panel, possibilité d'utiliser 
+              'this' pour référencer l'objet ddp]]></description>
+		</attribute>
+		<attribute>
+			<name>onCollapse</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Evènement sur fermeture du panel, possibilité d'utiliser 
+              'this' pour référencer l'objet ddp]]></description>
+		</attribute>
+		<attribute>
+			<name>onClickTitle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Evènement sur le click du tire du ddp, permet de surcharger 
+			le fonctionnement par defaut (ouverture/fermeture)]]></description>
+		</attribute>		
+	</tag>
+
+	<tag>
+		<name>isNotEmpty</name>
+		<tag-class>com.airfrance.welcom.taglib.logic.IsNotEmptyTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[Tag logic permettant d'afficher ce qui est contenu dans le tag si la valeur specifiée n'est pas nulle ou vide]]></description>
+		<attribute>
+			<name>cookie</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La variable à comparer est la valeur du cookie dont le nom est spécifié dans cet attribut.]]></description>
+		</attribute>
+		<attribute>
+			<name>header</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La variable à comparer est la valeur du header dont le nom est spécifié dans cet attribut. le match est fait sans tenir compte de la case]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La variable à comparer est le bean JSP spécifié dans cet attribut, si la propriété n'est pas spécifiée, ou la valeur de la propriété spécifiée, si la propriété est renseignée]]></description>
+		</attribute>
+		<attribute>
+			<name>parameter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La variable à comparer est la première, ou l'unique valeur du request parameter spécifié dans cet attribut.]]></description>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La variable à comparer est la propriété (du bean spécifié dans l'attribut name) spécifiée dans cet attribut. la propriété peut être simple, nested, et/ou indexée.]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>isEmpty</name>
+		<tag-class>com.airfrance.welcom.taglib.logic.IsEmptyTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[Tag logic permettant d'afficher ce qui est contenu dans le tag si la valeur spécifiée est  nulle ou vide]]></description>
+		<attribute>
+			<name>cookie</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La variable à comparer est la valeur du cookie dont le nom est spécifié dans cet attribut.]]></description>
+		</attribute>
+		<attribute>
+			<name>header</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La variable à comparer est la valeur du header dont le nom est spécifié dans cet attribut. le match est fait sans tenir compte de la case]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La variable à comparer est le bean JSP spécifié dans cet attribut, si la propriété n'est pas spécifiée, ou la valeur de la propriété spécifiée, si la propriété est renseignée]]></description>
+		</attribute>
+		<attribute>
+			<name>parameter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La variable à comparer est la première, ou l'unique valeur du request parameter spécifié dans cet attribut.]]></description>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La variable à comparer est la propriété (du bean spécifié dans l'attribut name) spécifiée dans cet attribut. la propriété peut être simple, nested, et/ou indexée.]]></description>
+		</attribute>
+	</tag>
+
+	<!-- tag select -->
+	<tag>
+		<name>option</name>
+		<tag-class>com.airfrance.welcom.taglib.html.OptionTag</tag-class>
+		<description><![CDATA[<p>Ce tag doit être inclus dans un tag <a href="select.html">select</a></p>
+    <p>Son Fonctionnement est le même que le tag Struts <a href="http://jakarta.apache.org/struts/userGuide/struts-html.html#option">html:option</a>.</p>]]></description>
+		<attribute>
+			<name>bundle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La clé de l'instance de MessageResources à utiliser. Si non spécifié, choisit par défaut l'application resources configuré pour la servlet action.]]></description>
+		</attribute>
+		<attribute>
+			<name>disabled</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[on le met à true si on ne veut pas cette option]]></description>
+		</attribute>
+		<attribute>
+			<name>key</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Clé de l'étiquette à afficher. Si cette clé n'a pas de valeur correspondante dans les messages, la clé est affichée. Si non spécifiée, on prend le texte dans le body content du tag]]></description>
+		</attribute>
+		<attribute>
+			<name>locale</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La locale à utiliser]]></description>
+		</attribute>
+		<attribute>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[le style CSS à utiliser pour ce tag]]></description>
+		</attribute>
+		<attribute>
+			<name>styleClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[la classe de la CSS à utiliser pour ce tag]]></description>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[la valeur que l'on veut passer au formulaire si cette option est sélectionnée]]></description>
+		</attribute>
+	</tag>
+	<tag>
+		<name>options</name>
+		<tag-class>com.airfrance.welcom.taglib.html.OptionsTag</tag-class>
+		<body-content>empty</body-content>
+		<description><![CDATA[ <p>Ce tag doit être inclus dans un tag <a href="#select">select</a></p>
+    <p>Son Fonctionnement est le même que le tag Struts <a href="http://jakarta.apache.org/struts/userGuide/struts-html.html#options">html:options</a>.</p>
+    <p>ce tag affiche dans la le combo box une bean de type collection.</p>]]></description>
+		<attribute>
+			<name>collection</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Nom d'un bean contenant une collection d'autres beans ayant des propriétés dont le nom est indiqué par les attributs "property" et "labelProperty", respectivement utilisés pour récupérer la valeur et l'étiquette de chaque option. ]]></description>
+		</attribute>
+		<attribute>
+			<name>labelName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Nom du bean contenant la collection d'étiquettes à afficher pour les options. ]]></description>
+		</attribute>
+		<attribute>
+			<name>labelProperty</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Propriété du bean du formulaire, ou du bean indiqué par l'attribut "labelName", qui retournera la collection des étiquettes à afficher pour les options.]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Nom du bean contenant la collection des valeurs à retourner au serveur pour les options. Si non spécifié, le bean du formulaire sera utilisé ]]></description>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Propriété du bean du formulaire, ou du bean indiqué par l'attribut "name", qui retournera la collection des valeurs à retourner au serveur pour les options.]]></description>
+		</attribute>
+		<attribute>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[le style CSS à utiliser pour ce tag]]></description>
+		</attribute>
+		<attribute>
+			<name>styleClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[la classe de la CSS à utiliser pour ce tag]]></description>
+		</attribute>
+	</tag>
+	<tag>
+		<name>select</name>
+		<tag-class>com.airfrance.welcom.taglib.html.SelectTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce tag s'utilise avec les tags <a href="option.html">option</a> ou <a href="options.html">options</a></p>
+    <p>Son Fonctionnement est le même que le tag Struts <a href="http://jakarta.apache.org/struts/userGuide/struts-html.html#select">html:select</a> 
+      à l'exception de quelques attrbuts qui ont été rajoutés, 
+      et une génération html plus optimisée.</p>]]></description>
+		<attribute>
+			<name>accesskey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Le caractère du clavier à utiliser pour se placer immédiatement sur cet élément. ]]></description>
+		</attribute>
+		<attribute>
+			<name>disabled</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[mettre true si on ne veut pas cet input field]]></description>
+		</attribute>
+		<attribute>
+			<name>multiple</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Si vaut true , l'élément select généré supportera les sélections multiples.]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Nom du bean du contexte pageContext, request, session ou application dont on veut éditer une propriété. La valeur par défaut est le bean du formulaire struts ]]></description>
+		</attribute>
+		<attribute>
+			<name>onblur</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>onchange</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>onclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>ondblclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>onfocus</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeydown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeypress</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeyup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousedown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousemove</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseout</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseover</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Propriété du bean à voir/éditer.]]></description>
+		</attribute>
+		<attribute>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[le style CSS à utiliser pour ce tag]]></description>
+		</attribute>
+		<attribute>
+			<name>styleClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Classe du style CSS à utiliser. ]]></description>
+		</attribute>
+		<attribute>
+			<name>styleId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[l'id de cet élément html]]></description>
+		</attribute>
+		<attribute>
+			<name>tabindex</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[L'ordre de tabulation pour cet élément (entiers positifs croissants). ]]></description>
+		</attribute>
+		<attribute>
+			<name>size</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Nombre de colonnes à afficher dans la zone.]]></description>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[la valeur que l'on veut passer au formulaire si cette option est sélectionnée]]></description>
+		</attribute>
+		<attribute>
+			<name>forceReadWrite</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>permet de forcer l'accès en lecture écriture 
+              sur le champs quand la page est en lecture seule </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>accessKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>indique la clé du droit d'accès habilité 
+              à afficher ce champs. Exemple : &quot;DRPG_PAGE1&quot; ou 
+              &quot;DRPG_PAGE1 || DRPG_PAGE2&quot;</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>overridePageAccess</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[détermine si l'accessKey du field remplace le général de la page]]></description>
+		</attribute>
+		<attribute>
+			<name>lazyLoading</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[envoi seulement les options nécessaires à l'affichage 
+            par défaut, puis charge entiérement le combo seulement si l'onglet 
+            prend le focus ou un mouseover]]></description>
+		</attribute>
+		<attribute>
+			<name>isRequired</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[affiche une astérisque rouge à 
+            c&ocirc;té du champs si le champs est obligatoire.]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>checkPage</name>
+		<tag-class>com.airfrance.welcom.taglib.security.CheckPageTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Vérifie les droits d'accès sur la page</description>
+		<attribute>
+			<name>accessKey</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Clef de hashage retournant la valeur 
+              (NONE,READWRITE,READONLY) en fonction de la key via l'appel de la 
+              méthode du ILogonBeanSecurity : getAccess(key) dans le pageContext 
+              sous la variable 'access'. Le logonBean étant stocké 
+              dans la session.</p>
+            <p>Si le logonBean est null alors redirige vers la page définit en 
+              'timeout' </p>
+            <p>Possibilité d'utiliser la combinaison ou : exemple (DRPG_PAGE1 
+              || DRPG_PAGE2)</p>]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>isPageReadOnly</name>
+		<tag-class>com.airfrance.welcom.taglib.security.IsPageReadOnlyTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce tag permet d'afficher le code compris entre le tag qui si la page est 
+      en lecture seule. Cette valeur est définie par le tag checkPage ou bien 
+      manuellement en positionant la variable 'access' du pageContext avec les 
+      valeurs suivantes (&quot;NONE&quot;, &quot;READWRITE&quot;, &quot;READONLY&quot;).</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:isPageReadOnly&gt;
+	... html  ...
+&lt;/af:isPageReadOnly&gt;</pre>]]></description>
+	</tag>
+
+	<tag>
+		<name>isPageReadWrite</name>
+		<tag-class>com.airfrance.welcom.taglib.security.IsPageReadWriteTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[ <p>Ce tag permet d'afficher le code compris entre le tag qui si la page est 
+      en lecture/ecriture. Cette valeur est définie par le tag checkPage ou bien 
+      manuellement en positionnant la variable 'access' du pageContext avec les 
+      valeurs suivantes (&quot;NONE&quot;, &quot;READWRITE&quot;, &quot;READONLY&quot;).</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:isPageReadWrite&gt;
+	... html  ...
+&lt;/af:isPageReadWrite&gt;</pre>
+  </div>
+  <p>]]></description>
+	</tag>
+
+	<tag>
+		<name>hasAccess</name>
+		<tag-class>com.airfrance.welcom.taglib.security.HasAccessTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce tag vérifie que la personne connectée posséde le droit 
+      demandé. Si oui affiche ce qui est contenu entre le tag.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;af:hasAcces accessKey=&quot;...&quot; value=&quot;...&quot;&gt;
+	... html ...
+&lt;/af:hasAccess&gt;</pre>]]></description>
+		<attribute>
+			<name>accessKey</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Clef de hashage retournant la valeur (NONE,READWRITE,READONLY) en 
+            fonction de la key via l'appel de la methode du ILogonBeanSecurity 
+            : getSecuritePage(key) dans le pageContext sous la variable 'access'.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Valeurs possibles NO,YES,READWRITE,READONLY,NONE</p>
+          <p>Possibilité d'utiliser la combinaison ou : exemple (READWRITE || 
+            READONLY)</p>]]></description>
+		</attribute>
+	</tag>
+
+
+	<tag>
+		<name>link</name>
+		<tag-class>com.airfrance.welcom.taglib.html.LinkTag</tag-class>
+		<description><![CDATA[<p>ce tag fonctionne comme le tag struts <a href="http://struts.apache.org/userGuide/struts-html.html#link">html:link</a></p>]]></description>
+		<attribute>
+			<name>accesskey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>anchor</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>forward</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>href</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>linkName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onblur</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>ondblclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onfocus</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeydown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeypress</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeyup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousedown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousemove</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseout</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseover</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>paramId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>paramName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>paramProperty</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>paramScope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>styleClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>styleId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>tabindex</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>target</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>transaction</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org/userGuide/struts-html.html#link">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[titre du link]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg0</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[argument {0} du titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg1</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[argument {1} du titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg2</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[argument {2} du titre]]></description>
+		</attribute>
+		<attribute>
+			<name>titleKeyArg3</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[argument {3} du titre]]></description>
+		</attribute>
+	</tag>
+	<tag>
+		<name>colOrder</name>
+		<tag-class>com.airfrance.welcom.taglib.table.ColOrderTag</tag-class>
+		<body-content>none</body-content>
+		<description><![CDATA[<p>Ce Tag définit une colonne afin de gérer l'ordre des lignes.il doit 
+      être impérativement dans un tag Table.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;<a href="table.html">af:table</a> name=&quot;monBean&quot;&gt;
+	&lt;<a href="cols.html">af:cols</a> id="element"&gt;
+		&lt;af:colOrder href=&quot;...&quot; property=&quot;ordre&quot; key=&quot;element.ordre&quot;/&gt;
+  &lt;/af:cols&gt;
+&lt;/af:table&gt;</pre>
+    <p>L'appel du lien s'il est renseigné ajoutera un paramètre ordre avec les valeurs desc ou asc.</p>
+    <p>Si il n'est pas renseigné, le bean associé à la ligne devra implémenter WIChanged, et le statut changed sera modifié</p>]]></description>
+		<attribute>
+			<name>property</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit l'attribut du bean qui sera inversé. le bean devra contenir des accesseurs à 
+              cette propriété.]]></description>
+		</attribute>
+		<attribute>
+			<name>key</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[correspond la clé de l'ApplicationResources.propertie 
+              qui détermine le texte à afficher dans l'en-tête 
+              de la colonne.]]></description>
+		</attribute>
+		<attribute>
+			<name>paramId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Le nom du paramètre de la request à 
+            passer dans l'url. La valeur correspondante est définie dans 
+            l'atrribut paramName et optionnellement dans l'atribut paramProperty.]]></description>
+		</attribute>
+		<attribute>
+			<name>paramName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Le nom d'un bean JSP qui est une String 
+            contenant la valeur du paramètre de requete définit 
+            dans paramId (si paramProperty n'est pas précisé), ou 
+            un bean JSP contenant une propriété à laquelle 
+            on veut accéder.]]></description>
+		</attribute>
+		<attribute>
+			<name>paramProperty</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Le nom d'une propriété du bean spécifiée 
+              dans l'attribut paramName. la valeur retournée par l'accesseur 
+              à cette propriété doit être une String 
+              .</p>
+            <p>exemple :</p>
+            <p>&lt;col property=&quot;matricule&quot; href=&quot;pnc.do?action=detail&quot; 
+              paramId=&quot;matricule&quot; paramName=&quot;pnc&quot; paramProperty=&quot;matricule&quot;/&gt;</p>
+            <p>Si le matricule est égal ) 12345678 l'url générée 
+              sera : pnc.do?action=detail&amp;matricule=12345678</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>href</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[L' URL vers laquelle renverra la valeur de 
+            la colonne. Ce lien hypertexte peut être modifié 
+            dynamiquement en modifiant les paramètres &quot;paramId&quot;, &quot;paramName&quot;,&quot;paramProperty&quot;.]]></description>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la largeur de la colonne. (voir attribut 
+            width de la balise html &lt;td&gt;)]]></description>
+		</attribute>
+		<attribute>
+			<name>toolTipKeyUp</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La bulle d'aide de la flèche up]]></description>
+		</attribute>
+		<attribute>
+			<name>toolTipKeyDown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La bulle d'aide de la flèche down]]></description>
+		</attribute>
+	  <attribute>
+	    	<name>forceReadWrite</name>
+	     	<required>false</required>
+	      	<rtexprvalue>true</rtexprvalue>
+ 			<description><![CDATA[permet de forcer l'accès en lecture écriture sur 
+          le champs quand la page est en lecture seule]]></description>
+ 	   </attribute> 
+	</tag>
+	<tag>
+		<name>colEdit</name>
+		<tag-class>com.airfrance.welcom.taglib.table.ColEditTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce Tag définit une colonne afin de gérer l'édition de la ligne.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;<a href="table.html">af:table</a> name=&quot;monBean&quot;&gt;
+  &lt;<a href="cols.html">af:cols</a> id="element"&gt;
+     &lt;af:colEdit key=&quot;element.ordre&quot; ... /&gt;
+ou
+     &lt;af:colEdit key=&quot;element.ordre&quot; ... &gt;
+         &lt;<a href="http://jakarta.apache.org/struts/userGuide/struts-logic.html#equal">logic:equal</a> name=&quot;element&quot; property=&quot;displayEdition&quot; value=&quot;false&quot;&gt;
+            &amp;nbsp;
+        &lt;/logic:equal&gt;
+     &lt;/af:colEdit&gt;
+     ...
+  &lt;/af:cols&gt;
+&lt;/af:table&gt;</pre>
+    <p>Le Bean element doit implementer l'interface WIEditable, ou spécifier la property &agrave considérer pour savoir si la ligne est éditable ou non.</p>
+    <p>Si on désire inhiber la mise en place des images (Edit/Cancel), il suffit 
+      de définir un corps au tag qui affiche '&amp;nbsp' sur une condition.C'est 
+      le même principe que la col quand on désire spécialiser 
+      son corps.</p>
+    <p>Par default les autres properties sont transformées en &lt;input 
+      type=text&gt;, il faut ensuite les spécialiser avec un field 
+      .... </p>
+    <pre><p>&lt;<a href="col.html">af:col</a> key=&quot;element.ordre&quot; propertie=&quot;nom &quot;... &gt;
+   &lt;<a href="http://jakarta.apache.org/struts/userGuide/struts-logic.html#equal">logic:equal</a> name=&quot;element&quot; property=&quot;edited&quot; value=&quot;true&quot;&gt;
+		&lt;<a href="field.html">af:field</a> key=&quot;&quot; name=&quot;element&quot; property=&quot;nom&quot; ... /&gt;
+   &lt;/logic:equal&gt;
+&lt;/af:col&gt;
+</pre>]]></description>
+		<attribute>
+			<name>property</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La propriété qui remplace le edited, si la ligne n'implémente pas WIEditable]]></description>
+		</attribute>
+		<attribute>
+			<name>key</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[correspond à la clé de l'ApplicationResources.properties 
+              qui détermine le texte à afficher dans l'en-tête 
+              de la colonne.]]></description>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la largeur de la colonne. (voire attribut 
+            width de la balise html &lt;td&gt;)]]></description>
+		</attribute>
+		<attribute>
+			<name>toolTipKeyCancel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Bulle d'aide pour l'image cancel]]></description>
+		</attribute>
+		<attribute>
+			<name>toolTipKeyEdit</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Bulle d'aide pour l'image edit]]></description>
+		</attribute>
+ 		 <attribute>
+ 		   	<name>forceReadWrite</name>
+ 	    	<required>false</required>
+ 	     	<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[permet de forcer l'accès en lecture écriture sur 
+          le champs quand la page est en lecture seule]]></description>
+	    </attribute> 
+   		<attribute>
+			<name>disabledProperty</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[propriété de la ligne permettant de savoir si elle est éditable ou non]]></description>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>colSelect</name>
+		<tag-class>com.airfrance.welcom.taglib.table.ColSelectTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce Tag définit une colonne afin de gérer la sélection de la ligne.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;<a href="table.html">af:table</a> name=&quot;monBean&quot;&gt;
+  &lt;<a href="cols.html">af:cols</a> id="element"&gt;
+     &lt;<strong>af:colSelect</strong> key=&quot;element.ordre&quot; ... /&gt;
+     ...
+ou
+     &lt;<strong>af:colSelect</strong> key=&quot;element.ordre&quot; ... &gt;
+        &lt;<a href="http://jakarta.apache.org/struts/userGuide/struts-logic.html#equal">logic:equal</a> name=&quot;element&quot; property=&quot;displaySelection&quot; value=&quot;false&quot;&gt;
+            &amp;nbsp;
+        &lt;/logic:equal&gt;
+     &lt;/<strong>af:colSelect</strong>&gt;
+  &lt;/af:cols&gt;
+&lt;/af:table&gt;</pre>
+    <p>Le Bean element doit implémenter l'interface WISelectable ou hériter de 
+      WActionFormSelectable</p>
+    <p>Si on désire inhiber la création de la check box, il suffit de définir 
+      un corps au tag qui affiche '&amp;nbsp' sur une condition. C'est le même 
+      principe que la col quand on désire spécialiser son corps.</p>]]></description>
+		<attribute>
+			<name>key</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>correspond à la clé de l'ApplicationResources.properties 
+              qui détermine le texte à afficher dans l'en-tête 
+              de la colonne.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[définit la largeur de la colonne. (voir attribut 
+            width de la balise html &lt;td&gt;)]]></description>
+		</attribute>
+		<attribute>
+			<name>toolTipKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Bulle d'aide pour la case à cocher</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>enableSingleSelect</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Deprecated (Utiliser af:colSingleSelect):Par défault la sélection sur la table est multiple. 
+              Cette option permet de basculer la séléction en mode 
+              simple. </p>]]></description>
+		</attribute>
+ 		<attribute>
+    		<name>forceReadWrite</name>
+	     	<required>false</required>
+    	  	<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[permet de forcer l'accès en lecture écriture sur 
+          le champs quand la page est en lecture seule]]></description>
+	    </attribute> 
+ 		<attribute>
+    		<name>onclick</name>
+	     	<required>false</required>
+    	  	<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'événements JavaScript]]></description>
+	    </attribute> 
+		<attribute>
+			<name>property</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La propriété utilisée à la place de selected, dans le cas où elle n'implémente pas WISelectable]]></description>
+		</attribute>
+   		<attribute>
+			<name>disabledProperty</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[propriété du bean appelé pour savoir si la ligne est sélectionnable]]></description>
+		</attribute>
+		<attribute>
+			<name>showSelectAllHeader</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[prend la valeur false par défaut, si à true affice une case à cocher dans l'entête qui permet de sélectionner toutes les lignes de la liste en un click]]></description>
+		</attribute>
+	</tag>
+	<tag>
+	<name>colSingleSelect</name>
+		<tag-class>com.airfrance.welcom.taglib.table.ColSingleSelectTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Ce Tag définit une colonne afin de gérer la sélection de la ligne de manière unique.</p>
+    <p>la syntaxe est la suivante : </p>
+    <pre><p>&lt;<a href="table.html">af:table</a> name=&quot;monBean&quot;&gt;
+  &lt;<a href="cols.html">af:cols</a> id="element"&gt;
+     &lt;<strong>af:colSingleSelect</strong> key=&quot;element.ordre&quot; ... /&gt;
+     ...
+ou
+     &lt;<strong>af:colSingleSelect</strong> key=&quot;element.ordre&quot; ... &gt;
+        &lt;<a href="http://jakarta.apache.org/struts/userGuide/struts-logic.html#equal">logic:equal</a> name=&quot;element&quot; property=&quot;displaySelection&quot; value=&quot;false&quot;&gt;
+            &amp;nbsp;
+        &lt;/logic:equal&gt;
+     &lt;/<strong>af:colSingleSelect</strong>&gt;
+  &lt;/af:cols&gt;
+&lt;/af:table&gt;</pre>
+    
+    <p>Si on dÚsire inhiber la crÚation du radio bouton, il suffit de dÚfinir 
+      un corps au tag qui affiche '&amp;nbsp' sur une condition. C'est le mÛme 
+      principe que la col quand on dÚsire spÚcialiser son corps.</p>
+      <p>Par défaut, si l'attribut value et l'attibut propertyValue ne sont pas renseignés,
+      la value du radio bouton est égale à l'indice de l'itération sur la liste.]]></description>
+		<attribute>
+			<name>key</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>correspond Ó la clÚ de l'ApplicationResources.properties 
+              qui dÚtermine le texte Ó afficher dans l'en-tÛte 
+              de la colonne.</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[dÚfinit la largeur de la colonne. (voir attribut 
+            width de la balise html &lt;td&gt;)]]></description>
+		</attribute>
+		<attribute>
+			<name>toolTipKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Bulle d'aide pour la case Ó cocher</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue> 
+			<description><![CDATA[<p>Nom de la propriété du bean de formulaire dans laquelle devra être mise la valeur du radio bouton à la validation du formulaire </p>]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue> 
+			<description><![CDATA[<p>Nom du bean de formulaire contenant la propriété dans laquelle devra être mise la valeur du radio bouton à la validation du formulaire (le bean du formulaire)</p>]]></description>
+		</attribute>
+ 		<attribute>
+    		<name>forceReadWrite</name>
+	     	<required>false</required>
+    	  	<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[permet de forcer l'accÞs en lecture Úcriture sur 
+          le champs quand la page est en lecture seule]]></description>
+	    </attribute> 
+	    <attribute>
+    		<name>value</name>
+	     	<required>false</required>
+    	  	<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[permet de forcer une valeur sur le radio bouton]]></description>
+	    </attribute> 
+ 		<attribute>
+    		<name>onclick</name>
+	     	<required>false</required>
+    	  	<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Gestionnaires d'ÚvÚnements JavaScript]]></description>
+	    </attribute> 
+		<attribute>
+			<name>propertyValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[La propriÚtÚ utilisÚe pour récupérer la valeur du radio bouton sur le bean de la collection (id du tag cols)]]></description>
+		</attribute>
+   		<attribute>
+			<name>disabledProperty</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[propriÚtÚ du bean appelÚ pour savoir si la ligne est sÚlectionnable]]></description>
+		</attribute>		
+	</tag>	
+	<tag>
+		<name>write</name>
+		<tag-class>com.airfrance.welcom.taglib.write.WWriteTag</tag-class>
+		<body-content>empty</body-content>
+		<description><![CDATA[<p>Voir la documentation de <a href="http://struts.apache.org//struts-doc-1.1/userGuide/struts-bean.html#write">struts</a></p>
+		<p>2 attributs ont été rajoutés : dateFormat et dateFormatKey pour la gestion des dates</p>]]></description>
+		<attribute>
+			<name>bundle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org//struts-doc-1.1/userGuide/struts-bean.html#write">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>dateFormat</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[dateFormat : format dans le cas ou la propriété est une date (format java.util.SimpleDateFormat)]]></description>
+		</attribute>
+		<attribute>
+			<name>dateFormatKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[clé identifiant le dateFormat à utiliser. Ce dernier se trouve dnas l'ApplicationRessource.properties et est donc internationalisé]]></description>
+		</attribute>
+		<attribute>
+			<name>filter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org//struts-doc-1.1/userGuide/struts-bean.html#write">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>format</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org//struts-doc-1.1/userGuide/struts-bean.html#write">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>formatKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org//struts-doc-1.1/userGuide/struts-bean.html#write">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>ignore</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org//struts-doc-1.1/userGuide/struts-bean.html#write">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>locale</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org//struts-doc-1.1/userGuide/struts-bean.html#write">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org//struts-doc-1.1/userGuide/struts-bean.html#write">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org//struts-doc-1.1/userGuide/struts-bean.html#write">struts</a>]]></description>
+		</attribute>
+		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="http://struts.apache.org//struts-doc-1.1/userGuide/struts-bean.html#write">struts</a>]]></description>
+		</attribute>
+	</tag>
+	<tag>
+		<name>zone</name>
+		<tag-class>com.airfrance.welcom.taglib.zone.ZoneTag</tag-class>
+		<body-content>JSP</body-content>
+		<description><![CDATA[<p>Le tag zone permet de définir une zone qui ne sera chargée que lors de l'appel de l'utilisateur sans rechargement de la page (pour diminuer les flux), le chargement se fait par la fonction javascript loadzone, qui prend 2 parametres : 
+		<ul>
+  <li>le nom de la zone, pour récupérer le contenu du tag zone</li>
+  <li>l'identifiant de l'endroit où on veut mettre ce contenu ou le nom de la callback (définie par l'utilisateur). Cette callback aura un paramêtre : le contenu de la zone</li>
+</ul></p>
+
+<p>Ci dessous un exemple de JSP : le clic sur les liens insère le contenu de la zone correspondante dans le div 'zonecontent'. On peut remplacer zonecontent par le nom d'une fonction javascript définie au préalable</p>
+<p><pre>
+&lt;a href="javascript:loadzone('zone1','zonecontent');">charge zone 1 &lt;/a&gt; 
+&lt;br&gt;
+&lt;a href="javascript:loadzone('zone2','zonecontent');">charge zone 2 &lt;/a&gt; 
+&lt;br&gt;
+Avant div zonecontent
+&lt;br&gt;
+&lt;div id="zonecontent" &gt;
+&lt;/div&gt;
+&lt;br&gt;
+Après div zonecontent
+
+&lt;<b>af:zone</b> name="zone1"&gt;
+contenu de la zone 1
+&lt;/af:zone&gt;
+&lt;<b>af:zone</b> name="zone2"&gt;
+contenu de la zone 2
+&lt;/af:zone&gt;
+</pre>
+</p>
+
+]]></description>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[le name identifiant la zone]]></description>
+		</attribute>
+	</tag>	
+ 	<tag>
+		<name>multilingueField</name>
+		<tag-class>com.airfrance.welcom.taglib.multilingue.MultilingueFieldTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>disabled</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>access</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>filterSpecialChar</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>forceReadWrite</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>cols</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>rows</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>colspan</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>colspanLabel</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>li</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>upperCase</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>firstUpperCase</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>accent</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>tabindex</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>key</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>arg0</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>arg1</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>arg2</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>arg3</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>arg4</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>size</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>maxlength</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>styleClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>styleClassLabel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>isRequired</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>redisplay</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>dateFormat</name>
+			<required>false</required>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>hourFormat</name>
+			<required>false</required>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>calendarBeginYear</name>
+			<required>false</required>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>calendarEndYear</name>
+			<required>false</required>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>autoComplete</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>writeTD</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>ondblclick</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseover</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseout</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousemove</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmousedown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onmouseup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeydown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeyup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onkeypress</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onselect</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onchange</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onblur</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+		<attribute>
+			<name>onfocus</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[Voir la documentation de <a href="table.html"></a>]]></description>
+		</attribute>
+	</tag>	
+	<tag>
+		<name>changeAccess</name>
+		<tag-class>com.airfrance.welcom.taglib.access.ChangeAccessTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Permet de changer le droit des tags contenu dans changeAccess (à la place du droit de la page)</description>
+		<attribute>
+			<name>accessKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<p>Clef de hashage retournant la valeur 
+              (NONE,READWRITE,READONLY) en fonction de la key via l'appel de la 
+              méthode du ILogonBeanSecurity : getAccess(key) dans le pageContext 
+              sous la variable 'access', le logonBean étant stocké 
+              dans la session.</p>
+            <p>Si le logonBean est null, alors redirige vers la page definit en 
+              'timeout' </p>
+            <p>Possibilité d'utiliser la combinaison ou : exemple (DRPG_PAGE1 
+              || DRPG_PAGE2)</p>]]></description>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>le bean dans lequel on cherchera le droit</description>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>l'attribut contenant le droit</description>
+		</attribute>
+	</tag>	
+	<tag>
+		<name>debugConsole</name>
+		<tag-class>com.airfrance.welcom.taglib.util.WDebugConsoleTag</tag-class>
+		<body-content>empty</body-content>
+		<description><![CDATA[Console d'erreur affichant les messages envoyés via la méthode wJSDebug(message)]]></description>
+	</tag>
+		
+</taglib>

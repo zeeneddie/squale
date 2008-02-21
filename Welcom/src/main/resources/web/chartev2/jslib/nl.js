@@ -1,0 +1,22 @@
+/* Flamand (nl) Nederlands */
+les_jours[0]= "M";
+les_jours[1]= "D";
+les_jours[2]= "W";
+les_jours[3]= "D";
+les_jours[4]= "V";
+les_jours[5]= "Z";
+les_jours[6]= "Z";
+les_mois[0]= "Januari";
+les_mois[1]= "Februari";
+les_mois[2]= "Maart";
+les_mois[3]= "April";
+les_mois[4]= "Mei";
+les_mois[5]= "Juni";
+les_mois[6]= "Juli";
+les_mois[7]= "Augustus";
+les_mois[8]= "September";
+les_mois[9]= "Oktober";
+les_mois[10]= "November";
+les_mois[11]= "December";
+les_annees["pre"]= "";
+les_annees["post"]= "";
