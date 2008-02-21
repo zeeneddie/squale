@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--- 
+	Application context definition for Express on Hibernate.
+-->
+<beans>	
+	<bean id="initialize" class="com.airfrance.jraf.bootstrap.initializer.Initializer">
+	 	<property name="configFile">
+		 <value>config/hibernate.cfg.xml</value>		 
+	 	</property>	
+	 	<property name="rootPath">
+		<value>/home/linux/m312645/dinb_comp_java_jraf_v3_0_act_m312645/vobs/dinb_comp_java_jraf/dev/jraf-provider-hibernate/bin/</value>
+		</property>
+	</bean>
+	
+	<bean id="messageSource"
+        class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames">
+      <list>
+        <value>format</value>
+        <value>exceptions</value>
+        <value>windows</value>
+      </list>
+    </property>
+  </bean>
+	
+</beans>

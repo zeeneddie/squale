@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--- 
+	Application context definition for Express on Hibernate.
+-->
+<beans>
+	
+	<bean id="initialize" class="com.airfrance.jraf.bootstrap.initializer.Initializer">
+	 	<property name="configFile">
+		 <value>config/providers-config.xml</value>		 
+	 	</property>	
+	 	<!--property name="Jndi">
+	 	<value>false</value>
+	 	</property-->
+	</bean>
+	
+	<!--bean id="otherService" class="com.airfrance.comor.daolayer.test.OtherServiceSpringTest">
+	</bean-->
+	
+	
+	<bean id="messageSource"
+        class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames">
+      <list>
+        <value>format</value>
+        <value>exceptions</value>
+        <value>windows</value>
+      </list>
+    </property>
+  </bean>
+  
+     <bean id="accountWebService" class="org.springframework.remoting.jaxrpc.JaxRpcPortProxyFactoryBean">
+        <property name="serviceInterface">
+            <value>example.RemoteAccountService</value>
+        </property>
+        <property name="wsdlDocumentUrl">
+            <value>http://localhost:8080/account/services/accountService?WSDL</value>
+        </property>
+        <property name="namespaceUri">
+            <value>http://localhost:8080/account/services/accountService</value>
+        </property>
+        <property name="serviceName">
+            <value>AccountService</value>
+        </property>
+        <property name="portName">
+            <value>AccountPort</value>
+        </property>
+    </bean>
+
+	
+</beans>
