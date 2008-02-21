@@ -1,0 +1,17 @@
+<projectDescription>
+  <name>jraf-struts-initializer</name>
+  <comment>jraf-struts-initializer</comment>
+  <projects>
+    <project>jraf-bootstrap</project>
+    <project>jraf-commons</project>
+    <project>jraf-spi</project>
+  </projects>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>
