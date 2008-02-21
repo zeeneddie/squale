@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding="utf-8"?>
+<!ELEMENT checkstyle-configuration
+   (jarDirectory,reportDirectory)
+>
+<!ELEMENT jarDirectory
+   (#PCDATA)
+>
+<!ELEMENT reportDirectory
+   (#PCDATA)
+>
