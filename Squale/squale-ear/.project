@@ -1,0 +1,9 @@
+<projectDescription>
+  <name>squale-ear</name>
+  <comment>Ear packaging for the Squale Project</comment>
+  <projects>
+    <project>squale-web</project>
+  </projects>
+  <buildSpec/>
+  <natures/>
+</projectDescription>
