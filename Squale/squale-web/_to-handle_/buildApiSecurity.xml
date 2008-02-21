@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="squaleCommons" basedir="." default="all">
+
+	<!-- =================================================================== -->
+	<!-- Gestion de l'API Securité  -->
+	<!-- =================================================================== -->
+	<target name="apiSecurity">
+<!--		<javadoc access="public" author="true" 
+				destdir="delivery/security/doc"
+            	nodeprecated="false" nodeprecatedlist="false"
+            	noindex="false" nonavbar="false" notree="false"
+            	packagenames="com.airfrance.squaleweb.connection"
+            	sourcepath="JavaSource"
+            	splitindex="true" use="true" version="true"/>
+-->    <jar destfile="delivery/security/apiSecurity.jar"
+         basedir="WebContent/WEB-INF/classes"
+         includes="com/airfrance/squaleweb/connection/*,com/airfrance/squaleweb/connection/exception/*"
+         excludes="com/airfrance/squaleweb/connection/habile"/>
+	</target>
+
+	<target name="all" depends="apiSecurity"/>
+ 
+</project>

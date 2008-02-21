@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!ELEMENT init-param
+   (param-name,param-value)
+>
+<!ELEMENT load-on-startup
+   (#PCDATA)
+>
+<!ELEMENT param-name
+   (#PCDATA)
+>
+<!ELEMENT param-value
+   (#PCDATA)
+>
+<!ELEMENT provider
+   (((init-param,load-on-startup?)|init-param+)?)
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST provider
+class CDATA #IMPLIED
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST provider
+description CDATA #IMPLIED
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST provider
+id CDATA #IMPLIED
+>
+<!ELEMENT providers
+   (provider+)
+>

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding="UTF-8"?>
+
+<!ELEMENT listApplicationComponent
+   (applicationComponent*)
+>
+<!ELEMENT applicationComponent
+   (component+)
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST applicationComponent
+description CDATA #IMPLIED
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST applicationComponent
+impl CDATA #IMPLIED
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST applicationComponent
+jndiName CDATA #IMPLIED
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST applicationComponent
+name CDATA #IMPLIED
+>
+<!ELEMENT component
+   EMPTY
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST component
+name CDATA #IMPLIED
+>
+

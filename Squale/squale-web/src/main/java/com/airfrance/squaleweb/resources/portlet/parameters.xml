@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<portlet-preferences>
+	<preference name="nbAudits" type="text" admin="true">
+		<labels>
+			<label locale="fr" value="Nombre d'audits" />
+			<label locale="en" value="Number of audits" />
+		</labels>
+		<defaultValues>
+			<defaultValue value="3" />
+		</defaultValues>
+	</preference>
+	<preference name="nbDays" type="text" admin="true">
+		<labels>
+			<label locale="fr" value="Exécuté dans les n derniers jours"/>
+			<label locale="en" value="Lauched in the last n days" />
+		</labels>
+		<defaultValues>
+			<defaultValue value="15" />
+		</defaultValues>
+	</preference>
+	<preference name="excludedApplications" type="text" admin="true">
+		<labels>
+			<label locale="fr" value="Les applications exclues (surlignées)"/>
+			<label locale="en" value="Excluded applications (highlighted)" />
+		</labels>
+		<defaultValues>
+			<defaultValue value="-1" />
+		</defaultValues>
+	</preference>
+</portlet-preferences>

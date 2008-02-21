@@ -1,0 +1,147 @@
+package com.airfrance.squaleweb.transformer;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import com.airfrance.squalecommon.datatransfertobject.component.ApplicationConfDTO;
+import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
+import com.airfrance.squalecommon.datatransfertobject.component.ProjectConfDTO;
+import com.airfrance.squalecommon.datatransfertobject.config.ServeurDTO;
+import com.airfrance.squaleweb.applicationlayer.formbean.access.AccessListForm;
+import com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm;
+import com.airfrance.squaleweb.applicationlayer.formbean.config.ServeurForm;
+import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateApplicationForm;
+import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
+import com.airfrance.squaleweb.transformer.access.AccessListTransformer;
+import com.airfrance.welcom.struts.bean.WActionForm;
+import com.airfrance.welcom.struts.transformer.WITransformer;
+import com.airfrance.welcom.struts.transformer.WTransformerException;
+import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+
+/**
+ * Transformation de la configuration d'une application
+ */
+public class ApplicationConfTransformer implements WITransformer {
+
+    /**
+     * @param pObject l'objet à transformer
+     * @throws WTransformerException si un pb apparait.
+     * @return le formulaire.
+     */
+    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+        CreateApplicationForm form = new CreateApplicationForm();
+        objToForm(pObject, form);
+        return form;
+    }
+
+    /**
+     * @param pObject l'objet à transformer
+     * @param pForm le formulaire à remplir.
+     * @throws WTransformerException si un pb apparait.
+     */
+    public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
+        ApplicationConfDTO dto = (ApplicationConfDTO) pObject[0];
+        CreateApplicationForm form = (CreateApplicationForm) pForm;
+        form.setApplicationId("" + dto.getId());
+        form.setApplicationName(dto.getName());
+        form.setStatus(dto.getStatus());
+        form.setLastUpdate(dto.getLastUpdate());
+        form.setLastUser(dto.getLastUser());
+        // Le dto ne contient que la fréquence d'audit
+        // alors que le form contient un booléen et la fréquence
+        if (dto.getAuditFrequency() > 0) {
+            form.setAuditFrequency(dto.getAuditFrequency());
+            form.setMilestone(false);
+        } else {
+            form.setMilestone(true);
+        }
+        form.setPurgeDelay(dto.getResultsStorageOptions());
+        if(dto.getServeurDTO() != null) {
+            form.setServeurForm((ServeurForm)WTransformerFactory.objToForm(ServeurTransformer.class,dto.getServeurDTO()));
+        }
+        if(dto.getAccesses() != null) {
+            form.setAccessListForm((AccessListForm) WTransformerFactory.objToForm(AccessListTransformer.class, dto.getAccesses()));
+        }
+        form.setPublic(dto.getPublic());
+        HashMap hm = new HashMap();
+        form.setIsInProduction(dto.getInProduction());
+        form.setExternalDev(dto.getExternalDev());
+
+        // Prise en compte des utilisateurs déclarés sur l'application
+        if (null != dto.getUsers()) {
+            hm.putAll(dto.getUsers());
+        }
+        form.setRights(hm);
+        // Transformation des projets
+        ArrayList projects = new ArrayList();
+        if (dto.getProjectConfList() != null) {
+            Iterator it = dto.getProjectConfList().iterator();
+            ProjectConfDTO project = null;
+            Object[] paramIn = { project };
+            // Traitement de chaque projet
+            while (it.hasNext()) {
+                project = (ProjectConfDTO) it.next();
+                paramIn[0] = project;
+                // Conversion du projet
+                CreateProjectForm projectForm = (CreateProjectForm) WTransformerFactory.objToForm(ProjectConfTransformer.class, paramIn);
+                // on remplit les informations concernant l'application parent
+                projectForm.setApplicationId(form.getApplicationId());
+                projectForm.setApplicationName(form.getApplicationName());
+                // ajoute à la liste
+                projects.add(projectForm);
+            }
+        }
+        form.setProjects(projects);
+        if (pObject.length == 2 && null != pObject[1]) {
+            // On affecte l'audit de jalon
+            AuditDTO audit = (AuditDTO) pObject[1];
+            AuditForm auditForm = (AuditForm) WTransformerFactory.objToForm(AuditTransformer.class, new Object[] { audit });
+            form.setMilestoneAudit(auditForm);
+        }
+    }
+
+    /**
+     * @param pForm le formulaire à lire.
+     * @throws WTransformerException si un pb apparait.
+     * @return le tableaux des objets.
+     */
+    public Object[] formToObj(WActionForm pForm) throws WTransformerException {
+        Object[] obj = { new ApplicationConfDTO()};
+        formToObj(pForm, obj);
+        return obj;
+    }
+
+    /**
+     * @param pObject l'objet à remplir
+     * @param pForm le formulaire à lire.
+     * @throws WTransformerException si un pb apparait.
+     */
+    public void formToObj(WActionForm pForm, Object[] pObject) throws WTransformerException {
+        CreateApplicationForm form = (CreateApplicationForm) pForm;
+        ApplicationConfDTO dto = (ApplicationConfDTO) pObject[0];
+        dto.setId(new Long(form.getApplicationId()).longValue());
+        dto.setName(form.getApplicationName());
+        dto.setResultsStorageOptions(form.getPurgeDelay());
+        if(form.getServeurForm() != null) {
+            Object[] lServeurDTOs = WTransformerFactory.formToObj(ServeurTransformer.class,form.getServeurForm());
+            dto.setServeurDTO((ServeurDTO)lServeurDTOs[0]);
+        }
+
+        dto.setStatus(form.getStatus());
+        if (form.isMilestone()) {
+            dto.setAuditFrequency(-1);
+        } else {
+            dto.setAuditFrequency(form.getAuditFrequency());
+        }
+        dto.setPublic(form.isPublic());
+        dto.setInProduction(form.getIsInProduction());
+        dto.setExternalDev(form.getExternalDev());
+        HashMap hm = new HashMap();
+        if (null != form.getRights()) {
+            hm.putAll(form.getRights());
+        }
+        dto.setUsers(hm);
+    }
+
+}

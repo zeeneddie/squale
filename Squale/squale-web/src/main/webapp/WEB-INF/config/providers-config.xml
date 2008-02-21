@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<providers>
+
+	<!-- Provider hibernate -->
+	<provider id="persistence" class="com.airfrance.jraf.provider.persistence.hibernate.Initializer" description="">
+		<init-param>
+			<param-name>configFile</param-name>
+			<param-value>/WEB-INF/config/hibernate.cfg.xml</param-value>
+		</init-param>
+
+		<load-on-startup>2</load-on-startup>
+	</provider>
+
+	<!-- Provider d'acces aux applicationComponent -->
+	<provider id="accessdelegate" class="com.airfrance.jraf.provider.accessdelegate.Initializer" description="Mecanisme d'access aux ApplicationComponent">
+		<init-param>
+			<param-name>configFile</param-name>
+			<param-value>/WEB-INF/config/configApplicationComponent.xml</param-value>
+		</init-param>
+	</provider>
+
+	<provider id="bootstrap" class="com.airfrance.jraf.bootstrap.BootstrapInitializer" description="Initializer du bootstrap">
+		<init-param>
+			<param-name>jndi.class</param-name>
+			<param-value>com.ibm.websphere.naming.WsnInitialContextFactory</param-value>
+		</init-param>
+	</provider>
+	<!-- Provider d'envoi de mail -->
+	<provider id="mailer" class="com.airfrance.squalecommon.util.mail.xmedia.Initializer" description="Envoi de mail">
+		<init-param>
+			<param-name>configFile</param-name>
+			<param-value>/WEB-INF/config/xmedia-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>appli</param-name>
+				<!--ENV-PROVIDER_XMEDIA-->
+			<param-value>SQUALE</param-value>
+		</init-param>
+	</provider>
+</providers>
+

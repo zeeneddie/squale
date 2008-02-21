@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="_packaging_generation_" name="Packaging Generator">
+<target name="_packaging_generation_" depends="N10004"/>
+<target name="N10004" description="squale.war">
+<jar destfile="squale.war" manifest="src/META-INF/MANIFEST.MF">
+<zipfileset dir="src/WEB-INF" prefix="WEB-INF">
+<include name="web.xml"/>
+</zipfileset>
+<zipfileset dir="src/WEB-INF" prefix="WEB-INF">
+<include name="jboss-web.xml"/>
+</zipfileset>
+<zipfileset dir="bin" prefix="WEB-INF/classes" includes="**/*.class"/>
+</jar>
+</target>
+</project>

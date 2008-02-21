@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+  "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+
+	<tlib-version>1.2</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>sd</short-name>
+	<uri>http://www.airfrance.fr/sdistant/tags-sdistant</uri>
+	<display-name>Air France, SDistant Tag Library (Intralignes)</display-name>
+  <description><![CDATA[Cette Taglib contient des tags conformes à la charte AirFrance V2. 
+Elle contient des tags susceptibles de faciliter le développement de services distants du portail à la charte V2 (001 ou 002). ]]></description>
+
+	<tag>
+		<name>viewCanvas</name>
+		<tag-class>com.airfrance.portail.services.taglib.ViewCanvasTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Canvas pour le mode view d'un service distant</description>
+	</tag>
+
+	<tag>
+		<name>editCanvas</name>
+		<tag-class>com.airfrance.portail.services.taglib.EditCanvasTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Canvas pour le mode edit d'un service distant</description>
+		<attribute>
+			<name>formName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>okMethod</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cancelMethod</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>internalLink</name>
+		<tag-class>com.airfrance.portail.services.taglib.InternalLinkTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Lien interne du service distant (dans son contexte)</description>
+		<attribute>
+			<name>params</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>callMethod</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>popupLink</name>
+		<tag-class>com.airfrance.portail.services.taglib.ExternalLinkTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Lien externe du service distant (dans une popup)</description>
+		<attribute>
+			<name>url</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>options</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

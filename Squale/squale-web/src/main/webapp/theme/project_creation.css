@@ -1,0 +1,64 @@
+#java_projects {
+    position: relative;
+    border-style: dashed;
+	border-width: 2px;
+	border-color: green;
+	width: 610px;
+}
+
+
+/********************************
+ *       Liste des projets      *
+ ********************************/
+#java_project_list {
+	float: left;
+	width: 400px;
+	border-style: dotted;
+	border-width: 2px;
+	border-color: red;
+}
+
+#java_project_list div.compiling_java_project {
+    position: relative;
+	margin: 4px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #989898;
+}
+
+#java_project_list div.title {
+    display: block;
+    background-color: #989898; 
+    color: #ffffff;
+    padding: 4px;
+    font-weight: bold;
+}
+
+#java_project_list div.body {
+    padding: 4px;
+}
+
+#java_project_list input.field {
+	width: 250px;
+}
+
+
+/********************************
+ *    Gestion des priorités     *
+ ********************************/
+#java_project_priority {
+	float: right;
+	border-style: solid;
+	border-width: 2px;
+	border-color: blue;
+	width: 200px;
+}
+
+
+/************************************
+ * Nécessaire pour décaler la barre *
+ * de validation vers le bas        *
+ ************************************/
+ .spacer {
+    clear: both;
+}

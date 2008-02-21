@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+"struts-config_1_1.dtd">
+
+<struts-config>
+
+	<!-- ========== Form Bean Definitions =================================== -->
+
+
+	<form-beans>
+		<form-bean name="auditForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm"/>
+		<form-bean name="auditForm2" type="com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm"/>
+		<form-bean name="auditListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.AuditListForm"/>
+		<form-bean name="paramReviewForm" type="com.airfrance.squaleweb.applicationlayer.formbean.results.ParamReviewForm"/>
+		<form-bean name="resultListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm"/>
+		<form-bean name="projectSummaryForm" type="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm"/>
+		<form-bean name="markForm" type="com.airfrance.squaleweb.applicationlayer.formbean.results.MarkForm"/>
+		<form-bean name="referenceListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.reference.ReferenceListForm"/>
+		<form-bean name="topListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.results.TopListForm"/>
+		<form-bean name="componentForm" type="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm"/>
+		<form-bean name="createApplicationForm" type="com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateApplicationForm"/>
+		<form-bean name="configApplicationForm" type="com.airfrance.squaleweb.applicationlayer.formbean.creation.ConfigApplicationForm"/>
+		<form-bean name="applicationRightsForm" type="com.airfrance.squaleweb.applicationlayer.formbean.creation.ApplicationRightsForm"/>
+		<form-bean name="createProjectForm" type="com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm"/>
+		<form-bean name="javaCompilationForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.JavaCompilationForm"/>
+		<form-bean name="applicationListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationListForm">
+		</form-bean>
+		<form-bean name="userForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.UserForm">
+		</form-bean>
+		<form-bean name="gridListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.GridListForm">
+		</form-bean>
+		<form-bean name="gridConfigForm" type="com.airfrance.squaleweb.applicationlayer.formbean.creation.GridConfigForm">
+		</form-bean>
+		<form-bean name="createGridForm" type="com.airfrance.squaleweb.applicationlayer.formbean.creation.CGridForm">
+		</form-bean>
+		<form-bean name="createMessageForm" type="com.airfrance.squaleweb.applicationlayer.formbean.creation.CMessageForm">
+		</form-bean>
+		<form-bean name="RuleSetUploadForm" type="com.airfrance.squaleweb.applicationlayer.formbean.rulechecking.RuleSetUploadForm">
+		</form-bean>
+		<form-bean name="CheckstyleRuleSetListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.rulechecking.CheckstyleRuleSetListForm">
+		</form-bean>
+		<form-bean name="checkstyleForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.CheckstyleForm">
+		</form-bean>
+		<form-bean name="configListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.config.ConfigPortailForm">
+		</form-bean>
+		<form-bean name="createConfigForm" type="com.airfrance.squaleweb.applicationlayer.formbean.creation.CConfigForm">
+		</form-bean>
+		<form-bean name="configPortailForm" type="com.airfrance.squaleweb.applicationlayer.formbean.config.ConfigPortailForm">
+		</form-bean>
+		<form-bean name="clearCaseForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.ClearCaseForm">
+		</form-bean>
+		<form-bean name="jCompilingForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.JCompilingForm">
+		</form-bean>
+		<form-bean name="cppTestForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.CppTestForm">
+		</form-bean>
+		<form-bean name="cppTestConfigForm" type="com.airfrance.squaleweb.applicationlayer.formbean.rulechecking.CppTestRuleSetListForm">
+		</form-bean>
+		<form-bean name="mackerForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.MackerForm">
+		</form-bean>
+		<form-bean name="errorListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.ErrorListForm">
+		</form-bean>
+		<form-bean name="applicationErrorForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationErrorForm">
+		</form-bean>
+		<form-bean name="searchProjectForm" type="com.airfrance.squaleweb.applicationlayer.formbean.search.SearchProjectForm">
+		</form-bean>
+		<form-bean name="umlQualityForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.UMLQualityForm">
+		</form-bean>
+		<form-bean name="pmdForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.PmdForm">
+		</form-bean>
+		<form-bean name="pmdRuleSetListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.rulechecking.PmdRuleSetListForm">
+		</form-bean>
+		<form-bean name="newsListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.messages.NewsListForm">
+		</form-bean>
+		<form-bean name="newsForm" type="com.airfrance.squaleweb.applicationlayer.formbean.messages.NewsForm">
+		</form-bean>
+		<form-bean name="mailForm" type="com.airfrance.squaleweb.applicationlayer.formbean.mails.MailForm">
+		</form-bean>
+		<form-bean name="analyserForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AnalyserForm">
+		</form-bean>
+		<form-bean name="javaMockCompilingForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.JavaMockCompilingForm">
+		</form-bean>
+		<form-bean name="roiForm" type="com.airfrance.squaleweb.applicationlayer.formbean.roi.RoiForm">
+		</form-bean>
+		<form-bean name="evolutionForm" type="com.airfrance.squaleweb.applicationlayer.formbean.results.EvolutionForm">
+		</form-bean>
+		<form-bean name="splitAuditsListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm">
+		</form-bean>
+		<form-bean name="rootForm" type="com.airfrance.squaleweb.applicationlayer.formbean.RootForm">
+		</form-bean>
+		<form-bean name="practiceInformationForm" type="com.airfrance.squaleweb.applicationlayer.formbean.information.PracticeInformationForm">
+		</form-bean>
+		<form-bean name="cppMcCabeForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.CppMcCabeForm">
+		</form-bean>
+		<form-bean name="generalParametersForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.GeneralParametersForm">
+		</form-bean>
+		<form-bean name="jspCompilingForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.JspCompilingForm">
+		</form-bean>
+		<form-bean name="setOfReferencesListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.reference.SetOfReferencesListForm">
+		</form-bean>
+		<form-bean name="setOfStatsForm" type="com.airfrance.squaleweb.applicationlayer.formbean.stats.SetOfStatsForm">
+		</form-bean>
+		<form-bean name="j2eeMackerForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.J2EEMackerForm">
+		</form-bean>
+		<form-bean name="eclipseVarForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.EclipseVarForm">
+		</form-bean>
+		<form-bean name="eclipseUserLibForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.EclipseUserLibForm">
+		</form-bean>
+		<form-bean name="bugTrackingQCForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.externalTask.BugTrackingQCForm">
+		</form-bean>
+		
+	</form-beans>
+
+
+	<!-- ========== Global Forward Definitions ============================== -->
+	<global-forwards>
+		<forward name="homepage" path="/jsp/homepage.jsp" redirect="true"/>
+		<forward name="failure" path="/jsp/errorStruts.jsp" redirect="false"/>
+		<forward name="total_failure" path="/jsp/errorStruts.jsp" redirect="false"/>
+		<forward name="unauthorized_access" path="/jsp/accessError.jsp" />
+	</global-forwards>
+
+
+	<!-- ========== Action Form Definitions ============================== -->
+	<action-mappings>
+		<!-- ================ Liens ========================== -->
+		<action path="/reference" type="com.airfrance.squaleweb.applicationlayer.action.results.ReferenceAction" name="setOfReferencesListForm" scope="session">
+			<forward contextRelative="false" name="success" path="referenceList.do?action=list"/>
+		</action>
+		<action path="/login" type="com.airfrance.squaleweb.applicationlayer.action.LoginAction">
+			<forward name="success" path="/index.do"/>
+			<forward name="email" path="display_account.do?action=detail">
+			</forward>
+		</action>
+		<action path="/all_applications" type="com.airfrance.squaleweb.applicationlayer.action.results.application.AllApplicationsAction" name="resultListForm" scope="session" parameter="action">
+			<forward name="factors" path="/jsp/results/all_applications/factors.jsp"/>
+			<forward name="kiviats" path="/jsp/results/all_applications/kiviats.jsp"/>
+			<forward name="application" path="/application.do?action=summary" redirect="true"/>
+			<forward name="project" path="/project.do" redirect="true"/>
+			<forward name="empty" path="/jsp/results/all_applications/empty.jsp">
+			</forward>
+		</action>
+		<action path="/application" type="com.airfrance.squaleweb.applicationlayer.action.results.application.ApplicationResultsAction" name="resultListForm" scope="session" parameter="action">
+			<forward name="project" path="/project.do?action=select"/>
+			<forward name="summary" path="/jsp/results/application/summary.jsp"/>
+		</action>
+		<action path="/project" type="com.airfrance.squaleweb.applicationlayer.action.results.project.ProjectResultsAction" parameter="action" name="projectSummaryForm" scope="session">
+			<forward name="summaryAction" path="/project.do?action=summary"/>
+			<forward name="factor" path="/jsp/results/project/factor.jsp"/>
+			<forward name="practice" path="/jsp/results/project/practice.jsp"/>
+			<forward name="summary" path="/jsp/results/project/summary.jsp"/>
+			<forward name="practiceruleschecking" path="/jsp/results/project/practiceRuleChecking.jsp"/>
+			<forward name="component_root" path="/project_component.do?action=root">
+			</forward>
+			<forward name="practicerulescheckingitem" path="/jsp/results/project/practiceRuleCheckingItem.jsp">
+			</forward>
+			<forward name="errorsAction" path="/project_errors.do?action=errors">
+			</forward>
+			<forward name="noAudits" path="/jsp/results/audits/none.jsp">
+			</forward>
+			<forward name="export_failure" path="/jsp/results/project/summary.jsp">
+			</forward>
+		</action>
+		<action path="/audits" parameter="action" type="com.airfrance.squaleweb.applicationlayer.action.results.audit.AuditAction" name="splitAuditsListForm" scope="session" input="/jsp/admin/audit/terminated.jsp">
+			<forward name="list" path="/jsp/results/audits/all.jsp"/>
+			<forward name="application" path="/application.do?action=summary">
+			</forward>
+			<forward name="applicationErrors" path="/appliErrors.do?action=applicationErrors">
+			</forward>
+			<forward name="failure" path="/jsp/results/audits/all.jsp">
+			</forward>
+			<forward name="list_terminated" path="/jsp/admin/audit/terminated.jsp">
+			</forward>
+		</action>
+		 <action path="/auditsFailed" parameter="action" type="com.airfrance.squaleweb.applicationlayer.action.results.audit.AuditAction" name="splitAuditsListForm" scope="session" >
+			<forward name="displayFailed" path="/jsp/admin/audit/failedOrPartials.jsp"/>
+			<forward name="display" path="/jsp/admin/audit/failedOrPartials.jsp"/>
+		</action>
+		<action path="/project_component" type="com.airfrance.squaleweb.applicationlayer.action.results.project.ProjectComponentsAction" parameter="action" name="componentForm" scope="session" input="/jsp/results/project/component.jsp">
+			<forward name="component_root" path="/jsp/results/project/component_root.jsp">
+			</forward>
+			<forward name="component" path="/jsp/results/project/component.jsp">
+			</forward>
+		</action>
+		<action path="/index" type="com.airfrance.squaleweb.applicationlayer.action.IndexAction" name="splitAuditsListForm" scope="session" validate="false">
+			<forward name="success" path="/jsp/homepage.jsp">
+			</forward>
+		</action>
+		<action path="/review" type="com.airfrance.squaleweb.applicationlayer.action.results.ReviewAction" name="paramReviewForm" parameter="action" scope="session" input="/jsp/results/review.jsp">
+			<forward name="review" path="/jsp/results/review.jsp"/>
+			<forward name="validate" path="/jsp/results/review.jsp"/>
+		</action>
+		<action path="/mark" type="com.airfrance.squaleweb.applicationlayer.action.results.project.ProjectResultsAction" name="markForm" scope="session" parameter="action">
+			<forward name="mark" path="/jsp/results/project/mark.jsp"/>
+		</action>
+		<action path="/top" name="topListForm" scope="session" type="com.airfrance.squaleweb.applicationlayer.action.results.project.TopAction" parameter="action">
+			<forward name="success" path="/jsp/results/project/top.jsp">
+			</forward>
+			<forward name="displayBubble" path="/jsp/results/project/bubble.jsp">
+			</forward>
+		</action>
+		<action path="/new_application" type="com.airfrance.squaleweb.applicationlayer.action.component.CreateApplicationAction" name="createApplicationForm" scope="session" parameter="action" input="/jsp/admin/application/new_application.jsp">
+			<forward name="config_application" path="/jsp/admin/application/config_application.jsp" />
+			<forward name="failure" path="/jsp/admin/application/new_application.jsp">
+			</forward>
+		</action>
+		<action path="/add_user" type="com.airfrance.squaleweb.applicationlayer.action.component.ManageApplicationAction" name="applicationRightsForm" scope="request" parameter="action" validate="false">
+			<forward name="failure" path="/jsp/admin/application/application_rights.jsp" />
+			<forward name="success" path="/jsp/admin/application/application_summary.jsp" />
+		</action>
+		<action path="/add_project" type="com.airfrance.squaleweb.applicationlayer.action.component.ManageApplicationAction" input="/jsp/admin/application/add_project.jsp" name="createProjectForm" scope="session" parameter="action" validate="true">
+			<forward name="failure" path="/config_project.do?action=newProject" />
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp" />
+			<forward name="save_failure" path="/jsp/admin/application/add_project.jsp" />
+		</action>
+		<action path="/create_project_java_compiling" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateJCompilingParametersAction" parameter="action" name="javaCompilationForm" scope="request" input="/jsp/admin/project/config_project.jsp">
+			<forward name="success" path="/jsp/admin/project/config_project.jsp" />
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/config_project" type="com.airfrance.squaleweb.applicationlayer.action.component.CreateProjectAction" name="createProjectForm" scope="session" parameter="action" validate="false">
+			<forward name="application" path="/jsp/admin/application/application_summary.jsp" />
+			<forward name="project" path="/jsp/admin/application/add_project.jsp" />
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="save_failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/add_milestone" type="com.airfrance.squaleweb.applicationlayer.action.component.ManageApplicationAction" name="auditForm" scope="request" parameter="action" input="/jsp/admin/application/application_summary.jsp">
+			<forward name="success" path="/jsp/admin/application/application_summary.jsp">
+			</forward>
+			<forward name="failure" path="/jsp/admin/application/application_summary.jsp">
+			</forward>
+		</action>
+		<action path="/add_branch" type="com.airfrance.squaleweb.applicationlayer.action.component.ManageApplicationAction" name="auditForm2" scope="session" parameter="action" input="/jsp/admin/application/application_summary.jsp">
+			<forward name="success" path="/jsp/admin/application/application_summary.jsp">
+			</forward>
+			<forward name="failure" path="/jsp/admin/application/application_summary.jsp">
+			</forward>
+		</action>
+		<action path="/ack_newapplication" type="com.airfrance.squaleweb.applicationlayer.action.component.AckApplicationAction" parameter="action" name="applicationListForm" scope="session">
+			<forward name="list" path="/jsp/admin/application/listnew.jsp">
+			</forward>
+			<forward name="failure" path="/ack_newapplication.do?action=list">
+			</forward>
+			<forward name="acknowledge" path="/jsp/admin/application/listack.jsp">
+			</forward>
+		</action>
+		<action path="/create_project_list_compiling" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateJCompilingParametersAction" name="jCompilingForm" scope="session" parameter="action" input="/jsp/admin/project/config_project.jsp">
+			<forward name="success" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/admin_account" type="com.airfrance.squaleweb.applicationlayer.action.ManageAccountAction" name="userForm" scope="session" input="/jsp/admin/user/detail.jsp">
+			<forward name="detail" path="/jsp/admin/user/detail.jsp">
+			</forward>
+		</action>
+		<action path="/grid" type="com.airfrance.squaleweb.applicationlayer.action.grid.GridAction" name="gridListForm" scope="session">
+			<forward name="list" path="/jsp/admin/grid/list.jsp">
+			</forward>
+			<forward name="detail" path="/jsp/admin/grid/detail.jsp">
+			</forward>
+		</action>
+		<action path="/addGrid" forward="/jsp/admin/grid/new.jsp">
+		</action>
+		<action path="/createGrid" type="com.airfrance.squaleweb.applicationlayer.action.grid.GridCreationAction" name="createGridForm" scope="request" parameter="action">
+			<forward name="fail" path="/jsp/admin/grid/new.jsp">
+			</forward>
+			<forward name="confirm" path="/jsp/admin/grid/confirm.jsp">
+			</forward>
+			<forward name="success_mail" path="/jsp/admin/grid/grid_info.jsp">
+			</forward>
+			<forward name="success" path="/jsp/admin/grid/list.jsp">
+			</forward>
+		</action>
+		<action path="/config_portail" type="com.airfrance.squaleweb.applicationlayer.action.config.ConfigPortailAction" name="configPortailForm" parameter="action">
+			<forward name="list" path="/jsp/admin/config/config_portail.jsp">
+			</forward>
+		</action>
+		<action path="/loadConfig" forward="/jsp/admin/config/new.jsp">
+		</action>
+		<action path="/createConfig" type="com.airfrance.squaleweb.applicationlayer.action.config.ConfigCreationAction" name="createConfigForm" scope="request">
+			<forward name="success" path="config_portail.do?action=list">
+			</forward>
+			<forward name="fail" path="/jsp/admin/config/new.jsp">
+			</forward>
+		</action>
+		<action path="/ClearCaseTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateClearCaseParametersAction" name="clearCaseForm" parameter="action" input="/jsp/admin/project/add_project_clearcasetask_conf.jsp" validate="false" scope="session">
+			<forward name="config" path="/jsp/admin/project/add_project_clearcasetask_conf.jsp">
+			</forward>
+		</action>
+		<action path="/add_project_clearcase_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateClearCaseParametersAction" parameter="action" name="clearCaseForm" scope="session" input="/jsp/admin/project/config_project.jsp">
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/JCompilingTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateJCompilingParametersAction" name="jCompilingForm" input="/jsp/admin/project/add_project_jcompilingtask_conf.jsp" parameter="action" scope="session" validate="false">
+			<forward name="config" path="/jsp/admin/project/add_project_jcompilingtask_conf.jsp">
+			</forward>
+		</action>
+		<action path="/CppMcCabeTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateCppMcCabeParametersAction" name="cppMcCabeForm" input="/jsp/admin/project/add_project_cppmccabetask_conf.jsp" parameter="action" validate="false" scope="session">
+			<forward name="config" path="/jsp/admin/project/add_project_cppmccabetask_conf.jsp">
+			</forward>
+		</action>
+		<action path="/message" type="com.airfrance.squaleweb.applicationlayer.action.message.MessageAction" name="createMessageForm" scope="request">
+			<forward name="success_messages" path="/jsp/admin/message/message.jsp">
+			</forward>
+			<forward name="fail" path="/jsp/admin/message/message.jsp">
+			</forward>
+		</action>
+		<action path="/checkstyle" type="com.airfrance.squaleweb.applicationlayer.action.rulechecking.CheckstyleAction" name="CheckstyleRuleSetListForm" scope="session">
+			<forward name="list" path="/jsp/admin/checkstyle/list.jsp"></forward>
+        </action>
+		<action path="/addCheckstyleRuleset" forward="/jsp/admin/checkstyle/new.jsp">
+		</action>
+		<action path="/parseCheckstyleRuleset" type="com.airfrance.squaleweb.applicationlayer.action.rulechecking.CheckstyleAddRulesetAction" name="RuleSetUploadForm" scope="request">
+			<forward name="failure" path="/jsp/admin/checkstyle/new.jsp"></forward>
+			<forward name="success" path="/jsp/admin/checkstyle/new.jsp"></forward>
+		</action>
+		<action path="/add_project_cpp_mccabe_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateCppMcCabeParametersAction" parameter="action" name="cppMcCabeForm" scope="session" input="/jsp/admin/project/config_project.jsp">
+  			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+  			</forward>
+  			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+  			</forward>
+  		</action>
+		<action path="/CppTestTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateCppTestParametersAction" parameter="action" name="cppTestForm" input="/jsp/admin/project/add_project_cpptesttask_conf.jsp" validate="false" scope="session">
+			<forward name="config" path="/jsp/admin/project/add_project_cpptesttask_conf.jsp">
+			</forward>
+		</action>
+		<action path="/add_project_cpptest_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateCppTestParametersAction" parameter="action" name="cppTestForm" scope="session" input="/jsp/admin/project/config_project.jsp">
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/RulesCheckingTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateCheckstyleParametersAction" parameter="action" name="checkstyleForm" input="/jsp/admin/project/add_project_rulescheckingtask_conf.jsp" validate="false" scope="session">
+			<forward name="config" path="/jsp/admin/project/add_project_rulescheckingtask_conf.jsp">
+			</forward>
+		</action>
+		<action path="/add_project_checkstyle_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateCheckstyleParametersAction" parameter="action" name="checkstyleForm" scope="session" input="/jsp/admin/project/config_project.jsp">
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/cppTest" type="com.airfrance.squaleweb.applicationlayer.action.rulechecking.CppTestAction" name="cppTestConfigForm" scope="session">
+			<forward name="list" path="/jsp/admin/cpptest/cpptest.jsp"></forward>
+		</action>
+		<action path="/addCppTestRuleset" forward="/jsp/admin/cpptest/cpptest_new.jsp">
+		</action>
+		<action path="/parseCppTestRuleset" type="com.airfrance.squaleweb.applicationlayer.action.rulechecking.CppTestAddRuleSetAction" name="RuleSetUploadForm" scope="request">
+			<forward name="failure" path="/jsp/admin/cpptest/cpptest_new.jsp"></forward>
+			<forward name="success" path="/jsp/admin/cpptest/cpptest_new.jsp"></forward>
+		</action>
+		<action path="/pmd" type="com.airfrance.squaleweb.applicationlayer.action.rulechecking.PmdAction" name="pmdRuleSetListForm" scope="session">
+			<forward name="list" path="/jsp/admin/pmd/pmd.jsp"></forward>
+		</action>
+		<action path="/addPmdRuleSet" forward="/jsp/admin/pmd/pmd_new.jsp">
+		</action>
+		<action path="/parsePmdRuleset" type="com.airfrance.squaleweb.applicationlayer.action.rulechecking.PmdAddRuleSetAction" name="RuleSetUploadForm" scope="request">
+			<forward name="failure" path="/jsp/admin/pmd/pmd_new.jsp"></forward>
+			<forward name="success" path="/jsp/admin/pmd/pmd_new.jsp"></forward>
+		</action>
+		<action path="/MackerTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateMackerParametersAction" parameter="action" name="mackerForm" input="/jsp/admin/project/add_project_mackertask_conf.jsp" validate="false" scope="session">
+			<forward name="config" path="/jsp/admin/project/add_project_mackertask_conf.jsp">
+			</forward>
+		</action>
+		<action path="/add_project_macker_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateMackerParametersAction" parameter="action" name="mackerForm" scope="session" input="/jsp/admin/project/config_project.jsp">
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/project_errors" name="errorListForm" type="com.airfrance.squaleweb.applicationlayer.action.results.project.ErrorsAction">
+			<forward name="displayErrors" path="/jsp/results/project/errors.jsp">
+			</forward>
+		</action>
+		<action path="/appliErrors" type="com.airfrance.squaleweb.applicationlayer.action.results.project.ErrorsAction" name="applicationErrorForm">
+			<forward name="displayApplicationErrors" path="/jsp/results/application/applicationErrors.jsp">
+			</forward>
+		</action>
+		<action path="/list_projects" type="com.airfrance.squaleweb.applicationlayer.action.search.SearchAction" name="searchProjectForm" input="/jsp/search/searchProject.jsp" scope="session">
+			<forward name="list" path="/jsp/search/searchProject.jsp">
+			</forward>
+		</action>
+		<action path="/UMLQualityTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateUMLQualityParametersAction" parameter="action" name="umlQualityForm" input="/jsp/admin/project/add_project_umlqualitytask_conf.jsp" validate="false" scope="session">
+			<forward name="config" path="/jsp/admin/project/add_project_umlqualitytask_conf.jsp">
+			</forward>
+		</action>
+		<action path="/add_project_umlquality_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateUMLQualityParametersAction" parameter="action" name="umlQualityForm" scope="session" input="/jsp/admin/project/config_project.jsp">
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/roi" type="com.airfrance.squaleweb.applicationlayer.action.roi.RoiAction" parameter="action" name="roiForm">
+			<forward name="show" path="/jsp/roi/roi.jsp">
+			</forward>
+			<forward name="fail" path="/jsp/roi/roi.jsp">
+			</forward>
+		</action>
+		<action path="/failed_audit" type="com.airfrance.squaleweb.applicationlayer.action.results.audit.ManagerAuditAction" parameter="action" name="applicationErrorForm" scope="session">
+			<forward name="purge" path="/jsp/results/audits/listpurge.jsp">
+			</forward>
+			<forward name="restart" path="/jsp/results/application/applicationErrors.jsp">
+			</forward>
+		</action>
+		<action path="/information" type="com.airfrance.squaleweb.applicationlayer.action.results.project.InformationAction" name="practiceInformationForm" scope="request">
+			<forward name="information" path="/jsp/results/project/information.jsp">
+			</forward>
+		</action>
+		<action path="/PmdTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreatePmdParametersAction" parameter="action" name="pmdForm" input="/jsp/admin/project/add_project_pmdtask_conf.jsp" validate="false" scope="session">
+			<forward name="config" path="/jsp/admin/project/add_project_pmdtask_conf.jsp">
+			</forward>
+		</action>
+		<action path="/add_project_pmd_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreatePmdParametersAction" input="/jsp/admin/project/config_project.jsp" name="pmdForm" scope="session">
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/referenceList" type="com.airfrance.squaleweb.applicationlayer.action.results.ReferenceListAction" parameter="action" name="setOfReferencesListForm" scope="session">
+			<forward name="success" path="/jsp/reference.jsp">
+			</forward>
+		</action>
+		<action path="/purgeAuditAction" type="com.airfrance.squaleweb.applicationlayer.action.results.audit.ManagerAuditAction" parameter="action" name="splitAuditsListForm" scope="session">
+			<forward name="purge" path="/jsp/results/audits/listpurge.jsp" />
+			<forward name="purgeInvalid" path="/jsp/results/audits/listpurge.jsp" />
+			<forward name="purgeError" path="/jsp/results/audits/all.jsp" />
+		</action>
+		<action path="/manageApplication" type="com.airfrance.squaleweb.applicationlayer.action.component.ManageApplicationAction" name="createApplicationForm" scope="session" parameter="action" input="/jsp/admin/application/application_summary.jsp" validate="false">
+			<forward name="failure" path="/jsp/admin/application/new_application.jsp" />
+			<forward name="save_failure" path="/jsp/admin/project/config_project.jsp" />
+			<forward name="application_summary" path="/jsp/admin/application/application_summary.jsp" />
+			<forward name="application_end_purge" path="/jsp/admin/application/list.jsp" />
+			<forward name="application_confirm_purge" path="/jsp/admin/application/application_purge.jsp" />
+			<forward name="config_application" path="/jsp/admin/application/config_application.jsp" />
+			<forward name="add_rights" path="/jsp/admin/application/application_rights.jsp" />
+			<forward name="ack_application_end_purge" path="/ack_newapplication.do?action=list">
+			</forward>
+		</action>
+		<action path="/adminNews" type="com.airfrance.squaleweb.applicationlayer.action.message.AdminNewsAction" name="newsListForm" scope="session" parameter="action">
+			<forward name="success_news" path="/jsp/admin/message/news.jsp">
+			</forward>
+			<forward name="success_purge" path="/adminNews.do?action=listNews">
+			</forward>
+			<forward name="addOrModify" path="/jsp/admin/message/addOrModifyNews.jsp">
+			</forward>
+			<forward name="viewNews" path="/jsp/admin/message/viewsNews.jsp">
+			</forward>
+		</action>
+		<action path="/news" type="com.airfrance.squaleweb.applicationlayer.action.message.StandardUserNewsAction" name="newsListForm" scope="session" parameter="action">
+			<forward name="viewNews" path="/jsp/admin/message/viewsNews.jsp">
+		</forward>
+		</action>
+		<action path="/addOrModifyNews" parameter="action" type="com.airfrance.squaleweb.applicationlayer.action.message.AddOrModifyNewsAction" name="newsForm" input="/jsp/admin/message/addOrModifyNews.jsp" scope="session">
+			<forward name="success" path="/adminNews.do?action=listNews">
+			</forward>
+			<forward name="uncorrect" path="/jsp/admin/message/addOrModifyNews.jsp">
+			</forward>
+		</action>
+		<action path="/sendMail" name="mailForm" input="/jsp/admin/mails/new_mail.jsp" parameter="action" type="com.airfrance.squaleweb.applicationlayer.action.mail.SendMailAction" scope="session">
+			<forward name="success" path="/jsp/admin/mails/new_mail.jsp" />
+		</action>
+		<action path="/sendMailForGridChanges" type="com.airfrance.squaleweb.applicationlayer.action.grid.GridCreationAction" name="gridListForm" scope="session">
+			<forward name="success" path="grid.do?action=list">
+			</forward>
+		</action>
+		<action path="/meteo" parameter="action" type="com.airfrance.squaleweb.applicationlayer.action.grid.PracticesSummaryAction" name="resultListForm">
+			<forward name="success" path="/jsp/results/project/meteo.jsp">
+			</forward>
+			<forward name="noPracticesDefined" path="/jsp/results/project/meteo.jsp">
+			</forward>
+		</action>
+		<action path="/SourceCodeAnalyserTask" parameter="action" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateAnalyserParametersAction" name="analyserForm" input="/jsp/admin/project/add_project_sourcecodeanalysertask_conf.jsp" scope="session" validate="false">
+			<forward name="config" path="/jsp/admin/project/add_project_sourcecodeanalysertask_conf.jsp">
+			</forward>
+		</action>
+		<action path="/add_project_analyser_config" input="/jsp/admin/project/config_project.jsp" parameter="action" name="analyserForm" scope="session" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateAnalyserParametersAction">
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/JavaMockCompilingTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateJavaMockCompilingParameters" parameter="action" name="javaMockCompilingForm" input="/jsp/admin/project/add_project_javamockcompilingtask_conf.jsp" scope="session" validate="false">
+			<forward name="config" path="/jsp/admin/project/add_project_javamockcompilingtask_conf.jsp">
+			</forward>
+		</action>
+		<action path="/add_project_java_mockcompiling_config" input="/jsp/admin/project/config_project.jsp" parameter="action" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateJavaMockCompilingParameters" name="javaMockCompilingForm" scope="session">
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/evolution" type="com.airfrance.squaleweb.applicationlayer.action.results.project.EvolutionAction" parameter="action" name="evolutionForm" scope="session" input="jsp/results/project/evolution.jsp">
+			<forward name="success" path="jsp/results/project/evolution.jsp">
+			</forward>
+		</action>
+		<action path="/updateGrid" type="com.airfrance.squaleweb.applicationlayer.action.grid.GridAction" parameter="action" name="gridConfigForm" input="/jsp/admin/grid/detail.jsp">
+			<forward name="detail" path="/jsp/admin/grid/detail.jsp">
+			</forward>
+			<forward name="list" path="/jsp/admin/grid/list.jsp">
+			</forward>
+		</action>
+		<action path="/utilLink" type="com.airfrance.squaleweb.applicationlayer.action.UtilLinkAction" name="rootForm">
+			<forward name="goodPractice" path="/jsp/help/generic_help.jsp">
+			</forward>
+			<forward name="error" path="/jsp/errorStruts.jsp">
+			</forward>
+			<forward name="newApplication" path="/jsp/admin/application/new_application.jsp">
+			</forward>
+			<forward name="configApplication" path="/jsp/admin/application/config_application.jsp">
+			</forward>
+			<forward name="addRights" path="/jsp/admin/application/application_rights.jsp">
+			</forward>
+			<forward name="adminApplication" path="/jsp/admin/application/list.jsp">
+			</forward>
+			<forward name="applicationSummary" path="/jsp/admin/application/application_summary.jsp">
+			</forward>
+			<forward name="message" path="/jsp/admin/message/message.jsp">
+			</forward>
+			<forward name="homepage" path="/jsp/homepage.jsp">
+			</forward>
+			<forward name="login" path="/jsp/index.jsp">
+			</forward>
+		</action>
+		<action path="/generalConfiguration" name="generalParametersForm" scope="session" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateGeneralParametersAction" parameter="action" input="/jsp/admin/project/add_project_general_parameters.jsp" validate="false">
+			<forward name="config" path="/jsp/admin/project/add_project_general_parameters.jsp">
+			</forward>
+		</action>
+		<action path="/add_project_general_parameters" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateGeneralParametersAction" input="/jsp/admin/project/config_project.jsp" parameter="action" name="generalParametersForm" scope="session">
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/adminNotAttemptedAudit" type="com.airfrance.squaleweb.applicationlayer.action.results.audit.AuditAction" parameter="action" name="splitAuditsListForm" scope="session" input="/jsp/admin/audit/notAttempted.jsp">
+			<forward name="display" path="/jsp/admin/audit/notAttempted.jsp">
+			</forward>
+		</action>
+		<action path="/J2eeMackerTask" input="/jsp/admin/project/add_project_j2eemackertask_conf.jsp" parameter="action" name="j2eeMackerForm" scope="session" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateMackerParametersAction" validate="false">
+			<forward name="config" path="/jsp/admin/project/add_project_j2eemackertask_conf.jsp">
+			</forward>
+		</action>
+		<action path="/JspCompilingTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction" parameter="action" name="jspCompilingForm" input="/jsp/admin/project/add_project_jspcompilingtask_conf.jsp" scope="session" validate="false">
+		</action>
+		<action path="/add_project_jsp_compiling_parameters" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction" parameter="action" input="/jsp/admin/project/config_project.jsp" name="jspCompilingForm" scope="session">
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/stats" type="com.airfrance.squaleweb.applicationlayer.action.stats.StatsAction" name="setOfStatsForm" input="/jsp/admin/stats/displayStats.jsp">
+			<forward name="displayAdmin" path="/jsp/admin/stats/displayStats.jsp">
+			</forward>
+			<forward name="displayUser" path="/jsp/stats.jsp">
+			</forward>
+		</action>
+		<action path="/application_errors" type="com.airfrance.squaleweb.applicationlayer.action.results.project.ErrorsAction" name="errorListForm">
+			<forward name="displayErrors" path="/jsp/results/application/errors.jsp">
+			</forward>
+		</action>
+		<action path="/add_project_j2eemacker_config" input="/jsp/admin/project/config_project.jsp" parameter="action" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateMackerParametersAction" name="j2eeMackerForm" scope="session">
+		</action>
+		<action path="/display_account" type="com.airfrance.squaleweb.applicationlayer.action.ManageAccountAction" name="userForm" parameter="action" scope="session" input="/jsp/admin/user/detail.jsp" validate="false">
+			<forward name="detail" path="/jsp/admin/user/detail.jsp">
+			</forward>
+		</action>
+		<action path="/create_eclipse_var" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateJCompilingParametersAction" input="/jsp/admin/project/config_project.jsp" name="eclipseVarForm" parameter="action" scope="request">
+			<forward name="success" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/create_eclipse_lib" input="/jsp/admin/project/config_project.jsp" parameter="action" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateJCompilingParametersAction" name="eclipseUserLibForm" scope="request">
+			<forward name="success" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/ExtBugTrackingQCTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.externalTask.CreateBugTrackingQCParametersAction" parameter="action" name="bugTrackingQCForm" input="/jsp/admin/project/add_project_extbugtrackingqctask_conf.jsp" scope="session" validate="false">
+			<forward name="config" path="/jsp/admin/project/add_project_extbugtrackingqctask_conf.jsp">
+			</forward>
+		</action>
+		<action path="/add_project_extbugtrackingqctask_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.externalTask.CreateBugTrackingQCParametersAction" parameter="action" input="/jsp/admin/project/config_project.jsp" name="bugTrackingQCForm" scope="session">
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+	</action-mappings>
+	
+	<message-resources parameter="com.airfrance.squaleweb.resources.ApplicationResources" factory="com.airfrance.squaleweb.resources.MessageResourcesFactory" null="false"/>
+	<plug-in className="com.airfrance.welcom.struts.plugin.WelcomPlugIn">
+		<set-property property="properties" value="com.airfrance.squaleweb.resources.WelcomResources"/>
+	</plug-in>
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn"/>
+ </struts-config>
