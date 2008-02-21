@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<!-- shared properties -->
+
+	<!-- properties for this SessionFactory only -->
+	<session-factory>
+
+		<property name="show_sql">false</property>
+
+		<property name="use_outer_join">true</property>
+
+		<property name="jdbc.batch_size">0</property>
+
+		<property name="query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
+
+
+		<property name="connection.provider_class">org.hibernate.connection.DriverManagerConnectionProvider</property>
+		<property name="connection.username">
+<!-- ENV-HIBERNATE-USERNAME -->
+			squale
+		</property>
+		<property name="connection.password">
+<!-- ENV-HIBERNATE-PASSWORD -->		
+			squale
+		</property>
+		<property name="connection.url">
+<!-- ENV-HIBERNATE-URL -->		
+			jdbc:oracle:thin:@bd8ts:1528:BDDEV9
+		</property>
+		<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+	
+		<property name="dialect">org.hibernate.dialect.OracleDialect</property>
+		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+
+		<property name="jdbc.use_streams_for_binary">true</property>
+
+
+		<!-- begin mapping files -->
+		<mapping resource="mapping/AbstractComponentBO.hbm.xml" />
+		<mapping resource="mapping/AbstractFormulaBO.hbm.xml" />
+		<mapping resource="mapping/AtomicRightsBO.hbm.xml" />
+		<mapping resource="mapping/AuditBO.hbm.xml" />
+		<mapping resource="mapping/ErrorBO.hbm.xml" />
+		<mapping resource="mapping/MarkBO.hbm.xml" />
+		<mapping resource="mapping/MeasureBO.hbm.xml" />
+		<mapping resource="mapping/ProfileBO.hbm.xml" />
+		<mapping resource="mapping/QualityResultBO.hbm.xml" />
+		<mapping resource="mapping/QualityRuleBO.hbm.xml" />
+		<mapping resource="mapping/SqualeReferenceBO.hbm.xml" />
+		<mapping resource="mapping/UserBO.hbm.xml" />
+		<mapping resource="mapping/MetricBO.hbm.xml" />
+		<mapping resource="mapping/QualityGridBO.hbm.xml" />
+		<mapping resource="mapping/AuditGridBO.hbm.xml" />
+		<mapping resource="mapping/MessageBO.hbm.xml" />
+		<mapping resource="mapping/RuleSetBO.hbm.xml" />
+		<mapping resource="mapping/RuleBO.hbm.xml" />
+		<mapping resource="mapping/CheckstyleModuleBO.hbm.xml" />
+		<mapping resource="mapping/TaskBO.hbm.xml" />
+		<mapping resource="mapping/AbstractTasksUserBO.hbm.xml" />
+		<mapping resource="mapping/StopTimeBO.hbm.xml" />
+		<mapping resource="mapping/AuditFrequencyBO.hbm.xml" />
+		<mapping resource="mapping/ProjectParameterBO.hbm.xml" />
+		<mapping resource="mapping/RuleCheckingTransgressionItemBO.hbm.xml" />
+		<mapping resource="mapping/TaskParameterBO.hbm.xml" />
+		<mapping resource="mapping/TaskRefBO.hbm.xml" />
+		<mapping resource="mapping/NewsBO.hbm.xml" />
+		<mapping resource="mapping/SiteStatsDICTBO.hbm.xml" />
+		<mapping resource="mapping/SiteAndProfilStatsDICTBO.hbm.xml" />
+		<mapping resource="mapping/ServeurBO.hbm.xml" />
+		<mapping resource="mapping/UserAccessBO.hbm.xml" />
+		<mapping resource="mapping/AbstractDisplayConfBO.hbm.xml" />
+		<mapping resource="mapping/Profile_DisplayConfBO.hbm.xml" />
+		<mapping resource="mapping/AuditDisplayConfBO.hbm.xml" />
+		<!-- end mapping files   -->
+	</session-factory>
+
+</hibernate-configuration>
+

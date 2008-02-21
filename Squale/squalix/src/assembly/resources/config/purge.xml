@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PurgeConfiguration>
+	<!-- Nombre maximum d'audits à purger par serveur et par exécution du batch -->
+	<MaxAuditsToDelete>5</MaxAuditsToDelete>
+	<!-- Nombre minimum d'audits de suivi obsolètes à conserver pour historique -->
+	<MinObsoleteAuditsToKeep>3</MinObsoleteAuditsToKeep>
+</PurgeConfiguration>

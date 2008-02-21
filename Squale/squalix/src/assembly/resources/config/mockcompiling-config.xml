@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE mockcompiling-configuration  PUBLIC "-//MockCompiling Configuration DTD //EN" "file:../src/config/mockcompiling-config.dtd">
+
+<mockcompiling-configuration>
+	<!--  ENV-COMPILED-SOURCES-ROOT -->
+	<rootPath>/app/SQUALE/dev/data/compiledsources</rootPath>
+</mockcompiling-configuration>

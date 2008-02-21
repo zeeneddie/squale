@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMEDIA>
+  <!-- ENV-XMEDIA_QCF -->
+  <QCF>TSQUALEQCF</QCF>
+  
+  <!-- ENV-XMEDIA_PRODUCER_QL -->
+  <producerQL>TXMEDIAPOST001</producerQL>
+
+  <!-- ENV-XMEDIA_PRODUCER_QLH -->
+  <producerQLH>TXMEDIAPOST001H</producerQLH>
+
+  <!-- ENV-XMEDIA_CONSUMER_QL -->
+  <consumerQL>TXMEDIARECV001</consumerQL>
+  
+  <!-- ENV-XMEDIA_RECEIPT_QL -->
+  <receiptQL>TXMEDIARECV001</receiptQL>
+  
+  <!-- ENV-XMEDIA_ERROR_QL -->
+  <errorQL>TXMEDIARECV002</errorQL>
+
+  <consumerTimer>0</consumerTimer>
+  <errorTimer>0</errorTimer>
+
+  <!-- ENV-XMEDIA_ICF -->
+  <ICF>com.sun.jndi.fscontext.RefFSContextFactory</ICF>
+
+  <!-- ENV-XMEDIA_URL -->
+  <URL>file:///exploit/mqprod/prod/bin/XMEDIA8/</URL>
+  
+</XMEDIA>

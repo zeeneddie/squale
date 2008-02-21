@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <!DOCTYPE configuration SYSTEM "rsm-config.dtd"> -->
+<configuration>
+	<general>
+		<!-- ENV-RSM-WORKSPACE -->
+		<workspace>/app/SQUALE/squalix/workspace</workspace>
+		<!-- ENV-RSM-RPT -->
+		<reportpath>/app/SQUALE/squalix/workspace/rapports_RSM.csv</reportpath>
+		<!-- ENV-RSM-RPT-METHODS -->
+		<reportmethodspath>/app/SQUALE/squalix/workspace/rapports_Methods_RSM.csv</reportmethodspath>
+		<!-- ENV-RSM-RPT-CLASSES -->
+		<reportclassespath>/app/SQUALE/squalix/workspace/rapports_Class_RSM.csv</reportclassespath>
+		<!-- ENV-RSM-INPUT -->
+		<inputfile>/app/SQUALE/squalix/workspace/input.txt</inputfile>
+		<!-- ENV-RSM-AUX -->
+		<auxfile>/app/SQUALE/squalix/workspace/aux.csv</auxfile>
+		<!-- ENV-RSM-EXEC -->
+		<execcommand>/app/SQUALE/OUTILS/RSM/7.0/rsm</execcommand>
+	</general>
+	<profiles>
+		 <profile name="java">
+	      	<extensions>.java</extensions>
+	      	<entetes></entetes>
+	      	<parameters>
+	      		<!-- CSV output mode -->
+	        	<parameter>-A</parameter>
+	        	<!-- les options pour récupérer le type de données voulues -->
+	        	<parameter>-Tf</parameter>
+	        	<!-- Pour avoir les métriques orientés objets -->
+	        	<parameter>-To</parameter>
+	        	<!-- Pour prendre une liste de fichiers en paramètres -->
+	        	<parameter>-F</parameter>
+	        	<!-- Fichier de sortie, sinon s'affiche à l'écran -->
+	        	<parameter>-O</parameter>
+	      	</parameters>
+	     </profile>
+		 <profile name="java compiled">
+	      	<extensions>.java</extensions>
+	      	<entetes></entetes>
+	      	<parameters>
+	      		<!-- CSV output mode -->
+	        	<parameter>-A</parameter>
+	        	<!-- les options pour récupérer le type de données voulues -->
+	        	<parameter>-Tf</parameter>
+	        	<!-- Pour avoir les métriques orientés objets -->
+	        	<parameter>-To</parameter>
+	        	<!-- Pour prendre une liste de fichiers en paramètres -->
+	        	<parameter>-F</parameter>
+	        	<!-- Fichier de sortie, sinon s'affiche à l'écran -->
+	        	<parameter>-O</parameter>
+	      	</parameters>
+	     </profile>
+	     <profile name="j2ee">
+	      	<extensions>.java</extensions>
+	      	<entetes></entetes>
+	      	<parameters>
+	      		<!-- CSV output mode -->
+	        	<parameter>-A</parameter>
+	        	<!-- les options pour récupérer le type de données voulues -->
+	        	<parameter>-Tf</parameter>
+	        	<!-- Pour avoir les métriques orientés objets -->
+	        	<parameter>-To</parameter>
+	        	<!-- Pour prendre une liste de fichiers en paramètres -->
+	        	<parameter>-F</parameter>
+	        	<!-- Fichier de sortie, sinon s'affiche à l'écran -->
+	        	<parameter>-O</parameter>
+	      	</parameters>
+	     </profile>
+	     <profile name="j2ee compiled">
+	      	<extensions>.java</extensions>
+	      	<entetes></entetes>
+	      	<parameters>
+	      		<!-- CSV output mode -->
+	        	<parameter>-A</parameter>
+	        	<!-- les options pour récupérer le type de données voulues -->
+	        	<parameter>-Tf</parameter>
+	        	<!-- Pour avoir les métriques orientés objets -->
+	        	<parameter>-To</parameter>
+	        	<!-- Pour prendre une liste de fichiers en paramètres -->
+	        	<parameter>-F</parameter>
+	        	<!-- Fichier de sortie, sinon s'affiche à l'écran -->
+	        	<parameter>-O</parameter>
+	      	</parameters>
+	     </profile>
+	     <profile name="cpp">
+	     	<extensions>.c,.cc,.cxx,.cpp,.C</extensions>
+	      	<entetes>.h,.hh,.hxx,.hpp</entetes>
+	     	<parameters>
+		      	<!-- CSV output mode -->
+	        	<parameter>-A</parameter>
+	        	<!-- les options pour récupérer le type de données voulues -->
+	        	<parameter>-Tf</parameter>
+	        	<!-- Pour avoir les métriques orientés objets -->
+	        	<parameter>-To</parameter>
+	        	<!-- Pour prendre une liste de fichiers en paramètres -->
+	        	<parameter>-F</parameter>
+	        	<!-- Fichier de sortie, sinon s'affiche à l'écran -->
+	        	<parameter>-O</parameter>
+	      	</parameters>
+	     </profile>
+    </profiles>
+</configuration>

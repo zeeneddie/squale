@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<providers>
+
+	<!-- Provider bootstrap -->
+	<provider id="bootstrap" class="com.airfrance.jraf.bootstrap.BootstrapInitializer" description="Initializer du bootstrap">
+	</provider>
+
+
+	<!-- Provider hibernate -->
+	<provider id="persistence" class="com.airfrance.jraf.provider.persistence.hibernate.Initializer" description="">
+		<init-param>
+			<param-name>configFile</param-name>
+			<param-value>/config/hibernate.cfg.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>containerManagedTransaction</param-name>
+			<param-value>false</param-value>
+		</init-param>
+
+		<load-on-startup>2</load-on-startup>
+	</provider>
+
+	<!-- Provider d'envoi de mail -->
+		<provider id="mailer" class="com.airfrance.squalecommon.util.mail.xmedia.Initializer" description="Envoi de mail">
+			<init-param>
+				<param-name>configFile</param-name>
+				<param-value>/config/xmedia-config.xml</param-value>
+			</init-param>
+			<init-param>
+				<param-name>appli</param-name>
+					<!--ENV-PROVIDER_XMEDIA_APPLI-->
+				<param-value>SQUALE</param-value>
+			</init-param><init-param>
+				<param-name>sender</param-name>
+					<!--ENV-PROVIDER_XMEDIA_SENDER-->
+				<param-value>squale@xmedia.airfrance.fr</param-value>
+			</init-param>
+			<init-param>
+				<param-name>senderConfigFile</param-name>
+				<param-value>/config/xmedia-config.xml</param-value>
+			</init-param>
+		</provider>
+
+</providers>

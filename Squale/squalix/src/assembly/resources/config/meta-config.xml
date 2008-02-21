@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- AIR FRANCE -->
+
+<!-- A.Buisine 15/06/2000 -->
+
+<!-- Les chaines en MAJUSCULES sont fixees par programme -->
+
+<!-- Les tags ne peuvent etre utilises comme id -->
+
+<!-- <!DOCTYPE MetaConfiguration SYSTEM "meta-config.dtd"> -->
+
+<MetaConfiguration id="squalix" desc="Configuration des fichiers de configuraton Squalix" version="0.1" date="05/07/2005">
+<Configuration id="logtrace" fichier="/config/log-trace-config.xml"/>
+
+</MetaConfiguration>
+

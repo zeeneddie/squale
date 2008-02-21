@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+	<template name="mccabe.classes">
+		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO</csvbean>
+		<header size="0" />
+		<footer size="0" />
+		<fields>
+			<field name="componentName" type="java.lang.String" column="0"></field>
+			<field name="maxvg" type="java.lang.Integer" column="1"></field>
+			<field name="rfc" type="java.lang.Integer" column="2"></field>
+			<field name="wmc" type="java.lang.Integer" column="3"></field>
+			<field name="dit" type="java.lang.Integer" column="4"></field>
+			<field name="cbo" type="java.lang.Integer" column="5"></field>
+			<field name="locm" type="java.lang.Integer" column="6"></field>
+			<field name="noc" type="java.lang.Integer" column="7"></field>
+			<field name="sumvg" type="java.lang.Integer" column="8"></field>
+			<field name="dependsUponChild" type="java.lang.Boolean" column="9"></field>
+		</fields>
+	</template>
+	<!-- Pas de cbo pour les classes Java -->
+	<template name="mccabe.java.classes">
+		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO</csvbean>
+		<header size="0" />
+		<footer size="0" />
+		<fields>
+			<field name="componentName" type="java.lang.String" column="0"></field>
+			<field name="maxvg" type="java.lang.Integer" column="1"></field>
+			<field name="rfc" type="java.lang.Integer" column="2"></field>
+			<field name="wmc" type="java.lang.Integer" column="3"></field>
+			<field name="dit" type="java.lang.Integer" column="4"></field>
+			<field name="locm" type="java.lang.Integer" column="6"></field>
+			<field name="noc" type="java.lang.Integer" column="7"></field>
+			<field name="sumvg" type="java.lang.Integer" column="8"></field>
+			<field name="dependsUponChild" type="java.lang.Boolean" column="9"></field>
+		</fields>
+	</template>
+	
+	<template name="mccabe.methodes">
+		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO</csvbean>
+		<header size="0" />
+		<footer size="0" />
+		<fields>
+			<field name="componentName" type="java.lang.String" column="0"></field>
+			<field name="nlmixed" type="java.lang.Integer" column="1"></field>
+			<field name="ncloc" type="java.lang.Integer" column="2"></field>
+			<field name="nsloc" type="java.lang.Integer" column="3"></field>
+			<field name="nl" type="java.lang.Integer" column="4"></field>
+			<field name="vg" type="java.lang.Integer" column="5"></field>
+			<field name="evg" type="java.lang.Integer" column="6"></field>
+			<field name="ivg" type="java.lang.Integer" column="7"></field>
+			<field name="filename" type="java.lang.String" column="8"></field>
+			<field name="startLine" type="java.lang.Integer" column="9"></field>
+		</fields>
+	</template>
+	
+	<template name="umlquality.class">
+		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityClassMetricsBO</csvbean>
+		<header size="1" />
+		<footer size="0" />
+		<fields>
+			<field name="Name" type="java.lang.String" column="0"></field>
+			<field name="NOBD" type="java.lang.Integer" column="10"></field>
+			<field name="NOBM" type="java.lang.Integer" column="11"></field>
+			<field name="NOC" type="java.lang.Integer" column="24"></field>
+			<field name="NOP" type="java.lang.Integer" column="25"></field>
+			<field name="NVM" type="java.lang.Integer" column="26"></field>
+			<field name="NII" type="java.lang.Integer" column="27"></field>
+			<field name="RFC" type="java.lang.Integer" column="29"></field>
+			<field name="numAttr" type="java.lang.Integer" column="31"></field>
+			<field name="numOps" type="java.lang.Integer" column="32"></field>
+			<field name="DIT" type="java.lang.Integer" column="34"></field>
+			<field name="opsInh" type="java.lang.Integer" column="39"></field>
+			<field name="depClient" type="java.lang.Integer" column="42"></field>
+			<field name="depSupp" type="java.lang.Integer" column="43"></field>
+		</fields>
+		
+	</template>
+		
+	<template name="umlquality.interface">
+		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityInterfaceMetricsBO</csvbean>
+		<header size="1" />
+		<footer size="0" />
+		<fields>
+			<field name="Name" type="java.lang.String" column="0"></field>
+			<field name="numOps" type="java.lang.Integer" column="1"></field>
+			<field name="numClients" type="java.lang.Integer" column="2"></field>
+			<field name="numAnc" type="java.lang.Integer" column="3"></field>
+		</fields>
+	</template>		
+	
+	<template name="umlquality.model">
+		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityModelMetricsBO</csvbean>
+		<header size="1" />
+		<footer size="0" />
+		<fields>
+			<field name="Name" type="java.lang.String" column="0"></field>
+			<field name="ADI" type="java.lang.Integer" column="7"></field>
+			<field name="MD" type="java.lang.Integer" column="22"></field>
+			<field name="MCC" type="java.lang.Integer" column="40"></field>
+		</fields>
+	</template>		
+	
+	<template name="umlquality.package">
+		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityPackageMetricsBO</csvbean>
+		<header size="1" />
+		<footer size="0" />
+		<fields>
+			<field name="Name" type="java.lang.String" column="0"></field>
+			
+		</fields>
+	</template>	
+
+	<!-- pour RSM , les profils java et cpp ont les memes mesures remontées-->
+	<template name="rsm.classes">
+		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMClassMetricsBO</csvbean>
+		<header size="0" />
+		<footer size="0" />
+		<fields>
+			<field name="componentName" type="java.lang.String" column="1"></field>
+			<field name="sloc" type="java.lang.Integer" column="2"></field>
+			<field name="comments" type="java.lang.Integer" column="5"></field>
+			<field name="publicData" type="java.lang.Integer" column="14"></field>
+			<field name="protectedData" type="java.lang.Integer" column="15"></field>
+			<field name="privateData" type="java.lang.Integer" column="16"></field>
+		</fields>
+	</template>	
+	<template name="rsm.methods">
+		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMMethodMetricsBO</csvbean>
+		<header size="0" />
+		<footer size="0" />
+		<fields>
+			<field name="componentName" type="java.lang.String" column="1"></field>
+			<field name="comments" type="java.lang.Integer" column="7"></field>
+			<field name="sloc" type="java.lang.Integer" column="9"></field>
+			<field name="fileName" type="java.lang.String" column="19"></field>
+		</fields>
+	</template>		
+	
+	
+</templates>

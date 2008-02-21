@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- Configuration du Servlet IPN -->
+
+<!-- AIR FRANCE -->
+
+<!-- <!DOCTYPE LogTraceConfiguration SYSTEM "log-trace-config.dtd"> -->
+
+<LogTraceConfiguration id="squalix" desc="Batch de Squale" version="1" date="05/07/2005">
+	<MsgDirectives mode="off" debug="off" console="off" fichier="traceMsger"/>
+	<LogDirectives logStd="false" logErr="false" directory="erreurs-app"></LogDirectives>
+	<TraceDirectives trace="off"/>
+</LogTraceConfiguration>
+
