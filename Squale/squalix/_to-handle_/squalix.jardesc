@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+    <jar path="D:/temp/squalix.jar"/>
+    <options buildIfNeeded="true" compress="true"
+        descriptionLocation="/squalix/squalix.jardesc"
+        exportErrors="true" exportWarnings="true" overwrite="true"
+        saveDescription="true" useSourceFolders="false"/>
+    <manifest generateManifest="false"
+        manifestLocation="/squalix/manifest.mf" manifestVersion="1.0"
+        reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="true">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false">
+        <javaElement handleIdentifier="=Jraf/jraf-provider-logging-2.5/src"/>
+        <javaElement handleIdentifier="=Jraf/jraf-spi-2.5/src"/>
+        <javaElement handleIdentifier="=Jraf/jraf-provider-accessdelegate-ejb-2.5/src"/>
+        <file path="/ckjm/.classpath"/>
+        <javaElement handleIdentifier="=squaleCommon/src"/>
+        <file path="/ckjm/.checkstyle"/>
+        <javaElement handleIdentifier="=squalix/src"/>
+        <javaElement handleIdentifier="=ckjm/src"/>
+        <javaElement handleIdentifier="=Jraf/jraf-web-initializer-2.5/src"/>
+        <javaElement handleIdentifier="=Jraf/jraf-provider-accessdelegate-2.5/src"/>
+        <javaElement handleIdentifier="=Jraf/jraf-struts-initializer-2.5/src"/>
+        <javaElement handleIdentifier="=Jraf/jraf-provider-logging-cexi-2.5/src"/>
+        <javaElement handleIdentifier="=Jraf/jraf-helper-2.5/src"/>
+        <javaElement handleIdentifier="=Jraf/jraf-bootstrap-2.5/src"/>
+        <javaElement handleIdentifier="=Jraf/jraf-testenv-tools-2.5/src"/>
+        <javaElement handleIdentifier="=Jraf/jraf-provider-adhesion-2.5/src"/>
+        <javaElement handleIdentifier="=Jraf/jraf-commons-2.5/src"/>
+        <file path="/ckjm/.project"/>
+        <javaElement handleIdentifier="=squaleAF/src&lt;com.airfrance.squalecommon.util.mail.xmedia"/>
+        <javaElement handleIdentifier="=Jraf/jraf-provider-hibernate-2.5/src"/>
+    </selectedElements>
+</jardesc>

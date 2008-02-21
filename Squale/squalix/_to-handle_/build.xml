@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="squalix" basedir="." default="all">
+
+	<!-- lecture du fichier de properties -->
+	<property file="${basedir}/build.properties" />
+	 
+	<!-- classpath du projet --> 
+	<path id="project.class.path">
+		<pathelement location="${classes.dir}"/>
+		<pathelement location="${common.dir}/bin"/>
+		
+		<!-- librairies common -->
+		<fileset dir="${common.dir}">
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
+		</fileset>	
+		
+		<!-- librairies de squalix -->
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
+		</fileset>	
+		
+		<!-- librairies contenues dans l'ear -->
+		<fileset dir="${ear.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+		
+		<!-- driver JDBC -->
+		<pathelement location="${jdbc.driver.lib}"/> 
+		
+		<!-- parser XML : xerces - XMLAPI -->
+		<fileset dir="${xerces.dir}">
+   			<include name="xerces-2.4.0.jar" />
+   			<include name="xml-apis.jar" />
+		</fileset>
+	</path>
+
+	
+		<!-- =================================================================== -->
+	<!-- Afficher les variables d'environnement                               -->
+	<!-- =================================================================== -->
+	<target name="env">
+
+		<!-- Set date/time variable -->
+		<tstamp>
+		    <format property="time" pattern="yyyyMMdd-kkmm" locale="fr"/>
+		</tstamp>
+		
+		<!-- repertoire de test -->
+	  	<property name="build.test.dir" location="${build.dir}/test/${time}"/>
+
+		<!-- recuperation des informations du projet eclipse -->	
+		<!-- <getProjectData  Basedir="${basedir}" /> -->
+
+		<!-- affichage des proprietes=valeurs -->
+		<echo message="java.version=${java.version}" />
+		<echo message="version=${version}" />
+		<echo message="time=${time}" />
+		<echo message="build.test.dir=${build.test.dir}" />
+		<echo message="projectName=${projectName}" />
+		<echo message="java.home = ${java.home}"/>
+		<echo message="user.home = ${user.home}"/>
+		<echo message="java.class.path = ${java.class.path}"/>
+		<echo message="src.dir = ${src.dir}"/>
+		<echo message="test.dir = ${test.dir}"/>
+		<echo message="classes.dir = ${classes.dir}"/>
+		<echo message="build.dir = ${build.dir}"/>
+		<echo message="common.dir = ${common.dir}"/>
+		
+		<echo message=""/>
+	    
+	</target>
+	
+	<target name="test" depends="env, init-test" description="Executer les tests unitaires de Squalix">
+		<!-- execution des tests -->
+	    <junit fork="no" 
+	    	haltonfailure="false" 
+	    	printsummary="true"
+	    	errorproperty="test.failed"
+	    	failureproperty="test.failed">
+		    <classpath>
+		    	<path refid="project.class.path"></path>
+			</classpath>
+ 	      	<formatter type="brief" usefile="false" />
+ 	      	<!-- <formatter type="xml" /> -->
+	      	<batchtest todir="${build.test.dir}">
+	     		<fileset dir="${classes.dir}" 
+	     			includes="**/*AllTests.class" />
+	      	</batchtest>
+	    </junit>
+	    <!-- generation des rapports -->
+	    <junitreport todir="${build.test.dir}">
+	    	<fileset dir="${build.test.dir}">
+	    		<include name="TEST-*.xml"/>
+	    	</fileset>
+	    	<report format="frames" todir="${build.test.dir}"/>
+	    </junitreport>
+	    
+	</target>
+	
+	
+		<!-- =================================================================== -->
+	<!-- initialisation des tests -->
+	<!-- =================================================================== -->
+	<target name="init-test" depends="init">
+		<!-- on efface le repertoire de test precedent -->
+		<!-- inactif dans un cas normal car le repertoire n'existe pas -->
+		<delete dir="${build.test.dir}" />
+
+		<!-- on construit le repertoire des tests -->
+		<mkdir dir="${build.test.dir}"/>
+		
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- tache d'initialisation -->
+	<!-- =================================================================== -->
+	<target name="init" depends="env">
+		<mkdir dir="${build.dir}"/>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- clean -->
+	<!-- =================================================================== -->
+	<target name="clean">
+		<!-- on efface le repertoire build -->
+		<delete dir="${build.dir}" />
+	</target>
+ 
+ 	<!-- execution de toutes les taches -->
+ 	<target name="all" depends="test, init" >
+ 	</target>
+</project>
