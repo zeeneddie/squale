@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.MarkBO"
+        table="Mark"
+        mutable="true"
+    >
+
+        <id
+            name="id"
+            column="MarkId"
+            type="long"
+            length="19"
+            unsaved-value="-1"
+        >
+            <generator class="native">
+                <param name="sequence">mark_sequence</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-MarkBO.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="value"
+            type="float"
+            update="true"
+            insert="true"
+            column="Value"
+            not-null="true"
+            unique="false"
+        />
+
+        <many-to-one
+            name="component"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="ComponentId"
+            not-null="true"
+        />
+
+        <many-to-one
+            name="practice"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="PracticeResultId"
+            not-null="true"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-MarkBO.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

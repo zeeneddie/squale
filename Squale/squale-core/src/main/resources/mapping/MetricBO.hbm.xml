@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO"
+        table="Metric"
+        mutable="true"
+        discriminator-value="Metric"
+    >
+
+        <id
+            name="id"
+            column="MetricId"
+            type="long"
+            length="19"
+            unsaved-value="-1"
+        >
+            <generator class="native">
+                <param name="sequence">metric_sequence</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-MetricBO.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <discriminator
+            column="subclass"
+        />
+
+        <property
+            name="name"
+            type="string"
+            update="true"
+            insert="true"
+            column="Name"
+            not-null="false"
+            unique="false"
+        />
+
+        <many-to-one
+            name="measure"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="MeasureId"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-MetricBO.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.BooleanMetricBO"
+            discriminator-value="Bool"
+        >
+        <property
+            name="value"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="Boolean_val"
+            not-null="false"
+            unique="false"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-BooleanMetricBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.StringMetricBO"
+            discriminator-value="Str"
+        >
+        <property
+            name="value"
+            type="string"
+            update="true"
+            insert="true"
+            column="String_val"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-StringMetricBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.BinaryMetricBO"
+            discriminator-value="Bin"
+        >
+        <property
+            name="value"
+            type="com.airfrance.jraf.provider.persistence.hibernate.BinaryBlobType"
+            update="true"
+            insert="true"
+            column="Blob_val"
+            not-null="false"
+            unique="false"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-BinaryMetricBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.NumberMetricBO"
+            discriminator-value="Number"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-NumberMetricBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.FloatMetricBO"
+            discriminator-value="Float"
+        >
+        <property
+            name="value"
+            type="float"
+            update="true"
+            insert="true"
+            column="Number_val"
+            not-null="false"
+            unique="false"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-FloatMetricBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO"
+            discriminator-value="Int"
+        >
+        <property
+            name="value"
+            type="integer"
+            update="true"
+            insert="true"
+            column="Number_val"
+            not-null="false"
+            unique="false"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-IntegerMetricBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+
+        </subclass>
+
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE messages PUBLIC "-//Squale//DTD Message Configuration 1.0//EN" "file:../com/airfrance/squalecommon/dtd/message-1.0.dtd">
+
+<messages>
+<!--  Messages de la grille qualité  -->
+<!--  Facteurs  -->
+  <message lang="fr" key="rule.reliability">Fiabilité</message>
+  <message lang="en" key="rule.reliability">Reliability</message>
+  <message lang="fr" key="rule.reusecapacity">Réutilisabilité</message>
+  <message lang="en" key="rule.reusecapacity">Reusecapacity</message>
+  <message lang="fr" key="rule.evolutionarity">Evolutivité</message>
+  <message lang="en" key="rule.evolutionarity">Evolutionarity</message>
+  <message lang="fr" key="rule.maintainability">Maintenabilité</message>
+  <message lang="en" key="rule.maintainability">Maintainability</message>
+  <message lang="fr" key="rule.architecture">Architecture</message>
+  <message lang="en" key="rule.architecture">Architecture</message>
+  <message lang="fr" key="rule.conformity">Conformité</message>
+  <message lang="en" key="rule.conformity">Conformity</message>
+  <!--  Critères  -->
+  <message lang="fr" key="rule.modularity">Modularité</message>
+  <message lang="en" key="rule.modularity">Modularity</message>
+  <message lang="fr" key="rule.integrationcapacity">Dépendance interne</message>
+  <message lang="en" key="rule.integrationcapacity">Integration capacity</message>
+  <message lang="fr" key="rule.simplicity">Simplicité</message>
+  <message lang="en" key="rule.simplicity">Simplicity</message>
+  <message lang="fr" key="rule.comprehension">Compréhension</message>
+  <message lang="en" key="rule.comprehension">Comprehension</message>
+  <message lang="fr" key="rule.homogeneity">Homogénéité</message>
+  <message lang="en" key="rule.homogeneity">Homogeneity</message>
+  <message lang="fr" key="rule.architecturerespect">Respect de l'architecture</message>
+  <message lang="en" key="rule.architecturerespect">Architecture respect</message>
+  <message lang="fr" key="rule.architecturerelevance">Pertinence de l'architecture</message>
+  <message lang="en" key="rule.architecturerelevance">Architecture relevance</message>
+  <message lang="fr" key="rule.exploitability">Exploitabilité</message>
+  <message lang="en" key="rule.exploitability">Exploitability</message>
+  <message lang="fr" key="rule.modeling">Modélisation</message>
+  <message lang="en" key="rule.modeling">Modeling</message>
+  <message lang="fr" key="rule.performances">Performances</message>
+  <message lang="en" key="rule.performances">Performances</message>
+  <message lang="fr" key="rule.stability">Stabilité</message>
+  <message lang="en" key="rule.stability">Stability</message>
+  <message lang="fr" key="rule.testquality">Tests techniques</message>
+  <message lang="en" key="rule.testquality">Test quality</message>
+  <message lang="fr" key="rule.acceptancetest">Recette fonctionnelle</message>
+  <message lang="en" key="rule.acceptancetest">Acceptance test</message>
+  <message lang="fr" key="rule.taskaptitude">Aptitude à la tâche</message>
+  <message lang="en" key="rule.taskaptitude">Task aptitude</message>
+  <!--  Pratiques  -->
+  <message lang="fr" key="rule.blob">Pieuvre</message>
+  <message lang="en" key="rule.blob">Blob</message>
+  <message lang="fr" key="rule.inheritancedepth">Profondeur d'héritage</message>
+  <message lang="en" key="rule.inheritancedepth">Inheritance depth</message>
+  <message lang="fr" key="rule.afferentcoupling">Couplage afferent</message>
+  <message lang="en" key="rule.afferentcoupling">Afferent coupling</message>
+  <message lang="fr" key="rule.numberofmethods">Nombre de méthodes</message>
+  <message lang="en" key="rule.numberofmethods">Number of methods</message>
+  <message lang="fr" key="rule.swissarmyknife">Couteau suisse</message>
+  <message lang="en" key="rule.swissarmyknife">Swiss army knife</message>
+  <message lang="fr" key="rule.efferentcoupling">Couplage efferent</message>
+  <message lang="en" key="rule.efferentcoupling">Efferent coupling</message>
+  <message lang="fr" key="rule.documentation">Documentation</message>
+  <message lang="en" key="rule.documentation">Documentation</message>
+  <message lang="fr" key="rule.jspdocumentation">Documentation des scriptlets JSP</message>
+  <message lang="en" key="rule.jspdocumentation">JSP's scriptlets documentation</message>
+  <message lang="fr" key="rule.methodsize">Taille de la méthode</message>
+  <message lang="en" key="rule.methodsize">Method size</message>
+  <message lang="fr" key="rule.jspsize">Taille de la JSP</message>
+  <message lang="en" key="rule.jspsize">JSP size</message>
+  <message lang="fr" key="rule.spaghetticode">Code Spaghetti</message>
+  <message lang="en" key="rule.spaghetticode">Spaghetti code</message>
+  <message lang="fr" key="rule.jspspaghetticode">Code Spaghetti des JSP</message>
+  <message lang="en" key="rule.jspspaghetticode">JSP spaghetti code</message>
+  <message lang="fr" key="rule.jspcomplexity">Complexité des JSP</message>
+  <message lang="en" key="rule.jspcomplexity">JSP complexity</message>
+  <message lang="fr" key="rule.architecturefile">Dossier d'architecture</message>
+  <message lang="en" key="rule.architecturefile">Architecture file</message>
+  <message lang="fr" key="rule.layering">Découpage en couches</message>
+  <message lang="en" key="rule.layering">Layering</message>
+  <message lang="fr" key="rule.benchmarksprocedure">Existence et résultats de la procédure de tests de performance</message>
+  <message lang="en" key="rule.benchmarksprocedure">Existence et results of the benchmark procedure</message>
+  <message lang="fr" key="rule.copypaste">Copier-coller</message>
+  <message lang="en" key="rule.copypaste">Copy paste</message>
+  <message lang="fr" key="rule.deploymentpackaging">"Normes et standards" : packaging de déploiement</message>
+  <message lang="en" key="rule.deploymentpackaging">Deployment packaging standard</message>
+  <message lang="fr" key="rule.documentationquality">Existence et qualité de la documentation</message>
+  <message lang="en" key="rule.documentationquality">Documentation quality</message>
+  <message lang="fr" key="rule.documentationstandard">"Normes et standard" : documentation</message>
+  <message lang="en" key="rule.documentationstandard">Documentation standard</message>
+  <message lang="fr" key="rule.formatingstandard">"Normes et standards" : mise en forme</message>
+  <message lang="en" key="rule.formatingstandard">Formating standard</message>
+  <message lang="fr" key="rule.integrationtestsprocedure">Existence et résultats de la procédure de tests d'intégration</message>
+  <message lang="en" key="rule.integrationtestsprocedure">Integration tests procedure</message>
+  <message lang="fr" key="rule.loadtestsprocedure">Existence et résultats de la procédure de tests de charge</message>
+  <message lang="en" key="rule.loadtestsprocedure">Load tests procedure</message>
+  <message lang="fr" key="rule.memoryleaktest">Memory leak test</message>
+  <message lang="en" key="rule.memoryleaktest">Tests de fuite mémoire</message>
+  <message lang="fr" key="rule.modelingdiagrams">Diagrammes de modélisation</message>
+  <message lang="en" key="rule.modelingdiagrams">Modeling diagrams</message>
+  <message lang="fr" key="rule.modelingimplementationconformity">Conformité entre modélisation et implémentation</message>
+  <message lang="en" key="rule.modelingimplementationconformity">Modeling and implementation conformity</message>
+  <message lang="fr" key="rule.modelsreasoning">Raisonnement par les modèles</message>
+  <message lang="en" key="rule.modelsreasoning">Models reasoning</message>
+  <message lang="fr" key="rule.namingstandard">"Normes et standards" : nommage</message>
+  <message lang="en" key="rule.namingstandard">Naming standard</message>
+  <message lang="fr" key="rule.portabilitystandard">"Normes et standards" : portabilité</message>
+  <message lang="en" key="rule.portabilitystandard">Portability standard</message>
+  <message lang="fr" key="rule.programmingstandard">"Normes et standards" : programmation</message>
+  <message lang="en" key="rule.programmingstandard">Programming standard</message>
+  <message lang="fr" key="rule.restartingprocedure">Existence et qualité d'une procédure de redémarrage</message>
+  <message lang="en" key="rule.restartingprocedure">Restarting procedure</message>
+  <message lang="fr" key="rule.robustnesstests">Existence d'un processus de tests de robustesse</message>
+  <message lang="en" key="rule.robustnesstests">Robustness tests</message>
+  <message lang="fr" key="rule.tracingstandard">"Normes et standards" : traçage</message>
+  <message lang="en" key="rule.tracingstandard">Tracing standard</message>
+  <message lang="fr" key="rule.unittestsprocedure">Existence et résultats de la procédure de tests unitaires</message>
+  <message lang="en" key="rule.unittestsprocedure">Unit tests procedure</message>
+  <message lang="fr" key="rule.acceptancetestcodecoverage">Taux de couverture de la recette fonctionnelle</message>
+  <message lang="en" key="rule.acceptancetestcodecoverage">Acceptance test code coverage</message>
+  <message lang="fr" key="rule.acceptancetestscenario">Existence de scénarios de recette fonctionnelle</message>
+  <message lang="en" key="rule.acceptancetestscenario">Acceptance test scenario</message>
+  <message lang="fr" key="rule.aqplan">Plan d'Assurance Qualité</message>
+  <message lang="en" key="rule.aqplan">Quality Assurance Plan</message>
+  <message lang="fr" key="rule.ergonomynorms">Existence de Normes d'ergonomie</message>
+  <message lang="en" key="rule.ergonomynorms">Ergonomy norms</message>
+  <message lang="fr" key="rule.extremecasetest">Tests aux limites fonctionnelles</message>
+  <message lang="en" key="rule.extremecasetest">Extreme case test</message>
+  <message lang="fr" key="rule.functionalspecification">Existence d'un dossier de spécifications fonctionnelles</message>
+  <message lang="en" key="rule.functionalspecification">Functional specification</message>
+  <message lang="fr" key="rule.riskanalysis">Analyse des risques fonctionnels (gravité/fréquence)</message>
+  <message lang="en" key="rule.riskanalysis">Risk analysis (gravity/frequency)</message>
+  <message lang="fr" key="rule.automaticacceptancetest">Automatisation des tests fonctionnels</message>
+  <message lang="en" key="rule.automaticacceptancetest">Automatic acceptance test</message>
+  <message lang="fr" key="rule.umlswissarmyknife">Couteau suisse du modèle</message>
+  <message lang="en" key="rule.umlswissarmyknife">Model Swiss army knife</message>
+  <message lang="fr" key="rule.umlinheritancedepth">Profondeur d'héritage du modèle</message>
+  <message lang="en" key="rule.umlinheritancedepth">Model Inheritance depth</message>
+  <message lang="fr" key="rule.umlpresenceofpublicsfields">Présence d'attributs publics dans le modèle</message>
+  <message lang="en" key="rule.umlpresenceofpublicsfields">Presence of publics fields in model</message>
+  <message lang="fr" key="rule.umlnumberofmethods">Nombre de méthodes du modèle</message>
+  <message lang="en" key="rule.umlnumberofmethods">Model Number of methods</message>
+  <message lang="fr" key="rule.umlclasseswithoutmethods">Classes sans methodes dans le modèle</message>
+  <message lang="en" key="rule.umlclasseswithoutmethods">Classes without methods in model</message>
+  <message lang="fr" key="rule.umlclasseswithoutfield">Classes sans attributs dans le modèle</message>
+  <message lang="en" key="rule.umlclasseswithoutfield">Classes without fields in model</message>
+  <message lang="fr" key="rule.umlisolatedclasses">Classes isolées du modèle</message>
+  <message lang="en" key="rule.umlisolatedclasses">Model Isolated classes</message>
+  <message lang="fr" key="rule.umlclassspecialization">Spécialisation de la classe du modèle</message>
+  <message lang="en" key="rule.umlclassspecialization">Model Class specialization</message>
+  <message lang="fr" key="rule.stabilityabstractnesslevel">Niveau  d'abstraction et de stabilité</message>
+  <message lang="en" key="rule.stabilityabstractnesslevel">Stability and abstractness level</message>
+  <message lang="fr" key="rule.layerrespect">Respect de l'architecture en couche</message>
+  <message lang="en" key="rule.layerrespect">Layer respect</message>
+  <message lang="fr" key="rule.layernaming">Correspondance entre les couches et le nommage des packages</message>
+  <message lang="en" key="rule.layernaming">Layer naming convention</message>
+  <message lang="fr" key="rule.classspecialization">Spécialisation de la classe</message>
+  <message lang="en" key="rule.classspecialization">Class specialization</message>
+  <message lang="fr" key="rule.dependencycycle">Dépendance cyclique</message>
+  <message lang="en" key="rule.dependencycycle">Dependency cycle</message>
+  <message lang="fr" key="rule.integrationeffort">Effort d'intégration</message>
+  <message lang="en" key="rule.integrationeffort">Integration effort</message>
+  <message lang="fr" key="rule.dependonchild">Dépendance inverse dans l'arbre d'héritage</message>
+  <message lang="en" key="rule.dependonchild">Depend on child</message>
+  <message lang="fr" key="rule.jspstandard">"Normes et standards" : Bonnes pratiques JSP</message>
+  <message lang="en" key="rule.jspstandard">JSP standards</message>
+  
+  <!-- Pour les informations -->
+  
+  
+   <!-- Textes descriptifs -->
+  <!--  Pratiques  -->
+  <message lang="fr" key="rule.blob.description">La pieuvre est une méthode dans une classe qui a tendance à agréger à elle seule une grande partie de la complexité de cette dernière, les autres méthodes étant réduites à un traitement minimum.</message>
+  <message lang="en" key="rule.blob.description">Blob</message>
+  <message lang="fr" key="rule.inheritancedepth.description">Qualifie du niveau d'héritage moyen et maximum d'une classe, traduisant la complexité de certaines classes trop profondes dans la hiérarchie. Une profondeur d'héritage trop importante nuit généralement à la compréhension et potentiellement à l'organisation générale des classes.</message>
+  <message lang="en" key="rule.inheritancedepth.description">Inheritance depth</message>
+  <message lang="fr" key="rule.afferentcoupling.description">Analyse la dépendance des autres classes de l'application vers une classe. Cette pratique est la réciproque de la pratique Couplage efférent.</message>
+  <message lang="en" key="rule.afferentcoupling.description">Afferent coupling</message>
+  <message lang="fr" key="rule.numberofmethods.description">Qualifie la répartition du nombre de méthodes sur les classes de l’application : un nombre de méthodes trop important pour une classe la rend difficile à maintenir et à comprendre. De plus, elle centralise potentiellement trop de notions fonctionnelles.</message>
+  <message lang="en" key="rule.numberofmethods.description">Number of methods</message>
+  <message lang="fr" key="rule.swissarmyknife.description">Traque les classes dites « utilitaires », généralement très complexes parce qu'elles comprennent un grand nombre de méthodes sans relations. En conséquence, elles ne respectent pas les principes objet d'héritage et d'encapsulation et augmentent fortement le couplage entre les objets. Il s'agit généralement de classes sans parents ni enfants, avec peu voir pas d'attribut, et un nombre relativement important de méthodes, parfois complexes.</message>
+  <message lang="en" key="rule.swissarmyknife.description">Swiss army knife</message>
+  <message lang="fr" key="rule.efferentcoupling.description">Analyse la dépendance d'une classe vers les autres classes de l'application. Une classe est couplée à une autre si les méthodes de la classe utilisent des attributs (hors constantes) ou des méthodes d'une autre classe (dans le cas d'un appel de méthode polymorphique, toutes les classes définissant la méthode sont comptabilisées). La simple déclaration d'une autre classe n'est donc pas comptabilisée. L'utilisation multiple d'une même classe est comptée une seule fois.</message>
+  <message lang="en" key="rule.efferentcoupling.description">Efferent coupling</message>
+  <message lang="fr" key="rule.documentation.description">Qualifie le niveau de commentaires au sein du code (intra méthode). Un niveau minimum de commentaires par rapport au nombre de lignes de code source est requis, le seuil dépendant principalement de la complexité de la méthode considérée. La qualité des commentaires n'est cependant pas évaluée, mais par l'intermédiaire de certains ratios (taux de commentaire trop élevé), il est possible de détecter par exemple des portions de code mises en commentaire. Cette pratique doit être complétée d'une revue manuelle par sondage pour évaluer la pertinence des commentaires.</message>
+  <message lang="en" key="rule.documentation.description">Documentation</message>
+  <message lang="fr" key="rule.methodsize.description">Qualifie la répartition du code source sur les méthodes des classes de l'application : une méthode ayant un nombre de ligne de code trop important devient trop longue pour être compréhensible et maintenable.</message>
+  <message lang="en" key="rule.methodsize.description">Method size</message>
+  <message lang="fr" key="rule.spaghetticode.description">Qualifie du niveau de déstructuration et de complexité du code, mettant en évidence les parties de code source à risque, car difficilement compréhensibles et donc difficilement maintenables. Dès que le niveau de complexité essentielle et non essentielle est dépassé, il faut commencer à investiguer les méthodes remontées pour un éventuel remaniement. Un filtre est appliqué au niveau du nombre de lignes de code source afin de ne pas remonter des méthodes déstructurées mais courtes et maintenables car correspondant à une pratique de codage connue (exemple : l'implémentation des méthodes equals(Object) en Java).</message>
+  <message lang="en" key="rule.spaghetticode.description">Spaghetti code</message>
+  <message lang="fr" key="rule.architecturefile.description">pratique non disponible</message>
+  <message lang="en" key="rule.architecturefile.description">practice not available</message>
+  <message lang="fr" key="rule.layering.description">pratique non disponible</message>
+  <message lang="en" key="rule.layering.description">practice not available</message>
+  <message lang="fr" key="rule.benchmarksprocedure.description">Existence et résultats de la procédure de tests de performance</message>
+  <message lang="en" key="rule.benchmarksprocedure.description">Existence et results of the benchmark procedure</message>
+  <message lang="fr" key="rule.copypaste.description">Traque les parties du code source qui ont été dupliquées par simple copier-coller, avec parfois un simple renommage des données. Cette façon, très productive de procéder, a le défaut de dupliquer les efforts de test et de dupliquer les éventuels bugs. Ceci ne devrait pas avoir lieu dans un développement Orienté Objet (utilisation de la factorisation par les mécanismes de l'héritage par exemple). Cette pratique est mesurée en fonction du pourcentage de similitude entre les méthodes de l'application.</message>
+  <message lang="en" key="rule.copypaste.description">Copy paste</message>
+  <message lang="fr" key="rule.deploymentpackaging.description">pratique non disponible</message>
+  <message lang="en" key="rule.deploymentpackaging.description">practice not available</message>
+  <message lang="fr" key="rule.documentationquality.description">pratique non disponible</message>
+  <message lang="en" key="rule.documentationquality.description">practice not available</message>
+  <message lang="fr" key="rule.documentationstandard.description">Qualifie les éléments requis (description technique, tags, adéquation syntaxique, etc.) pour la génération automatique de documentation technique (Javadoc).</message>
+  <message lang="en" key="rule.documentationstandard.description">Documentation standard</message>
+  <message lang="fr" key="rule.formatingstandard.description">Qualifie le niveau de respect des règles de mises en forme du code source préconisées afin de vérifier l'homogénéité des fichiers sources</message>
+  <message lang="en" key="rule.formatingstandard.description">Formating standard</message>
+  <message lang="fr" key="rule.integrationtestsprocedure.description">Existence et résultats de la procédure de tests d'intégration</message>
+  <message lang="en" key="rule.integrationtestsprocedure.description">Integration tests procedure</message>
+  <message lang="fr" key="rule.loadtestsprocedure.description">Existence et résultats de la procédure de tests de charge</message>
+  <message lang="en" key="rule.loadtestsprocedure.description">Load tests procedure</message>
+  <message lang="fr" key="rule.memoryleaktest.description">pratique non disponible</message>
+  <message lang="en" key="rule.memoryleaktest.description">practice not available</message>
+  <message lang="fr" key="rule.modelingdiagrams.description">pratique non disponible</message>
+  <message lang="en" key="rule.modelingdiagrams.description">practice not available</message>
+  <message lang="fr" key="rule.modelingimplementationconformity.description">pratique non disponible</message>
+  <message lang="en" key="rule.modelingimplementationconformity.description">practice not available</message>
+  <message lang="fr" key="rule.modelsreasoning.description">pratique non disponible</message>
+  <message lang="en" key="rule.modelsreasoning.description">practice not available</message>
+  <message lang="fr" key="rule.namingstandard.description">Qualifie le niveau de respect des règles de nommage des différents types de données et méthodes du code source, préconisées sur le projet.</message>
+  <message lang="en" key="rule.namingstandard">Naming standard</message>
+  <message lang="fr" key="rule.portabilitystandard.description">pratique non disponible</message>
+  <message lang="en" key="rule.portabilitystandard.description">practice not available</message>
+  <message lang="fr" key="rule.programmingstandard.description">Qualifie le niveau de respect des règles de programmation et de codage préconisées. Ces règles ont notamment pour objectif d'éviter des sources de bugs potentielles.</message>
+  <message lang="en" key="rule.programmingstandard.description">Programming standard</message>
+  <message lang="fr" key="rule.restartingprocedure.description">pratique non disponible</message>
+  <message lang="en" key="rule.restartingprocedure.description">practice not available</message>
+  <message lang="fr" key="rule.robustnesstests.description">pratique non disponible</message>
+  <message lang="en" key="rule.robustnesstests.description">practice not available</message>
+  <message lang="fr" key="rule.tracingstandard.description">pratique non disponible</message>
+  <message lang="en" key="rule.tracingstandard.description">practice not available</message>
+  <message lang="fr" key="rule.unittestsprocedure.description">pratique non disponible</message>
+  <message lang="en" key="rule.unittestsprocedure.description">practice not available</message>
+  <message lang="fr" key="rule.acceptancetestcodecoverage.description">pratique non disponible</message>
+  <message lang="en" key="rule.acceptancetestcodecoverage.description">practice not available</message>
+  <message lang="fr" key="rule.acceptancetestscenario.description">pratique non disponible</message>
+  <message lang="en" key="rule.acceptancetestscenario.description">practice not available</message>
+  <message lang="fr" key="rule.aqplan.description">pratique non disponible</message>
+  <message lang="en" key="rule.aqplan.description">practice not available</message>
+  <message lang="fr" key="rule.ergonomynorms.description">pratique non disponible</message>
+  <message lang="en" key="rule.ergonomynorms.description">practice not available</message>
+  <message lang="fr" key="rule.extremecasetest.description">pratique non disponible</message>
+  <message lang="en" key="rule.extremecasetest.description">practice not available</message>
+  <message lang="fr" key="rule.functionalspecification.description">pratique non disponible</message>
+  <message lang="en" key="rule.functionalspecification.description">practice not available</message>
+  <message lang="fr" key="rule.riskanalysis.description">pratique non disponible</message>
+  <message lang="en" key="rule.riskanalysis.description">practice not available</message>
+  <message lang="fr" key="rule.automaticacceptancetest.description">pratique non disponible</message>
+  <message lang="en" key="rule.automaticacceptancetest.description">practice not available</message>
+  <message lang="fr" key="rule.umlswissarmyknife.description">pratique non disponible</message>
+  <message lang="en" key="rule.umlswissarmyknife.description">practice not available</message>
+  <message lang="fr" key="rule.umlinheritancedepth.description">pratique non disponible</message>
+  <message lang="en" key="rule.umlinheritancedepth.description">practice not available</message>
+  <message lang="fr" key="rule.umlpresenceofpublicsfields.description">pratique non disponible</message>
+  <message lang="en" key="rule.umlpresenceofpublicsfields.description">practice not available</message>
+  <message lang="fr" key="rule.umlnumberofmethods.description">pratique non disponible</message>
+  <message lang="en" key="rule.umlnumberofmethods.description">practice not available</message>
+  <message lang="fr" key="rule.umlclasseswithoutmethods.description">pratique non disponible</message>
+  <message lang="en" key="rule.umlclasseswithoutmethods.description">practice not available</message>
+  <message lang="fr" key="rule.umlclasseswithoutfield.description">pratique non disponible</message>
+  <message lang="en" key="rule.umlclasseswithoutfield.description">practice not available</message>
+  <message lang="fr" key="rule.umlisolatedclasses.description">pratique non disponible</message>
+  <message lang="en" key="rule.umlisolatedclasses.description">practice not available</message>
+  <message lang="fr" key="rule.umlclassspecialization.description">pratique non disponible</message>
+  <message lang="en" key="rule.umlclassspecialization.description">practice not available</message>
+  <message lang="fr" key="rule.stabilityabstractnesslevel.description">Qualifie le respect d'un package au principe de séparation de l'interface et des implémentations. Un package relativement abstrait doit avoir un faible couplage efférent (vers d'autres packages) afin de garantir certaine stabilité à la spécification qu'il représente (peu d'impact sur ce package lorsque les autres packages sont modifiés). A l'inverse, un package relativement concret doit avoir un faible couplage afférent (provenant d'autres packages) afin de garantir que l'implémentation qu'il représente peut être facilement modifiée sans impact sur d'autres packages. En d'autres termes, un package abstrait doit avoir un fort couplage afférent, et un package concret un fort couplage efférent afin de garantir le principe de séparation de l'interface et des implémentations (utilisation d'interface et non directement des implémentations). </message>
+  <message lang="en" key="rule.stabilityabstractnesslevel.description">Stability and abstractness level</message>
+  <message lang="fr" key="rule.layerrespect.description">Qualification du niveau de respect de l'architecture implémentée en regard des préconisations faites dans le dossier d'architecture du projet. L'évaluation se fait via un niveau de transgression.</message>
+  <message lang="en" key="rule.layerrespect.description">Layer respect</message>
+  <message lang="fr" key="rule.layernaming.description">pratique non disponible</message>
+  <message lang="en" key="rule.layernaming.description">practice not available</message>
+  <message lang="fr" key="rule.classspecialization.description">pratique non disponible</message>
+  <message lang="en" key="rule.classspecialization.description">practice not available</message>
+  <message lang="fr" key="rule.dependencycycle.description">Cette pratique détecte tous les cycles de packages, mettant en évidence un mauvais packaging du projet ou une mauvaise conception.</message>
+  <message lang="en" key="rule.dependencycycle.description">Dependency cycle</message>
+  <message lang="fr" key="rule.integrationeffort.description">pratique non disponible</message>
+  <message lang="en" key="rule.integrationeffort.description">practice not available</message>
+  <message lang="fr" key="rule.dependonchild.description">Une dépendance inverse dans l'arbre d'héritage correspond à une classe qui dépend directement ou indirectement d'une de ses classes filles, ce qui, à de très rares exceptions prés, est une erreur de conception en orienté objet.</message>
+  <message lang="en" key="rule.dependonchild.description">Depend on child</message>
+  <message lang="fr" key="rule.jspstandard.description">Qualifie le niveau de respect des règles de programmation préconisées pour une page JSP. Ces règles ont notamment pour objectif d'éviter des sources de bugs potentielles.</message>
+  <message lang="en" key="rule.jspstandard.description">practice not available</message>
+  <message lang="fr" key="rule.jspcomplexity.description">Qualifie le niveau de complexité de la page JSP (complexité cyclomatique).</message>
+  <message lang="en" key="rule.jspcomplexity.description">practice not available</message>
+  <message lang="fr" key="rule.jspdocumentation.description">Qualifie le niveau de commentaires java des scriptlets d'une page JSP (introduits pas // ou encadrés par /* et */). Le nombre de commentaires requis dépend de la complexité cyclomatique v(G) de la scriptlet. La pertinence des commentaires n'est cependant pas évaluée. Les commentaires JSP ne sont pas pris en compte dans l'évaluation de cette pratique.</message>
+  <message lang="en" key="rule.jspdocumentation.description">practice not available</message>
+  <message lang="fr" key="rule.jspsize.description">Qualifie le nombre de lignes de code source de la page JSP (les commentaires JSP ou Java, ou lignes vides/blanches ne sont pas pris en compte).</message>
+  <message lang="en" key="rule.jspsize.description">practice not available</message>
+  <message lang="fr" key="rule.jspspaghetticode.description">Qualifie le niveau de déstructuration de la page JSP (complexité cyclomatique essentielle).</message>
+  <message lang="en" key="rule.jspspaghetticode.description">practice not available</message>
+
+  
+  <!-- Textes pour les corrections -->
+  <!--  Pratiques  -->
+  <message lang="fr" key="rule.blob.correction">Revoir la classe afin de découper la méthode incriminée.</message>
+  <message lang="en" key="rule.blob.correction">Blob</message>
+  <message lang="fr" key="rule.inheritancedepth.correction">Retravailler l'arbre d'héritage et le positionnement de cette classe afin de réduire sa profondeur et le nombre de traitement que cette dernière accumule.</message>
+  <message lang="en" key="rule.inheritancedepth.correction">Inheritance depth</message>
+  <message lang="fr" key="rule.afferentcoupling.correction">Une classe ayant un fort couplage afférent est une classe de type utilitaire interne : cette classe sera peu évolutive. Il est conseillé de déporter ces utilitaires dans un projet et un jar séparé.</message>
+  <message lang="en" key="rule.afferentcoupling.correction">Afferent coupling</message>
+  <message lang="fr" key="rule.numberofmethods.correction">Réduisez le nombre de méthodes de votre classe et le nombre de traitements effectués par cette dernière.</message>
+  <message lang="en" key="rule.numberofmethods.correction">Number of methods</message>
+  <message lang="fr" key="rule.swissarmyknife.correction">Quand une classe est détectée comme étant un couteau suisse, s'il s'avère que cette classe est bien une classe « fourre tout », il faut découper en plusieurs classes mieux orientées ou déplacer les méthodes dans les classes réellement concernées.</message>
+  <message lang="en" key="rule.swissarmyknife.correction">Swiss army knife</message>
+  <message lang="fr" key="rule.efferentcoupling.correction">Une classe dépassant ayant un fort couplage efférent est une classe ayant potentiellement trop de responsabilités : cette classe sera plus difficilement compréhensible, trop impactée par la modification d’autres classes, et peu réutilisable.	
+Il faut simplifier les dépendances de cette classe par l'utilisation de motifs de conception :
+&lt;li&gt;structuration des objets métiers (par encapsulation notam.),&lt;/li&gt;
+&lt;li&gt;utilisation de fabriques et de façades afin d'éviter de manipuler trop d’objet et de structurer la logique métier,&lt;/li&gt;
+&lt;li&gt;utilisation d'autres motifs : délégation, 'provider', etc.&lt;/li&gt;
+Un équilibre doit être trouvé avec le couplage afférent.</message>
+  <message lang="en" key="rule.efferentcoupling.correction">Efferent coupling</message>
+  <message lang="fr" key="rule.documentation.correction">Augmenter le commentaire interne à la méthode en fonction de la complexité de cette dernière. Le commentaire doit expliquer l'algorithmique mise en oeuvre.</message>
+  <message lang="en" key="rule.documentation.correction">Add comments</message>
+  <message lang="fr" key="rule.methodsize.correction">Réduisez la taille de votre méthode en la factorisant.</message>
+  <message lang="en" key="rule.methodsize.correction">Method size</message>
+  <message lang="fr" key="rule.spaghetticode.correction">Les méthodes trop complexes et trop longues doivent être découpées pour limiter la complexité de l'algorithme. De plus, pour simplifier la maintenance, il est important d'éviter les points de sorties multiples de chaque bloc. Il faut donc faire la chasse au « return », « break » et autres courts circuits dans le code.</message>
+  <message lang="en" key="rule.spaghetticode.correction">Spaghetti code</message>
+  <message lang="fr" key="rule.architecturefile.correction">pratique non disponible</message>
+  <message lang="en" key="rule.architecturefile.correction">practice not available</message>
+  <message lang="fr" key="rule.layering.correction">pratique non disponible</message>
+  <message lang="en" key="rule.layering.correction">practice not available</message>
+  <message lang="fr" key="rule.benchmarksprocedure.correction">pratique non disponible</message>
+  <message lang="en" key="rule.benchmarksprocedure.correction">practice not available</message>
+  <message lang="fr" key="rule.copypaste.correction">Il faut factoriser le code dupliqué à un seul endroit, en fonction du contexte, par exemple :
+&lt;li&gt;dans une méthode privée de la classe&lt;/li&gt;
+&lt;li&gt;dans une méthode protégée de la classe parente&lt;/li&gt;
+&lt;li&gt;etc...&lt;/li&gt;
+</message>
+  <message lang="en" key="rule.copypaste.correction">Copy paste</message>
+  <message lang="fr" key="rule.deploymentpackaging.correction">pratique non disponible</message>
+  <message lang="en" key="rule.deploymentpackaging.correction">practice not available</message>
+  <message lang="fr" key="rule.documentationquality.correction">pratique non disponible</message>
+  <message lang="en" key="rule.documentationquality.correction">practice not available</message>
+  <message lang="fr" key="rule.documentationstandard.correction">Ajouter la javadoc pour chaque transgression détectée. Pour éviter ce problème, il est important d'utiliser le plugin Eclipse/WSAD « Checkstyle » en Java.</message>
+  <message lang="en" key="rule.documentationstandard.correction">Documentation standard</message>
+  <message lang="fr" key="rule.formatingstandard.correction">Il existe des outils de reformatage de code source (comme Jalopy en java) qui permettent de reformater automatiquement l'ensemble des sources afin de le rendre homogène.
+Pour éviter ce problème, il est important d'utiliser le plugin Eclipse/WSAD « Checkstyle » en Java.
+  </message>
+  <message lang="en" key="rule.formatingstandard.correction">Formating standard</message>
+  <message lang="fr" key="rule.integrationtestsprocedure.correction">pratique non disponible</message>
+  <message lang="en" key="rule.integrationtestsprocedure.correction">practice not available</message>
+  <message lang="fr" key="rule.loadtestsprocedure.correction">pratique non disponible</message>
+  <message lang="en" key="rule.loadtestsprocedure.correction">practice not available</message>
+  <message lang="fr" key="rule.memoryleaktest.correction">pratique non disponible</message>
+  <message lang="en" key="rule.memoryleaktest.correction">practice not available</message>
+  <message lang="fr" key="rule.modelingdiagrams.correction">pratique non disponible</message>
+  <message lang="en" key="rule.modelingdiagrams.correction">practice not available</message>
+  <message lang="fr" key="rule.modelingimplementationconformity.correction">pratique non disponible</message>
+  <message lang="en" key="rule.modelingimplementationconformity.correction">practice not available</message>
+  <message lang="fr" key="rule.modelsreasoning.correction">pratique non disponible</message>
+  <message lang="en" key="rule.modelsreasoning.correction">practice not available</message>
+  <message lang="fr" key="rule.namingstandard.correction">Afin de garantir l'homogénéité du code pour en améliorer la lecture, il faut renommer les éléments conformément aux règles établies. Utilisez le module de refactoring de Eclipse.
+Pour éviter ce problème, il est important d'utiliser le plugin Eclipse/WSAD « Checkstyle » en Java.
+  </message>
+  <message lang="en" key="rule.namingstandard.correction">pratique non disponible</message>
+  <message lang="fr" key="rule.portabilitystandard.correction">practice not available</message>
+  <message lang="en" key="rule.portabilitystandard.correction">Portability standard</message>
+  <message lang="fr" key="rule.programmingstandard.correction">Chaque transgression remontée par l'outil doit être analysée car c'est un bug potentiel. Il est normalement assez facile de corriger chaque transgression en modifiant la partie du code concerné.
+Pour éviter ce problème, il est important d'utiliser le plugin Eclipse/WSAD « Checkstyle » en Java.
+  </message>
+  <message lang="en" key="rule.programmingstandard.correction">Programming standard</message>
+  <message lang="fr" key="rule.restartingprocedure.correction">pratique non disponible</message>
+  <message lang="en" key="rule.restartingprocedure.correction">practice not available</message>
+  <message lang="fr" key="rule.robustnesstests.correction">pratique non disponible</message>
+  <message lang="en" key="rule.robustnesstests.correction">practice not available</message>
+  <message lang="fr" key="rule.tracingstandard.correction">pratique non disponible</message>
+  <message lang="en" key="rule.tracingstandard.correction">practice not available</message>
+  <message lang="fr" key="rule.unittestsprocedure.correction">pratique non disponible</message>
+  <message lang="en" key="rule.unittestsprocedure.correction">practice not available</message>
+  <message lang="fr" key="rule.acceptancetestcodecoverage.correction">pratique non disponible</message>
+  <message lang="en" key="rule.acceptancetestcodecoverage.correction">practice not available</message>
+  <message lang="fr" key="rule.acceptancetestscenario.correction">pratique non disponible</message>
+  <message lang="en" key="rule.acceptancetestscenario.correction">practice not available</message>
+  <message lang="fr" key="rule.aqplan.correction">pratique non disponible</message>
+  <message lang="en" key="rule.aqplan.correction">practice not available</message>
+  <message lang="fr" key="rule.ergonomynorms.correction">pratique non disponible</message>
+  <message lang="en" key="rule.ergonomynorms.correction">practice not available</message>
+  <message lang="fr" key="rule.extremecasetest.correction">pratique non disponible</message>
+  <message lang="en" key="rule.extremecasetest.correction">practice not available</message>
+  <message lang="fr" key="rule.functionalspecification.correction">pratique non disponible</message>
+  <message lang="en" key="rule.functionalspecification.correction">practice not available</message>
+  <message lang="fr" key="rule.riskanalysis.correction">pratique non disponible</message>
+  <message lang="en" key="rule.riskanalysis.correction">practice not available</message>
+  <message lang="fr" key="rule.automaticacceptancetest.correction">pratique non disponible</message>
+  <message lang="en" key="rule.automaticacceptancetest.correction">practice not available</message>
+  <message lang="fr" key="rule.umlswissarmyknife.correction">pratique non disponible</message>
+  <message lang="en" key="rule.umlswissarmyknife.correction">practice not available</message>
+  <message lang="fr" key="rule.umlinheritancedepth.correction">pratique non disponible</message>
+  <message lang="en" key="rule.umlinheritancedepth.correction">practice not available</message>
+  <message lang="fr" key="rule.umlpresenceofpublicsfields.correction">pratique non disponible</message>
+  <message lang="en" key="rule.umlpresenceofpublicsfields.correction">practice not available</message>
+  <message lang="fr" key="rule.umlnumberofmethods.correction">pratique non disponible</message>
+  <message lang="en" key="rule.umlnumberofmethods.correction">practice not available</message>
+  <message lang="fr" key="rule.umlclasseswithoutmethods.correction">pratique non disponible</message>
+  <message lang="en" key="rule.umlclasseswithoutmethods.correction">practice not available</message>
+  <message lang="fr" key="rule.umlclasseswithoutfield.correction">pratique non disponible</message>
+  <message lang="en" key="rule.umlclasseswithoutfield.correction">practice not available</message>
+  <message lang="fr" key="rule.umlisolatedclasses.correction">pratique non disponible</message>
+  <message lang="en" key="rule.umlisolatedclasses.correction">practice not available</message>
+  <message lang="fr" key="rule.umlclassspecialization.correction">pratique non disponible</message>
+  <message lang="en" key="rule.umlclassspecialization.correction">practice not available</message>
+  <message lang="fr" key="rule.stabilityabstractnesslevel.correction">Ajouter les interfaces et les classes abstraites nécessaires au respect de la séparation de l'interface et des implémentations.</message>
+  <message lang="en" key="rule.stabilityabstractnesslevel.correction">Stability and abstractness level</message>
+  <message lang="fr" key="rule.layerrespect.correction">L'architecture en couche est définie pour chaque projet sous SQUALE. Il est important que le fichier xml corresponde aux règles d'architecture en vigueur, ainsi que les niveaux d'alerte associés à chaque type d'erreur. Une erreur d'architecture peut venir:
+&lt;li&gt;d'un problème sur le fichier de règles (si celui-ci n'est pas à jour par exemple)&lt;/li&gt;
+&lt;li&gt;d'une réelle transgression de l'architecture définie&lt;/li&gt;
+Une fois que le problème est identifié, il est normalement facile de le corriger en passant par les couches préconisées.
+</message>
+  <message lang="en" key="rule.layerrespect.correction">Layer respect</message>
+  <message lang="fr" key="rule.layernaming.correction">pratique non disponible</message>
+  <message lang="en" key="rule.layernaming.correction">practice not available</message>
+  <message lang="fr" key="rule.classspecialization.correction">pratique non disponible</message>
+  <message lang="en" key="rule.classspecialization.correction">practice not available</message>
+  <message lang="fr" key="rule.dependencycycle.correction">Un cycle de packages nuit à la compréhension du code source, et peut mettre en évidence une violation du principe de séparation de l’interface et des implémentations.
+Il faut :
+&lt;li&gt;revoir le packaging du projet (regroupement fonctionnel dans un même package des classes dépendantes),&lt;/li&gt;
+&lt;li&gt;appliquer le principe de séparation de l'interface et des implémentations.&lt;/li&gt;</message>
+  <message lang="en" key="rule.dependencycycle.correction">practice not available</message>
+  <message lang="fr" key="rule.integrationeffort.correction">pratique non disponible</message>
+  <message lang="en" key="rule.integrationeffort.correction">practice not available</message>
+  <message lang="fr" key="rule.dependonchild.correction">pratique non disponible</message>
+  <message lang="en" key="rule.dependonchild.correction">practice not available</message>
+  <message lang="fr" key="rule.jspdocumentation.correction">Commenter les scriptlets complexes des pages JSP par des commentaires java. L'usage d'instructions de contrôle doit être commenté afin d'expliquer l'implémentation des différents cas de traitement.</message>
+  <message lang="en" key="rule.jspdocumentation.correction">practice not available</message>
+  <message lang="fr" key="rule.jspcomplexity.correction">Evitez les scriptlets trop complexes ; l'usage de déclarations de méthode, la définition de tags ou l'inclusion de pages JSP peut permettre une réduction de la complexité cyclomatique.</message>
+  <message lang="en" key="rule.jspcomplexity.correction">practice not available</message>
+  <message lang="fr" key="rule.jspsize.correction">Réduisez la taille de votre page JSP par la définition de tags ou l'inclusion de pages JSP.</message>
+  <message lang="en" key="rule.jspsize.correction">practice not available</message>
+  <message lang="fr" key="rule.jspspaghetticode.correction">Evitez les points de sortie multiples de vos scriptlets par les instructions 'break', 'return' ; l'usage de déclarations de méthode, la définition de tags ou l'inclusion de pages JSP peut permettre une réduction de la complexité cyclomatique essentielle.</message>
+  <message lang="en" key="rule.jspspaghetticode.correction">practice not available</message>
+  <message lang="fr" key="rule.jspstandard.correction">Chaque transgression remontée par l'outil doit être analysée car c'est un bug potentiel. Il est normalement assez facile de corriger chaque transgression en modifiant la partie du code concerné.</message>
+  <message lang="en" key="rule.jspstandard.correction">practice not available</message>
+  
+  
+  <!--  Métriques  -->
+  <!--  Projets  -->
+  <message lang="fr" key="copypaste.project.duplicateLinesNumber">Nombre de lignes dupliquées</message>
+  <message lang="en" key="copypaste.project.duplicateLinesNumber">Duplicate lines number</message>
+  <message lang="fr" key="rsm.project.sloc">Nombre de lignes de code source</message>
+  <message lang="en" key="rsm.project.sloc">Source code lines number</message>
+  <message lang="fr" key="rsm.project.comments">Nombre de lignes de commentaire</message>
+  <message lang="en" key="rsm.project.comments">Comment lines number</message>
+  <message lang="fr" key="rsm.project.numberOfClasses">Nombre de classes</message>
+  <message lang="en" key="rsm.project.numberOfClasses">Number of classes</message>
+  <message lang="fr" key="rsm.project.numberOfMethods">Nombre de méthodes</message>
+  <message lang="en" key="rsm.project.numberOfMethods">Number of methods</message>
+  <message lang="fr" key="rsm.project.numberofcodelines">Nombre total de lignes</message>
+  <message lang="en" key="rsm.project.numberofcodelines">Total number of lines</message>
+  
+  <message lang="fr" key="mccabe.project.numberOfFiles">Nombre total de fichiers</message>
+  <message lang="en" key="mccabe.project.numberOfFiles">Total number of files</message>
+  <message lang="fr" key="mccabe.project.numberOfPackages">Nombre total de packages</message>
+  <message lang="en" key="mccabe.project.numberOfPackages">Total number of packages</message>
+  <message lang="fr" key="mccabe.project.numberOfClasses">Nombre total de classes</message>
+  <message lang="en" key="mccabe.project.numberOfClasses">Total number of classes</message>
+  <message lang="fr" key="mccabe.project.numberOfMethods">Nombre total de méthodes</message>
+  <message lang="en" key="mccabe.project.numberOfMethods">Total number of methods</message>
+  
+  <message lang="fr" key="mccabe.project.sloc">Nombre de lignes</message>
+  <message lang="en" key="mccabe.project.sloc">Line number</message>
+  
+  <message lang="fr" key="purecomments.project.cloc">Nombre de lignes de commentaire</message>
+  <message lang="en" key="purecomments.project.cloc">Comment lines number</message>
+  <message lang="fr" key="purecomments.project.sloc">Nombre de lignes de code</message>
+  <message lang="en" key="purecomments.project.sloc">Source lines number</message>
+  
+  <message lang="fr" key="jspvolumetry.project.numberOfJSP">Nombre de JSPs</message>
+  <message lang="en" key="jspvolumetry.project.numberOfJSP">Number of JSPs</message>
+  <message lang="fr" key="jspvolumetry.project.numberOfJSPCodeLines">Nombre de lignes JSP</message>
+  <message lang="en" key="jspvolumetry.project.numberOfJSPCodeLines">JSP code lines</message>
+
+  <!--  Packages  -->
+  <!--  Message pour les packages  -->
+  <message lang="fr" key="jdepend.package.distance">Distance d'instabilité et d'abstraction (%)</message>
+  <message lang="en" key="jdepend.package.distance">Distance from the Main Sequence (%)</message>
+  <message lang="fr" key="jdepend.package.instability">Degré de stabilité (%)</message>
+  <message lang="en" key="jdepend.package.instability">Instability (%)</message>
+  <message lang="fr" key="jdepend.package.abstractness">Degré d'abstraction (%)</message>
+  <message lang="en" key="jdepend.package.abstractness">Abstractness (%)</message>
+  <message lang="fr" key="jdepend.package.ce">Couplage efferent</message>
+  <message lang="en" key="jdepend.package.ce">Efferent coupling</message>
+  <message lang="fr" key="jdepend.package.numberOfClassesAndInterfaces">Nombre de classes et d'interfaces</message>
+  <message lang="en" key="jdepend.package.numberOfClassesAndInterfaces">Number of classes and interfaces</message>
+  <message lang="fr" key="jdepend.package.haveCycles">Présence de cycles</message>
+  <message lang="en" key="jdepend.package.haveCycles">Existing cycles</message>
+  <message lang="fr" key="jdepend.package.cycle">Les cycles</message>
+  <message lang="en" key="jdepend.package.cycle">Cycles</message>
+  <message lang="fr" key="jdepend.package.ca">Couplage afférent</message>
+  <message lang="en" key="jdepend.package.ca">Afferent coupling</message>
+
+  <!--  Classes  -->
+  <message lang="fr" key="mccabe.class.sloc">Nombre de lignes de code</message>
+  <message lang="en" key="mccabe.class.sloc">Source lines number</message>
+  <message lang="fr" key="mccabe.class.cloc">Nombre de lignes de commentaires</message>
+  <message lang="en" key="mccabe.class.cloc">Comment lines number</message>
+  <message lang="fr" key="mccabe.class.cbo">Couplage entre objet</message>
+  <message lang="en" key="mccabe.class.cbo">Couplage between object</message>
+  <message lang="fr" key="mccabe.class.dit">Profondeur d'héritage maximale</message>
+  <message lang="en" key="mccabe.class.dit">Depth in tree</message>
+  <message lang="fr" key="mccabe.class.locm">Manque de cohésion</message>
+  <message lang="en" key="mccabe.class.locm">Lock of cohesion in method</message>
+  <message lang="fr" key="mccabe.class.maxvg">Plus grande complexité cyclomatique</message>
+  <message lang="en" key="mccabe.class.maxvg">Maximal cyclomatique complexity</message>
+  <message lang="fr" key="mccabe.class.noc">Nombre de descendants directs</message>
+  <message lang="en" key="mccabe.class.noc">Number of children</message>
+  <message lang="fr" key="mccabe.class.rfc">Nombre total de méthodes</message>
+  <message lang="en" key="mccabe.class.rfc">Response for a class</message>
+  <message lang="fr" key="mccabe.class.sumivg">Complexité d'intégration</message>
+  <message lang="en" key="mccabe.class.sumivg">Module Design Complexity</message>
+  <message lang="fr" key="mccabe.class.sumvg">Complexité cyclomatique</message>
+  <message lang="en" key="mccabe.class.sumvg">Cyclomatique complexity</message>
+  <message lang="fr" key="mccabe.class.wmc">Nombre de méthodes déclarées</message>
+  <message lang="en" key="mccabe.class.wmc">Weighted methods per class</message>
+  <message lang="fr" key="mccabe.class.dependsUponChild">Dépendance avec des sous-classes</message>
+  <message lang="en" key="mccabe.class.dependsUponChild">Depends upon child</message>
+  <message lang="fr" key="ckjm.class.ca">Couplage afférent</message>
+  <message lang="en" key="ckjm.class.ca">Afferent coupling</message>
+  <message lang="fr" key="ckjm.class.cbo">Couplage entre objet</message>
+  <message lang="en" key="ckjm.class.cbo">Couplage between object</message>
+  <message lang="fr" key="umlquality.umlclass.NOBD">Nombre d'attributs publics dans la classe</message>
+  <message lang="en" key="umlquality.umlclass.NOBD">Number of publics fields</message>
+  <message lang="fr" key="umlquality.umlclass.NOBM">Nombre de méthodes publics dans la classe</message>
+  <message lang="en" key="umlquality.umlclass.NOBM">Number of publics methods</message>
+  <message lang="fr" key="umlquality.umlclass.numOps">Nombre d'opérations</message>
+  <message lang="en" key="umlquality.umlclass.numOps">Number of Operations</message>
+  <message lang="fr" key="umlquality.umlclass.numAttr">Nombre d'attributs dans la classe</message>
+  <message lang="en" key="umlquality.umlclass.numAttr">Number of attributes</message>
+  <message lang="fr" key="umlquality.umlclass.depClient">Nombre de dépendances dans lesquelles la classe est cliente.</message>
+  <message lang="en" key="umlquality.umlclass.depClient">Dependencies as Client</message>
+  <message lang="fr" key="umlquality.umlclass.depSupp">Nombre de dépendances dans lesquelles la classe est fournisseuse</message>
+  <message lang="en" key="umlquality.umlclass.depSupp">Dependencies as supplier</message>
+  <message lang="fr" key="umlquality.umlclass.NVM">Nombre d'opérations de la classe qui redéfinissent une opération héritée</message>
+  <message lang="en" key="umlquality.umlclass.NVM">Number of overriding methods</message>
+  <message lang="fr" key="umlquality.umlclass.opsInh">nombre d'opérations héritées dans la classe</message>
+  <message lang="en" key="umlquality.umlclass.opsInh">Number of inherited methods</message>
+  <message lang="fr" key="umlquality.umlclass.DIT">Profondeur d'héritage maximale</message>
+  <message lang="en" key="umlquality.umlclass.DIT">Depth in tree</message>
+  <message lang="fr" key="umlquality.umlclass.NOC">Nombre de descendants directs</message>
+  <message lang="en" key="umlquality.umlclass.NOC">Number of children</message>
+  <message lang="fr" key="umlquality.umlclass.NOP">Nombre d'ancêtres directs</message>
+  <message lang="en" key="umlquality.umlclass.NOP">Number of parents</message>
+  <message lang="fr" key="umlquality.umlclass.RFC">Nombre total de méthodes</message>
+  <message lang="en" key="umlquality.umlclass.RFC">Response for a class</message>
+  <message lang="fr" key="umlquality.umlclass.NII">Nombre d'interfaces implémentées</message>
+  <message lang="en" key="umlquality.umlclass.NII">Number of implemented interfaces</message>
+  <message lang="fr" key="rsm.class.private">Nombre de méthodes privées</message>
+  <message lang="en" key="rsm.class.private">Number of private methods</message>
+  <message lang="fr" key="rsm.class.sloc">Nombre de lignes de code</message>
+  <message lang="en" key="rsm.class.sloc">Number of code lines</message>
+  <message lang="fr" key="rsm.class.protectedData">Nombre de méthodes protégées</message>
+  <message lang="en" key="rsm.class.protectedData">Number of protected methods</message>
+  <message lang="fr" key="rsm.class.public">Nombre de méthodes publiques</message>
+  <message lang="en" key="rsm.class.public">Number of public methods</message>
+  <message lang="fr" key="rsm.class.comments">Nombre de lignes de commentaires</message>
+  <message lang="en" key="rsm.class.comments">Number of comments</message>
+  <!-- Interfaces -->
+  <message lang="fr" key="umlquality.umlinterface.numAnc">Nombre d'ancêtres de l'Interface</message>
+  <message lang="en" key="umlquality.umlinterface.numAnc">Number of ancestors</message>
+  <message lang="fr" key="umlquality.umlinterface.numClients">Nombre de clients qui implémentent l'Interface</message>
+  <message lang="en" key="umlquality.umlinterface.numClients">Number of clients</message>
+  <!-- Modèle -->
+  <message lang="fr" key="umlquality.umlmodel.ADI">Profondeur moyenne de l'arbre d'héritage des classes</message>
+  <message lang="en" key="umlquality.umlmodel.ADI">Average Depth of Inheritance</message>
+  <message lang="fr" key="umlquality.umlmodel.MD">Plus grande profondeur de l'arbre d'héritage</message>
+  <message lang="en" key="umlquality.umlmodel.MD">Maximum Depth of Inheritance</message>
+  <message lang="fr" key="umlquality.umlmodel.MCC">Plus grande valeur de couplage pour une classe du modèle</message>
+  <message lang="en" key="umlquality.umlmodel.MCC">Maximum Class Coupling</message>
+  <!--  Méthodes  -->
+  <message lang="fr" key="mccabe.method.nl">Nombre total de lignes</message>
+  <message lang="en" key="mccabe.method.nl">Number of lines</message>
+  <message lang="fr" key="mccabe.method.nlmixed">Nombre de lignes mixtes (code et commentaires)</message>
+  <message lang="en" key="mccabe.method.nlmixed">Mixed lines (code and comments)</message>
+  <message lang="fr" key="mccabe.method.ncloc">Nombre de lignes de commentaire</message>
+  <message lang="en" key="mccabe.method.ncloc">Lines of comment</message>
+  <message lang="fr" key="mccabe.method.nsloc">Nombre de lignes de code</message>
+  <message lang="en" key="mccabe.method.nsloc">Lines of code</message>
+  <message lang="fr" key="mccabe.method.vg">Complexité cyclomatique</message>
+  <message lang="en" key="mccabe.method.vg">Cyclomatique complexity</message>
+  <message lang="fr" key="mccabe.method.evg">Complexité cyclomatique essentielle</message>
+  <message lang="en" key="mccabe.method.evg">Essential Complexity</message>
+  <message lang="fr" key="mccabe.method.ivg">Complexité cyclomatique d'intégration</message>
+  <message lang="en" key="mccabe.method.ivg">Module Design Complexity</message>
+  <message lang="fr" key="mccabe.method.fanout">Nombre d'appel à d'autres méthodes</message>
+  <message lang="en" key="mccabe.method.fanout">Fan out</message>
+  <!-- Jsp -->
+  <message lang="fr" key="mccabe.jsp.nlmixed">Nombre de lignes mixtes (code et commentaires)</message>
+  <message lang="en" key="mccabe.jsp.nlmixed">Mixed lines (code and comments)</message>
+  <message lang="fr" key="mccabe.jsp.ncloc">Nombre de lignes de commentaire</message>
+  <message lang="en" key="mccabe.jsp.ncloc">Lines of comment</message>
+  <message lang="fr" key="mccabe.jsp.nsloc">Nombre de lignes de code</message>
+  <message lang="en" key="mccabe.jsp.nsloc">Lines of code</message>
+  <message lang="fr" key="mccabe.jsp.vg">Complexité cyclomatique</message>
+  <message lang="en" key="mccabe.jsp.vg">Cyclomatique complexity</message>
+  <message lang="fr" key="mccabe.jsp.evg">Complexité cyclomatique essentielle</message>
+  <message lang="en" key="mccabe.jsp.evg">Essential Complexity</message>
+  
+  <!-- ATTENTION : NE PAS METTRE DE CARACTERES SPECIAUX (' ou ") -->
+  <!--  Messages pour checkstyle  -->
+  <message lang="fr" key="metric.COD01">Import illégal, redondant ou inutilisé détecté</message>
+  <message lang="en" key="metric.COD01">Detected illegal, redundant or unused import</message>
+  <message lang="fr" key="metric.COD03">Ne pas utiliser de valeurs magiques mais des constantes nommées</message>
+  <message lang="en" key="metric.COD03">Magic numbers must be defined as a constant</message>
+  <message lang="fr" key="metric.COD04">Les attributs doivent etre protected ou private avec des accesseurs</message>
+  <message lang="en" key="metric.COD04">Public or package visibility class members are not allowed</message>
+  <message lang="fr" key="metric.COD05">Instructions break et continue interdites dans une boucle</message>
+  <message lang="en" key="metric.COD05">Break or continue not allowed inside a loop statement</message>
+  <message lang="fr" key="metric.COD06">Les méthodes ne doivent pas dépasser 70 lignes</message>
+  <message lang="en" key="metric.COD06">Method lenght must not exceed 70 lines</message>
+  <message lang="fr" key="metric.COD07">Mettez toujours un cas par défaut dans les switch</message>
+  <message lang="en" key="metric.COD07">Default case missing in a switch clause</message>
+  <message lang="fr" key="metric.COD08">Ne pas faire d affectations de valeur à l intérieur d autres instructions </message>
+  <message lang="en" key="metric.COD08">Do not assign values inside another instruction</message>
+  <message lang="fr" key="metric.COD09">Ne pas cacher un champ par une variable locale de meme nom</message>
+  <message lang="en" key="metric.COD09">Do not shadow a member with a parameter or a local variable using identical name</message>
+  <message lang="fr" key="metric.COD10">Ne pas laisser de méthodes privées inutilisées</message>
+  <message lang="en" key="metric.COD10">Unused private method found</message>
+  <message lang="fr" key="metric.COD11">Interdiction d utiliser System.out.print</message>
+  <message lang="en" key="metric.COD11">System.out.print not allowed</message>
+  <message lang="fr" key="metric.COD12">Ne pas laisser d attributs prives inutilisés</message>
+  <message lang="en" key="metric.COD12">Unused class member found</message>
+  <message lang="fr" key="metric.COD13">Nombre maximal de methodes definies dans une classe</message>
+  <message lang="en" key="metric.COD13">Maximum allowable number of lines exceeded</message>
+  <message lang="fr" key="metric.COD14">Depassement du seuil de la complexite cyclomatique</message>
+  <message lang="en" key="metric.COD14">Cyclomatic complexity threshold exceeded</message>
+  <message lang="fr" key="metric.COD15">Les classes anonymes sont interdites</message>
+  <message lang="en" key="metric.COD15">Anonymous inner class are not allowed</message>
+  <message lang="fr" key="metric.COD16">Trop de return dans une methode</message>
+  <message lang="en" key="metric.COD16">Number of return in a method is exceeded</message>
+  <message lang="fr" key="metric.COM01">Commentaire Javadoc manquant pour une classe, interface, méthode ou variable locale</message>
+  <message lang="en" key="metric.COM01">Javadoc comments missing for class, interface, method or member definition</message>
+  <message lang="fr" key="metric.FOR01">Indenter le code à l aide d espaces et non de tabulations</message>
+  <message lang="en" key="metric.FOR01">Using spaces and not tabulations to format code</message>
+  <message lang="fr" key="metric.FOR02">Positionnement de l accolade fermante ou ouvrante incorrect</message>
+  <message lang="en" key="metric.FOR02">Incorrect placement of right or left curly braces</message>
+  <message lang="fr" key="metric.FOR03">Utiliser des accolades ouvrantes et fermantes pour les blocs</message>
+  <message lang="en" key="metric.FOR03">Need braces around code blocks</message>
+  <message lang="fr" key="metric.FOR04">Ne pas faire de ligne de longueur superieure a 200</message>
+  <message lang="en" key="metric.FOR04">Line length exceeds 200 characters </message>
+  <message lang="fr" key="metric.NOM01">Respecter la convention de nommage des paramètres</message>
+  <message lang="en" key="metric.NOM01">Parameter does not follow naming convention</message>
+  <message lang="fr" key="metric.NOM02">Respecter la convention de nommage des champs non-statiques</message>
+  <message lang="en" key="metric.NOM02">Member field does not follow naming convention</message>
+  <message lang="fr" key="metric.NOM03">Respecter la convention de nommage des constantes</message>
+  <message lang="en" key="metric.NOM03">Constant field does not follow naming convention</message>
+
+  <!--  Messages pour CppTest : jeu MustHaveRules -->
+  <message lang="fr" key="metric.AvoidConvertConstToNonconst.rule">Ne pas convertir de const en non-const</message>
+  <message lang="en" key="metric.AvoidConvertConstToNonconst.rule">Never convert consts to non-consts</message>
+  <message lang="fr" key="metric.AvoidDirectlyAccessGlobals.rule">Ne pas accéder à des données globales depuis un constructeur</message>
+  <message lang="en" key="metric.AvoidDirectlyAccessGlobals.rule">Do not directly access global data from a constructor</message>
+  <message lang="fr" key="metric.CharCompareLeft.rule">Ne pas comparer des char à des const en dehors de la plage des char (partie gauche)</message>
+  <message lang="en" key="metric.CharCompareLeft.rule">Do not compare chars to constants out of char range (part left)</message>
+  <message lang="fr" key="metric.CharCompareRight.rule">Ne pas comparer des char à des const en dehors de la plage des char (partie droite)</message>
+  <message lang="en" key="metric.CharCompareRight.rule">Do not compare chars to constants out of char range (part right)</message>
+  <message lang="fr" key="metric.DeleteNonPointer.rule">Ne pas appeler delete sur des non-pointeurs</message>
+  <message lang="en" key="metric.DeleteNonPointer.rule">Do not call delete on non-pointers</message>
+  <message lang="fr" key="metric.DiffNameLocalAndMemberVars.rule">Les variables locales et les données membre doivent avoir des noms différents</message>
+  <message lang="en" key="metric.DiffNameLocalAndMemberVars.rule">Local variables and class variables should have different name</message>
+  <message lang="fr" key="metric.EqualityFloatLeft.rule">Ne pas tester l'égalité sur des float mais la supériorité ou l'infériorité (partie gauche)</message>
+  <message lang="en" key="metric.EqualityFloatLeft.rule">Do not check floats for equality; check for greater than or less than (part left)</message>
+  <message lang="fr" key="metric.EqualityFloatRight.rule">Ne pas tester l'égalité sur des float mais la supériorité ou l'infériorité (partie droite)</message>
+  <message lang="en" key="metric.EqualityFloatRight.rule">Do not check floats for equality; check for greater than or less than (part right)</message>
+  <message lang="fr" key="metric.IfAssign.rule">Eviter l'affectation dans la condition d'une instruction if</message>
+  <message lang="en" key="metric.IfAssign.rule">Avoid assignment in if statement condition</message>
+  <message lang="fr" key="metric.MemberNotInitializedInConstructor.rule">Initialiser tous les atributs dans le constructeur</message>
+  <message lang="en" key="metric.MemberNotInitializedInConstructor.rule">Initialize all member variables in a constructor</message>
+  <message lang="fr" key="metric.NoAbstractClassPointerConvert.rule">Un pointeur vers une classe abstraite ne doit pas être converti en un pointeur vers une classe héritant de cette classe abstraite</message>
+  <message lang="en" key="metric.NoAbstractClassPointerConvert.rule">A pointer to an abstract class shall not be converted to a pointer of a class that inherits from the abstract class</message>
+  <message lang="fr" key="metric.OpEqualThis.rule">Retouner une référence à *this dans une fonction operator=</message>
+  <message lang="en" key="metric.OpEqualThis.rule">Return reference to *this in operator= functions</message>
+  <message lang="fr" key="metric.PublicReturnConst.rule">Les fonctions membre publics doivent toujours retourner des accès constants à une donnée membre</message>
+  <message lang="en" key="metric.PublicReturnConst.rule">Public member functions shall always return const handles to member data</message>
+  <message lang="fr" key="metric.VirtualFuncVirtualDestr.rule">Si une classe a des fonctions virtuelles, elle doit avoir un destructeur virtuel</message>
+  <message lang="en" key="metric.VirtualFuncVirtualDestr.rule">If a class has virtual functions it shall have a virtual destructor</message>
+  <message lang="fr" key="metric.ecpp-08_NewAdhereToConvention.rule">Suivre les conventions d'écriture de new</message>
+  <message lang="en" key="metric.ecpp-08_NewAdhereToConvention.rule">Adhere to convention when writing new</message>
+  <message lang="fr" key="metric.ecpp-09_AvoidHidingGlobalNew.rule">Eviter de cacher le new global</message>
+  <message lang="en" key="metric.ecpp-09_AvoidHidingGlobalNew.rule">Avoid hiding the global new</message>
+  <message lang="fr" key="metric.ecpp-10_CallDeleteIfWriteNew.rule">Définir également delete si new est défini</message>
+  <message lang="en" key="metric.ecpp-10_CallDeleteIfWriteNew.rule">Write delete if you write new</message>
+  <message lang="fr" key="metric.ecpp-11_CopyConstructorAndAssignmentOperator.rule">Définir un constructeur de copie et l'operateur = pour les classes allouant dynamiquement de la mémoire</message>
+  <message lang="en" key="metric.ecpp-11_CopyConstructorAndAssignmentOperator.rule">Define a copy constructor and operator= for classes with dynamically allocated memory</message>
+  <message lang="fr" key="metric.ecpp-14_VirtDestrInBaseClass.rule">Les destructeurs des classes de base doivent être virtuels</message>
+  <message lang="en" key="metric.ecpp-14_VirtDestrInBaseClass.rule">Make destructors virtual in base classes</message>
+  <message lang="fr" key="metric.ecpp-15_AssignmentOperatorRetPntThis.rule">L'opérateur = doit retourner une référence à *this</message>
+  <message lang="en" key="metric.ecpp-15_AssignmentOperatorRetPntThis.rule">Have operator= return a reference to *this</message>
+  <message lang="fr" key="metric.ecpp-22_ReturnObjectByReference.rule">Passer et retourner les objets par référence plutôt que par valeur</message>
+  <message lang="en" key="metric.ecpp-22_ReturnObjectByReference.rule">Pass and return objects by reference instead of by value</message>
+  <message lang="fr" key="metric.ecpp-29_AvoidNonConstAccessToInternalData.rule">Eviter de retourner des accès à des données internes depuis une fonction membre constante</message>
+  <message lang="en" key="metric.ecpp-29_AvoidNonConstAccessToInternalData.rule">Avoid returning "handles" to internal data from const member functions</message>
+  <message lang="fr" key="metric.ecpp-31_LocalVariableAsReturn.rule">Ne pas retourner de référence à un objet local</message>
+  <message lang="en" key="metric.ecpp-31_LocalVariableAsReturn.rule">Never return a reference to a local object</message>
+  <message lang="fr" key="metric.mk-13_AvoidVirtualFunctionCall.rule">Eviter d'appeler des fonctions virtuelles depuis un constructeur ou un destructeur</message>
+  <message lang="en" key="metric.mk-13_AvoidVirtualFunctionCall.rule">Avoid calling virtual functions from constructors and destructors</message>
+  <message lang="fr" key="metric.sa-40_AvoidImplicitConversions.rule">Eviter de fournir des conversions implicites</message>
+  <message lang="en" key="metric.sa-40_AvoidImplicitConversions.rule">Avoid providing implicit conversions</message>
+  <message lang="fr" key="metric.sa-50_BaseClassDestrPubVirtualOrProtNonvirtual.rule">Le destructeur d'une classe de base doit être public et virtuel, ou protégé et non virtuel</message>
+  <message lang="en" key="metric.sa-50_BaseClassDestrPubVirtualOrProtNonvirtual.rule">Make base class destructors public and virtual, or protected and nonvirtual</message>
+  <!--  Messages pour CppTest : jeu DINB -->
+  <message lang="fr" key="metric.AssignmentOpCopyConstr.rule">Si une classe a des membres de type pointeur, elle doit définir un constructeur de copie et l'opérateur =</message>
+  <message lang="en" key="metric.AssignmentOpCopyConstr.rule">If a class has pointer members it must define a copy constructor and operator=</message>
+  <message lang="fr" key="metric.AvoidGotoStatement.rule">Ne pas utiliser l'instruction goto</message>
+  <message lang="en" key="metric.AvoidGotoStatement.rule">Do not use the goto statement</message>
+  <message lang="fr" key="metric.AvoidProtectedMembers.rule">Ne pas déclarer de données membre protégées</message>
+  <message lang="en" key="metric.AvoidProtectedMembers.rule">Do not declare protected data members</message>
+  <message lang="fr" key="metric.AvoidPublicDataMembers.rule">Ne pas déclarer de données membre publiques</message>
+  <message lang="en" key="metric.AvoidPublicDataMembers.rule">Do not specify public data members</message>
+  <message lang="fr" key="metric.ConfirmToIncludeDirectiveFormat_MISRA_089.rule">Faire suivre chaque directive #include d'un nom de fichier entre guillemets ou chevrons</message>
+  <message lang="en" key="metric.ConfirmToIncludeDirectiveFormat_MISRA_089.rule">Ensure that each #include directive is followed by a filename in double-quotes or angle brackets</message>
+  <message lang="fr" key="metric.ConstParam.rule">Déclarer si possible les paramètres référence en références constantes</message>
+  <message lang="en" key="metric.ConstParam.rule">Declare reference parameters as const references whenever possible</message>
+  <message lang="fr" key="metric.ConstPointerFunctionCall.rule">Passer des pointeurs constants aux fonctions si la valeur pointée ne doit pas changer</message>
+  <message lang="en" key="metric.ConstPointerFunctionCall.rule">Pass const pointer to function if the value of which the pointer points at is not to be changed</message>
+  <message lang="fr" key="metric.DefaultInSwitch.rule">Fournir un cas par défaut aux instructions switch</message>
+  <message lang="en" key="metric.DefaultInSwitch.rule">Provide a default branch for switch statements</message>
+  <message lang="fr" key="metric.DefineNamingConvention.rule">Les constantes #define doivent être en capitales</message>
+  <message lang="en" key="metric.DefineNamingConvention.rule">All "#define" constants shall be in uppercase</message>
+  <message lang="fr" key="metric.DeleteIfNew.rule">Définir l'opérateur delete si l'opérateur new a été défini</message>
+  <message lang="en" key="metric.DeleteIfNew.rule">Write operator delete if you write operator new</message>
+  <message lang="fr" key="metric.ExplicitlyReturnType.rule">Les fonctions doivent déclarer explicitement leur type de retour</message>
+  <message lang="en" key="metric.ExplicitlyReturnType.rule">Functions should explicitly declare their return type</message>
+  <message lang="fr" key="metric.FuncParamTypeMismatch.rule">Les types des arguments formels et effectifs doivent correspondre</message>
+  <message lang="en" key="metric.FuncParamTypeMismatch.rule">Declared types of formal and actual parameters to functions must match</message>
+  <message lang="fr" key="metric.FunctionCurlyBraces.rule">Les accolades doivent apparaître sur une ligne séparée</message>
+  <message lang="en" key="metric.FunctionCurlyBraces.rule">All curly braces shall appear on a line by themselves</message>
+  <message lang="fr" key="metric.FunctionSize.rule">Eviter les fonctions de plus de 50 lignes</message>
+  <message lang="en" key="metric.FunctionSize.rule">Avoid functions with over 50 lines</message>
+  <message lang="fr" key="metric.LineLength.rule">Physical lines should be less than eighty characters</message>
+  <message lang="en" key="metric.LineLength.rule">Une ligne ne doit pas contenir plus de 80 caractères</message>
+  <message lang="fr" key="metric.NameClass.rule">Débuter le nom des classes par une majuscule</message>
+  <message lang="en" key="metric.NameClass.rule">Begin class names with an uppercase letter</message>
+  <message lang="fr" key="metric.NameDataMember.rule">Débuter le nom des membres par la lettre m</message>
+  <message lang="en" key="metric.NameDataMember.rule">Begin class data member names with letter m</message>
+  <message lang="fr" key="metric.NameVariable.rule">Débuter le nom des variables par une miniscule</message>
+  <message lang="en" key="metric.NameVariable.rule">Begin all variables with a lowercase letter</message>
+  <message lang="fr" key="metric.OneStatementPerLine.rule">Une seule instruction est autorisée par ligne</message>
+  <message lang="en" key="metric.OneStatementPerLine.rule">Only one statement shall be allowed per line</message>
+  <message lang="fr" key="metric.OnlyOneReturn.rule">Une fonction ne doit contenir qu'une seule instruction return (partie 1)</message>
+  <message lang="en" key="metric.OnlyOneReturn.rule">Provide only one return statement in a function (part 1)</message>
+  <message lang="fr" key="metric.OnlyOneReturn2.rule">Une fonction ne doit contenir qu'une seule instruction return (partie 2)</message>
+  <message lang="en" key="metric.OnlyOneReturn2.rule">Provide only one return statement in a function (part 2)</message>
+  <message lang="fr" key="metric.OpEqualThis.rule">Retouner une référence à *this dans une fonction operator=</message>
+  <message lang="en" key="metric.OpEqualThis.rule">Return reference to *this in operator= functions</message>
+  <message lang="fr" key="metric.SourceFileSize.rule">Eviter les fichiers source de plus de 1000 lignes</message>
+  <message lang="en" key="metric.SourceFileSize.rule">Avoid source files that are longer than 1000 lines</message>
+  <message lang="fr" key="metric.SpaceInSelector.rule">Il ne doit pas y avoir d'espace autour d'un opérateur primaire (partie 1)</message>
+  <message lang="en" key="metric.SpaceInSelector.rule">There shall be no white space preceding or following a primary operator (part 1)</message>
+  <message lang="fr" key="metric.SpaceInSelector2.rule">Il ne doit pas y avoir d'espace autour d'un opérateur primaire (partie 2)</message>
+  <message lang="en" key="metric.SpaceInSelector2.rule">There shall be no white space preceding or following a primary operator (part 2)</message>
+  <message lang="fr" key="metric.ecpp-11_CopyConstructorAndAssignmentOperator.rule">Définir un constructeur de copie et l'operateur = pour les classes allouant dynamiquement de la mémoire (partie 1)</message>
+  <message lang="en" key="metric.ecpp-11_CopyConstructorAndAssignmentOperator.rule">Define a copy constructor and operator= for classes with dynamically allocated memory (part 1)</message>
+  <message lang="fr" key="metric.ecpp-11_CopyConstructorAndAssignmentOperator1.rule">Définir un constructeur de copie et l'operateur = pour les classes allouant dynamiquement de la mémoire (partie 2)</message>
+  <message lang="en" key="metric.ecpp-11_CopyConstructorAndAssignmentOperator1.rule">Define a copy constructor and operator= for classes with dynamically allocated memory (part 2)</message>
+  <message lang="fr" key="metric.ellemtel_rec-03_OneClassPerIncludeFile.rule">Un fichier d'inclusion ne doit pas contenir plus d'une définition de classe</message>
+  <message lang="en" key="metric.ellemtel_rec-03_OneClassPerIncludeFile.rule">An include file should not contain more than one class definition</message>
+  <message lang="fr" key="metric.ellemtel_rec-07_ClassIncludeFileNaming.rule">Un fichier d'inclusion pour une classe doit avoir un nom composé du nom de la classe suivi de l'extension</message>
+  <message lang="en" key="metric.ellemtel_rec-07_ClassIncludeFileNaming.rule">An include file for a class should have a file name of the form classname + extension</message>
+  <message lang="fr" key="metric.ellemtel_rec-08_CommentBeforeFunction.rule">Commenter chaque fonction</message>
+  <message lang="en" key="metric.ellemtel_rec-08_CommentBeforeFunction.rule">Comment every function</message>
+  <message lang="fr" key="metric.ellemtel_rec-09_UseCStyleComments.rule">Ne pas utiliser de commentaires multi-lignes</message>
+  <message lang="en" key="metric.ellemtel_rec-09_UseCStyleComments.rule">Do not use multiline comments</message>
+  <message lang="fr" key="metric.ellemtel_rec-19_EncapsulateGlobalsInClass.rule">Encapsuler les variables globales, les constantes, les types énumérés et les typedef dans une classe</message>
+  <message lang="en" key="metric.ellemtel_rec-19_EncapsulateGlobalsInClass.rule">Encapsulate global variables and constants, enumerated types, and typedefs in a class</message>
+  <message lang="fr" key="metric.ellemtel_rec-26_OperatorsDirectlyConnectTypeName.rule">Les opérateurs * et &amp; doivent être directement accolés au type</message>
+  <message lang="en" key="metric.ellemtel_rec-26_OperatorsDirectlyConnectTypeName.rule">The dereference operator * and the address-of operator &amp; should be directly connected with the type names</message>
+  <message lang="fr" key="metric.ellemtel_rec-36_DefineBothOpositeOperators.rule">Deux opérateurs opposés (comme == et !=) doivent être définis ensemble</message>
+  <message lang="en" key="metric.ellemtel_rec-36_DefineBothOpositeOperators.rule">When two operators are opposites (such as == and !=), it is appropriate to define both</message>
+  <message lang="fr" key="metric.ellemtel_rec-43_AvoidPassingByValue.rule">Utiliser des références constantes au lieu de passage par valeur</message>
+  <message lang="en" key="metric.ellemtel_rec-43_AvoidPassingByValue.rule">Use constant references (const &amp;) instead of call-by-value, unless using a pre-defined data type or a pointer</message>
+  <message lang="fr" key="metric.ellemtel_rule-01_IncludeFileExtensionHH.rule">Les fichiers d'inclusion C++ doivent porter l'extension .h ou .H</message>
+  <message lang="en" key="metric.ellemtel_rule-01_IncludeFileExtensionHH.rule">Include files in C++ always have the file name extension .h or .H</message>
+  <message lang="fr" key="metric.ellemtel_rule-02_ImplementationFileExtensionCC.rule">Les fichiers d'implémentation C++ doivent porter l'extension .cc ou .C ou .cpp</message>
+  <message lang="en" key="metric.ellemtel_rule-02_ImplementationFileExtensionCC.rule">Implementation files in C++ always have the file name extension .cc or .C or .cpp</message>
+  <message lang="fr" key="metric.ellemtel_rule-04_IntroductoryComments.rule">Commenter chaque fichier</message>
+  <message lang="en" key="metric.ellemtel_rule-04_IntroductoryComments.rule">Comment every file</message>
+  <message lang="fr" key="metric.ellemtel_rule-07_MultipleInclusionMechanism.rule">Se protéger contre l'inclusion multiple de fichiers d'entête</message>
+  <message lang="en" key="metric.ellemtel_rule-07_MultipleInclusionMechanism.rule">Always write internal #include guards</message>
+  <message lang="fr" key="metric.ellemtel_rule-25_DefineCopyConstructor.rule">Définir un constructeur de copie pour les classes allouant dynamiquement de la mémoire</message>
+  <message lang="en" key="metric.ellemtel_rule-25_DefineCopyConstructor.rule">Define copy constructor for classes with dynamically allocated memory</message>
+  <message lang="fr" key="metric.ellemtel_rule-26_DefineVirtualDesctructor.rule">Si une classe a des fonctions virtuelles, elle doit avoir un destructeur virtuel</message>
+  <message lang="en" key="metric.ellemtel_rule-26_DefineVirtualDesctructor.rule">If a class has virtual functions it shall have a virtual destructor</message>
+  <message lang="fr" key="metric.ellemtel_rule-29_MemberFunctionReturnTypes.rule">Une fonction membre publique ne doit pas retourner de référence ou de pointeur non constant à une donnée membre</message>
+  <message lang="en" key="metric.ellemtel_rule-29_MemberFunctionReturnTypes.rule">A public member function must never return a non-const reference or pointer to member data</message>
+  <message lang="fr" key="metric.ellemtel_rule-34_PointerReferenceToLocalVariable.rule">Une fonction publique ne doit pas retourner de référence ou de pointeur non constant à une variable locale</message>
+  <message lang="en" key="metric.ellemtel_rule-34_PointerReferenceToLocalVariable.rule">A public function must never return a reference or a pointer to a local variable</message>
+  <message lang="fr" key="metric.ellemtel_rule-35_InlineFunctionInsteadDefine.rule">Utiliser les fonctions inline plutôt que les directives #define</message>
+  <message lang="en" key="metric.ellemtel_rule-35_InlineFunctionInsteadDefine.rule">Do not use the preprocessor directive #define to obtain more efficient code, instead, use inline functions</message>
+  <message lang="fr" key="metric.ellemtel_rule-36_ConstantsDefineStatement.rule">Ne pas définir de constantes par #define</message>
+  <message lang="en" key="metric.ellemtel_rule-36_ConstantsDefineStatement.rule">Do not define constants via #define</message>
+  <message lang="fr" key="metric.ellemtel_rule-39_VariablesDeclaredSeparateStatement.rule">Chaque variable doit être déclarée dans une instruction séparée</message>
+  <message lang="en" key="metric.ellemtel_rule-39_VariablesDeclaredSeparateStatement.rule">Each variable is to be declared in a separate declaration statement</message>
+  <message lang="fr" key="metric.ellemtel_rule-41_1_VariableInitializedBeforeUsed.rule">Initialiser toutes les variables</message>
+  <message lang="en" key="metric.ellemtel_rule-41_1_VariableInitializedBeforeUsed.rule">Initialize all variables</message>
+  <message lang="fr" key="metric.ellemtel_rule-41_2_VariableDeclarationScope.rule">Les variables doivent être déclarées aussi localement que possible</message>
+  <message lang="en" key="metric.ellemtel_rule-41_2_VariableDeclarationScope.rule">Declare variables as locally as possible</message>
+  <message lang="fr" key="metric.ellemtel_rule-42_PointerToNULLComparison.rule">Ne pas comparer un pointeur à NULL ou l'assigner à NULL, mais à 0</message>
+  <message lang="en" key="metric.ellemtel_rule-42_PointerToNULLComparison.rule">Do not compare a pointer to NULL or assign NULL to a pointer, use 0 instead</message>
+  <message lang="fr" key="metric.ellemtel_rule-43_DoNotUseCasts.rule">Ne pas utiliser de conversions explicites (cast)</message>
+  <message lang="en" key="metric.ellemtel_rule-43_DoNotUseCasts.rule">Never use explicit type conversions (casts)</message>
+  <message lang="fr" key="metric.ellemtel_rule-45_PointerToDerivedClassConversion.rule">Ne pas convertir de pointeur sur un objet d'une classe dérivée en un pointeur sur un objet de la classe de base virtuelle</message>
+  <message lang="en" key="metric.ellemtel_rule-45_PointerToDerivedClassConversion.rule">Never convert pointers to objects of a derived class to pointers to objects of a virtual base class</message>
+  <message lang="fr" key="metric.ellemtel_rule-46_ConstToNonConstConversion.rule">Ne pas convertir un const en un non-const</message>
+  <message lang="en" key="metric.ellemtel_rule-46_ConstToNonConstConversion.rule">Never convert a const to a non-const</message>
+  <message lang="fr" key="metric.ellemtel_rule-50_AvoidMallocReallocFree.rule">Ne pas utiliser malloc,realloc ou free</message>
+  <message lang="en" key="metric.ellemtel_rule-50_AvoidMallocReallocFree.rule">Do not use malloc, realloc or free</message>
+
+  <!--  Messages pour PMD  -->
+  <message lang="fr" key="metric.CyclomaticComplexity">Depassement du seuil de la complexite cyclomatique</message>
+  <message lang="en" key="metric.CyclomaticComplexty">Cyclomatic complexity threshold exceeded</message>
+  <message lang="fr" key="metric.SingularField">Un attribut peut être remplacé par une variable locale car il est utilisé par une seule méthode</message>
+  <message lang="en" key="metric.SingularField">A field can be replaced by a local variable since it is used by only one method</message>
+  <message lang="fr" key="metric.LooseCoupling">Au lieu d utiliser une implémentation (i.e., HashSet), utilisez l interface (i,e, Set)</message>
+  <message lang="en" key="metric.LooseCoupling">Avoid using implementation types (i.e., HashSet), use the interface (i.e, Set) instead</message>
+  <message lang="fr" key="metric.AbstractClassWithoutAbstractMethod">La classe abstraite ne contient aucune méthode abstraite</message>
+  <message lang="en" key="metric.AbstractClassWithoutAbstractMethod">The abstract class does not contain any abstract methods</message>
+  <message lang="fr" key="metric.CompareObjectsWithEquals">Utiliser equals pour comparer des objets</message>
+  <message lang="en" key="metric.CompareObjectsWithEquals">Use equals() to compare object references</message>
+  <message lang="fr" key="metric.PreserveStackTrace">Ne pas lancer une nouvelle exception dans un bloc catch sans lui passer l exception originale</message>
+  <message lang="en" key="metric.PreserveStackTrace">Do not throw a new exception from a catch block without passing the original exception into the new Exception</message>
+  <message lang="fr" key="metric.UseProperClassLoader">Utilisez hread.currentThread().getContextClassLoader() à la place de getClassLoader()</message>
+  <message lang="en" key="metric.UseProperClassLoader">Use Thread.currentThread().getContextClassLoader() instead of getClassLoader()</message>
+  <message lang="fr" key="metric.NoLongScripts">Les scripts devraient être placés dans des Tag Libraries</message>
+  <message lang="en" key="metric.NoLongScripts">Scripts should be part of Tag Libraries</message>
+  <message lang="fr" key="metric.NoScriptlets">Les scriptlets doivent être placés dans des Tag Libraries ou des déclarations JSP</message>
+  <message lang="en" key="metric.NoScriptlets">Scriptlets should be factored into Tag Libraries or JSP declarations</message>
+  <message lang="fr" key="metric.NoInlineStyleInformation">Les informations devraient être placées dans un fichier CSS, non dans les JSPs</message>
+  <message lang="en" key="metric.NoInlineStyleInformation">Style information should be put in CSS files, not in JSPs</message>
+  <message lang="fr" key="metric.NoClassAttribute">Ne pas utiliser d attribut de nom [class]. Utilisez [styleclass] pour les styles CSS</message>
+  <message lang="en" key="metric.NoClassAttribute">Do not use an attribute called [class]. Use [styleclass] for CSS styles</message>
+  <message lang="fr" key="metric.NoJspForward">Ne pas faire de forward dans un fichier JSP</message>
+  <message lang="en" key="metric.NoJspForward">Do not do a forward from within a JSP file</message>
+  <message lang="fr" key="metric.NoHtmlComments">Ne pas utiliser de commentaires HTML</message>
+  <message lang="en" key="metric.NoHtmlComments">Do not use HTML comments</message>
+  <message lang="fr" key="metric.DuplicateJspImports">Evitez d utiliser des imports dupliqués dans les JSPs</message>
+  <message lang="en" key="metric.DuplicateJspImports">Avoid duplicate import statements inside JSPs</message>
+  <!--  Messages pour CPD  -->
+  <message lang="fr" key="metric.cpd.java">Copier-coller java</message>
+  <message lang="en" key="metric.cpd.java">Java copy-paste</message>
+  <message lang="fr" key="metric.cpd.jsp">Copier-coller JSP</message>
+  <message lang="en" key="metric.cpd.jsp">JSP Copy-paste</message>
+  <message lang="fr" key="metric.cpd.cpp">Copier-coller C++</message>
+  <message lang="en" key="metric.cpd.cpp">C++ copy-paste</message>
+
+   <!--  Messages pour la configuration des tâches Squalix  -->
+  <message lang="fr" key="task.clearcasetask.configuration">Configuration de ClearCase</message>
+  <message lang="en" key="task.clearcasetask.configuration">ClearCase's configuration</message>
+  <message lang="fr" key="task.jcompilingtask.configuration">Configuration de la compilation java</message>
+  <message lang="en" key="task.jcompilingtask.configuration">Java compilation's configuration</message>
+  <message lang="fr" key="task.jspcompilingtask.configuration">Configuration de la compilation jsp</message>
+  <message lang="en" key="task.jspcompilingtask.configuration">Jsp compilation's configuration</message>
+  <message lang="fr" key="task.cppmccabetask.configuration">Configuration de McCabe</message>
+  <message lang="en" key="task.cppmccabetask.configuration">McCabe's configuration</message>
+  <message lang="fr" key="task.cpptesttask.configuration">Configuration de CppTest</message>
+  <message lang="en" key="task.cpptesttask.configuration">CppTest's configuration</message>
+  <message lang="fr" key="task.rulescheckingtask.configuration">Configuration de Checkstyle</message>
+  <message lang="en" key="task.rulescheckingtask.configuration">Checkstyle's configuration</message>
+  <message lang="fr" key="task.mackertask.configuration">Configuration de Macker</message>
+  <message lang="en" key="task.mackertask.configuration">Macker's configuration</message>
+  <message lang="fr" key="task.j2eemackertask.configuration">Configuration de Macker</message>
+  <message lang="en" key="task.j2eemackertask.configuration">Macker's configuration</message>
+  <message lang="fr" key="task.umlqualitytask.configuration">Configuration d'UMLQuality</message>
+  <message lang="en" key="task.umlqualitytask.configuration">UMLQuality configuration</message>
+  <message lang="en" key="task.pmdtask.configuration">PMD's configuration</message>
+  <message lang="fr" key="task.pmdtask.configuration">Configuration de PMD</message>
+  <message lang="en" key="task.sourcecodeanalysertask.configuration">Source manager's configuration</message>
+  <message lang="fr" key="task.sourcecodeanalysertask.configuration">Configuration du récupérateur de source</message>
+  <message lang="en" key="task.javamockcompilingtask.configuration">Java compilation's configuration</message>
+  <message lang="fr" key="task.javamockcompilingtask.configuration">Configuration de la compilation java</message>
+	
+  <message lang="en" key="task.extbugtrackingqctask.configuration">QC bugtracking's configuration</message>
+  <message lang="fr" key="task.extbugtrackingqctask.configuration">Configuration du bugtracking QC</message>  
+
+  <message lang="fr" key="task.jdependtask.configuration2">Configuration de jDepend</message>
+  
+  <!--  Messages pour l'affichage des noms de tâches internationalisés  -->
+  <message lang="fr" key="ClearCaseTask.name">Tâche ClearCase</message>
+  <message lang="en" key="ClearCaseTask.name">ClearCase's task</message>
+  <message lang="fr" key="ClearCaseCleanerTask.name">Tâche ClearCase de complétude</message>
+  <message lang="en" key="ClearCaseCleanerTask.name">ClearCase's final task</message>
+  <message lang="fr" key="JCompilingTask.name">Tâche de compilation java</message>
+  <message lang="en" key="JCompilingTask.name">Java compilation task </message>
+  <message lang="fr" key="JCompilingCleanerTask.name">Tâche finale de compilation java</message>
+  <message lang="en" key="JCompilingCleanerTask.name">Java compilation' final task </message>
+  <message lang="fr" key="JspCompilingTask.name">Tâche de compilation des pages JSP</message>
+  <message lang="en" key="JspCompilingTask.name">JSP pages compilation task </message>
+  <message lang="fr" key="JavaMcCabeTask.name">Tâche McCabe</message>
+  <message lang="en" key="JavaMcCabeTask.name">McCabe task</message>
+  <message lang="fr" key="CppMcCabeTask.name">Tâche McCabe pour le profil Cpp</message>
+  <message lang="en" key="CppMcCabeTask.name">McCabe task for Cpp profile</message>
+  <message lang="fr" key="J2eeMcCabeTask.name">Tâche McCabe</message>
+  <message lang="en" key="J2eeMcCabeTask.name">McCabe task</message>
+  <message lang="fr" key="CppTestTask.name">Tâche CppTest</message>
+  <message lang="en" key="CppTestTask.name">CppTest Task</message>
+  <message lang="fr" key="RulesCheckingTask.name">Tâche Checkstyle</message>
+  <message lang="en" key="RulesCheckingTask.name">Checkstyle task</message>
+  <message lang="fr" key="MackerTask.name">Tâche Macker</message>
+  <message lang="en" key="MackerTask.name">Macker task</message>
+  <message lang="fr" key="J2eeMackerTask.name">Tâche Macker</message>
+  <message lang="en" key="J2eeMackerTask.name">Macker task</message>
+  <message lang="fr" key="CkjmTask.name">Tâche Ckjm</message>
+  <message lang="en" key="CkjmTask.name">Ckjm task</message>
+  <message lang="fr" key="JavaRSMTask.name">Tâche de calcul du taux de commentaires</message>
+  <message lang="en" key="JavaRSMTask.name">Comments ratio task</message>
+  <message lang="fr" key="CppRSMTask.name">Tâche de calcul du taux de commentaires</message>
+  <message lang="en" key="CppRSMTask.name">Comments ratio task</message>
+  <message lang="fr" key="UMLQualityTask.name">Tâche UMLQuality</message>
+  <message lang="en" key="UMLQualityTask.name">UMLQuality task</message>
+  <message lang="en" key="JDependTask.name">Tâche JDepend</message>
+  <message lang="fr" key="JDependTask.name">JDepend</message>
+  <message lang="fr" key="CpdTask.name">Tâche de détection de copier/coller</message>
+  <message lang="en" key="CpdTask.name">Copy/paste detector task</message>
+  <message lang="fr" key="PmdTask.name">Tâche de détection des erreurs de programmation</message>
+  <message lang="en" key="PmdTask.name">Programming mistake detector task</message>
+  <message lang="fr" key="SourceCodeAnalyserTask.name">Tâche de récupération des sources</message>
+  <message lang="en" key="SourceCodeAnalyserTask.name">Sources management task</message>
+  <message lang="fr" key="SourceCodeAnalyserCleanerTask.name">Tâche finale de récupération des sources</message>
+  <message lang="en" key="SourceCodeAnalyserCleanerTask.name">Sources management's final task</message>
+  <message lang="fr" key="JavaMockCompilingTask.name">Tâche de compilation java</message>
+  <message lang="en" key="JavaMockCompilingTask.name">Java compilation task</message>
+  <message lang="en" key="ComputeResultTask.name">Compute result task</message>
+  <message lang="fr" key="ComputeResultTask.name">Tâche de calcul des résultats</message>
+  
+  <message lang="fr" key="ExtBugTrackingQCTask.name">Tâche externe de bugtracking QC</message>
+  <message lang="en" key="ExtBugTrackingQCTask.name">QC bugtracking external task</message>
+  
+  <!--  Messages pour les graphes   -->
+  <message lang="fr" key="roi.graph.xTitle">Date des audits</message>
+  <message lang="en" key="roi.graph.xTitle">Audits date</message>
+  <message lang="fr" key="roi.graph.yTitle">ROI en mois-homme</message>
+  <message lang="en" key="roi.graph.yTitle">ROI in month-man</message>
+  
+  <!-- Messages pour les grilles -->  
+  <message lang="fr" key="ref.java">Java</message>
+  <message lang="en" key="ref.java">Java</message>
+  <message lang="fr" key="ref.cpp">Cpp</message>
+  <message lang="en" key="ref.cpp">Cpp</message>
+  <message lang="fr" key="ref.j2ee">J2ee</message>
+  <message lang="en" key="ref.j2ee">J2ee</message>
+  <message lang="fr" key="ref.archinet">Archinet</message>
+  <message lang="en" key="ref.archinet">Archinet</message>
+  
+  <!-- Configuration pour l'ordonnencement des audits -->
+  <message lang="fr" key="application.max.accesses">3</message>
+  <message lang="en" key="application.max.accesses">3</message>
+  
+  <!-- Configuration pour le menu Applications -->
+  <message lang="fr" key="nbApplisForGrouping">10</message>
+  <message lang="en" key="nbApplisForGrouping">10</message>
+  <message lang="fr" key="groupForApplicationsMenu">E,R</message>
+  <message lang="en" key="groupForApplicationsMenu">E,R</message>
+  <message lang="fr" key="groupForPublicApplicationsMenu">E,R</message>
+  <message lang="en" key="groupForPublicApplicationsMenu">E,R</message>
+  
+  <!-- Configuration pour les versions d'eclipse proposées lors de la configuration de la compilation java -->
+  <message lang="fr" key="eclipseRCPList">/app/SQUALE/ECLIPSE_BUNDLE_3_2, /app/SQUALE/eclipse_af_3.3.0.zip</message>
+  <message lang="en" key="eclipseRCPList">/app/SQUALE/ECLIPSE_BUNDLE_3_2, /app/SQUALE/eclipse_af_3.3.0.zip</message>
+
+</messages>

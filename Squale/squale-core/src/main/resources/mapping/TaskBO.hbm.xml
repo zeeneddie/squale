@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskBO"
+        table="Task"
+        lazy="true"
+    >
+
+        <id
+            name="id"
+            column="TaskId"
+            type="long"
+            length="19"
+            unsaved-value="-1"
+        >
+            <generator class="native">
+                <param name="sequence">task_sequence</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-TaskBO.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="name"
+            type="string"
+            update="true"
+            insert="true"
+            column="Name"
+            length="255"
+            not-null="true"
+            unique="true"
+        />
+
+        <property
+            name="className"
+            type="string"
+            update="true"
+            insert="true"
+            column="Class"
+            length="2048"
+            not-null="true"
+            unique="false"
+        />
+
+        <property
+            name="configurable"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="Configurable"
+            not-null="true"
+            unique="false"
+        />
+
+        <property
+            name="standard"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="Standard"
+            not-null="true"
+            unique="false"
+        />
+
+        <property
+            name="mandatory"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="Mandatory"
+            not-null="true"
+            unique="false"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-TaskBO.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

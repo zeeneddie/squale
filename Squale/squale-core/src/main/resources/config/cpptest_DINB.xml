@@ -1,0 +1,55 @@
+<ruleset name="DINB" version="0" cppTestName="user://DINB">
+	<rule code="SourceFileSize.rule" category="formatingstandard" severity="info" />
+	<rule code="NameDataMember.rule" category="namingstandard" severity="info" />
+	<rule code="ellemtel_rule-01_IncludeFileExtensionHH.rule" category="namingstandard" severity="error" />
+	<rule code="ellemtel_rule-02_ImplementationFileExtensionCC.rule" category="namingstandard" severity="error" />
+	<rule code="ellemtel_rec-03_OneClassPerIncludeFile.rule" category="programmingstandard" severity="error" />
+	<rule code="ellemtel_rec-07_ClassIncludeFileNaming.rule" category="namingstandard" severity="error" />
+	<rule code="ellemtel_rec-19_EncapsulateGlobalsInClass.rule" category="programmingstandard" severity="error" />
+	<rule code="FunctionCurlyBraces.rule" category="formatingstandard" severity="error" />
+	<rule code="FuncParamTypeMismatch.rule" category="programmingstandard" severity="error"/>
+	<rule code="AssignmentOpCopyConstr.rule" category="programmingstandard" severity="error"/>
+	<rule code="FunctionSize.rule" category="formatingstandard" severity="info"/>
+	<rule code="ecpp-11_CopyConstructorAndAssignmentOperator.rule" category="programmingstandard" severity="error"/>
+	<rule code="ecpp-11_CopyConstructorAndAssignmentOperator1.rule" category="programmingstandard" severity="error"/>
+	<rule code="DefineNamingConvention.rule" category="namingstandard" severity="info"/>
+	<rule code="NameVariable.rule" category="namingstandard" severity="info"/>
+	<rule code="NameClass.rule" category="namingstandard" severity="info"/>
+	<rule code="LineLength.rule" category="formatingstandard" severity="error"/>
+	<rule code="OneStatementPerLine.rule" category="formatingstandard" severity="error"/>
+	<rule code="SpaceInSelector2.rule" category="formatingstandard" severity="error"/>
+	<rule code="SpaceInSelector.rule" category="formatingstandard" severity="error"/>
+	<rule code="DefaultInSwitch.rule" category="programmingstandard" severity="error"/>
+	<rule code="AvoidGotoStatement.rule" category="programmingstandard" severity="error"/>
+	<rule code="OnlyOneReturn.rule" category="programmingstandard" severity="warning"/>
+	<rule code="ConstParam.rule" category="programmingstandard" severity="error"/>
+	<rule code="OnlyOneReturn2.rule" category="programmingstandard" severity="warning"/>
+	<rule code="ConstPointerFunctionCall.rule" category="programmingstandard" severity="error"/>
+	<rule code="ExplicitlyReturnType.rule" category="programmingstandard" severity="error"/>
+	<rule code="ConfirmToIncludeDirectiveFormat_MISRA_089.rule" category="programmingstandard" severity="error"/>
+	<rule code="DeleteIfNew.rule" category="programmingstandard" severity="error"/>
+	<rule code="OpEqualThis.rule" category="programmingstandard" severity="error"/>
+	<rule code="AvoidPublicDataMembers.rule" category="programmingstandard" severity="warning"/>
+	<rule code="AvoidProtectedMembers.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rule-45_PointerToDerivedClassConversion.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rule-43_DoNotUseCasts.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rec-08_CommentBeforeFunction.rule" category="documentationstandard" severity="warning"/>
+	<rule code="ellemtel_rule-29_MemberFunctionReturnTypes.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rule-34_PointerReferenceToLocalVariable.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rec-36_DefineBothOpositeOperators.rule" category="programmingstandard" severity="warning"/>
+	<rule code="ellemtel_rule-35_InlineFunctionInsteadDefine.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rule-39_VariablesDeclaredSeparateStatement.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rule-25_DefineCopyConstructor.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rule-46_ConstToNonConstConversion.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rule-41_1_VariableInitializedBeforeUsed.rule" category="programmingstandard" severity="warning"/>
+	<rule code="ellemtel_rule-07_MultipleInclusionMechanism.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rule-41_2_VariableDeclarationScope.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rec-43_AvoidPassingByValue.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rule-42_PointerToNULLComparison.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rule-26_DefineVirtualDesctructor.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rec-26_OperatorsDirectlyConnectTypeName.rule" category="formatingstandard" severity="error"/>
+	<rule code="ellemtel_rule-50_AvoidMallocReallocFree.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rule-04_IntroductoryComments.rule" category="documentationstandard" severity="warning"/>
+	<rule code="ellemtel_rec-09_UseCStyleComments.rule" category="programmingstandard" severity="error"/>
+	<rule code="ellemtel_rule-36_ConstantsDefineStatement.rule" category="programmingstandard" severity="error"/>
+</ruleset>

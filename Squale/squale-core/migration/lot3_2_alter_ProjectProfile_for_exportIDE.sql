@@ -1,0 +1,1 @@
+alter table tasks_user add export_IDE number(1) default 1 not null;

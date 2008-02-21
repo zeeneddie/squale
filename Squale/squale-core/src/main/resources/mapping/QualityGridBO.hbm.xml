@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+        table="QualityGrid"
+        lazy="true"
+        mutable="true"
+    >
+
+        <id
+            name="id"
+            column="QualityGridId"
+            type="long"
+            length="19"
+            unsaved-value="-1"
+        >
+            <generator class="native">
+                <param name="sequence">qualitygrid_sequence</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-QualityGridBO.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="name"
+            type="string"
+            update="true"
+            insert="true"
+            column="Name"
+            not-null="true"
+            unique="false"
+        />
+
+        <set
+            name="profiles"
+            table="Profiles_Grids"
+            lazy="true"
+            inverse="true"
+            cascade="none"
+            sort="unsorted"
+        >
+
+            <key
+                column="GridId"
+            >
+            </key>
+
+            <many-to-many
+                class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
+                column="ProfileId"
+                outer-join="auto"
+             />
+
+        </set>
+
+        <property
+            name="dateOfUpdate"
+            type="timestamp"
+            update="true"
+            insert="true"
+            column="DateOfUpdate"
+            not-null="true"
+            unique="false"
+        />
+
+        <set
+            name="factors"
+            table="GridFactor_Rule"
+            lazy="true"
+            inverse="false"
+            cascade="all"
+            sort="natural"
+        >
+
+            <key
+                column="QualityGridId"
+            >
+            </key>
+
+            <many-to-many
+                class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"
+                column="FactorRuleId"
+                outer-join="auto"
+             />
+
+        </set>
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-QualityGridBO.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

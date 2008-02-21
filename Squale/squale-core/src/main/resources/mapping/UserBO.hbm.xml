@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO"
+        table="UserBO"
+        mutable="true"
+    >
+
+        <id
+            name="id"
+            column="UserId"
+            type="long"
+            length="19"
+            unsaved-value="-1"
+        >
+            <generator class="native">
+                <param name="sequence">user_sequence</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-UserBO.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="fullName"
+            type="string"
+            update="true"
+            insert="true"
+            column="FullName"
+        />
+
+        <property
+            name="matricule"
+            type="string"
+            update="true"
+            insert="true"
+            column="Matricule"
+        />
+
+        <property
+            name="password"
+            type="string"
+            update="true"
+            insert="true"
+            column="Password"
+        />
+
+        <property
+            name="email"
+            type="string"
+            update="true"
+            insert="true"
+            column="Email"
+        />
+
+        <map
+            name="rights"
+            table="User_Rights"
+            lazy="true"
+            sort="unsorted"
+            cascade="none"
+        >
+
+            <key
+                column="UserId"
+            >
+            </key>
+
+            <index-many-to-many
+                class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO"
+                column="ApplicationId"
+            />
+
+            <many-to-many
+                class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"
+                column="ProfileId"
+                outer-join="auto"
+             />
+
+        </map>
+
+        <many-to-one
+            name="defaultProfile"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="ProfileId"
+            not-null="true"
+        />
+
+        <property
+            name="unsubscribed"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="unsubscribed"
+            unique="false"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-UserBO.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

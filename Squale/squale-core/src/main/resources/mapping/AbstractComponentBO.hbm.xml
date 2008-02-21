@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+        table="Component"
+        lazy="true"
+        mutable="true"
+        discriminator-value="AbstractComponent"
+    >
+
+        <id
+            name="id"
+            column="ComponentId"
+            type="long"
+            length="19"
+            unsaved-value="-1"
+        >
+            <generator class="native">
+                <param name="sequence">component_sequence</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-AbstractComponentBO.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <discriminator
+            column="subclass"
+        />
+
+        <property
+            name="excludedFromActionPlan"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="Excluded"
+            not-null="true"
+            unique="false"
+        />
+
+        <property
+            name="justification"
+            type="string"
+            update="true"
+            insert="true"
+            column="Justification"
+            length="4000"
+            not-null="false"
+            unique="false"
+        />
+
+        <property
+            name="name"
+            type="string"
+            update="true"
+            insert="true"
+            column="Name"
+            length="1024"
+            not-null="true"
+            unique="false"
+        />
+
+        <many-to-one
+            name="parent"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
+            cascade="save-update"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="Parent"
+        />
+
+        <set
+            name="audits"
+            table="Components_Audits"
+            lazy="true"
+            inverse="false"
+            cascade="none"
+            sort="unsorted"
+        >
+
+            <key
+                column="ComponentId"
+            >
+            </key>
+
+            <many-to-many
+                class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+                column="AuditId"
+                outer-join="auto"
+             />
+
+        </set>
+
+        <many-to-one
+            name="project"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="ProjectId"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-AbstractComponentBO.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO"
+            lazy="true"
+            discriminator-value="Method"
+        >
+        <property
+            name="longFileName"
+            type="string"
+            update="true"
+            insert="true"
+            column="LongFileName"
+            length="2048"
+            not-null="false"
+            unique="false"
+        />
+
+        <property
+            name="startLine"
+            type="integer"
+            update="true"
+            insert="true"
+            column="StartLine"
+            length="10"
+            not-null="false"
+            unique="false"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-MethodBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO"
+            lazy="true"
+            discriminator-value="UmlInterface"
+        >
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-UmlInterfaceBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.JspBO"
+            lazy="true"
+            discriminator-value="Jsp"
+        >
+        <property
+            name="fileName"
+            type="string"
+            update="true"
+            insert="true"
+            column="LongFileName"
+            length="2048"
+            not-null="false"
+            unique="false"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-JspBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
+            lazy="true"
+            discriminator-value="AbstractComplexComponent"
+        >
+
+        <bag
+            name="children"
+            table="AbstractComplexComponent_children"
+            lazy="true"
+            cascade="none"
+        >
+
+            <key
+                column="Parent"
+            >
+            </key>
+
+            <one-to-many
+                  class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+            />
+
+      </bag>
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-AbstractComplexComponentBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlClassBO"
+            lazy="true"
+            discriminator-value="UmlClass"
+        >
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-UmlClassBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlModelBO"
+            lazy="true"
+            discriminator-value="UmlModel"
+        >
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-UmlModelBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO"
+            lazy="true"
+            discriminator-value="Class"
+        >
+        <property
+            name="fileName"
+            type="string"
+            update="true"
+            insert="true"
+            column="LongFileName"
+            length="2048"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-ClassBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO"
+            lazy="true"
+            discriminator-value="UmlPackage"
+        >
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-UmlPackageBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO"
+            lazy="true"
+            discriminator-value="Application"
+        >
+        <property
+            name="auditFrequency"
+            type="integer"
+            update="true"
+            insert="true"
+            column="AuditFrequency"
+            length="10"
+            not-null="false"
+            unique="false"
+        />
+
+        <property
+            name="resultsStorageOptions"
+            type="integer"
+            update="true"
+            insert="true"
+            column="ResultsStorageOptions"
+            length="10"
+            not-null="false"
+            unique="false"
+        />
+
+        <property
+            name="status"
+            type="integer"
+            update="true"
+            insert="true"
+            column="Status"
+            length="10"
+            unique="false"
+        />
+
+        <property
+            name="public"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="PublicApplication"
+            unique="false"
+        />
+
+        <property
+            name="lastUpdate"
+            type="timestamp"
+            update="true"
+            insert="true"
+            column="LastUpdate"
+            not-null="false"
+            unique="false"
+        />
+
+        <property
+            name="externalDev"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="EXTERNAL_DEV"
+            unique="false"
+        />
+
+        <property
+            name="inProduction"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="IN_PRODUCTION"
+            unique="false"
+        />
+
+        <property
+            name="lastUser"
+            type="string"
+            update="true"
+            insert="true"
+            column="lastUser"
+            length="1024"
+            unique="false"
+        />
+
+        <many-to-one
+            name="serveurBO"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="Serveur"
+            not-null="false"
+        />
+
+        <list
+            name="userAccesses"
+            table="UserAccess"
+            lazy="false"
+            cascade="all"
+        >
+
+            <key
+                column="ApplicationId"
+            >
+            </key>
+
+            <index
+                column="AccessIndex"
+                type="long"
+                length="19"
+            />
+
+            <one-to-many
+                  class="com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO"
+            />
+
+        </list>
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-ApplicationBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO"
+            lazy="true"
+            discriminator-value="Package"
+        >
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-PackageBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
+            lazy="true"
+            discriminator-value="Project"
+        >
+
+        <many-to-one
+            name="profile"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="ProfileBO"
+            not-null="false"
+        />
+
+        <many-to-one
+            name="parameters"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="ParametersSet"
+            not-null="false"
+        />
+
+        <many-to-one
+            name="qualityGrid"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="QualityGrid"
+            not-null="false"
+        />
+
+        <bag
+            name="qualityResults"
+            lazy="true"
+            inverse="true"
+            cascade="none"
+        >
+
+            <key
+                column="ProjectId"
+            >
+            </key>
+
+            <one-to-many
+                  class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
+            />
+
+      </bag>
+
+        <many-to-one
+            name="sourceManager"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="SourceManager"
+            not-null="false"
+        />
+
+        <property
+            name="status"
+            type="integer"
+            update="true"
+            insert="true"
+            column="Status"
+            length="10"
+            unique="false"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-ProjectBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+
+        </subclass>
+
+    </class>
+
+</hibernate-mapping>

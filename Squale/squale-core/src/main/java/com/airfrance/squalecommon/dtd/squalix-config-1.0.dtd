@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding="UTF-8"?>
+
+<!ELEMENT configuration
+   (stoptimes, frequencies?,tasks,sourcemanagements,profiles)
+>
+<!ELEMENT stoptimes
+   (stoptime*)
+>
+<!ELEMENT stoptime
+   EMPTY
+>
+
+<!ATTLIST stoptime
+day CDATA #REQUIRED
+>
+
+<!ATTLIST stoptime
+time CDATA #REQUIRED
+>
+
+<!ELEMENT frequencies
+   (frequency*)
+>
+<!ELEMENT frequency
+   EMPTY
+>
+
+<!ATTLIST frequency
+days CDATA #REQUIRED
+>
+
+<!ATTLIST frequency
+frequency CDATA #REQUIRED
+>
+
+<!ELEMENT tasks
+   (task+)
+>
+
+<!ELEMENT task
+   EMPTY
+>
+
+<!ATTLIST task
+class CDATA #REQUIRED
+>
+<!ATTLIST task
+configurable (true|false) "true"
+>
+
+<!ATTLIST task
+standard (true|false) "false"
+>
+
+<!ATTLIST task
+mandatory (true|false) "true"
+>
+
+<!ATTLIST task
+name CDATA #REQUIRED
+>
+
+<!ELEMENT sourcemanagements
+   (sourcemanagement+)
+>
+
+<!ELEMENT sourcemanagement
+   (analysis,termination)
+>
+<!ATTLIST sourcemanagement
+name CDATA #REQUIRED
+>
+<!ATTLIST sourcemanagement
+milestoneAudit (true|false) "true"
+>
+<!ATTLIST sourcemanagement
+normalAudit (true|false) "true"
+>
+<!ELEMENT profiles
+   (profile+)
+>
+
+<!ELEMENT profile
+   (integrityConstraints?, analysis,termination)
+>
+<!ATTLIST profile
+name CDATA #REQUIRED
+>
+<!ATTLIST profile
+exportIDE (true|false) "true"
+>
+
+<!ELEMENT integrityConstraints
+   (grids, displayConfigurations?)
+>
+
+<!ELEMENT grids
+   (grid+)
+>
+
+<!ELEMENT grid
+ 	EMPTY
+>
+
+<!ATTLIST grid
+name CDATA #REQUIRED
+>
+
+<!ELEMENT displayConfigurations
+   (bubble?, volumetries?)
+>
+
+<!ELEMENT volumetries
+ 	(volumetry+)
+>
+
+<!ELEMENT volumetry
+ 	(tre+)
+>
+
+<!ATTLIST volumetry
+component CDATA #REQUIRED
+>
+
+<!ELEMENT tre
+ 	EMPTY
+>
+
+<!ATTLIST tre
+name CDATA #REQUIRED
+>
+
+<!ATTLIST bubble
+xtre CDATA #REQUIRED
+>
+<!ATTLIST bubble
+ytre CDATA #REQUIRED
+>
+
+<!ATTLIST bubble
+xPos CDATA #REQUIRED
+>
+
+<!ATTLIST bubble
+yPos CDATA #REQUIRED
+>
+
+<!ELEMENT bubble
+  	EMPTY
+>
+
+<!ELEMENT analysis
+   (task-ref*)
+>
+
+<!ELEMENT termination
+   (task-ref*)
+>
+
+<!ELEMENT task-ref
+	(parameter*)
+>
+
+<!ATTLIST task-ref
+name CDATA #REQUIRED
+>
+
+<!ELEMENT parameter
+	EMPTY
+>
+
+<!ATTLIST parameter
+name CDATA #REQUIRED
+value CDATA #REQUIRED
+>

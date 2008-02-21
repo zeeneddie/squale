@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"
+        table="Rule"
+        lazy="true"
+        mutable="true"
+        discriminator-value="Rule"
+    >
+
+        <id
+            name="id"
+            column="RuleId"
+            type="long"
+            length="19"
+            unsaved-value="-1"
+        >
+            <generator class="native">
+                <param name="sequence">Rule_sequence</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-RuleBO.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <discriminator
+            column="subclass"
+        />
+
+        <property
+            name="category"
+            type="string"
+            update="true"
+            insert="true"
+            column="Category"
+            not-null="false"
+            unique="false"
+        />
+
+        <property
+            name="code"
+            type="string"
+            update="true"
+            insert="true"
+            column="Code"
+            not-null="false"
+            unique="false"
+        />
+
+        <many-to-one
+            name="ruleSet"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO"
+            cascade="save-update"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="RuleSetId"
+            not-null="true"
+        />
+
+        <property
+            name="severity"
+            type="string"
+            update="true"
+            insert="true"
+            column="Severity"
+            not-null="false"
+            unique="false"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-RuleBO.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleBO"
+            discriminator-value="Checkstyle"
+        >
+
+        <set
+            name="modules"
+            lazy="true"
+            cascade="all"
+            sort="unsorted"
+        >
+
+            <key
+                column="RuleId"
+            >
+            </key>
+
+            <one-to-many
+                  class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleModuleBO"
+            />
+
+        </set>
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-CheckstyleRuleBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+
+    </class>
+
+</hibernate-mapping>

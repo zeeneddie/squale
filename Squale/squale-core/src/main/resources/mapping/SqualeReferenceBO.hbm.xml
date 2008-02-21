@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.SqualeReferenceBO"
+        table="SqualeReference"
+        mutable="true"
+    >
+
+        <id
+            name="id"
+            column="ReferencielId"
+            type="long"
+            length="19"
+            unsaved-value="-1"
+        >
+            <generator class="native">
+                <param name="sequence">reference_sequence</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-SqualeReferenceBO.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <many-to-one
+            name="qualityGrid"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="QualityGrid"
+            not-null="false"
+        />
+
+        <property
+            name="public"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="PublicApplication"
+            unique="false"
+        />
+
+        <property
+            name="applicationName"
+            type="string"
+            update="true"
+            insert="true"
+            column="ApplicationName"
+        />
+
+        <property
+            name="projectName"
+            type="string"
+            update="true"
+            insert="true"
+            column="ProjectName"
+        />
+
+        <property
+            name="language"
+            type="string"
+            update="true"
+            insert="true"
+            column="ProjectLanguage"
+        />
+
+        <property
+            name="version"
+            type="string"
+            update="true"
+            insert="true"
+            column="Version"
+        />
+
+        <property
+            name="date"
+            type="timestamp"
+            update="true"
+            insert="true"
+            column="AuditDate"
+        />
+
+        <map
+            name="factors"
+            table="FactorRef"
+            lazy="false"
+            sort="natural"
+            cascade="all"
+        >
+
+            <key
+                column="ReferencielId"
+            >
+            </key>
+
+            <index-many-to-many
+                class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"
+                column="Rule"
+            />
+
+            <element
+                column="Factor_Value"
+                type="float"
+                not-null="false"
+                unique="false"
+            />
+
+        </map>
+
+        <property
+            name="codeLineNumber"
+            type="integer"
+            update="true"
+            insert="true"
+            column="CodeLineNumber"
+            length="10"
+            not-null="false"
+            unique="false"
+        />
+
+        <property
+            name="methodNumber"
+            type="integer"
+            update="true"
+            insert="true"
+            column="MethodNumber"
+            length="10"
+            not-null="false"
+            unique="false"
+        />
+
+        <property
+            name="classNumber"
+            type="integer"
+            update="true"
+            insert="true"
+            column="ClassNumber"
+            length="10"
+            not-null="false"
+            unique="false"
+        />
+
+        <property
+            name="hidden"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="HIDDEN"
+            not-null="true"
+            unique="false"
+        />
+
+        <property
+            name="auditType"
+            type="string"
+            update="true"
+            insert="true"
+            column="AUDIT_TYPE"
+            length="50"
+            not-null="true"
+            unique="false"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-SqualeReferenceBO.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

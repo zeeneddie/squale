@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO"
+        table="Error"
+        mutable="true"
+    >
+
+        <id
+            name="id"
+            column="ErrorId"
+            type="long"
+            length="19"
+            unsaved-value="-1"
+        >
+            <generator class="native">
+                <param name="sequence">error_sequence</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-ErrorBO.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="initialMessage"
+            type="string"
+            update="true"
+            insert="true"
+            column="InitialMessage"
+            length="2048"
+            not-null="false"
+            unique="false"
+        />
+
+        <property
+            name="message"
+            type="string"
+            update="true"
+            insert="true"
+            column="Message"
+            length="2048"
+            not-null="false"
+            unique="false"
+        />
+
+        <property
+            name="level"
+            type="string"
+            update="true"
+            insert="true"
+            column="CriticityLevel"
+        />
+
+        <property
+            name="taskName"
+            type="string"
+            update="true"
+            insert="true"
+            column="TaskName"
+        />
+
+        <many-to-one
+            name="audit"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="AuditId"
+            not-null="true"
+        />
+
+        <many-to-one
+            name="project"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
+            cascade="none"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="ProjectId"
+            not-null="true"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-ErrorBO.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

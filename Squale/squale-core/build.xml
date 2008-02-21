@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="squaleCommon" basedir="." default="all">
+
+	<!-- lecture du fichier de properties -->
+	<property file="${basedir}/build.properties" />
+
+	<!-- definition des proprietes -->
+	<!-- standard -->
+  	<property name="src.dir" location="${basedir}/src"/>
+	<property name="classes.dir" value="${basedir}/classes" />
+	
+	<property name="generated.dir" value="${basedir}/generated" />
+	<property name="generated.ddl.dir" value="${generated.dir}/ddl" />
+
+	<property name="mapping.full.path" value="${src.dir}/mapping" />
+	<property name="config.full.path" value="${basedir}/../squaleWeb/WebContent/WEB-INF/config" />
+	<property name="hibernate.config.file" value="hibernate.cfg.xml" />
+	<property name="schema.export.file" value="schema-export-${type.ext}.sql" />	
+
+	 
+	<!-- classpath du projet --> 
+	<path id="project.class.path">
+		<pathelement location="${classes.dir}"/>
+		<!-- librairies -->
+		<fileset dir="${basedir}/lib">
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
+		</fileset>	
+		
+		<fileset dir="${basedir}/../squalix/lib/compiling_ressources/java/1_4">
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
+		</fileset>	
+
+		<!-- librairies contenues dans l'ear -->
+		<fileset dir="${ear.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+		
+		<!-- parser xdoclet -->
+		<fileset dir="lib/xdoclet/">
+  			<include name="**/*.jar" />
+		</fileset>
+	</path>  	  
+	
+	<!-- Specifique WSAD -->
+  	<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+  	<!-- Parametres de compilation -->
+	<property name="javac.debug" value="on"/>
+	<property name="javac.optimize" value="off"/>
+	<property name="javac.nowarn" value="false"/>
+	<property name="javac.verbose" value="false"/>
+	<property name="javac.listfiles" value="true"/>
+	
+	<!-- tache hibernate pour l'exportation de schema de base -->
+	<taskdef name="schemaexport"
+		classname="org.hibernate.tool.hbm2ddl.SchemaExportTask"
+		classpathref="project.class.path"/>
+		
+	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    
+	<!-- Verification de la version java qui doit etre 1.4 pour produire le schema -->
+   <target name="checkjavaversion" >
+
+     <condition property="isJavaVersionCorrect">
+         <equals arg1="${ant.java.version}"
+                 arg2="1.4" />
+     </condition>
+
+     <fail unless="isJavaVersionCorrect">
+           The java version should be 1.4!
+           Start ant with JRE 1.4 and not from eclipse 2.1. </fail>
+
+   </target>
+   
+	<!-- construit le mapping dont les fichiers sont precises dans le
+		fichier hibernate.cfg.xml
+	-->
+	
+	<target name="hbm2ddl" description="construire le ddl" depends="checkjavaversion">
+		<echo message="mapping.full.path=${mapping.full.path}" />
+		<schemaexport 
+			config="${config.full.path}/${hibernate.config.file}"
+			quiet="no" 
+			text="yes"
+			drop="no"
+			delimiter=";"
+			output="${generated.ddl.dir}/${schema.export.file}">
+		</schemaexport>
+		<echo message="schema.export.file=${schema.export.file}" />
+	</target>
+
+	
+	<!-- =================================================================== -->
+	<!-- tache de création des fichiers de mapping -->
+	<!-- =================================================================== -->
+	<target name="create-mapping" depends="">
+		<taskdef
+		name="hibernate2"
+		classname="xdoclet.modules.hibernate.HibernateDocletTask"
+		classpathref="project.class.path"
+		/>
+
+		<tstamp>
+        	<format property="TODAY" pattern="d-MM-yy"/>
+    	</tstamp>
+    	
+		<!-- Creation du fichier destination -->
+		<mkdir dir="${mapping.full.path}"/>
+    	
+    	<hibernate2 force="yes" destDir="${mapping.full.path}"
+    		verbose="true"
+    		excludedtags="@version,@author,@todo"
+	    	addedtags="@xdoclet-generated at ${TODAY}"
+	    	mergeDir="${mapping.full.path}">
+			
+    		<!-- Fichiers à intégrer dans le parsing -->
+    		<fileset dir="${src.dir}">
+				<include name="**/*.java" />
+			</fileset>
+
+    		<hibernate version="3.0" validateXML="true"
+            		prefixWithPackageStructure="false"/> 
+    	</hibernate2>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Gestion de l'API Mail  -->
+	<!-- =================================================================== -->
+	<target name="apiMail">
+		<javadoc access="public" author="true" classpathref="project.class.path"
+				destdir="${basedir}/delivery/mail/doc"
+            	nodeprecated="false" nodeprecatedlist="false"
+            	noindex="false" nonavbar="false" notree="false"
+            	packagenames="com.airfrance.squalecommon.util.mail"
+            	sourcepath="${basedir}/src"
+            	splitindex="true" use="true" version="true"/>
+    <jar destfile="${basedir}/delivery/mail/apiMail.jar"
+         basedir="${classes.dir}"
+         includes="com/airfrance/squalecommon/util/mail/*"
+         excludes="com/airfrance/squalecommon/util/mail/xmedia"/>
+	</target>
+
+ 
+ 	<!-- execution de toutes les taches -->
+ 	<target name="all" depends="" >
+ 	</target>
+ 
+</project>

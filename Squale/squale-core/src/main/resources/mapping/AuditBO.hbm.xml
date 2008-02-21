@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+        table="AuditBO"
+        mutable="true"
+    >
+
+        <id
+            name="id"
+            column="AuditId"
+            type="long"
+            length="19"
+            unsaved-value="-1"
+        >
+            <generator class="native">
+                <param name="sequence">audit_sequence</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-AuditBO.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="name"
+            type="string"
+            update="true"
+            insert="true"
+            column="Name"
+        />
+
+        <property
+            name="date"
+            type="timestamp"
+            update="true"
+            insert="true"
+            column="auditDate"
+        />
+
+        <property
+            name="type"
+            type="string"
+            update="true"
+            insert="true"
+            column="auditType"
+        />
+
+        <property
+            name="status"
+            type="integer"
+            update="true"
+            insert="true"
+            column="Status"
+            length="10"
+            not-null="true"
+            unique="false"
+        />
+
+        <bag
+            name="qualityResults"
+            lazy="true"
+            inverse="true"
+            cascade="none"
+        >
+
+            <key
+                column="AuditId"
+            >
+            </key>
+
+            <one-to-many
+                  class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
+            />
+
+      </bag>
+
+        <property
+            name="comments"
+            type="string"
+            update="true"
+            insert="true"
+            column="Comments"
+        />
+
+        <bag
+            name="components"
+            table="Components_Audits"
+            lazy="true"
+            inverse="true"
+            cascade="none"
+        >
+
+            <key
+                column="AuditId"
+            >
+            </key>
+
+            <many-to-many
+                class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+                column="ComponentId"
+                outer-join="auto"
+             />
+
+      </bag>
+
+        <bag
+            name="auditGrids"
+            lazy="true"
+            inverse="true"
+            cascade="none"
+        >
+
+            <key
+                column="AuditId"
+            >
+            </key>
+
+            <one-to-many
+                  class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditGridBO"
+            />
+
+      </bag>
+
+        <property
+            name="historicalDate"
+            type="timestamp"
+            update="true"
+            insert="true"
+            column="historicalDate"
+        />
+
+        <property
+            name="duration"
+            type="string"
+            update="true"
+            insert="true"
+            column="Duration"
+        />
+
+        <property
+            name="endDate"
+            type="timestamp"
+            update="true"
+            insert="true"
+            column="END_DATE"
+        />
+
+        <property
+            name="maxFileSystemSize"
+            type="long"
+            update="true"
+            insert="true"
+            column="MAX_FILE_SYSTEM_SIZE"
+        />
+
+        <property
+            name="realBeginningDate"
+            type="timestamp"
+            update="true"
+            insert="true"
+            column="BEGINNING_DATE"
+        />
+
+        <property
+            name="squaleVersion"
+            type="double"
+            update="true"
+            insert="true"
+            column="squale_version"
+        />
+
+        <bag
+            name="auditDisplayConfs"
+            lazy="true"
+            inverse="true"
+            cascade="none"
+        >
+
+            <key
+                column="AuditId"
+            >
+            </key>
+
+            <one-to-many
+                  class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO"
+            />
+
+      </bag>
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-AuditBO.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

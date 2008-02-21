@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ruleset PUBLIC "-//Squale//DTD CppTest Configuration 1.0//EN" "file:../com/airfrance/squalecommon/dtd/cpptest-1.0.dtd">
+
+<!--TODO la version est 0 en attendant la finalisation de ce fichier -->
+<ruleset name="default" version="0" cppTestName="user://MustHaveRules">
+	<rule code="CharCompareRight.rule" category="programmingstandard" severity="error" />
+	<rule code="NoAbstractClassPointerConvert.rule" category="programmingstandard" severity="error" />
+	<rule code="DiffNameLocalAndMemberVars.rule" category="programmingstandard" severity="error" />
+	<rule code="IfAssign.rule" category="programmingstandard" severity="error" />
+	<rule code="AvoidConvertConstToNonconst.rule" category="programmingstandard" severity="error" />
+	<rule code="EqualityFloatRight.rule" category="programmingstandard" severity="error" />
+	<rule code="CharCompareLeft.rule" category="programmingstandard" severity="error" />
+	<rule code="PublicReturnConst.rule" category="programmingstandard" severity="error" />
+	<rule code="EqualityFloatLeft.rule" category="programmingstandard" severity="error" />
+	<rule code="VirtualFuncVirtualDestr.rule" category="programmingstandard" severity="error" />
+	<rule code="DeleteNonPointer.rule" category="programmingstandard" severity="error" />
+	<rule code="ecpp-22_ReturnObjectByReference.rule" category="programmingstandard" severity="error" />
+	<rule code="ecpp-10_CallDeleteIfWriteNew.rule" category="programmingstandard" severity="error" />
+	<rule code="ecpp-31_LocalVariableAsReturn.rule" category="programmingstandard" severity="error" />
+	<rule code="ecpp-09_AvoidHidingGlobalNew.rule" category="programmingstandard" severity="error" />
+	<rule code="ecpp-08_NewAdhereToConvention.rule" category="programmingstandard" severity="error" />
+	<rule code="ecpp-14_VirtDestrInBaseClass.rule" category="programmingstandard" severity="error" />
+	<rule code="ecpp-11_CopyConstructorAndAssignmentOperator.rule" category="programmingstandard" severity="error" />
+	<rule code="ecpp-29_AvoidNonConstAccessToInternalData.rule" category="programmingstandard" severity="error" />
+	<rule code="ecpp-15_AssignmentOperatorRetPntThis.rule" category="programmingstandard" severity="error" />
+	<rule code="mk-13_AvoidVirtualFunctionCall.rule" category="programmingstandard" severity="error" />
+	<rule code="OpEqualThis.rule" category="programmingstandard" severity="error" />
+	<rule code="AvoidDirectlyAccessGlobals.rule" category="programmingstandard" severity="error" />
+	<rule code="sa-50_BaseClassDestrPubVirtualOrProtNonvirtual.rule" category="programmingstandard" severity="error" />
+	<rule code="sa-40_AvoidImplicitConversions.rule" category="programmingstandard" severity="error" />
+	<rule code="MemberNotInitializedInConstructor.rule" category="programmingstandard" severity="error" />
+</ruleset>

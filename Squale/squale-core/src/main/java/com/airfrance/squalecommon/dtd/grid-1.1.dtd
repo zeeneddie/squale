@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!ELEMENT condition
+   (#PCDATA)
+>
+<!ELEMENT conditionformula
+   (level,measures,trigger,conditions)
+>
+<!ELEMENT conditions
+   (condition+)
+>
+<!ELEMENT criterium
+   (practice-ref+)
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST criterium
+name CDATA #IMPLIED
+>
+<!ELEMENT criterium-ref
+   EMPTY
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST criterium-ref
+name CDATA #IMPLIED
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST criterium-ref
+weight CDATA #IMPLIED
+>
+<!ELEMENT criteriumset
+   (criterium+)
+>
+<!ELEMENT factor
+   (criterium-ref+)
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST factor
+name CDATA #IMPLIED
+>
+<!ELEMENT factor-ref
+   EMPTY
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST factor-ref
+name CDATA #IMPLIED
+>
+<!ELEMENT factorset
+   (factor+)
+>
+<!ELEMENT formula
+   (#PCDATA)
+>
+<!ELEMENT grid
+   (factor-ref+)
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST grid
+name CDATA #IMPLIED
+>
+<!ELEMENT gridset
+   (grid)
+>
+<!ELEMENT helpKey
+   (#PCDATA)
+>
+<!ELEMENT level
+   (#PCDATA)
+>
+<!ELEMENT measure
+   (#PCDATA)
+>
+<!ELEMENT measures
+   (measure+)
+>
+<!ELEMENT practice
+   ((weight?,(conditionformula|simpleformula),helpKey?)?)
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST practice
+name CDATA #IMPLIED
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST practice
+effort CDATA #IMPLIED
+>
+<!ELEMENT practice-ref
+   EMPTY
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST practice-ref
+name CDATA #IMPLIED
+>
+<!--
+   <annotation>
+      <appinfo source='com.ibm.DDbEv2.Models.AbstractXModel.POSSIBLE'>
+         <restriction base='string'/>
+      </appinfo>
+   </annotation>
+-->
+
+<!ATTLIST practice-ref
+weight CDATA #IMPLIED
+>
+<!ELEMENT practiceset
+   (practice+)
+>
+<!ELEMENT simpleformula
+   (level,measures,trigger,formula)
+>
+<!ELEMENT squale
+   (practiceset,criteriumset,factorset,gridset)
+>
+<!ELEMENT trigger
+   (#PCDATA)
+>
+<!ELEMENT weight
+   (#PCDATA)
+>

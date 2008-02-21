@@ -1,0 +1,1 @@
+alter table auditbo add squale_version number(9,4) default 3.1 not null;

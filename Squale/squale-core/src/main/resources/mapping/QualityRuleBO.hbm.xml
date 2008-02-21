@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO"
+        table="QualityRule"
+        discriminator-value="QualityRule"
+    >
+
+        <id
+            name="id"
+            column="QualityRuleId"
+            type="long"
+            length="19"
+            unsaved-value="-1"
+        >
+            <generator class="native">
+                <param name="sequence">qualityrule_sequence</param>
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-QualityRuleBO.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <discriminator
+            column="subclass"
+            not-null="true"
+            type="string"
+        />
+
+        <property
+            name="helpKey"
+            type="string"
+            update="true"
+            insert="true"
+            column="Help_Key"
+            unique="false"
+        />
+
+        <property
+            name="name"
+            type="string"
+            update="true"
+            insert="true"
+            column="Name"
+            not-null="true"
+            unique="false"
+        />
+
+        <property
+            name="dateOfCreation"
+            type="timestamp"
+            update="true"
+            insert="true"
+            column="DateOfCreation"
+            not-null="true"
+            unique="false"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-QualityRuleBO.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO"
+            lazy="false"
+            discriminator-value="PracticeRule"
+        >
+
+        <many-to-one
+            name="formula"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO"
+            cascade="all"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="Formula"
+        />
+
+        <property
+            name="weightFunction"
+            type="string"
+            update="true"
+            insert="true"
+            column="WeightFunction"
+            unique="false"
+        />
+
+        <property
+            name="effort"
+            type="integer"
+            update="true"
+            insert="true"
+            column="effort"
+            length="10"
+            unique="false"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-PracticeRuleBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"
+            lazy="false"
+            discriminator-value="FactorRule"
+        >
+
+        <map
+            name="criteria"
+            table="FactorCriterium_Rule"
+            lazy="true"
+            sort="natural"
+            cascade="all"
+        >
+
+            <key
+                column="FactorRuleId"
+            >
+            </key>
+
+            <index-many-to-many
+                class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO"
+                column="CriteriumRuleId"
+            />
+
+            <element
+                column="Weight"
+                type="float"
+                not-null="true"
+                unique="false"
+            />
+
+        </map>
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-FactorRuleBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO"
+            lazy="false"
+            discriminator-value="CriteriumRule"
+        >
+
+        <map
+            name="practices"
+            table="CriteriumPractice_Rule"
+            lazy="true"
+            sort="natural"
+            cascade="all"
+        >
+
+            <key
+                column="CriteriumRuleId"
+            >
+            </key>
+
+            <index-many-to-many
+                class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO"
+                column="PracticeRuleId"
+            />
+
+            <element
+                column="Weight"
+                type="float"
+                not-null="true"
+                unique="false"
+            />
+
+        </map>
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-CriteriumRuleBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+
+    </class>
+
+</hibernate-mapping>
