@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding="UTF-8"?>
+
+<!ELEMENT templates
+   (template+)
+>
+<!ELEMENT template
+   (csvbean,header,footer,fields)
+>
+<!ATTLIST template
+name CDATA #REQUIRED
+>
+<!ELEMENT csvbean
+   (#PCDATA)
+>
+<!ELEMENT header
+   EMPTY
+>
+<!ATTLIST header
+size CDATA #REQUIRED
+>
+<!ELEMENT footer
+   EMPTY
+>
+<!ATTLIST footer
+size CDATA #REQUIRED
+>
+<!ELEMENT fields
+   (field+)
+>
+
+<!ELEMENT field
+   EMPTY
+>
+<!ATTLIST field
+column CDATA #REQUIRED
+>
+
+<!ATTLIST field
+name CDATA #REQUIRED
+>
+
+<!ATTLIST field
+type CDATA #REQUIRED
+>

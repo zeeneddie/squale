@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!ELEMENT configuration (java,cpp)>
+
+<!-- configuration du tag java -->
+<!ELEMENT java (general, parsing)>
+    <!ELEMENT general (separators, default_jdk_version, dest_dir, required_memory)>
+        <!ELEMENT separators (separator+)>
+            <!ELEMENT separator (#PCDATA)>
+                <!ATTLIST separator name CDATA #REQUIRED value CDATA #REQUIRED>
+        <!ELEMENT default_jdk_version (#PCDATA)>
+        <!ELEMENT dest_dir (#PCDATA)>
+        <!ELEMENT required_memory (#PCDATA)>
+    <!ELEMENT parsing (wsad)>
+        <!ELEMENT wsad (filename, keys, values)>
+            <!ELEMENT filename (#PCDATA)>
+            <!ELEMENT keys (key+)>
+                <!ELEMENT key (#PCDATA)>
+                    <!ATTLIST key name CDATA #REQUIRED value CDATA #REQUIRED>
+            <!ELEMENT values (value+)>
+                <!ELEMENT value (#PCDATA)>
+                    <!ATTLIST value name CDATA #REQUIRED value CDATA #REQUIRED>     
+
+
+<!-- configuration du tag cpp -->
+<!ELEMENT cpp (script)>
+    <!ELEMENT script (vars)>
+        <!ELEMENT vars (var+)>
+            <!ELEMENT var (#PCDATA)>
+                <!ATTLIST var name CDATA #REQUIRED value CDATA #REQUIRED>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- DTD pour la configuration de Servlets -->
+
+<!-- AIR FRANCE -->
+<!-- A.Buisine 15/06/2000 -->
+
+
+<!ELEMENT LogTraceConfiguration (MsgDirectives, LogDirectives, TraceDirectives?)>
+<!ATTLIST LogTraceConfiguration
+    	id 		ID		#REQUIRED
+    	desc 		CDATA		""
+	version 	CDATA		#REQUIRED
+	date 		CDATA		#REQUIRED>
+
+
+<!ELEMENT TraceDirectives EMPTY>
+<!ATTLIST TraceDirectives 
+	trace 		(on|off|default)	"default">
+
+<!ELEMENT LogDirectives EMPTY>
+<!ATTLIST LogDirectives 
+	logStd 		(true|false)	"true"
+	logErr 		(true|false)	"true"
+	directory		CDATA			"log"> 
+
+<!ELEMENT MsgDirectives EMPTY>
+<!ATTLIST MsgDirectives 
+	mode 		(on|off)	"on"
+	debug		(on|off)	"on"
+	console		(on|off)	"on" 
+	fichier		CDATA             "">
+
+

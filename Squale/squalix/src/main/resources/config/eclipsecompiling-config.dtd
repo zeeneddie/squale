@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding="utf-8"?>
+<!ELEMENT options
+   (option+)
+>
+<!ELEMENT workspace
+   (#PCDATA)
+>
+<!ELEMENT command
+   (executable,options)
+>
+<!ELEMENT squaleEclipseHome
+   (#PCDATA)
+>
+<!ELEMENT eclipseHome
+   (#PCDATA)
+>
+<!ELEMENT rightScript
+   (#PCDATA)
+>
+<!ELEMENT copyScript
+   (#PCDATA)
+>
+<!ELEMENT configuration
+   (workspace, command, squaleEclipseHome, eclipseHome, rightScript, copyScript)
+>
+<!ELEMENT executable
+   (#PCDATA)
+>
+<!ELEMENT option
+   (#PCDATA)
+>

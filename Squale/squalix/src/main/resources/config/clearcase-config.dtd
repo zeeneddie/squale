@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!ELEMENT configuration (options, patterns, commands)>
+
+<!-- configuration du tag options -->
+<!ELEMENT options (option+)>
+    <!ELEMENT option (#PCDATA)>
+        <!ATTLIST option key CDATA #REQUIRED>
+
+<!-- configuration du tag patterns -->
+<!ELEMENT patterns (pattern+)>
+    <!ELEMENT pattern (#PCDATA)>
+        <!ATTLIST pattern key CDATA #REQUIRED>
+
+        
+<!-- configuration du tag commands -->
+<!ELEMENT commands (command+)>
+    <!ELEMENT command (#PCDATA)>
+        <!ATTLIST command key CDATA #REQUIRED>
+        

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding="UTF-8"?>
+
+
+<!ELEMENT configuration
+   (general,timeout,profiles,resources)
+>
+
+<!-- Element general -->
+<!ELEMENT general
+   (auditpool,taskpool,softmodeduration,inactivity)
+>
+
+<!-- Configuration du pool d'audit -->
+<!ELEMENT auditpool
+   EMPTY
+>
+<!ATTLIST auditpool
+softmodesize CDATA #REQUIRED
+>
+<!ATTLIST auditpool
+size CDATA #REQUIRED
+>
+
+<!-- Configuration du pool de tâches -->
+<!ELEMENT taskpool
+   EMPTY
+>
+<!ATTLIST taskpool
+size CDATA #REQUIRED
+>
+
+<!-- Configuration du passage en mode soft -->
+<!ELEMENT softmodeduration
+   EMPTY
+>
+<!ATTLIST softmodeduration
+value CDATA #REQUIRED
+>
+
+<!-- Durée d'inactivité avant fermeture du pool (en minutes) -->
+<!ELEMENT inactivity
+   EMPTY
+>
+<!ATTLIST inactivity
+delay CDATA #REQUIRED
+>
+
+<!-- Configuration des fins de session -->
+<!ELEMENT timeout
+   (when+)
+>
+<!ELEMENT when
+	EMPTY
+>
+<!ATTLIST when
+day CDATA #REQUIRED
+>
+<!ATTLIST when
+time CDATA #REQUIRED
+>
+
+<!-- Configuration des profils d'execution -->
+<!ELEMENT profiles
+   (profile+)
+>
+
+<!ELEMENT profile
+   (analysis+,termination+)
+>
+
+<!ATTLIST profile
+name CDATA #REQUIRED
+>
+
+<!ELEMENT analysis
+   (task+)
+>
+
+<!ELEMENT termination
+   (task*)
+>
+
+<!ELEMENT task
+   EMPTY
+>
+
+<!ATTLIST task
+class CDATA #REQUIRED
+>
+<!ATTLIST task
+depends CDATA #REQUIRED
+>
+
+
+<!-- Configuration des resources disponibles -->
+<!ELEMENT resources
+   (resource*)
+>
+<!ELEMENT resource
+   EMPTY
+>
+<!ATTLIST resource
+name CDATA #REQUIRED
+>
+<!ATTLIST resource
+quantity CDATA #REQUIRED
+>
+

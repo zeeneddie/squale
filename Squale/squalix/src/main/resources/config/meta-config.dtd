@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- DTD pour la configuration des fichiers de configuration -->
+
+<!-- AIR FRANCE -->
+<!-- A.Buisine 15/06/2000 -->
+
+<!ELEMENT MetaConfiguration (Configuration*)>
+<!ATTLIST MetaConfiguration
+   id 		ID		#REQUIRED
+   desc 		CDATA		""
+	version 	CDATA		#REQUIRED
+	date 		CDATA		#REQUIRED>
+
+<!ELEMENT Configuration EMPTY>
+<!ATTLIST Configuration 
+    	id 		ID		#REQUIRED
+    	fichier 		CDATA		#REQUIRED> 
+
+

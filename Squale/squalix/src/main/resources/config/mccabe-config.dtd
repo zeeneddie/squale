@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT configuration
+	(general,profiles)
+>
+
+<!-- Configuration générale -->
+<!ELEMENT general
+	(commands,workspace,reportspath,reports)
+>
+
+<!-- Liste des commandes utilisées -->
+<!ELEMENT commands
+	(clicommand,parsercommand,metricscommand)
+>
+
+<!ELEMENT clicommand
+	(#PCDATA)
+>
+<!ELEMENT parsercommand
+	(#PCDATA)
+>
+<!ELEMENT metricscommand
+	(#PCDATA)
+>
+<!-- Workspace réservé à McCabe -->
+<!ELEMENT workspace
+	(#PCDATA)
+>
+<!-- Chemin absolu du fichier contenant les modèles de rapport -->
+<!ELEMENT reportspath
+	(#PCDATA)
+>
+<!-- Liste des rapports à générer -->
+<!ELEMENT reports
+	(report+)
+>
+<!-- Nom d'un rapport -->
+<!-- Le rapport de niveau classe doit être préfixé par CLASS et celui des méthodes par MODULE -->
+<!ELEMENT report
+	(#PCDATA)
+>
+<!-- Liste des profils d'analyse -->
+<!ELEMENT profiles
+	(profile+)
+>
+<!ELEMENT profile
+	(parser,extensions,entetes?,parameters)
+>
+<!ATTLIST profile
+name CDATA #REQUIRED
+>
+<!-- Nom du parser à utiliser -->
+<!ELEMENT parser
+	(#PCDATA)
+>
+<!-- Liste des extensions associées au profil, séparées par des virgules -->
+<!ELEMENT extensions
+	(#PCDATA)
+>
+<!-- Liste des extensions des entetes à inclure dans le filtre -->
+<!ELEMENT entetes
+	(#PCDATA)
+>
+<!-- Liste des arguments de parsing des sources -->
+<!ELEMENT parameters
+	(parameter+)
+>
+<!ELEMENT parameter
+	(#PCDATA)
+>
+ 
+

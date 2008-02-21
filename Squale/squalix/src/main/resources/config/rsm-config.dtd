@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT configuration
+	(general,profiles)
+	
+>
+<!ELEMENT general
+	(workspace,reportpath,reportmethodspath,reportclassespath,inputfile,auxfile,execcommand)
+>
+
+<!-- configuration de la commande d'exécution -->
+<!ELEMENT execcommand (#PCDATA) >
+
+<!-- Workspace réservé à McCabe -->
+<!ELEMENT workspace
+	(#PCDATA)
+>
+<!-- Chemin absolu du fichier contenant le rapport -->
+<!ELEMENT reportpath
+	(#PCDATA)
+>
+
+<!-- Chemin absolu du fichier contenant le rapport -->
+<!ELEMENT reportmethodspath
+	(#PCDATA)
+>
+
+<!-- Chemin absolu du fichier contenant le rapport -->
+<!ELEMENT reportclassespath
+	(#PCDATA)
+>
+
+<!-- Chemin du fichier liste passé en paramètre -->
+<!ELEMENT inputfile
+	(#PCDATA)
+>
+
+<!-- Chemin du fichier auxilliaire servant au préprocessing -->
+<!ELEMENT auxfile
+	(#PCDATA)
+>
+
+<!-- Liste des profils d'analyse -->
+<!ELEMENT profiles
+	(profile+)
+>
+
+<!ELEMENT profile
+	(extensions,entetes,parameters)
+>
+<!ATTLIST profile
+name CDATA #REQUIRED
+>
+
+<!--  Liste des extensions associées au profil séparées par une virgule  -->
+<!ELEMENT extensions
+	(#PCDATA)
+>
+
+<!-- Liste des entetes associées au profil séparées par une virgule -->
+<!ELEMENT entetes
+	(#PCDATA)
+>
+
+<!-- Liste des arguments de parsing des sources -->
+<!ELEMENT parameters
+	(parameter+)
+>
+<!ELEMENT parameter
+	(#PCDATA)
+>
+
+
+  

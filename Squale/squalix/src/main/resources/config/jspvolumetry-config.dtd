@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT configuration
+	(workspace,script,resultfile)
+>
+
+<!-- Workspace -->
+<!ELEMENT workspace	(#PCDATA) >
+
+<!-- configuration de la commande d'exécution pour récupérer le nombre de jsp-->
+<!ELEMENT script (#PCDATA) >
+
+<!-- Workspace -->
+<!ELEMENT resultfile (#PCDATA) >
