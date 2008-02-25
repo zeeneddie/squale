@@ -86,12 +86,6 @@
 			<artifactId>jazzy-core</artifactId>
 			<version>0.5.2</version>
 		</dependency>
-		<!-- TODO FAB : supprimer définitivement cette générateur PDF non OSS
-			<dependency>
-			<groupId>com.airfrance</groupId>
-			<artifactId>xreport_pro</artifactId>
-			</dependency>-->
-
 		<!-- TEST DEPENDENCIES -->
 		<dependency>
 			<groupId>junit</groupId>
