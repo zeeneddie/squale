@@ -948,7 +948,7 @@ Il faut :
   <message lang="en" key="groupForPublicApplicationsMenu">E,R</message>
   
   <!-- Configuration pour les versions d'eclipse proposées lors de la configuration de la compilation java -->
-  <message lang="fr" key="eclipseRCPList">/app/SQUALE/ECLIPSE_BUNDLE_3_2, /app/SQUALE/eclipse_af_3.3.0.zip</message>
-  <message lang="en" key="eclipseRCPList">/app/SQUALE/ECLIPSE_BUNDLE_3_2, /app/SQUALE/eclipse_af_3.3.0.zip</message>
+  <message lang="fr" key="eclipseRCPList">/app/SQUALE/dev/ECLIPSE_3_3</message>
+  <message lang="en" key="eclipseRCPList">/app/SQUALE/dev/ECLIPSE_3_3</message>
 
 </messages>
