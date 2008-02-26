@@ -247,7 +247,7 @@ public class ProgressBarTag extends TagSupport {
             if(isFullScreen())
             {
                 //out.println("<div height=\"50px\" width=\"100%\" style=\"background-image:url(http://cmsintranet.airfrance.fr/charte_v03_001/img/lignage/lignage_trans.gif)\">&nbsp;</div>");
-                out.println("<div style=\"background-image:url(http://cmsintranet.airfrance.fr/charte_v03_001/img/lignage/lignage_trans.gif);background-position:left bottom;background-repeat:repeat-x;height:32px;width:"+width+"px;\" class=\"bg_theme\"><div style=\"margin: 0pt; padding: 0px 5px; font-family: Verdana,Arial,Helvetica,sans-serif; font-weight: bold; font-size: 10px; color: rgb(255, 255, 255); background-color: rgb(5, 16, 57); cursor: default; height: 16px; float: left;\">Execution</div></div>");
+                out.println("<div style=\"background-image:url(theme/charte_v03_001/img/lignage/lignage_trans.gif);background-position:left bottom;background-repeat:repeat-x;height:32px;width:"+width+"px;\" class=\"bg_theme\"><div style=\"margin: 0pt; padding: 0px 5px; font-family: Verdana,Arial,Helvetica,sans-serif; font-weight: bold; font-size: 10px; color: rgb(255, 255, 255); background-color: rgb(5, 16, 57); cursor: default; height: 16px; float: left;\">Execution</div></div>");
                 //out.println("<div style=\"background-image:url(http://cmsintranet.airfrance.fr/charte_v03_001/img/lignage/lignage_trans.gif);line-height:32px;\" class=\"bg_theme\">&nbsp</div>");
             }
             
@@ -391,7 +391,7 @@ public class ProgressBarTag extends TagSupport {
 			out.println("</table>");
 //			out.println("</div>");
 			if (isFullScreen) {
-                out.println("<div style=\"background-image:url(http://cmsintranet.airfrance.fr/charte_v03_001/img/lignage/footer_trans.gif);background-position:left bottom;clear:both;height:20px;width:"+width+"px;\" class=\"bg_theme\"></div>");
+                out.println("<div style=\"background-image:url(theme/charte_v03_001/img/lignage/footer_trans.gif);background-position:left bottom;clear:both;height:20px;width:"+width+"px;\" class=\"bg_theme\"></div>");
 				out.println("</div>");
 			}
 			out.println("</div>");

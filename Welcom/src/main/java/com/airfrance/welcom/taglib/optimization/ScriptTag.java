@@ -43,9 +43,9 @@ public class ScriptTag extends TagSupport {
 
         try {
             writer.print("<script type=\"text/JavaScript\" src=\"");
-            if ((src.indexOf("cmsintranet.airfrance.fr") == -1) || !(WelcomConfigurator.getMessage(WelcomConfigurator.OPTIFLUX_REDIRECT_CMSINTRANET).equals("false"))) {
+            /*if ((src.indexOf("cmsintranet.airfrance.fr") == -1) || !(WelcomConfigurator.getMessage(WelcomConfigurator.OPTIFLUX_REDIRECT_CMSINTRANET).equals("false"))) {
                 writer.print(prefix);
-            }
+            }*/
             writer.print(src + "\"");
             if (!GenericValidator.isBlankOrNull(charset)) {
                 writer.print(" charset=\"" + charset + "\"");

@@ -44,7 +44,7 @@ span.deco{
 }
 
 span.upW{
-background-image: url(http://cmsintranet.airfrance.fr/charte_v03_001/img/picto/blanc/arTr.gif);
+background-image: url(theme/charte_v03_001/img/picto/blanc/arTr.gif);
 background-repeat: no-repeat;
 background-position: center;
 padding-left:12px;
@@ -52,7 +52,7 @@ width:12px;
 }
 
 span.downW{
-background-image: url(http://cmsintranet.airfrance.fr/charte_v03_001/img/picto/blanc/arTr_D.gif);
+background-image: url(theme/charte_v03_001/img/picto/blanc/arTr_D.gif);
 background-repeat: no-repeat;
 background-position: center;
 padding-left:12px;
@@ -60,7 +60,7 @@ width:12px;
 }
 
 span.upB{
-background-image: url(http://cmsintranet.airfrance.fr/charte_v03_001/img/picto/neutre/arTr.gif);
+background-image: url(theme/charte_v03_001/img/picto/neutre/arTr.gif);
 background-repeat: no-repeat;
 background-position: center;
 padding-left:12px;
@@ -68,7 +68,7 @@ width:12px;
 }
 
 span.downB{
-background-image: url(http://cmsintranet.airfrance.fr/charte_v03_001/img/picto/neutre/arTr_D.gif);
+background-image: url(theme/charte_v03_001/img/picto/neutre/arTr_D.gif);
 background-repeat: no-repeat;
 background-position: center;
 padding-left:12px;

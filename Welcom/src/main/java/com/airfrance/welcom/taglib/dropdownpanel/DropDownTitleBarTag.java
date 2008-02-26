@@ -87,7 +87,7 @@ public class DropDownTitleBarTag extends BodyTagSupport {
         sb.append(
             "<div class=\"iconClose\"><a href=\"javascript:vis(document.getElementById('"
                 + dropDown.getName()
-                + "'));\"><img src=\"http://cmsintranet.airfrance.fr/charte_v02_002/img/ico/blueaf/icon_close.gif\" border=\"0\"></a></div>");
+                + "'));\"><img src=\"theme/charte_v02_002/img/ico/blueaf/icon_close.gif\" border=\"0\"></a></div>");
 
         ResponseUtils.write(pageContext, sb.toString());
 

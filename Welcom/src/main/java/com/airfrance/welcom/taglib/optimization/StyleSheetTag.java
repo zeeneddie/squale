@@ -40,9 +40,9 @@ public class StyleSheetTag extends TagSupport {
 
         try {
             writer.print("<link rel=\"stylesheet\" type=\"text/css\" href=\"");
-            if ((src.indexOf("cmsintranet.airfrance.fr") == -1) || !(WelcomConfigurator.getMessage(WelcomConfigurator.OPTIFLUX_REDIRECT_CMSINTRANET).equals("false"))) {
+            /*if ((src.indexOf("cmsintranet.airfrance.fr") == -1) || !(WelcomConfigurator.getMessage(WelcomConfigurator.OPTIFLUX_REDIRECT_CMSINTRANET).equals("false"))) {
                 writer.print(prefix);
-            }
+            }*/
             writer.print(src);
             writer.print("\">");
         } catch (final IOException e) {

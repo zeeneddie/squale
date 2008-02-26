@@ -158,8 +158,8 @@ public class WRunTaskAction extends WDispatchAction {
 		response.setContentType("text/html");
 		ServletOutputStream out = response.getOutputStream();
 		out.println("<html>");
-		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"http://cmsintranet.airfrance.fr/charte_v03_001/css/master.css\">");
-		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css.do?value=css/welcom-001.css\">");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"theme/charte_v03_001/css/master.css\">");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"theme/welcom-001.css\">");
 		out.println("<body>");
 		out.println("<H1>Server batch admin</H1>");
 		out.println(
