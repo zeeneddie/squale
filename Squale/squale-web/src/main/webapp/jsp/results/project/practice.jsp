@@ -151,7 +151,6 @@ request.setAttribute("practiceInformationForm", infoForm);
 								<div align="center">0</div>
 								</td>
 							</logic:equal>
-							</logic:greaterThan>
 						</logic:iterate>
 					</tr>
 				</TBODY>

@@ -1,0 +1,102 @@
+
+div.richbox{
+	position:absolute;
+	background-color:#F5F5FC;
+	border:1px;
+	border-style:solid;
+	border-color:#A8AFD8;
+	padding:2px;
+}
+div.iconClose{
+	position:absolute;
+	right:0;
+}
+
+
+div.notsel{		
+	cursor:pointer;
+	display: block;	
+}
+
+div.sel{		
+	cursor:pointer;
+	background-color:#e9cd9e;	
+	display: block;	
+}
+
+div.ddlist{
+	position:absolute;
+	border:1px;
+	background-color:#FFFFFF;
+	border-style:solid;
+	border-color:#3675AE;
+	padding:2px;
+}
+
+span.deco{
+	font-weight: bold;
+}
+
+.suggest{
+	background-image: url({#easyComplete.img.ok#}) ;
+	background-position: top right;
+	background-repeat:no-repeat;
+}
+
+span.upW{
+background-image: url(theme/charte_v03_001/img/picto/blanc/arTr.gif);
+background-repeat: no-repeat;
+background-position: center;
+padding-left:12px;
+width:12px;
+}
+
+span.downW{
+background-image: url(theme/charte_v03_001/img/picto/blanc/arTr_D.gif);
+background-repeat: no-repeat;
+background-position: center;
+padding-left:12px;
+width:12px;
+}
+
+span.upB{
+background-image: url(theme/charte_v03_001/img/picto/neutre/arTr.gif);
+background-repeat: no-repeat;
+background-position: center;
+padding-left:12px;
+width:12px;
+}
+
+span.downB{
+background-image: url(theme/charte_v03_001/img/picto/neutre/arTr_D.gif);
+background-repeat: no-repeat;
+background-position: center;
+padding-left:12px;
+width:12px;
+}
+
+.100pc{
+	width:auto !important; width:100%;
+}
+
+
+.wIntro {font-size:100%; font-weight:bold; margin:20px 0 20px 0; padding:0; line-height: 1em;}
+
+.wTitreGeneral {font-size:130%; font-weight:bold; margin:0; padding:0;line-height: 1.4em;color:#051039; border-bottom:solid #ccc 1px;background-color:inherit;width:100%;}
+.wTitreParagraphe {font-size:110%; font-weight:bold;margin:0;padding:0;line-height: 1.1em;color:#051039; background-color:inherit;} 
+
+.exergue {font-style:italic;font-weight:bold;color:#ea5a00;background-color:inherit;}
+.surtitre{
+	 font-size:90%;
+	 font-weight:bold;
+	 margin:10px 0 0 0;
+	 padding:0;
+	 text-transform:uppercase;
+	 color:#ea5a00;background-color:inherit;
+}
+
+p{
+	padding : 0 0 0 0;
+	margin : 0 0 0 0;
+}
+

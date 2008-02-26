@@ -17,7 +17,7 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 <div id="header" class="ciel04">
 <hr class="bg_theme">
 <div id="visuel"
-	style="background-image: url(http://cmsintranet.airfrance.fr/charte_v03_001/img/tetiere/ciel04_app.jpg)">
+	style="background-image: url(theme/charte_v03_001/img/tetiere/ciel04_app.jpg)">
 <p>SQUALE</p>
 </div>
 </div>

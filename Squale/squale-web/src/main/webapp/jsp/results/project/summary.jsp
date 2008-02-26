@@ -46,13 +46,14 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 		
 		<%-- une autre valeur que "true" indique qu'on est passé par une autre vue 
 			que celle composant directement --%>
-		<bean:define id="componentName" type="String" property="name"
+		<%-- TODO FAB : gérer la suppression du traceur... --%>
+		<%--<bean:define id="compoName" type="String" property="name"
 			value="<%=component%> " />
 		<squale:tracker
 			directWay="<%=(String) session.getAttribute(SqualeWebConstants.TRACKER_BOOL)%>"
-			componentName="<%=componentName%>" projectId="<%=projectId%>"
+			componentName="<%=compoName%>" projectId="<%=projectId%>"
 			currentAuditId="<%=currentAuditId%>"
-			previousAuditId="<%=previousAuditId%>"/>
+			previousAuditId="<%=previousAuditId%>"/>--%>
 		<af:canvasCenter>
 			<br />
 			<squale:resultsHeader name="projectSummaryForm" displayComparable="true"/>

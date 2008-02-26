@@ -304,7 +304,7 @@ public class CreateProjectAction extends ReaderAction {
             applicationDTO.setLastUser(((LogonBean) pRequest.getSession().getAttribute(WConstants.USER_KEY)).getMatricule());
             applicationDTO.setLastUpdate(Calendar.getInstance().getTime());
             Object[] paramIn = { dto, applicationDTO };
-            String action = "manageApplication.do?" + "action=selectApplicationToConfig&applicationId=" + applicationDTO.getId();
+            String action = "/manageApplication.do?" + "action=selectApplicationToConfig&applicationId=" + applicationDTO.getId();
             forward = new ActionForward(action);
             // Appel de la couche métier
             if ((dto = (ProjectConfDTO) ac.execute("saveProject", paramIn)) != null) {

@@ -1,2 +1,2 @@
 <%-- Inclusion du Javascript permettant d'utiliser Xiti (à placer dans le header de la page) --%>
-<script language="javascript" src="http://stats.airfrance.fr/stats/js/marqueurs_xiti_AF_v2.jsp"></script>
+<script language="javascript" src="jslib/xiti.js"></script>

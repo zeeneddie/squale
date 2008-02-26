@@ -4,7 +4,7 @@
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic" %>
 <%@ page import="com.airfrance.squaleweb.applicationlayer.action.IndexAction" %>
 
-<script type="text/javascript" src="/squale/jslib/format_page.js">
+<script type="text/javascript" src="theme/charte_v03_001/js/format_page.js">
 </script>
 
 <%String titleKey = "news.modify.title";%>

@@ -11,7 +11,7 @@
 <%@ page import="com.airfrance.squaleweb.taskconfig.AbstractConfigTask"%>
 
 
-<script type="text/javascript" src="/theme/charte_v3_001/js/format_page.js"></script>
+<script type="text/javascript" src="theme/charte_v03_001/js/format_page.js"></script>
 
 <bean:define id="projectId" name="createProjectForm"
 	property="projectId" type="String" />
@@ -61,7 +61,7 @@ Collection fields = conf.getInfoConfigTask();
     String fieldSize = field.getSize();
     String fieldIsRequired = field.getIsRequired();
     String fieldType = field.getType();	
-	// TODO BF : Ajouter le masquage du password avec le paramétre type
+	
 	%>
 	
 	<tr>

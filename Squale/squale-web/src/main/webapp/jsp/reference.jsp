@@ -17,7 +17,7 @@ LogonBean sessionUser = (LogonBean) request.getSession().getAttribute(WConstants
 boolean isAdmin = sessionUser.isAdmin();
 %>
 
-<script type="text/javascript" src="/squale/jslib/format_page.js"></script>
+<script type="text/javascript" src="theme/charte_v03_001/js/format_page.js"></script>
 
 
 <af:page titleKey="reference.title" accessKey="default">
@@ -136,8 +136,7 @@ if (!isAdmin && (isPublic.booleanValue() || !applicationName.equals(WebMessages.
 								</af:table>
 								<br />
 								<br />
-						</logic:iterate>
-						</af:tab>
+							</af:tab>
 						</logic:iterate>
 					</af:tabbedPane>
 					<af:buttonBar>

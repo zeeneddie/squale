@@ -7,7 +7,7 @@
 <TITLE>Erreur</TITLE>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <meta name="keywords" lang="fr" content="charte, graphique, intranet">
-<link rel="stylesheet" href="http://cmsintranet.airfrance.fr/charte_v03_001/css/master.css" type="text/css">
+<link rel="stylesheet" href="theme/charte_v03_001/css/master.css" type="text/css">
 </HEAD>
 
 <BODY id="app" class="metiers">

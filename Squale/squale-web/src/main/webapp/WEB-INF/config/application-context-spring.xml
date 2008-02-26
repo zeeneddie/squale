@@ -7,7 +7,7 @@
 	<!-- Bean pour retrouver un provider de façon statique, comme le permet le ProviderLocator de JRAF -->
 	<bean id="springLocator" class="com.airfrance.jraf.bootstrap.locator.SpringLocator" ></bean>
 	
-	<bean id="persistence" class="com.airfrance.jraf.provider.persistence.hibernate.PersistenceProviderSpringImpl" 
+	<bean id="persistence" class="com.airfrance.jraf.provider.persistence.hibernate.PersistenceProviderSpringUrlImpl" 
 		init-method="initialize">
 		<property name="configFile">
 			<value>/WEB-INF/config/hibernate.cfg.xml</value>
@@ -20,44 +20,29 @@
 	<bean id="logging" class="com.airfrance.jraf.provider.logging.LoggingProviderImpl"></bean>
 	
 	<!-- Provider d'acces aux applicationComponent POJO -->
-	<bean id="accessdelegate" class="com.airfrance.jraf.provider.accessdelegate.AccessDelegateProviderSpringImpl" 
+	<bean id="accessdelegate" class="com.airfrance.jraf.provider.accessdelegate.AccessDelegateProviderSpringUrlImpl" 
 		init-method="initialize">
 		<property name="configFile">
 			<value>/WEB-INF/config/configApplicationComponent.xml</value>
 		</property>
 	</bean>
 	
-	<bean id="adhesion" class="com.airfrance.jraf.provider.adhesion.AdhesionProviderSpringImpl" 
-		init-method="initialize">	 	
-		<property name="configFile">		 
-			<value>/WEB-INF/config/adhesion.cfg.xml</value>		 	 	
-		</property>		
-	</bean>
-	
 	<!-- Provider d'envoi de mail -->
-	<bean id="mailer" class="com.airfrance.squalecommon.util.mail.xmedia.XmediaProviderSpringImpl" 
-		init-method="initialize">
-		<property name="configFile">
-			<value>/WEB-INF/config/xmedia-config.xml</value>
-		</property>
-		<property name="appli">
-				<!--ENV-PROVIDER_XMEDIA-->
-			<value>SQUALE</value>
-		</property>
+	<bean id="mailer" class="com.airfrance.squalecommon.util.mail.javamail.JavaMailProviderSpringImpl">
 	</bean>
 	
 	<!-- Enterprise layer's dependencies -->
 	<!--<import resource="classpath:config/spring/0-entrepriselayer-dependencies.xml"/>-->
 	
 	<!-- Accesseur ldapBean d'Habile -->
-	<bean id="userBeanAccessor" class="com.airfrance.squaleweb.connection.habile.UserBeanAccessorHabileImpl">
+	<bean id="userBeanAccessor" class="com.airfrance.squaleweb.connection.stubImpl.UserBeanAccessorImpl">
 		<property name="userBean">
-			<ref bean="userBean" />
+			<ref bean="userBean"/>
 		</property>
 	</bean>
 	
 	<!-- bean utilisateur authentifié par Habile -->
-	<bean id="userBean" class="com.airfrance.squaleweb.connection.habile.UserBeanHabileImpl" >
+	<bean id="userBean" class="com.airfrance.squaleweb.connection.stubImpl.UserBeanImpl" >
 	</bean>
 	
 	

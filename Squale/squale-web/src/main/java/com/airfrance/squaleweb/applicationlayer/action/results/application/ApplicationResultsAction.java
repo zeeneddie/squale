@@ -213,7 +213,8 @@ public class ApplicationResultsAction extends ReaderAction {
                 Long projectId = new Long(((ProjectForm) projects.get(0)).getId());
                 pRequest.setAttribute("projectId", projectId.toString());
                 // On ajoute aussi l'id du projet dans les paramétres pour le traceur
-                pRequest.getParameterMap().put("projectId", new String[]{projectId.toString()});
+                // TODO FAB : regarder cette ligne décommentée (lien avec le traceur...)
+                //pRequest.getParameterMap().put("projectId", new String[]{projectId.toString()});
                 forward = pMapping.findForward("project");
             }
         }

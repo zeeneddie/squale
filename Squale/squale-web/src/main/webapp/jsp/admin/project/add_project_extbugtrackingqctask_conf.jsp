@@ -6,7 +6,7 @@
 <%@ page import="com.airfrance.squaleweb.taskconfig.AbstractConfigTask"%>
 <%@ page import="com.airfrance.squaleweb.taskconfig.qc.ExtBugTrackingQCTaskConfig"%>
 
-<script type="text/javascript" src="/theme/charte_v3_001/js/format_page.js"></script>
+<script type="text/javascript" src="theme/charte_v03_001/js/format_page.js"></script>
 
 <%
 AbstractConfigTask conf = new ExtBugTrackingQCTaskConfig();

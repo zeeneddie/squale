@@ -4,7 +4,7 @@
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic" %>
 <%@ page import="com.airfrance.squaleweb.applicationlayer.action.IndexAction" %>
 
-<script type="text/javascript" src="/squale/jslib/format_page.js">
+<script type="text/javascript" src="theme/charte_v03_001/js/format_page.js">
 </script>
 
 <af:page titleKey="news.title" subTitleKey="news.subTitle"
@@ -50,7 +50,7 @@
 				<af:form action="adminNews.do" scope="session" method="POST">
 					<af:buttonBar>
 						<af:button type="form" name="retour"
-							toolTipKey="toolTip.retour.homepage" onclick='<%="index.do?"%>' />
+							toolTipKey="toolTip.retour.homepage" onclick="<%=\"location.href='index.do?'\"%>" />
 						<af:button type="form" callMethod="checkAdd" name="news.add"
 							toolTipKey="toolTip.news.add" accessKey="admin" />
 					</af:buttonBar>

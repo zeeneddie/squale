@@ -100,8 +100,8 @@ public class LoginAction extends DefaultAction {
     public LogonBean getUser(HttpServletRequest pRequest) throws ConnectionException, JrafEnterpriseException, WTransformerException {
         // Obtention des informations sur l'utilisateur connecté
         IUserBeanAccessor userBeanAccessor = UserBeanAccessorHelper.getUserBeanAccessor();
-        
-        String name = pRequest.getRemoteUser();
+        String name = "squaleUser"; //pRequest.getRemoteUser();
+        	/**TODO rentrer un utilisateur */
         // Valeur par défaut si l'utilisateur
         if (name.length() == 0) {
             name = " ";

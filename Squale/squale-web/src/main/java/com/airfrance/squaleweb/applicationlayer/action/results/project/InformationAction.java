@@ -109,8 +109,8 @@ public class InformationAction extends DefaultAction {
             //          * SimpleFormula --> récupération simple de la formule
             //          * ConditionFormula --> récupération des conditions
             AbstractFormulaDTO formula = ((PracticeRuleDTO) ruleDto).getFormula();
-            result[2] = formula.getMeasureKinds();
             if (formula != null) {
+            	result[2] = formula.getMeasureKinds();
                 String trigger = formula.getTriggerCondition();
                 if (trigger != null) {
                     result[0] = trigger;

@@ -6,7 +6,7 @@
 <!-- frames -->
 <frameset  rows="*,24" frameborder="no" border="0" framespacing="0">	
   <frame name="contenu" id="haut" src="index.jsp" scrolling="Auto" noresize marginwidth="0" marginheight="0">
-  <frame name="outils" src="http://cmsintranet.airfrance.fr/charte_v02_001/footer/footer.jsp?elastic=" scrolling="no" noresize marginwidth="0" marginheight="0">
+  <!-- <frame name="outils" src="http://cmsintranet.airfrance.fr/charte_v02_001/footer/footer.jsp?elastic=" scrolling="no" noresize marginwidth="0" marginheight="0">-->
 </frameset>
 </html>
 

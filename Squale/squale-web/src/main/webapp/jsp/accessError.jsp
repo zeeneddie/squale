@@ -8,13 +8,13 @@
 <TITLE>Erreur</TITLE>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <meta name="keywords" lang="fr" content="charte, graphique, intranet">
-<link rel="stylesheet" href="http://cmsintranet.airfrance.fr/charte_v03_001/css/master.css" type="text/css">
+<link rel="stylesheet" href="theme/charte_v03_001/css/master.css" type="text/css">
 </HEAD>
 
 <BODY id="app" class="metiers">
 	<div id="header" class="ciel04">
 		<hr class="bg_theme">
-		<div id="visuel" style="background-image:url(http://cmsintranet.airfrance.fr/charte_v03_001/img/tetiere/ciel04_app.jpg)">
+		<div id="visuel" style="background-image:url(theme/charte_v03_001/img/tetiere/ciel04_app.jpg)">
 			<p>SQUALE</p>
 		</div>
 	</div>

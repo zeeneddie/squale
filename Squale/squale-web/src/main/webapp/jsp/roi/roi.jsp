@@ -99,7 +99,7 @@
 							--%>
 							<input title="Valider la sélection" class="btn left white " 
 								type="button" name="valider"  
-								style="BACKGROUND-IMAGE: url(http://cmsintranet.airfrance.fr/charte_v03_001/img/ico/neutre/ok.gif)" 
+								style="BACKGROUND-IMAGE: url(theme/charte_v03_001/img/ico/neutre/ok.gif)" 
 								onclick="execSubmit('roiForm','changeApplication',this);" value="Valider" />
 						</td>
 					</tr>

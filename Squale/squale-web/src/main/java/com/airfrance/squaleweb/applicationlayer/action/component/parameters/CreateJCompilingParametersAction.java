@@ -38,7 +38,7 @@ public class CreateJCompilingParametersAction extends CreateParametersAction {
         ActionMessages errors = new ActionMessages();
         ActionForward forward = null;
         try {
-            forward = pMapping.findForward("success");
+            forward = pMapping.findForward("success_add");
             // Affectation au projet courant
             CreateProjectForm project = (CreateProjectForm) pRequest.getSession().getAttribute("createProjectForm");
             // Récupération du bean pour les paramètres java:
@@ -50,7 +50,9 @@ public class CreateJCompilingParametersAction extends CreateParametersAction {
             // On sauvegarde le projet
             new CreateProjectAction().saveProject(pMapping, project, pRequest, pResponse);
             // On supprime le type de compilation des paramètres de la requête
-            pRequest.getParameterMap().remove("kindOfTask");
+          
+            //pRequest.getParameterMap().remove("kindOfTask");
+            
 
         } catch (Exception e) {
             handleException(e, errors, pRequest);

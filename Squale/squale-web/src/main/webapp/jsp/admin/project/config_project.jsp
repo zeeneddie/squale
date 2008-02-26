@@ -32,7 +32,7 @@ boolean expanded = false;
 	property="<%=\"profile(\"+applicationId+\")\"%>" />
 <af:page>
 	<af:head>
-		<script type="text/javascript" src="/squale/jslib/format_page.js"></script>
+		<script type="text/javascript" src="theme/charte_v03_001/js/format_page.js"></script>
 		<script type="text/javascript">
 			/* 
 				Permet de soumettre un formulaire sans le valider
@@ -138,7 +138,7 @@ String pageTask = "add_project_" + taskName.toLowerCase() + "_conf.jsp";%>
 			<af:buttonBar>
 				<%-- dans ce cas on spécifie et l'id de l'application et l'id du projet car le lien n'a pas encore été fait --%>
 				<af:button type="form" name="retour" toolTipKey="toolTip.retour"
-					onclick="<%=\"config_project.do?action=selectProjectToView&applicationId=\"+applicationId + \"&projectId=\"+ projectId%>" />
+					onclick="<%=\"config_project.do?action=selectProjectToModify&applicationId=\"+applicationId + \"&projectId=\"+ projectId%>" />
 				<logic:notEqual name="profile"
 					value="<%=ProfileBO.READER_PROFILE_NAME%>">
 					<af:button type="form" name="end.configuration"

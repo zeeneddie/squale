@@ -227,7 +227,7 @@ session.removeAttribute("modification");
 						la conf d'un projet en vérifiant que l'utilisateur à les droits sur l'appli -->
 						<af:col property="projectName"
 							key="project_creation.field.project_name" sortable="true"
-							href='<%="/squale/config_project.do?action=selectProjectToModify&applicationId=" + applicationId%>'
+							href='<%="config_project.do?action=selectProjectToModify&applicationId=" + applicationId%>'
 							paramName="project" paramId="projectId" paramProperty="projectId">
 						</af:col>
 						<af:col property="sourceManagement"

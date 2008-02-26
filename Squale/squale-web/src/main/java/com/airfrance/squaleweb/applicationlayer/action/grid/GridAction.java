@@ -123,7 +123,8 @@ public class GridAction extends AdminAction {
                 }
                 // On remet à jour la liste des grilles
                 Collection newgrids = (Collection) ac.execute("getGrids", new Object[] { Boolean.FALSE });
-                WTransformerFactory.objToForm(GridListTransformer.class, (WActionForm) pForm, newgrids);
+                Collection unlinkedGrids = (Collection) ac.execute("getUnlinkedGrids");
+                WTransformerFactory.objToForm(GridListTransformer.class, (WActionForm) pForm, new Object[]{newgrids, unlinkedGrids});
             }
             forward = pMapping.findForward("list");
         } catch (Exception e) {

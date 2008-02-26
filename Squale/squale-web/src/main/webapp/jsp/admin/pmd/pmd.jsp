@@ -6,7 +6,7 @@
 Permet l'importation d'un fichier de règles PMD
 --%>
 
-<script type="text/javascript" src="/squale/jslib/format_page.js">
+<script type="text/javascript" src="theme/charte_v03_001/js/format_page.js">
 </script>
 
 

@@ -10,7 +10,7 @@
 <%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectFactorsForm" %>
 <%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils" %>
 
-<script type="text/javascript" src="/squale/jslib/format_page.js"></script>
+<script type="text/javascript" src="theme/charte_v03_001/js/format_page.js"></script>
 
 <%
 	String title = "all_applications.title";
@@ -23,7 +23,7 @@
 	%>
 </logic:present>
 
-</logic:notPresent>
+
 <af:page titleKey="<%=title%>">
 	<af:head>
 		<%-- inclusion pour le marquage XITI --%>

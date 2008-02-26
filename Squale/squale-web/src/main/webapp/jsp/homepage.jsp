@@ -6,7 +6,7 @@
 
 <af:page titleKey="homepage.title" accessKey="reader">
 	<af:head>
-		<script type="text/javascript" src="/squale/jslib/format_page.js"></script>
+		<script type="text/javascript" src="theme/charte_v03_001/js/format_page.js"></script>
 		<%-- inclusion pour le marquage XITI --%>
 		<jsp:include page="/jsp/xiti/xiti_header_common.jsp" />
 	</af:head>
