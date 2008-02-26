@@ -88,6 +88,10 @@
 			<groupId>jfree</groupId>
 			<artifactId>jfreechart</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+		</dependency>
 		<!-- PROVIDED DEPENDENCIES -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

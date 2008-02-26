@@ -1,1 +1,0 @@
-alter table bubble_conf drop column component_type;

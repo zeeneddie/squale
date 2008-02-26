@@ -224,6 +224,7 @@
         Parent number(19,0),
         ProjectId number(19,0),
         LongFileName varchar2(2048),
+        StartLine number(10,0),
         AuditFrequency number(10,0),
         ResultsStorageOptions number(10,0),
         Status number(10,0),
