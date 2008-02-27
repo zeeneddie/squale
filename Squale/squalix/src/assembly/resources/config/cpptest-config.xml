@@ -3,9 +3,6 @@
 <!DOCTYPE cpptest-configuration PUBLIC "-//CppTest Configuration DTD 1.0//EN" "file:../src/com/airfrance/squalix/tools/cpptest/cpptest-config-1.0.dtd">
 
 <cpptest-configuration>
-
-<!--  ENV-CPPTEST-REPORT -->
-<reportDirectory>/app/SQUALE/dev/data/cpptest/report</reportDirectory>
-<!--  ENV-CPPTEST-LOG -->
-<logger>/app/SQUALE/squalix/cpptest/logs/cpptest.log</logger>
+	<reportDirectory>${ENV-CPPTEST-REPORT}</reportDirectory>
+	<logger>${ENV-CPPTEST-LOG}</logger>
 </cpptest-configuration>

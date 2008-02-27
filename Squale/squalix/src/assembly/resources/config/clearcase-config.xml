@@ -1,44 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- <!DOCTYPE configuration SYSTEM "clearcase-config.dtd"> -->
+<!-- TODO FAB : externalize parameters -->
 <configuration>
 	<options>
 		<option key="option.vob">-vob</option>
 	</options>
-    <patterns>
-    	<pattern key="\{LOGIN\}">
-<!-- ENV-CLEARCASE-LOGIN -->
-    		squaledev
-    	</pattern>
-    	
-    	<pattern key="\{CLEARTOOL\}">/usr/atria/bin/cleartool</pattern>
-    	<pattern key="\{MKVIEW\}">/usr/atria/bin/Perl -S /DINB/outils/gcl/script/mkview.pl</pattern>
-    	
-    	<pattern key="\{VOBS_PATH\}"> </pattern>
-    	
-    	<pattern key="\{CC_STORAGE_PATH\}">/app/SQUALE/clearcase/cc_storage/views/</pattern>
-    	<pattern key="\{SNAPSHOT_PATH\}">
-<!--  ENV-CLEARCASE-SNAPSHOT -->
-    		/app/SQUALE/dev/data/cc_snapshot/
-    	</pattern>	    	    	    	    	
-    </patterns>
-    <commands>
-        <command key="cmd.verify_view_existence">
-            {CLEARTOOL} lsview {BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}
-        </command>
-        <command key="cmd.mount_work_view">
-            {MKVIEW} -application {APP_NAME} {VOB_LIST} -travail {BRANCH_NAME} -vws {CC_STORAGE_PATH}{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}.vws -login {BRANCH_SUFFIX}_{LOGIN} -snap -dir {SNAPSHOT_PATH}{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}
-        </command>
-        <command key="cmd.mount_consultation_view">
-            {MKVIEW} -application {APP_NAME} {VOB_LIST} -consultation {BRANCH_NAME} -vws {CC_STORAGE_PATH}{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}.vws -login {BRANCH_SUFFIX}_{LOGIN} -snap -dir {SNAPSHOT_PATH}{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}
-        </command>
-        <command key="cmd.umount_view">
-            {CLEARTOOL} rmview {SNAPSHOT_PATH}{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}
-        </command>
-        <command key="cmd.aux_umount_view">
-            {CLEARTOOL} rmview -f -tag {BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}
-        </command>
-        <command key="cmd.remove_directory">
-            rm -rf {SNAPSHOT_PATH}{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}
-        </command>
-    </commands>
+	<patterns>
+		<pattern key="\{LOGIN\}">${ENV-CLEARCASE-LOGIN}</pattern>
+		<pattern key="\{CLEARTOOL\}">/usr/atria/bin/cleartool</pattern>
+		<pattern key="\{MKVIEW\}">
+			/usr/atria/bin/Perl -S /DINB/outils/gcl/script/mkview.pl
+		</pattern>
+		<pattern key="\{VOBS_PATH\}"></pattern>
+		<pattern key="\{CC_STORAGE_PATH\}">
+			/app/SQUALE/clearcase/cc_storage/views/
+		</pattern>
+		<pattern key="\{SNAPSHOT_PATH\}">
+			${ENV-CLEARCASE-SNAPSHOT}
+		</pattern>
+	</patterns>
+	<commands>
+		<command key="cmd.verify_view_existence">
+			{CLEARTOOL} lsview {BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}
+		</command>
+		<command key="cmd.mount_work_view">
+			{MKVIEW} -application {APP_NAME} {VOB_LIST} -travail
+			{BRANCH_NAME} -vws
+			{CC_STORAGE_PATH}{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}.vws
+			-login {BRANCH_SUFFIX}_{LOGIN} -snap -dir
+			{SNAPSHOT_PATH}{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}
+		</command>
+		<command key="cmd.mount_consultation_view">
+			{MKVIEW} -application {APP_NAME} {VOB_LIST} -consultation
+			{BRANCH_NAME} -vws
+			{CC_STORAGE_PATH}{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}.vws
+			-login {BRANCH_SUFFIX}_{LOGIN} -snap -dir
+			{SNAPSHOT_PATH}{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}
+		</command>
+		<command key="cmd.umount_view">
+			{CLEARTOOL} rmview
+			{SNAPSHOT_PATH}{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}
+		</command>
+		<command key="cmd.aux_umount_view">
+			{CLEARTOOL} rmview -f -tag
+			{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}
+		</command>
+		<command key="cmd.remove_directory">
+			rm -rf {SNAPSHOT_PATH}{BRANCH_NAME}_{BRANCH_SUFFIX}_{LOGIN}
+		</command>
+	</commands>
 </configuration>

@@ -368,7 +368,8 @@ public abstract class AbstractTask implements Runnable {
                     String content = Messages.getString("mail.header") + Messages.getString("mail.task.failed.content", infos);
                     String dest = SqualeCommonConstants.ONLY_ADMINS;
                     IMailerProvider mailer = MailerHelper.getMailerProvider();
-                    SqualeCommonUtils.notifyByEmail(mailer, null, dest, null, object, content, false);
+                    // TODO FAB : remttre
+                    // SqualeCommonUtils.notifyByEmail(mailer, null, dest, null, object, content, false);
                 }
                 // Pas de conversion InitialMessage -> Message
                 try {

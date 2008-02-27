@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- <!DOCTYPE configuration SYSTEM "rsm-config.dtd"> -->
 <configuration>
-	<!-- ENV-JSPVOL-WORKSPACE -->
-	<workspace>/app/SQUALE/squalix/workspace</workspace>
-	<!-- ENV-JSPVOL-SCRIPT -->
-	<script>/app/SQUALE/bin/script.sh</script>
-	<!--ENV-JSPVOL-RESULTFILE-->
-	<resultfile>/app/SQUALE/squalix/workspace/resultFile.txt</resultfile>
+	<workspace>${ENV-JSPVOL-WORKSPACE}</workspace>
+	<script>${ENV-JSPVOL-SCRIPT}</script>
+	<resultfile>${ENV-JSPVOL-RESULTFILE}</resultfile>
 </configuration>

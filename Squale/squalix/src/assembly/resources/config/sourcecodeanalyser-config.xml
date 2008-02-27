@@ -3,6 +3,5 @@
 <!DOCTYPE sourcecodeanalyser-configuration PUBLIC "-//SourceCodeAnalyser Configuration DTD //EN" "file:../src/config/sourcecodeanalyser-config-1.0.dtd">
 
 <sourcecodeanalyser-configuration>
-	<!--  ENV-SOURCECODEANALYSER-ROOT -->
-	<rootPath>/app/SQUALE/dev/data/source_code_analyser/</rootPath>
+	<rootPath>${ENV-SOURCECODEANALYSER-ROOT}</rootPath>
 </sourcecodeanalyser-configuration>

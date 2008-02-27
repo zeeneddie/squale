@@ -3,7 +3,5 @@
 <!DOCTYPE umlquality-configuration PUBLIC "-//UMLQuality Configuration DTD 1.0//EN" "file:../src/config/umlquality-config-1.0.dtd">
 
 <umlquality-configuration>
-
-<!--  ENV-UMLQUALITY-REPORT -->
-<reportDirectory>/app/SQUALE/squalix/umlquality/report</reportDirectory>
+	<reportDirectory>${ENV-UMLQUALITY-REPORT}</reportDirectory>
 </umlquality-configuration>

@@ -14,9 +14,12 @@ case "`hostname`" in
 	qvidssx1)
 		type=1
 		;;
+	*)
+		type=1
+		;;
 esac
 
-JAVA_HOME=/OUTILS/Java/1.4.2_03
+JAVA_HOME=${START-BATCH-JAVA-HOME}
 export JAVA_HOME
 
 LANG=fr
@@ -29,4 +32,4 @@ SQUALIX_HOME=`dirname $0`
 cd ${SQUALIX_HOME}
 # On enleve le -Xms512M pour éviter les "java.io.IOException: Not enough space" lors des fork sur dev8ts
 # a priori du a un /tmp plein...
-${JAVA_HOME}/bin/java -DentityExpansionLimit=500000 -Djava.awt.headless=true $DEBUG -Xmx512M -Xss7M -jar  ${SQUALIX_HOME}/squalix.jar ${SQUALIX_HOME} -s $type
+${JAVA_HOME}/bin/java -DentityExpansionLimit=500000 -Djava.awt.headless=true $DEBUG -Xmx512M -Xss7M -jar  ${SQUALIX_HOME}/${project.build.finalName}.jar ${SQUALIX_HOME} -s $type

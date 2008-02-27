@@ -3,6 +3,5 @@
 <!DOCTYPE jspcompiling-configuration PUBLIC "-//JspCompiling Configuration DTD //EN" "file:../src/config/jspcompiling-config.dtd">
 
 <jspcompiling-configuration>
-<!--  ENV-JSPCOMPILING-JAR -->
-<jarDirectory>/app/SQUALE/dev/bin/java/lib/jspcompiling</jarDirectory>
+	<jarDirectory>${ENV-JSPCOMPILING-JAR}</jarDirectory>
 </jspcompiling-configuration>

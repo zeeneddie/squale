@@ -2,20 +2,13 @@
 <!-- <!DOCTYPE configuration SYSTEM "rsm-config.dtd"> -->
 <configuration>
 	<general>
-		<!-- ENV-RSM-WORKSPACE -->
-		<workspace>/app/SQUALE/squalix/workspace</workspace>
-		<!-- ENV-RSM-RPT -->
-		<reportpath>/app/SQUALE/squalix/workspace/rapports_RSM.csv</reportpath>
-		<!-- ENV-RSM-RPT-METHODS -->
-		<reportmethodspath>/app/SQUALE/squalix/workspace/rapports_Methods_RSM.csv</reportmethodspath>
-		<!-- ENV-RSM-RPT-CLASSES -->
-		<reportclassespath>/app/SQUALE/squalix/workspace/rapports_Class_RSM.csv</reportclassespath>
-		<!-- ENV-RSM-INPUT -->
-		<inputfile>/app/SQUALE/squalix/workspace/input.txt</inputfile>
-		<!-- ENV-RSM-AUX -->
-		<auxfile>/app/SQUALE/squalix/workspace/aux.csv</auxfile>
-		<!-- ENV-RSM-EXEC -->
-		<execcommand>/app/SQUALE/OUTILS/RSM/7.0/rsm</execcommand>
+		<workspace>${ENV-RSM-WORKSPACE}</workspace>
+		<reportpath>${ENV-RSM-RPT}</reportpath>
+		<reportmethodspath>${ENV-RSM-RPT-METHODS}</reportmethodspath>
+		<reportclassespath>${ENV-RSM-RPT-CLASSES}</reportclassespath>
+		<inputfile>${ENV-RSM-INPUT}</inputfile>
+		<auxfile>${ENV-RSM-AUX}</auxfile>
+		<execcommand>${ENV-RSM-EXEC}</execcommand>
 	</general>
 	<profiles>
 		 <profile name="java">

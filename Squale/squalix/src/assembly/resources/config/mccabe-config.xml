@@ -2,19 +2,14 @@
 <configuration>
   <general>
     <commands>
-<!-- ENV-MCCABE-CLI -->
-      <clicommand>/app/SQUALE/squalix/resources/mccabe_cli.sh</clicommand>
+      <clicommand>${ENV-MCCABE-CLI}</clicommand>
       <parsercommand>parse</parsercommand>
       <metricscommand>metrics -report %report_name% -ss -output %report_out%</metricscommand>
     </commands>
-<!-- ENV-MCCABE-WORKSPACE -->
-    <workspace>/app/SQUALE/squalix/workspace</workspace>
-<!-- ENV-MCCABE-LOG -->
-    <logger>/app/SQUALE/dev/data/mccabe/logs/mccabe.log</logger>
-<!-- ENV-MCCABE-LOG-ERROR -->
-    <logger-err>/app/SQUALE/dev/data/mccabe/logs/mccabe_err.log</logger-err>
-<!-- ENV-MCCABE-RPT -->
-    <reportspath>/app/SQUALE/squalix/config/rapports.RPT</reportspath>
+    <workspace>${ENV-MCCABE-WORKSPACE}</workspace>
+    <logger>${ENV-MCCABE-LOG}</logger>
+    <logger-err>${ENV-MCCABE-LOG-ERROR}</logger-err>
+    <reportspath>${ENV-MCCABE-RPT}</reportspath>
     <reports>
       <report>METHODES</report>
       <report>CLASSES</report>
@@ -53,7 +48,7 @@
         <parameter>-PATHVEC</parameter>
         <parameter>-SOURCE1.3</parameter>
         <parameter>-JREHOME</parameter>
-        <parameter>/OUTILS/Java/1.3.1.03/jre</parameter>
+        <parameter>${ENV-MCCABE-JRE-1.3}</parameter>
         <parameter>-CLASS</parameter>
         <parameter>-INST</parameter>
         <parameter>-PARAM</parameter>
@@ -73,7 +68,7 @@
         <parameter>-PATHVEC</parameter>
         <parameter>-SOURCE1.3</parameter>
         <parameter>-JREHOME</parameter>
-        <parameter>/OUTILS/Java/1.3.1.03/jre</parameter>
+        <parameter>${ENV-MCCABE-JRE-1.3}</parameter>
         <parameter>-CLASS</parameter>
         <parameter>-INST</parameter>
         <parameter>-PARAM</parameter>
@@ -93,7 +88,7 @@
         <parameter>-PATHVEC</parameter>
         <parameter>-SOURCE1.3</parameter>
         <parameter>-JREHOME</parameter>
-        <parameter>/OUTILS/Java/1.3.1.03/jre</parameter>
+        <parameter>${ENV-MCCABE-JRE-1.3}</parameter>
         <parameter>-CLASS</parameter>
         <parameter>-INST</parameter>
         <parameter>-PARAM</parameter>
@@ -113,7 +108,7 @@
         <parameter>-PATHVEC</parameter>
         <parameter>-SOURCE1.3</parameter>
         <parameter>-JREHOME</parameter>
-        <parameter>/OUTILS/Java/1.3.1.03/jre</parameter>
+        <parameter>${ENV-MCCABE-JRE-1.3}</parameter>
         <parameter>-CLASS</parameter>
         <parameter>-INST</parameter>
         <parameter>-PARAM</parameter>
@@ -133,7 +128,7 @@
         <parameter>-PATHVEC</parameter>
         <parameter>-SOURCE1.4</parameter>
         <parameter>-JREHOME</parameter>
-        <parameter>/OUTILS/Java/1.4.2_03/jre</parameter>
+        <parameter>${ENV-MCCABE-JRE-1.4}</parameter>
         <parameter>-CLASS</parameter>
         <parameter>-INST</parameter>
         <parameter>-PARAM</parameter>
@@ -153,7 +148,7 @@
         <parameter>-PATHVEC</parameter>
         <parameter>-SOURCE1.4</parameter>
         <parameter>-JREHOME</parameter>
-        <parameter>/OUTILS/Java/1.4.2_03/jre</parameter>
+        <parameter>${ENV-MCCABE-JRE-1.4}</parameter>
         <parameter>-CLASS</parameter>
         <parameter>-INST</parameter>
         <parameter>-PARAM</parameter>
@@ -173,7 +168,7 @@
         <parameter>-PATHVEC</parameter>
         <parameter>-SOURCE1.4</parameter>
         <parameter>-JREHOME</parameter>
-        <parameter>/OUTILS/Java/1.4.2_03/jre</parameter>
+        <parameter>${ENV-MCCABE-JRE-1.4}</parameter>
         <parameter>-CLASS</parameter>
         <parameter>-INST</parameter>
         <parameter>-PARAM</parameter>
@@ -193,7 +188,7 @@
         <parameter>-PATHVEC</parameter>
         <parameter>-SOURCE1.4</parameter>
         <parameter>-JREHOME</parameter>
-        <parameter>/OUTILS/Java/1.4.2_03/jre</parameter>
+        <parameter>${ENV-MCCABE-JRE-1.4}</parameter>
         <parameter>-CLASS</parameter>
         <parameter>-INST</parameter>
         <parameter>-PARAM</parameter>
@@ -213,7 +208,7 @@
         <parameter>-PATHVEC</parameter>
         <parameter>-SOURCE1.5</parameter>
         <parameter>-JREHOME</parameter>
-        <parameter>/app/SQUALE/OUTILS/JAVA/jdk1.5.0_09/jre</parameter>
+        <parameter>${ENV-MCCABE-JRE-1.5}</parameter>
         <parameter>-CLASS</parameter>
         <parameter>-INST</parameter>
         <parameter>-PARAM</parameter>
@@ -233,7 +228,7 @@
         <parameter>-PATHVEC</parameter>
         <parameter>-SOURCE1.5</parameter>
         <parameter>-JREHOME</parameter>
-        <parameter>/app/SQUALE/OUTILS/JAVA/jdk1.5.0_09/jre</parameter>
+        <parameter>${ENV-MCCABE-JRE-1.5}</parameter>
         <parameter>-CLASS</parameter>
         <parameter>-INST</parameter>
         <parameter>-PARAM</parameter>
@@ -253,7 +248,7 @@
         <parameter>-PATHVEC</parameter>
         <parameter>-SOURCE1.5</parameter>
         <parameter>-JREHOME</parameter>
-        <parameter>/app/SQUALE/OUTILS/JAVA/jdk1.5.0_09/jre</parameter>
+        <parameter>${ENV-MCCABE-JRE-1.5}</parameter>
         <parameter>-CLASS</parameter>
         <parameter>-INST</parameter>
         <parameter>-PARAM</parameter>
@@ -273,7 +268,7 @@
         <parameter>-PATHVEC</parameter>
         <parameter>-SOURCE1.5</parameter>
         <parameter>-JREHOME</parameter>
-        <parameter>/app/SQUALE/OUTILS/JAVA/jdk1.5.0_09/jre</parameter>
+        <parameter>${ENV-MCCABE-JRE-1.5}</parameter>
         <parameter>-CLASS</parameter>
         <parameter>-INST</parameter>
         <parameter>-PARAM</parameter>

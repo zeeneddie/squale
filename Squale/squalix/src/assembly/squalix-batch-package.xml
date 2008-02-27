@@ -15,6 +15,18 @@
 		</fileSet>
 		<fileSet>
 			<directory>src/assembly/resources</directory>
+			<excludes>
+				<!-- we don't want go.sh to be filtered, as it would have Win EOL -->
+				<exclude>go.sh</exclude>
+			</excludes>
+			<outputDirectory>/</outputDirectory>
+			<filtered>true</filtered>
+		</fileSet>
+		<fileSet>
+			<directory>src/assembly/resources</directory>
+			<includes>
+				<include>go.sh</include>
+			</includes>
 			<outputDirectory>/</outputDirectory>
 		</fileSet>
 	</fileSets>
@@ -22,6 +34,9 @@
 		<dependencySet>
 			<scope>runtime</scope>
 			<outputDirectory>lib</outputDirectory>
+			<excludes>
+				<exclude>org.squale.app:squalix</exclude>
+			</excludes>
 		</dependencySet>
 	</dependencySets>
 </assembly>

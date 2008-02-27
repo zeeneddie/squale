@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE checkstyle-configuration PUBLIC "-//Checkstyle Configuration DTD 1.0//EN" "file:../src/com/airfrance/squalix/tools/ruleschecking/checkstyle-config-1.0.dtd">
+<!DOCTYPE checkstyle-configuration PUBLIC "-//Checkstyle Configuration DTD 1.0//EN" "file:../../../main/java/com/airfrance/squalix/tools/ruleschecking/checkstyle-config-1.0.dtd">
 
 <checkstyle-configuration>
-<!--  ENV-CHECKSTYLE-JAR -->
-<jarDirectory>/app/SQUALE/dev/bin/java/lib/checkstyle</jarDirectory>
-<!--  ENV-CHECKSTYLE-REPORT -->
-<reportDirectory>/app/SQUALE/dev/data/checkstyle/report</reportDirectory>
+	<jarDirectory>${ENV-CHECKSTYLE-JAR}</jarDirectory>
+	<reportDirectory>${ENV-CHECKSTYLE-REPORT}</reportDirectory>
 </checkstyle-configuration>

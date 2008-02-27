@@ -1,52 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- <!DOCTYPE configuration SYSTEM "../../src/config/compiling-config.dtd"> -->
 <configuration>
-    <java>
-        <general>
-            <separators>
-                <separator name="classpath" value=";" />
-            </separators>
-            <bootclasspaths>
-            	<bootclasspath version="1.3" path="/app/SQUALE/OUTILS/JAVA/1.3.1.03/rt.jar" />
-            	<bootclasspath version="1.4" path="/app/SQUALE/OUTILS/JAVA/1.4.0/rt.jar" />
-            	<bootclasspath version="1.5" path="/app/SQUALE/OUTILS/JAVA/jdk1.5.0_09/jre/lib/rt.jar" />
-            </bootclasspaths>
-            <default_jdk_version>1_4</default_jdk_version>
-            <dest_dir>bin/</dest_dir>
-            <required_memory>1024m</required_memory>
-            <!-- ENV-JCOMPILING-ECLIPSE-BUNDLE -->
-            <eclipse_bundle_path>/app/SQUALE/dev/data/jcompiling/eclipse_bundle</eclipse_bundle_path>
-            <!-- ENV-JCOMPILING-EXPORTED-LIB -->
-            <exported_libs_path>/app/SQUALE/dev/data/jcompiling/exported_libs</exported_libs_path>
-        </general>
-    
-        <parsing>
-            <wsad>
-                <filename>.classpath</filename>
-                <keys>
-                    <key name="classpath" value="classpath" />
-                    <key name="classpathentry" value="classpathentry" />
-                    <key name="kind" value="kind" />
-                    <key name="path" value="path" />
-                    <key name="exported" value="exported" />
-                </keys>
-                <values>
-                    <value name="src" value="src" />
-                    <value name="lib" value="lib" />
-                    <value name="var" value="var" />
-                    <value name="con" value="con" />
-                </values>
-            </wsad>
-        </parsing>
-    
-    </java>
-    
-    <cpp>
-        <script>
-            <scriptname>cpp_squale_compilation.sh</scriptname>
-            <vars>
-                <var name="USE_MCCABE" value="1" />
-            </vars>
-        </script>    
-    </cpp>
+	<java>
+		<general>
+			<separators>
+				<separator name="classpath" value=";" />
+			</separators>
+			<bootclasspaths>
+				<bootclasspath version="1.3"
+					path="${BOOTCLASSPATH-1.3}" />
+				<bootclasspath version="1.4"
+					path="${BOOTCLASSPATH-1.4}" />
+				<bootclasspath version="1.5"
+					path="${BOOTCLASSPATH-1.5}" />
+			</bootclasspaths>
+			<default_jdk_version>1_4</default_jdk_version>
+			<dest_dir>bin/</dest_dir>
+			<required_memory>1024m</required_memory>
+			<eclipse_bundle_path>
+				${ENV-JCOMPILING-ECLIPSE-BUNDLE}
+			</eclipse_bundle_path>
+			<exported_libs_path>
+				${ENV-JCOMPILING-EXPORTED-LIB}
+			</exported_libs_path>
+		</general>
+
+		<parsing>
+			<wsad>
+				<filename>.classpath</filename>
+				<keys>
+					<key name="classpath" value="classpath" />
+					<key name="classpathentry" value="classpathentry" />
+					<key name="kind" value="kind" />
+					<key name="path" value="path" />
+					<key name="exported" value="exported" />
+				</keys>
+				<values>
+					<value name="src" value="src" />
+					<value name="lib" value="lib" />
+					<value name="var" value="var" />
+					<value name="con" value="con" />
+				</values>
+			</wsad>
+		</parsing>
+
+	</java>
+
+	<cpp>
+		<script>
+			<scriptname>cpp_squale_compilation.sh</scriptname>
+			<vars>
+				<var name="USE_MCCABE" value="1" />
+			</vars>
+		</script>
+	</cpp>
 </configuration>

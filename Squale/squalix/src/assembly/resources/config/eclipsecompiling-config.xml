@@ -3,14 +3,16 @@
 <!DOCTYPE configuration PUBLIC "-//EclipseCompiling Configuration DTD //EN" "file:../src/config/eclipsecompiling-config.dtd">
 
 <configuration>
-	<!--  ENV-ECLIPSE-WORKSPACE -->
-	<workspace>/app/SQUALE/dev/data/jcompiling/workspace/</workspace>
-	<command>
-		<executable>/app/SQUALE/OUTILS/JAVA/jdk1.5.0_09/bin/java</executable>
+	<workspace>${ENV-ECLIPSE-WORKSPACE}</workspace>
+	<command><!-- TODO : la valeur suivante n'est pas paramétrée ?  -->
+		<executable>${ENV-ECLIPSE-EXECUTABLE}</executable>
 		<options>
 			<option>-jar [squale_eclipse_home]/startup.jar</option>
 			<option>-data [workspace]</option>
-			<option>-application com.airfrance.squale.builder.eclipse32.workspaceId1</option>
+			<option>
+				-application
+				com.airfrance.squale.builder.eclipse32.workspaceId1
+			</option>
 			<option>-dialect [dialect]</option>
 			<option>-sunLibs [sun_libs]</option>
 			<option>-projects [projects_list]</option>
@@ -18,12 +20,9 @@
 			<option>-userLibs [user_libs]</option>
 			<option>-excluded [excluded_patterns]</option>
 		</options>
-	</command>
-	<squaleEclipseHome>/app/SQUALE/OUTILS/ECLIPSE/SQUALE_ECLIPSE_PLUGINS</squaleEclipseHome>
-	<!-- ENV-ECLIPSE-HOME -->
-	<eclipseHome>/app/SQUALE/dev/data/jcompiling/eclipse</eclipseHome>
-	<!-- ENV-ECLIPSE-RIGHT_SCRIPT -->
-	<rightScript>/app/SQUALE/dev/bin/java/resources/change_eclipse_classpath_rights.sh</rightScript>
-	<!-- ENV-ECLIPSE-COPY-SCRIPT -->
-	<copyScript>/app/SQUALE/dev/bin/java/resources/copy.sh</copyScript>
+	</command><!-- TODO : la valeur suivante n'est pas paramétrée ?  -->
+	<squaleEclipseHome>${ENV-ECLIPSE-SQUALE-HOME}</squaleEclipseHome>
+	<eclipseHome>${ENV-ECLIPSE-HOME}</eclipseHome>
+	<rightScript>${ENV-ECLIPSE-RIGHT_SCRIPT}</rightScript>
+	<copyScript>${ENV-ECLIPSE-COPY-SCRIPT}</copyScript>
 </configuration>

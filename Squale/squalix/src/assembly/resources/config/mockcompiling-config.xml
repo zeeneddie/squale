@@ -3,6 +3,5 @@
 <!DOCTYPE mockcompiling-configuration  PUBLIC "-//MockCompiling Configuration DTD //EN" "file:../src/config/mockcompiling-config.dtd">
 
 <mockcompiling-configuration>
-	<!--  ENV-COMPILED-SOURCES-ROOT -->
-	<rootPath>/app/SQUALE/dev/data/compiledsources</rootPath>
+	<rootPath>${ENV-COMPILED-SOURCES-ROOT}</rootPath>
 </mockcompiling-configuration>
