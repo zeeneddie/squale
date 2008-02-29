@@ -20,9 +20,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Appli
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 
-/**
- * @author M400843
- */
+
 public class UserDAOImpl extends AbstractDAOImpl {
     /**
      * Instance singleton
@@ -72,6 +70,33 @@ public class UserDAOImpl extends AbstractDAOImpl {
             if (col.size() > 1) {
                 String tab[] = { pMatricule };
                 LOG.warn(DAOMessages.getString("user.many.matricule", tab));
+            }
+        } else {
+            user = (UserBO) col.iterator().next();
+        }
+        return user;
+    }
+    
+    
+    /**
+     * Permet de récupérer UserBO en fonction du matricule et du password
+     * @param pSession session Hibernate
+     * @param pMatricule matricule de l'utilisateur
+     * @param pPassword password du user
+     * @return UserBO associé au matricule
+     * @throws JrafDaoException exception DAO
+     */
+    public UserBO loadWithMatriculeAndPassword(ISession pSession, String pMatricule, String pPassword) throws JrafDaoException {
+        UserBO user = null;
+        String whereClause = "where ";
+        whereClause += getAlias() + ".matricule = '" + pMatricule + "' AND "+getAlias()+".password = '"+pPassword+"'";
+        Collection col = findWhere(pSession, whereClause);
+        if (col.size() != 1) {
+            if (col.size() > 1) {
+                String tab[] = { pMatricule };
+                LOG.warn(DAOMessages.getString("user.many.matricule", tab));
+            }else if (col.size() == 0){
+            	user = new UserBO();
             }
         } else {
             user = (UserBO) col.iterator().next();
