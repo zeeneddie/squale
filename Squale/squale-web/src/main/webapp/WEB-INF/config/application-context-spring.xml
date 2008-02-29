@@ -34,15 +34,15 @@
 	<!-- Enterprise layer's dependencies -->
 	<!--<import resource="classpath:config/spring/0-entrepriselayer-dependencies.xml"/>-->
 	
-	<!-- Accesseur ldapBean d'Habile -->
-	<bean id="userBeanAccessor" class="com.airfrance.squaleweb.connection.stubImpl.UserBeanAccessorImpl">
+	<!-- Accesseur bean utilisateur authentifié  -->
+	<bean id="userBeanAccessor" class="com.airfrance.squaleweb.connection.basic.BasicUserBeanAccessorImpl">
 		<property name="userBean">
 			<ref bean="userBean"/>
 		</property>
 	</bean>
 	
-	<!-- bean utilisateur authentifié par Habile -->
-	<bean id="userBean" class="com.airfrance.squaleweb.connection.stubImpl.UserBeanImpl" >
+	<!-- bean utilisateur authentifié  -->
+	<bean id="userBean" class="com.airfrance.squaleweb.connection.basic.BasicUserBeanImpl" >
 	</bean>
 	
 	
