@@ -9,6 +9,9 @@ public class UserBeanImpl implements IUserBean {
 	
 	
 	private static final String ADMIN_PROFILE = "P_SQUALE_ADMIN-TECH";
+	
+	/** */
+	protected String matricule;
 
 	 /** Les profils */
     protected List profiles;
@@ -25,5 +28,13 @@ public class UserBeanImpl implements IUserBean {
 	public boolean isAdmin() {
 		return true;
 	}
+
+
+	public String getIdentifier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

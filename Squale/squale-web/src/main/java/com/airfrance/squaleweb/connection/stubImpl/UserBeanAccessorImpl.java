@@ -1,7 +1,9 @@
 package com.airfrance.squaleweb.connection.stubImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
 import com.airfrance.squaleweb.connection.IUserBean;
 import com.airfrance.squaleweb.connection.IUserBeanAccessor;
 import com.airfrance.squaleweb.connection.exception.ConnectionException;
@@ -52,4 +54,19 @@ public class UserBeanAccessorImpl implements IUserBeanAccessor {
     public void setUserBean(IUserBean pBean) {
         userBean = pBean;
     }
+
+	public boolean isConnect() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isUser(UserDTO user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void disConnect(HttpSession session) {
+		// TODO Auto-generated method stub
+		
+	}
 }
