@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone='no'?>
+
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.1//EN" "http://www.puppycrawl.com/dtds/configuration_1_1.dtd">
+    
+<module name="Checker">
+    <!-- squalevers: 1.1  --> 
+    <module name="TreeWalker">
+        <!-- squalecode: COD13   -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.DescendantTokenCheck">
+            <property name="limitedTokens" value="METHOD_DEF"/>
+            <property name="maximumDepth" value="2"/>
+            <property name="maximumMessage" value="Nombre maximal de methodes definies dans une classe"/>
+            <property name="maximumNumber" value="50"/>
+            <property name="minimumDepth" value="0"/>
+            <property name="minimumNumber" value="0"/>
+            <property name="severity" value="info"/>
+            <property name="tokens" value="CLASS_DEF"/>
+        </module>
+           
+    </module>
+</module>

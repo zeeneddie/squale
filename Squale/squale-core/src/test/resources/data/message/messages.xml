@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE messages PUBLIC "-//Squale//DTD Message Configuration 1.0//EN" "file:../../../../squaleCommon/src/com/airfrance/squalecommon/dtd/message-1.0.dtd">
+<messages>
+<!-- Messages de la grille qualité -->
+<!-- Facteurs -->
+<message lang="fr" key="rule.reliability">Fiabilité</message>
+<message lang="" key="rule.reliability">Reliability</message>
+</messages>

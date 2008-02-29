@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Squale Core">
+	<skin>
+		<groupId>org.squale.sites.skins</groupId>
+		<artifactId>squale-main-skin</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</skin>
+	<publishDate position="left" format="dd MMM yyyy" />
+	<bannerLeft>
+		<name>The Squale Project</name>
+		<src>images/squale-banner-left.gif</src>
+		<href>http://www.squale.org</href>
+	</bannerLeft>
+	<bannerRight>
+		<src>images/squale-banner-right.gif</src>
+	</bannerRight>
+
+	<body>
+		<links>
+			<item name="Squale Home" href="http://www.squale.org/index.html" />
+			<item name="User Docs" href="http://www.squale.org/squale-user-site/index.html" />
+			<item name="Developer Docs" href="http://www.squale.org/squale-developer-site/index.html" />
+		</links>
+
+		<menu name="Main">
+			<item name="Main page" href="index.html" />
+		</menu>
+		
+		<menu ref="modules"/>
+		
+		<menu ref="reports"/>
+		
+	</body>
+</project>

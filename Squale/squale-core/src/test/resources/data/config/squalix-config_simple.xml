@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.0//EN" "file:../../../../squaleCommon/src/com/airfrance/squalecommon/dtd/squalix-config-1.0.dtd">
+
+<configuration>
+	<stoptimes>
+		<stoptime day="monday" time="4:00" />
+	</stoptimes>
+	<frequencies>
+		<frequency days="1" frequency="1" />
+	</frequencies>
+	<tasks>
+		<task name="ClearCaseTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseTask" standard="true"/>
+		<task name="JCompilingTask" class="com.airfrance.squalix.tools.compiling.java.JCompilingTask" />
+		<task name="ClearCaseCleanerTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseCleanerTask" />
+	</tasks>
+	<sourcemanagements>
+		<sourcemanagement name="clearcase">
+			<analysis>
+				<task-ref name="ClearCaseTask" />
+			</analysis>
+			<termination>
+				<task-ref name="ClearCaseCleanerTask" />
+			</termination>
+		</sourcemanagement>
+	</sourcemanagements>
+	<profiles>
+		<profile name="java1.4">
+			<integrityConstraints>
+				<grids>
+					<grid name="grid" />
+				</grids>
+				<displayConfigurations>
+					<bubble xtre="mccabe.method.vg" ytre="mccabe.method.evg" xPos="10" yPos="7" />
+					<volumetries>
+						<volumetry component="application">
+							<tre name="rsm.project.sloc" />
+						</volumetry>
+						<volumetry component="project">
+							<tre name="rsm.project.sloc" />
+							<tre name="rsm.project.comments" />
+						</volumetry>
+					</volumetries>
+				</displayConfigurations>
+			</integrityConstraints>
+			<analysis>
+				<task-ref name="JCompilingTask" />
+			</analysis>
+			<termination>
+			</termination>
+		</profile>
+	</profiles>
+</configuration>

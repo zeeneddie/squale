@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE squale PUBLIC "-//Squale//DTD Grid Configuration 1.1//EN" "file:../../../../squaleCommon/src/com/airfrance/squalecommon/dtd/grid-1.1.dtd">
+
+<squale>
+	<practiceset>
+		<practice name="formatingstandard">
+	    	<weight>lambda x: x</weight>
+			<simpleformula>
+				<level>project</level>
+				<measures>
+					<measure>rsm</measure>
+					<measure>checkstyle</measure>
+				</measures>
+				<trigger></trigger>
+				<formula>3*(2./3.)**(-(100*checkstyle.getTotalErrorNumberForCategory("formatingstandard")+20*checkstyle.getTotalWarningNumberForCategory("formatingstandard")+5*checkstyle.getTotalInfoNumberForCategory("formatingstandard"))/rsm.sloc)</formula>
+			</simpleformula>
+		</practice>
+
+		<practice name="namingstandard">
+	    	<weight>lambda x: x</weight>
+			<simpleformula>
+				<level>project</level>
+				<measures>
+					<measure>rsm</measure>
+					<measure>checkstyle</measure>
+				</measures>
+				<trigger></trigger>
+				<formula>3*(2./3.)**(-(100*checkstyle.getTotalErrorNumberForCategory("namingstandard")+20*checkstyle.getTotalWarningNumberForCategory("namingstandard")+5*checkstyle.getTotalInfoNumberForCategory("namingstandard"))/rsm.sloc)</formula>
+			</simpleformula>		
+		</practice>
+		<practice name="programmingstandard">
+	    	<weight>lambda x: x</weight>
+			<simpleformula>
+				<level>project</level>
+				<measures>
+					<measure>rsm</measure>
+					<measure>checkstyle</measure>
+				</measures>
+				<trigger></trigger>
+				<formula>3*(2./3.)**(-(100*checkstyle.getTotalErrorNumberForCategory("programmingstandard")+20*checkstyle.getTotalWarningNumberForCategory("programmingstandard")+5*checkstyle.getTotalInfoNumberForCategory("programmingstandard"))/rsm.sloc)</formula>
+			</simpleformula>		
+		</practice>
+	</practiceset>
+
+	<criteriumset>		
+		<criterium name="homogeneity1">
+			<practice-ref name="formatingstandard" weight="1" />
+			<practice-ref name="namingstandard" weight="1" />
+			<practice-ref name="programmingstandard" weight="1" />
+		</criterium>
+		<criterium name="homogeneity2">
+			<practice-ref name="formatingstandard" weight="1" />
+			<practice-ref name="namingstandard" weight="1" />
+			<practice-ref name="programmingstandard" weight="1" />
+		</criterium>		
+	</criteriumset>
+
+	<factorset>
+		<factor name="maintainability1">
+			<criterium-ref name="homogeneity1" weight="1" />
+			<criterium-ref name="homogeneity2" weight="1" />				
+		</factor>
+		<factor name="maintainability2">
+			<criterium-ref name="homogeneity1" weight="1" />
+			<criterium-ref name="homogeneity2" weight="1" />				
+		</factor>
+	</factorset>
+
+	<gridset>
+		<grid name="default">
+			<factor-ref name="maintainability1" />
+			<factor-ref name="maintainability2" />	
+		</grid>
+	</gridset>
+</squale>

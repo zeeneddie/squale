@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<ruleset name="default" language="java"
+    xmlns="http://pmd.sf.net/ruleset/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+    xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+
+  <description>
+  This ruleset checks my code for bad stuff
+  </description>
+
+  <rule ref="rulesets/codesize.xml/CyclomaticComplexity" >
+    <properties>
+        <property name="squaleCategory" value="coding"/>
+        <property name="squaleSeverity" value="error"/>
+    </properties>
+  </rule>
+
+  <rule ref="rulesets/codesize.xml/ExcessiveMethodLength" >
+    <properties>
+        <property name="squaleCategory" value="format"/>
+        <property name="squaleSeverity" value="warning"/>
+    </properties>
+  </rule>
+
+</ruleset>

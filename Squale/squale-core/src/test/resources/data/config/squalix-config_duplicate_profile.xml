@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.0//EN" "file:../../../../squaleCommon/src/com/airfrance/squalecommon/dtd/squalix-config-1.0.dtd">
+
+<configuration>
+	<stoptimes>
+		<stoptime day="monday" time="4:00" />
+		<stoptime day="tuesday" time="4:00" />
+		<stoptime day="wednesday" time="4:00" />
+		<stoptime day="thurday" time="4:00" />
+		<stoptime day="friday" time="4:00" />
+	</stoptimes>
+	<tasks>
+		<task name="ClearCaseTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseTask" />
+		<task name="JCompilingTask" class="com.airfrance.squalix.tools.compiling.java.JCompilingTask" />
+		<task name="ClearCaseCleanerTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseCleanerTask" />
+	</tasks>
+	<sourcemanagements>
+		<sourcemanagement name="clearcase">
+			<analysis>
+				<task-ref name="ClearCaseTask" />
+			</analysis>
+			<termination>
+				<task-ref name="ClearCaseCleanerTask" />
+			</termination>
+		</sourcemanagement>
+	</sourcemanagements>
+	<profiles>
+		<profile name="java1.4">
+			<analysis>
+				<task-ref name="JCompilingTask" />
+			</analysis>
+			<termination>
+			</termination>
+		</profile>
+		<profile name="java1.4">
+			<analysis>
+				<task-ref name="ClearCaseTask" />
+			</analysis>
+			<termination>
+			</termination>
+		</profile>
+	</profiles>
+</configuration>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.1//EN" "http://www.puppycrawl.com/dtds/configuration_1_1.dtd">
+<module name="Checker">
+	<metadata name="checkstyle.version" value="1.1"/>
+    <module name="TreeWalker">
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck">
+            <property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD01"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.imports.IllegalImportCheck">
+            <property name="illegalPkgs" value="sun,com.ibm"/>
+            <property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD01"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck">
+            <property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD01"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck">
+            
+            <property name="severity" value="error"/>
+            <metadata name="checkstyle.rule.name" value="COD01"/>
+        </module>
+		 
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck">
+            <property name="ignoreNumbers" value="-1, 0, 1, 2"/>
+            <property name="severity" value="info"/>
+            <property name="tokens" value="NUM_DOUBLE, NUM_FLOAT, NUM_INT, NUM_LONG"/>
+            <metadata name="checkstyle.rule.name" value="COD03"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck">
+            <property name="packageAllowed" value="false"/>
+            <property name="protectedAllowed" value="true"/>
+            <property name="publicMemberPattern" value="^serialVersionUID"/>
+            <property name="severity" value="error"/>
+            <metadata name="checkstyle.rule.name" value="COD04"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.DescendantTokenCheck">
+            <property name="limitedTokens" value="LITERAL_BREAK,LITERAL_CONTINUE"/>
+            <property name="maximumMessage" value="Instructions break et continue interdites dans une boucle"/>
+            <property name="maximumNumber" value="0"/>
+            <property name="minimumDepth" value="1"/>
+            <property name="minimumNumber" value="0"/>
+            <property name="severity" value="warning"/>
+            <property name="tokens" value="LITERAL_FOR,LITERAL_WHILE,LITERAL_DO"/>
+            <metadata name="checkstyle.rule.name" value="COD05"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck">
+            <property name="countEmpty" value="false"/>
+            <property name="max" value="70"/>
+            <property name="severity" value="warning"/>
+            <property name="tokens" value="METHOD_DEF, CTOR_DEF"/>
+            <metadata name="checkstyle.rule.name" value="COD06"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.MissingSwitchDefaultCheck">
+            <property name="severity" value="error"/>
+            <metadata name="checkstyle.rule.name" value="COD07"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.InnerAssignmentCheck">
+            <property name="severity" value="error"/>
+            <property name="tokens" value="ASSIGN, BAND_ASSIGN, BOR_ASSIGN, BSR_ASSIGN, BXOR_ASSIGN, DIV_ASSIGN, MINUS_ASSIGN, MOD_ASSIGN, PLUS_ASSIGN, SL_ASSIGN, SR_ASSIGN, STAR_ASSIGN"/>
+            <metadata name="checkstyle.rule.name" value="COD08"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.HiddenFieldCheck">
+            <property name="ignoreConstructorParameter" value="false"/>
+            <property name="ignoreSetter" value="false"/>
+            <property name="severity" value="warning"/>
+            <property name="tokens" value="PARAMETER_DEF, VARIABLE_DEF"/>
+            <metadata name="checkstyle.rule.name" value="COD09"/>
+        </module>	
+		 
+        <module name="com.puppycrawl.tools.checkstyle.checks.usage.UnusedPrivateMethodCheck">
+            <property name="ignoreFormat" value="^$"/>
+            <property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD10"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.GenericIllegalRegexpCheck">
+            <property name="format" value="System.out.print"/>
+            <property name="ignoreCase" value="false"/>
+            <property name="ignoreComments" value="false"/>
+            <property name="message" value="Interdiction d&apos;&apos;utiliser des System.out"/>
+            <property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD11"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.usage.UnusedPrivateFieldCheck">
+            <property name="ignoreFormat" value="^$"/>
+            <property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD12"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.DescendantTokenCheck">
+            <property name="limitedTokens" value="METHOD_DEF"/>
+            <property name="maximumDepth" value="2"/>
+            <property name="maximumMessage" value="Nombre maximal de methodes definies dans une classe"/>
+            <property name="maximumNumber" value="50"/>
+            <property name="minimumDepth" value="0"/>
+            <property name="minimumNumber" value="0"/>
+            <property name="severity" value="info"/>
+            <property name="tokens" value="CLASS_DEF"/>
+            <metadata name="checkstyle.rule.name" value="COD13"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck">
+            <property name="max" value="10"/>
+            <property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD14"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.sizes.AnonInnerLengthCheck">
+            <property name="max" value="5"/>
+            <property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD15"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.coding.ReturnCountCheck">
+            <property name="format" value="^equals$ (empty)"/>
+            <property name="max" value="2"/>
+            <property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD16"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck">
+            <property name="allowMissingParamTags" value="false"/>
+            <property name="allowMissingReturnTag" value="false"/>
+            <property name="allowMissingThrowsTags" value="false"/>
+            <property name="allowThrowsTagsForSubclasses" value="false"/>
+            <property name="allowUndeclaredRTE" value="false"/>
+            <property name="excludeScope" value="nothing"/>
+            <property name="scope" value="private"/>
+            <property name="severity" value="info"/>
+            <property name="tokens" value="METHOD_DEF, CTOR_DEF"/>
+            <metadata name="checkstyle.rule.name" value="COM01"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck">
+            <property name="excludeScope" value="nothing"/>
+            <property name="scope" value="private"/>
+            <property name="severity" value="info"/>
+            <property name="tokens" value="CLASS_DEF, INTERFACE_DEF"/>
+            <metadata name="checkstyle.rule.name" value="COM01"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck">
+            <property name="excludeScope" value="nothing"/>
+            <property name="scope" value="private"/>
+            <property name="severity" value="info"/>
+            <metadata name="checkstyle.rule.name" value="COM01"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.whitespace.TabCharacterCheck">
+            <property name="severity" value="info"/>
+            <metadata name="checkstyle.rule.name" value="FOR01"/>
+        </module>		
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.blocks.LeftCurlyCheck">
+            <property name="maxLineLength" value="80"/>
+            <property name="option" value="eol"/>
+            <property name="severity" value="info"/>
+            <property name="tokens" value="CLASS_DEF, CTOR_DEF, INTERFACE_DEF, LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, METHOD_DEF"/>
+            <metadata name="checkstyle.rule.name" value="FOR02"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.blocks.RightCurlyCheck">
+            <property name="option" value="same"/>
+            <property name="severity" value="info"/>
+            <property name="tokens" value="LITERAL_CATCH, LITERAL_ELSE, LITERAL_TRY"/>
+            <metadata name="checkstyle.rule.name" value="FOR02"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck">
+            <property name="severity" value="error"/>
+            <property name="tokens" value="LITERAL_DO, LITERAL_ELSE, LITERAL_IF, LITERAL_FOR, LITERAL_WHILE"/>
+            <metadata name="checkstyle.rule.name" value="FOR03"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck">
+            <property name="ignorePattern" value="^(.*@see.*)|(.*//Source.*)$"/>
+            <property name="max" value="200"/>
+            <property name="severity" value="warning"/>
+            <property name="tabWidth" value="4"/>
+            <metadata name="checkstyle.rule.name" value="FOR04"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.naming.ParameterNameCheck">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+            <property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="NOM01"/>
+        </module>
+		
+        <module name="com.puppycrawl.tools.checkstyle.checks.naming.MemberNameCheck">
+            <property name="applyToPackage" value="true"/>
+            <property name="applyToPrivate" value="true"/>
+            <property name="applyToProtected" value="true"/>
+            <property name="applyToPublic" value="true"/>
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+            <property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="NOM02"/>
+        </module>
+				
+        <module name="com.puppycrawl.tools.checkstyle.checks.naming.ConstantNameCheck">
+            <property name="format" value="^[A-Z](_?[A-Z0-9]+)*$"/>
+            <property name="severity" value="error"/>
+            <metadata name="checkstyle.rule.name" value="NOM03"/>
+        </module>
+		
+		
+    </module>
+</module>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE squale PUBLIC "-//Squale//DTD Grid Configuration 1.1//EN" "file:../../../../squaleCommon/src/com/airfrance/squalecommon/dtd/grid-1.1.dtd">
+
+<squale>
+	<practiceset>
+	    <practice name="practice1">
+	    </practice>
+
+	    <practice name="practice2">
+	    	<weight>lambdax:x</weight>
+			<conditionformula>
+				<level>class</level>
+				<measures>
+					<measure>mccabe</measure>
+				</measures>
+				<trigger>mccabe.wmc >= 8</trigger>
+				<conditions>
+					<condition>mccabe.maxvg >= Z0.5*mccabe.sumvg</condition>
+					<condition>mccabe.maxvg >= 0.4*mccabe.sumvg</condition>
+					<condition>mccabe.maxvg >= 0.3*mccabe.sumvg</condition>
+				</conditions>
+			</conditionformula>
+	    </practice>
+
+	    <practice name="practice3">
+	    	<weight>lambda x: 9**-x</weight>
+			<simpleformula>
+				<level>class</level>
+				<measures>
+					<measure>mccabe</measure>
+				</measures>
+				<trigger/>
+				<formula>mccabe.maxvg / mccabe.sumvgZ</formula>
+			</simpleformula>
+	    </practice>
+	    
+	</practiceset>
+	
+	<criteriumset>
+		<criterium name="criterium1">
+			<practice-ref name="practice1" weight="1"/>
+			<practice-ref name="practice2" weight="2"/>
+			<practice-ref name="practice3" weight="3"/>
+		</criterium>
+
+
+	</criteriumset>
+	
+	<factorset>
+		<factor name="factor1"> 
+			<criterium-ref name="criterium1" weight="1" />
+		</factor>
+	
+	</factorset>
+	
+	<gridset>
+		<grid name="grid1">
+			<factor-ref name="factor1" />
+		</grid>
+	</gridset>
+</squale>

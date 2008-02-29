@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.0//EN" "file:../../../../src/squaleCommon/src/com/airfrance/squalecommon/dtd/squalix-config-1.0.dtd">
+
+<!--Fichier de configuration de squalix définissant les profiles possibles, les différents types
+    de récupération des sources,...
+    La configuration des types de récupération des sources se fait par l'action dont le nom correspond à
+    l'attribut name du tag recovering.
+    Chaque profile doit commencer la tâche d'analyse de récupération des sources du projet et terminer
+    par sa tâche de terminaison-->
+    
+<configuration>
+	<stoptimes>
+		<stoptime day="monday" time="4:00" />
+		<stoptime day="tuesday" time="4:00" />
+		<stoptime day="wednesday" time="4:00" />
+		<stoptime day="thurday" time="4:00" />
+		<stoptime day="friday" time="4:00" />
+	</stoptimes>
+	<tasks>
+		<task name="ClearCaseTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseTask" standard="true"/>
+		<task name="JCompilingTask" class="com.airfrance.squalix.tools.compiling.java.JCompilingTask" />
+		<task name="McCabeTask" class="com.airfrance.squalix.tools.mccabe.McCabeTask" />
+		<task name="CppCompilingTask" class="com.airfrance.squalix.tools.compiling.cpp.CppCompilingTask" />
+		<task name="ComputeResultTask" class="com.airfrance.squalix.tools.computing.project.ComputeResultTask" />
+		<task name="ClearCaseCleanerTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseCleanerTask" />
+	</tasks>
+	<sourcemanagements>
+		<sourcemanagement name="clearcase" normalAudit="false">
+			<analysis>
+				<task-ref name="ClearCaseTask" />
+			</analysis>
+			<termination>
+				<task-ref name="ClearCaseCleanerTask" />
+			</termination>
+		</sourcemanagement>
+	</sourcemanagements>
+	<profiles>
+		<profile name="system">
+			<analysis>
+			</analysis>
+			<termination></termination>
+		</profile>
+		<profile name="java1.4">
+			<analysis>
+				<task-ref name="JCompilingTask" />
+				<task-ref name="McCabeTask" />
+			</analysis>
+			<termination>
+				<task-ref name="ComputeResultTask" />
+			</termination>
+		</profile>
+		<profile name="java1.3">
+			<analysis>
+				<task-ref name="JCompilingTask" />
+				<task-ref name="McCabeTask" />
+			</analysis>
+			<termination>
+				<task-ref name="ComputeResultTask" />
+			</termination>
+		</profile>
+		<profile name="cpp">
+			<analysis>
+				<task-ref name="CppCompilingTask" />
+				<task-ref name="McCabeTask" />
+			</analysis>
+			<termination>
+				<task-ref name="ComputeResultTask" />
+			</termination>
+		</profile>
+	</profiles>
+</configuration>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE squale PUBLIC "-//Squale//DTD Grid Configuration 1.1//EN" "file:../../../../squaleCommon/src/com/airfrance/squalecommon/dtd/grid-1.1.dtd">
+
+<squale>
+	<practiceset>
+	    <practice name="practice1">
+	    </practice>
+
+	    <practice name="practice1">
+	    </practice>
+
+	    
+	</practiceset>
+	
+	<criteriumset>
+		<criterium name="criterium1">
+			<practice-ref name="practice1" weight="1"/>
+		</criterium>
+
+
+	</criteriumset>
+	
+	<factorset>
+		<factor name="factor1"> 
+			<criterium-ref name="criterium1" weight="1" />
+		</factor>
+	
+	</factorset>
+	
+	<gridset>
+		<grid name="grid1">
+			<factor-ref name="factor1" />
+		</grid>
+	</gridset>
+</squale>

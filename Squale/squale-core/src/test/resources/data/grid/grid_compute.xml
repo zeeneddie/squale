@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE squale PUBLIC "-//Squale//DTD Grid Configuration 1.1//EN" "file:../../../../squaleCommon/src/com/airfrance/squalecommon/dtd/grid-1.1.dtd">
+
+<squale>
+	<practiceset>
+	    <practice name="practice1">
+	    	<weight>lambda x:x</weight>
+			<conditionformula>
+				<level>class</level>
+				<measures>
+					<measure>mccabe</measure>
+				</measures>
+				<trigger>mccabe.wmc >= 8</trigger>
+				<conditions>
+					<condition>mccabe.maxvg >= 0.5*mccabe.sumvg</condition>
+					<condition>mccabe.maxvg >= 0.4*mccabe.sumvg</condition>
+					<condition>mccabe.maxvg >= 0.3*mccabe.sumvg</condition>
+				</conditions>
+			</conditionformula>
+	    </practice>
+
+		<practice name="practice2">
+	    	<weight>lambda x: 9**-x</weight>
+			<simpleformula>
+			   <level>project</level>
+				<measures>
+					<measure>rsm</measure>
+					<measure>checkstyle</measure>
+				</measures>
+				<trigger></trigger>
+				<formula>3*(2.0/3.0)**(100.0*checkstyle.getTotalErrorNumberForCategory("programmingstandard")/rsm.sloc)</formula>
+			</simpleformula>
+		</practice>
+	    
+		<practice name="practice3">
+	    	<weight>lambda x:x</weight>
+			<conditionformula>
+				<level>method</level>
+				<measures>
+					<measure>mccabe</measure>
+				</measures>
+				<trigger></trigger>
+				<conditions>
+					<condition>mccabe.nsloc >= 70</condition>
+					<condition>mccabe.nsloc >= 50</condition>
+					<condition>mccabe.nsloc >= 40</condition>
+				</conditions>
+			</conditionformula>
+		</practice>
+
+	</practiceset>
+	
+	<criteriumset>
+		<criterium name="criterium1">
+			<practice-ref name="practice1" weight="1"/>
+			<practice-ref name="practice2" weight="1"/>
+			<practice-ref name="practice3" weight="1"/>
+		</criterium>
+
+		<criterium name="criterium2">
+			<practice-ref name="practice1" weight="1"/>
+			<practice-ref name="practice2" weight="1"/>
+			<practice-ref name="practice3" weight="1"/>
+		</criterium>
+
+	</criteriumset>
+	
+	<factorset>
+		<factor name="factor1"> 
+			<criterium-ref name="criterium1" weight="1" />
+			<criterium-ref name="criterium2" weight="1" />
+		</factor>
+		<factor name="factor2"> 
+			<criterium-ref name="criterium1" weight="1" />
+			<criterium-ref name="criterium2" weight="1" />
+		</factor>
+	
+	</factorset>
+	
+	<gridset>
+		<grid name="grid1">
+			<factor-ref name="factor1" />
+			<factor-ref name="factor2" />
+		</grid>
+	</gridset>
+</squale>

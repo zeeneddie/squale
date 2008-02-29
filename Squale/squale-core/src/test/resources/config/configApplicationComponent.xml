@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <!DOCTYPE listApplicationComponent PUBLIC "-//Air France Software,Inc.//DTD squalecommon Configuration 1.0//EN" "configApplicationComponent.dtd" > -->
+
+<listApplicationComponent> 
+  
+	<applicationComponent name="Login" description="Phase de login" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.LoginApplicationComponentAccess">
+		
+		<component name="verifyUser" />
+		
+		<component name="getAdminsWithEmails" />
+		
+		<component name="getManagersWithEmails" />
+		
+		<component name="createOrUpdateUser" />
+		
+		<component name="getManagersEmails" />
+		
+		<component name="getAdminsEmails" />
+		
+		<component name="getReadersEmails" />
+		
+	</applicationComponent>
+	
+	<applicationComponent name="ApplicationAdmin" description="Administration et Enregistrement d'applications" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.ApplicationAdminApplicationComponentAccess">
+
+		<component name="addMilestone" />
+		
+		<component name="addProject" />
+		
+		<component name="createApplication" />
+		
+		<component name="getApplicationConf" />
+		
+		<component name="loadByAuditId" />
+		
+		<component name="removeProject" />
+		
+		<component name="saveApplication" />
+		
+		<component name="saveProject" />
+		
+		<component name="listAll" />
+
+	</applicationComponent>
+	
+	<applicationComponent name="Purge" description="supprimer des audits et applications" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.PurgeApplicationComponentAccess">
+
+		<component name="purgeAudit" />
+		
+		<component name="purgeApplication" />
+
+	</applicationComponent>
+	
+	<applicationComponent name="Validation" description="valider des applications en creation et dans le referentiel" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.ValidationApplicationComponentAccess">
+
+		<component name="getApplicationsCreated" />
+		
+		<component name="removeApplicationsCreation" />
+		
+		<component name="removeApplicationsReference" />
+		
+		<component name="validateApplicationsCreation" />
+		
+		<component name="validateApplicationsReference" />
+
+	</applicationComponent>
+	
+	<applicationComponent name="Component" description="Acceder aux derniers audits / aux fils d'un composant" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display.ComponentApplicationComponentAccess">
+
+		<component name="get" />
+		
+		<component name="getAudits" />
+		
+		<component name="getChildren" />
+		
+		<component name="getLastMilestones" />
+		
+		<component name="getTerminatedAudits" />
+		
+		<component name="getFailedAudits" />
+		
+		<component name="getLastPeriodicAudits" />
+		
+		<component name="getLastAllAudits" />
+		
+		<component name="getParentsComponent" />
+		
+		<component name="getProjectChildren" />
+		
+		<component name="getProjects" />
+		
+		<component name="updateComponent" />
+		
+		<component name="findWhereQualityGrid" />
+
+	</applicationComponent>
+	
+	<applicationComponent name="Error" description="Gestion des erreurs" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display.ErrorApplicationComponentAccess">
+
+		<component name="getErrors" />
+		
+		<component name="getErrorsByAudit" />
+		
+		<component name="getErrorsByTask" />
+		
+		<component name="getErrorsByAuditAndTask" />
+
+	</applicationComponent>
+	
+	<applicationComponent name="Graph" description="Gestion des graphiques" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display.GraphApplicationComponentAccess">
+
+		<component name="getHistoricGraph" />
+		
+		<component name="getGraphic" />
+		
+		<component name="getGraphics" />
+	
+	</applicationComponent>
+	
+	<applicationComponent name="Results" description="Recuperation des resultats" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display.ResultsApplicationComponentAccess">
+		
+		<component name="getByAudit" />
+		
+		<component name="getComponentResults" />
+		
+		<component name="getHaveErrors" />
+		
+		<component name="getNumberOfErrors" />
+		
+		<component name="getProjectResults" />
+		
+		<component name="getProjectVolumetry" />
+				
+		<component name="getReference" />
+		
+		<component name="getApplicationResults" />
+		
+		<component name="getTreChildrenResults" />
+		
+		<component name="getRepartitionResults" />
+		
+		<component name="getRuleCheckingResults" />
+		
+		<component name="getRuleCheckingItemResults" />
+		
+		<component name="getValueResults" />
+
+		<component name="getPreviousAudit" />
+		
+		<component name="getTopResults" />
+		
+		<component name="getProjectAuditGrid" />
+	</applicationComponent>
+
+	<applicationComponent name="QualityGrid" description="Manipulation des grilles qualite et objets connexes" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.QualityGridApplicationComponentAccess">
+
+		<component name="getGrid" />
+		
+		<component name="getGrids" />
+		
+		<component name="createGrid" />
+		
+		<component name="importGrid" />
+
+		<component name="getQualityRule" />
+
+		<component name="deleteGrids" />
+		
+		<component name="updateGrid" />
+
+		<component name="getGridMetrics" />
+	</applicationComponent>
+	
+	<applicationComponent name="Messages" description="" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.MessageApplicationComponentAccess">
+		
+		<component name="importMessages" />
+		
+		<component name="getMessages" />
+		
+		<component name="getNews" />
+		
+		<component name="purgeNews" />
+		
+		<component name="modifyNews" />
+		
+		<component name="addNews" />
+		
+		<component name="findLangs" />
+		
+		<component name="newsAlreadyExists" />
+		
+	</applicationComponent>
+	
+	<applicationComponent name="CheckstyleAdmin" description="Parsing du fichier de configuration checkstyle" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.CheckstyleAdminComponentAccess">
+
+		<component name="getAllConfigurations" />
+		
+		<component name="importConfiguration" />
+		
+		<component name="deleteRuleSets" />
+
+	</applicationComponent>
+	
+	<applicationComponent name="SqualixConfig" description="Configuration du portail" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.ConfigurationApplicationComponentAccess">
+		
+		<component name="getProfiles" />
+		
+		<component name="getSourceManagements" />
+		
+		<component name="importConfig" />
+		
+		<component name="createConfig" />
+		
+		<component name="getConfigurableTasks" />
+		
+	</applicationComponent>
+	
+	<applicationComponent name="CppTestAdmin" description="Administration de CppTest" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.CppTestAdminComponentAccess">
+
+		<component name="getAllConfigurations" />
+		
+		<component name="importConfiguration" />
+
+		<component name="deleteRuleSets" />
+
+	</applicationComponent>
+	
+	<applicationComponent name="PmdAdmin" description="Administration de Pmd" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.PmdAdminComponentAccess">
+
+		<component name="getAllConfigurations" />
+		
+		<component name="importConfiguration" />
+
+		<component name="deleteRuleSets" />
+
+	</applicationComponent>
+
+	<applicationComponent name="Task" description="gestion des taches" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.TaskAdministrationComponentAccess">
+	
+		<component name="getAllTasks" />
+	
+	</applicationComponent>
+	
+</listApplicationComponent>
