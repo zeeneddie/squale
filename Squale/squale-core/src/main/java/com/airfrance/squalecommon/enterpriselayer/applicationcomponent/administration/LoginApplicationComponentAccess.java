@@ -35,6 +35,13 @@ public class LoginApplicationComponentAccess extends DefaultExecuteComponent {
         userDTO = UserFacade.getUser(pUser, pAdmin);
         return userDTO;
     }
+    
+    public UserDTO userAuthentication(UserDTO pUser) throws JrafEnterpriseException {
+
+        UserDTO userDTO = null; // Initialisation du retour
+        userDTO = UserFacade.getUserByMatriculeAndPassword(pUser);
+        return userDTO;
+    }
 
     /**
      * Permet de mettre à jour les informations d'un utilisateur
