@@ -85,7 +85,9 @@ public class UserDTO implements Serializable {
      */
     public void setMatricule(String pMatricule) {
         // TODO : pas transformé en minuscule dans le BO??
-        mMatricule = pMatricule.toLowerCase();
+    	if (pMatricule!=null){
+    		mMatricule = pMatricule.toLowerCase();
+    	}
     }
     
     /**
