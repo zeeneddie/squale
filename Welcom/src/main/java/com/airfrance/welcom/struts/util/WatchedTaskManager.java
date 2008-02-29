@@ -17,11 +17,11 @@ import org.apache.commons.logging.LogFactory;
 import com.airfrance.welcom.outils.WelcomConfigurator;
 
 /**
- * Batch task management.
- * 
- * @author 6361371
- * 
+ * Third-party code used for this class. 
+ * Impossible to find original licence though.
+ * Copyright left to original author if ever found in the future.
  */
+
 public class WatchedTaskManager {
 
 

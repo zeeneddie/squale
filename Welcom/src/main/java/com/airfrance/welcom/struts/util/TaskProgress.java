@@ -1,5 +1,11 @@
 package com.airfrance.welcom.struts.util;
 
+/**
+ * Third-party code used for this class. 
+ * Impossible to find original licence though.
+ * Copyright left to original author if ever found in the future.
+ */
+
 public class TaskProgress {
 	/**
 	 * Current value of the progress.

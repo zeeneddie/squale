@@ -9,8 +9,6 @@ import org.apache.commons.validator.GenericValidator;
 
 import com.airfrance.welcom.outils.pdf.itext.PDFiTextWrapper;
 import com.airfrance.welcom.outils.pdf.jasperreports.PDFJasperReportsWrapper;
-/* TODO FAB : il faut supprimer ce type de générateur
-//import com.airfrance.welcom.outils.pdf.stylereport.PDFStyleReportWrapper;
 
 /**
  * 
@@ -87,11 +85,7 @@ public class PDFFactory {
         PDFGenerateur generateur = null;
         if (engine == PDFEngine.JASPERREPORTS) {
             generateur = new PDFJasperReportsWrapper();
-        } 
-        /* TODO FAB : il faut supprimer ce type de générateur
-        else if (engine == PDFEngine.STYLEREPORT) {
-            generateur = new PDFStyleReportWrapper();
-        }*/ 
+        }
         else if (engine == PDFEngine.ITEXT) {
             generateur = new PDFiTextWrapper();
         }

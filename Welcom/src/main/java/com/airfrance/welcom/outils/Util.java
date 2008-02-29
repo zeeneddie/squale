@@ -362,14 +362,6 @@ public class Util {
         return sb.toString();
     }
 
-    public static String formatStyleReport(final String st) {
-        if (GenericValidator.isBlankOrNull(st)) {
-            return "";
-        } else {
-            return st;
-        }
-    }
-
     public static boolean isNonVide(final String texte) {
         return ((texte != null) && (texte.length() > 0));
     }

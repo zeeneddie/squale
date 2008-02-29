@@ -14,12 +14,6 @@ package com.airfrance.welcom.outils.pdf;
  */
 public class PDFEngine {
     /** constante*/
-	/* TODO FAB : il faut supprimer ce type de générateur
-    
-    public final static PDFEngine STYLEREPORT = new PDFEngine("styleReport");
-    
-    */
-    /** constante*/
     public final static PDFEngine ITEXT = new PDFEngine("iText");
     /** constante*/
     public final static PDFEngine JASPERREPORTS = new PDFEngine("jasperReports");
