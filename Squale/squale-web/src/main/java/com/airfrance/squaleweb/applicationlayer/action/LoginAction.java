@@ -2,6 +2,7 @@ package com.airfrance.squaleweb.applicationlayer.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -61,6 +62,7 @@ public class LoginAction extends DefaultAction {
         } else {
             forward = pMapping.findForward("total_failure");
         }
+        
         return forward;
     }
 
@@ -100,12 +102,9 @@ public class LoginAction extends DefaultAction {
     public LogonBean getUser(HttpServletRequest pRequest) throws ConnectionException, JrafEnterpriseException, WTransformerException {
         // Obtention des informations sur l'utilisateur connecté
         IUserBeanAccessor userBeanAccessor = UserBeanAccessorHelper.getUserBeanAccessor();
-        String name = "squaleUser"; //pRequest.getRemoteUser();
-        	/**TODO rentrer un utilisateur */
-        // Valeur par défaut si l'utilisateur
-        if (name.length() == 0) {
-            name = " ";
-        }
+        //String name = "squaleUser";
+        //pRequest.getRemoteUser();
+        String name = userBeanAccessor.getUserBean().getIdentifier();
         boolean isAdmin = userBeanAccessor.getUserBean(pRequest).isAdmin();
         UserDTO user = new UserDTO();
         user.setMatricule(name);
