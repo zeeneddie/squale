@@ -34,7 +34,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 public class UserFacade implements IFacade {
 
     /**
-     * provider de persistence
+     * Persistence provider
      */
     private static final IPersistenceProvider PERSISTENTPROVIDER = PersistenceHelper.getPersistenceProvider();
 
@@ -144,6 +144,43 @@ public class UserFacade implements IFacade {
         return userDTO;
     }
 
+    
+    /**
+     * Return the complete userDTO corresponding with the identifier and the password 
+     * @param pUser The userDTO with the identifier and the password inside
+     * @return UserDTO found 
+     * @throws JrafEnterpriseException exception JRAF
+     */
+    public static UserDTO getUserByMatriculeAndPassword(UserDTO pUser) throws JrafEnterpriseException {
+    
+    
+    
+    UserBO userBO = null; 
+    UserDTO userDTO = null; 
+
+    ISession session = null;
+
+    try {
+        
+        session = PERSISTENTPROVIDER.getSession();
+
+        UserDAOImpl userDAO = UserDAOImpl.getInstance();
+
+        
+        userBO = (UserBO) userDAO.loadWithMatriculeAndPassword(session, pUser.getMatricule(), pUser.getPassword());
+        
+       
+        userDTO = UserTransform.bo2Dto(userBO);
+
+    } catch (JrafDaoException e) {
+        FacadeHelper.convertException(e, UserFacade.class.getName() );
+    } finally {
+        FacadeHelper.closeSession(session, UserFacade.class.getName() );
+    }
+
+    return userDTO;
+}
+    
     /**
      * Permet d'ajouter des droits au UserDTO
      * Dans le cas d'un utilisateur avec un privilège admin,
