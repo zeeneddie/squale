@@ -108,7 +108,8 @@
 		</form-bean>
 		<form-bean name="bugTrackingQCForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.externalTask.BugTrackingQCForm">
 		</form-bean>
-		
+		<form-bean name="userLoginForm" type="com.airfrance.squaleweb.applicationlayer.formbean.UserLoginForm">
+		</form-bean>
 	</form-beans>
 
 
@@ -592,6 +593,16 @@
 			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
 			</forward>
 			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		<action path="/ident" type="com.airfrance.squaleweb.applicationlayer.action.UserLoginAction" parameter="action" name="userLoginForm"  input="/jsp/login.jsp" scope="session" validate="false">
+			<forward name="success" path="/login.do">
+			</forward>
+			<forward name="failure" path="/jsp/login.jsp">
+			</forward>
+		</action>
+		<action path="/logout" type="com.airfrance.squaleweb.applicationlayer.action.UserLogoutAction">
+			<forward name="success" path="/jsp/login.jsp">
 			</forward>
 		</action>
 	</action-mappings>
