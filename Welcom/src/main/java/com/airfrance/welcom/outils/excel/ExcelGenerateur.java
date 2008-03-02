@@ -11,29 +11,31 @@ import java.io.OutputStream;
 
 /**
  * Interface à implémenter pour le formatage de la sortie des fichiers Excel.
+ * 
  * @author Rémy Bouquet
- *
  */
-public interface ExcelGenerateur {
+public interface ExcelGenerateur
+{
 
     /**
-     * 
      * @throws ExcelGenerateurException : Level une erreur sur la production du fichier
      */
-    public abstract void writeExcel() throws ExcelGenerateurException;
+    public abstract void writeExcel()
+        throws ExcelGenerateurException;
 
     /**
-     * 
      * @throws IOException : Probleme lors de l'ouverture des streams
      */
-    public abstract void init() throws IOException;
+    public abstract void init()
+        throws IOException;
 
     /**
-     * 
      * assigne l'outputstream
+     * 
      * @param os outputStream à setter
      * @throws ExcelGenerateurException exception pouvant etre levee
      */
-    public void open(OutputStream os) throws ExcelGenerateurException;
+    public void open( OutputStream os )
+        throws ExcelGenerateurException;
 
 }

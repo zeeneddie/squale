@@ -1,10 +1,11 @@
 package com.airfrance.welcom.taglib.aide;
 
 /**
- *  Exception concernant l'aide 
- *
+ * Exception concernant l'aide
  */
-public class AideException extends Exception {
+public class AideException
+    extends Exception
+{
     /**
      * 
      */
@@ -12,9 +13,11 @@ public class AideException extends Exception {
 
     /**
      * Constructeur
+     * 
      * @param message le message de l'exception
      */
-    public AideException(final String message) {
-        super(message);
+    public AideException( final String message )
+    {
+        super( message );
     }
 }

@@ -7,12 +7,11 @@
 package com.airfrance.welcom.struts.bean;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public interface WILogonBean {
+public interface WILogonBean
+{
     /**
      * @return le userName
      */

@@ -13,83 +13,114 @@ import javax.servlet.jsp.tagext.Tag;
 import org.apache.commons.validator.GenericValidator;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class ColTag extends BodyTagSupport {
+public class ColTag
+    extends BodyTagSupport
+{
     /**
      * 
      */
     private static final long serialVersionUID = -3223443429650477776L;
+
     /** parametre du tag */
     private String property = "";
+
     /** parametre du tag */
     private String key = "";
+
     /** parametre du tag */
     private boolean sortable = false;
+
     /** parametre du tag */
     private boolean editable = true;
+
     /** parametre du tag */
     private String paramId = "";
+
     /** parametre du tag */
     private String paramName = "";
+
     /** parametre du tag */
     private String paramProperty = "";
+
     /** parametre du tag */
     private String href = "";
+
     /** parametre du tag */
     private String width = "";
+
     /** parametre du tag */
     private String type = null;
+
     /** parametre du tag */
     private String dateFormatKey = null;
+
     /** parametre du tag */
     private String dateFormat = null;
+
     /** parametre du tag */
     private boolean writeTD = true;
+
     /** parametre du tag */
     private ColsTag colsTag;
+
     /** parametre du tag */
     private String emptyKey = "";
+
     /** parametre du tag */
     private String contentClass = "";
+
     /** parametre du tag */
     private String contentStyle = "";
+
     /** parametre du tag */
     private String headerStyle = "";
+
     /** parametre du tag */
     private String headerClass = "";
+
     /** parametre du tag */
     private String headerTruncate = "";
+
     /** parametre du tag */
     private String contentTruncate = "";
+
     /** parametre du tag */
     private boolean contentNoWrap = false;
+
     /** parametre du tag */
     private boolean headerNoWrap = true;
 
     /**
      * @see javax.servlet.jsp.tagext.BodyTagSupport#doStartTag()
      */
-    public int doStartTag() throws JspException {
+    public int doStartTag()
+        throws JspException
+    {
         // Recherche si un parent est du bon type
         Tag curParent = null;
 
-        for (curParent = getParent();(curParent != null) && !(curParent instanceof ColsTag);) {
+        for ( curParent = getParent(); ( curParent != null ) && !( curParent instanceof ColsTag ); )
+        {
             curParent = curParent.getParent();
         }
 
-        if (curParent == null) {
-            throw new JspException("ColTag  must be used between Table Tag.");
+        if ( curParent == null )
+        {
+            throw new JspException( "ColTag  must be used between Table Tag." );
         }
 
         colsTag = (ColsTag) curParent;
 
-        if (!GenericValidator.isBlankOrNull(colsTag.getEmptyKey()) && (pageContext.getAttribute(colsTag.getId()) == null)) {
+        if ( !GenericValidator.isBlankOrNull( colsTag.getEmptyKey() )
+            && ( pageContext.getAttribute( colsTag.getId() ) == null ) )
+        {
             return SKIP_BODY;
-        } else {
+        }
+        else
+        {
             return EVAL_BODY_BUFFERED;
         }
     }
@@ -97,47 +128,52 @@ public class ColTag extends BodyTagSupport {
     /**
      * @see javax.servlet.jsp.tagext.Tag#doEndTag()
      */
-    public int doEndTag() throws JspException {
+    public int doEndTag()
+        throws JspException
+    {
         final Col c = new Col();
 
-        if (key == null) {
+        if ( key == null )
+        {
             key = property;
         }
 
-        c.setKey(key);
-        c.setProperty(property);
-        c.setSortable(sortable);
-        c.setEditable(editable);
-        c.setParamId(paramId);
-        c.setParamName(paramName);
-        c.setParamProperty(paramProperty);
-        c.setLink(href);
-        c.setWidth(width);
-        c.setPageContext(pageContext);
-        c.setContentStyle(contentStyle);
-        c.setContentClass(contentClass);
-        c.setHeaderStyle(headerStyle);
-        c.setHeaderClass(headerClass);
-        c.setHeaderTruncate(headerTruncate);
-        c.setContentTruncate(contentTruncate);
-        c.setHeaderNoWrap(headerNoWrap);
-        c.setContentNoWrap(contentNoWrap);
+        c.setKey( key );
+        c.setProperty( property );
+        c.setSortable( sortable );
+        c.setEditable( editable );
+        c.setParamId( paramId );
+        c.setParamName( paramName );
+        c.setParamProperty( paramProperty );
+        c.setLink( href );
+        c.setWidth( width );
+        c.setPageContext( pageContext );
+        c.setContentStyle( contentStyle );
+        c.setContentClass( contentClass );
+        c.setHeaderStyle( headerStyle );
+        c.setHeaderClass( headerClass );
+        c.setHeaderTruncate( headerTruncate );
+        c.setContentTruncate( contentTruncate );
+        c.setHeaderNoWrap( headerNoWrap );
+        c.setContentNoWrap( contentNoWrap );
 
-        if (getBodyContent() != null) {
-            c.setCurrentValue(getBodyContent().getString().trim());
+        if ( getBodyContent() != null )
+        {
+            c.setCurrentValue( getBodyContent().getString().trim() );
         }
 
-        c.setWriteTD(writeTD);
+        c.setWriteTD( writeTD );
 
-        if (type != null) {
+        if ( type != null )
+        {
             type = type.toUpperCase();
         }
 
-        c.setType(type);
-        c.setDateFormatKey(dateFormatKey);
-        c.setDateFormat(dateFormat);
-        c.setEmptyKey(emptyKey);
-        colsTag.addCellule(c);
+        c.setType( type );
+        c.setDateFormatKey( dateFormatKey );
+        c.setDateFormat( dateFormat );
+        c.setEmptyKey( emptyKey );
+        colsTag.addCellule( c );
 
         return EVAL_PAGE;
     }
@@ -145,7 +181,8 @@ public class ColTag extends BodyTagSupport {
     /**
      * @see javax.servlet.jsp.tagext.BodyTagSupport#release()
      */
-    public void release() {
+    public void release()
+    {
         colsTag = null;
         property = "";
         key = "";
@@ -176,307 +213,352 @@ public class ColTag extends BodyTagSupport {
     /**
      * @return key
      */
-    public String getKey() {
+    public String getKey()
+    {
         return key;
     }
 
     /**
      * @return property
      */
-    public String getProperty() {
+    public String getProperty()
+    {
         return property;
     }
 
     /**
      * @return sortable
      */
-    public boolean isSortable() {
+    public boolean isSortable()
+    {
         return sortable;
     }
 
     /**
      * @param string le nouveau key
      */
-    public void setKey(final String string) {
+    public void setKey( final String string )
+    {
         key = string;
     }
 
     /**
      * @param string le nouveau property
      */
-    public void setProperty(final String string) {
+    public void setProperty( final String string )
+    {
         property = string;
     }
 
     /**
      * @param b le nouveau sortable
      */
-    public void setSortable(final boolean b) {
+    public void setSortable( final boolean b )
+    {
         sortable = b;
     }
 
     /**
      * @return paramId
      */
-    public String getParamId() {
+    public String getParamId()
+    {
         return paramId;
     }
 
     /**
      * @return paramName
      */
-    public String getParamName() {
+    public String getParamName()
+    {
         return paramName;
     }
 
     /**
      * @return paramProperty
      */
-    public String getParamProperty() {
+    public String getParamProperty()
+    {
         return paramProperty;
     }
 
     /**
      * @param string le nouveau paramId
      */
-    public void setParamId(final String string) {
+    public void setParamId( final String string )
+    {
         paramId = string;
     }
 
     /**
      * @param string le nouveau paramName
      */
-    public void setParamName(final String string) {
+    public void setParamName( final String string )
+    {
         paramName = string;
     }
 
     /**
      * @param string le nouveau paramProperty
      */
-    public void setParamProperty(final String string) {
+    public void setParamProperty( final String string )
+    {
         paramProperty = string;
     }
 
     /**
      * @return href
      */
-    public String getHref() {
+    public String getHref()
+    {
         return href;
     }
 
     /**
-    * @return width
-    */
-    public String getWidth() {
+     * @return width
+     */
+    public String getWidth()
+    {
         return width;
     }
 
     /**
      * @param string le nouveau href
      */
-    public void setHref(final String string) {
+    public void setHref( final String string )
+    {
         href = string;
     }
 
     /**
      * @param string le nouveau width
      */
-    public void setWidth(final String string) {
+    public void setWidth( final String string )
+    {
         width = string;
     }
 
     /**
      * @return writeTD
      */
-    public boolean isWriteTD() {
+    public boolean isWriteTD()
+    {
         return writeTD;
     }
 
     /**
      * @param b le nouveau writeTD
      */
-    public void setWriteTD(final boolean b) {
+    public void setWriteTD( final boolean b )
+    {
         writeTD = b;
     }
 
     /**
      * @return dateFormat
      */
-    public String getDateFormat() {
+    public String getDateFormat()
+    {
         return dateFormat;
     }
 
     /**
      * @return type
      */
-    public String getType() {
+    public String getType()
+    {
         return type;
     }
 
     /**
      * @param string le nouveau dateFormat
      */
-    public void setDateFormat(final String string) {
+    public void setDateFormat( final String string )
+    {
         dateFormat = string;
     }
 
     /**
      * @param string le nouveau type
      */
-    public void setType(final String string) {
+    public void setType( final String string )
+    {
         type = string;
     }
 
     /**
      * @return emptyKey
      */
-    public String getEmptyKey() {
+    public String getEmptyKey()
+    {
         return emptyKey;
     }
 
     /**
      * @param string le nouveau emptyKEy
      */
-    public void setEmptyKey(final String string) {
+    public void setEmptyKey( final String string )
+    {
         emptyKey = string;
     }
+
     /**
      * @return editable
      */
-    public boolean isEditable() {
+    public boolean isEditable()
+    {
         return editable;
     }
 
     /**
      * @param b editable
      */
-    public void setEditable(final boolean b) {
+    public void setEditable( final boolean b )
+    {
         editable = b;
     }
 
     /**
      * @return headerStyle
      */
-    public String getHeaderStyle() {
+    public String getHeaderStyle()
+    {
         return headerStyle;
     }
 
     /**
      * @param string headerStyle
      */
-    public void setHeaderStyle(final String string) {
+    public void setHeaderStyle( final String string )
+    {
         headerStyle = string;
     }
 
     /**
      * @return contentTruncate
      */
-    public String getContentTruncate() {
+    public String getContentTruncate()
+    {
         return contentTruncate;
     }
 
     /**
      * @return headerTruncate
      */
-    public String getHeaderTruncate() {
+    public String getHeaderTruncate()
+    {
         return headerTruncate;
     }
 
     /**
      * @param string contentTruncate
      */
-    public void setContentTruncate(final String string) {
+    public void setContentTruncate( final String string )
+    {
         contentTruncate = string;
     }
 
     /**
      * @param string headerTruncate
      */
-    public void setHeaderTruncate(final String string) {
+    public void setHeaderTruncate( final String string )
+    {
         headerTruncate = string;
     }
 
     /**
      * @return contentClass
      */
-    public String getContentClass() {
+    public String getContentClass()
+    {
         return contentClass;
     }
 
     /**
      * @return contentStyle
      */
-    public String getContentStyle() {
+    public String getContentStyle()
+    {
         return contentStyle;
     }
 
     /**
      * @return headerClass
      */
-    public String getHeaderClass() {
+    public String getHeaderClass()
+    {
         return headerClass;
     }
 
     /**
      * @param string contentClass
      */
-    public void setContentClass(final String string) {
+    public void setContentClass( final String string )
+    {
         contentClass = string;
     }
 
     /**
      * @param string contentStyle
      */
-    public void setContentStyle(final String string) {
+    public void setContentStyle( final String string )
+    {
         contentStyle = string;
     }
 
     /**
      * @param string headerClass
      */
-    public void setHeaderClass(final String string) {
+    public void setHeaderClass( final String string )
+    {
         headerClass = string;
     }
 
     /**
      * @return dateFormatKey
      */
-    public String getDateFormatKey() {
+    public String getDateFormatKey()
+    {
         return dateFormatKey;
     }
 
     /**
      * @param string dateFormatKey
      */
-    public void setDateFormatKey(final String string) {
+    public void setDateFormatKey( final String string )
+    {
         dateFormatKey = string;
     }
 
     /**
      * @return ContentNoWrap
      */
-    public boolean isContentNoWrap() {
+    public boolean isContentNoWrap()
+    {
         return contentNoWrap;
     }
 
     /**
      * @return HeaderNoWrap
      */
-    public boolean isHeaderNoWrap() {
+    public boolean isHeaderNoWrap()
+    {
         return headerNoWrap;
     }
 
     /**
      * @param b ContentNoWrap
      */
-    public void setContentNoWrap(final boolean b) {
+    public void setContentNoWrap( final boolean b )
+    {
         contentNoWrap = b;
     }
 
     /**
      * @param b HeaderNoWrap
      */
-    public void setHeaderNoWrap(final boolean b) {
+    public void setHeaderNoWrap( final boolean b )
+    {
         headerNoWrap = b;
     }
 

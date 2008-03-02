@@ -11,15 +11,17 @@ import com.airfrance.welcom.outils.WelcomConfigurator;
 import com.airfrance.welcom.taglib.field.util.LayoutUtils;
 
 /**
- * Base class for the tags dealing with form input
- * The tag renders html code looking like: &lt;tr&gt;&lt;th&gt; input field title &lt;/th&gt;&lt;td&gt; input field &lt;/td&gt;&lt;/tr&gt;
- *
+ * Base class for the tags dealing with form input The tag renders html code looking like: &lt;tr&gt;&lt;th&gt; input
+ * field title &lt;/th&gt;&lt;td&gt; input field &lt;/td&gt;&lt;/tr&gt;
+ * 
  * @author: F Madaule
  */
-public abstract class BaseFieldTag extends LabelledTag {
+public abstract class BaseFieldTag
+    extends LabelledTag
+{
 
     /** Logger */
-    private static Log logger = LogFactory.getLog(LabelledTag.class);
+    private static Log logger = LogFactory.getLog( LabelledTag.class );
 
     /** Si le champs est requis */
     protected boolean isRequired = false;
@@ -33,29 +35,40 @@ public abstract class BaseFieldTag extends LabelledTag {
     /** prefixe auto id */
     private static final String AUTOID_PREFIX = "welcomFieldAutoId";
 
-    /** Constante*/
+    /** Constante */
     public static final String CHECKBOX = "CHECKBOX";
-    /** Constante*/
+
+    /** Constante */
     public static final String EMAIL = "EMAIL";
-    /** Constante*/
+
+    /** Constante */
     public static final String NUMBER = "NUMBER";
-    /** Constante*/
+
+    /** Constante */
     public static final String PASSWORD = "PASSWORD";
-    /** Constante*/
+
+    /** Constante */
     public static final String READONLY = "READONLY";
-    /** Constante*/
+
+    /** Constante */
     public static final String READSEND = "READSEND";
-    /** Constante*/
+
+    /** Constante */
     public static final String READWRITE = "READWRITE";
-    /** Constante*/
+
+    /** Constante */
     public static final String DATE = "DATE";
-    /** Constante*/
+
+    /** Constante */
     public static final String DATEHEURE = "DATEHEURE";
-    /** Constante*/
+
+    /** Constante */
     public static final String TEXT = "TEXT";
-    /** Constante*/
+
+    /** Constante */
     public static final String TEXTAREA = "TEXTAREA";
-    /** Constante*/
+
+    /** Constante */
     public static final String RADIO = "RADIO";
 
     /** type par defaut */
@@ -63,163 +76,204 @@ public abstract class BaseFieldTag extends LabelledTag {
 
     /**
      * Append the title of the field to the buffer
+     * 
      * @param buffer le stringbuffer
      * @throws JspException exception pouvant etre levee
      */
-    protected void beginField(final StringBuffer buffer) throws JspException {
-        doRenderLabel(buffer);
+    protected void beginField( final StringBuffer buffer )
+        throws JspException
+    {
+        doRenderLabel( buffer );
 
-        if (writeTD) {
-            buffer.append("<td");
+        if ( writeTD )
+        {
+            buffer.append( "<td" );
 
-            if (!GenericValidator.isBlankOrNull(styleClass)) {
-                buffer.append(" class=\"" + styleClass + "\"");
+            if ( !GenericValidator.isBlankOrNull( styleClass ) )
+            {
+                buffer.append( " class=\"" + styleClass + "\"" );
             }
 
-            if (!GenericValidator.isBlankOrNull(colspan)) {
-                buffer.append(" colspan=\"" + colspan + "\"");
+            if ( !GenericValidator.isBlankOrNull( colspan ) )
+            {
+                buffer.append( " colspan=\"" + colspan + "\"" );
             }
 
-            if (!GenericValidator.isBlankOrNull(width)) {
-                buffer.append(" width=\"" + width + "\"");
+            if ( !GenericValidator.isBlankOrNull( width ) )
+            {
+                buffer.append( " width=\"" + width + "\"" );
             }
 
-            buffer.append(" valign=\"middle\">");
+            buffer.append( " valign=\"middle\">" );
         }
     }
 
     /**
      * Gère le label
+     * 
      * @param buffer le Stringbuffer
      * @throws JspException exception pouvant etre levee
      */
-    private void doRenderLabel(final StringBuffer buffer) throws JspException {
-        if (hasLabel()) {
-            if (writeTD) {
-                buffer.append("<td");
+    private void doRenderLabel( final StringBuffer buffer )
+        throws JspException
+    {
+        if ( hasLabel() )
+        {
+            if ( writeTD )
+            {
+                buffer.append( "<td" );
 
-                /*if (WelcomConfigurator.getCharte()==Charte.V3_001 && "td1".equals(styleClassLabel)) {
-                
-                    logger.info("Supprimer 'styleclass=td1' dans la page JSP");
-                    styleClassLabel="right";
-                }*/
+                /*
+                 * if (WelcomConfigurator.getCharte()==Charte.V3_001 && "td1".equals(styleClassLabel)) {
+                 * logger.info("Supprimer 'styleclass=td1' dans la page JSP"); styleClassLabel="right"; }
+                 */
 
-                if (GenericValidator.isBlankOrNull(styleClassLabel)) {
-                    if (WelcomConfigurator.getCharte() == Charte.V3_001) {
+                if ( GenericValidator.isBlankOrNull( styleClassLabel ) )
+                {
+                    if ( WelcomConfigurator.getCharte() == Charte.V3_001 )
+                    {
                         styleClassLabel = "right";
-                    } else if (WelcomConfigurator.getCharte() == Charte.V2_002) {
+                    }
+                    else if ( WelcomConfigurator.getCharte() == Charte.V2_002 )
+                    {
                         styleClassLabel = "td1";
-                    } else {
+                    }
+                    else
+                    {
                         styleClassLabel = "formtdr";
                     }
                 }
 
-                buffer.append(" class=\"" + styleClassLabel + "\"");
+                buffer.append( " class=\"" + styleClassLabel + "\"" );
 
-                if (!GenericValidator.isBlankOrNull(widthLabel)) {
-                    buffer.append(" width=\"" + widthLabel + "\"");
+                if ( !GenericValidator.isBlankOrNull( widthLabel ) )
+                {
+                    buffer.append( " width=\"" + widthLabel + "\"" );
                 }
 
-                if (!GenericValidator.isBlankOrNull(colspanLabel)) {
-                    buffer.append(" colspan=\"" + colspanLabel + "\"");
+                if ( !GenericValidator.isBlankOrNull( colspanLabel ) )
+                {
+                    buffer.append( " colspan=\"" + colspanLabel + "\"" );
                 }
 
-                buffer.append(">");
+                buffer.append( ">" );
             }
 
-
             // ecrit le libellé
-            writeLabel(buffer);
+            writeLabel( buffer );
 
             // ecrit le td final
-            if (writeTD) {
-                buffer.append("</td>");
+            if ( writeTD )
+            {
+                buffer.append( "</td>" );
             }
         }
     }
 
     /**
      * Retourne vrai si on a a generer un label
+     * 
      * @return true si on a a generer un label
      * @throws JspException exception sur la recuperation du lbale
      */
-    private boolean hasLabel() throws JspException {
-        return (super.key != null) && (getLabel() != null) && (getLabel().length() > 0);
+    private boolean hasLabel()
+        throws JspException
+    {
+        return ( super.key != null ) && ( getLabel() != null ) && ( getLabel().length() > 0 );
     }
 
     /**
      * Ecrit le contenu du label
-     * @param buffer  stringbuffer
+     * 
+     * @param buffer stringbuffer
      * @throws JspException exception
      */
-    private void writeLabel(final StringBuffer buffer) throws JspException {
-  
+    private void writeLabel( final StringBuffer buffer )
+        throws JspException
+    {
+
         // S'il ya une puce
-        if (isLi()) {
-            buffer.append("<li>");
+        if ( isLi() )
+        {
+            buffer.append( "<li>" );
         }
-              
-        // Si c'est un bouton radio ou 
+
+        // Si c'est un bouton radio ou
         // une check box, on rajoute le label
-        if (type.equalsIgnoreCase(CHECKBOX) || type.equalsIgnoreCase(RADIO)) {
-        	
-        	if ((getStyleId() == null) || getStyleId().equals("")){
-        		// Génération de l'ID auto ssi aucun ID n'a été défini dans la balise
-        		setStyleId(getAutoId());
-        	}
-        	
-            buffer.append("<LABEL FOR=\"" + getStyleId() + "\">");
-            buffer.append(getLabel());
-            buffer.append("</LABEL>");
-        } else {
-            buffer.append(getLabel());
+        if ( type.equalsIgnoreCase( CHECKBOX ) || type.equalsIgnoreCase( RADIO ) )
+        {
+
+            if ( ( getStyleId() == null ) || getStyleId().equals( "" ) )
+            {
+                // Génération de l'ID auto ssi aucun ID n'a été défini dans la balise
+                setStyleId( getAutoId() );
+            }
+
+            buffer.append( "<LABEL FOR=\"" + getStyleId() + "\">" );
+            buffer.append( getLabel() );
+            buffer.append( "</LABEL>" );
         }
-        
+        else
+        {
+            buffer.append( getLabel() );
+        }
+
         // Ajout de l'étoiel si on est en charte V3
-        if (isRequired && WelcomConfigurator.getCharte() == Charte.V3_001) {
-            buffer.append(" *");
+        if ( isRequired && WelcomConfigurator.getCharte() == Charte.V3_001 )
+        {
+            buffer.append( " *" );
         }
     }
 
     /**
      * End the field (close the html tags)
+     * 
      * @param buffer le stringbuffer
      */
-    protected void endField(final StringBuffer buffer) {
-        if (writeTD) {
-            buffer.append("</td>");
+    protected void endField( final StringBuffer buffer )
+    {
+        if ( writeTD )
+        {
+            buffer.append( "</td>" );
         }
     }
 
     /**
      * @see com.airfrance.welcom.taglib.field.LabelledTag#setProperty(java.lang.String)
      */
-    public void setProperty(final String pProperty) {
+    public void setProperty( final String pProperty )
+    {
         property = pProperty;
 
-        if (LayoutUtils.getNoErrorMode()) {
+        if ( LayoutUtils.getNoErrorMode() )
+        {
             this.property = "property";
         }
     }
+
     /**
      * @return accesseur
      */
-    public String getStyleId() {
+    public String getStyleId()
+    {
         return styleId;
     }
 
     /**
      * @param string accesseur
      */
-    public void setStyleId(String string) {
+    public void setStyleId( String string )
+    {
         styleId = string;
     }
 
     /**
      * Retourn l'id
+     * 
      * @return retourne l'id
      */
-    private synchronized String getAutoId() {
-        return AUTOID_PREFIX + (autoid++);
+    private synchronized String getAutoId()
+    {
+        return AUTOID_PREFIX + ( autoid++ );
     }
 }

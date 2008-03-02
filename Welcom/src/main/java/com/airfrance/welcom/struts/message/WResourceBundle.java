@@ -13,48 +13,56 @@ import java.util.ResourceBundle;
 import org.apache.struts.util.MessageResources;
 
 /**
- * @author M325379
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M325379 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class WResourceBundle extends ResourceBundle {
+public class WResourceBundle
+    extends ResourceBundle
+{
     /** Message resource */
     private MessageResources resources;
-    
+
     /** locale */
     private Locale locale;
 
     /**
-     * Contructeur dun WResourceBundle 
-     * @param pResources Resource 
+     * Contructeur dun WResourceBundle
+     * 
+     * @param pResources Resource
      * @param pLocale Locale
      */
-    public WResourceBundle(final MessageResources pResources, final Locale pLocale) {
+    public WResourceBundle( final MessageResources pResources, final Locale pLocale )
+    {
         this.resources = pResources;
         this.locale = pLocale;
     }
 
-    /** (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see java.util.ResourceBundle#handleGetObject(java.lang.String)
      */
-    protected Object handleGetObject(final String key) {
-        return resources.getMessage(locale, key);
+    protected Object handleGetObject( final String key )
+    {
+        return resources.getMessage( locale, key );
     }
 
-    /** (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see java.util.ResourceBundle#getKeys()
      */
-    public Enumeration getKeys() {
+    public Enumeration getKeys()
+    {
         return null;
     }
-    
-    /**
-	 * @see java.util.ResourceBundle#getLocale()
-	 */
-	public Locale getLocale() {
-		return locale;
-	}
 
+    /**
+     * @see java.util.ResourceBundle#getLocale()
+     */
+    public Locale getLocale()
+    {
+        return locale;
+    }
 
 }

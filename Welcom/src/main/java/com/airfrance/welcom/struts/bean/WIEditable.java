@@ -7,20 +7,20 @@
 package com.airfrance.welcom.struts.bean;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public interface WIEditable {
+public interface WIEditable
+{
     /**
      * @return true si l'objet qui implemente l'interface est selectionne
      */
     public boolean isEdited();
 
     /**
-     * change le flag d'edition de l'objet 
+     * change le flag d'edition de l'objet
+     * 
      * @param b la nouvelle selection
      */
-    public void setEdited(boolean b);
+    public void setEdited( boolean b );
 }

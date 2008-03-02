@@ -17,72 +17,83 @@ import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class WPdfDecoration {
-    /** le header*/
+public class WPdfDecoration
+{
+    /** le header */
     private WIPdfHeaderFooter header;
-    /** le footer*/
+
+    /** le footer */
     private WIPdfHeaderFooter footer;
+
     /** int */
     private int startDecorationPage = 1;
 
     /**
-     * Constructeur  
+     * Constructeur
+     * 
      * @param pHeader le header
      * @param pFooter le footer
      */
-    public WPdfDecoration(final WIPdfHeaderFooter pHeader, final WIPdfHeaderFooter pFooter) {
+    public WPdfDecoration( final WIPdfHeaderFooter pHeader, final WIPdfHeaderFooter pFooter )
+    {
         footer = pFooter;
         header = pHeader;
     }
 
     /**
-     * Constructeur 
-     *
+     * Constructeur
      */
-    public WPdfDecoration() {
-        this(null, null);
+    public WPdfDecoration()
+    {
+        this( null, null );
     }
 
     /**
-     * 
      * @param pdfReader le reader
      * @return le byte array "rempli"
      * @throws DocumentException exception pouvant etre levee
      * @throws IOException exception pouvant etre levee
      */
-    public byte[] fill(final PdfReader pdfReader) throws DocumentException, IOException {
+    public byte[] fill( final PdfReader pdfReader )
+        throws DocumentException, IOException
+    {
         final ByteArrayOutputStream tmpout = new ByteArrayOutputStream();
-        fill(pdfReader, tmpout);
+        fill( pdfReader, tmpout );
         return tmpout.toByteArray();
     }
 
     /**
      * Met a la decoration du document;
+     * 
      * @param pdfReader le reader
-     * @param out l'outputstream 
+     * @param out l'outputstream
      * @throws DocumentException exception pouvant etre levee
      * @throws IOException exception pouvant etre levee
      */
-    public void fill(final PdfReader pdfReader, final OutputStream out) throws DocumentException, IOException {
+    public void fill( final PdfReader pdfReader, final OutputStream out )
+        throws DocumentException, IOException
+    {
         final int n = pdfReader.getNumberOfPages();
-        final PdfStamper stamp = new PdfStamper(pdfReader, out);
-        for (int i = 1; i <= n; i++) {
-            if (i >= startDecorationPage) {
-                //PdfImportedPage page = stamp.getImportedPage (pdfReader, i);
-                final PdfContentByte over = stamp.getOverContent(i);
-                final Rectangle pageSize = pdfReader.getPageSizeWithRotation(i);
+        final PdfStamper stamp = new PdfStamper( pdfReader, out );
+        for ( int i = 1; i <= n; i++ )
+        {
+            if ( i >= startDecorationPage )
+            {
+                // PdfImportedPage page = stamp.getImportedPage (pdfReader, i);
+                final PdfContentByte over = stamp.getOverContent( i );
+                final Rectangle pageSize = pdfReader.getPageSizeWithRotation( i );
 
-                if (header != null) {
-                    header.fill(over, pageSize, i, n);
+                if ( header != null )
+                {
+                    header.fill( over, pageSize, i, n );
                 }
 
-                if (footer != null) {
-                    footer.fill(over, pageSize, i, n);
+                if ( footer != null )
+                {
+                    footer.fill( over, pageSize, i, n );
                 }
 
             }
@@ -93,42 +104,48 @@ public class WPdfDecoration {
     /**
      * @return footer
      */
-    public WIPdfHeaderFooter getFooter() {
+    public WIPdfHeaderFooter getFooter()
+    {
         return footer;
     }
 
     /**
      * @return header
      */
-    public WIPdfHeaderFooter getHeader() {
+    public WIPdfHeaderFooter getHeader()
+    {
         return header;
     }
 
     /**
      * @param pFooter footer
      */
-    public void setFooter(final WIPdfHeaderFooter pFooter) {
+    public void setFooter( final WIPdfHeaderFooter pFooter )
+    {
         footer = pFooter;
     }
 
     /**
      * @param pFooter header
      */
-    public void setHeader(final WIPdfHeaderFooter pFooter) {
+    public void setHeader( final WIPdfHeaderFooter pFooter )
+    {
         header = pFooter;
     }
 
     /**
      * @return startDecorationPage
      */
-    public int getStartDecorationPage() {
+    public int getStartDecorationPage()
+    {
         return startDecorationPage;
     }
 
     /**
      * @param i startDecorationPage
      */
-    public void setStartDecorationPage(final int i) {
+    public void setStartDecorationPage( final int i )
+    {
         startDecorationPage = i;
     }
 

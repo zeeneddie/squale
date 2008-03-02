@@ -10,31 +10,36 @@ import com.airfrance.welcom.outils.rsh.Impl.CmdRshClient;
 import com.airfrance.welcom.outils.rsh.Impl.JavaRshClient;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class RshClientFactory {
+public class RshClientFactory
+{
     /**
      * Contructeur
      */
-    private RshClientFactory() {
+    private RshClientFactory()
+    {
         super();
     }
 
     /**
      * Retourne un rsh client en fonction de la plateforme.
+     * 
      * @param serveur : Serveur
      * @param loginDistant : Logon Distant
-     * @param loginLocal : Login  Local
+     * @param loginLocal : Login Local
      * @return RshClient en fonction de l'os ... soit full java ou rsh
      */
-    public static RshClient getRshClient(final String serveur, final String loginDistant, final String loginLocal) {
-        if (System.getProperty("os.name").equals("SunOS")) {
-            return new CmdRshClient(serveur, loginDistant, loginLocal);
-        } else {
-            return new JavaRshClient(serveur, loginDistant, loginLocal);
+    public static RshClient getRshClient( final String serveur, final String loginDistant, final String loginLocal )
+    {
+        if ( System.getProperty( "os.name" ).equals( "SunOS" ) )
+        {
+            return new CmdRshClient( serveur, loginDistant, loginLocal );
+        }
+        else
+        {
+            return new JavaRshClient( serveur, loginDistant, loginLocal );
         }
     }
 }

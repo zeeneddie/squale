@@ -14,17 +14,16 @@ import org.apache.struts.util.MessageResources;
 import com.airfrance.welcom.outils.WelcomConfigurator;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class ColHeader {
+public class ColHeader
+{
 
     /** Colonne */
     private Col col;
 
-    /** critére de trie de la colonne*/
+    /** critére de trie de la colonne */
     private ColSort colSort;
 
     /** locale de l'utlisateur */
@@ -33,22 +32,28 @@ public class ColHeader {
     /** message resource */
     private MessageResources resources;
 
-    /** Constante*/
-    private final static String IMG_NONE = WelcomConfigurator.getMessageWithCfgChartePrefix(".htmltable.images.sort.none");
-    /** Constante*/
-    private final static String IMG_ASC = WelcomConfigurator.getMessageWithCfgChartePrefix(".htmltable.images.sort.asc");
-    /** Constante*/
-    private final static String IMG_DESC = WelcomConfigurator.getMessageWithCfgChartePrefix(".htmltable.images.sort.desc");
+    /** Constante */
+    private final static String IMG_NONE =
+        WelcomConfigurator.getMessageWithCfgChartePrefix( ".htmltable.images.sort.none" );
 
+    /** Constante */
+    private final static String IMG_ASC =
+        WelcomConfigurator.getMessageWithCfgChartePrefix( ".htmltable.images.sort.asc" );
+
+    /** Constante */
+    private final static String IMG_DESC =
+        WelcomConfigurator.getMessageWithCfgChartePrefix( ".htmltable.images.sort.desc" );
 
     /**
      * Contructeur d'un col header
-     * @param pCol colonne 
+     * 
+     * @param pCol colonne
      * @param pColSort critere de trie
      * @param pLocaleRequest locale de l'utilisateur
      * @param pResource resourcebundle, contient touts les massge de l'appli
-     *      */
-    public ColHeader(MessageResources pResource, Locale pLocaleRequest, Col pCol, ColSort pColSort) {
+     */
+    public ColHeader( MessageResources pResource, Locale pLocaleRequest, Col pCol, ColSort pColSort )
+    {
         this.col = pCol;
         this.colSort = pColSort;
         this.resources = pResource;
@@ -56,106 +61,125 @@ public class ColHeader {
     }
 
     /**
-     * Retourne le libellé de l'entete de la colonne
-     * cela peux etre de ll'HTMl si c'est un spécialcontent a été definit
-     * @return  Retourne le libellé de l'entete de la colonne
+     * Retourne le libellé de l'entete de la colonne cela peux etre de ll'HTMl si c'est un spécialcontent a été definit
+     * 
+     * @return Retourne le libellé de l'entete de la colonne
      */
-    public String getLibelle() {
+    public String getLibelle()
+    {
         String libelle = "";
-        if (col.isSpecialHeader()) {
+        if ( col.isSpecialHeader() )
+        {
             libelle = col.getSpecialHeaderContent();
-        } else {
-            libelle = resources.getMessage(localeRequest, col.getKey());
+        }
+        else
+        {
+            libelle = resources.getMessage( localeRequest, col.getKey() );
         }
 
-        if (libelle == null) {
+        if ( libelle == null )
+        {
             libelle = col.getKey();
         }
-        
+
         return libelle;
 
     }
 
     /**
      * Retourne le libelle trucated si necessaire
+     * 
      * @return le libelle trucated si necessaire
      */
-    public String getTuncatedIfNecessaryLibelle(){
+    public String getTuncatedIfNecessaryLibelle()
+    {
         // Truncque le fichier si necessaire
-        return InternalTableUtil.getTruncatedString(getLibelle(), col.getHeaderTruncate(), null);        
+        return InternalTableUtil.getTruncatedString( getLibelle(), col.getHeaderTruncate(), null );
     }
-
 
     /**
      * Retourne l'url pour le trie
+     * 
      * @param servletName nom de la servlet
      * @param tableTag nom du tag de la table
      * @param from pour quel indice de la table ?
      * @return l'url pour le trie
      */
-    public String getSortUrl(TableTag tableTag, String servletName,int from) {
-        
+    public String getSortUrl( TableTag tableTag, String servletName, int from )
+    {
+
         String frwd = null;
 
-        if (!GenericValidator.isBlankOrNull(tableTag.getPageForward())) {
+        if ( !GenericValidator.isBlankOrNull( tableTag.getPageForward() ) )
+        {
             frwd = "&wforward=" + tableTag.getPageForward();
-        } else {
+        }
+        else
+        {
             frwd = "&requestURI=" + tableTag.getRequestURI();
         }
 
         final StringBuffer sbUrl = new StringBuffer();
-        sbUrl.append(servletName + "from=" + from + frwd + "&colonne=" + col.getProperty());
-        sbUrl.append("&table="+ListColumnSort.getCle(tableTag.getName(), tableTag.getProperty()));
-        sbUrl.append("&sens=" + SortOrder.next(colSort.getSort()) + "");
+        sbUrl.append( servletName + "from=" + from + frwd + "&colonne=" + col.getProperty() );
+        sbUrl.append( "&table=" + ListColumnSort.getCle( tableTag.getName(), tableTag.getProperty() ) );
+        sbUrl.append( "&sens=" + SortOrder.next( colSort.getSort() ) + "" );
 
-        if (!GenericValidator.isBlankOrNull(col.getType())) {
-            sbUrl.append("&type=" + col.getType() + "");
+        if ( !GenericValidator.isBlankOrNull( col.getType() ) )
+        {
+            sbUrl.append( "&type=" + col.getType() + "" );
         }
 
-        if (!GenericValidator.isBlankOrNull(col.getDateFormatKey())) {
-            final String format = resources.getMessage(localeRequest, col.getDateFormatKey());
-            sbUrl.append("&dateformat=" + format + "");
-        } else if (!GenericValidator.isBlankOrNull(col.getDateFormat())) {
-            sbUrl.append("&dateformat=" + col.getDateFormat() + "");
+        if ( !GenericValidator.isBlankOrNull( col.getDateFormatKey() ) )
+        {
+            final String format = resources.getMessage( localeRequest, col.getDateFormatKey() );
+            sbUrl.append( "&dateformat=" + format + "" );
         }
-        
+        else if ( !GenericValidator.isBlankOrNull( col.getDateFormat() ) )
+        {
+            sbUrl.append( "&dateformat=" + col.getDateFormat() + "" );
+        }
+
         return sbUrl.toString();
     }
 
-
     /**
      * retourn l'image du trie
-     * @return le chemin de l'image correspondant au type de trie
-     * defini dans le WelcomResources
+     * 
+     * @return le chemin de l'image correspondant au type de trie defini dans le WelcomResources
      */
-    public String getSrcImgOfSort() {
-        String src=null;
-        if (colSort.getSort() == SortOrder.NONE) {
-            src=IMG_NONE ;
-        } else if (colSort.getSort() == SortOrder.ASC) {
-            src=IMG_DESC;
-        } else if (colSort.getSort() == SortOrder.DESC) {
-            src=IMG_ASC;
+    public String getSrcImgOfSort()
+    {
+        String src = null;
+        if ( colSort.getSort() == SortOrder.NONE )
+        {
+            src = IMG_NONE;
+        }
+        else if ( colSort.getSort() == SortOrder.ASC )
+        {
+            src = IMG_DESC;
+        }
+        else if ( colSort.getSort() == SortOrder.DESC )
+        {
+            src = IMG_ASC;
         }
         return src;
     }
-    
+
     /**
      * Retourne si on autorise les espaces
+     * 
      * @return si on autorise les espaces
      */
-    public boolean isNoWrap() {
+    public boolean isNoWrap()
+    {
         return col.isHeaderNoWrap();
     }
-    
-    
-    
-
 
     /**
      * @return la colonne
      */
-    public Col getCol() {
+    public Col getCol()
+    {
         return col;
     }
 

@@ -13,33 +13,40 @@ import org.apache.commons.validator.GenericValidator;
 import com.airfrance.welcom.struts.util.WRequestUtils;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
+public class LinkTag
+    extends org.apache.struts.taglib.html.LinkTag
+{
 
     /**
      * 
      */
     private static final long serialVersionUID = -5683341365632034727L;
-    /** attribut*/
+
+    /** attribut */
     protected String titleKey = "";
-    /** attribut*/
+
+    /** attribut */
     protected String titleKeyArg0 = "";
-    /** attribut*/
+
+    /** attribut */
     protected String titleKeyArg1 = "";
-    /** attribut*/
+
+    /** attribut */
     protected String titleKeyArg2 = "";
-    /** attribut*/
+
+    /** attribut */
     protected String titleKeyArg3 = "";
 
     /**
      * @see org.apache.struts.taglib.html.LinkTag#doStartTag()
      */
-    public int doStartTag() throws JspException {
-        setTitle(computeTitle());
+    public int doStartTag()
+        throws JspException
+    {
+        setTitle( computeTitle() );
 
         return super.doStartTag();
     }
@@ -47,18 +54,23 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
     /**
      * @return le title
      */
-    public String computeTitle() {
-        if (!GenericValidator.isBlankOrNull(titleKey)) {
+    public String computeTitle()
+    {
+        if ( !GenericValidator.isBlankOrNull( titleKey ) )
+        {
             final String titlekeyArgs[] = { titleKeyArg0, titleKeyArg1, titleKeyArg2, titleKeyArg3 };
             String message;
-            message = WRequestUtils.message(super.pageContext, titleKey, titlekeyArgs);
+            message = WRequestUtils.message( super.pageContext, titleKey, titlekeyArgs );
 
-            if (GenericValidator.isBlankOrNull(message)) {
+            if ( GenericValidator.isBlankOrNull( message ) )
+            {
                 message = titleKey;
             }
 
             return message;
-        } else {
+        }
+        else
+        {
             return super.getTitle();
         }
     }
@@ -66,70 +78,80 @@ public class LinkTag extends org.apache.struts.taglib.html.LinkTag {
     /**
      * @return titleKey
      */
-    public String getTitleKey() {
+    public String getTitleKey()
+    {
         return titleKey;
     }
 
     /**
      * @return titleKeyArg0
      */
-    public String getTitleKeyArg0() {
+    public String getTitleKeyArg0()
+    {
         return titleKeyArg0;
     }
 
     /**
      * @return titleKeyArg1
      */
-    public String getTitleKeyArg1() {
+    public String getTitleKeyArg1()
+    {
         return titleKeyArg1;
     }
 
     /**
      * @return titleKeyArg2
      */
-    public String getTitleKeyArg2() {
+    public String getTitleKeyArg2()
+    {
         return titleKeyArg2;
     }
 
     /**
      * @return titleKeyArg3
      */
-    public String getTitleKeyArg3() {
+    public String getTitleKeyArg3()
+    {
         return titleKeyArg3;
     }
 
     /**
      * @param string titleKey
      */
-    public void setTitleKey(final String string) {
+    public void setTitleKey( final String string )
+    {
         titleKey = string;
     }
 
     /**
      * @param string titleKeyArg0
      */
-    public void setTitleKeyArg0(final String string) {
+    public void setTitleKeyArg0( final String string )
+    {
         titleKeyArg0 = string;
     }
 
     /**
      * @param string titleKeyArg1
      */
-    public void setTitleKeyArg1(final String string) {
+    public void setTitleKeyArg1( final String string )
+    {
         titleKeyArg1 = string;
     }
 
     /**
      * @param string titleKeyArg2
      */
-    public void setTitleKeyArg2(final String string) {
+    public void setTitleKeyArg2( final String string )
+    {
         titleKeyArg2 = string;
     }
 
     /**
      * @param string titleKeyArg3
      */
-    public void setTitleKeyArg3(final String string) {
+    public void setTitleKeyArg3( final String string )
+    {
         titleKeyArg3 = string;
     }
 }

@@ -7,18 +7,18 @@
 package com.airfrance.welcom.taglib.formulaire;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public interface IFormulaireBottomRenderer {
+public interface IFormulaireBottomRenderer
+{
 
     /**
      * Rendu : table
+     * 
      * @param bottomvalue Valeur du bottom
      * @return la barre de bouton
      */
-    public String drawTable(String bottomvalue);
+    public String drawTable( String bottomvalue );
 
 }

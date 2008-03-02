@@ -10,12 +10,11 @@ import org.apache.struts.action.ActionServlet;
 import org.apache.struts.config.ModuleConfig;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public interface WIAddOns {
+public interface WIAddOns
+{
 
     /**
      * Fermeture de l'addons..
@@ -24,11 +23,13 @@ public interface WIAddOns {
 
     /**
      * la config de l'Add-on est Ok
+     * 
      * @param servlet : Servlet
      * @param config : Config
      * @throws AddonsException : Probleme sur l'initialisation de l'addons
      */
-    public void init(ActionServlet servlet, ModuleConfig config) throws AddonsException;
+    public void init( ActionServlet servlet, ModuleConfig config )
+        throws AddonsException;
 
     /**
      * @return Affichage

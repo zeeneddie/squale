@@ -1,10 +1,11 @@
 package com.airfrance.welcom.struts.bean;
 
 /**
- * Classe WCryptableException 
- *
+ * Classe WCryptableException
  */
-public class JCryptableException extends Exception {
+public class JCryptableException
+    extends Exception
+{
     /**
      * 
      */
@@ -12,9 +13,11 @@ public class JCryptableException extends Exception {
 
     /**
      * Constructeur
+     * 
      * @param message le message de l'exception
      */
-    public JCryptableException(final String message) {
-        super(message);
+    public JCryptableException( final String message )
+    {
+        super( message );
     }
 }

@@ -7,25 +7,31 @@ import com.airfrance.welcom.outils.Access;
 
 /**
  * @author user
- *
  */
-public class IsPageReadWriteTag extends TagSupport {
+public class IsPageReadWriteTag
+    extends TagSupport
+{
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -9143207268381306577L;
+     * 
+     */
+    private static final long serialVersionUID = -9143207268381306577L;
 
-	/**
-      * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
-      */
-    public int doStartTag() throws JspException {
+    /**
+     * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
+     */
+    public int doStartTag()
+        throws JspException
+    {
         // Recupere le droit sur la page
-        final String pageAccess = (String) pageContext.getAttribute("access");
+        final String pageAccess = (String) pageContext.getAttribute( "access" );
 
-        if ((pageAccess != null) && pageAccess.equals(Access.READWRITE)) {
+        if ( ( pageAccess != null ) && pageAccess.equals( Access.READWRITE ) )
+        {
             return EVAL_BODY_INCLUDE;
-        } else {
+        }
+        else
+        {
             return SKIP_BODY;
         }
     }

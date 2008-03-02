@@ -16,201 +16,241 @@ import com.airfrance.welcom.outils.Util;
 import com.airfrance.welcom.outils.WelcomConfigurator;
 
 /**
- * 
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class GZIPResponseStream extends ServletOutputStream {
-    
+public class GZIPResponseStream
+    extends ServletOutputStream
+{
+
     /** Flux de sortie interne */
     protected ByteArrayOutputStream baos = null;
-    
+
     /** Stream pour compresser */
     protected DeflaterOutputStream gzipstream = null;
-    
-    /** Closed ?*/
+
+    /** Closed ? */
     protected boolean closed = false;
-    
+
     /** La response */
     protected HttpServletResponse response = null;
-    
+
     /** La outputstream */
     protected ServletOutputStream output = null;
-    
+
     /** Le contentType */
     protected String contentType;
-    
+
     /** Type permis de compressé */
     protected Vector allowedType;
-    
+
     /** l'entete */
     protected Hashtable headers;
-    
+
     /** Ignore la compression */
     protected boolean ignoreZip = false;
 
-    /** Niveau de compression max*/
+    /** Niveau de compression max */
     private static final int LEVEL_COMPRESSION = 9;
 
     /**
      * Contructeur
+     * 
      * @param pResponse : la response
      * @throws IOException : Probleme sur les streams
      */
-    public GZIPResponseStream(final HttpServletResponse pResponse) throws IOException {
+    public GZIPResponseStream( final HttpServletResponse pResponse )
+        throws IOException
+    {
         super();
         closed = false;
         this.response = pResponse;
         this.output = response.getOutputStream();
         baos = new ByteArrayOutputStream();
-        response.addHeader("Content-Encoding", WelcomConfigurator.getMessage(WelcomConfigurator.OPTIFLUX_COMPRESSION_MODE).toLowerCase());
+        response.addHeader( "Content-Encoding",
+                            WelcomConfigurator.getMessage( WelcomConfigurator.OPTIFLUX_COMPRESSION_MODE ).toLowerCase() );
     }
 
-    /** 
-     * Cloture 
+    /**
+     * Cloture
+     * 
      * @throws IOException : Probleme sur les streams
      */
-    public void close() throws IOException {
-        if (closed) {
+    public void close()
+        throws IOException
+    {
+        if ( closed )
+        {
             return;
         }
 
-        if (((contentType == null) || GZIPAllowedContentType.isAllowZipType(contentType)) && !ignoreZip) {
+        if ( ( ( contentType == null ) || GZIPAllowedContentType.isAllowZipType( contentType ) ) && !ignoreZip )
+        {
             final ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
 
-            if (Util.isEqualsIgnoreCase(WelcomConfigurator.getMessage(WelcomConfigurator.OPTIFLUX_COMPRESSION_MODE), "deflate")) {
-                gzipstream = new DeflaterOutputStream(baos2, new Deflater(LEVEL_COMPRESSION, true));
-            } else {
-                gzipstream = new GZIPOutputStream(baos2);
+            if ( Util.isEqualsIgnoreCase(
+                                          WelcomConfigurator.getMessage( WelcomConfigurator.OPTIFLUX_COMPRESSION_MODE ),
+                                          "deflate" ) )
+            {
+                gzipstream = new DeflaterOutputStream( baos2, new Deflater( LEVEL_COMPRESSION, true ) );
+            }
+            else
+            {
+                gzipstream = new GZIPOutputStream( baos2 );
             }
 
             final byte bytes[] = baos.toByteArray();
 
-            gzipstream.write(bytes);
+            gzipstream.write( bytes );
             gzipstream.finish();
 
-            output.write(baos2.toByteArray());
-        } else {
+            output.write( baos2.toByteArray() );
+        }
+        else
+        {
             response.reset();
 
-            response.setContentType(contentType);
+            response.setContentType( contentType );
 
-            if (headers != null) {
-                for (final Enumeration e = headers.keys(); e.hasMoreElements();) {
+            if ( headers != null )
+            {
+                for ( final Enumeration e = headers.keys(); e.hasMoreElements(); )
+                {
                     final String key = (String) e.nextElement();
-                    response.addHeader(key, (String) headers.get(key));
+                    response.addHeader( key, (String) headers.get( key ) );
                 }
             }
 
-            output.write(baos.toByteArray());
+            output.write( baos.toByteArray() );
         }
 
         output.close();
         closed = true;
     }
 
-    /** 
+    /**
      * Flush la stream si pas fermé
+     * 
      * @throws IOException : Probleme sur les streams
      */
-    public void flush() throws IOException {
-        if (!closed) {
+    public void flush()
+        throws IOException
+    {
+        if ( !closed )
+        {
             baos.flush();
         }
     }
 
     /**
      * Ecrit dans la stream
-     * @param b un byte... 
+     * 
+     * @param b un byte...
      * @throws IOException : Probleme sur les streams
      */
-    public void write(final int b) throws IOException {
-        if (closed) {
-            throw new IOException("Cannot write to a closed output stream");
+    public void write( final int b )
+        throws IOException
+    {
+        if ( closed )
+        {
+            throw new IOException( "Cannot write to a closed output stream" );
         }
 
-        baos.write((byte) b);
+        baos.write( (byte) b );
     }
 
     /**
      * Ecrit dans la stream
+     * 
      * @param b un tableau de byte
      * @throws IOException : Probleme sur les streams
      */
-    public void write(final byte b[]) throws IOException {
-        write(b, 0, b.length);
+    public void write( final byte b[] )
+        throws IOException
+    {
+        write( b, 0, b.length );
     }
 
     /**
-     * Ecrit dans la stream 
+     * Ecrit dans la stream
+     * 
      * @param b un tableau de byte
      * @param off : Offeset
      * @param len : longueur
      * @throws IOException : Probleme sur les streams
      */
-    public void write(final byte b[], final int off, final int len) throws IOException {
-        if (closed) {
-            throw new IOException("Cannot write to a closed output stream");
+    public void write( final byte b[], final int off, final int len )
+        throws IOException
+    {
+        if ( closed )
+        {
+            throw new IOException( "Cannot write to a closed output stream" );
         }
 
-        baos.write(b, off, len);
+        baos.write( b, off, len );
     }
 
     /**
      * @return Si c'est fermé
      */
-    public boolean closed() {
-        return (this.closed);
+    public boolean closed()
+    {
+        return ( this.closed );
     }
 
     /**
      * Reset, fait rien
      */
-    public void reset() {
-        //noop
+    public void reset()
+    {
+        // noop
     }
 
     /**
      * @return le contentType
      */
-    public String getContentType() {
+    public String getContentType()
+    {
         return contentType;
     }
 
     /**
      * @param string le contentType
      */
-    public void setContentType(final String string) {
+    public void setContentType( final String string )
+    {
         contentType = string;
     }
 
     /**
      * @return le header
      */
-    public Hashtable getHeaders() {
+    public Hashtable getHeaders()
+    {
         return headers;
     }
 
     /**
      * @param hashtable les headers
      */
-    public void setHeaders(final Hashtable hashtable) {
+    public void setHeaders( final Hashtable hashtable )
+    {
         headers = hashtable;
     }
 
     /**
      * @return Ignore la compression
      */
-    public boolean isIgnoreZip() {
+    public boolean isIgnoreZip()
+    {
         return ignoreZip;
     }
 
     /**
      * @param b Ignore la compression
      */
-    public void setIgnoreZip(final boolean b) {
+    public void setIgnoreZip( final boolean b )
+    {
         ignoreZip = b;
     }
 }

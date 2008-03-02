@@ -17,25 +17,29 @@ import com.airfrance.welcom.outils.WelcomConfigurator;
 import com.airfrance.welcom.struts.webServer.WebEngine;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class HtmlAreaServlet extends HttpServlet {
+public class HtmlAreaServlet
+    extends HttpServlet
+{
 
     /**
      * 
      */
     private static final long serialVersionUID = -4108756563480677586L;
 
-    /** 
-     * @see javax.servlet.http.HttpServlet#service(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+    /**
+     * @see javax.servlet.http.HttpServlet#service(javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse)
      */
-    protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-        final WebEngine webEngine = new WebEngine(this, request, response);
-        final String path = WelcomConfigurator.getMessage(WelcomConfigurator.HTMLAREA_DEFAULT_PATH) + request.getPathInfo();
-        webEngine.process(path);
+    protected void service( final HttpServletRequest request, final HttpServletResponse response )
+        throws ServletException, IOException
+    {
+        final WebEngine webEngine = new WebEngine( this, request, response );
+        final String path =
+            WelcomConfigurator.getMessage( WelcomConfigurator.HTMLAREA_DEFAULT_PATH ) + request.getPathInfo();
+        webEngine.process( path );
     }
 
 }

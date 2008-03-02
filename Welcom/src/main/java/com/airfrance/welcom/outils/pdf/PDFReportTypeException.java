@@ -2,9 +2,10 @@ package com.airfrance.welcom.outils.pdf;
 
 /**
  * @author user
- *
  */
-public class PDFReportTypeException extends Exception {
+public class PDFReportTypeException
+    extends Exception
+{
     /**
      * 
      */
@@ -12,9 +13,11 @@ public class PDFReportTypeException extends Exception {
 
     /**
      * Procleme sur le report
+     * 
      * @param arg0 : message
      */
-    public PDFReportTypeException(final String arg0) {
-        super(arg0);
+    public PDFReportTypeException( final String arg0 )
+    {
+        super( arg0 );
     }
 }

@@ -17,268 +17,303 @@ import org.apache.commons.validator.GenericValidator;
 import com.airfrance.welcom.struts.message.WPropertyMessageResources;
 
 /**
- * Inspired by code coming from Dirk Bartkowiak, MessageResources.java, Jul 21,
- * 2003
+ * Inspired by code coming from Dirk Bartkowiak, MessageResources.java, Jul 21, 2003
  */
-public class MessageResourcesAddons extends WPropertyMessageResources implements
-		java.io.Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5806590266875523596L;
-	/** logger */
-	private static Log log = LogFactory.getLog(MessageResourcesAddons.class);
-	/** logger */
-	private static Log logWelcom = LogFactory.getLog("Welcom");
+public class MessageResourcesAddons
+    extends WPropertyMessageResources
+    implements java.io.Serializable
+{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5806590266875523596L;
 
-	/** Les mes message en fonction de la locale */
-	private final HashSet messageLocales = new HashSet();
+    /** logger */
+    private static Log log = LogFactory.getLog( MessageResourcesAddons.class );
 
-	/** Liste des message en cache */
-	private final HashMap messageCache = new HashMap();
+    /** logger */
+    private static Log logWelcom = LogFactory.getLog( "Welcom" );
 
-	/** Liste des properties pas defaut */
-	private final Properties defaultProperties = new Properties();
+    /** Les mes message en fonction de la locale */
+    private final HashSet messageLocales = new HashSet();
 
-	/** Liste des properties de Welcom */
-	private final Properties welcomProperties = new Properties();
+    /** Liste des message en cache */
+    private final HashMap messageCache = new HashMap();
 
-	/**
-	 * @param factory :
-	 *            Factory du message ressources
-	 * @param messageConfig :
-	 *            Configuration information.
-	 * @param returnNull :
-	 *            retourne null
-	 */
-	public MessageResourcesAddons(final MessageResourcesFactoryAddons factory,
-			final String messageConfig, final boolean returnNull) {
-		super(factory, messageConfig, returnNull);
-		initDefaultProperties(messageConfig);
-		initWelcomProperties();
-	}
+    /** Liste des properties pas defaut */
+    private final Properties defaultProperties = new Properties();
 
-	/**
-	 * Constuctor
-	 * 
-	 * @param messageResourcesFactory
-	 *            MessageResorcesFactory.
-	 * @param messageConfig
-	 *            Configuration information.
-	 */
-	public MessageResourcesAddons(
-			final MessageResourcesFactoryAddons messageResourcesFactory,
-			final String messageConfig) {
-		super(messageResourcesFactory, messageConfig);
-		initDefaultProperties(messageConfig);
-		initWelcomProperties();
-	}
+    /** Liste des properties de Welcom */
+    private final Properties welcomProperties = new Properties();
 
-	/**
-	 * Inilise le default properties
-	 * 
-	 * @param messageConfig :
-	 *            Fichier de resources
-	 */
-	private void initDefaultProperties(final String messageConfig) {
-		String name = messageConfig.replace('.', '/');
-		name += ".properties";
-		InputStream is = null;
+    /**
+     * @param factory : Factory du message ressources
+     * @param messageConfig : Configuration information.
+     * @param returnNull : retourne null
+     */
+    public MessageResourcesAddons( final MessageResourcesFactoryAddons factory, final String messageConfig,
+                                   final boolean returnNull )
+    {
+        super( factory, messageConfig, returnNull );
+        initDefaultProperties( messageConfig );
+        initWelcomProperties();
+    }
 
-		ClassLoader classLoader = Thread.currentThread()
-				.getContextClassLoader();
-		if (classLoader == null) {
-			classLoader = this.getClass().getClassLoader();
-		}
-		is = classLoader.getResourceAsStream(name);
-		if (is != null) {
-			try {
-				defaultProperties.load(is);
-				logWelcom.info("Lecture du fichier : " + name + " ... OK");
-			} catch (final IOException e) {
-				logWelcom.info("Lecture du fichier : " + name + " ... ERROR");
-				log.error(e, e);
-			} finally {
-				try {
-					is.close();
-				} catch (final IOException e) {
-					log.error(e, e);
-				}
-			}
-		}
-	}
+    /**
+     * Constuctor
+     * 
+     * @param messageResourcesFactory MessageResorcesFactory.
+     * @param messageConfig Configuration information.
+     */
+    public MessageResourcesAddons( final MessageResourcesFactoryAddons messageResourcesFactory,
+                                   final String messageConfig )
+    {
+        super( messageResourcesFactory, messageConfig );
+        initDefaultProperties( messageConfig );
+        initWelcomProperties();
+    }
 
-	/**
-	 * Initialise du fichier de resources de Welcom
-	 * 
-	 */
-	private void initWelcomProperties() {
-		InputStream is = null;
-		final String name = "com/airfrance/welcom/resources/DefaultMessages.properties";
-		ClassLoader classLoader = Thread.currentThread()
-				.getContextClassLoader();
-		if (classLoader == null) {
-			classLoader = this.getClass().getClassLoader();
-		}
-		is = classLoader.getResourceAsStream(name);
-		if (is != null) {
-			try {
-				defaultProperties.load(is);
-				logWelcom.info("Lecture du fichier : " + name + " ... OK");
-			} catch (final IOException e) {
-				logWelcom.info("Lecture du fichier : " + name + " ... ERROR");
-				log.error(e, e);
-			} finally {
-				try {
-					is.close();
-				} catch (final IOException e) {
-					log.error(e, e);
-				}
-			}
-		}
-	}
+    /**
+     * Inilise le default properties
+     * 
+     * @param messageConfig : Fichier de resources
+     */
+    private void initDefaultProperties( final String messageConfig )
+    {
+        String name = messageConfig.replace( '.', '/' );
+        name += ".properties";
+        InputStream is = null;
 
-	/**
-	 * @return Les clef de l'application resources
-	 */
-	public Enumeration getDefaultPropertiesKeys() {
-		return defaultProperties.keys();
-	}
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        if ( classLoader == null )
+        {
+            classLoader = this.getClass().getClassLoader();
+        }
+        is = classLoader.getResourceAsStream( name );
+        if ( is != null )
+        {
+            try
+            {
+                defaultProperties.load( is );
+                logWelcom.info( "Lecture du fichier : " + name + " ... OK" );
+            }
+            catch ( final IOException e )
+            {
+                logWelcom.info( "Lecture du fichier : " + name + " ... ERROR" );
+                log.error( e, e );
+            }
+            finally
+            {
+                try
+                {
+                    is.close();
+                }
+                catch ( final IOException e )
+                {
+                    log.error( e, e );
+                }
+            }
+        }
+    }
 
-	/**
-	 * @param key
-	 *            la clef a rechercher
-	 * @return les propriété par defaut
-	 */
-	public String getDefaultProperty(final String key) {
-		return defaultProperties.getProperty(key);
-	}
+    /**
+     * Initialise du fichier de resources de Welcom
+     */
+    private void initWelcomProperties()
+    {
+        InputStream is = null;
+        final String name = "com/airfrance/welcom/resources/DefaultMessages.properties";
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        if ( classLoader == null )
+        {
+            classLoader = this.getClass().getClassLoader();
+        }
+        is = classLoader.getResourceAsStream( name );
+        if ( is != null )
+        {
+            try
+            {
+                defaultProperties.load( is );
+                logWelcom.info( "Lecture du fichier : " + name + " ... OK" );
+            }
+            catch ( final IOException e )
+            {
+                logWelcom.info( "Lecture du fichier : " + name + " ... ERROR" );
+                log.error( e, e );
+            }
+            finally
+            {
+                try
+                {
+                    is.close();
+                }
+                catch ( final IOException e )
+                {
+                    log.error( e, e );
+                }
+            }
+        }
+    }
 
-	/**
-	 * Remet a zero les fichiers lors d'un resyncrhonisation
-	 * 
-	 */
-	public synchronized void resetCache() {
-		synchronized (messageLocales) {
-			messageLocales.clear();
-		}
+    /**
+     * @return Les clef de l'application resources
+     */
+    public Enumeration getDefaultPropertiesKeys()
+    {
+        return defaultProperties.keys();
+    }
 
-		synchronized (messageCache) {
-			messageCache.clear();
-		}
+    /**
+     * @param key la clef a rechercher
+     * @return les propriété par defaut
+     */
+    public String getDefaultProperty( final String key )
+    {
+        return defaultProperties.getProperty( key );
+    }
 
-		formats = new HashMap();
-	}
+    /**
+     * Remet a zero les fichiers lors d'un resyncrhonisation
+     */
+    public synchronized void resetCache()
+    {
+        synchronized ( messageLocales )
+        {
+            messageLocales.clear();
+        }
 
-	/**
-	 * Met les locale en cache
-	 * 
-	 * @param locale :
-	 *            la locale courante
-	 */
-	private synchronized void cacheLocale(final Locale locale) {
-		// has some thread cached allready, while we are waiting for
-		// for this method?
-		if (messageLocales.contains(locale)) {
-			return;
-		}
+        synchronized ( messageCache )
+        {
+            messageCache.clear();
+        }
 
-		final String askedLocale = super.localeKey(locale);
+        formats = new HashMap();
+    }
 
-		// ask Application for Messages associated to this locale
-		final Vector Messages = WMessageResourcesControleur
-				.getWMessageResourcesControleur().getMessagesByLanguage(
-						askedLocale);
+    /**
+     * Met les locale en cache
+     * 
+     * @param locale : la locale courante
+     */
+    private synchronized void cacheLocale( final Locale locale )
+    {
+        // has some thread cached allready, while we are waiting for
+        // for this method?
+        if ( messageLocales.contains( locale ) )
+        {
+            return;
+        }
 
-		for (int i = 0; i < Messages.size(); i++) {
-			final Hashtable tmpHashtable = (Hashtable) Messages.elementAt(i);
+        final String askedLocale = super.localeKey( locale );
 
-			String value = (String) tmpHashtable.get("value");
-			final String key = (String) tmpHashtable.get("key");
+        // ask Application for Messages associated to this locale
+        final Vector Messages =
+            WMessageResourcesControleur.getWMessageResourcesControleur().getMessagesByLanguage( askedLocale );
 
-			if (value == null) {
-				value = "";
-			}
+        for ( int i = 0; i < Messages.size(); i++ )
+        {
+            final Hashtable tmpHashtable = (Hashtable) Messages.elementAt( i );
 
-			// cache message
-			messageCache.put(super.messageKey(locale, key), value);
-		}
+            String value = (String) tmpHashtable.get( "value" );
+            final String key = (String) tmpHashtable.get( "key" );
 
-		// store info about cached locale
-		messageLocales.add(locale);
-	}
+            if ( value == null )
+            {
+                value = "";
+            }
 
-	/**
-	 * Get the parent Locale.
-	 * 
-	 * e.g. en_US will return en
-	 * 
-	 * @param currentLocale :
-	 *            Locale courante
-	 * @return locale
-	 * 
-	 */
-	private Locale getParentLocale(final Locale currentLocale) {
-		Locale theReturnLocale = null;
-		if (null == currentLocale) {
-			theReturnLocale = null;
-		} else if (!currentLocale.getVariant().equals("")) {
-			theReturnLocale = new Locale(currentLocale.getLanguage(),
-					currentLocale.getCountry());
-		} else if (!currentLocale.getCountry().equals("")) {
-			theReturnLocale = new Locale(currentLocale.getLanguage(), "");
-		}
+            // cache message
+            messageCache.put( super.messageKey( locale, key ), value );
+        }
 
-		return theReturnLocale;
-	}
+        // store info about cached locale
+        messageLocales.add( locale );
+    }
 
-	/**
-	 * @see org.apache.struts.util.MessageResources#getMessage(Locale, String)
-	 */
-	public String getMessage(final Locale currentLocale, final String askedKey) {
-		String resultingMessage = null;
-		Locale localeParent = currentLocale;
+    /**
+     * Get the parent Locale. e.g. en_US will return en
+     * 
+     * @param currentLocale : Locale courante
+     * @return locale
+     */
+    private Locale getParentLocale( final Locale currentLocale )
+    {
+        Locale theReturnLocale = null;
+        if ( null == currentLocale )
+        {
+            theReturnLocale = null;
+        }
+        else if ( !currentLocale.getVariant().equals( "" ) )
+        {
+            theReturnLocale = new Locale( currentLocale.getLanguage(), currentLocale.getCountry() );
+        }
+        else if ( !currentLocale.getCountry().equals( "" ) )
+        {
+            theReturnLocale = new Locale( currentLocale.getLanguage(), "" );
+        }
 
-		if (GenericValidator.isBlankOrNull(askedKey)) {
-			return askedKey;
-		}
+        return theReturnLocale;
+    }
 
-		try {
-			do {
-				if (!messageLocales.contains(localeParent)) {
-					// cache parent
-					cacheLocale(localeParent);
-				}
+    /**
+     * @see org.apache.struts.util.MessageResources#getMessage(Locale, String)
+     */
+    public String getMessage( final Locale currentLocale, final String askedKey )
+    {
+        String resultingMessage = null;
+        Locale localeParent = currentLocale;
 
-				resultingMessage = (String) messageCache.get(super.messageKey(
-						localeParent, askedKey));
+        if ( GenericValidator.isBlankOrNull( askedKey ) )
+        {
+            return askedKey;
+        }
 
-				if (null == localeParent) {
-					break;
-				}
+        try
+        {
+            do
+            {
+                if ( !messageLocales.contains( localeParent ) )
+                {
+                    // cache parent
+                    cacheLocale( localeParent );
+                }
 
-				localeParent = getParentLocale(localeParent);
-			} while (resultingMessage == null);
-		} catch (final Exception e) {
-			log.error("Erreur a la recuperation en BD des messages ...", e);
-		}
+                resultingMessage = (String) messageCache.get( super.messageKey( localeParent, askedKey ) );
 
-		if (resultingMessage == null) {
-			// try to get default language
-			resultingMessage = defaultProperties.getProperty(askedKey);
+                if ( null == localeParent )
+                {
+                    break;
+                }
 
-			if (resultingMessage == null) {
-				// on a pas trouve la valeur par defaut, on regarde dans le
-				// fichier DefaultMessage
-				resultingMessage = welcomProperties.getProperty(askedKey);
-				if (resultingMessage == null) {
-					if (!returnNull) {
-						resultingMessage = "???" + askedKey + "???";
-					}
-				}
-			}
-		}
-		return resultingMessage;
-	}
+                localeParent = getParentLocale( localeParent );
+            }
+            while ( resultingMessage == null );
+        }
+        catch ( final Exception e )
+        {
+            log.error( "Erreur a la recuperation en BD des messages ...", e );
+        }
+
+        if ( resultingMessage == null )
+        {
+            // try to get default language
+            resultingMessage = defaultProperties.getProperty( askedKey );
+
+            if ( resultingMessage == null )
+            {
+                // on a pas trouve la valeur par defaut, on regarde dans le
+                // fichier DefaultMessage
+                resultingMessage = welcomProperties.getProperty( askedKey );
+                if ( resultingMessage == null )
+                {
+                    if ( !returnNull )
+                    {
+                        resultingMessage = "???" + askedKey + "???";
+                    }
+                }
+            }
+        }
+        return resultingMessage;
+    }
 
 }

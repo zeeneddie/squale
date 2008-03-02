@@ -22,15 +22,15 @@ import com.airfrance.welcom.addons.spell.exception.WSpellCheckerNotFound;
 import com.airfrance.welcom.outils.LocaleUtil;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class WAddOnsSpellManager extends WAddOns {
+public class WAddOnsSpellManager
+    extends WAddOns
+{
 
     /** logger */
-    private static Log logStartup = LogFactory.getLog("Welcom");
+    private static Log logStartup = LogFactory.getLog( "Welcom" );
 
     /** Singleton */
     private static WAddOnsSpellManager me = null;
@@ -47,62 +47,77 @@ public class WAddOnsSpellManager extends WAddOns {
     /**
      * @return Affichage
      */
-    public String getDisplayName() {
+    public String getDisplayName()
+    {
         return ADDONS_SPELL_DISPLAYNAME;
     }
 
     /**
      * @return nom de l'addon
      */
-    public String getName() {
+    public String getName()
+    {
         return ADDONS_SPELL_NAME;
     }
 
     /**
      * @return Version
      */
-    public String getVersion() {
+    public String getVersion()
+    {
         return ADDONS_SPELL_VERSION;
     }
 
     /**
-     * @see com.airfrance.welcom.addons.config.WIAddOns#init(org.apache.struts.action.ActionServlet, org.apache.struts.config.ModuleConfig)
+     * @see com.airfrance.welcom.addons.config.WIAddOns#init(org.apache.struts.action.ActionServlet,
+     *      org.apache.struts.config.ModuleConfig)
      */
-    public void init(final ActionServlet servlet, final ModuleConfig config) throws AddonsException {
+    public void init( final ActionServlet servlet, final ModuleConfig config )
+        throws AddonsException
+    {
 
         // initialise les dictionnaires
-        initDico(servlet);
+        initDico( servlet );
 
         // Initialise les mappings;
-        initMappings(servlet, config);
+        initMappings( servlet, config );
 
-        setLoaded(true);
+        setLoaded( true );
     }
 
     /**
      * Verification de la presence des dictionnaires
+     * 
      * @param servlet : Stockage dans les servlet des dicos
      * @throws AddonsException : Pb sur l'init de l'adddons
      */
-    public void initDico(final ActionServlet servlet) throws AddonsException {
+    public void initDico( final ActionServlet servlet )
+        throws AddonsException
+    {
 
-        logStartup.info("Chargement differé des dictionnaires ... ");
+        logStartup.info( "Chargement differé des dictionnaires ... " );
 
-        final Runnable runnable = new Runnable() {
+        final Runnable runnable = new Runnable()
+        {
             /**
-            * @see java.lang.Runnable#run()
-            */
-            public void run() {
+             * @see java.lang.Runnable#run()
+             */
+            public void run()
+            {
 
                 ArrayList locales = LocaleUtil.getAvailableLocales();
                 Iterator iter = locales.iterator();
 
-                while (iter.hasNext()) {
+                while ( iter.hasNext() )
+                {
                     String locale = (String) iter.next();
-                    try {
-                        WSpellChecker.getSpellChecker(locale);
-                    } catch (WSpellCheckerNotFound e) {
-                        logStartup.fatal("Impossible de charger le dictionnaire : " + locale);
+                    try
+                    {
+                        WSpellChecker.getSpellChecker( locale );
+                    }
+                    catch ( WSpellCheckerNotFound e )
+                    {
+                        logStartup.fatal( "Impossible de charger le dictionnaire : " + locale );
                     }
 
                 }
@@ -111,46 +126,55 @@ public class WAddOnsSpellManager extends WAddOns {
         };
 
         // Demarrage du thread de chargement difeere
-        final Thread th = new Thread(runnable);
+        final Thread th = new Thread( runnable );
         th.start();
 
     }
 
     /**
      * Initialise le mapping du profil et du profilsaccesskey
+     * 
      * @param servlet : Servlet
      * @param config : Module Config
      * @throws AddonsException : Erreur a l'init
-     * */
-    public void initMappings(final ActionServlet servlet, final ModuleConfig config) throws AddonsException {
+     */
+    public void initMappings( final ActionServlet servlet, final ModuleConfig config )
+        throws AddonsException
+    {
         // Liste des messages
-        //initFormBeanConfig(config, "wSpellWait", "com.airfrance.welcom.addons.message.bean.wSpellWaiBean");
-        //logStartup.info("Ajout du bean 'wMessagesBean' pour l'action '/wMessageList.do'");
-        //initFormBeanConfig(config,"wSpellWaitBean","com.airfrance.welcom.addons.spell.bean.WSpellWaitBean");
-        //logStartup.info("Ajout du bean 'wSpellWaitBean' pour l'action '/wSpellWait.do'");
-        initFormBeanConfig(config, "wSpellCheckerBean", "com.airfrance.welcom.addons.spell.bean.WSpellCheckerBean");
-        logStartup.info("Ajout du bean 'wSpellCheckerBean' pour l'action '/wSpellChecker.do'");
+        // initFormBeanConfig(config, "wSpellWait", "com.airfrance.welcom.addons.message.bean.wSpellWaiBean");
+        // logStartup.info("Ajout du bean 'wMessagesBean' pour l'action '/wMessageList.do'");
+        // initFormBeanConfig(config,"wSpellWaitBean","com.airfrance.welcom.addons.spell.bean.WSpellWaitBean");
+        // logStartup.info("Ajout du bean 'wSpellWaitBean' pour l'action '/wSpellWait.do'");
+        initFormBeanConfig( config, "wSpellCheckerBean", "com.airfrance.welcom.addons.spell.bean.WSpellCheckerBean" );
+        logStartup.info( "Ajout du bean 'wSpellCheckerBean' pour l'action '/wSpellChecker.do'" );
 
-        initMappings(servlet, config, "wSpellCheckerBean", "addons.spellManager.jsp.wait", "/wSpellWait", "com.airfrance.welcom.addons.spell.action.WSpellWaitAction", "request");
-        logStartup.info("Ajout du mapping '/wSpellWait.do' pour afficher la page d'attente de validation d'orthographe");
-        initMappings(servlet, config, "wSpellCheckerBean", "addons.spellManager.jsp.chercker", "/wSpellChecker", "com.airfrance.welcom.addons.spell.action.WSpellCheckerAction", "request");
-        logStartup.info("Ajout du mapping '/wSpellChecker.do' pour afficher la page du checker");
+        initMappings( servlet, config, "wSpellCheckerBean", "addons.spellManager.jsp.wait", "/wSpellWait",
+                      "com.airfrance.welcom.addons.spell.action.WSpellWaitAction", "request" );
+        logStartup.info( "Ajout du mapping '/wSpellWait.do' pour afficher la page d'attente de validation d'orthographe" );
+        initMappings( servlet, config, "wSpellCheckerBean", "addons.spellManager.jsp.chercker", "/wSpellChecker",
+                      "com.airfrance.welcom.addons.spell.action.WSpellCheckerAction", "request" );
+        logStartup.info( "Ajout du mapping '/wSpellChecker.do' pour afficher la page du checker" );
 
     }
 
-    /** 
+    /**
      * Termine le Thread de mise a jour des libellés
+     * 
      * @see com.airfrance.welcom.addons.config.WIAddOns#destroy()
      */
-    public void destroy() {
+    public void destroy()
+    {
 
     }
 
     /**
      * @return Retourne le sigleton
      */
-    public static WIAddOns getAddOns() {
-        if (me == null) {
+    public static WIAddOns getAddOns()
+    {
+        if ( me == null )
+        {
             me = new WAddOnsSpellManager();
         }
         return me;

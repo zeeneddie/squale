@@ -9,7 +9,9 @@ package com.airfrance.welcom.addons.access.exception;
 /**
  *
  */
-public class ProfileException extends Exception {
+public class ProfileException
+    extends Exception
+{
 
     /**
      * 
@@ -18,9 +20,11 @@ public class ProfileException extends Exception {
 
     /**
      * Constructeur
+     * 
      * @param cause : Le throwable
      */
-    public ProfileException(final Throwable cause) {
-        super(cause);
+    public ProfileException( final Throwable cause )
+    {
+        super( cause );
     }
 }

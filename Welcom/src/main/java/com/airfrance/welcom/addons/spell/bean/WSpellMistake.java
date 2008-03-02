@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class WSpellMistake implements Serializable {
+public class WSpellMistake
+    implements Serializable
+{
 
     /**
      * 
@@ -29,7 +29,7 @@ public class WSpellMistake implements Serializable {
     /** Premier caractere du mot invalide */
     protected String firstChar;
 
-    /** reste du mot sans la majuscule*/
+    /** reste du mot sans la majuscule */
     protected String lastChar;
 
     /** Liste des suggestion */
@@ -50,82 +50,95 @@ public class WSpellMistake implements Serializable {
     /**
      * @return accesseur
      */
-    public boolean isAllCaps() {
+    public boolean isAllCaps()
+    {
         return allCaps;
     }
 
     /**
      * @return accesseur
      */
-    public boolean isFirstLetterCaps() {
+    public boolean isFirstLetterCaps()
+    {
         return firstLetterCaps;
     }
 
     /**
      * @return accesseur
      */
-    public String getInvalidWord() {
+    public String getInvalidWord()
+    {
         return invalidWord;
     }
 
     /**
      * @param string accesseur
      */
-    public void setInvalidWord(final String string) {
+    public void setInvalidWord( final String string )
+    {
         invalidWord = string;
-        firstChar = invalidWord.substring(0, 1);
-        lastChar = invalidWord.substring(invalidWord.length() - 1);
-        firstLetterCaps = firstChar.equals(firstChar.toUpperCase());
-        allCaps = firstLetterCaps && lastChar.equals(lastChar.toUpperCase()); // Assume that all in the middle are too
+        firstChar = invalidWord.substring( 0, 1 );
+        lastChar = invalidWord.substring( invalidWord.length() - 1 );
+        firstLetterCaps = firstChar.equals( firstChar.toUpperCase() );
+        allCaps = firstLetterCaps && lastChar.equals( lastChar.toUpperCase() ); // Assume that all in the middle are too
     }
 
     /**
      * @return accesseur
      */
-    public List getSuggestions() {
+    public List getSuggestions()
+    {
         return suggestions;
     }
 
     /**
      * @param list accesseur
      */
-    public void setSuggestions(final ArrayList list) {
+    public void setSuggestions( final ArrayList list )
+    {
         suggestions = list;
     }
 
-    /** 
-     * 
+    /**
      * Ajout la suggestion*
+     * 
      * @param suggestedWord : Ajout du mot
-     * */
-    public void addSuggestions(String suggestedWord) {
+     */
+    public void addSuggestions( String suggestedWord )
+    {
 
-        if (allCaps) {
+        if ( allCaps )
+        {
             suggestedWord = suggestedWord.toUpperCase();
-        } else if (firstLetterCaps) {
-            suggestedWord = suggestedWord.substring(0, 1).toUpperCase() + suggestedWord.substring(1);
         }
-        suggestions.add(suggestedWord);
+        else if ( firstLetterCaps )
+        {
+            suggestedWord = suggestedWord.substring( 0, 1 ).toUpperCase() + suggestedWord.substring( 1 );
+        }
+        suggestions.add( suggestedWord );
     }
 
     /**
      * @return Taille des suggestions
      */
-    public int getSuggestionSize() {
+    public int getSuggestionSize()
+    {
         return suggestions.size();
     }
 
     /**
      * @return Postion du mot dans le contexte
      */
-    public int getWordContextPosition() {
+    public int getWordContextPosition()
+    {
         return wordContextPosition;
     }
 
     /**
      * @param i Positionne le contexte a une position donnée
      */
-    public void setWordContextPosition(final int i) {
+    public void setWordContextPosition( final int i )
+    {
         wordContextPosition = i;
     }
 

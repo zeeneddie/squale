@@ -7,9 +7,10 @@ import com.airfrance.welcom.outils.Access;
 
 /**
  * @author user
- *
  */
-public class IsPageReadOnlyTag extends TagSupport {
+public class IsPageReadOnlyTag
+    extends TagSupport
+{
 
     /**
      * 
@@ -17,15 +18,20 @@ public class IsPageReadOnlyTag extends TagSupport {
     private static final long serialVersionUID = -4113880035039612215L;
 
     /**
-      * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
-      */
-    public int doStartTag() throws JspException {
+     * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
+     */
+    public int doStartTag()
+        throws JspException
+    {
         // Recupere le droit sur la page
-        final String pageAccess = (String) pageContext.getAttribute("access");
+        final String pageAccess = (String) pageContext.getAttribute( "access" );
 
-        if ((pageAccess != null) && pageAccess.equals(Access.READONLY)) {
+        if ( ( pageAccess != null ) && pageAccess.equals( Access.READONLY ) )
+        {
             return EVAL_BODY_INCLUDE;
-        } else {
+        }
+        else
+        {
             return SKIP_BODY;
         }
     }

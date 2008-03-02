@@ -9,13 +9,13 @@ package com.airfrance.welcom.addons.spell.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/** 
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+/**
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class WSpellField implements Serializable {
+public class WSpellField
+    implements Serializable
+{
 
     /**
      * 
@@ -34,57 +34,66 @@ public class WSpellField implements Serializable {
     /**
      * @return accesseur
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
     /**
      * @return accesseur
      */
-    public String getValue() {
+    public String getValue()
+    {
         return value;
     }
 
     /**
      * @param string accesseur
      */
-    public void setName(final String string) {
+    public void setName( final String string )
+    {
         name = string;
     }
 
     /**
      * @param string accesseur
      */
-    public void setValue(final String string) {
+    public void setValue( final String string )
+    {
         value = string;
     }
 
     /**
      * @return accesseur
      */
-    public ArrayList getMistake() {
+    public ArrayList getMistake()
+    {
         return mistake;
     }
 
     /**
      * @param list accesseur
      */
-    public void setMistake(final ArrayList list) {
+    public void setMistake( final ArrayList list )
+    {
         mistake = list;
     }
 
-    /** 
+    /**
      * Ajoute une erreur
+     * 
      * @param sm erreur
-     * */
-    public void addMistake(final WSpellMistake sm) {
-        mistake.add(sm);
+     */
+    public void addMistake( final WSpellMistake sm )
+    {
+        mistake.add( sm );
     }
 
     /**
      * @return accesseur
      */
-    public int getMistakeSize() {
+    public int getMistakeSize()
+    {
         return mistake.size();
     }
 

@@ -12,45 +12,52 @@ import com.airfrance.welcom.outils.WelcomConfigurator;
 /**
  * AutoCompleteTag
  */
-public class AutoCompleteTag extends BaseTextTag {
+public class AutoCompleteTag
+    extends BaseTextTag
+{
     /**
      * 
      */
     private static final long serialVersionUID = 4279121296835714925L;
+
     /** parametre du tag */
     private String onitemselection;
 
-    /** 
+    /**
      * Ajoute l'attribut onintemselection
      */
-    protected void prepareOthersAttributes(StringBuffer results) {
+    protected void prepareOthersAttributes( StringBuffer results )
+    {
 
-        if (Util.isTrue(WelcomConfigurator.getMessage(WelcomConfigurator.EASY_COMPLETE_NOTIFIER))) {
-            setStyleClass(getStyleClass() + " suggest");
-        }
-        
-        if (onitemselection != null) {
-            results.append(" onitemselection=\"");
-            results.append(onitemselection.replaceAll("this", "target"));
-            results.append("\"");
+        if ( Util.isTrue( WelcomConfigurator.getMessage( WelcomConfigurator.EASY_COMPLETE_NOTIFIER ) ) )
+        {
+            setStyleClass( getStyleClass() + " suggest" );
         }
 
-        results.append(" autocomplete=\"off\" ");
+        if ( onitemselection != null )
+        {
+            results.append( " onitemselection=\"" );
+            results.append( onitemselection.replaceAll( "this", "target" ) );
+            results.append( "\"" );
+        }
+
+        results.append( " autocomplete=\"off\" " );
 
     }
-    
 
     /**
      * @return onitemselection
      */
-    public String getOnitemselection() {
+    public String getOnitemselection()
+    {
         return onitemselection;
     }
 
     /**
      * @param string onitemselection
      */
-    public void setOnitemselection(final String string) {
+    public void setOnitemselection( final String string )
+    {
         onitemselection = string;
     }
 

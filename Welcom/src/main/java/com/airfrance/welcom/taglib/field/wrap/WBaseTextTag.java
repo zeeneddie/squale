@@ -6,55 +6,68 @@ import com.airfrance.welcom.outils.Util;
 import com.airfrance.welcom.taglib.field.BaseTextTag;
 import com.airfrance.welcom.taglib.field.util.TagUtils;
 
-public class WBaseTextTag extends BaseTextTag implements IWelcomInputTag {
+public class WBaseTextTag
+    extends BaseTextTag
+    implements IWelcomInputTag
+{
 
     /** Gestion des majuscules (transforme automatiquement en majuscule) */
     protected boolean upperCase = false;
-    /** Gestion de la premiere lettre en majuscule*/
+
+    /** Gestion de la premiere lettre en majuscule */
     protected boolean firstUpperCase = false;
+
     /** Si le champs est requis */
     protected boolean isRequired = false;
+
     /** accent */
     protected boolean accent = true;
+
     /** Active le filtrage de caractere spécuax */
     protected boolean filterSpecialChar = false;
-    /** le parametre du tag*/
-    protected java.lang.String autoComplete=null;
-    /** Lance la verification du spell check*/
+
+    /** le parametre du tag */
+    protected java.lang.String autoComplete = null;
+
+    /** Lance la verification du spell check */
     protected boolean spellChecked = false;
+
     /** type pour le check */
-    protected String javascriptType="TEXT";
-    
+    protected String javascriptType = "TEXT";
+
     /**
      * {@inheritDoc}
      */
-    protected String prepareEventHandlers() {
+    protected String prepareEventHandlers()
+    {
         updateEvents();
         return super.prepareEventHandlers();
     }
-    
+
     /**
      * {@inheritDoc}
      */
-    protected void prepareOthersAttributes(StringBuffer sb) {
-        if (Util.isFalse(getAutoComplete())) {
-            sb.append(" autocomplete=\"off\"");
+    protected void prepareOthersAttributes( StringBuffer sb )
+    {
+        if ( Util.isFalse( getAutoComplete() ) )
+        {
+            sb.append( " autocomplete=\"off\"" );
         }
-        
-        if (isSpellChecked()) {
-            sb.append(" spell=\"true\"");
+
+        if ( isSpellChecked() )
+        {
+            sb.append( " spell=\"true\"" );
         }
-        
+
         // TODO Raccord de méthode auto-généré
-        super.prepareOthersAttributes(sb);
+        super.prepareOthersAttributes( sb );
     }
-    
+
     /**
-     * Met a jour les evements du tags
-     * Verification des caracteres spéciaux
-     * Verification classique
+     * Met a jour les evements du tags Verification des caracteres spéciaux Verification classique
      */
-    protected void updateEvents(){
+    protected void updateEvents()
+    {
         updateOnChange();
         updateOnBlur();
     }
@@ -62,43 +75,55 @@ public class WBaseTextTag extends BaseTextTag implements IWelcomInputTag {
     /**
      * Ajoute la fonction javascript de validation sur le onchange
      */
-    protected void updateOnChange() {
+    protected void updateOnChange()
+    {
         // Ajoute les validation javascript sur le onchange
-        setOnchange(getJavascriptForCheckValue()+((getOnchange()!=null)?getOnchange():""));
-        if (GenericValidator.isBlankOrNull(getOnchange())) {
-            setOnchange(null);
+        setOnchange( getJavascriptForCheckValue() + ( ( getOnchange() != null ) ? getOnchange() : "" ) );
+        if ( GenericValidator.isBlankOrNull( getOnchange() ) )
+        {
+            setOnchange( null );
         }
     }
 
     /**
      * Ajoute la fonction javascript de validation sur le onchange
      */
-    protected void updateOnBlur() {
+    protected void updateOnBlur()
+    {
         // Ajoute les validation javascript sur le onchange
-        setOnblur(getJavascriptForCheckSpecialChar()+((getOnblur()!=null)?getOnblur():""));
-        if (GenericValidator.isBlankOrNull(getOnblur())) {
-            setOnblur(null);
+        setOnblur( getJavascriptForCheckSpecialChar() + ( ( getOnblur() != null ) ? getOnblur() : "" ) );
+        if ( GenericValidator.isBlankOrNull( getOnblur() ) )
+        {
+            setOnblur( null );
         }
     }
-    
+
     /**
      * Recupere la fonction de validation javascript
+     * 
      * @return la fonction de validation renseigné
      */
-    private String getJavascriptForCheckValue() {
-        
-        return TagUtils.getJavascriptCheckValue(property, javascriptType, isRequired, isUpperCase(), isFirstUpperCase(), accent);
+    private String getJavascriptForCheckValue()
+    {
+
+        return TagUtils.getJavascriptCheckValue( property, javascriptType, isRequired, isUpperCase(),
+                                                 isFirstUpperCase(), accent );
 
     }
-    
+
     /**
      * Ajout de la verification des caracteres spéciaux
+     * 
      * @param myFieldTag : field
      */
-    private String getJavascriptForCheckSpecialChar() {
-        if (isFilterSpecialChar()) {
-            return TagUtils.getJavascriptForCheckSpecialChar(property);
-        } else {
+    private String getJavascriptForCheckSpecialChar()
+    {
+        if ( isFilterSpecialChar() )
+        {
+            return TagUtils.getJavascriptForCheckSpecialChar( property );
+        }
+        else
+        {
             return "";
         }
     }
@@ -106,107 +131,112 @@ public class WBaseTextTag extends BaseTextTag implements IWelcomInputTag {
     /**
      * @return accent attribut
      */
-    public boolean isAccent() {
+    public boolean isAccent()
+    {
         return accent;
     }
-
 
     /**
      * @param accent accent attribut
      */
-    public void setAccent(boolean accent) {
+    public void setAccent( boolean accent )
+    {
         this.accent = accent;
     }
-
 
     /**
      * @return firstUpperCase attribut
      */
-    public boolean isFirstUpperCase() {
+    public boolean isFirstUpperCase()
+    {
         return firstUpperCase;
     }
-
 
     /**
      * @param firstUpperCase firstUpperCase attribut
      */
-    public void setFirstUpperCase(boolean firstUpperCase) {
+    public void setFirstUpperCase( boolean firstUpperCase )
+    {
         this.firstUpperCase = firstUpperCase;
     }
-
 
     /**
      * @return isRequired attribut
      */
-    public boolean isRequired() {
+    public boolean isRequired()
+    {
         return isRequired;
     }
-
 
     /**
      * @param isRequired isRequired attribut
      */
-    public void setRequired(boolean isRequired) {
+    public void setRequired( boolean isRequired )
+    {
         this.isRequired = isRequired;
     }
-
 
     /**
      * @return upperCase attribut
      */
-    public boolean isUpperCase() {
+    public boolean isUpperCase()
+    {
         return upperCase;
     }
-
 
     /**
      * @param upperCase upperCase attribut
      */
-    public void setUpperCase(boolean upperCase) {
+    public void setUpperCase( boolean upperCase )
+    {
         this.upperCase = upperCase;
     }
-
 
     /**
      * @return filterSpecialChar attribut
      */
-    public boolean isFilterSpecialChar() {
+    public boolean isFilterSpecialChar()
+    {
         return filterSpecialChar;
     }
-
 
     /**
      * @param filterSpecialChar filterSpecialChar attribut
      */
-    public void setFilterSpecialChar(boolean filterSpecialChar) {
+    public void setFilterSpecialChar( boolean filterSpecialChar )
+    {
         this.filterSpecialChar = filterSpecialChar;
     }
 
     /**
      * @return autoComplete attribut
      */
-    public java.lang.String getAutoComplete() {
+    public java.lang.String getAutoComplete()
+    {
         return autoComplete;
     }
 
     /**
      * @param autoComplete autoComplete attribut
      */
-    public void setAutoComplete(java.lang.String autoComplete) {
+    public void setAutoComplete( java.lang.String autoComplete )
+    {
         this.autoComplete = autoComplete;
     }
 
     /**
      * @return spellChecked attribut
      */
-    public boolean isSpellChecked() {
+    public boolean isSpellChecked()
+    {
         return spellChecked;
     }
 
     /**
      * @param spellChecked spellChecked attribut
      */
-    public void setSpellChecked(boolean spellChecked) {
+    public void setSpellChecked( boolean spellChecked )
+    {
         this.spellChecked = spellChecked;
     }
 }

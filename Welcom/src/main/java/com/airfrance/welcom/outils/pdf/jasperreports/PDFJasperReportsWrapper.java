@@ -22,14 +22,13 @@ import com.airfrance.welcom.outils.pdf.advanced.WPdfDecoration;
 import com.airfrance.welcom.struts.message.WResourceBundle;
 
 /**
- * @author user
- *
- * To change this generated comment edit the template variable "typecomment":
- * Window>Preferences>Java>Templates.
- * To enable and disable the creation of type comments go to
- * Window>Preferences>Java>Code Generation.
+ * @author user To change this generated comment edit the template variable "typecomment":
+ *         Window>Preferences>Java>Templates. To enable and disable the creation of type comments go to
+ *         Window>Preferences>Java>Code Generation.
  */
-public class PDFJasperReportsWrapper implements PDFGenerateur {
+public class PDFJasperReportsWrapper
+    implements PDFGenerateur
+{
 
     /** Le pdfdata */
     private PDFData pdfData;
@@ -47,83 +46,111 @@ public class PDFJasperReportsWrapper implements PDFGenerateur {
     private JRDataSource dataSource = null;
 
     /** nb de page pour le virtualiser */
-    private final static int NB_PAGE= 10;    
+    private final static int NB_PAGE = 10;
 
     /**
      * @see com.airfrance.welcom.outils.pdf.PDFGenerateur#open(java.io.OutputStream)
      */
-    public void open(final OutputStream pOs) throws PDFGenerateurException {
-        setOutputStream(pOs);
+    public void open( final OutputStream pOs )
+        throws PDFGenerateurException
+    {
+        setOutputStream( pOs );
     }
 
     /**
      * Chargement du template
+     * 
      * @param is : Liste des InputStream
      * @throws PDFGenerateurException : Leve l'exception si le fichier est null
      */
-    public void loadTemplate(final InputStream is) throws PDFGenerateurException {
+    public void loadTemplate( final InputStream is )
+        throws PDFGenerateurException
+    {
         template = is;
     }
 
     /**
      * @see com.airfrance.welcom.outils.pdf.PDFGenerateur#close()
      */
-    public void close() throws PDFGenerateurException {
+    public void close()
+        throws PDFGenerateurException
+    {
         printPDF();
     }
 
     /**
      * Spécifie le flux de sortie
+     * 
      * @param pOs : Flux
      */
-    public void setOutputStream(final OutputStream pOs) {
+    public void setOutputStream( final OutputStream pOs )
+    {
         this.os = pOs;
     }
 
     /**
      * fabrication du rapport et envoi du rapport dans le outputStream
+     * 
      * @throws PDFGenerateurException : Verifie si le template a charger ou stream nulle
      */
-    public void printPDF() throws PDFGenerateurException {
-        if (template == null) {
-            throw new PDFGenerateurException("Aucun template de chargé, effectuer un loadTemplate avant");
+    public void printPDF()
+        throws PDFGenerateurException
+    {
+        if ( template == null )
+        {
+            throw new PDFGenerateurException( "Aucun template de chargé, effectuer un loadTemplate avant" );
         }
-        if (os == null) {
-            throw new PDFGenerateurException("Le stream de sortie est null sur le print PDF");
+        if ( os == null )
+        {
+            throw new PDFGenerateurException( "Le stream de sortie est null sur le print PDF" );
         }
-        if (dataSource == null) {
-            throw new PDFGenerateurException("Aucune data source n'a été spécifiée");
+        if ( dataSource == null )
+        {
+            throw new PDFGenerateurException( "Aucune data source n'a été spécifiée" );
         }
         JRFileVirtualizer virtualizer = null;
-        try {
+        try
+        {
             Map parameters = null;
-            if (pdfData != null) {
-                final WResourceBundle bundle = new WResourceBundle(pdfData.getMessageResources(), pdfData.getLocale());
+            if ( pdfData != null )
+            {
+                final WResourceBundle bundle = new WResourceBundle( pdfData.getMessageResources(), pdfData.getLocale() );
                 parameters = new HashMap();
-                if (pdfData instanceof PDFDataJasperReports) {
+                if ( pdfData instanceof PDFDataJasperReports )
+                {
                     final PDFDataJasperReports myPdfData = (PDFDataJasperReports) pdfData;
-                    if (myPdfData.getParameters() != null) {
+                    if ( myPdfData.getParameters() != null )
+                    {
                         parameters = myPdfData.getParameters();
                     }
-                    if (myPdfData.isVirtualize()) {
-                        virtualizer = new JRFileVirtualizer(NB_PAGE);
-                        parameters.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+                    if ( myPdfData.isVirtualize() )
+                    {
+                        virtualizer = new JRFileVirtualizer( NB_PAGE );
+                        parameters.put( JRParameter.REPORT_VIRTUALIZER, virtualizer );
                     }
                 }
-                if (!parameters.containsKey("REPORT_RESOURCE_BUNDLE")) {
-                    parameters.put("REPORT_RESOURCE_BUNDLE", bundle);
+                if ( !parameters.containsKey( "REPORT_RESOURCE_BUNDLE" ) )
+                {
+                    parameters.put( "REPORT_RESOURCE_BUNDLE", bundle );
                 }
 
             }
-            final JasperPrint jasperPrint = JasperFillManager.fillReport(template, parameters, dataSource);
-            final byte[] output = JasperExportManager.exportReportToPdf(jasperPrint);
-            os.write(output);
-        } catch (final JRException jre) {
+            final JasperPrint jasperPrint = JasperFillManager.fillReport( template, parameters, dataSource );
+            final byte[] output = JasperExportManager.exportReportToPdf( jasperPrint );
+            os.write( output );
+        }
+        catch ( final JRException jre )
+        {
             jre.printStackTrace();
-        } catch (final IOException ioe) {
+        }
+        catch ( final IOException ioe )
+        {
             ioe.printStackTrace();
-        } finally {
-            if (virtualizer != null) {
+        }
+        finally
+        {
+            if ( virtualizer != null )
+            {
                 virtualizer.cleanup();
             }
         }
@@ -132,36 +159,44 @@ public class PDFJasperReportsWrapper implements PDFGenerateur {
     /**
      * @return Report ...
      */
-    public Object getReport() {
+    public Object getReport()
+    {
         return null;
     }
 
     /**
      * @see com.airfrance.welcom.outils.pdf.PDFGenerateur#getPDFWriter()
      */
-    public Object getPDFWriter() {
+    public Object getPDFWriter()
+    {
         return null;
     }
 
     /**
      * @see com.airfrance.welcom.outils.pdf.PDFGenerateur#setDecoration(com.airfrance.welcom.outils.pdf.advanced.WPdfDecoration)
      */
-    public void setDecoration(final WPdfDecoration pdecoration) throws PDFGenerateurException {
-        throw new PDFGenerateurException("Attention, la méthode setDecoration() n'est utilisable qu'avec un moteur de type Itext");
+    public void setDecoration( final WPdfDecoration pdecoration )
+        throws PDFGenerateurException
+    {
+        throw new PDFGenerateurException(
+                                          "Attention, la méthode setDecoration() n'est utilisable qu'avec un moteur de type Itext" );
     }
 
     /**
      * Spécifie la data source pour les rapports générés avec JasperReports (exclusivement)
+     * 
      * @param pDataSource : la data source
      */
-    public void setDataSource(final JRDataSource pDataSource) {
+    public void setDataSource( final JRDataSource pDataSource )
+    {
         dataSource = pDataSource;
     }
 
     /**
      * @param data le PDFdata
      */
-    public void setPdfData(final PDFData data) {
+    public void setPdfData( final PDFData data )
+    {
         pdfData = data;
     }
 

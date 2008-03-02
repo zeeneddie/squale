@@ -4,29 +4,29 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import com.airfrance.welcom.taglib.field.util.TagUtils;
 
-
 /**
- * 
- * @author M327837
- *
- * Ajoute le support da l'ajour de parametre
+ * @author M327837 Ajoute le support da l'ajour de parametre
  */
-public class WTagSupport extends TagSupport {
-    
+public class WTagSupport
+    extends TagSupport
+{
+
     /**
-     * Serial version 
+     * Serial version
      */
     private static final long serialVersionUID = 7729934864169696859L;
 
-    /** 
+    /**
      * Ajout l'attribut avec sa valeur au stringbuffer
+     * 
      * @param sb stringbuffer
      * @param name nom
      * @param value valeur
      */
-    protected void addParam(StringBuffer sb,String name,String value) {
+    protected void addParam( StringBuffer sb, String name, String value )
+    {
 
-        TagUtils.addParam(sb, name, value);
+        TagUtils.addParam( sb, name, value );
 
     }
 

@@ -1,12 +1,15 @@
 package com.airfrance.welcom.taglib.field.wrap;
 
-public interface IWelcomInputTag {
+public interface IWelcomInputTag
+{
 
-    /** Constante*/
+    /** Constante */
     public static final String READONLY = "READONLY";
-    /** Constante*/
+
+    /** Constante */
     public static final String READSEND = "READSEND";
-    /** Constante*/
+
+    /** Constante */
     public static final String READWRITE = "READWRITE";
-    
+
 }

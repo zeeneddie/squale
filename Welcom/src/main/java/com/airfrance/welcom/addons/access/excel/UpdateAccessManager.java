@@ -28,14 +28,13 @@ import com.airfrance.welcom.outils.jdbc.WJdbcMagic;
 import com.airfrance.welcom.outils.jdbc.WStatement;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class UpdateAccessManager {
+public class UpdateAccessManager
+{
     /** logger */
-    private static Log logStartup = LogFactory.getLog("Welcom");
+    private static Log logStartup = LogFactory.getLog( "Welcom" );
 
     /** Mon lecteur de fichier excel */
     private static IAccessKeyReader accessKeyReader = null;
@@ -44,69 +43,100 @@ public class UpdateAccessManager {
     private static UpdateAccessManager updateAccessManager = null;
 
     /** Table pour la gestion des plugins */
-    private final static String WEL_ADDONS = WelcomConfigurator.getMessage(WelcomConfigurator.ADDONS_TABLE_NAME);
+    private final static String WEL_ADDONS = WelcomConfigurator.getMessage( WelcomConfigurator.ADDONS_TABLE_NAME );
 
     /**
      * Contructeur
+     * 
      * @param excelAccessFile du fichier excel
      * @throws AccessKeyReaderException : Probleme
      */
-    private UpdateAccessManager(final String excelAccessFile) throws AccessKeyReaderException {
+    private UpdateAccessManager( final String excelAccessFile )
+        throws AccessKeyReaderException
+    {
         WJdbc jdbc = null;
-        try {
+        try
+        {
             jdbc = new WJdbcMagic();
             // Verification et creation des tables
-            BdAccessFactory.getBdCreate().checkAnCreateAllTable(jdbc);
-        } catch (final SQLException e) {
-            logStartup.error(e);
-        } finally {
-            if (jdbc != null) {
+            BdAccessFactory.getBdCreate().checkAnCreateAllTable( jdbc );
+        }
+        catch ( final SQLException e )
+        {
+            logStartup.error( e );
+        }
+        finally
+        {
+            if ( jdbc != null )
+            {
                 jdbc.close();
             }
         }
 
-        final URL url = getUrlAccessKeyFile(excelAccessFile);
+        final URL url = getUrlAccessKeyFile( excelAccessFile );
 
-        if (!checkIfUpdateBDWithTheFile(url)) {
-            logStartup.info("Mise a jour de la BD ... en cours");
-            updateBD(url);
-        } else {
-            logStartup.info("Base de donnée ... Ok");
+        if ( !checkIfUpdateBDWithTheFile( url ) )
+        {
+            logStartup.info( "Mise a jour de la BD ... en cours" );
+            updateBD( url );
+        }
+        else
+        {
+            logStartup.info( "Base de donnée ... Ok" );
         }
 
     }
 
     /**
      * Met a jour la base de donnée avec le fichier xls
+     * 
      * @param url : Url...
      * @throws AccessKeyReaderException : Probleme
      */
-    private void updateBD(final URL url) throws AccessKeyReaderException {
+    private void updateBD( final URL url )
+        throws AccessKeyReaderException
+    {
         // Lecture du fichier excel
-        accessKeyReader = AccessKeyReaderFactory.read(url);
+        accessKeyReader = AccessKeyReaderFactory.read( url );
 
         WJdbc jdbc = null;
         int cpt = 0;
-        try {
+        try
+        {
             jdbc = new WJdbcMagic();
-            // Mise a jour de la BD : Table ACCESSKEY 
-            cpt += BdAccessFactory.getBdUpdate().updateAccessKey(jdbc, accessKeyReader.getAccessKey(), BdAccessFactory.getBdReader().getAccessKey(jdbc, false));
+            // Mise a jour de la BD : Table ACCESSKEY
+            cpt +=
+                BdAccessFactory.getBdUpdate().updateAccessKey( jdbc, accessKeyReader.getAccessKey(),
+                                                               BdAccessFactory.getBdReader().getAccessKey( jdbc, false ) );
 
             // Mise a jour de la BD : Table PROFILE
-            cpt += BdAccessFactory.getBdUpdate().updateProfile(jdbc, accessKeyReader.getProfile(), BdAccessFactory.getBdReader().getProfile(jdbc, false));
+            cpt +=
+                BdAccessFactory.getBdUpdate().updateProfile( jdbc, accessKeyReader.getProfile(),
+                                                             BdAccessFactory.getBdReader().getProfile( jdbc, false ) );
 
             // Mise a jour de la BD : Table PROFILE_ACCESSKEY_INT
-            cpt += BdAccessFactory.getBdUpdate().updateProfileAccessKey(jdbc, accessKeyReader.getProfileAccessKey(), BdAccessFactory.getBdReader().getProfileAccessKey(jdbc, false));
+            cpt +=
+                BdAccessFactory.getBdUpdate().updateProfileAccessKey(
+                                                                      jdbc,
+                                                                      accessKeyReader.getProfileAccessKey(),
+                                                                      BdAccessFactory.getBdReader().getProfileAccessKey(
+                                                                                                                         jdbc,
+                                                                                                                         false ) );
 
             // Mise a jour de la Date
-            setTimeStampBD(jdbc, url);
+            setTimeStampBD( jdbc, url );
 
             jdbc.commit();
 
-        } catch (final SQLException e) {
-            logStartup.error(e, e);
-        } finally {
-            if (jdbc != null) {
+        }
+        catch ( final SQLException e )
+        {
+            logStartup.error( e, e );
+        }
+        finally
+        {
+            if ( jdbc != null )
+            {
                 jdbc.close();
             }
         }
@@ -114,45 +144,53 @@ public class UpdateAccessManager {
     }
 
     /**
-     * 
      * @param excelAccessFile Nom du fichier excel
      * @throws AccessKeyReaderException : Probleme
      */
-    public static void update(final String excelAccessFile) throws AccessKeyReaderException {
-        if (updateAccessManager == null) {
-            updateAccessManager = new UpdateAccessManager(excelAccessFile);
+    public static void update( final String excelAccessFile )
+        throws AccessKeyReaderException
+    {
+        if ( updateAccessManager == null )
+        {
+            updateAccessManager = new UpdateAccessManager( excelAccessFile );
         }
 
     }
 
     /**
-     * 
      * @param url : URL
      * @return La date de dernier emodification de l'url
      */
-    private Date getTimeUrl(final URL url) {
-        try {
+    private Date getTimeUrl( final URL url )
+    {
+        try
+        {
             final URLConnection urlCon = url.openConnection();
-            urlCon.setUseCaches(false);
+            urlCon.setUseCaches( false );
             urlCon.connect();
-            return new Date(urlCon.getLastModified());
-        } catch (final IOException e) {
-            logStartup.error(e, e);
+            return new Date( urlCon.getLastModified() );
+        }
+        catch ( final IOException e )
+        {
+            logStartup.error( e, e );
         }
         return null;
     }
 
     /**
      * Retourne vrai si la bd est ok
+     * 
      * @param url : URl du fichier
      * @return vrais si la base est a jour avec le fichier
      */
-    private boolean checkIfUpdateBDWithTheFile(final URL url) {
-        final Date excelFileDate = getTimeUrl(url);
+    private boolean checkIfUpdateBDWithTheFile( final URL url )
+    {
+        final Date excelFileDate = getTimeUrl( url );
         final Date bdDate = getTimeStampBD();
 
-        if (bdDate != null) {
-            return (excelFileDate.getTime() <= bdDate.getTime());
+        if ( bdDate != null )
+        {
+            return ( excelFileDate.getTime() <= bdDate.getTime() );
         }
 
         return false;
@@ -160,26 +198,31 @@ public class UpdateAccessManager {
 
     /**
      * Met a jour la date de modification en base du fichier excel
+     * 
      * @param jdbcMagic : Connexion jdbc
      * @param url : Url du fichier excel
      */
-    private void setTimeStampBD(final WJdbc jdbcMagic, final URL url) {
+    private void setTimeStampBD( final WJdbc jdbcMagic, final URL url )
+    {
 
         Date excelFileDate;
-        try {
-            excelFileDate = getTimeUrl(url);
+        try
+        {
+            excelFileDate = getTimeUrl( url );
 
             final WStatement sta = jdbcMagic.getWStatement();
-            sta.add("update " + WEL_ADDONS + " set");
-            sta.addParameter("PARAMETERS=?", "" + excelFileDate.getTime());
+            sta.add( "update " + WEL_ADDONS + " set" );
+            sta.addParameter( "PARAMETERS=?", "" + excelFileDate.getTime() );
 
-            sta.addParameter("where NAME=?", WAddOnsAccessManager.ADDONS_ACCESSMANAGEMENT_NAME);
+            sta.addParameter( "where NAME=?", WAddOnsAccessManager.ADDONS_ACCESSMANAGEMENT_NAME );
 
             sta.executeUpdate();
             sta.close();
 
-        } catch (final Exception e) {
-            logStartup.error(e, e);
+        }
+        catch ( final Exception e )
+        {
+            logStartup.error( e, e );
         }
 
     }
@@ -187,24 +230,32 @@ public class UpdateAccessManager {
     /**
      * @return Derniere date de modification, null si la table n'existe pas
      */
-    private Date getTimeStampBD() {
+    private Date getTimeStampBD()
+    {
         Date bdDate = null;
         WJdbcMagic jdbcMagic = null;
-        try {
+        try
+        {
             jdbcMagic = new WJdbcMagic();
             final WStatement sta = jdbcMagic.getWStatement();
-            sta.add("select * from WEL_ADDONS where");
-            sta.addParameter("NAME=?", WAddOnsAccessManager.ADDONS_ACCESSMANAGEMENT_NAME);
+            sta.add( "select * from WEL_ADDONS where" );
+            sta.addParameter( "NAME=?", WAddOnsAccessManager.ADDONS_ACCESSMANAGEMENT_NAME );
             final ResultSet rs = sta.executeQuery();
-            if ((rs != null) && rs.next()) {
-                bdDate = new Date(rs.getLong("PARAMETERS"));
+            if ( ( rs != null ) && rs.next() )
+            {
+                bdDate = new Date( rs.getLong( "PARAMETERS" ) );
             }
             sta.close();
 
-        } catch (final SQLException e) {
+        }
+        catch ( final SQLException e )
+        {
             return null;
-        } finally {
-            if (jdbcMagic != null) {
+        }
+        finally
+        {
+            if ( jdbcMagic != null )
+            {
                 jdbcMagic.close();
             }
         }
@@ -212,31 +263,38 @@ public class UpdateAccessManager {
     }
 
     /**
-     * @param fileName : Nom de la resource locale du projet. 
+     * @param fileName : Nom de la resource locale du projet.
      * @return Retourne l'url du fichier
      * @throws AccessKeyReaderException : Probleme sur la lecture du fichier
      */
-    private URL getUrlAccessKeyFile(final String fileName) throws AccessKeyReaderException {
+    private URL getUrlAccessKeyFile( final String fileName )
+        throws AccessKeyReaderException
+    {
 
         final String extension = "xls";
-        if (GenericValidator.isBlankOrNull(fileName)) {
-            throw new AccessKeyReaderException("Vous devez spécifier un fichier de gestion des droits d'accés, attribut 'excelAccessFile' du plugin");
+        if ( GenericValidator.isBlankOrNull( fileName ) )
+        {
+            throw new AccessKeyReaderException(
+                                                "Vous devez spécifier un fichier de gestion des droits d'accés, attribut 'excelAccessFile' du plugin" );
         }
 
         // Set up to load the property resource for this locale key, if we can
-        String name = fileName.replace('.', '/');
-        if (name.endsWith("/" + extension)) {
-            name = name.substring(0, name.length() - extension.length() - 1);
+        String name = fileName.replace( '.', '/' );
+        if ( name.endsWith( "/" + extension ) )
+        {
+            name = name.substring( 0, name.length() - extension.length() - 1 );
         }
         name += "." + extension;
 
         final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
-        final URL url = classLoader.getResource(name);
-        if (url == null) {
-            throw new AccessKeyReaderException("Le fichier de gestion des droits d'accés est introuvable, '" + name + "'");
+        final URL url = classLoader.getResource( name );
+        if ( url == null )
+        {
+            throw new AccessKeyReaderException( "Le fichier de gestion des droits d'accés est introuvable, '" + name
+                + "'" );
         }
-        return (url);
+        return ( url );
 
     }
 

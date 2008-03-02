@@ -31,69 +31,82 @@ import com.swabunga.spell.event.XMLWordFinder;
  */
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class WSpellCheckerAction extends DispatchAction {
+public class WSpellCheckerAction
+    extends DispatchAction
+{
 
     /**
-     * @see org.apache.struts.actions.DispatchAction#unspecified(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.apache.struts.actions.DispatchAction#unspecified(org.apache.struts.action.ActionMapping,
+     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse)
      */
-    public ActionForward unspecified(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws Exception {
-        try {
-            //SpellChecker spellChecker = (SpellChecker)request.getSession().getServletContext().getAttribute("welcom.spellCheck");
+    public ActionForward unspecified( final ActionMapping mapping, final ActionForm form,
+                                      final HttpServletRequest request, final HttpServletResponse response )
+        throws Exception
+    {
+        try
+        {
+            // SpellChecker spellChecker =
+            // (SpellChecker)request.getSession().getServletContext().getAttribute("welcom.spellCheck");
 
-            final SpellChecker spellChecker = WSpellChecker.getSpellChecker(getLocale(request).getLanguage());
+            final SpellChecker spellChecker = WSpellChecker.getSpellChecker( getLocale( request ).getLanguage() );
 
             final SpellingHelper spellingHelper = new SpellingHelper();
-            spellChecker.addSpellCheckListener(spellingHelper);
+            spellChecker.addSpellCheckListener( spellingHelper );
 
             final Configuration configuration = spellChecker.getConfiguration();
 
             boolean keepGoing = true;
             int element = -1;
 
-            //WSpellCheckerBean wsp = (WSpellCheckerBean)request.getAttribute("wSpellCheckerBean");
+            // WSpellCheckerBean wsp = (WSpellCheckerBean)request.getAttribute("wSpellCheckerBean");
             final WSpellCheckerBean wsp = (WSpellCheckerBean) form;
 
-            while (keepGoing && (wsp.getFields().size()>element+1)) {
+            while ( keepGoing && ( wsp.getFields().size() > element + 1 ) )
+            {
                 element++;
-                final WSpellField field = ((WSpellField) (wsp.getFields().get(element)));
+                final WSpellField field = ( (WSpellField) ( wsp.getFields().get( element ) ) );
                 final String value = field.getValue();
                 final String formElement = field.getName();
-                if ((value == null) || (formElement == null)) {
+                if ( ( value == null ) || ( formElement == null ) )
+                {
                     keepGoing = false;
                     continue;
                 }
 
-                spellChecker.checkSpelling(new StringWordTokenizer(new XMLWordFinder(value)));
+                spellChecker.checkSpelling( new StringWordTokenizer( new XMLWordFinder( value ) ) );
                 final List spellCheckEvents = spellingHelper.getSpellCheckEvents();
                 spellingHelper.reset();
 
                 final Iterator iterCheckEvents = spellCheckEvents.iterator();
-                while (iterCheckEvents.hasNext()) {
+                while ( iterCheckEvents.hasNext() )
+                {
                     final SpellCheckEvent spellCheckEvent = (SpellCheckEvent) iterCheckEvents.next();
 
                     final WSpellMistake sm = new WSpellMistake();
-                    sm.setWordContextPosition(spellCheckEvent.getWordContextPosition());
-                    sm.setInvalidWord(spellCheckEvent.getInvalidWord());
+                    sm.setWordContextPosition( spellCheckEvent.getWordContextPosition() );
+                    sm.setInvalidWord( spellCheckEvent.getInvalidWord() );
 
                     final Iterator iterSuggestion = spellCheckEvent.getSuggestions().iterator();
-                    while (iterSuggestion.hasNext()) {
+                    while ( iterSuggestion.hasNext() )
+                    {
                         final Word word = (Word) iterSuggestion.next();
-                        sm.addSuggestions(word.toString());
+                        sm.addSuggestions( word.toString() );
                     }
 
-                    field.addMistake(sm);
+                    field.addMistake( sm );
                 }
             }
-        } catch (final Exception e) {
+        }
+        catch ( final Exception e )
+        {
             e.printStackTrace();
         }
 
-        return mapping.findForward("success");
+        return mapping.findForward( "success" );
     }
 
 }

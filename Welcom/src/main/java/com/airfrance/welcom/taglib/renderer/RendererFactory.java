@@ -48,12 +48,12 @@ import com.airfrance.welcom.taglib.table.impl.TableRendererV3001;
  * Class fournissant tout les renders
  * 
  * @author M327837
- *
  */
-public class RendererFactory {
+public class RendererFactory
+{
 
     /** logger */
-    private static Log logger = LogFactory.getLog(RendererFactory.class);
+    private static Log logger = LogFactory.getLog( RendererFactory.class );
 
     /** Clef du renderer pour le canasHeader */
     public final static String CANVAS_HEADER = "canvasheader";
@@ -76,115 +76,136 @@ public class RendererFactory {
     /** Clef du renderer pour boutons */
     public final static String BUTTON = "bouton";
 
-    /** Clef du renderer pour la barre de boutons formulaire*/
+    /** Clef du renderer pour la barre de boutons formulaire */
     public final static String FORM_BOTTOM_BAR = "formbar";
 
-    /** Clef du renderer pour la barre de boutons formulaire*/
+    /** Clef du renderer pour la barre de boutons formulaire */
     public final static String TABLE = "table";
 
-    /** Clef du renderer pour la barre de boutons formulaire*/
+    /** Clef du renderer pour la barre de boutons formulaire */
     public final static String TABLE_NAVIGATOR = "tablenavigator";
 
-    /** Clef du renderer pour la barre de boutons formulaire*/
+    /** Clef du renderer pour la barre de boutons formulaire */
     public final static String ONGLET = "onlget";
 
-	/** Clef du renderer pour la barre de boutons formulaire*/
-	public final static String PROGRESSBAR = "progbar";
+    /** Clef du renderer pour la barre de boutons formulaire */
+    public final static String PROGRESSBAR = "progbar";
 
     /** Map du tous les renderers */
     private static HashMap renders = null;
 
-    /** 
-     * Retourne le renderer demandé 
+    /**
+     * Retourne le renderer demandé
      * 
      * @param renderName nom du renderer
      * @return le rendere demandé
      */
-    public static Object getRenderer(String renderName) {
-        if (renders == null) {
+    public static Object getRenderer( String renderName )
+    {
+        if ( renders == null )
+        {
             init();
         }
-        return renders.get(renderName);
+        return renders.get( renderName );
     }
 
     /**
      * Initialise les renders ...
      */
-    private static void init() {
-        logger.info("initialisation de render des taglibs en fonction de la charte graphique");
+    private static void init()
+    {
+        logger.info( "initialisation de render des taglibs en fonction de la charte graphique" );
         renders = new HashMap();
-        if (WelcomConfigurator.getCharte() == Charte.V2_001) {
-            renders.put(CANVAS_HEADER, new CanvasHeaderRendererV2001());
-            renders.put(CANVAS_LEFT, new CanvasLeftMenuTagRendererV2001());
-            renders.put(CANVAS, new CanvasRendererV2001());
-            renders.put(CANVAS_CENTER, new CanvasCenterRendererV2001());
-            renders.put(CANVAS_POPUP, new CanvasPopupRendererV2001());
-            if (isMenuLight()) {
-                renders.put(MENU, new MenuSkinLight());
-            } else {
-                renders.put(MENU, new MenuSkinV2());
+        if ( WelcomConfigurator.getCharte() == Charte.V2_001 )
+        {
+            renders.put( CANVAS_HEADER, new CanvasHeaderRendererV2001() );
+            renders.put( CANVAS_LEFT, new CanvasLeftMenuTagRendererV2001() );
+            renders.put( CANVAS, new CanvasRendererV2001() );
+            renders.put( CANVAS_CENTER, new CanvasCenterRendererV2001() );
+            renders.put( CANVAS_POPUP, new CanvasPopupRendererV2001() );
+            if ( isMenuLight() )
+            {
+                renders.put( MENU, new MenuSkinLight() );
             }
-            renders.put(BUTTON, new ButtonSkinv1());
-            renders.put(FORM_BOTTOM_BAR, new FormulaireBottomRendererV200X());
-            renders.put(TABLE, new TableRendererV2001());
-            renders.put(TABLE_NAVIGATOR, new TableNavigatorRendererV200X());
-            renders.put(ONGLET, new JSOngletRendererV2001());
-			renders.put(PROGRESSBAR, new ProgressbarRendererV2001());
-        } else if (WelcomConfigurator.getCharte() == Charte.V2_002) {
-            renders.put(CANVAS_HEADER, new CanvasHeaderRendererV2002());
-            renders.put(CANVAS_LEFT, new CanvasLeftMenuTagRendererV2002());
-            renders.put(CANVAS, new CanvasRendererV2002());
-            renders.put(CANVAS_CENTER, new CanvasCenterRendererV2002());
-            renders.put(CANVAS_POPUP, new CanvasPopupRendererV2002());
-            if (isMenuLight()) {
-                renders.put(MENU, new MenuSkinLight());
-            } else {
-                renders.put(MENU, new MenuSkinV2());
+            else
+            {
+                renders.put( MENU, new MenuSkinV2() );
             }
-            if (isButtonSkinv2()) {
-                renders.put(BUTTON, new ButtonSkinv2());
-            } else {
-                renders.put(BUTTON, new ButtonSkinv3());
+            renders.put( BUTTON, new ButtonSkinv1() );
+            renders.put( FORM_BOTTOM_BAR, new FormulaireBottomRendererV200X() );
+            renders.put( TABLE, new TableRendererV2001() );
+            renders.put( TABLE_NAVIGATOR, new TableNavigatorRendererV200X() );
+            renders.put( ONGLET, new JSOngletRendererV2001() );
+            renders.put( PROGRESSBAR, new ProgressbarRendererV2001() );
+        }
+        else if ( WelcomConfigurator.getCharte() == Charte.V2_002 )
+        {
+            renders.put( CANVAS_HEADER, new CanvasHeaderRendererV2002() );
+            renders.put( CANVAS_LEFT, new CanvasLeftMenuTagRendererV2002() );
+            renders.put( CANVAS, new CanvasRendererV2002() );
+            renders.put( CANVAS_CENTER, new CanvasCenterRendererV2002() );
+            renders.put( CANVAS_POPUP, new CanvasPopupRendererV2002() );
+            if ( isMenuLight() )
+            {
+                renders.put( MENU, new MenuSkinLight() );
             }
-            renders.put(FORM_BOTTOM_BAR, new FormulaireBottomRendererV200X());
-            renders.put(TABLE, new TableRendererV2002());
-            renders.put(TABLE_NAVIGATOR, new TableNavigatorRendererV200X());
-            renders.put(ONGLET, new JSOngletRendererV2002());
-			renders.put(PROGRESSBAR, new ProgressbarRendererV2002());
+            else
+            {
+                renders.put( MENU, new MenuSkinV2() );
+            }
+            if ( isButtonSkinv2() )
+            {
+                renders.put( BUTTON, new ButtonSkinv2() );
+            }
+            else
+            {
+                renders.put( BUTTON, new ButtonSkinv3() );
+            }
+            renders.put( FORM_BOTTOM_BAR, new FormulaireBottomRendererV200X() );
+            renders.put( TABLE, new TableRendererV2002() );
+            renders.put( TABLE_NAVIGATOR, new TableNavigatorRendererV200X() );
+            renders.put( ONGLET, new JSOngletRendererV2002() );
+            renders.put( PROGRESSBAR, new ProgressbarRendererV2002() );
 
-        } else {
-            renders.put(CANVAS_HEADER, new CanvasHeaderRendererV3001());
-            renders.put(CANVAS_LEFT, new CanvasLeftMenuTagRendererV3001());
-            renders.put(CANVAS, new CanvasRendererV3001());
-            renders.put(CANVAS_CENTER, new CanvasCenterRendererV3001());
-            renders.put(CANVAS_POPUP, new CanvasPopupRendererV3001());
-            renders.put(MENU, new MenuSkinV3001());
-            renders.put(BUTTON, new ButtonRendererv3001());
-            renders.put(FORM_BOTTOM_BAR, new FormulaireBottomRendererV3001());
-            renders.put(TABLE, new TableRendererV3001());
-            renders.put(ONGLET, new JSOngletRendererV3001());
-            renders.put(TABLE_NAVIGATOR, new TableNavigatorRendererV3001());
-			renders.put(PROGRESSBAR, new ProgressbarRendererV3001());
+        }
+        else
+        {
+            renders.put( CANVAS_HEADER, new CanvasHeaderRendererV3001() );
+            renders.put( CANVAS_LEFT, new CanvasLeftMenuTagRendererV3001() );
+            renders.put( CANVAS, new CanvasRendererV3001() );
+            renders.put( CANVAS_CENTER, new CanvasCenterRendererV3001() );
+            renders.put( CANVAS_POPUP, new CanvasPopupRendererV3001() );
+            renders.put( MENU, new MenuSkinV3001() );
+            renders.put( BUTTON, new ButtonRendererv3001() );
+            renders.put( FORM_BOTTOM_BAR, new FormulaireBottomRendererV3001() );
+            renders.put( TABLE, new TableRendererV3001() );
+            renders.put( ONGLET, new JSOngletRendererV3001() );
+            renders.put( TABLE_NAVIGATOR, new TableNavigatorRendererV3001() );
+            renders.put( PROGRESSBAR, new ProgressbarRendererV3001() );
         }
 
     }
 
     /**
      * Retourn si c'est un menu light
+     * 
      * @return menu light
      */
-    private static boolean isMenuLight() {
-        final String menuKey = WelcomConfigurator.getMessage(WelcomConfigurator.WELCOM_MENU_LIGHT);
-        return Util.isTrue(menuKey);
+    private static boolean isMenuLight()
+    {
+        final String menuKey = WelcomConfigurator.getMessage( WelcomConfigurator.WELCOM_MENU_LIGHT );
+        return Util.isTrue( menuKey );
     }
 
     /**
      * Retourn vrai si les boutons sont charte V2
+     * 
      * @return vrai si les boutons sont charte V2
      */
-    private static boolean isButtonSkinv2() {
-        final String classButtonSkinName = WelcomConfigurator.getMessage(WelcomConfigurator.CHARTEV2_BOUTON_SKIN);
-        return ("com.airfrance.welcom.taglib.button.ButtonSkinv2".equals(classButtonSkinName));
+    private static boolean isButtonSkinv2()
+    {
+        final String classButtonSkinName = WelcomConfigurator.getMessage( WelcomConfigurator.CHARTEV2_BOUTON_SKIN );
+        return ( "com.airfrance.welcom.taglib.button.ButtonSkinv2".equals( classButtonSkinName ) );
     }
 
 }

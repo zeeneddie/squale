@@ -23,93 +23,124 @@ import com.airfrance.welcom.struts.bean.WILogonBean;
 import com.airfrance.welcom.struts.util.WConstants;
 
 /**
- * @author M327837
- *
- * Classe permattant la gestion du jdbc
- *
+ * @author M327837 Classe permattant la gestion du jdbc
  */
-public abstract class JAction extends MAction {
+public abstract class JAction
+    extends MAction
+{
     /** logger */
-    private static Log log = LogFactory.getLog(JAction.class);
+    private static Log log = LogFactory.getLog( JAction.class );
 
     /** Est-ce que l'on verifie le timout */
     protected boolean disabledTimeOut = false;
 
-    /**ù
-     * Recupere le WILogonBean
+    /**
+     * ù Recupere le WILogonBean
+     * 
      * @param request : le request
      * @return WILogonBean
      */
-    public WILogonBean getWILogonBean(final HttpServletRequest request) {
-        if (request.getSession().getAttribute(WConstants.USER_KEY) instanceof WILogonBean) {
-            return (WILogonBean) request.getSession().getAttribute(WConstants.USER_KEY);
-        } else {
+    public WILogonBean getWILogonBean( final HttpServletRequest request )
+    {
+        if ( request.getSession().getAttribute( WConstants.USER_KEY ) instanceof WILogonBean )
+        {
+            return (WILogonBean) request.getSession().getAttribute( WConstants.USER_KEY );
+        }
+        else
+        {
             return null;
         }
     }
 
     /**
-     * @see org.apache.struts.action.Action#execute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.apache.struts.action.Action#execute(org.apache.struts.action.ActionMapping,
+     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse)
      */
-    public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws Exception {
+    public ActionForward execute( final ActionMapping mapping, final ActionForm form, final HttpServletRequest request,
+                                  final HttpServletResponse response )
+        throws Exception
+    {
 
         WJdbc jdbc = null;
         ActionForward af = null;
         String userName = "";
-        try {
-            if (!isDisabledTimeOut()) {
-                WActionUtil.checkSessionTimeout(request);
+        try
+        {
+            if ( !isDisabledTimeOut() )
+            {
+                WActionUtil.checkSessionTimeout( request );
             }
-            final WILogonBean logonBean = getWILogonBean(request);
+            final WILogonBean logonBean = getWILogonBean( request );
 
-            if (logonBean != null) {
+            if ( logonBean != null )
+            {
                 userName = logonBean.getUserName();
             }
 
             // Appele le traitement
-            af = wExecute(mapping, form, request, response);
+            af = wExecute( mapping, form, request, response );
 
             // Teste si l'on utilise l'avec jdbc embarqué
-            if (af == null) {
-                final String useMode = ((String) servlet.getServletContext().getAttribute(WConstants.WELCOM_USE_MODE));
+            if ( af == null )
+            {
+                final String useMode =
+                    ( (String) servlet.getServletContext().getAttribute( WConstants.WELCOM_USE_MODE ) );
 
                 // Initialise la connection jdbc
-                if (Util.isEquals(useMode, WConstants.MODE_JDBC)) {
-                    jdbc = new WJdbc(userName);
-                } else {
+                if ( Util.isEquals( useMode, WConstants.MODE_JDBC ) )
+                {
+                    jdbc = new WJdbc( userName );
+                }
+                else
+                {
                     // appel de la fonction pour connaitre quel JDBC a utiliser
-                    String jdbcName = dispatchJdbcName(mapping.getParameter());
-                    if (jdbcName == null) {
-                        jdbcName = dispatchJdbcName(request, mapping.getParameter());
+                    String jdbcName = dispatchJdbcName( mapping.getParameter() );
+                    if ( jdbcName == null )
+                    {
+                        jdbcName = dispatchJdbcName( request, mapping.getParameter() );
                     }
-                    jdbc = new WMJdbc(userName, jdbcName);
+                    jdbc = new WMJdbc( userName, jdbcName );
                 }
 
-                if (!jdbc.isClosed()) {
-                    af = wExecute(mapping, form, request, response, jdbc);
+                if ( !jdbc.isClosed() )
+                {
+                    af = wExecute( mapping, form, request, response, jdbc );
                 }
 
             }
-        } catch (final Exception e) {
-            if (!(e instanceof TimeOutException)) {
-                log.error(e, e);
+        }
+        catch ( final Exception e )
+        {
+            if ( !( e instanceof TimeOutException ) )
+            {
+                log.error( e, e );
             }
 
             String theMessage = null;
-            try {
-                theMessage = getResources(request).getMessage(getLocale(request), e.getMessage());
-            } catch (final Exception e2) {
+            try
+            {
+                theMessage = getResources( request ).getMessage( getLocale( request ), e.getMessage() );
+            }
+            catch ( final Exception e2 )
+            {
                 throw e;
             }
-            if (!GenericValidator.isBlankOrNull(theMessage)) {
-                throw new Exception(theMessage);
-            } else {
+            if ( !GenericValidator.isBlankOrNull( theMessage ) )
+            {
+                throw new Exception( theMessage );
+            }
+            else
+            {
                 throw e;
             }
 
-        } finally {
+        }
+        finally
+        {
             // Fermeture de tout ce qui a été ouvert en connection JDBC
-            if (jdbc != null) {
+            if ( jdbc != null )
+            {
                 jdbc.close();
             }
 
@@ -121,53 +152,71 @@ public abstract class JAction extends MAction {
     }
 
     /**
-     * Fonction permettant de definir le quel jdbc on desire utiliser
-     * en retournant le nom definit dans le struts-config
+     * Fonction permettant de definir le quel jdbc on desire utiliser en retournant le nom definit dans le struts-config
+     * 
      * @param functionName : Nom de la fonction qui va etre appelé
      * @return : le nom du dataSource a Utiliser
      */
-    public String dispatchJdbcName(final String functionName) {
+    public String dispatchJdbcName( final String functionName )
+    {
         return null;
     }
 
     /**
-     * Fonction permettant de definir le quel jdbc on desire utiliser
-     * en retournant le nom definit dans le struts-config
+     * Fonction permettant de definir le quel jdbc on desire utiliser en retournant le nom definit dans le struts-config
+     * 
      * @param request : Request pour identifié quelle methode a appeler
      * @param functionName : Nom de la fonction qui va etre appelé
      * @return : le nom du dataSource a Utiliser
      */
-    public String dispatchJdbcName(final HttpServletRequest request, final String functionName) {
+    public String dispatchJdbcName( final HttpServletRequest request, final String functionName )
+    {
         return null;
     }
 
     /**
      * Fonction sans JDBC embarqué
-     * @see org.apache.struts.action.Action#execute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * 
+     * @see org.apache.struts.action.Action#execute(org.apache.struts.action.ActionMapping,
+     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse)
      */
-    public ActionForward wExecute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws Exception {
+    public ActionForward wExecute( final ActionMapping mapping, final ActionForm form,
+                                   final HttpServletRequest request, final HttpServletResponse response )
+        throws Exception
+    {
         return null;
     }
 
     /**
      * Fonction avec JDBC embarqué
-     * @see org.apache.struts.action.Action#execute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse) 
+     * 
+     * @see org.apache.struts.action.Action#execute(org.apache.struts.action.ActionMapping,
+     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse)
      */
 
-    public ActionForward wExecute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request, final HttpServletResponse response, final WJdbc jdbc) throws Exception {
+    public ActionForward wExecute( final ActionMapping mapping, final ActionForm form,
+                                   final HttpServletRequest request, final HttpServletResponse response,
+                                   final WJdbc jdbc )
+        throws Exception
+    {
         return null;
     }
+
     /**
      * @return si le timeout est activé
      */
-    public boolean isDisabledTimeOut() {
+    public boolean isDisabledTimeOut()
+    {
         return disabledTimeOut;
     }
 
     /**
      * @param b si le timeout est activé
      */
-    public void setDisabledTimeOut(final boolean b) {
+    public void setDisabledTimeOut( final boolean b )
+    {
         disabledTimeOut = b;
     }
 

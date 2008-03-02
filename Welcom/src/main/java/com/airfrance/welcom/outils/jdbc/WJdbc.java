@@ -20,15 +20,12 @@ import com.airfrance.welcom.struts.bean.WComboValueLabel;
 import com.airfrance.welcom.struts.bean.WCouple;
 
 /**
- * 
- * @author M327837
- *
- * Gestion de la conexion JDBC 
- * Effectue un garbageCollector SQL.
+ * @author M327837 Gestion de la conexion JDBC Effectue un garbageCollector SQL.
  */
-public class WJdbc {
+public class WJdbc
+{
     /** logger */
-    private static Log log = LogFactory.getLog(WJdbc.class);
+    private static Log log = LogFactory.getLog( WJdbc.class );
 
     /** Affiche le trace */
     protected static boolean enabledTrace = true;
@@ -42,88 +39,112 @@ public class WJdbc {
     /** Liste des statement ouvert a partir de cette connexion */
     private final Vector statements = new Vector();
 
-    /** Contructeur caché 
-    * @throws SQLException : Erreur SQL sur l'initisalisation
-    */
-    protected WJdbc() throws SQLException {
-        //init(); // Initialise la connexion
+    /**
+     * Contructeur caché
+     * 
+     * @throws SQLException : Erreur SQL sur l'initisalisation
+     */
+    protected WJdbc()
+        throws SQLException
+    {
+        // init(); // Initialise la connexion
     }
 
     /**
      * Contructeur d'une nouvelle connection
-     * @param pUserName  Nom de l'utilisateur
+     * 
+     * @param pUserName Nom de l'utilisateur
      * @throws SQLException : Erreur SQL sur l'initisalisation
      */
-    public WJdbc(final String pUserName) throws SQLException {
+    public WJdbc( final String pUserName )
+        throws SQLException
+    {
         this.userName = pUserName;
         init(); // Initialise la connexion
     }
 
     /**
-     * 
      * @return Vrai si la connection est fermé
      */
-    public boolean isClosed() {
-        return (conn == null);
+    public boolean isClosed()
+    {
+        return ( conn == null );
     }
 
     /**
      * initialise la connexion
+     * 
      * @throws SQLException leve une erreur SQL
      */
-    protected void init() throws SQLException {
+    protected void init()
+        throws SQLException
+    {
         conn = ConnectionPool.getConnection();
 
-        if (conn != null) {
-            if (conn.isClosed()) {
-                log.error("2004-critical-Database--BD close/Relancer le serveur de BD");
+        if ( conn != null )
+        {
+            if ( conn.isClosed() )
+            {
+                log.error( "2004-critical-Database--BD close/Relancer le serveur de BD" );
             }
 
             // Enleve l'autocommit
-            conn.setAutoCommit(false);
+            conn.setAutoCommit( false );
         }
     }
 
     /**
-     *  Ferme tout ce qui ouvert
+     * Ferme tout ce qui ouvert
      */
-    public void close() {
-        if (conn != null) {
-            synchronized (conn) {
+    public void close()
+    {
+        if ( conn != null )
+        {
+            synchronized ( conn )
+            {
                 // Statcke les erreurs possible
                 final ActionErrors errors = new ActionErrors();
 
                 // Fermture de tous les statements
                 final Enumeration enumeration = statements.elements();
 
-                while (enumeration.hasMoreElements()) {
+                while ( enumeration.hasMoreElements() )
+                {
                     final WStatement statement = (WStatement) enumeration.nextElement();
 
-                    try {
-                        if (!statement.isClose()) {
+                    try
+                    {
+                        if ( !statement.isClose() )
+                        {
                             statement.close();
                         }
-                    } catch (final SQLException sqle) {
-                        log.error("2003-critical-Database--Erreur sur le close GDCtatement" + sqle.toString());
-                        errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.database.GDCStatementClose"));
+                    }
+                    catch ( final SQLException sqle )
+                    {
+                        log.error( "2003-critical-Database--Erreur sur le close GDCtatement" + sqle.toString() );
+                        errors.add( ActionErrors.GLOBAL_ERROR, new ActionError( "error.database.GDCStatementClose" ) );
 
-                        //servlet.log("SQLError", sqle);
+                        // servlet.log("SQLError", sqle);
                     }
                 }
 
-                try {
+                try
+                {
                     // Fermeture de la connection
-                    if ((conn != null) && !conn.isClosed()) {
+                    if ( ( conn != null ) && !conn.isClosed() )
+                    {
                         conn.rollback();
                         conn.close();
 
-                        //conn = null;
+                        // conn = null;
                     }
-                } catch (final SQLException sqle) {
-                    log.error("2004-critical-Database--Erreur sur le close Connection" + sqle.toString());
-                    errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.database.connectionClose"));
+                }
+                catch ( final SQLException sqle )
+                {
+                    log.error( "2004-critical-Database--Erreur sur le close Connection" + sqle.toString() );
+                    errors.add( ActionErrors.GLOBAL_ERROR, new ActionError( "error.database.connectionClose" ) );
 
-                    //servlet.log("SQLError", sqle);
+                    // servlet.log("SQLError", sqle);
                 }
             }
         }
@@ -131,74 +152,95 @@ public class WJdbc {
 
     /**
      * Fournis un WStatement pour la suite des opérations
+     * 
      * @return Retourne un Statement
-     * @throws SQLException probleme sql 
+     * @throws SQLException probleme sql
      */
-    public WStatement getWStatement() throws SQLException {
-        if (conn == null) {
-            log.error("2004-critical-Database--BD close/Relancer le serveur de BD");
-            throw new SQLException("Connection nulle, ne peut creer un WStatement");
+    public WStatement getWStatement()
+        throws SQLException
+    {
+        if ( conn == null )
+        {
+            log.error( "2004-critical-Database--BD close/Relancer le serveur de BD" );
+            throw new SQLException( "Connection nulle, ne peut creer un WStatement" );
         }
 
-        synchronized (conn) {
-            if (!conn.isClosed()) {
+        synchronized ( conn )
+        {
+            if ( !conn.isClosed() )
+            {
                 WStatement statement = null;
 
-                statement = new WStatement(conn, userName);
+                statement = new WStatement( conn, userName );
 
-                statements.add(statement);
+                statements.add( statement );
 
                 return statement;
-            } else {
-                log.error("2004-critical-Database--BD close/Relancer le serveur de BD");
-                throw new SQLException("Connection fermer, ne peut creer un WStatement");
+            }
+            else
+            {
+                log.error( "2004-critical-Database--BD close/Relancer le serveur de BD" );
+                throw new SQLException( "Connection fermer, ne peut creer un WStatement" );
             }
         }
     }
 
     /**
-     *  Retourne la connection active
+     * Retourne la connection active
+     * 
      * @return Connexion Active
      */
-    public Connection getConnection() {
+    public Connection getConnection()
+    {
         return conn;
     }
 
     /**
      * Effectue un commit de modifcation dur la BD
-     *  @throws SQLException probleme sql 
+     * 
+     * @throws SQLException probleme sql
      */
-    public void commit() throws SQLException {
+    public void commit()
+        throws SQLException
+    {
         conn.commit();
     }
 
     /**
      * Effectue un roolback
+     * 
      * @throws SQLException Probleme sql
      */
-    public void rollback() throws SQLException {
+    public void rollback()
+        throws SQLException
+    {
         conn.rollback();
     }
 
     /**
      * Recupere une sequence
+     * 
      * @param seq Nom de la sequence
      * @throws SQLException Probleme sur la sequence
-     * @return String indice de la séquence Oracle 
+     * @return String indice de la séquence Oracle
      */
-    public String getSequence(final String seq) throws SQLException {
+    public String getSequence( final String seq )
+        throws SQLException
+    {
         WStatement sta = null;
         java.sql.ResultSet rs = null;
 
         final String cmd = "select " + seq + ".NEXTVAL from DUAL";
         sta = getWStatement();
-        sta.add(cmd);
+        sta.add( cmd );
         rs = sta.executeQuery();
 
         String result = "0";
-        if (rs != null) {
-            if (rs.next()) {
-                result = rs.getString("NEXTVAL");
+        if ( rs != null )
+        {
+            if ( rs.next() )
+            {
+                result = rs.getString( "NEXTVAL" );
             }
         }
         sta.close();
@@ -206,139 +248,177 @@ public class WJdbc {
         return result;
     }
 
-    /** Recupere la sequence sous un entier
+    /**
+     * Recupere la sequence sous un entier
+     * 
      * @param seq om de la sequence
      * @return numero de la sequence
      * @throws SQLException Probleme sur la sequence
      */
-    public int getIntSequence(final String seq) throws SQLException {
-        return Integer.parseInt(getSequence(seq));
+    public int getIntSequence( final String seq )
+        throws SQLException
+    {
+        return Integer.parseInt( getSequence( seq ) );
     }
 
     /**
-     *  Decryptage d'un bean
+     * Decryptage d'un bean
+     * 
      * @param beanCrypt Bean crypté
      * @throws JCryptableException Probleme sur le Cryptage
      */
-    public void decrypte(final JCryptable beanCrypt) throws JCryptableException {
-        beanCrypt.decrypte(getConnection());
+    public void decrypte( final JCryptable beanCrypt )
+        throws JCryptableException
+    {
+        beanCrypt.decrypte( getConnection() );
     }
 
     /**
-     *  Cryptage d'un bean
+     * Cryptage d'un bean
+     * 
      * @param beanCrypt Bean crypté
      * @throws JCryptableException Probleme sur le Cryptage
      */
-    public void crypte(final JCryptable beanCrypt) throws JCryptableException {
-        beanCrypt.crypte(getConnection());
+    public void crypte( final JCryptable beanCrypt )
+        throws JCryptableException
+    {
+        beanCrypt.crypte( getConnection() );
     }
 
     /**
      * Cryptage d'un combo Value
+     * 
      * @param newCombo Combo a crypter
      * @throws SQLException Probleme sur le Cryptage
      */
-    public void crypte(final WComboValue newCombo) throws SQLException {
-        //Décrypter
+    public void crypte( final WComboValue newCombo )
+        throws SQLException
+    {
+        // Décrypter
         final Iterator it = newCombo.getListe().iterator();
         int i = 0;
 
-        while (it.hasNext()) {
+        while ( it.hasNext() )
+        {
             final String comp = (String) it.next();
-            newCombo.getListe().set(i++, this.crypte(comp));
+            newCombo.getListe().set( i++, this.crypte( comp ) );
         }
     }
 
     /**
      * Decryptage D'un combo Value
+     * 
      * @param newCombo Combo a crypter
      * @throws SQLException Probleme sur le Cryptage
      */
-    public void decrypte(final WComboValue newCombo) throws SQLException {
-        //Décrypter
+    public void decrypte( final WComboValue newCombo )
+        throws SQLException
+    {
+        // Décrypter
         final Iterator it = newCombo.getListe().iterator();
         int i = 0;
 
-        while (it.hasNext()) {
+        while ( it.hasNext() )
+        {
             final String comp = (String) it.next();
-            newCombo.getListe().set(i++, this.decrypte(comp));
+            newCombo.getListe().set( i++, this.decrypte( comp ) );
         }
     }
 
     /**
      * Decryptage D'un combo Value Label
+     * 
      * @param newCombo Combo a crypter
      * @throws SQLException Probleme sur le Cryptage
      */
-    public void decrypte(final WComboValueLabel newCombo) throws SQLException {
-        //Décrypter
+    public void decrypte( final WComboValueLabel newCombo )
+        throws SQLException
+    {
+        // Décrypter
         final Iterator it = newCombo.getListe().iterator();
         int i = 0;
 
-        while (it.hasNext()) {
+        while ( it.hasNext() )
+        {
             final WCouple comp = (WCouple) it.next();
-            newCombo.getListe().set(i++, new WCouple(this.decrypte(comp.getValue()), this.decrypte(comp.getLabel())));
+            newCombo.getListe().set( i++,
+                                     new WCouple( this.decrypte( comp.getValue() ), this.decrypte( comp.getLabel() ) ) );
         }
     }
 
     /**
-     * DeCrype la chaine
-     * via l'appel à la Focntion decrypte_FCT
+     * DeCrype la chaine via l'appel à la Focntion decrypte_FCT
+     * 
      * @param text Texte a décripté
      * @return Chaine décrypté
-     * @throws SQLException  Erreur SQL     
+     * @throws SQLException Erreur SQL
      */
-    public String decrypte(final String text) throws SQLException {
+    public String decrypte( final String text )
+        throws SQLException
+    {
         CallableStatement cs = null;
 
-        try {
-            cs = conn.prepareCall("{? = call decrypte_FCT(?)}");
-            cs.registerOutParameter(1, java.sql.Types.VARCHAR);
-            cs.setString(2, text);
+        try
+        {
+            cs = conn.prepareCall( "{? = call decrypte_FCT(?)}" );
+            cs.registerOutParameter( 1, java.sql.Types.VARCHAR );
+            cs.setString( 2, text );
             cs.executeUpdate();
 
-            return cs.getString(1);
-        } finally {
-            if (cs != null) {
+            return cs.getString( 1 );
+        }
+        finally
+        {
+            if ( cs != null )
+            {
                 cs.close();
             }
         }
     }
 
     /**
-     * Crype la chaine
-     * via l'appel à la Focntion decrypte_FCT
+     * Crype la chaine via l'appel à la Focntion decrypte_FCT
+     * 
      * @param text Texte a décripté
      * @return Chaine décrypté
-     * @throws SQLException  Erreur SQL     
+     * @throws SQLException Erreur SQL
      */
-    public String crypte(final String text) throws SQLException {
+    public String crypte( final String text )
+        throws SQLException
+    {
         CallableStatement cs = null;
 
-        try {
-            cs = conn.prepareCall("{? = call crypte_FCT(?)}");
-            cs.registerOutParameter(1, java.sql.Types.VARCHAR);
-            cs.setString(2, text);
+        try
+        {
+            cs = conn.prepareCall( "{? = call crypte_FCT(?)}" );
+            cs.registerOutParameter( 1, java.sql.Types.VARCHAR );
+            cs.setString( 2, text );
             cs.executeUpdate();
 
-            return cs.getString(1);
-        } finally {
-            if (cs != null) {
+            return cs.getString( 1 );
+        }
+        finally
+        {
+            if ( cs != null )
+            {
                 cs.close();
             }
         }
     }
+
     /**
      * @return trace active ?
      */
-    public static boolean isEnabledTrace() {
+    public static boolean isEnabledTrace()
+    {
         return enabledTrace;
     }
 
     /**
      * @param b active la trace
      */
-    public static void setEnabledTrace(final boolean b) {
+    public static void setEnabledTrace( final boolean b )
+    {
         enabledTrace = b;
     }
 

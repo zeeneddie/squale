@@ -9,12 +9,12 @@ package com.airfrance.welcom.taglib.canvas;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class CanvasBodyEventHandler extends TagSupport {
+public class CanvasBodyEventHandler
+    extends TagSupport
+{
 
     /**
      * 
@@ -172,7 +172,8 @@ public class CanvasBodyEventHandler extends TagSupport {
     protected String onunload;
 
     /** Contructeur */
-    protected CanvasBodyEventHandler() {
+    protected CanvasBodyEventHandler()
+    {
 
         onactivate = null;
         onafterprint = null;
@@ -228,9 +229,10 @@ public class CanvasBodyEventHandler extends TagSupport {
     }
 
     /**
-      * @see javax.servlet.jsp.tagext.Tag#release()
-      */
-    public void release() {
+     * @see javax.servlet.jsp.tagext.Tag#release()
+     */
+    public void release()
+    {
         super.release();
         onactivate = null;
         onafterprint = null;
@@ -286,868 +288,980 @@ public class CanvasBodyEventHandler extends TagSupport {
 
     /**
      * prepare les proprietes liees aux evenements(souris, clavier, body et focus)
+     * 
      * @return le html genere
      */
-    protected String prepareEventHandlers() {
+    protected String prepareEventHandlers()
+    {
         final StringBuffer handlers = new StringBuffer();
-        handlers.append(" ");
-        prepareMouseEvents(handlers);
-        prepareKeyEvents(handlers);
-        prepareBodyEvents(handlers);
-        prepareFocusEvents(handlers);
+        handlers.append( " " );
+        prepareMouseEvents( handlers );
+        prepareKeyEvents( handlers );
+        prepareBodyEvents( handlers );
+        prepareFocusEvents( handlers );
         return handlers.toString();
     }
 
-
-    /** 
+    /**
      * Ajout l'attribut avec sa valeur au stringbuffer
+     * 
      * @param sb stringbuffer
      * @param name nom
      * @param value valeur
      */
-    protected static void addParam(StringBuffer sb,String name,String value) {
-        
-        if (value != null) {
-            if (sb.length()>1 && sb.charAt(sb.length()-1)!=' ') {
-                sb.append(" ");    
+    protected static void addParam( StringBuffer sb, String name, String value )
+    {
+
+        if ( value != null )
+        {
+            if ( sb.length() > 1 && sb.charAt( sb.length() - 1 ) != ' ' )
+            {
+                sb.append( " " );
             }
-            sb.append(name+"=\"");
-            sb.append(value);
-            sb.append("\"");
-        }           
-        
+            sb.append( name + "=\"" );
+            sb.append( value );
+            sb.append( "\"" );
+        }
+
     }
 
     /**
-     * prepare les proprietes liees aux evenements souris 
+     * prepare les proprietes liees aux evenements souris
+     * 
      * @param handlers le stringbuffer
      */
-    protected void prepareMouseEvents(final StringBuffer handlers) {
-        
-        addParam(handlers,"onclick",onclick);
+    protected void prepareMouseEvents( final StringBuffer handlers )
+    {
 
-        addParam(handlers,"ondblclick",ondblclick);
+        addParam( handlers, "onclick", onclick );
 
-        addParam(handlers,"onmouseover",onmouseover);
+        addParam( handlers, "ondblclick", ondblclick );
 
-        addParam(handlers,"onmouseout",onmouseout);
+        addParam( handlers, "onmouseover", onmouseover );
 
-        addParam(handlers,"onmousemove",onmousemove);
+        addParam( handlers, "onmouseout", onmouseout );
 
-        addParam(handlers,"onmousedown",onmousedown);
+        addParam( handlers, "onmousemove", onmousemove );
 
-        addParam(handlers,"onmouseup",onmouseup);
+        addParam( handlers, "onmousedown", onmousedown );
 
-        addParam(handlers,"onmouseenter",onmouseenter);
+        addParam( handlers, "onmouseup", onmouseup );
 
-        addParam(handlers,"onmouseleave",onmouseleave);
+        addParam( handlers, "onmouseenter", onmouseenter );
 
-        addParam(handlers,"onmove",onmove);
+        addParam( handlers, "onmouseleave", onmouseleave );
 
-        addParam(handlers,"onmoveend",onmoveend);
+        addParam( handlers, "onmove", onmove );
 
-        addParam(handlers,"onmovestart",onmovestart);
+        addParam( handlers, "onmoveend", onmoveend );
 
-        addParam(handlers,"onmousewheel",onmousewheel);
+        addParam( handlers, "onmovestart", onmovestart );
 
-        addParam(handlers,"ondrag",ondrag);
+        addParam( handlers, "onmousewheel", onmousewheel );
 
-        addParam(handlers,"ondragend",ondragend);
+        addParam( handlers, "ondrag", ondrag );
 
-        addParam(handlers,"ondragenter",ondragenter);
+        addParam( handlers, "ondragend", ondragend );
 
-        addParam(handlers,"ondragleave",ondragleave);
+        addParam( handlers, "ondragenter", ondragenter );
 
-        addParam(handlers,"ondragover",ondragover);
+        addParam( handlers, "ondragleave", ondragleave );
 
-        addParam(handlers,"ondragstart",ondragstart);
+        addParam( handlers, "ondragover", ondragover );
+
+        addParam( handlers, "ondragstart", ondragstart );
 
     }
 
     /**
-     * prepare les proprietes liees aux evenements clavier 
+     * prepare les proprietes liees aux evenements clavier
+     * 
      * @param handlers le buffer
      */
-    protected void prepareKeyEvents(final StringBuffer handlers) {
+    protected void prepareKeyEvents( final StringBuffer handlers )
+    {
 
-        addParam(handlers,"onkeydown",onkeydown);
+        addParam( handlers, "onkeydown", onkeydown );
 
-        addParam(handlers,"onkeyup",onkeyup);
+        addParam( handlers, "onkeyup", onkeyup );
 
-        addParam(handlers,"onkeypress",onkeypress);
+        addParam( handlers, "onkeypress", onkeypress );
 
     }
 
     /**
      * prepare les proprietes liees au focus
+     * 
      * @param handlers le stringbuffer
      */
-    protected void prepareFocusEvents(final StringBuffer handlers) {
+    protected void prepareFocusEvents( final StringBuffer handlers )
+    {
 
-        addParam(handlers,"onfocusin",onfocusin);
+        addParam( handlers, "onfocusin", onfocusin );
 
-        addParam(handlers,"onfocusout",onfocusout);
-        
+        addParam( handlers, "onfocusout", onfocusout );
+
     }
-
 
     /**
      * prepare les proprietes liees au dody
+     * 
      * @param handlers le stringbuffer
      */
-    protected void prepareBodyEvents(final StringBuffer handlers) {
+    protected void prepareBodyEvents( final StringBuffer handlers )
+    {
 
-        addParam(handlers,"onactivate",onactivate);
+        addParam( handlers, "onactivate", onactivate );
 
-        addParam(handlers,"onafterprint",onafterprint);
+        addParam( handlers, "onafterprint", onafterprint );
 
-        addParam(handlers,"onbeforeactivate",onbeforeactivate);
+        addParam( handlers, "onbeforeactivate", onbeforeactivate );
 
-        addParam(handlers,"onbeforecut",onbeforecut);
+        addParam( handlers, "onbeforecut", onbeforecut );
 
-        addParam(handlers,"onbeforedeactivate",onbeforedeactivate);
+        addParam( handlers, "onbeforedeactivate", onbeforedeactivate );
 
-        addParam(handlers,"onbeforeeditfocus",onbeforeeditfocus);
+        addParam( handlers, "onbeforeeditfocus", onbeforeeditfocus );
 
-        addParam(handlers,"onbeforepaste",onbeforepaste);
+        addParam( handlers, "onbeforepaste", onbeforepaste );
 
-        addParam(handlers,"onbeforeprint",onbeforeprint);
+        addParam( handlers, "onbeforeprint", onbeforeprint );
 
-        addParam(handlers,"onbeforeunload",onbeforeunload);
+        addParam( handlers, "onbeforeunload", onbeforeunload );
 
-        addParam(handlers,"oncontextmenu",oncontextmenu);
+        addParam( handlers, "oncontextmenu", oncontextmenu );
 
-        addParam(handlers,"oncontrolselect",oncontrolselect);
+        addParam( handlers, "oncontrolselect", oncontrolselect );
 
-        addParam(handlers,"oncut",oncut);
+        addParam( handlers, "oncut", oncut );
 
-        addParam(handlers,"ondeactivate",ondeactivate);
+        addParam( handlers, "ondeactivate", ondeactivate );
 
-        addParam(handlers,"ondrop",ondrop);
+        addParam( handlers, "ondrop", ondrop );
 
-        addParam(handlers,"onfilterchange",onfilterchange);
+        addParam( handlers, "onfilterchange", onfilterchange );
 
-        addParam(handlers,"onload",onload);
+        addParam( handlers, "onload", onload );
 
-        addParam(handlers,"onlosecapture",onlosecapture);
+        addParam( handlers, "onlosecapture", onlosecapture );
 
-        addParam(handlers,"onpaste",onpaste);
+        addParam( handlers, "onpaste", onpaste );
 
-        addParam(handlers,"onpropertychange",onpropertychange);
+        addParam( handlers, "onpropertychange", onpropertychange );
 
-        addParam(handlers,"onreadystatechange",onreadystatechange);
+        addParam( handlers, "onreadystatechange", onreadystatechange );
 
-        addParam(handlers,"onresizestart",onresizestart);
+        addParam( handlers, "onresizestart", onresizestart );
 
-        addParam(handlers,"onresizeend",onresizeend);
+        addParam( handlers, "onresizeend", onresizeend );
 
-        addParam(handlers,"onscroll",onscroll);
+        addParam( handlers, "onscroll", onscroll );
 
-        addParam(handlers,"onselect",onselect);
+        addParam( handlers, "onselect", onselect );
 
-        addParam(handlers,"onselectstart",onselectstart);
+        addParam( handlers, "onselectstart", onselectstart );
 
-        addParam(handlers,"onunload",onunload);
+        addParam( handlers, "onunload", onunload );
 
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnactivate() {
+    public String getOnactivate()
+    {
         return onactivate;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnafterprint() {
+    public String getOnafterprint()
+    {
         return onafterprint;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnbeforeactivate() {
+    public String getOnbeforeactivate()
+    {
         return onbeforeactivate;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnbeforecut() {
+    public String getOnbeforecut()
+    {
         return onbeforecut;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnbeforedeactivate() {
+    public String getOnbeforedeactivate()
+    {
         return onbeforedeactivate;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnbeforeeditfocus() {
+    public String getOnbeforeeditfocus()
+    {
         return onbeforeeditfocus;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnbeforepaste() {
+    public String getOnbeforepaste()
+    {
         return onbeforepaste;
     }
 
     /**
-     * @return Accesseur 
+     * @return Accesseur
      */
-    public String getOnbeforeprint() {
+    public String getOnbeforeprint()
+    {
         return onbeforeprint;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnbeforeunload() {
+    public String getOnbeforeunload()
+    {
         return onbeforeunload;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnclick() {
+    public String getOnclick()
+    {
         return onclick;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOncontextmenu() {
+    public String getOncontextmenu()
+    {
         return oncontextmenu;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOncontrolselect() {
+    public String getOncontrolselect()
+    {
         return oncontrolselect;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOncut() {
+    public String getOncut()
+    {
         return oncut;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOndblclick() {
+    public String getOndblclick()
+    {
         return ondblclick;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOndeactivate() {
+    public String getOndeactivate()
+    {
         return ondeactivate;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOndrag() {
+    public String getOndrag()
+    {
         return ondrag;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOndragend() {
+    public String getOndragend()
+    {
         return ondragend;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOndragenter() {
+    public String getOndragenter()
+    {
         return ondragenter;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOndragleave() {
+    public String getOndragleave()
+    {
         return ondragleave;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOndragover() {
+    public String getOndragover()
+    {
         return ondragover;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOndragstart() {
+    public String getOndragstart()
+    {
         return ondragstart;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOndrop() {
+    public String getOndrop()
+    {
         return ondrop;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnfilterchange() {
+    public String getOnfilterchange()
+    {
         return onfilterchange;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnfocusin() {
+    public String getOnfocusin()
+    {
         return onfocusin;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnfocusout() {
+    public String getOnfocusout()
+    {
         return onfocusout;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnkeydown() {
+    public String getOnkeydown()
+    {
         return onkeydown;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnkeypress() {
+    public String getOnkeypress()
+    {
         return onkeypress;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnkeyup() {
+    public String getOnkeyup()
+    {
         return onkeyup;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnload() {
+    public String getOnload()
+    {
         return onload;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnlosecapture() {
+    public String getOnlosecapture()
+    {
         return onlosecapture;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnmousedown() {
+    public String getOnmousedown()
+    {
         return onmousedown;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnmouseenter() {
+    public String getOnmouseenter()
+    {
         return onmouseenter;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnmouseleave() {
+    public String getOnmouseleave()
+    {
         return onmouseleave;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnmousemove() {
+    public String getOnmousemove()
+    {
         return onmousemove;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnmouseout() {
+    public String getOnmouseout()
+    {
         return onmouseout;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnmouseover() {
+    public String getOnmouseover()
+    {
         return onmouseover;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnmouseup() {
+    public String getOnmouseup()
+    {
         return onmouseup;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnmousewheel() {
+    public String getOnmousewheel()
+    {
         return onmousewheel;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnmove() {
+    public String getOnmove()
+    {
         return onmove;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnmoveend() {
+    public String getOnmoveend()
+    {
         return onmoveend;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnmovestart() {
+    public String getOnmovestart()
+    {
         return onmovestart;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnpaste() {
+    public String getOnpaste()
+    {
         return onpaste;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnpropertychange() {
+    public String getOnpropertychange()
+    {
         return onpropertychange;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnreadystatechange() {
+    public String getOnreadystatechange()
+    {
         return onreadystatechange;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnresizeend() {
+    public String getOnresizeend()
+    {
         return onresizeend;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnresizestart() {
+    public String getOnresizestart()
+    {
         return onresizestart;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnscroll() {
+    public String getOnscroll()
+    {
         return onscroll;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnselect() {
+    public String getOnselect()
+    {
         return onselect;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnselectstart() {
+    public String getOnselectstart()
+    {
         return onselectstart;
     }
 
     /**
      * @return Accesseur
      */
-    public String getOnunload() {
+    public String getOnunload()
+    {
         return onunload;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnactivate(final String string) {
+    public void setOnactivate( final String string )
+    {
         onactivate = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnafterprint(final String string) {
+    public void setOnafterprint( final String string )
+    {
         onafterprint = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnbeforeactivate(final String string) {
+    public void setOnbeforeactivate( final String string )
+    {
         onbeforeactivate = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnbeforecut(final String string) {
+    public void setOnbeforecut( final String string )
+    {
         onbeforecut = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnbeforedeactivate(final String string) {
+    public void setOnbeforedeactivate( final String string )
+    {
         onbeforedeactivate = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnbeforeeditfocus(final String string) {
+    public void setOnbeforeeditfocus( final String string )
+    {
         onbeforeeditfocus = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnbeforepaste(final String string) {
+    public void setOnbeforepaste( final String string )
+    {
         onbeforepaste = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnbeforeprint(final String string) {
+    public void setOnbeforeprint( final String string )
+    {
         onbeforeprint = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnbeforeunload(final String string) {
+    public void setOnbeforeunload( final String string )
+    {
         onbeforeunload = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnclick(final String string) {
+    public void setOnclick( final String string )
+    {
         onclick = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOncontextmenu(final String string) {
+    public void setOncontextmenu( final String string )
+    {
         oncontextmenu = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOncontrolselect(final String string) {
+    public void setOncontrolselect( final String string )
+    {
         oncontrolselect = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOncut(final String string) {
+    public void setOncut( final String string )
+    {
         oncut = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOndblclick(final String string) {
+    public void setOndblclick( final String string )
+    {
         ondblclick = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOndeactivate(final String string) {
+    public void setOndeactivate( final String string )
+    {
         ondeactivate = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOndrag(final String string) {
+    public void setOndrag( final String string )
+    {
         ondrag = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOndragend(final String string) {
+    public void setOndragend( final String string )
+    {
         ondragend = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOndragenter(final String string) {
+    public void setOndragenter( final String string )
+    {
         ondragenter = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOndragleave(final String string) {
+    public void setOndragleave( final String string )
+    {
         ondragleave = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOndragover(final String string) {
+    public void setOndragover( final String string )
+    {
         ondragover = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOndragstart(final String string) {
+    public void setOndragstart( final String string )
+    {
         ondragstart = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOndrop(final String string) {
+    public void setOndrop( final String string )
+    {
         ondrop = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnfilterchange(final String string) {
+    public void setOnfilterchange( final String string )
+    {
         onfilterchange = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnfocusin(final String string) {
+    public void setOnfocusin( final String string )
+    {
         onfocusin = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnfocusout(final String string) {
+    public void setOnfocusout( final String string )
+    {
         onfocusout = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnkeydown(final String string) {
+    public void setOnkeydown( final String string )
+    {
         onkeydown = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnkeypress(final String string) {
+    public void setOnkeypress( final String string )
+    {
         onkeypress = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnkeyup(final String string) {
+    public void setOnkeyup( final String string )
+    {
         onkeyup = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnload(final String string) {
+    public void setOnload( final String string )
+    {
         onload = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnlosecapture(final String string) {
+    public void setOnlosecapture( final String string )
+    {
         onlosecapture = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnmousedown(final String string) {
+    public void setOnmousedown( final String string )
+    {
         onmousedown = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnmouseenter(final String string) {
+    public void setOnmouseenter( final String string )
+    {
         onmouseenter = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnmouseleave(final String string) {
+    public void setOnmouseleave( final String string )
+    {
         onmouseleave = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnmousemove(final String string) {
+    public void setOnmousemove( final String string )
+    {
         onmousemove = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnmouseout(final String string) {
+    public void setOnmouseout( final String string )
+    {
         onmouseout = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnmouseover(final String string) {
+    public void setOnmouseover( final String string )
+    {
         onmouseover = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnmouseup(final String string) {
+    public void setOnmouseup( final String string )
+    {
         onmouseup = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnmousewheel(final String string) {
+    public void setOnmousewheel( final String string )
+    {
         onmousewheel = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnmove(final String string) {
+    public void setOnmove( final String string )
+    {
         onmove = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnmoveend(final String string) {
+    public void setOnmoveend( final String string )
+    {
         onmoveend = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnmovestart(final String string) {
+    public void setOnmovestart( final String string )
+    {
         onmovestart = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnpaste(final String string) {
+    public void setOnpaste( final String string )
+    {
         onpaste = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnpropertychange(final String string) {
+    public void setOnpropertychange( final String string )
+    {
         onpropertychange = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnreadystatechange(final String string) {
+    public void setOnreadystatechange( final String string )
+    {
         onreadystatechange = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnresizeend(final String string) {
+    public void setOnresizeend( final String string )
+    {
         onresizeend = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnresizestart(final String string) {
+    public void setOnresizestart( final String string )
+    {
         onresizestart = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnscroll(final String string) {
+    public void setOnscroll( final String string )
+    {
         onscroll = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnselect(final String string) {
+    public void setOnselect( final String string )
+    {
         onselect = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnselectstart(final String string) {
+    public void setOnselectstart( final String string )
+    {
         onselectstart = string;
     }
 
     /**
      * @param string Accesseur
      */
-    public void setOnunload(final String string) {
+    public void setOnunload( final String string )
+    {
         onunload = string;
     }
 

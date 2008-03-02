@@ -7,24 +7,26 @@
 package com.airfrance.welcom.outils.interpel;
 
 /**
- *
  * Erreur sur le site
- *
+ * 
  * @author M327837
- * @deprecated 
- *
+ * @deprecated
  */
-public class SiteException extends Exception {
+public class SiteException
+    extends Exception
+{
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4481655564326801375L;
+     * 
+     */
+    private static final long serialVersionUID = 4481655564326801375L;
 
-	/**
-     * Constructeur d'un probleme sur le site 
+    /**
+     * Constructeur d'un probleme sur le site
+     * 
      * @param m Message de l'exception
      */
-    public SiteException(final String m) {
-        super(m);
+    public SiteException( final String m )
+    {
+        super( m );
     }
 }

@@ -20,58 +20,79 @@ import com.airfrance.welcom.taglib.html.FormTag;
 import com.airfrance.welcom.taglib.renderer.RendererFactory;
 
 /**
- * Generates an image representing current sorting order
- * over some field and link to change this mode.
- *
- * @author     Yuriy Zubarev
- * @version    1.0
+ * Generates an image representing current sorting order over some field and link to change this mode.
+ * 
+ * @author Yuriy Zubarev
+ * @version 1.0
  */
-public class TableNavigatorTag extends TagSupport {
+public class TableNavigatorTag
+    extends TagSupport
+{
     /**
      * 
      */
     private static final long serialVersionUID = 1645916293761797206L;
-    /** Constante*/
-    public static final int PAGES_PER_NAVIGATIONBAR = 10;
-    /** parametre du tag*/
-    private String name;
-    /** parametre du tag*/
-    private HttpServletResponse response;
-    /** parametre du tag*/
-    private HttpServletRequest request;
-    /** parametre du tag*/
-    private String baseURL;
-    /** parametre du tag*/
-    private int from;
-    /** parametre du tag*/
-    private int volume;
-    /** parametre du tag*/
-    private int length;
-    /** parametre du tag*/
-    private String localeKey;
-    /** parametre du tag*/
-    private String bundle;
-    /** parametre du tag*/
-    private String pagesPerNavBar = null;
-    /** parametre du tag*/
-    private HTMLTable table;
-    /** parametre du tag*/
-    private String txtPrev = "";
-    /** parametre du tag*/
-    private String txtNext = "";
-    /** parametre du tag*/
-    private String formName = null;
-    /** parametre du tag*/
-    private String callBackUrl = "";
-    /** parametre du tag*/
-    private int ipagesPerNavBar = PAGES_PER_NAVIGATIONBAR; // defaultValue
-    /** render */
-    private static ITableNavigatorRenderer render = (ITableNavigatorRenderer) RendererFactory.getRenderer(RendererFactory.TABLE_NAVIGATOR);
 
-    /** 
+    /** Constante */
+    public static final int PAGES_PER_NAVIGATIONBAR = 10;
+
+    /** parametre du tag */
+    private String name;
+
+    /** parametre du tag */
+    private HttpServletResponse response;
+
+    /** parametre du tag */
+    private HttpServletRequest request;
+
+    /** parametre du tag */
+    private String baseURL;
+
+    /** parametre du tag */
+    private int from;
+
+    /** parametre du tag */
+    private int volume;
+
+    /** parametre du tag */
+    private int length;
+
+    /** parametre du tag */
+    private String localeKey;
+
+    /** parametre du tag */
+    private String bundle;
+
+    /** parametre du tag */
+    private String pagesPerNavBar = null;
+
+    /** parametre du tag */
+    private HTMLTable table;
+
+    /** parametre du tag */
+    private String txtPrev = "";
+
+    /** parametre du tag */
+    private String txtNext = "";
+
+    /** parametre du tag */
+    private String formName = null;
+
+    /** parametre du tag */
+    private String callBackUrl = "";
+
+    /** parametre du tag */
+    private int ipagesPerNavBar = PAGES_PER_NAVIGATIONBAR; // defaultValue
+
+    /** render */
+    private static ITableNavigatorRenderer render =
+        (ITableNavigatorRenderer) RendererFactory.getRenderer( RendererFactory.TABLE_NAVIGATOR );
+
+    /**
      * Constructeur
      */
-    public TableNavigatorTag() {
+    public TableNavigatorTag()
+    {
         name = null;
         localeKey = Globals.LOCALE_KEY;
         bundle = Globals.MESSAGES_KEY;
@@ -79,23 +100,25 @@ public class TableNavigatorTag extends TagSupport {
     }
 
     /**
-     *Sets the name attribute of the TableNavigatorTag object
-     *
-     * @param  pPagesPerNavBar  The new name value
+     * Sets the name attribute of the TableNavigatorTag object
+     * 
+     * @param pPagesPerNavBar The new name value
      */
-    public void setPagesPerNavBar(final String pPagesPerNavBar) {
+    public void setPagesPerNavBar( final String pPagesPerNavBar )
+    {
         pagesPerNavBar = pPagesPerNavBar;
     }
 
     /**
-     * 
      * @return le formName
      */
-    protected String getFormName() {
+    protected String getFormName()
+    {
 
-        final FormTag formTag = (FormTag) pageContext.getRequest().getAttribute("org.apache.struts.taglib.html.FORM");
+        final FormTag formTag = (FormTag) pageContext.getRequest().getAttribute( "org.apache.struts.taglib.html.FORM" );
 
-        if (formTag != null) {
+        if ( formTag != null )
+        {
             return formTag.getFormName();
         }
 
@@ -103,65 +126,80 @@ public class TableNavigatorTag extends TagSupport {
     }
 
     /**
-     * 
      * @return chaine URL
      */
-    protected String getServletName() {
-        if (!GenericValidator.isBlankOrNull(callBackUrl)) {
-            if (callBackUrl.indexOf('?') > 0) {
+    protected String getServletName()
+    {
+        if ( !GenericValidator.isBlankOrNull( callBackUrl ) )
+        {
+            if ( callBackUrl.indexOf( '?' ) > 0 )
+            {
                 return callBackUrl + "&action=navigate&";
-            } else {
+            }
+            else
+            {
                 return callBackUrl + "?action=navigate&";
             }
-        } else {
+        }
+        else
+        {
             return Util.SERVEPATH + "?";
         }
     }
 
     /**
-     *Gets the name attribute of the TableNavigatorTag object
-     *
-     * @return    The name value
+     * Gets the name attribute of the TableNavigatorTag object
+     * 
+     * @return The name value
      */
-    public String getPagesPerNavBar() {
-        return (this.pagesPerNavBar);
+    public String getPagesPerNavBar()
+    {
+        return ( this.pagesPerNavBar );
     }
 
     /**
      * Gere le lien pour un id donnée
+     * 
      * @return : liens
      */
-    protected String getStartHref() {
+    protected String getStartHref()
+    {
         String frwd = null;
 
-        if (!GenericValidator.isBlankOrNull(table.getMapping())) {
-            frwd = "wforward=" + Util.encode(table.getMapping());
-        } else {
-            frwd = "requestURI=" + Util.encode(request.getRequestURI());
+        if ( !GenericValidator.isBlankOrNull( table.getMapping() ) )
+        {
+            frwd = "wforward=" + Util.encode( table.getMapping() );
+        }
+        else
+        {
+            frwd = "requestURI=" + Util.encode( request.getRequestURI() );
         }
 
         final String result = baseURL + "/" + getServletName() + frwd + "&";
 
-        return response.encodeURL(result);
+        return response.encodeURL( result );
     }
 
     /**
      * Desine la barre de navigation
+     * 
      * @param pFrom : ID de depart
      * @param pVolume : Taille de la collection
      * @param pLength : Nombre par page
      * @return le flux
      */
-    protected StringBuffer drawBar(final int pFrom, final int pVolume, final int pLength) {
+    protected StringBuffer drawBar( final int pFrom, final int pVolume, final int pLength )
+    {
         final StringBuffer sb = new StringBuffer();
 
         // Recupere la locale de la page
-        final Locale localeRequest = (Locale) request.getSession().getAttribute(localeKey);
+        final Locale localeRequest = (Locale) request.getSession().getAttribute( localeKey );
 
         // Recuperer le fichier des Bundle
-        final MessageResources resources = (MessageResources) pageContext.getServletContext().getAttribute(bundle);
+        final MessageResources resources = (MessageResources) pageContext.getServletContext().getAttribute( bundle );
 
-        sb.append(render.drawBar(resources, localeRequest, formName, getStartHref(), pFrom, pVolume, pLength, ipagesPerNavBar, getName()));
+        sb.append( render.drawBar( resources, localeRequest, formName, getStartHref(), pFrom, pVolume, pLength,
+                                   ipagesPerNavBar, getName() ) );
 
         return sb;
     }
@@ -169,72 +207,88 @@ public class TableNavigatorTag extends TagSupport {
     /**
      * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
      */
-    public int doStartTag() throws JspException {
+    public int doStartTag()
+        throws JspException
+    {
         final StringBuffer results = new StringBuffer();
 
-        results.append(drawStart());
-        ResponseUtils.write(pageContext, results.toString());
+        results.append( drawStart() );
+        ResponseUtils.write( pageContext, results.toString() );
 
         return 0;
     }
 
     /**
      * Desine la bare, et initialise les params
+     * 
      * @return : le flux
      * @throws JspException : pd a la creation
      */
-    public String drawStart() throws JspException {
+    public String drawStart()
+        throws JspException
+    {
         init();
 
-        return drawBar(from, volume, length).toString();
+        return drawBar( from, volume, length ).toString();
     }
 
     /**
-     * 
      * @return Ecriture a la fin de la barre
      * @throws JspException : exception
      */
-    public String drawEnd() throws JspException {
+    public String drawEnd()
+        throws JspException
+    {
         return "";
     }
 
     /**
      * Initialise les proprietes
+     * 
      * @throws JspException : Exception
      */
-    protected void init() throws JspException {
+    protected void init()
+        throws JspException
+    {
         response = (HttpServletResponse) pageContext.getResponse();
         request = (HttpServletRequest) pageContext.getRequest();
-        baseURL = ((HttpServletRequest) pageContext.getRequest()).getContextPath();
+        baseURL = ( (HttpServletRequest) pageContext.getRequest() ).getContextPath();
 
-        if (table == null) {
-            final Object bean = RequestUtils.lookup(pageContext, name, null);
+        if ( table == null )
+        {
+            final Object bean = RequestUtils.lookup( pageContext, name, null );
 
-            if (!(bean instanceof Collection)) {
-                throw new JspException("Bean should be type of HTMLTable");
+            if ( !( bean instanceof Collection ) )
+            {
+                throw new JspException( "Bean should be type of HTMLTable" );
             }
 
             table = (HTMLTable) bean;
         }
 
-        if (table == null) {
-            throw new JspException("Table not set for pagination");
+        if ( table == null )
+        {
+            throw new JspException( "Table not set for pagination" );
         }
 
         from = table.getFrom();
         volume = table.getVolume();
         length = table.getLength();
 
-        if (pagesPerNavBar != null) {
-            ipagesPerNavBar = Integer.parseInt(pagesPerNavBar);
+        if ( pagesPerNavBar != null )
+        {
+            ipagesPerNavBar = Integer.parseInt( pagesPerNavBar );
         }
 
-        if (WelcomConfigurator.getCharte().isV2()) {
+        if ( WelcomConfigurator.getCharte().isV2() )
+        {
             // Recalcule la taille
-            if (((volume / length) <= PAGES_PER_NAVIGATIONBAR) && GenericValidator.isBlankOrNull(pagesPerNavBar)) {
+            if ( ( ( volume / length ) <= PAGES_PER_NAVIGATIONBAR ) && GenericValidator.isBlankOrNull( pagesPerNavBar ) )
+            {
                 ipagesPerNavBar = 1;
             }
-            if (ipagesPerNavBar != 1) {
+            if ( ipagesPerNavBar != 1 )
+            {
                 txtPrev += " (" + ipagesPerNavBar + ")";
                 txtNext += " (" + ipagesPerNavBar + ")";
             }
@@ -248,7 +302,8 @@ public class TableNavigatorTag extends TagSupport {
     /**
      * Release any acquired resources.
      */
-    public void release() {
+    public void release()
+    {
         super.release();
         name = null;
         baseURL = null;
@@ -263,84 +318,96 @@ public class TableNavigatorTag extends TagSupport {
     /**
      * @return accesseur
      */
-    public int getLength() {
+    public int getLength()
+    {
         return length;
     }
 
     /**
      * @return accesseur
      */
-    public String getLocaleKey() {
+    public String getLocaleKey()
+    {
         return localeKey;
     }
 
     /**
      * @return accesseur
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
     /**
      * @return accesseur
      */
-    public int getVolume() {
+    public int getVolume()
+    {
         return volume;
     }
 
     /**
      * @param i accesseur
      */
-    public void setLength(final int i) {
+    public void setLength( final int i )
+    {
         length = i;
     }
 
     /**
      * @param string accesseur
      */
-    public void setLocaleKey(final String string) {
+    public void setLocaleKey( final String string )
+    {
         localeKey = string;
     }
 
     /**
      * @param string accesseur
      */
-    public void setName(final String string) {
+    public void setName( final String string )
+    {
         name = string;
     }
 
     /**
      * @param i accesseur
      */
-    public void setVolume(final int i) {
+    public void setVolume( final int i )
+    {
         volume = i;
     }
 
     /**
      * @return accesseur
      */
-    public HTMLTable getTable() {
+    public HTMLTable getTable()
+    {
         return table;
     }
 
     /**
      * @param pTable accesseur
      */
-    public void setTable(final HTMLTable pTable) {
+    public void setTable( final HTMLTable pTable )
+    {
         table = pTable;
     }
 
     /**
      * @return accesseur
      */
-    public String getCallBackUrl() {
+    public String getCallBackUrl()
+    {
         return callBackUrl;
     }
 
     /**
      * @param string accesseur
      */
-    public void setCallBackUrl(final String string) {
+    public void setCallBackUrl( final String string )
+    {
         callBackUrl = string;
     }
 }

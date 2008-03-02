@@ -12,12 +12,11 @@ import javax.naming.NamingException;
 import org.apache.commons.validator.GenericValidator;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class WelcomContext {
+public class WelcomContext
+{
 
     /** Nom de context Welcom, resoud le pb de clonnage */
     private final static String DEFAULT_WELCOM_CONTEXT_NAME = "Welcom";
@@ -26,15 +25,19 @@ public class WelcomContext {
     private static int nbInit = 0;
 
     /**
-     * @return le nom du welcomContext (java:com/env) declaré sur le serveur 
+     * @return le nom du welcomContext (java:com/env) declaré sur le serveur
      */
-    private static String lookupWelcomContextName() {
+    private static String lookupWelcomContextName()
+    {
         InitialContext ic;
         String welcomContextName;
-        try {
+        try
+        {
             ic = new InitialContext();
-            welcomContextName = (String) ic.lookup("java:comp/env/welcomContext");
-        } catch (final NamingException e) {
+            welcomContextName = (String) ic.lookup( "java:comp/env/welcomContext" );
+        }
+        catch ( final NamingException e )
+        {
             welcomContextName = DEFAULT_WELCOM_CONTEXT_NAME;
         }
         return welcomContextName;
@@ -46,30 +49,37 @@ public class WelcomContext {
     /**
      * Initalise le WelcomContextName
      */
-    static void initWelcomContextName() {
+    static void initWelcomContextName()
+    {
         nbInit++;
     }
 
-    /** 
+    /**
      * Reinitialise le contexte de Welcom
      */
-    public static void resetWelcomContextName() {
-        synchronized (threadLocal) {
-            threadLocal.set(lookupWelcomContextName());
+    public static void resetWelcomContextName()
+    {
+        synchronized ( threadLocal )
+        {
+            threadLocal.set( lookupWelcomContextName() );
         }
     }
 
-    /** 
+    /**
      * Recuperele contextName de Welcom
+     * 
      * @return le nom du contexte de welcom
      */
-    public static String getWelcomContextName() {
+    public static String getWelcomContextName()
+    {
         String welcomContextName = DEFAULT_WELCOM_CONTEXT_NAME;
-        if (nbInit > 1) {
+        if ( nbInit > 1 )
+        {
             welcomContextName = (String) threadLocal.get();
-            if (GenericValidator.isBlankOrNull(welcomContextName)) {
+            if ( GenericValidator.isBlankOrNull( welcomContextName ) )
+            {
                 welcomContextName = lookupWelcomContextName();
-                threadLocal.set(welcomContextName);
+                threadLocal.set( welcomContextName );
             }
         }
         return welcomContextName;

@@ -23,15 +23,15 @@ import com.airfrance.welcom.outils.jdbc.WJdbcMagic;
 import com.airfrance.welcom.outils.jdbc.WStatement;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class TaskCheckUpdateMessageRessources extends TimerTask {
+public class TaskCheckUpdateMessageRessources
+    extends TimerTask
+{
 
     /** logger */
-    private static Log log = LogFactory.getLog(TaskCheckUpdateMessageRessources.class);
+    private static Log log = LogFactory.getLog( TaskCheckUpdateMessageRessources.class );
 
     /** Date de derniere maj */
     private Date internalLastDate;
@@ -41,31 +41,39 @@ public class TaskCheckUpdateMessageRessources extends TimerTask {
 
     /**
      * Initilise le verificateur de synchronisation des messages
+     * 
      * @param pServletContext : servelet
      */
-    public TaskCheckUpdateMessageRessources(final ServletContext pServletContext) {
+    public TaskCheckUpdateMessageRessources( final ServletContext pServletContext )
+    {
         servletContext = pServletContext;
     }
 
-    /** (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see java.lang.Runnable#run()
      */
-    public void run() {
+    public void run()
+    {
 
-        final Date lastDateInBD = getTimeStampBD(WAddOnsMessageManager.ADDONS_MESSAGEMANAGER_NAME);
+        final Date lastDateInBD = getTimeStampBD( WAddOnsMessageManager.ADDONS_MESSAGEMANAGER_NAME );
 
-        if (lastDateInBD != null) {
+        if ( lastDateInBD != null )
+        {
 
-            if (internalLastDate == null) {
+            if ( internalLastDate == null )
+            {
                 internalLastDate = lastDateInBD;
             }
 
-            if (internalLastDate.getTime() < lastDateInBD.getTime()) {
+            if ( internalLastDate.getTime() < lastDateInBD.getTime() )
+            {
 
-                log.info("Synchronisation des MessageResources, suite a mise à jour");
+                log.info( "Synchronisation des MessageResources, suite a mise à jour" );
 
                 // Reset
-                 ((MessageResourcesAddons) servletContext.getAttribute(Globals.MESSAGES_KEY)).resetCache();
+                ( (MessageResourcesAddons) servletContext.getAttribute( Globals.MESSAGES_KEY ) ).resetCache();
 
                 // Memorise le nouveau
                 internalLastDate = lastDateInBD;
@@ -79,24 +87,32 @@ public class TaskCheckUpdateMessageRessources extends TimerTask {
      * @return Derniere date de modification, null si la table n'existe pas
      * @param addonName : nom de l'addons
      */
-    private Date getTimeStampBD(final String addonName) {
+    private Date getTimeStampBD( final String addonName )
+    {
         Date bdDate = null;
         WJdbcMagic jdbcMagic = null;
-        try {
+        try
+        {
             jdbcMagic = new WJdbcMagic();
             final WStatement sta = jdbcMagic.getWStatement();
-            sta.add("select * from WEL_ADDONS where");
-            sta.addParameter("NAME=?", addonName);
+            sta.add( "select * from WEL_ADDONS where" );
+            sta.addParameter( "NAME=?", addonName );
             final ResultSet rs = sta.executeQuery();
-            if ((rs != null) && rs.next()) {
-                bdDate = new Date(rs.getLong("PARAMETERS"));
+            if ( ( rs != null ) && rs.next() )
+            {
+                bdDate = new Date( rs.getLong( "PARAMETERS" ) );
             }
             sta.close();
 
-        } catch (final SQLException e) {
+        }
+        catch ( final SQLException e )
+        {
             return null;
-        } finally {
-            if (jdbcMagic != null) {
+        }
+        finally
+        {
+            if ( jdbcMagic != null )
+            {
                 jdbcMagic.close();
             }
         }

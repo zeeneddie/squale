@@ -13,7 +13,9 @@ import com.airfrance.welcom.struts.bean.WActionForm;
 /**
  *
  */
-public class MessagesBean extends WActionForm {
+public class MessagesBean
+    extends WActionForm
+{
 
     /**
      * 
@@ -26,7 +28,7 @@ public class MessagesBean extends WActionForm {
     /** liest des locales */
     private ArrayList listLocales = new ArrayList();
 
-    /** clef de filtre*/
+    /** clef de filtre */
     private String messageKeyFiltre = "";
 
     /** message de filtre */
@@ -35,56 +37,64 @@ public class MessagesBean extends WActionForm {
     /**
      * @return accesseur
      */
-    public ArrayList getListMessages() {
+    public ArrayList getListMessages()
+    {
         return listMessages;
     }
 
     /**
      * @param list accesseur
      */
-    public void setListMessages(final ArrayList list) {
+    public void setListMessages( final ArrayList list )
+    {
         listMessages = list;
     }
 
     /**
      * @return accesseur
      */
-    public ArrayList getListLocales() {
+    public ArrayList getListLocales()
+    {
         return listLocales;
     }
 
     /**
      * @param list accesseur
      */
-    public void setListLocales(final ArrayList list) {
+    public void setListLocales( final ArrayList list )
+    {
         listLocales = list;
     }
 
     /**
      * @return accesseur
      */
-    public String getMessageKeyFiltre() {
+    public String getMessageKeyFiltre()
+    {
         return messageKeyFiltre;
     }
 
     /**
      * @param string accesseur
      */
-    public void setMessageKeyFiltre(final String string) {
+    public void setMessageKeyFiltre( final String string )
+    {
         messageKeyFiltre = string;
     }
 
     /**
      * @return accesseur
      */
-    public String getMessageFiltre() {
+    public String getMessageFiltre()
+    {
         return messageFiltre;
     }
 
     /**
      * @param string accesseur
      */
-    public void setMessageFiltre(final String string) {
+    public void setMessageFiltre( final String string )
+    {
         messageFiltre = string;
     }
 

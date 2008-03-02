@@ -16,18 +16,23 @@ import org.apache.struts.actions.DispatchAction;
  */
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class WSpellWaitAction extends DispatchAction {
+public class WSpellWaitAction
+    extends DispatchAction
+{
 
     /**
-     * @see org.apache.struts.actions.DispatchAction#unspecified(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.apache.struts.actions.DispatchAction#unspecified(org.apache.struts.action.ActionMapping,
+     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse)
      */
-    public ActionForward unspecified(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws Exception {
-        return mapping.findForward("success");
+    public ActionForward unspecified( final ActionMapping mapping, final ActionForm form,
+                                      final HttpServletRequest request, final HttpServletResponse response )
+        throws Exception
+    {
+        return mapping.findForward( "success" );
     }
 
 }

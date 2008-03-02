@@ -17,63 +17,75 @@ import com.airfrance.welcom.outils.Charte;
 import com.airfrance.welcom.outils.WelcomConfigurator;
 
 /**
- * @author M327837
- *
- * Pour changer le modÞle de ce commentaire de type gÚnÚrÚ, allez Ó :
- * FenÛtre&gt;PrÚfÚrences&gt;Java&gt;GÚnÚration de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modÞle de ce commentaire de type gÚnÚrÚ, allez Ó :
+ *         FenÛtre&gt;PrÚfÚrences&gt;Java&gt;GÚnÚration de code&gt;Code et commentaires
  */
-public class ColSingleSelect extends ColDisabled {
+public class ColSingleSelect
+    extends ColDisabled
+{
     /** logger */
-    private static Log log = LogFactory.getLog(ColSelect.class);
+    private static Log log = LogFactory.getLog( ColSelect.class );
+
     /** ToolTip */
     protected String toolTip = "";
+
     /** onclick */
     protected String onclick = "";
+
     /** parametre du tag */
     private String specialHeaderTitle = "";
-    /**bean du formulaire*/
+
+    /** bean du formulaire */
     private String formbeanValue = "";
+
     /** parametre du tag */
     private String propertyValue = "";
+
     /** id auto generer */
     private static long autoid = 0;
+
     /** parametre du tag */
     private String value = "";
 
     /** prefixe auto id */
     private static final String AUTOID_PREFIX = "welcomRadioAutoId";
 
-
-
-
     /**
      * Retourne la valeur pour le champ input
+     * 
      * @param bean le bean
      * @param idIndex l'index
      * @return si une propertyvalue est calculé alors on retoune cette valeur, sinon l'index
      */
-    private String getComputedInputValue(final Object bean, final int idIndex) {
-        
-        String comptedInputValue=Integer.toString(idIndex);
-        
-        if (GenericValidator.isBlankOrNull(value) && !GenericValidator.isBlankOrNull(propertyValue)) {
-            try {
-                comptedInputValue = BeanUtils.getProperty(bean, propertyValue);
-            } catch (final IllegalAccessException e) {
-                log.error(e, e);
-            } catch (final InvocationTargetException e) {
-                log.error(e, e);
-            } catch (final NoSuchMethodException e) {
-                log.error(e, e);
+    private String getComputedInputValue( final Object bean, final int idIndex )
+    {
+
+        String comptedInputValue = Integer.toString( idIndex );
+
+        if ( GenericValidator.isBlankOrNull( value ) && !GenericValidator.isBlankOrNull( propertyValue ) )
+        {
+            try
+            {
+                comptedInputValue = BeanUtils.getProperty( bean, propertyValue );
+            }
+            catch ( final IllegalAccessException e )
+            {
+                log.error( e, e );
+            }
+            catch ( final InvocationTargetException e )
+            {
+                log.error( e, e );
+            }
+            catch ( final NoSuchMethodException e )
+            {
+                log.error( e, e );
             }
         }
-        
+
         return comptedInputValue;
     }
-    
-    
+
     /**
-     * 
      * @param bean : Bean
      * @param position la position de la colonne
      * @param idIndex Index
@@ -81,89 +93,99 @@ public class ColSingleSelect extends ColDisabled {
      * @param styleSelect Style selectionne
      * @return le html gÚnÚrÚ
      */
-    public String getSpecificContent(int position, Object bean, int idIndex, String style, String styleSelect, final int pageLength) {
+    public String getSpecificContent( int position, Object bean, int idIndex, String style, String styleSelect,
+                                      final int pageLength )
+    {
 
         final StringBuffer sb = new StringBuffer();
 
         /** Calcule la value du tag */
-        value = getComputedInputValue(bean, idIndex);
+        value = getComputedInputValue( bean, idIndex );
 
         String name = getCols().getTable().getName();
         String wdt = "";
         String st = style;
 
-        if (isNeedWriteWidth(idIndex)) {
+        if ( isNeedWriteWidth( idIndex ) )
+        {
             wdt = " width=\"" + getWidth() + "\"";
         }
-        if (WelcomConfigurator.getCharte() == Charte.V2_002) {
+        if ( WelcomConfigurator.getCharte() == Charte.V2_002 )
+        {
             st = "normal";
         }
 
-
-        if (!GenericValidator.isBlankOrNull(getCols().getTable().getProperty())) {
+        if ( !GenericValidator.isBlankOrNull( getCols().getTable().getProperty() ) )
+        {
             name = getCols().getTable().getProperty();
         }
 
         // Creation du TD
-        sb.append("<td style=\"padding:0 0 0 0;\"");
-        sb.append(wdt);
-        sb.append(" classSelect=\"");
-        sb.append(styleSelect);
-        sb.append("\" classDefault=\"");
-        sb.append(style);
-        sb.append("\">");
+        sb.append( "<td style=\"padding:0 0 0 0;\"" );
+        sb.append( wdt );
+        sb.append( " classSelect=\"" );
+        sb.append( styleSelect );
+        sb.append( "\" classDefault=\"" );
+        sb.append( style );
+        sb.append( "\">" );
 
         // Creation de la check box
-        sb.append("<input class=\"");
-        sb.append(st);
-        sb.append("\" type=\"radio\" name=\"");
-        sb.append(getProperty());
-        sb.append("\" value=\"");
-        sb.append(value);
-        sb.append("\" ");
-        sb.append(" id=\"");
-        sb.append(getAutoID());
-        sb.append("\" ");
+        sb.append( "<input class=\"" );
+        sb.append( st );
+        sb.append( "\" type=\"radio\" name=\"" );
+        sb.append( getProperty() );
+        sb.append( "\" value=\"" );
+        sb.append( value );
+        sb.append( "\" " );
+        sb.append( " id=\"" );
+        sb.append( getAutoID() );
+        sb.append( "\" " );
 
-        sb.append("onclick=\"checkRadioSingle(this);");
+        sb.append( "onclick=\"checkRadioSingle(this);" );
 
-        if (!GenericValidator.isBlankOrNull(onclick)) {
-            sb.append(onclick);
+        if ( !GenericValidator.isBlankOrNull( onclick ) )
+        {
+            sb.append( onclick );
         }
-        sb.append(";\"");
+        sb.append( ";\"" );
 
-        //Si ce test venait à changer, mettre à jour la méthode getLineIsSelected
-        //qui reprend le même principe
-        if (formbeanValue.equals(value)) {
-            sb.append(" checked ");
+        // Si ce test venait à changer, mettre à jour la méthode getLineIsSelected
+        // qui reprend le même principe
+        if ( formbeanValue.equals( value ) )
+        {
+            sb.append( " checked " );
         }
 
-        sb.append("></td>");
+        sb.append( "></td>" );
 
         return sb.toString();
     }
 
     /**
-     * ATTENTION Cette méthode recopie le principe de test utilisé dans getSpecificContent
-     * Si elle est modifiée, reporter les modifs sur getSpecificContent
+     * ATTENTION Cette méthode recopie le principe de test utilisé dans getSpecificContent Si elle est modifiée,
+     * reporter les modifs sur getSpecificContent
+     * 
      * @param bean FormBean de la ligne
      * @param int index de la ligne
      * @return booléen indiquant si la ligne du tableau est sélectionnée
      */
-    public boolean getLineIsSelected(Object bean,final int i)
+    public boolean getLineIsSelected( Object bean, final int i )
     {
-        String beanValue = getComputedInputValue(bean, i);
-        
-        if (formbeanValue.equals(beanValue)) {
+        String beanValue = getComputedInputValue( bean, i );
+
+        if ( formbeanValue.equals( beanValue ) )
+        {
             return true;
         }
-        else return false;
+        else
+            return false;
     }
 
     /**
      * @return id generer automatiquement
      */
-    private String getAutoID() {
+    private String getAutoID()
+    {
 
         return AUTOID_PREFIX + getCols().getTable().getName() + getCols().getTable().getProperty() + autoid++;
     }
@@ -171,86 +193,96 @@ public class ColSingleSelect extends ColDisabled {
     /**
      * @return accesseur
      */
-    public String getToolTip() {
+    public String getToolTip()
+    {
         return toolTip;
     }
 
     /**
      * @param string accesseur
      */
-    public void setToolTip(final String string) {
+    public void setToolTip( final String string )
+    {
         toolTip = string;
     }
 
     /**
      * @return onclick
      */
-    public String getOnclick() {
+    public String getOnclick()
+    {
         return onclick;
     }
 
     /**
      * @param string onclick
      */
-    public void setOnclick(final String string) {
+    public void setOnclick( final String string )
+    {
         onclick = string;
     }
-
-
 
     /**
      * @return specialHeaderTitle
      */
-    public String getSpecialHeaderTitle() {
+    public String getSpecialHeaderTitle()
+    {
         return specialHeaderTitle;
     }
 
     /**
      * @param string specialHeaderTitle
      */
-    public void setSpecialHeaderTitle(final String string) {
+    public void setSpecialHeaderTitle( final String string )
+    {
         specialHeaderTitle = string;
     }
 
     /**
      * @return FormbeanValu
      */
-    public String getFormbeanValue() {
+    public String getFormbeanValue()
+    {
         return formbeanValue;
     }
 
     /**
      * @param string HeaderNoWrap
      */
-    public void setFormbeanValue(String string) {
+    public void setFormbeanValue( String string )
+    {
         formbeanValue = string;
     }
 
     /**
      * @return avlue
      */
-    public String getValue() {
+    public String getValue()
+    {
         return value;
     }
 
     /**
      * @param string value
      */
-    public void setValue(String string) {
+    public void setValue( String string )
+    {
         value = string;
     }
 
     /**
      * @return PropertyValue
      */
-    public String getPropertyValue() {
+    public String getPropertyValue()
+    {
         return propertyValue;
     }
 
     /**
      * @param string PropertyValue
      */
-    public void setPropertyValue(String string) {
+    public void setPropertyValue( String string )
+    {
         propertyValue = string;
     }
 

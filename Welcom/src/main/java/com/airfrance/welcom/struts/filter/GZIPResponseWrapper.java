@@ -10,13 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 /**
- * 
- * @author M327837
- *  
- * Wrapper de la response pour le filtre
- *
+ * @author M327837 Wrapper de la response pour le filtre
  */
-public class GZIPResponseWrapper extends HttpServletResponseWrapper {
+public class GZIPResponseWrapper
+    extends HttpServletResponseWrapper
+{
     /** Response d'origine */
     protected HttpServletResponse origResponse = null;
 
@@ -37,49 +35,65 @@ public class GZIPResponseWrapper extends HttpServletResponseWrapper {
 
     /**
      * Le contructeur
+     * 
      * @param response : La response d'origne
      */
-    public GZIPResponseWrapper(final HttpServletResponse response) {
-        super(response);
+    public GZIPResponseWrapper( final HttpServletResponse response )
+    {
+        super( response );
         origResponse = response;
     }
 
     /**
      * Creation de la outputstream
+     * 
      * @return : la outpoutstream
      * @throws IOException : Probleme sur la stream
      */
-    public ServletOutputStream createOutputStream() throws IOException {
-        final GZIPResponseStream zips = new GZIPResponseStream(origResponse);
-        zips.setContentType(contentType);
-        zips.setHeaders(headers);
-        zips.setIgnoreZip(ignoreZip);
+    public ServletOutputStream createOutputStream()
+        throws IOException
+    {
+        final GZIPResponseStream zips = new GZIPResponseStream( origResponse );
+        zips.setContentType( contentType );
+        zips.setHeaders( headers );
+        zips.setIgnoreZip( ignoreZip );
 
-        return (zips);
+        return ( zips );
     }
 
     /**
      * Cloture des responses
      */
-    public void finishResponse() {
-        try {
-            if (writer != null) {
+    public void finishResponse()
+    {
+        try
+        {
+            if ( writer != null )
+            {
                 writer.close();
-            } else {
-                if (stream != null) {
+            }
+            else
+            {
+                if ( stream != null )
+                {
                     stream.close();
                 }
             }
-        } catch (final IOException e) {
+        }
+        catch ( final IOException e )
+        {
             ;
         }
     }
 
-    /** 
+    /**
      * Flush de la stream
+     * 
      * @throws IOException : Probleme sur la stream
      */
-    public void flushBuffer() throws IOException {
+    public void flushBuffer()
+        throws IOException
+    {
         stream.flush();
     }
 
@@ -87,118 +101,147 @@ public class GZIPResponseWrapper extends HttpServletResponseWrapper {
      * @return Recupere la output stream
      * @throws IOException : Probleme sur la stream
      */
-    public ServletOutputStream getOutputStream() throws IOException {
-        if (writer != null) {
-            throw new IllegalStateException("getWriter() has already been called!");
+    public ServletOutputStream getOutputStream()
+        throws IOException
+    {
+        if ( writer != null )
+        {
+            throw new IllegalStateException( "getWriter() has already been called!" );
         }
 
-        if (stream == null) {
+        if ( stream == null )
+        {
             stream = createOutputStream();
         }
 
-        return (stream);
+        return ( stream );
     }
 
     /**
      * @return retourne le Writter
      * @throws IOException : Probleme sur la stream
      */
-    public PrintWriter getWriter() throws IOException {
-        if (writer != null) {
-            return (writer);
+    public PrintWriter getWriter()
+        throws IOException
+    {
+        if ( writer != null )
+        {
+            return ( writer );
         }
 
-        if (stream != null) {
-            throw new IllegalStateException("getOutputStream() has already been called!");
+        if ( stream != null )
+        {
+            throw new IllegalStateException( "getOutputStream() has already been called!" );
         }
 
         stream = createOutputStream();
-        writer = new PrintWriter(new OutputStreamWriter(stream, "ISO-8859-1"));
+        writer = new PrintWriter( new OutputStreamWriter( stream, "ISO-8859-1" ) );
 
-        return (writer);
+        return ( writer );
     }
 
     /**
      * @see javax.servlet.http.HttpServletResponseWrapper#addHeader(java.lang.String, java.lang.String)
      */
-    public void addHeader(final String arg0, final String arg1) {
-        if (arg0.equalsIgnoreCase("Content-Type")) {
-            setContentType(arg1);
-        } else {
-            if (arg0.equalsIgnoreCase("Content-Encoding")) {
-                if (stream != null) {
-                    ((GZIPResponseStream) stream).setIgnoreZip(true);
+    public void addHeader( final String arg0, final String arg1 )
+    {
+        if ( arg0.equalsIgnoreCase( "Content-Type" ) )
+        {
+            setContentType( arg1 );
+        }
+        else
+        {
+            if ( arg0.equalsIgnoreCase( "Content-Encoding" ) )
+            {
+                if ( stream != null )
+                {
+                    ( (GZIPResponseStream) stream ).setIgnoreZip( true );
                 }
 
                 ignoreZip = true;
             }
 
-            if (headers == null) {
+            if ( headers == null )
+            {
                 headers = new Hashtable();
             }
 
-            headers.put(arg0, arg1);
+            headers.put( arg0, arg1 );
 
-            if (stream != null) {
-                ((GZIPResponseStream) stream).setHeaders(headers);
+            if ( stream != null )
+            {
+                ( (GZIPResponseStream) stream ).setHeaders( headers );
             }
 
-            super.addHeader(arg0, arg1);
+            super.addHeader( arg0, arg1 );
         }
     }
 
     /**
      * @see javax.servlet.http.HttpServletResponseWrapper#setHeader(java.lang.String, java.lang.String)
      */
-    public void setHeader(final String arg0, final String arg1) {
-        if (arg0.equalsIgnoreCase("Content-Type")) {
-            setContentType(arg1);
-        } else {
-            if (arg0.equalsIgnoreCase("Content-Encoding")) {
-                if (stream != null) {
-                    ((GZIPResponseStream) stream).setIgnoreZip(true);
+    public void setHeader( final String arg0, final String arg1 )
+    {
+        if ( arg0.equalsIgnoreCase( "Content-Type" ) )
+        {
+            setContentType( arg1 );
+        }
+        else
+        {
+            if ( arg0.equalsIgnoreCase( "Content-Encoding" ) )
+            {
+                if ( stream != null )
+                {
+                    ( (GZIPResponseStream) stream ).setIgnoreZip( true );
                 }
 
                 ignoreZip = true;
             }
 
-            if (headers == null) {
+            if ( headers == null )
+            {
                 headers = new Hashtable();
             }
 
-            headers.put(arg0, arg1);
+            headers.put( arg0, arg1 );
 
-            if (stream != null) {
-                ((GZIPResponseStream) stream).setHeaders(headers);
+            if ( stream != null )
+            {
+                ( (GZIPResponseStream) stream ).setHeaders( headers );
             }
 
-            super.setHeader(arg0, arg1);
+            super.setHeader( arg0, arg1 );
         }
     }
 
     /**
-    * @see javax.servlet.ServletResponseWrapper#setContentType(java.lang.String)
-    */
-    public void setContentType(final String arg0) {
+     * @see javax.servlet.ServletResponseWrapper#setContentType(java.lang.String)
+     */
+    public void setContentType( final String arg0 )
+    {
 
-        if (stream != null) {
-            ((GZIPResponseStream) stream).setContentType(arg0);
+        if ( stream != null )
+        {
+            ( (GZIPResponseStream) stream ).setContentType( arg0 );
         }
 
-        super.setContentType(arg0);
+        super.setContentType( arg0 );
     }
 
     /**
      * Set le content Lent
+     * 
      * @param length Longueur
      */
-    public void setContentLength(final int length) {
+    public void setContentLength( final int length )
+    {
     }
 
     /**
      * @return le content Type
      */
-    public String getContentType() {
+    public String getContentType()
+    {
         return contentType;
     }
 }

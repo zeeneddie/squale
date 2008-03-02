@@ -7,31 +7,35 @@
 package com.airfrance.welcom.struts.bean;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class WActionFormSelectable extends WActionForm implements WISelectable {
+public class WActionFormSelectable
+    extends WActionForm
+    implements WISelectable
+{
 
     /**
      * 
      */
     private static final long serialVersionUID = -1966368476890825150L;
-    /** boolean selected*/
+
+    /** boolean selected */
     private boolean selected = false;
 
     /**
      * @return true si le form est selectionne
      */
-    public boolean isSelected() {
+    public boolean isSelected()
+    {
         return selected;
     }
 
     /**
      * @param b la nouvelle selection
      */
-    public void setSelected(final boolean b) {
+    public void setSelected( final boolean b )
+    {
         selected = b;
     }
 

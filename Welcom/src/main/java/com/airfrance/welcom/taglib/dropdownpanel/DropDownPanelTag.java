@@ -32,140 +32,178 @@ import com.airfrance.welcom.taglib.table.ColsTag;
 /**
  * DropDownPanelTag
  */
-public class DropDownPanelTag extends BodyTagSupport {
+public class DropDownPanelTag
+    extends BodyTagSupport
+{
     /**
      * 
      */
     private static final long serialVersionUID = -3286751636538006757L;
+
     /** Constante */
     private final static String BLUE = "BLUE";
-    /** parametre tag*/
+
+    /** parametre tag */
     private String titleKey = "";
-    /** parametre tag*/
+
+    /** parametre tag */
     private boolean expanded = false;
-    /** parametre tag*/
+
+    /** parametre tag */
     private String width = null;
-    /** parametre tag*/
+
+    /** parametre tag */
     private String headerClass = null;
-    /** parametre tag*/
+
+    /** parametre tag */
     private String name = "";
-    /** parametre tag*/
+
+    /** parametre tag */
     private String headerStyle = "";
-    /** parametre tag*/
+
+    /** parametre tag */
     private String contentClass = null;
-    /** parametre tag*/
+
+    /** parametre tag */
     private String contentStyle = "";
-    /** parametre tag*/
+
+    /** parametre tag */
     private String iconColor = BLUE;
-    /** parametre tag*/
+
+    /** parametre tag */
     private String filter = null;
-    /** parametre tag*/
+
+    /** parametre tag */
     protected MessageResources resources = null;
-    /** parametre tag*/
+
+    /** parametre tag */
     protected Locale localeRequest = Locale.FRENCH;
-    /** parametre tag*/
+
+    /** parametre tag */
     private boolean lazyLoading = true;
-    /** parametre tag*/
+
+    /** parametre tag */
     private String onExpand = "";
-    /** parametre tag*/
+
+    /** parametre tag */
     private String onCollapse = "";
-    /** parametre tag*/
+
+    /** parametre tag */
     private boolean topMode = false;
-    /** Javascript appele en lieu et place de l'ouverture sur click sur le titre **/
-    private String onClickTitle = ""; 
+
+    /** Javascript appele en lieu et place de l'ouverture sur click sur le titre * */
+    private String onClickTitle = "";
 
     /**
      * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
      */
-    public int doStartTag() throws JspException {
-        resources = (MessageResources) pageContext.getServletContext().getAttribute(Globals.MESSAGES_KEY);
-        localeRequest = (Locale) pageContext.getSession().getAttribute(Globals.LOCALE_KEY);
+    public int doStartTag()
+        throws JspException
+    {
+        resources = (MessageResources) pageContext.getServletContext().getAttribute( Globals.MESSAGES_KEY );
+        localeRequest = (Locale) pageContext.getSession().getAttribute( Globals.LOCALE_KEY );
         final TrimStringBuffer sb = new TrimStringBuffer();
 
         // Creation du Head du DDp
-        prepareHeadDdp(sb);
+        prepareHeadDdp( sb );
 
         // Creation du body du ddp
-        prepareBodyDdp(sb);
+        prepareBodyDdp( sb );
 
-        ResponseUtils.write(pageContext, sb.toString());
+        ResponseUtils.write( pageContext, sb.toString() );
 
         return EVAL_PAGE;
     }
 
     /**
      * Creation du Head du ddp
+     * 
      * @param sb stringbuffer
      * @throws JspException exception a la crecuperation des infos
      */
-    private void prepareHeadDdp(final TrimStringBuffer sb) throws JspException {
-        if (topMode) {
+    private void prepareHeadDdp( final TrimStringBuffer sb )
+        throws JspException
+    {
+        if ( topMode )
+        {
             onExpand = "fixPos('" + getName() + "');" + onExpand;
             onCollapse = "ddp=null;" + onCollapse;
             contentClass = "richbox " + contentClass;
         }
-        
+
         // Taille
-        if (!GenericValidator.isBlankOrNull(width)) {
+        if ( !GenericValidator.isBlankOrNull( width ) )
+        {
             headerStyle = "width:" + width + ";" + headerStyle;
         }
-        
+
         // Div ouvrant
-        sb.append("<div ");
-        
+        sb.append( "<div " );
+
         // Style du header
-        if (!GenericValidator.isBlankOrNull(headerStyle)) {
-            sb.append(" style=\"" + headerStyle + "\"");
+        if ( !GenericValidator.isBlankOrNull( headerStyle ) )
+        {
+            sb.append( " style=\"" + headerStyle + "\"" );
         }
-        
+
         // Style de la classe
-        if (!GenericValidator.isBlankOrNull(headerClass)) {
-            sb.append(" class=\"" + headerClass + "\"");
+        if ( !GenericValidator.isBlankOrNull( headerClass ) )
+        {
+            sb.append( " class=\"" + headerClass + "\"" );
         }
-        
+
         // Style du onclik
-        if (!GenericValidator.isBlankOrNull(onClickTitle)) {
-            sb.append(" onclick=\""+onClickTitle+";\"");
+        if ( !GenericValidator.isBlankOrNull( onClickTitle ) )
+        {
+            sb.append( " onclick=\"" + onClickTitle + ";\"" );
         }
-        
-        sb.append(">");
-        
+
+        sb.append( ">" );
+
         // Le lien
-        sb.append("<a href=\"javascript:vis(document.getElementById('" + getName() + "')");
-        sb.append(")\">");
-        
-        sb.append("<span id=\"pic" + getName() + "\" class=\"");
-        
+        sb.append( "<a href=\"javascript:vis(document.getElementById('" + getName() + "')" );
+        sb.append( ")\">" );
+
+        sb.append( "<span id=\"pic" + getName() + "\" class=\"" );
+
         // Le picto
-        sb.append(getClassPic() + "\"></span>");
+        sb.append( getClassPic() + "\"></span>" );
         final String text = getText();
-        
-        sb.append("<span id=\"" + getName() + "Title\"");
-        
-        if (!GenericValidator.isBlankOrNull(headerStyle)) {
-            sb.append(" style=\"" + headerStyle + "\"");
+
+        sb.append( "<span id=\"" + getName() + "Title\"" );
+
+        if ( !GenericValidator.isBlankOrNull( headerStyle ) )
+        {
+            sb.append( " style=\"" + headerStyle + "\"" );
         }
-        if (!GenericValidator.isBlankOrNull(headerClass)) {
-            sb.append(" class=\"" + headerClass + "\"");
+        if ( !GenericValidator.isBlankOrNull( headerClass ) )
+        {
+            sb.append( " class=\"" + headerClass + "\"" );
         }
-        
-        sb.append(">");
-        
-        sb.append(text + "</span></a></div>\n");
+
+        sb.append( ">" );
+
+        sb.append( text + "</span></a></div>\n" );
     }
 
     /**
      * Recupere la classe du picto
+     * 
      * @return up / down et B (bleu) ou W (white)
      */
-    private String getClassPic() {
+    private String getClassPic()
+    {
         String pic = "up";
-        if (expanded) {
+        if ( expanded )
+        {
             pic = "down";
         }
-        if (iconColor.toUpperCase().equals(BLUE)) {
+        if ( iconColor.toUpperCase().equals( BLUE ) )
+        {
             pic += "B";
-        } else {
+        }
+        else
+        {
             pic += "W";
         }
         return pic;
@@ -173,112 +211,137 @@ public class DropDownPanelTag extends BodyTagSupport {
 
     /**
      * Retourne la eon contenu du ddp
+     * 
      * @param sb stringbuffer
      */
-    private void prepareBodyDdp(final TrimStringBuffer sb) {
+    private void prepareBodyDdp( final TrimStringBuffer sb )
+    {
 
         String divStyle = "";
-        onExpand = onExpand.replaceAll("this", "document.getElementById('" + getName() + "')");
-        onCollapse = onCollapse.replaceAll("this", "document.getElementById('" + getName() + "')");
-        
-        sb.append("<div id=\"" + getName() + "\"");
-        
+        onExpand = onExpand.replaceAll( "this", "document.getElementById('" + getName() + "')" );
+        onCollapse = onCollapse.replaceAll( "this", "document.getElementById('" + getName() + "')" );
+
+        sb.append( "<div id=\"" + getName() + "\"" );
+
         // Event ouvert
-        if (!GenericValidator.isBlankOrNull(onExpand)) {
-            sb.append(" onExpand=\"" + onExpand + "\"");
+        if ( !GenericValidator.isBlankOrNull( onExpand ) )
+        {
+            sb.append( " onExpand=\"" + onExpand + "\"" );
         }
-        
+
         // event fermé
-        if (!GenericValidator.isBlankOrNull(onCollapse)) {
-            sb.append(" onCollapse=\"" + onCollapse + "\"");
+        if ( !GenericValidator.isBlankOrNull( onCollapse ) )
+        {
+            sb.append( " onCollapse=\"" + onCollapse + "\"" );
         }
-        
+
         // Si lazy loading
-        if (WLazyUtil.isLazy(lazyLoading) && !isExpanded() && Util.isTrue(WelcomConfigurator.getMessage(WelcomConfigurator.OPTIFLUX_GLOBAL_LAZYLOADING_DDP))) {
-            sb.append(" load=\"true\"");
+        if ( WLazyUtil.isLazy( lazyLoading ) && !isExpanded()
+            && Util.isTrue( WelcomConfigurator.getMessage( WelcomConfigurator.OPTIFLUX_GLOBAL_LAZYLOADING_DDP ) ) )
+        {
+            sb.append( " load=\"true\"" );
         }
-        
+
         // si pas ouvert
-        if (!expanded) {
+        if ( !expanded )
+        {
             divStyle += "display:none;";
         }
-        
+
         // taille ddp
-        if (!GenericValidator.isBlankOrNull(width)) {
-            divStyle += ("width:" + width + ";");
+        if ( !GenericValidator.isBlankOrNull( width ) )
+        {
+            divStyle += ( "width:" + width + ";" );
         }
-        
+
         // style du contenu
-        if (!GenericValidator.isBlankOrNull(contentStyle)) {
+        if ( !GenericValidator.isBlankOrNull( contentStyle ) )
+        {
             divStyle += contentStyle;
         }
-        
+
         // style du div calculé precedement
-        if (!GenericValidator.isBlankOrNull(divStyle)) {
-            sb.append(" style=\"" + divStyle + "\"");
+        if ( !GenericValidator.isBlankOrNull( divStyle ) )
+        {
+            sb.append( " style=\"" + divStyle + "\"" );
         }
-        
+
         // class du contenu
-        if (!GenericValidator.isBlankOrNull(contentClass)) {
-            sb.append(" class=\"" + contentClass + "\"");
+        if ( !GenericValidator.isBlankOrNull( contentClass ) )
+        {
+            sb.append( " class=\"" + contentClass + "\"" );
         }
-        
-        sb.append(">");
+
+        sb.append( ">" );
     }
 
     /**
      * @return Retourne le titre de ddp
      * @throws JspException Probleme sur la recherche de la valeur de la colonne
      */
-    private String getText() throws JspException {
-        String text = resources.getMessage(localeRequest, titleKey);
-        if (GenericValidator.isBlankOrNull(text) && GenericValidator.isBlankOrNull(titleKey)) {
+    private String getText()
+        throws JspException
+    {
+        String text = resources.getMessage( localeRequest, titleKey );
+        if ( GenericValidator.isBlankOrNull( text ) && GenericValidator.isBlankOrNull( titleKey ) )
+        {
             text = getTextIfInColTag();
         }
-        if (GenericValidator.isBlankOrNull(text)) {
+        if ( GenericValidator.isBlankOrNull( text ) )
+        {
             text = titleKey;
         }
-        if (Util.isTrue(filter) || (filter == null && findAncestorWithClass(this, ColTag.class) != null)) {
-            text = ResponseUtils.filter(text);
+        if ( Util.isTrue( filter ) || ( filter == null && findAncestorWithClass( this, ColTag.class ) != null ) )
+        {
+            text = ResponseUtils.filter( text );
         }
 
         return text;
     }
 
     /**
-     * 
      * @return
      * @throws JspException
      */
 
     /**
-     * @return Retourne le libelle de la colonne dans la quelle se trouve la tag 
+     * @return Retourne le libelle de la colonne dans la quelle se trouve la tag
      * @throws JspException Probleme sur la recherche de la valeur de la colonne
      */
-    private String getTextIfInColTag() throws JspException {
-        
-        String text=null;
-        
+    private String getTextIfInColTag()
+        throws JspException
+    {
+
+        String text = null;
+
         // Verfie si son papa est un ColTag
-        if (getParent() instanceof ColTag) {
+        if ( getParent() instanceof ColTag )
+        {
             final ColTag colTag = (ColTag) getParent();
             // Recherche le nom de l'iteration
             Tag curTag = null;
-            curTag = findAncestorWithClass(this,ColsTag.class);
+            curTag = findAncestorWithClass( this, ColsTag.class );
             final ColsTag colsTag = (ColsTag) curTag;
-            if ((colsTag != null) && !GenericValidator.isBlankOrNull(colTag.getProperty())) {
+            if ( ( colsTag != null ) && !GenericValidator.isBlankOrNull( colTag.getProperty() ) )
+            {
 
-                final Object o = pageContext.getAttribute(colsTag.getId());
-                final Object ovalue = LayoutUtils.getProperty(o, colTag.getProperty());
+                final Object o = pageContext.getAttribute( colsTag.getId() );
+                final Object ovalue = LayoutUtils.getProperty( o, colTag.getProperty() );
 
-                if (ovalue != null) {
-                    text= ResponseUtils.filter(ovalue.toString());
-                } else {
+                if ( ovalue != null )
+                {
+                    text = ResponseUtils.filter( ovalue.toString() );
+                }
+                else
+                {
                     // Recupere celle spécifié
-                    if (!GenericValidator.isBlankOrNull(colTag.getEmptyKey())) {
-                        text= colTag.getEmptyKey();
-                    } else {
-                        text= WelcomConfigurator.getMessageWithCfgChartePrefix(".default.char.if.empty");
+                    if ( !GenericValidator.isBlankOrNull( colTag.getEmptyKey() ) )
+                    {
+                        text = colTag.getEmptyKey();
+                    }
+                    else
+                    {
+                        text = WelcomConfigurator.getMessageWithCfgChartePrefix( ".default.char.if.empty" );
                     }
                 }
             }
@@ -289,51 +352,65 @@ public class DropDownPanelTag extends BodyTagSupport {
     /**
      * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
      */
-    public int doEndTag() throws JspException {
+    public int doEndTag()
+        throws JspException
+    {
         final TrimStringBuffer sb = new TrimStringBuffer();
 
-        if (getBodyContent() != null) {
+        if ( getBodyContent() != null )
+        {
             final String corps = getBodyContent().getString();
 
-            if (WLazyUtil.isLazy(lazyLoading) && !isExpanded() && Util.isTrue(WelcomConfigurator.getMessage(WelcomConfigurator.OPTIFLUX_GLOBAL_LAZYLOADING_DDP))) {
-                WLazyLoadingPersistance.find(pageContext.getSession()).add(WLazyLoadingType.DROPDOWNPANEL, getName(), corps);
+            if ( WLazyUtil.isLazy( lazyLoading ) && !isExpanded()
+                && Util.isTrue( WelcomConfigurator.getMessage( WelcomConfigurator.OPTIFLUX_GLOBAL_LAZYLOADING_DDP ) ) )
+            {
+                WLazyLoadingPersistance.find( pageContext.getSession() ).add( WLazyLoadingType.DROPDOWNPANEL,
+                                                                              getName(), corps );
 
                 final HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 
-                final ActionMapping mappingGenerique = (ActionMapping) request.getAttribute(Globals.MAPPING_KEY);
+                final ActionMapping mappingGenerique = (ActionMapping) request.getAttribute( Globals.MAPPING_KEY );
                 final String scope = mappingGenerique.getScope();
 
-                if (Util.isEqualsIgnoreCase(scope, "session")) {
-                    sb.append(WLazyUtil.getSuperLightBody(corps));
-                } else {
-                    sb.append(WLazyUtil.getLightBody(corps));
+                if ( Util.isEqualsIgnoreCase( scope, "session" ) )
+                {
+                    sb.append( WLazyUtil.getSuperLightBody( corps ) );
                 }
-            } else {
-                sb.append(corps);
+                else
+                {
+                    sb.append( WLazyUtil.getLightBody( corps ) );
+                }
+            }
+            else
+            {
+                sb.append( corps );
             }
         }
 
-        sb.append("</div>");
-        ResponseUtils.write(pageContext, sb.toString());
+        sb.append( "</div>" );
+        ResponseUtils.write( pageContext, sb.toString() );
         release();
         return EVAL_PAGE;
     }
 
     /**
-     * 
      * @return le "unique" name
      */
-    private String getUniqueName() {
+    private String getUniqueName()
+    {
         String nom = "";
-        final String drpdwn = (String) pageContext.getSession().getAttribute("drpdwn");
+        final String drpdwn = (String) pageContext.getSession().getAttribute( "drpdwn" );
 
-        if (GenericValidator.isBlankOrNull(drpdwn)) {
-            pageContext.getSession().setAttribute("drpdwn", "1");
+        if ( GenericValidator.isBlankOrNull( drpdwn ) )
+        {
+            pageContext.getSession().setAttribute( "drpdwn", "1" );
             nom = "ddp1";
-        } else {
-            final int intdrpdwn = Integer.parseInt(drpdwn) + 1;
-            nom = "ddp" + (intdrpdwn);
-            pageContext.getSession().setAttribute("drpdwn", "" + intdrpdwn);
+        }
+        else
+        {
+            final int intdrpdwn = Integer.parseInt( drpdwn ) + 1;
+            nom = "ddp" + ( intdrpdwn );
+            pageContext.getSession().setAttribute( "drpdwn", "" + intdrpdwn );
         }
 
         return nom;
@@ -342,176 +419,202 @@ public class DropDownPanelTag extends BodyTagSupport {
     /**
      * @return expanded
      */
-    public boolean isExpanded() {
+    public boolean isExpanded()
+    {
         return expanded;
     }
 
     /**
      * @return iconColor
      */
-    public String getIconColor() {
+    public String getIconColor()
+    {
         return iconColor;
     }
 
     /**
      * @return titleKey
      */
-    public String getTitleKey() {
+    public String getTitleKey()
+    {
         return titleKey;
     }
 
     /**
      * @return width
      */
-    public String getWidth() {
+    public String getWidth()
+    {
         return width;
     }
 
     /**
      * @param b le expanded
      */
-    public void setExpanded(final boolean b) {
+    public void setExpanded( final boolean b )
+    {
         expanded = b;
     }
 
     /**
      * @param string le iconColor
      */
-    public void setIconColor(final String string) {
+    public void setIconColor( final String string )
+    {
         iconColor = string;
     }
 
     /**
      * @param string le titleKey
      */
-    public void setTitleKey(final String string) {
+    public void setTitleKey( final String string )
+    {
         titleKey = string;
     }
 
     /**
      * @param string le width
      */
-    public void setWidth(final String string) {
+    public void setWidth( final String string )
+    {
         width = string;
     }
 
     /**
      * @return contentClass
      */
-    public String getContentClass() {
+    public String getContentClass()
+    {
         return contentClass;
     }
 
     /**
      * @return contentStyle
      */
-    public String getContentStyle() {
+    public String getContentStyle()
+    {
         return contentStyle;
     }
 
     /**
      * @return headerClass
      */
-    public String getHeaderClass() {
+    public String getHeaderClass()
+    {
         return headerClass;
     }
 
     /**
      * @return headerStyle
      */
-    public String getHeaderStyle() {
+    public String getHeaderStyle()
+    {
         return headerStyle;
     }
 
     /**
      * @param string le contentClass
      */
-    public void setContentClass(final String string) {
+    public void setContentClass( final String string )
+    {
         contentClass = string;
     }
 
     /**
      * @param string le contentStyle
      */
-    public void setContentStyle(final String string) {
+    public void setContentStyle( final String string )
+    {
         contentStyle = string;
     }
 
     /**
      * @param string le headerClass
      */
-    public void setHeaderClass(final String string) {
+    public void setHeaderClass( final String string )
+    {
         headerClass = string;
     }
 
     /**
      * @param string le headerStyle
      */
-    public void setHeaderStyle(final String string) {
+    public void setHeaderStyle( final String string )
+    {
         headerStyle = string;
     }
 
     /**
      * @return lazyLoading
      */
-    public boolean isLazyLoading() {
+    public boolean isLazyLoading()
+    {
         return lazyLoading;
     }
 
     /**
      * @param b le lazyLoading
      */
-    public void setLazyLoading(final boolean b) {
+    public void setLazyLoading( final boolean b )
+    {
         lazyLoading = b;
     }
 
     /**
      * @return onCollapse
      */
-    public String getOnCollapse() {
+    public String getOnCollapse()
+    {
         return onCollapse;
     }
 
     /**
      * @return onExpand
      */
-    public String getOnExpand() {
+    public String getOnExpand()
+    {
         return onExpand;
     }
 
     /**
      * @param string le onCollapse
      */
-    public void setOnCollapse(final String string) {
+    public void setOnCollapse( final String string )
+    {
         onCollapse = string;
     }
 
     /**
      * @param string le onExpand
      */
-    public void setOnExpand(final String string) {
+    public void setOnExpand( final String string )
+    {
         onExpand = string;
     }
 
     /**
      * @return topMode
      */
-    public boolean isTopMode() {
+    public boolean isTopMode()
+    {
         return topMode;
     }
 
     /**
      * @param b le topMode
      */
-    public void setTopMode(final boolean b) {
+    public void setTopMode( final boolean b )
+    {
         topMode = b;
     }
 
     /**
      * @return name
      */
-    public String getName() {
-        if (GenericValidator.isBlankOrNull(name)) {
+    public String getName()
+    {
+        if ( GenericValidator.isBlankOrNull( name ) )
+        {
             name = getUniqueName();
         }
         return name;
@@ -520,14 +623,16 @@ public class DropDownPanelTag extends BodyTagSupport {
     /**
      * @param string le name
      */
-    public void setName(final String string) {
+    public void setName( final String string )
+    {
         name = string;
     }
 
     /**
      * @see javax.servlet.jsp.tagext.BodyTagSupport#release()
      */
-    public void release() {
+    public void release()
+    {
         super.release();
         titleKey = "";
         expanded = false;
@@ -550,28 +655,32 @@ public class DropDownPanelTag extends BodyTagSupport {
     /**
      * @return accesseur
      */
-    public String getFilter() {
+    public String getFilter()
+    {
         return filter;
     }
 
     /**
      * @param b accesseur
      */
-    public void setFilter(final String b) {
+    public void setFilter( final String b )
+    {
         filter = b;
     }
 
     /**
      * @return accesseur
      */
-    public String getOnClickTitle() {
+    public String getOnClickTitle()
+    {
         return onClickTitle;
     }
 
     /**
      * @param string accesseur
      */
-    public void setOnClickTitle(String string) {
+    public void setOnClickTitle( String string )
+    {
         onClickTitle = string;
     }
 

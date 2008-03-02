@@ -14,41 +14,53 @@ import com.airfrance.welcom.outils.WelcomConfigurator;
 import com.airfrance.welcom.struts.util.WRequestUtils;
 
 /**
- * OptionTag 
- *
+ * OptionTag
  */
-public class OptionTag extends BodyTagSupport {
+public class OptionTag
+    extends BodyTagSupport
+{
 
     /**
      *  
      */
     private static final long serialVersionUID = -571283088885353434L;
-    /** Constante*/
+
+    /** Constante */
     protected static final Locale DEFAULT_LOCALE = Locale.getDefault();
-    /** messageRessource*/
-    protected static MessageResources messages = MessageResources.getMessageResources("org.apache.struts.taglib.html.LocalStrings");
-    /** parametre du tag*/
+
+    /** messageRessource */
+    protected static MessageResources messages =
+        MessageResources.getMessageResources( "org.apache.struts.taglib.html.LocalStrings" );
+
+    /** parametre du tag */
     protected String text;
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String bundle;
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected boolean disabled;
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String key;
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String locale;
-    /** parametre du tag*/
+
+    /** parametre du tag */
     private String style;
-    /** parametre du tag*/
+
+    /** parametre du tag */
     private String styleClass;
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String value;
 
     /**
      * Constructeur
-     *
      */
-    public OptionTag() {
+    public OptionTag()
+    {
         text = null;
         bundle = "org.apache.struts.action.MESSAGE";
         disabled = false;
@@ -60,138 +72,142 @@ public class OptionTag extends BodyTagSupport {
     }
 
     /**
-     * 
      * @return bundle
      */
-    public String getBundle() {
+    public String getBundle()
+    {
         return bundle;
     }
 
     /**
-     * 
      * @param pBundle bundle
      */
-    public void setBundle(final String pBundle) {
+    public void setBundle( final String pBundle )
+    {
         bundle = pBundle;
     }
 
     /**
-     * 
      * @return disabled
      */
-    public boolean getDisabled() {
+    public boolean getDisabled()
+    {
         return disabled;
     }
 
     /**
-     * 
      * @param pDisabled disabled
      */
-    public void setDisabled(final boolean pDisabled) {
+    public void setDisabled( final boolean pDisabled )
+    {
         disabled = pDisabled;
     }
 
     /**
-     * 
      * @return key
      */
-    public String getKey() {
+    public String getKey()
+    {
         return key;
     }
 
     /**
-     * 
      * @param pKey key
      */
-    public void setKey(final String pKey) {
+    public void setKey( final String pKey )
+    {
         key = pKey;
     }
 
     /**
-     * 
      * @return locale
      */
-    public String getLocale() {
+    public String getLocale()
+    {
         return locale;
     }
 
     /**
-     * 
      * @param pLocale locale
      */
-    public void setLocale(final String pLocale) {
+    public void setLocale( final String pLocale )
+    {
         locale = pLocale;
     }
 
     /**
-     * 
      * @return style
      */
-    public String getStyle() {
+    public String getStyle()
+    {
         return style;
     }
 
     /**
-     * 
      * @param pStyle style
      */
-    public void setStyle(final String pStyle) {
+    public void setStyle( final String pStyle )
+    {
         style = pStyle;
     }
 
     /**
-     * 
      * @return styleClass
      */
-    public String getStyleClass() {
+    public String getStyleClass()
+    {
         return styleClass;
     }
 
     /**
-     * 
      * @param pStyleClass styleClass
      */
-    public void setStyleClass(final String pStyleClass) {
+    public void setStyleClass( final String pStyleClass )
+    {
         styleClass = pStyleClass;
     }
 
     /**
-     * 
      * @return value
      */
-    public String getValue() {
+    public String getValue()
+    {
         return value;
     }
 
     /**
-     * 
      * @param pValue value
      */
-    public void setValue(final String pValue) {
+    public void setValue( final String pValue )
+    {
         value = pValue;
     }
 
     /**
-     * 
      * @see javax.servlet.jsp.tagext.Tag#doStartTag()
      */
-    public int doStartTag() throws JspException {
+    public int doStartTag()
+        throws JspException
+    {
         text = null;
 
         return EVAL_BODY_BUFFERED;
     }
 
     /**
-     * 
      * @see javax.servlet.jsp.tagext.IterationTag#doAfterBody()
      */
-    public int doAfterBody() throws JspException {
+    public int doAfterBody()
+        throws JspException
+    {
         String newText = super.bodyContent.getString();
 
-        if (newText != null) {
+        if ( newText != null )
+        {
             newText = newText.trim();
 
-            if (newText.length() > 0) {
+            if ( newText.length() > 0 )
+            {
                 text = newText;
             }
         }
@@ -200,86 +216,106 @@ public class OptionTag extends BodyTagSupport {
     }
 
     /**
-     * 
      * @see javax.servlet.jsp.tagext.Tag#doEndTag()
      */
-    public int doEndTag() throws JspException {
-        final SelectTag selectTag = (SelectTag) super.pageContext.getAttribute("com.airfrance.welcom.taglib.html.SELECT");
+    public int doEndTag()
+        throws JspException
+    {
+        final SelectTag selectTag =
+            (SelectTag) super.pageContext.getAttribute( "com.airfrance.welcom.taglib.html.SELECT" );
 
-        if (selectTag == null) {
-            final JspException e = new JspException(messages.getMessage("optionTag.select"));
-            RequestUtils.saveException(super.pageContext, e);
+        if ( selectTag == null )
+        {
+            final JspException e = new JspException( messages.getMessage( "optionTag.select" ) );
+            RequestUtils.saveException( super.pageContext, e );
             throw e;
         }
 
-        //        String pageAccess = (String) pageContext.getAttribute("access");
+        // String pageAccess = (String) pageContext.getAttribute("access");
         final String pageAccess = selectTag.getResultAccess();
         final StringBuffer results = new StringBuffer();
 
-        if (selectTag.isForceReadWrite() || ((pageAccess != null) && pageAccess.equals(Access.READWRITE)) || (pageAccess == null)) {
-            results.append("<option value=\"");
-            results.append(value);
-            results.append("\"");
+        if ( selectTag.isForceReadWrite() || ( ( pageAccess != null ) && pageAccess.equals( Access.READWRITE ) )
+            || ( pageAccess == null ) )
+        {
+            results.append( "<option value=\"" );
+            results.append( value );
+            results.append( "\"" );
 
-            if (disabled) {
-                results.append(" disabled=\"disabled\"");
+            if ( disabled )
+            {
+                results.append( " disabled=\"disabled\"" );
             }
 
-            if (selectTag.isMatched(value)) {
-                results.append(" selected=\"selected\"");
+            if ( selectTag.isMatched( value ) )
+            {
+                results.append( " selected=\"selected\"" );
             }
 
-            if (style != null) {
-                results.append(" style=\"");
-                results.append(style);
-                results.append("\"");
+            if ( style != null )
+            {
+                results.append( " style=\"" );
+                results.append( style );
+                results.append( "\"" );
             }
 
-            if (styleClass != null) {
-                results.append(" class=\"");
-                results.append(styleClass);
-                results.append("\"");
+            if ( styleClass != null )
+            {
+                results.append( " class=\"" );
+                results.append( styleClass );
+                results.append( "\"" );
             }
 
-            results.append(">");
+            results.append( ">" );
 
             final String newText = text();
 
-            if (newText == null) {
-                results.append(value);
-            } else {
-                results.append(newText);
+            if ( newText == null )
+            {
+                results.append( value );
+            }
+            else
+            {
+                results.append( newText );
             }
 
-            results.append("</option>");
-        } else {
-            if (selectTag.isMatched(value)) {
-                results.append("<span class=\"normalBold\">");
+            results.append( "</option>" );
+        }
+        else
+        {
+            if ( selectTag.isMatched( value ) )
+            {
+                results.append( "<span class=\"normalBold\">" );
 
                 final String newText = text();
 
-                if (newText != null) {
-                    results.append(newText);
-                } else if (value != null) {
-                    results.append(value);
-                } else {
-                    results.append(WelcomConfigurator.getMessageWithCfgChartePrefix(".default.char.if.empty"));
+                if ( newText != null )
+                {
+                    results.append( newText );
+                }
+                else if ( value != null )
+                {
+                    results.append( value );
+                }
+                else
+                {
+                    results.append( WelcomConfigurator.getMessageWithCfgChartePrefix( ".default.char.if.empty" ) );
                 }
 
-                results.append("</span>");
+                results.append( "</span>" );
             }
         }
 
-        ResponseUtils.write(super.pageContext, results.toString());
+        ResponseUtils.write( super.pageContext, results.toString() );
 
         return EVAL_PAGE;
     }
 
     /**
-     * 
      * @see javax.servlet.jsp.tagext.Tag#release()
      */
-    public void release() {
+    public void release()
+    {
         super.release();
         bundle = "org.apache.struts.action.MESSAGE";
         disabled = false;
@@ -292,15 +328,19 @@ public class OptionTag extends BodyTagSupport {
     }
 
     /**
-     * 
      * @return le text si il n'est pas nul
      * @throws JspException exception pouvant etre levee
      */
-    protected String text() throws JspException {
-        if (text != null) {
+    protected String text()
+        throws JspException
+    {
+        if ( text != null )
+        {
             return text;
-        } else {
-            return WRequestUtils.message(super.pageContext, key);
+        }
+        else
+        {
+            return WRequestUtils.message( super.pageContext, key );
         }
     }
 }

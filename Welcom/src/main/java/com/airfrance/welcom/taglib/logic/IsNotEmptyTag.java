@@ -22,11 +22,11 @@ package com.airfrance.welcom.taglib.logic;
 import javax.servlet.jsp.JspException;
 
 /**
- *  Referenced classes of package com.airfrance.struts.taglib.layout:
- * IsEmptyTag
- *
+ * Referenced classes of package com.airfrance.struts.taglib.layout: IsEmptyTag
  */
-public class IsNotEmptyTag extends IsEmptyTag {
+public class IsNotEmptyTag
+    extends IsEmptyTag
+{
     /**
      * 
      */
@@ -34,16 +34,17 @@ public class IsNotEmptyTag extends IsEmptyTag {
 
     /**
      * Constructeur
-     *
      */
-    public IsNotEmptyTag() {
+    public IsNotEmptyTag()
+    {
     }
 
     /**
-     * 
      * @see org.apache.struts.taglib.logic.ConditionalTagBase#condition()
      */
-    protected boolean condition() throws JspException {
-        return condition(false);
+    protected boolean condition()
+        throws JspException
+    {
+        return condition( false );
     }
 }

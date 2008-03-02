@@ -9,26 +9,30 @@ package com.airfrance.welcom.struts.ajax;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Rémy Bouquet
- *
- *  Wrapper de construction de réponse xml pour un message de confirmation dynamique.
+ * @author Rémy Bouquet Wrapper de construction de réponse xml pour un message de confirmation dynamique.
  */
-public class WHttpConfirmationMessageResponse extends AjaxXmlResponseWrapper {
-    
+public class WHttpConfirmationMessageResponse
+    extends AjaxXmlResponseWrapper
+{
+
     /**
      * constructeur
+     * 
      * @param presponse la response HTTP
      */
-    public WHttpConfirmationMessageResponse(final HttpServletResponse presponse) {
-            super(presponse,"confirm");
+    public WHttpConfirmationMessageResponse( final HttpServletResponse presponse )
+    {
+        super( presponse, "confirm" );
     }
 
     /**
      * Ajoute un message à la réponse XML
+     * 
      * @param message message à ajouter
      */
-    public void sendMessage(final String message) {
-             addItem("message",message);            
+    public void sendMessage( final String message )
+    {
+        addItem( "message", message );
     }
 
 }

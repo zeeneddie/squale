@@ -19,42 +19,54 @@ import com.airfrance.welcom.outils.pdf.jasperreports.PDFJasperReportsWrapper;
 /**
  * PDFDataEscaleListe
  */
-public class PDFDataJasperReports extends PDFData {
+public class PDFDataJasperReports
+    extends PDFData
+{
 
     /** la liste des beans */
     private Collection collection;
+
     /** le nom du template */
     private String templateName;
+
     /** Liste des parametres */
     private Map parameters;
+
     /** Active la bufferisation sur le disque */
     private boolean virtualize;
 
     /**
-     * Constructeur 
+     * Constructeur
+     * 
      * @param locale la locale
      * @param mess le messageRessource
      * @param pCollection la liste
      * @param pTemplateName le nom du template
      */
-    public PDFDataJasperReports(final Locale locale, final MessageResources mess, final Collection pCollection, final String pTemplateName) {
-        this(locale, mess, pCollection, pTemplateName, false, null);
+    public PDFDataJasperReports( final Locale locale, final MessageResources mess, final Collection pCollection,
+                                 final String pTemplateName )
+    {
+        this( locale, mess, pCollection, pTemplateName, false, null );
     }
 
     /**
-      * Constructeur 
-      * @param locale la locale
-      * @param mess le messageRessource
-      * @param pCollection la liste
-      * @param pTemplateName le nom du template
-      * @param pVirtualize active le bufferisation sur le disque
-      */
-    public PDFDataJasperReports(final Locale locale, final MessageResources mess, final Collection pCollection, final String pTemplateName, final boolean pVirtualize) {
-        this(locale, mess, pCollection, pTemplateName, pVirtualize, null);
+     * Constructeur
+     * 
+     * @param locale la locale
+     * @param mess le messageRessource
+     * @param pCollection la liste
+     * @param pTemplateName le nom du template
+     * @param pVirtualize active le bufferisation sur le disque
+     */
+    public PDFDataJasperReports( final Locale locale, final MessageResources mess, final Collection pCollection,
+                                 final String pTemplateName, final boolean pVirtualize )
+    {
+        this( locale, mess, pCollection, pTemplateName, pVirtualize, null );
     }
 
     /**
-     * Constructeur 
+     * Constructeur
+     * 
      * @param locale la locale
      * @param mess le messageRessource
      * @param pCollection la liste
@@ -62,8 +74,10 @@ public class PDFDataJasperReports extends PDFData {
      * @param pParameters Paramtres du report
      * @param pVirtualize active le bufferisation sur le disque
      */
-    public PDFDataJasperReports(final Locale locale, final MessageResources mess, final Collection pCollection, final String pTemplateName, final boolean pVirtualize, final Map pParameters) {
-        super(locale, mess);
+    public PDFDataJasperReports( final Locale locale, final MessageResources mess, final Collection pCollection,
+                                 final String pTemplateName, final boolean pVirtualize, final Map pParameters )
+    {
+        super( locale, mess );
         collection = pCollection;
         templateName = pTemplateName;
         parameters = pParameters;
@@ -73,32 +87,38 @@ public class PDFDataJasperReports extends PDFData {
     /**
      * @see com.airfrance.welcom.outils.pdf.PDFData#getTemplateName()
      */
-    public String getTemplateName() {
+    public String getTemplateName()
+    {
         return templateName;
     }
 
     /**
-    * @param pdfGenerateur le pdfGenerateur
-    * @throws PDFGenerateurException exception pouvant etre levee
-    */
-    public void fill(final PDFGenerateur pdfGenerateur) throws PDFGenerateurException {
-        final JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(collection);
-        if (pdfGenerateur instanceof PDFJasperReportsWrapper) {
-            ((PDFJasperReportsWrapper) pdfGenerateur).setDataSource(dataSource);
+     * @param pdfGenerateur le pdfGenerateur
+     * @throws PDFGenerateurException exception pouvant etre levee
+     */
+    public void fill( final PDFGenerateur pdfGenerateur )
+        throws PDFGenerateurException
+    {
+        final JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource( collection );
+        if ( pdfGenerateur instanceof PDFJasperReportsWrapper )
+        {
+            ( (PDFJasperReportsWrapper) pdfGenerateur ).setDataSource( dataSource );
         }
     }
 
     /**
      * @return les parametres du report
      */
-    public Map getParameters() {
+    public Map getParameters()
+    {
         return parameters;
     }
 
     /**
      * @return si on active la bufferisation sur le disque
      */
-    public boolean isVirtualize() {
+    public boolean isVirtualize()
+    {
         return virtualize;
     }
 

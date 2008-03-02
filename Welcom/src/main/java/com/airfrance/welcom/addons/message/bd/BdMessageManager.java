@@ -17,65 +17,77 @@ import com.airfrance.welcom.outils.jdbc.WJdbcMagic;
 /**
  *
  */
-public class BdMessageManager {
+public class BdMessageManager
+{
     /** logger */
-    private static Log log = LogFactory.getLog(BdMessageManager.class);
+    private static Log log = LogFactory.getLog( BdMessageManager.class );
 
-    
     /** singleton */
     private static BdMessageManager instance = null;
 
-
     /** Instance du bd create */
-    private static BdMessageCreate bdCreate =null;
+    private static BdMessageCreate bdCreate = null;
 
-    
     /**
-     * Constructeur private pour le singleton 
+     * Constructeur private pour le singleton
      */
-    private BdMessageManager() {
-        
+    private BdMessageManager()
+    {
+
     }
-    
+
     /**
      * @return l'instance de BdMessageManager
-     *
      */
-    public static BdMessageManager getInstance() {
-        if(instance == null) {
+    public static BdMessageManager getInstance()
+    {
+        if ( instance == null )
+        {
             instance = new BdMessageManager();
         }
         return instance;
     }
-    
+
     /**
-     *  initialisation
+     * initialisation
      */
-    public void init() {
+    public void init()
+    {
         WJdbc jdbc = null;
-        try {
+        try
+        {
 
             jdbc = new WJdbcMagic();
 
             // Verification et creation des tables
-            getBdCreate().checkAnCreateAllTable(jdbc);
+            getBdCreate().checkAnCreateAllTable( jdbc );
 
             jdbc.commit();
 
-        } catch (final SQLException e) {
-            log.error(e,e);
-        } finally {
-            if (jdbc != null) {
+        }
+        catch ( final SQLException e )
+        {
+            log.error( e, e );
+        }
+        finally
+        {
+            if ( jdbc != null )
+            {
                 jdbc.close();
             }
         }
-        
+
     }
-    /** Recupere l'instance du BD create
-     * @return Creation de BD 
-     * */
-    public BdMessageCreate getBdCreate(){
-        if (bdCreate==null) {
+
+    /**
+     * Recupere l'instance du BD create
+     * 
+     * @return Creation de BD
+     */
+    public BdMessageCreate getBdCreate()
+    {
+        if ( bdCreate == null )
+        {
             bdCreate = new BdMessageCreate();
         }
         return bdCreate;

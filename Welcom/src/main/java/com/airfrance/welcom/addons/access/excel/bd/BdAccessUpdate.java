@@ -21,50 +21,57 @@ import com.airfrance.welcom.outils.jdbc.WJdbc;
 import com.airfrance.welcom.outils.jdbc.WStatement;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class BdAccessUpdate {
+public class BdAccessUpdate
+{
     /** logger */
-    private static Log log = LogFactory.getLog(BdAccessUpdate.class);
+    private static Log log = LogFactory.getLog( BdAccessUpdate.class );
+
     /**
      * Mise a jour des profiles
+     * 
      * @param jdbc : connecition
      * @param arrayFromFile : liste dans le fichie excel
      * @param arrayFromBd : liste dans la bd
      * @throws SQLException : probleme SQL
      * @return nombre de champs modifiés
      */
-    public int updateProfile(final WJdbc jdbc, final ArrayList arrayFromFile, final ArrayList arrayFromBd) throws SQLException {
+    public int updateProfile( final WJdbc jdbc, final ArrayList arrayFromFile, final ArrayList arrayFromBd )
+        throws SQLException
+    {
 
         int cpt = 0;
         final ArrayList noChange = new ArrayList();
         Iterator iter = arrayFromBd.iterator();
 
-        while (iter.hasNext()) {
+        while ( iter.hasNext() )
+        {
             final Profile profileBd = (Profile) iter.next();
-            if (arrayFromFile.contains(profileBd)) {
-                noChange.add(profileBd);
+            if ( arrayFromFile.contains( profileBd ) )
+            {
+                noChange.add( profileBd );
             }
         }
 
         // Suppression des doubles
-        arrayFromBd.removeAll(noChange);
-        arrayFromFile.removeAll(noChange);
+        arrayFromBd.removeAll( noChange );
+        arrayFromFile.removeAll( noChange );
 
         iter = arrayFromBd.iterator();
-        while (iter.hasNext()) {
+        while ( iter.hasNext() )
+        {
             final Profile profileBd = (Profile) iter.next();
-            delete(jdbc, profileBd);
+            delete( jdbc, profileBd );
             cpt++;
         }
 
         iter = arrayFromFile.iterator();
-        while (iter.hasNext()) {
+        while ( iter.hasNext() )
+        {
             final Profile profileFile = (Profile) iter.next();
-            create(jdbc, profileFile);
+            create( jdbc, profileFile );
             cpt++;
         }
         return cpt;
@@ -72,17 +79,20 @@ public class BdAccessUpdate {
     }
 
     /**
-      * Supprime un Profile
-      * @param jdbc : connection
-      * @param profile : profil
-      * @throws SQLException : erreur SQL
-      */
-    public void delete(final WJdbc jdbc, final Profile profile) throws SQLException {
-        log.info("Delete : " + profile);
+     * Supprime un Profile
+     * 
+     * @param jdbc : connection
+     * @param profile : profil
+     * @throws SQLException : erreur SQL
+     */
+    public void delete( final WJdbc jdbc, final Profile profile )
+        throws SQLException
+    {
+        log.info( "Delete : " + profile );
 
         final WStatement sta = jdbc.getWStatement();
-        sta.add("delete from "+AddonsConfig.WEL_PROFILE+" where ");
-        sta.addParameter("IDPROFILE=?", profile.getIdProfile());
+        sta.add( "delete from " + AddonsConfig.WEL_PROFILE + " where " );
+        sta.addParameter( "IDPROFILE=?", profile.getIdProfile() );
 
         sta.executeUpdate();
         sta.close();
@@ -91,19 +101,22 @@ public class BdAccessUpdate {
 
     /**
      * Insertion de Profile
+     * 
      * @param jdbc : connection
      * @param profile : profil
      * @throws SQLException : Exception SQL
      */
-    public void create(final WJdbc jdbc, final Profile profile) throws SQLException {
+    public void create( final WJdbc jdbc, final Profile profile )
+        throws SQLException
+    {
 
-        log.info("Insertion : " + profile);
+        log.info( "Insertion : " + profile );
 
         final WStatement sta = jdbc.getWStatement();
-        sta.add("insert into "+AddonsConfig.WEL_PROFILE+" (IDPROFILE,NAME)");
-        sta.add("values (");
-        sta.addParameter("?,", profile.getIdProfile());
-        sta.addParameter("?)", profile.getName());
+        sta.add( "insert into " + AddonsConfig.WEL_PROFILE + " (IDPROFILE,NAME)" );
+        sta.add( "values (" );
+        sta.addParameter( "?,", profile.getIdProfile() );
+        sta.addParameter( "?)", profile.getName() );
 
         sta.executeUpdate();
         sta.close();
@@ -111,40 +124,47 @@ public class BdAccessUpdate {
 
     /**
      * Mise a jour des access Key
+     * 
      * @param jdbc : connecition
      * @param arrayFromFile : liste dans le fichie excel
      * @param arrayFromBd : liste dans la bd
      * @throws SQLException : probleme SQL
      * @return Nombre de champs modifiés
      */
-    public int updateAccessKey(final WJdbc jdbc, final ArrayList arrayFromFile, final ArrayList arrayFromBd) throws SQLException {
+    public int updateAccessKey( final WJdbc jdbc, final ArrayList arrayFromFile, final ArrayList arrayFromBd )
+        throws SQLException
+    {
 
         int cpt = 0;
         final ArrayList noChange = new ArrayList();
         Iterator iter = arrayFromBd.iterator();
 
-        while (iter.hasNext()) {
+        while ( iter.hasNext() )
+        {
             final AccessKey accessKeyBd = (AccessKey) iter.next();
-            if (arrayFromFile.contains(accessKeyBd)) {
-                noChange.add(accessKeyBd);
+            if ( arrayFromFile.contains( accessKeyBd ) )
+            {
+                noChange.add( accessKeyBd );
             }
         }
 
         // Suppression des doubles
-        arrayFromBd.removeAll(noChange);
-        arrayFromFile.removeAll(noChange);
+        arrayFromBd.removeAll( noChange );
+        arrayFromFile.removeAll( noChange );
 
         iter = arrayFromBd.iterator();
-        while (iter.hasNext()) {
+        while ( iter.hasNext() )
+        {
             final AccessKey accessKeyBd = (AccessKey) iter.next();
-            delete(jdbc, accessKeyBd);
+            delete( jdbc, accessKeyBd );
             cpt++;
         }
 
         iter = arrayFromFile.iterator();
-        while (iter.hasNext()) {
+        while ( iter.hasNext() )
+        {
             final AccessKey accessKeyFile = (AccessKey) iter.next();
-            create(jdbc, accessKeyFile);
+            create( jdbc, accessKeyFile );
             cpt++;
         }
         return cpt;
@@ -152,16 +172,19 @@ public class BdAccessUpdate {
 
     /**
      * Supprime un accessKey
+     * 
      * @param jdbc : connection
      * @param accessKey : clef d'accés
      * @throws SQLException : erreur SQL
      */
-    public void delete(final WJdbc jdbc, final AccessKey accessKey) throws SQLException {
-        log.info("Delete : " + accessKey);
+    public void delete( final WJdbc jdbc, final AccessKey accessKey )
+        throws SQLException
+    {
+        log.info( "Delete : " + accessKey );
 
         final WStatement sta = jdbc.getWStatement();
-        sta.add("delete from "+AddonsConfig.WEL_ACCESSKEY+" where ");
-        sta.addParameter("ACCESSKEY=?", accessKey.getAccesskey());
+        sta.add( "delete from " + AddonsConfig.WEL_ACCESSKEY + " where " );
+        sta.addParameter( "ACCESSKEY=?", accessKey.getAccesskey() );
 
         sta.executeUpdate();
         sta.close();
@@ -170,21 +193,24 @@ public class BdAccessUpdate {
 
     /**
      * Insertion de accesKey
+     * 
      * @param jdbc : connection
      * @param accessKey : accessKey
      * @throws SQLException : erreur SQL
      */
-    public void create(final WJdbc jdbc, final AccessKey accessKey) throws SQLException {
+    public void create( final WJdbc jdbc, final AccessKey accessKey )
+        throws SQLException
+    {
 
-        log.info("Insertion : " + accessKey);
+        log.info( "Insertion : " + accessKey );
 
         final WStatement sta = jdbc.getWStatement();
-        sta.add("insert into "+AddonsConfig.WEL_ACCESSKEY+" (IDACCESSKEY,TAB,ACCESSKEY,LABEL,TYPE)");
-        sta.addParameter("values (?,", accessKey.getIdAccessKey());
-        sta.addParameter("?,", accessKey.getTab());
-        sta.addParameter("?,", accessKey.getAccesskey());
-        sta.addParameter("?,", accessKey.getLabel());
-        sta.addParameter("?)", accessKey.getType());
+        sta.add( "insert into " + AddonsConfig.WEL_ACCESSKEY + " (IDACCESSKEY,TAB,ACCESSKEY,LABEL,TYPE)" );
+        sta.addParameter( "values (?,", accessKey.getIdAccessKey() );
+        sta.addParameter( "?,", accessKey.getTab() );
+        sta.addParameter( "?,", accessKey.getAccesskey() );
+        sta.addParameter( "?,", accessKey.getLabel() );
+        sta.addParameter( "?)", accessKey.getType() );
 
         sta.executeUpdate();
         sta.close();
@@ -192,40 +218,47 @@ public class BdAccessUpdate {
 
     /**
      * Mise a jour des profiles / droits d'accés
+     * 
      * @param jdbc : connecition
      * @param arrayFromFile : liste dans le fichie excel
      * @param arrayFromBd : liste dans la bd
      * @throws SQLException : probleme SQL
      * @return nombre de champs modifiés
      */
-    public int updateProfileAccessKey(final WJdbc jdbc, final ArrayList arrayFromFile, final ArrayList arrayFromBd) throws SQLException {
+    public int updateProfileAccessKey( final WJdbc jdbc, final ArrayList arrayFromFile, final ArrayList arrayFromBd )
+        throws SQLException
+    {
 
         int cpt = 0;
         final ArrayList noChange = new ArrayList();
         Iterator iter = arrayFromBd.iterator();
 
-        while (iter.hasNext()) {
+        while ( iter.hasNext() )
+        {
             final ProfileAccessKey profileAccessKeyBd = (ProfileAccessKey) iter.next();
-            if (arrayFromFile.contains(profileAccessKeyBd)) {
-                noChange.add(profileAccessKeyBd);
+            if ( arrayFromFile.contains( profileAccessKeyBd ) )
+            {
+                noChange.add( profileAccessKeyBd );
             }
         }
 
         // Suppression des doubles
-        arrayFromBd.removeAll(noChange);
-        arrayFromFile.removeAll(noChange);
+        arrayFromBd.removeAll( noChange );
+        arrayFromFile.removeAll( noChange );
 
         iter = arrayFromBd.iterator();
-        while (iter.hasNext()) {
+        while ( iter.hasNext() )
+        {
             final ProfileAccessKey profileAccessKeyBd = (ProfileAccessKey) iter.next();
-            delete(jdbc, profileAccessKeyBd);
+            delete( jdbc, profileAccessKeyBd );
             cpt++;
         }
 
         iter = arrayFromFile.iterator();
-        while (iter.hasNext()) {
+        while ( iter.hasNext() )
+        {
             final ProfileAccessKey profileAccessKeyFile = (ProfileAccessKey) iter.next();
-            create(jdbc, profileAccessKeyFile);
+            create( jdbc, profileAccessKeyFile );
             cpt++;
         }
         return cpt;
@@ -233,18 +266,21 @@ public class BdAccessUpdate {
     }
 
     /**
-      * Supprime un Profile
-      * @param jdbc : connection
-      * @param profileAccessKey : ProfilAccessKey
-      * @throws SQLException : erreur SQL
-      */
-    public void delete(final WJdbc jdbc, final ProfileAccessKey profileAccessKey) throws SQLException {
-        log.info("Delete : " + profileAccessKey);
+     * Supprime un Profile
+     * 
+     * @param jdbc : connection
+     * @param profileAccessKey : ProfilAccessKey
+     * @throws SQLException : erreur SQL
+     */
+    public void delete( final WJdbc jdbc, final ProfileAccessKey profileAccessKey )
+        throws SQLException
+    {
+        log.info( "Delete : " + profileAccessKey );
 
         final WStatement sta = jdbc.getWStatement();
-        sta.add("delete from "+AddonsConfig.WEL_PROFILE_ACCESSKEY_INT+" where ");
-        sta.addParameter("IDPROFILE=?", profileAccessKey.getIdProfile());
-        sta.addParameter("and ACCESSKEY=?", profileAccessKey.getAccesskey());
+        sta.add( "delete from " + AddonsConfig.WEL_PROFILE_ACCESSKEY_INT + " where " );
+        sta.addParameter( "IDPROFILE=?", profileAccessKey.getIdProfile() );
+        sta.addParameter( "and ACCESSKEY=?", profileAccessKey.getAccesskey() );
 
         sta.executeUpdate();
         sta.close();
@@ -253,20 +289,23 @@ public class BdAccessUpdate {
 
     /**
      * Insertion de Profile
+     * 
      * @param jdbc : connection
      * @param profileAccessKey : ProfilAccessKey
      * @throws SQLException : erreur SQL
      */
-    public void create(final WJdbc jdbc, final ProfileAccessKey profileAccessKey) throws SQLException {
+    public void create( final WJdbc jdbc, final ProfileAccessKey profileAccessKey )
+        throws SQLException
+    {
 
-        log.info("Insertion : " + profileAccessKey);
+        log.info( "Insertion : " + profileAccessKey );
 
         final WStatement sta = jdbc.getWStatement();
-        sta.add("insert into "+AddonsConfig.WEL_PROFILE_ACCESSKEY_INT+" (IDPROFILE,ACCESSKEY,VALUE)");
-        sta.add("values (");
-        sta.addParameter("?,", profileAccessKey.getIdProfile());
-        sta.addParameter("?,", profileAccessKey.getAccesskey());
-        sta.addParameter("?)", profileAccessKey.getValue());
+        sta.add( "insert into " + AddonsConfig.WEL_PROFILE_ACCESSKEY_INT + " (IDPROFILE,ACCESSKEY,VALUE)" );
+        sta.add( "values (" );
+        sta.addParameter( "?,", profileAccessKey.getIdProfile() );
+        sta.addParameter( "?,", profileAccessKey.getAccesskey() );
+        sta.addParameter( "?)", profileAccessKey.getValue() );
 
         sta.executeUpdate();
         sta.close();

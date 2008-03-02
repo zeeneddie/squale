@@ -13,31 +13,35 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import com.airfrance.welcom.outils.TrimStringBuffer;
 
 /**
- * @author M327837
- *
- * Suppresion Intelligente des espaces ....
- *
+ * @author M327837 Suppresion Intelligente des espaces ....
  */
-public class CleanSpacesTag extends BodyTagSupport {
+public class CleanSpacesTag
+    extends BodyTagSupport
+{
     /**
      * 
      */
     private static final long serialVersionUID = -2547959677796929093L;
 
     /**
-      * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
-      */
-    public int doEndTag() throws JspException {
+     * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
+     */
+    public int doEndTag()
+        throws JspException
+    {
         String value = getBodyContent().getString();
 
-        try {
+        try
+        {
             final TrimStringBuffer tsb = new TrimStringBuffer();
-            tsb.append(value);
+            tsb.append( value );
             value = tsb.toString();
             final JspWriter writer = pageContext.getOut();
-            writer.print(value);
-        } catch (final Exception e) {
-            throw new JspException("Clean Spaces : " + e.getMessage());
+            writer.print( value );
+        }
+        catch ( final Exception e )
+        {
+            throw new JspException( "Clean Spaces : " + e.getMessage() );
         }
 
         return EVAL_PAGE;

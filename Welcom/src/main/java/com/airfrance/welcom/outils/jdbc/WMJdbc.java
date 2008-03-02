@@ -13,12 +13,13 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.validator.GenericValidator;
 
 /**
- * @author M327837
- * Gestion d'un jdbc Mutltiple (@link com.airfrance.welcom.outils.jdbc.WJdbc)
+ * @author M327837 Gestion d'un jdbc Mutltiple (@link com.airfrance.welcom.outils.jdbc.WJdbc)
  */
-public class WMJdbc extends WJdbc {
+public class WMJdbc
+    extends WJdbc
+{
     /** logger */
-    private static Log log = LogFactory.getLog(WMJdbc.class);
+    private static Log log = LogFactory.getLog( WMJdbc.class );
 
     /** Chaine de connexion */
     private String connectionName = "";
@@ -27,17 +28,20 @@ public class WMJdbc extends WJdbc {
      * @param pUserName Nom de l'utilisateur
      * @throws SQLException probleme sql
      */
-    public WMJdbc(final String pUserName) throws SQLException {
-        this(pUserName, null);
+    public WMJdbc( final String pUserName )
+        throws SQLException
+    {
+        this( pUserName, null );
     }
 
     /**
-     * 
      * @param pUserName Nom de l'utilisateur
      * @param pConnectionName Nom de la connexion
      * @throws SQLException Probleme SQL
      */
-    public WMJdbc(final String pUserName, final String pConnectionName) throws SQLException {
+    public WMJdbc( final String pUserName, final String pConnectionName )
+        throws SQLException
+    {
         super();
         this.userName = pUserName;
         this.connectionName = pConnectionName;
@@ -46,25 +50,36 @@ public class WMJdbc extends WJdbc {
 
     /**
      * Surcharge de la methode init
+     * 
      * @throws SQLException Probleme SQL
      */
-    protected void init() throws SQLException {
-        try {
-            if (!GenericValidator.isBlankOrNull(connectionName)) {
-                conn = WConnectionPool.getConnection(connectionName);
-            } else {
+    protected void init()
+        throws SQLException
+    {
+        try
+        {
+            if ( !GenericValidator.isBlankOrNull( connectionName ) )
+            {
+                conn = WConnectionPool.getConnection( connectionName );
+            }
+            else
+            {
                 conn = WConnectionPool.getConnection();
             }
 
-            if (conn != null) {
-                if (conn.isClosed()) {
-                    log.error("2004-critical-Database--BD close/Relancer le serveur de BD");
+            if ( conn != null )
+            {
+                if ( conn.isClosed() )
+                {
+                    log.error( "2004-critical-Database--BD close/Relancer le serveur de BD" );
                 }
 
                 // Enleve l'autocommit
-                conn.setAutoCommit(false);
+                conn.setAutoCommit( false );
             }
-        } catch (final SQLException e) {
+        }
+        catch ( final SQLException e )
+        {
             throw e;
         }
     }

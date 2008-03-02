@@ -10,7 +10,10 @@ import com.airfrance.welcom.outils.WelcomConfigurator;
 import com.airfrance.welcom.taglib.field.util.LayoutUtils;
 import com.airfrance.welcom.taglib.field.util.TagUtils;
 
-public class WTextareaTag extends WBaseTextareaTag implements IWelcomInputTag{
+public class WTextareaTag
+    extends WBaseTextareaTag
+    implements IWelcomInputTag
+{
 
     /**
      * Spécifie le mode d'accée du composant
@@ -20,20 +23,27 @@ public class WTextareaTag extends WBaseTextareaTag implements IWelcomInputTag{
     /**
      * {@inheritDoc}
      */
-    public int doStartTag() throws JspException {
+    public int doStartTag()
+        throws JspException
+    {
         // Adapte le style de la case a cohé sir on est en charte v2.002
-        if (WelcomConfigurator.getCharte() == Charte.V2_002 && GenericValidator.isBlankOrNull(this.getStyleClass())) {
-            this.setStyleClass("normal");
+        if ( WelcomConfigurator.getCharte() == Charte.V2_002 && GenericValidator.isBlankOrNull( this.getStyleClass() ) )
+        {
+            this.setStyleClass( "normal" );
         }
 
-        if (READWRITE.equals(access)) {
+        if ( READWRITE.equals( access ) )
+        {
             return super.doStartTag();
-        } else {
-            this.setReadonly(true);
-            if (READSEND.equals(access)) {
+        }
+        else
+        {
+            this.setReadonly( true );
+            if ( READSEND.equals( access ) )
+            {
                 HiddenTag hiddenTag = new HiddenTag();
                 // initialize the tag
-                LayoutUtils.copyProperties(hiddenTag, this);
+                LayoutUtils.copyProperties( hiddenTag, this );
                 hiddenTag.doStartTag();
                 hiddenTag.doEndTag();
             }
@@ -44,21 +54,25 @@ public class WTextareaTag extends WBaseTextareaTag implements IWelcomInputTag{
     /**
      * Methode preparant les index on rajout le possibilité sur le TableTag
      */
-    protected void prepareIndex(StringBuffer sb, String name) throws JspException {
-        TagUtils.prepareIndex(pageContext, this, messages, sb, name);
+    protected void prepareIndex( StringBuffer sb, String name )
+        throws JspException
+    {
+        TagUtils.prepareIndex( pageContext, this, messages, sb, name );
     }
 
     /**
      * @return access attribut
      */
-    public String getAccess() {
+    public String getAccess()
+    {
         return access;
     }
 
     /**
      * @param access access attribut
      */
-    public void setAccess(String access) {
+    public void setAccess( String access )
+    {
         this.access = access;
     }
 

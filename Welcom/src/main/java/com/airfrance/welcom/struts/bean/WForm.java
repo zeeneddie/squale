@@ -8,9 +8,12 @@ package com.airfrance.welcom.struts.bean;
 
 /**
  * Class WForm
+ * 
  * @deprecated change to WActionForm
  */
-public class WForm extends WActionForm {
+public class WForm
+    extends WActionForm
+{
 
     /**
      * 

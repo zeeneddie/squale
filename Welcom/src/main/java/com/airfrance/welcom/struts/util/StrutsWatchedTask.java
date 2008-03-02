@@ -4,20 +4,25 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionForm;
 
-public class StrutsWatchedTask extends WatchedTask {
+public class StrutsWatchedTask
+    extends WatchedTask
+{
 
-	private String actionURL;
-	
-	public void init(ActionForm form, HttpServletRequest request) {
-		actionURL = request.getParameter("wWatchedAction");
-	}
+    private String actionURL;
 
-	public void run() {
-		// Nothing todo
-	}
+    public void init( ActionForm form, HttpServletRequest request )
+    {
+        actionURL = request.getParameter( "wWatchedAction" );
+    }
 
-	public String getActionURL() {
-		return actionURL;
-	}
+    public void run()
+    {
+        // Nothing todo
+    }
+
+    public String getActionURL()
+    {
+        return actionURL;
+    }
 
 }

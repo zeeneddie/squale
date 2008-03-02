@@ -16,37 +16,50 @@ import com.airfrance.welcom.taglib.renderer.RendererFactory;
 /**
  * CanvasLeftMenu Tag
  */
-public class CanvasLeftMenuTag extends BodyTagSupport {
+public class CanvasLeftMenuTag
+    extends BodyTagSupport
+{
 
     /**
      * 
      */
     private static final long serialVersionUID = -8253987493672223902L;
+
     /** Clef de stockage */
     public static final String KEY_CANVASLEFT = "com.airfrance.welcom.CanvasLeft";
-    /** Constante la largeur par defaut du canvas*/
+
+    /** Constante la largeur par defaut du canvas */
     private static final int DEFAULT_WIDTH = 140;
+
     /** la largeur du canvas */
     private int width = DEFAULT_WIDTH;
-    /** vrai si le canvas contient des boutons*/
+
+    /** vrai si le canvas contient des boutons */
     private boolean containsBoutons = false;
-    /** vrai si le canvas contient des menus*/
+
+    /** vrai si le canvas contient des menus */
     private boolean containsMenu = false;
-    /** le body*/
+
+    /** le body */
     private String body = "";
+
     /** render */
-    private ICanvasLeftMenuTagRenderer render = (ICanvasLeftMenuTagRenderer) RendererFactory.getRenderer(RendererFactory.CANVAS_LEFT);
+    private ICanvasLeftMenuTagRenderer render =
+        (ICanvasLeftMenuTagRenderer) RendererFactory.getRenderer( RendererFactory.CANVAS_LEFT );
 
     /**
      * @see javax.servlet.jsp.tagext.BodyTagSupport#doStartTag()
      */
-    public int doStartTag() throws JspException {
+    public int doStartTag()
+        throws JspException
+    {
 
-        pageContext.getRequest().setAttribute(KEY_CANVASLEFT, this);
+        pageContext.getRequest().setAttribute( KEY_CANVASLEFT, this );
 
         final String startContent = render.drawStart();
-        if (startContent != null) {
-            ResponseUtils.write(pageContext, startContent);
+        if ( startContent != null )
+        {
+            ResponseUtils.write( pageContext, startContent );
         }
 
         return super.doStartTag();
@@ -55,68 +68,84 @@ public class CanvasLeftMenuTag extends BodyTagSupport {
     /**
      * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
      */
-    public int doEndTag() throws JspException {
-        if (getBodyContent() != null) {
+    public int doEndTag()
+        throws JspException
+    {
+        if ( getBodyContent() != null )
+        {
             body = getBodyContent().getString();
         }
 
-        ResponseUtils.write(pageContext, render.drawEnd(body, width, containsMenu, isContainsBoutons()));
+        ResponseUtils.write( pageContext, render.drawEnd( body, width, containsMenu, isContainsBoutons() ) );
 
         return EVAL_PAGE;
     }
 
     /**
      * Accesseur
+     * 
      * @return la largeur
      */
-    public int getWidth() {
+    public int getWidth()
+    {
         return width;
     }
 
     /**
      * Accesseur
+     * 
      * @param i la largeur
      */
-    public void setWidth(final int i) {
+    public void setWidth( final int i )
+    {
         width = i;
     }
 
     /**
      * Accesseur
+     * 
      * @return vrai si le canvas contient des boutons
      */
-    public boolean isContainsBoutons() {
+    public boolean isContainsBoutons()
+    {
         return containsBoutons;
     }
 
     /**
      * Accesseur
+     * 
      * @param b la nouvelle valeur
      */
-    public void setContainsBoutons(final boolean b) {
+    public void setContainsBoutons( final boolean b )
+    {
         containsBoutons = b;
     }
 
     /**
      * Accesseur
+     * 
      * @return vrai si le canvas contient des menus
      */
-    public boolean isContainsMenu() {
+    public boolean isContainsMenu()
+    {
         return containsMenu;
     }
 
     /**
      * Accesseur
+     * 
      * @param b la nouvelle valeur
      */
-    public void setContainsMenu(final boolean b) {
+    public void setContainsMenu( final boolean b )
+    {
         containsMenu = b;
     }
 
     /**
      * @see javax.servlet.jsp.tagext.BodyTagSupport#release()
      */
-    public void release() {
+    public void release()
+    {
         super.release();
         width = DEFAULT_WIDTH;
         containsBoutons = false;

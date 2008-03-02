@@ -23,18 +23,18 @@ import com.airfrance.welcom.taglib.aide.Aide;
 import com.airfrance.welcom.taglib.aide.AideException;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class WelcomConfigurator implements IWConfigurator{
+public class WelcomConfigurator
+    implements IWConfigurator
+{
 
     /** instance */
     private static final HashMap htSingleton = new HashMap();
 
     /** logger */
-    private static Log logStartup = LogFactory.getLog("Welcom");
+    private static Log logStartup = LogFactory.getLog( "Welcom" );
 
     /** Message bundle de l'application, pour la configuration */
     private MessageResources message = null;
@@ -48,7 +48,7 @@ public class WelcomConfigurator implements IWConfigurator{
     /** Date de derniere modification de parametres */
     private Date lastDateFile = null;
 
-    /** Nom du fichier de configuration du projet pour welcom*/
+    /** Nom du fichier de configuration du projet pour welcom */
     private String fileName = "";
 
     /** Le fichie de configuration est trouvé */
@@ -57,33 +57,34 @@ public class WelcomConfigurator implements IWConfigurator{
     /** Version de la charte */
     private Charte charte = null;
 
-
     /**
      * @return Pseudo Singleton /recupere sous la clef JNDI : java:comp/env/welcomConfContext
      */
-    public static WelcomConfigurator getInstance() {
+    public static WelcomConfigurator getInstance()
+    {
 
         WelcomConfigurator wc;
         final String welcomContextName = WelcomContext.getWelcomContextName();
 
-        synchronized (htSingleton) {
-            wc = (WelcomConfigurator) htSingleton.get(welcomContextName);
-            if (wc == null) {
+        synchronized ( htSingleton )
+        {
+            wc = (WelcomConfigurator) htSingleton.get( welcomContextName );
+            if ( wc == null )
+            {
                 wc = new WelcomConfigurator();
-                htSingleton.put(welcomContextName, wc);
+                htSingleton.put( welcomContextName, wc );
             }
         }
         return wc;
     }
 
     /**
-     * Initialise les propriétés du fichier de configuration
-     *  - lastDate
-     *  - isGoodResources
-     *  @param pFileName fichier de configuration
+     * Initialise les propriétés du fichier de configuration - lastDate - isGoodResources
      * 
+     * @param pFileName fichier de configuration
      */
-    private void initializeFile(final String pFileName) {
+    private void initializeFile( final String pFileName )
+    {
 
         String realFileName = "";
 
@@ -91,53 +92,67 @@ public class WelcomConfigurator implements IWConfigurator{
 
         InputStream is = null;
 
-        if (!GenericValidator.isBlankOrNull(fileName)) {
+        if ( !GenericValidator.isBlankOrNull( fileName ) )
+        {
 
             // Set up to load the property resource for this locale key, if we can
-            realFileName = fileName.replace('.', '/') + ".properties";
+            realFileName = fileName.replace( '.', '/' ) + ".properties";
 
             goodFileResources = true;
             final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
             // Recherche la date de derniere modification
-            final URL url = classLoader.getResource(realFileName);
+            final URL url = classLoader.getResource( realFileName );
             URLConnection urlConn;
-            try {
+            try
+            {
                 urlConn = url.openConnection();
-                urlConn.setUseCaches(false);
+                urlConn.setUseCaches( false );
                 urlConn.connect();
                 urlConn.getLastModified();
-                lastDateFile = new Date(urlConn.getLastModified());
-            } catch (final Exception e) {
+                lastDateFile = new Date( urlConn.getLastModified() );
+            }
+            catch ( final Exception e )
+            {
                 goodFileResources = false;
             }
 
-            // Regarde si le fichier n'est pas vide 
-            is = classLoader.getResourceAsStream(realFileName);
-            goodFileResources = (is != null);
+            // Regarde si le fichier n'est pas vide
+            is = classLoader.getResourceAsStream( realFileName );
+            goodFileResources = ( is != null );
         }
 
     }
 
     /**
      * Retourne la charte actuelle dans le fichier de config
+     * 
      * @return la charte interne
      */
-    public Charte getInternalCharte() {
-        if (charte == null) {
-            String versionMajor = WelcomConfigurator.getMessage(WelcomConfigurator.CHARTE);
-            String versionMinor = WelcomConfigurator.getMessage("charte" + versionMajor + ".version");
+    public Charte getInternalCharte()
+    {
+        if ( charte == null )
+        {
+            String versionMajor = WelcomConfigurator.getMessage( WelcomConfigurator.CHARTE );
+            String versionMinor = WelcomConfigurator.getMessage( "charte" + versionMajor + ".version" );
             String version = versionMajor + "." + versionMinor;
-            if ("v2.001".equalsIgnoreCase(version)) {
+            if ( "v2.001".equalsIgnoreCase( version ) )
+            {
                 charte = Charte.V2_001;
-            } else if ("v2.002".equalsIgnoreCase(version)) {
+            }
+            else if ( "v2.002".equalsIgnoreCase( version ) )
+            {
                 charte = Charte.V2_002;
-            } else if ("v3.001".equalsIgnoreCase(version)) {
+            }
+            else if ( "v3.001".equalsIgnoreCase( version ) )
+            {
                 charte = Charte.V3_001;
-            } else {
+            }
+            else
+            {
                 /** Par default si ca merde ... */
                 charte = Charte.V3_001;
-                logStartup.warn("Erreur sur la lecture de la charte passage en " + charte);
+                logStartup.warn( "Erreur sur la lecture de la charte passage en " + charte );
             }
         }
         return charte;
@@ -146,99 +161,116 @@ public class WelcomConfigurator implements IWConfigurator{
     /**
      * @return Troune vrai si le fichier est trouvé
      */
-    public boolean isGoodFileResources() {
+    public boolean isGoodFileResources()
+    {
         return goodFileResources;
     }
 
     /**
      * @return Retourne la date de derniere modification du fichier
      */
-    public Date getLastDateFile() {
+    public Date getLastDateFile()
+    {
         return lastDateFile;
     }
 
     /**
      * initialise la configuration de Welcom
+     * 
      * @param pFileName : File name
      */
-    private void initialize(final String pFileName) {
+    private void initialize( final String pFileName )
+    {
 
-        initializeFile(pFileName);
+        initializeFile( pFileName );
 
-        if (!GenericValidator.isBlankOrNull(pFileName)) {
+        if ( !GenericValidator.isBlankOrNull( pFileName ) )
+        {
 
-            if (message != null) {
-                logStartup.warn("Double initialisation de Welcom");
-                logStartup.warn("Seules les propriétés du dernier init seront prises en compte !");
-                logStartup.warn("Spécifier votre welcomContext (Variable d'environnement du web.xml)");
+            if ( message != null )
+            {
+                logStartup.warn( "Double initialisation de Welcom" );
+                logStartup.warn( "Seules les propriétés du dernier init seront prises en compte !" );
+                logStartup.warn( "Spécifier votre welcomContext (Variable d'environnement du web.xml)" );
             }
-            if (isGoodFileResources()) {
-                logStartup.info("Initialisation de " + WelcomContext.getWelcomContextName() + " : " + fileName);
-                message = MessageResources.getMessageResources(fileName);
-            } else {
-                logStartup.info("ERREUR : fichier de config welcom non trouvé '" + fileName + "'");
+            if ( isGoodFileResources() )
+            {
+                logStartup.info( "Initialisation de " + WelcomContext.getWelcomContextName() + " : " + fileName );
+                message = MessageResources.getMessageResources( fileName );
             }
-        } else {
-            logStartup.info("Initialisation de Welcom avec configuration par default");
+            else
+            {
+                logStartup.info( "ERREUR : fichier de config welcom non trouvé '" + fileName + "'" );
+            }
+        }
+        else
+        {
+            logStartup.info( "Initialisation de Welcom avec configuration par default" );
         }
 
-        messageInternal = MessageResources.getMessageResources(MSG_INTERNAL_KEY);
+        messageInternal = MessageResources.getMessageResources( MSG_INTERNAL_KEY );
 
         // Init De l'aide
         initAide();
 
     }
 
-    /**************************************************************************************************
-     * 
+    /*******************************************************************************************************************
      * Partie statique
-     * 
-     **************************************************************************************************/
+     ******************************************************************************************************************/
 
-    /** 
+    /**
      * Initilisation via le fichier de config
+     * 
      * @param fileName : Nom de la resource locale du projet. Celle-cis surcharge les definition de welcom
      */
-    public static void init(final String fileName) {
+    public static void init( final String fileName )
+    {
 
-        getInstance().initialize(fileName);
+        getInstance().initialize( fileName );
     }
 
     /**
      * Initialisation par default si par de resource par l'utilisateur
-     *
      */
-    private static void init() {
-        getInstance().initialize(null);
+    private static void init()
+    {
+        getInstance().initialize( null );
     }
 
     /**
-     * Initialisation de l'aide ....
-     * Utilisé seulement par agir / n'est pas propposé aux auters projets
-     *
+     * Initialisation de l'aide .... Utilisé seulement par agir / n'est pas propposé aux auters projets
      */
-    private static void initAide() {
-        if (Util.isTrue(getMessage("aide.active"))) {
-            final String aideRessource = getMessage("aide.properties");
-            final String aidePath = getMessage("aide.path.url");
+    private static void initAide()
+    {
+        if ( Util.isTrue( getMessage( "aide.active" ) ) )
+        {
+            final String aideRessource = getMessage( "aide.properties" );
+            final String aidePath = getMessage( "aide.path.url" );
 
-            if (GenericValidator.isBlankOrNull(aideRessource)) {
-                logStartup.info("Parametre Aide.properties : null");
-            } else {
-                logStartup.info("Fichier d'aide :" + aideRessource);
+            if ( GenericValidator.isBlankOrNull( aideRessource ) )
+            {
+                logStartup.info( "Parametre Aide.properties : null" );
+            }
+            else
+            {
+                logStartup.info( "Fichier d'aide :" + aideRessource );
 
-                try {
-                    Aide.openAide(aideRessource, aidePath);
-                } catch (final AideException ae) {
-                    logStartup.error(ae.getMessage(), ae);
+                try
+                {
+                    Aide.openAide( aideRessource, aidePath );
+                }
+                catch ( final AideException ae )
+                {
+                    logStartup.error( ae.getMessage(), ae );
                 }
             }
         }
     }
 
     /**
-     * Recuperation des messages de configuration ....
-     * L'internationnalisaion n'est pas necessaire
+     * Recuperation des messages de configuration .... L'internationnalisaion n'est pas necessaire
+     * 
      * @param locale : locale
      * @param key : Clef a cherché
      * @param arg1 : attribut 1
@@ -247,21 +279,27 @@ public class WelcomConfigurator implements IWConfigurator{
      * @param arg4 : attribut 4
      * @return Valeur
      */
-    private String getComputedMessage(final Locale locale, final String key, final Object arg1, final Object arg2, final Object arg3, final Object arg4) {
-        if ((message == null) && (messageInternal == null)) {
+    private String getComputedMessage( final Locale locale, final String key, final Object arg1, final Object arg2,
+                                       final Object arg3, final Object arg4 )
+    {
+        if ( ( message == null ) && ( messageInternal == null ) )
+        {
             WelcomConfigurator.init();
         }
 
-        if ((message != null) && message.isPresent(locale, key)) {
-            return message.getMessage(locale, key, arg1, arg2, arg3, arg4);
-        } else {
-            return messageInternal.getMessage(locale, key, arg1, arg2, arg3, arg4);
+        if ( ( message != null ) && message.isPresent( locale, key ) )
+        {
+            return message.getMessage( locale, key, arg1, arg2, arg3, arg4 );
+        }
+        else
+        {
+            return messageInternal.getMessage( locale, key, arg1, arg2, arg3, arg4 );
         }
     }
 
     /**
-     * Recuperation des messages de configuration ....
-     * L'internationnalisaion n'est pas necessaire
+     * Recuperation des messages de configuration .... L'internationnalisaion n'est pas necessaire
+     * 
      * @param locale : locale
      * @param key : Clef a cherché
      * @param arg1 : attribut 1
@@ -270,76 +308,91 @@ public class WelcomConfigurator implements IWConfigurator{
      * @param arg4 : attribut 4
      * @return Valeur
      */
-    private static String getMessage(final Locale locale, final String key, final Object arg1, final Object arg2, final Object arg3, final Object arg4) {
-        return getInstance().getComputedMessage(locale, key, arg1, arg2, arg3, arg4);
+    private static String getMessage( final Locale locale, final String key, final Object arg1, final Object arg2,
+                                      final Object arg3, final Object arg4 )
+    {
+        return getInstance().getComputedMessage( locale, key, arg1, arg2, arg3, arg4 );
     }
 
     /**
      * Recuperation des messages de configuration ....
+     * 
      * @param partialKey : Clef a cherché
      * @return Valeur
      */
-    public static String getMessageWithFullCfgChartePrefix(final String partialKey) {
-    	final Charte vcharte = WelcomConfigurator.getCharte();
-    	String prefix = vcharte.getWelcomConfigFullPrefix();
-        return getMessage((Locale) null, prefix + partialKey, null, null, null, null);
+    public static String getMessageWithFullCfgChartePrefix( final String partialKey )
+    {
+        final Charte vcharte = WelcomConfigurator.getCharte();
+        String prefix = vcharte.getWelcomConfigFullPrefix();
+        return getMessage( (Locale) null, prefix + partialKey, null, null, null, null );
     }
-    
+
     /**
      * Recuperation des messages de configuration ....
+     * 
      * @param partialKey : Clef a cherché
      * @return Valeur
      */
-    public static String getMessageWithCfgChartePrefix(final String partialKey) {
-    	final Charte vcharte = WelcomConfigurator.getCharte();
-    	String prefix = vcharte.getWelcomConfigPrefix();
-        return getMessage((Locale) null, prefix + partialKey, null, null, null, null);
+    public static String getMessageWithCfgChartePrefix( final String partialKey )
+    {
+        final Charte vcharte = WelcomConfigurator.getCharte();
+        String prefix = vcharte.getWelcomConfigPrefix();
+        return getMessage( (Locale) null, prefix + partialKey, null, null, null, null );
     }
-    
+
     /**
      * Recuperation des messages de configuration ....
+     * 
      * @param key : Clef a cherché
      * @return Valeur
      */
-    public static String getMessage(final String key) {
-        return getMessage((Locale) null, key, null, null, null, null);
+    public static String getMessage( final String key )
+    {
+        return getMessage( (Locale) null, key, null, null, null, null );
     }
 
     /**
      * Recuperation des messages de configuration ....
+     * 
      * @param key : Clef a cherché
      * @param arg1 : attribut 1
      * @return Valeur
      */
-    public static String getMessage(final String key, final Object arg1) {
-        return getMessage(null, key, arg1, null, null, null);
+    public static String getMessage( final String key, final Object arg1 )
+    {
+        return getMessage( null, key, arg1, null, null, null );
     }
 
     /**
      * Recuperation des messages de configuration ....
+     * 
      * @param key : Clef a cherché
      * @param arg1 : attribut 1
      * @param arg2 : attribut 2
      * @return Valeur
      */
-    public static String getMessage(final String key, final Object arg1, final Object arg2) {
-        return getMessage(null, key, arg1, arg2, null, null);
+    public static String getMessage( final String key, final Object arg1, final Object arg2 )
+    {
+        return getMessage( null, key, arg1, arg2, null, null );
     }
 
     /**
      * Recuperation des messages de configuration ....
+     * 
      * @param key : Clef a cherché
      * @param arg1 : attribut 1
      * @param arg2 : attribut 2
      * @param arg3 : attribut 3
      * @return Valeur
      */
-    public static String getMessage(final String key, final Object arg1, final Object arg2, final Object arg3) {
-        return getMessage(null, key, arg1, arg2, arg3, null);
+    public static String getMessage( final String key, final Object arg1, final Object arg2, final Object arg3 )
+    {
+        return getMessage( null, key, arg1, arg2, arg3, null );
     }
 
     /**
      * Recuperation des messages de configuration ....
+     * 
      * @param key : Clef a cherché
      * @param arg1 : attribut 1
      * @param arg2 : attribut 2
@@ -347,22 +400,27 @@ public class WelcomConfigurator implements IWConfigurator{
      * @param arg4 : attribut 4
      * @return Valeur
      */
-    public static String getMessage(final String key, final Object arg1, final Object arg2, final Object arg3, final Object arg4) {
-        return getMessage(key, arg1, arg2, arg3, arg4);
+    public static String getMessage( final String key, final Object arg1, final Object arg2, final Object arg3,
+                                     final Object arg4 )
+    {
+        return getMessage( key, arg1, arg2, arg3, arg4 );
     }
 
     /**
      * @return Date de modification des fichiers
      */
-    public static Date getLastDate() {
+    public static Date getLastDate()
+    {
         return getInstance().getLastDateFile();
     }
 
     /**
      * Retourne la charte actuelle dans le fichier de config
+     * 
      * @return la charte actuelle dans le fichier de config
      */
-    public static Charte getCharte() {
+    public static Charte getCharte()
+    {
         return getInstance().getInternalCharte();
     }
 

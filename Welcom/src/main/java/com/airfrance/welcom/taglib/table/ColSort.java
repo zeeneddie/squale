@@ -9,78 +9,88 @@ package com.airfrance.welcom.taglib.table;
 import java.io.Serializable;
 
 /**
- * @author M327837
- *
- * Infos pour trier une colonne
+ * @author M327837 Infos pour trier une colonne
  */
-public class ColSort implements Serializable{
-    
-    
+public class ColSort
+    implements Serializable
+{
+
     /** ID pour la serialization */
     static final long serialVersionUID = -6974144058267526814L;
 
-    /** Nom de la colonne a trie*/
+    /** Nom de la colonne a trie */
     private String column;
+
     /** ordre du trie */
     private SortOrder sort;
-    /** Type de trie*/
+
+    /** Type de trie */
     private String type;
-    /** Formatage de la date, s'il y en a une ..*/
+
+    /** Formatage de la date, s'il y en a une .. */
     private String dateFormat;
 
     /**
      * @return accesseur
      */
-    public String getColumn() {
+    public String getColumn()
+    {
         return column;
     }
 
     /**
      * @return accesseur
      */
-    public SortOrder getSort() {
+    public SortOrder getSort()
+    {
         return sort;
     }
 
     /**
      * @param string accesseur
      */
-    public void setColumn(final String string) {
+    public void setColumn( final String string )
+    {
         column = string;
     }
 
-    /** 
+    /**
      * @param order accesseur
      */
-    public void setSort(final SortOrder order) {
+    public void setSort( final SortOrder order )
+    {
         sort = order;
     }
 
     /**
      * @return accesseur
      */
-    public String getDateFormat() {
+    public String getDateFormat()
+    {
         return dateFormat;
     }
 
     /**
      * @return accesseur
      */
-    public String getType() {
+    public String getType()
+    {
         return type;
     }
 
     /**
      * @param string accesseur
      */
-    public void setDateFormat(final String string) {
+    public void setDateFormat( final String string )
+    {
         dateFormat = string;
     }
 
     /**
      * @param string accesseur
      */
-    public void setType(final String string) {
+    public void setType( final String string )
+    {
         type = string;
     }
 }

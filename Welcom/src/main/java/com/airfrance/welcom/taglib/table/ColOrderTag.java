@@ -19,110 +19,136 @@ import org.apache.struts.util.MessageResources;
 import com.airfrance.welcom.outils.Access;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class ColOrderTag extends TagSupport {
+public class ColOrderTag
+    extends TagSupport
+{
     /**
      * 
      */
     private static final long serialVersionUID = 4093291249075934380L;
+
     /** parametre du tag */
     private String property = "";
+
     /** parametre du tag */
     private String key = "";
+
     /** parametre du tag */
     private String paramId = "";
+
     /** parametre du tag */
     private String paramName = "";
+
     /** parametre du tag */
     private String paramProperty = "";
+
     /** parametre du tag */
     private String href = "";
+
     /** parametre du tag */
     private String width = "24px";
+
     /** parametre du tag */
     private ColsTag colsTag;
+
     /** parametre du tag */
     private String toolTipKeyUp = "";
+
     /** parametre du tag */
     private String toolTipKeyDown = "";
+
     /** parametre du tag */
     private boolean forceReadWrite = false;
 
     /**
      * @see javax.servlet.jsp.tagext.BodyTagSupport#doStartTag()
      */
-    public int doStartTag() throws JspException {
-        final String pageAccess = (String) pageContext.getAttribute("access");
+    public int doStartTag()
+        throws JspException
+    {
+        final String pageAccess = (String) pageContext.getAttribute( "access" );
 
-        if ((pageAccess != null) && pageAccess.equals(Access.READONLY) && !forceReadWrite) {
+        if ( ( pageAccess != null ) && pageAccess.equals( Access.READONLY ) && !forceReadWrite )
+        {
             return SKIP_BODY;
         }
 
         // Recherche si un parent est du bon type
         Tag curParent = null;
 
-        for (curParent = getParent();(curParent != null) && !(curParent instanceof ColsTag);) {
+        for ( curParent = getParent(); ( curParent != null ) && !( curParent instanceof ColsTag ); )
+        {
             curParent = curParent.getParent();
         }
 
-        if (curParent == null) {
-            throw new JspException("ColTag  must be used between Cols Tag.");
+        if ( curParent == null )
+        {
+            throw new JspException( "ColTag  must be used between Cols Tag." );
         }
 
         colsTag = (ColsTag) curParent;
 
-        if (!GenericValidator.isBlankOrNull(colsTag.getEmptyKey()) && (pageContext.getAttribute(colsTag.getId()) == null)) {
+        if ( !GenericValidator.isBlankOrNull( colsTag.getEmptyKey() )
+            && ( pageContext.getAttribute( colsTag.getId() ) == null ) )
+        {
             return SKIP_BODY;
-        } else {
+        }
+        else
+        {
             return EVAL_PAGE;
         }
     }
 
     /**
-     * 
      * @see javax.servlet.jsp.tagext.Tag#doEndTag()
      */
-    public int doEndTag() throws JspException {
-        final String pageAccess = (String) pageContext.getAttribute("access");
+    public int doEndTag()
+        throws JspException
+    {
+        final String pageAccess = (String) pageContext.getAttribute( "access" );
 
-        if ((pageAccess != null) && pageAccess.equals(Access.READONLY) && !forceReadWrite) {
+        if ( ( pageAccess != null ) && pageAccess.equals( Access.READONLY ) && !forceReadWrite )
+        {
             return SKIP_BODY;
         }
 
         // Recupere la locale de la page
-        final Locale localeRequest = (Locale) pageContext.getSession().getAttribute(Globals.LOCALE_KEY);
+        final Locale localeRequest = (Locale) pageContext.getSession().getAttribute( Globals.LOCALE_KEY );
 
         // Recuperer le fichier des Bundle
-        final MessageResources resources = (MessageResources) pageContext.getServletContext().getAttribute(Globals.MESSAGES_KEY);
+        final MessageResources resources =
+            (MessageResources) pageContext.getServletContext().getAttribute( Globals.MESSAGES_KEY );
 
         final ColOrder c = new ColOrder();
 
-        if (key == null) {
+        if ( key == null )
+        {
             key = property;
         }
 
-        c.setKey(key);
-        c.setProperty(property);
-        c.setParamId(paramId);
-        c.setParamName(paramName);
-        c.setParamProperty(paramProperty);
-        c.setLink(href);
-        c.setWidth(width);
-        c.setPageContext(pageContext);
+        c.setKey( key );
+        c.setProperty( property );
+        c.setParamId( paramId );
+        c.setParamName( paramName );
+        c.setParamProperty( paramProperty );
+        c.setLink( href );
+        c.setWidth( width );
+        c.setPageContext( pageContext );
 
-        if (!GenericValidator.isBlankOrNull(toolTipKeyDown)) {
-            c.setTitleDown(resources.getMessage(localeRequest, toolTipKeyDown));
+        if ( !GenericValidator.isBlankOrNull( toolTipKeyDown ) )
+        {
+            c.setTitleDown( resources.getMessage( localeRequest, toolTipKeyDown ) );
         }
 
-        if (!GenericValidator.isBlankOrNull(toolTipKeyUp)) {
-            c.setTitleUp(resources.getMessage(localeRequest, toolTipKeyUp));
+        if ( !GenericValidator.isBlankOrNull( toolTipKeyUp ) )
+        {
+            c.setTitleUp( resources.getMessage( localeRequest, toolTipKeyUp ) );
         }
 
-        colsTag.addCellule(c);
+        colsTag.addCellule( c );
 
         return EVAL_PAGE;
     }
@@ -130,7 +156,8 @@ public class ColOrderTag extends TagSupport {
     /**
      * @see javax.servlet.jsp.tagext.BodyTagSupport#release()
      */
-    public void release() {
+    public void release()
+    {
         colsTag = null;
         property = "";
         key = "";
@@ -148,153 +175,176 @@ public class ColOrderTag extends TagSupport {
     /**
      * @return colsTag
      */
-    public ColsTag getColsTag() {
+    public ColsTag getColsTag()
+    {
         return colsTag;
     }
 
     /**
      * @return href
      */
-    public String getHref() {
+    public String getHref()
+    {
         return href;
     }
 
     /**
      * @return key
      */
-    public String getKey() {
+    public String getKey()
+    {
         return key;
     }
 
     /**
      * @return paramId
      */
-    public String getParamId() {
+    public String getParamId()
+    {
         return paramId;
     }
 
     /**
      * @return paramName
      */
-    public String getParamName() {
+    public String getParamName()
+    {
         return paramName;
     }
 
     /**
      * @return paramProperty
      */
-    public String getParamProperty() {
+    public String getParamProperty()
+    {
         return paramProperty;
     }
 
     /**
      * @return property
      */
-    public String getProperty() {
+    public String getProperty()
+    {
         return property;
     }
 
     /**
      * @return width
      */
-    public String getWidth() {
+    public String getWidth()
+    {
         return width;
     }
 
     /**
      * @param tag le nouveau colsTag
      */
-    public void setColsTag(final ColsTag tag) {
+    public void setColsTag( final ColsTag tag )
+    {
         colsTag = tag;
     }
 
     /**
      * @param string le nouveau href
      */
-    public void setHref(final String string) {
+    public void setHref( final String string )
+    {
         href = string;
     }
 
     /**
      * @param string le nouveau key
      */
-    public void setKey(final String string) {
+    public void setKey( final String string )
+    {
         key = string;
     }
 
     /**
      * @param string le nouveau paramId
      */
-    public void setParamId(final String string) {
+    public void setParamId( final String string )
+    {
         paramId = string;
     }
 
     /**
      * @param string le nouveau paramName
      */
-    public void setParamName(final String string) {
+    public void setParamName( final String string )
+    {
         paramName = string;
     }
 
     /**
      * @param string le nouveau paramProperty
      */
-    public void setParamProperty(final String string) {
+    public void setParamProperty( final String string )
+    {
         paramProperty = string;
     }
 
     /**
      * @param string le nouveau property
      */
-    public void setProperty(final String string) {
+    public void setProperty( final String string )
+    {
         property = string;
     }
 
     /**
      * @param string le nouveau width
      */
-    public void setWidth(final String string) {
+    public void setWidth( final String string )
+    {
         width = string;
     }
 
     /**
      * @return forceReadWrite
      */
-    public boolean isForceReadWrite() {
+    public boolean isForceReadWrite()
+    {
         return forceReadWrite;
     }
 
     /**
      * @param b le nouveau forceReadWrite
      */
-    public void setForceReadWrite(final boolean b) {
+    public void setForceReadWrite( final boolean b )
+    {
         forceReadWrite = b;
     }
+
     /**
      * @return edited
      */
-    public String getToolTipKeyDown() {
+    public String getToolTipKeyDown()
+    {
         return toolTipKeyDown;
     }
 
     /**
      * @return edited
      */
-    public String getToolTipKeyUp() {
+    public String getToolTipKeyUp()
+    {
         return toolTipKeyUp;
     }
 
     /**
      * @param string edited
      */
-    public void setToolTipKeyDown(final String string) {
+    public void setToolTipKeyDown( final String string )
+    {
         toolTipKeyDown = string;
     }
 
     /**
      * @param string edited
      */
-    public void setToolTipKeyUp(final String string) {
+    public void setToolTipKeyUp( final String string )
+    {
         toolTipKeyUp = string;
     }
 

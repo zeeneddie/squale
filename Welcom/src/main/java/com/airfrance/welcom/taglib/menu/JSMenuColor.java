@@ -1,123 +1,159 @@
 package com.airfrance.welcom.taglib.menu;
 
-
 /**
  * @author LEBRERE fabien
- *
- * */
-public class JSMenuColor {
-    /** Constante*/
-    private static final JSMenuColor BLEU_FONCE = new JSMenuColor("0", "BLEU FONCE", "Infos Compagnie");
-    /** Constante*/
-    private static final JSMenuColor ROUGE = new JSMenuColor("1", "ROUGE", "Les Métiers");
-    /** Constante*/
-    private static final JSMenuColor BLEU_CLAIR = new JSMenuColor("2", "BLEU_CLAIR", "Coté pratique");
-    /** Constante*/
-    private static final JSMenuColor ORANGE = new JSMenuColor("3", "ORANGE", "Parcours professionnel");
-    /** Constante*/
-    private static final JSMenuColor VERT = new JSMenuColor("4", "VERT", "Entre nous");
-    /** Constante*/
-    private static final JSMenuColor PRUNE = new JSMenuColor("5", "PRUNE", "Environnement");
-    /** l'id*/
+ */
+public class JSMenuColor
+{
+    /** Constante */
+    private static final JSMenuColor BLEU_FONCE = new JSMenuColor( "0", "BLEU FONCE", "Infos Compagnie" );
+
+    /** Constante */
+    private static final JSMenuColor ROUGE = new JSMenuColor( "1", "ROUGE", "Les Métiers" );
+
+    /** Constante */
+    private static final JSMenuColor BLEU_CLAIR = new JSMenuColor( "2", "BLEU_CLAIR", "Coté pratique" );
+
+    /** Constante */
+    private static final JSMenuColor ORANGE = new JSMenuColor( "3", "ORANGE", "Parcours professionnel" );
+
+    /** Constante */
+    private static final JSMenuColor VERT = new JSMenuColor( "4", "VERT", "Entre nous" );
+
+    /** Constante */
+    private static final JSMenuColor PRUNE = new JSMenuColor( "5", "PRUNE", "Environnement" );
+
+    /** l'id */
     private String id;
-    /** la couleur*/
+
+    /** la couleur */
     private String couleur;
-    /** la description*/
+
+    /** la description */
     private String description;
 
-    /***
-     * Constructeur 
+    /*******************************************************************************************************************
+     * Constructeur
+     * 
      * @param pId l'id
      * @param pCouleur la couleur
      * @param pDescription la description
      */
-    private JSMenuColor(final String pId, final String pCouleur, final String pDescription) {
+    private JSMenuColor( final String pId, final String pCouleur, final String pDescription )
+    {
         id = pId;
         couleur = pCouleur;
         description = pDescription;
     }
 
     /**
-     *  
      * @param id id de la couleur
      * @return la couleur en fonction de l'id
      * @throws JSMenuColorNotFound exception si la couleur n'est pas trouvee
      */
-    public static JSMenuColor getJSMenuColorById(final String id) throws JSMenuColorNotFound {
-        if (id.equals("1")) {
+    public static JSMenuColor getJSMenuColorById( final String id )
+        throws JSMenuColorNotFound
+    {
+        if ( id.equals( "1" ) )
+        {
             return BLEU_FONCE;
-        } else if (id.equals("2")) {
+        }
+        else if ( id.equals( "2" ) )
+        {
             return ROUGE;
-        } else if (id.equals("3")) {
+        }
+        else if ( id.equals( "3" ) )
+        {
             return BLEU_CLAIR;
-        } else if (id.equals("4")) {
+        }
+        else if ( id.equals( "4" ) )
+        {
             return ORANGE;
-        } else if (id.equals("5")) {
+        }
+        else if ( id.equals( "5" ) )
+        {
             return VERT;
-        } else if (id.equals("6")) {
+        }
+        else if ( id.equals( "6" ) )
+        {
             return PRUNE;
-        } else {
-            throw new JSMenuColorNotFound("JSMenuColorNotFound : ID :" + id + " non trouvé");
+        }
+        else
+        {
+            throw new JSMenuColorNotFound( "JSMenuColorNotFound : ID :" + id + " non trouvé" );
         }
     }
 
     /**
-     * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
-    public boolean equals(final Object o) {
-        if (o instanceof JSMenuColor) {
-            return this.getId().equals(((JSMenuColor) o).getId());
+    public boolean equals( final Object o )
+    {
+        if ( o instanceof JSMenuColor )
+        {
+            return this.getId().equals( ( (JSMenuColor) o ).getId() );
         }
 
-        return super.equals(o);
+        return super.equals( o );
     }
 
     /**
      * Returns the couleur.
+     * 
      * @return String
      */
-    public String getCouleur() {
+    public String getCouleur()
+    {
         return couleur;
     }
 
     /**
      * Returns the description.
+     * 
      * @return String
      */
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
     /**
      * Returns the id.
+     * 
      * @return String
      */
-    public String getId() {
+    public String getId()
+    {
         return id;
     }
 
     /**
      * Sets the couleur.
+     * 
      * @param pCouleur The couleur to set
      */
-    public void setCouleur(final String pCouleur) {
+    public void setCouleur( final String pCouleur )
+    {
         couleur = pCouleur;
     }
 
     /**
      * Sets the description.
+     * 
      * @param pDescription The description to set
      */
-    public void setDescription(final String pDescription) {
+    public void setDescription( final String pDescription )
+    {
         description = pDescription;
     }
 
     /**
      * Sets the id.
+     * 
      * @param pId The id to set
      */
-    public void setId(final String pId) {
+    public void setId( final String pId )
+    {
         id = pId;
     }
 }

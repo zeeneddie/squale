@@ -17,61 +17,81 @@ import com.airfrance.welcom.struts.util.WConstants;
 import com.airfrance.welcom.taglib.field.util.LayoutUtils;
 
 /**
- * @author M325379
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M325379 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class ChangeAccessTag extends TagSupport {
+public class ChangeAccessTag
+    extends TagSupport
+{
     /**
      * 
      */
     private static final long serialVersionUID = -5439124180702475906L;
-    /** attribut*/
+
+    /** attribut */
     private String accessKey = "";
-    /** attribut*/
+
+    /** attribut */
     private String name = "";
-    /** attribut*/
+
+    /** attribut */
     private String property = "";
 
-    /** le page access (pour le stocker)*/
+    /** le page access (pour le stocker) */
     private String pageAccess = null;
 
     /**
-    * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
-    */
-    public int doStartTag() throws JspException {
-        if (GenericValidator.isBlankOrNull(accessKey) && GenericValidator.isBlankOrNull(name) && GenericValidator.isBlankOrNull(property)) {
-            throw new JspException("Aucun attribut spécifié pour le ChangeAccessTag");
+     * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
+     */
+    public int doStartTag()
+        throws JspException
+    {
+        if ( GenericValidator.isBlankOrNull( accessKey ) && GenericValidator.isBlankOrNull( name )
+            && GenericValidator.isBlankOrNull( property ) )
+        {
+            throw new JspException( "Aucun attribut spécifié pour le ChangeAccessTag" );
         }
 
-        if (!GenericValidator.isBlankOrNull(accessKey) && !GenericValidator.isBlankOrNull(name) && !GenericValidator.isBlankOrNull(property)) {
-            throw new JspException("Avec le tag ChangeAccessTag, utiliser soit accessKey, soit name et property");
+        if ( !GenericValidator.isBlankOrNull( accessKey ) && !GenericValidator.isBlankOrNull( name )
+            && !GenericValidator.isBlankOrNull( property ) )
+        {
+            throw new JspException( "Avec le tag ChangeAccessTag, utiliser soit accessKey, soit name et property" );
         }
 
-        pageAccess = (String) pageContext.getAttribute("access");
+        pageAccess = (String) pageContext.getAttribute( "access" );
         String access = null;
-        if (!GenericValidator.isBlankOrNull(accessKey)) {
-            final WILogonBeanSecurity lb = (WILogonBeanSecurity) pageContext.getSession().getAttribute(WConstants.USER_KEY);
-            access = Access.getMultipleSecurityPage(lb, accessKey);
-        } else { // on utilise name et property
-            access = (String) LayoutUtils.getBeanFromPageContext(pageContext, name, property);
+        if ( !GenericValidator.isBlankOrNull( accessKey ) )
+        {
+            final WILogonBeanSecurity lb =
+                (WILogonBeanSecurity) pageContext.getSession().getAttribute( WConstants.USER_KEY );
+            access = Access.getMultipleSecurityPage( lb, accessKey );
+        }
+        else
+        { // on utilise name et property
+            access = (String) LayoutUtils.getBeanFromPageContext( pageContext, name, property );
         }
 
-        if (access != null) {
-            pageContext.setAttribute("access", access);
+        if ( access != null )
+        {
+            pageContext.setAttribute( "access", access );
         }
 
         return EVAL_PAGE;
     }
+
     /**
      * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
      */
-    public int doEndTag() throws JspException {
-        if (pageAccess != null) {
-            pageContext.setAttribute("access", pageAccess);
-        } else if (pageContext.getAttribute("access") != null) {
-            pageContext.removeAttribute("access");
+    public int doEndTag()
+        throws JspException
+    {
+        if ( pageAccess != null )
+        {
+            pageContext.setAttribute( "access", pageAccess );
+        }
+        else if ( pageContext.getAttribute( "access" ) != null )
+        {
+            pageContext.removeAttribute( "access" );
         }
         return EVAL_PAGE;
     }
@@ -79,7 +99,8 @@ public class ChangeAccessTag extends TagSupport {
     /**
      * @see javax.servlet.jsp.tagext.TagSupport#release()
      */
-    public void release() {
+    public void release()
+    {
         accessKey = "";
         name = "";
         property = "";
@@ -89,42 +110,48 @@ public class ChangeAccessTag extends TagSupport {
     /**
      * @return accessKey
      */
-    public String getAccessKey() {
+    public String getAccessKey()
+    {
         return accessKey;
     }
 
     /**
      * @return name
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
     /**
      * @return property
      */
-    public String getProperty() {
+    public String getProperty()
+    {
         return property;
     }
 
     /**
      * @param string accessKey
      */
-    public void setAccessKey(final String string) {
+    public void setAccessKey( final String string )
+    {
         accessKey = string;
     }
 
     /**
      * @param string name
      */
-    public void setName(final String string) {
+    public void setName( final String string )
+    {
         name = string;
     }
 
     /**
      * @param string property
      */
-    public void setProperty(final String string) {
+    public void setProperty( final String string )
+    {
         property = string;
     }
 

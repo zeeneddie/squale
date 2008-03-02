@@ -22,28 +22,35 @@ import org.apache.struts.action.ActionMapping;
 import com.airfrance.welcom.struts.webServer.WebEngine;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class WGzipAction extends Action {
+public class WGzipAction
+    extends Action
+{
     /** logger */
-    private static Log log = LogFactory.getLog(WGzipAction.class);
+    private static Log log = LogFactory.getLog( WGzipAction.class );
 
     /**
-     * @see org.apache.struts.action.Action#perform(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.apache.struts.action.Action#perform(org.apache.struts.action.ActionMapping,
+     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse)
      */
-    public synchronized ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request, final HttpServletResponse response)
-        throws IOException, ServletException {
+    public synchronized ActionForward execute( final ActionMapping mapping, final ActionForm form,
+                                               final HttpServletRequest request, final HttpServletResponse response )
+        throws IOException, ServletException
+    {
 
-        try {
+        try
+        {
 
-            final WebEngine serveurWeb = new WebEngine(servlet, request, response);
-            serveurWeb.process(request.getParameter("value"));
+            final WebEngine serveurWeb = new WebEngine( servlet, request, response );
+            serveurWeb.process( request.getParameter( "value" ) );
             return null;
-        } catch (final Exception e) {
-            log.error(e, e);
+        }
+        catch ( final Exception e )
+        {
+            log.error( e, e );
             return null;
         }
     }

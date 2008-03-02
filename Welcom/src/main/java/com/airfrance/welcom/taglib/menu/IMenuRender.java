@@ -13,17 +13,18 @@ import javax.servlet.jsp.tagext.Tag;
 /**
  *
  */
-public interface IMenuRender {
-    
+public interface IMenuRender
+{
+
     /** The RecursiceNumber */
     public static final int RECUSIVE_MAGIC_NUMBER = 100;
-    
+
     /**
      * @param menu le menu
      * @param level le niveau
      * @return le resultat du print
      */
-    public String doPrintBase(JSMenu menu, int level);
+    public String doPrintBase( JSMenu menu, int level );
 
     /**
      * @param menuItem le menuItem
@@ -33,26 +34,25 @@ public interface IMenuRender {
      * @param tab le tab
      * @return le js resultant associe
      */
-    public String doPrint(JSMenuItem menuItem, JSMenuBase parent, String menuName, int level, int tab);
+    public String doPrint( JSMenuItem menuItem, JSMenuBase parent, String menuName, int level, int tab );
 
     /**
      * @param tag le tag
-     * @param pageContext le pageContext 
+     * @param pageContext le pageContext
      * @return le header
      * @throws JspException exception pouvant etre levee
      */
-    public String doPrintHeader(Tag tag, PageContext pageContext) throws JspException;
+    public String doPrintHeader( Tag tag, PageContext pageContext )
+        throws JspException;
 
     /**
-     * 
      * @return le footer
      */
     public String doPrintFooter();
 
     /**
-     * 
      * @param action l'action
      * @return l'action
      */
-    public String getAction(String action);
+    public String getAction( String action );
 }

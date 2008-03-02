@@ -16,14 +16,15 @@ import com.airfrance.welcom.outils.Util;
 /**
  * Deux input text pour une date séparée en champ JOUR - HEURE.
  * 
- * @author Fabien LEBRERE 
+ * @author Fabien LEBRERE
  * @version 1.0
  */
-public class DateHeureTag extends BaseDateHeureTag {
-    
+public class DateHeureTag
+    extends BaseDateHeureTag
+{
 
     /** logger */
-    private static Log log = LogFactory.getLog(DateHeureTag.class);
+    private static Log log = LogFactory.getLog( DateHeureTag.class );
 
     /** parametre du tag */
     private String dateFormat;
@@ -48,199 +49,245 @@ public class DateHeureTag extends BaseDateHeureTag {
 
     /** datePattern (pour ne le chercher qu'une fois dans le ApplicationResource) */
     private String hourPattern;
-    
 
     /**
-     * Dessine le contenu du tag 
+     * Dessine le contenu du tag
+     * 
      * @param sb string buffer
      * @throws JspException erreur sur le recupration de la value
      */
-    protected void doRender(StringBuffer sb) throws JspException {
-        doRenderInput(sb,TYPE_WDATE);
-        if (!getDisabled()) { 
-            doRenderCalendar(sb, getCalendarId());
-        } else {
-            sb.append("&nbsp;");
+    protected void doRender( StringBuffer sb )
+        throws JspException
+    {
+        doRenderInput( sb, TYPE_WDATE );
+        if ( !getDisabled() )
+        {
+            doRenderCalendar( sb, getCalendarId() );
         }
-        doRenderInput(sb,TYPE_WHOUR);
+        else
+        {
+            sb.append( "&nbsp;" );
+        }
+        doRenderInput( sb, TYPE_WHOUR );
     }
-    
+
     /**
-     * Retourne le simple date/hour format key en fonction du type
-     * si TYPE_WDATE alors dateFormat
-     * si TYPE_WHOUR alors hourFormat
-     * @param typeOfElement type TYPE_WDATE / TYPE_WHOUR  
+     * Retourne le simple date/hour format key en fonction du type si TYPE_WDATE alors dateFormat si TYPE_WHOUR alors
+     * hourFormat
+     * 
+     * @param typeOfElement type TYPE_WDATE / TYPE_WHOUR
      * @return le date/hour format
      */
-    protected String getFormatDateOrHourFormat(int typeOfElement){
-        if (typeOfElement == TYPE_WDATE) {
+    protected String getFormatDateOrHourFormat( int typeOfElement )
+    {
+        if ( typeOfElement == TYPE_WDATE )
+        {
             return dateFormat;
-        } else {
+        }
+        else
+        {
             return hourFormat;
         }
     }
-    
+
     /**
-     * Retourne le simple date/hour format key en fonction du type
-     * si TYPE_WDATE alors dateFormatKey
-     * si TYPE_WHOUR alors hourFormatKey
-     * @param typeOfElement type TYPE_WDATE / TYPE_WHOUR  
+     * Retourne le simple date/hour format key en fonction du type si TYPE_WDATE alors dateFormatKey si TYPE_WHOUR alors
+     * hourFormatKey
+     * 
+     * @param typeOfElement type TYPE_WDATE / TYPE_WHOUR
      * @return le date/hour formatKey
      */
-    protected String getFormatKeyDateOrHourFormat(int typeOfElement){
-        if (typeOfElement == TYPE_WDATE) {
+    protected String getFormatKeyDateOrHourFormat( int typeOfElement )
+    {
+        if ( typeOfElement == TYPE_WDATE )
+        {
             return dateFormatKey;
-        } else {
+        }
+        else
+        {
             return hourFormatKey;
         }
     }
-    
+
     /**
-     * Retourne le simple date format en fonction du type
-     * si TYPE_WDATE alors simpleDateFormat
-     * si TYPE_WHOUR alors simpleHourFormat
-     * @param typeOfElement type TYPE_WDATE / TYPE_WHOUR  
+     * Retourne le simple date format en fonction du type si TYPE_WDATE alors simpleDateFormat si TYPE_WHOUR alors
+     * simpleHourFormat
+     * 
+     * @param typeOfElement type TYPE_WDATE / TYPE_WHOUR
      * @return le simple date format
      */
-    protected SimpleDateFormat getSimpleDateOrHourFormat(int typeOfElement){
-        if (typeOfElement == TYPE_WDATE) {
+    protected SimpleDateFormat getSimpleDateOrHourFormat( int typeOfElement )
+    {
+        if ( typeOfElement == TYPE_WDATE )
+        {
             return simpleDateFormat;
-        } else {
+        }
+        else
+        {
             return simpleHourFormat;
         }
     }
-    
+
     /**
-     * Retourne le nom du parametre dans la requete
-     * si TYPE_WDATE alors super.property + "WDate";
-     * si TYPE_WHOUR alors uper.property + "WHour";
-     * @param typeOfElement type TYPE_WDATE / TYPE_WHOUR  
+     * Retourne le nom du parametre dans la requete si TYPE_WDATE alors super.property + "WDate"; si TYPE_WHOUR alors
+     * uper.property + "WHour";
+     * 
+     * @param typeOfElement type TYPE_WDATE / TYPE_WHOUR
      * @return le nom du parametre dans la requete
      */
-    protected String getParameterNameInRequest(int typeOfElement) {
-        if (typeOfElement == TYPE_WDATE) {
+    protected String getParameterNameInRequest( int typeOfElement )
+    {
+        if ( typeOfElement == TYPE_WDATE )
+        {
             return super.property + "WDate";
-        } else {
+        }
+        else
+        {
             return super.property + "WHour";
         }
-        
+
     }
-    
+
     /**
-     * Retourne le simple date/hour format key en fonction du type
-     * si TYPE_WDATE alors dateFormat
-     * si TYPE_WHOUR alors hourFormat
-     * @param typeOfElement type TYPE_WDATE / TYPE_WHOUR  
+     * Retourne le simple date/hour format key en fonction du type si TYPE_WDATE alors dateFormat si TYPE_WHOUR alors
+     * hourFormat
+     * 
+     * @param typeOfElement type TYPE_WDATE / TYPE_WHOUR
      * @return le date/hour format
      */
-    protected String getDateOrHourPattern(int typeOfElement) {
-        if (typeOfElement == TYPE_WDATE) {
+    protected String getDateOrHourPattern( int typeOfElement )
+    {
+        if ( typeOfElement == TYPE_WDATE )
+        {
             return datePattern;
-        } else {
+        }
+        else
+        {
             return hourPattern;
         }
     }
 
     /**
-     * Recupere le format par defaut 
-     * Util.stringFormatDt ou Util.stringFormatHr 
-     * @param typeOfElement typeOfElement type TYPE_WDATE / TYPE_WHOUR  
+     * Recupere le format par defaut Util.stringFormatDt ou Util.stringFormatHr
+     * 
+     * @param typeOfElement typeOfElement type TYPE_WDATE / TYPE_WHOUR
      * @return le formet de la date par defaut
      */
-    protected String getDefaultFormatDateOrHour(int typeOfElement) {
-        if (typeOfElement == TYPE_WDATE) {
+    protected String getDefaultFormatDateOrHour( int typeOfElement )
+    {
+        if ( typeOfElement == TYPE_WDATE )
+        {
             return Util.stringFormatDt;
-        } else {
+        }
+        else
+        {
             return Util.stringFormatHr;
-        }        
+        }
     }
 
     /**
      * Sauve le nouveau simpledate format a partir de celui fournit par le pattern
-     * @param typeOfElement  typeOfElement type TYPE_WDATE / TYPE_WHOUR  
+     * 
+     * @param typeOfElement typeOfElement type TYPE_WDATE / TYPE_WHOUR
      * @param SimpleDateFormat SimpleDateFormat
      */
-    protected void saveSimpleDateFormatsForDateOrHour(int typeOfElement, SimpleDateFormat sdf) {
-        if (typeOfElement == TYPE_WDATE) {
+    protected void saveSimpleDateFormatsForDateOrHour( int typeOfElement, SimpleDateFormat sdf )
+    {
+        if ( typeOfElement == TYPE_WDATE )
+        {
             simpleDateFormat = sdf;
-        } else {
-            simpleHourFormat= sdf;
-        }             
+        }
+        else
+        {
+            simpleHourFormat = sdf;
+        }
     }
 
     /**
      * Stocke le pattern de la date
-     * @param typeOfElement  typeOfElement type TYPE_WDATE / TYPE_WHOUR  
+     * 
+     * @param typeOfElement typeOfElement type TYPE_WDATE / TYPE_WHOUR
      * @param patten pattern
      */
-    protected void setDateOrHourPattern(int typeOfElement, String patten) {
-        if (typeOfElement == TYPE_WDATE) {
+    protected void setDateOrHourPattern( int typeOfElement, String patten )
+    {
+        if ( typeOfElement == TYPE_WDATE )
+        {
             datePattern = patten;
-        } else {
-            hourPattern= patten;
-        }        
+        }
+        else
+        {
+            hourPattern = patten;
+        }
     }
-    
+
     /**
-     * Retourne DATE ou HEURE pour la fonction javascript
-     * si TYPE_WDATE alors DATE
-     * si TYPE_WHOUR alors HEURE
-     * @param typeOfElement type TYPE_WDATE / TYPE_WHOUR  
+     * Retourne DATE ou HEURE pour la fonction javascript si TYPE_WDATE alors DATE si TYPE_WHOUR alors HEURE
+     * 
+     * @param typeOfElement type TYPE_WDATE / TYPE_WHOUR
      * @return DATE ou HEURE
      */
-    protected String getJavascriptDateOrHour(int typeOfElement) {
-        if (typeOfElement == TYPE_WDATE) {
+    protected String getJavascriptDateOrHour( int typeOfElement )
+    {
+        if ( typeOfElement == TYPE_WDATE )
+        {
             return "DATE";
-        } else {
+        }
+        else
+        {
             return "HEURE";
-        }  
+        }
     }
-    
+
     /**
-     * @param newDateFormat
-     *            le dateFormat
+     * @param newDateFormat le dateFormat
      */
-    public void setDateFormat(final java.lang.String newDateFormat) {
-        if (GenericValidator.isBlankOrNull(newDateFormat)) {
-            dateFormat = getDefaultFormatDateOrHour(TYPE_WDATE);
-        } else {
+    public void setDateFormat( final java.lang.String newDateFormat )
+    {
+        if ( GenericValidator.isBlankOrNull( newDateFormat ) )
+        {
+            dateFormat = getDefaultFormatDateOrHour( TYPE_WDATE );
+        }
+        else
+        {
             dateFormat = newDateFormat;
         }
     }
 
     /**
-     * on cherche si le dateFormatKey est defini, sinon, on prend le pattern du
-     * dateFormat, sinon on prend Util.stringFormatDt pareil pour les heures...
-     * 
+     * on cherche si le dateFormatKey est defini, sinon, on prend le pattern du dateFormat, sinon on prend
+     * Util.stringFormatDt pareil pour les heures...
      */
 
-    protected void updateSimpleDateFormats(MessageResources resources, Locale localeRequest, HashMap hashMap) {
-        
-        updateSimpleDateFormat(TYPE_WDATE,resources, localeRequest, hashMap);
-        updateSimpleDateFormat(TYPE_WHOUR,resources, localeRequest, hashMap);
+    protected void updateSimpleDateFormats( MessageResources resources, Locale localeRequest, HashMap hashMap )
+    {
+
+        updateSimpleDateFormat( TYPE_WDATE, resources, localeRequest, hashMap );
+        updateSimpleDateFormat( TYPE_WHOUR, resources, localeRequest, hashMap );
     }
 
     /**
-     * @param newHourFormat
-     *            le hourFormat
+     * @param newHourFormat le hourFormat
      */
-    public void setHourFormat(final java.lang.String newHourFormat) {
-        if (GenericValidator.isBlankOrNull(newHourFormat)) {
-            hourFormat = getDefaultFormatDateOrHour(TYPE_WHOUR);
-        } else {
+    public void setHourFormat( final java.lang.String newHourFormat )
+    {
+        if ( GenericValidator.isBlankOrNull( newHourFormat ) )
+        {
+            hourFormat = getDefaultFormatDateOrHour( TYPE_WHOUR );
+        }
+        else
+        {
             hourFormat = newHourFormat;
         }
 
         // simpleHourFormat = new java.text.SimpleDateFormat(hourFormat);
     }
 
-
-
-
     /**
      * @see org.apache.struts.taglib.html.BaseFieldTag#release()
      */
-    public void release() {
+    public void release()
+    {
         super.release();
         dateFormat = "";
         dateFormatKey = "";
@@ -254,79 +301,81 @@ public class DateHeureTag extends BaseDateHeureTag {
     /**
      * @return dateFormat
      */
-    public String getDateFormat() {
+    public String getDateFormat()
+    {
         return dateFormat;
     }
 
     /**
      * @return hourFormat
      */
-    public String getHourFormat() {
+    public String getHourFormat()
+    {
         return hourFormat;
     }
 
     /**
-     * @param format
-     *            le simpleDateFormat
+     * @param format le simpleDateFormat
      */
-    public void setSimpleDateFormat(final java.text.SimpleDateFormat format) {
+    public void setSimpleDateFormat( final java.text.SimpleDateFormat format )
+    {
         simpleDateFormat = format;
     }
 
     /**
-     * @param format
-     *            le simpleHourFormat
+     * @param format le simpleHourFormat
      */
-    public void setSimpleHourFormat(final java.text.SimpleDateFormat format) {
+    public void setSimpleHourFormat( final java.text.SimpleDateFormat format )
+    {
         simpleHourFormat = format;
     }
-    
-    
+
     /**
      * @return dateFormatKey
      */
-    public String getDateFormatKey() {
+    public String getDateFormatKey()
+    {
         return dateFormatKey;
     }
 
     /**
      * @return hourFormatKey
      */
-    public String getHourFormatKey() {
+    public String getHourFormatKey()
+    {
         return hourFormatKey;
     }
 
     /**
-     * @param string
-     *            dateFormatKey
+     * @param string dateFormatKey
      */
-    public void setDateFormatKey(final String string) {
+    public void setDateFormatKey( final String string )
+    {
         dateFormatKey = string;
     }
 
     /**
-     * @param string
-     *            hourFormatKey
+     * @param string hourFormatKey
      */
-    public void setHourFormatKey(final String string) {
+    public void setHourFormatKey( final String string )
+    {
         hourFormatKey = string;
     }
 
     /**
      * @return simpleDateFormat
      */
-    public java.text.SimpleDateFormat getSimpleDateFormat() {
+    public java.text.SimpleDateFormat getSimpleDateFormat()
+    {
         return simpleDateFormat;
     }
 
     /**
      * @return simpleHourFormat
      */
-    public java.text.SimpleDateFormat getSimpleHourFormat() {
+    public java.text.SimpleDateFormat getSimpleHourFormat()
+    {
         return simpleHourFormat;
     }
-
-
-
 
 }

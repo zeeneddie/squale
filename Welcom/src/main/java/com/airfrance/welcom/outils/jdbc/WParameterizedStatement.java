@@ -14,17 +14,16 @@ import org.apache.commons.logging.LogFactory;
 import com.airfrance.welcom.outils.jdbc.wrapper.ParameterizedStatement;
 
 /**
- * 
- * @author M327837
- *
- * Surcouche du @link ParametrizedStatement
- * Effectue le Tracing SQL dans l'appender SQLLoggin
- * Dump au format Oracle
- * Memorise si la connexion est deja fermé
+ * @author M327837 Surcouche du
+ * @link ParametrizedStatement Effectue le Tracing SQL dans l'appender SQLLoggin Dump au format Oracle Memorise si la
+ *       connexion est deja fermé
  */
-public class WParameterizedStatement extends ParameterizedStatement {
+public class WParameterizedStatement
+    extends ParameterizedStatement
+{
     /** logger */
-    private static Log log = LogFactory.getLog("SQLLogging");
+    private static Log log = LogFactory.getLog( "SQLLogging" );
+
     /** Taille max pour l'affichage du nom de l'utlisateur */
     private static final int MAX_LENGTH_USER = 10;
 
@@ -39,29 +38,37 @@ public class WParameterizedStatement extends ParameterizedStatement {
 
     /**
      * Constructeur
+     * 
      * @param pSql : Requete SQL
      * @param connection : Connexion sur laquelle elle est effectué
      * @param parameters : liste des parametres a (remplamecement de ?)
      * @throws SQLException : Probleme SQL
      */
-    public WParameterizedStatement(final String pSql, final Connection connection, final List parameters) throws SQLException {
-        super(pSql, connection, parameters);
+    public WParameterizedStatement( final String pSql, final Connection connection, final List parameters )
+        throws SQLException
+    {
+        super( pSql, connection, parameters );
         this.myparameters = parameters;
         isclose = false;
     }
 
     /**
-     * Constructeur 
+     * Constructeur
+     * 
      * @param pSQL : Requete SQL
      * @param pConnection : Connexion sur laquelle elle est effectué
      * @param pParameters : liste des parametres a (remplamecement de ?)
-     * @param pUser : nom  de l'utlisateur
+     * @param pUser : nom de l'utlisateur
      * @throws SQLException : Probleme SQL
      */
-    public WParameterizedStatement(final String pSQL, final Connection pConnection, final List pParameters, final String pUser) throws SQLException {
-        super(pSQL, pConnection, pParameters);
+    public WParameterizedStatement( final String pSQL, final Connection pConnection, final List pParameters,
+                                    final String pUser )
+        throws SQLException
+    {
+        super( pSQL, pConnection, pParameters );
 
-        if (user != null) {
+        if ( user != null )
+        {
             this.user = pUser;
         }
 
@@ -71,33 +78,47 @@ public class WParameterizedStatement extends ParameterizedStatement {
 
     /**
      * Execute la requete de consultation
+     * 
      * @throws SQLException : Probleme SQL
      * @return ResultSet : Resultset de la requete
-     * */
-    public ResultSet executeQuery() throws SQLException {
+     */
+    public ResultSet executeQuery()
+        throws SQLException
+    {
         LocationInfo info;
-        info = new LocationInfo(new Throwable(), "WStatement");
+        info = new LocationInfo( new Throwable(), "WStatement" );
 
         final String className = info.getClassName();
         final String lineNumber = info.getLineNumber();
         String status = "Ok";
         final long start = new Date().getTime();
 
-        try {
+        try
+        {
             final ResultSet rs = super.executeQuery();
 
             return rs;
-        } catch (final SQLException sqle) {
+        }
+        catch ( final SQLException sqle )
+        {
             status = "Erreur [" + sqle.getMessage() + "]";
             throw sqle;
-        } finally {
+        }
+        finally
+        {
             final long end = new Date().getTime();
 
-            if (WJdbc.isEnabledTrace()) {
-                if ((end - start) < WStatement.LIMITSPEED) {
-                    log.info("-> QUERY (" + (end - start) + " ms )  :" + getUser() + ": " + getSQL() + " - (" + className + "," + lineNumber + ") - (" + status + ")");
-                } else {
-                    log.warn("-> QUERY (" + (end - start) + " ms )  :" + getUser() + ": " + getSQL() + " - (" + className + "," + lineNumber + ") - (" + status + ")");
+            if ( WJdbc.isEnabledTrace() )
+            {
+                if ( ( end - start ) < WStatement.LIMITSPEED )
+                {
+                    log.info( "-> QUERY (" + ( end - start ) + " ms )  :" + getUser() + ": " + getSQL() + " - ("
+                        + className + "," + lineNumber + ") - (" + status + ")" );
+                }
+                else
+                {
+                    log.warn( "-> QUERY (" + ( end - start ) + " ms )  :" + getUser() + ": " + getSQL() + " - ("
+                        + className + "," + lineNumber + ") - (" + status + ")" );
                 }
             }
         }
@@ -105,12 +126,15 @@ public class WParameterizedStatement extends ParameterizedStatement {
 
     /**
      * Execute la requete de modification
+     * 
      * @throws SQLException : Probleme SQL
      * @return int : Nombre d'element modifiés
-     * */
-    public int executeUpdate() throws SQLException {
+     */
+    public int executeUpdate()
+        throws SQLException
+    {
         LocationInfo info;
-        info = new LocationInfo(new Throwable(), "WStatement");
+        info = new LocationInfo( new Throwable(), "WStatement" );
 
         final String className = info.getClassName();
         final String lineNumber = info.getLineNumber();
@@ -118,19 +142,30 @@ public class WParameterizedStatement extends ParameterizedStatement {
 
         final long start = new Date().getTime();
 
-        try {
+        try
+        {
             return super.executeUpdate();
-        } catch (final SQLException sqle) {
+        }
+        catch ( final SQLException sqle )
+        {
             status = "Erreur [" + sqle.getMessage() + "]";
             throw sqle;
-        } finally {
+        }
+        finally
+        {
             final long end = new Date().getTime();
 
-            if (WJdbc.isEnabledTrace()) {
-                if ((end - start) < WStatement.LIMITSPEED) {
-                    log.info("-> UPDATE (" + (end - start) + " ms )  :" + getUser() + ": " + getSQL() + " - (" + className + "," + lineNumber + ") - (" + status + ")");
-                } else {
-                    log.warn("-> UPDATE (" + (end - start) + " ms )  :" + getUser() + ": " + getSQL() + " - (" + className + "," + lineNumber + ") - (" + status + ")");
+            if ( WJdbc.isEnabledTrace() )
+            {
+                if ( ( end - start ) < WStatement.LIMITSPEED )
+                {
+                    log.info( "-> UPDATE (" + ( end - start ) + " ms )  :" + getUser() + ": " + getSQL() + " - ("
+                        + className + "," + lineNumber + ") - (" + status + ")" );
+                }
+                else
+                {
+                    log.warn( "-> UPDATE (" + ( end - start ) + " ms )  :" + getUser() + ": " + getSQL() + " - ("
+                        + className + "," + lineNumber + ") - (" + status + ")" );
                 }
             }
         }
@@ -138,27 +173,34 @@ public class WParameterizedStatement extends ParameterizedStatement {
 
     /**
      * Trace et retourn le resultSet
+     * 
      * @return : resuturn le resusultSet du stament
      * @throws SQLException : Probleme SQL
      */
-    public ResultSet getResultSet() throws SQLException {
+    public ResultSet getResultSet()
+        throws SQLException
+    {
         LocationInfo info;
-        info = new LocationInfo(new Throwable(), "WParameterizedStatement");
+        info = new LocationInfo( new Throwable(), "WParameterizedStatement" );
 
         final String className = info.getClassName();
         final String lineNumber = info.getLineNumber();
 
-        log.info("-> UPDATE :" + getUser() + ": " + getSQL() + " - (" + className + "," + lineNumber + ")");
+        log.info( "-> UPDATE :" + getUser() + ": " + getSQL() + " - (" + className + "," + lineNumber + ")" );
 
         return super.getStatement().getResultSet();
     }
 
-    /** 
-     * Fermeture de la connexion 
+    /**
+     * Fermeture de la connexion
+     * 
      * @throws SQLException : Probleme SQL
      */
-    public void close() throws SQLException {
-        if (!isClose()) {
+    public void close()
+        throws SQLException
+    {
+        if ( !isClose() )
+        {
             user = WStatement.DEFAULTUSER;
             super.close();
             isclose = true;
@@ -168,17 +210,22 @@ public class WParameterizedStatement extends ParameterizedStatement {
     /**
      * @return Retourn Vrai Si la connexion est deja fermé
      */
-    public boolean isClose() {
+    public boolean isClose()
+    {
         return isclose;
     }
 
     /**
      * Gets the user
+     * 
      * @return Returns a String
      */
-    public String getUser() {
-        if (user.length() < MAX_LENGTH_USER) {
-            while (user.length() < MAX_LENGTH_USER) {
+    public String getUser()
+    {
+        if ( user.length() < MAX_LENGTH_USER )
+        {
+            while ( user.length() < MAX_LENGTH_USER )
+            {
                 user += " ";
             }
         }
@@ -188,44 +235,59 @@ public class WParameterizedStatement extends ParameterizedStatement {
 
     /**
      * Sets the user
+     * 
      * @param pUser The user to set
      */
-    public void setUser(final String pUser) {
+    public void setUser( final String pUser )
+    {
         this.user = pUser;
     }
 
     /**
      * Formate la requete SQL comme elle devrait être vue par Oracle
+     * 
      * @return : chaine de caracteres representant la chaine Oracle
      */
-    public String getSQL() {
-        return getSQLOracle(super.getSQL(), myparameters);
+    public String getSQL()
+    {
+        return getSQLOracle( super.getSQL(), myparameters );
     }
 
     /**
      * Formate la requete SQL comme elle devrait être vue par Oracle
+     * 
      * @param mysql : Requete SQL a transformer
      * @param myparameters : Liste de parametres a remplacer
      * @return : chaine de caracteres representant la chaine Oracle
      */
-    public static String getSQLOracle(final String mysql, final List myparameters) {
+    public static String getSQLOracle( final String mysql, final List myparameters )
+    {
         Object parameter = null;
         int i = 0;
         final Object parameters[] = myparameters.toArray();
-        final StringTokenizer stringTokenizer = new StringTokenizer(mysql, "?");
+        final StringTokenizer stringTokenizer = new StringTokenizer( mysql, "?" );
         final StringBuffer sb = new StringBuffer();
-        while (stringTokenizer.hasMoreTokens()) {
-            sb.append(stringTokenizer.nextToken());
-            if (i < parameters.length) {
+        while ( stringTokenizer.hasMoreTokens() )
+        {
+            sb.append( stringTokenizer.nextToken() );
+            if ( i < parameters.length )
+            {
                 parameter = parameters[i++];
-                if (parameter == null) {
-                    sb.append("null");
-                } else if (parameter instanceof String) {
-                    sb.append("'" + formatQuote(parameter.toString()) + "'");
-                } else if (parameter instanceof InputStream) {
-                    sb.append(" ");
-                } else {
-                    sb.append(parameter.toString());
+                if ( parameter == null )
+                {
+                    sb.append( "null" );
+                }
+                else if ( parameter instanceof String )
+                {
+                    sb.append( "'" + formatQuote( parameter.toString() ) + "'" );
+                }
+                else if ( parameter instanceof InputStream )
+                {
+                    sb.append( " " );
+                }
+                else
+                {
+                    sb.append( parameter.toString() );
                 }
             }
         }
@@ -235,11 +297,14 @@ public class WParameterizedStatement extends ParameterizedStatement {
 
     /**
      * Double les quotes pour la requetes SQL
+     * 
      * @param st : Chiane d'origine
      * @return : Chaine requoté
      */
-    private final static String formatQuote(final String st) {
-        if (st == null) {
+    private final static String formatQuote( final String st )
+    {
+        if ( st == null )
+        {
             return "";
         }
 
@@ -247,14 +312,18 @@ public class WParameterizedStatement extends ParameterizedStatement {
         String tempo = "";
 
         // Doubler la ' pour les requetes SQL
-        final java.util.StringTokenizer token = new java.util.StringTokenizer(st, "'", true);
+        final java.util.StringTokenizer token = new java.util.StringTokenizer( st, "'", true );
 
-        while (token.hasMoreTokens()) {
+        while ( token.hasMoreTokens() )
+        {
             tempo = token.nextToken();
 
-            if (tempo.equals("'") == true) {
+            if ( tempo.equals( "'" ) == true )
+            {
                 newString = newString + "''";
-            } else {
+            }
+            else
+            {
                 newString = newString + tempo;
             }
         }

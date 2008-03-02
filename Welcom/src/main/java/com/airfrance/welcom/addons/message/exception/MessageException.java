@@ -9,7 +9,9 @@ package com.airfrance.welcom.addons.message.exception;
 /**
  *
  */
-public class MessageException extends Exception {
+public class MessageException
+    extends Exception
+{
 
     /**
      * 
@@ -18,9 +20,11 @@ public class MessageException extends Exception {
 
     /**
      * Constructeur
+     * 
      * @param cause l'exception encapsulée
      */
-    public MessageException(final Throwable cause) {
-        super(cause);
+    public MessageException( final Throwable cause )
+    {
+        super( cause );
     }
 }

@@ -27,10 +27,11 @@ import org.apache.struts.util.RequestUtils;
 import com.airfrance.welcom.taglib.field.util.LayoutUtils;
 
 /**
- *  Class IsEmptyTag 
- *
+ * Class IsEmptyTag
  */
-public class IsEmptyTag extends ConditionalTagBase {
+public class IsEmptyTag
+    extends ConditionalTagBase
+{
     /**
      * 
      */
@@ -38,42 +39,51 @@ public class IsEmptyTag extends ConditionalTagBase {
 
     /**
      * Constructeur
-     *
      */
-    public IsEmptyTag() {
+    public IsEmptyTag()
+    {
     }
 
     /**
-     * 
      * @see org.apache.struts.taglib.logic.ConditionalTagBase#condition()
      */
-    protected boolean condition() throws JspException {
-        return condition(true);
+    protected boolean condition()
+        throws JspException
+    {
+        return condition( true );
     }
 
     /**
-     * 
      * @param desired boolean desire
      * @return la condition
      * @throws JspException exception pouvant etre levee
      */
-    protected boolean condition(final boolean desired) throws JspException {
+    protected boolean condition( final boolean desired )
+        throws JspException
+    {
         boolean empty = true;
 
-        if (super.name != null) {
-            final Object value = LayoutUtils.getBeanFromPageContext(super.pageContext, super.name, super.property);
+        if ( super.name != null )
+        {
+            final Object value = LayoutUtils.getBeanFromPageContext( super.pageContext, super.name, super.property );
 
-            if (value != null) {
-                if (value instanceof String) {
+            if ( value != null )
+            {
+                if ( value instanceof String )
+                {
                     final String strValue = (String) value;
                     empty = strValue.length() < 1;
-                } else {
+                }
+                else
+                {
                     empty = false;
                 }
             }
-        } else {
-            final JspException e = new JspException(ConditionalTagBase.messages.getMessage("logic.selector"));
-            RequestUtils.saveException(super.pageContext, e);
+        }
+        else
+        {
+            final JspException e = new JspException( ConditionalTagBase.messages.getMessage( "logic.selector" ) );
+            RequestUtils.saveException( super.pageContext, e );
             throw e;
         }
 

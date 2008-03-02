@@ -23,104 +23,124 @@ import com.airfrance.welcom.taglib.field.util.LayoutUtils;
 import com.airfrance.welcom.taglib.table.InternalTableUtil;
 
 /**
- * WForwardAction 
- *
+ * WForwardAction
  */
-public class WForwardAction extends WAction {
+public class WForwardAction
+    extends WAction
+{
     /**
-     * The request attribute under which the path information is stored for
-     * processing during a RequestDispatcher.include() call.
+     * The request attribute under which the path information is stored for processing during a
+     * RequestDispatcher.include() call.
      */
     public static final String INCLUDE_PATH_INFO = "javax.servlet.include.path_info";
 
     /**
-     * The request attribute under which the servlet path information is stored
-     * for processing during a RequestDispatcher.include() call.
+     * The request attribute under which the servlet path information is stored for processing during a
+     * RequestDispatcher.include() call.
      */
     public static final String INCLUDE_SERVLET_PATH = "javax.servlet.include.servlet_path";
 
     /**
-     * 
-     * @see com.airfrance.welcom.struts.action.WAction#wExecute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see com.airfrance.welcom.struts.action.WAction#wExecute(org.apache.struts.action.ActionMapping,
+     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse)
      */
-    public ActionForward wExecute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request, final HttpServletResponse response)
-        throws IOException, ServletException, JspException {
-        final String oldAction = request.getParameter("oldAction");
+    public ActionForward wExecute( final ActionMapping mapping, final ActionForm form,
+                                   final HttpServletRequest request, final HttpServletResponse response )
+        throws IOException, ServletException, JspException
+    {
+        final String oldAction = request.getParameter( "oldAction" );
 
         // Permer de rester dansle contexte.
-        final String forward = request.getParameter("wforward");
-        if (forward != null) {
-            return mapping.findForward(forward);
+        final String forward = request.getParameter( "wforward" );
+        if ( forward != null )
+        {
+            return mapping.findForward( forward );
         }
 
-        if (!GenericValidator.isBlankOrNull(oldAction)) {
+        if ( !GenericValidator.isBlankOrNull( oldAction ) )
+        {
             // Effectue le populate
             final ModuleConfig moduleConfig = mapping.getModuleConfig();
-            final String path = ServletUtils.processPath(servlet, request, response, oldAction, moduleConfig);
-            final ActionMapping mappingGenerique = ServletUtils.processMapping(request, response, moduleConfig, path);
+            final String path = ServletUtils.processPath( servlet, request, response, oldAction, moduleConfig );
+            final ActionMapping mappingGenerique = ServletUtils.processMapping( request, response, moduleConfig, path );
 
-            if (mappingGenerique != null) {
+            if ( mappingGenerique != null )
+            {
                 // Process any ActionForm bean related to this request
-                final ActionForm formGenerique = ServletUtils.processActionForm(request, response, moduleConfig, mappingGenerique, servlet);
+                final ActionForm formGenerique =
+                    ServletUtils.processActionForm( request, response, moduleConfig, mappingGenerique, servlet );
 
                 // remis a zero
                 // Déactive si optimization.checkbox.javascript a true
-                if (Util.isFalse(WelcomConfigurator.getMessage(WelcomConfigurator.OPTIFLUX_AUTORESET_CHECKBOX))) {
-                    InternalTableUtil.razCheckBoxListe(request, formGenerique);
+                if ( Util.isFalse( WelcomConfigurator.getMessage( WelcomConfigurator.OPTIFLUX_AUTORESET_CHECKBOX ) ) )
+                {
+                    InternalTableUtil.razCheckBoxListe( request, formGenerique );
                 }
 
                 // Appele le reset du formulaire
-                formGenerique.reset(mappingGenerique, request);
+                formGenerique.reset( mappingGenerique, request );
 
                 // Effectue la populate
-                ServletUtils.processPopulate(request, response, formGenerique, mappingGenerique, servlet);
+                ServletUtils.processPopulate( request, response, formGenerique, mappingGenerique, servlet );
 
-                // on gere le cas ColOrder :  
-                final String action = request.getParameter("action");
-                if ((action != null) && (action.equals("order"))) {
-                    final String property = request.getParameter("property");
-                    final String sens = request.getParameter("sens");
-                    final List list = (List) LayoutUtils.getProperty(formGenerique, request.getParameter("collection"));
-                    final int index1 = Integer.parseInt(request.getParameter("position"));
+                // on gere le cas ColOrder :
+                final String action = request.getParameter( "action" );
+                if ( ( action != null ) && ( action.equals( "order" ) ) )
+                {
+                    final String property = request.getParameter( "property" );
+                    final String sens = request.getParameter( "sens" );
+                    final List list =
+                        (List) LayoutUtils.getProperty( formGenerique, request.getParameter( "collection" ) );
+                    final int index1 = Integer.parseInt( request.getParameter( "position" ) );
                     int index2;
-                    final Object obj1 = list.get(index1);
+                    final Object obj1 = list.get( index1 );
                     Object obj2;
-                    if (sens.equals("up")) {
+                    if ( sens.equals( "up" ) )
+                    {
                         index2 = index1 - 1;
-                        obj2 = list.get(index2);
-                    } else {
-                        index2 = index1 + 1;
-                        obj2 = list.get(index2);
+                        obj2 = list.get( index2 );
                     }
-                    //on echange la property d'ordre
-                    final Object oldProperty1 = LayoutUtils.getProperty(obj1, property);
-                    final Object oldProperty2 = LayoutUtils.getProperty(obj2, property);
-                    LayoutUtils.setProperty(obj1, property, oldProperty2);
-                    LayoutUtils.setProperty(obj2, property, oldProperty1);
+                    else
+                    {
+                        index2 = index1 + 1;
+                        obj2 = list.get( index2 );
+                    }
+                    // on echange la property d'ordre
+                    final Object oldProperty1 = LayoutUtils.getProperty( obj1, property );
+                    final Object oldProperty2 = LayoutUtils.getProperty( obj2, property );
+                    LayoutUtils.setProperty( obj1, property, oldProperty2 );
+                    LayoutUtils.setProperty( obj2, property, oldProperty1 );
 
-                    //on modifie l'ordre dans la liste
-                    Collections.swap(list, index1, index2);
+                    // on modifie l'ordre dans la liste
+                    Collections.swap( list, index1, index2 );
 
-                    //on position a true l'attribut changed : 
-                     ((WIChanged) obj1).setChanged(true);
-                    ((WIChanged) obj2).setChanged(true);
+                    // on position a true l'attribut changed :
+                    ( (WIChanged) obj1 ).setChanged( true );
+                    ( (WIChanged) obj2 ).setChanged( true );
                 }
 
             }
         }
 
-        final String referer = request.getParameter("requestURI");
+        final String referer = request.getParameter( "requestURI" );
 
-        if (!GenericValidator.isBlankOrNull(referer) && (referer.length() > 1) && (referer.charAt(0) == '/')) {
+        if ( !GenericValidator.isBlankOrNull( referer ) && ( referer.length() > 1 ) && ( referer.charAt( 0 ) == '/' ) )
+        {
             final String contextPath = request.getContextPath();
 
-            if (referer.indexOf(contextPath, 0) > -1) {
-                return new ActionForward(referer.substring(contextPath.length(), referer.length()));
-            } else {
-                return new ActionForward(referer);
+            if ( referer.indexOf( contextPath, 0 ) > -1 )
+            {
+                return new ActionForward( referer.substring( contextPath.length(), referer.length() ) );
             }
-        } else {
-            return new ActionForward(referer);
+            else
+            {
+                return new ActionForward( referer );
+            }
+        }
+        else
+        {
+            return new ActionForward( referer );
         }
     }
 }

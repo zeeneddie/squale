@@ -7,82 +7,93 @@ import java.util.Vector;
 import com.airfrance.welcom.taglib.renderer.RendererFactory;
 
 /**
- * @author user
- *
- * To change this generated comment edit the template variable "typecomment":
- * Window>Preferences>Java>Templates.
- * To enable and disable the creation of type comments go to
- * Window>Preferences>Java>Code Generation.
+ * @author user To change this generated comment edit the template variable "typecomment":
+ *         Window>Preferences>Java>Templates. To enable and disable the creation of type comments go to
+ *         Window>Preferences>Java>Code Generation.
  */
-public class JSMenuItem extends JSMenuBase {
+public class JSMenuItem
+    extends JSMenuBase
+{
     /** la largeur */
     private String width = "120";
-    /** l'id*/
+
+    /** l'id */
     private int id = 0;
+
     /** les items */
     private final Vector items = new Vector();
+
     /** render */
-    private static IMenuRender render = (IMenuRender)RendererFactory.getRenderer(RendererFactory.MENU);
+    private static IMenuRender render = (IMenuRender) RendererFactory.getRenderer( RendererFactory.MENU );
 
     /**
      * Ajoute un menu Item
+     * 
      * @param m le menuItem
      */
-    public void addMenuItem(final JSMenuItem m) {
-        items.add(m);
+    public void addMenuItem( final JSMenuItem m )
+    {
+        items.add( m );
     }
 
     /**
-     * 
      * @return true si le menuItem a des enfants
      */
-    public boolean hasChild() {
+    public boolean hasChild()
+    {
         boolean child = false;
 
-        if (!items.isEmpty()) {
+        if ( !items.isEmpty() )
+        {
             final Enumeration enumeration = items.elements();
 
-            while (enumeration.hasMoreElements()) {
+            while ( enumeration.hasMoreElements() )
+            {
                 final JSMenuItem js = (JSMenuItem) enumeration.nextElement();
                 child = child || js.hasChild();
             }
 
             return child;
-        } else {
+        }
+        else
+        {
             return getAction() != null;
         }
     }
 
     /**
-     * 
      * @return true si c'est une feuille (pas d'enfant)
      */
-    public boolean isLast() {
+    public boolean isLast()
+    {
         return items.isEmpty();
     }
 
     /**
-     * 
      * @param parent le parent
      * @param menuName le nom du menu
      * @param level le niveau
      * @param tab le tab
      * @return le js resultant associe
      */
-    public String doPrint(final JSMenuBase parent, final String menuName, final int level, final int tab) {
-        return render.doPrint(this,parent,menuName,level,tab);
+    public String doPrint( final JSMenuBase parent, final String menuName, final int level, final int tab )
+    {
+        return render.doPrint( this, parent, menuName, level, tab );
     }
 
     /**
      * Ajoute la nombre de tabulation
+     * 
      * @param tab le nombre de tabulation
      * @return le text correspondant
      */
-    public String tabs(final int tab) {
+    public String tabs( final int tab )
+    {
         final StringBuffer buf = new StringBuffer();
 
-        for (int i = 0; i < tab; i++) {
-            buf.append("\t");
+        for ( int i = 0; i < tab; i++ )
+        {
+            buf.append( "\t" );
         }
 
         return buf.toString();
@@ -90,41 +101,50 @@ public class JSMenuItem extends JSMenuBase {
 
     /**
      * Returns the width.
+     * 
      * @return String
      */
-    public String getWidth() {
+    public String getWidth()
+    {
         return width;
     }
 
     /**
      * Sets the width.
+     * 
      * @param pWidth The width to set
      */
-    public void setWidth(final String pWidth) {
+    public void setWidth( final String pWidth )
+    {
         width = pWidth;
     }
 
     /**
      * Returns the id.
+     * 
      * @return int
      */
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
     /**
      * Sets the id.
+     * 
      * @param pId The id to set
      */
-    public void setId(final int pId) {
+    public void setId( final int pId )
+    {
         id = pId;
     }
-    
+
     /**
      * @return un iterator
      */
-    public Iterator itemsIterator() {
+    public Iterator itemsIterator()
+    {
         return items.iterator();
     }
-    
+
 }

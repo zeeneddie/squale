@@ -7,12 +7,12 @@
 package com.airfrance.welcom.addons.config;
 
 /**
- * @author M327837
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class AddonsException extends Exception {
+public class AddonsException
+    extends Exception
+{
 
     /**
      * 
@@ -22,30 +22,34 @@ public class AddonsException extends Exception {
     /**
      * Contructeur
      */
-    public AddonsException() {
+    public AddonsException()
+    {
         super();
     }
 
     /**
      * @param s : message
      */
-    public AddonsException(final String s) {
-        super(s);
+    public AddonsException( final String s )
+    {
+        super( s );
     }
 
     /**
      * @param message Message
      * @param cause Cause
      */
-    public AddonsException(final String message, final Throwable cause) {
-        super(message, cause);
+    public AddonsException( final String message, final Throwable cause )
+    {
+        super( message, cause );
     }
 
     /**
      * @param cause Cause
      */
-    public AddonsException(final Throwable cause) {
-        super(cause);
+    public AddonsException( final Throwable cause )
+    {
+        super( cause );
     }
 
 }

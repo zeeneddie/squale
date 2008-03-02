@@ -24,53 +24,77 @@ import com.airfrance.welcom.struts.util.WConstants;
 /**
  * PageTag
  */
-public class PageTag extends TagSupport {
+public class PageTag
+    extends TagSupport
+{
     /**
      * 
      */
     private static final long serialVersionUID = -5573071429915297169L;
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String titleKey = "";
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String titleKeyArg0 = "";
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String titleKeyArg1 = "";
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String titleKeyArg2 = "";
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String titleKeyArg3 = "";
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String subTitleKey = "";
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String subTitleKeyArg0 = "";
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String subTitleKeyArg1 = "";
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String subTitleKeyArg2 = "";
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String subTitleKeyArg3 = "";
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String accessKey = "";
-    /** parametre du tag*/
+
+    /** parametre du tag */
     protected String headPageInclude = "";
 
     /**
      * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
      */
-    public int doStartTag() throws JspException {
+    public int doStartTag()
+        throws JspException
+    {
         final String access = computeMode();
         // Si la page n'est pas accessible alors redirige vers la page d'erreur
-        if (access.equals(Access.NONE) || access.equals(Access.NO)) {
-            try {
+        if ( access.equals( Access.NONE ) || access.equals( Access.NO ) )
+        {
+            try
+            {
                 final ActionErrors errors = new ActionErrors();
-                errors.add("error", new ActionError("welcom.internal.page.non.access"));
-                pageContext.getRequest().setAttribute(Globals.ERROR_KEY, errors);
-                pageContext.getRequest().getRequestDispatcher("/error.do").include(pageContext.getRequest(), pageContext.getResponse());
-            } catch (final ServletException e) {
+                errors.add( "error", new ActionError( "welcom.internal.page.non.access" ) );
+                pageContext.getRequest().setAttribute( Globals.ERROR_KEY, errors );
+                pageContext.getRequest().getRequestDispatcher( "/error.do" ).include( pageContext.getRequest(),
+                                                                                      pageContext.getResponse() );
+            }
+            catch ( final ServletException e )
+            {
                 e.printStackTrace();
-            } catch (final IOException e) {
+            }
+            catch ( final IOException e )
+            {
                 e.printStackTrace();
-            };
+            }
+            ;
             return SKIP_PAGE;
         }
 
@@ -80,178 +104,209 @@ public class PageTag extends TagSupport {
     /**
      * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
      */
-    public int doEndTag() throws JspException {
+    public int doEndTag()
+        throws JspException
+    {
         return super.doEndTag();
     }
 
     /**
      * @return subTitleKey
      */
-    public String getSubTitleKey() {
+    public String getSubTitleKey()
+    {
         return subTitleKey;
     }
 
     /**
      * @return subTitleKeyArg0
      */
-    public String getSubTitleKeyArg0() {
+    public String getSubTitleKeyArg0()
+    {
         return subTitleKeyArg0;
     }
 
     /**
      * @return subTitleKeyArg1
      */
-    public String getSubTitleKeyArg1() {
+    public String getSubTitleKeyArg1()
+    {
         return subTitleKeyArg1;
     }
 
     /**
      * @return subTitleKeyArg2
      */
-    public String getSubTitleKeyArg2() {
+    public String getSubTitleKeyArg2()
+    {
         return subTitleKeyArg2;
     }
 
     /**
      * @return subTitleKeyArg3
      */
-    public String getSubTitleKeyArg3() {
+    public String getSubTitleKeyArg3()
+    {
         return subTitleKeyArg3;
     }
 
     /**
      * @return titleKey
      */
-    public String getTitleKey() {
+    public String getTitleKey()
+    {
         return titleKey;
     }
 
     /**
      * @return titleKeyArg0
      */
-    public String getTitleKeyArg0() {
+    public String getTitleKeyArg0()
+    {
         return titleKeyArg0;
     }
 
     /**
      * @return titleKeyArg1
      */
-    public String getTitleKeyArg1() {
+    public String getTitleKeyArg1()
+    {
         return titleKeyArg1;
     }
 
     /**
      * @return titleKeyArg2
      */
-    public String getTitleKeyArg2() {
+    public String getTitleKeyArg2()
+    {
         return titleKeyArg2;
     }
 
     /**
      * @return titleKeyArg3
      */
-    public String getTitleKeyArg3() {
+    public String getTitleKeyArg3()
+    {
         return titleKeyArg3;
     }
 
     /**
      * @param string le subTitleKey
      */
-    public void setSubTitleKey(final String string) {
+    public void setSubTitleKey( final String string )
+    {
         subTitleKey = string;
     }
 
     /**
      * @param string le subTitleKeyArg0
      */
-    public void setSubTitleKeyArg0(final String string) {
+    public void setSubTitleKeyArg0( final String string )
+    {
         subTitleKeyArg0 = string;
     }
 
     /**
      * @param string le subTitleKeyArg1
      */
-    public void setSubTitleKeyArg1(final String string) {
+    public void setSubTitleKeyArg1( final String string )
+    {
         subTitleKeyArg1 = string;
     }
 
     /**
      * @param string le subTitleKeyArg2
      */
-    public void setSubTitleKeyArg2(final String string) {
+    public void setSubTitleKeyArg2( final String string )
+    {
         subTitleKeyArg2 = string;
     }
 
     /**
      * @param string le subTitleKeyArg3
      */
-    public void setSubTitleKeyArg3(final String string) {
+    public void setSubTitleKeyArg3( final String string )
+    {
         subTitleKeyArg3 = string;
     }
 
     /**
      * @param string le titleKey
      */
-    public void setTitleKey(final String string) {
+    public void setTitleKey( final String string )
+    {
         titleKey = string;
     }
 
     /**
      * @param string le titleKeyArg0
      */
-    public void setTitleKeyArg0(final String string) {
+    public void setTitleKeyArg0( final String string )
+    {
         titleKeyArg0 = string;
     }
 
     /**
      * @param string le titleKeyArg1
      */
-    public void setTitleKeyArg1(final String string) {
+    public void setTitleKeyArg1( final String string )
+    {
         titleKeyArg1 = string;
     }
 
     /**
      * @param string le titleKeyArg2
      */
-    public void setTitleKeyArg2(final String string) {
+    public void setTitleKeyArg2( final String string )
+    {
         titleKeyArg2 = string;
     }
 
     /**
      * @param string le titleKeyArg3
      */
-    public void setTitleKeyArg3(final String string) {
+    public void setTitleKeyArg3( final String string )
+    {
         titleKeyArg3 = string;
     }
 
     /**
      * @return accessKey
      */
-    public String getAccessKey() {
+    public String getAccessKey()
+    {
         return accessKey;
     }
 
     /**
      * @param string le accessKey
      */
-    public void setAccessKey(final String string) {
+    public void setAccessKey( final String string )
+    {
         accessKey = string;
     }
 
     /**
      * Recupere les droits stockes dans le profil et les stocke dans la page
+     * 
      * @return le pageAccess
      */
-    public String computeMode() {
+    public String computeMode()
+    {
         // Recupere le droits stocké dans le profil
-        if ((pageContext.getSession().getAttribute(WConstants.USER_KEY) instanceof WILogonBeanSecurity) && !GenericValidator.isBlankOrNull(accessKey)) {
-            final WILogonBeanSecurity lb = (WILogonBeanSecurity) pageContext.getSession().getAttribute(WConstants.USER_KEY);
-            final String pageAccess = Access.getMultipleSecurityPage(lb, accessKey);
+        if ( ( pageContext.getSession().getAttribute( WConstants.USER_KEY ) instanceof WILogonBeanSecurity )
+            && !GenericValidator.isBlankOrNull( accessKey ) )
+        {
+            final WILogonBeanSecurity lb =
+                (WILogonBeanSecurity) pageContext.getSession().getAttribute( WConstants.USER_KEY );
+            final String pageAccess = Access.getMultipleSecurityPage( lb, accessKey );
             // Stocke dans la page le droit
-            pageContext.setAttribute("access", pageAccess);
+            pageContext.setAttribute( "access", pageAccess );
 
             return pageAccess;
-        } else {
+        }
+        else
+        {
             return "";
         }
     }
@@ -259,7 +314,8 @@ public class PageTag extends TagSupport {
     /**
      * @see javax.servlet.jsp.tagext.TagSupport#release()
      */
-    public void release() {
+    public void release()
+    {
         super.release();
         titleKey = "";
         titleKeyArg0 = "";
