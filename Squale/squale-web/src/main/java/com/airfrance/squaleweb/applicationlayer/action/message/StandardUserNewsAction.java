@@ -23,61 +23,76 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 
 /**
  */
-public class StandardUserNewsAction extends DefaultAction {
+public class StandardUserNewsAction
+    extends DefaultAction
+{
 
     /**
      * Permet de lister les news ou les messages pour l'administrateur
+     * 
      * @param pMapping le mapping.
      * @param pForm le formulaire à lire.
      * @param pRequest la requête HTTP.
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward listNews(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward listNews( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                   HttpServletResponse pResponse )
+    {
         ActionErrors errors = new ActionErrors();
-        ActionForward forward = pMapping.findForward("viewNews");
-        try {
+        ActionForward forward = pMapping.findForward( "viewNews" );
+        try
+        {
             // Peut etre null, la date n'a pas d'importance
-            String which = pRequest.getParameter("which");
+            String which = pRequest.getParameter( "which" );
             // Peut etre null, la langue n'a pas d'importance
-            String lang = pRequest.getParameter("lang");
-            IApplicationComponent ac = AccessDelegateHelper.getInstance("Messages");
-            Collection langs = (Collection) ac.execute("findLangs");
-            Object[] paramIn = new Object[] { which , lang };
+            String lang = pRequest.getParameter( "lang" );
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "Messages" );
+            Collection langs = (Collection) ac.execute( "findLangs" );
+            Object[] paramIn = new Object[] { which, lang };
             // Renvoie une collection de newsDto
-            NewsListDTO dtoList = (NewsListDTO) ac.execute("getNews", paramIn);
+            NewsListDTO dtoList = (NewsListDTO) ac.execute( "getNews", paramIn );
             paramIn = new Object[0];
 
             Collection coll = dtoList.getNewsList();
-            Collection result = new ArrayList(0);
+            Collection result = new ArrayList( 0 );
             // ajout de l'ensembre des langues disponibles
-            if (coll != null) {
+            if ( coll != null )
+            {
                 Iterator it = coll.iterator();
-                while (it.hasNext()) {
+                while ( it.hasNext() )
+                {
                     NewsDTO dto = (NewsDTO) it.next();
                     // ajout de l'ensemble de langues
-                    dto.setLangSet(langs);
-                    result.add(dto);
+                    dto.setLangSet( langs );
+                    result.add( dto );
                 }
             }
-            dtoList.setNewsList(result);
-            NewsListForm newsListForm = (NewsListForm) WTransformerFactory.objToForm(NewsListTransformer.class, dtoList);
+            dtoList.setNewsList( result );
+            NewsListForm newsListForm =
+                (NewsListForm) WTransformerFactory.objToForm( NewsListTransformer.class, dtoList );
             // on ne met le form en session que si il y a des news
-            if (newsListForm.getNewsList().size() != 0) {
-                pRequest.getSession().setAttribute("newsListForm", newsListForm);
-            } else { // sinon on le supprime de la session
-                pRequest.getSession().removeAttribute("newsListForm");
+            if ( newsListForm.getNewsList().size() != 0 )
+            {
+                pRequest.getSession().setAttribute( "newsListForm", newsListForm );
             }
-        } catch (Exception e) {
+            else
+            { // sinon on le supprime de la session
+                pRequest.getSession().removeAttribute( "newsListForm" );
+            }
+        }
+        catch ( Exception e )
+        {
             // Traitement des exceptions
-            handleException(e, errors, pRequest);
-            forward = pMapping.findForward("total_failure");
+            handleException( e, errors, pRequest );
+            forward = pMapping.findForward( "total_failure" );
         }
-        if (!errors.isEmpty()) {
-            saveMessages(pRequest, errors);
+        if ( !errors.isEmpty() )
+        {
+            saveMessages( pRequest, errors );
         }
-        //On est passé par un menu donc on réinitialise le traceur
-        resetTracker(pRequest);
+        // On est passé par un menu donc on réinitialise le traceur
+        resetTracker( pRequest );
         return forward;
     }
 

@@ -5,6 +5,8 @@ import com.airfrance.squaleweb.applicationlayer.action.component.parameters.Crea
 /**
  * configuration des paramètres de la tache de Bug Tracking de QC
  */
-public class CreateBugTrackingQCParametersAction extends CreateParametersAction {
+public class CreateBugTrackingQCParametersAction
+    extends CreateParametersAction
+{
 
 }

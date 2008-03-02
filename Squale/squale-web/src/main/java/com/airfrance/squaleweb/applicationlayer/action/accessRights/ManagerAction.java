@@ -5,16 +5,21 @@ import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
 
 /**
  */
-public class ManagerAction extends BaseDispatchAction {
-    
-    /** 
+public class ManagerAction
+    extends BaseDispatchAction
+{
+
+    /**
      * vérifie les droits de l'utilisateur à effectuer cette action
+     * 
      * @param pApplicationId l'id de l'application
      * @param pUser l'utilisateur courant
      * @return un booléen indiquant si l'utilisateur possède les droits suffisants
      */
-    protected boolean checkRights(LogonBean pUser, Long pApplicationId){
-        return pUser.isAdmin() || (pApplicationId != null && pUser.getApplicationRight(pApplicationId) != null // illegal access
-         && pUser.getApplicationRight(pApplicationId).equals(ProfileBO.MANAGER_PROFILE_NAME));
+    protected boolean checkRights( LogonBean pUser, Long pApplicationId )
+    {
+        return pUser.isAdmin() || ( pApplicationId != null && pUser.getApplicationRight( pApplicationId ) != null // illegal
+                                                                                                                    // access
+        && pUser.getApplicationRight( pApplicationId ).equals( ProfileBO.MANAGER_PROFILE_NAME ) );
     }
 }

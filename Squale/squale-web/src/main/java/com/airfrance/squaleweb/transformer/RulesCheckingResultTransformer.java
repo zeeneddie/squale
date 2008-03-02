@@ -29,26 +29,33 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
 
 /**
  * Transformation des résultats de RulesChecking
- * 
  */
-public class RulesCheckingResultTransformer implements WITransformer {
-    /** 
+public class RulesCheckingResultTransformer
+    implements WITransformer
+{
+    /**
      * {@inheritDoc}
+     * 
      * @param object {@inheritDoc}
      * @return le formulaire transformé
      */
-    public WActionForm objToForm(Object[] object) throws WTransformerException {
+    public WActionForm objToForm( Object[] object )
+        throws WTransformerException
+    {
         ResultRulesCheckingForm result = new ResultRulesCheckingForm();
-        objToForm(object, result);
+        objToForm( object, result );
         return result;
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @param object {@inheritDoc}
      * @param form le formulaire des résultats de RulesChecking
      */
-    public void objToForm(Object[] object, WActionForm form) throws WTransformerException {
+    public void objToForm( Object[] object, WActionForm form )
+        throws WTransformerException
+    {
         // Récupération des paramètres
         int index = 0;
         // Index pour récupérer la locale
@@ -63,64 +70,74 @@ public class RulesCheckingResultTransformer implements WITransformer {
         PracticeInformationForm infoForm = (PracticeInformationForm) object[index++];
         ResultRulesCheckingForm practiceResult = (ResultRulesCheckingForm) form;
 
-        practiceResult.setName(pPractice.getName());
-        practiceResult.setInfoForm(infoForm);
-        practiceResult.setId(pPractice.getId() + "");
-        if (pFactorParent != null) {
-            practiceResult.setTreParent(pFactorParent.getName());
-            practiceResult.setParentId("" + pFactorParent.getId());
+        practiceResult.setName( pPractice.getName() );
+        practiceResult.setInfoForm( infoForm );
+        practiceResult.setId( pPractice.getId() + "" );
+        if ( pFactorParent != null )
+        {
+            practiceResult.setTreParent( pFactorParent.getName() );
+            practiceResult.setParentId( "" + pFactorParent.getId() );
         }
         // Récupération de la valeur de la pratique
-        Float value = (Float) (((List) resultDTO.getResultMap().get(pProject)).get(0));
-        if (null != value) {
+        Float value = (Float) ( ( (List) resultDTO.getResultMap().get( pProject ) ).get( 0 ) );
+        if ( null != value )
+        {
             // Conversion de la valeur en texte
-            practiceResult.setCurrentMark(""+value.floatValue());
-            List result = getRulesCheckingForm((Map) resultDTO.getIntRepartitionPracticeMap().get(audits.get(0)), practiceResult, lang);
-            practiceResult.setList(result);
+            practiceResult.setCurrentMark( "" + value.floatValue() );
+            List result =
+                getRulesCheckingForm( (Map) resultDTO.getIntRepartitionPracticeMap().get( audits.get( 0 ) ),
+                                      practiceResult, lang );
+            practiceResult.setList( result );
 
             // Calcul d'une tendance si un audit antérieur est présent
-            if (audits.size() > 1) {
-                Float value2 = (Float) (((List) resultDTO.getResultMap().get(pProject)).get(1));
-                practiceResult.setPredecessorMark(""+value2);
+            if ( audits.size() > 1 )
+            {
+                Float value2 = (Float) ( ( (List) resultDTO.getResultMap().get( pProject ) ).get( 1 ) );
+                practiceResult.setPredecessorMark( "" + value2 );
             }
         }
 
     }
+
     /**
-     * 
      * @param pRulesCheckingResults les résultats ruleschecking
-     * @param pPracticeResult formbean 
+     * @param pPracticeResult formbean
      * @param pLang la locale
      * @throws WTransformerException si erreur lors de la transformation
-     * @return liste des  les résultats ruleschecking sous forme de Form
+     * @return liste des les résultats ruleschecking sous forme de Form
      */
-    private List getRulesCheckingForm(Map pRulesCheckingResults, ResultRulesCheckingForm pPracticeResult, Locale pLang) throws WTransformerException {
+    private List getRulesCheckingForm( Map pRulesCheckingResults, ResultRulesCheckingForm pPracticeResult, Locale pLang )
+        throws WTransformerException
+    {
 
         RuleCheckingDTO dto = null;
         RulesCheckingForm rulesCheckingForm = null;
         Integer value = null;
-        List result = new ArrayList(pRulesCheckingResults.size());
+        List result = new ArrayList( pRulesCheckingResults.size() );
 
         Set keys = pRulesCheckingResults.keySet();
         Iterator itSet = keys.iterator();
 
         int index = 0;
-        while (itSet.hasNext()) {
+        while ( itSet.hasNext() )
+        {
             dto = (RuleCheckingDTO) itSet.next();
-            value = (Integer) pRulesCheckingResults.get(dto);
+            value = (Integer) pRulesCheckingResults.get( dto );
             rulesCheckingForm = new RulesCheckingForm();
-            rulesCheckingForm.setNameRule(dto.getName());
-            rulesCheckingForm.setSeverity(dto.getSeverity());
-            rulesCheckingForm.setId(dto.getId());
-            rulesCheckingForm.setMeasureID(dto.getMeasureID());
-            if (null != dto.getVersion()) {
-                rulesCheckingForm.setVersion(dto.getVersion());
+            rulesCheckingForm.setNameRule( dto.getName() );
+            rulesCheckingForm.setSeverity( dto.getSeverity() );
+            rulesCheckingForm.setId( dto.getId() );
+            rulesCheckingForm.setMeasureID( dto.getMeasureID() );
+            if ( null != dto.getVersion() )
+            {
+                rulesCheckingForm.setVersion( dto.getVersion() );
             }
-            rulesCheckingForm.setTransgressionsNumber(value.intValue());
-            doRepartition(rulesCheckingForm, pPracticeResult);
+            rulesCheckingForm.setTransgressionsNumber( value.intValue() );
+            doRepartition( rulesCheckingForm, pPracticeResult );
             // On traduit la sévérité pour pouvoir trier dans le tableau Welcom
-            rulesCheckingForm.setSeverityLang(WebMessages.getString(pLang, "rulesChecking.rule.severity_" + dto.getSeverity()));
-            result.add(rulesCheckingForm);
+            rulesCheckingForm.setSeverityLang( WebMessages.getString( pLang, "rulesChecking.rule.severity_"
+                + dto.getSeverity() ) );
+            result.add( rulesCheckingForm );
             index++;
         }
 
@@ -128,44 +145,60 @@ public class RulesCheckingResultTransformer implements WITransformer {
     }
 
     /**
-     * 
-     * @param pRulesCheckingForm  formbean de tous les resultat
-     * @param pPracticeResult  formbean de d'une transgression d'une règle checkstyle
+     * @param pRulesCheckingForm formbean de tous les resultat
+     * @param pPracticeResult formbean de d'une transgression d'une règle checkstyle
      */
-    private void doRepartition(RulesCheckingForm pRulesCheckingForm, ResultRulesCheckingForm pPracticeResult) {
+    private void doRepartition( RulesCheckingForm pRulesCheckingForm, ResultRulesCheckingForm pPracticeResult )
+    {
 
-        if (pRulesCheckingForm.getSeverity().equals(ConstantRulesChecking.INFO_LABEL)) {
-            pPracticeResult.getIntRepartition()[ConstantRulesChecking.INFO_INT] += pRulesCheckingForm.getTransgressionsNumber();
+        if ( pRulesCheckingForm.getSeverity().equals( ConstantRulesChecking.INFO_LABEL ) )
+        {
+            pPracticeResult.getIntRepartition()[ConstantRulesChecking.INFO_INT] +=
+                pRulesCheckingForm.getTransgressionsNumber();
 
-        } else {
-            if (pRulesCheckingForm.getSeverity().equals(ConstantRulesChecking.ERROR_LABEL)) {
-                pPracticeResult.getIntRepartition()[ConstantRulesChecking.ERROR_INT] += pRulesCheckingForm.getTransgressionsNumber();
+        }
+        else
+        {
+            if ( pRulesCheckingForm.getSeverity().equals( ConstantRulesChecking.ERROR_LABEL ) )
+            {
+                pPracticeResult.getIntRepartition()[ConstantRulesChecking.ERROR_INT] +=
+                    pRulesCheckingForm.getTransgressionsNumber();
 
-            } else {
-                if (pRulesCheckingForm.getSeverity().equals(ConstantRulesChecking.WARNING_LABEL)) {
-                    pPracticeResult.getIntRepartition()[ConstantRulesChecking.WARNING_INT] += pRulesCheckingForm.getTransgressionsNumber();
+            }
+            else
+            {
+                if ( pRulesCheckingForm.getSeverity().equals( ConstantRulesChecking.WARNING_LABEL ) )
+                {
+                    pPracticeResult.getIntRepartition()[ConstantRulesChecking.WARNING_INT] +=
+                        pRulesCheckingForm.getTransgressionsNumber();
                 }
             }
         }
 
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @param form {@inheritDoc}
      * @return le tableau des objets transformés
      */
-    public Object[] formToObj(WActionForm form) throws WTransformerException {
-        throw new WTransformerException("not yet implemented");
+    public Object[] formToObj( WActionForm form )
+        throws WTransformerException
+    {
+        throw new WTransformerException( "not yet implemented" );
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @param form {@inheritDoc}
      * @param object {@inheritDoc}
      */
-    public void formToObj(WActionForm form, Object[] object) throws WTransformerException {
-        throw new WTransformerException("not yet implemented");
+    public void formToObj( WActionForm form, Object[] object )
+        throws WTransformerException
+    {
+        throw new WTransformerException( "not yet implemented" );
     }
 
 }

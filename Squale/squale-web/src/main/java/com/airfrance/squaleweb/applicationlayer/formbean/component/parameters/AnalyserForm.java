@@ -11,84 +11,94 @@ import com.airfrance.squaleweb.transformer.component.parameters.AnalyserTransfor
 /**
  * Bean pour la configuration de la récupération des sources via l'arborescence de fichiers
  */
-public class AnalyserForm extends AbstractParameterForm {
-    
+public class AnalyserForm
+    extends AbstractParameterForm
+{
+
     /**
-     * La chemin racine du projet
-     * Ce chemin peut-être le chemin absolu d'un fichier compressé
-     * ou d'un répertoire.
+     * La chemin racine du projet Ce chemin peut-être le chemin absolu d'un fichier compressé ou d'un répertoire.
      */
     private String mPath;
 
     /**
      * Constructeur par défaut
      */
-    public AnalyserForm() {
+    public AnalyserForm()
+    {
         mPath = "";
     }
 
     /**
      * @return le chemin racine
      */
-    public String getPath() {
+    public String getPath()
+    {
         return mPath;
     }
 
     /**
      * @param pPath le chemin racine
      */
-    public void setPath(String pPath) {
+    public void setPath( String pPath )
+    {
         mPath = pPath;
     }
 
-    /** 
+    /**
      * @return le transformer à utiliser
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTransformer()
      */
-    public Class getTransformer() {
+    public Class getTransformer()
+    {
         return AnalyserTransformer.class;
     }
 
-    /** 
+    /**
      * @return le nom en session
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
      */
-    public String getNameInSession() {
+    public String getNameInSession()
+    {
         return "analyserForm";
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getParametersConstants()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public String[] getParametersConstants() {
-        return new String[]{ParametersConstants.ANALYSER};
+    public String[] getParametersConstants()
+    {
+        return new String[] { ParametersConstants.ANALYSER };
     }
 
-    /** 
-     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+    /**
+     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    public void reset(ActionMapping mapping, HttpServletRequest request) {
-        setPath("");
+    public void reset( ActionMapping mapping, HttpServletRequest request )
+    {
+        setPath( "" );
     }
 
-    /** 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+    /**
+     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    protected void validateConf(ActionMapping pMapping, HttpServletRequest pRequest) {
-        setPath(getPath().trim());
-        if (getPath().length()==0) {
-            addError("path", new ActionError("error.field.required"));
+    protected void validateConf( ActionMapping pMapping, HttpServletRequest pRequest )
+    {
+        setPath( getPath().trim() );
+        if ( getPath().length() == 0 )
+        {
+            addError( "path", new ActionError( "error.field.required" ) );
         }
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public String getTaskName() {
+    public String getTaskName()
+    {
         return "SourceCodeAnalyserTask";
     }
 

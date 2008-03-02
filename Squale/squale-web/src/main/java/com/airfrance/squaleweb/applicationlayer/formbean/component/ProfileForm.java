@@ -9,44 +9,50 @@ import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
  * 
  * @author M400842
  */
-public class ProfileForm extends RootForm {
+public class ProfileForm
+    extends RootForm
+{
 
-     /**
-      * Nom du profil
-      */
-     private String mName;
-    
-     /**
-      * Les droits atomiques
-      */
-     private Map mRights;
+    /**
+     * Nom du profil
+     */
+    private String mName;
 
-     /**
-      * @return le nom
-      */
-     public String getName() {
-         return mName;
-     }
+    /**
+     * Les droits atomiques
+     */
+    private Map mRights;
 
-     /**
-      * @return les droits atomiques
-      */
-     public Map getRights() {
-         return mRights;
-     }
+    /**
+     * @return le nom
+     */
+    public String getName()
+    {
+        return mName;
+    }
 
-     /**
-      * @param pName le nom du profil
-      */
-     public void setName(String pName) {
-         mName = pName;
-     }
+    /**
+     * @return les droits atomiques
+     */
+    public Map getRights()
+    {
+        return mRights;
+    }
 
-     /**
-      * @param pRights les droits atomiques
-      */
-     public void setRights(Map pRights) {
-         mRights = pRights;
-     }
+    /**
+     * @param pName le nom du profil
+     */
+    public void setName( String pName )
+    {
+        mName = pName;
+    }
+
+    /**
+     * @param pRights les droits atomiques
+     */
+    public void setRights( Map pRights )
+    {
+        mRights = pRights;
+    }
 
 }

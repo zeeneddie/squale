@@ -11,7 +11,9 @@ import com.airfrance.welcom.taglib.field.FieldTag;
 
 /**
  */
-public class IteratePathsTag extends TagSupport {
+public class IteratePathsTag
+    extends TagSupport
+{
 
     /** le nom permettant de définir la variable utilisée dans le tag */
     private String name;
@@ -29,123 +31,137 @@ public class IteratePathsTag extends TagSupport {
     private String isRequired = "false";
 
     /**
-     * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
-     * {@inheritDoc}
-     * Méthode de lancement du tag
+     * @see javax.servlet.jsp.tagext.TagSupport#doEndTag() {@inheritDoc} Méthode de lancement du tag
      */
-    public int doStartTag() throws JspException {
+    public int doStartTag()
+        throws JspException
+    {
         // Publie
-        String[] elementsTab = (String[]) RequestUtils.lookup(pageContext, name, property, null);
+        String[] elementsTab = (String[]) RequestUtils.lookup( pageContext, name, property, null );
         FieldTag field = new FieldTag();
-        field.setSize("60");
-        if (elementsTab != null) {
+        field.setSize( "60" );
+        if ( elementsTab != null )
+        {
             // On supprime les chaînes vides du tableau
-            elementsTab = SqualeWebActionUtils.cleanValues(elementsTab);
+            elementsTab = SqualeWebActionUtils.cleanValues( elementsTab );
         }
         // cas particulier, aucun champ n'a été rempli
-        if (elementsTab == null || elementsTab.length == 0) {
+        if ( elementsTab == null || elementsTab.length == 0 )
+        {
             elementsTab = new String[] { "" };
         }
         // charge la page dans le tag a exécuter
-        field.setPageContext(pageContext);
-        // premier champ obligatoire  
-        field.setIsRequired(isRequired);
-        field.setKey(key);
-        field.setProperty(property);
-        field.setDisabled(disabled);
-        field.setStyleClassLabel("td1");
+        field.setPageContext( pageContext );
+        // premier champ obligatoire
+        field.setIsRequired( isRequired );
+        field.setKey( key );
+        field.setProperty( property );
+        field.setDisabled( disabled );
+        field.setStyleClassLabel( "td1" );
         String result = "";
-        for (int i = 0; i < elementsTab.length; i++) {
-            if (i == 1) {
-                field.setIsRequired("false");
+        for ( int i = 0; i < elementsTab.length; i++ )
+        {
+            if ( i == 1 )
+            {
+                field.setIsRequired( "false" );
             }
             // positionne la valeur
-            field.setValue(elementsTab[i]);
-            ResponseUtils.write(pageContext, "<tr class=\"fondClair\">");
+            field.setValue( elementsTab[i] );
+            ResponseUtils.write( pageContext, "<tr class=\"fondClair\">" );
             // lance le tag de welcom
             field.doStartTag();
             field.doEndTag();
-            ResponseUtils.write(pageContext, "</tr>");
+            ResponseUtils.write( pageContext, "</tr>" );
         }
         return SKIP_BODY;
     }
 
     /**
-     * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
-     * {@inheritDoc}
-     * Méthode de lancement du tag
+     * @see javax.servlet.jsp.tagext.TagSupport#doEndTag() {@inheritDoc} Méthode de lancement du tag
      */
-    public int doEndTag() throws JspException {
+    public int doEndTag()
+        throws JspException
+    {
         return EVAL_PAGE;
     }
 
     /**
      * @return le nom utilisé dans le tag
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
     /**
-     * @param newUsedName le nouveau nom 
+     * @param newUsedName le nouveau nom
      */
-    public void setName(String newUsedName) {
+    public void setName( String newUsedName )
+    {
         name = newUsedName;
     }
 
     /**
      * @return la clé
      */
-    public String getKey() {
+    public String getKey()
+    {
         return key;
     }
 
     /**
-     * @return la propriété 
+     * @return la propriété
      */
-    public String getProperty() {
+    public String getProperty()
+    {
         return property;
     }
 
     /**
      * @param newKey la nouvelle clé
      */
-    public void setKey(String newKey) {
+    public void setKey( String newKey )
+    {
         key = newKey;
     }
 
     /**
      * @param newProperty la nouvelle propriété
      */
-    public void setProperty(String newProperty) {
+    public void setProperty( String newProperty )
+    {
         property = newProperty;
     }
 
     /**
      * @return le caractère obligatoire du champ
      */
-    public String getIsRequired() {
+    public String getIsRequired()
+    {
         return isRequired;
     }
 
     /**
      * @param newRequirement le nouveau caractère obligatoire du champ
      */
-    public void setIsRequired(String newRequirement) {
+    public void setIsRequired( String newRequirement )
+    {
         isRequired = newRequirement;
     }
 
     /**
-     * @return si le champ  est readonly
+     * @return si le champ est readonly
      */
-    public boolean isDisabled() {
+    public boolean isDisabled()
+    {
         return disabled;
     }
 
     /**
      * @param pDisabled indique si le champ est readonly
      */
-    public void setDisabled(boolean pDisabled) {
+    public void setDisabled( boolean pDisabled )
+    {
         disabled = pDisabled;
     }
 }

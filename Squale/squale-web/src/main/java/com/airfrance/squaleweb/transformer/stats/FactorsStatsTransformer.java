@@ -8,16 +8,20 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
 
 /**
  */
-public class FactorsStatsTransformer implements WITransformer {
+public class FactorsStatsTransformer
+    implements WITransformer
+{
 
     /**
-      * @param pObject le tableau d'objet contenant l'objet à transformer
-      * @return le form résultat de la transformation
-      * @throws WTransformerException en cas d'échec
-      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+     * @param pObject le tableau d'objet contenant l'objet à transformer
+     * @return le form résultat de la transformation
+     * @throws WTransformerException en cas d'échec
+     */
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         FactorsStatsForm form = new FactorsStatsForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 
@@ -26,13 +30,15 @@ public class FactorsStatsTransformer implements WITransformer {
      * @param pForm le form résultat
      * @throws WTransformerException en cas d'échec
      */
-    public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
         FactorsStatsForm form = (FactorsStatsForm) pForm;
         FactorsStatsDTO dto = (FactorsStatsDTO) pObject[0];
-        form.setNbFactorsAccepted(dto.getNbFactorsAccepted());
-        form.setNbFactorsRefused(dto.getNbFactorsRefused());
-        form.setNbFactorsReserved(dto.getNbFactorsReserved());
-        form.setNbTotal(dto.getNbTotal());
+        form.setNbFactorsAccepted( dto.getNbFactorsAccepted() );
+        form.setNbFactorsRefused( dto.getNbFactorsRefused() );
+        form.setNbFactorsReserved( dto.getNbFactorsReserved() );
+        form.setNbTotal( dto.getNbTotal() );
     }
 
     /**
@@ -41,8 +47,10 @@ public class FactorsStatsTransformer implements WITransformer {
      * @throws WTransformerException si un pb apparait.
      * @return rien mais lance systématiquement une exception
      */
-    public Object[] formToObj(WActionForm pForm) throws WTransformerException {
-        throw new WTransformerException("deprecated");
+    public Object[] formToObj( WActionForm pForm )
+        throws WTransformerException
+    {
+        throw new WTransformerException( "deprecated" );
     }
 
     /**
@@ -51,8 +59,10 @@ public class FactorsStatsTransformer implements WITransformer {
      * @param pTab les paramètres
      * @throws WTransformerException si un pb apparait.
      */
-    public void formToObj(WActionForm pForm, Object[] pTab) throws WTransformerException {
-        throw new WTransformerException("deprecated");
+    public void formToObj( WActionForm pForm, Object[] pTab )
+        throws WTransformerException
+    {
+        throw new WTransformerException( "deprecated" );
     }
 
 }

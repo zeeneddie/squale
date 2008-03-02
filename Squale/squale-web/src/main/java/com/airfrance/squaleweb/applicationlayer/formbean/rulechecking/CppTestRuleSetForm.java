@@ -3,27 +3,33 @@ package com.airfrance.squaleweb.applicationlayer.formbean.rulechecking;
 /**
  * Formulaire d'un ruleset CppTest
  */
-public class CppTestRuleSetForm extends AbstractRuleSetForm {
+public class CppTestRuleSetForm
+    extends AbstractRuleSetForm
+{
 
     /**
      * Constructeur par défaut.
      */
-    public CppTestRuleSetForm() {
+    public CppTestRuleSetForm()
+    {
     }
 
     /** Nom des règles CppTest */
     private String mCppTestName;
+
     /**
      * @return nom
      */
-    public String getCppTestName() {
+    public String getCppTestName()
+    {
         return mCppTestName;
     }
 
     /**
      * @param pName nom
      */
-    public void setCppTestName(String pName) {
+    public void setCppTestName( String pName )
+    {
         mCppTestName = pName;
     }
 }

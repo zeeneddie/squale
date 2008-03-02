@@ -9,26 +9,28 @@ import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
  * Liste de projets
  * 
  * @author M400842
- *
  */
-public class ProjectListForm extends RootForm{
+public class ProjectListForm
+    extends RootForm
+{
     /**
      * Liste des projets
      */
     private List mList = new ArrayList();
 
-    
     /**
      * @return la liste des projets
      */
-    public List getList() {
+    public List getList()
+    {
         return mList;
     }
 
     /**
      * @param pList la liste des projets
      */
-    public void setList(List pList) {
+    public void setList( List pList )
+    {
         mList = pList;
     }
 

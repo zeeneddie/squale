@@ -6,19 +6,21 @@ import com.airfrance.welcom.struts.bean.WActionForm;
 import com.airfrance.welcom.struts.transformer.WTransformerException;
 
 /**
- * @author E6400802
- *
- *Transformation d'un jeu de règles checkstyle
+ * @author E6400802 Transformation d'un jeu de règles checkstyle
  */
-public class CheckstyleRuleSetTransformer extends AbstractRuleSetTransformer {
+public class CheckstyleRuleSetTransformer
+    extends AbstractRuleSetTransformer
+{
     /**
      * @param pObject l'objet à transformer
      * @throws WTransformerException si un pb apparait.
      * @return le formulaire.
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         CheckstyleRuleSetForm form = new CheckstyleRuleSetForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 
@@ -27,9 +29,11 @@ public class CheckstyleRuleSetTransformer extends AbstractRuleSetTransformer {
      * @throws WTransformerException si un pb apparait.
      * @return le tableaux des objets.
      */
-    public Object[] formToObj(WActionForm pForm) throws WTransformerException {
-        Object[] obj = {new CheckstyleDTO()};
-        formToObj(pForm, obj);
+    public Object[] formToObj( WActionForm pForm )
+        throws WTransformerException
+    {
+        Object[] obj = { new CheckstyleDTO() };
+        formToObj( pForm, obj );
         return obj;
     }
 

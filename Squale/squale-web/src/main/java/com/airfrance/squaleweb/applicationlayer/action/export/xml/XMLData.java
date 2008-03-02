@@ -18,7 +18,8 @@ import org.w3c.dom.Document;
 /**
  * Les données XML
  */
-public abstract class XMLData {
+public abstract class XMLData
+{
 
     /** la requête */
     protected HttpServletRequest request = null;
@@ -28,21 +29,26 @@ public abstract class XMLData {
 
     /**
      * Contructeur
+     * 
      * @param pRequest pRequest
-     * @throws ParserConfigurationException si erreur 
+     * @throws ParserConfigurationException si erreur
      */
-    public XMLData(final HttpServletRequest pRequest) throws ParserConfigurationException {
+    public XMLData( final HttpServletRequest pRequest )
+        throws ParserConfigurationException
+    {
         this.request = pRequest;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         document = db.newDocument();
     }
 
-    /** 
-     * Accesseur 
+    /**
+     * Accesseur
+     * 
      * @return la requête
-     * */
-    public HttpServletRequest getRequest() {
+     */
+    public HttpServletRequest getRequest()
+    {
         return request;
     }
 
@@ -54,7 +60,8 @@ public abstract class XMLData {
     /**
      * @return le document contenant les informations XML
      */
-    public Document getDocument() {
+    public Document getDocument()
+    {
         return document;
     }
 
@@ -62,15 +69,17 @@ public abstract class XMLData {
      * @return le document XML sous forme de String
      * @throws TransformerException si erreur
      */
-    public String print() throws TransformerException {
-        DOMSource domSource = new DOMSource(document);
+    public String print()
+        throws TransformerException
+    {
+        DOMSource domSource = new DOMSource( document );
         StringWriter writer = new StringWriter();
-        StreamResult result = new StreamResult(writer);
+        StreamResult result = new StreamResult( writer );
         TransformerFactory tf = TransformerFactory.newInstance();
         Transformer transformer = tf.newTransformer();
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        transformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
-        transformer.transform(domSource, result);
+        transformer.setOutputProperty( OutputKeys.INDENT, "yes" );
+        transformer.setOutputProperty( OutputKeys.ENCODING, "ISO-8859-1" );
+        transformer.transform( domSource, result );
         return writer.toString();
     }
 }

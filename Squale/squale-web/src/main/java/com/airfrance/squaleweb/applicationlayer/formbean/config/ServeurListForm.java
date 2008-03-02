@@ -7,7 +7,9 @@ import java.util.ArrayList;
 /**
  * Transformer de liste de serveurs
  */
-public class ServeurListForm extends WActionForm {
+public class ServeurListForm
+    extends WActionForm
+{
 
     /**
      * Liste des serveurs
@@ -17,14 +19,16 @@ public class ServeurListForm extends WActionForm {
     /**
      * @return la liste des serveurs
      */
-    public ArrayList getServeurs() {
+    public ArrayList getServeurs()
+    {
         return mServeurs;
     }
 
     /**
      * @param pServeurs la liste des serveurs
      */
-    public void setServeurs(ArrayList pServeurs) {
+    public void setServeurs( ArrayList pServeurs )
+    {
         mServeurs = pServeurs;
     }
 

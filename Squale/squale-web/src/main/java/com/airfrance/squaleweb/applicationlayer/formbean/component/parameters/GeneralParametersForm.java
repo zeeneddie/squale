@@ -12,22 +12,28 @@ import com.airfrance.squaleweb.util.SqualeWebActionUtils;
 /**
  * Bean des paramètres généraux
  */
-public class GeneralParametersForm extends AbstractParameterForm {
-    
+public class GeneralParametersForm
+    extends AbstractParameterForm
+{
+
     /** Indication de la nécessite des sources JSP */
     private boolean mJspSourcesRequired;
+
     /**
      * Listes des chemins vers les src à auditer du projet
      */
     private String[] mJspSources;
+
     /**
      * Listes des chemins vers les src à auditer du projet
      */
     private String[] mSources;
+
     /**
      * Expressions régulières à exclure de l'analyse
      */
     private String[] mExcludePatterns;
+
     /**
      * Expressions régulières à inclure de l'analyse
      */
@@ -36,151 +42,178 @@ public class GeneralParametersForm extends AbstractParameterForm {
     /**
      * Constructeur par défaut
      */
-    public GeneralParametersForm() {
+    public GeneralParametersForm()
+    {
         mExcludePatterns = new String[0];
         mIncludePatterns = new String[0];
-        mSources= new String[0];
-        mJspSources= new String[0];
+        mSources = new String[0];
+        mJspSources = new String[0];
     }
-    
+
     /**
      * Getter.
+     * 
      * @return emplacement des sources.
      */
-    public String[] getSources() {
+    public String[] getSources()
+    {
         return mSources;
     }
+
     /**
      * Setter.
+     * 
      * @param pSources emplacement des sources.
      */
-    public void setSources(String[] pSources) {
+    public void setSources( String[] pSources )
+    {
         mSources = pSources;
     }
 
     /**
      * @return les expressions régulières à exclure de l'analyse
      */
-    public String[] getExcludePatterns() {
+    public String[] getExcludePatterns()
+    {
         return mExcludePatterns;
     }
 
     /**
      * @param pExcludePatterns les expressions régulières à exclure de l'analyse
      */
-    public void setExcludePatterns(String[] pExcludePatterns) {
+    public void setExcludePatterns( String[] pExcludePatterns )
+    {
         mExcludePatterns = pExcludePatterns;
     }
 
     /**
      * @return les expressions régulières à inclure de l'analyse
      */
-    public String[] getIncludePatterns() {
+    public String[] getIncludePatterns()
+    {
         return mIncludePatterns;
     }
 
     /**
      * @param pIncludePatterns les expressions régulières à inclure de l'analyse
      */
-    public void setIncludePatterns(String[] pIncludePatterns) {
+    public void setIncludePatterns( String[] pIncludePatterns )
+    {
         mIncludePatterns = pIncludePatterns;
     }
 
     /**
      * Getter.
+     * 
      * @return emplacement des sources.
      */
-    public String[] getJspSources() {
+    public String[] getJspSources()
+    {
         return mJspSources;
     }
+
     /**
      * Setter.
+     * 
      * @param pJspSources emplacement des sources.
      */
-    public void setJspSources(String[] pJspSources) {
+    public void setJspSources( String[] pJspSources )
+    {
         mJspSources = pJspSources;
     }
 
     /**
      * @return true si les sources JSP sont requises
      */
-    public boolean isJspSourcesRequired() {
+    public boolean isJspSourcesRequired()
+    {
         return mJspSourcesRequired;
     }
 
     /**
      * @param pJspSourcesRequired indicateur de sources JSP requises
      */
-    public void setJspSourcesRequired(boolean pJspSourcesRequired) {
+    public void setJspSourcesRequired( boolean pJspSourcesRequired )
+    {
         mJspSourcesRequired = pJspSourcesRequired;
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTransformer()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public Class getTransformer() {
+    public Class getTransformer()
+    {
         return GeneralParametersTransformer.class;
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public String getNameInSession() {
+    public String getNameInSession()
+    {
         return "generalParametersForm";
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getParametersConstants()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public String[] getParametersConstants() {
-        return new String[]{ParametersConstants.SOURCES, ParametersConstants.EXCLUDED_PATTERNS, ParametersConstants.INCLUDED_PATTERNS, ParametersConstants.JSP};
+    public String[] getParametersConstants()
+    {
+        return new String[] { ParametersConstants.SOURCES, ParametersConstants.EXCLUDED_PATTERNS,
+            ParametersConstants.INCLUDED_PATTERNS, ParametersConstants.JSP };
     }
 
-    /** 
-     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+    /**
+     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    public void reset(ActionMapping mapping, HttpServletRequest request) {
-        setJspSourcesRequired(false);
-        setJspSources(new String[0]);
-        setExcludePatterns(new String[0]);
-        setIncludePatterns(new String[0]);
-        setSources(new String[0]);
+    public void reset( ActionMapping mapping, HttpServletRequest request )
+    {
+        setJspSourcesRequired( false );
+        setJspSources( new String[0] );
+        setExcludePatterns( new String[0] );
+        setIncludePatterns( new String[0] );
+        setSources( new String[0] );
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public String getTaskName() {
+    public String getTaskName()
+    {
         return "GeneralParameters";
     }
 
-    /** 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+    /**
+     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    protected void validateConf(ActionMapping pMapping, HttpServletRequest pRequest) {
+    protected void validateConf( ActionMapping pMapping, HttpServletRequest pRequest )
+    {
         // Traitement des sources
-        setSources(SqualeWebActionUtils.cleanValues(getSources()));
-        if (getSources().length==0) {
-            addError("sources", new ActionError("error.field.required"));
+        setSources( SqualeWebActionUtils.cleanValues( getSources() ) );
+        if ( getSources().length == 0 )
+        {
+            addError( "sources", new ActionError( "error.field.required" ) );
         }
         // Vérification des sources JSP si requis
-        if (isJspSourcesRequired()) {
-            setJspSources(SqualeWebActionUtils.cleanValues(getJspSources()));
-            if (getJspSources().length==0) {
-                addError("jspSources", new ActionError("error.field.required"));
+        if ( isJspSourcesRequired() )
+        {
+            setJspSources( SqualeWebActionUtils.cleanValues( getJspSources() ) );
+            if ( getJspSources().length == 0 )
+            {
+                addError( "jspSources", new ActionError( "error.field.required" ) );
             }
         }
         // Traitement des exclusions
-        setExcludePatterns(SqualeWebActionUtils.cleanValues(getExcludePatterns()));
+        setExcludePatterns( SqualeWebActionUtils.cleanValues( getExcludePatterns() ) );
         // Pas de nombre minimal pour les exclusions
         // Traitement des inclusions
-        setIncludePatterns(SqualeWebActionUtils.cleanValues(getIncludePatterns()));
+        setIncludePatterns( SqualeWebActionUtils.cleanValues( getIncludePatterns() ) );
         // Pas de nombre minimal pour les inclusions
     }
 

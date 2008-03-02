@@ -17,16 +17,20 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
 /**
  * Transformation d'une formule
  */
-public class FormulaTransformer implements WITransformer {
+public class FormulaTransformer
+    implements WITransformer
+{
 
     /**
      * @param pObject l'objet à transformer
      * @throws WTransformerException si un pb apparait.
      * @return le formulaire.
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         FormulaForm form = new FormulaForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 
@@ -35,29 +39,35 @@ public class FormulaTransformer implements WITransformer {
      * @param pForm le formulaire à remplir.
      * @throws WTransformerException si un pb apparait.
      */
-    public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
         AbstractFormulaDTO formulaDTO = (AbstractFormulaDTO) pObject[0];
         FormulaForm form = (FormulaForm) pForm;
-        form.setId(formulaDTO.getId());
-        form.setComponentLevel(formulaDTO.getComponentLevel());
+        form.setId( formulaDTO.getId() );
+        form.setComponentLevel( formulaDTO.getComponentLevel() );
         String measures = "";
         Iterator measuresIt = formulaDTO.getMeasureKinds().iterator();
-        while (measuresIt.hasNext()) {
-            if (measures.length() > 0) {
+        while ( measuresIt.hasNext() )
+        {
+            if ( measures.length() > 0 )
+            {
                 measures += ", ";
             }
             measures += (String) measuresIt.next();
         }
-        form.setMeasures(measures);
-        form.setTriggerCondition(formulaDTO.getTriggerCondition());
+        form.setMeasures( measures );
+        form.setTriggerCondition( formulaDTO.getTriggerCondition() );
         String[] conditions;
-        if (formulaDTO instanceof SimpleFormulaDTO) {
-            conditions = new String[] {((SimpleFormulaDTO) formulaDTO).getFormula()};
-        } else {
-            conditions = (String[]) ((ConditionFormulaDTO) formulaDTO).getMarkConditions().toArray(new String[] {
-            });
+        if ( formulaDTO instanceof SimpleFormulaDTO )
+        {
+            conditions = new String[] { ( (SimpleFormulaDTO) formulaDTO ).getFormula() };
         }
-        form.setConditions(conditions);
+        else
+        {
+            conditions = (String[]) ( (ConditionFormulaDTO) formulaDTO ).getMarkConditions().toArray( new String[] {} );
+        }
+        form.setConditions( conditions );
     }
 
     /**
@@ -65,13 +75,16 @@ public class FormulaTransformer implements WITransformer {
      * @throws WTransformerException si un pb apparait.
      * @return le tableaux des objets.
      */
-    public Object[] formToObj(WActionForm pForm) throws WTransformerException {
+    public Object[] formToObj( WActionForm pForm )
+        throws WTransformerException
+    {
         FormulaForm form = (FormulaForm) pForm;
         AbstractFormulaDTO dto = new SimpleFormulaDTO();
-        if(form.getConditions().length > 1) {
+        if ( form.getConditions().length > 1 )
+        {
             dto = new ConditionFormulaDTO();
         }
-        formToObj(pForm, new Object[] { dto });
+        formToObj( pForm, new Object[] { dto } );
         return new Object[] { dto };
     }
 
@@ -80,26 +93,32 @@ public class FormulaTransformer implements WITransformer {
      * @param pForm le formulaire à lire.
      * @throws WTransformerException si un pb apparait.
      */
-    public void formToObj(WActionForm pForm, Object[] pObject) throws WTransformerException {
+    public void formToObj( WActionForm pForm, Object[] pObject )
+        throws WTransformerException
+    {
         FormulaForm form = (FormulaForm) pForm;
         AbstractFormulaDTO dto = (AbstractFormulaDTO) pObject[0];
-        dto.setId(form.getId());
-        dto.setComponentLevel(form.getComponentLevel());
-        dto.setTriggerCondition(form.getTriggerCondition());
+        dto.setId( form.getId() );
+        dto.setComponentLevel( form.getComponentLevel() );
+        dto.setTriggerCondition( form.getTriggerCondition() );
         String measures = form.getMeasures();
         // on découpe les types de mesures qui sont sous la forme d'une String dans le form
         // les valeurs sont séparés par une ","
-        StringTokenizer st = new StringTokenizer(measures,",");
+        StringTokenizer st = new StringTokenizer( measures, "," );
         ArrayList measuresList = new ArrayList();
-        while(st.hasMoreTokens()){
-            measuresList.add(st.nextToken().trim());
+        while ( st.hasMoreTokens() )
+        {
+            measuresList.add( st.nextToken().trim() );
         }
-        dto.setMeasureKinds(measuresList);
-        if(dto instanceof SimpleFormulaDTO) {
-            ((SimpleFormulaDTO)dto).setFormula(form.getConditions()[0]);
-        } else {
-            List conditions = Arrays.asList(form.getConditions());
-            ((ConditionFormulaDTO)dto).setMarkConditions(conditions);
+        dto.setMeasureKinds( measuresList );
+        if ( dto instanceof SimpleFormulaDTO )
+        {
+            ( (SimpleFormulaDTO) dto ).setFormula( form.getConditions()[0] );
+        }
+        else
+        {
+            List conditions = Arrays.asList( form.getConditions() );
+            ( (ConditionFormulaDTO) dto ).setMarkConditions( conditions );
         }
     }
 

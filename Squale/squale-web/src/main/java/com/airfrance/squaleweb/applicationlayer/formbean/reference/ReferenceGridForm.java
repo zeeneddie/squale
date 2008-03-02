@@ -7,7 +7,9 @@ import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
 /**
  * Données du référentiel par grille
  */
-public class ReferenceGridForm extends RootForm {
+public class ReferenceGridForm
+    extends RootForm
+{
 
     /** Date de mise à jour */
     private Date mUpdateDate;
@@ -21,14 +23,16 @@ public class ReferenceGridForm extends RootForm {
     /**
      * @return date de mise à jour formatée
      */
-    public String getFormattedDate() {
+    public String getFormattedDate()
+    {
         return mFormattedDate;
     }
 
     /**
      * @param pString date de mise à jour formatée
      */
-    public void setFormattedDate(String pString) {
+    public void setFormattedDate( String pString )
+    {
         mFormattedDate = pString;
     }
 
@@ -36,45 +40,52 @@ public class ReferenceGridForm extends RootForm {
      * Liste des références (referencesForm)
      */
     private ReferenceListForm mReferenceListForm = new ReferenceListForm();
+
     /**
      * @return la liste des références
      */
-    public ReferenceListForm getReferenceListForm() {
+    public ReferenceListForm getReferenceListForm()
+    {
         return mReferenceListForm;
     }
 
     /**
      * @param pReferenceListForm la liste des références
      */
-    public void setReferenceListForm(ReferenceListForm pReferenceListForm) {
+    public void setReferenceListForm( ReferenceListForm pReferenceListForm )
+    {
         mReferenceListForm = pReferenceListForm;
     }
 
     /**
      * @return date de mise à jour
      */
-    public Date getUpdateDate() {
+    public Date getUpdateDate()
+    {
         return mUpdateDate;
     }
 
     /**
      * @param pString date de mise à jour
      */
-    public void setUpdateDate(Date pString) {
+    public void setUpdateDate( Date pString )
+    {
         mUpdateDate = pString;
     }
 
     /**
      * @return le nom de la grille
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
 
     /**
      * @param pName le nom de la grille
      */
-    public void setName(String pName) {
+    public void setName( String pName )
+    {
         mName = pName;
     }
 

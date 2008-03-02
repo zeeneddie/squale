@@ -12,7 +12,9 @@ import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
  * @author M400832
  * @version 1.0
  */
-public class CRightListForm extends RootForm {
+public class CRightListForm
+    extends RootForm
+{
 
     /**
      * Liste de droits.
@@ -22,14 +24,16 @@ public class CRightListForm extends RootForm {
     /**
      * @return une liste de droits.
      */
-    public List getRightList() {
+    public List getRightList()
+    {
         return mRightList;
     }
 
     /**
      * @param pRightList une liste de droits.
      */
-    public void setRightList(List pRightList) {
+    public void setRightList( List pRightList )
+    {
         mRightList = pRightList;
     }
 

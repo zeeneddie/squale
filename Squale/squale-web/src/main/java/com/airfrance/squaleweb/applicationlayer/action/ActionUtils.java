@@ -29,35 +29,40 @@ import com.airfrance.welcom.struts.util.WConstants;
 /**
  * Utilitaire pour les actions
  */
-public class ActionUtils {
+public class ActionUtils
+{
     /**
-     * Mise à jour du user en session
-     * Le user actuellement en session voit ses informations
-     * mises à jour après appel des couches métier
+     * Mise à jour du user en session Le user actuellement en session voit ses informations mises à jour après appel des
+     * couches métier
+     * 
      * @param pRequest requête
      * @throws JrafEnterpriseException si erreur
      * @throws WTransformerException si erreur
      */
-    public static void refreshUser(HttpServletRequest pRequest) throws JrafEnterpriseException, WTransformerException {
+    public static void refreshUser( HttpServletRequest pRequest )
+        throws JrafEnterpriseException, WTransformerException
+    {
         // On recharge les profils de l'utilisateur
         // On vérifie en base que le nom est disponible
-        LogonBean sessionUser = (LogonBean) pRequest.getSession().getAttribute(WConstants.USER_KEY);
+        LogonBean sessionUser = (LogonBean) pRequest.getSession().getAttribute( WConstants.USER_KEY );
         UserDTO user = new UserDTO();
-        user.setID(sessionUser.getId());
+        user.setID( sessionUser.getId() );
         // Appel couche métier
-        IApplicationComponent ac2 = AccessDelegateHelper.getInstance("Login");
-        Object[] paramIn2 = { user, Boolean.valueOf(sessionUser.isAdmin())};
-        user = (UserDTO) ac2.execute("verifyUser", paramIn2);
+        IApplicationComponent ac2 = AccessDelegateHelper.getInstance( "Login" );
+        Object[] paramIn2 = { user, Boolean.valueOf( sessionUser.isAdmin() ) };
+        user = (UserDTO) ac2.execute( "verifyUser", paramIn2 );
         // Placement dans la session des informations mises à jour
-        if (null != user) {
+        if ( null != user )
+        {
             boolean isAdmin = sessionUser.isAdmin();
             sessionUser = new LogonBean();
-            WActionForm userForm = WTransformerFactory.objToForm(UserTransformer.class, user);
-            WTransformerFactory.formToObj(LogonBeanTransformer.class, userForm, new Object[]{sessionUser, Boolean.valueOf(isAdmin)});
-            pRequest.getSession().setAttribute(WConstants.USER_KEY, sessionUser);
+            WActionForm userForm = WTransformerFactory.objToForm( UserTransformer.class, user );
+            WTransformerFactory.formToObj( LogonBeanTransformer.class, userForm, new Object[] { sessionUser,
+                Boolean.valueOf( isAdmin ) } );
+            pRequest.getSession().setAttribute( WConstants.USER_KEY, sessionUser );
         }
     }
-   
+
     /**
      * Retourne l'application recherchée et stockée dans la liste.
      * 
@@ -65,21 +70,26 @@ public class ActionUtils {
      * @param pApplications la liste des applications.
      * @return le nom de l'application.
      */
-    public static ApplicationForm getComponent(long pId, final Collection pApplications) {
+    public static ApplicationForm getComponent( long pId, final Collection pApplications )
+    {
         ApplicationForm application = null;
-        if (null != pApplications) {
+        if ( null != pApplications )
+        {
             // Parcours de chaque application
             Iterator it = pApplications.iterator();
-            while (it.hasNext() && null == application) {
+            while ( it.hasNext() && null == application )
+            {
                 application = (ApplicationForm) it.next();
                 // Le test se fait sur l'id de l'application
-                if (application.getId() != pId) {
+                if ( application.getId() != pId )
+                {
                     application = null;
                 }
             }
         }
         return application;
     }
+
     /**
      * Permet la récupération des audits en session de la requête paramètre.
      * 
@@ -87,44 +97,55 @@ public class ActionUtils {
      * @return une liste des audits, ou null si il n'y en a pas.
      * @throws WTransformerException si un pb de transformation apparait.
      */
-    public static List getCurrentAuditsAsDTO(final HttpServletRequest pRequest) throws WTransformerException {
+    public static List getCurrentAuditsAsDTO( final HttpServletRequest pRequest )
+        throws WTransformerException
+    {
         List audits = null;
-        AuditDTO currentAudit = (AuditDTO) pRequest.getSession().getAttribute(BaseDispatchAction.CURRENT_AUDIT_DTO);
-        AuditDTO previousAudit = (AuditDTO) pRequest.getSession().getAttribute(BaseDispatchAction.PREVIOUS_AUDIT_DTO);
+        AuditDTO currentAudit = (AuditDTO) pRequest.getSession().getAttribute( BaseDispatchAction.CURRENT_AUDIT_DTO );
+        AuditDTO previousAudit = (AuditDTO) pRequest.getSession().getAttribute( BaseDispatchAction.PREVIOUS_AUDIT_DTO );
         // On ajoute les audits que si ils ne sont pas nuls car sinon on a une erreur de taille
         // car ajouter un élément nul incréménte la taille
-        if(currentAudit != null){
-            audits = new ArrayList(0);
-            audits.add(currentAudit);
+        if ( currentAudit != null )
+        {
+            audits = new ArrayList( 0 );
+            audits.add( currentAudit );
             // De plus on ajoute (fort logiquement) le previous que si le courant existe
-            if(previousAudit != null){
-                audits.add(previousAudit);
+            if ( previousAudit != null )
+            {
+                audits.add( previousAudit );
             }
         }
         return audits;
     }
+
     /**
-     * @param pRequest la requête 
+     * @param pRequest la requête
      * @return l'application courante en tant que form
      * @throws WTransformerException si un pb de transformation apparait.
      */
-    public static ApplicationForm getCurrentApplication(final HttpServletRequest pRequest) throws WTransformerException {
+    public static ApplicationForm getCurrentApplication( final HttpServletRequest pRequest )
+        throws WTransformerException
+    {
         ApplicationForm application = null;
-        ComponentDTO appli= (ComponentDTO) pRequest.getSession().getAttribute(BaseDispatchAction.APPLI_DTO);
-        application = (ApplicationForm) WTransformerFactory.objToForm(ApplicationTransformer.class,new Object[]{appli});
+        ComponentDTO appli = (ComponentDTO) pRequest.getSession().getAttribute( BaseDispatchAction.APPLI_DTO );
+        application =
+            (ApplicationForm) WTransformerFactory.objToForm( ApplicationTransformer.class, new Object[] { appli } );
         return application;
     }
+
     /**
-     * 
      * @param pRequest la requête HTTP.
      * @return le projet, ou null.
      * @throws WTransformerException si un pb de transformation apparait.
      */
-    public static ProjectForm getCurrentProject(final HttpServletRequest pRequest) throws WTransformerException {
+    public static ProjectForm getCurrentProject( final HttpServletRequest pRequest )
+        throws WTransformerException
+    {
         ProjectForm result = null;
-        ComponentDTO project = (ComponentDTO) pRequest.getSession().getAttribute(BaseDispatchAction.PROJECT_DTO);
-        if(project != null){
-            result = (ProjectForm) WTransformerFactory.objToForm(ProjectTransformer.class,new Object[]{project});
+        ComponentDTO project = (ComponentDTO) pRequest.getSession().getAttribute( BaseDispatchAction.PROJECT_DTO );
+        if ( project != null )
+        {
+            result = (ProjectForm) WTransformerFactory.objToForm( ProjectTransformer.class, new Object[] { project } );
         }
         return result;
     }

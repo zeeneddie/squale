@@ -16,59 +16,70 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 /**
  * transformer pour la recherche d'un projet
  */
-public class SearchProjectTransformer implements WITransformer {
+public class SearchProjectTransformer
+    implements WITransformer
+{
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
-     * {@inheritDoc}
+     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[]) {@inheritDoc}
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         SearchProjectForm form = new SearchProjectForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[], com.airfrance.welcom.struts.bean.WActionForm)
-     * {@inheritDoc}
+     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      com.airfrance.welcom.struts.bean.WActionForm) {@inheritDoc}
      */
-    public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
         SearchProjectForm form = (SearchProjectForm) pForm;
         Map projectsWithAudit = new HashMap();
         Map projectsDto = (Map) pObject[0];
         List applications = (List) pObject[1];
-        for (Iterator it = projectsDto.keySet().iterator(); it.hasNext();) {
+        for ( Iterator it = projectsDto.keySet().iterator(); it.hasNext(); )
+        {
             ComponentDTO dto = (ComponentDTO) it.next();
-            AuditDTO auditDTO = (AuditDTO) projectsDto.get(dto);
-            if(null != auditDTO) {
-            projectsWithAudit.put(
-                WTransformerFactory.objToForm(ProjectTransformer.class, new Object[] { dto, applications }),
-                WTransformerFactory.objToForm(AuditTransformer.class, new Object[] { auditDTO }));
-            } else {
-                projectsWithAudit.put(
-                    WTransformerFactory.objToForm(ProjectTransformer.class, new Object[] { dto, applications }),
-                    null);
+            AuditDTO auditDTO = (AuditDTO) projectsDto.get( dto );
+            if ( null != auditDTO )
+            {
+                projectsWithAudit.put( WTransformerFactory.objToForm( ProjectTransformer.class, new Object[] { dto,
+                    applications } ), WTransformerFactory.objToForm( AuditTransformer.class, new Object[] { auditDTO } ) );
+            }
+            else
+            {
+                projectsWithAudit.put( WTransformerFactory.objToForm( ProjectTransformer.class, new Object[] { dto,
+                    applications } ), null );
             }
         }
-        form.setProjectForms(projectsWithAudit);
+        form.setProjectForms( projectsWithAudit );
 
     }
 
     /**
      * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public Object[] formToObj(WActionForm pForm) throws WTransformerException {
+    public Object[] formToObj( WActionForm pForm )
+        throws WTransformerException
+    {
         Object[] obj = new Object[2];
-        formToObj(pForm, obj);
+        formToObj( pForm, obj );
         return obj;
     }
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm, java.lang.Object[])
-     * {@inheritDoc}
+     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm,
+     *      java.lang.Object[]) {@inheritDoc}
      */
-    public void formToObj(WActionForm pForm, Object[] pObject) throws WTransformerException {
+    public void formToObj( WActionForm pForm, Object[] pObject )
+        throws WTransformerException
+    {
         SearchProjectForm form = (SearchProjectForm) pForm;
         pObject[0] = form.getApplicationBeginningName();
         pObject[1] = form.getProjectBeginningName();

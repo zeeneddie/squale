@@ -27,7 +27,9 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 /**
  * Manipulation des grilles qualité
  */
-public class GridAction extends AdminAction {
+public class GridAction
+    extends AdminAction
+{
     /**
      * Affichage de la liste des grilles
      * 
@@ -37,27 +39,34 @@ public class GridAction extends AdminAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward list(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward list( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                               HttpServletResponse pResponse )
+    {
 
         ActionErrors errors = new ActionErrors();
-        ActionForward forward = pMapping.findForward("total_failure");
-        try {
-            IApplicationComponent ac = AccessDelegateHelper.getInstance("QualityGrid");
-            Collection grids = (Collection) ac.execute("getGrids", new Object[] { Boolean.FALSE });
+        ActionForward forward = pMapping.findForward( "total_failure" );
+        try
+        {
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "QualityGrid" );
+            Collection grids = (Collection) ac.execute( "getGrids", new Object[] { Boolean.FALSE } );
             // On récupère la liste des noms des grilles qui ne sont liées à aucun profil ni à
             // aucun audit
-            Collection unlinkedGrids = (Collection) ac.execute("getUnlinkedGrids");
-            WTransformerFactory.objToForm(GridListTransformer.class, (WActionForm) pForm, new Object[]{grids, unlinkedGrids});
-            forward = pMapping.findForward("list");
-        } catch (Exception e) {
-            handleException(e, errors, pRequest);
+            Collection unlinkedGrids = (Collection) ac.execute( "getUnlinkedGrids" );
+            WTransformerFactory.objToForm( GridListTransformer.class, (WActionForm) pForm, new Object[] { grids,
+                unlinkedGrids } );
+            forward = pMapping.findForward( "list" );
         }
-        if (!errors.isEmpty()) {
-            saveMessages(pRequest, errors);
+        catch ( Exception e )
+        {
+            handleException( e, errors, pRequest );
         }
-        //On est passé par un menu donc on réinitialise le traceur
-        resetTracker(pRequest);
-        return (forward);
+        if ( !errors.isEmpty() )
+        {
+            saveMessages( pRequest, errors );
+        }
+        // On est passé par un menu donc on réinitialise le traceur
+        resetTracker( pRequest );
+        return ( forward );
     }
 
     /**
@@ -69,28 +78,34 @@ public class GridAction extends AdminAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward detail(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward detail( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                 HttpServletResponse pResponse )
+    {
 
         ActionErrors errors = new ActionErrors();
-        ActionForward forward = pMapping.findForward("total_failure");
-        try {
-            IApplicationComponent ac = AccessDelegateHelper.getInstance("QualityGrid");
-            String param = pRequest.getParameter("gridId");
+        ActionForward forward = pMapping.findForward( "total_failure" );
+        try
+        {
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "QualityGrid" );
+            String param = pRequest.getParameter( "gridId" );
             QualityGridDTO dto = new QualityGridDTO();
-            dto.setId(Long.parseLong(param));
-            QualityGridConfDTO conf = (QualityGridConfDTO) ac.execute("getGrid", new Object[] { dto });
-            WActionForm form = WTransformerFactory.objToForm(GridConfTransformer.class, conf);
-            pRequest.getSession().setAttribute("gridConfigForm", form);
-            forward = pMapping.findForward("detail");
-        } catch (Exception e) {
-            handleException(e, errors, pRequest);
+            dto.setId( Long.parseLong( param ) );
+            QualityGridConfDTO conf = (QualityGridConfDTO) ac.execute( "getGrid", new Object[] { dto } );
+            WActionForm form = WTransformerFactory.objToForm( GridConfTransformer.class, conf );
+            pRequest.getSession().setAttribute( "gridConfigForm", form );
+            forward = pMapping.findForward( "detail" );
         }
-        if (!errors.isEmpty()) {
-            saveMessages(pRequest, errors);
+        catch ( Exception e )
+        {
+            handleException( e, errors, pRequest );
         }
-        //On est passé par un menu donc on réinitialise le traceur
-        resetTracker(pRequest);
-        return (forward);
+        if ( !errors.isEmpty() )
+        {
+            saveMessages( pRequest, errors );
+        }
+        // On est passé par un menu donc on réinitialise le traceur
+        resetTracker( pRequest );
+        return ( forward );
     }
 
     /**
@@ -102,41 +117,53 @@ public class GridAction extends AdminAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward purge(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward purge( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                HttpServletResponse pResponse )
+    {
 
         ActionErrors errors = new ActionErrors();
-        ActionForward forward = pMapping.findForward("total_failure");
-        try {
+        ActionForward forward = pMapping.findForward( "total_failure" );
+        try
+        {
             // Transformation en DTO de chaque grille sélectionnée
-            ArrayList grids = (ArrayList) WTransformerFactory.formToObj(GridListTransformer.class, (WActionForm) pForm)[0];
-            if (grids.isEmpty()) {
+            ArrayList grids =
+                (ArrayList) WTransformerFactory.formToObj( GridListTransformer.class, (WActionForm) pForm )[0];
+            if ( grids.isEmpty() )
+            {
                 // Affichage d'une erreur car rien n'est sélectionné
-                ActionMessage error = new ActionError("error.invalidSelection");
-                errors.add(ActionErrors.GLOBAL_ERROR, error);
-            } else {
-                IApplicationComponent ac = AccessDelegateHelper.getInstance("QualityGrid");
-                Collection usedGrids = (Collection) ac.execute("deleteGrids", new Object[] { grids });
-                if (usedGrids.size() > 0) {
+                ActionMessage error = new ActionError( "error.invalidSelection" );
+                errors.add( ActionErrors.GLOBAL_ERROR, error );
+            }
+            else
+            {
+                IApplicationComponent ac = AccessDelegateHelper.getInstance( "QualityGrid" );
+                Collection usedGrids = (Collection) ac.execute( "deleteGrids", new Object[] { grids } );
+                if ( usedGrids.size() > 0 )
+                {
                     // Affichage d'une erreur sir des grilles sont utilisées
-                    ActionMessage error = new ActionError("error.gridUsed");
-                    errors.add(ActionErrors.GLOBAL_ERROR, error);
+                    ActionMessage error = new ActionError( "error.gridUsed" );
+                    errors.add( ActionErrors.GLOBAL_ERROR, error );
                 }
                 // On remet à jour la liste des grilles
-                Collection newgrids = (Collection) ac.execute("getGrids", new Object[] { Boolean.FALSE });
-                Collection unlinkedGrids = (Collection) ac.execute("getUnlinkedGrids");
-                WTransformerFactory.objToForm(GridListTransformer.class, (WActionForm) pForm, new Object[]{newgrids, unlinkedGrids});
+                Collection newgrids = (Collection) ac.execute( "getGrids", new Object[] { Boolean.FALSE } );
+                Collection unlinkedGrids = (Collection) ac.execute( "getUnlinkedGrids" );
+                WTransformerFactory.objToForm( GridListTransformer.class, (WActionForm) pForm, new Object[] { newgrids,
+                    unlinkedGrids } );
             }
-            forward = pMapping.findForward("list");
-        } catch (Exception e) {
-            handleException(e, errors, pRequest);
+            forward = pMapping.findForward( "list" );
+        }
+        catch ( Exception e )
+        {
+            handleException( e, errors, pRequest );
         }
         // Sauvegarde des erreurs
-        if (!errors.isEmpty()) {
-            saveMessages(pRequest, errors);
+        if ( !errors.isEmpty() )
+        {
+            saveMessages( pRequest, errors );
         }
-        //On est passé par un menu donc on réinitialise le traceur
-        resetTracker(pRequest);
-        return (forward);
+        // On est passé par un menu donc on réinitialise le traceur
+        resetTracker( pRequest );
+        return ( forward );
     }
 
     /**
@@ -149,37 +176,47 @@ public class GridAction extends AdminAction {
      * @return l'action à réaliser.
      * @deprecated à ne pas utiliser, il reste des problèmes de gestion. En attente des specs pour la 2.2
      */
-    public ActionForward update(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward update( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                 HttpServletResponse pResponse )
+    {
         ActionMessages errors = new ActionMessages();
-        ActionForward forward = pMapping.findForward("detail");
-        try {
-            IApplicationComponent ac = AccessDelegateHelper.getInstance("QualityGrid");
-            QualityGridConfDTO gridDto = (QualityGridConfDTO) WTransformerFactory.formToObj(GridConfTransformer.class, (WActionForm) pForm)[0];
+        ActionForward forward = pMapping.findForward( "detail" );
+        try
+        {
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "QualityGrid" );
+            QualityGridConfDTO gridDto =
+                (QualityGridConfDTO) WTransformerFactory.formToObj( GridConfTransformer.class, (WActionForm) pForm )[0];
             StringBuffer buf = new StringBuffer();
-            ac.execute("updateGrid", new Object[] { gridDto, buf });
-            if(buf.length() > 0 ) {
-                ActionMessage error = new ActionError("error.cannot_update_grid");
-                ActionMessage msg = new ActionError("grid_import.errors", buf.toString());
-                errors.add(ActionErrors.GLOBAL_ERROR, error);
-                errors.add(ActionErrors.GLOBAL_ERROR, msg);
-            } else {
-                // mise à jour effectuée
-                ActionMessage msg = new ActionError("grid_updated", gridDto.getName());
-                errors.add(ActionErrors.GLOBAL_ERROR, msg);
-                pRequest.getSession().removeAttribute("gridConfigForm");
-                forward = pMapping.findForward("list");
+            ac.execute( "updateGrid", new Object[] { gridDto, buf } );
+            if ( buf.length() > 0 )
+            {
+                ActionMessage error = new ActionError( "error.cannot_update_grid" );
+                ActionMessage msg = new ActionError( "grid_import.errors", buf.toString() );
+                errors.add( ActionErrors.GLOBAL_ERROR, error );
+                errors.add( ActionErrors.GLOBAL_ERROR, msg );
             }
-        } catch (Exception e) {
-            // Affichage d'une erreur 
-            ActionMessage error = new ActionError("error.cannot_update_grid");
-            errors.add(ActionErrors.GLOBAL_ERROR, error);
+            else
+            {
+                // mise à jour effectuée
+                ActionMessage msg = new ActionError( "grid_updated", gridDto.getName() );
+                errors.add( ActionErrors.GLOBAL_ERROR, msg );
+                pRequest.getSession().removeAttribute( "gridConfigForm" );
+                forward = pMapping.findForward( "list" );
+            }
+        }
+        catch ( Exception e )
+        {
+            // Affichage d'une erreur
+            ActionMessage error = new ActionError( "error.cannot_update_grid" );
+            errors.add( ActionErrors.GLOBAL_ERROR, error );
         }
         // Sauvegarde des erreurs
-        if (!errors.isEmpty()) {
-            saveMessages(pRequest, errors);
+        if ( !errors.isEmpty() )
+        {
+            saveMessages( pRequest, errors );
         }
-        //On est passé par un menu donc on réinitialise le traceur
-        resetTracker(pRequest);
-        return (forward);
+        // On est passé par un menu donc on réinitialise le traceur
+        resetTracker( pRequest );
+        return ( forward );
     }
 }

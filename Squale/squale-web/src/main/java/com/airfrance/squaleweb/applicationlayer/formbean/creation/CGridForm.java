@@ -5,5 +5,7 @@ import com.airfrance.squaleweb.applicationlayer.formbean.AbstractUploadForm;
 /**
  * Configuration d'une grille qualité
  */
-public class CGridForm extends AbstractUploadForm {
+public class CGridForm
+    extends AbstractUploadForm
+{
 }

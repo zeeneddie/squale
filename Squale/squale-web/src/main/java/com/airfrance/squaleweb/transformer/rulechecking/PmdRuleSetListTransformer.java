@@ -7,13 +7,16 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
 /**
  * Transformation d'une liste de ruleset PMD
  */
-public class PmdRuleSetListTransformer extends AbstractRuleSetListTransformer {
+public class PmdRuleSetListTransformer
+    extends AbstractRuleSetListTransformer
+{
 
     /**
      * Constructeur
      */
-    public PmdRuleSetListTransformer() {
-        super(PmdRuleSetTransformer.class);
+    public PmdRuleSetListTransformer()
+    {
+        super( PmdRuleSetTransformer.class );
     }
 
     /**
@@ -21,9 +24,11 @@ public class PmdRuleSetListTransformer extends AbstractRuleSetListTransformer {
      * @throws WTransformerException si un pb apparaît.
      * @return le formulaire associé
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         PmdRuleSetListForm form = new PmdRuleSetListForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 }

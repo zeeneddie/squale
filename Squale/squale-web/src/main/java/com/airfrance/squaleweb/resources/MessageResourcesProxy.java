@@ -16,60 +16,69 @@ import com.airfrance.squaleweb.messages.MessageProvider;
 import com.airfrance.squaleweb.transformer.message.MessagesDTOTransformer;
 
 /**
- * Proxy des ressources struts
- * Les messages affichés sous struts proviennent de deux sources :
- * les messages statiqques définis dans un fichier de propriétés
- * les messages dynamiques définis dans la base de données
+ * Proxy des ressources struts Les messages affichés sous struts proviennent de deux sources : les messages statiqques
+ * définis dans un fichier de propriétés les messages dynamiques définis dans la base de données
  */
-public class MessageResourcesProxy extends MessageResources implements Observer {
+public class MessageResourcesProxy
+    extends MessageResources
+    implements Observer
+{
     /**
-      * Logger
-      */
-    private static Log log = LogFactory.getLog(MessageResourcesProxy.class);
+     * Logger
+     */
+    private static Log log = LogFactory.getLog( MessageResourcesProxy.class );
+
     /** Ressources dans le fichier de configuration */
     private MessageResources mMessageResources;
 
     /**
      * Constructeur
+     * 
      * @param factory factory
      * @param config configuration
      * @param pMessageResources messages struts
      */
-    public MessageResourcesProxy(MessageResourcesFactory factory, String config, MessageResources pMessageResources) {
-        super(factory, config);
+    public MessageResourcesProxy( MessageResourcesFactory factory, String config, MessageResources pMessageResources )
+    {
+        super( factory, config );
         mMessageResources = pMessageResources;
         IApplicationComponent ac;
-        DataBaseMessages.registerObserver(this);
-        try {
-            ac = AccessDelegateHelper.getInstance("Messages");
-            MessageProvider messages = MessagesDTOTransformer.transform(ac.execute("getMessages"));
-            DataBaseMessages.update(messages);
-        } catch (JrafEnterpriseException e) {
-            log.error(e, e);
+        DataBaseMessages.registerObserver( this );
+        try
+        {
+            ac = AccessDelegateHelper.getInstance( "Messages" );
+            MessageProvider messages = MessagesDTOTransformer.transform( ac.execute( "getMessages" ) );
+            DataBaseMessages.update( messages );
+        }
+        catch ( JrafEnterpriseException e )
+        {
+            log.error( e, e );
         }
     }
 
-    /** 
-     * @see org.apache.struts.util.MessageResources#getMessage(java.util.Locale, java.lang.String)
-     * {@inheritDoc}
+    /**
+     * @see org.apache.struts.util.MessageResources#getMessage(java.util.Locale, java.lang.String) {@inheritDoc}
      */
-    public String getMessage(Locale locale, String key) {
-        String result = mMessageResources.getMessage(locale, key);
+    public String getMessage( Locale locale, String key )
+    {
+        String result = mMessageResources.getMessage( locale, key );
         // Récupération du message dans la base de données
-        if (result == null) {
-            result = DataBaseMessages.getMessage(locale, key);
+        if ( result == null )
+        {
+            result = DataBaseMessages.getMessage( locale, key );
         }
         return result;
     }
 
-    /** 
-     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-     * {@inheritDoc}
+    /**
+     * @see java.util.Observer#update(java.util.Observable, java.lang.Object) {@inheritDoc}
      */
-    public void update(Observable o, Object arg) {
+    public void update( Observable o, Object arg )
+    {
         // On reinitialise la map interne des formats gérée par struts
         // Cette map contient un ensemble de MessageFormat
-        synchronized (formats) {
+        synchronized ( formats )
+        {
             formats.clear();
         }
     }

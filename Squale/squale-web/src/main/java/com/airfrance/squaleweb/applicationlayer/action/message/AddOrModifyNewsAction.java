@@ -21,7 +21,9 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 /**
  * 
  */
-public class AddOrModifyNewsAction extends AdminAction {
+public class AddOrModifyNewsAction
+    extends AdminAction
+{
 
     /**
      * @param pMapping le mapping.
@@ -30,34 +32,43 @@ public class AddOrModifyNewsAction extends AdminAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward add(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward add( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                              HttpServletResponse pResponse )
+    {
         ActionErrors errors = new ActionErrors();
         ActionMessages messages = new ActionMessages();
         // par défaut on est redirigés sur la page courante
         ActionForward forward = null;
         NewsForm form = (NewsForm) pForm;
-        try {
-            IApplicationComponent ac = AccessDelegateHelper.getInstance("Messages");
-            NewsDTO dto = (NewsDTO) WTransformerFactory.formToObj(NewsTranformer.class, form)[0];
+        try
+        {
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "Messages" );
+            NewsDTO dto = (NewsDTO) WTransformerFactory.formToObj( NewsTranformer.class, form )[0];
             Object[] paramIn = new Object[] { dto };
-            // si la news existe déja, on revient sur la page courante 
+            // si la news existe déja, on revient sur la page courante
             // en signalant qu'on a pas pu ajouté
-            if(((Boolean)ac.execute("newsAlreadyExists",paramIn)).booleanValue()){
-                forward = pMapping.findForward("uncorrect");
-                ActionMessage error = new ActionMessage("error.key.alreadyExists");
-                messages.add(ActionMessages.GLOBAL_MESSAGE, error);
-                saveMessages(pRequest, messages);
-            }else{ // on ajoute effectivement en base
-                ac.execute("addNews", paramIn);
-                forward = pMapping.findForward("success");
+            if ( ( (Boolean) ac.execute( "newsAlreadyExists", paramIn ) ).booleanValue() )
+            {
+                forward = pMapping.findForward( "uncorrect" );
+                ActionMessage error = new ActionMessage( "error.key.alreadyExists" );
+                messages.add( ActionMessages.GLOBAL_MESSAGE, error );
+                saveMessages( pRequest, messages );
             }
-        } catch (Exception e) {
-            handleException(e, errors, pRequest);
+            else
+            { // on ajoute effectivement en base
+                ac.execute( "addNews", paramIn );
+                forward = pMapping.findForward( "success" );
+            }
         }
-        if (!errors.isEmpty()) {
-            //Enregistrement du message et routage vers la page d'erreur
-            saveErrors(pRequest, errors);
-            forward = pMapping.findForward("total_failure");
+        catch ( Exception e )
+        {
+            handleException( e, errors, pRequest );
+        }
+        if ( !errors.isEmpty() )
+        {
+            // Enregistrement du message et routage vers la page d'erreur
+            saveErrors( pRequest, errors );
+            forward = pMapping.findForward( "total_failure" );
         }
         return forward;
     }
@@ -69,24 +80,30 @@ public class AddOrModifyNewsAction extends AdminAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward modify(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward modify( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                 HttpServletResponse pResponse )
+    {
         ActionErrors errors = new ActionErrors();
         // par défaut on est redirigés sur la page courante
         ActionForward forward = null;
         NewsForm form = (NewsForm) pForm;
-        try {
-            IApplicationComponent ac = AccessDelegateHelper.getInstance("Messages");
-            NewsDTO dto = (NewsDTO) WTransformerFactory.formToObj(NewsTranformer.class, form)[0];
+        try
+        {
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "Messages" );
+            NewsDTO dto = (NewsDTO) WTransformerFactory.formToObj( NewsTranformer.class, form )[0];
             Object[] paramIn = new Object[] { dto };
-            ac.execute("modifyNews", paramIn);
-            forward = pMapping.findForward("success");
-        } catch (Exception e) {
-            handleException(e, errors, pRequest);
+            ac.execute( "modifyNews", paramIn );
+            forward = pMapping.findForward( "success" );
         }
-        if (!errors.isEmpty()) {
-            //Enregistrement du message et routage vers la page d'erreur
-            saveErrors(pRequest, errors);
-            forward = pMapping.findForward("total_failure");
+        catch ( Exception e )
+        {
+            handleException( e, errors, pRequest );
+        }
+        if ( !errors.isEmpty() )
+        {
+            // Enregistrement du message et routage vers la page d'erreur
+            saveErrors( pRequest, errors );
+            forward = pMapping.findForward( "total_failure" );
         }
         return forward;
     }

@@ -8,16 +8,20 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
 
 /**
  */
-public class ProfileStatsTransformer implements WITransformer {
+public class ProfileStatsTransformer
+    implements WITransformer
+{
 
     /**
      * @param pObject le tableau d'objet contenant l'objet à transformer
      * @return le form résultat de la transformation
      * @throws WTransformerException en cas d'échec
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         ProfilStatsForm form = new ProfilStatsForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 
@@ -26,12 +30,14 @@ public class ProfileStatsTransformer implements WITransformer {
      * @param pForm le form résultat
      * @throws WTransformerException en cas d'échec
      */
-    public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
         ProfilStatsForm form = (ProfilStatsForm) pForm;
         ProfilStatsDTO dto = (ProfilStatsDTO) pObject[0];
-        form.setLoc(dto.getLoc());
-        form.setNbProjects(dto.getNbProjects());
-        form.setProfileName(dto.getProfileName());
+        form.setLoc( dto.getLoc() );
+        form.setNbProjects( dto.getNbProjects() );
+        form.setProfileName( dto.getProfileName() );
     }
 
     /**
@@ -40,8 +46,10 @@ public class ProfileStatsTransformer implements WITransformer {
      * @throws WTransformerException si un pb apparait.
      * @return rien mais lance systématiquement une exception
      */
-    public Object[] formToObj(WActionForm pForm) throws WTransformerException {
-        throw new WTransformerException("deprecated");
+    public Object[] formToObj( WActionForm pForm )
+        throws WTransformerException
+    {
+        throw new WTransformerException( "deprecated" );
     }
 
     /**
@@ -50,8 +58,10 @@ public class ProfileStatsTransformer implements WITransformer {
      * @param pTab les paramètres
      * @throws WTransformerException si un pb apparait.
      */
-    public void formToObj(WActionForm pForm, Object[] pTab) throws WTransformerException {
-        throw new WTransformerException("deprecated");
+    public void formToObj( WActionForm pForm, Object[] pTab )
+        throws WTransformerException
+    {
+        throw new WTransformerException( "deprecated" );
     }
 
 }

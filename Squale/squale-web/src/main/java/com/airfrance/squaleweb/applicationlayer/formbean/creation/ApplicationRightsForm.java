@@ -4,14 +4,18 @@ import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
  * Form bean for a Struts application.
+ * 
  * @version 1.0
  * @author
  */
-public class ApplicationRightsForm extends RootForm {
+public class ApplicationRightsForm
+    extends RootForm
+{
     /**
      * Matricule de l'utilisateur
      */
     private String[] mMatricule = null;
+
     /**
      * Profil associé de l'utilisateur
      */
@@ -20,28 +24,32 @@ public class ApplicationRightsForm extends RootForm {
     /**
      * @return le matricule
      */
-    public String[] getMatricule() {
+    public String[] getMatricule()
+    {
         return mMatricule;
     }
 
     /**
      * @return le profil
      */
-    public String[] getRightProfile() {
+    public String[] getRightProfile()
+    {
         return mRightProfile;
     }
 
     /**
      * @param pMatricule le matricule
      */
-    public void setMatricule(String[] pMatricule) {
+    public void setMatricule( String[] pMatricule )
+    {
         mMatricule = pMatricule;
     }
 
     /**
      * @param pRightProfile le profil
      */
-    public void setRightProfile(String[] pRightProfile) {
+    public void setRightProfile( String[] pRightProfile )
+    {
         mRightProfile = pRightProfile;
     }
 

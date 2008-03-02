@@ -6,15 +6,17 @@ import java.util.List;
 import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
- * Formulaire de réprésentation d'une note de pratique, avec la liste
- * des composants ayant cette note.
+ * Formulaire de réprésentation d'une note de pratique, avec la liste des composants ayant cette note.
  * 
  * @author M400842
  */
-public class MarkForm extends RootForm {
+public class MarkForm
+    extends RootForm
+{
 
     /** Id de la pratique */
     private String mPracticeId;
+
     /** Id du facteur */
     private String mFactorId;
 
@@ -39,28 +41,32 @@ public class MarkForm extends RootForm {
     /**
      * @return la note max
      */
-    public double getMaxMark() {
+    public double getMaxMark()
+    {
         return mMaxMark;
     }
 
     /**
      * @return la note min
      */
-    public double getMinMark() {
+    public double getMinMark()
+    {
         return mMinMark;
     }
 
     /**
      * @param pMaxMark la note max
      */
-    public void setMaxMark(double pMaxMark) {
+    public void setMaxMark( double pMaxMark )
+    {
         mMaxMark = pMaxMark;
     }
 
     /**
      * @param pMinMark la note min
      */
-    public void setMinMark(double pMinMark) {
+    public void setMinMark( double pMinMark )
+    {
         mMinMark = pMinMark;
     }
 
@@ -68,6 +74,7 @@ public class MarkForm extends RootForm {
      * Liste des noms des métriques
      */
     private List mTreNames = new LinkedList();
+
     /**
      * Liste des composants, avec leurs métriques
      */
@@ -81,98 +88,112 @@ public class MarkForm extends RootForm {
     /**
      * @return la liste des composants
      */
-    public List getComponents() {
+    public List getComponents()
+    {
         return mComponents;
     }
 
     /**
      * @return la valeur de la note
      */
-    public int getMarkValue() {
+    public int getMarkValue()
+    {
         return mMarkValue;
     }
 
     /**
      * @return le nom de la pratique
      */
-    public String getPracticeName() {
+    public String getPracticeName()
+    {
         return mPracticeName;
     }
 
     /**
      * @return la liste des noms des tre
      */
-    public List getTreNames() {
+    public List getTreNames()
+    {
         return mTreNames;
     }
 
     /**
      * @param pComponents la liste des composants
      */
-    public void setComponents(List pComponents) {
+    public void setComponents( List pComponents )
+    {
         mComponents = pComponents;
     }
 
     /**
      * @param pMarkValue la valeur des notes
      */
-    public void setMarkValue(int pMarkValue) {
+    public void setMarkValue( int pMarkValue )
+    {
         mMarkValue = pMarkValue;
     }
 
     /**
      * @param pPracticeName le nom de la pratique
      */
-    public void setPracticeName(String pPracticeName) {
+    public void setPracticeName( String pPracticeName )
+    {
         mPracticeName = pPracticeName;
     }
 
     /**
      * @param pTreNames la liste des noms des tre
      */
-    public void setTreNames(List pTreNames) {
+    public void setTreNames( List pTreNames )
+    {
         mTreNames = pTreNames;
     }
 
     /**
      * @return FactorName nom du facteur parent
      */
-    public String getFactorName() {
+    public String getFactorName()
+    {
         return mFactorName;
     }
 
     /**
      * @param pFactorName nom du facteur parent
      */
-    public void setFactorName(String pFactorName) {
+    public void setFactorName( String pFactorName )
+    {
         mFactorName = pFactorName;
     }
 
     /**
      * @return id du facteur
      */
-    public String getFactorId() {
+    public String getFactorId()
+    {
         return mFactorId;
     }
 
     /**
      * @return id de la pratique
      */
-    public String getPracticeId() {
+    public String getPracticeId()
+    {
         return mPracticeId;
     }
 
     /**
      * @param pString id du facteur
      */
-    public void setFactorId(String pString) {
+    public void setFactorId( String pString )
+    {
         mFactorId = pString;
     }
 
     /**
      * @param pString id de la pratique
      */
-    public void setPracticeId(String pString) {
+    public void setPracticeId( String pString )
+    {
         mPracticeId = pString;
     }
 

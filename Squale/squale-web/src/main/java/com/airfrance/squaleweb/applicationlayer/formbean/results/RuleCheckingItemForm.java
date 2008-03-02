@@ -5,7 +5,9 @@ import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
 /**
  * Bean pour les items de transgression.
  */
-public class RuleCheckingItemForm extends RootForm {
+public class RuleCheckingItemForm
+    extends RootForm
+{
 
     /** L'id du composant concerné par la transgression */
     private long mComponentId = -1;
@@ -25,70 +27,80 @@ public class RuleCheckingItemForm extends RootForm {
     /**
      * @return l'id du composant concerné par la transgression
      */
-    public long getComponentId() {
+    public long getComponentId()
+    {
         return mComponentId;
     }
 
     /**
      * @return le nom du composant concerné par la transgression
      */
-    public String getComponentName() {
+    public String getComponentName()
+    {
         return mComponentName;
     }
 
     /**
      * @return l'id du composant en relation avec la transgression
      */
-    public long getComponentInvolvedId() {
+    public long getComponentInvolvedId()
+    {
         return mComponentInvolvedId;
     }
 
     /**
      * @return le nom du composant en relation avec la transgression
      */
-    public String getComponentInvolvedName() {
+    public String getComponentInvolvedName()
+    {
         return mComponentInvolvedName;
     }
 
     /**
      * @return le détail de la transgression
      */
-    public String getMessage() {
+    public String getMessage()
+    {
         return mMessage;
     }
 
     /**
      * @param pComponentName le nom du composant concerné par la transgression
      */
-    public void setComponentName(String pComponentName) {
+    public void setComponentName( String pComponentName )
+    {
         mComponentName = pComponentName;
     }
 
     /**
      * @param pComponentId l'id du composant concerné par la transgression
      */
-    public void setComponentId(long pComponentId) {
+    public void setComponentId( long pComponentId )
+    {
         mComponentId = pComponentId;
     }
 
     /**
      * @param pComponentInvolvedId l'id du composant en relation avec la transgression
      */
-    public void setComponentInvolvedId(long pComponentInvolvedId) {
+    public void setComponentInvolvedId( long pComponentInvolvedId )
+    {
         mComponentInvolvedId = pComponentInvolvedId;
     }
 
     /**
      * @param pComponentInvolvedName le nom du composant en relation avec la transgression
      */
-    public void setComponentInvolvedName(String pComponentInvolvedName) {
+    public void setComponentInvolvedName( String pComponentInvolvedName )
+    {
         mComponentInvolvedName = pComponentInvolvedName;
     }
 
     /**
      * @param pMessage le détail de la transgression
      */
-    public void setMessage(String pMessage) {
+    public void setMessage( String pMessage )
+    {
         mMessage = pMessage;
     }
 }

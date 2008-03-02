@@ -5,21 +5,25 @@ import com.airfrance.squaleweb.transformer.rulechecking.PmdRuleSetListTransforme
 /**
  * Actions de configuration PMD
  */
-public class PmdAction extends AbstractRuleSetAction {
+public class PmdAction
+    extends AbstractRuleSetAction
+{
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.action.rulechecking.AbstractRuleSetAction#getRuleSetListTransformer()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    protected Class getRuleSetListTransformer() {
+    protected Class getRuleSetListTransformer()
+    {
         return PmdRuleSetListTransformer.class;
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.action.rulechecking.AbstractRuleSetAction#getAccessComponentName()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    protected String getAccessComponentName() {
+    protected String getAccessComponentName()
+    {
         return "PmdAdmin";
     }
 }

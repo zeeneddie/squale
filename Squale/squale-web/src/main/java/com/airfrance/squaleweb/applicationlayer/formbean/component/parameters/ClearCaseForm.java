@@ -12,7 +12,9 @@ import com.airfrance.squaleweb.util.SqualeWebActionUtils;
 /**
  * Bean pour la configuration de la tâche clearcase.
  */
-public class ClearCaseForm extends AbstractParameterForm {
+public class ClearCaseForm
+    extends AbstractParameterForm
+{
 
     /**
      * Liste des noms de VOBs relatives à un projet
@@ -31,9 +33,9 @@ public class ClearCaseForm extends AbstractParameterForm {
 
     /**
      * Constructeur
-     *
      */
-    public ClearCaseForm() {
+    public ClearCaseForm()
+    {
         mLocation = new String[0];
         mAppli = "";
         mLabelAudited = "";
@@ -42,9 +44,10 @@ public class ClearCaseForm extends AbstractParameterForm {
     /**
      * Access method for the mVOBName property.
      * 
-     * @return   the current value of the mVOBName property
+     * @return the current value of the mVOBName property
      */
-    public String[] getLocation() {
+    public String[] getLocation()
+    {
         return mLocation;
     }
 
@@ -53,97 +56,110 @@ public class ClearCaseForm extends AbstractParameterForm {
      * 
      * @param pLocation the new value of the mLocation property
      */
-    public void setLocation(String[] pLocation) {
+    public void setLocation( String[] pLocation )
+    {
         mLocation = pLocation;
     }
+
     /**
      * @return Label ou branche (ClearCase) en cours d'analyse
      */
-    public String getLabelAudited() {
+    public String getLabelAudited()
+    {
         return mLabelAudited;
     }
 
     /**
      * @param pLabelAudited Label ou branche (ClearCase) en cours d'analyse
      */
-    public void setLabelAudited(String pLabelAudited) {
+    public void setLabelAudited( String pLabelAudited )
+    {
         mLabelAudited = pLabelAudited;
     }
 
     /**
      * @return Application au sens Clearcase (Vob d'admin)
      */
-    public String getAppli() {
+    public String getAppli()
+    {
         return mAppli;
     }
 
     /**
      * @param string Application au sens Clearcase (Vob d'admin)
      */
-    public void setAppli(String string) {
+    public void setAppli( String string )
+    {
         mAppli = string;
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTransformer()
-     * 
      * @return le transformer à utiliser
      */
-    public Class getTransformer() {
+    public Class getTransformer()
+    {
         return ClearCaseConfTransformer.class;
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
-     * 
      * @return le nom utilisé
      */
-    public String getNameInSession() {
+    public String getNameInSession()
+    {
         return "clearCaseForm";
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getParametersConstants()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public String[] getParametersConstants() {
-        return new String[]{ParametersConstants.CLEARCASE};
+    public String[] getParametersConstants()
+    {
+        return new String[] { ParametersConstants.CLEARCASE };
     }
 
-    /** 
-     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+    /**
+     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    public void reset(ActionMapping mapping, HttpServletRequest request) {
-        setAppli("");
-        setLabelAudited("");
-        setLocation(new String[0]);
+    public void reset( ActionMapping mapping, HttpServletRequest request )
+    {
+        setAppli( "" );
+        setLabelAudited( "" );
+        setLocation( new String[0] );
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public String getTaskName() {
+    public String getTaskName()
+    {
         return "ClearCaseTask";
     }
 
-    /** 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+    /**
+     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    protected void validateConf(ActionMapping pMapping, HttpServletRequest pRequest) {
-        setAppli(getAppli().trim());
-        if (getAppli().length() == 0) {
-            addError("appli", new ActionError("error.field.required"));
+    protected void validateConf( ActionMapping pMapping, HttpServletRequest pRequest )
+    {
+        setAppli( getAppli().trim() );
+        if ( getAppli().length() == 0 )
+        {
+            addError( "appli", new ActionError( "error.field.required" ) );
         }
-        setLabelAudited(getLabelAudited().trim());
-        if (getLabelAudited().length() == 0) {
-            addError("labelAudited", new ActionError("error.field.required"));
+        setLabelAudited( getLabelAudited().trim() );
+        if ( getLabelAudited().length() == 0 )
+        {
+            addError( "labelAudited", new ActionError( "error.field.required" ) );
         }
-        setLocation(SqualeWebActionUtils.cleanValues(getLocation()));
-        if (getLocation().length == 0) {
-            addError("location", new ActionError("error.field.required"));
+        setLocation( SqualeWebActionUtils.cleanValues( getLocation() ) );
+        if ( getLocation().length == 0 )
+        {
+            addError( "location", new ActionError( "error.field.required" ) );
         }
     }
 

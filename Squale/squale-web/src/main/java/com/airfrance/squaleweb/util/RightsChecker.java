@@ -8,15 +8,15 @@ package com.airfrance.squaleweb.util;
 
 /**
  * @author M400842
- *
  */
-public class RightsChecker {
+public class RightsChecker
+{
 
     /**
      * Constructeur
-     *
      */
-    private RightsChecker(){
+    private RightsChecker()
+    {
     }
 
 }

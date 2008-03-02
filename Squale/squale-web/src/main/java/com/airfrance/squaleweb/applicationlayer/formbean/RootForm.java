@@ -9,7 +9,9 @@ import com.airfrance.welcom.struts.bean.WActionFormSelectable;
 
 /**
  */
-public class RootForm extends WActionFormSelectable {
+public class RootForm
+    extends WActionFormSelectable
+{
 
     /** id de l'application */
     protected String mApplicationId = "";
@@ -26,7 +28,7 @@ public class RootForm extends WActionFormSelectable {
     /** la date de l'audit courant */
     protected String mPreviousAuditDate = "";
 
-    /** le label de l'audit courant dans le cas d'un audit de jalon ou date sinon*/
+    /** le label de l'audit courant dans le cas d'un audit de jalon ou date sinon */
     protected String mAuditName = "";
 
     /** le label de l'audit précédent dans le cas d'un audit de jalon ou date sinon */
@@ -41,7 +43,7 @@ public class RootForm extends WActionFormSelectable {
     /** id de l'audit courant */
     protected String mCurrentAuditId = "";
 
-    /** id de l'audit précédent*/
+    /** id de l'audit précédent */
     protected String mPreviousAuditId = "";
 
     /** Indique si les audits sont comparables */
@@ -53,162 +55,186 @@ public class RootForm extends WActionFormSelectable {
     /**
      * @return l'id de l'application
      */
-    public String getApplicationId() {
+    public String getApplicationId()
+    {
         return mApplicationId;
     }
 
     /**
      * @return l'id de l'audit courant
      */
-    public String getCurrentAuditId() {
+    public String getCurrentAuditId()
+    {
         return mCurrentAuditId;
     }
 
     /**
      * @return l'id de l'audit précédent
      */
-    public String getPreviousAuditId() {
+    public String getPreviousAuditId()
+    {
         return mPreviousAuditId;
     }
 
     /**
      * @return l'id du projet
      */
-    public String getProjectId() {
+    public String getProjectId()
+    {
         return mProjectId;
     }
 
     /**
      * @param pAppliId l'id de l'application
      */
-    public void setApplicationId(String pAppliId) {
+    public void setApplicationId( String pAppliId )
+    {
         mApplicationId = pAppliId;
     }
 
     /**
      * @param pCurrentAuditId l'id de l'audit courant
      */
-    public void setCurrentAuditId(String pCurrentAuditId) {
+    public void setCurrentAuditId( String pCurrentAuditId )
+    {
         mCurrentAuditId = pCurrentAuditId;
     }
 
     /**
-     * @param pPreviousAuditId  l'id de l'audit précédent
+     * @param pPreviousAuditId l'id de l'audit précédent
      */
-    public void setPreviousAuditId(String pPreviousAuditId) {
+    public void setPreviousAuditId( String pPreviousAuditId )
+    {
         mPreviousAuditId = pPreviousAuditId;
     }
 
     /**
      * @param pProjectId l'id du projet
      */
-    public void setProjectId(String pProjectId) {
+    public void setProjectId( String pProjectId )
+    {
         mProjectId = pProjectId;
     }
 
     /**
      * @return le nom de l'application
      */
-    public String getApplicationName() {
+    public String getApplicationName()
+    {
         return mApplicationName;
     }
 
     /**
      * @return le nom du projet
      */
-    public String getProjectName() {
+    public String getProjectName()
+    {
         return mProjectName;
     }
 
     /**
-     * @param pApplicationName le nom de l'application 
+     * @param pApplicationName le nom de l'application
      */
-    public void setApplicationName(String pApplicationName) {
+    public void setApplicationName( String pApplicationName )
+    {
         mApplicationName = pApplicationName;
     }
 
     /**
      * @param pProjectName le nom du projet
      */
-    public void setProjectName(String pProjectName) {
+    public void setProjectName( String pProjectName )
+    {
         mProjectName = pProjectName;
     }
 
     /**
      * @return la date sous la forme d'une chaine
      */
-    public String getAuditDate() {
+    public String getAuditDate()
+    {
         return mAuditDate;
     }
 
     /**
      * @return le label de l'audit courant
      */
-    public String getAuditName() {
+    public String getAuditName()
+    {
         return mAuditName;
     }
 
     /**
      * @param pLabel le label de l'audit courant
      */
-    public void setAuditName(String pLabel) {
+    public void setAuditName( String pLabel )
+    {
         mAuditName = pLabel;
     }
 
     /**
      * @return le label de l'audit précédent
      */
-    public String getPreviousAuditName() {
+    public String getPreviousAuditName()
+    {
         return mPreviousAuditName;
     }
 
     /**
      * @param pLabel le label de l'audit précédent
      */
-    public void setPreviousAuditName(String pLabel) {
+    public void setPreviousAuditName( String pLabel )
+    {
         mPreviousAuditName = pLabel;
     }
 
     /**
      * @param pDate la date sous la forme d'une chaine
      */
-    public void setAuditDate(String pDate) {
+    public void setAuditDate( String pDate )
+    {
         mAuditDate = pDate;
     }
 
     /**
      * @return le nombre de projets de l'application
      */
-    public String getNumberOfChildren() {
+    public String getNumberOfChildren()
+    {
         return mNumberOfChildren;
     }
 
     /**
      * @param pNumber le nombre de projets de l'application
      */
-    public void setNumberOfChildren(String pNumber) {
+    public void setNumberOfChildren( String pNumber )
+    {
         mNumberOfChildren = pNumber;
     }
 
     /**
      * @return la date de l'audit précédent
      */
-    public String getPreviousAuditDate() {
+    public String getPreviousAuditDate()
+    {
         return mPreviousAuditDate;
     }
 
     /**
      * @param pPreviousAuditDate la date de l'audit
      */
-    public void setPreviousAuditDate(String pPreviousAuditDate) {
+    public void setPreviousAuditDate( String pPreviousAuditDate )
+    {
         mPreviousAuditDate = pPreviousAuditDate;
     }
 
     /**
      * Méthode utilitaire permettant de copier les données d'un form dans un autre
+     * 
      * @param pForm le form dont on veut récupérer les valeurs
      */
-    public void copyValues(RootForm pForm) {
+    public void copyValues( RootForm pForm )
+    {
         mApplicationId = pForm.getApplicationId();
         mApplicationName = pForm.getApplicationName();
         mProjectId = pForm.getProjectId();
@@ -226,47 +252,59 @@ public class RootForm extends WActionFormSelectable {
 
     /**
      * Vérifie que le nom correspond bien au pattern
+     * 
      * @param pName le nom (application ou projet) à vérifier
      * @return true si le nom est valide par rapport au pattern
      */
-    protected boolean isAValidName(String pName) {
+    protected boolean isAValidName( String pName )
+    {
         String regexp = "[a-zA-Z0-9]+[a-zA-Z0-9_ \\.]*[a-zA-Z0-9]+$|[a-zA-Z0-9]+$";
         // Si ça matche, alors c'est un nom valide
-        return Pattern.matches(regexp, pName);
+        return Pattern.matches( regexp, pName );
     }
 
     /**
      * Méthode permettant de remettre à jour les propriétés d'un form avec les audits courants
+     * 
      * @param pAudits la liste des audits (actuel et précédent)
      */
-    public void resetAudits(List pAudits) {
+    public void resetAudits( List pAudits )
+    {
         // Si il n'y a pas d'audits,ou pas d'audit courant, on reinitialise les 2 audits
-        if (pAudits == null || pAudits.size() < 1 || pAudits.get(0) == null) {
+        if ( pAudits == null || pAudits.size() < 1 || pAudits.get( 0 ) == null )
+        {
             resetAudits();
-        } else {
+        }
+        else
+        {
             // ici, l'audit courant ne peut pas etre null
-            AuditDTO currentAudit = ((AuditDTO) pAudits.get(0));
-            setCurrentAuditId("" + currentAudit.getID());
-            setAuditDate("" + currentAudit.getFormattedDate());
-            setAuditName(getAuditDate());
+            AuditDTO currentAudit = ( (AuditDTO) pAudits.get( 0 ) );
+            setCurrentAuditId( "" + currentAudit.getID() );
+            setAuditDate( "" + currentAudit.getFormattedDate() );
+            setAuditName( getAuditDate() );
             // Formatage du nom dans le cas où il s'agit d'un audit de jalon
-            if (currentAudit.getType().equals(AuditBO.MILESTONE)) {
-                setAuditName(currentAudit.getName() + " (" + getAuditDate() + ")");
+            if ( currentAudit.getType().equals( AuditBO.MILESTONE ) )
+            {
+                setAuditName( currentAudit.getName() + " (" + getAuditDate() + ")" );
             }
             // Gere l'audit précédent
-            if (pAudits.size() < 2 || pAudits.get(1) == null) {
+            if ( pAudits.size() < 2 || pAudits.get( 1 ) == null )
+            {
                 // L'audit présédant n'existe pas
-                setPreviousAuditId("");
-                setPreviousAuditDate("");
-                setPreviousAuditName("");
-            } else {
-                AuditDTO previousAudit = ((AuditDTO) pAudits.get(1));
-                setPreviousAuditId("" + previousAudit.getID());
-                setPreviousAuditDate("" + previousAudit.getFormattedDate());
-                setPreviousAuditName(getPreviousAuditDate());
+                setPreviousAuditId( "" );
+                setPreviousAuditDate( "" );
+                setPreviousAuditName( "" );
+            }
+            else
+            {
+                AuditDTO previousAudit = ( (AuditDTO) pAudits.get( 1 ) );
+                setPreviousAuditId( "" + previousAudit.getID() );
+                setPreviousAuditDate( "" + previousAudit.getFormattedDate() );
+                setPreviousAuditName( getPreviousAuditDate() );
                 // Formatage du nom dans le cas où il s'agit d'un audit de jalon
-                if (previousAudit.getType().equals(AuditBO.MILESTONE)) {
-                    setPreviousAuditName(previousAudit.getName() + " (" + getPreviousAuditDate() + ")");
+                if ( previousAudit.getType().equals( AuditBO.MILESTONE ) )
+                {
+                    setPreviousAuditName( previousAudit.getName() + " (" + getPreviousAuditDate() + ")" );
                 }
             }
         }
@@ -276,30 +314,32 @@ public class RootForm extends WActionFormSelectable {
     /**
      * Efface les données pour les audits
      */
-    private void resetAudits() {
+    private void resetAudits()
+    {
         // L'audit courant
-        setCurrentAuditId("");
-        setAuditDate("");
-        setAuditName("");
+        setCurrentAuditId( "" );
+        setAuditDate( "" );
+        setAuditName( "" );
         // L'audit précédent
-        setPreviousAuditId("");
-        setPreviousAuditDate("");
-        setPreviousAuditName("");
-        setAuditSqualeVersion("");
+        setPreviousAuditId( "" );
+        setPreviousAuditDate( "" );
+        setPreviousAuditName( "" );
+        setAuditSqualeVersion( "" );
     }
 
     /**
      * Efface les données de l'audit précédent
      */
-    public void resetCache() {
+    public void resetCache()
+    {
         // L'application
-        setApplicationId("");
-        setApplicationName("");
-        setNumberOfChildren("");
-        setAuditSqualeVersion("");
+        setApplicationId( "" );
+        setApplicationName( "" );
+        setNumberOfChildren( "" );
+        setAuditSqualeVersion( "" );
         // L'id du projet
-        setProjectId("");
-        setProjectName("");
+        setProjectId( "" );
+        setProjectName( "" );
         // Les audits
         resetAudits();
     }
@@ -307,28 +347,32 @@ public class RootForm extends WActionFormSelectable {
     /**
      * @return la version de squale
      */
-    public String getAuditSqualeVersion() {
+    public String getAuditSqualeVersion()
+    {
         return mAuditSqualeVersion;
     }
 
     /**
      * @param pVersion la version de SQUALE
      */
-    public void setAuditSqualeVersion(String pVersion) {
+    public void setAuditSqualeVersion( String pVersion )
+    {
         mAuditSqualeVersion = pVersion;
     }
 
     /**
      * @return true si les audits sont comparables
      */
-    public boolean getComparableAudits() {
+    public boolean getComparableAudits()
+    {
         return mComparableAudits;
     }
 
     /**
      * @param pComparable si les audits sont comparables
      */
-    public void setComparableAudits(boolean pComparable) {
+    public void setComparableAudits( boolean pComparable )
+    {
         mComparableAudits = pComparable;
     }
 

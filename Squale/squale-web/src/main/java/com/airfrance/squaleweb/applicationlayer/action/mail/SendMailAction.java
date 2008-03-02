@@ -33,7 +33,9 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 /**
  * 
  */
-public class SendMailAction extends AdminAction {
+public class SendMailAction
+    extends AdminAction
+{
 
     /**
      * @param pMapping le mapping.
@@ -42,24 +44,29 @@ public class SendMailAction extends AdminAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward init(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward init( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                               HttpServletResponse pResponse )
+    {
         ActionMessages errors = new ActionMessages();
         ActionForward forward = null;
         MailForm form = (MailForm) pForm;
-        try {
-            IApplicationComponent ac = AccessDelegateHelper.getInstance("ApplicationAdmin");
-            Collection appliDtoColl = (Collection) ac.execute("listAll");
+        try
+        {
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "ApplicationAdmin" );
+            Collection appliDtoColl = (Collection) ac.execute( "listAll" );
             // On trie la applications par ordre alphabétique (sans tenit compte de la casse)
-            ArrayList sortedAppliList = new ArrayList(appliDtoColl);
-            Collections.sort(sortedAppliList, new ComponentComparator());
+            ArrayList sortedAppliList = new ArrayList( appliDtoColl );
+            Collections.sort( sortedAppliList, new ComponentComparator() );
             // Transformation en formulaire
-            WTransformerFactory.objToForm(MailTransformer.class, ((WActionForm) pForm), sortedAppliList);
-            forward = pMapping.findForward("success");
-        } catch (Exception e) {
+            WTransformerFactory.objToForm( MailTransformer.class, ( (WActionForm) pForm ), sortedAppliList );
+            forward = pMapping.findForward( "success" );
+        }
+        catch ( Exception e )
+        {
             // Traitement factorisé des exceptions et transfert vers la page d'erreur
-            handleException(e, errors, pRequest);
-            saveMessages(pRequest, errors);
-            forward = pMapping.findForward("failure");
+            handleException( e, errors, pRequest );
+            saveMessages( pRequest, errors );
+            forward = pMapping.findForward( "failure" );
         }
         return forward;
     }
@@ -71,67 +78,81 @@ public class SendMailAction extends AdminAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward sendMail(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward sendMail( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                   HttpServletResponse pResponse )
+    {
         // On envoie un email même aux utilisateurs désabonnés car il ne s'agit pas d'un email automatique
         ActionMessages errors = new ActionMessages();
         ActionForward forward = null;
         // on enlève l'élément qui permettait de ne pas vérifier que les champs
         // étaient remplis suite à l'initialisation préalable nécessaire
-        pRequest.removeAttribute("fromMenu");
-        try {
-            
-            /* 
-             * En attendant un refonte de la gestion de la vérification des mails
-             * on affiche tous les mails des gestionnaires pour chaque application
+        pRequest.removeAttribute( "fromMenu" );
+        try
+        {
+
+            /*
+             * En attendant un refonte de la gestion de la vérification des mails on affiche tous les mails des
+             * gestionnaires pour chaque application
              */
-            IApplicationComponent acLogin = AccessDelegateHelper.getInstance("Login");
-            ActionMessage listEmailsMsg = new ActionMessage("mail.send.list_emails_title");
-            errors.add("listEmailsMsg", listEmailsMsg);
-            
+            IApplicationComponent acLogin = AccessDelegateHelper.getInstance( "Login" );
+            ActionMessage listEmailsMsg = new ActionMessage( "mail.send.list_emails_title" );
+            errors.add( "listEmailsMsg", listEmailsMsg );
+
             MailForm mailForm = (MailForm) pForm;
             String appliName = mailForm.getAppliName();
-            Collection applis = getApplisForEmail(appliName, mailForm.getApplicationFormsList().getList());
-            // on préfixe le sujet choisis par l'utilisateur par [Squale - <nom application>] 
-            // pour qu'un gestionnaire qui gère plusieurs applications sache sur quelle application 
+            Collection applis = getApplisForEmail( appliName, mailForm.getApplicationFormsList().getList() );
+            // on préfixe le sujet choisis par l'utilisateur par [Squale - <nom application>]
+            // pour qu'un gestionnaire qui gère plusieurs applications sache sur quelle application
             // le mail porte.
-            String content = WebMessages.getString(pRequest, "mail.admin.start.content") + mailForm.getContent() + WebMessages.getString(pRequest, "mail.admin.end.content");
+            String content =
+                WebMessages.getString( pRequest, "mail.admin.start.content" ) + mailForm.getContent()
+                    + WebMessages.getString( pRequest, "mail.admin.end.content" );
             // On envoie à toutes les applications ou à celle sélectionnée
-            Long appliId = new Long(-1);
+            Long appliId = new Long( -1 );
             IMailerProvider mailer = MailerHelper.getMailerProvider();
             Iterator appliIt = applis.iterator();
-            while (appliIt.hasNext()) {
+            while ( appliIt.hasNext() )
+            {
                 // Pour chaque application, on envoie un mail aux managers
                 ApplicationForm curAppli = (ApplicationForm) appliIt.next();
-                appliId = new Long(curAppli.getId());
-                
-                 // On récupère les mails des gestionnaires
-                Collection managerEmails = (Collection) acLogin.execute("getManagersEmails", new Object[] { appliId, Boolean.TRUE });
+                appliId = new Long( curAppli.getId() );
+
+                // On récupère les mails des gestionnaires
+                Collection managerEmails =
+                    (Collection) acLogin.execute( "getManagersEmails", new Object[] { appliId, Boolean.TRUE } );
                 // On ajoute au message
-                listEmailsMsg = new ActionMessage("mail.send.list_emails_by_application", new Object[]{curAppli.getApplicationName(), getFormattedEmails(managerEmails)});
-                errors.add("listEmailsMsg", listEmailsMsg);
-                
+                listEmailsMsg =
+                    new ActionMessage( "mail.send.list_emails_by_application", new Object[] {
+                        curAppli.getApplicationName(), getFormattedEmails( managerEmails ) } );
+                errors.add( "listEmailsMsg", listEmailsMsg );
+
                 // On ajoute le message de confirmation
                 String object = "[Squale - <" + curAppli.getApplicationName() + ">] " + mailForm.getObject();
-                if (!SqualeCommonUtils.notifyByEmail(mailer, SqualeCommonConstants.ONLY_MANAGERS, appliId, object, content, true)) {
+                if ( !SqualeCommonUtils.notifyByEmail( mailer, SqualeCommonConstants.ONLY_MANAGERS, appliId, object,
+                                                       content, true ) )
+                {
                     // On le nom de l'application à la liste des non envoyées pour construire le message
                     // d'erreur
-                    ActionMessage error = new ActionMessage("mail.admin.appli", curAppli.getApplicationName());
-                    errors.add("errorMsg", error);
+                    ActionMessage error = new ActionMessage( "mail.admin.appli", curAppli.getApplicationName() );
+                    errors.add( "errorMsg", error );
                 }
 
             }
-            if (!errors.isEmpty()) {
+            if ( !errors.isEmpty() )
+            {
                 // On ajoute le titre pour la liste des applications non envoyées
-                ActionMessage errorTitle = new ActionMessage("mail.admin.no.sent");
-                errors.add("errorTitleMsg", errorTitle);
+                ActionMessage errorTitle = new ActionMessage( "mail.admin.no.sent" );
+                errors.add( "errorTitleMsg", errorTitle );
             }
-            saveMessages(pRequest, errors);
-            forward = pMapping.findForward("success");
-        } catch (Exception e) {
+            saveMessages( pRequest, errors );
+            forward = pMapping.findForward( "success" );
+        }
+        catch ( Exception e )
+        {
             // Traitement factorisé des exceptions et transfert vers la page d'erreur
-            handleException(e, errors, pRequest);
-            saveMessages(pRequest, errors);
-            forward = pMapping.findForward("failure");
+            handleException( e, errors, pRequest );
+            saveMessages( pRequest, errors );
+            forward = pMapping.findForward( "failure" );
         }
         return forward;
     }
@@ -140,18 +161,21 @@ public class SendMailAction extends AdminAction {
      * @param managerEmails les emails
      * @return les emails formatés sous la forme : email1, email2
      */
-    private String getFormattedEmails(Collection managerEmails) {
+    private String getFormattedEmails( Collection managerEmails )
+    {
         final String sep = ", ";
         String result = "";
         StringBuffer emails = new StringBuffer();
-        for(Iterator it = managerEmails.iterator(); it.hasNext();) {
-            emails.append((String) it.next());
-            emails.append(sep);
+        for ( Iterator it = managerEmails.iterator(); it.hasNext(); )
+        {
+            emails.append( (String) it.next() );
+            emails.append( sep );
         }
         result = emails.toString();
-        if(result.endsWith(sep)) {
-            int cutId = result.lastIndexOf(sep);
-            result = result.substring(0, cutId);
+        if ( result.endsWith( sep ) )
+        {
+            int cutId = result.lastIndexOf( sep );
+            result = result.substring( 0, cutId );
         }
         return result;
     }
@@ -161,20 +185,26 @@ public class SendMailAction extends AdminAction {
      * @param allApplis toutes les applications
      * @return les applications qui doivent recevoir l'email
      */
-    private Collection getApplisForEmail(String appliName, List allApplis) {
-        ArrayList applis = new ArrayList(1);
+    private Collection getApplisForEmail( String appliName, List allApplis )
+    {
+        ArrayList applis = new ArrayList( 1 );
         Iterator allApplisIt = allApplis.iterator();
-        if (!MailForm.ALL_APPLICATIONS.equals(appliName)) {
+        if ( !MailForm.ALL_APPLICATIONS.equals( appliName ) )
+        {
             // Il faut rechercher l'application
-            while (allApplisIt.hasNext() && applis.size() == 0) {
-                ApplicationForm appliForm = (ApplicationForm) (allApplisIt.next());
-                if (appliForm.getApplicationName().equals(appliName)) {
-                    applis.add(appliForm);
+            while ( allApplisIt.hasNext() && applis.size() == 0 )
+            {
+                ApplicationForm appliForm = (ApplicationForm) ( allApplisIt.next() );
+                if ( appliForm.getApplicationName().equals( appliName ) )
+                {
+                    applis.add( appliForm );
                 }
             }
-        } else {
+        }
+        else
+        {
             // On prend toutes les applications
-            applis = new ArrayList(allApplis);
+            applis = new ArrayList( allApplis );
         }
         return applis;
     }

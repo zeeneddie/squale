@@ -15,16 +15,20 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 
 /**
  */
-public class SetOfStatsTransformer implements WITransformer {
+public class SetOfStatsTransformer
+    implements WITransformer
+{
 
     /**
-      * @param pObject l'objet à transformer
-      * @throws WTransformerException si un pb apparait.
-      * @return le formulaire.
-      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+     * @param pObject l'objet à transformer
+     * @throws WTransformerException si un pb apparait.
+     * @return le formulaire.
+     */
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         SetOfStatsForm form = new SetOfStatsForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 
@@ -33,7 +37,9 @@ public class SetOfStatsTransformer implements WITransformer {
      * @param pForm le formulaire à remplir.
      * @throws WTransformerException si un pb apparait.
      */
-    public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
         SetOfStatsDTO dto = (SetOfStatsDTO) pObject[0];
         Locale locale = (Locale) pObject[1];
         SetOfStatsForm form = (SetOfStatsForm) pForm;
@@ -42,26 +48,32 @@ public class SetOfStatsTransformer implements WITransformer {
         List siteDto = dto.getListOfSiteStatsDTO();
         List applicationsStatsDto = dto.getListOfApplicationsStatsDTO();
         // Les 3 listes qui contiendront les objets transformés
-        List profilFormList = new ArrayList(0);
-        List siteFormList = new ArrayList(0);
-        List applicationFormList = new ArrayList(0);
-        for (int i = 0; i < profilDto.size(); i++) {
+        List profilFormList = new ArrayList( 0 );
+        List siteFormList = new ArrayList( 0 );
+        List applicationFormList = new ArrayList( 0 );
+        for ( int i = 0; i < profilDto.size(); i++ )
+        {
             // Transforme et ajoute chaque objet profil
-            profilFormList.add(WTransformerFactory.objToForm(ProfileStatsTransformer.class, profilDto.get(i)));
+            profilFormList.add( WTransformerFactory.objToForm( ProfileStatsTransformer.class, profilDto.get( i ) ) );
         }
-        for (int i = 0; i < siteDto.size(); i++) {
+        for ( int i = 0; i < siteDto.size(); i++ )
+        {
             // Transforme et ajoute chaque
-            siteFormList.add(WTransformerFactory.objToForm(SiteStatsTransformer.class, siteDto.get(i)));
+            siteFormList.add( WTransformerFactory.objToForm( SiteStatsTransformer.class, siteDto.get( i ) ) );
         }
-        for (int i = 0; i < applicationsStatsDto.size(); i++) {
+        for ( int i = 0; i < applicationsStatsDto.size(); i++ )
+        {
             // Transforme et ajoute chaque statistique
-            applicationFormList.add(WTransformerFactory.objToForm(ApplicationStatsTransformer.class, new Object[]{applicationsStatsDto.get(i), locale}));
+            applicationFormList.add( WTransformerFactory.objToForm( ApplicationStatsTransformer.class, new Object[] {
+                applicationsStatsDto.get( i ), locale } ) );
         }
-        form.setListOfProfilsStatsForm(profilFormList);
-        form.setListOfSiteStatsForm(siteFormList);
-        form.setListOfApplicationsStatsForm(applicationFormList);
-        form.setAuditsStatsForm((AuditsStatsForm)WTransformerFactory.objToForm(AuditsStatsTransformer.class,dto.getAuditsStatsDTO()));
-        form.setFactorsStatsForm((FactorsStatsForm)WTransformerFactory.objToForm(FactorsStatsTransformer.class,dto.getFactorsStatsDTO()));
+        form.setListOfProfilsStatsForm( profilFormList );
+        form.setListOfSiteStatsForm( siteFormList );
+        form.setListOfApplicationsStatsForm( applicationFormList );
+        form.setAuditsStatsForm( (AuditsStatsForm) WTransformerFactory.objToForm( AuditsStatsTransformer.class,
+                                                                                  dto.getAuditsStatsDTO() ) );
+        form.setFactorsStatsForm( (FactorsStatsForm) WTransformerFactory.objToForm( FactorsStatsTransformer.class,
+                                                                                    dto.getFactorsStatsDTO() ) );
     }
 
     /**
@@ -70,8 +82,10 @@ public class SetOfStatsTransformer implements WITransformer {
      * @throws WTransformerException si un pb apparait.
      * @return rien mais lance systématiquement une exception
      */
-    public Object[] formToObj(WActionForm pForm) throws WTransformerException {
-        throw new WTransformerException("deprecated");
+    public Object[] formToObj( WActionForm pForm )
+        throws WTransformerException
+    {
+        throw new WTransformerException( "deprecated" );
     }
 
     /**
@@ -80,8 +94,10 @@ public class SetOfStatsTransformer implements WITransformer {
      * @param pTab les paramètres
      * @throws WTransformerException si un pb apparait.
      */
-    public void formToObj(WActionForm pForm, Object[] pTab) throws WTransformerException {
-        throw new WTransformerException("deprecated");
+    public void formToObj( WActionForm pForm, Object[] pTab )
+        throws WTransformerException
+    {
+        throw new WTransformerException( "deprecated" );
     }
 
 }

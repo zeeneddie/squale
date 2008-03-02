@@ -5,6 +5,8 @@ import com.airfrance.squaleweb.applicationlayer.formbean.AbstractUploadForm;
 /**
  * Configuration de Squalix
  */
-public class CConfigForm extends AbstractUploadForm {
-    
+public class CConfigForm
+    extends AbstractUploadForm
+{
+
 }

@@ -1,10 +1,11 @@
 package com.airfrance.squaleweb.applicationlayer.formbean.stats;
 
-
 /**
  */
-public class ProfilStatsForm extends CommonStatsForm {
-    
+public class ProfilStatsForm
+    extends CommonStatsForm
+{
+
     /**
      * Le nom du profil
      */
@@ -13,14 +14,16 @@ public class ProfilStatsForm extends CommonStatsForm {
     /**
      * @return le nom du profil
      */
-    public String getProfileName() {
+    public String getProfileName()
+    {
         return mProfileName;
     }
 
     /**
      * @param pProfileName le nouveau nom du profile
      */
-    public void setProfileName(String pProfileName) {
+    public void setProfileName( String pProfileName )
+    {
         mProfileName = pProfileName;
     }
 

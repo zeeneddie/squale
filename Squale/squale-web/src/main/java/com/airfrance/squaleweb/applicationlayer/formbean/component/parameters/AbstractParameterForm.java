@@ -9,14 +9,15 @@ import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
 /**
  * Classe abstraite pour les paramétres d'un projet
  */
-public abstract class AbstractParameterForm extends RootForm {
-    
+public abstract class AbstractParameterForm
+    extends RootForm
+{
+
     /**
      * @return le transformer du bean
      */
     public abstract Class getTransformer();
-    
-    
+
     /**
      * @return les constantes des paramètres
      */
@@ -25,8 +26,9 @@ public abstract class AbstractParameterForm extends RootForm {
     /**
      * @return si le bean n'est pas validé
      */
-    public boolean isValid() {
-        return (null == getErrors()) || getErrors().isEmpty();
+    public boolean isValid()
+    {
+        return ( null == getErrors() ) || getErrors().isEmpty();
     }
 
     /**
@@ -39,27 +41,30 @@ public abstract class AbstractParameterForm extends RootForm {
      */
     public abstract String getTaskName();
 
-    /** 
-     * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+    /**
+     * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    public void wValidate(ActionMapping arg0, HttpServletRequest arg1) {
+    public void wValidate( ActionMapping arg0, HttpServletRequest arg1 )
+    {
         // On ajoute le nom de la tâche à la requête pour indiquer au dropPanel
         // qu'il faut qu'il soit ouvert
-        arg1.setAttribute("tool", getTaskName());
+        arg1.setAttribute( "tool", getTaskName() );
         // On ne valide pas les formulaires si on déconfigure la tâche
-        String action = (String)arg1.getParameter("action");
+        String action = (String) arg1.getParameter( "action" );
         // on teste donc sur l'action réalisée
-        if(null == action || !("removeParameters").equals(action)) {
-            validateConf(arg0, arg1);
+        if ( null == action || !( "removeParameters" ).equals( action ) )
+        {
+            validateConf( arg0, arg1 );
         }
     }
-    
+
     /**
      * Valide le formulaire
+     * 
      * @param pMapping le mapping
      * @param pRequest la requête
      */
-    protected abstract void validateConf(ActionMapping pMapping, HttpServletRequest pRequest);
+    protected abstract void validateConf( ActionMapping pMapping, HttpServletRequest pRequest );
 
 }

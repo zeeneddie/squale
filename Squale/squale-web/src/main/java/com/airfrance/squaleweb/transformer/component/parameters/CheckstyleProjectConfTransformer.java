@@ -1,4 +1,3 @@
-
 package com.airfrance.squaleweb.transformer.component.parameters;
 
 import java.util.Collection;
@@ -17,69 +16,81 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
 /**
  * Conversion des informations du formulaire de configuration Checkstyle
  */
-public class CheckstyleProjectConfTransformer implements WITransformer {
+public class CheckstyleProjectConfTransformer
+    implements WITransformer
+{
 
     /**
      * @param pObject l'objet à transformer
      * @throws WTransformerException si un pb apparait.
      * @return le formulaire.
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         CheckstyleForm form = new CheckstyleForm();
-         objToForm(pObject, form);
-         return form;
+        objToForm( pObject, form );
+        return form;
     }
 
     /**
-    * @param pObject l'objet à transformer
-    * @param pForm le formulaire à remplir.
-    * @throws WTransformerException si un pb apparait.
-    */
-   public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
-       int index =0;
-       MapParameterDTO projectParamsDTO = (MapParameterDTO) pObject[index++];
-       Collection versions= (Collection)pObject[index++];
-        
-       CheckstyleForm form =(CheckstyleForm)pForm;
-       StringParameterDTO params = (StringParameterDTO) projectParamsDTO.getParameters().get(ParametersConstants.CHECKSTYLE_RULESET_NAME);
-       if (params!=null) {
-           form.setSelectedRuleSet(params.getValue().trim());
-       }
-              
-       //Mettre la liste des versions disponibles dans la formbean
-       Iterator it = versions.iterator();
-       // On filtre pour ne conserver que les noms de ruleset uniques
-       HashSet set = new HashSet();
-       while (it.hasNext()) {
-           set.add(((CheckstyleDTO) it.next()).getName());
-       }
-       form.setVersions((String[]) set.toArray(new String[]{}));
-   }
+     * @param pObject l'objet à transformer
+     * @param pForm le formulaire à remplir.
+     * @throws WTransformerException si un pb apparait.
+     */
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
+        int index = 0;
+        MapParameterDTO projectParamsDTO = (MapParameterDTO) pObject[index++];
+        Collection versions = (Collection) pObject[index++];
+
+        CheckstyleForm form = (CheckstyleForm) pForm;
+        StringParameterDTO params =
+            (StringParameterDTO) projectParamsDTO.getParameters().get( ParametersConstants.CHECKSTYLE_RULESET_NAME );
+        if ( params != null )
+        {
+            form.setSelectedRuleSet( params.getValue().trim() );
+        }
+
+        // Mettre la liste des versions disponibles dans la formbean
+        Iterator it = versions.iterator();
+        // On filtre pour ne conserver que les noms de ruleset uniques
+        HashSet set = new HashSet();
+        while ( it.hasNext() )
+        {
+            set.add( ( (CheckstyleDTO) it.next() ).getName() );
+        }
+        form.setVersions( (String[]) set.toArray( new String[] {} ) );
+    }
 
     /**
      * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
-     * 
      * @param form le formulaire
      * @return les objets transformés
      * @throws WTransformerException si erreur
      */
-    public Object[] formToObj(WActionForm form) throws WTransformerException {
-        throw new WTransformerException("not yet implemented");
+    public Object[] formToObj( WActionForm form )
+        throws WTransformerException
+    {
+        throw new WTransformerException( "not yet implemented" );
     }
-    
-    /** 
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm, java.lang.Object[])
-     * 
+
+    /**
+     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm,
+     *      java.lang.Object[])
      * @param pForm le formulaire
      * @param pObject le tableau d'objet
      * @throws WTransformerException si erreur
      */
-    public void formToObj(WActionForm pForm, Object[] pObject) throws WTransformerException {
-        CheckstyleForm form =(CheckstyleForm)pForm;
+    public void formToObj( WActionForm pForm, Object[] pObject )
+        throws WTransformerException
+    {
+        CheckstyleForm form = (CheckstyleForm) pForm;
         MapParameterDTO projectParamsDTO = (MapParameterDTO) pObject[0];
         StringParameterDTO param = new StringParameterDTO();
-        param.setValue(form.getSelectedRuleSet());
-        projectParamsDTO.getParameters().put(ParametersConstants.CHECKSTYLE_RULESET_NAME, param);
+        param.setValue( form.getSelectedRuleSet() );
+        projectParamsDTO.getParameters().put( ParametersConstants.CHECKSTYLE_RULESET_NAME, param );
     }
 
 }

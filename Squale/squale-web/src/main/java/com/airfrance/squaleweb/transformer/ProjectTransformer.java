@@ -13,63 +13,73 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
  * 
  * @author M400842
  */
-public class ProjectTransformer implements WITransformer {
-        /**
-         * @param pObject l'objet à transformer
-         * @throws WTransformerException si un pb apparait.
-         * @return le formulaire.
-         */
-        public WActionForm objToForm(Object[] pObject) throws WTransformerException {
-            ProjectForm form = new ProjectForm();
-            objToForm(pObject, form);
-            return form;
-        }
+public class ProjectTransformer
+    implements WITransformer
+{
+    /**
+     * @param pObject l'objet à transformer
+     * @throws WTransformerException si un pb apparait.
+     * @return le formulaire.
+     */
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
+        ProjectForm form = new ProjectForm();
+        objToForm( pObject, form );
+        return form;
+    }
 
-        /**
-         * @param pObject l'objet à transformer
-         * @param pForm le formulaire à remplir.
-         * @throws WTransformerException si un pb apparait.
-         */
-        public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
-            ComponentDTO dto = (ComponentDTO)pObject[0];
-            ProjectForm form = (ProjectForm)pForm;
-            form.setId(dto.getID());
-            form.setProjectName(dto.getName());
-            form.setApplicationId("" + dto.getIDParent());
-            form.setHasTerminatedAudit(dto.getHasResults());
-            // Si le tableau d'objets passé en paramètre contient 2 objets
-            // alors le deuxième est la liste des applications stockées en session.
-            // Cela arrive dans les cas où l'on veut récupérer le nom de l'application
-            // associée au projet.
-            if(pObject.length == 2) {
-                Collection applications = (Collection) pObject[1];
-                String applicationName 
-                    = TransformerUtils.getApplicationName(dto.getIDParent(), applications);
-                form.setApplicationName(applicationName);
-            }
+    /**
+     * @param pObject l'objet à transformer
+     * @param pForm le formulaire à remplir.
+     * @throws WTransformerException si un pb apparait.
+     */
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
+        ComponentDTO dto = (ComponentDTO) pObject[0];
+        ProjectForm form = (ProjectForm) pForm;
+        form.setId( dto.getID() );
+        form.setProjectName( dto.getName() );
+        form.setApplicationId( "" + dto.getIDParent() );
+        form.setHasTerminatedAudit( dto.getHasResults() );
+        // Si le tableau d'objets passé en paramètre contient 2 objets
+        // alors le deuxième est la liste des applications stockées en session.
+        // Cela arrive dans les cas où l'on veut récupérer le nom de l'application
+        // associée au projet.
+        if ( pObject.length == 2 )
+        {
+            Collection applications = (Collection) pObject[1];
+            String applicationName = TransformerUtils.getApplicationName( dto.getIDParent(), applications );
+            form.setApplicationName( applicationName );
         }
+    }
 
-        /**
-         * @param pForm le formulaire à lire.
-         * @throws WTransformerException si un pb apparait.
-         * @return le tableaux des objets.
-         */
-        public Object[] formToObj(WActionForm pForm) throws WTransformerException {
-            Object[] obj = {new ComponentDTO()};
-            formToObj(pForm, obj);
-            return obj;
-        }
+    /**
+     * @param pForm le formulaire à lire.
+     * @throws WTransformerException si un pb apparait.
+     * @return le tableaux des objets.
+     */
+    public Object[] formToObj( WActionForm pForm )
+        throws WTransformerException
+    {
+        Object[] obj = { new ComponentDTO() };
+        formToObj( pForm, obj );
+        return obj;
+    }
 
-        /**
-         * @param pObject l'objet à remplir
-         * @param pForm le formulaire à lire.
-         * @throws WTransformerException si un pb apparait.
-         */
-        public void formToObj(WActionForm pForm, Object[] pObject) throws WTransformerException { 
-            ProjectForm form = (ProjectForm)pForm;
-            ComponentDTO dto = (ComponentDTO)pObject[0];
-            dto.setID(form.getId());
-            dto.setIDParent(form.getParentId());
-            dto.setName(form.getProjectName());
-        }
+    /**
+     * @param pObject l'objet à remplir
+     * @param pForm le formulaire à lire.
+     * @throws WTransformerException si un pb apparait.
+     */
+    public void formToObj( WActionForm pForm, Object[] pObject )
+        throws WTransformerException
+    {
+        ProjectForm form = (ProjectForm) pForm;
+        ComponentDTO dto = (ComponentDTO) pObject[0];
+        dto.setID( form.getId() );
+        dto.setIDParent( form.getParentId() );
+        dto.setName( form.getProjectName() );
+    }
 }

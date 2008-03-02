@@ -11,90 +11,109 @@ import com.airfrance.squaleweb.transformer.component.parameters.CppMcCabeProject
 /**
  * Formulaire de configuration McCabe pour le C++
  */
-public class CppMcCabeForm extends AbstractParameterForm {
+public class CppMcCabeForm
+    extends AbstractParameterForm
+{
     /** Script de compilation du C++ */
     private String mCppScript = "";
+
     /** Dialect */
     private String mDialect = "";
+
     /**
      * @return le script de compilation
      */
-    public String getCppScript() {
+    public String getCppScript()
+    {
         return mCppScript;
     }
+
     /**
      * @param pCppScript le script de compilation
      */
-    public void setCppScript(String pCppScript) {
+    public void setCppScript( String pCppScript )
+    {
         mCppScript = pCppScript;
     }
 
     /**
      * @return le dialect
      */
-    public String getDialect() {
+    public String getDialect()
+    {
         return mDialect;
     }
 
     /**
      * @param pDialect le dialect
      */
-    public void setDialect(String pDialect) {
+    public void setDialect( String pDialect )
+    {
         mDialect = pDialect;
     }
-    /** 
+
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTransformer()
-     * 
      * @return le transformer à utiliser
      */
-    public Class getTransformer() {
+    public Class getTransformer()
+    {
         return CppMcCabeProjectConfTransformer.class;
     }
-    /** 
+
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
-     * 
      * @return le nom utilisé en session
      */
-    public String getNameInSession() {
+    public String getNameInSession()
+    {
         return "cppMcCabeForm";
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getParametersConstants()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public String[] getParametersConstants() {
-        return new String[]{ParametersConstants.CPP, ParametersConstants.DIALECT};
+    public String[] getParametersConstants()
+    {
+        return new String[] { ParametersConstants.CPP, ParametersConstants.DIALECT };
     }
 
-    /** 
-     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+    /**
+     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    public void reset(ActionMapping mapping, HttpServletRequest request) {
-        setDialect("");
-        setCppScript("");
+    public void reset( ActionMapping mapping, HttpServletRequest request )
+    {
+        setDialect( "" );
+        setCppScript( "" );
     }
-    /** 
+
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public String getTaskName() {
+    public String getTaskName()
+    {
         return "CppMcCabeTask";
     }
-    /** 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+
+    /**
+     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    protected void validateConf(ActionMapping pMapping, HttpServletRequest pRequest) {
+    protected void validateConf( ActionMapping pMapping, HttpServletRequest pRequest )
+    {
         // Traitement du champ cppScript
-        setCppScript(getCppScript().trim());
-        if (getCppScript().length() == 0) {
-            addError("cppScript", new ActionError("error.field.required"));
+        setCppScript( getCppScript().trim() );
+        if ( getCppScript().length() == 0 )
+        {
+            addError( "cppScript", new ActionError( "error.field.required" ) );
         }
         // Traitement du dialect
-        if (getDialect().length() == 0) {
-            addError("dialect", new ActionError("error.field.required"));
+        if ( getDialect().length() == 0 )
+        {
+            addError( "dialect", new ActionError( "error.field.required" ) );
         }
     }
 }

@@ -10,133 +10,151 @@ import com.airfrance.squaleweb.transformer.component.parameters.JavaMockCompilin
 import com.airfrance.squaleweb.util.SqualeWebActionUtils;
 
 /**
- * Bean pour la tâche de compilation dans les cas où le projet
- * est déjà compilé
+ * Bean pour la tâche de compilation dans les cas où le projet est déjà compilé
  */
-public class JavaMockCompilingForm extends AbstractParameterForm {
-    
+public class JavaMockCompilingForm
+    extends AbstractParameterForm
+{
+
     /** Chemin vers les sources compilées */
     private String[] mCompiledSources;
-    
+
     /** Chemin vers le classpath du projet */
     private String mClasspath;
-    
+
     /**
      * Version de java
      */
     private String mDialect;
-    
+
     /**
      * Constructeur par défaut
      */
-    public JavaMockCompilingForm() {
+    public JavaMockCompilingForm()
+    {
         mClasspath = "";
         mDialect = "";
         mCompiledSources = new String[0];
     }
-    
+
     /**
      * @return le chemin vers le classpath du projet
      */
-    public String getClasspath() {
+    public String getClasspath()
+    {
         return mClasspath;
     }
-    
+
     /**
      * Modifie le chemin vers le classpath du projet
+     * 
      * @param pClasspath le chemin vers le classpath du projet
      */
-    public void setClasspath(String pClasspath) {
+    public void setClasspath( String pClasspath )
+    {
         mClasspath = pClasspath;
     }
 
     /**
      * @return la version de java
      */
-    public String getDialect() {
+    public String getDialect()
+    {
         return mDialect;
     }
 
     /**
      * @param pDialect la version de java
      */
-    public void setDialect(String pDialect) {
+    public void setDialect( String pDialect )
+    {
         mDialect = pDialect;
     }
 
     /**
      * @return les chemins vers les sources compilées
      */
-    public String[] getCompiledSources() {
+    public String[] getCompiledSources()
+    {
         return mCompiledSources;
     }
 
     /**
      * @param pSrcs les chemins vers les sources compilées
      */
-    public void setCompiledSources(String[] pSrcs) {
+    public void setCompiledSources( String[] pSrcs )
+    {
         mCompiledSources = pSrcs;
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTransformer()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public Class getTransformer() {
+    public Class getTransformer()
+    {
         return JavaMockCompilingTransformer.class;
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public String getNameInSession() {
+    public String getNameInSession()
+    {
         return "javaMockCompilingForm";
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getParametersConstants()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public String[] getParametersConstants() {
-        return new String[]{ParametersConstants.COMPILED, ParametersConstants.DIALECT};
+    public String[] getParametersConstants()
+    {
+        return new String[] { ParametersConstants.COMPILED, ParametersConstants.DIALECT };
     }
 
-    /** 
-     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+    /**
+     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    public void reset(ActionMapping mapping, HttpServletRequest request) {
-        setClasspath("");
-        setCompiledSources(new String[0]);
+    public void reset( ActionMapping mapping, HttpServletRequest request )
+    {
+        setClasspath( "" );
+        setCompiledSources( new String[0] );
     }
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public String getTaskName() {
+    public String getTaskName()
+    {
         return "JavaMockCompilingTask";
     }
 
-    /** 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+    /**
+     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    protected void validateConf(ActionMapping pMapping, HttpServletRequest pRequest) {
+    protected void validateConf( ActionMapping pMapping, HttpServletRequest pRequest )
+    {
         // Les sources compilées
-        setCompiledSources(SqualeWebActionUtils.cleanValues(getCompiledSources()));
-        if(getCompiledSources().length == 0) {
-            addError("compiledSources", new ActionError("error.field.required"));
+        setCompiledSources( SqualeWebActionUtils.cleanValues( getCompiledSources() ) );
+        if ( getCompiledSources().length == 0 )
+        {
+            addError( "compiledSources", new ActionError( "error.field.required" ) );
         }
-        setClasspath(getClasspath().trim());
+        setClasspath( getClasspath().trim() );
         // Le classpath est un champ obligatoire tout comme le chemin vers les sources compilées
-        if(getClasspath().length() == 0) {
-            addError("classpath", new ActionError("error.field.required"));
+        if ( getClasspath().length() == 0 )
+        {
+            addError( "classpath", new ActionError( "error.field.required" ) );
         }
         // Le dialect est aussi obligatoire
-        if(getDialect().length() == 0) {
-            addError("dialect", new ActionError("error.field.required"));
+        if ( getDialect().length() == 0 )
+        {
+            addError( "dialect", new ActionError( "error.field.required" ) );
         }
     }
 

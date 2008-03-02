@@ -32,35 +32,43 @@ import com.airfrance.welcom.struts.util.WConstants;
 
 /**
  */
-public class ReferenceListAction extends DefaultAction {
+public class ReferenceListAction
+    extends DefaultAction
+{
 
     /**
      * Affichage des applications du référentiel
+     * 
      * @param pMapping le mapping.
      * @param pForm le formulaire à lire.
      * @param pRequest la requête HTTP.
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward list(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward list( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                               HttpServletResponse pResponse )
+    {
 
         // Initialisation
         ActionForward forward; // return value
         // ReferenceListForm renseigné ou non
         SetOfReferencesListForm form = (SetOfReferencesListForm) pForm;
 
-        try {
+        try
+        {
             // Renseigne le form
-            populateForm(form, pRequest);
+            populateForm( form, pRequest );
             // met un nom de grille avec la date afin de distinguer les différentes mises à jour
-            //setDisplayedGridName(pRequest, form);
+            // setDisplayedGridName(pRequest, form);
             // Provoquer le forward
-            forward = pMapping.findForward("success");
-        } catch (Exception e) {
+            forward = pMapping.findForward( "success" );
+        }
+        catch ( Exception e )
+        {
             ActionErrors errors = new ActionErrors();
-            handleException(e, errors, pRequest);
-            saveMessages(pRequest, errors);
-            forward = pMapping.findForward("failure");
+            handleException( e, errors, pRequest );
+            saveMessages( pRequest, errors );
+            forward = pMapping.findForward( "failure" );
 
         }
         // Finish with
@@ -69,51 +77,60 @@ public class ReferenceListAction extends DefaultAction {
     }
 
     /**
-     * Peuplement du form avec les liste des références
-     * Le form passé en paramètre est mis à jour pour contenir les objets à afficher dans la JSP 
-     * Les applications de l'utilisateur sont affichées si celui-ci n'est pas administrateur du portail
+     * Peuplement du form avec les liste des références Le form passé en paramètre est mis à jour pour contenir les
+     * objets à afficher dans la JSP Les applications de l'utilisateur sont affichées si celui-ci n'est pas
+     * administrateur du portail
+     * 
      * @param pForm form
      * @param pRequest requête
      * @throws JrafEnterpriseException exception
      * @throws WTransformerException exception
      */
-    public void populateForm(SetOfReferencesListForm pForm, HttpServletRequest pRequest) throws WTransformerException, JrafEnterpriseException {
-        List applicationsList = new ArrayList(0);
+    public void populateForm( SetOfReferencesListForm pForm, HttpServletRequest pRequest )
+        throws WTransformerException, JrafEnterpriseException
+    {
+        List applicationsList = new ArrayList( 0 );
         // Récupération de la liste des applications
         // Toutes si on est admin, les publiques et celles dont l'utilisateur est gestionnaire sinon
-        if (isUserAdmin(pRequest)) {
-            applicationsList = getUserAdminApplicationListAsDTO(pRequest);
-        } else {
-            applicationsList = getUserApplicationListAsDTO(pRequest);
+        if ( isUserAdmin( pRequest ) )
+        {
+            applicationsList = getUserAdminApplicationListAsDTO( pRequest );
+        }
+        else
+        {
+            applicationsList = getUserApplicationListAsDTO( pRequest );
         }
 
-        // On vérifie que l'on récupère que les applications qui sont effectivement stockées en base et non pas que celles
+        // On vérifie que l'on récupère que les applications qui sont effectivement stockées en base et non pas que
+        // celles
         // qui ont des résultats (cas pouvant arriver dans des conditions particulières)
-        IApplicationComponent ac = AccessDelegateHelper.getInstance("Validation");
-        Collection referencedApplis = (Collection) ac.execute("listReferentiel");
+        IApplicationComponent ac = AccessDelegateHelper.getInstance( "Validation" );
+        Collection referencedApplis = (Collection) ac.execute( "listReferentiel" );
         // les applications de l'utilisateur qui sont également référencés
-        List commonApplis = new ArrayList(0);
-        for (int i = 0; i < applicationsList.size(); i++) {
-            if (referencedApplis.contains(((ComponentDTO) applicationsList.get(i)).getName())) {
-                commonApplis.add(((ComponentDTO) applicationsList.get(i)).getName());
+        List commonApplis = new ArrayList( 0 );
+        for ( int i = 0; i < applicationsList.size(); i++ )
+        {
+            if ( referencedApplis.contains( ( (ComponentDTO) applicationsList.get( i ) ).getName() ) )
+            {
+                commonApplis.add( ( (ComponentDTO) applicationsList.get( i ) ).getName() );
             }
         }
 
         // Comme le form est en session, on le remet à jour
         pForm = new SetOfReferencesListForm();
         // Récupère les références et les structures
-        getReferences(commonApplis, isUserAdmin(pRequest), pRequest, pForm);
+        getReferences( commonApplis, isUserAdmin( pRequest ), pRequest, pForm );
         // Remet à jour le form en session
-        pRequest.getSession().removeAttribute("setOfReferencesListForm");
-        pRequest.getSession().setAttribute("setOfReferencesListForm", pForm);
+        pRequest.getSession().removeAttribute( "setOfReferencesListForm" );
+        pRequest.getSession().setAttribute( "setOfReferencesListForm", pForm );
 
     }
 
     /**
-     * Permet de récupérer tous les projets qui se trouvent dans le référentiel
-     * Les résultats renvoyés sont rendus anonymes en fonction du privilège
-     * administrateur, des projets connus par l'utilisateur et du caractère public
-     * du référentiel
+     * Permet de récupérer tous les projets qui se trouvent dans le référentiel Les résultats renvoyés sont rendus
+     * anonymes en fonction du privilège administrateur, des projets connus par l'utilisateur et du caractère public du
+     * référentiel
+     * 
      * @param pApplicationsList liste des applications de l'utilisateur
      * @param pAdmin indique un privilège administrateur
      * @param pRequest la requete http
@@ -121,52 +138,63 @@ public class ReferenceListAction extends DefaultAction {
      * @throws JrafEnterpriseException exception
      * @throws WTransformerException exception
      */
-    private void getReferences(List pApplicationsList, boolean pAdmin, HttpServletRequest pRequest, SetOfReferencesListForm pSetForm) throws JrafEnterpriseException, WTransformerException {
+    private void getReferences( List pApplicationsList, boolean pAdmin, HttpServletRequest pRequest,
+                                SetOfReferencesListForm pSetForm )
+        throws JrafEnterpriseException, WTransformerException
+    {
         // Obtention des résultats
-        IApplicationComponent ac = AccessDelegateHelper.getInstance("Results");
-        LogonBean sessionUser = (LogonBean) pRequest.getSession().getAttribute(WConstants.USER_KEY);
-        Object[] paramIn = { null, null, new Boolean(pAdmin), new Long(sessionUser.getId())};
-        List references = ((List) ac.execute("getReference", paramIn));
+        IApplicationComponent ac = AccessDelegateHelper.getInstance( "Results" );
+        LogonBean sessionUser = (LogonBean) pRequest.getSession().getAttribute( WConstants.USER_KEY );
+        Object[] paramIn = { null, null, new Boolean( pAdmin ), new Long( sessionUser.getId() ) };
+        List references = ( (List) ac.execute( "getReference", paramIn ) );
         SqualeReferenceDTO squaleReference = null;
         ReferenceForm refForm = null;
         Iterator referencesIterator = references.iterator();
-        while (referencesIterator.hasNext()) {
+        while ( referencesIterator.hasNext() )
+        {
             squaleReference = (SqualeReferenceDTO) referencesIterator.next();
             // Conversion welcom
             Object[] obj = { squaleReference };
-            refForm = (ReferenceForm) WTransformerFactory.objToForm(ReferenceTransformer.class, obj);
+            refForm = (ReferenceForm) WTransformerFactory.objToForm( ReferenceTransformer.class, obj );
             // On rend les projets anonymes si on n'est pas admin, qu'on a pas les droits de lecture
             // et s'il ne sont pas publics
-            if (!pAdmin && !refForm.isPublic() && !pApplicationsList.contains(refForm.getApplicationName())) {
-                anonymize(refForm, pRequest);
+            if ( !pAdmin && !refForm.isPublic() && !pApplicationsList.contains( refForm.getApplicationName() ) )
+            {
+                anonymize( refForm, pRequest );
             }
             // Met à jour le caractère masqué ou affiché
-            if (refForm.isHidden()) {
-                refForm.setState(WebMessages.getString(pRequest, ReferenceForm.HIDDEN));
-            } else {
-                refForm.setState(WebMessages.getString(pRequest, ReferenceForm.DISPLAYED));
+            if ( refForm.isHidden() )
+            {
+                refForm.setState( WebMessages.getString( pRequest, ReferenceForm.HIDDEN ) );
+            }
+            else
+            {
+                refForm.setState( WebMessages.getString( pRequest, ReferenceForm.DISPLAYED ) );
             }
             // On convertit la grille qualité associée
             ReferenceGridForm gridForm = new ReferenceGridForm();
-            gridForm.setName(squaleReference.getGrid().getName());
-            gridForm.setUpdateDate(squaleReference.getGrid().getUpdateDate());
-            gridForm.setFormattedDate(SqualeWebActionUtils.getFormattedDate(squaleReference.getGrid().getUpdateDate(), pRequest.getLocale()));
-            pSetForm.add(gridForm, refForm);
+            gridForm.setName( squaleReference.getGrid().getName() );
+            gridForm.setUpdateDate( squaleReference.getGrid().getUpdateDate() );
+            gridForm.setFormattedDate( SqualeWebActionUtils.getFormattedDate(
+                                                                              squaleReference.getGrid().getUpdateDate(),
+                                                                              pRequest.getLocale() ) );
+            pSetForm.add( gridForm, refForm );
         }
     }
 
     /**
-     * Anonymisation du form de référence
-     * Les projets qui ne font pas partie des projets de l'utilisateur sont rendus
+     * Anonymisation du form de référence Les projets qui ne font pas partie des projets de l'utilisateur sont rendus
      * anonymes en effaçant le nom de l'application et du projet
+     * 
      * @param pReferenceForm form de la référence
      * @param pRequest la requete http
      */
-    private void anonymize(ReferenceForm pReferenceForm, HttpServletRequest pRequest) {
+    private void anonymize( ReferenceForm pReferenceForm, HttpServletRequest pRequest )
+    {
         // Effacement des informations
-        String textAnonym = WebMessages.getString(pRequest, "reference.project.anonyme");
-        pReferenceForm.setApplicationName(textAnonym);
+        String textAnonym = WebMessages.getString( pRequest, "reference.project.anonyme" );
+        pReferenceForm.setApplicationName( textAnonym );
         String projectName = textAnonym;
-        pReferenceForm.setName(projectName);
+        pReferenceForm.setName( projectName );
     }
 }

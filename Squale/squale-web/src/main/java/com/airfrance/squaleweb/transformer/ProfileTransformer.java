@@ -10,18 +10,21 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
  * Transformer ProfileDTO <-> ProfilForm
  * 
  * @author M400842
- *
  */
-public class ProfileTransformer implements WITransformer{
-   
+public class ProfileTransformer
+    implements WITransformer
+{
+
     /**
      * @param pObject l'objet à transformer
      * @throws WTransformerException si un pb apparait.
      * @return le formulaire.
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         ProfileForm form = new ProfileForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 
@@ -30,11 +33,13 @@ public class ProfileTransformer implements WITransformer{
      * @param pForm le formulaire à remplir.
      * @throws WTransformerException si un pb apparait.
      */
-    public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
-        ProfileDTO dto = (ProfileDTO)pObject[0];
-        ProfileForm form = (ProfileForm)pForm;
-        form.setName(dto.getName());
-        form.setRights(dto.getRights());
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
+        ProfileDTO dto = (ProfileDTO) pObject[0];
+        ProfileForm form = (ProfileForm) pForm;
+        form.setName( dto.getName() );
+        form.setRights( dto.getRights() );
     }
 
     /**
@@ -42,9 +47,11 @@ public class ProfileTransformer implements WITransformer{
      * @throws WTransformerException si un pb apparait.
      * @return le tableaux des objets.
      */
-    public Object[] formToObj(WActionForm pForm) throws WTransformerException {
-        Object[] obj = {new ProfileDTO()};
-        formToObj(pForm, obj);
+    public Object[] formToObj( WActionForm pForm )
+        throws WTransformerException
+    {
+        Object[] obj = { new ProfileDTO() };
+        formToObj( pForm, obj );
         return obj;
     }
 
@@ -53,10 +60,12 @@ public class ProfileTransformer implements WITransformer{
      * @param pForm le formulaire à lire.
      * @throws WTransformerException si un pb apparait.
      */
-    public void formToObj(WActionForm pForm, Object[] pObject) throws WTransformerException { 
-        ProfileForm form = (ProfileForm)pForm;
-        ProfileDTO dto = (ProfileDTO)pObject[0];
-        dto.setName(form.getName());
-        dto.setRights(form.getRights());
+    public void formToObj( WActionForm pForm, Object[] pObject )
+        throws WTransformerException
+    {
+        ProfileForm form = (ProfileForm) pForm;
+        ProfileDTO dto = (ProfileDTO) pObject[0];
+        dto.setName( form.getName() );
+        dto.setRights( form.getRights() );
     }
 }

@@ -8,24 +8,27 @@ import com.airfrance.welcom.struts.bean.WActionForm;
 /**
  * Liste de facteurs
  */
-public class FactorListForm extends WActionForm {
+public class FactorListForm
+    extends WActionForm
+{
     /**
      * Liste des facteurs
      */
     private List mList = new ArrayList();
 
-    
     /**
      * @return la liste des facteurs
      */
-    public List getList() {
+    public List getList()
+    {
         return mList;
     }
 
     /**
      * @param pList la liste des facteurs
      */
-    public void setList(List pList) {
+    public void setList( List pList )
+    {
         mList = pList;
     }
 

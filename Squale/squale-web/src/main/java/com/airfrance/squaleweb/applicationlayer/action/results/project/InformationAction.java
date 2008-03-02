@@ -25,63 +25,75 @@ import com.airfrance.squaleweb.resources.WebMessages;
 
 /**
  */
-public class InformationAction extends DefaultAction {
+public class InformationAction
+    extends DefaultAction
+{
 
-    /**  
+    /**
      * récupère les informations liées à un facteur/critère/pratique
+     * 
      * @param pMapping le mapping.
      * @param pForm le formulaire à lire.
      * @param pRequest la requête HTTP.
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward retrieveInformation(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward retrieveInformation( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                              HttpServletResponse pResponse )
+    {
         ActionForward forward = null;
         ActionErrors errors = new ActionErrors();
-        try {
-            forward = pMapping.findForward("information");
+        try
+        {
+            forward = pMapping.findForward( "information" );
             // la clé de l'élément sur lequel on veut des détails
-            String elementKey = pRequest.getParameter("elementName");
+            String elementKey = pRequest.getParameter( "elementName" );
             // l'id de l'élément (pour récupérer la formule)
-            String ruleId = pRequest.getParameter("ruleId");
+            String ruleId = pRequest.getParameter( "ruleId" );
             // récupère les informations liées a l'élément
-            IApplicationComponent ac = AccessDelegateHelper.getInstance("QualityGrid");
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "QualityGrid" );
             QualityRuleDTO rule = new QualityRuleDTO();
-            rule.setId(new Long(ruleId).longValue());
-            Object[] param = new Object[] { rule, new Boolean(true)};
-            Object[] ruleAndTre = (Object[]) ac.execute("getQualityRuleAndUsedTres", param);
+            rule.setId( new Long( ruleId ).longValue() );
+            Object[] param = new Object[] { rule, new Boolean( true ) };
+            Object[] ruleAndTre = (Object[]) ac.execute( "getQualityRuleAndUsedTres", param );
             QualityRuleDTO ruleResult = (QualityRuleDTO) ruleAndTre[0];
-            Object[] triggerAndFormula = formatFormula(pRequest, ruleResult);
+            Object[] triggerAndFormula = formatFormula( pRequest, ruleResult );
             String trigger = (String) triggerAndFormula[0];
             String key = ruleResult.getHelpKey();
-            if (key != null && !key.equals("")) {
+            if ( key != null && !key.equals( "" ) )
+            {
                 elementKey = ruleResult.getHelpKey();
             }
-            String description = WebMessages.getString(pRequest, elementKey + ".description");
-            String correction = WebMessages.getString(pRequest, elementKey + ".correction");
-            ((PracticeInformationForm) pForm).setTrigger(trigger);
+            String description = WebMessages.getString( pRequest, elementKey + ".description" );
+            String correction = WebMessages.getString( pRequest, elementKey + ".correction" );
+            ( (PracticeInformationForm) pForm ).setTrigger( trigger );
             // Suivant le type de la formule, on a récupéré une formule simple
             // ou une formule avec des conditions
             Object formula = triggerAndFormula[1];
-            if (formula instanceof String) {
-                ((PracticeInformationForm) pForm).setFormula((String) formula);
+            if ( formula instanceof String )
+            {
+                ( (PracticeInformationForm) pForm ).setFormula( (String) formula );
             }
-            if (formula instanceof String[]) {
-                ((PracticeInformationForm) pForm).setFormulaCondition((String[]) formula);
+            if ( formula instanceof String[] )
+            {
+                ( (PracticeInformationForm) pForm ).setFormulaCondition( (String[]) formula );
             }
-            ((PracticeInformationForm) pForm).setDescription(description);
-            ((PracticeInformationForm) pForm).setCorrection(correction);
-            ((PracticeInformationForm) pForm).setName(WebMessages.getString(pRequest, elementKey));
-            ((PracticeInformationForm) pForm).setUsedTres((Collection)ruleAndTre[1]);
-        } catch (Exception e) {
-            // Traitement factorisé des exceptions
-            handleException(e, errors, pRequest);
+            ( (PracticeInformationForm) pForm ).setDescription( description );
+            ( (PracticeInformationForm) pForm ).setCorrection( correction );
+            ( (PracticeInformationForm) pForm ).setName( WebMessages.getString( pRequest, elementKey ) );
+            ( (PracticeInformationForm) pForm ).setUsedTres( (Collection) ruleAndTre[1] );
         }
-        if (!errors.isEmpty()) {
+        catch ( Exception e )
+        {
+            // Traitement factorisé des exceptions
+            handleException( e, errors, pRequest );
+        }
+        if ( !errors.isEmpty() )
+        {
             // Sauvegarde des messages
-            saveMessages(pRequest, errors);
+            saveMessages( pRequest, errors );
             // Routage vers la page d'erreur
-            forward = pMapping.findForward("total_failure");
+            forward = pMapping.findForward( "total_failure" );
         }
         return forward;
     }
@@ -89,61 +101,68 @@ public class InformationAction extends DefaultAction {
     /**
      * @param ruleDto la règle
      * @param pRequest la requete
-     * @return un tableau de deux Strings et une liste : le trigger, la formule et les métriques
-     * utilisées dans la formule
-     * formatée pour l'affichage
+     * @return un tableau de deux Strings et une liste : le trigger, la formule et les métriques utilisées dans la
+     *         formule formatée pour l'affichage
      */
-    public Object[] formatFormula(HttpServletRequest pRequest, QualityRuleDTO ruleDto) {
+    public Object[] formatFormula( HttpServletRequest pRequest, QualityRuleDTO ruleDto )
+    {
         final int ITEMS = 3;
         Object[] result = new Object[ITEMS];
         // initialisation par défaut à des messages
         // indiquant que le trigger et la formule n'ont pas été définies.
-        result[0] = WebMessages.getString(pRequest, "qualityRule.trigger.undefined");
-        result[1] = WebMessages.getString(pRequest, "qualityRule.formula.undefined");
+        result[0] = WebMessages.getString( pRequest, "qualityRule.trigger.undefined" );
+        result[1] = WebMessages.getString( pRequest, "qualityRule.formula.undefined" );
         result[2] = new ArrayList();
         // code défensif: normalement on est forcément sur une practiceRuleDTO
         // si on n'est pas sur une practice alors il n'y a pas d'aide
-        if (ruleDto instanceof PracticeRuleDTO) {
+        if ( ruleDto instanceof PracticeRuleDTO )
+        {
             // On récupère la formule et on l'adapte pour l'affichage
             // 2 cas :
-            //          * SimpleFormula --> récupération simple de la formule
-            //          * ConditionFormula --> récupération des conditions
-            AbstractFormulaDTO formula = ((PracticeRuleDTO) ruleDto).getFormula();
-            if (formula != null) {
-            	result[2] = formula.getMeasureKinds();
+            // * SimpleFormula --> récupération simple de la formule
+            // * ConditionFormula --> récupération des conditions
+            AbstractFormulaDTO formula = ( (PracticeRuleDTO) ruleDto ).getFormula();
+            if ( formula != null )
+            {
+                result[2] = formula.getMeasureKinds();
                 String trigger = formula.getTriggerCondition();
-                if (trigger != null) {
+                if ( trigger != null )
+                {
                     result[0] = trigger;
                 }
-                if (formula instanceof SimpleFormulaDTO) {
-                    result[1] = ((SimpleFormulaDTO) formula).getFormula();
+                if ( formula instanceof SimpleFormulaDTO )
+                {
+                    result[1] = ( (SimpleFormulaDTO) formula ).getFormula();
                 }
-                if (formula instanceof ConditionFormulaDTO) {
-                    Collection coll = ((ConditionFormulaDTO) formula).getMarkConditions();
+                if ( formula instanceof ConditionFormulaDTO )
+                {
+                    Collection coll = ( (ConditionFormulaDTO) formula ).getMarkConditions();
                     String[] conditions = new String[coll.size()];
                     Iterator it = coll.iterator();
                     String formulaResult = "";
-                    // 3 conditions : 
-                    //   * index = 0 --> accepté
-                    //   * index = 1 --> accepté avec réserve
-                    //   * index = 2 --> refusé
-                    String accepted = WebMessages.getString(pRequest, "mark.less.1");
-                    String reserves = WebMessages.getString(pRequest, "mark.less.2");
-                    String refused = WebMessages.getString(pRequest, "mark.less.3");
+                    // 3 conditions :
+                    // * index = 0 --> accepté
+                    // * index = 1 --> accepté avec réserve
+                    // * index = 2 --> refusé
+                    String accepted = WebMessages.getString( pRequest, "mark.less.1" );
+                    String reserves = WebMessages.getString( pRequest, "mark.less.2" );
+                    String refused = WebMessages.getString( pRequest, "mark.less.3" );
                     int counter = 0;
                     String rule = "";
-                    while (it.hasNext()) {
-                        switch (counter) {
-                            case 0 :
+                    while ( it.hasNext() )
+                    {
+                        switch ( counter )
+                        {
+                            case 0:
                                 rule = accepted;
                                 break;
-                            case 1 :
+                            case 1:
                                 rule = reserves;
                                 break;
-                            case 2 :
+                            case 2:
                                 rule = refused;
                                 break;
-                            default :
+                            default:
                                 break;
                         }
                         formulaResult = rule + ": " + it.next();

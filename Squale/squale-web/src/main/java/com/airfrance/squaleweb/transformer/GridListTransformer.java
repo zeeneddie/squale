@@ -13,16 +13,20 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 /**
  * Transformation d'une liste de grilles qualité
  */
-public class GridListTransformer extends AbstractListTransformer {
+public class GridListTransformer
+    extends AbstractListTransformer
+{
 
     /**
      * @param pObject le tableau de QualityGridDTO à transformer en formulaires.
      * @throws WTransformerException si un pb apparaît.
      * @return le formulaire associé
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         GridListForm form = new GridListForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 
@@ -31,21 +35,26 @@ public class GridListTransformer extends AbstractListTransformer {
      * @param pForm le formulaire à remplir.
      * @throws WTransformerException si un pb apparaît.
      */
-    public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
         ArrayList listGridsDTO = (ArrayList) pObject[0];
         GridListForm gridListForm = (GridListForm) pForm;
         ArrayList listGridForm = new ArrayList();
-        if(null != listGridsDTO){
+        if ( null != listGridsDTO )
+        {
             Iterator it = listGridsDTO.iterator();
-            while(it.hasNext()){
-                listGridForm.add(WTransformerFactory.objToForm(GridTransformer.class,it.next()));
+            while ( it.hasNext() )
+            {
+                listGridForm.add( WTransformerFactory.objToForm( GridTransformer.class, it.next() ) );
             }
         }
-        gridListForm.setGrids(listGridForm);
-        if(pObject.length > 1) {
+        gridListForm.setGrids( listGridForm );
+        if ( pObject.length > 1 )
+        {
             // On récupère les grilles sans profil ni audit
             // sans transformation car la liste ne contient que des String
-            gridListForm.setUnlinkedGrids((ArrayList)pObject[1]);
+            gridListForm.setUnlinkedGrids( (ArrayList) pObject[1] );
         }
     }
 
@@ -54,13 +63,17 @@ public class GridListTransformer extends AbstractListTransformer {
      * @param pObject le tableau de QualityGridDTO qui récupère les données du formulaire.
      * @throws WTransformerException si un pb apparaît.
      */
-    public void formToObj(WActionForm pForm, Object[] pObject) throws WTransformerException {
+    public void formToObj( WActionForm pForm, Object[] pObject )
+        throws WTransformerException
+    {
         ArrayList listObject = (ArrayList) pObject[0];
-        ListIterator it = ((GridListForm) pForm).getGrids().listIterator();
-        while (it.hasNext()) {
+        ListIterator it = ( (GridListForm) pForm ).getGrids().listIterator();
+        while ( it.hasNext() )
+        {
             GridForm gridForm = (GridForm) it.next();
-            if (gridForm.isSelected()) {
-                listObject.add(WTransformerFactory.formToObj(GridTransformer.class, gridForm)[0]);
+            if ( gridForm.isSelected() )
+            {
+                listObject.add( WTransformerFactory.formToObj( GridTransformer.class, gridForm )[0] );
             }
         }
     }

@@ -1,17 +1,18 @@
 package com.airfrance.squaleweb.applicationlayer.action.rulechecking;
 
-
 /**
  * Action d'ajout de ruleset dans CppTest
  */
-public class CppTestAddRuleSetAction extends AbstractAddRuleSetAction {
+public class CppTestAddRuleSetAction
+    extends AbstractAddRuleSetAction
+{
 
-    /** 
+    /**
      * @see com.airfrance.squaleweb.applicationlayer.action.rulechecking.AbstractAddRuleSetAction#getAccessComponentName()
-     * 
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    protected String getAccessComponentName() {
+    protected String getAccessComponentName()
+    {
         return "CppTestAdmin";
     }
 }

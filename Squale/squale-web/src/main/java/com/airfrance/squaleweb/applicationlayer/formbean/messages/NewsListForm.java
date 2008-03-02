@@ -7,7 +7,9 @@ import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
 /**
  * 
  */
-public class NewsListForm extends RootForm{
+public class NewsListForm
+    extends RootForm
+{
 
     /** la liste des nouveautés */
     private Collection newsList;
@@ -15,15 +17,17 @@ public class NewsListForm extends RootForm{
     /**
      * @return la liste des nouveautés
      */
-    public Collection getNewsList() {
+    public Collection getNewsList()
+    {
         return newsList;
     }
 
     /**
      * @param newList la nouvelle liste
      */
-    public void setNewsList(Collection newList) {
+    public void setNewsList( Collection newList )
+    {
         newsList = newList;
     }
-    
+
 }

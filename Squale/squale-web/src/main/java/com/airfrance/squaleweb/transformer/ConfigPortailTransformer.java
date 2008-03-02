@@ -14,16 +14,20 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 /**
  * Transforme ConfigPortailForm <-> ProjectProfileDTO et SourceManagementDTO
  */
-public class ConfigPortailTransformer extends AbstractListTransformer {
+public class ConfigPortailTransformer
+    extends AbstractListTransformer
+{
 
     /**
      * @param pObject l'objet SqualixConfigurationDTO à transformer en formulaire.
      * @throws WTransformerException si un pb apparaît.
      * @return le formulaire associé
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         ConfigPortailForm form = new ConfigPortailForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 
@@ -32,7 +36,9 @@ public class ConfigPortailTransformer extends AbstractListTransformer {
      * @param pForm le formulaire à remplir.
      * @throws WTransformerException si un pb apparaît.
      */
-    public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
         Collection listProfilesDTO = (Collection) pObject[0];
         Collection listManagersDTO = (Collection) pObject[1];
         ConfigPortailForm configForm = (ConfigPortailForm) pForm;
@@ -40,28 +46,32 @@ public class ConfigPortailTransformer extends AbstractListTransformer {
         ArrayList listManagersForm = new ArrayList();
         Iterator itProfiles = listProfilesDTO.iterator();
         ProjectProfileDTO profileDTO = null;
-        while (itProfiles.hasNext()) {
+        while ( itProfiles.hasNext() )
+        {
             profileDTO = (ProjectProfileDTO) itProfiles.next();
-            listProfilesForm.add(WTransformerFactory.objToForm(ProjectProfileTransformer.class, profileDTO));
+            listProfilesForm.add( WTransformerFactory.objToForm( ProjectProfileTransformer.class, profileDTO ) );
 
         }
-        configForm.setProfiles(listProfilesForm);
+        configForm.setProfiles( listProfilesForm );
         Iterator itManagers = listManagersDTO.iterator();
         SourceManagementDTO managerDTO = null;
-        while (itManagers.hasNext()) {
+        while ( itManagers.hasNext() )
+        {
             managerDTO = (SourceManagementDTO) itManagers.next();
-            listManagersForm.add(WTransformerFactory.objToForm(SourceManagementTransformer.class, managerDTO));
+            listManagersForm.add( WTransformerFactory.objToForm( SourceManagementTransformer.class, managerDTO ) );
         }
-        configForm.setSourceManagements(listManagersForm);
+        configForm.setSourceManagements( listManagersForm );
     }
 
     /**
      * Méthode générée
      * 
      * @param pForm le formulaire à transformer.
-     * @param pObject l'objet à remplir 
+     * @param pObject l'objet à remplir
      * @throws WTransformerException si un pb apparaît.
      */
-    public void formToObj(WActionForm pForm, Object[] pObject) throws WTransformerException {
-     }
+    public void formToObj( WActionForm pForm, Object[] pObject )
+        throws WTransformerException
+    {
+    }
 }

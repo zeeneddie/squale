@@ -8,24 +8,27 @@ import com.airfrance.welcom.struts.bean.WActionForm;
 /**
  * Liste des critères
  */
-public class CriteriaListForm  extends WActionForm {
+public class CriteriaListForm
+    extends WActionForm
+{
     /**
      * Liste des critères
      */
     private List mList = new ArrayList();
 
-    
     /**
      * @return la liste des critères
      */
-    public List getList() {
+    public List getList()
+    {
         return mList;
     }
 
     /**
      * @param pList la liste des critères
      */
-    public void setList(List pList) {
+    public void setList( List pList )
+    {
         mList = pList;
     }
 

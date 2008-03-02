@@ -1,63 +1,69 @@
 package com.airfrance.squaleweb.applicationlayer.formbean;
 
 
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
-
-
 /**
  * actionForm associate to the login JSP
  */
-public class UserLoginForm extends RootForm {
+public class UserLoginForm
+    extends RootForm
+{
 
-	/**
-	 * The login of the user
-	 */
-	private String login;
-	
-	/**
-	 * The password of the user 
-	 */
-	private String pass;
+    /**
+     * The login of the user
+     */
+    private String login;
 
-	/**
-	 * Default constructor
-	 */
-	public UserLoginForm(){
-		
-	}
+    /**
+     * The password of the user
+     */
+    private String pass;
 
-	/**
-	 * Getter for the login
-	 * @return the login
-	 */
-	public String getLogin() {
-		return login;
-	}
+    /**
+     * Default constructor
+     */
+    public UserLoginForm()
+    {
 
-	/**
-	 * Setter for the login 
-	 * @param login : the login of the user
-	 */
-	public void setLogin(String login) {
-		this.login = login;
-	}
+    }
 
-	
-	/**
-	 * Getter for the password
-	 * @return the password
-	 */
-	public String getPass() {
-		return pass;
-	}
+    /**
+     * Getter for the login
+     * 
+     * @return the login
+     */
+    public String getLogin()
+    {
+        return login;
+    }
 
-	
-	/**
-	 * Setter for the password
-	 * @param pass : the password of the user
-	 */
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-		
+    /**
+     * Setter for the login
+     * 
+     * @param login : the login of the user
+     */
+    public void setLogin( String login )
+    {
+        this.login = login;
+    }
+
+    /**
+     * Getter for the password
+     * 
+     * @return the password
+     */
+    public String getPass()
+    {
+        return pass;
+    }
+
+    /**
+     * Setter for the password
+     * 
+     * @param pass : the password of the user
+     */
+    public void setPass( String pass )
+    {
+        this.pass = pass;
+    }
+
 }

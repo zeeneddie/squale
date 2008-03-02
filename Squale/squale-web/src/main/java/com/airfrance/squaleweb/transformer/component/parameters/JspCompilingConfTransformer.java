@@ -17,97 +17,114 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
 /**
  * Transformeur pour les paramétres de compilation JSP
  */
-public class JspCompilingConfTransformer implements WITransformer {
+public class JspCompilingConfTransformer
+    implements WITransformer
+{
 
-    /** 
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
-     * {@inheritDoc}
+    /**
+     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[]) {@inheritDoc}
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         JspCompilingForm jspForm = new JspCompilingForm();
-        objToForm(pObject, jspForm);
+        objToForm( pObject, jspForm );
         return jspForm;
     }
 
-    /** 
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[], com.airfrance.welcom.struts.bean.WActionForm)
-     * {@inheritDoc}
+    /**
+     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      com.airfrance.welcom.struts.bean.WActionForm) {@inheritDoc}
      */
-    public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
         MapParameterDTO params = (MapParameterDTO) pObject[0];
         JspCompilingForm jspCompilingForm = (JspCompilingForm) pForm;
         // On remplit le form
         // Le chemin vers le répertoire d'application Web
-        StringParameterDTO webApp = (StringParameterDTO) params.getParameters().get(ParametersConstants.WEB_APP);
-        if (webApp != null) {
-            jspCompilingForm.setWebAppPath(webApp.getValue());
+        StringParameterDTO webApp = (StringParameterDTO) params.getParameters().get( ParametersConstants.WEB_APP );
+        if ( webApp != null )
+        {
+            jspCompilingForm.setWebAppPath( webApp.getValue() );
         }
         // La version des servlets
-        StringParameterDTO j2eeVers = (StringParameterDTO) params.getParameters().get(ParametersConstants.J2EE_VERSION);
-        if (j2eeVers != null) {
-            jspCompilingForm.setJ2eeVersion(j2eeVers.getValue());
+        StringParameterDTO j2eeVers =
+            (StringParameterDTO) params.getParameters().get( ParametersConstants.J2EE_VERSION );
+        if ( j2eeVers != null )
+        {
+            jspCompilingForm.setJ2eeVersion( j2eeVers.getValue() );
         }
         // excludedDirs
-        jspCompilingForm.setExcludeJspDir(new String[0]);
-        ListParameterDTO dirsList = (ListParameterDTO) params.getParameters().get(ParametersConstants.JSP_EXCLUDED_DIRS);
-        if (dirsList != null) {
+        jspCompilingForm.setExcludeJspDir( new String[0] );
+        ListParameterDTO dirsList =
+            (ListParameterDTO) params.getParameters().get( ParametersConstants.JSP_EXCLUDED_DIRS );
+        if ( dirsList != null )
+        {
             List dirs = dirsList.getParameters();
             Iterator it = dirs.iterator();
             String[] excludedDirs = new String[dirs.size()];
             int index = 0;
             // On parcours la liste des répertoires exclus afin de remplir
             // le tableau concerné du form
-            while (it.hasNext()) {
+            while ( it.hasNext() )
+            {
                 StringParameterDTO dir = (StringParameterDTO) it.next();
                 excludedDirs[index] = dir.getValue();
                 index++;
             }
-            jspCompilingForm.setExcludeJspDir(excludedDirs);
+            jspCompilingForm.setExcludeJspDir( excludedDirs );
         }
     }
 
-    /** 
+    /**
      * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public Object[] formToObj(WActionForm pForm) throws WTransformerException {
-        Object[] obj = { new MapParameterDTO()};
-        formToObj(pForm, obj);
+    public Object[] formToObj( WActionForm pForm )
+        throws WTransformerException
+    {
+        Object[] obj = { new MapParameterDTO() };
+        formToObj( pForm, obj );
         return obj;
     }
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm, java.lang.Object[])
-     * {@inheritDoc}
+     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm,
+     *      java.lang.Object[]) {@inheritDoc}
      */
-    public void formToObj(WActionForm pForm, Object[] pObject) throws WTransformerException {
+    public void formToObj( WActionForm pForm, Object[] pObject )
+        throws WTransformerException
+    {
         MapParameterDTO mapParameter = (MapParameterDTO) pObject[0];
         JspCompilingForm jspCompilingForm = (JspCompilingForm) pForm;
         // Insertion des paramètres dans la map
         // chemin vers le répertoire d'application web
         StringParameterDTO webApp = new StringParameterDTO();
-        webApp.setValue(jspCompilingForm.getWebAppPath());
-        mapParameter.getParameters().put(ParametersConstants.WEB_APP, webApp);
+        webApp.setValue( jspCompilingForm.getWebAppPath() );
+        mapParameter.getParameters().put( ParametersConstants.WEB_APP, webApp );
         // dialect
         StringParameterDTO dialect = new StringParameterDTO();
-        dialect.setValue(jspCompilingForm.getJ2eeVersion());
-        mapParameter.getParameters().put(ParametersConstants.J2EE_VERSION, dialect);
+        dialect.setValue( jspCompilingForm.getJ2eeVersion() );
+        mapParameter.getParameters().put( ParametersConstants.J2EE_VERSION, dialect );
         // excludedDirs
         // Nettoyage des noms des répertoires à exclure
-        String[] excludedDirsTab = SqualeWebActionUtils.cleanValues(jspCompilingForm.getExcludeJspDir());
+        String[] excludedDirsTab = SqualeWebActionUtils.cleanValues( jspCompilingForm.getExcludeJspDir() );
         ListParameterDTO excludedDirsList = new ListParameterDTO();
         ArrayList paramsList = new ArrayList();
         // On remplit la liste avec les données du tableau
-        for (int i = 0; i < excludedDirsTab.length; i++) {
+        for ( int i = 0; i < excludedDirsTab.length; i++ )
+        {
             StringParameterDTO strParam = new StringParameterDTO();
-            strParam.setValue(excludedDirsTab[i]);
-            paramsList.add(strParam);
+            strParam.setValue( excludedDirsTab[i] );
+            paramsList.add( strParam );
         }
-        excludedDirsList.setParameters(paramsList);
-        mapParameter.getParameters().put(ParametersConstants.JSP_EXCLUDED_DIRS, excludedDirsList);
+        excludedDirsList.setParameters( paramsList );
+        mapParameter.getParameters().put( ParametersConstants.JSP_EXCLUDED_DIRS, excludedDirsList );
         // si il n'y a plus de répertoires exclus, on supprime le paramètre correspondant
-        if (excludedDirsTab.length == 0) {
-            mapParameter.getParameters().remove(ParametersConstants.JSP_EXCLUDED_DIRS);
+        if ( excludedDirsTab.length == 0 )
+        {
+            mapParameter.getParameters().remove( ParametersConstants.JSP_EXCLUDED_DIRS );
         }
     }
 }

@@ -13,9 +13,10 @@ import com.airfrance.squaleweb.applicationlayer.formbean.ActionIdForm;
  * Représente un composant (package, classe, fichier, méthode)
  * 
  * @author M400842
- *
  */
-public class ComponentForm extends ActionIdForm {
+public class ComponentForm
+    extends ActionIdForm
+{
 
     /**
      * Nom du composant
@@ -31,7 +32,7 @@ public class ComponentForm extends ActionIdForm {
      * Type du composant (package, classe, méthode, ...)
      */
     private String mType = null;
-    
+
     /**
      * Le filtre sur le nom du composant
      */
@@ -76,16 +77,19 @@ public class ComponentForm extends ActionIdForm {
     /**
      * Constructeur par défaut
      */
-    public ComponentForm() {
-        this(-1, "");
+    public ComponentForm()
+    {
+        this( -1, "" );
     }
 
     /**
      * Constructeur
+     * 
      * @param pId l'id
      * @param pName le nom
      */
-    public ComponentForm(long pId, String pName) {
+    public ComponentForm( long pId, String pName )
+    {
         mId = pId;
         mName = pName;
     }
@@ -93,37 +97,42 @@ public class ComponentForm extends ActionIdForm {
     /**
      * @return true si le composant est exclu du plan d'action
      */
-    public boolean getExcludedFromActionPlan() {
+    public boolean getExcludedFromActionPlan()
+    {
         return excludedFromActionPlan;
     }
 
     /**
      * @return la justification du composant
      */
-    public String getJustification() {
+    public String getJustification()
+    {
         return justification;
     }
 
     /**
      * @param pExcluded le booléen indiquant si il faut exclure le composant ou pas
      */
-    public void setExcludedFromActionPlan(boolean pExcluded) {
+    public void setExcludedFromActionPlan( boolean pExcluded )
+    {
         excludedFromActionPlan = pExcluded;
     }
 
     /**
      * @param pJustification la nouvelle valeur de la justification
      */
-    public void setJustification(String pJustification) {
+    public void setJustification( String pJustification )
+    {
         justification = pJustification;
     }
 
     /**
      * Access method for the mName property.
      * 
-     * @return   the current value of the mName property
+     * @return the current value of the mName property
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
 
@@ -132,16 +141,18 @@ public class ComponentForm extends ActionIdForm {
      * 
      * @param pName the new value of the mName property
      */
-    public void setName(String pName) {
+    public void setName( String pName )
+    {
         mName = pName;
     }
 
     /**
      * Access method for the mType property.
      * 
-     * @return   the current value of the mType property
+     * @return the current value of the mType property
      */
-    public String getType() {
+    public String getType()
+    {
         return mType;
     }
 
@@ -150,16 +161,18 @@ public class ComponentForm extends ActionIdForm {
      * 
      * @param pType the new value of the mType property
      */
-    public void setType(String pType) {
+    public void setType( String pType )
+    {
         mType = pType;
     }
 
     /**
      * Access method for the mFileName property.
      * 
-     * @return   the current value of the mFileName property
+     * @return the current value of the mFileName property
      */
-    public String getFileName() {
+    public String getFileName()
+    {
         return mFileName;
     }
 
@@ -168,16 +181,18 @@ public class ComponentForm extends ActionIdForm {
      * 
      * @param pFileName the new value of the mFileName property
      */
-    public void setFileName(String pFileName) {
+    public void setFileName( String pFileName )
+    {
         mFileName = pFileName;
     }
 
     /**
      * Access method for the mIDParent property.
      * 
-     * @return   the current value of the mIDParent property
+     * @return the current value of the mIDParent property
      */
-    public long getParentId() {
+    public long getParentId()
+    {
         return mParentId;
     }
 
@@ -186,146 +201,167 @@ public class ComponentForm extends ActionIdForm {
      * 
      * @param pParentId the new value of the mIDParent property
      */
-    public void setParentId(long pParentId) {
+    public void setParentId( long pParentId )
+    {
         mParentId = pParentId;
     }
 
     /**
      * @return la liste des metriques du composant.
      */
-    public LinkedList getMetrics() {
+    public LinkedList getMetrics()
+    {
         return mMetrics;
     }
 
     /**
      * @param pList la liste des métriques du composant.
      */
-    public void setMetrics(LinkedList pList) {
+    public void setMetrics( LinkedList pList )
+    {
         mMetrics = pList;
     }
 
     /**
      * @return la liste des enfants
      */
-    public ComponentListForm getChildren() {
+    public ComponentListForm getChildren()
+    {
         return mChildren;
     }
 
     /**
      * @return la liste des résultats sur les pratiques
      */
-    public ResultListForm getPractices() {
+    public ResultListForm getPractices()
+    {
         return mPractices;
     }
 
     /**
      * @return la liste des métriques
      */
-    public ResultListForm getResults() {
+    public ResultListForm getResults()
+    {
         return mResults;
     }
 
     /**
      * @param pChildren la liste des enfants
      */
-    public void setChildren(ComponentListForm pChildren) {
+    public void setChildren( ComponentListForm pChildren )
+    {
         mChildren = pChildren;
     }
 
     /**
      * @param pPractices la liste des résultats sur les pratiques
      */
-    public void setPractices(ResultListForm pPractices) {
+    public void setPractices( ResultListForm pPractices )
+    {
         mPractices = pPractices;
     }
 
     /**
      * @param pResults la liste des métriques
      */
-    public void setResults(ResultListForm pResults) {
+    public void setResults( ResultListForm pResults )
+    {
         mResults = pResults;
     }
 
-    /** 
+    /**
      * petite méthode pour ajuster du texte à la justification
+     * 
      * @param pJustification le texte à ajouter justification
      */
-    public void addJustification(String pJustification) {
+    public void addJustification( String pJustification )
+    {
         justification += pJustification;
     }
 
     /**
      * @return le nom complet
      */
-    public String getFullName() {
+    public String getFullName()
+    {
         return mFullName;
     }
 
     /**
      * @param pFullName le nom complet
      */
-    public void setFullName(String pFullName) {
+    public void setFullName( String pFullName )
+    {
         mFullName = pFullName;
     }
 
     /**
-     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest
-     * A implémenter sinon on ne peut pas décocher la checkBox
-     * 
+     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest A implémenter sinon on ne peut pas décocher la checkBox
      * @param mapping le mapping
      * @param request la requête
      */
-    public void reset(ActionMapping mapping, HttpServletRequest request) {
-        super.reset(mapping, request);
+    public void reset( ActionMapping mapping, HttpServletRequest request )
+    {
+        super.reset( mapping, request );
         // Reinitialisation du checkbox
         excludedFromActionPlan = false;
         // Reinitialisation du filtre
-        setFilter("");
+        setFilter( "" );
     }
 
     /**
-     * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * 
+     * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest)
      * @param mapping le mapping
      * @param request la requête
      */
-    public void wValidate(ActionMapping mapping, HttpServletRequest request) {
-        if (excludedFromActionPlan && (justification == null || justification.trim().equals(""))) {
-            addError("justification", new ActionError("error.justification.mandatory"));
+    public void wValidate( ActionMapping mapping, HttpServletRequest request )
+    {
+        if ( excludedFromActionPlan && ( justification == null || justification.trim().equals( "" ) ) )
+        {
+            addError( "justification", new ActionError( "error.justification.mandatory" ) );
         }
-        setFilter(getFilter().trim());
-        if(getFilter().matches(".*['\"` ].*")) {
-            addError("filter", new ActionError("error.invalid.characters"));
+        setFilter( getFilter().trim() );
+        if ( getFilter().matches( ".*['\"` ].*" ) )
+        {
+            addError( "filter", new ActionError( "error.invalid.characters" ) );
         }
-            
+
     }
 
-    /** 
+    /**
      * Comparaison sur l'id
-     * @see java.lang.Object#equals(java.lang.Object)
      * 
+     * @see java.lang.Object#equals(java.lang.Object)
      * @param obj l'objet à comparer
      * @return true si this=obj
      */
-    public boolean equals(Object obj) {
+    public boolean equals( Object obj )
+    {
         boolean result = false;
-        if (obj instanceof ComponentForm && null != obj) {
+        if ( obj instanceof ComponentForm && null != obj )
+        {
             ComponentForm comp = (ComponentForm) obj;
-            result = (comp.getId() == mId);
+            result = ( comp.getId() == mId );
         }
         return result;
     }
 
-    /** 
+    /**
      * @see java.lang.Object#hashCode()
-     * 
      * @return le hashcode
      */
-    public int hashCode() {
+    public int hashCode()
+    {
         int result;
-        if (getName() != null) {
+        if ( getName() != null )
+        {
             result = getName().hashCode();
-        } else {
+        }
+        else
+        {
             result = super.hashCode();
         }
         return result;
@@ -334,14 +370,16 @@ public class ComponentForm extends ActionIdForm {
     /**
      * @return le filtre sur le nom
      */
-    public String getFilter() {
+    public String getFilter()
+    {
         return mFilter;
     }
 
     /**
      * @param pFilter le filtre sur le nom
      */
-    public void setFilter(String pFilter) {
+    public void setFilter( String pFilter )
+    {
         mFilter = pFilter;
     }
 

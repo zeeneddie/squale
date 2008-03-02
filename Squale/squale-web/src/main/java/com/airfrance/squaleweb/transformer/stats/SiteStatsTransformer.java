@@ -11,16 +11,20 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 
 /**
  */
-public class SiteStatsTransformer implements WITransformer {
+public class SiteStatsTransformer
+    implements WITransformer
+{
 
     /**
      * @param pObject le tableau d'objet contenant l'objet à transformer
      * @return le form résultat de la transformation
      * @throws WTransformerException en cas d'échec
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         SiteStatsForm form = new SiteStatsForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 
@@ -29,17 +33,19 @@ public class SiteStatsTransformer implements WITransformer {
      * @param pForm le form résultat
      * @throws WTransformerException en cas d'échec
      */
-    public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
         SiteStatsForm form = (SiteStatsForm) pForm;
         SiteStatsDTO dto = (SiteStatsDTO) pObject[0];
-        form.setLoc(dto.getLoc());
-        form.setNbProjects(dto.getNbProjects());
-        form.setServeurForm((ServeurForm)WTransformerFactory.objToForm(ServeurTransformer.class,dto.getServeurDTO()));
+        form.setLoc( dto.getLoc() );
+        form.setNbProjects( dto.getNbProjects() );
+        form.setServeurForm( (ServeurForm) WTransformerFactory.objToForm( ServeurTransformer.class, dto.getServeurDTO() ) );
 
-        form.setNbAppliToValidate(dto.getNbAppliToValidate());
-        form.setNbAppliWithAuditsSuccessful(dto.getNbAppliWithAuditsSuccessful());
-        form.setNbAppliWithoutSuccessfulAudits(dto.getNbAppliWithoutSuccessfulAudits());
-        form.setNbValidatedApplis(dto.getNbValidatedApplis());
+        form.setNbAppliToValidate( dto.getNbAppliToValidate() );
+        form.setNbAppliWithAuditsSuccessful( dto.getNbAppliWithAuditsSuccessful() );
+        form.setNbAppliWithoutSuccessfulAudits( dto.getNbAppliWithoutSuccessfulAudits() );
+        form.setNbValidatedApplis( dto.getNbValidatedApplis() );
     }
 
     /**
@@ -48,8 +54,10 @@ public class SiteStatsTransformer implements WITransformer {
      * @throws WTransformerException si un pb apparait.
      * @return rien mais lance systématiquement une exception
      */
-    public Object[] formToObj(WActionForm pForm) throws WTransformerException {
-        throw new WTransformerException("deprecated");
+    public Object[] formToObj( WActionForm pForm )
+        throws WTransformerException
+    {
+        throw new WTransformerException( "deprecated" );
     }
 
     /**
@@ -58,10 +66,10 @@ public class SiteStatsTransformer implements WITransformer {
      * @param pTab les paramètres
      * @throws WTransformerException si un pb apparait.
      */
-    public void formToObj(WActionForm pForm, Object[] pTab) throws WTransformerException {
-        throw new WTransformerException("deprecated");
+    public void formToObj( WActionForm pForm, Object[] pTab )
+        throws WTransformerException
+    {
+        throw new WTransformerException( "deprecated" );
     }
-    
-    
 
 }

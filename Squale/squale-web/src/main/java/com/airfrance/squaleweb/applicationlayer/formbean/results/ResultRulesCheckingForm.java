@@ -6,7 +6,9 @@ import java.util.List;
 /**
  * Bean pour les résultats des transgressions
  */
-public class ResultRulesCheckingForm extends ResultForm {
+public class ResultRulesCheckingForm
+    extends ResultForm
+{
 
     /* Constantes de severite pour remplir le tableau de repartition */
 
@@ -25,16 +27,18 @@ public class ResultRulesCheckingForm extends ResultForm {
     private List mList = new ArrayList();
 
     /**
-    * @return la liste des résultats
-    */
-    public List getList() {
+     * @return la liste des résultats
+     */
+    public List getList()
+    {
         return mList;
     }
 
     /**
-    * @param pList la liste des résultats
-    */
-    public void setList(List pList) {
+     * @param pList la liste des résultats
+     */
+    public void setList( List pList )
+    {
         mList = pList;
 
     }

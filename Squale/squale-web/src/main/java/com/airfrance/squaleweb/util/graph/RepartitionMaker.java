@@ -21,30 +21,33 @@ import com.airfrance.squaleweb.resources.WebMessages;
 
 /**
  */
-public class RepartitionMaker extends AbstractRepartitionMaker {
+public class RepartitionMaker
+    extends AbstractRepartitionMaker
+{
 
     /**
      * Hauteur du diagramme par défaut
      */
     public static final int DEFAULT_HEIGHT = 300;
+
     /**
      * Hauteur du diagramme par défaut
      */
     public static final int DEFAULT_WIDTH = 900;
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight()
-     * {@inheritDoc}
+     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() {@inheritDoc}
      */
-    protected int getDefaultHeight() {
+    protected int getDefaultHeight()
+    {
         return DEFAULT_HEIGHT;
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth()
-     * {@inheritDoc}
+     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() {@inheritDoc}
      */
-    protected int getDefaultWidth() {
+    protected int getDefaultWidth()
+    {
         return DEFAULT_WIDTH;
     }
 
@@ -73,6 +76,7 @@ public class RepartitionMaker extends AbstractRepartitionMaker {
 
     /**
      * Constructeur avec les paramètres servant pour le graph cliquable
+     * 
      * @param pRequest la requete pour avoir des clés internationalisés
      * @param pProjectId l'id du projet
      * @param pCurrentAuditId l'id de l'audit courant
@@ -80,20 +84,18 @@ public class RepartitionMaker extends AbstractRepartitionMaker {
      * @param pPracticeId l'id de la pratique
      * @param pFactorParentId l'id du facteur parent
      */
-    public RepartitionMaker(HttpServletRequest pRequest, String pProjectId, String pCurrentAuditId, String pPreviousAuditId, String pPracticeId, String pFactorParentId) {
-        this(
-            WebMessages.getString(pRequest, DEFAULT_TITLE_KEY),
-            WebMessages.getString(pRequest, DEFAULT_XAXIS_LABEL_KEY),
-            WebMessages.getString(pRequest, DEFAULT_YAXIS_LABEL_KEY),
-            pProjectId,
-            pCurrentAuditId,
-            pPreviousAuditId,
-            pPracticeId,
-            pFactorParentId);
+    public RepartitionMaker( HttpServletRequest pRequest, String pProjectId, String pCurrentAuditId,
+                             String pPreviousAuditId, String pPracticeId, String pFactorParentId )
+    {
+        this( WebMessages.getString( pRequest, DEFAULT_TITLE_KEY ), WebMessages.getString( pRequest,
+                                                                                           DEFAULT_XAXIS_LABEL_KEY ),
+              WebMessages.getString( pRequest, DEFAULT_YAXIS_LABEL_KEY ), pProjectId, pCurrentAuditId,
+              pPreviousAuditId, pPracticeId, pFactorParentId );
     }
 
     /**
      * Constructeur avec les paramètres servant pour le graph cliquable
+     * 
      * @param pProjectId l'id du projet
      * @param pCurrentAuditId l'id de l'audit
      * @param pPreviousAuditId l'id de l'audit précédent
@@ -103,7 +105,9 @@ public class RepartitionMaker extends AbstractRepartitionMaker {
      * @param pXLabel le label des abscisses
      * @param pYLabel le label des ordonnées
      */
-    public RepartitionMaker(String pTitle, String pXLabel, String pYLabel, String pProjectId, String pCurrentAuditId, String pPreviousAuditId, String pPracticeId, String pFactorParentId) {
+    public RepartitionMaker( String pTitle, String pXLabel, String pYLabel, String pProjectId, String pCurrentAuditId,
+                             String pPreviousAuditId, String pPracticeId, String pFactorParentId )
+    {
         mProjectId = pProjectId;
         mDataSet = new DefaultCategoryDataset();
         mCurrentAuditId = pCurrentAuditId;
@@ -117,44 +121,53 @@ public class RepartitionMaker extends AbstractRepartitionMaker {
 
     /**
      * Constructeur avec les paramètres servant pour le graph cliquable
+     * 
      * @param pProjectId l'id du projet
      * @param pCurrentAuditId l'id de l'audit
      * @param pPreviousAuditId l'id de l'audit précédent
      * @param pPracticeId l'id de la pratique
      * @param pFactorParentId l'id du facteur parent
      */
-    public RepartitionMaker(String pProjectId, String pCurrentAuditId, String pPreviousAuditId, String pPracticeId, String pFactorParentId) {
-        this("", "", "", pProjectId, pCurrentAuditId, pPreviousAuditId, pPracticeId, pFactorParentId);
+    public RepartitionMaker( String pProjectId, String pCurrentAuditId, String pPreviousAuditId, String pPracticeId,
+                             String pFactorParentId )
+    {
+        this( "", "", "", pProjectId, pCurrentAuditId, pPreviousAuditId, pPracticeId, pFactorParentId );
     }
 
     /**
      * @return le diagramme JFreeChart
      */
-    public JFreeChart getChart() {
+    public JFreeChart getChart()
+    {
         JFreeChart retChart = super.getChart();
-        if (null == retChart) {
-            retChart = ChartFactory.createBarChart3D(mTitle, mXLabel, mYLabel, mDataSet, PlotOrientation.VERTICAL, false,true , true);
+        if ( null == retChart )
+        {
+            retChart =
+                ChartFactory.createBarChart3D( mTitle, mXLabel, mYLabel, mDataSet, PlotOrientation.VERTICAL, false,
+                                               true, true );
             CategoryPlot plot = retChart.getCategoryPlot();
             CategoryAxis xAxis = plot.getDomainAxis();
-            xAxis.setAxisLineVisible(true);
-            xAxis.setVisible(true);
+            xAxis.setAxisLineVisible( true );
+            xAxis.setVisible( true );
             ValueAxis yAxis = plot.getRangeAxis();
-            yAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+            yAxis.setStandardTickUnits( NumberAxis.createIntegerTickUnits() );
             // On rajoute 5% pour avoir une meilleure lisibilité
             final double YAxisCoeff = 1.05;
-            yAxis.setRange(PracticeResultBO.REFUSED_MIN, Math.max(mMaxValue * YAxisCoeff, 1));
+            yAxis.setRange( PracticeResultBO.REFUSED_MIN, Math.max( mMaxValue * YAxisCoeff, 1 ) );
 
             // Positionne les couleurs et les liens
             mRenderer = (CategoryItemRenderer) plot.getRenderer();
-            RepartitionUrlGenerator generator = new RepartitionUrlGenerator(mProjectId, mCurrentAuditId, mPreviousAuditId, mPracticeId, mFactorParentId, NB_SERIES_FOR_FLOAT_GRAPH);
-            mRenderer.setItemURLGenerator(generator);
-            BarRenderer barRenderer = (BarRenderer)mRenderer;
-            barRenderer.setBaseSeriesVisible(true);
+            RepartitionUrlGenerator generator =
+                new RepartitionUrlGenerator( mProjectId, mCurrentAuditId, mPreviousAuditId, mPracticeId,
+                                             mFactorParentId, NB_SERIES_FOR_FLOAT_GRAPH );
+            mRenderer.setItemURLGenerator( generator );
+            BarRenderer barRenderer = (BarRenderer) mRenderer;
+            barRenderer.setBaseSeriesVisible( true );
             RepartitionToolTipGenerator toolTipGenerator = new RepartitionToolTipGenerator();
-            barRenderer.setToolTipGenerator(toolTipGenerator);
-            manageColor(NB_SERIES_FOR_FLOAT_GRAPH);
-            retChart.setBackgroundPaint(Color.WHITE);
-            super.setChart(retChart);
+            barRenderer.setToolTipGenerator( toolTipGenerator );
+            manageColor( NB_SERIES_FOR_FLOAT_GRAPH );
+            retChart.setBackgroundPaint( Color.WHITE );
+            super.setChart( retChart );
         }
         return retChart;
     }
@@ -162,40 +175,49 @@ public class RepartitionMaker extends AbstractRepartitionMaker {
     /**
      * @param pValues les valeurs
      */
-    public void build(double[] pValues) {
+    public void build( double[] pValues )
+    {
         // on ne veut pas de la derniere valeur, car ce sont les éléments non notés
         // on s'arrete sur l'avant avant derniere car pour la derniere colonne
-        // du graph on fait un cumul des 2 dernieres notes 
+        // du graph on fait un cumul des 2 dernieres notes
         mMaxValue = pValues[0];
         int value = (int) pValues[0];
         double min = 0.0;
         NumberFormat format = NumberFormat.getInstance();
-        format.setMaximumFractionDigits(1);
+        format.setMaximumFractionDigits( 1 );
         final double pas = 0.1;
-        for (int i = 0; i < NB_SERIES_FOR_FLOAT_GRAPH; i++) {
-            if (i == (NB_SERIES_FOR_FLOAT_GRAPH - 1)) {
-                value = (int) (pValues[NB_SERIES_FOR_FLOAT_GRAPH - 1] + pValues[NB_SERIES_FOR_FLOAT_GRAPH]);
-            } else {
+        for ( int i = 0; i < NB_SERIES_FOR_FLOAT_GRAPH; i++ )
+        {
+            if ( i == ( NB_SERIES_FOR_FLOAT_GRAPH - 1 ) )
+            {
+                value = (int) ( pValues[NB_SERIES_FOR_FLOAT_GRAPH - 1] + pValues[NB_SERIES_FOR_FLOAT_GRAPH] );
+            }
+            else
+            {
                 value = (int) pValues[i];
             } // positionne le max
-            if (mMaxValue < value) {
+            if ( mMaxValue < value )
+            {
                 mMaxValue = value;
             }
-            if(value ==0){
-                mDataSet.addValue(null, new String(format.format(min)), "");
-            }else{
-                mDataSet.addValue(value, new String(format.format(min)), "");
+            if ( value == 0 )
+            {
+                mDataSet.addValue( null, new String( format.format( min ) ), "" );
+            }
+            else
+            {
+                mDataSet.addValue( value, new String( format.format( min ) ), "" );
             }
             min += pas;
         }
     }
 
     /**
-     * @see com.airfrance.squaleweb.util.graph.AbstractRepartitionMaker#applyColor(int, java.awt.Color)
-     * {@inheritDoc}
+     * @see com.airfrance.squaleweb.util.graph.AbstractRepartitionMaker#applyColor(int, java.awt.Color) {@inheritDoc}
      */
-    protected void applyColor(int pIndex, Color pColor) {
-       mRenderer.setSeriesPaint(pIndex, pColor);
-       
+    protected void applyColor( int pIndex, Color pColor )
+    {
+        mRenderer.setSeriesPaint( pIndex, pColor );
+
     }
 }

@@ -11,16 +11,20 @@ import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectF
 /**
  * Configuration des paramètres de la tâche CppTest
  */
-public class CreateCppTestParametersAction extends CreateParametersAction {
-    
-    /** 
-     * @see com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction#getTransformerParameters(com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+public class CreateCppTestParametersAction
+    extends CreateParametersAction
+{
+
+    /**
+     * @see com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction#getTransformerParameters(com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    public Object[] getTransformerParameters(CreateProjectForm pProject, HttpServletRequest pRequest) throws Exception {
-        IApplicationComponent acCheckstyleAdmin = AccessDelegateHelper.getInstance("CppTestAdmin");
-        //On récupère la liste des configurations existantes
-        Collection configsDTO = (Collection) acCheckstyleAdmin.execute("getAllConfigurations");
+    public Object[] getTransformerParameters( CreateProjectForm pProject, HttpServletRequest pRequest )
+        throws Exception
+    {
+        IApplicationComponent acCheckstyleAdmin = AccessDelegateHelper.getInstance( "CppTestAdmin" );
+        // On récupère la liste des configurations existantes
+        Collection configsDTO = (Collection) acCheckstyleAdmin.execute( "getAllConfigurations" );
         // On ajoute les paramètres de CPPTEST
         Object[] params = { pProject.getParameters(), configsDTO };
         return params;

@@ -2,7 +2,6 @@ package com.airfrance.squaleweb.applicationlayer.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,11 +32,13 @@ import com.airfrance.welcom.struts.util.WConstants;
  * @version 1.0
  * @author
  */
-public class LoginAction extends DefaultAction {
+public class LoginAction
+    extends DefaultAction
+{
     /**
      * Logger
      */
-    private static Log log = LogFactory.getLog(LoginAction.class);
+    private static Log log = LogFactory.getLog( LoginAction.class );
 
     /**
      * @param pMapping le mapping.
@@ -46,23 +47,32 @@ public class LoginAction extends DefaultAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward execute(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward execute( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                  HttpServletResponse pResponse )
+    {
 
         ActionForward forward = null;
-        boolean sessionOk = initUserInSession(pRequest);
-        if (sessionOk) {
+        boolean sessionOk = initUserInSession( pRequest );
+        if ( sessionOk )
+        {
             // On redirige vers la gestion de son compte si l'email OU le nom n'est pas renseigné
             // Sinon on redirige vers la page d'accueil
-            LogonBean logonBean = (LogonBean)pRequest.getSession().getAttribute(WConstants.USER_KEY);
-            if(logonBean.getEmail().length() == 0 || logonBean.getUsername() == null || logonBean.getUsername().length() == 0) {
-                forward = pMapping.findForward("email");
-            } else {
-                forward = pMapping.findForward("success");
+            LogonBean logonBean = (LogonBean) pRequest.getSession().getAttribute( WConstants.USER_KEY );
+            if ( logonBean.getEmail().length() == 0 || logonBean.getUsername() == null
+                || logonBean.getUsername().length() == 0 )
+            {
+                forward = pMapping.findForward( "email" );
             }
-        } else {
-            forward = pMapping.findForward("total_failure");
+            else
+            {
+                forward = pMapping.findForward( "success" );
+            }
         }
-        
+        else
+        {
+            forward = pMapping.findForward( "total_failure" );
+        }
+
         return forward;
     }
 
@@ -70,23 +80,27 @@ public class LoginAction extends DefaultAction {
      * @param pRequest la requpete
      * @return true si l'utilisateur a pu être initialisé et enregistré en session
      */
-    public boolean initUserInSession(HttpServletRequest pRequest) {
+    public boolean initUserInSession( HttpServletRequest pRequest )
+    {
         ActionMessages errors = new ActionMessages();
         boolean success;
-        try {
-            LogonBean logonBeanSecurity = getUser(pRequest);
+        try
+        {
+            LogonBean logonBeanSecurity = getUser( pRequest );
 
-            pRequest.getSession().setAttribute(WConstants.USER_KEY, logonBeanSecurity);
+            pRequest.getSession().setAttribute( WConstants.USER_KEY, logonBeanSecurity );
             success = true;
-        } catch (Exception e) {
-            //On ecrit l'erreur et on la sauvegarde pour affichage dans la jsp
-            log.error(e, e);
-            ExceptionWrapper.saveException(pRequest, e);
+        }
+        catch ( Exception e )
+        {
+            // On ecrit l'erreur et on la sauvegarde pour affichage dans la jsp
+            log.error( e, e );
+            ExceptionWrapper.saveException( pRequest, e );
             // On invalide la session
             pRequest.getSession().invalidate();
-            ActionMessage error = new ActionMessage("error.cannot_act");
-            errors.add(ActionMessages.GLOBAL_MESSAGE, error);
-            saveMessages(pRequest, errors);
+            ActionMessage error = new ActionMessage( "error.cannot_act" );
+            errors.add( ActionMessages.GLOBAL_MESSAGE, error );
+            saveMessages( pRequest, errors );
             success = false;
         }
         return success;
@@ -99,23 +113,26 @@ public class LoginAction extends DefaultAction {
      * @throws JrafEnterpriseException si erreur Jraf
      * @throws WTransformerException si erreur lors de la transformation
      */
-    public LogonBean getUser(HttpServletRequest pRequest) throws ConnectionException, JrafEnterpriseException, WTransformerException {
+    public LogonBean getUser( HttpServletRequest pRequest )
+        throws ConnectionException, JrafEnterpriseException, WTransformerException
+    {
         // Obtention des informations sur l'utilisateur connecté
         IUserBeanAccessor userBeanAccessor = UserBeanAccessorHelper.getUserBeanAccessor();
-        //String name = "squaleUser";
-        //pRequest.getRemoteUser();
+        // String name = "squaleUser";
+        // pRequest.getRemoteUser();
         String name = userBeanAccessor.getUserBean().getIdentifier();
-        boolean isAdmin = userBeanAccessor.getUserBean(pRequest).isAdmin();
+        boolean isAdmin = userBeanAccessor.getUserBean( pRequest ).isAdmin();
         UserDTO user = new UserDTO();
-        user.setMatricule(name);
+        user.setMatricule( name );
 
-        IApplicationComponent ac = AccessDelegateHelper.getInstance("Login");
-        Object[] paramIn = { user, Boolean.valueOf(isAdmin)};
+        IApplicationComponent ac = AccessDelegateHelper.getInstance( "Login" );
+        Object[] paramIn = { user, Boolean.valueOf( isAdmin ) };
 
-        user = (UserDTO) ac.execute("verifyUser", paramIn);
-        UserForm userForm = (UserForm) WTransformerFactory.objToForm(UserTransformer.class, user);
+        user = (UserDTO) ac.execute( "verifyUser", paramIn );
+        UserForm userForm = (UserForm) WTransformerFactory.objToForm( UserTransformer.class, user );
         LogonBean logonBeanSecurity = new LogonBean();
-        WTransformerFactory.formToObj(LogonBeanTransformer.class, userForm, new Object[] { logonBeanSecurity, Boolean.valueOf(isAdmin)});
+        WTransformerFactory.formToObj( LogonBeanTransformer.class, userForm, new Object[] { logonBeanSecurity,
+            Boolean.valueOf( isAdmin ) } );
 
         return logonBeanSecurity;
     }

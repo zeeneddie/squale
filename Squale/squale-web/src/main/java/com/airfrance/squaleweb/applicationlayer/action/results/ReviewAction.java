@@ -38,12 +38,12 @@ import com.airfrance.welcom.struts.bean.WActionForm;
 import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 
 /**
- * Affichage de l'historique
- * Cette action permet l'affichage de l'historique de métriques ou de règles
- * qualité (facteur, critère ou pratique)
- *
+ * Affichage de l'historique Cette action permet l'affichage de l'historique de métriques ou de règles qualité (facteur,
+ * critère ou pratique)
  */
-public class ReviewAction extends ReaderAction {
+public class ReviewAction
+    extends ReaderAction
+{
 
     /**
      * Récupère la liste des TREs correspondant au composant sélectionné
@@ -54,69 +54,86 @@ public class ReviewAction extends ReaderAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward review(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward review( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                 HttpServletResponse pResponse )
+    {
         ActionForward forward = null;
         ActionErrors errors = new ActionErrors();
-        try {
-            forward = pMapping.findForward("review");
+        try
+        {
+            forward = pMapping.findForward( "review" );
             String tre;
             String ruleId;
             // Détermination du type de paramètre
-            boolean isMetric = (pRequest.getParameter("kind") == null) || (pRequest.getParameter("kind").equals("metric"));
-            if (isMetric) {
-                tre = pRequest.getParameter("which");
+            boolean isMetric =
+                ( pRequest.getParameter( "kind" ) == null ) || ( pRequest.getParameter( "kind" ).equals( "metric" ) );
+            if ( isMetric )
+            {
+                tre = pRequest.getParameter( "which" );
                 ruleId = "";
-            } else {
+            }
+            else
+            {
                 // Récupération du véritable nom de la règle
-                IApplicationComponent ac = AccessDelegateHelper.getInstance("QualityGrid");
+                IApplicationComponent ac = AccessDelegateHelper.getInstance( "QualityGrid" );
                 QualityRuleDTO dto = new QualityRuleDTO();
-                dto.setId(Integer.valueOf(pRequest.getParameter("which")).longValue());
-                dto = (QualityRuleDTO) ac.execute("getQualityRule", new Object[] { dto, new Boolean(false)});
+                dto.setId( Integer.valueOf( pRequest.getParameter( "which" ) ).longValue() );
+                dto = (QualityRuleDTO) ac.execute( "getQualityRule", new Object[] { dto, new Boolean( false ) } );
                 tre = dto.getName();
-                ruleId = pRequest.getParameter("which");
+                ruleId = pRequest.getParameter( "which" );
             }
             // si un composant est précisé, on le prend sinon on prend le projet
-            String componentId = pRequest.getParameter("component");
-            if (componentId == null) {
-                componentId = pRequest.getParameter("projectId");
+            String componentId = pRequest.getParameter( "component" );
+            if ( componentId == null )
+            {
+                componentId = pRequest.getParameter( "projectId" );
             }
-            WTransformerFactory.objToForm(ParamReviewTransformer.class, (WActionForm) pForm, new Object[] { tre, ruleId, componentId });
-            IApplicationComponent ac = AccessDelegateHelper.getInstance("Component");
+            WTransformerFactory.objToForm( ParamReviewTransformer.class, (WActionForm) pForm, new Object[] { tre,
+                ruleId, componentId } );
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "Component" );
             ComponentDTO dto = new ComponentDTO();
-            dto.setID(new Long(componentId).longValue());
+            dto.setID( new Long( componentId ).longValue() );
             Object[] paramIn = { dto };
-            dto = (ComponentDTO) ac.execute("get", paramIn);
+            dto = (ComponentDTO) ac.execute( "get", paramIn );
             Object obj[] = { dto };
-            ComponentForm cForm = (ComponentForm) WTransformerFactory.objToForm(ComponentTransformer.class, obj);
-            ((ParamReviewForm) pForm).setComponentName(cForm.getName());
-            ((ParamReviewForm) pForm).setComponentType(cForm.getType());
+            ComponentForm cForm = (ComponentForm) WTransformerFactory.objToForm( ComponentTransformer.class, obj );
+            ( (ParamReviewForm) pForm ).setComponentName( cForm.getName() );
+            ( (ParamReviewForm) pForm ).setComponentType( cForm.getType() );
             // Met à jour le champ graph du form
-            getGraph(pForm, pRequest);
+            getGraph( pForm, pRequest );
 
-        } catch (Exception e) {
+        }
+        catch ( Exception e )
+        {
             // Factorisation du traitement des erreurs
-            handleException(e, errors, pRequest);
+            handleException( e, errors, pRequest );
         }
-        if (!errors.isEmpty()) {
+        if ( !errors.isEmpty() )
+        {
             // Sauvegarde des message et transfert vers la page d'erreur
-            saveErrors(pRequest, errors);
-            forward = pMapping.findForward("failure");
+            saveErrors( pRequest, errors );
+            forward = pMapping.findForward( "failure" );
         }
-        //Mise en place du traceur historique
-        String displayName = WebMessages.getString(pRequest.getLocale(), "tracker.mark.history");
+        // Mise en place du traceur historique
+        String displayName = WebMessages.getString( pRequest.getLocale(), "tracker.mark.history" );
         // Dans le cas ou on arrive depuis la vue composant
-        // il ne faut pas faire un updateTracker car ce n'est pas le TrackerHist 
+        // il ne faut pas faire un updateTracker car ce n'est pas le TrackerHist
         // qui est affiché mais le Tracker des composants.
         // Par conséquent, il faut créér un nouveau form dont le seul champ à remplir est le nom,
         // car ce sera le dernier élément et ne sera donc pas cliquable.
-        if (pRequest.getSession().getAttribute(SqualeWebConstants.TRACKER_BOOL).equals("true")) {
+        if ( pRequest.getSession().getAttribute( SqualeWebConstants.TRACKER_BOOL ).equals( "true" ) )
+        {
             // nouveau form dont on ne fait que remplir le nom
             ComponentForm form = new ComponentForm();
-            form.setName(displayName);
+            form.setName( displayName );
             // remet à jour le Tracker des composants
-            updateTrackerComponent(form.getId(), form.getName(), pRequest);
-        } else {
-            updateHistTracker(displayName, "", TrackerStructure.UNDEFINED, pRequest, false); // Le lien est vide car c'est action terminale
+            updateTrackerComponent( form.getId(), form.getName(), pRequest );
+        }
+        else
+        {
+            updateHistTracker( displayName, "", TrackerStructure.UNDEFINED, pRequest, false ); // Le lien est vide car
+                                                                                                // c'est action
+                                                                                                // terminale
         }
         return forward;
     }
@@ -130,18 +147,23 @@ public class ReviewAction extends ReaderAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward changeDays(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward changeDays( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                     HttpServletResponse pResponse )
+    {
         ActionErrors errors = new ActionErrors();
-        ActionForward forward = pMapping.findForward("review");
+        ActionForward forward = pMapping.findForward( "review" );
         // Met à jour le champ graph du form
-        try {
-            getGraph(pForm, pRequest);
-        } catch (Exception e) {
-            // Factorisation du traitement des erreurs
-            handleException(e, errors, pRequest);
-            forward = pMapping.findForward("total_failure");
+        try
+        {
+            getGraph( pForm, pRequest );
         }
-        //traceur non nécessaire ici
+        catch ( Exception e )
+        {
+            // Factorisation du traitement des erreurs
+            handleException( e, errors, pRequest );
+            forward = pMapping.findForward( "total_failure" );
+        }
+        // traceur non nécessaire ici
         return forward;
     }
 
@@ -150,34 +172,42 @@ public class ReviewAction extends ReaderAction {
      * @param pRequest la requête
      * @return les paramètres
      */
-    private Object[] getParams(ActionForm pForm, HttpServletRequest pRequest) {
+    private Object[] getParams( ActionForm pForm, HttpServletRequest pRequest )
+    {
         ActionErrors errors = new ActionErrors();
         Object[] paramIn = null;
-        try {
-            Object[] vals = WTransformerFactory.formToObj(ParamReviewTransformer.class, (WActionForm) pForm);
+        try
+        {
+            Object[] vals = WTransformerFactory.formToObj( ParamReviewTransformer.class, (WActionForm) pForm );
             int index = 0;
             Integer nbDays = (Integer) vals[index++];
             String tre = (String) vals[index++];
             String ruleId = (String) vals[index++];
             String componentId = (String) vals[index++];
             ComponentDTO comp = new ComponentDTO();
-            comp.setID(Long.decode(componentId).longValue());
+            comp.setID( Long.decode( componentId ).longValue() );
             Date date = null;
             // Conversion en une date
-            if (nbDays.intValue() > 0) {
+            if ( nbDays.intValue() > 0 )
+            {
                 GregorianCalendar gc = new GregorianCalendar();
-                gc.add(Calendar.DATE, -nbDays.intValue());
+                gc.add( Calendar.DATE, -nbDays.intValue() );
                 date = gc.getTime();
             }
-            String treLabel = WebMessages.getString(pRequest, tre);
-            if (ruleId.length() > 0) {
-                paramIn = new Object[] { comp, tre, treLabel, date, Long.decode(ruleId)};
-            } else {
+            String treLabel = WebMessages.getString( pRequest, tre );
+            if ( ruleId.length() > 0 )
+            {
+                paramIn = new Object[] { comp, tre, treLabel, date, Long.decode( ruleId ) };
+            }
+            else
+            {
                 paramIn = new Object[] { comp, tre, treLabel, date, null };
             }
-        } catch (Exception e) {
+        }
+        catch ( Exception e )
+        {
             // Factorisation du traitement des erreurs
-            handleException(e, errors, pRequest);
+            handleException( e, errors, pRequest );
         }
         return paramIn;
     }
@@ -191,44 +221,50 @@ public class ReviewAction extends ReaderAction {
      * @throws JrafEnterpriseException en cas de problème de récupération des donnés
      * @throws IOException en cas de problèmes de création du graph
      */
-    private GraphMaker getGraph(ActionForm pForm, HttpServletRequest pRequest) throws JrafEnterpriseException, IOException {
+    private GraphMaker getGraph( ActionForm pForm, HttpServletRequest pRequest )
+        throws JrafEnterpriseException, IOException
+    {
         // Initialisation
         GraphMaker histoChart = null;
         // Obtention de la couche métier
-        IApplicationComponent ac = AccessDelegateHelper.getInstance("Component");
-        Object[] paramIn = getParams(pForm, pRequest);
+        IApplicationComponent ac = AccessDelegateHelper.getInstance( "Component" );
+        Object[] paramIn = getParams( pForm, pRequest );
 
-        //  Récupération du componentDTO
+        // Récupération du componentDTO
         ComponentDTO comp = (ComponentDTO) paramIn[0];
         Object[] paramIn2 = new Object[] { comp };
-        ComponentDTO componentDTO = (ComponentDTO) ac.execute("get", paramIn2);
-        // S'applique uniquement dans le cas d'une méthode 
+        ComponentDTO componentDTO = (ComponentDTO) ac.execute( "get", paramIn2 );
+        // S'applique uniquement dans le cas d'une méthode
         // on enlève tout ce qui concerne les paramètres de la méthode
         // pour faciliter l'affichage
         String componentName = componentDTO.getName();
-        StringTokenizer st = new StringTokenizer(componentName, "(");
-        if (st.hasMoreTokens()) {
-            componentDTO.setName(st.nextToken());
+        StringTokenizer st = new StringTokenizer( componentName, "(" );
+        if ( st.hasMoreTokens() )
+        {
+            componentDTO.setName( st.nextToken() );
         }
 
         // Obtention de la couche métier
-        IApplicationComponent ac2 = AccessDelegateHelper.getInstance("Graph");
+        IApplicationComponent ac2 = AccessDelegateHelper.getInstance( "Graph" );
 
         // Appel de la couche métier
-        Object[] result = (Object[]) ac2.execute("getHistoricGraph", paramIn);
+        Object[] result = (Object[]) ac2.execute( "getHistoricGraph", paramIn );
         // On n'affiche le graphe que si on a des résultats
-        if (((Map) result[1]).size() > 0) {
+        if ( ( (Map) result[1] ).size() > 0 )
+        {
             HistoMaker histoMaker = new HistoMaker();
-            histoMaker.addCurve((String) result[0], (Map) result[1]);
+            histoMaker.addCurve( (String) result[0], (Map) result[1] );
             JFreeChart chartKiviat = histoMaker.getChart();
-            ChartRenderingInfo infoHisto = new ChartRenderingInfo(new StandardEntityCollection());
+            ChartRenderingInfo infoHisto = new ChartRenderingInfo( new StandardEntityCollection() );
             // Sauvegarde du graphe historique au format png dans un espace temporaire
-            String fileNameHisto = ServletUtilities.saveChartAsPNG(chartKiviat, HistoMaker.DEFAULT_WIDTH, HistoMaker.DEFAULT_HEIGHT, infoHisto, pRequest.getSession());
-            histoChart = new GraphMaker(pRequest, fileNameHisto, infoHisto);
+            String fileNameHisto =
+                ServletUtilities.saveChartAsPNG( chartKiviat, HistoMaker.DEFAULT_WIDTH, HistoMaker.DEFAULT_HEIGHT,
+                                                 infoHisto, pRequest.getSession() );
+            histoChart = new GraphMaker( pRequest, fileNameHisto, infoHisto );
         }
         // Met à jour l'attribut graph dans le form
-         ((ParamReviewForm) pForm).setReviewGraph(histoChart);
-        pRequest.getSession().removeAttribute(SqualeWebConstants.VALIDATED);
+        ( (ParamReviewForm) pForm ).setReviewGraph( histoChart );
+        pRequest.getSession().removeAttribute( SqualeWebConstants.VALIDATED );
         return histoChart;
     }
 

@@ -8,67 +8,77 @@ import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
 /**
  * Regroupe l'ensemble des différents ReferenceListForm
  */
-public class SetOfReferencesListForm extends RootForm {
+public class SetOfReferencesListForm
+    extends RootForm
+{
 
     /**
      * Ensemble des listes des références, liste de ReferenceGridForm
      */
-    private List mList = new ArrayList(0);
+    private List mList = new ArrayList( 0 );
 
     /**
      * @return la liste des grilles de références
      */
-    public List getList() {
+    public List getList()
+    {
         return mList;
     }
 
     /**
      * @param pList la liste des grille de références
      */
-    public void setList(List pList) {
+    public void setList( List pList )
+    {
         mList = pList;
     }
-    
-
 
     /**
-     * Ajoute la référence associée à la grille
-     * Si une grille porte le même nom et que la date est avant pGridForm
-     * alors on supprime la grille et on ajoute pGridForm
+     * Ajoute la référence associée à la grille Si une grille porte le même nom et que la date est avant pGridForm alors
+     * on supprime la grille et on ajoute pGridForm
+     * 
      * @param pGridForm la grille de référence
      * @param pReferenceForm la référence a ajouter
      */
-    public void add(ReferenceGridForm pGridForm, ReferenceForm pReferenceForm) {
+    public void add( ReferenceGridForm pGridForm, ReferenceForm pReferenceForm )
+    {
         // On parcours la liste
         List refs = null;
         ReferenceGridForm current = null;
         boolean found = false;
         int compare = 0;
-       for (int i=0; i<mList.size() && null == refs; i++) {
-            current = (ReferenceGridForm) mList.get(i);
-            if (current.getName().equals(pGridForm.getName())) {
+        for ( int i = 0; i < mList.size() && null == refs; i++ )
+        {
+            current = (ReferenceGridForm) mList.get( i );
+            if ( current.getName().equals( pGridForm.getName() ) )
+            {
                 refs = (List) current.getReferenceListForm().getList(); // on sauvegarde la valeur associée
-                compare = current.getUpdateDate().compareTo(pGridForm.getUpdateDate());
+                compare = current.getUpdateDate().compareTo( pGridForm.getUpdateDate() );
                 // Si une grille du même nom existe et que la date est avant
                 // alors on la remplace par la grille en paramètre
-                if (compare < 0) {
-                    mList.remove(i); // on supprime l'entrée afin de la remplacer
-                } else {
+                if ( compare < 0 )
+                {
+                    mList.remove( i ); // on supprime l'entrée afin de la remplacer
+                }
+                else
+                {
                     found = true;
-                    if (compare == 0) { // ce sont les mêmes grille, on ajoute la référence
-                        refs.add(pReferenceForm);
+                    if ( compare == 0 )
+                    { // ce sont les mêmes grille, on ajoute la référence
+                        refs.add( pReferenceForm );
                     }
                 }
             }
         }
         // Si on a trouvé aucune entrée portant le même nom, on ajoute la grille
-        if (!found) {
+        if ( !found )
+        {
             refs = new ArrayList();
-            refs.add(pReferenceForm);
+            refs.add( pReferenceForm );
             ReferenceListForm refsList = new ReferenceListForm();
-            refsList.setList(refs);
-            pGridForm.setReferenceListForm(refsList);
-            mList.add(pGridForm);
+            refsList.setList( refs );
+            pGridForm.setReferenceListForm( refsList );
+            mList.add( pGridForm );
         }
     }
 

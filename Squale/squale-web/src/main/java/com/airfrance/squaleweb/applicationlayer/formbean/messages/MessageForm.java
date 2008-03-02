@@ -4,7 +4,9 @@ import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
  */
-public class MessageForm extends RootForm {
+public class MessageForm
+    extends RootForm
+{
 
     /** le text du message */
     private String text = "";
@@ -24,70 +26,80 @@ public class MessageForm extends RootForm {
     /**
      * @return l'id du message
      */
-    public long getMessageIdSequ() {
+    public long getMessageIdSequ()
+    {
         return messageIdSequ;
     }
 
     /**
      * @param newMessageSequenceId le nouvel id du message
      */
-    public void setMessageIdSequ(long newMessageSequenceId) {
+    public void setMessageIdSequ( long newMessageSequenceId )
+    {
         messageIdSequ = newMessageSequenceId;
     }
 
     /**
      * @return la clé
      */
-    public String getKey() {
+    public String getKey()
+    {
         return key;
     }
 
     /**
      * @return la langue dans lequel est écrit le message
      */
-    public String getLanguage() {
+    public String getLanguage()
+    {
         return language;
     }
 
     /**
      * @return le text du message
      */
-    public String getText() {
+    public String getText()
+    {
         return text;
     }
 
     /**
      * @param newKey la nouvelle valeur de la clé
      */
-    public void setKey(String newKey) {
+    public void setKey( String newKey )
+    {
         key = newKey;
     }
 
     /**
      * @param newLang la nouvelle langue du message
      */
-    public void setLanguage(String newLang) {
+    public void setLanguage( String newLang )
+    {
         language = newLang;
     }
 
     /**
      * @param newText le nouveau text du message
      */
-    public void setText(String newText) {
+    public void setText( String newText )
+    {
         text = newText;
     }
 
     /**
      * @return le titre
      */
-    public String getTitle() {
+    public String getTitle()
+    {
         return title;
     }
 
     /**
      * @param newTitle le nouveau titre
      */
-    public void setTitle(String newTitle) {
+    public void setTitle( String newTitle )
+    {
         title = newTitle;
     }
 

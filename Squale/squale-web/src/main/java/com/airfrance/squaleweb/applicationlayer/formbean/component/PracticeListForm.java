@@ -8,24 +8,27 @@ import com.airfrance.welcom.struts.bean.WActionForm;
 /**
  * Liste des pratiques
  */
-public class PracticeListForm  extends WActionForm {
+public class PracticeListForm
+    extends WActionForm
+{
     /**
      * Liste des pratiques
      */
     private List mList = new ArrayList();
 
-    
     /**
      * @return la liste des pratiques
      */
-    public List getList() {
+    public List getList()
+    {
         return mList;
     }
 
     /**
      * @param pList la liste des pratiques
      */
-    public void setList(List pList) {
+    public void setList( List pList )
+    {
         mList = pList;
     }
 

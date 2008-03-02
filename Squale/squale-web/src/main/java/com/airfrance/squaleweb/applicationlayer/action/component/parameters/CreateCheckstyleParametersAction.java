@@ -11,16 +11,20 @@ import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectF
 /**
  * Configuration des paramètres de la tâche Checkstyle
  */
-public class CreateCheckstyleParametersAction extends CreateParametersAction {
-    
-    /** 
-     * @see com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction#getTransformerParameters(com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+public class CreateCheckstyleParametersAction
+    extends CreateParametersAction
+{
+
+    /**
+     * @see com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction#getTransformerParameters(com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    public Object[] getTransformerParameters(CreateProjectForm pProject, HttpServletRequest pRequest) throws Exception {
-        IApplicationComponent acCheckstyleAdmin = AccessDelegateHelper.getInstance("CheckstyleAdmin");
+    public Object[] getTransformerParameters( CreateProjectForm pProject, HttpServletRequest pRequest )
+        throws Exception
+    {
+        IApplicationComponent acCheckstyleAdmin = AccessDelegateHelper.getInstance( "CheckstyleAdmin" );
         // on récupère la liste des versions disponibles
-        Collection versionsDTO = (Collection) acCheckstyleAdmin.execute("getAllConfigurations");
+        Collection versionsDTO = (Collection) acCheckstyleAdmin.execute( "getAllConfigurations" );
         Object[] params = { pProject.getParameters(), versionsDTO };
         return params;
     }

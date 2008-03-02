@@ -23,7 +23,9 @@ import com.airfrance.welcom.outils.excel.ExcelWrapper;
 /**
  * Gestion de l'export des composants par note de pratiques
  */
-public class ExcelDataMarkList extends ExcelData {
+public class ExcelDataMarkList
+    extends ExcelData
+{
 
     /** Le formulaire */
     private MarkForm mMarkForm;
@@ -33,56 +35,74 @@ public class ExcelDataMarkList extends ExcelData {
 
     /**
      * Constructeur
+     * 
      * @param pLocale : c'est la locale de l'application pour l'internationnalisation
-     * @param pMessages :un MessageResources initialisé avec le fichier ressource 
-     * contenant les labels à utiliser dans le fichier excel.
+     * @param pMessages :un MessageResources initialisé avec le fichier ressource contenant les labels à utiliser dans
+     *            le fichier excel.
      * @param pMarkForm le formulaire
      * @param pMatricule le matricule de l'utilsateur
      */
-    public ExcelDataMarkList(final Locale pLocale, final MessageResources pMessages, MarkForm pMarkForm, String pMatricule) {
-        super(pLocale, pMessages);
+    public ExcelDataMarkList( final Locale pLocale, final MessageResources pMessages, MarkForm pMarkForm,
+                              String pMatricule )
+    {
+        super( pLocale, pMessages );
         mMarkForm = pMarkForm;
         mMatricule = pMatricule;
     }
 
-    /** 
+    /**
      * @see com.airfrance.welcom.outils.excel.ExcelData#fill(com.airfrance.welcom.outils.excel.ExcelGenerateur)
-     * {@inheritDoc}
+     *      {@inheritDoc}
      */
-    public void fill(ExcelGenerateur xlGenerateur) throws ExcelGenerateurException {
+    public void fill( ExcelGenerateur xlGenerateur )
+        throws ExcelGenerateurException
+    {
         ExcelWrapper monWrapper = (ExcelWrapper) xlGenerateur;
         WritableWorkbook workbook = monWrapper.getWorkbook();
         Collection components = mMarkForm.getComponents();
-        if (null != components) {
-            ExcelTable et = new ExcelTable(messages, locale);
-            et.setTable(components);
+        if ( null != components )
+        {
+            ExcelTable et = new ExcelTable( messages, locale );
+            et.setTable( components );
             /* les en-têtes du tableau */
             // le nom du composant
-            et.addHeader("component.name", "fullName");
+            et.addHeader( "component.name", "fullName" );
             // la note
-            et.addHeader("project.result.practice.value", "metrics[0]");
+            et.addHeader( "project.result.practice.value", "metrics[0]" );
             // les métriques
             List metricNames = mMarkForm.getTreNames();
             int cpt = 0;
-            for (int i = 0; i < metricNames.size(); i++) {
-                cpt = i+1;
-                et.addHeader((String) metricNames.get(i), "metrics[" + cpt + "]");
+            for ( int i = 0; i < metricNames.size(); i++ )
+            {
+                cpt = i + 1;
+                et.addHeader( (String) metricNames.get( i ), "metrics[" + cpt + "]" );
             }
-            try {
-                et.writeTable(workbook);
+            try
+            {
+                et.writeTable( workbook );
                 // On modifie l'en-tête et pied-de-page
-                WritableSheet sheet = workbook.getSheet(0);
+                WritableSheet sheet = workbook.getSheet( 0 );
                 SheetSettings settings = sheet.getSettings();
-                String title = (String) WebMessages.getString(locale, "export.pdf.project.results.title", new String[] { mMarkForm.getProjectName()});
+                String title =
+                    (String) WebMessages.getString( locale, "export.pdf.project.results.title",
+                                                    new String[] { mMarkForm.getProjectName() } );
                 HeaderFooter head = new HeaderFooter();
-                head.getCentre().append(title);
-                settings.setHeader(head);
-                String footerLeft = (String) WebMessages.getString(locale, "description.name.audit", new String[] { mMarkForm.getAuditDate()});
+                head.getCentre().append( title );
+                settings.setHeader( head );
+                String footerLeft =
+                    (String) WebMessages.getString( locale, "description.name.audit",
+                                                    new String[] { mMarkForm.getAuditDate() } );
                 footerLeft += "\n";
-                footerLeft += (String) WebMessages.getString(locale, "evolution.components.previous_audit", new String[] { mMarkForm.getPreviousAuditDate()});
-                HeaderFooter footer = SqualeExportExcelUtils.getFooter(locale, mMarkForm.getApplicationName(), mMarkForm.getProjectName(), footerLeft, mMatricule);
-                settings.setFooter(footer);
-            } catch (WriteException e) {
+                footerLeft +=
+                    (String) WebMessages.getString( locale, "evolution.components.previous_audit",
+                                                    new String[] { mMarkForm.getPreviousAuditDate() } );
+                HeaderFooter footer =
+                    SqualeExportExcelUtils.getFooter( locale, mMarkForm.getApplicationName(),
+                                                      mMarkForm.getProjectName(), footerLeft, mMatricule );
+                settings.setFooter( footer );
+            }
+            catch ( WriteException e )
+            {
                 e.printStackTrace();
             }
         }

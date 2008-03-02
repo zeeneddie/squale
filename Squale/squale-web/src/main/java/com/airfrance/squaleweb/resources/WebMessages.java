@@ -17,45 +17,49 @@ import com.airfrance.squalecommon.util.messages.BaseMessages;
  * @author m400832
  * @version 1.0
  */
-public class WebMessages extends BaseMessages{
+public class WebMessages
+    extends BaseMessages
+{
 
     /**
      * @param pBundleName le nom du bundle
      */
-    private WebMessages(String pBundleName) {
-        super(pBundleName);
+    private WebMessages( String pBundleName )
+    {
+        super( pBundleName );
     }
 
     /**
      * Logger.
      */
-    private static final Log LOGGER =
-        LogFactory.getLog(WebMessages.class);
+    private static final Log LOGGER = LogFactory.getLog( WebMessages.class );
 
     /**
      * Chemin du fichier de propriétés.
      */
-    private static final String BUNDLE_NAME =
-        "com.airfrance.squaleweb.resources.ApplicationResources";
+    private static final String BUNDLE_NAME = "com.airfrance.squaleweb.resources.ApplicationResources";
 
     /**
      * Instance de ResourceBudle utilisée par defaut
      */
-    private static final ResourceBundle RESOURCE_BUNDLE =
-        ResourceBundle.getBundle(BUNDLE_NAME, new Locale(""));
-
+    private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle( BUNDLE_NAME, new Locale( "" ) );
 
     /**
      * Retourne la chaîne de caractère identifiée par la clé.
+     * 
      * @param pKey nom de la clé.
      * @return la chaîne associée.
      */
-    public static String getString(String pKey) {
+    public static String getString( String pKey )
+    {
         String value = null;
-        try {
-            value = RESOURCE_BUNDLE.getString(pKey);
-        } catch (MissingResourceException e) {
-            LOGGER.warn(e,e);
+        try
+        {
+            value = RESOURCE_BUNDLE.getString( pKey );
+        }
+        catch ( MissingResourceException e )
+        {
+            LOGGER.warn( e, e );
             value = pKey;
         }
         return value;
@@ -63,65 +67,77 @@ public class WebMessages extends BaseMessages{
 
     /**
      * Retourne la chaîne de caractère identifiée par la clé.
+     * 
      * @param pLocale locale
      * @param pKey nom de la clé.
      * @return la chaîne associée.
      */
-    public static String getString(Locale pLocale, String pKey) {
+    public static String getString( Locale pLocale, String pKey )
+    {
         String value = null;
-        try {
+        try
+        {
             // On modifie la locale par défaut pour récupérer
             // notre fichier properties par défaut (ApplicationResources.properties) dans le cas
             // où il n'y a pas de ressource pour la locale passée en paramètre
-            Locale.setDefault(new Locale(""));
-            ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, pLocale);
-            value = bundle.getString(pKey);
-            if (value==null) {
-                value = DataBaseMessages.getMessage(pLocale, pKey);
+            Locale.setDefault( new Locale( "" ) );
+            ResourceBundle bundle = ResourceBundle.getBundle( BUNDLE_NAME, pLocale );
+            value = bundle.getString( pKey );
+            if ( value == null )
+            {
+                value = DataBaseMessages.getMessage( pLocale, pKey );
             }
-        } catch (MissingResourceException e) {
-            value = DataBaseMessages.getMessage(pLocale, pKey);
+        }
+        catch ( MissingResourceException e )
+        {
+            value = DataBaseMessages.getMessage( pLocale, pKey );
         }
         return value;
     }
-    
+
     /**
      * Retourne la chaîne de caractère identifiée par la clé.
+     * 
      * @param pRequest requête
      * @param pKey nom de la clé.
      * @return la chaîne associée.
      */
-    public static String getString(HttpServletRequest pRequest, String pKey) {
+    public static String getString( HttpServletRequest pRequest, String pKey )
+    {
         String value = null;
-        Locale locale = (Locale) pRequest.getSession().getAttribute(Globals.LOCALE_KEY);
-        if (locale==null) {
+        Locale locale = (Locale) pRequest.getSession().getAttribute( Globals.LOCALE_KEY );
+        if ( locale == null )
+        {
             locale = Locale.getDefault();
         }
-        return getString(locale, pKey);
+        return getString( locale, pKey );
     }
 
     /**
      * @param pKey la clé
      * @return le résultat après conversion dans le int associé
      */
-    public static int getInt(String pKey) {
-        return Integer.decode(getString(pKey)).intValue();
+    public static int getInt( String pKey )
+    {
+        return Integer.decode( getString( pKey ) ).intValue();
     }
 
     /**
      * @param pKey la clé
      * @return le résultat après conversion dans le booléen associé
      */
-    public static boolean getBool(String pKey) {
-        return Boolean.valueOf(getString(pKey)).booleanValue();
+    public static boolean getBool( String pKey )
+    {
+        return Boolean.valueOf( getString( pKey ) ).booleanValue();
     }
 
     /**
      * @param pKey la clé
      * @return le résultat après conversion dans le double associé
      */
-    public static double getDouble(String pKey) {
-        return Double.parseDouble(getString(pKey));
+    public static double getDouble( String pKey )
+    {
+        return Double.parseDouble( getString( pKey ) );
     }
 
     /**
@@ -129,9 +145,10 @@ public class WebMessages extends BaseMessages{
      * @param pValues les paramètres du message
      * @return le texte
      */
-    public static Object getString(String pKey, String[] pValues) {
-        MessageFormat format = new MessageFormat(getString(pKey));
-        return format.format(pValues);
+    public static Object getString( String pKey, String[] pValues )
+    {
+        MessageFormat format = new MessageFormat( getString( pKey ) );
+        return format.format( pValues );
     }
 
     /**
@@ -140,8 +157,9 @@ public class WebMessages extends BaseMessages{
      * @param pValues les paramètres du message
      * @return le texte
      */
-    public static Object getString(Locale pLocale, String pKey, String[] pValues) {
-        MessageFormat format = new MessageFormat(getString(pLocale, pKey));
-        return format.format(pValues);
+    public static Object getString( Locale pLocale, String pKey, String[] pValues )
+    {
+        MessageFormat format = new MessageFormat( getString( pLocale, pKey ) );
+        return format.format( pValues );
     }
 }

@@ -20,32 +20,41 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 /**
  * Configuration du portail
  */
-public class ConfigPortailAction extends AdminAction {
+public class ConfigPortailAction
+    extends AdminAction
+{
 
     /**
-     * Affichage de la liste des types de récupération des sources et de la liste
-     * des profiles.
+     * Affichage de la liste des types de récupération des sources et de la liste des profiles.
+     * 
      * @param pMapping le mapping.
      * @param pForm le formulaire à lire.
      * @param pRequest la requête HTTP.
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward list(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward list( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                               HttpServletResponse pResponse )
+    {
         ActionForward forward = null;
         ActionErrors errors = new ActionErrors();
-        try {
-            IApplicationComponent ac = AccessDelegateHelper.getInstance("SqualixConfig");
-            ArrayList managersDTO = (ArrayList) ac.execute("getSourceManagements", null);
-            ArrayList profilesDTO = (ArrayList) ac.execute("getProfiles", null);
-            WTransformerFactory.objToForm(ConfigPortailTransformer.class, (WActionForm)pForm, profilesDTO, managersDTO);
-        } catch (Exception e) {
-            handleException(e, errors, pRequest);
+        try
+        {
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "SqualixConfig" );
+            ArrayList managersDTO = (ArrayList) ac.execute( "getSourceManagements", null );
+            ArrayList profilesDTO = (ArrayList) ac.execute( "getProfiles", null );
+            WTransformerFactory.objToForm( ConfigPortailTransformer.class, (WActionForm) pForm, profilesDTO,
+                                           managersDTO );
         }
-        if (!errors.isEmpty()) {
-            saveMessages(pRequest, errors);
+        catch ( Exception e )
+        {
+            handleException( e, errors, pRequest );
         }
-        forward = pMapping.findForward("list");
+        if ( !errors.isEmpty() )
+        {
+            saveMessages( pRequest, errors );
+        }
+        forward = pMapping.findForward( "list" );
         return forward;
     }
 }

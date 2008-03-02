@@ -9,9 +9,10 @@ import com.airfrance.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
  * Contient une référence du portail Squale.
  * 
  * @author M400842
- *
  */
-public class ReferenceForm extends ActionIdFormSelectable {
+public class ReferenceForm
+    extends ActionIdFormSelectable
+{
 
     // Constantes pour l'affichage
 
@@ -30,7 +31,7 @@ public class ReferenceForm extends ActionIdFormSelectable {
      */
     private boolean mPublic;
 
-    /** le type de l'audit*/
+    /** le type de l'audit */
     private String mAuditType;
 
     /**
@@ -71,127 +72,145 @@ public class ReferenceForm extends ActionIdFormSelectable {
     /**
      * @return le nom
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
 
     /**
      * @return le nombre de classes
      */
-    public String getNumberOfClasses() {
+    public String getNumberOfClasses()
+    {
         return mNumberOfClasses;
     }
 
     /**
      * @return la technologie
      */
-    public String getTechnology() {
+    public String getTechnology()
+    {
         return mTechnology;
     }
 
     /**
      * @return le nombre de méthodes
      */
-    public String getNumberOfMethods() {
+    public String getNumberOfMethods()
+    {
         return mNumberOfMethods;
     }
 
     /**
      * @return le nombre de lignes de codes
      */
-    public String getNumberOfCodeLines() {
+    public String getNumberOfCodeLines()
+    {
         return mNumberOfCodeLines;
     }
 
     /**
      * @param pName le nom
      */
-    public void setName(String pName) {
+    public void setName( String pName )
+    {
         mName = pName;
     }
 
     /**
      * @param pNumberOfClasses le nombre de classes
      */
-    public void setNumberOfClasses(String pNumberOfClasses) {
+    public void setNumberOfClasses( String pNumberOfClasses )
+    {
         mNumberOfClasses = pNumberOfClasses;
     }
 
     /**
      * @param pTechnology la technologie
      */
-    public void setTechnology(String pTechnology) {
+    public void setTechnology( String pTechnology )
+    {
         mTechnology = pTechnology;
     }
 
     /**
      * @param pNumberOfMethods le nombre de méthodes
      */
-    public void setNumberOfMethods(String pNumberOfMethods) {
+    public void setNumberOfMethods( String pNumberOfMethods )
+    {
         mNumberOfMethods = pNumberOfMethods;
     }
 
     /**
      * @param pNumberOfCodeLines le nombre de lignes de code
      */
-    public void setNumberOfCodeLines(String pNumberOfCodeLines) {
+    public void setNumberOfCodeLines( String pNumberOfCodeLines )
+    {
         mNumberOfCodeLines = pNumberOfCodeLines;
     }
 
     /**
      * @return l'état de validation de la référence
      */
-    public boolean isHidden() {
+    public boolean isHidden()
+    {
         return mHidden;
     }
 
     /**
      * @param pHidden indique si la référence est masquée ou pas
      */
-    public void setHidden(boolean pHidden) {
+    public void setHidden( boolean pHidden )
+    {
         mHidden = pHidden;
     }
 
     /**
      * @return Valeur courante de mFactors
      */
-    public Collection getFactors() {
+    public Collection getFactors()
+    {
         return mFactors;
     }
 
     /**
      * @param pPublic caractère public
      */
-    public void setPublic(boolean pPublic) {
+    public void setPublic( boolean pPublic )
+    {
         mPublic = pPublic;
     }
 
     /**
      * @return caractère public
      */
-    public boolean isPublic() {
+    public boolean isPublic()
+    {
         return mPublic;
     }
 
     /**
      * @param pFactor facteur
      */
-    public void addFactor(Object pFactor) {
-        mFactors.add(pFactor);
+    public void addFactor( Object pFactor )
+    {
+        mFactors.add( pFactor );
 
     }
 
     /**
      * @return le type de l'audit
      */
-    public String getAuditType() {
+    public String getAuditType()
+    {
         return mAuditType;
     }
 
     /**
      * @param pType le type de l'audit
      */
-    public void setAuditType(String pType) {
+    public void setAuditType( String pType )
+    {
         mAuditType = pType;
     }
 
@@ -203,15 +222,18 @@ public class ReferenceForm extends ActionIdFormSelectable {
     /**
      * @param pState le nouvel état
      */
-    public void setState(String pState) {
+    public void setState( String pState )
+    {
         mState = pState;
     }
 
     /**
      * Méthode renvoyant la string décrivant l'état, sert juste pour l'affichage
+     * 
      * @return l'état
      */
-    public String getState() {
+    public String getState()
+    {
         return mState;
     }
 

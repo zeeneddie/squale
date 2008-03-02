@@ -35,12 +35,14 @@ import com.airfrance.welcom.struts.util.WConstants;
 /**
  * Action pour la ncomparaison détaillée de deux audits
  */
-public class EvolutionAction extends ReaderAction {
-    
+public class EvolutionAction
+    extends ReaderAction
+{
+
     /** le nombre max de résultats à récupérer */
     public static final int MAX_RESULTS = 300;
 
-    /** 
+    /**
      * Nom de l'attibut en session pour indiquer à l'utilisateur que les résultats sont limités
      */
     public static final String DISPLAY_RESULTS_MSG = "displayLimitMsg";
@@ -54,48 +56,57 @@ public class EvolutionAction extends ReaderAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward list(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
-        
+    public ActionForward list( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                               HttpServletResponse pResponse )
+    {
+
         ActionForward forward = null;
         ActionErrors errors = new ActionErrors();
         ActionMessages messages = new ActionMessages();
-        try {
-            forward = pMapping.findForward("success");
+        try
+        {
+            forward = pMapping.findForward( "success" );
             // On récupère les deux audits
-            List auditDTOList = ActionUtils.getCurrentAuditsAsDTO(pRequest);
+            List auditDTOList = ActionUtils.getCurrentAuditsAsDTO( pRequest );
             // On récupère le projet
-            ComponentDTO project = (ComponentDTO) pRequest.getSession().getAttribute(BaseDispatchAction.PROJECT_DTO);
+            ComponentDTO project = (ComponentDTO) pRequest.getSession().getAttribute( BaseDispatchAction.PROJECT_DTO );
             // On vérifie qu'on en a bien deux et qu'ils ne sont pas nuls et que le projet est défini
             // sinon il s'agit d'une erreur
-            if (auditDTOList != null && auditDTOList.size() == 2 && auditDTOList.get(0) != null && auditDTOList.get(1) != null && project != null) {
+            if ( auditDTOList != null && auditDTOList.size() == 2 && auditDTOList.get( 0 ) != null
+                && auditDTOList.get( 1 ) != null && project != null )
+            {
                 // On transforme le formulaire en un tableau de string
                 Object[] filter = new Object[EvolutionForm.NB_FILTER];
-                WTransformerFactory.formToObj(EvolutionTransformer.class, (WActionForm) pForm, filter);
+                WTransformerFactory.formToObj( EvolutionTransformer.class, (WActionForm) pForm, filter );
                 // On récupère l'applicationComponent
-                IApplicationComponent ac = AccessDelegateHelper.getInstance("Results");
-                AuditDTO firstAudit = (AuditDTO) auditDTOList.get(0);
-                AuditDTO secondAudit = (AuditDTO) auditDTOList.get(1);
-                Object[] paramsTab = { firstAudit, secondAudit, project, filter, new Integer(MAX_RESULTS) };
+                IApplicationComponent ac = AccessDelegateHelper.getInstance( "Results" );
+                AuditDTO firstAudit = (AuditDTO) auditDTOList.get( 0 );
+                AuditDTO secondAudit = (AuditDTO) auditDTOList.get( 1 );
+                Object[] paramsTab = { firstAudit, secondAudit, project, filter, new Integer( MAX_RESULTS ) };
                 // On appelle la méthode avec le filtre associé
-                Collection results = (Collection) ac.execute("getChangedComponentResults", paramsTab);
+                Collection results = (Collection) ac.execute( "getChangedComponentResults", paramsTab );
                 // Si le nombre de résultats correspond au maximum d'élément affichables (cf. MAX_RESULTS)
                 // on affiche un message dans la page
-                pRequest.getSession().removeAttribute(DISPLAY_RESULTS_MSG); // gestion de la session
-                if(results.size() >= MAX_RESULTS) {
-                    pRequest.getSession().setAttribute(DISPLAY_RESULTS_MSG, Boolean.TRUE);
+                pRequest.getSession().removeAttribute( DISPLAY_RESULTS_MSG ); // gestion de la session
+                if ( results.size() >= MAX_RESULTS )
+                {
+                    pRequest.getSession().setAttribute( DISPLAY_RESULTS_MSG, Boolean.TRUE );
                 }
                 // On transforme les listes en formulaire qui dépend des filtres utilisés et du tri
                 Object[] args = new Object[] { results, pRequest.getLocale() };
-                WTransformerFactory.objToForm(EvolutionTransformer.class, (WActionForm) pForm, args);
+                WTransformerFactory.objToForm( EvolutionTransformer.class, (WActionForm) pForm, args );
             }
-        } catch (Exception e) {
-            handleException(e, errors, pRequest);
+        }
+        catch ( Exception e )
+        {
+            handleException( e, errors, pRequest );
         }
         return forward;
     }
 
     /**
      * Export PDF pour la comparaison des audits
+     * 
      * @param pMapping le actionMapping
      * @param pForm le form
      * @param pRequest la request
@@ -103,23 +114,31 @@ public class EvolutionAction extends ReaderAction {
      * @return l'actionForward
      * @throws ServletException exception pouvant etre levee
      */
-    public ActionForward exportPDF(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) throws ServletException {
-        try {
+    public ActionForward exportPDF( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                    HttpServletResponse pResponse )
+        throws ServletException
+    {
+        try
+        {
             // Les données seront une liste à 1 élément contenant le formulaire courant
             Collection data = new ArrayList();
-            data.add(pForm);
-            
+            data.add( pForm );
+
             // Les paramètres
             HashMap parameters = new HashMap();
             // Le nom de l'utilisateur
-            LogonBean logon = (LogonBean) pRequest.getSession().getAttribute(WConstants.USER_KEY);
-            parameters.put("userName", logon.getMatricule());
-            
+            LogonBean logon = (LogonBean) pRequest.getSession().getAttribute( WConstants.USER_KEY );
+            parameters.put( "userName", logon.getMatricule() );
+
             PDFDataJasperReports pdfData =
-                new PDFDataJasperReports(pRequest.getLocale(), getResources(pRequest), data, "/com/airfrance/squaleweb/resources/jasperreport/Comparison.jasper", false, parameters);
-            PDFFactory.generatePDFToHTTPResponse(pdfData, pResponse, "", PDFEngine.JASPERREPORTS);
-        } catch (Exception e) {
-            throw new ServletException(e);
+                new PDFDataJasperReports( pRequest.getLocale(), getResources( pRequest ), data,
+                                          "/com/airfrance/squaleweb/resources/jasperreport/Comparison.jasper", false,
+                                          parameters );
+            PDFFactory.generatePDFToHTTPResponse( pdfData, pResponse, "", PDFEngine.JASPERREPORTS );
+        }
+        catch ( Exception e )
+        {
+            throw new ServletException( e );
         }
         return null;
     }

@@ -2,7 +2,8 @@ package com.airfrance.squaleweb.util.graph;
 
 /**
  */
-public abstract class AbstractURLGenerator {
+public abstract class AbstractURLGenerator
+{
 
     /**
      * Id du projet
@@ -13,11 +14,10 @@ public abstract class AbstractURLGenerator {
      * Id de l'audit courant
      */
     protected String mCurrentAuditId;
-    
+
     /**
      * Id de l'audit précédent
      */
     protected String mPreviousAuditId;
-
 
 }

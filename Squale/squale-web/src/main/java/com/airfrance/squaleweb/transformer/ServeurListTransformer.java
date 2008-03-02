@@ -13,46 +13,59 @@ import java.util.Iterator;
 /**
  * Transformer de liste de serveur
  */
-public class ServeurListTransformer extends AbstractListTransformer {
+public class ServeurListTransformer
+    extends AbstractListTransformer
+{
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @param object le tableau des objets nécessaires à la transformation
      * @return le formulaire transformé
      * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
      */
-    public WActionForm objToForm(Object[] object) throws WTransformerException {
+    public WActionForm objToForm( Object[] object )
+        throws WTransformerException
+    {
         ServeurListForm form = new ServeurListForm();
-        objToForm(object, form);
+        objToForm( object, form );
         return form;
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @param object {@inheritDoc} - la liste des serveurs sous forme DTO
      * @param form le formulaire de liste de serveur
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[], com.airfrance.welcom.struts.bean.WActionForm)
+     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      com.airfrance.welcom.struts.bean.WActionForm)
      */
-    public void objToForm(Object[] object, WActionForm form) throws WTransformerException {
+    public void objToForm( Object[] object, WActionForm form )
+        throws WTransformerException
+    {
         ArrayList lServeurListDTO = (ArrayList) object[0];
-        ServeurListForm lServeurListForm = (ServeurListForm) form ;
+        ServeurListForm lServeurListForm = (ServeurListForm) form;
         ArrayList ar = new ArrayList();
         Iterator it = lServeurListDTO.iterator();
-        while (it.hasNext()) {
+        while ( it.hasNext() )
+        {
             ServeurDTO lServeurDTO = (ServeurDTO) it.next();
-            ar.add(WTransformerFactory.objToForm(ServeurTransformer.class,lServeurDTO));
+            ar.add( WTransformerFactory.objToForm( ServeurTransformer.class, lServeurDTO ) );
         }
-        lServeurListForm.setServeurs(ar);  
+        lServeurListForm.setServeurs( ar );
     }
 
-    /** 
-     * Méthode non implémentée
-     * {@inheritDoc}
+    /**
+     * Méthode non implémentée {@inheritDoc}
+     * 
      * @param form {@inheritDoc}
      * @param object {@inheritDoc}
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm, java.lang.Object[])
+     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm,
+     *      java.lang.Object[])
      */
-    public void formToObj(WActionForm form, Object[] object) throws WTransformerException {
+    public void formToObj( WActionForm form, Object[] object )
+        throws WTransformerException
+    {
         // méthode non utilisée
     }
 

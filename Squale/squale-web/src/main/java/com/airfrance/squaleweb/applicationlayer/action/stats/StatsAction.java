@@ -27,7 +27,9 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 
 /**
  */
-public class StatsAction extends DefaultAction {
+public class StatsAction
+    extends DefaultAction
+{
 
     /**
      * Méthode redirigant vers la page des stats pour un utilisateur lambda
@@ -38,37 +40,47 @@ public class StatsAction extends DefaultAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward displayUser(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward displayUser( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                      HttpServletResponse pResponse )
+    {
         ActionForward forward = null;
         ActionErrors errors = new ActionErrors();
-        try {
-            forward = pMapping.findForward("displayUser");
-            populateForm(pForm, pRequest);
-        } catch (Exception e) {
-            handleException(e, errors, pRequest);
-            forward = pMapping.findForward("total_failure");
+        try
+        {
+            forward = pMapping.findForward( "displayUser" );
+            populateForm( pForm, pRequest );
+        }
+        catch ( Exception e )
+        {
+            handleException( e, errors, pRequest );
+            forward = pMapping.findForward( "total_failure" );
         }
         return forward;
     }
 
     /**
-     * Méthode récupérant les stats et initialisant le form correspondant.
-     * Factorisation de code pour les 2 actions renvoyant sur 2 jsps différentes
-     * suivant si l'utilisateur est admin ou pas
+     * Méthode récupérant les stats et initialisant le form correspondant. Factorisation de code pour les 2 actions
+     * renvoyant sur 2 jsps différentes suivant si l'utilisateur est admin ou pas
+     * 
      * @param pForm le formulaire à initialiser
      * @param pRequest la requête
      * @throws JrafEnterpriseException en cas d'échec de récupération des données
      * @throws WTransformerException en cas de problème de transformation de l'objet
      */
-    private void populateForm(ActionForm pForm, HttpServletRequest pRequest) throws JrafEnterpriseException, WTransformerException {
+    private void populateForm( ActionForm pForm, HttpServletRequest pRequest )
+        throws JrafEnterpriseException, WTransformerException
+    {
 
-        Object[] params = { new Integer(((SetOfStatsForm) pForm).getNbDaysForTerminated()), new Integer(((SetOfStatsForm) pForm).getNbDaysForAll())};
+        Object[] params =
+            { new Integer( ( (SetOfStatsForm) pForm ).getNbDaysForTerminated() ),
+                new Integer( ( (SetOfStatsForm) pForm ).getNbDaysForAll() ) };
         // Préparation de l'appel à la couche métier
-        IApplicationComponent ac = AccessDelegateHelper.getInstance("Stats");
+        IApplicationComponent ac = AccessDelegateHelper.getInstance( "Stats" );
         // On récupère l'objet regroupant les données stats sous forme de dto
-        SetOfStatsDTO statsDto = (SetOfStatsDTO) ac.execute("getStats", params);
+        SetOfStatsDTO statsDto = (SetOfStatsDTO) ac.execute( "getStats", params );
         // On transforme le form
-        WTransformerFactory.objToForm(SetOfStatsTransformer.class, (WActionForm) pForm, new Object[] { statsDto, pRequest.getLocale()});
+        WTransformerFactory.objToForm( SetOfStatsTransformer.class, (WActionForm) pForm, new Object[] { statsDto,
+            pRequest.getLocale() } );
     }
 
     /**
@@ -80,15 +92,20 @@ public class StatsAction extends DefaultAction {
      * @param pResponse la réponse de la servlet.
      * @return l'action à réaliser.
      */
-    public ActionForward displayAdmin(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) {
+    public ActionForward displayAdmin( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                       HttpServletResponse pResponse )
+    {
         ActionForward forward = null;
         ActionErrors errors = new ActionErrors();
-        try {
-            forward = pMapping.findForward("displayAdmin");
-            populateForm(pForm, pRequest);
-        } catch (Exception e) {
-            handleException(e, errors, pRequest);
-            forward = pMapping.findForward("total_failure");
+        try
+        {
+            forward = pMapping.findForward( "displayAdmin" );
+            populateForm( pForm, pRequest );
+        }
+        catch ( Exception e )
+        {
+            handleException( e, errors, pRequest );
+            forward = pMapping.findForward( "total_failure" );
         }
         return forward;
     }
@@ -103,14 +120,24 @@ public class StatsAction extends DefaultAction {
      * @return null.
      * @throws ServletException si erreur durant le traitement
      */
-    public ActionForward ApplicationsStatsExportExcel(ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest, HttpServletResponse pResponse) throws ServletException {
-        try {
+    public ActionForward ApplicationsStatsExportExcel( ActionMapping pMapping, ActionForm pForm,
+                                                       HttpServletRequest pRequest, HttpServletResponse pResponse )
+        throws ServletException
+    {
+        try
+        {
             ExcelDataApplicationsStatsList data =
-                new ExcelDataApplicationsStatsList(pRequest.getLocale(), getResources(pRequest), ((SetOfStatsForm) pForm).getListOfApplicationsStatsForm(), pRequest.getRemoteUser());
-            String today = SqualeWebActionUtils.getFormattedDate(pRequest.getLocale(), Calendar.getInstance().getTime(), "date.format.simple.underscore");
-            ExcelFactory.generateExcelToHTTPResponse(data, pResponse, "squaleDetailReport" + today + ".xls");
-        } catch (Exception e) {
-            throw new ServletException(e);
+                new ExcelDataApplicationsStatsList( pRequest.getLocale(), getResources( pRequest ),
+                                                    ( (SetOfStatsForm) pForm ).getListOfApplicationsStatsForm(),
+                                                    pRequest.getRemoteUser() );
+            String today =
+                SqualeWebActionUtils.getFormattedDate( pRequest.getLocale(), Calendar.getInstance().getTime(),
+                                                       "date.format.simple.underscore" );
+            ExcelFactory.generateExcelToHTTPResponse( data, pResponse, "squaleDetailReport" + today + ".xls" );
+        }
+        catch ( Exception e )
+        {
+            throw new ServletException( e );
         }
         return null;
     }

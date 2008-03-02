@@ -10,9 +10,10 @@ import com.airfrance.squaleweb.util.graph.GraphMaker;
  * Contient une liste de résultats
  * 
  * @author M400842
- *
  */
-public class ResultListForm extends RootForm {
+public class ResultListForm
+    extends RootForm
+{
 
     /**
      * Liste des résultats
@@ -28,42 +29,48 @@ public class ResultListForm extends RootForm {
     /**
      * @return la liste des résultats
      */
-    public List getList() {
+    public List getList()
+    {
         return mList;
     }
 
     /**
      * @param pList la liste des résultats
      */
-    public void setList(List pList) {
+    public void setList( List pList )
+    {
         mList = pList;
     }
 
     /**
      * @return le kiviat
      */
-    public GraphMaker getKiviat() {
+    public GraphMaker getKiviat()
+    {
         return kiviat;
     }
 
     /**
      * @return le pieChart
      */
-    public GraphMaker getPieChart() {
+    public GraphMaker getPieChart()
+    {
         return pieChart;
     }
 
     /**
      * @param pKiviat le nouveau kiviat
      */
-    public void setKiviat(GraphMaker pKiviat) {
+    public void setKiviat( GraphMaker pKiviat )
+    {
         kiviat = pKiviat;
     }
 
     /**
      * @param pPieChart le nouveau pieChart
      */
-    public void setPieChart(GraphMaker pPieChart) {
+    public void setPieChart( GraphMaker pPieChart )
+    {
         pieChart = pPieChart;
     }
 

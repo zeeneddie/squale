@@ -7,13 +7,16 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
 /**
  * Transformation d'une liste de tuleset CppTest
  */
-public class CppTestRuleSetListTransformer extends AbstractRuleSetListTransformer {
+public class CppTestRuleSetListTransformer
+    extends AbstractRuleSetListTransformer
+{
 
     /**
      * Constructeur
      */
-    public CppTestRuleSetListTransformer() {
-        super(CppTestRuleSetTransformer.class);
+    public CppTestRuleSetListTransformer()
+    {
+        super( CppTestRuleSetTransformer.class );
     }
 
     /**
@@ -21,9 +24,11 @@ public class CppTestRuleSetListTransformer extends AbstractRuleSetListTransforme
      * @throws WTransformerException si un pb apparaît.
      * @return le formulaire associé
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         CppTestRuleSetListForm form = new CppTestRuleSetListForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 

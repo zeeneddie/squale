@@ -7,13 +7,16 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
 /**
  * Transformation d'une liste de jeux de règles checkstyle
  */
-public class CheckStyleRuleSetListTransformer extends AbstractRuleSetListTransformer {
+public class CheckStyleRuleSetListTransformer
+    extends AbstractRuleSetListTransformer
+{
 
     /**
      * Constructeur
      */
-    public CheckStyleRuleSetListTransformer() {
-        super(CheckstyleRuleSetTransformer.class);
+    public CheckStyleRuleSetListTransformer()
+    {
+        super( CheckstyleRuleSetTransformer.class );
     }
 
     /**
@@ -21,9 +24,11 @@ public class CheckStyleRuleSetListTransformer extends AbstractRuleSetListTransfo
      * @throws WTransformerException si un pb apparaît.
      * @return le formulaire associé
      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         CheckstyleRuleSetListForm form = new CheckstyleRuleSetListForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 

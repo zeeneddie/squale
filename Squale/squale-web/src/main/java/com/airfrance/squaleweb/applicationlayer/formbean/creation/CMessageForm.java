@@ -5,5 +5,7 @@ import com.airfrance.squaleweb.applicationlayer.formbean.AbstractUploadForm;
 /**
  * Formulaire de chargement des messages
  */
-public class CMessageForm extends AbstractUploadForm {
+public class CMessageForm
+    extends AbstractUploadForm
+{
 }

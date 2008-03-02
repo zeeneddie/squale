@@ -19,23 +19,26 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
  * Transforme des listes de résultats en un formulaiire adéquat.
  * 
  * @author M400842
- *
  */
-public class ResultListTransformer extends AbstractListTransformer {
-    
+public class ResultListTransformer
+    extends AbstractListTransformer
+{
+
     /**
      * Logger
      */
-    private static final Log LOGGER = LogFactory.getLog(ResultListTransformer.class);
+    private static final Log LOGGER = LogFactory.getLog( ResultListTransformer.class );
 
     /**
-      * @param pObject le tableau de ProjectDTO à transformer en formulaires.
-      * @throws WTransformerException si un pb apparaît.
-      * @return le formulaire associé
-      */
-    public WActionForm objToForm(Object[] pObject) throws WTransformerException {
+     * @param pObject le tableau de ProjectDTO à transformer en formulaires.
+     * @throws WTransformerException si un pb apparaît.
+     * @return le formulaire associé
+     */
+    public WActionForm objToForm( Object[] pObject )
+        throws WTransformerException
+    {
         ResultListForm form = new ResultListForm();
-        objToForm(pObject, form);
+        objToForm( pObject, form );
         return form;
     }
 
@@ -44,46 +47,56 @@ public class ResultListTransformer extends AbstractListTransformer {
      * @param pForm le formulaire à remplir.
      * @throws WTransformerException si un pb apparaît.
      */
-    public void objToForm(Object[] pObject, WActionForm pForm) throws WTransformerException {
+    public void objToForm( Object[] pObject, WActionForm pForm )
+        throws WTransformerException
+    {
         List tre = (List) pObject[0];
         // On supprime les objets nuls
-        tre.remove(null);
+        tre.remove( null );
         // Concersion en liste de String
-        List values = SqualeWebActionUtils.getAsStringsList((List) pObject[1]);
+        List values = SqualeWebActionUtils.getAsStringsList( (List) pObject[1] );
         ArrayList result = new ArrayList();
         ResultListForm form = (ResultListForm) pForm;
         ListIterator it = tre.listIterator();
         ResultForm resultForm = null;
         // On récupère les règles
-        while (it.hasNext()) {
+        while ( it.hasNext() )
+        {
             resultForm = new ResultForm();
             Object currentTre = it.next();
             // sous forme de TRE ou sous forme de QualityResultDTO
-            if (currentTre instanceof String) {
-                resultForm.setName((String) currentTre);
-             } else {
-                 QualityRuleDTO rule = (QualityRuleDTO) currentTre;
-                 resultForm.setName(rule.getName());
-                 // Dans ce cas on renseigne aussi l'id de la règle
-                 resultForm.setId(""+rule.getId());
-             }
-           try {
-               String value = (String) values.get(it.previousIndex());
-               // Cas où la règle n'a pa de note
-               if(value == null || value.startsWith("-")) {
-                   value = "-";
-               }
-               // formatage HTML
-               value = value.replaceAll(" ","&nbsp;");
-               resultForm.setCurrentMark(value.replaceAll("\n","<br/>"));
-            } catch (Exception e) {
+            if ( currentTre instanceof String )
+            {
+                resultForm.setName( (String) currentTre );
+            }
+            else
+            {
+                QualityRuleDTO rule = (QualityRuleDTO) currentTre;
+                resultForm.setName( rule.getName() );
+                // Dans ce cas on renseigne aussi l'id de la règle
+                resultForm.setId( "" + rule.getId() );
+            }
+            try
+            {
+                String value = (String) values.get( it.previousIndex() );
+                // Cas où la règle n'a pa de note
+                if ( value == null || value.startsWith( "-" ) )
+                {
+                    value = "-";
+                }
+                // formatage HTML
+                value = value.replaceAll( " ", "&nbsp;" );
+                resultForm.setCurrentMark( value.replaceAll( "\n", "<br/>" ) );
+            }
+            catch ( Exception e )
+            {
                 // TODO voir comment ce code est activé
                 // l'accès à it.previousIndex() est étrange
-                LOGGER.debug(e, e);
+                LOGGER.debug( e, e );
             }
-            result.add(resultForm);
+            result.add( resultForm );
         }
-        form.setList(result);
+        form.setList( result );
     }
 
     /**
@@ -91,14 +104,17 @@ public class ResultListTransformer extends AbstractListTransformer {
      * @param pObject le tableau de ProjectDTO qui récupère les données du formulaire.
      * @throws WTransformerException si un pb apparaît.
      */
-    public void formToObj(WActionForm pForm, Object[] pObject) throws WTransformerException {
-         ArrayList listObject = (ArrayList) pObject[0];
-         List listForm = ((ResultListForm) pForm).getList();
-         ResultsDTO dto = null;
-         for(int i=0;i<listForm.size();i++){
-             dto = new ResultsDTO();
-             listObject.add(dto);
-         }
+    public void formToObj( WActionForm pForm, Object[] pObject )
+        throws WTransformerException
+    {
+        ArrayList listObject = (ArrayList) pObject[0];
+        List listForm = ( (ResultListForm) pForm ).getList();
+        ResultsDTO dto = null;
+        for ( int i = 0; i < listForm.size(); i++ )
+        {
+            dto = new ResultsDTO();
+            listObject.add( dto );
+        }
     }
 
 }

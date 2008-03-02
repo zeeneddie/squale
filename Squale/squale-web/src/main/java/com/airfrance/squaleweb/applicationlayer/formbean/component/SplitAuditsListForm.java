@@ -13,10 +13,11 @@ import com.airfrance.squaleweb.resources.WebMessages;
 import com.airfrance.squaleweb.util.graph.GraphMaker;
 
 /**
- * Sépare les audits des applications publiques par rapport
- * à celles qui appartiennent à l'utilisateur
+ * Sépare les audits des applications publiques par rapport à celles qui appartiennent à l'utilisateur
  */
-public class SplitAuditsListForm extends AuditListForm {
+public class SplitAuditsListForm
+    extends AuditListForm
+{
 
     /**
      * Liste des audits sur les applications publiques
@@ -32,67 +33,82 @@ public class SplitAuditsListForm extends AuditListForm {
     /**
      * @return la maker
      */
-    public GraphMaker getTimeMaker() {
+    public GraphMaker getTimeMaker()
+    {
         return mTimeMaker;
     }
 
     /**
      * Change le maker
+     * 
      * @param pMaker le nouveau maker
      */
-    public void setTimeMaker(GraphMaker pMaker) {
+    public void setTimeMaker( GraphMaker pMaker )
+    {
         mTimeMaker = pMaker;
     }
 
     /**
-         * @return la maker
-         */
-    public GraphMaker getSizeMaker() {
+     * @return la maker
+     */
+    public GraphMaker getSizeMaker()
+    {
         return mSizeMaker;
     }
 
     /**
      * Change le maker
+     * 
      * @param pMaker le nouveau maker
      */
-    public void setSizeMaker(GraphMaker pMaker) {
+    public void setSizeMaker( GraphMaker pMaker )
+    {
         mSizeMaker = pMaker;
     }
 
     /**
      * @return la liste des audits publiques
      */
-    public List getPublicAudits() {
+    public List getPublicAudits()
+    {
         return mPublicAudits;
     }
 
     /**
      * @param pPublicAudits la liste des audits publiques
      */
-    public void setPublicAudits(List pPublicAudits) {
+    public void setPublicAudits( List pPublicAudits )
+    {
         mPublicAudits = pPublicAudits;
     }
 
     /**
-     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    public void reset(ActionMapping mapping, HttpServletRequest request) {
-        super.reset(mapping, request);
+    public void reset( ActionMapping mapping, HttpServletRequest request )
+    {
+        super.reset( mapping, request );
     }
 
-    /** 
-     * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
-     * {@inheritDoc}
+    /**
+     * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
-    public void wValidate(ActionMapping pMapping, HttpServletRequest pRequest) {
+    public void wValidate( ActionMapping pMapping, HttpServletRequest pRequest )
+    {
         // On valide tous les audits
-        for (int i = 0; i < getAudits().size(); i++) {
-            AuditForm current = (AuditForm) getAudits().get(i);
+        for ( int i = 0; i < getAudits().size(); i++ )
+        {
+            AuditForm current = (AuditForm) getAudits().get( i );
             // La date ne doit pas être nulle
             // Sauf dans le cas d'un audit de jalon programmé
-            if (null == current.getDate() && !(AuditBO.MILESTONE.equals(current.getType()) && AuditBO.NOT_ATTEMPTED == current.getStatus())) {
-                addError("audits[" + i + "].date", new ActionError("error.date_format", WebMessages.getString(pRequest, "datetime.format.simple")));
+            if ( null == current.getDate()
+                && !( AuditBO.MILESTONE.equals( current.getType() ) && AuditBO.NOT_ATTEMPTED == current.getStatus() ) )
+            {
+                addError( "audits[" + i + "].date", new ActionError( "error.date_format",
+                                                                     WebMessages.getString( pRequest,
+                                                                                            "datetime.format.simple" ) ) );
             }
         }
     }

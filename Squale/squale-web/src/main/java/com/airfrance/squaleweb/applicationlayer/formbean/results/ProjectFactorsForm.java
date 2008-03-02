@@ -7,23 +7,27 @@ import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
 import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
- * Contient les notes des facteurs d'un projet, 
- * ainsi que des renseignements sur son parent.
+ * Contient les notes des facteurs d'un projet, ainsi que des renseignements sur son parent.
  */
-public class ProjectFactorsForm extends RootForm{
+public class ProjectFactorsForm
+    extends RootForm
+{
 
     /**
      * ID du projet
      */
     private String mId = "";
+
     /**
      * Nom du projet
      */
     private String mName = "";
+
     /**
      * ID de l'application
      */
     private String mAppliId = "";
+
     /**
      * Nom de l'application
      */
@@ -31,92 +35,103 @@ public class ProjectFactorsForm extends RootForm{
 
     /** Liste des facteurs */
     private Collection mFactors = new ArrayList();
-    
+
     /**
      * Constructeur.
      */
-    public ProjectFactorsForm(){
-    }
-    
-    /**
-     * Constructeur.
-     * @param pComponent le composant DTO correspondant au projet.
-     */
-    public ProjectFactorsForm(final ComponentDTO pComponent){
-        mName = pComponent.getName();
-        mId = Long.toString(pComponent.getID());
-        mAppliId = Long.toString(pComponent.getIDParent()); 
+    public ProjectFactorsForm()
+    {
     }
 
+    /**
+     * Constructeur.
+     * 
+     * @param pComponent le composant DTO correspondant au projet.
+     */
+    public ProjectFactorsForm( final ComponentDTO pComponent )
+    {
+        mName = pComponent.getName();
+        mId = Long.toString( pComponent.getID() );
+        mAppliId = Long.toString( pComponent.getIDParent() );
+    }
 
     /**
      * @return l'id du projet
      */
-    public String getId() {
+    public String getId()
+    {
         return mId;
     }
 
     /**
      * @return le nom du projet
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
 
     /**
      * @return l'id de l'application parente
      */
-    public String getAppliId() {
+    public String getAppliId()
+    {
         return mAppliId;
     }
 
     /**
      * @return le nom de l'application parente
      */
-    public String getApplicationName() {
+    public String getApplicationName()
+    {
         return mApplicationName;
     }
 
     /**
      * @param pId l'id du projet
      */
-    public void setId(String pId) {
+    public void setId( String pId )
+    {
         mId = pId;
     }
-
 
     /**
      * @param pName le nom du projet
      */
-    public void setName(String pName) {
+    public void setName( String pName )
+    {
         mName = pName;
     }
 
     /**
      * @param pApplicationId l'id de l'application parente
      */
-    public void setAppliId(String pApplicationId) {
+    public void setAppliId( String pApplicationId )
+    {
         mAppliId = pApplicationId;
     }
 
     /**
      * @param pApplicationName nom de l'application
      */
-    public void setApplicationName(String pApplicationName) {
+    public void setApplicationName( String pApplicationName )
+    {
         mApplicationName = pApplicationName;
     }
 
     /**
      * @return facteurs
      */
-    public Collection getFactors() {
+    public Collection getFactors()
+    {
         return mFactors;
     }
 
     /**
      * @param pList facteurs
      */
-    public void setFactors(Collection pList) {
+    public void setFactors( Collection pList )
+    {
         mFactors = pList;
     }
 }

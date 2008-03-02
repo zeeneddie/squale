@@ -31,9 +31,12 @@ import servletunit.struts.MockStrutsTestCase;
 /**
  * Test unitaire en contexte WEB
  */
-public class SqualeWebTestCase extends MockStrutsTestCase {
+public class SqualeWebTestCase
+    extends MockStrutsTestCase
+{
 
-    static {
+    static
+    {
         // Initialisation de la couche JRAF
         JRafConfigurator.initialize();
     }
@@ -43,17 +46,23 @@ public class SqualeWebTestCase extends MockStrutsTestCase {
 
     /** Fabrique de composant */
     private ComponentFactory mComponentFactory;
+
     /**
      * @return fabrique
      */
-    public ComponentFactory getComponentFactory() {
+    public ComponentFactory getComponentFactory()
+    {
         return mComponentFactory;
     }
 
-    /** (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see junit.framework.TestCase#setUp()
      */
-    protected void setUp() throws Exception {
+    protected void setUp()
+        throws Exception
+    {
         super.setUp();
         IPersistenceProvider PERSISTENTPROVIDER = PersistenceHelper.getPersistenceProvider();
 
@@ -61,55 +70,63 @@ public class SqualeWebTestCase extends MockStrutsTestCase {
         ISession session = null; // session Hibernate
         session = PERSISTENTPROVIDER.getSession();
         session.beginTransaction();
-        Connection conn = ((SessionImpl) session).getSession().connection();
+        Connection conn = ( (SessionImpl) session ).getSession().connection();
         Statement stm = conn.createStatement();
-        stm.execute("SET REFERENTIAL_INTEGRITY FALSE");
-        IDatabaseConnection dc = new DatabaseConnection(((SessionImpl) session).getSession().connection());
-        DatabaseOperation.DELETE_ALL.execute(dc, dc.createDataSet());
-        stm.execute("SET REFERENTIAL_INTEGRITY TRUE");
+        stm.execute( "SET REFERENTIAL_INTEGRITY FALSE" );
+        IDatabaseConnection dc = new DatabaseConnection( ( (SessionImpl) session ).getSession().connection() );
+        DatabaseOperation.DELETE_ALL.execute( dc, dc.createDataSet() );
+        stm.execute( "SET REFERENTIAL_INTEGRITY TRUE" );
         session.commitTransaction();
         session.closeSession();
 
         // Utilisation d'une autre session
         mSession = PERSISTENTPROVIDER.getSession();
-        mComponentFactory = new ComponentFactory(mSession);
-        setContextDirectory(new File("../squaleWeb/WebContent"));
-        setConfigFile("../squaleWeb/WebContent/WEB-INF/config/struts-config.xml");
+        mComponentFactory = new ComponentFactory( mSession );
+        setContextDirectory( new File( "../squaleWeb/WebContent" ) );
+        setConfigFile( "../squaleWeb/WebContent/WEB-INF/config/struts-config.xml" );
     }
 
     /**
-     * 
      * @param pMatricule matricule utilisateur
      * @param pAdmin indique s'il y a un privilège administrateur
      * @throws JrafEnterpriseException si erreur
      * @throws WTransformerException si erreur
      */
-    protected void setupLogonBean(String pMatricule, boolean pAdmin) throws JrafEnterpriseException, WTransformerException {
+    protected void setupLogonBean( String pMatricule, boolean pAdmin )
+        throws JrafEnterpriseException, WTransformerException
+    {
         UserDTO user = new UserDTO();
-        user.setMatricule(pMatricule);
+        user.setMatricule( pMatricule );
 
-        IApplicationComponent ac = AccessDelegateHelper.getInstance("Login");
-        Object[] paramIn = { user, Boolean.valueOf(pAdmin)};
+        IApplicationComponent ac = AccessDelegateHelper.getInstance( "Login" );
+        Object[] paramIn = { user, Boolean.valueOf( pAdmin ) };
 
-        user = (UserDTO) ac.execute("verifyUser", paramIn);
-        UserForm userForm = (UserForm) WTransformerFactory.objToForm(UserTransformer.class, user);
+        user = (UserDTO) ac.execute( "verifyUser", paramIn );
+        UserForm userForm = (UserForm) WTransformerFactory.objToForm( UserTransformer.class, user );
         LogonBean logonBeanSecurity = new LogonBean();
-        WTransformerFactory.formToObj(LogonBeanTransformer.class, userForm, new Object[]{logonBeanSecurity, Boolean.valueOf(pAdmin)});
-        getRequest().getSession().setAttribute(WConstants.USER_KEY, logonBeanSecurity);
+        WTransformerFactory.formToObj( LogonBeanTransformer.class, userForm, new Object[] { logonBeanSecurity,
+            Boolean.valueOf( pAdmin ) } );
+        getRequest().getSession().setAttribute( WConstants.USER_KEY, logonBeanSecurity );
     }
-    
+
     /**
      * Obtention de la session
+     * 
      * @return session
      */
-    protected ISession getJRAFSession() {
+    protected ISession getJRAFSession()
+    {
         return mSession;
     }
-    
-    /** (non-Javadoc)
+
+    /**
+     * (non-Javadoc)
+     * 
      * @see junit.framework.TestCase#tearDown()
      */
-    protected void tearDown() throws Exception {
+    protected void tearDown()
+        throws Exception
+    {
         getJRAFSession().closeSession();
         super.tearDown();
     }
