@@ -1,0 +1,101 @@
+Resource Standard Metrics
+Version 6.94
+Date Processed: Mon Mar 12 10:23:15 2007
+
+RSM Command Line: -A -fa -Tf -To -F/app/SQUALE/dev/data/rsm/input.txt 
+License File: /app/SQUALE/OUTILS/RSM/rsm.lic
+
+Configuration File: /app/SQUALE/OUTILS/RSM/rsm.cfg
+
+Type, Name, File Date, Size, LOC/FP, eLOC/FP, lLOC/FP, Comments, Blanks, Lines, Comment/eLOC, Classes, Functions, Parameters, Returns, InterComp, CycloComp, Total Complexity, Notices
+
+
+  f(), hash_dict_tweaker::hash_dict_tweaker, , , 1/0.0       , 1/0.0       , 0/0.0       , 0, 0, 1, 0.00, , 1, 1, 1, 2, 1, 3, 
+  f(), hash_dict_tweaker::tweak_template_params, , , 16/0.0       , 12/0.0       , 7/0.0       , 0, 1, 17, 0.00, , 1, 1, 1, 2, 2, 4, 
+, Total, , , 17/0.0       , 13/0.0       , 7/0.0       , 0, 1, 18, 0.00, , 2, 2, 2, 4, 3, 7, 
+, Average, , , 8.50/0.0       , 6.50/0.0       , 3.50/0.0       , 0.00, 0.50, 9.00, 0.00, , 1.00, 1.00, 1.00, 2.00, 1.50, 3.50, 
+, Maximum, , , 16/0.0       , 12/0.0       , 7/0.0       , 0, 1, 17, 0.00, , 1, 1, 1, 2, 2, 4, 
+, Minimum, , , 1/0.0       , 1/0.0       , 0/0.0       , 0, 0, 1, 0.00, , 1, 1, 1, 2, 1, 3, 
+File, /app/SQUALE/dev/data/cc_snapshot/squale_v3_0_act_quicktest_testcpp_squaledev/vobs/squale/src/squalixTest/data/Project4McCabeCppTest/include/hash_dict_tweaker.h, Mon Mar 12 10:23:01 2007, 1127, 31/0.0       , 25/0.0       , 9/0.0       , 5, 10, 46, 0.20, 1, 2, 2, 2, 4, 3, 7, 37
+
+  f(), hash_set_tweaker::hash_set_tweaker, , , 1/0.0       , 1/0.0       , 0/0.0       , 0, 0, 1, 0.00, , 1, 1, 1, 2, 1, 3, 
+  f(), hash_set_tweaker::tweak_template_params, , , 14/0.0       , 10/0.0       , 6/0.0       , 0, 1, 15, 0.00, , 1, 1, 1, 2, 2, 4, 
+, Total, , , 15/0.0       , 11/0.0       , 6/0.0       , 0, 1, 16, 0.00, , 2, 2, 2, 4, 3, 7, 
+, Average, , , 7.50/0.0       , 5.50/0.0       , 3.00/0.0       , 0.00, 0.50, 8.00, 0.00, , 1.00, 1.00, 1.00, 2.00, 1.50, 3.50, 
+, Maximum, , , 14/0.0       , 10/0.0       , 6/0.0       , 0, 1, 15, 0.00, , 1, 1, 1, 2, 2, 4, 
+, Minimum, , , 1/0.0       , 1/0.0       , 0/0.0       , 0, 0, 1, 0.00, , 1, 1, 1, 2, 1, 3, 
+File, /app/SQUALE/dev/data/cc_snapshot/squale_v3_0_act_quicktest_testcpp_squaledev/vobs/squale/src/squalixTest/data/Project4McCabeCppTest/include/hash_set_tweaker.h, Mon Mar 12 10:23:01 2007, 1072, 29/0.0       , 23/0.0       , 8/0.0       , 5, 7, 41, 0.22, 1, 2, 2, 2, 4, 3, 7, 34
+
+  f(), trim, , , 7/0.0       , 5/0.0       , 5/0.0       , 0, 0, 7, 0.00, , 1, 1, 1, 2, 1, 3, 
+  f(), line_tweaker::line_tweaker, , , 1/0.0       , 1/0.0       , 0/0.0       , 0, 0, 1, 0.00, , 1, 1, 1, 2, 1, 3, 
+  f(), line_tweaker::operator (), , , 14/0.0       , 8/0.0       , 6/0.0       , 0, 2, 16, 0.00, , 1, 0, 1, 1, 3, 4, 
+  f(), line_tweaker::replace_template_params, , , 9/0.0       , 5/0.0       , 4/0.0       , 0, 0, 9, 0.00, , 1, 1, 1, 2, 2, 4, 
+  f(), line_tweaker::tweaked_line, , , 1/0.0       , 1/0.0       , 1/0.0       , 0, 0, 1, 0.00, , 1, 0, 1, 1, 1, 2, 
+  f(), line_tweaker::parse_template_params, , , 36/0.0       , 22/0.0       , 15/0.0       , 2, 1, 39, 0.09, , 1, 2, 2, 4, 10, 14, 
+, Total, , , 68/0.0       , 42/0.0       , 31/0.0       , 2, 3, 73, 0.09, , 6, 5, 7, 12, 18, 30, 
+, Average, , , 11.33/0.0       , 7.00/0.0       , 5.17/0.0       , 0.33, 0.50, 12.17, 0.02, , 1.00, 0.83, 1.17, 2.00, 3.00, 5.00, 
+, Maximum, , , 36/0.0       , 22/0.0       , 15/0.0       , 2, 2, 39, 0.09, , 1, 2, 2, 4, 10, 14, 
+, Minimum, , , 1/0.0       , 1/0.0       , 0/0.0       , 0, 0, 1, 0.00, , 1, 0, 1, 1, 1, 2, 
+File, /app/SQUALE/dev/data/cc_snapshot/squale_v3_0_act_quicktest_testcpp_squaledev/vobs/squale/src/squalixTest/data/Project4McCabeCppTest/include/line_tweaker.h, Mon Mar 12 10:23:01 2007, 2368, 89/0.0       , 61/0.0       , 37/0.0       , 2, 19, 110, 0.03, 1, 6, 5, 7, 12, 18, 30, 55
+
+  f(), sorted_vector_tweaker::sorted_vector_tweaker, , , 1/0.0       , 1/0.0       , 0/0.0       , 0, 0, 1, 0.00, , 1, 1, 1, 2, 1, 3, 
+  f(), sorted_vector_tweaker::tweak_template_params, , , 12/0.0       , 8/0.0       , 5/0.0       , 0, 1, 13, 0.00, , 1, 1, 1, 2, 2, 4, 
+, Total, , , 13/0.0       , 9/0.0       , 5/0.0       , 0, 1, 14, 0.00, , 2, 2, 2, 4, 3, 7, 
+, Average, , , 6.50/0.0       , 4.50/0.0       , 2.50/0.0       , 0.00, 0.50, 7.00, 0.00, , 1.00, 1.00, 1.00, 2.00, 1.50, 3.50, 
+, Maximum, , , 12/0.0       , 8/0.0       , 5/0.0       , 0, 1, 13, 0.00, , 1, 1, 1, 2, 2, 4, 
+, Minimum, , , 1/0.0       , 1/0.0       , 0/0.0       , 0, 0, 1, 0.00, , 1, 1, 1, 2, 1, 3, 
+File, /app/SQUALE/dev/data/cc_snapshot/squale_v3_0_act_quicktest_testcpp_squaledev/vobs/squale/src/squalixTest/data/Project4McCabeCppTest/include/sorted_vector_tweaker.h, Mon Mar 12 10:23:01 2007, 851, 25/0.0       , 19/0.0       , 7/0.0       , 4, 9, 38, 0.21, 1, 2, 2, 2, 4, 3, 7, 18
+
+  f(), rw_main, , , 25/0.2       , 15/0.1       , 11/0.1       , 0, 3, 28, 0.00, , 1, 2, 3, 5, 4, 9, 
+, Total, , , 25/0.2       , 15/0.1       , 11/0.1       , 0, 3, 28, 0.00, , 1, 2, 3, 5, 4, 9, 
+, Average, , , 25.00/0.2       , 15.00/0.1       , 11.00/0.1       , 0.00, 3.00, 28.00, 0.00, , 1.00, 2.00, 3.00, 5.00, 4.00, 9.00, 
+, Maximum, , , 25/0.2       , 15/0.1       , 11/0.1       , 0, 3, 28, 0.00, , 1, 2, 3, 5, 4, 9, 
+, Minimum, , , 25/0.2       , 15/0.2       , 11/0.2       , 0, 3, 28, 0.00, , 1, 2, 3, 5, 4, 9, 
+File, /app/SQUALE/dev/data/cc_snapshot/squale_v3_0_act_quicktest_testcpp_squaledev/vobs/squale/src/squalixTest/data/Project4McCabeCppTest/src/rw_migrate.c, Mon Mar 12 10:23:01 2007, 812, 35/0.3       , 24/0.2       , 17/0.1       , 0, 12, 47, 0.00, 0, 1, 2, 3, 5, 4, 9, 16
+
+  f(), rw_migrate_file, , , 24/0.2       , 20/0.2       , 13/0.1       , 0, 10, 34, 0.00, , 1, 2, 1, 3, 2, 5, 
+, Total, , , 24/0.2       , 20/0.2       , 13/0.1       , 0, 10, 34, 0.00, , 1, 2, 1, 3, 2, 5, 
+, Average, , , 24.00/0.2       , 20.00/0.2       , 13.00/0.1       , 0.00, 10.00, 34.00, 0.00, , 1.00, 2.00, 1.00, 3.00, 2.00, 5.00, 
+, Maximum, , , 24/0.2       , 20/0.2       , 13/0.1       , 0, 10, 34, 0.00, , 1, 2, 1, 3, 2, 5, 
+, Minimum, , , 24/0.2       , 20/0.2       , 13/0.2       , 0, 10, 34, 0.00, , 1, 2, 1, 3, 2, 5, 
+File, /app/SQUALE/dev/data/cc_snapshot/squale_v3_0_act_quicktest_testcpp_squaledev/vobs/squale/src/squalixTest/data/Project4McCabeCppTest/src/rw_migrate_file.c, Mon Mar 12 10:23:01 2007, 1630, 35/0.3       , 31/0.2       , 18/0.1       , 3, 17, 55, 0.10, 0, 1, 2, 1, 3, 2, 5, 19
+
+Files, 6
+
+
+Project Function Metrics
+No Sort Method
+Count,14
+Type,Name,LOC,eLOC,lLOC,Comments,Comments/eLOC,Lines,Parameters,Returns,Interface Complexity,Cyclomatic Complexity,Functional Complexity
+f(),hash_dict_tweaker::hash_dict_tweaker,1,1,0,0,0.00,1,1,1,2,1,3
+f(),hash_dict_tweaker::tweak_template_params,16,12,7,0,0.00,17,1,1,2,2,4
+f(),hash_set_tweaker::hash_set_tweaker,1,1,0,0,0.00,1,1,1,2,1,3
+f(),hash_set_tweaker::tweak_template_params,14,10,6,0,0.00,15,1,1,2,2,4
+f(),trim,7,5,5,0,0.00,7,1,1,2,1,3
+f(),line_tweaker::line_tweaker,1,1,0,0,0.00,1,1,1,2,1,3
+f(),line_tweaker::operator (),14,8,6,0,0.00,16,0,1,1,3,4
+f(),line_tweaker::replace_template_params,9,5,4,0,0.00,9,1,1,2,2,4
+f(),line_tweaker::tweaked_line,1,1,1,0,0.00,1,0,1,1,1,2
+f(),line_tweaker::parse_template_params,36,22,15,2,0.09,39,2,2,4,10,14
+f(),sorted_vector_tweaker::sorted_vector_tweaker,1,1,0,0,0.00,1,1,1,2,1,3
+f(),sorted_vector_tweaker::tweak_template_params,12,8,5,0,0.00,13,1,1,2,2,4
+f(),rw_main,25,15,11,0,0.00,28,2,3,5,4,9
+f(),rw_migrate_file,24,20,13,0,0.00,34,2,1,3,2,5
+f(),Total,162,110,73,2,0.09,183,15,17,32,33,65
+f(),Average,11.57,7.86,5.21,0.14,0.01,13.07,1.07,1.21,2.29,2.36,4.64
+f(),Maximum,36,22,15,2,0.09,39,2,3,5,10,15
+f(),Minimum,1,1,0,0,0.00,1,0,1,1,1,2
+,Function Pts.,       0.4,       0.3,       0.2,
+
+Project Class Metrics
+No Sort Method
+Count,4
+Type,Name,LOC,eLOC,lLOC,Comments,Comments/eLOC,Lines,Parameters,Returns,Interface Complexity,Cyclomatic Complexity,Functional Complexity,Methods,Public Methods,Protected Methods,Private Methods,Attributes,Public Attributes,Protected Attributes,Private Attributes
+Class,hash_dict_tweaker,21,15,7,0,0.00,23,2,2,4,3,7,2,2,0,0,0,0,0,0
+Class,hash_set_tweaker,19,13,6,0,0.00,21,2,2,4,3,7,2,2,0,0,0,0,0,0
+Class,line_tweaker,71,45,28,2,0.04,85,4,6,10,17,27,6,5,1,0,1,0,1,0
+Class,sorted_vector_tweaker,17,11,5,0,0.00,19,2,2,4,3,7,2,2,0,0,0,0,0,0
+Class,Total,128,84,46,2,0.04,148,10,12,22,26,48,12,11,1,0,1,0,1,0
+Class,Average,32.00,21.00,11.50,0.50,0.01,37.00,2.50,3.00,5.50,6.50,12.00,3.00,2.75,0.25,0.00,0.25,0.00,0.25,0.00
+Class,Maximum,71,45,28,2,0.04,85,4,6,10,17,27,6,5,1,0,1,0,1,0
+Class,Minimum,17,11,5,0,0.00,19,2,2,4,3,7,2,2,0,0,0,0,0,0

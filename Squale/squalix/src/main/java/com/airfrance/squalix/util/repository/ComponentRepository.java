@@ -26,11 +26,12 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlPa
 /**
  * Charger de faire persister les composants.
  */
-public class ComponentRepository {
+public class ComponentRepository
+{
 
     /**
-     * Séparateur des champs de clés. Ne doit pas être un séparateur utilisé
-     * par McCabe pour qualifier entièrement un nom.
+     * Séparateur des champs de clés. Ne doit pas être un séparateur utilisé par McCabe pour qualifier entièrement un
+     * nom.
      */
     private static final String KEY_SEPARATOR = "<=>";
 
@@ -55,14 +56,15 @@ public class ComponentRepository {
     private Map mPackages;
 
     /**
-     *  Liste des Modèles UML
+     * Liste des Modèles UML
      */
     private Map mUmlModels;
 
     /**
-     *  Liste des  packages UML
+     * Liste des packages UML
      */
     private Map mUmlPackages;
+
     /**
      * Liste des Interfaces UML
      */
@@ -90,7 +92,8 @@ public class ComponentRepository {
      * @param pProject le projet sur lequel est réalisée l'analyse.
      * @param pSession la session de persistance
      */
-    public ComponentRepository(ProjectBO pProject, ISession pSession) {
+    public ComponentRepository( ProjectBO pProject, ISession pSession )
+    {
         mProject = pProject;
         mSession = pSession;
         mClasses = new HashMap();
@@ -102,44 +105,55 @@ public class ComponentRepository {
         mUmlPackages = new HashMap();
         mJSPs = new HashMap();
         Collection children = mProject.getChildren();
-        if (null != children) {
+        if ( null != children )
+        {
             Iterator it = children.iterator();
-            while (it.hasNext()) {
-                addToCollection((AbstractComponentBO) it.next(), null);
+            while ( it.hasNext() )
+            {
+                addToCollection( (AbstractComponentBO) it.next(), null );
             }
         }
     }
 
     /**
-     * Crée la clé du composant pour être utilisée avec l'adaptateur et 
-     * ajoute le composant et ses enfants dans les collections locales associées.
+     * Crée la clé du composant pour être utilisée avec l'adaptateur et ajoute le composant et ses enfants dans les
+     * collections locales associées.
      * 
      * @param pComponent le composant à ajouter.
      * @param pParentName le nom du parent si disponible.
      */
-    private void addToCollection(AbstractComponentBO pComponent, String pParentName) {
+    private void addToCollection( AbstractComponentBO pComponent, String pParentName )
+    {
         // Création de la clé
-        if (null == pParentName) {
+        if ( null == pParentName )
+        {
             pParentName = pComponent.getName();
-        } else {
+        }
+        else
+        {
             pParentName += KEY_SEPARATOR + pComponent.getName();
         }
-        Map map = getMapForComponent(pComponent);
-        if (pComponent instanceof AbstractComplexComponentBO) {
-            map.put(pParentName, pComponent);
-            Collection children = ((AbstractComplexComponentBO) pComponent).getChildren();
-            if (null != children) {
+        Map map = getMapForComponent( pComponent );
+        if ( pComponent instanceof AbstractComplexComponentBO )
+        {
+            map.put( pParentName, pComponent );
+            Collection children = ( (AbstractComplexComponentBO) pComponent ).getChildren();
+            if ( null != children )
+            {
                 // Si le composant est complexe, alors on va réappeler la méthode sur
                 // chacun de ses enfants, de manière récursive pour parcourir tout
                 // l'arbre des composants du projet
                 Iterator it = children.iterator();
-                while (it.hasNext()) {
-                    addToCollection((AbstractComponentBO) it.next(), pParentName);
+                while ( it.hasNext() )
+                {
+                    addToCollection( (AbstractComponentBO) it.next(), pParentName );
                 }
             }
-        } else {
+        }
+        else
+        {
             // Sinon, il s'agit d'une méthode, on l'ajoute simplement à sa map
-            map.put(pParentName, pComponent);
+            map.put( pParentName, pComponent );
         }
     }
 
@@ -150,13 +164,16 @@ public class ComponentRepository {
      * @return le composant persistant.
      * @throws JrafDaoException si erreur
      */
-    public AbstractComponentBO persisteComponent(AbstractComponentBO pComponent) throws JrafDaoException {
+    public AbstractComponentBO persisteComponent( AbstractComponentBO pComponent )
+        throws JrafDaoException
+    {
         // On crée la liste de ses parents + le composant lui-même
-        List parents = getParents(pComponent);
+        List parents = getParents( pComponent );
         AbstractComponentBO persistentParent = mProject;
         int parentsSize = parents.size();
-        for (int i = parents.size() - 1; i >= 0; i--) {
-            persistentParent = persisteComponent(persistentParent, (AbstractComponentBO) parents.get(i));
+        for ( int i = parents.size() - 1; i >= 0; i-- )
+        {
+            persistentParent = persisteComponent( persistentParent, (AbstractComponentBO) parents.get( i ) );
         }
         return persistentParent;
     }
@@ -167,57 +184,67 @@ public class ComponentRepository {
      * @param pComponent le composant
      * @return la liste contenant les parents de pComponent et lui-même.
      */
-    private List getParents(AbstractComponentBO pComponent) {
+    private List getParents( AbstractComponentBO pComponent )
+    {
         List parents = new ArrayList();
-        parents.add(pComponent);
+        parents.add( pComponent );
         AbstractComplexComponentBO parent = pComponent.getParent();
-        boolean hasCorrectParents = (parent != null);
-        for (; parent != null && hasCorrectParents; parent = parent.getParent()) {
-            if (parent instanceof ProjectBO) {
+        boolean hasCorrectParents = ( parent != null );
+        for ( ; parent != null && hasCorrectParents; parent = parent.getParent() )
+        {
+            if ( parent instanceof ProjectBO )
+            {
                 hasCorrectParents = false;
-            } else {
-                parents.add(parent);
+            }
+            else
+            {
+                parents.add( parent );
             }
         }
         return parents;
     }
 
     /**
-     * Fait persister un composant (ou le récupère si il existe déjà) en lui
-     * associant son parent déjà persistant.
+     * Fait persister un composant (ou le récupère si il existe déjà) en lui associant son parent déjà persistant.
      * 
      * @param pPersistentParent le parent du composant déjà persistant.
      * @param pComponent le composant à faire persister ou à rechercher
      * @return le composant persistant
      * @throws JrafDaoException si erreur
      */
-    private AbstractComponentBO persisteComponent(AbstractComponentBO pPersistentParent, AbstractComponentBO pComponent) throws JrafDaoException {
+    private AbstractComponentBO persisteComponent( AbstractComponentBO pPersistentParent, AbstractComponentBO pComponent )
+        throws JrafDaoException
+    {
         // On récupère la map du composant
-        Map map = getMapForComponent(pComponent);
+        Map map = getMapForComponent( pComponent );
         // On crée la clé représentant l'objet dans la map
-        String key = buildKey(pComponent);
-        AbstractComponentBO mapComponent = (AbstractComponentBO) map.get(key);
-        if (null == mapComponent) {
+        String key = buildKey( pComponent );
+        AbstractComponentBO mapComponent = (AbstractComponentBO) map.get( key );
+        if ( null == mapComponent )
+        {
             // il n'existe pas, on le crée et on sauvegarde l'objet en base
             AbstractComponentDAOImpl dao = AbstractComponentDAOImpl.getInstance();
-            pComponent.setParent((AbstractComplexComponentBO) pPersistentParent);
-            pComponent.setProject(mProject);
-            dao.save(mSession, pComponent);
+            pComponent.setParent( (AbstractComplexComponentBO) pPersistentParent );
+            pComponent.setProject( mProject );
+            dao.save( mSession, pComponent );
             // On ajoute l' élément persistant à la map correspondante
-            map.put(key, pComponent);
+            map.put( key, pComponent );
             mapComponent = pComponent;
-        } else if(pComponent instanceof ClassBO) { 
-            //cas particulier d'un classe qui peut être persistée sans son fichier
+        }
+        else if ( pComponent instanceof ClassBO )
+        {
+            // cas particulier d'un classe qui peut être persistée sans son fichier
             ClassBO classPersistent = (ClassBO) mapComponent;
             ClassBO classArg = (ClassBO) pComponent;
-            if(null == classPersistent.getFileName() && null != classArg.getFileName()) {
+            if ( null == classPersistent.getFileName() && null != classArg.getFileName() )
+            {
                 // On update la classe
                 AbstractComponentDAOImpl dao = AbstractComponentDAOImpl.getInstance();
-                classPersistent.setFileName(classArg.getFileName());
-                dao.save(mSession, classPersistent);
+                classPersistent.setFileName( classArg.getFileName() );
+                dao.save( mSession, classPersistent );
             }
         }
-        
+
         return mapComponent;
     }
 
@@ -227,33 +254,49 @@ public class ComponentRepository {
      * @param pComponent le composant
      * @return la map dans laquelle pComponent doit être
      */
-    private Map getMapForComponent(AbstractComponentBO pComponent) {
+    private Map getMapForComponent( AbstractComponentBO pComponent )
+    {
         Map result = null;
         // Chaque type de composant à sa map associée,
         // on récupère donc le véritable type de l'objet
         // passé en paramètre et on retourne sa map associée
-        if (pComponent instanceof MethodBO) {
+        if ( pComponent instanceof MethodBO )
+        {
             // mMethods contient des MethodBO
             result = mMethods;
-        } else if (pComponent instanceof ClassBO) {
+        }
+        else if ( pComponent instanceof ClassBO )
+        {
             // mClasses contient des ClassBO
             result = mClasses;
-        } else if (pComponent instanceof PackageBO) {
+        }
+        else if ( pComponent instanceof PackageBO )
+        {
             // mPackages contient des PackageBO
             result = mPackages;
-        } else if (pComponent instanceof UmlInterfaceBO) {
+        }
+        else if ( pComponent instanceof UmlInterfaceBO )
+        {
             // mUmlInterface contient des UmlInterfaceBO
             result = mUmlInterface;
-        } else if (pComponent instanceof UmlModelBO) {
+        }
+        else if ( pComponent instanceof UmlModelBO )
+        {
             // mUmlModels contient des UmlModelBO
             result = mUmlModels;
-        } else if (pComponent instanceof UmlClassBO) {
+        }
+        else if ( pComponent instanceof UmlClassBO )
+        {
             // mUmlClass contient des UmlClasslBO
             result = mUmlClasses;
-        } else if (pComponent instanceof UmlPackageBO) {
+        }
+        else if ( pComponent instanceof UmlPackageBO )
+        {
             // mUmlPackage contient des UmlPackagelBO
             result = mUmlPackages;
-        } else if (pComponent instanceof JspBO) {
+        }
+        else if ( pComponent instanceof JspBO )
+        {
             // mJSPs contient des JspBO
             result = mJSPs;
         }
@@ -261,22 +304,27 @@ public class ComponentRepository {
     }
 
     /**
-     * Construit la clé du composant qui correspond à la concaténation de ses parents
-     * séparée par KEY_SEPARATOR
+     * Construit la clé du composant qui correspond à la concaténation de ses parents séparée par KEY_SEPARATOR
+     * 
      * @param pComponent le composant
      * @return la clé représentant le composant dans les maps
      */
-    public String buildKey(AbstractComponentBO pComponent) {
+    public String buildKey( AbstractComponentBO pComponent )
+    {
         String key = pComponent.getName();
         AbstractComponentBO parent = pComponent.getParent();
-        boolean hasCorrectParents = (parent != null);
-        while (hasCorrectParents) {
-            if (parent instanceof ProjectBO) {
+        boolean hasCorrectParents = ( parent != null );
+        while ( hasCorrectParents )
+        {
+            if ( parent instanceof ProjectBO )
+            {
                 hasCorrectParents = false;
-            } else {
+            }
+            else
+            {
                 key = parent.getName() + KEY_SEPARATOR + key;
                 parent = parent.getParent();
-                hasCorrectParents = (parent != null);
+                hasCorrectParents = ( parent != null );
             }
         }
         return key;
@@ -285,7 +333,8 @@ public class ComponentRepository {
     /**
      * @return la session
      */
-    public ISession getSession() {
+    public ISession getSession()
+    {
         return mSession;
     }
 
@@ -296,11 +345,13 @@ public class ComponentRepository {
      * @return la bonne méthodBO
      * @throws JrafDaoException en cas d'échec
      */
-    public Collection getSimilarMethods(String pMethodName,String pFileName,long pAuditId) throws JrafDaoException {
+    public Collection getSimilarMethods( String pMethodName, String pFileName, long pAuditId )
+        throws JrafDaoException
+    {
         AbstractComponentDAOImpl compDao = AbstractComponentDAOImpl.getInstance();
-        Collection result = new ArrayList(0);
+        Collection result = new ArrayList( 0 );
         MethodDAOImpl dao = MethodDAOImpl.getInstance();
-        result = dao.findMethodeByName(mSession,pMethodName,pFileName,pAuditId );
+        result = dao.findMethodeByName( mSession, pMethodName, pFileName, pAuditId );
         return result;
     }
 

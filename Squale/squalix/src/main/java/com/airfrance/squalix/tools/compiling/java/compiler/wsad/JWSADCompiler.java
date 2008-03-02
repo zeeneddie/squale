@@ -15,18 +15,18 @@ import com.airfrance.squalix.tools.compiling.java.beans.JWSADProject;
 import com.airfrance.squalix.tools.compiling.java.parser.wsad.JWSADParser;
 
 /**
- * Compilation d'une série de projets WSAD
- * Cette classe permet de lancer la compilation en fonction des dépendances
- * éventuelles entre les projets. Le processus de compilation est stoppé
- * à la première anomalie.
+ * Compilation d'une série de projets WSAD Cette classe permet de lancer la compilation en fonction des dépendances
+ * éventuelles entre les projets. Le processus de compilation est stoppé à la première anomalie.
+ * 
  * @author m400832 (by rose)
  * @version 1.3
  */
-public class JWSADCompiler {
+public class JWSADCompiler
+{
     /**
      * Logger.
      */
-    private static final Log LOGGER = LogFactory.getLog(JWSADCompiler.class);
+    private static final Log LOGGER = LogFactory.getLog( JWSADCompiler.class );
 
     /**
      * Liste des projets en cours de traitement pour détecter des cycles
@@ -40,52 +40,67 @@ public class JWSADCompiler {
 
     /**
      * Constructeur.
+     * 
      * @param pProjectList liste des projets WSAD à compiler.
      */
-    public JWSADCompiler(List pProjectList) {
+    public JWSADCompiler( List pProjectList )
+    {
         mProjectList = pProjectList;
     }
 
     /**
-     * Cette méthode lance la procédure de compilation. 
+     * Cette méthode lance la procédure de compilation.
+     * 
      * @see #doRecursive()
-     * @throws Exception exception lors de la compilation 
-     * du projet WSAD 5.x.
+     * @throws Exception exception lors de la compilation du projet WSAD 5.x.
      */
-    public void runCompilation() throws Exception {
+    public void runCompilation()
+        throws Exception
+    {
         JWSADProject projet = null;
-        try {
+        try
+        {
             /* si la liste de projets n'est pas vide */
-            if (null != mProjectList) {
+            if ( null != mProjectList )
+            {
                 Iterator it = mProjectList.iterator();
                 /* si l'itérateur a des éléments */
-                if (null != it && it.hasNext()) {
+                if ( null != it && it.hasNext() )
+                {
                     /* tant qu'il y a des projets à compiler */
-                    while (it.hasNext()) {
+                    while ( it.hasNext() )
+                    {
                         projet = (JWSADProject) it.next();
-                        /* on appelle la méthode qui lance effectivement 
-                         * la compilation*/
-                        doRecursive(projet);
+                        /*
+                         * on appelle la méthode qui lance effectivement la compilation
+                         */
+                        doRecursive( projet );
                     }
                 }
                 it = null;
             }
             /* exception en provenance de doRecursive() */
-        } catch (Exception e) {
-            LOGGER.fatal(e, e);
+        }
+        catch ( Exception e )
+        {
+            LOGGER.fatal( e, e );
             /* on lance une nouvelle exception */
-            throw new Exception(CompilingMessages.getString("java.exception.task.not_compiled") + projet.getName() + "\n" + e);
+            throw new Exception( CompilingMessages.getString( "java.exception.task.not_compiled" ) + projet.getName()
+                + "\n" + e );
         }
     }
 
     /**
-     * This methods is actually the one that launches the project compilation. Firstly, 
-     * one checks that the parser didn't find any dependencies with another projet :
-     * <br /><br /><code>if(null != mProj.getMDependsOnProjects() && 
-     * mProj.getMDependsOnProjects().size()>0)</code><br /><br />
-     * If one or more dependencies are found, then the compiling method (
-     * <code>doCompilation()</code>) is recursively called on each dependency.<br />
+     * This methods is actually the one that launches the project compilation. Firstly, one checks that the parser
+     * didn't find any dependencies with another projet : <br />
+     * <br />
+     * <code>if(null != mProj.getMDependsOnProjects() && 
+     * mProj.getMDependsOnProjects().size()>0)</code><br />
+     * <br />
+     * If one or more dependencies are found, then the compiling method ( <code>doCompilation()</code>) is
+     * recursively called on each dependency.<br />
      * Otherwise, the comiling method is only called for the current projet.
+     * 
      * @param pProject projet to compile
      * @see com.airfrance.squalix.tools.compiling.java.parser.wsad.JWSADParser#processSrc(String)
      * @see JWSADProject
@@ -93,35 +108,48 @@ public class JWSADCompiler {
      * @since 1.0
      * @throws Exception exception lors de la compilation.
      */
-    private void doRecursive(JWSADProject pProject) throws Exception {
+    private void doRecursive( JWSADProject pProject )
+        throws Exception
+    {
         // On crée un parser WSAD pour pouvoir appeler la méthode "addExportedPackagesToClasspath"
-        JWSADParser parser = new JWSADParser(new ArrayList());
-        if (pProject.isCompiled() == false) {
+        JWSADParser parser = new JWSADParser( new ArrayList() );
+        if ( pProject.isCompiled() == false )
+        {
             // Détection de cycle
-            if (mProjectProcessed.contains(pProject)) {
-                throw new Exception(CompilingMessages.getString("java.exception.task.circularity") + pProject.getName() + "\n");
-            } else {
-                mProjectProcessed.add(pProject);
+            if ( mProjectProcessed.contains( pProject ) )
+            {
+                throw new Exception( CompilingMessages.getString( "java.exception.task.circularity" )
+                    + pProject.getName() + "\n" );
             }
-            /* si la compilation du projet ne peut se faire que si d'autres 
-             * projets ont été compilés */
-            if (pProject.hasDependency()) {
+            else
+            {
+                mProjectProcessed.add( pProject );
+            }
+            /*
+             * si la compilation du projet ne peut se faire que si d'autres projets ont été compilés
+             */
+            if ( pProject.hasDependency() )
+            {
                 Iterator it = pProject.getDependsOnProjects().iterator();
-                /* tant que l'itérateur a des éléments  */
-                if (null != it && it.hasNext()) {
-                    /* on crée les instances utilisées par la boucle 
-                     * ci dessous */
+                /* tant que l'itérateur a des éléments */
+                if ( null != it && it.hasNext() )
+                {
+                    /*
+                     * on crée les instances utilisées par la boucle ci dessous
+                     */
                     JWSADCompiler comp = null;
                     JWSADProject pTemp = null;
                     /* tant qu'il y a des projets en dépendance */
-                    while (it.hasNext()) {
+                    while ( it.hasNext() )
+                    {
                         /* on appelle récursivement doRecursive() */
                         pTemp = (JWSADProject) it.next();
-                        doRecursive(pTemp);
+                        doRecursive( pTemp );
                         // On ajoute les .class si il y a des packages exportés dans le cas
                         // d'une compilation RCP
-                        if(pTemp.getExportedPackages().size() > 0) {
-                            parser.addExportedPackagesToClasspath(pProject, pTemp, new File(pTemp.getDestPath()));
+                        if ( pTemp.getExportedPackages().size() > 0 )
+                        {
+                            parser.addExportedPackagesToClasspath( pProject, pTemp, new File( pTemp.getDestPath() ) );
                         }
                     }
                     pTemp = null;
@@ -129,7 +157,7 @@ public class JWSADCompiler {
                 it = null;
             }
             /* Sinon on compile le projet */
-            JWSADAntCompiler compiler = new JWSADAntCompiler(pProject);
+            JWSADAntCompiler compiler = new JWSADAntCompiler( pProject );
             compiler.doCompilation();
         }
     }

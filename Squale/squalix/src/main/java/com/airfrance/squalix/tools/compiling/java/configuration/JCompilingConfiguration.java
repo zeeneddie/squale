@@ -19,15 +19,17 @@ import com.airfrance.squalix.tools.compiling.CompilingMessages;
 /**
  * Classe de configuration pour la compilation des projets JAVA.<br />
  * La version 2.0 introduit le recours à la réflexion.
+ * 
  * @author m400832
  * @version 2.0
  */
-public class JCompilingConfiguration {
+public class JCompilingConfiguration
+{
 
     /**
      * Logger.
      */
-    private static final Log LOGGER = LogFactory.getLog(JCompilingConfiguration.class);
+    private static final Log LOGGER = LogFactory.getLog( JCompilingConfiguration.class );
 
     /**
      * Séparateur UNIX.
@@ -67,13 +69,11 @@ public class JCompilingConfiguration {
     /**
      * Répertoire cible pour extraire les libraries exportées dans le cas de la compilation RCP.
      */
-    private File mExportedLibsDir = new File("");
+    private File mExportedLibsDir = new File( "" );
 
     /**
-     * Les classpath des APIs java dont la clé est la version de java.
-     * 1.3 -> /chemin1_3VersLe_rt.jar
-     * 1.4 -> /chemin1_4VersLe_rt.jar
-     * 1.5 -> /chemin1_5VersLe_rt.jar
+     * Les classpath des APIs java dont la clé est la version de java. 1.3 -> /chemin1_3VersLe_rt.jar 1.4 ->
+     * /chemin1_4VersLe_rt.jar 1.5 -> /chemin1_5VersLe_rt.jar
      */
     private HashMap mBootclasspaths = new HashMap();
 
@@ -84,93 +84,112 @@ public class JCompilingConfiguration {
 
     /**
      * Constructeur.
+     * 
      * @throws Exception exception lors de la configuration.
      * @see #createReflectionMap()
      * @see #getConfigurationFromXML(String)
      */
-    public JCompilingConfiguration() throws Exception {
+    public JCompilingConfiguration()
+        throws Exception
+    {
         createReflectionMap();
-        getConfigurationFromXML(CompilingMessages.getString("configuration.file"));
+        getConfigurationFromXML( CompilingMessages.getString( "configuration.file" ) );
     }
 
     /**
      * Cette méthode lance le parsing du fichier de configuration XML.
+     * 
      * @param pFile chemin du fichier de configuration à parser.
      * @throws Exception exception en cas d'erreur de parsing.
      */
-    private void getConfigurationFromXML(final String pFile) throws Exception {
-        LOGGER.trace(CompilingMessages.getString("logs.task.entering_method"));
+    private void getConfigurationFromXML( final String pFile )
+        throws Exception
+    {
+        LOGGER.trace( CompilingMessages.getString( "logs.task.entering_method" ) );
         boolean isNull = false;
 
         /* on récupère le noeud racine */
-        Node root = ConfigUtility.getRootNode(pFile, CompilingMessages.getString("configuration.root"));
+        Node root = ConfigUtility.getRootNode( pFile, CompilingMessages.getString( "configuration.root" ) );
 
         /* s'il n'est pas nul */
-        if (null != root) {
+        if ( null != root )
+        {
             /* on récupère le noeud relatif la compilation JAVA */
-            Node myNode = ConfigUtility.getNodeByTagName(root, CompilingMessages.getString("configuration.java"));
+            Node myNode = ConfigUtility.getNodeByTagName( root, CompilingMessages.getString( "configuration.java" ) );
 
             /* s'il n'est pas nul */
-            if (null != myNode) {
-                /* on récupère le noeud relatif à la configuration 
-                 * générale pour la compilation JAVA */
-                myNode = ConfigUtility.getNodeByTagName(myNode, CompilingMessages.getString("configuration.java.general"));
+            if ( null != myNode )
+            {
+                /*
+                 * on récupère le noeud relatif à la configuration générale pour la compilation JAVA
+                 */
+                myNode =
+                    ConfigUtility.getNodeByTagName( myNode, CompilingMessages.getString( "configuration.java.general" ) );
 
                 /* récupération des séparateurs */
-                getSeparatorsFromXML(myNode);
+                getSeparatorsFromXML( myNode );
 
-                /* récupération des classpath des APIs Java*/
-                getBootclasspathsFromXML(myNode);
+                /* récupération des classpath des APIs Java */
+                getBootclasspathsFromXML( myNode );
 
-                /* création d'une liste des autres noeuds contenant 
-                 * les infos de config générale */
+                /*
+                 * création d'une liste des autres noeuds contenant les infos de config générale
+                 */
                 ArrayList nodes = new ArrayList();
                 /* version par défaut du JDK */
-                nodes.add(CompilingMessages.getString("configuration.java.general.default_jdk_version"));
+                nodes.add( CompilingMessages.getString( "configuration.java.general.default_jdk_version" ) );
                 /* répertoire de stockage des classes compilées */
-                nodes.add(CompilingMessages.getString("configuration.java.general.dest_dir"));
+                nodes.add( CompilingMessages.getString( "configuration.java.general.dest_dir" ) );
                 /* mémoire requise pour la compilation */
-                nodes.add(CompilingMessages.getString("configuration.java.general.required_memory"));
+                nodes.add( CompilingMessages.getString( "configuration.java.general.required_memory" ) );
                 /* répertoire contenant le bundle eclipse de l'utilisateur */
-                nodes.add(CompilingMessages.getString("configuration.java.general.eclipse_bundle_path"));
+                nodes.add( CompilingMessages.getString( "configuration.java.general.eclipse_bundle_path" ) );
                 /* répertoire contenant les librairies exportées dans le cas de la compilation RCP */
-                nodes.add(CompilingMessages.getString("configuration.java.general.exported_libs_path"));
+                nodes.add( CompilingMessages.getString( "configuration.java.general.exported_libs_path" ) );
 
                 /* récupération des autres noeuds de la config générale */
-                getGeneralFromXML(myNode, nodes);
-            } else {
+                getGeneralFromXML( myNode, nodes );
+            }
+            else
+            {
                 /* noeud rencontré nul / n'existe pas */
                 isNull = true;
             }
             myNode = null;
 
-        } else {
-            /* noeud rencontré nul / n'existe pas  */
+        }
+        else
+        {
+            /* noeud rencontré nul / n'existe pas */
             isNull = true;
         }
 
-        /* si le noeud rencontré est nul / n'existe pas  */
-        if (isNull) {
+        /* si le noeud rencontré est nul / n'existe pas */
+        if ( isNull )
+        {
             /* on lance l'exception en rapport */
-            throw new Exception(CompilingMessages.getString("exception.xml.node_not_found"));
+            throw new Exception( CompilingMessages.getString( "exception.xml.node_not_found" ) );
         }
 
         root = null;
     }
 
     /**
-     * Cette méthode récupère les valeurs de fichier de configuration 
-     * relatives à la configuration générale de la tâche, et les 
-     * attribue par réflexion.
+     * Cette méthode récupère les valeurs de fichier de configuration relatives à la configuration générale de la tâche,
+     * et les attribue par réflexion.
+     * 
      * @param pNode noeud racine.
      * @param pChildNodeNames noeud fils à parcourir.
      * @throws Exception exception lors du traitement.
      */
-    private void getGeneralFromXML(final Node pNode, final ArrayList pChildNodeNames) throws Exception {
-        LOGGER.trace(CompilingMessages.getString("logs.task.entering_method"));
+    private void getGeneralFromXML( final Node pNode, final ArrayList pChildNodeNames )
+        throws Exception
+    {
+        LOGGER.trace( CompilingMessages.getString( "logs.task.entering_method" ) );
 
-        /* instanciation des variables pour la boucle
-         * qui va suivre. */
+        /*
+         * instanciation des variables pour la boucle qui va suivre.
+         */
         Node myNode;
         String pChildNodeName;
 
@@ -178,23 +197,28 @@ public class JCompilingConfiguration {
         Iterator it = pChildNodeNames.iterator();
 
         /* si l'itérateur n'est pas nul */
-        if (null != it) {
+        if ( null != it )
+        {
             /* tant qu'il a des éléments */
-            while (it.hasNext()) {
+            while ( it.hasNext() )
+            {
                 /* nom du noeud fils courant */
                 pChildNodeName = (String) it.next();
 
                 /* noeud enfant */
-                myNode = ConfigUtility.getNodeByTagName(pNode, pChildNodeName);
+                myNode = ConfigUtility.getNodeByTagName( pNode, pChildNodeName );
 
                 /* si le noeud contient une valeur */
-                if (null != myNode && Node.ELEMENT_NODE == myNode.getNodeType()) {
-                    mapKeyValue(pChildNodeName, myNode.getFirstChild().getNodeValue().trim());
+                if ( null != myNode && Node.ELEMENT_NODE == myNode.getNodeType() )
+                {
+                    mapKeyValue( pChildNodeName, myNode.getFirstChild().getNodeValue().trim() );
 
                     /* sinon */
-                } else {
+                }
+                else
+                {
                     /* on lance l'exception en rapport */
-                    throw new Exception(CompilingMessages.getString("exception.xml.node_not_found"));
+                    throw new Exception( CompilingMessages.getString( "exception.xml.node_not_found" ) );
                 }
             }
         }
@@ -203,40 +227,58 @@ public class JCompilingConfiguration {
 
     /**
      * Récupére les classpaths vers les APIs Java
+     * 
      * @param pNode le noeud
      * @throws Exception si erreur
      */
-    private void getBootclasspathsFromXML(final Node pNode) throws Exception {
+    private void getBootclasspathsFromXML( final Node pNode )
+        throws Exception
+    {
 
         /* noeud racine contenant les classpaths */
-        Node myNode = ConfigUtility.getNodeByTagName(pNode, CompilingMessages.getString("configuration.java.general.bootclasspaths"));
+        Node myNode =
+            ConfigUtility.getNodeByTagName( pNode,
+                                            CompilingMessages.getString( "configuration.java.general.bootclasspaths" ) );
 
         boolean throwException = false;
 
         /* noeud non nul et de type ELEMENT */
-        if (null != myNode && Node.ELEMENT_NODE == myNode.getNodeType()) {
-            /* on récupère le 1er noeud fils*/
-            myNode = ConfigUtility.getNodeByTagName(myNode, CompilingMessages.getString("configuration.java.general.bootclasspaths.bootclasspath"));
+        if ( null != myNode && Node.ELEMENT_NODE == myNode.getNodeType() )
+        {
+            /* on récupère le 1er noeud fils */
+            myNode =
+                ConfigUtility.getNodeByTagName(
+                                                myNode,
+                                                CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath" ) );
 
             /* si ce noeud existe */
-            if (null != myNode) {
+            if ( null != myNode )
+            {
                 NamedNodeMap attrMap = null;
                 String attrValue = null, attrName = null;
 
                 /* tant qu'il y a des noeuds */
-                while (null != myNode) {
-                    if (Node.ELEMENT_NODE == myNode.getNodeType()) {
+                while ( null != myNode )
+                {
+                    if ( Node.ELEMENT_NODE == myNode.getNodeType() )
+                    {
                         /* on récupère les attributs du noeud */
                         attrMap = myNode.getAttributes();
 
                         /* attribut "clé" */
-                        attrName = (attrMap.getNamedItem(CompilingMessages.getString("configuration.java.general.bootclasspaths.bootclasspath.version"))).getNodeValue().trim();
+                        attrName =
+                            ( attrMap.getNamedItem( CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath.version" ) ) ).getNodeValue().trim();
 
                         /* attribut "valeur" */
-                        attrValue = (attrMap.getNamedItem(CompilingMessages.getString("configuration.java.general.bootclasspaths.bootclasspath.path"))).getNodeValue().trim();
+                        attrValue =
+                            ( attrMap.getNamedItem( CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath.path" ) ) ).getNodeValue().trim();
 
                         // On invoque la méthode d'ajout
-                         ((Method) (mMap.get(CompilingMessages.getString("configuration.java.general.bootclasspaths.bootclasspath")))).invoke(this, new String[] { attrName, attrValue });
+                        ( (Method) ( mMap.get( CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath" ) ) ) ).invoke(
+                                                                                                                                                      this,
+                                                                                                                                                      new String[] {
+                                                                                                                                                          attrName,
+                                                                                                                                                          attrValue } );
                     }
                     /* on itère */
                     myNode = myNode.getNextSibling();
@@ -247,62 +289,80 @@ public class JCompilingConfiguration {
                 attrValue = null;
 
                 /* erreur rencontrée --> exception à lancer */
-            } else {
+            }
+            else
+            {
                 throwException = true;
             }
             /* erreur rencontrée --> exception à lancer */
-        } else {
+        }
+        else
+        {
             throwException = true;
         }
 
         myNode = null;
 
         /* erreur rencontrée */
-        if (throwException) {
+        if ( throwException )
+        {
             /* exception lancée */
-            throw new Exception(CompilingMessages.getString("exception.xml.node_not_found"));
+            throw new Exception( CompilingMessages.getString( "exception.xml.node_not_found" ) );
         }
     }
 
     /**
-    * Cette méthode récupère le valeur des clés nécessaires pour parser 
-    * le fichier de classpath.
-    * @param pNode noeud XML à parser.
-    * @throws Exception exception en cas d'erreur lors du parsing.
-    * @see #mapKeyValue(String, String)
-    */
-    private void getSeparatorsFromXML(final Node pNode) throws Exception {
-        LOGGER.trace(CompilingMessages.getString("logs.task.entering_method"));
+     * Cette méthode récupère le valeur des clés nécessaires pour parser le fichier de classpath.
+     * 
+     * @param pNode noeud XML à parser.
+     * @throws Exception exception en cas d'erreur lors du parsing.
+     * @see #mapKeyValue(String, String)
+     */
+    private void getSeparatorsFromXML( final Node pNode )
+        throws Exception
+    {
+        LOGGER.trace( CompilingMessages.getString( "logs.task.entering_method" ) );
 
         /* noeud racine contenant les séparateurs */
-        Node myNode = ConfigUtility.getNodeByTagName(pNode, CompilingMessages.getString("configuration.java.general.separators"));
+        Node myNode =
+            ConfigUtility.getNodeByTagName( pNode,
+                                            CompilingMessages.getString( "configuration.java.general.separators" ) );
 
         boolean throwException = false;
 
         /* noeud non nul et de type ELEMENT */
-        if (null != myNode && Node.ELEMENT_NODE == myNode.getNodeType()) {
-            /* on récupère le 1er noeud fils*/
-            myNode = ConfigUtility.getNodeByTagName(myNode, CompilingMessages.getString("configuration.java.general.separators.separator"));
+        if ( null != myNode && Node.ELEMENT_NODE == myNode.getNodeType() )
+        {
+            /* on récupère le 1er noeud fils */
+            myNode =
+                ConfigUtility.getNodeByTagName(
+                                                myNode,
+                                                CompilingMessages.getString( "configuration.java.general.separators.separator" ) );
 
             /* si ce noeud existe */
-            if (null != myNode) {
+            if ( null != myNode )
+            {
                 NamedNodeMap attrMap = null;
                 String attrValue = null, attrName = null;
 
                 /* tant qu'il y a des noeuds */
-                while (null != myNode) {
-                    if (Node.ELEMENT_NODE == myNode.getNodeType()) {
+                while ( null != myNode )
+                {
+                    if ( Node.ELEMENT_NODE == myNode.getNodeType() )
+                    {
                         /* on récupère les attributs du noeud */
                         attrMap = myNode.getAttributes();
 
                         /* attribut "clé" */
-                        attrName = (attrMap.getNamedItem(CompilingMessages.getString("configuration.java.general.separators.separator.name"))).getNodeValue().trim();
+                        attrName =
+                            ( attrMap.getNamedItem( CompilingMessages.getString( "configuration.java.general.separators.separator.name" ) ) ).getNodeValue().trim();
 
                         /* attribut "valeur" */
-                        attrValue = (attrMap.getNamedItem(CompilingMessages.getString("configuration.java.general.separators.separator.value"))).getNodeValue().trim();
+                        attrValue =
+                            ( attrMap.getNamedItem( CompilingMessages.getString( "configuration.java.general.separators.separator.value" ) ) ).getNodeValue().trim();
 
                         /* on mappe les clés / valeurs -> réflexion. */
-                        mapKeyValue(attrName, attrValue);
+                        mapKeyValue( attrName, attrValue );
                     }
                     /* on itère */
                     myNode = myNode.getNextSibling();
@@ -313,184 +373,224 @@ public class JCompilingConfiguration {
                 attrValue = null;
 
                 /* erreur rencontrée --> exception à lancer */
-            } else {
+            }
+            else
+            {
                 throwException = true;
             }
             /* erreur rencontrée --> exception à lancer */
-        } else {
+        }
+        else
+        {
             throwException = true;
         }
 
         myNode = null;
 
         /* erreur rencontrée */
-        if (throwException) {
+        if ( throwException )
+        {
             /* exception lancée */
-            throw new Exception(CompilingMessages.getString("exception.xml.node_not_found"));
+            throw new Exception( CompilingMessages.getString( "exception.xml.node_not_found" ) );
         }
     }
 
     /**
      * Cette méthode assure la réflexion.
+     * 
      * @param pKey clé dans la hashMap.
      * @param pValue valeur.
      * @throws Exception exception de réflexion.
      */
-    private void mapKeyValue(final String pKey, final String pValue) throws Exception {
+    private void mapKeyValue( final String pKey, final String pValue )
+        throws Exception
+    {
 
-        /* on invoque le setter correspondant à la clé attrName, 
-         * en lui passant la valeur attrValue */
+        /*
+         * on invoque le setter correspondant à la clé attrName, en lui passant la valeur attrValue
+         */
         Object[] obj = { pValue };
-        ((Method) (mMap.get(pKey))).invoke(this, obj);
+        ( (Method) ( mMap.get( pKey ) ) ).invoke( this, obj );
     }
 
     /**
-     * Cette méthode crée une map contenant des clés associées à des 
-     * méthodes de type setter. <br />
-     * En procédant ainsi, on pourra facilement affecter une valeur à 
-     * une variable par réflexion.
+     * Cette méthode crée une map contenant des clés associées à des méthodes de type setter. <br />
+     * En procédant ainsi, on pourra facilement affecter une valeur à une variable par réflexion.
+     * 
      * @throws Exception exception de réflexion.
      * @see #mapKeyValue(String, String)
      */
-    private void createReflectionMap() throws Exception {
-        LOGGER.trace(CompilingMessages.getString("logs.task.entering_method"));
+    private void createReflectionMap()
+        throws Exception
+    {
+        LOGGER.trace( CompilingMessages.getString( "logs.task.entering_method" ) );
 
-        /* tableau contenant la classe du paramètre à passer à
-         * chaque setter. ici, java.lang.String. */
+        /*
+         * tableau contenant la classe du paramètre à passer à chaque setter. ici, java.lang.String.
+         */
         Class[] param = { String.class };
 
         mMap = new HashMap();
 
         /* Version par défaut du JDK à utiliser. */
-        mMap.put(CompilingMessages.getString("configuration.java.general.default_jdk_version"), this.getClass().getMethod("setJDKDefaultVersion", param));
+        mMap.put( CompilingMessages.getString( "configuration.java.general.default_jdk_version" ),
+                  this.getClass().getMethod( "setJDKDefaultVersion", param ) );
 
         /* Répertoire cible pour stocker les classes compilées. */
-        mMap.put(CompilingMessages.getString("configuration.java.general.dest_dir"), this.getClass().getMethod("setDestDir", param));
+        mMap.put( CompilingMessages.getString( "configuration.java.general.dest_dir" ),
+                  this.getClass().getMethod( "setDestDir", param ) );
 
         /* Mémoire requise pour la compilation. */
-        mMap.put(CompilingMessages.getString("configuration.java.general.required_memory"), this.getClass().getMethod("setRequiredMemory", param));
+        mMap.put( CompilingMessages.getString( "configuration.java.general.required_memory" ),
+                  this.getClass().getMethod( "setRequiredMemory", param ) );
 
         /* Séparateur du classpath. */
-        mMap.put(CompilingMessages.getString("configuration.java.general.separators.separator.name.classpath"), this.getClass().getMethod("setClasspathSeparator", param));
+        mMap.put( CompilingMessages.getString( "configuration.java.general.separators.separator.name.classpath" ),
+                  this.getClass().getMethod( "setClasspathSeparator", param ) );
 
         /* Répertoire cible du bundle eclipse. */
-        mMap.put(CompilingMessages.getString("configuration.java.general.eclipse_bundle_path"), this.getClass().getMethod("setEclipseBundleDir", param));
+        mMap.put( CompilingMessages.getString( "configuration.java.general.eclipse_bundle_path" ),
+                  this.getClass().getMethod( "setEclipseBundleDir", param ) );
 
         /* Répertoire cible des librairies exportées qu'il faut dézippées pour la compilation RCP. */
-        mMap.put(CompilingMessages.getString("configuration.java.general.exported_libs_path"), this.getClass().getMethod("setExportedLibsDir", param));
+        mMap.put( CompilingMessages.getString( "configuration.java.general.exported_libs_path" ),
+                  this.getClass().getMethod( "setExportedLibsDir", param ) );
 
         /* Les chemins vers les classpath des APIs java */
-        mMap.put(CompilingMessages.getString("configuration.java.general.bootclasspaths.bootclasspath"), this.getClass().getMethod("addBootclasspath", new Class[] { String.class, String.class }));
+        mMap.put( CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath" ),
+                  this.getClass().getMethod( "addBootclasspath", new Class[] { String.class, String.class } ) );
     }
 
     /**
      * Getter.
+     * 
      * @return Version par défaut du JDK à utiliser.
      */
-    public String getJDKDefaultVersion() {
+    public String getJDKDefaultVersion()
+    {
         return mJDKDefaultVersion;
     }
 
     /**
      * Setter.
+     * 
      * @param pJDKDefaultVersion Version par défaut du JDK à utiliser.
      */
-    public void setJDKDefaultVersion(String pJDKDefaultVersion) {
+    public void setJDKDefaultVersion( String pJDKDefaultVersion )
+    {
         mJDKDefaultVersion = pJDKDefaultVersion;
     }
 
     /**
      * Getter.
+     * 
      * @return le séparateur du classpath.
      */
-    public String getClasspathSeparator() {
+    public String getClasspathSeparator()
+    {
         return mClasspathSeparator;
     }
 
     /**
      * Setter.
+     * 
      * @param pClasspathSeparator le séparateur du classpath.
      */
-    public void setClasspathSeparator(String pClasspathSeparator) {
+    public void setClasspathSeparator( String pClasspathSeparator )
+    {
         mClasspathSeparator = pClasspathSeparator;
     }
 
     /**
      * Getter.
+     * 
      * @return le répertoire cible de stockage des classes compilées.
      */
-    public String getDestDir() {
+    public String getDestDir()
+    {
         return mDestDir;
     }
 
     /**
      * Setter.
-     * @param pDestDir le répertoire cible de stockage des 
-     * classes compilées.
+     * 
+     * @param pDestDir le répertoire cible de stockage des classes compilées.
      */
-    public void setDestDir(String pDestDir) {
+    public void setDestDir( String pDestDir )
+    {
         mDestDir = pDestDir;
     }
 
     /**
      * Getter.
+     * 
      * @return la mémoire requise pour la compilation
      */
-    public String getRequiredMemory() {
+    public String getRequiredMemory()
+    {
         return mRequiredMemory;
     }
 
     /**
      * Setter.
+     * 
      * @param pRequiredMemory la mémoire requise pour la compilation
      */
-    public void setRequiredMemory(String pRequiredMemory) {
+    public void setRequiredMemory( String pRequiredMemory )
+    {
         mRequiredMemory = pRequiredMemory;
     }
 
     /**
      * @return le répertoire cible pour copier ou extraire le bundle eclipse.
      */
-    public String getEclipseBundleDir() {
+    public String getEclipseBundleDir()
+    {
         return mEclipseBundleDir;
     }
 
     /**
      * @param pEclipseBundleDir le répertoire cible pour copier ou extraire le bundle eclipse.
      */
-    public void setEclipseBundleDir(String pEclipseBundleDir) {
+    public void setEclipseBundleDir( String pEclipseBundleDir )
+    {
         mEclipseBundleDir = pEclipseBundleDir;
     }
 
     /**
      * @return le répertoire des libraries exportées
      */
-    public File getExportedLibsDir() {
+    public File getExportedLibsDir()
+    {
         return mExportedLibsDir;
     }
 
     /**
      * @param pExportedLibsDir le répertoire des libraries exportées
      */
-    public void setExportedLibsDir(String pExportedLibsDir) {
-        mExportedLibsDir = new File(pExportedLibsDir);
+    public void setExportedLibsDir( String pExportedLibsDir )
+    {
+        mExportedLibsDir = new File( pExportedLibsDir );
     }
 
     /**
      * @param pDialect la version java sous la forme 1.4, 1.3,...
      * @return le chemin vers l'api java de la version java pDialect
      */
-    public String getBootclasspath(String pDialect) {
-        return (String) mBootclasspaths.get(pDialect);
+    public String getBootclasspath( String pDialect )
+    {
+        return (String) mBootclasspaths.get( pDialect );
     }
 
     /**
      * Ajoute une entrée pour l'option -booclasspath de javac
+     * 
      * @param pDialect le dialect java qui sert de clé
      * @param pPath le chemin vers le rt.jar correspondant à la version de java
      */
-    public void addBootclasspath(String pDialect, String pPath) {
-        mBootclasspaths.put(pDialect, pPath);
+    public void addBootclasspath( String pDialect, String pPath )
+    {
+        mBootclasspaths.put( pDialect, pPath );
     }
 
 }

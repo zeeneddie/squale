@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <general>
+    <commands>
+      <clicommand>d:\temp\mccabe_cli.bat</clicommand>
+      <parsercommand>parse</parsercommand>
+      <metricscommand>metrics –report %report_name% –ss –output %report_out%</metricscommand>
+    </commands>
+    <workspace>./data/results</workspace>
+<!-- ENV-MCCABE-LOG -->
+    <logger>d:\temp\mccabe\logs\mccabe.log</logger>
+<!-- ENV-MCCABE-LOG-ERROR -->
+    <logger-err>d:\temp\mccabe\logs\mccabe_err.log</logger-err>
+    <reportspath>./config/rapports.RPT</reportspath>
+    <reports>
+      <report>METHODES</report>
+      <report>CLASSES</report>
+    </reports>
+    <filter>
+    	<errorToWarningMessages>
+    		<message>ERR-gra2sc: 3012\.1: Completed build of class chart with warnings\. See the root/server window for details.*</message>
+    		<message>WARN-metmng: 1099\.303: Licensing Error: 'Connection to license manager re-established\.'.*</message>
+    	</errorToWarningMessages>
+    	<ignoringMessages>
+    		<message>ERR-cli: 1053\.117: Can't create directory '/OUTILS/McCabe/current/repos'.*</message>
+    		<message>CRIT-cli: 1085\.304.*</message>
+    	</ignoringMessages>
+    	<addFileNameMessages>
+    		<message>WARN-javapar: 2009\.302: parse error:.*</message>
+    		<message>WARN-javapar: 1001\.325: Can't read class file.*</message>
+    	</addFileNameMessages>
+    	<replacingMessages>
+    		<replacingMessage 
+    			msg="McCabe's execution environment isn't correct, contact your SQUALE administrator.*" 
+    			replace="McCabe's execution environment isn't correct, contact your SQUALE administrator."/>
+    		<replacingMessage msg="WARN-cli: 1099\.309.*" 
+    			replace="No licence for McCabe execution. A new test will be done later."/>
+    	</replacingMessages>
+    </filter>
+  </general>
+  <profiles>
+    <profile name="java1.3">
+      <parser>cw_Java_inst</parser>
+      <extensions>java</extensions>
+      <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>JDK1.3</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-SOURCE1.3</parameter>
+        <parameter>-JREHOME</parameter>
+        <parameter>/OUTILS/Java/1.3.1.03/jre</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-INST</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-CLASSPATH</parameter>
+        <parameter>%classpath%</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-OVERLOAD</parameter>
+      </parameters>
+    </profile>
+    <profile name="j2ee1.3">
+      <parser>cw_Java_inst</parser>
+      <extensions>java,jsp</extensions>
+      <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>JDK1.3</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-SOURCE1.3</parameter>
+        <parameter>-JREHOME</parameter>
+        <parameter>/OUTILS/Java/1.3.1.03/jre</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-INST</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-CLASSPATH</parameter>
+        <parameter>%classpath%</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-OVERLOAD</parameter>
+      </parameters>
+    </profile>
+    <profile name="j2ee compiled1.3">
+      <parser>cw_Java_inst</parser>
+      <extensions>java,jsp</extensions>
+      <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>JDK1.3</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-SOURCE1.3</parameter>
+        <parameter>-JREHOME</parameter>
+        <parameter>/OUTILS/Java/1.3.1.03/jre</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-INST</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-CLASSPATH</parameter>
+        <parameter>%classpath%</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-OVERLOAD</parameter>
+      </parameters>
+    </profile>
+    <profile name="java compiled1.3">
+      <parser>cw_Java_inst</parser>
+      <extensions>java</extensions>
+      <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>JDK1.3</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-SOURCE1.3</parameter>
+        <parameter>-JREHOME</parameter>
+        <parameter>/OUTILS/Java/1.3.1.03/jre</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-INST</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-CLASSPATH</parameter>
+        <parameter>%classpath%</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-OVERLOAD</parameter>
+      </parameters>
+    </profile>
+    <profile name="java1.4">
+      <parser>cw_Java_inst</parser>
+      <extensions>java</extensions>
+      <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>JDK1.4</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-SOURCE1.4</parameter>
+        <parameter>-JREHOME</parameter>
+        <parameter>/OUTILS/Java/1.4.2_03/jre</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-INST</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-CLASSPATH</parameter>
+        <parameter>%classpath%</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-OVERLOAD</parameter>
+      </parameters>
+    </profile>
+    <profile name="j2ee1.4">
+      <parser>cw_Java_inst</parser>
+      <extensions>java,jsp</extensions>
+      <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>JDK1.4</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-SOURCE1.4</parameter>
+        <parameter>-JREHOME</parameter>
+        <parameter>/OUTILS/Java/1.4.2_03/jre</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-INST</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-CLASSPATH</parameter>
+        <parameter>%classpath%</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-OVERLOAD</parameter>
+      </parameters>
+    </profile>
+    <profile name="java compiled1.4">
+      <parser>cw_Java_inst</parser>
+      <extensions>java</extensions>
+      <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>JDK1.4</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-SOURCE1.4</parameter>
+        <parameter>-JREHOME</parameter>
+        <parameter>/OUTILS/Java/1.4.2_03/jre</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-INST</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-CLASSPATH</parameter>
+        <parameter>%classpath%</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-OVERLOAD</parameter>
+      </parameters>
+    </profile>
+    <profile name="j2ee compiled1.4">
+      <parser>cw_Java_inst</parser>
+      <extensions>java,jsp</extensions>
+      <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>JDK1.4</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-SOURCE1.4</parameter>
+        <parameter>-JREHOME</parameter>
+        <parameter>/OUTILS/Java/1.4.2_03/jre</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-INST</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-CLASSPATH</parameter>
+        <parameter>%classpath%</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-OVERLOAD</parameter>
+      </parameters>
+    </profile>
+    <profile name="java1.5">
+      <parser>cw_Java_inst</parser>
+      <extensions>java,jsp</extensions>
+      <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>JDK1.5</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-SOURCE1.5</parameter>
+        <parameter>-JREHOME</parameter>
+        <parameter>/app/SQUALE/OUTILS/JAVA/jdk1.5.0_09/jre</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-INST</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-CLASSPATH</parameter>
+        <parameter>%classpath%</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-OVERLOAD</parameter>
+      </parameters>
+    </profile>
+    <profile name="j2ee1.5">
+      <parser>cw_Java_inst</parser>
+      <extensions>java,jsp</extensions>
+      <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>JDK1.5</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-SOURCE1.5</parameter>
+        <parameter>-JREHOME</parameter>
+        <parameter>/app/SQUALE/OUTILS/JAVA/jdk1.5.0_09/jre</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-INST</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-CLASSPATH</parameter>
+        <parameter>%classpath%</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-OVERLOAD</parameter>
+      </parameters>
+    </profile>
+    <profile name="java compiled1.5">
+      <parser>cw_Java_inst</parser>
+      <extensions>java,jsp</extensions>
+      <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>JDK1.5</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-SOURCE1.5</parameter>
+        <parameter>-JREHOME</parameter>
+        <parameter>/app/SQUALE/OUTILS/JAVA/jdk1.5.0_09/jre</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-INST</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-CLASSPATH</parameter>
+        <parameter>%classpath%</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-OVERLOAD</parameter>
+      </parameters>
+    </profile>
+    <profile name="j2ee compiled1.5">
+      <parser>cw_Java_inst</parser>
+      <extensions>java,jsp</extensions>
+      <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>JDK1.5</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-SOURCE1.5</parameter>
+        <parameter>-JREHOME</parameter>
+        <parameter>/app/SQUALE/OUTILS/JAVA/jdk1.5.0_09/jre</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-INST</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-CLASSPATH</parameter>
+        <parameter>%classpath%</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-OVERLOAD</parameter>
+      </parameters>
+    </profile>
+    <profile name="cppSunws_5x">
+      <parser>cw_C++_inst</parser>
+      <extensions>i</extensions>
+      <entetes>h, hh, hpp, hxx, c, cc, cpp, cxx, C</entetes>
+     <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>SUNWS_5X</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-EDG</parameter>
+        <parameter>-MODINFO</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-EVENTMAP</parameter>
+        <parameter>-NONINST</parameter>
+        <parameter>-NPP</parameter>
+      </parameters>
+    </profile>
+    <profile name="cppForte">
+      <parser>cw_C++_inst</parser>
+      <extensions>i</extensions>
+      <entetes>h, hh, hpp, hxx, c, cc, cpp, cxx, C</entetes>
+     <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>FORTE</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-CLASS</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-EDG</parameter>
+        <parameter>-MODINFO</parameter>
+        <parameter>-PARAM</parameter>
+        <parameter>-EVENTMAP</parameter>
+        <parameter>-NONINST</parameter>
+        <parameter>-NPP</parameter>
+      </parameters>
+    </profile>
+  </profiles>
+
+</configuration>

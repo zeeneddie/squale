@@ -42,11 +42,12 @@ import com.airfrance.squalix.core.CoreMessages;
 
 /**
  */
-public class ComputeStats {
+public class ComputeStats
+{
 
     // TODO voir avec laurent et nicolas comment le moteur d'indicateur SQUALE
     // fournit ce paramètre (SEB)
-    /** Le nombre de mois précédents pris en compte*/
+    /** Le nombre de mois précédents pris en compte */
     private final static int NB_MONTHS = 2;
 
     /** Le nombre de chiffres pour l'arrondi */
@@ -55,7 +56,7 @@ public class ComputeStats {
     /**
      * Logger
      */
-    private static final Log LOGGER = LogFactory.getLog(ComputeStats.class);
+    private static final Log LOGGER = LogFactory.getLog( ComputeStats.class );
 
     /**
      * Provider de persistance
@@ -67,10 +68,11 @@ public class ComputeStats {
      */
     private ISession mSession;
 
-
     /** Constructeur */
-    public ComputeStats() {
-        try {
+    public ComputeStats()
+    {
+        try
+        {
             mSession = PERSISTANT_PROVIDER.getSession();
             // on instancie les différents DAO nécessaires
             profileDao = ProjectProfileDAOImpl.getInstance();
@@ -83,8 +85,10 @@ public class ComputeStats {
             siteDao = SiteStatsDICTDAOImpl.getInstance();
             auditDao = AuditDAOImpl.getInstance();
             projectDao = ProjectDAOImpl.getInstance();
-        } catch (JrafPersistenceException e) {
-            LOGGER.error(CoreMessages.getString("exception"), e);
+        }
+        catch ( JrafPersistenceException e )
+        {
+            LOGGER.error( CoreMessages.getString( "exception" ), e );
         }
     }
 
@@ -92,7 +96,7 @@ public class ComputeStats {
 
     /** pour les stats concernant les profils */
     private ProjectProfileDAOImpl profileDao;
-    
+
     /** pour le nombre de projets */
     private ProjectDAOImpl projectDao;
 
@@ -111,7 +115,7 @@ public class ComputeStats {
     /** pour le roi */
     private MeasureDAOImpl measureDao;
 
-    /** pour la formule du roi*/
+    /** pour la formule du roi */
     private SimpleFormulaDAOImpl formulaDAO;
 
     /** Les DAO pour l'enregistrement en base */
@@ -123,134 +127,138 @@ public class ComputeStats {
     private SiteStatsDICTDAOImpl siteDao;
 
     /**
-     * Calcule et enregistre en base les différents statistiques nécessaires 
-     * au calcul des indicateurs SQUALE pour DICT
-     * Ces statistiques sont:
-     * Le nombre total d'appli (par site)
-     * Le nombre total d'appli avec un audit exécuté depuis n mois
-     * Le nombre total d'appli avec un audit réussi depuis n mois
-     * Le nombre de lignes de codes par site et par profil
-     * Le nombre de facteurs acceptés / acceptés avec réserves / refusés
-     * Le ROI en ke par site
+     * Calcule et enregistre en base les différents statistiques nécessaires au calcul des indicateurs SQUALE pour DICT
+     * Ces statistiques sont: Le nombre total d'appli (par site) Le nombre total d'appli avec un audit exécuté depuis n
+     * mois Le nombre total d'appli avec un audit réussi depuis n mois Le nombre de lignes de codes par site et par
+     * profil Le nombre de facteurs acceptés / acceptés avec réserves / refusés Le ROI en ke par site
      */
-    public void computeDICTStats() {
-        try {
+    public void computeDICTStats()
+    {
+        try
+        {
             // la liste des StatsDICTBO, un par site
-            List siteStatsList = new ArrayList(0);
-            // la liste des SiteStatsDICTBO, il y en a 
+            List siteStatsList = new ArrayList( 0 );
+            // la liste des SiteStatsDICTBO, il y en a
             // un par site et par profil, soit nbSites*nbProfils
-            List siteProfilStatsList = new ArrayList(0);
+            List siteProfilStatsList = new ArrayList( 0 );
             // on récupère la liste des profils disponibles
-            Collection profiles = profileDao.findAll(mSession);
+            Collection profiles = profileDao.findAll( mSession );
             // Pour chaque site, on crée un SiteStatsDICTBO
             // Pour chaque combinaison site/profil, on crée un SiteStatsDICTBO
-            Collection lServeurList = new ArrayList() ;
-            try {
+            Collection lServeurList = new ArrayList();
+            try
+            {
                 lServeurList = ServeurFacade.listeServeurs();
-            } catch (Exception e) {
+            }
+            catch ( Exception e )
+            {
             }
             Iterator lServeurListIt = lServeurList.iterator();
-            for (int i = 0; i < lServeurList.size(); i++) {
+            for ( int i = 0; i < lServeurList.size(); i++ )
+            {
                 ServeurDTO lServeurDTO = (ServeurDTO) lServeurListIt.next();
                 long lSiteId = lServeurDTO.getServeurId();
-                 
-                int nbAppli = appliDao.countWhereSite(mSession, lSiteId);
-                
-                int nbAppliWithAudit = appliDao.countWhereHaveOnlyFailedAudit(mSession, lSiteId);
-                int nbAppliWithAuditSuccessful = appliDao.countWhereHaveAuditByStatus(mSession, lSiteId, new Integer(AuditBO.TERMINATED),null);
-                int nbAppliWithoutAudits = appliDao.countWhereHaveNoAudits(mSession, lSiteId);
-                int nbApplisToValidate = appliDao.countNotValidate(mSession, lSiteId);
-                int nbFactorsAcc = resultDao.countFactorsByAcceptanceLevelAndSite(mSession, QualityResultBO.ACCEPTED, lSiteId);
-                int nbFactorsRes = resultDao.countFactorsByAcceptanceLevelAndSite(mSession, QualityResultBO.RESERVED, lSiteId);
-                int nbFactorsRef = resultDao.countFactorsByAcceptanceLevelAndSite(mSession, QualityResultBO.REFUSED, lSiteId);
-                int nbAuditsFailed = auditDao.countWhereStatusAndSite(mSession, lSiteId, AuditBO.FAILED);
-                int nbAuditsSuccessfuls = auditDao.countWhereStatusAndSite(mSession, lSiteId, AuditBO.TERMINATED);
-                int nbAuditsPartials = auditDao.countWhereStatusAndSite(mSession, lSiteId, AuditBO.PARTIAL);
-                int nbAuditsNotAttempted = auditDao.countWhereStatusAndSite(mSession, lSiteId, AuditBO.NOT_ATTEMPTED);
-                double roi = calculateGlobalROI(lSiteId);
-                siteStatsList.add(
-                    new SiteStatsDICTBO(
-                        lSiteId,
-                        nbAppli,
-                        nbAppliWithAudit,
-                        nbAppliWithAuditSuccessful,
-                        nbAppliWithoutAudits,
-                        nbApplisToValidate,
-                        nbFactorsAcc,
-                        nbFactorsRes,
-                        nbFactorsRef,
-                        nbAuditsFailed,
-                        nbAuditsSuccessfuls,
-                        nbAuditsPartials,
-                        nbAuditsNotAttempted,
-                        roi));
+
+                int nbAppli = appliDao.countWhereSite( mSession, lSiteId );
+
+                int nbAppliWithAudit = appliDao.countWhereHaveOnlyFailedAudit( mSession, lSiteId );
+                int nbAppliWithAuditSuccessful =
+                    appliDao.countWhereHaveAuditByStatus( mSession, lSiteId, new Integer( AuditBO.TERMINATED ), null );
+                int nbAppliWithoutAudits = appliDao.countWhereHaveNoAudits( mSession, lSiteId );
+                int nbApplisToValidate = appliDao.countNotValidate( mSession, lSiteId );
+                int nbFactorsAcc =
+                    resultDao.countFactorsByAcceptanceLevelAndSite( mSession, QualityResultBO.ACCEPTED, lSiteId );
+                int nbFactorsRes =
+                    resultDao.countFactorsByAcceptanceLevelAndSite( mSession, QualityResultBO.RESERVED, lSiteId );
+                int nbFactorsRef =
+                    resultDao.countFactorsByAcceptanceLevelAndSite( mSession, QualityResultBO.REFUSED, lSiteId );
+                int nbAuditsFailed = auditDao.countWhereStatusAndSite( mSession, lSiteId, AuditBO.FAILED );
+                int nbAuditsSuccessfuls = auditDao.countWhereStatusAndSite( mSession, lSiteId, AuditBO.TERMINATED );
+                int nbAuditsPartials = auditDao.countWhereStatusAndSite( mSession, lSiteId, AuditBO.PARTIAL );
+                int nbAuditsNotAttempted = auditDao.countWhereStatusAndSite( mSession, lSiteId, AuditBO.NOT_ATTEMPTED );
+                double roi = calculateGlobalROI( lSiteId );
+                siteStatsList.add( new SiteStatsDICTBO( lSiteId, nbAppli, nbAppliWithAudit, nbAppliWithAuditSuccessful,
+                                                        nbAppliWithoutAudits, nbApplisToValidate, nbFactorsAcc,
+                                                        nbFactorsRes, nbFactorsRef, nbAuditsFailed,
+                                                        nbAuditsSuccessfuls, nbAuditsPartials, nbAuditsNotAttempted,
+                                                        roi ) );
                 // Les stats concernant les profils et les sites
                 Iterator it = profiles.iterator();
-                while (it.hasNext()) {
-                    String profileName = ((ProjectProfileBO) it.next()).getName();
-                    int nbLines = metricDao.getVolumetryBySiteAndProfil(mSession, lSiteId, profileName);
-                    int nbProjects = projectDao.countBySiteAndProfil(mSession, lSiteId, profileName);
-                    siteProfilStatsList.add(new SiteAndProfilStatsDICTBO(lSiteId, profileName, nbLines,nbProjects));
+                while ( it.hasNext() )
+                {
+                    String profileName = ( (ProjectProfileBO) it.next() ).getName();
+                    int nbLines = metricDao.getVolumetryBySiteAndProfil( mSession, lSiteId, profileName );
+                    int nbProjects = projectDao.countBySiteAndProfil( mSession, lSiteId, profileName );
+                    siteProfilStatsList.add( new SiteAndProfilStatsDICTBO( lSiteId, profileName, nbLines, nbProjects ) );
                 }
             }
             // enregistre les résultats en base
-            storeResults(siteStatsList, siteProfilStatsList);
-            LOGGER.info("Statistics 'calculation done");
-        } catch (JrafDaoException e) {
-            LOGGER.error(CoreMessages.getString("exception"), e);
+            storeResults( siteStatsList, siteProfilStatsList );
+            LOGGER.info( "Statistics 'calculation done" );
+        }
+        catch ( JrafDaoException e )
+        {
+            LOGGER.error( CoreMessages.getString( "exception" ), e );
         }
     }
 
     /**
      * @return la date courante moins le nombre de mois définis
      */
-    private Date getBeginDate() {
+    private Date getBeginDate()
+    {
         GregorianCalendar cal = new GregorianCalendar();
         long today = Calendar.getInstance().getTimeInMillis();
-        cal.add(GregorianCalendar.MONTH, 0 - NB_MONTHS);
+        cal.add( GregorianCalendar.MONTH, 0 - NB_MONTHS );
         return cal.getTime();
     }
 
     /**
      * Enregistre les résultats en base
+     * 
      * @param siteStatsList la liste des StatsDICTBO, un par site
-     * @param siteProfilStatsList  // la liste des SiteStatsDICTBO, un par site et par profil
+     * @param siteProfilStatsList // la liste des SiteStatsDICTBO, un par site et par profil
      * @throws JrafDaoException en cas d'échec de l'enregistrement en base des stats
      */
-    private void storeResults(List siteStatsList, List siteProfilStatsList) throws JrafDaoException {
+    private void storeResults( List siteStatsList, List siteProfilStatsList )
+        throws JrafDaoException
+    {
         // on crée une transaction car il faut d'abord enregister les objets
-        // de type SiteStatsDICTBO , committer et ensuite enregister les 
+        // de type SiteStatsDICTBO , committer et ensuite enregister les
         // objets SiteAndProfilStatsDICTBO
-        for (int i = 0; i < siteStatsList.size(); i++) {
-            SiteStatsDICTBO site = (SiteStatsDICTBO) siteStatsList.get(i);
+        for ( int i = 0; i < siteStatsList.size(); i++ )
+        {
+            SiteStatsDICTBO site = (SiteStatsDICTBO) siteStatsList.get( i );
             // on commence par supprimer toutes les stats concernant ce site
             // évite les doublons et permet d'éviter le test est-ce que ca existe déjà ou pas
             // pour savoir si il faut faire un update ou un create
             mSession.beginTransaction();
             // suppression
             // commence par supprimer les stats annexes sur le site
-            siteAndProfilDao.removeWhereSite(mSession, site.getServeurBO().getServeurId());
-            siteDao.removeWhereSite(mSession, site.getServeurBO().getServeurId());
+            siteAndProfilDao.removeWhereSite( mSession, site.getServeurBO().getServeurId() );
+            siteDao.removeWhereSite( mSession, site.getServeurBO().getServeurId() );
             mSession.commitTransactionWithoutClose();
             mSession.beginTransaction();
             // création
-            siteDao.create(mSession, site);
+            siteDao.create( mSession, site );
             mSession.commitTransactionWithoutClose();
         }
 
         // maintenant ont peut enregistrer les SiteAndProfilStatsDICTBO
-        for (int i = 0; i < siteProfilStatsList.size(); i++) {
-            SiteAndProfilStatsDICTBO siteAndProfil = (SiteAndProfilStatsDICTBO) siteProfilStatsList.get(i);
+        for ( int i = 0; i < siteProfilStatsList.size(); i++ )
+        {
+            SiteAndProfilStatsDICTBO siteAndProfil = (SiteAndProfilStatsDICTBO) siteProfilStatsList.get( i );
             // on commence par supprimer toutes les stats concernant ce site et ce profil
             // évite les doublons et permet d'éviter le test est-ce que ca existe déjà ou pas
             // pour savoir si il faut faire un update ou un create
             mSession.beginTransaction();
             // suppression
-            siteAndProfilDao.removeWhereSiteAndProfil(mSession, siteAndProfil.getServeurBO().getServeurId(), siteAndProfil.getProfil());
+            siteAndProfilDao.removeWhereSiteAndProfil( mSession, siteAndProfil.getServeurBO().getServeurId(),
+                                                       siteAndProfil.getProfil() );
             mSession.commitTransactionWithoutClose();
             mSession.beginTransaction();
             // création
-            siteAndProfilDao.create(mSession, siteAndProfil);
+            siteAndProfilDao.create( mSession, siteAndProfil );
             mSession.commitTransactionWithoutClose();
         }
 
@@ -258,33 +266,42 @@ public class ComputeStats {
 
     /**
      * Calcul le roi sur l'ensemble des applications du site
+     * 
      * @param pSiteId l'id du site
      * @return le roi global du site
      * @throws JrafDaoException en cas d'échec
      */
-    private double calculateGlobalROI(long pSiteId) throws JrafDaoException {
+    private double calculateGlobalROI( long pSiteId )
+        throws JrafDaoException
+    {
         int result = 0;
-        Collection appliList = appliDao.findWhereSite(mSession, pSiteId);
+        Collection appliList = appliDao.findWhereSite( mSession, pSiteId );
         // Pour toutes les applis, on récupère tous les différents nombres de corrections
         // sur les audits fait depuis la plage donnée
         Iterator it = appliList.iterator();
-        while (it.hasNext()) {
+        while ( it.hasNext() )
+        {
             ApplicationBO appli = (ApplicationBO) it.next();
-            Collection rois = metricDao.findROIWhereApplicationSinceDate(mSession, new Long(appli.getId()), getBeginDate());
+            Collection rois =
+                metricDao.findROIWhereApplicationSinceDate( mSession, new Long( appli.getId() ), getBeginDate() );
             Iterator itRois = rois.iterator();
-            while (itRois.hasNext()) {
+            while ( itRois.hasNext() )
+            {
                 IntegerMetricBO roiBo = (IntegerMetricBO) itRois.next();
-                result += ((Integer) roiBo.getValue()).intValue();
+                result += ( (Integer) roiBo.getValue() ).intValue();
             }
         }
         // pour l'instant le résultat est en nombre de corrections
         // et on doit le calculer en nombre de MHI
         // on enregistre la valeur -1 en cas de problèmes avec le calcul du roi
         double ke = -1;
-        try {
-            ke = computeRoiMHI(result);
-        } catch (FormulaException e) {
-            LOGGER.error("Problems encountered while calculating squale's stats: roi formula not found or uncorrect");
+        try
+        {
+            ke = computeRoiMHI( result );
+        }
+        catch ( FormulaException e )
+        {
+            LOGGER.error( "Problems encountered while calculating squale's stats: roi formula not found or uncorrect" );
         }
         return ke;
     }
@@ -295,14 +312,16 @@ public class ComputeStats {
      * @throws JrafDaoException en cas d'échec
      * @throws FormulaException si erreur ai niveau de la formule
      */
-    private double computeRoiMHI(int pNbCorrections) throws JrafDaoException, FormulaException {
+    private double computeRoiMHI( int pNbCorrections )
+        throws JrafDaoException, FormulaException
+    {
         double result = 0;
         // On récupère l'unique formule du ROI en base
-        SimpleFormulaBO roiFormula = formulaDAO.getRoiFormula(mSession);
-        float MhiRoi = RoiFacade.calculateROI(pNbCorrections, roiFormula);
+        SimpleFormulaBO roiFormula = formulaDAO.getRoiFormula( mSession );
+        float MhiRoi = RoiFacade.calculateROI( pNbCorrections, roiFormula );
         // arrondi à NB_DIGITS chiffres après la virgule
-        int number = (int) Math.pow(10, NB_DIGITS);
-        result = ((int) (MhiRoi * number)) / number;
+        int number = (int) Math.pow( 10, NB_DIGITS );
+        result = ( (int) ( MhiRoi * number ) ) / number;
         return result;
 
     }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE umlquality-configuration PUBLIC "-//UMLQuality Configuration DTD 1.0//EN" "file:../../../squalix/src/config/umlquality-config-1.0.dtd">
+
+<umlquality-configuration>
+
+<!--  ENV-UMLQUALITY-REPORT -->
+<reportDirectory>/app/SQUALE/dev/data/umlquality/report</reportDirectory>
+</umlquality-configuration>

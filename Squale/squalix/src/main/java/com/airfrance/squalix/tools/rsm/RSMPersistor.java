@@ -31,7 +31,8 @@ import com.airfrance.squalix.util.repository.ComponentRepository;
 /**
  * Objet chargé de faire persister les résultats RSM
  */
-public class RSMPersistor {
+public class RSMPersistor
+{
 
     /** Le template pour le rapport de classe */
     private String mClassTemplate = "csv.template.class";
@@ -43,6 +44,7 @@ public class RSMPersistor {
      * Nombre de méthodes
      */
     private int mNumberOfMethods = 0;
+
     /**
      * Nombre de classes
      */
@@ -74,7 +76,7 @@ public class RSMPersistor {
     /**
      * Logger
      */
-    private static final Log LOGGER = LogFactory.getLog(RSMPersistor.class);
+    private static final Log LOGGER = LogFactory.getLog( RSMPersistor.class );
 
     /**
      * Audit durant lequel l'analyse est effectuée
@@ -106,7 +108,7 @@ public class RSMPersistor {
     /** Le marqueur pour préprocesser le rapport généré et en extraire les métriques de classes */
     private final static String CLASS_LOCATOR = "Class,";
 
-    /** Le marqueur pour préprocesser le rapport généré et en extraire les métriques de méthodes*/
+    /** Le marqueur pour préprocesser le rapport généré et en extraire les métriques de méthodes */
     private final static String METHOD_LOCATOR = "f(),";
 
     /** Marqueur pour signaler la fin de la zone doublon */
@@ -120,6 +122,7 @@ public class RSMPersistor {
 
     /**
      * Constructeur.
+     * 
      * @param pConfiguration configuration du framework.
      * @param pAudit audit encadrant l'exécution.
      * @param pSession la session de persistance utilisée par la tâche.
@@ -128,49 +131,57 @@ public class RSMPersistor {
      * @param pLanguageParser le parser de language pour persister les données
      * @throws JrafDaoException si une session de peristance ne peut être créée.
      */
-    public RSMPersistor(final RSMConfiguration pConfiguration, final AuditBO pAudit, final ISession pSession, TaskData pDatas, String pTaskName, LanguageParser pLanguageParser)
-        throws JrafDaoException {
+    public RSMPersistor( final RSMConfiguration pConfiguration, final AuditBO pAudit, final ISession pSession,
+                         TaskData pDatas, String pTaskName, LanguageParser pLanguageParser )
+        throws JrafDaoException
+    {
         mSession = pSession;
         mConfiguration = pConfiguration;
         mAudit = pAudit;
         mDatas = pDatas;
         mProject = pConfiguration.getProject();
-        mRepository = new ComponentRepository(mProject, mSession);
+        mRepository = new ComponentRepository( mProject, mSession );
         mTaskName = pTaskName;
-        mAdaptator = new RSMAdaptator(pLanguageParser, mRepository);
+        mAdaptator = new RSMAdaptator( pLanguageParser, mRepository );
     }
 
     /**
      * Parse le rapport pour obtenir tous les métriques
+     * 
      * @param pFileName chemin du fichier rapport.
      * @param pDatas les données
      * @throws Exception si un problème de parsing apparait.
      * @return le nombre de métriques
      */
-    public int parseReport(final String pFileName, TaskData pDatas) throws Exception {
+    public int parseReport( final String pFileName, TaskData pDatas )
+        throws Exception
+    {
         mReportFileName = pFileName;
-        LOGGER.info(RSMMessages.getString("logs.debug.report_parsing_class") + mReportFileName);
-        mParser = new CSVParser(RSMMessages.getString("csv.config.file"));
+        LOGGER.info( RSMMessages.getString( "logs.debug.report_parsing_class" ) + mReportFileName );
+        mParser = new CSVParser( RSMMessages.getString( "csv.config.file" ) );
 
         // effecue les différents préprocessing
-        managePreProcess(pFileName);
+        managePreProcess( pFileName );
 
-        int nbClassResults = parseReportForClassMetrics(mConfiguration.getClassReportPath());
-        int nbMethodsResults = parseMethodReport(mConfiguration.getMethodsReportPath(), pDatas);
+        int nbClassResults = parseReportForClassMetrics( mConfiguration.getClassReportPath() );
+        int nbMethodsResults = parseMethodReport( mConfiguration.getMethodsReportPath(), pDatas );
         return nbClassResults + nbMethodsResults;
     }
 
     /**
      * Effectur les différents préprocess nécessaires
+     * 
      * @param pFileName le nom du fichier généré par RSM
      * @throws IOException en cas de problemes lors du pré-processing
      */
-    private void managePreProcess(String pFileName) throws IOException {
+    private void managePreProcess( String pFileName )
+        throws IOException
+    {
         // On effectue un préprocessing du fichier résultat car le format CSV renvoyé n'est pas vraiment du CSV,
         // Il y a des lignes supplémentaires et des informations génantes pour le parsing
-        eraseDouble(pFileName, mConfiguration.getAuxFile());
-        preProcess(mConfiguration.getClassReportPath(), mConfiguration.getAuxFile(), CLASS_LOCATOR);
-        preProcess(mConfiguration.getMethodsReportPath(), mConfiguration.getAuxFile(), METHOD_LOCATOR);
+        eraseDouble( pFileName, mConfiguration.getAuxFile() );
+        preProcess( mConfiguration.getClassReportPath(), mConfiguration.getAuxFile(), CLASS_LOCATOR );
+        preProcess( mConfiguration.getMethodsReportPath(), mConfiguration.getAuxFile(), METHOD_LOCATOR );
     }
 
     /**
@@ -179,52 +190,68 @@ public class RSMPersistor {
      * @param pMarker la chaine repère
      * @throws IOException en cas de problemes avec le préprocessing du fichier
      */
-    private void preProcess(String pCSVOutputFile, String pCSVOutputFileAux, String pMarker) throws IOException {
+    private void preProcess( String pCSVOutputFile, String pCSVOutputFileAux, String pMarker )
+        throws IOException
+    {
         // Ecrit a partir du deuxième fichier
-        File f = new File(pCSVOutputFile);
-        BufferedWriter bw = new BufferedWriter(new FileWriter(pCSVOutputFile));
-        BufferedReader br = new BufferedReader(new FileReader(pCSVOutputFileAux));
+        File f = new File( pCSVOutputFile );
+        BufferedWriter bw = new BufferedWriter( new FileWriter( pCSVOutputFile ) );
+        BufferedReader br = new BufferedReader( new FileReader( pCSVOutputFileAux ) );
         String line = "";
-        List results = new ArrayList(0);
-        while (line != null) {
+        List results = new ArrayList( 0 );
+        while ( line != null )
+        {
             line = br.readLine();
             // Null signifie fin de fichier
-            if (line != null) {
+            if ( line != null )
+            {
                 // Si on a trouvé une ligne commencant par le repère passé en paramètre, on la récupère
                 // Pour plus de sureté on vérifie également que la ligne contient une virgule
                 // Traitement différent suivant les classes ou les fichiers, pour les classes on ne s'occupe
                 // pas du nom du fichier, pour les méthodes oui
-                if (pMarker.equals(CLASS_LOCATOR)) {
-                    if (isValidCSVLine(line, pMarker)) {
-                        bw.write(line + "\n");
+                if ( pMarker.equals( CLASS_LOCATOR ) )
+                {
+                    if ( isValidCSVLine( line, pMarker ) )
+                    {
+                        bw.write( line + "\n" );
                     }
-                } else {
-                    if (isValidCSVLine(line, pMarker)) {
-                        results.add(line);
-                    } else if (isFileLine(line)) {
+                }
+                else
+                {
+                    if ( isValidCSVLine( line, pMarker ) )
+                    {
+                        results.add( line );
+                    }
+                    else if ( isFileLine( line ) )
+                    {
                         // On est sur la ligne indiquant le fichier dans lequel se trouve tous les éléments
                         // obtenus aux lignes précédentes
                         // on écrit les résultats précédents avec le nom du fichier en plus
-                        StringTokenizer st = new StringTokenizer(line, ",");
+                        StringTokenizer st = new StringTokenizer( line, "," );
                         String fileName = "";
                         int counter = 0;
-                        while (st.hasMoreElements() && counter < 2) {
+                        while ( st.hasMoreElements() && counter < 2 )
+                        {
                             fileName = st.nextToken().trim();
                             counter++;
                         }
                         // on écrit la ligne
-                        for (int i = 0; i < results.size(); i++) {
-                            // efface le retour à la ligne 
-                            String result = ((String) (results.get(i))).replaceAll("\n", "");
+                        for ( int i = 0; i < results.size(); i++ )
+                        {
+                            // efface le retour à la ligne
+                            String result = ( (String) ( results.get( i ) ) ).replaceAll( "\n", "" );
                             // Dans ce cas il faut rajouter un " " sinon le parser ne tient pas compte de la colonne
-                            if (result.charAt(result.length() - 1) != ' ') {
-                                bw.write(result + " ," + fileName + "\n");
-                            } else {
-                                bw.write(result + "," + fileName + "\n");
+                            if ( result.charAt( result.length() - 1 ) != ' ' )
+                            {
+                                bw.write( result + " ," + fileName + "\n" );
+                            }
+                            else
+                            {
+                                bw.write( result + "," + fileName + "\n" );
                             }
                         }
                         // reset la liste des résultats
-                        results = new ArrayList(0);
+                        results = new ArrayList( 0 );
                     }
                 }
             }
@@ -239,45 +266,60 @@ public class RSMPersistor {
      * @param pLine la ligne courante
      * @return true si la ligne commence par le marqueur de ligne fichier
      */
-    private boolean isFileLine(String pLine) {
-        return pLine.startsWith(FILE_LOCATOR);
+    private boolean isFileLine( String pLine )
+    {
+        return pLine.startsWith( FILE_LOCATOR );
     }
 
-    /** @param pFilename le nom du fichier généré par rsm
+    /**
+     * @param pFilename le nom du fichier généré par rsm
      * @param pOutputFileAux nom du fichier auxilliaire utilisé pour supprimer les doublons
      * @throws IOException en cas d'échec de lecture
      */
-    private void eraseDouble(String pFilename, String pOutputFileAux) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(pOutputFileAux));
-        BufferedReader br = new BufferedReader(new FileReader(pFilename));
+    private void eraseDouble( String pFilename, String pOutputFileAux )
+        throws IOException
+    {
+        BufferedWriter bw = new BufferedWriter( new FileWriter( pOutputFileAux ) );
+        BufferedReader br = new BufferedReader( new FileReader( pFilename ) );
         String line = "";
         // Supprime les lignes redondantes du à l'utilisation (nécessaire)
         // de deux options donnant en partie le meme résultat
         boolean write = true;
-        while (line != null) {
+        while ( line != null )
+        {
             line = br.readLine();
             // Null signifie fin de fichier
-            if (line != null) {
+            if ( line != null )
+            {
                 // on enlève tous les espaces (il n'est pas censé y avoir d'espaces dans un fichier CSV)
-                // et dans le fichier renvoyé par RSM il y en a un peu partout 
+                // et dans le fichier renvoyé par RSM il y en a un peu partout
                 // Toutefois on enlève pas l'espace qui est entre deux virgules sinon le parser ne compte pas la colonne
                 String properLine = "";
-                for (int i = 0; i < line.length(); i++) {
-                    if (line.charAt(i) != ' ' || (line.charAt(i) == ' ' && i > 0 && i < (line.length() - 1) && line.charAt(i - 1) == ',' && line.charAt(i + 1) == ',')) {
-                        properLine += line.charAt(i);
+                for ( int i = 0; i < line.length(); i++ )
+                {
+                    if ( line.charAt( i ) != ' '
+                        || ( line.charAt( i ) == ' ' && i > 0 && i < ( line.length() - 1 )
+                            && line.charAt( i - 1 ) == ',' && line.charAt( i + 1 ) == ',' ) )
+                    {
+                        properLine += line.charAt( i );
                     }
                 }
                 // Si on a trouvé une ligne commencant par le repère passé en paramètre, on la récupère
                 // Pour plus de sureté on vérifie également que la ligne contient une virgule
-                if (properLine.startsWith(STOP_WRITE)) {
+                if ( properLine.startsWith( STOP_WRITE ) )
+                {
                     write = false;
-                } else {
-                    if (properLine.startsWith(RESTART_WRITE)) {
+                }
+                else
+                {
+                    if ( properLine.startsWith( RESTART_WRITE ) )
+                    {
                         write = true;
                     }
                 }
-                if (write && isValidCSVLine(properLine)) {
-                    bw.write(properLine + "\n");
+                if ( write && isValidCSVLine( properLine ) )
+                {
+                    bw.write( properLine + "\n" );
                 }
             }
         }
@@ -287,153 +329,169 @@ public class RSMPersistor {
     }
 
     /**
-     * Effectue un test plus général sans marqueur 
-     * Sert pour l'étape 1 du pré-processing
+     * Effectue un test plus général sans marqueur Sert pour l'étape 1 du pré-processing
+     * 
      * @param pLine la ligne à tester
      * @return true si la ligne est valide pour préprocessing CSV
      */
-    private boolean isValidCSVLine(String pLine) {
+    private boolean isValidCSVLine( String pLine )
+    {
         // On vérifie que la ligne comporte les éléments nécessaire à l'analyse CSV
         // Il faut une virgule
-        return commonValidCVSLine(pLine)
-        && (pLine.startsWith(CLASS_LOCATOR) || pLine.startsWith(FILE_LOCATOR) || pLine.startsWith(METHOD_LOCATOR));
+        return commonValidCVSLine( pLine )
+            && ( pLine.startsWith( CLASS_LOCATOR ) || pLine.startsWith( FILE_LOCATOR ) || pLine.startsWith( METHOD_LOCATOR ) );
     }
 
     /**
-     * Effectue les tests de préprocessing pour récupérer les données qui interressent
-     * en fonction du marqueur
-     * Sert pour l'étape 2 du pré-processing
+     * Effectue les tests de préprocessing pour récupérer les données qui interressent en fonction du marqueur Sert pour
+     * l'étape 2 du pré-processing
+     * 
      * @param pLine la ligne à tester
      * @param pMarker le repère
      * @return true si la ligne est valide pour analyse CSV
      */
-    private boolean isValidCSVLine(String pLine, String pMarker) {
+    private boolean isValidCSVLine( String pLine, String pMarker )
+    {
         // On vérifie que la ligne comporte les éléments nécessaire à l'analyse CSV
         // Il faut une virgule
-        return commonValidCVSLine(pLine)
+        return commonValidCVSLine( pLine )
         // Les contraintes sur la taille
-        && pLine.length() > pMarker.length() && pMarker.equals(pLine.substring(0, pMarker.length()));
+            && pLine.length() > pMarker.length() && pMarker.equals( pLine.substring( 0, pMarker.length() ) );
     }
 
     /**
-     * Permet de traiter les conditions communes qu'une ligne doit avoir
-     * pour être analysée par CSV
+     * Permet de traiter les conditions communes qu'une ligne doit avoir pour être analysée par CSV
+     * 
      * @param pLine la ligne à vérifier
      * @return true si la ligne est partiellement valide pour préprocessing CSV
      */
-    private boolean commonValidCVSLine(String pLine) {
+    private boolean commonValidCVSLine( String pLine )
+    {
         // On vérifie que la ligne comporte les éléments nécessaire à l'analyse CSV
         // Il faut une virgule
-        return pLine.indexOf(",") != -1
-        // Les mots clés interdits
-        && pLine.indexOf("Average") == -1 
-        && pLine.indexOf("Total") == -1 
-        && pLine.indexOf("Maximum") == -1 
-        && pLine.indexOf("Minimum") == -1;
+        return pLine.indexOf( "," ) != -1
+            // Les mots clés interdits
+            && pLine.indexOf( "Average" ) == -1 && pLine.indexOf( "Total" ) == -1 && pLine.indexOf( "Maximum" ) == -1
+            && pLine.indexOf( "Minimum" ) == -1;
     }
 
     /**
      * Parse le rapport pour obtenir les métriques de classe.
+     * 
      * @param pFilename chemin du fichier rapport.
      * @throws Exception si un problème de parsing apparait.
      * @return le nombre de résultats de niveau classe
      * @roseuid 42B976100269
      */
-    private int parseReportForClassMetrics(final String pFilename) throws Exception {
+    private int parseReportForClassMetrics( final String pFilename )
+        throws Exception
+    {
         // Récupérer les beans issus du rapport de classes RSM
-        Collection classResults = mParser.parse(RSMMessages.getString(mClassTemplate), pFilename);
+        Collection classResults = mParser.parse( RSMMessages.getString( mClassTemplate ), pFilename );
         // On ne compte que les classes qui ont une logique
-        Collection classToPersist = new ArrayList(0);
+        Collection classToPersist = new ArrayList( 0 );
         // Ajout de la volumétrie dans les beans
         Iterator it = classResults.iterator();
         RSMClassMetricsBO bo = null;
-        while (it.hasNext()) {
+        while ( it.hasNext() )
+        {
             // On adapte chaque bean issu du rapport
             bo = (RSMClassMetricsBO) it.next();
             // On ne compte que les classes qui ont une logique, c'est à dire les classes ayant des méthodes
-            if ((bo.getPublicData().intValue() + bo.getProtectedData().intValue() + bo.getPrivateData().intValue()) > 0) {
+            if ( ( bo.getPublicData().intValue() + bo.getProtectedData().intValue() + bo.getPrivateData().intValue() ) > 0 )
+            {
                 // rattache le bo rsm à la classe associée
-                mAdaptator.adaptClassResult(bo);
+                mAdaptator.adaptClassResult( bo );
                 // on ajoute pour les données projets les données concernant la classe courante
                 // au niveau des commentaires et du nombre de lignes de code
                 mSLOC += bo.getSloc().intValue();
                 mComments += bo.getComments().intValue();
-                bo.setAudit(mAudit);
+                bo.setAudit( mAudit );
                 mNumberOfClasses++;
-                bo.setTaskName(mTaskName);
-                classToPersist.add(bo);
+                bo.setTaskName( mTaskName );
+                classToPersist.add( bo );
             }
         }
-        LOGGER.info(RSMMessages.getString("logs.debug.report_parsing_database"));
+        LOGGER.info( RSMMessages.getString( "logs.debug.report_parsing_database" ) );
         // On sauvegarde le mesures sur les classes
-        MeasureDAOImpl.getInstance().saveAll(mSession, classToPersist);
+        MeasureDAOImpl.getInstance().saveAll( mSession, classToPersist );
         mSession.commitTransactionWithoutClose();
         mSession.beginTransaction();
-        LOGGER.info(RSMMessages.getString("logs.debug.report_parsing_end"));
+        LOGGER.info( RSMMessages.getString( "logs.debug.report_parsing_end" ) );
         return classResults.size();
     }
 
     /**
      * Parse le rapport pour obtenir les métriques de méthodes
+     * 
      * @param pFilename chemin du fichier rapport.
      * @param pDatas les données temporaires
      * @throws Exception si un problème de parsing apparaît.
      * @return le nombre de résultats de niveau méthode récupérés.
      * @roseuid 42B9761F015F
      */
-    private int parseMethodReport(final String pFilename, TaskData pDatas) throws Exception {
+    private int parseMethodReport( final String pFilename, TaskData pDatas )
+        throws Exception
+    {
         // Récupérer les beans issus du rapport de méthodes RSM
-        Collection methodResults = mParser.parse(RSMMessages.getString(mMethodTemplate), pFilename);
+        Collection methodResults = mParser.parse( RSMMessages.getString( mMethodTemplate ), pFilename );
         RSMMethodMetricsBO bo = null;
         String name = null;
         // On crée une nouvelle collection contenant les beans à faire effectivement persister
         List resultsToPersist = new ArrayList();
         // Adaptation des beans
         Iterator it = methodResults.iterator();
-        while (it.hasNext()) {
+        while ( it.hasNext() )
+        {
             bo = (RSMMethodMetricsBO) it.next();
             // rattache le bo rsm à la classe associée
-            bo.setAudit(mAudit);
+            bo.setAudit( mAudit );
             // Le nom du fichier est mis en relatif par rapport à la racine du projet
             String completFileName = bo.getFileName();
-            String fileName = completFileName.substring(completFileName.indexOf("vobs"), completFileName.length());
-            bo.setFileName(fileName);
-            bo.setTaskName(mTaskName);
+            String fileName = completFileName.substring( completFileName.indexOf( "vobs" ), completFileName.length() );
+            bo.setFileName( fileName );
+            bo.setTaskName( mTaskName );
             mNumberOfMethods++;
-            // Problème RSM avec le polymorphisme, si plusieurs méthodes de meme nom présentes 
+            // Problème RSM avec le polymorphisme, si plusieurs méthodes de meme nom présentes
             // dans le fichier on ne les sauvegarde pas
-            boolean canAdd = mAdaptator.adaptMethodResult(bo);
-            if (canAdd) {
-                resultsToPersist.add(bo);
+            boolean canAdd = mAdaptator.adaptMethodResult( bo );
+            if ( canAdd )
+            {
+                resultsToPersist.add( bo );
             }
         } // La collection des résultats de méthodes est persistée
-        LOGGER.info(RSMMessages.getString("logs.debug.report_parsing_database"));
-        MeasureDAOImpl.getInstance().saveAll(mSession, resultsToPersist);
+        LOGGER.info( RSMMessages.getString( "logs.debug.report_parsing_database" ) );
+        MeasureDAOImpl.getInstance().saveAll( mSession, resultsToPersist );
         mSession.commitTransactionWithoutClose();
         mSession.beginTransaction();
-        LOGGER.info(RSMMessages.getString("logs.debug.report_parsing_end"));
+        LOGGER.info( RSMMessages.getString( "logs.debug.report_parsing_end" ) );
         return methodResults.size();
     }
 
     /**
      * Crée et fait persister les résultats de niveau projet.
+     * 
      * @roseuid 42E09E5201AB
      */
-    public void persistProjectResult() {
-        LOGGER.info(RSMMessages.getString("logs.debug.project_database"));
+    public void persistProjectResult()
+    {
+        LOGGER.info( RSMMessages.getString( "logs.debug.project_database" ) );
         RSMProjectMetricsBO metrics = new RSMProjectMetricsBO();
         // Création des métriques de niveau projet
-        metrics.setComponent(mProject);
-        metrics.setAudit(mAudit);
-        metrics.setTaskName(mTaskName);
-        metrics.setNumberOfClasses(new Integer(mNumberOfClasses));
-        metrics.setNumberOfMethods(new Integer(mNumberOfMethods));
-        metrics.setSloc(new Integer(mSLOC));
-        metrics.setComments(new Integer(mComments));
-        try {
-            MeasureDAOImpl.getInstance().create(mSession, metrics);
-        } catch (JrafDaoException e) {
-            LOGGER.error(e, e);
+        metrics.setComponent( mProject );
+        metrics.setAudit( mAudit );
+        metrics.setTaskName( mTaskName );
+        metrics.setNumberOfClasses( new Integer( mNumberOfClasses ) );
+        metrics.setNumberOfMethods( new Integer( mNumberOfMethods ) );
+        metrics.setSloc( new Integer( mSLOC ) );
+        metrics.setComments( new Integer( mComments ) );
+        try
+        {
+            MeasureDAOImpl.getInstance().create( mSession, metrics );
+        }
+        catch ( JrafDaoException e )
+        {
+            LOGGER.error( e, e );
         }
     }
 }

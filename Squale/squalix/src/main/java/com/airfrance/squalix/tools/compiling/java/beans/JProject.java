@@ -9,13 +9,14 @@ import org.apache.tools.ant.BuildListener;
  * @author m400832
  * @version 1.0
  */
-public class JProject {
+public class JProject
+{
 
     /**
      * Chemin vers le projet.
      */
     private String mPath;
-    
+
     /**
      * L'écouteur
      */
@@ -23,33 +24,38 @@ public class JProject {
 
     /**
      * Setter.
+     * 
      * @param pPath Chemin vers le projet.
      * @since 1.0
      */
-    public void setPath(String pPath) {
+    public void setPath( String pPath )
+    {
         mPath = pPath;
     }
-    
+
     /**
      * Getter.
+     * 
      * @return Chemin vers le projet.
      */
-    public String getPath(){
+    public String getPath()
+    {
         return mPath;
     }
-    
-    
+
     /**
      * @return le listener
      */
-    public BuildListener getListener() {
+    public BuildListener getListener()
+    {
         return listener;
     }
 
     /**
      * @param pListener le nouveau listener
      */
-    public void setListener(BuildListener pListener) {
+    public void setListener( BuildListener pListener )
+    {
         listener = pListener;
     }
 

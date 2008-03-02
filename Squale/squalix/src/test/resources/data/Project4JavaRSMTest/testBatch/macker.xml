@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<macker>    
+    <ruleset name="Simple example">
+    	<var name="nom_projet" value="testbatch" /> <!-- nom du package le plus haut -->
+        <access-rule>
+        	<message>Les références ne sont pas correctes</message>
+            <deny>
+                <from class="${nom_projet}.batch.**" />
+                <to class="java.**" />
+            </deny>
+        </access-rule>
+    </ruleset>
+</macker>

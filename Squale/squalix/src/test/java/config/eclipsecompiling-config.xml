@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//EclipseCompiling Configuration DTD //EN" "file:../../../squalix/src/config/eclipsecompiling-config.dtd">
+
+<configuration>
+	<!--  ENV-ECLIPSE-WORKSPACE -->
+	<workspace>D:</workspace>
+	<command>
+		<executable>java</executable>
+		<options>
+			<!--  ENV-ECLIPSE-JAR -->
+			<option>-jar [squale_eclipse_home]/org.eclipse.equinox.launcher_1.0.0.v20070606.jar</option>
+			<option>-data [workspace]</option>
+			<option>-application com.airfrance.squale.builder.eclipse32.workspaceId1</option>
+			<option>-dialect [dialect]</option>
+			<option>-sunLibs [sun_libs]</option>
+			<option>-projects [projects_list]</option>
+			<option>-outputDir [outputDir]</option>
+			<option>-varLibs [var_libs]</option>
+			<option>-excluded [excluded_patterns]</option>
+		</options>
+	</command>
+	<!-- ENV-JCOMPILING-ECLIPSE-BUNDLE -->
+	<squaleEclipseHome>C:/eclipse_3_2_1/plugins</squaleEclipseHome>
+	<eclipseHome>plugins</eclipseHome>
+	<!-- ENV-ECLIPSE-RIGHT_SCRIPT -->
+	<rightScript>script1.sh</rightScript>
+	<!-- ENV-ECLIPSE-COPY-SCRIPT -->
+	<copyScript>script2.sh</copyScript>
+</configuration>

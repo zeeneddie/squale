@@ -11,29 +11,38 @@ import com.airfrance.squalix.util.file.FileUtility;
 /**
  * Supprime le répertoire de compilation des sources
  */
-public class JavaMockCompilingCleanerTask extends AbstractTask {
+public class JavaMockCompilingCleanerTask
+    extends AbstractTask
+{
 
     /**
      * Constructeur
      */
-    public JavaMockCompilingCleanerTask() {
+    public JavaMockCompilingCleanerTask()
+    {
         mName = "JavaMockCompilingCleanerTask";
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @see com.airfrance.squalix.core.AbstractTask#execute()
      */
-    public void execute() throws TaskException {
-        try {
+    public void execute()
+        throws TaskException
+    {
+        try
+        {
             // On récupère la configuration de la tâche
             MockCompilingConf conf = new MockCompilingConf();
-            conf.parse(new FileInputStream("config/mockcompiling-config.xml"));
+            conf.parse( new FileInputStream( "config/mockcompiling-config.xml" ) );
             // On supprime le répertoire
-            File dir = new File(conf.getRootDirectory());
-            FileUtility.deleteRecursively(dir);
-        } catch (Exception e) {
-            throw new TaskException(e);
+            File dir = new File( conf.getRootDirectory() );
+            FileUtility.deleteRecursively( dir );
+        }
+        catch ( Exception e )
+        {
+            throw new TaskException( e );
         }
     }
 }

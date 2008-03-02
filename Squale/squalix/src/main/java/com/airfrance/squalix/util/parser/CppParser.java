@@ -11,11 +11,15 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Proje
 /**
  * Parse les noms de type C++ et les remplace par les objets correspondants.
  */
-public class CppParser implements LanguageParser {
+public class CppParser
+    implements LanguageParser
+{
     /** Nom du package par défaut */
     private static final String DEFAULT_PACKAGE_NAME = "{C}";
+
     /** Nom de la classe par défaut */
     private static final String DEFAULT_CLASS_NAME = "{C}";
+
     /**
      * Pattern pour repérer une zone d'initialisation statique
      */
@@ -24,11 +28,10 @@ public class CppParser implements LanguageParser {
     /** Projet sur lequel est réalisé l'analyse */
     private ProjectBO mProject;
 
-    /** Ensemble des classes connues
-     *  Celà permet de renseigner les noms de classe connues pour permettre
-     *  une distinction entre un namespace et un nom de classe. McCabe utilise
-     *  l'opérateur de qualification :: aussi bien pour une classe imbriquée que
-     *  pour un namespace
+    /**
+     * Ensemble des classes connues Celà permet de renseigner les noms de classe connues pour permettre une distinction
+     * entre un namespace et un nom de classe. McCabe utilise l'opérateur de qualification :: aussi bien pour une classe
+     * imbriquée que pour un namespace
      */
     private TreeSet mKnownClasses = new TreeSet();
 
@@ -37,89 +40,112 @@ public class CppParser implements LanguageParser {
      * 
      * @param pProject le projet sur lequel est réalisé l'analyse
      */
-    public CppParser(ProjectBO pProject) {
+    public CppParser( ProjectBO pProject )
+    {
         mProject = pProject;
     }
 
     /**
      * Ajout d'une classe connue
+     * 
      * @param pClassName nom de la classe
      */
-    public void addKnownClass(String pClassName) {
+    public void addKnownClass( String pClassName )
+    {
         StringBuffer context = new StringBuffer();
-        String className = geRelativeElementName(pClassName, context);
-        mKnownClasses.add(className);
+        String className = geRelativeElementName( pClassName, context );
+        mKnownClasses.add( className );
     }
 
-    /*################ Décomposition et transformation en objet correspondant ################*/
+    /* ################ Décomposition et transformation en objet correspondant ################ */
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @see com.airfrance.squalix.util.parser.LanguageParser#getMethod(java.lang.String, java.lang.String)
      */
-    public MethodBO getMethod(String pAbsoluteMethodName, String pFileName) {
+    public MethodBO getMethod( String pAbsoluteMethodName, String pFileName )
+    {
         // On récupère le nom de la méthode
         MethodBO methodBO;
-        try {
-            String methodName = getMethodName(pAbsoluteMethodName);
-            methodBO = new MethodBO(methodName);
+        try
+        {
+            String methodName = getMethodName( pAbsoluteMethodName );
+            methodBO = new MethodBO( methodName );
             String nameWithoutParameters;
             // cas des méthodes 'main' C++ inscrite sans signature par McCabe
-            if (methodName.equals("main") || methodName.matches("main_#.*")) {
+            if ( methodName.equals( "main" ) || methodName.matches( "main_#.*" ) )
+            {
                 nameWithoutParameters = methodName;
-            } else {
-                nameWithoutParameters = pAbsoluteMethodName.substring(0, pAbsoluteMethodName.lastIndexOf("("));
             }
-            int classIndex = nameWithoutParameters.lastIndexOf("::");
+            else
+            {
+                nameWithoutParameters = pAbsoluteMethodName.substring( 0, pAbsoluteMethodName.lastIndexOf( "(" ) );
+            }
+            int classIndex = nameWithoutParameters.lastIndexOf( "::" );
             String absoluteClassName;
             // On rattache les fonctions à une classe fictive
-            if (classIndex == -1) {
+            if ( classIndex == -1 )
+            {
                 absoluteClassName = DEFAULT_CLASS_NAME;
-            } else {
-                absoluteClassName = nameWithoutParameters.substring(0, nameWithoutParameters.lastIndexOf("::"));
             }
-            ClassBO parent = getClass(absoluteClassName);
-            methodBO.setParent(parent);
-            methodBO.setLongFileName(pFileName);
-        } catch (StringIndexOutOfBoundsException e) {
-            // cas d'un nom de méthode mal formé - bug McCabe sur l'opérateur C++ () 
+            else
+            {
+                absoluteClassName = nameWithoutParameters.substring( 0, nameWithoutParameters.lastIndexOf( "::" ) );
+            }
+            ClassBO parent = getClass( absoluteClassName );
+            methodBO.setParent( parent );
+            methodBO.setLongFileName( pFileName );
+        }
+        catch ( StringIndexOutOfBoundsException e )
+        {
+            // cas d'un nom de méthode mal formé - bug McCabe sur l'opérateur C++ ()
             methodBO = null;
         }
         return methodBO;
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @see com.airfrance.squalix.util.parser.LanguageParser#getClass(java.lang.String)
      */
-    public ClassBO getClass(String pAbsoluteClassName) {
+    public ClassBO getClass( String pAbsoluteClassName )
+    {
         // On récupère le nom de la classe
         StringBuffer context = new StringBuffer();
-        String className = geRelativeElementName(pAbsoluteClassName, context);
-        ClassBO classBO = new ClassBO(className);
+        String className = geRelativeElementName( pAbsoluteClassName, context );
+        ClassBO classBO = new ClassBO( className );
         AbstractComplexComponentBO current = classBO;
         // Le contexte est soit un nom de classe, soit un nom de package
         // On le décompose entièrement
-        while (context.length() > 0) {
+        while ( context.length() > 0 )
+        {
             AbstractComplexComponentBO parent = null;
-            String parentName = geRelativeElementName(context.toString(), context);
+            String parentName = geRelativeElementName( context.toString(), context );
             // On doit maintenant deviner si le parentName est une classe ou un namespace
-            if (isClassName(parentName)) {
-                parent = new ClassBO(parentName);
-            } else {
-                parent = new PackageBO(parentName);
+            if ( isClassName( parentName ) )
+            {
+                parent = new ClassBO( parentName );
             }
-            current.setParent(parent);
+            else
+            {
+                parent = new PackageBO( parentName );
+            }
+            current.setParent( parent );
             current = parent;
         }
         AbstractComplexComponentBO parent = null;
         // On récupère le parent associé
-        if (current instanceof ClassBO) {
-            parent = getPackage(DEFAULT_PACKAGE_NAME);
-        } else {
+        if ( current instanceof ClassBO )
+        {
+            parent = getPackage( DEFAULT_PACKAGE_NAME );
+        }
+        else
+        {
             parent = mProject;
         }
-        current.setParent(parent);
+        current.setParent( parent );
         return classBO;
     }
 
@@ -127,10 +153,11 @@ public class CppParser implements LanguageParser {
      * @param parentName nom de classe
      * @return true si le nom est considéré comme étant une classe
      */
-    private boolean isClassName(String parentName) {
+    private boolean isClassName( String parentName )
+    {
         // Un nom est suppsé être une classe s'il s'agit d'un template
         // ou s'il s'agit d'un nom de classe déjà enregistré
-        return parentName.indexOf('>') > 0 || mKnownClasses.contains(parentName);
+        return parentName.indexOf( '>' ) > 0 || mKnownClasses.contains( parentName );
     }
 
     /**
@@ -139,14 +166,18 @@ public class CppParser implements LanguageParser {
      * @param pPackageName le nom absolu du package
      * @return le PackageBO désigné par les paramètres.
      */
-    private PackageBO getPackage(String pPackageName) {
-        PackageBO packageBO = new PackageBO(getPackageName(pPackageName));
-        String parentName = getParentName(pPackageName);
-        if (null == parentName) {
-            packageBO.setParent(mProject);
-        } else {
-            PackageBO parent = getPackage(parentName);
-            packageBO.setParent(parent);
+    private PackageBO getPackage( String pPackageName )
+    {
+        PackageBO packageBO = new PackageBO( getPackageName( pPackageName ) );
+        String parentName = getParentName( pPackageName );
+        if ( null == parentName )
+        {
+            packageBO.setParent( mProject );
+        }
+        else
+        {
+            PackageBO parent = getPackage( parentName );
+            packageBO.setParent( parent );
         }
         return packageBO;
     }
@@ -157,11 +188,13 @@ public class CppParser implements LanguageParser {
      * @param pAbsoluteName le nom absolu du fils
      * @return le nom absolu du parent
      */
-    public String getParentName(String pAbsoluteName) {
+    public String getParentName( String pAbsoluteName )
+    {
         String parent = null;
-        int lastDot = pAbsoluteName.lastIndexOf("::");
-        if (lastDot != -1) {
-            parent = pAbsoluteName.substring(0, lastDot);
+        int lastDot = pAbsoluteName.lastIndexOf( "::" );
+        if ( lastDot != -1 )
+        {
+            parent = pAbsoluteName.substring( 0, lastDot );
         }
         return parent;
     }
@@ -172,103 +205,128 @@ public class CppParser implements LanguageParser {
      * @param pPackageName le nom absolu du package
      * @return le nom du dernier package
      */
-    private String getPackageName(String pPackageName) {
-        String[] splittingPackageName = pPackageName.split("\\.");
+    private String getPackageName( String pPackageName )
+    {
+        String[] splittingPackageName = pPackageName.split( "\\." );
         return splittingPackageName[splittingPackageName.length - 1];
     }
 
     /**
-     * Décompose le nom entièrement qualifié d'une méthode afin de récupérer
-     * son nom relatif.
+     * Décompose le nom entièrement qualifié d'une méthode afin de récupérer son nom relatif.
+     * 
      * @param pAbsoluteMethodName le nom entièrement qualifié d'une méthode
      * @return le nom relatif de la méthode
      */
-    protected String getMethodName(String pAbsoluteMethodName) {
+    protected String getMethodName( String pAbsoluteMethodName )
+    {
         String relativeMethodName = "";
-        if (pAbsoluteMethodName.matches(STATIC_INITIALIZER_PATTERN)) {
+        if ( pAbsoluteMethodName.matches( STATIC_INITIALIZER_PATTERN ) )
+        {
             // S'il s'agit d'une zone d'initialisation statique,
             // on la considère comme une méthode
-            relativeMethodName = getStaticInitializerName(pAbsoluteMethodName);
-        } else if (pAbsoluteMethodName.equals("main") || pAbsoluteMethodName.matches("main_#.*")) {
+            relativeMethodName = getStaticInitializerName( pAbsoluteMethodName );
+        }
+        else if ( pAbsoluteMethodName.equals( "main" ) || pAbsoluteMethodName.matches( "main_#.*" ) )
+        {
             // cas des méthodes 'main' C++ inscrite sans signature par McCabe
             relativeMethodName = pAbsoluteMethodName;
-        } else {
+        }
+        else
+        {
             StringBuffer context = new StringBuffer();
-            relativeMethodName = geRelativeElementName(pAbsoluteMethodName.substring(0, pAbsoluteMethodName.lastIndexOf("(")), context);
-            relativeMethodName += pAbsoluteMethodName.substring(pAbsoluteMethodName.lastIndexOf("("));
+            relativeMethodName =
+                geRelativeElementName( pAbsoluteMethodName.substring( 0, pAbsoluteMethodName.lastIndexOf( "(" ) ),
+                                       context );
+            relativeMethodName += pAbsoluteMethodName.substring( pAbsoluteMethodName.lastIndexOf( "(" ) );
         }
         return relativeMethodName;
     }
 
     /**
-     * Décompose le nom entièrement qualifié d'une classe afin de récupérer son
-     * nom relatif.
+     * Décompose le nom entièrement qualifié d'une classe afin de récupérer son nom relatif.
+     * 
      * @param pAbsoluteName le nom entièrement qualifié de la méthode
-     * @param pContext contexte de définition de la classe (soit une classe englobante
-     * soit un namespace)
-     * (ou le nom entièrement qualifié de la méthode sans les paramètres)
+     * @param pContext contexte de définition de la classe (soit une classe englobante soit un namespace) (ou le nom
+     *            entièrement qualifié de la méthode sans les paramètres)
      * @return le nom relatif de la classe (ou de la méthode sans ses paramètres)
      */
-    protected String geRelativeElementName(String pAbsoluteName, StringBuffer pContext) {
+    protected String geRelativeElementName( String pAbsoluteName, StringBuffer pContext )
+    {
         // normal pattern = .+ car il faut aussi prendre en compte les destructeurs
         // et la redéfinition des opérateurs
         String normalPattern = ".+$";
         String specialPattern = ".*<.*>.*$";
         String name = "";
-        pContext.setLength(0);
+        pContext.setLength( 0 );
         // On commence par tester sur le pattern des templates
         // car le pattern de class simple englobe tout
         // Cas d'une classe basée sur des templates
-        if (pAbsoluteName.matches(specialPattern)) {
+        if ( pAbsoluteName.matches( specialPattern ) )
+        {
             // Cas complexe utilisant des templates
-            int dbpIndex = pAbsoluteName.lastIndexOf("::");
-            int gtIndex = pAbsoluteName.lastIndexOf(">");
-            if (dbpIndex > gtIndex) {
+            int dbpIndex = pAbsoluteName.lastIndexOf( "::" );
+            int gtIndex = pAbsoluteName.lastIndexOf( ">" );
+            if ( dbpIndex > gtIndex )
+            {
                 // Si le dernier :: est après le dernier >
                 // On récupère la chaîne après les ::
-                name = pAbsoluteName.substring(dbpIndex + 2);
-                pContext.append(pAbsoluteName.substring(0, dbpIndex));
-            } else {
-                // Sinon traitement spécial
-                name = getSpecialCppName(pAbsoluteName, pContext);
+                name = pAbsoluteName.substring( dbpIndex + 2 );
+                pContext.append( pAbsoluteName.substring( 0, dbpIndex ) );
             }
-        } else {
+            else
+            {
+                // Sinon traitement spécial
+                name = getSpecialCppName( pAbsoluteName, pContext );
+            }
+        }
+        else
+        {
             // Cas simple d'une classe qui n'utilise pas de template
-            if (pAbsoluteName.matches(normalPattern)) {
-                int index = pAbsoluteName.lastIndexOf(":");
-                name = pAbsoluteName.substring(index + 1);
-                if (index > 0) {
-                    pContext.append(pAbsoluteName.substring(0, index - 1));
+            if ( pAbsoluteName.matches( normalPattern ) )
+            {
+                int index = pAbsoluteName.lastIndexOf( ":" );
+                name = pAbsoluteName.substring( index + 1 );
+                if ( index > 0 )
+                {
+                    pContext.append( pAbsoluteName.substring( 0, index - 1 ) );
                 }
-            } else { // Ne devrait jamais arriver
+            }
+            else
+            { // Ne devrait jamais arriver
                 name = DEFAULT_CLASS_NAME;
             }
         }
         // Enfin, on nettoie le nom complet
-        return clearName(name);
+        return clearName( name );
     }
 
     /**
-     * Traite les nom spéciaux, c'est-à-dire contenant des déclarations
-     * ou utilisation de templates.
+     * Traite les nom spéciaux, c'est-à-dire contenant des déclarations ou utilisation de templates.
+     * 
      * @param pAbsoluteName le nom à traiter.
-     * @param pContext contexte de définition de la classe (soit une classe englobante
-     * soit un namespace)
+     * @param pContext contexte de définition de la classe (soit une classe englobante soit un namespace)
      * @return le nom simplement qualifié.
      */
-    private String getSpecialCppName(String pAbsoluteName, StringBuffer pContext) {
+    private String getSpecialCppName( String pAbsoluteName, StringBuffer pContext )
+    {
         int count = 0;
         String className = pAbsoluteName;
-        for (int i = 0; i < pAbsoluteName.length(); i++) {
+        for ( int i = 0; i < pAbsoluteName.length(); i++ )
+        {
             // On analyse chacun des caractères
-            if (count == 0 && pAbsoluteName.charAt(i) == ':' && pAbsoluteName.charAt(++i) == ':') {
+            if ( count == 0 && pAbsoluteName.charAt( i ) == ':' && pAbsoluteName.charAt( ++i ) == ':' )
+            {
                 // Si on trouve :: en dehors d'un template, on récupère ce qu'il y a après les ::
-                className = pAbsoluteName.substring(i + 1);
-                pContext.append(pAbsoluteName.substring(0, i - 1));
-            } else if (pAbsoluteName.charAt(i) == '<') {
+                className = pAbsoluteName.substring( i + 1 );
+                pContext.append( pAbsoluteName.substring( 0, i - 1 ) );
+            }
+            else if ( pAbsoluteName.charAt( i ) == '<' )
+            {
                 // On entre dans un template, donc on attend la fin du template
                 count++;
-            } else if (pAbsoluteName.charAt(i) == '>') {
+            }
+            else if ( pAbsoluteName.charAt( i ) == '>' )
+            {
                 count--;
             }
         }
@@ -280,23 +338,23 @@ public class CppParser implements LanguageParser {
      * 
      * @param pAbsoluteName le nom à traiter.
      * @return le nom simplement qualifié.
-     * 
      */
-    private String getStaticInitializerName(String pAbsoluteName) {
-        int index = pAbsoluteName.lastIndexOf(".");
-        String result = pAbsoluteName.substring(++index);
+    private String getStaticInitializerName( String pAbsoluteName )
+    {
+        int index = pAbsoluteName.lastIndexOf( "." );
+        String result = pAbsoluteName.substring( ++index );
         return result;
     }
 
     /**
      * Enlève les caractères spéciaux à la fin d'un nom de classe, package, méthode.<br>
-     * Les caractères spéciaux sont les séparateurs Java et C++ : 
+     * Les caractères spéciaux sont les séparateurs Java et C++ :
      * <ul>
      * <li>.</li>
      * <li>:</li>
      * <li>$</li>
      * </ul>
-     * Ainsi que les caractères de chemins : 
+     * Ainsi que les caractères de chemins :
      * <ul>
      * <li>/</li>
      * <li>\</li>
@@ -305,10 +363,12 @@ public class CppParser implements LanguageParser {
      * @param pName le nom à nettoyer
      * @return le nom sans caractère spécial en fin.
      */
-    public static String clearName(String pName) {
+    public static String clearName( String pName )
+    {
         String badEnd = ".*[/.:\\$#]$";
-        while (pName.matches(badEnd)) {
-            pName = pName.substring(0, pName.length() - 1);
+        while ( pName.matches( badEnd ) )
+        {
+            pName = pName.substring( 0, pName.length() - 1 );
         }
         return pName;
     }

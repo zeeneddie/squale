@@ -2,18 +2,19 @@ package com.airfrance.squalix.tools.rsm;
 
 import com.airfrance.squalix.util.parser.CppParser;
 
-
 /**
  */
-public class CppRSMTask extends RSMTask {
+public class CppRSMTask
+    extends RSMTask
+{
 
     /**
      * Constructeur
      */
-    public CppRSMTask() {
+    public CppRSMTask()
+    {
         mName = "CppRSMTask";
-        mLanguageParser = new CppParser(mProject);
+        mLanguageParser = new CppParser( mProject );
     }
-    
-    
+
 }

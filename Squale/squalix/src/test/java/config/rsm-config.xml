@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <!DOCTYPE configuration SYSTEM "rsm-config.dtd"> -->
+<configuration>
+	<general>
+		<workspace>D:\temp\rsm</workspace>
+		<reportpath>D:\temp\rsm\rapport.csv</reportpath>
+		<reportmethodspath>D:\temp\rsm\rapports_Methods_RSM.csv</reportmethodspath>
+		<reportclassespath>D:\temp\rsm\rapports_Class_RSM.csv</reportclassespath>
+		<auxfile>D:\temp\rsm\rapports_aux_RSM.csv</auxfile>
+		<inputfile>D:\temp\rsm\input.txt</inputfile>
+		<execcommand>D:\temp\rsm\rsm</execcommand>
+	</general>
+	<profiles>
+		 <profile name="java">
+	      	<extensions>.java</extensions>
+	      	<entetes></entetes>
+	      	<parameters>
+	      		<!-- CSV output mode -->
+	        	<parameter>-A</parameter>
+	        	<!-- les options pour récupérer le type de données voulues -->
+	        	<parameter>-Tf</parameter>
+	        	<!-- Pour avoir les métriques orientés objets -->
+	        	<parameter>-To</parameter>
+	        	<!-- Pour prendre une liste de fichiers en paramètres -->
+	        	<parameter>-F</parameter>
+	        	<!-- Fichier de sortie, sinon s'affiche à l'écran -->
+	        	<parameter>-O</parameter>
+	      	</parameters>
+	     </profile>
+	     <profile name="j2ee">
+	      	<extensions>.java</extensions>
+	      	<entetes></entetes>
+	      	<parameters>
+	      		<!-- CSV output mode -->
+	        	<parameter>-A</parameter>
+	        	<!-- les options pour récupérer le type de données voulues -->
+	        	<parameter>-Tf</parameter>
+	        	<!-- Pour avoir les métriques orientés objets -->
+	        	<parameter>-To</parameter>
+	        	<!-- Pour prendre une liste de fichiers en paramètres -->
+	        	<parameter>-F</parameter>
+	        	<!-- Fichier de sortie, sinon s'affiche à l'écran -->
+	        	<parameter>-O</parameter>
+	      	</parameters>
+	     </profile>
+	     <profile name="cpp">
+	     	<extensions>.c,.cc,.cxx,.cpp,.C</extensions>
+	      	<entetes>.h,.hh,.hxx,.hpp</entetes>
+	     	<parameters>
+		      	<!-- CSV output mode -->
+	        	<parameter>-A</parameter>
+	        	<!-- les options pour récupérer le type de données voulues -->
+	        	<parameter>-Tf</parameter>
+	        	<!-- Pour avoir les métriques orientés objets -->
+	        	<parameter>-To</parameter>
+	        	<!-- Pour prendre une liste de fichiers en paramètres -->
+	        	<parameter>-F</parameter>
+	        	<!-- Fichier de sortie, sinon s'affiche à l'écran -->
+	        	<parameter>-O</parameter>
+	      	</parameters>
+	     </profile>
+    </profiles>
+</configuration>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="arch.xsl"?>
+<!-- Fichier de configuration de testWeb -->
+<macker>
+	<ruleset name="architecture JRAF">
+		<!-- definition des variables -->
+		<access-rule>
+        	<message>Les références ne sont pas correctes</message>
+            <deny>
+                <from class="**Web*" />
+                <to class="testweb.**" />
+            </deny>
+        </access-rule>
+	</ruleset>
+</macker>

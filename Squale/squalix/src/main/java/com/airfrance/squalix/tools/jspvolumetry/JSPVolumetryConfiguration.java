@@ -10,7 +10,8 @@ import com.airfrance.squalix.core.TaskData;
 
 /**
  */
-public class JSPVolumetryConfiguration {
+public class JSPVolumetryConfiguration
+{
 
     /** le chemin du fichier où sont écrits les résultats */
     private File mResultFile;
@@ -21,8 +22,7 @@ public class JSPVolumetryConfiguration {
     private ProjectBO mProject = null;
 
     /**
-     * Espace de travail autorisé (voire réservé) à RSM : il permet d'accueillir 
-     * tous les fichiers générés par RSM
+     * Espace de travail autorisé (voire réservé) à RSM : il permet d'accueillir tous les fichiers générés par RSM
      */
     private File mWorkspace = null;
 
@@ -32,10 +32,11 @@ public class JSPVolumetryConfiguration {
     /**
      * @return le workspace
      */
-    public File getWorkspace() {
+    public File getWorkspace()
+    {
         return mWorkspace;
     }
-    
+
     /**
      * @param pProject le projet en cours d'analyse
      * @param pFile le fichier de config
@@ -43,45 +44,56 @@ public class JSPVolumetryConfiguration {
      * @return la configuration
      * @throws Exception en cas d'échec
      */
-    public static JSPVolumetryConfiguration build(ProjectBO pProject, String pFile, TaskData pData) throws Exception {
+    public static JSPVolumetryConfiguration build( ProjectBO pProject, String pFile, TaskData pData )
+        throws Exception
+    {
         JSPVolumetryConfiguration config = new JSPVolumetryConfiguration();
         config.mProject = pProject;
         // Recuperation de la configuration
-        Node root = ConfigUtility.getRootNode(pFile, JSPVolumetryMessages.getString("configuration.root"));
+        Node root = ConfigUtility.getRootNode( pFile, JSPVolumetryMessages.getString( "configuration.root" ) );
         // Workspace
-        config.mWorkspace = new File(ConfigUtility.getNodeByTagName(root, JSPVolumetryMessages.getString("configuration.workspace")).getFirstChild().getNodeValue().trim());
+        config.mWorkspace =
+            new File(
+                      ConfigUtility.getNodeByTagName( root, JSPVolumetryMessages.getString( "configuration.workspace" ) ).getFirstChild().getNodeValue().trim() );
         // Emplacement du fichier de résultat
-        config.mResultFile = new File(ConfigUtility.getNodeByTagName(root, JSPVolumetryMessages.getString("configuration.resultfile")).getFirstChild().getNodeValue().trim());
+        config.mResultFile =
+            new File(
+                      ConfigUtility.getNodeByTagName( root, JSPVolumetryMessages.getString( "configuration.resultfile" ) ).getFirstChild().getNodeValue().trim() );
         // Emplacement du fichier de résultat
-        config.mScriptPath = ConfigUtility.getNodeByTagName(root, JSPVolumetryMessages.getString("configuration.script")).getFirstChild().getNodeValue().trim();
+        config.mScriptPath =
+            ConfigUtility.getNodeByTagName( root, JSPVolumetryMessages.getString( "configuration.script" ) ).getFirstChild().getNodeValue().trim();
         return config;
     }
 
     /**
      * @return le chemin du fichier ou sont écrits les résultats
      */
-    public File getResultFile() {
+    public File getResultFile()
+    {
         return mResultFile;
     }
 
     /**
      * @return le chemin du fichier ou sont écrits les résultats
      */
-    public String getResultFilePath() {
+    public String getResultFilePath()
+    {
         return mResultFile.getPath();
     }
 
     /**
      * @return l'emplacement du script
      */
-    public String getScriptPath() {
+    public String getScriptPath()
+    {
         return mScriptPath;
     }
 
     /**
      * @param pScritpPath le nouveau chemin
      */
-    public void setScriptPath(String pScritpPath) {
+    public void setScriptPath( String pScritpPath )
+    {
         mScriptPath = pScritpPath;
     }
 

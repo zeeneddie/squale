@@ -1,4 +1,5 @@
 package com.airfrance.squalix.tools.ruleschecking;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,32 +31,33 @@ import com.airfrance.squalix.util.buildpath.BuildProjectPath;
  * elle prend celui par défaut(stocké sur le serveur)   
  * 
  * @author sportorico
- *
  */
 
-public class RulesCheckingTask extends AbstractTask {
+public class RulesCheckingTask
+    extends AbstractTask
+{
 
     /**
      * Logger
      */
-    private static final Log LOGGER = LogFactory.getLog(RulesCheckingTask.class);
+    private static final Log LOGGER = LogFactory.getLog( RulesCheckingTask.class );
 
     /**
-     * 
-     *Constructeur par defaut
+     * Constructeur par defaut
      */
-    public RulesCheckingTask() {
+    public RulesCheckingTask()
+    {
         mName = "RulesCheckingTask";
     }
 
     /**
      * L'analyse complète consiste en :
      * <ul>
-     * 
      * <li>lancement du connecteur rulesChecking</li>
      * <li>recupération des resultats génerés par rulesChecking</li>
      * <li>Persistance des beans</li>
      * </ul>
+     * 
      * @throws RulesCheckingException Si un problème d'exécution apparaît.
      * @throws JrafDaoException Si un problème d'exécution apparaît.
      * @throws IOException Si un problème d'exécution apparaît.
@@ -63,48 +65,65 @@ public class RulesCheckingTask extends AbstractTask {
      * @throws ConfigurationException si erreur
      * @throws FileNotFoundException si erreur
      */
-    private void analyze() throws JrafDaoException, RulesCheckingException, FileNotFoundException, IOException, RulesCheckingConnectorException, ConfigurationException {
-        LOGGER.info(RulesCheckingMessages.getString("logs.analyzing") + mProject.getParent().getName() + " - " + mProject.getName());
+    private void analyze()
+        throws JrafDaoException, RulesCheckingException, FileNotFoundException, IOException,
+        RulesCheckingConnectorException, ConfigurationException
+    {
+        LOGGER.info( RulesCheckingMessages.getString( "logs.analyzing" ) + mProject.getParent().getName() + " - "
+            + mProject.getName() );
         // On récupère le nom du ruleset à appliquer
-        StringParameterBO param = (StringParameterBO) getProject().getParameter(ParametersConstants.CHECKSTYLE_RULESET_NAME);
-        if (param == null) {
-            String message = RulesCheckingMessages.getString("exception.rulesChecking.parameter.missing");
+        StringParameterBO param =
+            (StringParameterBO) getProject().getParameter( ParametersConstants.CHECKSTYLE_RULESET_NAME );
+        if ( param == null )
+        {
+            String message = RulesCheckingMessages.getString( "exception.rulesChecking.parameter.missing" );
             // On affiche un warning sans lancer d'exception, la tâche ne sera pas exécutée.
-            initError(message);
-            LOGGER.warn(message);
+            initError( message );
+            LOGGER.warn( message );
             // Les paramètres sont mal configurés, on annule la tâche
             mStatus = CANCELLED;
-        } else {
-            CheckstyleRuleSetBO versionBo = CheckstyleRuleSetDAOImpl.getInstance().getLastVersion(getSession(), param.getValue());
-            // On recupère la version du fichier de configuration checkstyle réferentile à utiliser 
+        }
+        else
+        {
+            CheckstyleRuleSetBO versionBo =
+                CheckstyleRuleSetDAOImpl.getInstance().getLastVersion( getSession(), param.getValue() );
+            // On recupère la version du fichier de configuration checkstyle réferentile à utiliser
             // Cas peu probable si la configuration est mal faite
-            if (versionBo == null) {
-                throw new RulesCheckingException(RulesCheckingMessages.getString("exception.rulesChecking.version.unfound"));
+            if ( versionBo == null )
+            {
+                throw new RulesCheckingException(
+                                                  RulesCheckingMessages.getString( "exception.rulesChecking.version.unfound" ) );
             }
             // On récupère la version de java
-            StringParameterBO javaVersion = (StringParameterBO) getProject().getParameter(ParametersConstants.DIALECT);
-            if (javaVersion == null) {
-                throw new RulesCheckingException(RulesCheckingMessages.getString("exception.rulesChecking.dialect.unfound"));
+            StringParameterBO javaVersion = (StringParameterBO) getProject().getParameter( ParametersConstants.DIALECT );
+            if ( javaVersion == null )
+            {
+                throw new RulesCheckingException(
+                                                  RulesCheckingMessages.getString( "exception.rulesChecking.dialect.unfound" ) );
             }
             // On ne calcule pas les transgressions si aucune règle n'est définie
-            if (versionBo.getRules().size() > 0) {
-                CheckstyleTransgressionBO transgression = ckeck(versionBo, javaVersion.getValue());
-                if (null != transgression) {
-                    transgression.setAudit(getAudit());
-                    transgression.setTaskName(getName());
-                    transgression.setComponent(getProject());
-                    MeasureDAOImpl.getInstance().create(getSession(), transgression);
-                } else {
-                    throw new RulesCheckingException(RulesCheckingMessages.getString("exception.during.audit"));
+            if ( versionBo.getRules().size() > 0 )
+            {
+                CheckstyleTransgressionBO transgression = ckeck( versionBo, javaVersion.getValue() );
+                if ( null != transgression )
+                {
+                    transgression.setAudit( getAudit() );
+                    transgression.setTaskName( getName() );
+                    transgression.setComponent( getProject() );
+                    MeasureDAOImpl.getInstance().create( getSession(), transgression );
+                }
+                else
+                {
+                    throw new RulesCheckingException( RulesCheckingMessages.getString( "exception.during.audit" ) );
                 }
             }
         }
     }
 
     /**
-     * Recupère les paramètres checkstyle du projet;
-     * Fait appel au connecteur et recupère l'ensemble des violations générées
-     * par le connector checkstyle.  
+     * Recupère les paramètres checkstyle du projet; Fait appel au connecteur et recupère l'ensemble des violations
+     * générées par le connector checkstyle.
+     * 
      * @param pVersion La version du fichier de configuration
      * @param pJavaVersion la version de java
      * @return la liste des transgressions
@@ -113,68 +132,84 @@ public class RulesCheckingTask extends AbstractTask {
      * @throws ConfigurationException si erreur
      * @throws FileNotFoundException si erreur
      */
-    public CheckstyleTransgressionBO ckeck(CheckstyleRuleSetBO pVersion, String pJavaVersion) throws IOException, RulesCheckingConnectorException, FileNotFoundException, ConfigurationException {
-        /* Permet de préciser le pays et le language de l'ordi ... 
-         * cela permet de contourner un problème de messages avec Checkstyle 3.5
+    public CheckstyleTransgressionBO ckeck( CheckstyleRuleSetBO pVersion, String pJavaVersion )
+        throws IOException, RulesCheckingConnectorException, FileNotFoundException, ConfigurationException
+    {
+        /*
+         * Permet de préciser le pays et le language de l'ordi ... cela permet de contourner un problème de messages
+         * avec Checkstyle 3.5
          */
-        Locale bufferLocal = Locale.getDefault(); //memoriser la valeur courante
-        try {
-            Locale.setDefault(Locale.US); //changer cette valeur avec celle des USA
+        Locale bufferLocal = Locale.getDefault(); // memoriser la valeur courante
+        try
+        {
+            Locale.setDefault( Locale.US ); // changer cette valeur avec celle des USA
 
-            File file = FileUtility.byteToFile(pVersion.getValue());
+            File file = FileUtility.byteToFile( pVersion.getValue() );
             // Configuration Checkstyle
             CheckstyleConfiguration config = new CheckstyleConfiguration();
-            config.parse(new FileInputStream("config/checkstyle-config.xml"));
-            //récupération des sources du project
-            List srcs = ((ListParameterBO) mProject.getParameters().getParameters().get(ParametersConstants.SOURCES)).getParameters();
-            List paths = BuildProjectPath.buildProjectPath((String) mData.getData(TaskData.VIEW_PATH), srcs);
+            config.parse( new FileInputStream( "config/checkstyle-config.xml" ) );
+            // récupération des sources du project
+            List srcs =
+                ( (ListParameterBO) mProject.getParameters().getParameters().get( ParametersConstants.SOURCES ) ).getParameters();
+            List paths = BuildProjectPath.buildProjectPath( (String) mData.getData( TaskData.VIEW_PATH ), srcs );
             // On récupère les sources qui peuvent être analysées
             List includedFileNames =
-            com.airfrance.squalix.util.file.FileUtility.getIncludedFiles(
-                    (String) mData.getData(TaskData.VIEW_PATH),
-                    paths,
-                    (ListParameterBO) mProject.getParameter(ParametersConstants.INCLUDED_PATTERNS),
-                    (ListParameterBO) mProject.getParameter(ParametersConstants.EXCLUDED_PATTERNS),
-                    null,
-                    new String[] { ".java" });
-            CheckStyleProcess process = new CheckStyleProcess(new File(config.getJarDirectory()), new File(config.getReportDirectory()), pJavaVersion);
-            File report = process.analyseSources(file, (String[]) includedFileNames.toArray(new String[] {
-            }), "checkstyle-report" + getProject().getId());
-            CheckstyleReportParser parser = new CheckstyleReportParser((String) mData.getData(TaskData.VIEW_PATH));
-            CheckStylePersistor persistor = new CheckStylePersistor(pVersion);
-            parser.parse(new FileInputStream(report), persistor);
+                com.airfrance.squalix.util.file.FileUtility.getIncludedFiles(
+                                                                              (String) mData.getData( TaskData.VIEW_PATH ),
+                                                                              paths,
+                                                                              (ListParameterBO) mProject.getParameter( ParametersConstants.INCLUDED_PATTERNS ),
+                                                                              (ListParameterBO) mProject.getParameter( ParametersConstants.EXCLUDED_PATTERNS ),
+                                                                              null, new String[] { ".java" } );
+            CheckStyleProcess process =
+                new CheckStyleProcess( new File( config.getJarDirectory() ), new File( config.getReportDirectory() ),
+                                       pJavaVersion );
+            File report =
+                process.analyseSources( file, (String[]) includedFileNames.toArray( new String[] {} ),
+                                        "checkstyle-report" + getProject().getId() );
+            CheckstyleReportParser parser = new CheckstyleReportParser( (String) mData.getData( TaskData.VIEW_PATH ) );
+            CheckStylePersistor persistor = new CheckStylePersistor( pVersion );
+            parser.parse( new FileInputStream( report ), persistor );
             // On récupère le transgression
             CheckstyleTransgressionBO transgression = persistor.computeTransgression();
 
             // positionne les données sur la taille du file System
-            affectFileSystemSize(config.getReportDirectory(), false);
+            affectFileSystemSize( config.getReportDirectory(), false );
 
             // Destruction du rapport
             report.delete();
             return transgression;
-        } finally {
-            Locale.setDefault(bufferLocal); //remettre  à la valeur initiale 
+        }
+        finally
+        {
+            Locale.setDefault( bufferLocal ); // remettre à la valeur initiale
         }
     }
 
     /**
-     * Exécute la méthode init(), puis une analyse complète, et enfin la méthode 
-     * close().
+     * Exécute la méthode init(), puis une analyse complète, et enfin la méthode close().
+     * 
      * @throws TaskException en cas de problèmes liés à la base
      */
-    public void execute() throws TaskException {
-        try {
+    public void execute()
+        throws TaskException
+    {
+        try
+        {
             analyze();
-        } catch (Exception e) {
-            throw new TaskException(e);
+        }
+        catch ( Exception e )
+        {
+            throw new TaskException( e );
         }
     }
 
     /**
      * Acces au nom de la tâche CheckStyleTask
+     * 
      * @return le nom de la tâche
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
 

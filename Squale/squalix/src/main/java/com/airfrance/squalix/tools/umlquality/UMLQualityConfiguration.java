@@ -9,59 +9,70 @@ import com.airfrance.squalecommon.util.xml.XmlImport;
 import com.airfrance.squalix.core.exception.ConfigurationException;
 
 /**
- * Configuration  UMLQuality.
- * La configuration UMLQuality est définie dans un fichier XML, celui-ci
- * est lu par cette classe.
+ * Configuration UMLQuality. La configuration UMLQuality est définie dans un fichier XML, celui-ci est lu par cette
+ * classe.
  */
 
-public class UMLQualityConfiguration extends XmlImport{
-   
-      
-      /**
-       * Logger.
-       */
-      private static final Log LOGGER = LogFactory.getLog(UMLQualityConfiguration.class);
+public class UMLQualityConfiguration
+    extends XmlImport
+{
 
-      /** Répertoire de génération de rapport */
-      private String mReportDirectory;
-      
-      /**
-       * Constructeur
-       *
-       */
-      public UMLQualityConfiguration() {
-          super(LOGGER);
-      }
-      /**
-       * Lecture du fichier de configuration
-       * @param pStream flux
-       * @throws ConfigurationException si erreur
-       */
-      public void parse(InputStream pStream) throws ConfigurationException {
-          StringBuffer errors = new StringBuffer();
-          Digester digester = preSetupDigester("-//UMLQuality Configuration DTD 1.0//EN", "/config/umlquality-config-1.0.dtd", errors);
-          // Traitement du répertoire de génération des reports
-          digester.addCallMethod("umlquality-configuration/reportDirectory", "setReportDirectory", 1, new Class[]{String.class});
-          digester.addCallParam("umlquality-configuration/reportDirectory", 0);
-          digester.push(this);
-          // Appel du parser
-          parse(digester, pStream, errors);
-          if (errors.length()>0) {
-              throw new ConfigurationException(UMLQualityMessages.getString("error.configuration", new Object[]{errors.toString()}));
-          }
-      }
-      /**
-       * @return directory
-       */
-      public String getReportDirectory() {
-          return mReportDirectory;
-      }
+    /**
+     * Logger.
+     */
+    private static final Log LOGGER = LogFactory.getLog( UMLQualityConfiguration.class );
 
-      /**
-       * @param pDirectory répertoire
-       */
-      public void setReportDirectory(String pDirectory) {
-          mReportDirectory = pDirectory;
-      }
+    /** Répertoire de génération de rapport */
+    private String mReportDirectory;
+
+    /**
+     * Constructeur
+     */
+    public UMLQualityConfiguration()
+    {
+        super( LOGGER );
+    }
+
+    /**
+     * Lecture du fichier de configuration
+     * 
+     * @param pStream flux
+     * @throws ConfigurationException si erreur
+     */
+    public void parse( InputStream pStream )
+        throws ConfigurationException
+    {
+        StringBuffer errors = new StringBuffer();
+        Digester digester =
+            preSetupDigester( "-//UMLQuality Configuration DTD 1.0//EN", "/config/umlquality-config-1.0.dtd", errors );
+        // Traitement du répertoire de génération des reports
+        digester.addCallMethod( "umlquality-configuration/reportDirectory", "setReportDirectory", 1,
+                                new Class[] { String.class } );
+        digester.addCallParam( "umlquality-configuration/reportDirectory", 0 );
+        digester.push( this );
+        // Appel du parser
+        parse( digester, pStream, errors );
+        if ( errors.length() > 0 )
+        {
+            throw new ConfigurationException( UMLQualityMessages.getString( "error.configuration",
+                                                                            new Object[] { errors.toString() } ) );
+        }
+    }
+
+    /**
+     * @return directory
+     */
+    public String getReportDirectory()
+    {
+        return mReportDirectory;
+    }
+
+    /**
+     * @param pDirectory répertoire
+     */
+    public void setReportDirectory( String pDirectory )
+    {
+        mReportDirectory = pDirectory;
+    }
 
 }

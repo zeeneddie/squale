@@ -12,32 +12,41 @@ import com.airfrance.squalix.util.file.FileUtility;
 /**
  * Permet de supprimer les répertoires crées lors de la tâche de compilation
  */
-public class JCompilingCleanerTask extends AbstractTask {
+public class JCompilingCleanerTask
+    extends AbstractTask
+{
 
     /**
      * Constructeur par défaut.
      */
-    public JCompilingCleanerTask() {
+    public JCompilingCleanerTask()
+    {
         mName = "JCompilingCleanerTask";
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @see com.airfrance.squalix.core.AbstractTask#execute()
      */
-    public void execute() throws TaskException {
-        try {
+    public void execute()
+        throws TaskException
+    {
+        try
+        {
             JCompilingConfiguration jCompilingConf = new JCompilingConfiguration();
             // On supprime le répertoire des plugins eclipse
-            FileUtility.deleteRecursively(new File(jCompilingConf.getEclipseBundleDir()));
+            FileUtility.deleteRecursively( new File( jCompilingConf.getEclipseBundleDir() ) );
             // On supprime le répertoire des librairies exportées
-            FileUtility.deleteRecursively(jCompilingConf.getExportedLibsDir());
+            FileUtility.deleteRecursively( jCompilingConf.getExportedLibsDir() );
             // On supprime le workspace
             EclipseCompilingConfiguration conf = new EclipseCompilingConfiguration();
-            conf.parse(new FileInputStream(new File("config/eclipsecompiling-config.xml")));
-            FileUtility.deleteRecursively(new File(conf.getWorkspace()));
-            FileUtility.deleteRecursively(conf.getEclipseHome());
-        } catch (Exception e) {
+            conf.parse( new FileInputStream( new File( "config/eclipsecompiling-config.xml" ) ) );
+            FileUtility.deleteRecursively( new File( conf.getWorkspace() ) );
+            FileUtility.deleteRecursively( conf.getEclipseHome() );
+        }
+        catch ( Exception e )
+        {
             e.printStackTrace();
         }
     }

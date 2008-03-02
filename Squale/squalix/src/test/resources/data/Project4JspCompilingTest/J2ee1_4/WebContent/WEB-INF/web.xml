@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>comorWeb</display-name>
+	<!-- initialization -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/config/application-context-spring.xml</param-value>
+	</context-param>
+	
+	<filter>
+		<display-name>HabileFilter</display-name>	
+		<filter-name>HabileFilter</filter-name>
+		<filter-class>com.airfrance.habile.filter.HabileFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>HabileFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Action Servlet Configuration -->
+	<servlet>
+		<servlet-name>comor</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/config/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>0</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>0</param-value>
+		</init-param>
+		<init-param>
+			<param-name>validate</param-name>
+			<param-value>true</param-value>
+		</init-param>
+
+		<!-- fin parametre propre-->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- Action Servlet Mapping -->
+	<servlet>
+		<servlet-name>htmlarea</servlet-name>
+		<servlet-class>com.airfrance.welcom.struts.servlet.HtmlAreaServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>comor</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>htmlarea</servlet-name>
+		<url-pattern>/htmlarea/*</url-pattern>
+	</servlet-mapping>	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<resource-ref id="ResourceRef_1190041757154">
+		<res-ref-name>jdbc/comor</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	<resource-ref id="ResourceRef_1190041757264">
+		<description>Génération automatique - Connexion de source de données SDO à dbform</description>
+		<res-ref-name>comor</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	<security-role>
+		<description>
+		</description>
+		<role-name>test role</role-name>
+	</security-role>
+	<env-entry>
+		<description>Chemin racine des logs</description>
+		<env-entry-name>logDataRoot</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>D:/logs</env-entry-value>
+	</env-entry>
+	<env-entry>
+		<env-entry-name>sun.io.unicode.encoding</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>UnicodeBig</env-entry-value>
+	</env-entry>
+	<env-entry>
+		<env-entry-name>ibm.system.encoding</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value></env-entry-value>
+	</env-entry>
+	<env-entry>
+		<env-entry-name>file.encoding</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>ISO646-US</env-entry-value>
+	</env-entry>
+
+</web-app>

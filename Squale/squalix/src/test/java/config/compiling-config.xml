@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <!DOCTYPE configuration SYSTEM "compiling-config.dtd"> -->
+<configuration>
+    <java>
+        <general>
+            <separators>
+                <separator name="classpath" value=";" />
+            </separators>
+            <bootclasspaths>
+            	<bootclasspath version="1.4" path="C:/j2sdk1.4.2_12/jre/lib/rt.jar" />
+            </bootclasspaths>
+            <default_jdk_version>1_4</default_jdk_version>
+            <dest_dir>bin/</dest_dir>
+            <required_memory>1024m</required_memory>
+            <eclipse_bundle_path>./data/eclipse_bundle</eclipse_bundle_path>
+            <exported_libs_path>./data/exported_libs</exported_libs_path>
+        </general>
+    
+        <parsing>
+            <wsad>
+                <filename>.classpath</filename>
+                <keys>
+                    <key name="classpath" value="classpath" />
+                    <key name="classpathentry" value="classpathentry" />
+                    <key name="kind" value="kind" />
+                    <key name="path" value="path" />
+                    <key name="exported" value="exported" />
+                </keys>
+                <values>
+                    <value name="src" value="src" />
+                    <value name="lib" value="lib" />
+                    <value name="var" value="var" />
+                    <value name="con" value="con" />
+                </values>
+            </wsad>
+        </parsing>
+    
+    </java>
+    
+    <cpp>
+        <script>
+            <scriptname>data/cpp_squale_compilation.sh</scriptname>
+            <vars>
+                <var name="USE_MCCABE" value="1" />
+            </vars>
+        </script>    
+    </cpp>
+</configuration>

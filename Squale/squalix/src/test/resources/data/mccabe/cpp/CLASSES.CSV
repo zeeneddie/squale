@@ -1,0 +1,5 @@
+__sun_dummy,1,1,1,1,0,0,0,1,FALSE
+hash_dict_tweaker,2,7,2,2,0,0,0,3,FALSE
+hash_set_tweaker,2,7,2,2,0,0,0,3,FALSE
+line_tweaker,10,6,6,1,0,33,3,17,FALSE
+sorted_vector_tweaker,2,7,2,2,0,0,0,3,FALSE

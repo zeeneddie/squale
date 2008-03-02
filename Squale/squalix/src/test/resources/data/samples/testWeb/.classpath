@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path="JavaSource"/>
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/WebSphere v5.1 JRE"/>
+    <classpathentry kind="con" path="com.ibm.etools.server.target.container/com.ibm.etools.websphere.serverTarget.base.v51/j2ee.web/1"/>
+    <classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-beanutils.jar"/>
+    <classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-collections.jar"/>
+    <classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-digester.jar"/>
+    <classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-fileupload.jar"/>
+    <classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-lang.jar"/>
+    <classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging.jar"/>
+    <classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-validator.jar"/>
+    <classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts.jar"/>
+    <classpathentry kind="lib" path="WebContent/WEB-INF/lib/welcom-2.3.jar"/>
+    <classpathentry kind="src" path="/testCommon"/>
+    <classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
+</classpath>

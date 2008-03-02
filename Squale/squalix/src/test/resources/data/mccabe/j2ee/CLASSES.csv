@@ -1,0 +1,11 @@
+pageWeb_jsp,1,1,1,1,0,0,0,1,FALSE
+test.TestCommon,1,6,6,2,0,100,0,6,FALSE
+testbatch.1.BlockInnerClass,1,1,1,1,0,0,0,1,FALSE
+testbatch.batch.TestBatch,1,3,2,2,0,0,1,2,FALSE
+testbatch.batch.TestBatchExtended,1,9,6,3,0,100,0,2,FALSE
+"testbatch.batch.TestBatchExtended.getLineNumber(java.lang.String[],java.io.File)$__Anon_001_",1,1,1,2,0,0,0,1,FALSE
+"testbatch.batch.TestBatchExtended.getLineNumbers(java.lang.String[],java.io.File)$__Anon_001_",1,1,1,2,0,0,0,1,FALSE
+testbatch.batch2.TestBatch,1,2,1,2,0,0,0,1,FALSE
+testbatch.batch2.TestBatch.InnerTestBatch,1,1,1,2,0,0,0,1,FALSE
+testExcluded.TestExcludedDirs,1,2,2,2,0,100,0,2,FALSE
+testweb.TestServlet,1,2,2,2,0,0,0,2,FALSE

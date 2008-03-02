@@ -17,11 +17,11 @@ import com.airfrance.squalix.util.parser.LanguageParser;
 import com.airfrance.squalix.util.repository.ComponentRepository;
 
 /**
- * Est en charge de remplacer tous les noms des méthodes par les objets 
- * correspondant.<br>
+ * Est en charge de remplacer tous les noms des méthodes par les objets correspondant.<br>
  * Ceci permet d'utiliser les relations proposées par la base de données.<br>
  */
-public class McCabeAdaptator {
+public class McCabeAdaptator
+{
 
     /**
      * HashMap des sommes des iv(g).
@@ -41,14 +41,16 @@ public class McCabeAdaptator {
     /**
      * Logger
      */
-    private static final Log LOGGER = LogFactory.getLog(McCabeAdaptator.class);
+    private static final Log LOGGER = LogFactory.getLog( McCabeAdaptator.class );
 
     /**
      * Constructeur
+     * 
      * @param pParser le parser
      * @param pRepository le repository
      */
-    public McCabeAdaptator(LanguageParser pParser, ComponentRepository pRepository) {
+    public McCabeAdaptator( LanguageParser pParser, ComponentRepository pRepository )
+    {
         mParser = pParser;
         mRepository = pRepository;
         mSumIvg = new HashMap();
@@ -56,78 +58,93 @@ public class McCabeAdaptator {
 
     /**
      * Adapte le bean des résultats des méthodes et le fait persister.<br>
-     * En utilisant nom du composant récupéré depuis le rapport McCabe, on crée
-     * la relation avec le composant adéquat. 
+     * En utilisant nom du composant récupéré depuis le rapport McCabe, on crée la relation avec le composant adéquat.
      * 
-     * @param pMethodResult Ensemble de résultats de la méthode devant être modifiés 
-     * et persistés.
+     * @param pMethodResult Ensemble de résultats de la méthode devant être modifiés et persistés.
      * @throws JrafDaoException si erreur
      */
-    public void adaptMethodResult(final McCabeQAMethodMetricsBO pMethodResult) throws JrafDaoException {
-        LOGGER.debug(McCabeMessages.getString("logs.debug.adapt_method") + pMethodResult.getComponentName());
+    public void adaptMethodResult( final McCabeQAMethodMetricsBO pMethodResult )
+        throws JrafDaoException
+    {
+        LOGGER.debug( McCabeMessages.getString( "logs.debug.adapt_method" ) + pMethodResult.getComponentName() );
         // Recherche de la méthode associée
-        MethodBO method = mParser.getMethod(pMethodResult.getComponentName(), pMethodResult.getFilename());
-        if (null != method) {
+        MethodBO method = mParser.getMethod( pMethodResult.getComponentName(), pMethodResult.getFilename() );
+        if ( null != method )
+        {
             // On renseigne son numéro de ligne dans le fichier pour le plugin IDE
-            try {
-                method.setStartLine(Integer.parseInt(pMethodResult.getStartLine()));
-            } catch(NumberFormatException nfe) {
+            try
+            {
+                method.setStartLine( Integer.parseInt( pMethodResult.getStartLine() ) );
+            }
+            catch ( NumberFormatException nfe )
+            {
                 // Par défaut on met la ligne à 0
-                method.setStartLine(0);
+                method.setStartLine( 0 );
             }
-            MethodBO persistentMethod = (MethodBO) mRepository.persisteComponent(method);
-            String parentKeyName = mRepository.buildKey((ClassBO) persistentMethod.getParent());
-            Integer sumIvG = (Integer) mSumIvg.get(parentKeyName);
-            if (null == sumIvG) {
-                sumIvG = new Integer(pMethodResult.getIvg().intValue());
-            } else {
+            MethodBO persistentMethod = (MethodBO) mRepository.persisteComponent( method );
+            String parentKeyName = mRepository.buildKey( (ClassBO) persistentMethod.getParent() );
+            Integer sumIvG = (Integer) mSumIvg.get( parentKeyName );
+            if ( null == sumIvG )
+            {
+                sumIvG = new Integer( pMethodResult.getIvg().intValue() );
+            }
+            else
+            {
                 int value = sumIvG.intValue() + pMethodResult.getIvg().intValue();
-                sumIvG = new Integer(value);
+                sumIvG = new Integer( value );
             }
-            mSumIvg.put(parentKeyName, sumIvG);
-            pMethodResult.setComponent(persistentMethod);
+            mSumIvg.put( parentKeyName, sumIvG );
+            pMethodResult.setComponent( persistentMethod );
         }
     }
 
     /**
      * Adapte le bean des résultats des classes et le fait persister.
      * 
-     * @param pClassResult Ensemble des résultats de la classe devant être modifiés et 
-     * persistés.
+     * @param pClassResult Ensemble des résultats de la classe devant être modifiés et persistés.
      * @throws JrafDaoException si erreur
      */
-    public void adaptClassResult(final McCabeQAClassMetricsBO pClassResult) throws JrafDaoException {
-        LOGGER.debug(McCabeMessages.getString("logs.debug.adapt_class") + pClassResult.getComponentName());
-        ClassBO classBO = mParser.getClass(pClassResult.getComponentName());
-        if (null != classBO) {
-            ClassBO persistentClassBO = (ClassBO) mRepository.persisteComponent(classBO);
-            pClassResult.setComponent(persistentClassBO);
-            String keyName = mRepository.buildKey(persistentClassBO);
-            Integer sumIvG = (Integer) mSumIvg.get(keyName);
-            if (null == sumIvG) {
-                sumIvG = new Integer(0);
+    public void adaptClassResult( final McCabeQAClassMetricsBO pClassResult )
+        throws JrafDaoException
+    {
+        LOGGER.debug( McCabeMessages.getString( "logs.debug.adapt_class" ) + pClassResult.getComponentName() );
+        ClassBO classBO = mParser.getClass( pClassResult.getComponentName() );
+        if ( null != classBO )
+        {
+            ClassBO persistentClassBO = (ClassBO) mRepository.persisteComponent( classBO );
+            pClassResult.setComponent( persistentClassBO );
+            String keyName = mRepository.buildKey( persistentClassBO );
+            Integer sumIvG = (Integer) mSumIvg.get( keyName );
+            if ( null == sumIvG )
+            {
+                sumIvG = new Integer( 0 );
             }
-            pClassResult.setSumivg(sumIvG);
+            pClassResult.setSumivg( sumIvG );
         }
     }
 
     /**
      * Adapte le bean des résultats des méthodes au composant JSP et le fait persister.<br>
-     * En utilisant le nom du composant récupéré depuis le rapport McCabe, on crée
-     * la relation avec le composant adéquat. 
+     * En utilisant le nom du composant récupéré depuis le rapport McCabe, on crée la relation avec le composant
+     * adéquat.
      * 
      * @param pJspMethodResult Ensemble de résultats de la méthode de la JSP
      * @param pDirectoryName le nom du répertoire racine contenant les pages JSP
      * @param pId l'index du répertoires des JSPs dans les paramétres du projet
-     * 
      * @throws JrafDaoException si erreur
      */
-    public void adaptJspResult(McCabeQAJspMetricsBO pJspMethodResult, String pDirectoryName, int pId) throws JrafDaoException {
-        LOGGER.debug(McCabeMessages.getString("logs.debug.adapt_jsp_with_method_result") + pJspMethodResult.getComponentName());
-        JspBO jsp = ((J2EEParser)mParser).getJsp(pJspMethodResult.getComponentName(), pJspMethodResult.getFileName(), pDirectoryName, pId);
-        if(null != jsp) {
-            JspBO persistentJsp = (JspBO) mRepository.persisteComponent(jsp);
-            pJspMethodResult.setComponent(persistentJsp);
+    public void adaptJspResult( McCabeQAJspMetricsBO pJspMethodResult, String pDirectoryName, int pId )
+        throws JrafDaoException
+    {
+        LOGGER.debug( McCabeMessages.getString( "logs.debug.adapt_jsp_with_method_result" )
+            + pJspMethodResult.getComponentName() );
+        JspBO jsp =
+            ( (J2EEParser) mParser ).getJsp( pJspMethodResult.getComponentName(), pJspMethodResult.getFileName(),
+                                             pDirectoryName, pId );
+        if ( null != jsp )
+        {
+            JspBO persistentJsp = (JspBO) mRepository.persisteComponent( jsp );
+            pJspMethodResult.setComponent( persistentJsp );
         }
     }
 }

@@ -10,29 +10,38 @@ import com.airfrance.squalix.util.file.FileUtility;
 /**
  * Supprime le répertoire crée par la tâche d'analyse du code source
  */
-public class SourceCodeAnalyserCleanerTask extends AbstractTask {
+public class SourceCodeAnalyserCleanerTask
+    extends AbstractTask
+{
 
     /**
      * Constructeur
      */
-    public SourceCodeAnalyserCleanerTask() {
+    public SourceCodeAnalyserCleanerTask()
+    {
         mName = "SourceCodeAnalyserCleanerTask";
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @see com.airfrance.squalix.core.AbstractTask#execute()
      */
-    public void execute() throws TaskException {
-        try {
+    public void execute()
+        throws TaskException
+    {
+        try
+        {
             // On récupère la configuration de la tâche
             SourceCodeAnalyserConfig conf = new SourceCodeAnalyserConfig();
-            conf.parse(new FileInputStream("config/sourcecodeanalyser-config.xml"));
+            conf.parse( new FileInputStream( "config/sourcecodeanalyser-config.xml" ) );
             // On supprime le répertoire
-            File dir = new File(conf.getRootDirectory());
-            FileUtility.deleteRecursively(dir);
-        } catch (Exception e) {
-            throw new TaskException(e);
+            File dir = new File( conf.getRootDirectory() );
+            FileUtility.deleteRecursively( dir );
+        }
+        catch ( Exception e )
+        {
+            throw new TaskException( e );
         }
 
     }

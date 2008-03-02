@@ -24,15 +24,17 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.cp
 /**
  * Persistance des résultats CppTest
  */
-public class CppTestPersistor {
+public class CppTestPersistor
+{
 
     /**
      * Logger
      */
-    private static final Log LOGGER = LogFactory.getLog(CppTestPersistor.class);
+    private static final Log LOGGER = LogFactory.getLog( CppTestPersistor.class );
 
     /**
      * Sauvegarde des résultats
+     * 
      * @param pSession session
      * @param pProjectBO projet
      * @param pAuditBO audit
@@ -40,53 +42,62 @@ public class CppTestPersistor {
      * @param pRuleSet ruleset
      * @throws JrafDaoException si erreur
      */
-    public void storeResults(ISession pSession, ProjectBO pProjectBO, AuditBO pAuditBO, Map pResults, CppTestRuleSetDTO pRuleSet) throws JrafDaoException {
+    public void storeResults( ISession pSession, ProjectBO pProjectBO, AuditBO pAuditBO, Map pResults,
+                              CppTestRuleSetDTO pRuleSet )
+        throws JrafDaoException
+    {
         // On récupère le jeu de règles associé au projet
-        CppTestRuleSetBO ruleset = (CppTestRuleSetBO) CppTestRuleSetDAOImpl.getInstance().get(pSession, new Long(pRuleSet.getId()));
+        CppTestRuleSetBO ruleset =
+            (CppTestRuleSetBO) CppTestRuleSetDAOImpl.getInstance().get( pSession, new Long( pRuleSet.getId() ) );
         // Création de la transgression
         CppTestTransgressionBO transgression = new CppTestTransgressionBO();
-        transgression.setAudit(pAuditBO);
-        transgression.setComponent(pProjectBO);
-        transgression.setRuleSet(ruleset);
-        transgression.setTaskName("task.cpptest.name");
+        transgression.setAudit( pAuditBO );
+        transgression.setComponent( pProjectBO );
+        transgression.setRuleSet( ruleset );
+        transgression.setTaskName( "task.cpptest.name" );
         // On parcourt les règles connues dans le ruleset
         Iterator ruleCodes = ruleset.getRules().values().iterator();
-        while (ruleCodes.hasNext()) {       
+        while ( ruleCodes.hasNext() )
+        {
             RuleBO rule = (RuleBO) ruleCodes.next();
-            Collection details = (Collection) pResults.get(rule.getCode());
+            Collection details = (Collection) pResults.get( rule.getCode() );
             int nbOcc = 0;
             // Si le parsing n'a pas donné de résultat, on place 0 comme
             // nombre de transgression
-            if (details!=null) {
+            if ( details != null )
+            {
                 nbOcc = details.size();
                 // On parcourt le détail des transgressions
                 int cpt = RuleCheckingTransgressionBO.MAX_DETAILS;
-                for (Iterator detailIt = details.iterator(); detailIt.hasNext() && cpt > 0; cpt--) {
+                for ( Iterator detailIt = details.iterator(); detailIt.hasNext() && cpt > 0; cpt-- )
+                {
                     RuleCheckingTransgressionItemBO item = (RuleCheckingTransgressionItemBO) detailIt.next();
-                    item.setRule(rule);
-                    transgression.getDetails().add(item);
+                    item.setRule( rule );
+                    transgression.getDetails().add( item );
                 }
             }
             // On ajoute une métrique de type Integer pour chaque règle transgressée
             // avec 0 comme valeur par défaut
             IntegerMetricBO metric = new IntegerMetricBO();
-            metric.setName(rule.getCode());
-            metric.setValue(nbOcc);
-            metric.setMeasure(transgression);
-            transgression.putMetric(metric);
+            metric.setName( rule.getCode() );
+            metric.setValue( nbOcc );
+            metric.setMeasure( transgression );
+            transgression.putMetric( metric );
         }
         // On parcourt les règles non trouvées dans le ruleset
         ruleCodes = pResults.keySet().iterator();
-        while (ruleCodes.hasNext()) {
+        while ( ruleCodes.hasNext() )
+        {
             String ruleCode = (String) ruleCodes.next();
             // Chaque règle non trouvée est signalée comme
             // manquante
-            if (false==ruleset.getRules().containsKey(ruleCode)) {
-                LOGGER.warn(CppTestMessages.getString("rule.ignored", ruleCode));
+            if ( false == ruleset.getRules().containsKey( ruleCode ) )
+            {
+                LOGGER.warn( CppTestMessages.getString( "rule.ignored", ruleCode ) );
             }
         }
         // Sauvegarde des données dans la base
-        MeasureDAOImpl.getInstance().create(pSession, transgression);
+        MeasureDAOImpl.getInstance().create( pSession, transgression );
     }
 
 }

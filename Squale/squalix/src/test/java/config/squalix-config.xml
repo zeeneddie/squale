@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<general>
+		<auditpool size="4" softmodesize="1" />
+		<taskpool size="30" />
+		<softmodeduration value="2:00" />
+		<inactivity delay="1" />
+	</general>
+	<timeout>
+		<when day="monday" time="7:00" />
+		<when day="thursday" time="7:00" />
+	</timeout>
+	<profiles>
+		<profile name="system">
+			<analysis>
+				<task class="classe1" depends="" />
+				<task class="classe2" depends="" />
+				<task class="classe3" depends="classe1" />
+				<task class="classe4" depends="classe3" />
+			</analysis>
+			<termination></termination>
+		</profile>
+		<profile name="java1.4">
+			<analysis>
+				<task class="classe5" depends="" />
+				<task class="classe6" depends="" />
+				<task class="classe7" depends="classe6" />
+				<task class="classe8" depends="classe7" />
+			</analysis>
+			<termination></termination>
+		</profile>
+	</profiles>
+	<resources>
+		<resource name="mccabe.license" quantity="8" />
+		<!-- Les espaces disque sont en Mo -->
+		<resource name="disk.space" quantity="5000" />
+	</resources>
+</configuration>

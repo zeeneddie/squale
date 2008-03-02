@@ -1,0 +1,9 @@
+Name,Diags2,NumCls,NumCls_tc,NumOpsCls,NumInterf,Nesting,DepClient,DepSupp,AssEl_ex,StimSent_Outside,StimRecv_Outside,StimSent_within,MsgSent_Outside,MsgRecv_Outside,MsgSent_within
+Transports.Terrestres,0,8,8,13,0,0,1,0,0,0,0,0,0,0,0
+Transports.java.lang,0,2,2,0,0,1,0,0,0,0,0,0,0,0,0
+Transports.java.util,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0
+Transports.java,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0
+Transports.Marins,0,1,1,7,1,0,0,0,0,0,0,0,0,0,0
+Transports.Essence,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Transports.Routes,0,6,6,4,1,0,0,1,0,0,0,0,0,0,0
+Transports.Aeriens,0,5,5,10,1,0,0,0,0,0,0,0,0,0,0

@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="arch.xsl"?>
+<!-- Fichier de configuration de testCommon -->
+<macker>
+	<ruleset name="architecture JRAF">
+		<!-- definition des variables -->
+		<!-- racines des variables -->
+		<var name="nom_projet" value="test" /> <!-- nom du package le plus haut -->
+
+	<!-- JSP -->
+		<pattern name="jsp">
+			<include class="org.apache.jsp.**" />
+		</pattern>
+
+		<!-- Variables application -->
+		<pattern name="actions-servlet">
+			<include class="${nom_projet}.**.servlet.*" />
+			<include class="${nom_projet}.**.action.**" />
+			<exclude pattern="jsp" />
+		</pattern>
+
+		<pattern name="formbeans">
+			<include class="${nom_projet}.**.formbean.**" />
+		</pattern>
+
+		<pattern name="jspbeans">
+			<include class="${nom_projet}.**.jspbean.**" />
+		</pattern>
+
+		<!-- Bus de donn�es JRaf (DTO) -->
+
+		<pattern name="dto">
+			<include class="${nom_projet}.datatransfertobject.**" />
+		</pattern>
+		<pattern name="dtotransform">
+			<include class="${nom_projet}.datatransfertobject.transform.**" />
+		</pattern>
+
+
+        <!-- Couche Welcom -->
+		<pattern name="welcom">
+			<include class="${nom_projet}.transformer.**" />
+			<include class="${nom_projet}.comparator.**" />
+		</pattern>
+
+		<!-- Variables m�tier -->
+
+		<pattern name="application-component">
+			<include class="${nom_projet}.enterpriselayer.applicationcomponent.**" />
+		</pattern>
+
+		<pattern name="facades">
+			<include class="${nom_projet}.enterpriselayer.facade.**" />
+		</pattern>
+
+
+		<pattern name="BO">
+			<include
+				class="${nom_projet}.enterpriselayer.businessobject.**" />
+		</pattern>
+
+		<!-- Variables persistance -->
+		<pattern name="persistance">
+			<include class="${nom_projet}.daolayer.**" />
+		</pattern>
+
+		<pattern name="jdbc">
+			<include class="java.sql.**" />
+			<include class="javax.sql.**" />
+			<include class="javax.jdo.**" />
+			<include class="oracle.jdbc.**" />
+			<include class="oracle.sql.**" />
+		</pattern>
+
+		<!-- on definit toutes les classes sauf celle du projet 
+			(la reciproque en fait) -->
+		<pattern name="reste-du-monde">
+			<exclude class="${nom_projet}.**" />
+		</pattern>
+
+		<!-- Definition des regles -->
+		<access-rule severity="error">
+			<message>Acces non valide aux formbeans</message>
+			<deny>
+				<to pattern="formbeans" />
+			</deny>
+			<allow>
+				<from>
+					<include pattern="jsp" />
+					<include pattern="formbeans" />
+					<include pattern="actions-servlet" />
+					<include pattern="jspbeans" />
+					<include pattern="welcom" />
+				</from>
+			</allow>
+		</access-rule>
+		<access-rule severity="error">
+			<message>Acces non valide aux jspbeans</message>
+			<deny>
+				<to pattern="jspbeans" />
+			</deny>
+			<allow>
+				<from>
+					<include pattern="jsp" />
+					<include pattern="jspbeans" />
+					<include pattern="actions-servlet" />
+					<include pattern="formbeans" />
+				</from>
+			</allow>
+		</access-rule>
+		<!-- L'acc�s aux actions-servlet n'est autoris� que depuis les JSP -->
+		<access-rule severity="error">
+			<message>Acces non valide aux actions-servlet</message>
+			<deny>
+				<to pattern="actions-servlet" />
+			</deny>
+			<allow>
+				<from>
+					<include pattern="actions-servlet" />
+					<include pattern="jsp" />
+				</from>
+			</allow>
+		</access-rule>
+		<access-rule severity="error">
+			<message>
+				Acces non valide aux application-component
+			</message>
+			<deny>
+				<to pattern="application-component" />
+			</deny>
+			<allow>
+				<from>
+					<include pattern="jspbeans" />
+					<include pattern="formbeans" />
+					<include pattern="actions-servlet" />
+					<include pattern="application-component" />
+				</from>
+			</allow>
+		</access-rule>
+		<access-rule severity="error">
+			<message>Acces non valide aux facades jraf</message>
+			<deny>
+				<to pattern="facades" />
+			</deny>
+			<allow>
+				<from>
+					<include pattern="facades" />
+					<include pattern="application-component" />
+				</from>
+			</allow>
+		</access-rule>
+		<access-rule severity="error">
+			<message>Acces non valide aux objets metiers jraf</message>
+			<deny>
+				<to pattern="BO" />
+			</deny>
+			<allow>
+				<from>
+					<include pattern="BO" />
+					<include pattern="persistance" />
+					<include pattern="facades" />
+					<include pattern="dtotransform" />
+				</from>
+			</allow>
+		</access-rule>
+		<access-rule severity="error">
+			<message>Acces non valide aux DTO</message>
+			<deny>
+				<to pattern="dto" />
+			</deny>
+			<allow>
+				<from>
+					<include pattern="dto" />
+					<include pattern="facades" />
+					<include pattern="application-component" />
+					<include pattern="actions-servlet" />
+					<include pattern="jspbeans" />
+					<include pattern="formbeans" />
+					<include pattern="welcom" />
+				</from>
+			</allow>
+		</access-rule>
+		<access-rule severity="error">
+			<message>Acces non valide a la persistance</message>
+			<deny>
+				<to pattern="persistance" />
+			</deny>
+			<allow>
+				<from>
+					<include pattern="facades" />
+					<include pattern="persistance" />
+				</from>
+			</allow>
+		</access-rule>
+		<access-rule severity="error">
+			<message>Acces non valide a l'api JDBC</message>
+			<deny>
+				<to pattern="jdbc" />
+			</deny>
+			<allow>
+				<from>
+					<include pattern="persistance" />
+				</from>
+			</allow>
+		</access-rule>
+	</ruleset>
+</macker>

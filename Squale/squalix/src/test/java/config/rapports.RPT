@@ -1,0 +1,23 @@
+REPORT METHODES MODULE NOHEADERS
+LINES 0
+COL mod_name "Module Name"  none trunc 999 none none
+COL mixed "C&SLOC"  none none 0 none none
+COL comments "CLOC"  none none 0 none none
+COL code "SLOC"  none none 0 none none
+COL nl "NL"  none none 0 none none
+COL vg "v(G)"  none none 0 none none
+COL evg "ev(G)"  none none 0 none none
+COL ivg "iv(G)"  none none 0 none none
+COL file_name "File Name"  none wrap 999 none none
+REPORT CLASSES CLASS NOHEADERS
+LINES 0
+COL cls_name "Class Name"  none trunc 999 none none
+COL max_vg "Max v(G)"  none none 0 none none
+COL rfc "Response"  none none 0 none none
+COL wmc "Method Count"  none none 0 none none
+COL depth "Dit"  none none 0 none none
+COL cbo "Coupling"  none none 0 none none
+COL locm "Lack Cohesion"  none none 0 none none
+COL noc "Child Count"  none none 0 none none
+COL sum_vg "Sum v(G)"  none none 0 none none
+COL dep_on_child "Depends Upon Child"  none none 0 none none

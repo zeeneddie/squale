@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<macker>    
+    <ruleset name="Simple example">
+        <access-rule>
+        	<message>Les références ne sont pas correctes</message>
+            <deny>
+                <from class="**Print*" />
+                <to class="java.**" />
+            </deny>
+        </access-rule>
+    </ruleset>
+</macker>

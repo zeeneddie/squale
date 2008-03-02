@@ -3,10 +3,10 @@ package com.airfrance.squalix.core;
 import java.util.HashMap;
 
 /**
- * Cette classe sert à l'échange entre les différents tâches
- * des paramètres qui ne doivent pas être persistés
+ * Cette classe sert à l'échange entre les différents tâches des paramètres qui ne doivent pas être persistés
  */
-public class TaskData {
+public class TaskData
+{
 
     /**
      * La map contenant les paramètres qui ne doivent pas etre persistés
@@ -16,71 +16,67 @@ public class TaskData {
     /**
      * Constructeur
      */
-    public TaskData() {
+    public TaskData()
+    {
         super();
         mMap = new HashMap();
     }
 
     /**
-     * 
      * @param pKey la clé du paramètre
      * @return l'objet associé à cette clé
      */
-    public Object getData(String pKey) {
-        return mMap.get(pKey);
+    public Object getData( String pKey )
+    {
+        return mMap.get( pKey );
     }
 
     /**
      * Insert dans la map le paramètre
+     * 
      * @param pKey la clé définissant le paramètre
      * @param pData la valeur de la clé
      */
-    public void putData(String pKey, Object pData) {
-        mMap.put(pKey, pData);
+    public void putData( String pKey, Object pData )
+    {
+        mMap.put( pKey, pData );
     }
 
-    //Liste des constantes qui servent de clé 
+    // Liste des constantes qui servent de clé
 
     /**
-     * Chemin d'accès absolu à la vue
-     * Cette variable est renseignée par le SourceManagement, elle est utilisée
-     * par les différentes tâches qui nécessitent l'accès à des données
-     * contenues dans un répertoire. Ces tâches font alors la concaténation de
-     * ce chemin avec le nom de leur répertoire.
-     * Par exemple, la tâche de compilation va chercher ses sources dans /vobs/squale/src/squaleCommon,
-     * l'accès à ces sources se fera par concaténation du chemin défini par le sourceManagement.
-     * Ce chemin d'accès est dépendant du type de sourcemanagement
-     *  (clearcase, filesystem, zip ...)
-     * Pour clearcase : donne le chemin d'accès à la vue statique
-     * qui a été montée par exemple :
-     * /app/SQUALE/dev/data/cc_snapshot/squale_v2_0_act_quicktest_testcommon_squaledev/
-     * La tâche de compilation java ira donc chercher ses données dans le répertoire
+     * Chemin d'accès absolu à la vue Cette variable est renseignée par le SourceManagement, elle est utilisée par les
+     * différentes tâches qui nécessitent l'accès à des données contenues dans un répertoire. Ces tâches font alors la
+     * concaténation de ce chemin avec le nom de leur répertoire. Par exemple, la tâche de compilation va chercher ses
+     * sources dans /vobs/squale/src/squaleCommon, l'accès à ces sources se fera par concaténation du chemin défini par
+     * le sourceManagement. Ce chemin d'accès est dépendant du type de sourcemanagement (clearcase, filesystem, zip ...)
+     * Pour clearcase : donne le chemin d'accès à la vue statique qui a été montée par exemple :
+     * /app/SQUALE/dev/data/cc_snapshot/squale_v2_0_act_quicktest_testcommon_squaledev/ La tâche de compilation java ira
+     * donc chercher ses données dans le répertoire
      * /app/SQUALE/dev/data/cc_snapshot/squale_v2_0_act_quicktest_testcommon_squaledev//vobs/squale/src/squaleCommon
      * (Noter le double slash qui est supeflu sur Unix)
      */
     public static final String VIEW_PATH = "view_path";
-    
+
     /**
-     * Classpath java de compilation
-     * Il s'agit du classpath utilisé par la tâche de compilation java,
-     * par exemple lib1.jar:lib2.jar
+     * Classpath java de compilation Il s'agit du classpath utilisé par la tâche de compilation java, par exemple
+     * lib1.jar:lib2.jar
      */
     public static final String CLASSPATH = "classpath";
-    
+
     /**
      * Les répertoires contenant les fichiers compilés
      */
     public static final String CLASSES_DIRS = "classes_dirs";
-    
-    /** 
-     * Le répertoire contenant les pages JSP compilées 
+
+    /**
+     * Le répertoire contenant les pages JSP compilées
      */
     public final static String JSP_TO_JAVA_DIR = "jspToJava_dir";
-    
-    /** 
-     * Le répertoire contenant les classes Java des pages JSP compilées 
+
+    /**
+     * Le répertoire contenant les classes Java des pages JSP compilées
      */
     public final static String JSP_CLASSES_DIR = "jsp_classes_dir";
-    
-    
+
 }

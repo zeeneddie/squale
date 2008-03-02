@@ -9,8 +9,7 @@ import com.airfrance.jraf.bootstrap.initializer.Initializer;
 import com.airfrance.squalix.messages.Messages;
 
 /**
- * Lance l'application Squalix.
- * <br />
+ * Lance l'application Squalix. <br />
  * Ceci consiste en quelques opérations simples :
  * <ul>
  * <li>initialisation du socle JRAF,</li>
@@ -18,18 +17,17 @@ import com.airfrance.squalix.messages.Messages;
  * <li>instanciation d'un scheduler si l'exécution peut-être lancée.</li>
  * </ul>
  * <br />
- * Le lancement du scheduler est synchrone, ce qui bloque l'application tant que le scheduler tourne.
- * <br />
- * Pour plus de renseignements sur le fonctionnement du moteur de tâches, reportez-vous à la 
- * javadoc des classes <code>Scheduler</code> et <code>ResourcesManager</code>.
+ * Le lancement du scheduler est synchrone, ce qui bloque l'application tant que le scheduler tourne. <br />
+ * Pour plus de renseignements sur le fonctionnement du moteur de tâches, reportez-vous à la javadoc des classes
+ * <code>Scheduler</code> et <code>ResourcesManager</code>.
  * 
  * @see com.airfrance.squalix.core.Scheduler
  * @see com.airfrance.squalix.core.ResourcesManager
- * 
  * @author m400842
  * @version 1.0
  */
-public class Squalix {
+public class Squalix
+{
 
     /**
      * Logger
@@ -48,50 +46,67 @@ public class Squalix {
 
     /**
      * Méthode main.
+     * 
      * @param pArgs arguments de lancement.
      * @roseuid 42918D3702A5
      */
-    public static void main(final String pArgs[]) {
+    public static void main( final String pArgs[] )
+    {
         // lancement de l’initialisation JRAF
         String rootPath = pArgs[0];
         String configFile = "/config/providers-config.xml";
-        Initializer init = new Initializer(rootPath, configFile);
-        init.initialize(); 
+        Initializer init = new Initializer( rootPath, configFile );
+        init.initialize();
         // Maintenant que le socle JRAF est initialisé, on peut créer un logger
-        mLOGGER = LogFactory.getLog(Squalix.class);
-        if (null != pArgs && pArgs.length > 0) {
-            try {
+        mLOGGER = LogFactory.getLog( Squalix.class );
+        if ( null != pArgs && pArgs.length > 0 )
+        {
+            try
+            {
                 // On trie les paramètres
-                getParameters(pArgs);
+                getParameters( pArgs );
                 Scheduler scheduler = null;
-                if (null == mSite) {
+                if ( null == mSite )
+                {
                     // Si aucun site n'est spécifié, on quitte l'application
-                    mLOGGER.fatal(Messages.getString("main.missing_parameters"));
-                } else {
-                    scheduler = new Scheduler(new Long(mSite).longValue());
+                    mLOGGER.fatal( Messages.getString( "main.missing_parameters" ) );
+                }
+                else
+                {
+                    scheduler = new Scheduler( new Long( mSite ).longValue() );
                     // on lance le scheduleur
                     scheduler.start();
                 }
-            } catch (Exception e) {
+            }
+            catch ( Exception e )
+            {
                 // Si un problème apparaît dans la récupération de la configuration
                 // ou des paramètres, on loggue et on quitte
-                mLOGGER.fatal("Fatal error", e);
+                mLOGGER.fatal( "Fatal error", e );
             }
-        } else {
-            mLOGGER.fatal(Messages.getString("main.missing_parameters"));
+        }
+        else
+        {
+            mLOGGER.fatal( Messages.getString( "main.missing_parameters" ) );
         }
     }
 
     /**
-     * Récupère les paramètres de la ligne de commande 
+     * Récupère les paramètres de la ligne de commande
+     * 
      * @param pArgs liste des paramètres.
      * @roseuid 42CE4F340204
      */
-    private static void getParameters(final String pArgs[]) {
-        for (int i = 0; i < pArgs.length; i++) {
-            if (pArgs[i].equals(Messages.getString("main.site_parameter"))) {
+    private static void getParameters( final String pArgs[] )
+    {
+        for ( int i = 0; i < pArgs.length; i++ )
+        {
+            if ( pArgs[i].equals( Messages.getString( "main.site_parameter" ) ) )
+            {
                 mSite = pArgs[++i];
-            } else if (pArgs[i].equals(Messages.getString("main.configFile_parameter"))) {
+            }
+            else if ( pArgs[i].equals( Messages.getString( "main.configFile_parameter" ) ) )
+            {
                 mConfigFile = pArgs[++i];
             }
         }

@@ -19,38 +19,42 @@ import com.airfrance.squalix.tools.compiling.CompilingMessages;
 
 /**
  * Cette classe utilise les méthodes de la classe <code>
- * com.airfrance.squalix.configurationmanager.ConfigUtility</code>. <br/>
- * La seule modification apportée se situe dans la méthode <code>
- * getRootNode(String, String)</code>. La méthode <code>
- * db.parse()</code> ne prend plus un <code>InputStream</code> issu d'un 
- * <code>RessourceBundle</code> en paramètre, mais une <code>String</code> 
- * qui est un chemin absolu. 
+ * com.airfrance.squalix.configurationmanager.ConfigUtility</code>.
+ * <br/> La seule modification apportée se situe dans la méthode <code>
+ * getRootNode(String, String)</code>. La méthode
+ * <code>
+ * db.parse()</code> ne prend plus un <code>InputStream</code> issu d'un <code>RessourceBundle</code> en
+ * paramètre, mais une <code>String</code> qui est un chemin absolu.
+ * 
  * @see com.airfrance.squalix.configurationmanager.ConfigUtility
  * @author m400832
  * @version 1.0
  */
-public class JParserUtility {
+public class JParserUtility
+{
 
     /**
      * Logger.
      */
-    private static final Log LOGGER = LogFactory.getLog(JParserUtility.class);
+    private static final Log LOGGER = LogFactory.getLog( JParserUtility.class );
 
     /**
-     * Retourne l'élément racine du document XML de
-     * configuration.
+     * Retourne l'élément racine du document XML de configuration.
+     * 
      * @param pFile Fichier de configuration
      * @param pName Nom de la racine.
      * @return Le noeud racine.
      * @throws Exception si un problème apparaît.
      */
-    public static Node getRootNode(final String pFile, final String pName) throws Exception {
-        LOGGER.debug(CompilingMessages.getString("logs.configuration.getRootNode"));
+    public static Node getRootNode( final String pFile, final String pName )
+        throws Exception
+    {
+        LOGGER.debug( CompilingMessages.getString( "logs.configuration.getRootNode" ) );
         /* création du Document */
         DocumentBuilderFactory dbc = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbc.newDocumentBuilder();
-        File f = new File(pFile);
-        Document doc = db.parse(f);
+        File f = new File( pFile );
+        Document doc = db.parse( f );
 
         /* Récupération de la liste des noeuds */
         NodeList nl = doc.getChildNodes();
@@ -59,13 +63,16 @@ public class JParserUtility {
         Node node = null;
         Node root = null;
 
-        /* tant qu'il y aura des noeuds ds la liste, et que l'on a 
-         * pas trouvé le noeud racine désiré */
-        for (int i = 0; i < nl.getLength() && null == root; i++) {
+        /*
+         * tant qu'il y aura des noeuds ds la liste, et que l'on a pas trouvé le noeud racine désiré
+         */
+        for ( int i = 0; i < nl.getLength() && null == root; i++ )
+        {
             /* récupération du i-ème noeud */
-            node = nl.item(i);
+            node = nl.item( i );
             /* si l'on trouve le noeud recherché */
-            if (node.getNodeType() == Node.ELEMENT_NODE && node.getNodeName().equalsIgnoreCase(pName)) {
+            if ( node.getNodeType() == Node.ELEMENT_NODE && node.getNodeName().equalsIgnoreCase( pName ) )
+            {
                 /* alors on le stocke */
                 root = node;
             }
@@ -74,14 +81,15 @@ public class JParserUtility {
     }
 
     /**
-     * Retourne un élément directement enfant avec le nom désiré, ou null
-     * si celui-ci n'existe pas.
+     * Retourne un élément directement enfant avec le nom désiré, ou null si celui-ci n'existe pas.
+     * 
      * @param pParent Le noeud parent.
      * @param pName Le nom de l'élément recherché, insensible à la casse.
      * @return l'élément trouvé ou null si non trouvé.
      * @see ConfigUtility#getNodeByTagName(Node, String)
      */
-    public static Node getNodeByTagName(Node pParent, String pName) {
-        return ConfigUtility.getNodeByTagName(pParent, pName);
+    public static Node getNodeByTagName( Node pParent, String pName )
+    {
+        return ConfigUtility.getNodeByTagName( pParent, pName );
     }
 }

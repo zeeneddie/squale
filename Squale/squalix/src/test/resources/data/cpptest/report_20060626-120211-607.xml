@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Log log_version="1.0" machine="dev8ts" os="SunOS" os_arch="sparc" os_ver="5.8" start="1151323324741" stop="1151323331580" time_zone="GMT" tool="C++Test" user="squale" version="6.7">
+<Group name="Coding Standards" start="1151323326116" stop="1151323331580">
+<Property name="Rule:FuncModifyGlobalVar.rule" value="Maintainability"/>
+<Property name="Rule:CastFuncPtrToPrimPtr.rule" value="Maintainability"/>
+<Property name="Rule:misra2004_15_4_BooleanInSwitchExpression.rule" value="Other"/>
+<Property name="Rule:ConditionCurlyBraces2.rule" value="Maintainability"/>
+<Property name="Rule:ExplicitlyReturnType.rule" value="Maintainability"/>
+<Property name="Rule:misra2004_18_2_ObjectAssignedToOverlappingObject.rule" value="Other"/>
+<Property name="PROJECT" value="cppProject"/>
+<Property name="analysis_type" value="static_analysis"/>
+<Property name="Rule:misra2004_12_2_1_IncDecOperatorInEvaluationOrder.rule" value="Other"/>
+<Property name="Rule:CaseWithBreak.rule" value="Reliability"/>
+<Property name="Rule:UsageOfScanf.rule" value="Security"/>
+<Property name="Rule:PartialStatementDefinition.rule" value="Maintainability"/>
+<Property name="Rule:DefaultInSwitch.rule" value="Maintainability"/>
+<Property name="Rule:PassDynamicStringIntoExec2.rule" value="Security"/>
+<Property name="Rule:ConditionCurlyBraces3.rule" value="Maintainability"/>
+<Property name="Rule:UseTypedefForFuncPointers.rule" value="Maintainability"/>
+<Property name="Rule:InitCharOutOfRange.rule" value="Reliability"/>
+<Property name="Rule:UsageOfVforkFunctions.rule" value="Security"/>
+<Property name="Rule:misra2004_5_3_DoNotReuseTypedefNames.rule" value="Other"/>
+<Property name="Rule:NoInputParamsInMacros.rule" value="Other"/>
+<Property name="Rule:PassDynamicStringIntoExec.rule" value="Security"/>
+<Property name="Rule:InitUnCharOutOfRange.rule" value="Reliability"/>
+<Property name="Rule:UsageOfFprintf.rule" value="Security"/>
+<Property name="Rule:UsageOfPrintf.rule" value="Security"/>
+<Property name="Rule:misra2004_15_5_AvoidSwitchWithNoCase.rule" value="Other"/>
+<Property name="PID" value="fffffef3c5038107"/>
+<Property name="Rule:CharCompareRight.rule" value="Reliability"/>
+<Property name="Rule:SpacesBeforeUnaryOperator.rule" value="Maintainability"/>
+<Property name="Rule:NumberMacroParams.rule" value="Maintainability"/>
+<Property name="Rule:misra2004_11_5_DoNotConvertConstToNonConst.rule" value="Other"/>
+<Property name="Rule:NameIsFunction.rule" value="Maintainability"/>
+<Property name="Rule:misra2004_19_8_FunctionLikeMacrosAllArguments.rule" value="Other"/>
+<Property name="Rule:SpacesAfterUnaryOperator.rule" value="Maintainability"/>
+<Property name="Rule:AssignCharTooLow.rule" value="Reliability"/>
+<Property name="Rule:CommaOperator.rule" value="Maintainability"/>
+<Property name="Rule:ConstPointerFunctionCall.rule" value="Maintainability"/>
+<Property name="Rule:misra2004_13_6_DoNotModifyCounterInForLoopBody.rule" value="Other"/>
+<Property name="Rule:ExplicitLogicalTests.rule" value="Maintainability"/>
+<Property name="Rule:misra2004_17_2_PointerSubtractionOnDiffrentArrays.rule" value="Other"/>
+<Property name="Rule:ConditionCurlyBraces.rule" value="Maintainability"/>
+<Property name="Rule:CyclomaticComplexity.rule" value="Maintainability"/>
+<Property name="Rule:misra2004_12_9_AvoidUnaryMinusInUnsignedtypes.rule" value="Other"/>
+<Property name="Rule:misra2004_12_2_5_AvoidNestedAssignment.rule" value="Other"/>
+<Property name="Rule:misra2004_12_2_3_PointerCallAndIncDecPointerOrder.rule" value="Other"/>
+<Property name="Rule:AvoidEllipses.rule" value="Maintainability"/>
+<Property name="Rule:TypeModifiersAfterTypes.rule" value="Maintainability"/>
+<Property name="Rule:misra2004_8_3_UseIdenticalTypesForDeclDef.rule" value="Other"/>
+<Property name="Rule:FractionLoss.rule" value="Reliability"/>
+<Property name="Rule:misra2004_8_6_DeclareFunctionsAtFileScope.rule" value="Other"/>
+<Property name="Rule:NameConflict.rule" value="Maintainability"/>
+<Property name="Rule:CharCompareLeft.rule" value="Reliability"/>
+<Property name="GID" value="S:fffffef3c5038107"/>
+<Property name="Rule:MacroWithinInclude.rule" value="Maintainability"/>
+<Property name="Rule:EqualityFloatRight.rule" value="Reliability"/>
+<Property name="Rule:IfElseWhileFollowBlock.rule" value="Maintainability"/>
+<Property name="Rule:misra2004_12_2_2_EvaluationOrderInCallExpression.rule" value="Other"/>
+<Property name="Rule:AssignUnCharTooLow.rule" value="Reliability"/>
+<Property name="Rule:AssignCharTooHigh.rule" value="Reliability"/>
+<Property name="Rule:misra2004_8_3_UseIdenticalReturnTypesForDeclDef.rule" value="Other"/>
+<Property name="Rule:AvoidUsingShellFunctions.rule" value="Security"/>
+<Property name="Rule:CastUnsigned.rule" value="Reliability"/>
+<Property name="EXECUTION MODE" value="COMMAND-LINE"/>
+<Property name="Rule:RedefControlStatements.rule" value="Maintainability"/>
+<Property name="Rule:AssignUnCharTooHigh.rule" value="Reliability"/>
+<Property name="Rule:misra2004_19_7_PreferFunctionsOverMacros.rule" value="Other"/>
+<Property name="Rule:misra2004_17_6_ReturningAddressOfLocalObject.rule" value="Other"/>
+<Property name="Rule:CastPointer.rule" value="Reliability"/>
+<Property name="User-Attribute: PROJECT_CONFIGURATION" value="project://SunC++5.5"/>
+<Property name="Rule:BreakInForLoop.rule" value="Maintainability"/>
+<Property name="Rule:EqualityFloatLeft.rule" value="Reliability"/>
+<Property name="Rule:misra2004_17_4_AvoidIndexingPointerAsArray.rule" value="Other"/>
+<Property name="Rule:misra2004_5_3_DoNotReuseTypedefNamesAsATypedefName.rule" value="Other"/>
+<Property name="Rule:UsageOfStringFunctions.rule" value="Security"/>
+<Property name="Rule:FloatDoubleComparing.rule" value="Reliability"/>
+<Property name="Rule:SpaceInSelector.rule" value="Maintainability"/>
+<Property name="Rule:ExprInSizeof.rule" value="Maintainability"/>
+<Property name="Rule:SpaceInSelector2.rule" value="Maintainability"/>
+<Property name="User-Attribute: TEST_CONFIGURATION" value="team://CRulesAF"/>
+<Property name="Rule:HardCodeValue.rule" value="Maintainability"/>
+<Property name="Rule:misra2004_17_1_PointerArithmeticOnNotPointers.rule" value="Other"/>
+<Property name="Rule:AvoidGotoStatement.rule" value="Maintainability"/>
+<Property name="Rule:MacroSize.rule" value="Maintainability"/>
+<Property name="Rule:IfAssign.rule" value="Reliability"/>
+<Test name="rw_migrate.C" start="1151323326117" status="failure" stop="1151323328897">
+<Message>
+<Property name="file" value="/vobs/squale/src/squalixTest/data/Project4McCabeCppTest/src/rw_migrate.C"/>
+<Property name="symbol" value="/vobs/squale/src/squalixTest/data/Project4McCabeCppTest/src/rw_migrate.C"/>
+<Property name="test_category" value="Maintainability"/>
+<Property name="rule_id" value="ExplicitLogicalTests.rule"/>
+<Property name="description" value="An explicit logical comparison should be used in conditional expression"/>
+<Property name="error_type" value="2"/>
+<Property name="severity" value="Severity Level 3"/>
+<Property name="message" value="Logical tests should be explicit in condition expression&#10;An explicit logical comparison should be used in conditional expression"/>
+<Property name="to_makto_scope" value="8"/>
+<Property name="line" value="26"/>
+</Message>
+<Message>
+<Property name="file" value="/vobs/squale/src/squalixTest/data/Project4McCabeCppTest/src/rw_migrate.C"/>
+<Property name="symbol" value="/vobs/squale/src/squalixTest/data/Project4McCabeCppTest/src/rw_migrate.C"/>
+<Property name="test_category" value="Maintainability"/>
+<Property name="rule_id" value="ExplicitLogicalTests.rule"/>
+<Property name="description" value="An explicit logical comparison should be used in conditional expression"/>
+<Property name="error_type" value="2"/>
+<Property name="severity" value="Severity Level 3"/>
+<Property name="message" value="Logical tests should be explicit in condition expression&#10;An explicit logical comparison should be used in conditional expression"/>
+<Property name="to_makto_scope" value="8"/>
+<Property name="line" value="31"/>
+</Message>
+</Test>
+<Test name="rw_migrate_file.C" start="1151323329036" status="failure" stop="1151323331579">
+<Message>
+<Property name="file" value="/vobs/squale/src/squalixTest/data/Project4McCabeCppTest/src/rw_migrate_file.C"/>
+<Property name="symbol" value="/vobs/squale/src/squalixTest/data/Project4McCabeCppTest/src/rw_migrate_file.C"/>
+<Property name="test_category" value="Maintainability"/>
+<Property name="rule_id" value="ExplicitLogicalTests.rule"/>
+<Property name="description" value="An explicit logical comparison should be used in conditional expression"/>
+<Property name="error_type" value="2"/>
+<Property name="severity" value="Severity Level 3"/>
+<Property name="message" value="Logical tests should be explicit in condition expression&#10;An explicit logical comparison should be used in conditional expression"/>
+<Property name="to_makto_scope" value="8"/>
+<Property name="line" value="25"/>
+</Message>
+</Test>
+</Group>
+</Log>

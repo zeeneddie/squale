@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="project4McCabeTest" default="java2class" basedir=".">
+
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="classes.dir" value="${basedir}/../results/compiled" />
+
+	<path id="class.path">
+		<fileset dir="${basedir}/lib">
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
+		</fileset>
+	</path>
+
+	<target name="java2class" description="tache de compilation des classes"  depends="init">
+        <echo message="src path: ${src.dir}"></echo>
+        <echo message="dest path: ${classes.dir}"></echo>
+		<javac srcdir="${src.dir}" destdir="${classes.dir}">
+			<classpath refid="class.path"/>
+		</javac>
+		
+	</target>
+
+	<target name="clean" description="suppression des fichiers generes">
+		<delete dir="${classes.dir}"/>
+	</target>
+
+	<target name="init" description="Initialisation de l'environnement" depends="clean">
+		<mkdir dir="${classes.dir}"/>
+	</target>
+
+</project>

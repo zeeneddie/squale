@@ -1,0 +1,79 @@
+Resource Standard Metrics
+Version 6.94
+Date Processed: Mon Mar 12 14:12:33 2007
+
+RSM Command Line: -A -fa -Tf -To -F/app/SQUALE/dev/data/rsm/input.txt 
+License File: /app/SQUALE/OUTILS/RSM/rsm.lic
+
+Configuration File: /app/SQUALE/OUTILS/RSM/rsm.cfg
+
+Type, Name, File Date, Size, LOC/FP, eLOC/FP, lLOC/FP, Comments, Blanks, Lines, Comment/eLOC, Classes, Functions, Parameters, Returns, InterComp, CycloComp, Total Complexity, Notices
+
+  f(), test.TestCommon.TestCommon, , , 3/0.1       , 2/0.0       , 1/0.0       , 0, 0, 3, 0.00, , 1, 0, 1, 1, 1, 2, 
+  f(), test.TestCommon.TestCommon, , , 3/0.1       , 2/0.0       , 1/0.0       , 0, 0, 3, 0.00, , 1, 1, 1, 2, 1, 3, 
+  f(), test.TestCommon.main, , , 2/0.0       , 1/0.0       , 0/0.0       , 0, 1, 3, 0.00, , 1, 1, 1, 2, 1, 3, 
+  f(), test.TestCommon.setTestNumber, , , 3/0.1       , 2/0.0       , 1/0.0       , 0, 0, 3, 0.00, , 1, 1, 1, 2, 1, 3, 
+  f(), test.TestCommon.getTestNumber, , , 3/0.1       , 2/0.0       , 1/0.0       , 0, 0, 3, 0.00, , 1, 0, 1, 1, 1, 2, 
+  f(), test.TestCommon.getDisplay, , , 3/0.1       , 2/0.0       , 1/0.0       , 0, 0, 3, 0.00, , 1, 0, 1, 1, 1, 2, 
+  f(), test.TestCommon.getDisplay, , , 12/0.2       , 9/0.2       , 6/0.1       , 0, 0, 12, 0.00, , 1, 1, 1, 2, 3, 5, 
+, Total, , , 29/0.5       , 20/0.4       , 11/0.2       , 0, 1, 30, 0.00, , 7, 4, 7, 11, 9, 20, 
+, Average, , , 4.14/0.1       , 2.86/0.1       , 1.57/0.0       , 0.00, 0.14, 4.29, 0.00, , 1.00, 0.57, 1.00, 1.57, 1.29, 2.86, 
+, Maximum, , , 12/0.2       , 9/0.2       , 6/0.1       , 0, 1, 12, 0.00, , 1, 1, 1, 2, 3, 5, 
+, Minimum, , , 2/0.0       , 1/0.0       , 0/0.0       , 0, 0, 3, 0.00, , 1, 0, 1, 1, 1, 2, 
+File, /app/SQUALE/dev/data/cc_snapshot/squale_v3_0_act_quicktest_testcommon_squaledev/vobs/squale/src/squalixTest/data/samples/testCommon/test/TestCommon.java, Mon Mar 12 14:12:13 2007, 1045, 33/0.6       , 23/0.4       , 13/0.2       , 6, 13, 52, 0.26, 1, 7, 4, 7, 11, 9, 20, 12
+
+File, /app/SQUALE/dev/data/cc_snapshot/squale_v3_0_act_quicktest_testcommon_squaledev/vobs/squale/src/squalixTest/data/samples/testCommon/test/TestCommonInterface.java, Mon Mar 12 14:12:13 2007, 108, 4/0.1       , 3/0.1       , 2/0.0       , 2, 3, 9, 0.67, 0, 0, 0, 0, 0, 0, 0, 0
+
+Files, 2
+File, Total, , 1153, 37/0.7       , 26/0.5       , 15/0.3       , 8, 16, 61, 0.93, 1, 7, 4, 7, 11, 9, 20, 12
+File, Average, , 576.50, 18.50/0.3       , 13.00/0.2       , 7.50/0.1       , 4.00, 8.00, 30.50, 0.46, 0.50, 3.50, 2.00, 3.50, 5.50, 4.50, 10.00, 6.00
+File, Maximum, , 1045, 33, 23, 13, 6, 13, 52, 0.67, 1, 7, 4, 7, 11, 9, 20, 12
+File, Minimum, , 108, 4, 3, 2, 2, 3, 9, 0.26, 0, 0, 0, 0, 0, 0, 0, 0
+
+
+
+Project Function Metrics
+No Sort Method
+Count,6
+Type,Name,LOC,eLOC,lLOC,Comments,Comments/eLOC,Lines,Parameters,Returns,Interface Complexity,Cyclomatic Complexity,Functional Complexity
+f(),test.TestCommon.TestCommon,3,2,1,0,0.00,3,0,1,1,1,2
+f(),test.TestCommon.TestCommon,3,2,1,0,0.00,3,1,1,2,1,3
+f(),test.TestCommon.main,2,1,0,0,0.00,3,1,1,2,1,3
+f(),test.TestCommon.setTestNumber,3,2,1,0,0.00,3,1,1,2,1,3
+f(),test.TestCommon.getTestNumber,3,2,1,0,0.00,3,0,1,1,1,2
+f(),test.TestCommon.getDisplayString,3,2,1,0,0.00,3,0,1,1,1,2
+f(),Total,17,11,5,0,0.00,18,3,6,9,6,15
+f(),Average,2.83,1.83,0.83,0.00,0.00,3.00,0.50,1.00,1.50,1.00,2.50
+f(),Maximum,3,2,1,0,0.00,3,1,1,2,1,3
+f(),Minimum,2,1,0,0,0.00,3,0,1,1,1,2
+,Function Pts.,       0.3,       0.2,       0.1,
+
+Project Class Metrics
+No Sort Method
+Count,1
+Type,Name,LOC,eLOC,lLOC,Comments,Comments/eLOC,Lines,Parameters,Returns,Interface Complexity,Cyclomatic Complexity,Functional Complexity,Methods,Public Methods,Protected Methods,Private Methods,Attributes,Public Attributes,Protected Attributes,Private Attributes
+Class,test.TestCommon,20,13,6,3,0.23,27,3,6,9,6,15,6,6,0,0,1,0,0,1
+Class,Total,20,13,6,3,0.23,27,3,6,9,6,15,6,6,0,0,1,0,0,1
+Class,Average,20.00,13.00,6.00,3.00,0.23,27.00,3.00,6.00,9.00,6.00,15.00,6.00,6.00,0.00,0.00,1.00,0.00,0.00,1.00
+Class,Maximum,20,13,6,3,0.23,27,3,6,9,6,15,6,6,0,0,1,0,0,1
+Class,Minimum,20,13,6,3,0.23,27,3,6,9,6,15,6,6,0,0,1,0,0,1
+
+Project Interface Metrics
+No Sort Method
+Count,1
+Type,Name,LOC,eLOC,lLOC,Comments,Comments/eLOC,Lines,Parameters,Returns,Interface Complexity,Cyclomatic Complexity,Functional Complexity,Methods,Public Methods,Protected Methods,Private Methods,Attributes,Public Attributes,Protected Attributes,Private Attributes
+Class,Interface-test.TestCommonInterface,3,2,1,2,1.00,4,0,0,0,0,0,1,1,0,0,0,0,0,0
+Class,Total,3,2,1,2,1.00,4,0,0,0,0,0,1,1,0,0,0,0,0,0
+Class,Average,3.00,2.00,1.00,2.00,1.00,4.00,0.00,0.00,0.00,0.00,0.00,1.00,1.00,0.00,0.00,0.00,0.00,0.00,0.00
+Class,Maximum,3,2,1,2,1.00,4,0,0,0,0,0,1,1,0,0,0,0,0,0
+Class,Minimum,3,2,1,2,1.00,4,0,0,0,0,0,1,1,0,0,0,0,0,0
+
+Project Namespace/Package Metrics
+No Sort Method
+Count,1
+Type,Name,LOC,eLOC,lLOC,Comments,Comments/eLOC,Lines,Parameters,Returns,Interface Complexity,Cyclomatic Complexity,Functional Complexity,Classes,Functions,Public Methods,Protected Methods,Private Methods,Attributes,Public Attributes,Protected Attributes,Private Attributes
+Namespace/Package,test,23,15,7,5,0.33,31,3,6,9,6,15,2,7,7,0,0,1,0,0,1
+Namespace/Package,Total,23,15,7,5,0.33,31,3,6,9,6,15,2,7,7,0,0,1,0,0,1
+Namespace/Package,Average,23.00,15.00,7.00,5.00,0.33,31.00,3.00,6.00,9.00,6.00,15.00,2.00,7.00,7.00,0.00,0.00,1.00,0.00,0.00,1.00
+Namespace/Package,Maximum,23,15,7,5,0.33,31,3,6,9,6,15,2,7,7,0,0,1,0,0,1
+Namespace/Package,Minimum,23,15,7,5,0.33,31,3,6,9,6,15,2,7,7,0,0,1,0,0,1

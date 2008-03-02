@@ -25,49 +25,56 @@ import com.airfrance.squalix.util.parser.CppParser;
 import com.airfrance.squalix.util.process.ProcessManager;
 
 /**
- * Tâche McCabe pour les projets C++
- * Cette tâche nécessite des ajustements pour l'analyse
- * du code C++.
- * Les fichiers source doivent être préprocessés pour générer des
- * fichiers .i. Un fichier myheader.dat doit être créé pour y
+ * Tâche McCabe pour les projets C++ Cette tâche nécessite des ajustements pour l'analyse du code C++. Les fichiers
+ * source doivent être préprocessés pour générer des fichiers .i. Un fichier myheader.dat doit être créé pour y
  * référencer l'ensemble des fichiers d'include à prendre en compte
  */
-public class CppMcCabeTask extends AbstractMcCabeTask implements CSVParser.CSVHandler {
+public class CppMcCabeTask
+    extends AbstractMcCabeTask
+    implements CSVParser.CSVHandler
+{
 
     /**
      * Logger
      */
-    private static final Log LOGGER = LogFactory.getLog(AbstractMcCabeTask.class);
+    private static final Log LOGGER = LogFactory.getLog( AbstractMcCabeTask.class );
 
     /**
      * Constructeur
      */
-    public CppMcCabeTask() {
+    public CppMcCabeTask()
+    {
         mName = "CppMcCabeTask";
     }
 
     /**
-     * {@inheritDoc}
-     * On doit utiliser un parser C++
+     * {@inheritDoc} On doit utiliser un parser C++
+     * 
      * @see com.airfrance.squalix.tools.mccabe.AbstractMcCabeTask#setParser()
      */
-    public void setParser() {
-        mParser = new CppParser(mProject);
+    public void setParser()
+    {
+        mParser = new CppParser( mProject );
     }
-    
+
     /**
      * {@inheritDoc}
+     * 
      * @see com.airfrance.squalix.tools.mccabe.AbstractMcCabeTask#setClassTemplate()
      */
-    public void setClassTemplate() {
+    public void setClassTemplate()
+    {
         mClassTemplate = "csv.template.class";
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @see com.airfrance.squalix.core.Task#execute()
      */
-    public void execute() throws TaskException {
+    public void execute()
+        throws TaskException
+    {
         // On passe la phase de compilation avant de lancer
         // McCabe
         doCompilation();
@@ -76,83 +83,116 @@ public class CppMcCabeTask extends AbstractMcCabeTask implements CSVParser.CSVHa
 
     /**
      * Cette méthode réalise la compilation d'un projet C++.
+     * 
      * @throws TaskException exception lors de la compilation.
      */
-    protected void doCompilation() throws TaskException {
-        try {
+    protected void doCompilation()
+        throws TaskException
+    {
+        try
+        {
             /* si le fichier de script est conforme */
             File scriptFile = getCompilationScriptFile();
-            if (!scriptFile.exists()) {
+            if ( !scriptFile.exists() )
+            {
                 /* on lance une exception */
-                throw new Exception(McCabeMessages.getString("cpp.exception.task.scriptfile_not_found", scriptFile.toString()));
+                throw new Exception( McCabeMessages.getString( "cpp.exception.task.scriptfile_not_found",
+                                                               scriptFile.toString() ) );
             }
-            LOGGER.info(McCabeMessages.getString("logs.cpp.compile", scriptFile.getAbsolutePath()));
-            String viewPath = (String) getData().getData(TaskData.VIEW_PATH);
+            LOGGER.info( McCabeMessages.getString( "logs.cpp.compile", scriptFile.getAbsolutePath() ) );
+            String viewPath = (String) getData().getData( TaskData.VIEW_PATH );
             /* Lancement du process */
-            ProcessManager mgr = new ProcessManager(new String[] { scriptFile.getAbsolutePath(), viewPath }, null, scriptFile.getParentFile());
-            mgr.setOutputHandler(this);
-            int result = mgr.startProcess(this);
+            ProcessManager mgr =
+                new ProcessManager( new String[] { scriptFile.getAbsolutePath(), viewPath }, null,
+                                    scriptFile.getParentFile() );
+            mgr.setOutputHandler( this );
+            int result = mgr.startProcess( this );
 
             /* si le process se termine correctement */
-            if (0 != result) {
-                throw new TaskException(McCabeMessages.getString("cpp.logs.task.not_compiled"));
+            if ( 0 != result )
+            {
+                throw new TaskException( McCabeMessages.getString( "cpp.logs.task.not_compiled" ) );
             }
-        } catch (Exception e) {
-            throw new TaskException(e);
+        }
+        catch ( Exception e )
+        {
+            throw new TaskException( e );
         }
     }
+
     /**
      * Obtention du nom du script de compilation
+     * 
      * @return script de compilation
      * @throws ConfigurationException si erreur
      */
-    private File getCompilationScriptFile() throws ConfigurationException {
+    private File getCompilationScriptFile()
+        throws ConfigurationException
+    {
         File result;
         // On prend la valeur stockée dans le projet
-        MapParameterBO cppParams = (MapParameterBO) mProject.getParameter(ParametersConstants.CPP);
-        if (cppParams == null) {
+        MapParameterBO cppParams = (MapParameterBO) mProject.getParameter( ParametersConstants.CPP );
+        if ( cppParams == null )
+        {
             // Renvoi d'une exception de configuration
-            throw new ConfigurationException(McCabeMessages.getString("cpp.exception.variable.not_found", ParametersConstants.CPP));
-        } else {
-            StringParameterBO cppScript = (StringParameterBO) cppParams.getParameters().get(ParametersConstants.CPP_SCRIPTFILE);
+            throw new ConfigurationException( McCabeMessages.getString( "cpp.exception.variable.not_found",
+                                                                        ParametersConstants.CPP ) );
+        }
+        else
+        {
+            StringParameterBO cppScript =
+                (StringParameterBO) cppParams.getParameters().get( ParametersConstants.CPP_SCRIPTFILE );
             // Renvoi d'une exception de configuration
-            if (cppScript == null) {
+            if ( cppScript == null )
+            {
                 // Renvoi d'une exception de configuration
-                throw new ConfigurationException(McCabeMessages.getString("cpp.exception.variable.not_found", ParametersConstants.CPP_SCRIPTFILE));
-            } else {
-                File scriptFile = new File(cppScript.getValue());
+                throw new ConfigurationException( McCabeMessages.getString( "cpp.exception.variable.not_found",
+                                                                            ParametersConstants.CPP_SCRIPTFILE ) );
+            }
+            else
+            {
+                File scriptFile = new File( cppScript.getValue() );
                 // Si le script a un nom absolue et existe, on prend celui-ci
-                if (scriptFile.isAbsolute() && scriptFile.exists()) {
+                if ( scriptFile.isAbsolute() && scriptFile.exists() )
+                {
                     result = scriptFile;
-                } else {
+                }
+                else
+                {
                     // Le script est supposé être relatif à la vue
-                    String viewPath = (String) getData().getData(TaskData.VIEW_PATH);
-                    if (viewPath == null) {
+                    String viewPath = (String) getData().getData( TaskData.VIEW_PATH );
+                    if ( viewPath == null )
+                    {
                         // Renvoi d'une exception de configuration
-                        throw new ConfigurationException(McCabeMessages.getString("cpp.exception.variable.not_found", TaskData.VIEW_PATH));
+                        throw new ConfigurationException( McCabeMessages.getString( "cpp.exception.variable.not_found",
+                                                                                    TaskData.VIEW_PATH ) );
                     }
-                    result = new File(viewPath, scriptFile.getPath());
+                    result = new File( viewPath, scriptFile.getPath() );
                 }
             }
         }
         return result;
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @see com.airfrance.squalix.tools.mccabe.AbstractMcCabeTask#createProjectConfigurationFile(com.airfrance.squalix.tools.mccabe.McCabePCFFile)
      */
-    protected void createProjectConfigurationFile(McCabePCFFile pFile) throws Exception {
+    protected void createProjectConfigurationFile( McCabePCFFile pFile )
+        throws Exception
+    {
         // Création du fichier
-        super.createProjectConfigurationFile(pFile);
+        super.createProjectConfigurationFile( pFile );
         // Création du fichier avec les headers à prendre en compte
-        File headerFile = new File(pFile.getPcfFile().getParentFile(), "myheader.dat");
-        LOGGER.info(McCabeMessages.getString("logs.cpp.header", headerFile));
+        File headerFile = new File( pFile.getPcfFile().getParentFile(), "myheader.dat" );
+        LOGGER.info( McCabeMessages.getString( "logs.cpp.header", headerFile ) );
         Collection headerFiles = getHeaderFiles();
-        BufferedWriter buf = new BufferedWriter(new FileWriter(headerFile));
+        BufferedWriter buf = new BufferedWriter( new FileWriter( headerFile ) );
         Iterator it = headerFiles.iterator();
-        while (it.hasNext()) {
-            buf.write((String) it.next());
+        while ( it.hasNext() )
+        {
+            buf.write( (String) it.next() );
             buf.newLine();
         }
         buf.close();
@@ -160,59 +200,70 @@ public class CppMcCabeTask extends AbstractMcCabeTask implements CSVParser.CSVHa
 
     /**
      * Obtention des fichiers headers
+     * 
      * @return liste des fichiers header
      */
-    protected Collection getHeaderFiles() {
+    protected Collection getHeaderFiles()
+    {
         // Construction de la liste des fichiers .h non exclus
         // On parcourt chaque répertoire source sous la vue avec
         // l'extension requise
-        File root = new File((String) getData().getData(TaskData.VIEW_PATH));
-        List srcs = ((ListParameterBO) getProject().getParameters().getParameters().get(ParametersConstants.SOURCES)).getParameters();
-        List paths = BuildProjectPath.buildProjectPath((String) getData().getData(TaskData.VIEW_PATH), srcs);
+        File root = new File( (String) getData().getData( TaskData.VIEW_PATH ) );
+        List srcs =
+            ( (ListParameterBO) getProject().getParameters().getParameters().get( ParametersConstants.SOURCES ) ).getParameters();
+        List paths = BuildProjectPath.buildProjectPath( (String) getData().getData( TaskData.VIEW_PATH ), srcs );
         HashSet filesList = new HashSet();
         // Parcours de chaque répertoire source
-        for (int i = 0; i < paths.size(); i++) {
-            McCabeFileFilter filter = new McCabeFileFilter(root.getAbsolutePath(), mConfiguration.getEntetes());
+        for ( int i = 0; i < paths.size(); i++ )
+        {
+            McCabeFileFilter filter = new McCabeFileFilter( root.getAbsolutePath(), mConfiguration.getEntetes() );
             HashSet fileList = new HashSet();
-            File pDirectory = new File((String) paths.get(i));
-            FileUtility.createRecursiveListOfFiles(pDirectory, filter, fileList);
+            File pDirectory = new File( (String) paths.get( i ) );
+            FileUtility.createRecursiveListOfFiles( pDirectory, filter, fileList );
             Iterator it = fileList.iterator();
             String filename = null;
             int rootLength = root.getAbsolutePath().length() + File.separator.length();
             // On ne retient que le nom du fichier
-            while (it.hasNext()) {
-                filename = new File((String) it.next()).getName();
-                filesList.add(filename);
+            while ( it.hasNext() )
+            {
+                filename = new File( (String) it.next() ).getName();
+                filesList.add( filename );
             }
         }
         return filesList;
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @see com.airfrance.squalix.tools.mccabe.AbstractMcCabeTask#createReport(java.lang.String)
      */
-    protected void createReport(String pReport) throws Exception {
+    protected void createReport( String pReport )
+        throws Exception
+    {
         // Génération du rapport
-        super.createReport(pReport);
+        super.createReport( pReport );
         // Dans le cas d'un rapport de type classe
         // on va lire ce rapport pour extraire les noms de classe
-        if (pReport.startsWith(McCabeMessages.getString("reports.profile.class"))) {
-            String fileName = computeReportFileName(pReport);
-            LOGGER.info(McCabeMessages.getString("logs.cpp.class.preprocess", fileName));
-            // Lecture du contenu de ce fichier pour en extraire les noms de 
+        if ( pReport.startsWith( McCabeMessages.getString( "reports.profile.class" ) ) )
+        {
+            String fileName = computeReportFileName( pReport );
+            LOGGER.info( McCabeMessages.getString( "logs.cpp.class.preprocess", fileName ) );
+            // Lecture du contenu de ce fichier pour en extraire les noms de
             // classes et les stocker dans le CppParser
-            CSVParser parser = new CSVParser(McCabeMessages.getString("csv.config.file"));
-            parser.parseLines(McCabeMessages.getString(mClassTemplate), fileName, this);
+            CSVParser parser = new CSVParser( McCabeMessages.getString( "csv.config.file" ) );
+            parser.parseLines( McCabeMessages.getString( mClassTemplate ), fileName, this );
         }
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @see com.airfrance.squalix.util.csv.CSVParser.CSVHandler#processLine(java.util.ArrayList)
      */
-    public void processLine(List pLine) {
-        ((CppParser) mParser).addKnownClass((String) pLine.get(0));
+    public void processLine( List pLine )
+    {
+        ( (CppParser) mParser ).addKnownClass( (String) pLine.get( 0 ) );
     }
 
 }

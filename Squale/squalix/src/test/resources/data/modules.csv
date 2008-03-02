@@ -1,0 +1,10 @@
+com.airfrance.project4mccabetest.Index.main(java.lang.String[]),4,0,4,5,1,1,1,D:\cc_views\squale_v0_0_act\squale\src\Project4McCabeTest\src\com\airfrance\project4mccabetest\Index.java
+com.airfrance.project4mccabetest.MyFileReader.readFile(java.net.URL),18,0,18,19,4,1,4,D:\cc_views\squale_v0_0_act\squale\src\Project4McCabeTest\src\com\airfrance\project4mccabetest\MyFileReader.java
+com.airfrance.project4mccabetest.MyFileReader.doNothing(java.lang.Object),9,0,9,10,2,1,1,D:\cc_views\squale_v0_0_act\squale\src\Project4McCabeTest\src\com\airfrance\project4mccabetest\MyFileReader.java
+com.airfrance.project4mccabetest.MyJavaBean.getFileName(),2,0,2,3,1,1,1,D:\cc_views\squale_v0_0_act\squale\src\Project4McCabeTest\src\com\airfrance\project4mccabetest\MyJavaBean.java
+com.airfrance.project4mccabetest.MyJavaBean.getLineNumber(),2,0,2,3,1,1,1,D:\cc_views\squale_v0_0_act\squale\src\Project4McCabeTest\src\com\airfrance\project4mccabetest\MyJavaBean.java
+com.airfrance.project4mccabetest.MyJavaBean.getReadingTime(),2,0,2,3,1,1,1,D:\cc_views\squale_v0_0_act\squale\src\Project4McCabeTest\src\com\airfrance\project4mccabetest\MyJavaBean.java
+com.airfrance.project4mccabetest.MyJavaBean.setFileName(java.lang.String),2,0,2,3,1,1,1,D:\cc_views\squale_v0_0_act\squale\src\Project4McCabeTest\src\com\airfrance\project4mccabetest\MyJavaBean.java
+com.airfrance.project4mccabetest.MyJavaBean.setLineNumber(int),2,0,2,3,1,1,1,D:\cc_views\squale_v0_0_act\squale\src\Project4McCabeTest\src\com\airfrance\project4mccabetest\MyJavaBean.java
+com.airfrance.project4mccabetest.MyJavaBean.setReadingTime(long),2,0,2,3,1,1,1,D:\cc_views\squale_v0_0_act\squale\src\Project4McCabeTest\src\com\airfrance\project4mccabetest\MyJavaBean.java
+com.airfrance.project4mccabetest.MyJavaBean.toString(),6,0,6,7,1,1,1,D:\cc_views\squale_v0_0_act\squale\src\Project4McCabeTest\src\com\airfrance\project4mccabetest\MyJavaBean.java
