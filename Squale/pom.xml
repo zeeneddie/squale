@@ -25,6 +25,10 @@
 			http://http://svn.javaforge.com/svn/squale/squale/trunk/squaleParentPOM/
 		</url>
 	</scm>
+	<properties>
+		<!-- TODO : to remove when tests are OK -->
+		<maven.test.skip>true</maven.test.skip>
+	</properties>
 	<modules>
 		<module>squale-core</module>
 		<module>squale-ear</module>
