@@ -5,41 +5,46 @@ import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
 /**
  * 
  */
-public class MarkDTO {
-    
+public class MarkDTO
+{
+
     /** la note */
     private float mValue;
-    
+
     /**
      * Composant possédant la note.
      */
     private ComponentDTO mComponent;
-    
+
     /**
      * @return le composant
      */
-    public ComponentDTO getComponent() {
+    public ComponentDTO getComponent()
+    {
         return mComponent;
     }
 
     /**
      * @return la note
      */
-    public float getValue() {
+    public float getValue()
+    {
         return mValue;
     }
 
     /**
      * @param pComponentDTO le composant
      */
-    public void setComponent(ComponentDTO pComponentDTO) {
+    public void setComponent( ComponentDTO pComponentDTO )
+    {
         mComponent = pComponentDTO;
     }
 
     /**
      * @param pMark la note
      */
-    public void setValue(float pMark) {
+    public void setValue( float pMark )
+    {
         mValue = pMark;
     }
 

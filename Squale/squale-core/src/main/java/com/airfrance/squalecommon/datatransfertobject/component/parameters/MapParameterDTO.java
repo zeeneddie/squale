@@ -5,7 +5,8 @@ import java.util.Map;
 
 /**
  */
-public class MapParameterDTO {
+public class MapParameterDTO
+{
 
     /**
      * La map de paramètres
@@ -20,9 +21,10 @@ public class MapParameterDTO {
     /**
      * Access method for the mId property.
      * 
-     * @return   the current value of the mId property
+     * @return the current value of the mId property
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
@@ -31,21 +33,24 @@ public class MapParameterDTO {
      * 
      * @param pId the new value of the mId property
      */
-    public void setId(long pId) {
+    public void setId( long pId )
+    {
         mId = pId;
     }
 
     /**
      * @return la map de paramètres
      */
-    public Map getParameters() {
+    public Map getParameters()
+    {
         return mParameters;
     }
 
     /**
      * @param pMap la nouvelle map de parametres
      */
-    public void setParameters(Map pMap) {
+    public void setParameters( Map pMap )
+    {
         mParameters = pMap;
     }
 

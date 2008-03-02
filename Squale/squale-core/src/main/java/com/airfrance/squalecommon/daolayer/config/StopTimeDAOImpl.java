@@ -6,7 +6,9 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.config.StopTime
 /**
  * DAO pour StopTimeBO
  */
-public class StopTimeDAOImpl extends AbstractDAOImpl {
+public class StopTimeDAOImpl
+    extends AbstractDAOImpl
+{
 
     /**
      * Instance singleton
@@ -14,22 +16,26 @@ public class StopTimeDAOImpl extends AbstractDAOImpl {
     private static StopTimeDAOImpl instance = null;
 
     /** initialisation du singleton */
-    static {
+    static
+    {
         instance = new StopTimeDAOImpl();
     }
 
     /**
      * Constructeur prive
      */
-    private StopTimeDAOImpl() {
-        initialize(StopTimeBO.class);
+    private StopTimeDAOImpl()
+    {
+        initialize( StopTimeBO.class );
     }
 
     /**
      * Retourne un singleton du DAO
+     * 
      * @return singleton du DAO
      */
-    public static StopTimeDAOImpl getInstance() {
+    public static StopTimeDAOImpl getInstance()
+    {
         return instance;
     }
 }

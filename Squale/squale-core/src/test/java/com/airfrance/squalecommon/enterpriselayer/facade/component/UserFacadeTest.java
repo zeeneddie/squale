@@ -10,9 +10,10 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 
 /**
  * Test de la facade User
- *
  */
-public class UserFacadeTest extends SqualeTestCase {
+public class UserFacadeTest
+    extends SqualeTestCase
+{
 
     /**
      * provider de persistence
@@ -21,24 +22,27 @@ public class UserFacadeTest extends SqualeTestCase {
 
     /**
      * Test de getUser
-     *
      */
-    public void testGetUser() {
-        try {
+    public void testGetUser()
+    {
+        try
+        {
             ISession session = PERSISTENTPROVIDER.getSession();
             session.beginTransaction();
-            UserBO user = getComponentFactory().createUser(session);
+            UserBO user = getComponentFactory().createUser( session );
             UserDTO dto = new UserDTO();
-            dto.setID(user.getId());
-            UserDTO out = UserFacade.getUser(dto, Boolean.FALSE);
-            assertNotNull(out);
-            dto.setID(-1);
-            out = UserFacade.getUser(dto, Boolean.FALSE);
-            assertNull(out);
-            FacadeHelper.closeSession(session, "");
-        } catch (Exception e) {
+            dto.setID( user.getId() );
+            UserDTO out = UserFacade.getUser( dto, Boolean.FALSE );
+            assertNotNull( out );
+            dto.setID( -1 );
+            out = UserFacade.getUser( dto, Boolean.FALSE );
+            assertNull( out );
+            FacadeHelper.closeSession( session, "" );
+        }
+        catch ( Exception e )
+        {
             e.printStackTrace();
-            fail("unexpected exception");
+            fail( "unexpected exception" );
         }
     }
 

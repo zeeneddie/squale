@@ -11,7 +11,9 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechec
 /**
  * DAO pour les items des transgressions.
  */
-public class RuleCheckingTransgressionItemDAOImpl extends AbstractDAOImpl {
+public class RuleCheckingTransgressionItemDAOImpl
+    extends AbstractDAOImpl
+{
 
     /** Le nombre limite d'items à retourner */
     private static final int LIMIT = 100;
@@ -25,23 +27,28 @@ public class RuleCheckingTransgressionItemDAOImpl extends AbstractDAOImpl {
     private static RuleCheckingTransgressionItemDAOImpl instance = null;
 
     /** initialisation du singleton */
-    static {
+    static
+    {
         instance = new RuleCheckingTransgressionItemDAOImpl();
     }
 
     /**
      * Constructeur prive
+     * 
      * @throws JrafDaoException
      */
-    private RuleCheckingTransgressionItemDAOImpl() {
-        initialize(RuleCheckingTransgressionItemBO.class);
+    private RuleCheckingTransgressionItemDAOImpl()
+    {
+        initialize( RuleCheckingTransgressionItemBO.class );
     }
 
     /**
      * Retourne un singleton du DAO
+     * 
      * @return singleton du DAO
      */
-    public static RuleCheckingTransgressionItemDAOImpl getInstance() {
+    public static RuleCheckingTransgressionItemDAOImpl getInstance()
+    {
         return instance;
     }
 
@@ -49,18 +56,20 @@ public class RuleCheckingTransgressionItemDAOImpl extends AbstractDAOImpl {
      * @param pSession la session
      * @param pMeasureId l'id de la mesure
      * @param pRuleId l'id de la règle
-     * @return les 100 premiers items classés par nom du composant impliqué ayant la mesure 
-     * d'id <code>pMeasureId</code> et la règle d'id <code>pRuleId</code>
+     * @return les 100 premiers items classés par nom du composant impliqué ayant la mesure d'id <code>pMeasureId</code>
+     *         et la règle d'id <code>pRuleId</code>
      * @throws JrafDaoException si erreur
      */
-    public Collection findWhereMeasureAndRule(ISession pSession, Long pMeasureId, Long pRuleId) throws JrafDaoException {
+    public Collection findWhereMeasureAndRule( ISession pSession, Long pMeasureId, Long pRuleId )
+        throws JrafDaoException
+    {
         String whereClause = "where ";
         whereClause += getAlias() + ".rule.id=" + pRuleId;
         whereClause += " and ";
         whereClause += getAlias() + ".id in ";
         whereClause += "(select rule.details.id from RuleCheckingTransgressionBO as rule where ";
         whereClause += "rule.id=" + pMeasureId + ")";
-        Collection items = (Collection) findWhereScrollable(pSession, whereClause, LIMIT, START, false);
+        Collection items = (Collection) findWhereScrollable( pSession, whereClause, LIMIT, START, false );
         return items;
     }
 
@@ -75,16 +84,20 @@ public class RuleCheckingTransgressionItemDAOImpl extends AbstractDAOImpl {
      * @return les transgressions correspondantes
      * @throws JrafDaoException si erreur
      */
-    public Collection findWhereMeasureClass(ISession pSession, String pProjectId, String pAuditId, String[] pClasses, String pSeverity, String pCategory, Integer pLimit) throws JrafDaoException {
-        Collection items = new ArrayList(0);
+    public Collection findWhereMeasureClass( ISession pSession, String pProjectId, String pAuditId, String[] pClasses,
+                                             String pSeverity, String pCategory, Integer pLimit )
+        throws JrafDaoException
+    {
+        Collection items = new ArrayList( 0 );
         // si il n'y a pas de mesures, on retourne une liste vide car in () ne fonctionne pas
-        if (pClasses.length > 0) {
-            String whereClause = getWhereMeasureClause(pProjectId, pAuditId, pClasses);
+        if ( pClasses.length > 0 )
+        {
+            String whereClause = getWhereMeasureClause( pProjectId, pAuditId, pClasses );
             whereClause += " and ";
             whereClause += getAlias() + ".rule.severity='" + pSeverity + "'";
             whereClause += " and ";
             whereClause += getAlias() + ".rule.category='" + pCategory + "'";
-            items = (Collection) findWhereScrollable(pSession, whereClause, pLimit.intValue(), 0, false);
+            items = (Collection) findWhereScrollable( pSession, whereClause, pLimit.intValue(), 0, false );
         }
         return items;
     }
@@ -97,12 +110,15 @@ public class RuleCheckingTransgressionItemDAOImpl extends AbstractDAOImpl {
      * @return le nombre de transgressions correspondantes
      * @throws JrafDaoException si erreur
      */
-    public int countWhereMeasures(ISession pSession, String pProjectId, String pAuditId, String[] pClasses) throws JrafDaoException {
+    public int countWhereMeasures( ISession pSession, String pProjectId, String pAuditId, String[] pClasses )
+        throws JrafDaoException
+    {
         int result = 0;
         // Si pClasses est vide, on retourne 0
-        if (pClasses.length > 0) {
-            String whereClause = getWhereMeasureClause(pProjectId, pAuditId, pClasses);
-            result = countWhere(pSession, whereClause).intValue();
+        if ( pClasses.length > 0 )
+        {
+            String whereClause = getWhereMeasureClause( pProjectId, pAuditId, pClasses );
+            result = countWhere( pSession, whereClause ).intValue();
         }
         return result;
     }
@@ -111,15 +127,16 @@ public class RuleCheckingTransgressionItemDAOImpl extends AbstractDAOImpl {
      * @param pProjectId l'id du projet
      * @param pAuditId l'id de l'audit
      * @param pClasses les mesures à chercher
-     * @return la clause where pour récupérer les transgressions liées aux critères passés
-     * en paramètre
+     * @return la clause where pour récupérer les transgressions liées aux critères passés en paramètre
      */
-    private String getWhereMeasureClause(String pProjectId, String pAuditId, String[] pClasses) {
+    private String getWhereMeasureClause( String pProjectId, String pAuditId, String[] pClasses )
+    {
         String whereClause = "where ";
         whereClause += getAlias() + ".id in ";
         whereClause += "(select rule.details.id from RuleCheckingTransgressionBO as rule where ";
         whereClause += " rule.class in (" + pClasses[0];
-        for (int i = 1; i < pClasses.length; i++) {
+        for ( int i = 1; i < pClasses.length; i++ )
+        {
             whereClause += ", " + pClasses[i];
         }
         whereClause += ")";

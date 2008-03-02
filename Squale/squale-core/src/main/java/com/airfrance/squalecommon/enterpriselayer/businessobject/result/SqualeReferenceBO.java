@@ -9,43 +9,42 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGri
 
 /**
  * Objet métier contenant les sous-projets sous référentiel
+ * 
  * @author m400842 (by rose)
  * @version 1.0
- * 
- * @hibernate.class 
- * table="SqualeReference"
- * mutable="true"
+ * @hibernate.class table="SqualeReference" mutable="true"
  */
-public class SqualeReferenceBO implements Serializable {
+public class SqualeReferenceBO
+    implements Serializable
+{
     /**
      * Grille qualité applicables pour ce sous-projet.
      */
     private QualityGridBO mQualityGrid;
-    
-    /** le type de l'audit*/
+
+    /** le type de l'audit */
     private String mAuditType;
-    
+
     /**
      * Access method for the mQualityGrid property.
      * 
-     * @return   the current value of the mQualityRules property
-     * 
-     * @hibernate.many-to-one 
-     * name="qualityGrid" 
-     * column="QualityGrid" 
-     * type="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO" 
-     * not-null="false" 
-     *
+     * @return the current value of the mQualityRules property
+     * @hibernate.many-to-one name="qualityGrid" column="QualityGrid"
+     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+     *                        not-null="false"
      */
-    public QualityGridBO getQualityGrid() {
+    public QualityGridBO getQualityGrid()
+    {
         return mQualityGrid;
     }
+
     /**
      * Sets the value of the mQualityGrid property.
      * 
      * @param pQualityGrid the new value of the mQualityGrid property
      */
-    public void setQualityGrid(QualityGridBO pQualityGrid) {
+    public void setQualityGrid( QualityGridBO pQualityGrid )
+    {
         mQualityGrid = pQualityGrid;
     }
 
@@ -75,8 +74,7 @@ public class SqualeReferenceBO implements Serializable {
     protected long mId;
 
     /**
-     * <code>true</code> si cette référence à été validée par l'administrateur du 
-     * portail.
+     * <code>true</code> si cette référence à été validée par l'administrateur du portail.
      */
     private boolean mHidden;
 
@@ -112,44 +110,36 @@ public class SqualeReferenceBO implements Serializable {
 
     /**
      * Récupère l'attribut mPublic
+     * 
      * @return projet est-il public
-     * 
-     * @hibernate.property 
-     * name="public" 
-     * column="PublicApplication" 
-     * type="boolean" 
-     * unique="false"
-     * 
+     * @hibernate.property name="public" column="PublicApplication" type="boolean" unique="false"
      */
-    public boolean getPublic() {
+    public boolean getPublic()
+    {
         return mPublic;
     }
 
     /**
      * Affecte pPublic à l'attribut mPublic.
+     * 
      * @param pPublic projet est-il publique
      * @roseuid 42CE36C203DF
      */
-    public void setPublic(boolean pPublic) {
+    public void setPublic( boolean pPublic )
+    {
         mPublic = pPublic;
     }
 
     /**
      * Access method for the mApplicationName property.
      * 
-     * @return   the current value of the mApplicationName property
-     * 
-     * @hibernate.property 
-     * name="projectName" 
-     * column="ApplicationName" 
-     * type="string" 
-     * //     *   length=""
-     * not-null="true"
-     * unique="false"
-     * 
+     * @return the current value of the mApplicationName property
+     * @hibernate.property name="projectName" column="ApplicationName" type="string" // * length="" not-null="true"
+     *                     unique="false"
      * @roseuid 42CA31D902B7
      */
-    public String getApplicationName() {
+    public String getApplicationName()
+    {
         return mApplicationName;
     }
 
@@ -159,26 +149,21 @@ public class SqualeReferenceBO implements Serializable {
      * @param pApplicationName the new value of the mApplicationName property
      * @roseuid 42CA31D902C6
      */
-    public void setApplicationName(String pApplicationName) {
+    public void setApplicationName( String pApplicationName )
+    {
         mApplicationName = pApplicationName;
     }
 
     /**
      * Access method for the mProjectName property.
      * 
-     * @return   the current value of the mProjectName property
-     * 
-     * @hibernate.property 
-     * name="projectName" 
-     * column="ProjectName" 
-     * type="string" 
-     * //     *   length=""
-     * not-null="true"
-     * unique="false"
-     * 
+     * @return the current value of the mProjectName property
+     * @hibernate.property name="projectName" column="ProjectName" type="string" // * length="" not-null="true"
+     *                     unique="false"
      * @roseuid 42CA31D90324
      */
-    public String getProjectName() {
+    public String getProjectName()
+    {
         return mProjectName;
     }
 
@@ -188,26 +173,21 @@ public class SqualeReferenceBO implements Serializable {
      * @param pProjectName the new value of the mProjectName property
      * @roseuid 42CA31D90372
      */
-    public void setProjectName(String pProjectName) {
+    public void setProjectName( String pProjectName )
+    {
         mProjectName = pProjectName;
     }
 
     /**
      * Access method for the mLanguage property.
      * 
-     * @return   the current value of the mLanguage property
-     * 
-     * @hibernate.property 
-     * name="language" 
-     * column="ProjectLanguage" 
-     * type="string" 
-     * //     *   length=""
-     * not-null="true"
-     * unique="false"
-     * 
+     * @return the current value of the mLanguage property
+     * @hibernate.property name="language" column="ProjectLanguage" type="string" // * length="" not-null="true"
+     *                     unique="false"
      * @roseuid 42CA31DA0046
      */
-    public String getLanguage() {
+    public String getLanguage()
+    {
         return mLanguage;
     }
 
@@ -217,26 +197,20 @@ public class SqualeReferenceBO implements Serializable {
      * @param pLanguage the new value of the mLanguage property
      * @roseuid 42CA31DA0055
      */
-    public void setLanguage(String pLanguage) {
+    public void setLanguage( String pLanguage )
+    {
         mLanguage = pLanguage;
     }
 
     /**
      * Access method for the mVersion property.
      * 
-     * @return   the current value of the mVersion property
-     * 
-     * @hibernate.property 
-     * name="version" 
-     * column="Version" 
-     * type="string" 
-     * //     *   length=""
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mVersion property
+     * @hibernate.property name="version" column="Version" type="string" // * length="" not-null="false" unique="false"
      * @roseuid 42CA31DA0130
      */
-    public String getVersion() {
+    public String getVersion()
+    {
         return mVersion;
     }
 
@@ -246,26 +220,21 @@ public class SqualeReferenceBO implements Serializable {
      * @param pVersion the new value of the mVersion property
      * @roseuid 42CA31DA018E
      */
-    public void setVersion(String pVersion) {
+    public void setVersion( String pVersion )
+    {
         mVersion = pVersion;
     }
 
     /**
      * Access method for the mDate property.
      * 
-     * @return   the current value of the mDate property
-     * 
-     * @hibernate.property 
-     * name="date" 
-     * column="AuditDate" 
-     * type="timestamp" 
-     * //     *   length=""
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mDate property
+     * @hibernate.property name="date" column="AuditDate" type="timestamp" // * length="" not-null="false"
+     *                     unique="false"
      * @roseuid 42CA31DA0298
      */
-    public Date getDate() {
+    public Date getDate()
+    {
         return mDate;
     }
 
@@ -275,33 +244,23 @@ public class SqualeReferenceBO implements Serializable {
      * @param pDate the new value of the mDate property
      * @roseuid 42CA31DA02E6
      */
-    public void setDate(Date pDate) {
+    public void setDate( Date pDate )
+    {
         mDate = pDate;
     }
 
     /**
      * Access method for the Factors property.
      * 
-     * @return   the current value of the mFactors property
-     * 
-     * @hibernate.map 
-     * name="factors" 
-     * table="FactorRef" 
-     * lazy="false" 
-     * cascade="all"
-     * sort="natural"
-     * @hibernate.index-many-to-many 
-     * column="Rule" 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO" 
-     * @hibernate.collection-key 
-     * column="ReferencielId"
-     * @hibernate.collection-element 
-     * column="Factor_Value" 
-     * type="float" 
-     * not-null="false"
-     * 
+     * @return the current value of the mFactors property
+     * @hibernate.map name="factors" table="FactorRef" lazy="false" cascade="all" sort="natural"
+     * @hibernate.index-many-to-many column="Rule"
+     *                               class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"
+     * @hibernate.collection-key column="ReferencielId"
+     * @hibernate.collection-element column="Factor_Value" type="float" not-null="false"
      */
-    public SortedMap getFactors() {
+    public SortedMap getFactors()
+    {
         return mFactors;
     }
 
@@ -310,26 +269,21 @@ public class SqualeReferenceBO implements Serializable {
      * 
      * @param pFactors the new value of the mFactors property
      */
-    public void setFactors(SortedMap pFactors) {
+    public void setFactors( SortedMap pFactors )
+    {
         mFactors = pFactors;
     }
 
     /**
      * Access method for the mCodeLineNumber property.
      * 
-     * @return   the current value of the mCodeLineNumber property
-     * 
-     * @hibernate.property 
-     * name="codeLineNumber" 
-     * column="CodeLineNumber" 
-     * type="integer" 
-     * length="10"
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mCodeLineNumber property
+     * @hibernate.property name="codeLineNumber" column="CodeLineNumber" type="integer" length="10" not-null="false"
+     *                     unique="false"
      * @roseuid 42CA31DE00C3
      */
-    public int getCodeLineNumber() {
+    public int getCodeLineNumber()
+    {
         return mCodeLineNumber;
     }
 
@@ -339,26 +293,21 @@ public class SqualeReferenceBO implements Serializable {
      * @param pCodeLineNumber the new value of the mCodeLineNumber property
      * @roseuid 42CA31DE00F2
      */
-    public void setCodeLineNumber(int pCodeLineNumber) {
+    public void setCodeLineNumber( int pCodeLineNumber )
+    {
         mCodeLineNumber = pCodeLineNumber;
     }
 
     /**
      * Access method for the mMethodNumber property.
      * 
-     * @return   the current value of the mMethodNumber property
-     * 
-     * @hibernate.property 
-     * name="methodNumber" 
-     * column="MethodNumber" 
-     * type="integer" 
-     * length="10"
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mMethodNumber property
+     * @hibernate.property name="methodNumber" column="MethodNumber" type="integer" length="10" not-null="false"
+     *                     unique="false"
      * @roseuid 42CA31DE017E
      */
-    public int getMethodNumber() {
+    public int getMethodNumber()
+    {
         return mMethodNumber;
     }
 
@@ -368,26 +317,21 @@ public class SqualeReferenceBO implements Serializable {
      * @param pMethodNumber the new value of the mMethodNumber property
      * @roseuid 42CA31DE01DC
      */
-    public void setMethodNumber(int pMethodNumber) {
+    public void setMethodNumber( int pMethodNumber )
+    {
         mMethodNumber = pMethodNumber;
     }
 
     /**
      * Access method for the mClassNumber property.
      * 
-     * @return   the current value of the mClassNumber property
-     * 
-     * @hibernate.property 
-     * name="classNumber" 
-     * column="ClassNumber" 
-     * type="integer" 
-     * length="10"
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mClassNumber property
+     * @hibernate.property name="classNumber" column="ClassNumber" type="integer" length="10" not-null="false"
+     *                     unique="false"
      * @roseuid 42CA31DE022A
      */
-    public int getClassNumber() {
+    public int getClassNumber()
+    {
         return mClassNumber;
     }
 
@@ -397,30 +341,24 @@ public class SqualeReferenceBO implements Serializable {
      * @param pClassNumber the new value of the mClassNumber property
      * @roseuid 42CA31DE0278
      */
-    public void setClassNumber(int pClassNumber) {
+    public void setClassNumber( int pClassNumber )
+    {
         mClassNumber = pClassNumber;
     }
 
     /**
      * Access method for the mId property.
      * 
-     * @return   the current value of the mId property
-     * 
-     * Note: unsaved-value An identifier property value that indicates that an instance 
-     * is newly instantiated (unsaved), distinguishing it from transient instances that 
-     * were saved or loaded in a previous session.  If not specified you will get an exception like this:
-     * another object associated with the session has the same identifier
-     * 
-     * @hibernate.id generator-class="native"
-     * type="long" 
-     * column="ReferencielId" 
-     * unsaved-value="-1" 
-     * length="19"
-     * @hibernate.generator-param name="sequence" value="reference_sequence" 
-     * 
+     * @return the current value of the mId property Note: unsaved-value An identifier property value that indicates
+     *         that an instance is newly instantiated (unsaved), distinguishing it from transient instances that were
+     *         saved or loaded in a previous session. If not specified you will get an exception like this: another
+     *         object associated with the session has the same identifier
+     * @hibernate.id generator-class="native" type="long" column="ReferencielId" unsaved-value="-1" length="19"
+     * @hibernate.generator-param name="sequence" value="reference_sequence"
      * @roseuid 42CA32200151
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
@@ -430,14 +368,15 @@ public class SqualeReferenceBO implements Serializable {
      * @param pId the new value of the mId property
      * @roseuid 42CA32200161
      */
-    public void setId(long pId) {
+    public void setId( long pId )
+    {
         mId = pId;
     }
 
     /**
      * Determines if the mValidated property is true.
      * 
-     * @return   <code>true<code> if the mValidated property is true
+     * @return <code>true<code> if the mValidated property is true
      * 
      * @hibernate.property 
      * name="hidden" 
@@ -448,7 +387,8 @@ public class SqualeReferenceBO implements Serializable {
      * 
      * @roseuid 42CA3F8901C8
      */
-    public boolean getHidden() {
+    public boolean getHidden()
+    {
         return mHidden;
     }
 
@@ -458,37 +398,35 @@ public class SqualeReferenceBO implements Serializable {
      * @param pDisplayed the new value of the mDisplayed property
      * @roseuid 42CA3F8901D8
      */
-    public void setHidden(boolean pDisplayed) {
+    public void setHidden( boolean pDisplayed )
+    {
         mHidden = pDisplayed;
     }
 
     /**
      * Constructeur par défaut.
+     * 
      * @roseuid 42CA594C0233
      */
-    public SqualeReferenceBO() {
+    public SqualeReferenceBO()
+    {
         mId = -1;
     }
-    
+
     /**
      * @return le type de l'audit
-     * 
-     * @hibernate.property 
-     * name="auditType" 
-     * column="AUDIT_TYPE" 
-     * type="string" 
-     * length="50"
-     * not-null="true" 
-     * unique="false"
+     * @hibernate.property name="auditType" column="AUDIT_TYPE" type="string" length="50" not-null="true" unique="false"
      */
-    public String getAuditType() {
+    public String getAuditType()
+    {
         return mAuditType;
     }
 
     /**
      * @param pType le type de l'audit
      */
-    public void setAuditType(String pType) {
+    public void setAuditType( String pType )
+    {
         mAuditType = pType;
     }
 

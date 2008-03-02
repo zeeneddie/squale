@@ -5,7 +5,8 @@ import java.util.List;
 
 /**
  */
-public class ListParameterDTO {
+public class ListParameterDTO
+{
 
     /**
      * La liste de paramètres
@@ -16,13 +17,14 @@ public class ListParameterDTO {
      * Identifiant de l'objet
      */
     private long mId = -1;
-    
+
     /**
      * Access method for the mId property.
      * 
-     * @return   the current value of the mId property
+     * @return the current value of the mId property
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
@@ -31,22 +33,24 @@ public class ListParameterDTO {
      * 
      * @param pId the new value of the mId property
      */
-    public void setId(long pId) {
+    public void setId( long pId )
+    {
         mId = pId;
     }
 
     /**
-     *
      * @return la liste de paramètres
      */
-    public List getParameters() {
+    public List getParameters()
+    {
         return mParameters;
     }
 
     /**
      * @param pList la nouvelle liste de paramètres
      */
-    public void setParameters(List pList) {
+    public void setParameters( List pList )
+    {
         mParameters = pList;
     }
 

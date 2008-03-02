@@ -3,26 +3,28 @@ package com.airfrance.squalecommon.datatransfertobject.result;
 import java.util.Date;
 
 /**
- * Représente une mesure de ROI avec le nom de l'application concerné
- * la date de l'audit et son résultat
+ * Représente une mesure de ROI avec le nom de l'application concerné la date de l'audit et son résultat
  */
-public class RoiMeasureDTO implements java.lang.Comparable {
+public class RoiMeasureDTO
+    implements java.lang.Comparable
+{
 
     /** Le nom de l'application concernée par la mesure */
     private String mAppliName;
-    
+
     /** La date de l'audit */
     private Date mAuditDate;
-    
+
     /** La valeur du ROI pour cette application et cet audit */
     private double mValue;
-    
+
     /**
      * @param pAppliName la nom de l'application
      * @param pAuditDate la date de l'audit
      * @param pValue la valeur du ROI
      */
-    public RoiMeasureDTO(String pAppliName, Date pAuditDate, double pValue) {
+    public RoiMeasureDTO( String pAppliName, Date pAuditDate, double pValue )
+    {
         mAppliName = pAppliName;
         mAuditDate = pAuditDate;
         mValue = pValue;
@@ -31,28 +33,32 @@ public class RoiMeasureDTO implements java.lang.Comparable {
     /**
      * @return le nom de l'application
      */
-    public String getAppliName() {
+    public String getAppliName()
+    {
         return mAppliName;
     }
 
     /**
      * @return la date de l'audit
      */
-    public Date getAuditDate() {
+    public Date getAuditDate()
+    {
         return mAuditDate;
     }
 
     /**
      * @param pAppliName le nom de l'application
      */
-    public void setAppliName(String pAppliName) {
+    public void setAppliName( String pAppliName )
+    {
         mAppliName = pAppliName;
     }
 
     /**
      * @param pDate la date de l'audit
      */
-    public void setAuditDate(Date pDate) {
+    public void setAuditDate( Date pDate )
+    {
         mAuditDate = pDate;
     }
 
@@ -63,14 +69,18 @@ public class RoiMeasureDTO implements java.lang.Comparable {
      * @return le résultat de la comparaison
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
-    public int compareTo(Object pRoiMeasure) {
+    public int compareTo( Object pRoiMeasure )
+    {
         int result = 0;
-        if (pRoiMeasure instanceof RoiMeasureDTO) {
+        if ( pRoiMeasure instanceof RoiMeasureDTO )
+        {
             RoiMeasureDTO roiMeasure = (RoiMeasureDTO) pRoiMeasure;
-            if (roiMeasure.mAppliName != null) {
-                result = getAppliName().compareTo(roiMeasure.mAppliName);
-                if((0 == result) && (getAuditDate() != null)) {
-                    result = getAuditDate().compareTo(roiMeasure.getAuditDate());
+            if ( roiMeasure.mAppliName != null )
+            {
+                result = getAppliName().compareTo( roiMeasure.mAppliName );
+                if ( ( 0 == result ) && ( getAuditDate() != null ) )
+                {
+                    result = getAuditDate().compareTo( roiMeasure.getAuditDate() );
                 }
             }
         }
@@ -80,14 +90,16 @@ public class RoiMeasureDTO implements java.lang.Comparable {
     /**
      * @return la valeur du ROI
      */
-    public double getValue() {
+    public double getValue()
+    {
         return mValue;
     }
 
     /**
      * @param pValue la valeur du ROI
      */
-    public void setValue(double pValue) {
+    public void setValue( double pValue )
+    {
         mValue = pValue;
     }
 

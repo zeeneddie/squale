@@ -8,11 +8,11 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
 
 /**
  * @author M401540
- *
- * @hibernate.subclass
- * discriminator-value="Bool"
+ * @hibernate.subclass discriminator-value="Bool"
  */
-public class BooleanMetricBO extends MetricBO {
+public class BooleanMetricBO
+    extends MetricBO
+{
     /**
      * Valeur boolean du mérique
      */
@@ -21,17 +21,11 @@ public class BooleanMetricBO extends MetricBO {
     /**
      * Access method for the mValue property.
      * 
-     * @return   the current value of the mName property
-     * 
-     * @hibernate.property 
-     * name="Value" 
-     * column="Boolean_val" 
-     * type="boolean" 
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mName property
+     * @hibernate.property name="Value" column="Boolean_val" type="boolean" not-null="false" unique="false"
      */
-    public Object getValue() {
+    public Object getValue()
+    {
         return mValue;
     }
 
@@ -40,16 +34,19 @@ public class BooleanMetricBO extends MetricBO {
      * 
      * @param pValue the new value of the mValue property
      */
-    public void setValue(Object pValue) {
+    public void setValue( Object pValue )
+    {
         mValue = (Boolean) pValue;
     }
 
-    /** (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO#isPrintable()
      */
-    public boolean isPrintable() {
+    public boolean isPrintable()
+    {
         return true;
-    }   
-    
+    }
 
 }

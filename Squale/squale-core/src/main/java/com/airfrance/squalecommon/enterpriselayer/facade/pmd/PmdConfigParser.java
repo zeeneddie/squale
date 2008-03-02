@@ -13,50 +13,56 @@ import com.airfrance.squalecommon.util.xml.XmlImport;
 /**
  * Parser de la configuration Pmd
  */
-public class PmdConfigParser extends XmlImport {
-
+public class PmdConfigParser
+    extends XmlImport
+{
 
     /** Log */
-    private static Log LOG = LogFactory.getLog(PmdConfigParser.class);
+    private static Log LOG = LogFactory.getLog( PmdConfigParser.class );
 
     /**
      * Constructeur par défaut
      */
-    public PmdConfigParser() {
-        super(LOG);
+    public PmdConfigParser()
+    {
+        super( LOG );
     }
-    
+
     /**
      * Parsing du fichier de configuration Macker
+     * 
      * @param pStream flux
      * @param pErrors erreurs rencontrées
      * @return données lues
      */
-    public PmdRuleSetBO parseFile(InputStream pStream, StringBuffer pErrors) {
+    public PmdRuleSetBO parseFile( InputStream pStream, StringBuffer pErrors )
+    {
         // Résultat
         PmdRuleSetBO result = new PmdRuleSetBO();
         // On d'a pas de DTD à fournir
-        Digester configDigester = preSetupDigester(null, null, pErrors);
-        configDigester.push(new Wrapper(result));
+        Digester configDigester = preSetupDigester( null, null, pErrors );
+        configDigester.push( new Wrapper( result ) );
         // On récupère le nom du ruleSet
-        configDigester.addSetProperties("ruleset");
+        configDigester.addSetProperties( "ruleset" );
         // On crée une règle
-        configDigester.addSetProperties("ruleset/rule");
+        configDigester.addSetProperties( "ruleset/rule" );
         // On récupère les informations supplémentaires
-        configDigester.addCallMethod("ruleset/rule/properties/property", "setRuleProperty", 2, new Class[]{String.class, String.class});
-        configDigester.addCallParam("ruleset/rule/properties/property", 0, "name");
-        configDigester.addCallParam("ruleset/rule/properties/property", 1, "value");
+        configDigester.addCallMethod( "ruleset/rule/properties/property", "setRuleProperty", 2, new Class[] {
+            String.class, String.class } );
+        configDigester.addCallParam( "ruleset/rule/properties/property", 0, "name" );
+        configDigester.addCallParam( "ruleset/rule/properties/property", 1, "value" );
         // On ajoute la règle au ruleSet
-        configDigester.addCallMethod("ruleset/rule", "addRule");
-        parse(configDigester, pStream, pErrors);
+        configDigester.addCallMethod( "ruleset/rule", "addRule" );
+        parse( configDigester, pStream, pErrors );
         return result;
     }
-    
+
     /**
      * 
      *
      */
-    public class Wrapper {
+    public class Wrapper
+    {
         /** Règle courante */
         private RuleBO mCurrentRule;
 
@@ -65,73 +71,88 @@ public class PmdConfigParser extends XmlImport {
 
         /**
          * Constructeur
+         * 
          * @param pRuleSet ruleset
          */
-        public Wrapper(PmdRuleSetBO pRuleSet) {
+        public Wrapper( PmdRuleSetBO pRuleSet )
+        {
             mRuleSet = pRuleSet;
         }
-        
+
         /**
          * Traitement de la balise ref
+         * 
          * @param pRuleRef référence
          */
-        public void setRef(String pRuleRef) {
+        public void setRef( String pRuleRef )
+        {
             lazyCreateRule();
-            int index = pRuleRef.lastIndexOf('/');
-            if (index!=-1) {
-                mCurrentRule.setCode(pRuleRef.substring(index+1));
-            } else {
-                mCurrentRule.setCode(pRuleRef);
+            int index = pRuleRef.lastIndexOf( '/' );
+            if ( index != -1 )
+            {
+                mCurrentRule.setCode( pRuleRef.substring( index + 1 ) );
+            }
+            else
+            {
+                mCurrentRule.setCode( pRuleRef );
             }
         }
-        
+
         /**
          * Traitement des propriétés
+         * 
          * @param pName nom
          * @param pValue valeur
          */
-        public void setRuleProperty(String pName, String pValue) {
-            if (pName.equals("squaleSeverity")) {
+        public void setRuleProperty( String pName, String pValue )
+        {
+            if ( pName.equals( "squaleSeverity" ) )
+            {
                 lazyCreateRule();
-                mCurrentRule.setSeverity(pValue);
-            } else if (pName.equals("squaleCategory")) {
+                mCurrentRule.setSeverity( pValue );
+            }
+            else if ( pName.equals( "squaleCategory" ) )
+            {
                 lazyCreateRule();
-                mCurrentRule.setCategory(pValue);
+                mCurrentRule.setCategory( pValue );
             }
         }
-        
+
         /**
          * Ajout d'une règle
-         *
          */
-        public void addRule() {
-            mCurrentRule.setRuleSet(mRuleSet);
-            mRuleSet.addRule(mCurrentRule);
+        public void addRule()
+        {
+            mCurrentRule.setRuleSet( mRuleSet );
+            mRuleSet.addRule( mCurrentRule );
             mCurrentRule = null;
         }
-        
+
         /**
          * Création de la règle courante
-         *
          */
-        private void lazyCreateRule() {
-            if (mCurrentRule==null) {
+        private void lazyCreateRule()
+        {
+            if ( mCurrentRule == null )
+            {
                 mCurrentRule = new RuleBO();
             }
         }
-        
+
         /**
          * @param pLanguage langage
          */
-        public void setLanguage(String pLanguage) {
-            mRuleSet.setLanguage(pLanguage);
+        public void setLanguage( String pLanguage )
+        {
+            mRuleSet.setLanguage( pLanguage );
         }
 
         /**
          * @param pName nom
          */
-        public void setName(String pName) {
-            mRuleSet.setName(pName);
+        public void setName( String pName )
+        {
+            mRuleSet.setName( pName );
         }
 
     }

@@ -6,36 +6,41 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.pm
 /**
  * Transformation BO-DTO pour Pmd
  */
-public class PmdTransform {
+public class PmdTransform
+{
 
     /**
-     *  Constructeur prive
-     *
+     * Constructeur prive
      */
-    private PmdTransform() {
+    private PmdTransform()
+    {
     }
 
     /**
      * DTO -> BO pour un CppTestRuleSet
+     * 
      * @return BO
      * @param pRuleSetDTO DTO
      */
-    public static PmdRuleSetBO dto2Bo(PmdRuleSetDTO pRuleSetDTO) {
+    public static PmdRuleSetBO dto2Bo( PmdRuleSetDTO pRuleSetDTO )
+    {
         PmdRuleSetBO bo = new PmdRuleSetBO();
-        RuleSetTransform.dto2Bo(pRuleSetDTO, bo);
-        bo.setLanguage(pRuleSetDTO.getLanguage());
+        RuleSetTransform.dto2Bo( pRuleSetDTO, bo );
+        bo.setLanguage( pRuleSetDTO.getLanguage() );
         return bo;
     }
 
     /**
      * BO -> DTO pour un RuleSet
+     * 
      * @param pRuleSetBO BO
      * @return pRuleSetDTO DTO
      */
-    public static PmdRuleSetDTO bo2Dto(PmdRuleSetBO pRuleSetBO) {
+    public static PmdRuleSetDTO bo2Dto( PmdRuleSetBO pRuleSetBO )
+    {
         PmdRuleSetDTO dto = new PmdRuleSetDTO();
-        RuleSetTransform.bo2Dto(pRuleSetBO, dto);
-        dto.setLanguage(pRuleSetBO.getLanguage());
+        RuleSetTransform.bo2Dto( pRuleSetBO, dto );
+        dto.setLanguage( pRuleSetBO.getLanguage() );
         return dto;
     }
 }

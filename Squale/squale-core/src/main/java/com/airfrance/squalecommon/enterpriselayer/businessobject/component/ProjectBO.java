@@ -12,36 +12,36 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGri
 
 /**
  * Représente un projet intégré à une application Air France
- * @author m400842
  * 
- * @hibernate.subclass
- * lazy="true"
- * discriminator-value="Project"
+ * @author m400842
+ * @hibernate.subclass lazy="true" discriminator-value="Project"
  */
-public class ProjectBO extends AbstractComplexComponentBO {
+public class ProjectBO
+    extends AbstractComplexComponentBO
+{
     /**
      * Le projet est actif.
      */
     public static final int ACTIVATED = 1;
+
     /**
      * Le projet est supprimé.
      */
     public static final int DELETED = 2;
+
     /**
      * Le projet est désactivé.
      */
     public static final int DISACTIVATED = 3;
 
     /**
-     * Contient le status du projet (activé, supprimé ou désactivé)
-     * Par défaut un projet est actif.
+     * Contient le status du projet (activé, supprimé ou désactivé) Par défaut un projet est actif.
      */
     private int mStatus = ACTIVATED;
-    
+
     /**
-     * Profil de l'application à mettre en adéquation avec la configuration de SQUALIX, 
-     * permettant de définir un schéma d'analyse.
-     * Un profil définit notamment la technologie.
+     * Profil de l'application à mettre en adéquation avec la configuration de SQUALIX, permettant de définir un schéma
+     * d'analyse. Un profil définit notamment la technologie.
      */
     private ProjectProfileBO mProfile;
 
@@ -50,7 +50,6 @@ public class ProjectBO extends AbstractComplexComponentBO {
      */
     private SourceManagementBO mSourceManager;
 
-    
     /**
      * Contient les propriétés nécessaires à l'éxecution des différentes tâches.<br>
      * Contient des ProjectParameter
@@ -69,19 +68,23 @@ public class ProjectBO extends AbstractComplexComponentBO {
 
     /**
      * Instancie un nouveau composant.
+     * 
      * @param pName Nom du composant.
      * @roseuid 42AFF0BF02D1
      */
-    public ProjectBO(final String pName) {
+    public ProjectBO( final String pName )
+    {
         super();
         mName = pName;
     }
 
     /**
      * Constructeur par défaut.
+     * 
      * @roseuid 42CBA9A901EC
      */
-    public ProjectBO() {
+    public ProjectBO()
+    {
         super();
         mParameters = new MapParameterBO();
         mQualityGrid = new QualityGridBO();
@@ -90,6 +93,7 @@ public class ProjectBO extends AbstractComplexComponentBO {
 
     /**
      * Constructeur complet.
+     * 
      * @param pName nom du composant
      * @param pChildren les enfants
      * @param pParent Composant parent
@@ -102,18 +106,12 @@ public class ProjectBO extends AbstractComplexComponentBO {
      * @throws UnexpectedRelationException si la relation ne peut etre ajouté
      * @roseuid 42CBA9A9021B
      */
-    public ProjectBO(
-        String pName,
-        Collection pChildren,
-        AbstractComplexComponentBO pParent,
-        ProjectProfileBO pProfile,
-        SourceManagementBO pManager,
-        MapParameterBO pParameters,
-        String pLocation,
-        QualityGridBO pQualityGrid,
-        Collection pQualityResults)
-        throws UnexpectedRelationException {
-        super(pName, pChildren, pParent);
+    public ProjectBO( String pName, Collection pChildren, AbstractComplexComponentBO pParent,
+                      ProjectProfileBO pProfile, SourceManagementBO pManager, MapParameterBO pParameters,
+                      String pLocation, QualityGridBO pQualityGrid, Collection pQualityResults )
+        throws UnexpectedRelationException
+    {
+        super( pName, pChildren, pParent );
         mProfile = pProfile;
         mQualityGrid = pQualityGrid;
         mQualityResults = pQualityResults;
@@ -124,17 +122,13 @@ public class ProjectBO extends AbstractComplexComponentBO {
     /**
      * Access method for the mProfile property.
      * 
-     * @return   the current value of the mProfile property
-     * 
-     * @hibernate.many-to-one 
-     * name="profile" 
-     * column="ProfileBO" 
-     * lazy="false"     
-     * type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO" 
-     * not-null="false" 
-     * 
+     * @return the current value of the mProfile property
+     * @hibernate.many-to-one name="profile" column="ProfileBO" lazy="false"
+     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
+     *                        not-null="false"
      */
-    public ProjectProfileBO getProfile() {
+    public ProjectProfileBO getProfile()
+    {
         return mProfile;
     }
 
@@ -144,45 +138,41 @@ public class ProjectBO extends AbstractComplexComponentBO {
      * @param pProfile the new value of the mProfile property
      * @roseuid 42BACECC020B
      */
-    public void setProfile(ProjectProfileBO pProfile) {
+    public void setProfile( ProjectProfileBO pProfile )
+    {
         mProfile = pProfile;
     }
 
-    
-
     /**
-     * @hibernate.many-to-one 
-     * name="parametersSet" 
-     * column="ParametersSet" 
-     * type="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO" 
-     * not-null="false"
+     * @hibernate.many-to-one name="parametersSet" column="ParametersSet"
+     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO"
+     *                        not-null="false"
      * @return la map de parametres
      */
-    public MapParameterBO getParameters() {
+    public MapParameterBO getParameters()
+    {
         return mParameters;
     }
 
     /**
      * @param pMap la nouvelle map de parametres
      */
-    public void setParameters(MapParameterBO pMap) {
+    public void setParameters( MapParameterBO pMap )
+    {
         mParameters = pMap;
     }
 
     /**
      * Access method for the mQualityGrid property.
      * 
-     * @return   the current value of the mQualityRules property
-     * 
-     * @hibernate.many-to-one 
-     * name="qualityGrid" 
-     * column="QualityGrid" 
-     * type="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO" 
-     * not-null="false" 
-     *
+     * @return the current value of the mQualityRules property
+     * @hibernate.many-to-one name="qualityGrid" column="QualityGrid"
+     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+     *                        not-null="false"
      * @roseuid 42BACECC0238
      */
-    public QualityGridBO getQualityGrid() {
+    public QualityGridBO getQualityGrid()
+    {
         return mQualityGrid;
     }
 
@@ -192,28 +182,22 @@ public class ProjectBO extends AbstractComplexComponentBO {
      * @param pQualityGrid the new value of the mQualityGrid property
      * @roseuid 42BACECC0239
      */
-    public void setQualityGrid(QualityGridBO pQualityGrid) {
+    public void setQualityGrid( QualityGridBO pQualityGrid )
+    {
         mQualityGrid = pQualityGrid;
     }
 
     /**
      * Access method for the mQualityResults property.
      * 
-     * @return   the current value of the mQualityResults property
-     * 
-     * @hibernate.bag
-     * lazy="true" 
-     * cascade="none" 
-     * inverse="true"
-     * 
-     * @hibernate.collection-key 
-     * column="ProjectId"
-     * @hibernate.collection-one-to-many 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
-     * 
+     * @return the current value of the mQualityResults property
+     * @hibernate.bag lazy="true" cascade="none" inverse="true"
+     * @hibernate.collection-key column="ProjectId"
+     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
      * @roseuid 42BACECC0248
      */
-    public Collection getQualityResults() {
+    public Collection getQualityResults()
+    {
         return mQualityResults;
     }
 
@@ -223,29 +207,27 @@ public class ProjectBO extends AbstractComplexComponentBO {
      * @param pQualityResults the new value of the mQualityResults property
      * @roseuid 42BACECC0249
      */
-    public void setQualityResults(Collection pQualityResults) {
+    public void setQualityResults( Collection pQualityResults )
+    {
         mQualityResults = pQualityResults;
     }
 
     /**
-     * 
      * @return le nom du source manager
-     * 
-     * @hibernate.many-to-one 
-     * name="sourceManager" 
-     * column="SourceManager" 
-     * lazy="false"     
-     * type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO" 
-     * not-null="false" 
+     * @hibernate.many-to-one name="sourceManager" column="SourceManager" lazy="false"
+     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO"
+     *                        not-null="false"
      */
-    public SourceManagementBO getSourceManager() {
+    public SourceManagementBO getSourceManager()
+    {
         return mSourceManager;
     }
 
     /**
      * @param pSourceManager le nouveau source manager
      */
-    public void setSourceManager(SourceManagementBO pSourceManager) {
+    public void setSourceManager( SourceManagementBO pSourceManager )
+    {
         mSourceManager = pSourceManager;
     }
 
@@ -255,24 +237,19 @@ public class ProjectBO extends AbstractComplexComponentBO {
      * @param pName le nom du paramètre
      * @return la valeur du paramètre
      */
-    public ProjectParameterBO getParameter(String pName) {
-        return (ProjectParameterBO) getParameters().getParameters().get(pName);
+    public ProjectParameterBO getParameter( String pName )
+    {
+        return (ProjectParameterBO) getParameters().getParameters().get( pName );
     }
 
     /**
      * Retourne le statut du projet
      * 
      * @return the mStatus property
-     * 
-     * @hibernate.property 
-     * name="status" 
-     * column="Status" 
-     * type="integer" 
-     * length="10"
-     * unique="false"
-     * 
+     * @hibernate.property name="status" column="Status" type="integer" length="10" unique="false"
      */
-    public int getStatus() {
+    public int getStatus()
+    {
         return mStatus;
     }
 
@@ -282,15 +259,19 @@ public class ProjectBO extends AbstractComplexComponentBO {
      * @param pStatus le status du projet
      * @roseuid 42CAA72C020E
      */
-    public void setStatus(int pStatus) {
+    public void setStatus( int pStatus )
+    {
         mStatus = pStatus;
     }
 
-    /** 
+    /**
      * {@inheritDoc}
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor, java.lang.Object)
+     * 
+     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor,
+     *      java.lang.Object)
      */
-    public Object accept(ComponentVisitor pVisitor, Object pArgument) {
-        return pVisitor.visit(this, pArgument);
+    public Object accept( ComponentVisitor pVisitor, Object pArgument )
+    {
+        return pVisitor.visit( this, pArgument );
     }
 }

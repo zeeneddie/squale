@@ -5,26 +5,26 @@ import java.io.Serializable;
 /**
  * Date limite pour un lancement d'audit
  * 
- * @hibernate.class 
- * table="StopTimeBO"
- * lazy="true"
- *  
+ * @hibernate.class table="StopTimeBO" lazy="true"
  */
-public class StopTimeBO implements Serializable {
-    
+public class StopTimeBO
+    implements Serializable
+{
+
     /** L'identifiant (au sens technique) de l'objet */
     private long mId;
-    
+
     /** Le jour de la semaine */
     private String mDay;
-    
+
     /** L'heure du jour */
     private String mTime;
 
     /**
      * Constructeur par défaut
      */
-    public StopTimeBO() {
+    public StopTimeBO()
+    {
         mId = -1;
         mDay = "Monday";
         mTime = "4:00";
@@ -34,16 +34,11 @@ public class StopTimeBO implements Serializable {
      * Méthode d'accès à mId
      * 
      * @return l'identifiant de l'objet
-     * 
-     * @hibernate.id generator-class="native"
-     * type="long" 
-     * column="StopTimeId" 
-     * unsaved-value="-1" 
-     * length="19"
-     * @hibernate.generator-param name="sequence" value="stoptime_sequence" 
-     * 
+     * @hibernate.id generator-class="native" type="long" column="StopTimeId" unsaved-value="-1" length="19"
+     * @hibernate.generator-param name="sequence" value="stoptime_sequence"
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
@@ -51,16 +46,10 @@ public class StopTimeBO implements Serializable {
      * Méthode d'accès à mDay
      * 
      * @return le jour de la semaine
-     * 
-     * @hibernate.property 
-     * name="day" 
-     * column="DayOfWeek" 
-     * type="string" 
-     * length="9"
-     * not-null="true" 
-     * 
+     * @hibernate.property name="day" column="DayOfWeek" type="string" length="9" not-null="true"
      */
-    public String getDay() {
+    public String getDay()
+    {
         return mDay;
     }
 
@@ -68,16 +57,10 @@ public class StopTimeBO implements Serializable {
      * Méthode d'accès à mTime
      * 
      * @return l'heure du jour
-     * 
-     * @hibernate.property 
-     * name="time" 
-     * column="TimeOfDay" 
-     * type="string" 
-     * length="5"
-     * not-null="true" 
-     * 
+     * @hibernate.property name="time" column="TimeOfDay" type="string" length="5" not-null="true"
      */
-    public String getTime() {
+    public String getTime()
+    {
         return mTime;
     }
 
@@ -86,7 +69,8 @@ public class StopTimeBO implements Serializable {
      * 
      * @param pId la nouvelle valeur de l'identifiant de l'objet
      */
-    public void setId(long pId) {
+    public void setId( long pId )
+    {
         mId = pId;
     }
 
@@ -95,7 +79,8 @@ public class StopTimeBO implements Serializable {
      * 
      * @param pDay le jour de la semaine
      */
-    public void setDay(String pDay) {
+    public void setDay( String pDay )
+    {
         mDay = pDay;
     }
 
@@ -104,7 +89,8 @@ public class StopTimeBO implements Serializable {
      * 
      * @param pTime l'heure du jour
      */
-    public void setTime(String pTime) {
+    public void setTime( String pTime )
+    {
         mTime = pTime;
     }
 

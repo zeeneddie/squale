@@ -6,50 +6,54 @@ import com.airfrance.squalecommon.datatransfertobject.rulechecking.CheckstyleDTO
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO;
 
 /**
- * 
  * @author S Porto Rico
- *
  */
-public class CheckstyleTransform {
-    
+public class CheckstyleTransform
+{
+
     /**
-     *  Constructeur prive
-     *
+     * Constructeur prive
      */
-    private CheckstyleTransform(){
-        
+    private CheckstyleTransform()
+    {
+
     }
-    
+
     /**
      * DTO -> BO pour une Version
+     * 
      * @param pVersionDTO VersionDTO à transformer
      * @return VersionBO
-     * @throws IOException si le fichier n'est pas disponible 
+     * @throws IOException si le fichier n'est pas disponible
      */
-    public static CheckstyleRuleSetBO dto2Bo(CheckstyleDTO pVersionDTO) throws IOException {
-        
+    public static CheckstyleRuleSetBO dto2Bo( CheckstyleDTO pVersionDTO )
+        throws IOException
+    {
+
         CheckstyleRuleSetBO versionBO = new CheckstyleRuleSetBO();
-        
-        //Initialisation des champs de VersionBO
-        RuleSetTransform.dto2Bo(pVersionDTO, versionBO);
-        versionBO.setValue(pVersionDTO.getBytes());
+
+        // Initialisation des champs de VersionBO
+        RuleSetTransform.dto2Bo( pVersionDTO, versionBO );
+        versionBO.setValue( pVersionDTO.getBytes() );
         return versionBO;
-   }
-    
+    }
+
     /**
      * BO -> DTO pour une Version
+     * 
      * @param pVersionBO VersionBO
-     * @return VersionDTO 
+     * @return VersionDTO
      */
-    public static CheckstyleDTO bo2Dto(CheckstyleRuleSetBO pVersionBO) {
-        
+    public static CheckstyleDTO bo2Dto( CheckstyleRuleSetBO pVersionBO )
+    {
+
         // Initialisation
-        CheckstyleDTO versionDTO= new CheckstyleDTO();       
-        
+        CheckstyleDTO versionDTO = new CheckstyleDTO();
+
         // Initialisation des champs de VersionBO
-        RuleSetTransform.bo2Dto(pVersionBO, versionDTO);
-        versionDTO.setBytes(pVersionBO.getValue());
-        
+        RuleSetTransform.bo2Dto( pVersionBO, versionDTO );
+        versionDTO.setBytes( pVersionBO.getValue() );
+
         return versionDTO;
     }
 }

@@ -8,13 +8,13 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.UnexpectedRelat
 
 /**
  * Représente une classe au sens Java et C++
- * @author m400842
  * 
- * @hibernate.subclass
- * lazy="true"
- * discriminator-value="Class"
+ * @author m400842
+ * @hibernate.subclass lazy="true" discriminator-value="Class"
  */
-public class ClassBO extends AbstractComplexComponentBO {
+public class ClassBO
+    extends AbstractComplexComponentBO
+{
 
     /**
      * Chemin du fichier à partir du projet
@@ -23,60 +23,66 @@ public class ClassBO extends AbstractComplexComponentBO {
 
     /**
      * Instancie un nouveau composant.
+     * 
      * @param pName Nom du composant.
      * @roseuid 42AFF04102A0
      */
-    public ClassBO(final String pName) {
+    public ClassBO( final String pName )
+    {
         super();
-        setName(pName);
+        setName( pName );
     }
 
     /**
      * Constructeur par défaut.
+     * 
      * @roseuid 42CBA49F0100
      */
-    public ClassBO() {
+    public ClassBO()
+    {
         super();
     }
 
     /**
      * Constructeur complet.
+     * 
      * @param pName nom du composant
      * @param pChildren les enfants
      * @param pParent Composant parent
      * @throws UnexpectedRelationException si la relation ne peut etre ajouté
      * @roseuid 42CBA49F010F
      */
-    public ClassBO(String pName, Collection pChildren, AbstractComplexComponentBO pParent)
-        throws UnexpectedRelationException {
-        super(pName, pChildren, pParent);
+    public ClassBO( String pName, Collection pChildren, AbstractComplexComponentBO pParent )
+        throws UnexpectedRelationException
+    {
+        super( pName, pChildren, pParent );
     }
 
     /**
      * @return le chemin du fichier à partir du projet
-     * 
-     * @hibernate.property 
-     * name="fileName" 
-     * column="LongFileName" 
-     * type="string" 
-     * length="2048"
+     * @hibernate.property name="fileName" column="LongFileName" type="string" length="2048"
      */
-    public String getFileName() {
+    public String getFileName()
+    {
         return mFileName;
     }
 
     /**
      * @param pFileName le nouveau chemin du fichier
      */
-    public void setFileName(String pFileName) {
+    public void setFileName( String pFileName )
+    {
         mFileName = pFileName;
     }
 
-    /** 
+    /**
      * {@inheritDoc}
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor, java.lang.Object)
+     * 
+     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor,
+     *      java.lang.Object)
      */
-    public Object accept(ComponentVisitor pVisitor, Object pArgument) {
-        return pVisitor.visit(this, pArgument);
+    public Object accept( ComponentVisitor pVisitor, Object pArgument )
+    {
+        return pVisitor.visit( this, pArgument );
     }
 }

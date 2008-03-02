@@ -4,10 +4,11 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerM
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
 
 /**
- * @hibernate.subclass
- * discriminator-value="JSPVolumetryProject"
+ * @hibernate.subclass discriminator-value="JSPVolumetryProject"
  */
-public class JSPVolumetryProjectBO extends MeasureBO {
+public class JSPVolumetryProjectBO
+    extends MeasureBO
+{
 
     /**
      * Nombre lignes de code jsp
@@ -22,38 +23,43 @@ public class JSPVolumetryProjectBO extends MeasureBO {
     /**
      * Constructeur par défaut.
      */
-    public JSPVolumetryProjectBO() {
+    public JSPVolumetryProjectBO()
+    {
         super();
-        getMetrics().put(NUMBER_OF_JSP_CODE_LINES, new IntegerMetricBO());
-        getMetrics().put(NUMBER_OF_JSP, new IntegerMetricBO());
+        getMetrics().put( NUMBER_OF_JSP_CODE_LINES, new IntegerMetricBO() );
+        getMetrics().put( NUMBER_OF_JSP, new IntegerMetricBO() );
     }
 
     /**
-         * @return   the current value of the NUMBER_OF_JSP property
-         */
-    public Integer getNumberOfJSP() {
-        return (Integer) ((IntegerMetricBO) getMetrics().get(NUMBER_OF_JSP)).getValue();
+     * @return the current value of the NUMBER_OF_JSP property
+     */
+    public Integer getNumberOfJSP()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( NUMBER_OF_JSP ) ).getValue();
     }
 
     /**
      * @param pNumberOfJSPs the new value of the NUMBER_OF_JSP property
      */
-    public void setNumberOfJSPs(Integer pNumberOfJSPs) {
-        ((IntegerMetricBO) getMetrics().get(NUMBER_OF_JSP)).setValue(pNumberOfJSPs);
+    public void setNumberOfJSPs( Integer pNumberOfJSPs )
+    {
+        ( (IntegerMetricBO) getMetrics().get( NUMBER_OF_JSP ) ).setValue( pNumberOfJSPs );
     }
 
     /**
-     * @return  the current value of the NUMBER_OF_JSP_CODE_LINES property
+     * @return the current value of the NUMBER_OF_JSP_CODE_LINES property
      */
-    public Integer getNumberOfJSPCodeLines() {
-        return (Integer) ((IntegerMetricBO) getMetrics().get(NUMBER_OF_JSP_CODE_LINES)).getValue();
+    public Integer getNumberOfJSPCodeLines()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( NUMBER_OF_JSP_CODE_LINES ) ).getValue();
     }
 
     /**
      * @param pJSPsLOC the new value of the NUMBER_OF_JSP_CODE_LINES property
      */
-    public void setJSPsLOC(Integer pJSPsLOC) {
-        ((IntegerMetricBO) getMetrics().get(NUMBER_OF_JSP_CODE_LINES)).setValue(pJSPsLOC);
+    public void setJSPsLOC( Integer pJSPsLOC )
+    {
+        ( (IntegerMetricBO) getMetrics().get( NUMBER_OF_JSP_CODE_LINES ) ).setValue( pJSPsLOC );
     }
 
 }

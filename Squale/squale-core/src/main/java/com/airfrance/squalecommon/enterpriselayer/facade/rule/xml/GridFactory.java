@@ -9,30 +9,40 @@ import com.airfrance.squalecommon.util.xml.FactoryAdapter;
 
 /**
  * Fabrique de grille qualité
- *
  */
-class GridFactory extends FactoryAdapter {
+class GridFactory
+    extends FactoryAdapter
+{
     /** Grilles qualité */
     private Hashtable mGrids;
+
     /**
      * Constructeur
-     *
      */
-    public GridFactory() {
+    public GridFactory()
+    {
         mGrids = new Hashtable();
     }
-    /** (non-Javadoc)
+
+    /**
+     * (non-Javadoc)
+     * 
      * @see org.apache.commons.digester.ObjectCreationFactory#createObject(org.xml.sax.Attributes)
      */
-    public Object createObject(Attributes attributes) throws Exception {
-        String name = attributes.getValue("name");
-        QualityGridBO grid = (QualityGridBO) mGrids.get(name);
-        if (grid == null) {
+    public Object createObject( Attributes attributes )
+        throws Exception
+    {
+        String name = attributes.getValue( "name" );
+        QualityGridBO grid = (QualityGridBO) mGrids.get( name );
+        if ( grid == null )
+        {
             grid = new QualityGridBO();
-            grid.setName(name);
-            mGrids.put(name, grid);
-        } else {
-            throw new Exception(XmlRuleMessages.getString("grid.duplicate", new Object[]{name}));
+            grid.setName( name );
+            mGrids.put( name, grid );
+        }
+        else
+        {
+            throw new Exception( XmlRuleMessages.getString( "grid.duplicate", new Object[] { name } ) );
         }
         return grid;
     }
@@ -40,7 +50,8 @@ class GridFactory extends FactoryAdapter {
     /**
      * @return grilles
      */
-    public Hashtable getGrids() {
+    public Hashtable getGrids()
+    {
         return mGrids;
     }
 

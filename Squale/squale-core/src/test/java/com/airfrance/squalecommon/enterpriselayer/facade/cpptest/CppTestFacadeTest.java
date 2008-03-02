@@ -13,75 +13,90 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.cp
 /**
  * Tests de la facade CppTest
  */
-public class CppTestFacadeTest extends SqualeTestCase {
+public class CppTestFacadeTest
+    extends SqualeTestCase
+{
 
     /**
      * Test d'importation de la facade
-     *
      */
-    public void testImport() {
+    public void testImport()
+    {
         StringBuffer errors = new StringBuffer();
-        InputStream stream = getClass().getClassLoader().getResourceAsStream("data/cpptest/cpptest.xml");
-        try {
-            CppTestRuleSetDTO ruleset = CppTestFacade.importCppTestConfig(stream, errors);
-            assertNotNull(ruleset);
+        InputStream stream = getClass().getClassLoader().getResourceAsStream( "data/cpptest/cpptest.xml" );
+        try
+        {
+            CppTestRuleSetDTO ruleset = CppTestFacade.importCppTestConfig( stream, errors );
+            assertNotNull( ruleset );
             CppTestRuleSetDAOImpl dao = CppTestRuleSetDAOImpl.getInstance();
-            assertEquals(1, dao.count(getSession()).intValue());
-            assertEquals("valeur à vérifier dans le fichier", "default",ruleset.getName());
-            assertEquals("valeur à vérifier dans le fichier", "builtin://MustHaveRules", ruleset.getCppTestName());
-        } catch (Exception e) {
+            assertEquals( 1, dao.count( getSession() ).intValue() );
+            assertEquals( "valeur à vérifier dans le fichier", "default", ruleset.getName() );
+            assertEquals( "valeur à vérifier dans le fichier", "builtin://MustHaveRules", ruleset.getCppTestName() );
+        }
+        catch ( Exception e )
+        {
             e.printStackTrace();
-            fail("unexpected exception");
+            fail( "unexpected exception" );
         }
     }
-    
+
     /**
      * Test d'obtention de toutes les configurations
-     *
      */
-    public void testGetAll() {
+    public void testGetAll()
+    {
         StringBuffer errors = new StringBuffer();
-        InputStream stream = getClass().getClassLoader().getResourceAsStream("data/cpptest/cpptest.xml");
-        try {
+        InputStream stream = getClass().getClassLoader().getResourceAsStream( "data/cpptest/cpptest.xml" );
+        try
+        {
             // Précondition
-            assertEquals(0, CppTestFacade.getCppTestConfigurations().size());
+            assertEquals( 0, CppTestFacade.getCppTestConfigurations().size() );
             // Chargement des données
-            CppTestRuleSetDTO ruleset = CppTestFacade.importCppTestConfig(stream, errors);
+            CppTestRuleSetDTO ruleset = CppTestFacade.importCppTestConfig( stream, errors );
             // Vérification de l'obtention des ruleset
-            assertEquals(1, CppTestFacade.getCppTestConfigurations().size());
-        } catch (Exception e) {
+            assertEquals( 1, CppTestFacade.getCppTestConfigurations().size() );
+        }
+        catch ( Exception e )
+        {
             e.printStackTrace();
-            fail("unexpected exception");
+            fail( "unexpected exception" );
         }
     }
-    
+
     /**
      * Test d'obtention d'un ruleset
-     *
      */
-    public void testGetCppTestConfiguration() {
+    public void testGetCppTestConfiguration()
+    {
         CppTestRuleSetBO ruleset = new CppTestRuleSetBO();
-        ruleset.setName("name");
-        try {
+        ruleset.setName( "name" );
+        try
+        {
             getSession().beginTransaction();
-            CppTestRuleSetDAOImpl.getInstance().create(getSession(), ruleset);
+            CppTestRuleSetDAOImpl.getInstance().create( getSession(), ruleset );
             getSession().commitTransactionWithoutClose();
             // Récupération du dto en nominal
-            CppTestRuleSetDTO dto = CppTestFacade.getCppTestConfiguration(ruleset.getName());
-            assertNotNull("ruleset existant dans la base", dto);
-            assertEquals("identité des champs", dto.getName(), ruleset.getName());
+            CppTestRuleSetDTO dto = CppTestFacade.getCppTestConfiguration( ruleset.getName() );
+            assertNotNull( "ruleset existant dans la base", dto );
+            assertEquals( "identité des champs", dto.getName(), ruleset.getName() );
             // Récuperation d'une config inexistante
-            dto = CppTestFacade.getCppTestConfiguration("unknown");
-            assertNull("ruleset inexistant dans la base", dto);
-        } catch (JrafPersistenceException e) {
+            dto = CppTestFacade.getCppTestConfiguration( "unknown" );
+            assertNull( "ruleset inexistant dans la base", dto );
+        }
+        catch ( JrafPersistenceException e )
+        {
             e.printStackTrace();
-            fail("unexpected exception");
-        } catch (JrafDaoException e) {
+            fail( "unexpected exception" );
+        }
+        catch ( JrafDaoException e )
+        {
             e.printStackTrace();
-            fail("unexpected exception");
-        } catch (JrafEnterpriseException e) {
+            fail( "unexpected exception" );
+        }
+        catch ( JrafEnterpriseException e )
+        {
             e.printStackTrace();
-            fail("unexpected exception");
+            fail( "unexpected exception" );
         }
     }
 }

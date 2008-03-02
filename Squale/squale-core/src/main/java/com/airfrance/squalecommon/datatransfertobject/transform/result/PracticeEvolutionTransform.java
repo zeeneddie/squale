@@ -14,18 +14,21 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.result.Practice
 /**
  * Transforme des données sous forme BO en PracticeEvolutionDTO
  */
-public class PracticeEvolutionTransform {
+public class PracticeEvolutionTransform
+{
 
     /**
      * @param pTabs la collection de tableau d'objets
      * @return la collection transformée
      */
-    public static Collection tabCollectionToDto(Collection pTabs) {
+    public static Collection tabCollectionToDto( Collection pTabs )
+    {
         ArrayList results = new ArrayList();
-        for (Iterator it = pTabs.iterator(); it.hasNext();) {
+        for ( Iterator it = pTabs.iterator(); it.hasNext(); )
+        {
             Object[] currentTab = (Object[]) it.next();
-            PracticeEvolutionDTO evolution = tabToDto(currentTab);
-            results.add(evolution);
+            PracticeEvolutionDTO evolution = tabToDto( currentTab );
+            results.add( evolution );
         }
         return results;
     }
@@ -35,12 +38,14 @@ public class PracticeEvolutionTransform {
      * @param pIsCurrentAudit indique si il s'agit de nouveaux composants
      * @return la collection transformée
      */
-    public static Collection markCollectionToDto(Collection pMarks, boolean pIsCurrentAudit) {
+    public static Collection markCollectionToDto( Collection pMarks, boolean pIsCurrentAudit )
+    {
         ArrayList results = new ArrayList();
-        for (Iterator it = pMarks.iterator(); it.hasNext();) {
+        for ( Iterator it = pMarks.iterator(); it.hasNext(); )
+        {
             MarkBO currentMark = (MarkBO) it.next();
-            PracticeEvolutionDTO evolution = markBOToDto(currentMark, pIsCurrentAudit);
-            results.add(evolution);
+            PracticeEvolutionDTO evolution = markBOToDto( currentMark, pIsCurrentAudit );
+            results.add( evolution );
         }
         return results;
     }
@@ -49,38 +54,42 @@ public class PracticeEvolutionTransform {
      * @param pObject le tableau d'objets nécessaires à la construction du DTO
      * @return le tableau transformé en PracticeEvolutionDTO
      */
-    private static PracticeEvolutionDTO tabToDto(Object[] pObject) {
+    private static PracticeEvolutionDTO tabToDto( Object[] pObject )
+    {
         PracticeEvolutionDTO evolution = new PracticeEvolutionDTO();
         int index = 0;
         AbstractComponentBO componentBO = (AbstractComponentBO) pObject[index++];
-        ComponentDTO componentDTO = ComponentTransform.bo2Dto(componentBO);
-        evolution.setComponent(componentDTO);
+        ComponentDTO componentDTO = ComponentTransform.bo2Dto( componentBO );
+        evolution.setComponent( componentDTO );
         PracticeResultBO practiceBO = (PracticeResultBO) pObject[index++];
-        evolution.setPractice(QualityResultTransform.bo2Dto(practiceBO));
+        evolution.setPractice( QualityResultTransform.bo2Dto( practiceBO ) );
         Float mark = (Float) pObject[index++];
-        evolution.setMark(mark);
+        evolution.setMark( mark );
         Float previousMark = (Float) pObject[index++];
-        evolution.setPreviousMark(previousMark);
+        evolution.setPreviousMark( previousMark );
         return evolution;
     }
 
     /**
      * @param pMarkBO la note sous forme BO
-     * @param pIsCurrentAudit indique si il s'agit d'un composant appartenant à l'audit
-     * courant
+     * @param pIsCurrentAudit indique si il s'agit d'un composant appartenant à l'audit courant
      * @return la note transformée en PracticeEvolutionDTO
      */
-    private static PracticeEvolutionDTO markBOToDto(MarkBO pMarkBO, boolean pIsCurrentAudit) {
+    private static PracticeEvolutionDTO markBOToDto( MarkBO pMarkBO, boolean pIsCurrentAudit )
+    {
         PracticeEvolutionDTO evolution = new PracticeEvolutionDTO();
-        ComponentDTO componentDTO = ComponentTransform.bo2Dto(pMarkBO.getComponent());
-        evolution.setComponent(componentDTO);
-        evolution.setPractice(QualityResultTransform.bo2Dto(pMarkBO.getPractice()));
-        if (pIsCurrentAudit) {
+        ComponentDTO componentDTO = ComponentTransform.bo2Dto( pMarkBO.getComponent() );
+        evolution.setComponent( componentDTO );
+        evolution.setPractice( QualityResultTransform.bo2Dto( pMarkBO.getPractice() ) );
+        if ( pIsCurrentAudit )
+        {
             // On change la note courante car il s'agit d'un composant de l'audit courant
-            evolution.setMark(new Float(pMarkBO.getValue()));
-        } else {
+            evolution.setMark( new Float( pMarkBO.getValue() ) );
+        }
+        else
+        {
             // On change la note précédente car il s'agit d'un composant de l'audit précédent
-            evolution.setPreviousMark(new Float(pMarkBO.getValue()));
+            evolution.setPreviousMark( new Float( pMarkBO.getValue() ) );
         }
         return evolution;
     }

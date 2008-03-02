@@ -6,11 +6,13 @@ import java.util.Collection;
 /**
  * Configuration Squalix
  */
-public class SqualixConfigurationDTO implements Serializable {
+public class SqualixConfigurationDTO
+    implements Serializable
+{
 
     /** La liste des dates limites de lancement d'audits */
     private Collection mStopTimes;
-    
+
     /** La liste des fréquences max des audits en fonction du dernier accès utilisateur */
     private Collection mFrequencies;
 
@@ -21,11 +23,12 @@ public class SqualixConfigurationDTO implements Serializable {
     private Collection mProfiles;
 
     /**
-    * Méthode d'accès pour mStopTimes
-    * 
-    * @return les dates limites
-    */
-    public Collection getStopTimes() {
+     * Méthode d'accès pour mStopTimes
+     * 
+     * @return les dates limites
+     */
+    public Collection getStopTimes()
+    {
         return mStopTimes;
     }
 
@@ -34,7 +37,8 @@ public class SqualixConfigurationDTO implements Serializable {
      * 
      * @return les profils
      */
-    public Collection getProfiles() {
+    public Collection getProfiles()
+    {
         return mProfiles;
     }
 
@@ -43,7 +47,8 @@ public class SqualixConfigurationDTO implements Serializable {
      * 
      * @return les récupérateurs de sources
      */
-    public Collection getSourceManagements() {
+    public Collection getSourceManagements()
+    {
         return mSourceManagements;
     }
 
@@ -52,7 +57,8 @@ public class SqualixConfigurationDTO implements Serializable {
      * 
      * @param pStopTimes les nouvelles dates limites
      */
-    public void setStopTimes(Collection pStopTimes) {
+    public void setStopTimes( Collection pStopTimes )
+    {
         mStopTimes = pStopTimes;
     }
 
@@ -61,7 +67,8 @@ public class SqualixConfigurationDTO implements Serializable {
      * 
      * @param pProfiles les nouveaux profils
      */
-    public void setProfiles(Collection pProfiles) {
+    public void setProfiles( Collection pProfiles )
+    {
         mProfiles = pProfiles;
     }
 
@@ -70,21 +77,24 @@ public class SqualixConfigurationDTO implements Serializable {
      * 
      * @param pSourceManagements les nouveaux types de récupération des sources
      */
-    public void setSourceManagements(Collection pSourceManagements) {
+    public void setSourceManagements( Collection pSourceManagements )
+    {
         mSourceManagements = pSourceManagements;
     }
-    
+
     /**
      * @return la liste des fréquences max des audits
      */
-    public Collection getFrequencies() {
+    public Collection getFrequencies()
+    {
         return mFrequencies;
     }
 
     /**
      * @param pCollection la liste des fréquences max des audits
      */
-    public void setFrequencies(Collection pCollection) {
+    public void setFrequencies( Collection pCollection )
+    {
         mFrequencies = pCollection;
     }
 }

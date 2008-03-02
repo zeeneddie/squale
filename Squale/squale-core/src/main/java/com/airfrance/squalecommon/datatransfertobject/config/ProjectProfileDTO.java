@@ -5,39 +5,45 @@ import java.util.List;
 /**
  * Profile Squalix
  */
-public class ProjectProfileDTO extends TasksUserDTO {
+public class ProjectProfileDTO
+    extends TasksUserDTO
+{
 
     /** true si l'export IDE est possible */
     private boolean mExportIDE;
-    
+
     /** Les grilles disponibles pour ce profil */
     private List mGrids;
 
     /**
      * @return true si l'export IDE est possible
      */
-    public boolean getExportIDE() {
+    public boolean getExportIDE()
+    {
         return mExportIDE;
     }
 
     /**
      * @param pExportIDE true si l'export IDE est possible
      */
-    public void setExportIDE(boolean pExportIDE) {
+    public void setExportIDE( boolean pExportIDE )
+    {
         mExportIDE = pExportIDE;
     }
 
     /**
      * @return les grilles
      */
-    public List getGrids() {
+    public List getGrids()
+    {
         return mGrids;
     }
 
     /**
      * @param pGrids les grilles
      */
-    public void setGrids(List pGrids) {
+    public void setGrids( List pGrids )
+    {
         mGrids = pGrids;
     }
 

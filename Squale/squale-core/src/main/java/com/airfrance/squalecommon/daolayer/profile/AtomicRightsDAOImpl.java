@@ -6,37 +6,44 @@
  */
 package com.airfrance.squalecommon.daolayer.profile;
 
+import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.AtomicRightsBO;
 
 /**
  * @author M400843
- *
  */
-public class AtomicRightsDAOImpl extends AbstractDAOImpl {
+public class AtomicRightsDAOImpl
+    extends AbstractDAOImpl
+{
     /**
      * Instance singleton
      */
     private static AtomicRightsDAOImpl instance = null;
 
     /** initialisation du singleton */
-    static {
+    static
+    {
         instance = new AtomicRightsDAOImpl();
     }
 
     /**
      * Constructeur prive
+     * 
      * @throws JrafDaoException
      */
-    private AtomicRightsDAOImpl() {
-        initialize(AtomicRightsBO.class);
+    private AtomicRightsDAOImpl()
+    {
+        initialize( AtomicRightsBO.class );
     }
 
     /**
      * Retourne un singleton du DAO
+     * 
      * @return singleton du DAO
      */
-    public static AtomicRightsDAOImpl getInstance() {
+    public static AtomicRightsDAOImpl getInstance()
+    {
         return instance;
     }
 }

@@ -5,47 +5,51 @@ import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
 /**
  * DTO pour les items des transgressions
  */
-public class RuleCheckingItemDTO {
-    
+public class RuleCheckingItemDTO
+{
+
     /** Détail de la transgression */
     private String mMessage;
-    
+
     /** Composant concerné par la transgression */
     private ComponentDTO mComponent;
-    
+
     /** Composant en relation avec la transgression */
     private ComponentDTO mComponentInvolved;
-    
+
     /** Sévérité de la règle */
     private String mRuleSeverity;
-    
+
     /** Code de la règle */
     private String mRuleCode;
-    
+
     /** Chemin du fichier conserné */
     private String mComponentFile;
-    
+
     /** Numéro de la ligne */
     private int mLine;
 
     /**
      * @return le détail de la transgession
      */
-    public String getMessage() {
+    public String getMessage()
+    {
         return mMessage;
     }
-    
+
     /**
      * @return le composant concerné par la transgression
      */
-    public ComponentDTO getComponent() {
+    public ComponentDTO getComponent()
+    {
         return mComponent;
     }
 
     /**
      * @return le composant en relation avec la transgression
      */
-    public ComponentDTO getComponentInvolved() {
+    public ComponentDTO getComponentInvolved()
+    {
         return mComponentInvolved;
     }
 
@@ -54,7 +58,8 @@ public class RuleCheckingItemDTO {
      * 
      * @param pMessage le détail de la transgession
      */
-    public void setMessage(String pMessage) {
+    public void setMessage( String pMessage )
+    {
         mMessage = pMessage;
     }
 
@@ -63,7 +68,8 @@ public class RuleCheckingItemDTO {
      * 
      * @param pComponent le composant concerné par la transgression
      */
-    public void setComponent(ComponentDTO pComponent) {
+    public void setComponent( ComponentDTO pComponent )
+    {
         mComponent = pComponent;
     }
 
@@ -72,63 +78,72 @@ public class RuleCheckingItemDTO {
      * 
      * @param pComponentInvolved le composant en relation avec la transgression
      */
-    public void setComponentInvolved(ComponentDTO pComponentInvolved) {
+    public void setComponentInvolved( ComponentDTO pComponentInvolved )
+    {
         mComponentInvolved = pComponentInvolved;
     }
+
     /**
      * @return le code de la règle
      */
-    public String getRuleCode() {
+    public String getRuleCode()
+    {
         return mRuleCode;
     }
 
     /**
      * @return la sévérité de la règle
      */
-    public String getRuleSeverity() {
+    public String getRuleSeverity()
+    {
         return mRuleSeverity;
     }
 
     /**
      * @param pRuleCode la code de la règle
      */
-    public void setRuleCode(String pRuleCode) {
+    public void setRuleCode( String pRuleCode )
+    {
         mRuleCode = pRuleCode;
     }
 
     /**
      * @param pRuleSeverity la sévérité de la règle
      */
-    public void setRuleSeverity(String pRuleSeverity) {
+    public void setRuleSeverity( String pRuleSeverity )
+    {
         mRuleSeverity = pRuleSeverity;
     }
 
     /**
      * @return le chemin du fichier
      */
-    public String getComponentFile() {
+    public String getComponentFile()
+    {
         return mComponentFile;
     }
 
     /**
      * @return le numéro de ligne
      */
-    public int getLine() {
+    public int getLine()
+    {
         return mLine;
     }
 
     /**
      * @param pComponentFile le chemin du fichier
      */
-    public void setComponentFile(String pComponentFile) {
+    public void setComponentFile( String pComponentFile )
+    {
         mComponentFile = pComponentFile;
     }
 
     /**
      * @param pLine le numéro de ligne
      */
-    public void setLine(int pLine) {
+    public void setLine( int pLine )
+    {
         mLine = pLine;
     }
 }
-

@@ -11,7 +11,9 @@ import java.util.Collection;
 /**
  * DAO du Serveur d'exécution de Squalix
  */
-public class ServeurDAOImpl extends AbstractDAOImpl {
+public class ServeurDAOImpl
+    extends AbstractDAOImpl
+{
 
     /**
      * Instance singleton
@@ -19,33 +21,40 @@ public class ServeurDAOImpl extends AbstractDAOImpl {
     private static ServeurDAOImpl instance = null;
 
     /** initialisation du singleton */
-    static {
+    static
+    {
         instance = new ServeurDAOImpl();
     }
 
     /**
      * Constructeur privé
      */
-    private ServeurDAOImpl() {
-        initialize(ServeurBO.class);
+    private ServeurDAOImpl()
+    {
+        initialize( ServeurBO.class );
     }
-    
+
     /**
      * Retourne un singleton du DAO
+     * 
      * @return singleton du DAO
      */
-    public static ServeurDAOImpl getInstance() {
+    public static ServeurDAOImpl getInstance()
+    {
         return instance;
     }
 
     /**
      * Donne la liste de tous les serveurs
+     * 
      * @param pSession la session hibernate
      * @return la liste des serveurs
      * @throws JrafDaoException si une erreur survient
      */
-    public Collection listeServeurs(ISession pSession) throws JrafDaoException {
-        Collection pCollection = super.findAll(pSession);
+    public Collection listeServeurs( ISession pSession )
+        throws JrafDaoException
+    {
+        Collection pCollection = super.findAll( pSession );
         return pCollection;
     }
 

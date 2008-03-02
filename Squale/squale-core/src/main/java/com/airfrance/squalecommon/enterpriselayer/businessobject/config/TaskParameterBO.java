@@ -1,23 +1,23 @@
 package com.airfrance.squalecommon.enterpriselayer.businessobject.config;
 
 /**
- * Paramètre de tâche
- * Une tâche Squalix peut être configurée par des paramètres dynamiques,
- * ceux-ci sont définis dans le ficheir de configuration de squalix.
- * Un paramètre est défini par un nom et une valeur
- * @hibernate.class 
- * table="TaskParameter"
- * lazy="true"
+ * Paramètre de tâche Une tâche Squalix peut être configurée par des paramètres dynamiques, ceux-ci sont définis dans le
+ * ficheir de configuration de squalix. Un paramètre est défini par un nom et une valeur
+ * 
+ * @hibernate.class table="TaskParameter" lazy="true"
  */
-public class TaskParameterBO {
+public class TaskParameterBO
+{
     /**
      * Identifiant (au sens technique) de l'objet
      */
     protected long mId = -1;
+
     /**
      * Nom du paramètre
      */
     private String mName;
+
     /**
      * Valeur du paramètre
      */
@@ -27,16 +27,11 @@ public class TaskParameterBO {
      * Méthode d'accès pour mId
      * 
      * @return la l'identifiant (au sens technique) de l'objet
-     * 
-     * @hibernate.id generator-class="native"
-     * type="long" 
-     * column="TaskParameterId" 
-     * unsaved-value="-1" 
-     * length="19"
-     * @hibernate.generator-param name="sequence" value="taskParameter_sequence" 
-     * 
+     * @hibernate.id generator-class="native" type="long" column="TaskParameterId" unsaved-value="-1" length="19"
+     * @hibernate.generator-param name="sequence" value="taskParameter_sequence"
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
@@ -45,7 +40,8 @@ public class TaskParameterBO {
      * 
      * @param pId le nouvel identifiant
      */
-    public void setId(long pId) {
+    public void setId( long pId )
+    {
         mId = pId;
     }
 
@@ -53,50 +49,37 @@ public class TaskParameterBO {
      * Méthode d'accès à mName
      * 
      * @return le nom
-     * 
-     * @hibernate.property 
-     * name="name" 
-     * column="Name" 
-     * type="string" 
-     * length="255"
-     * not-null="true" 
-     * 
+     * @hibernate.property name="name" column="Name" type="string" length="255" not-null="true"
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
-    
+
     /**
-     * 
      * @param pName nom
      */
-    public void setName(String pName) {
+    public void setName( String pName )
+    {
         mName = pName;
     }
-    
-    
+
     /**
      * Méthode d'accès à mValue
      * 
      * @return la valeur
-     * 
-     * @hibernate.property 
-     * name="name" 
-     * column="Value" 
-     * type="string" 
-     * length="255"
-     * not-null="true" 
-     * 
+     * @hibernate.property name="name" column="Value" type="string" length="255" not-null="true"
      */
-    public String getValue() {
+    public String getValue()
+    {
         return mValue;
     }
-    
+
     /**
-     * 
      * @param pValue nom
      */
-    public void setValue(String pValue) {
+    public void setValue( String pValue )
+    {
         mValue = pValue;
     }
 }

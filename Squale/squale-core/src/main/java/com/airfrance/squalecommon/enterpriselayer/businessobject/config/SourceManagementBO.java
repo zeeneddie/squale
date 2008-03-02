@@ -3,40 +3,36 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.config;
 /**
  * Récupérateur de sources
  * 
- * @hibernate.subclass
- * lazy="false"
- * discriminator-value="SourceManagement"
- * 
+ * @hibernate.subclass lazy="false" discriminator-value="SourceManagement"
  */
-public class SourceManagementBO extends AbstractTasksUserBO {
-    
+public class SourceManagementBO
+    extends AbstractTasksUserBO
+{
+
     /** Audit de jalon possible */
     private boolean mMilestoneAudit;
-    
+
     /** Audit de suivi possible */
     private boolean mNormalAudit;
-    
+
     /**
      * Constructeur par défaut
      */
-    public SourceManagementBO() {
+    public SourceManagementBO()
+    {
         super();
         mMilestoneAudit = true;
         mNormalAudit = true;
     }
-    
+
     /**
      * Méthode d'accès à mMilestoneAudit
      * 
      * @return true si l'audit de jalon est possible
-     * 
-     * @hibernate.property 
-     * name="milestoneAudit" 
-     * column="MilestoneAudit" 
-     * type="boolean" 
-     * 
+     * @hibernate.property name="milestoneAudit" column="MilestoneAudit" type="boolean"
      */
-    public boolean isMilestoneAudit() {
+    public boolean isMilestoneAudit()
+    {
         return mMilestoneAudit;
     }
 
@@ -44,14 +40,10 @@ public class SourceManagementBO extends AbstractTasksUserBO {
      * Méthode d'accès à mNormalAudit
      * 
      * @return true si l'audit de suivi est possible
-     * 
-     * @hibernate.property 
-     * name="normalAudit" 
-     * column="NormalAudit" 
-     * type="boolean" 
-     * 
+     * @hibernate.property name="normalAudit" column="NormalAudit" type="boolean"
      */
-    public boolean isNormalAudit() {
+    public boolean isNormalAudit()
+    {
         return mNormalAudit;
     }
 
@@ -60,16 +52,18 @@ public class SourceManagementBO extends AbstractTasksUserBO {
      * 
      * @param pMilestoneAudit la nouvelle valeur de mMilestoneAudit
      */
-    public void setMilestoneAudit(boolean pMilestoneAudit) {
+    public void setMilestoneAudit( boolean pMilestoneAudit )
+    {
         mMilestoneAudit = pMilestoneAudit;
     }
 
     /**
-      * Change la valeur de mNormalAudit
-      * 
-      * @param pNormalAudit la nouvelle valeur de mNormalAudit
-      */
-    public void setNormalAudit(boolean pNormalAudit) {
+     * Change la valeur de mNormalAudit
+     * 
+     * @param pNormalAudit la nouvelle valeur de mNormalAudit
+     */
+    public void setNormalAudit( boolean pNormalAudit )
+    {
         mNormalAudit = pNormalAudit;
     }
 

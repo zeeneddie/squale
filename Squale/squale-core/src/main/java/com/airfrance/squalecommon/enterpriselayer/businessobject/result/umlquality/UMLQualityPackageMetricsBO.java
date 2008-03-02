@@ -1,18 +1,19 @@
 package com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality;
 
 /**
- * 
- * @hibernate.subclass
- * discriminator-value="UMLQualityPackageMetrics"
+ * @hibernate.subclass discriminator-value="UMLQualityPackageMetrics"
  */
 
-public class UMLQualityPackageMetricsBO extends UMLQualityMetricsBO{
-    
+public class UMLQualityPackageMetricsBO
+    extends UMLQualityMetricsBO
+{
+
     /**
      * Constructeur
      */
-       public UMLQualityPackageMetricsBO() {
-           super();
-       }    
-    
+    public UMLQualityPackageMetricsBO()
+    {
+        super();
+    }
+
 }

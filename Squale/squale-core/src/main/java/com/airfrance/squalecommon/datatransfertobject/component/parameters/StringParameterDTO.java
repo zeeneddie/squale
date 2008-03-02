@@ -2,10 +2,11 @@ package com.airfrance.squalecommon.datatransfertobject.component.parameters;
 
 /**
  */
-public class StringParameterDTO {
+public class StringParameterDTO
+{
 
     /**
-     * La valeur du paramètre 
+     * La valeur du paramètre
      */
     private String mValue;
 
@@ -19,7 +20,8 @@ public class StringParameterDTO {
      * 
      * @param pValue la valeur du paramètre
      */
-    public StringParameterDTO(String pValue) {
+    public StringParameterDTO( String pValue )
+    {
         mId = -1;
         mValue = pValue;
     }
@@ -27,31 +29,35 @@ public class StringParameterDTO {
     /**
      * Constructeur
      */
-    public StringParameterDTO() {
+    public StringParameterDTO()
+    {
         mId = -1;
-        mValue="";
+        mValue = "";
     }
 
     /**
      * @return la valeur du paramètre
      */
-    public String getValue() {
+    public String getValue()
+    {
         return mValue;
     }
 
     /**
      * @param pValue la nouvelle valeur du paramètre
      */
-    public void setValue(String pValue) {
+    public void setValue( String pValue )
+    {
         mValue = pValue;
     }
 
     /**
      * Access method for the mId property.
      * 
-     * @return   the current value of the mId property
+     * @return the current value of the mId property
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
@@ -60,7 +66,8 @@ public class StringParameterDTO {
      * 
      * @param pId the new value of the mId property
      */
-    public void setId(long pId) {
+    public void setId( long pId )
+    {
         mId = pId;
     }
 

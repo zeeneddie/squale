@@ -5,39 +5,41 @@
 package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
 
 /**
- * @author m400841 
+ * @author m400841
  * @version 1.0
- * 
- * @hibernate.subclass
- * discriminator-value="Graph"
+ * @hibernate.subclass discriminator-value="Graph"
  */
-public abstract class GraphBO extends MeasureBO {
+public abstract class GraphBO
+    extends MeasureBO
+{
     /**
-     * Image sous forme de chaine de bytes 
+     * Image sous forme de chaine de bytes
      */
-    private final static String IMAGE ="Image";
+    private final static String IMAGE = "Image";
 
     /**
-     * Constructeur publique
-     * Initialise les "pseudo" attributs de la HashTable
+     * Constructeur publique Initialise les "pseudo" attributs de la HashTable
      */
-    public GraphBO() {
+    public GraphBO()
+    {
         super();
-        getMetrics().put(IMAGE,new BinaryMetricBO());
+        getMetrics().put( IMAGE, new BinaryMetricBO() );
     }
 
     /**
      * @return recupere l'image sous forme de byte[]
      */
-    public byte[] getImage() {
-        return (byte []) ((MetricBO) getMetrics().get(IMAGE)).getValue();
+    public byte[] getImage()
+    {
+        return (byte[]) ( (MetricBO) getMetrics().get( IMAGE ) ).getValue();
     }
 
     /**
      * @param pImage image sous forme de byte[]
      */
-    public void setImage(byte[] pImage) {
-        ((MetricBO) getMetrics().get(IMAGE)).setValue(pImage);
+    public void setImage( byte[] pImage )
+    {
+        ( (MetricBO) getMetrics().get( IMAGE ) ).setValue( pImage );
     }
 
 }

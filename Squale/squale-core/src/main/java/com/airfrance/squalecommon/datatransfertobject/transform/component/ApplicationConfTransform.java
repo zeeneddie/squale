@@ -24,42 +24,47 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
 
 /**
- * @author M400841
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class ApplicationConfTransform implements Serializable {
+public class ApplicationConfTransform
+    implements Serializable
+{
 
     /**
      * ApplicationConfDTO --> ApplicationBO
+     * 
      * @param pApplicationConfDTO ApplicationDTO à transformer
      * @return ApplicationBO
      */
-    public static ApplicationBO dto2Bo(ApplicationConfDTO pApplicationConfDTO) {
+    public static ApplicationBO dto2Bo( ApplicationConfDTO pApplicationConfDTO )
+    {
 
         // Initialisation du retour
         ApplicationBO applicationBO = new ApplicationBO();
-        applicationBO.setAuditFrequency(pApplicationConfDTO.getAuditFrequency());
-        applicationBO.setId(pApplicationConfDTO.getId());
-        applicationBO.setName(pApplicationConfDTO.getName());
-        applicationBO.setResultsStorageOptions(pApplicationConfDTO.getResultsStorageOptions());
-        applicationBO.setExternalDev(pApplicationConfDTO.getExternalDev());
-        applicationBO.setInProduction(pApplicationConfDTO.getInProduction());
-        if(pApplicationConfDTO.getServeurDTO() != null) {
-            applicationBO.setServeurBO((ServeurBO)ServeurTransform.dto2bo(pApplicationConfDTO.getServeurDTO()));
+        applicationBO.setAuditFrequency( pApplicationConfDTO.getAuditFrequency() );
+        applicationBO.setId( pApplicationConfDTO.getId() );
+        applicationBO.setName( pApplicationConfDTO.getName() );
+        applicationBO.setResultsStorageOptions( pApplicationConfDTO.getResultsStorageOptions() );
+        applicationBO.setExternalDev( pApplicationConfDTO.getExternalDev() );
+        applicationBO.setInProduction( pApplicationConfDTO.getInProduction() );
+        if ( pApplicationConfDTO.getServeurDTO() != null )
+        {
+            applicationBO.setServeurBO( (ServeurBO) ServeurTransform.dto2bo( pApplicationConfDTO.getServeurDTO() ) );
         }
 
         return applicationBO;
     }
 
     /**
-     * ApplicationBO -> ApplicationConfDTO 
+     * ApplicationBO -> ApplicationConfDTO
+     * 
      * @param pApplicationBO ApplicationBO
      * @param pUserBOs collection de UserBOs
      * @return ApplicationConfDTO
      */
-    public static ApplicationConfDTO bo2Dto(ApplicationBO pApplicationBO, Collection pUserBOs) {
+    public static ApplicationConfDTO bo2Dto( ApplicationBO pApplicationBO, Collection pUserBOs )
+    {
 
         // Initialisation
         Collection Projects = new ArrayList(); // collection de sous-projets
@@ -67,127 +72,144 @@ public class ApplicationConfTransform implements Serializable {
 
         // Initialisation du retour
         ApplicationConfDTO applicationConfDTO = new ApplicationConfDTO();
-        applicationConfDTO.setAuditFrequency(pApplicationBO.getAuditFrequency());
-        applicationConfDTO.setId(pApplicationBO.getId());
-        applicationConfDTO.setLastUpdate(pApplicationBO.getLastUpdate());
-        applicationConfDTO.setLastUser(pApplicationBO.getLastUser());
-        applicationConfDTO.setName(pApplicationBO.getName());
-        applicationConfDTO.setResultsStorageOptions(pApplicationBO.getResultsStorageOptions());
-        applicationConfDTO.setStatus(pApplicationBO.getStatus());
-        applicationConfDTO.setPublic(pApplicationBO.getPublic());
-        applicationConfDTO.setExternalDev(pApplicationBO.getExternalDev());
-        applicationConfDTO.setInProduction(pApplicationBO.getInProduction());
-        if(null != pApplicationBO.getUserAccesses()) {
-            applicationConfDTO.setAccesses(UserAccessTransform.bo2dto(pApplicationBO.getUserAccesses()));
+        applicationConfDTO.setAuditFrequency( pApplicationBO.getAuditFrequency() );
+        applicationConfDTO.setId( pApplicationBO.getId() );
+        applicationConfDTO.setLastUpdate( pApplicationBO.getLastUpdate() );
+        applicationConfDTO.setLastUser( pApplicationBO.getLastUser() );
+        applicationConfDTO.setName( pApplicationBO.getName() );
+        applicationConfDTO.setResultsStorageOptions( pApplicationBO.getResultsStorageOptions() );
+        applicationConfDTO.setStatus( pApplicationBO.getStatus() );
+        applicationConfDTO.setPublic( pApplicationBO.getPublic() );
+        applicationConfDTO.setExternalDev( pApplicationBO.getExternalDev() );
+        applicationConfDTO.setInProduction( pApplicationBO.getInProduction() );
+        if ( null != pApplicationBO.getUserAccesses() )
+        {
+            applicationConfDTO.setAccesses( UserAccessTransform.bo2dto( pApplicationBO.getUserAccesses() ) );
         }
-        if (pApplicationBO.getServeurBO() != null) {
-            applicationConfDTO.setServeurDTO(ServeurTransform.bo2dto(pApplicationBO.getServeurBO()));
+        if ( pApplicationBO.getServeurBO() != null )
+        {
+            applicationConfDTO.setServeurDTO( ServeurTransform.bo2dto( pApplicationBO.getServeurBO() ) );
         }
         // Traitement de la collection de sous-projets
-        if (null != pApplicationBO.getChildren()) {
+        if ( null != pApplicationBO.getChildren() )
+        {
 
             Iterator iterator = pApplicationBO.getChildren().iterator();
             ProjectConfDTO currentProject = null;
 
-            while (iterator.hasNext()) {
+            while ( iterator.hasNext() )
+            {
                 ProjectBO bo = (ProjectBO) iterator.next();
                 // On l'ajoute à la liste des projets seulement si
                 // il n'est pas supprimé
-                if(bo.getStatus() != ProjectBO.DELETED) {
-                    currentProject = ProjectConfTransform.bo2Dto(bo);
-                    Projects.add(currentProject);
+                if ( bo.getStatus() != ProjectBO.DELETED )
+                {
+                    currentProject = ProjectConfTransform.bo2Dto( bo );
+                    Projects.add( currentProject );
                 }
             }
         }
-        applicationConfDTO.setProjectConf(Projects);
+        applicationConfDTO.setProjectConf( Projects );
 
         // Traitement des Users
-        if (pUserBOs != null) {
+        if ( pUserBOs != null )
+        {
 
             Iterator userIterator = pUserBOs.iterator();
             UserBO currentUser = null;
 
-            while (userIterator.hasNext()) {
+            while ( userIterator.hasNext() )
+            {
 
                 currentUser = (UserBO) userIterator.next();
 
-                users.put(currentUser.getMatricule(), ((ProfileBO) currentUser.getRights().get(pApplicationBO)).getName());
+                users.put( currentUser.getMatricule(),
+                           ( (ProfileBO) currentUser.getRights().get( pApplicationBO ) ).getName() );
 
             }
         }
-        applicationConfDTO.setUsers(users);
+        applicationConfDTO.setUsers( users );
 
         return applicationConfDTO;
     }
 
     /**
-     * ApplicationBO -> ApplicationConfDTO 
+     * ApplicationBO -> ApplicationConfDTO
+     * 
      * @param pApplicationBO ApplicationBO
      * @return ApplicationConfDTO
      */
-    public static ApplicationConfDTO bo2Dto(ApplicationBO pApplicationBO) {
+    public static ApplicationConfDTO bo2Dto( ApplicationBO pApplicationBO )
+    {
 
         // Initialisation
         Collection Projects = new ArrayList(); // collection de sous-projets
 
         // Initialisation du retour
         ApplicationConfDTO applicationConfDTO = new ApplicationConfDTO();
-        applicationConfDTO.setAuditFrequency(pApplicationBO.getAuditFrequency());
-        applicationConfDTO.setId(pApplicationBO.getId());
-        applicationConfDTO.setLastUpdate(pApplicationBO.getLastUpdate());
-        applicationConfDTO.setLastUser(pApplicationBO.getLastUser());
-        applicationConfDTO.setName(pApplicationBO.getName());
-        applicationConfDTO.setResultsStorageOptions(pApplicationBO.getResultsStorageOptions());
-        applicationConfDTO.setStatus(pApplicationBO.getStatus());
-        applicationConfDTO.setPublic(pApplicationBO.getPublic());
-        applicationConfDTO.setExternalDev(pApplicationBO.getExternalDev());
-        applicationConfDTO.setInProduction(pApplicationBO.getInProduction());
-        if (pApplicationBO.getServeurBO() != null) {
-        applicationConfDTO.setServeurDTO((ServeurDTO)ServeurTransform.bo2dto(pApplicationBO.getServeurBO()));
+        applicationConfDTO.setAuditFrequency( pApplicationBO.getAuditFrequency() );
+        applicationConfDTO.setId( pApplicationBO.getId() );
+        applicationConfDTO.setLastUpdate( pApplicationBO.getLastUpdate() );
+        applicationConfDTO.setLastUser( pApplicationBO.getLastUser() );
+        applicationConfDTO.setName( pApplicationBO.getName() );
+        applicationConfDTO.setResultsStorageOptions( pApplicationBO.getResultsStorageOptions() );
+        applicationConfDTO.setStatus( pApplicationBO.getStatus() );
+        applicationConfDTO.setPublic( pApplicationBO.getPublic() );
+        applicationConfDTO.setExternalDev( pApplicationBO.getExternalDev() );
+        applicationConfDTO.setInProduction( pApplicationBO.getInProduction() );
+        if ( pApplicationBO.getServeurBO() != null )
+        {
+            applicationConfDTO.setServeurDTO( (ServeurDTO) ServeurTransform.bo2dto( pApplicationBO.getServeurBO() ) );
         }
-        if(null != pApplicationBO.getUserAccesses()) {
-            applicationConfDTO.setAccesses(UserAccessTransform.bo2dto(pApplicationBO.getUserAccesses()));
+        if ( null != pApplicationBO.getUserAccesses() )
+        {
+            applicationConfDTO.setAccesses( UserAccessTransform.bo2dto( pApplicationBO.getUserAccesses() ) );
         }
         // Traitement de la collection de sous-projets
-        if (null != pApplicationBO.getChildren()) {
+        if ( null != pApplicationBO.getChildren() )
+        {
 
             Iterator iterator = pApplicationBO.getChildren().iterator();
             ProjectConfDTO currentProject = null;
 
-            while (iterator.hasNext()) {
+            while ( iterator.hasNext() )
+            {
 
-                currentProject = ProjectConfTransform.bo2Dto((ProjectBO) iterator.next());
-                Projects.add(currentProject);
+                currentProject = ProjectConfTransform.bo2Dto( (ProjectBO) iterator.next() );
+                Projects.add( currentProject );
             }
         }
-        applicationConfDTO.setProjectConf(Projects);
+        applicationConfDTO.setProjectConf( Projects );
 
         return applicationConfDTO;
     }
 
     /**
-     * Permet de modifier les valeurs souhaitées dans ApplicationDTO
-     * sans ecraser les relations
+     * Permet de modifier les valeurs souhaitées dans ApplicationDTO sans ecraser les relations
+     * 
      * @param pApplicationConfDTO ApplicationDTO
      * @param pApplicationBO ApplicationBO
      */
-    public static void dto2Bo(ApplicationConfDTO pApplicationConfDTO, ApplicationBO pApplicationBO) {
+    public static void dto2Bo( ApplicationConfDTO pApplicationConfDTO, ApplicationBO pApplicationBO )
+    {
 
-        pApplicationBO.setAuditFrequency(pApplicationConfDTO.getAuditFrequency());
-        pApplicationBO.setId(pApplicationConfDTO.getId());
-        pApplicationBO.setName(pApplicationConfDTO.getName());
-        pApplicationBO.setResultsStorageOptions(pApplicationConfDTO.getResultsStorageOptions());
-        pApplicationBO.setStatus(pApplicationConfDTO.getStatus());
-        pApplicationBO.setPublic(pApplicationConfDTO.getPublic());
-        pApplicationBO.setExternalDev(pApplicationConfDTO.getExternalDev());
-        pApplicationBO.setInProduction(pApplicationConfDTO.getInProduction());
-        pApplicationBO.setLastUpdate(pApplicationConfDTO.getLastUpdate());
-        pApplicationBO.setLastUser(pApplicationConfDTO.getLastUser());
-        if(pApplicationConfDTO.getServeurDTO() != null) {
-            pApplicationBO.setServeurBO((ServeurBO)ServeurTransform.dto2bo(pApplicationConfDTO.getServeurDTO()));
+        pApplicationBO.setAuditFrequency( pApplicationConfDTO.getAuditFrequency() );
+        pApplicationBO.setId( pApplicationConfDTO.getId() );
+        pApplicationBO.setName( pApplicationConfDTO.getName() );
+        pApplicationBO.setResultsStorageOptions( pApplicationConfDTO.getResultsStorageOptions() );
+        pApplicationBO.setStatus( pApplicationConfDTO.getStatus() );
+        pApplicationBO.setPublic( pApplicationConfDTO.getPublic() );
+        pApplicationBO.setExternalDev( pApplicationConfDTO.getExternalDev() );
+        pApplicationBO.setInProduction( pApplicationConfDTO.getInProduction() );
+        pApplicationBO.setLastUpdate( pApplicationConfDTO.getLastUpdate() );
+        pApplicationBO.setLastUser( pApplicationConfDTO.getLastUser() );
+        if ( pApplicationConfDTO.getServeurDTO() != null )
+        {
+            pApplicationBO.setServeurBO( (ServeurBO) ServeurTransform.dto2bo( pApplicationConfDTO.getServeurDTO() ) );
         }
-        if(null != pApplicationConfDTO.getAccesses()) {
-            pApplicationBO.setUserAccesses(UserAccessTransform.dto2bo(pApplicationConfDTO.getAccesses()));
+        if ( null != pApplicationConfDTO.getAccesses() )
+        {
+            pApplicationBO.setUserAccesses( UserAccessTransform.dto2bo( pApplicationConfDTO.getAccesses() ) );
         }
 
     }

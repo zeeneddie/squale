@@ -7,37 +7,38 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureB
 /**
  * @author m400842 (by rose)
  * @version 1.0
- * 
- * @hibernate.subclass
- * discriminator-value="McCabeQAMetrics"
+ * @hibernate.subclass discriminator-value="McCabeQAMetrics"
  */
-public abstract class McCabeQAMetricsBO extends MeasureBO {
-    
+public abstract class McCabeQAMetricsBO
+    extends MeasureBO
+{
+
     /**
-     * Cet attribut n'est pas persistant, il représente le nom du composant auquel 
-     * sont liées les données.<br>
-     * L'adaptateur utilise ce nom pour déterminer l'instance de AbstractComponentBO 
-     * correspondante et créer la relation.
+     * Cet attribut n'est pas persistant, il représente le nom du composant auquel sont liées les données.<br>
+     * L'adaptateur utilise ce nom pour déterminer l'instance de AbstractComponentBO correspondante et créer la
+     * relation.
      */
     protected String mComponentName;
-    
+
     /**
      * Access method for the mComponentName property.
      * 
-     * @return   the current value of the mComponentName property
+     * @return the current value of the mComponentName property
      * @roseuid 42C416B60319
      */
-    public String getComponentName() {
+    public String getComponentName()
+    {
         return mComponentName;
     }
-    
+
     /**
      * Sets the value of the mComponentName property.
      * 
      * @param pComponentName the new value of the mComponentName property
      * @roseuid 42C416B60329
      */
-    public void setComponentName(String pComponentName) {
+    public void setComponentName( String pComponentName )
+    {
         mComponentName = pComponentName;
     }
 }

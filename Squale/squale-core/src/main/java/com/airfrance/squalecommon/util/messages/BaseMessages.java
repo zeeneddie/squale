@@ -10,11 +10,12 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Classe de manipulation des messages
  */
-public class BaseMessages {
+public class BaseMessages
+{
     /**
      * Logger.
      */
-    private static final Log LOGGER = LogFactory.getLog(BaseMessages.class);
+    private static final Log LOGGER = LogFactory.getLog( BaseMessages.class );
 
     /**
      * Instance de ResourceBudle utilisée.
@@ -23,39 +24,47 @@ public class BaseMessages {
 
     /**
      * Constructeur
+     * 
      * @param pBundleName du bundle à charger
      */
-    protected BaseMessages(String pBundleName) {
-        mResourceBundle = ResourceBundle.getBundle(pBundleName);
+    protected BaseMessages( String pBundleName )
+    {
+        mResourceBundle = ResourceBundle.getBundle( pBundleName );
     }
 
     /**
      * Retourne la chaîne de caractère identifiée par la clé.
+     * 
      * @param pKey nom de la clé.
      * @return la chaîne associée.
      */
-    protected String getBundleString(String pKey) {
+    protected String getBundleString( String pKey )
+    {
         String value;
-        try {
-            value = mResourceBundle.getString(pKey);
-        } catch (MissingResourceException e) {
-            String message = CommonMessages.getString("exception.messages.missing") + pKey;
-            LOGGER.error(message, e);
+        try
+        {
+            value = mResourceBundle.getString( pKey );
+        }
+        catch ( MissingResourceException e )
+        {
+            String message = CommonMessages.getString( "exception.messages.missing" ) + pKey;
+            LOGGER.error( message, e );
             value = "???" + pKey + "???";
         }
         return value;
     }
 
     /**
-     * 
      * Retourne la chaîne de caractère identifiée par la clé.
+     * 
      * @param pKey nom de la clé.
      * @param pValues les valeurs à insérer dans la chaine
      * @return la chaîne associée.
      */
-    protected String getBundleString(String pKey, Object[] pValues) {
-        MessageFormat format = new MessageFormat(getBundleString(pKey));
-        return format.format(pValues);
+    protected String getBundleString( String pKey, Object[] pValues )
+    {
+        MessageFormat format = new MessageFormat( getBundleString( pKey ) );
+        return format.format( pValues );
     }
 
 }

@@ -23,143 +23,187 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.cp
 /**
  * Facade pour CppTest
  */
-public class CppTestFacade {
+public class CppTestFacade
+{
     /**
      * Provider de persistence
      */
     private static final IPersistenceProvider PERSISTENTPROVIDER = PersistenceHelper.getPersistenceProvider();
 
     /** Log */
-    private static Log LOG = LogFactory.getLog(CppTestFacade.class);
+    private static Log LOG = LogFactory.getLog( CppTestFacade.class );
 
     /**
      * Parsing du fichier de configuration
+     * 
      * @param pStream flux à lire
      * @param pErrors erreurs rencontrées
-     * @return ruleset créé ou nul si la contrainte d'unicité n'est pas
-     * respectée
+     * @return ruleset créé ou nul si la contrainte d'unicité n'est pas respectée
      * @throws JrafEnterpriseException si erreur
      */
-    public static CppTestRuleSetDTO importCppTestConfig(InputStream pStream, StringBuffer pErrors) throws JrafEnterpriseException {
+    public static CppTestRuleSetDTO importCppTestConfig( InputStream pStream, StringBuffer pErrors )
+        throws JrafEnterpriseException
+    {
         ISession session = null;
         CppTestRuleSetDTO dto = null;
-        try {
+        try
+        {
             session = PERSISTENTPROVIDER.getSession();
             // Importation du fichier
             CppTestConfigParser parser = new CppTestConfigParser();
-            CppTestRuleSetBO ruleset = parser.parseFile(pStream, pErrors);
+            CppTestRuleSetBO ruleset = parser.parseFile( pStream, pErrors );
             // Si le parsing ne provoque pas d'erreur, on tente la sauvegarde dans la base
-            if (pErrors.length() == 0) {
+            if ( pErrors.length() == 0 )
+            {
                 CppTestRuleSetDAOImpl dao = CppTestRuleSetDAOImpl.getInstance();
-                ruleset = dao.createCppTestRuleSet(session, ruleset);
+                ruleset = dao.createCppTestRuleSet( session, ruleset );
                 // ruleset vaut nul si la contrainte d'unicité n'est pas respectée
                 // dans ce cas on renvoie null
-                if (ruleset != null) {
-                    dto = CppTestRuleSetTransform.bo2Dto(ruleset);
+                if ( ruleset != null )
+                {
+                    dto = CppTestRuleSetTransform.bo2Dto( ruleset );
                 }
             }
-        } catch (JrafDaoException e) {
+        }
+        catch ( JrafDaoException e )
+        {
             // Log de l'erreur
-            LOG.error(e.getMessage(), e);
-            FacadeHelper.convertException(e, CppTestFacade.class.getName() + ".get");
-        } finally {
+            LOG.error( e.getMessage(), e );
+            FacadeHelper.convertException( e, CppTestFacade.class.getName() + ".get" );
+        }
+        finally
+        {
             // Fermeture de la session
-            FacadeHelper.closeSession(session, CppTestFacade.class.getName() + ".get");
+            FacadeHelper.closeSession( session, CppTestFacade.class.getName() + ".get" );
         }
         return dto;
     }
 
     /**
      * Obtention des configurations CppTest
+     * 
      * @return collection de configurations sous la forme cd CppTestRuleSetDTO
      * @throws JrafEnterpriseException si erreur
      */
-    public static Collection getCppTestConfigurations() throws JrafEnterpriseException {
+    public static Collection getCppTestConfigurations()
+        throws JrafEnterpriseException
+    {
         ISession session = null;
         Collection result = new ArrayList();
-        try {
+        try
+        {
             session = PERSISTENTPROVIDER.getSession();
             // Obtention des RuleSet
             CppTestRuleSetDAOImpl dao = CppTestRuleSetDAOImpl.getInstance();
-            Collection rulesets = dao.findAll(session);
+            Collection rulesets = dao.findAll( session );
             Iterator boIt = rulesets.iterator();
-            while (boIt.hasNext()) {
+            while ( boIt.hasNext() )
+            {
                 CppTestRuleSetBO ruleset = (CppTestRuleSetBO) boIt.next();
-                result.add(CppTestRuleSetTransform.bo2Dto(ruleset));
+                result.add( CppTestRuleSetTransform.bo2Dto( ruleset ) );
             }
-        } catch (JrafDaoException e) {
-            LOG.error(e.getMessage(), e);
-            FacadeHelper.convertException(e, CppTestFacade.class.getName() + ".get");
-        } finally {
+        }
+        catch ( JrafDaoException e )
+        {
+            LOG.error( e.getMessage(), e );
+            FacadeHelper.convertException( e, CppTestFacade.class.getName() + ".get" );
+        }
+        finally
+        {
             // Fermeture de la session
-            FacadeHelper.closeSession(session, CppTestFacade.class.getName() + ".get");
+            FacadeHelper.closeSession( session, CppTestFacade.class.getName() + ".get" );
         }
         return result;
     }
 
     /**
      * Obtention d'une configuration CppTest
+     * 
      * @param pName nom
      * @return ruleset correspondant ou null si non trouvé
      * @throws JrafEnterpriseException si erreur
      */
-    public static CppTestRuleSetDTO getCppTestConfiguration(String pName) throws JrafEnterpriseException {
+    public static CppTestRuleSetDTO getCppTestConfiguration( String pName )
+        throws JrafEnterpriseException
+    {
         ISession session = null;
         CppTestRuleSetDTO result = null;
-        try {
+        try
+        {
             session = PERSISTENTPROVIDER.getSession();
             // Obtention des RuleSet
             CppTestRuleSetDAOImpl dao = CppTestRuleSetDAOImpl.getInstance();
-            CppTestRuleSetBO ruleset = dao.findRuleSet(session, pName);
-            if (ruleset!=null) {
-                result = CppTestRuleSetTransform.bo2Dto(ruleset);
+            CppTestRuleSetBO ruleset = dao.findRuleSet( session, pName );
+            if ( ruleset != null )
+            {
+                result = CppTestRuleSetTransform.bo2Dto( ruleset );
             }
-        } catch (JrafDaoException e) {
-            LOG.error(e.getMessage(), e);
-            FacadeHelper.convertException(e, CppTestFacade.class.getName() + ".get");
-        } finally {
+        }
+        catch ( JrafDaoException e )
+        {
+            LOG.error( e.getMessage(), e );
+            FacadeHelper.convertException( e, CppTestFacade.class.getName() + ".get" );
+        }
+        finally
+        {
             // Fermeture de la session
-            FacadeHelper.closeSession(session, CppTestFacade.class.getName() + ".get");
+            FacadeHelper.closeSession( session, CppTestFacade.class.getName() + ".get" );
         }
         return result;
     }
+
     /**
-      * Destruction de rulesets obsolètes
-      * @param pRuleSets ruleSets devant être détruits
-      * @return rulesets obsolètes ne pouvant pas être supprimés
-      * @throws JrafEnterpriseException si erreur
-      */
-    public static Collection deleteRuleSets(Collection pRuleSets) throws JrafEnterpriseException {
+     * Destruction de rulesets obsolètes
+     * 
+     * @param pRuleSets ruleSets devant être détruits
+     * @return rulesets obsolètes ne pouvant pas être supprimés
+     * @throws JrafEnterpriseException si erreur
+     */
+    public static Collection deleteRuleSets( Collection pRuleSets )
+        throws JrafEnterpriseException
+    {
         ISession session = null;
         Collection result = new ArrayList();
-        try {
+        try
+        {
             // récupération d'une session
             session = PERSISTENTPROVIDER.getSession();
             CppTestRuleSetDAOImpl checkstyleRuleSetDAO = CppTestRuleSetDAOImpl.getInstance();
             Iterator ruleSetsIt = pRuleSets.iterator();
             // Parcours des rulesets à détruire
             ArrayList rulesetsId = new ArrayList();
-            RuleCheckingTransgressionDAOImpl ruleCheckingTransgressionDAO = RuleCheckingTransgressionDAOImpl.getInstance();
-            while (ruleSetsIt.hasNext()) {
+            RuleCheckingTransgressionDAOImpl ruleCheckingTransgressionDAO =
+                RuleCheckingTransgressionDAOImpl.getInstance();
+            while ( ruleSetsIt.hasNext() )
+            {
                 CppTestRuleSetDTO checkstyleDTO = (CppTestRuleSetDTO) ruleSetsIt.next();
-                Long ruleSetId = new Long(checkstyleDTO.getId());
+                Long ruleSetId = new Long( checkstyleDTO.getId() );
                 // On vérifie que le jeu de règles n'est pas utilisé
-                // au niveau des mesures réalisées, pour les projets paramétrés mais non encore audités, on ne le gère pas
-                if (ruleCheckingTransgressionDAO.isRuleSetUsed(session, ruleSetId)) {
-                    result.add(checkstyleDTO);
-                } else {
+                // au niveau des mesures réalisées, pour les projets paramétrés mais non encore audités, on ne le gère
+                // pas
+                if ( ruleCheckingTransgressionDAO.isRuleSetUsed( session, ruleSetId ) )
+                {
+                    result.add( checkstyleDTO );
+                }
+                else
+                {
                     // Ajout dans les rulesets à détruire
-                    rulesetsId.add(ruleSetId);
+                    rulesetsId.add( ruleSetId );
                 }
             }
             // Destruction des rulesets qui ne sont plus référencés
-            if (rulesetsId.size() > 0) {
-                checkstyleRuleSetDAO.removeCppTestRuleSets(session, rulesetsId);
+            if ( rulesetsId.size() > 0 )
+            {
+                checkstyleRuleSetDAO.removeCppTestRuleSets( session, rulesetsId );
             }
-        } catch (JrafDaoException e) {
-            FacadeHelper.convertException(e, CppTestFacade.class.getName() + ".get");
-        } finally {
-            FacadeHelper.closeSession(session, CppTestFacade.class.getName() + ".get");
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, CppTestFacade.class.getName() + ".get" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, CppTestFacade.class.getName() + ".get" );
         }
         return result;
     }

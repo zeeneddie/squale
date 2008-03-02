@@ -6,11 +6,12 @@ import java.util.Collection;
 /**
  * La configuration de Squalix
  */
-public class SqualixConfigurationBO {
+public class SqualixConfigurationBO
+{
 
     /** La liste des dates limites de lancement d'audits */
     private Collection mStopTimes;
-    
+
     /** La liste des fréquences max des audits en fonction du dernier accès utilisateur */
     private Collection mFrequencies;
 
@@ -23,7 +24,8 @@ public class SqualixConfigurationBO {
     /**
      * Le constructeur par défaut
      */
-    public SqualixConfigurationBO() {
+    public SqualixConfigurationBO()
+    {
         mStopTimes = new ArrayList();
         mFrequencies = new ArrayList();
         mSourceManagements = new ArrayList();
@@ -35,7 +37,8 @@ public class SqualixConfigurationBO {
      * 
      * @return les dates limites
      */
-    public Collection getStopTimes() {
+    public Collection getStopTimes()
+    {
         return mStopTimes;
     }
 
@@ -44,7 +47,8 @@ public class SqualixConfigurationBO {
      * 
      * @return les profils
      */
-    public Collection getProfiles() {
+    public Collection getProfiles()
+    {
         return mProfiles;
     }
 
@@ -53,7 +57,8 @@ public class SqualixConfigurationBO {
      * 
      * @return les récupérateurs de sources
      */
-    public Collection getSourceManagements() {
+    public Collection getSourceManagements()
+    {
         return mSourceManagements;
     }
 
@@ -62,7 +67,8 @@ public class SqualixConfigurationBO {
      * 
      * @param pStopTimes les nouvelles dates limites
      */
-    public void setStopTimes(Collection pStopTimes) {
+    public void setStopTimes( Collection pStopTimes )
+    {
         mStopTimes = pStopTimes;
     }
 
@@ -71,7 +77,8 @@ public class SqualixConfigurationBO {
      * 
      * @param pProfiles les nouveaux profils
      */
-    public void setProfiles(Collection pProfiles) {
+    public void setProfiles( Collection pProfiles )
+    {
         mProfiles = pProfiles;
     }
 
@@ -80,17 +87,19 @@ public class SqualixConfigurationBO {
      * 
      * @param pSourceManagements les nouveaux types de récupération des sources
      */
-    public void setSourceManagements(Collection pSourceManagements) {
+    public void setSourceManagements( Collection pSourceManagements )
+    {
         mSourceManagements = pSourceManagements;
     }
-    
+
     /**
      * Ajoute une date limite
      * 
      * @param pStopTime la date limite à ajouter
      */
-    public void addStopTime(StopTimeBO pStopTime) {
-        mStopTimes.add(pStopTime);
+    public void addStopTime( StopTimeBO pStopTime )
+    {
+        mStopTimes.add( pStopTime );
     }
 
     /**
@@ -98,8 +107,9 @@ public class SqualixConfigurationBO {
      * 
      * @param pProfile le profil à ajouter
      */
-    public void addProfile(ProjectProfileBO pProfile) {
-        mProfiles.add(pProfile);
+    public void addProfile( ProjectProfileBO pProfile )
+    {
+        mProfiles.add( pProfile );
     }
 
     /**
@@ -107,31 +117,35 @@ public class SqualixConfigurationBO {
      * 
      * @param pSourceManagement une nouvelle manière de récupérer les source
      */
-    public void addSourceManagement(SourceManagementBO pSourceManagement) {
-        mSourceManagements.add(pSourceManagement);
+    public void addSourceManagement( SourceManagementBO pSourceManagement )
+    {
+        mSourceManagements.add( pSourceManagement );
     }
-    
+
     /**
      * @return la liste des fréquences max des audits
      */
-    public Collection getFrequencies() {
+    public Collection getFrequencies()
+    {
         return mFrequencies;
     }
 
     /**
      * @param pCollection la liste des fréquences max des audits
      */
-    public void setFrequencies(Collection pCollection) {
+    public void setFrequencies( Collection pCollection )
+    {
         mFrequencies = pCollection;
     }
-    
+
     /**
      * Ajoute une fréquence max d'audit
      * 
      * @param pFrequency la fréquence max
      */
-    public void addFrequency(AuditFrequencyBO pFrequency) {
-        mFrequencies.add(pFrequency);
+    public void addFrequency( AuditFrequencyBO pFrequency )
+    {
+        mFrequencies.add( pFrequency );
     }
 
 }

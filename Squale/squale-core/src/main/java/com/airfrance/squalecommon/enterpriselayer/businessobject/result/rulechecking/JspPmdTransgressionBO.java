@@ -3,10 +3,11 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.result.ruleche
 /**
  * Résultat de transgression de Pmd pour les Jsp
  * 
- * @hibernate.subclass
- * discriminator-value="JspPmdTransgression"
+ * @hibernate.subclass discriminator-value="JspPmdTransgression"
  */
-public class JspPmdTransgressionBO extends RuleCheckingTransgressionBO {
+public class JspPmdTransgressionBO
+    extends RuleCheckingTransgressionBO
+{
     // Vide. Cette classe sert juste à avoir un nom de subclass différent
     // dans la base.
 }

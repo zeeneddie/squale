@@ -19,7 +19,9 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGri
 /**
  * Test de la facade component
  */
-public class ComponentFacadeTest extends SqualeTestCase {
+public class ComponentFacadeTest
+    extends SqualeTestCase
+{
 
     /**
      * provider de persistence
@@ -29,79 +31,91 @@ public class ComponentFacadeTest extends SqualeTestCase {
     /**
      * Teste la recuperation du ComponentDTO relatif a une application
      */
-    public void testGetWithApplication() {
-        try {
+    public void testGetWithApplication()
+    {
+        try
+        {
             ISession session = PERSISTENTPROVIDER.getSession();
-            ApplicationBO application = getComponentFactory().createApplication(session);
+            ApplicationBO application = getComponentFactory().createApplication( session );
             // Initialisation des parametres de la methode
             ComponentDTO componentIn = new ComponentDTO();
-            componentIn.setID(application.getId());
+            componentIn.setID( application.getId() );
 
             // Exceution de la méthode
-            ComponentDTO out = ComponentFacade.get(componentIn);
-            FacadeHelper.closeSession(session, "");
-        } catch (Exception e) {
+            ComponentDTO out = ComponentFacade.get( componentIn );
+            FacadeHelper.closeSession( session, "" );
+        }
+        catch ( Exception e )
+        {
             e.printStackTrace();
-            fail("unexpected exception");
+            fail( "unexpected exception" );
         }
     }
 
     /**
-     * Teste la recuperation des composants enfants (projets) relative a une application 
+     * Teste la recuperation des composants enfants (projets) relative a une application
      */
-    public void testGetChildrenWithProject() {
-        try {
+    public void testGetChildrenWithProject()
+    {
+        try
+        {
             ISession session = PERSISTENTPROVIDER.getSession();
-            ApplicationBO application = getComponentFactory().createApplication(session);
-            QualityGridBO grid = getComponentFactory().createGrid(session);
-            ProjectBO project = getComponentFactory().createProject(session, application, grid);
-            PackageBO pkg = getComponentFactory().createPackage(session, project);
-            ClassBO cls = getComponentFactory().createClass(session, pkg);
+            ApplicationBO application = getComponentFactory().createApplication( session );
+            QualityGridBO grid = getComponentFactory().createGrid( session );
+            ProjectBO project = getComponentFactory().createProject( session, application, grid );
+            PackageBO pkg = getComponentFactory().createPackage( session, project );
+            ClassBO cls = getComponentFactory().createClass( session, pkg );
             // Initialisation des parametres de la methode
             ComponentDTO componentIn = new ComponentDTO();
-            componentIn.setID(project.getId());
-            Collection out = ComponentFacade.getChildren(componentIn, pkg.getType(), null, null);
-            assertEquals(1, out.size());
-            out = ComponentFacade.getChildren(componentIn, null, null, null);
-            assertEquals(1, out.size());
-            out = ComponentFacade.getChildren(componentIn, cls.getType(), null, null);
-            assertEquals(0, out.size());
-            
-            FacadeHelper.closeSession(session, "");
-        } catch (Exception e) {
+            componentIn.setID( project.getId() );
+            Collection out = ComponentFacade.getChildren( componentIn, pkg.getType(), null, null );
+            assertEquals( 1, out.size() );
+            out = ComponentFacade.getChildren( componentIn, null, null, null );
+            assertEquals( 1, out.size() );
+            out = ComponentFacade.getChildren( componentIn, cls.getType(), null, null );
+            assertEquals( 0, out.size() );
+
+            FacadeHelper.closeSession( session, "" );
+        }
+        catch ( Exception e )
+        {
             e.printStackTrace();
-            fail("unexpected exception");
+            fail( "unexpected exception" );
         }
     }
 
     /**
      * Test de getParentsComponent
      */
-    public void testGetParentList() {
-        try {
+    public void testGetParentList()
+    {
+        try
+        {
             ISession session = PERSISTENTPROVIDER.getSession();
-            ApplicationBO application = getComponentFactory().createApplication(session);
-            QualityGridBO grid = getComponentFactory().createGrid(session);
-            ProjectBO project = getComponentFactory().createProject(session, application, grid);
-            PackageBO pkg = getComponentFactory().createPackage(session, project);
-            ClassBO cls = getComponentFactory().createClass(session, pkg);
-            MethodBO method = getComponentFactory().createMethod(session, cls);
-            
+            ApplicationBO application = getComponentFactory().createApplication( session );
+            QualityGridBO grid = getComponentFactory().createGrid( session );
+            ProjectBO project = getComponentFactory().createProject( session, application, grid );
+            PackageBO pkg = getComponentFactory().createPackage( session, project );
+            ClassBO cls = getComponentFactory().createClass( session, pkg );
+            MethodBO method = getComponentFactory().createMethod( session, cls );
+
             // Initialisation des parametres de la methode
             ComponentDTO componentIn = new ComponentDTO();
-            componentIn.setID(cls.getId());
-            List out = ComponentFacade.getParentsComponent(componentIn, null);
-            assertEquals(1, out.size());
-            assertEquals(pkg.getId(), ((ComponentDTO)out.get(0)).getID());
-            componentIn.setID(method.getId());
-            out = ComponentFacade.getParentsComponent(componentIn, null);
-            assertEquals(2, out.size());
-            assertEquals(pkg.getId(), ((ComponentDTO)out.get(0)).getID());
-            assertEquals(cls.getId(), ((ComponentDTO)out.get(1)).getID());
-            FacadeHelper.closeSession(session, "");
-        } catch (Exception e) {
+            componentIn.setID( cls.getId() );
+            List out = ComponentFacade.getParentsComponent( componentIn, null );
+            assertEquals( 1, out.size() );
+            assertEquals( pkg.getId(), ( (ComponentDTO) out.get( 0 ) ).getID() );
+            componentIn.setID( method.getId() );
+            out = ComponentFacade.getParentsComponent( componentIn, null );
+            assertEquals( 2, out.size() );
+            assertEquals( pkg.getId(), ( (ComponentDTO) out.get( 0 ) ).getID() );
+            assertEquals( cls.getId(), ( (ComponentDTO) out.get( 1 ) ).getID() );
+            FacadeHelper.closeSession( session, "" );
+        }
+        catch ( Exception e )
+        {
             e.printStackTrace();
-            fail("unexpected exception");
+            fail( "unexpected exception" );
         }
     }
 

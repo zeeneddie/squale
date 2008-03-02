@@ -13,7 +13,9 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Audit
 /**
  * Interface avec la base de données pour les configurations d'affichage des audits
  */
-public class AuditDisplayConfDAOImpl extends AbstractDAOImpl {
+public class AuditDisplayConfDAOImpl
+    extends AbstractDAOImpl
+{
     /**
      * Instance singleton
      */
@@ -23,31 +25,38 @@ public class AuditDisplayConfDAOImpl extends AbstractDAOImpl {
     private static Log LOG;
 
     /** initialisation du singleton */
-    static {
+    static
+    {
         instance = new AuditDisplayConfDAOImpl();
     }
 
     /**
      * Constructeur prive
+     * 
      * @throws JrafDaoException
      */
-    private AuditDisplayConfDAOImpl() {
-        initialize(AuditDisplayConfBO.class);
-        if (null == LOG) {
-            LOG = LogFactory.getLog(AuditDisplayConfDAOImpl.class);
+    private AuditDisplayConfDAOImpl()
+    {
+        initialize( AuditDisplayConfBO.class );
+        if ( null == LOG )
+        {
+            LOG = LogFactory.getLog( AuditDisplayConfDAOImpl.class );
         }
     }
 
     /**
      * Retourne un singleton du DAO
+     * 
      * @return singleton du DAO
      */
-    public static AuditDisplayConfDAOImpl getInstance() {
+    public static AuditDisplayConfDAOImpl getInstance()
+    {
         return instance;
     }
 
     /**
      * Obtention d'une configuration
+     * 
      * @param pSession session
      * @param pProjectID projet
      * @param pAuditID audit
@@ -55,12 +64,16 @@ public class AuditDisplayConfDAOImpl extends AbstractDAOImpl {
      * @return résultats associés
      * @throws JrafDaoException si erreur
      */
-    public AuditDisplayConfBO findConfigurationWhere(ISession pSession, Long pProjectID, Long pAuditID, String pSubclass) throws JrafDaoException {
-        return findConfigurationWhere(pSession, pProjectID, pAuditID, pSubclass, null);
+    public AuditDisplayConfBO findConfigurationWhere( ISession pSession, Long pProjectID, Long pAuditID,
+                                                      String pSubclass )
+        throws JrafDaoException
+    {
+        return findConfigurationWhere( pSession, pProjectID, pAuditID, pSubclass, null );
     }
 
     /**
      * Obtention d'une configuration
+     * 
      * @param pSession session
      * @param pProjectID projet
      * @param pAuditID audit
@@ -69,21 +82,26 @@ public class AuditDisplayConfDAOImpl extends AbstractDAOImpl {
      * @return résultats associés
      * @throws JrafDaoException si erreur
      */
-    public AuditDisplayConfBO findConfigurationWhere(ISession pSession, Long pProjectID, Long pAuditID, String pSubclass, String pComponentType) throws JrafDaoException {
+    public AuditDisplayConfBO findConfigurationWhere( ISession pSession, Long pProjectID, Long pAuditID,
+                                                      String pSubclass, String pComponentType )
+        throws JrafDaoException
+    {
         String whereClause = "where ";
         whereClause += getAlias() + ".project.id = '" + pProjectID + "'";
         whereClause += " and ";
         whereClause += getAlias() + ".audit.id = '" + pAuditID + "'";
         whereClause += " and ";
         whereClause += getAlias() + ".displayConf.class = '" + pSubclass + "'";
-        if(null != pComponentType) {
+        if ( null != pComponentType )
+        {
             whereClause += " and ";
             whereClause += getAlias() + ".displayConf.componentType = '" + pComponentType + "'";
         }
 
         AuditDisplayConfBO result = null;
-        Collection col = findWhere(pSession, whereClause);
-        if (col.size()==1) {
+        Collection col = findWhere( pSession, whereClause );
+        if ( col.size() == 1 )
+        {
             result = (AuditDisplayConfBO) col.iterator().next();
         }
         return result;

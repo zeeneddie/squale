@@ -7,21 +7,26 @@ import com.airfrance.squalecommon.datatransfertobject.rule.FactorRuleDTO;
 /**
  * Facteur d'une référence
  */
-public class ReferenceFactorDTO extends FactorRuleDTO implements Serializable {
+public class ReferenceFactorDTO
+    extends FactorRuleDTO
+    implements Serializable
+{
     /** Valeur associée */
     private Float mValue;
-    
+
     /**
      * @return valeur
      */
-    public Float getValue() {
+    public Float getValue()
+    {
         return mValue;
     }
 
     /**
      * @param pFloat valeur
      */
-    public void setValue(Float pFloat) {
+    public void setValue( Float pFloat )
+    {
         mValue = pFloat;
     }
 

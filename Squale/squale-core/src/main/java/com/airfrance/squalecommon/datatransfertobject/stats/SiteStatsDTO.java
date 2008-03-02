@@ -4,7 +4,9 @@ import com.airfrance.squalecommon.datatransfertobject.config.ServeurDTO;
 
 /**
  */
-public class SiteStatsDTO extends CommonStatsDTO{
+public class SiteStatsDTO
+    extends CommonStatsDTO
+{
 
     /**
      * Le nom du serveur
@@ -34,77 +36,88 @@ public class SiteStatsDTO extends CommonStatsDTO{
     /**
      * Constructeur par défaut
      */
-    public SiteStatsDTO() {
+    public SiteStatsDTO()
+    {
         mServeurDTO = new ServeurDTO();
     }
 
     /**
      * @return le nombre d'appli à valider
      */
-    public int getNbAppliToValidate() {
+    public int getNbAppliToValidate()
+    {
         return nbAppliToValidate;
     }
 
     /**
      * @return le nombre d'appli avec des audits réussis
      */
-    public int getNbAppliWithAuditsSuccessful() {
+    public int getNbAppliWithAuditsSuccessful()
+    {
         return nbAppliWithAuditsSuccessful;
     }
 
     /**
      * @return le nombre d'applis avec des audits mais aucun réussi
      */
-    public int getNbAppliWithoutSuccessfulAudits() {
+    public int getNbAppliWithoutSuccessfulAudits()
+    {
         return nbAppliWithoutSuccessfulAudits;
     }
 
     /**
      * @return le nombre d'applis validés
      */
-    public int getNbValidatedApplis() {
+    public int getNbValidatedApplis()
+    {
         return nbValidatedApplis;
     }
 
     /**
      * @param pNbAppli le nombre d'applis à valider
      */
-    public void setNbAppliToValidate(int pNbAppli) {
+    public void setNbAppliToValidate( int pNbAppli )
+    {
         nbAppliToValidate = pNbAppli;
     }
 
     /**
      * @param pNbAppli le nombre d'appli avec des audits réussis
      */
-    public void setNbAppliWithAuditsSuccessful(int pNbAppli) {
+    public void setNbAppliWithAuditsSuccessful( int pNbAppli )
+    {
         nbAppliWithAuditsSuccessful = pNbAppli;
     }
 
     /**
      * @param pNbAppli le nombre d'appli sans audits réussis
      */
-    public void setNbAppliWithoutSuccessfulAudits(int pNbAppli) {
+    public void setNbAppliWithoutSuccessfulAudits( int pNbAppli )
+    {
         nbAppliWithoutSuccessfulAudits = pNbAppli;
     }
 
     /**
      * @param pNbAppli le nombre d'applis validés
      */
-    public void setNbValidatedApplis(int pNbAppli) {
+    public void setNbValidatedApplis( int pNbAppli )
+    {
         nbValidatedApplis = pNbAppli;
     }
 
     /**
      * @return le nom du serveur
      */
-    public ServeurDTO getServeurDTO() {
+    public ServeurDTO getServeurDTO()
+    {
         return mServeurDTO;
     }
 
     /**
      * @param pServeurDTO le nom du serveur
      */
-    public void setServeurDTO(ServeurDTO pServeurDTO) {
+    public void setServeurDTO( ServeurDTO pServeurDTO )
+    {
         mServeurDTO = pServeurDTO;
     }
 

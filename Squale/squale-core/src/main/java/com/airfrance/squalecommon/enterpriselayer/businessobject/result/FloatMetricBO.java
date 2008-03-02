@@ -1,10 +1,11 @@
 package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
 
 /**
- * @hibernate.subclass
- * discriminator-value="Float"
+ * @hibernate.subclass discriminator-value="Float"
  */
-public class FloatMetricBO extends NumberMetricBO {
+public class FloatMetricBO
+    extends NumberMetricBO
+{
 
     /**
      * Valeur continue du mérique
@@ -14,24 +15,19 @@ public class FloatMetricBO extends NumberMetricBO {
     /**
      * Access method for the mValue property.
      * 
-     * @return   the current value of the mName property
-     * 
-     * @hibernate.property 
-     * name="Value" 
-     * column="Number_val" 
-     * type="float" 
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mName property
+     * @hibernate.property name="Value" column="Number_val" type="float" not-null="false" unique="false"
      */
-    public Object getValue() {
+    public Object getValue()
+    {
         return mValue;
     }
 
     /**
      * @see com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO#setValue(java.lang.Object)
      */
-    public void setValue(Object pValue) {
+    public void setValue( Object pValue )
+    {
         mValue = (Float) pValue;
     }
 
@@ -40,15 +36,19 @@ public class FloatMetricBO extends NumberMetricBO {
      * 
      * @param pValue the new value of the mValue property
      */
-    public void setValue(float pValue) {
-        mValue = new Float(pValue);
+    public void setValue( float pValue )
+    {
+        mValue = new Float( pValue );
     }
 
-    /** (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO#isPrintable()
      */
-    public boolean isPrintable() {
+    public boolean isPrintable()
+    {
         return true;
-    }   
+    }
 
 }

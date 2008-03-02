@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Tâche Squalix
- * Les paramètres de la tâche squalix sont placés dans ce DTO :
- * le taskDTO est en fait un merge entre les classes TaskRefBO et TaskBO
+ * Tâche Squalix Les paramètres de la tâche squalix sont placés dans ce DTO : le taskDTO est en fait un merge entre les
+ * classes TaskRefBO et TaskBO
  */
-public class TaskDTO {
+public class TaskDTO
+{
 
     /**
      * Identifiant (au sens technique) de l'objet
@@ -21,7 +21,7 @@ public class TaskDTO {
     /** La classe correspondante à la tâche */
     private String mClassName;
 
-    /** Configuration possible de la tâche*/
+    /** Configuration possible de la tâche */
     private boolean mConfigurable;
 
     /** Configuration standard ou non */
@@ -37,9 +37,9 @@ public class TaskDTO {
      * Méthode d'accès pour mId
      * 
      * @return la l'identifiant (au sens technique) de l'objet
-     * 
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
@@ -48,7 +48,8 @@ public class TaskDTO {
      * 
      * @param pId le nouvel identifiant
      */
-    public void setId(long pId) {
+    public void setId( long pId )
+    {
         mId = pId;
     }
 
@@ -56,9 +57,9 @@ public class TaskDTO {
      * Méthode d'accès à mName
      * 
      * @return le nom de la tâche
-     * 
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
 
@@ -67,7 +68,8 @@ public class TaskDTO {
      * 
      * @param pName le nouveau nom de la tâche
      */
-    public void setName(String pName) {
+    public void setName( String pName )
+    {
         mName = pName;
     }
 
@@ -75,9 +77,9 @@ public class TaskDTO {
      * Méthode d'accès à mClassName
      * 
      * @return le nom de la classe associée à la tâche
-     * 
      */
-    public String getClassName() {
+    public String getClassName()
+    {
         return mClassName;
     }
 
@@ -86,67 +88,78 @@ public class TaskDTO {
      * 
      * @param pClassName la nouvelle classe associée
      */
-    public void setClassName(String pClassName) {
+    public void setClassName( String pClassName )
+    {
         mClassName = pClassName;
     }
 
     /**
      * Méthode d'accès à mConfigurable
+     * 
      * @return true si la tâche est configurable
      */
-    public boolean isConfigurable() {
+    public boolean isConfigurable()
+    {
         return mConfigurable;
     }
 
     /**
      * Change la valeur de mConfigurable
+     * 
      * @param pConfigurable la nouvelle valeur de mConfigurable
      */
-    public void setConfigurable(boolean pConfigurable) {
+    public void setConfigurable( boolean pConfigurable )
+    {
         mConfigurable = pConfigurable;
     }
 
     /**
      * Ajout d'un paramètre
+     * 
      * @param pParameter paramètre
      */
-    public void addParameter(TaskParameterDTO pParameter) {
-        mParameters.add(pParameter);
+    public void addParameter( TaskParameterDTO pParameter )
+    {
+        mParameters.add( pParameter );
     }
 
     /**
-     * 
      * @return paramètres
      */
-    public Collection getParameters() {
+    public Collection getParameters()
+    {
         return mParameters;
     }
 
     /**
      * @return true si la configuration est standard
      */
-    public boolean isStandard() {
+    public boolean isStandard()
+    {
         return mStandard;
     }
 
     /**
      * @param pStandard true si la configuration est standard
      */
-    public void setStandard(boolean pStandard) {
+    public void setStandard( boolean pStandard )
+    {
         mStandard = pStandard;
     }
 
     /**
      * @return true si la tâche est obligatoire
      */
-    public boolean isMandatory() {
+    public boolean isMandatory()
+    {
         return mMandatory;
     }
 
     /**
      * @param pMandatory true si la tâche est obligatoire
      */
-    public void setMandatory(boolean pMandatory) {
+    public void setMandatory( boolean pMandatory )
+    {
         mMandatory = pMandatory;
     }
 

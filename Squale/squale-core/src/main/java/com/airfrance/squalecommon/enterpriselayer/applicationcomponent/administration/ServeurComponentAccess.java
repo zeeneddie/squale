@@ -10,16 +10,21 @@ import java.util.Collection;
 /**
  * ComponentApplication du Serveur d'exécution de Squalix
  */
-public class ServeurComponentAccess extends DefaultExecuteComponent {
+public class ServeurComponentAccess
+    extends DefaultExecuteComponent
+{
 
     /**
      * Retourne la liste des serveurs
+     * 
      * @return la liste des serveurs
      * @throws JrafEnterpriseException si une erreur survient
      */
-    public Collection listeServeurs() throws JrafEnterpriseException {
+    public Collection listeServeurs()
+        throws JrafEnterpriseException
+    {
         Collection lListeServeurs = ServeurFacade.listeServeurs();
         return lListeServeurs;
     }
-    
+
 }

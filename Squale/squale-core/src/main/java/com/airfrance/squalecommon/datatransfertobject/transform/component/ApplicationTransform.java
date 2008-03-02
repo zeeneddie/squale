@@ -8,49 +8,55 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Compo
 
 /**
  * @author M400841
- *
  * @deprecated ComponentTransform doit etre utilisé a la place de ApplicationTransform
  */
-public class ApplicationTransform implements Serializable {
+public class ApplicationTransform
+    implements Serializable
+{
 
     /**
      * Constructeur prive
      */
-    private ApplicationTransform() {
+    private ApplicationTransform()
+    {
     }
 
     /**
      * ApplicationDTO -> ApplicationBO
+     * 
      * @param pApplicationDTO ApplicationDTO à transformer
      * @return ApplicationBO
      */
-    public static ApplicationBO dto2Bo(ComponentDTO pApplicationDTO) {
+    public static ApplicationBO dto2Bo( ComponentDTO pApplicationDTO )
+    {
 
         // Initialisation du retour
         ApplicationBO applicationBO = new ApplicationBO();
-        applicationBO.setId(pApplicationDTO.getID());
-        applicationBO.setName(pApplicationDTO.getName());
-        applicationBO.setExcludedFromActionPlan(pApplicationDTO.getExcludedFromActionPlan());
-        applicationBO.setJustification(pApplicationDTO.getJustification());
-        
+        applicationBO.setId( pApplicationDTO.getID() );
+        applicationBO.setName( pApplicationDTO.getName() );
+        applicationBO.setExcludedFromActionPlan( pApplicationDTO.getExcludedFromActionPlan() );
+        applicationBO.setJustification( pApplicationDTO.getJustification() );
+
         return applicationBO;
     }
 
     /**
-     * ApplicationBO -> ApplicationDTO 
+     * ApplicationBO -> ApplicationDTO
+     * 
      * @param pApplicationBO ApplicationBO
      * @return ApplicationDTO
      */
-    public static ComponentDTO bo2Dto(ApplicationBO pApplicationBO) {
+    public static ComponentDTO bo2Dto( ApplicationBO pApplicationBO )
+    {
 
         // Initialisation du retour
         ComponentDTO applicationDTO = new ComponentDTO();
-        applicationDTO.setID(pApplicationBO.getId());
-        applicationDTO.setName(pApplicationBO.getName());
-        applicationDTO.setType(ComponentType.APPLICATION);
-        pApplicationBO.setExcludedFromActionPlan(applicationDTO.getExcludedFromActionPlan());
-        pApplicationBO.setJustification(applicationDTO.getJustification());
-        
+        applicationDTO.setID( pApplicationBO.getId() );
+        applicationDTO.setName( pApplicationBO.getName() );
+        applicationDTO.setType( ComponentType.APPLICATION );
+        pApplicationBO.setExcludedFromActionPlan( applicationDTO.getExcludedFromActionPlan() );
+        pApplicationBO.setJustification( applicationDTO.getJustification() );
+
         return applicationDTO;
     }
 }

@@ -13,7 +13,9 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleForm
 /**
  *
  */
-public class SimpleFormulaDAOImpl extends AbstractDAOImpl {
+public class SimpleFormulaDAOImpl
+    extends AbstractDAOImpl
+{
     /**
      * Instance singleton
      */
@@ -23,40 +25,49 @@ public class SimpleFormulaDAOImpl extends AbstractDAOImpl {
     private static Log LOG;
 
     /** initialisation du singleton */
-    static {
+    static
+    {
         instance = new SimpleFormulaDAOImpl();
     }
 
     /**
      * Constructeur prive
+     * 
      * @throws JrafDaoException
      */
-    private SimpleFormulaDAOImpl() {
-        initialize(SimpleFormulaBO.class);
-        LOG = LogFactory.getLog(MarkDAOImpl.class);
+    private SimpleFormulaDAOImpl()
+    {
+        initialize( SimpleFormulaBO.class );
+        LOG = LogFactory.getLog( MarkDAOImpl.class );
     }
 
     /**
      * Retourne un singleton du DAO
+     * 
      * @return singleton du DAO
      */
-    public static SimpleFormulaDAOImpl getInstance() {
+    public static SimpleFormulaDAOImpl getInstance()
+    {
         return instance;
     }
-    
+
     /**
      * Récupère la formule du ROI qui doit être unique
+     * 
      * @param pSession la session
      * @return la formule du ROI
      * @throws JrafDaoException si erreur
      */
-    public SimpleFormulaBO getRoiFormula(ISession pSession) throws JrafDaoException {
+    public SimpleFormulaBO getRoiFormula( ISession pSession )
+        throws JrafDaoException
+    {
         SimpleFormulaBO formula = null;
         String whereClause = " where ";
         whereClause += " 'roi' in elements(" + getAlias() + ".measureKinds)";
-        List result = findWhere(pSession, whereClause);
-        if(result.size() > 0) {
-            formula = (SimpleFormulaBO) result.get(0);
+        List result = findWhere( pSession, whereClause );
+        if ( result.size() > 0 )
+        {
+            formula = (SimpleFormulaBO) result.get( 0 );
         }
         return formula;
     }

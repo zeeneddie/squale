@@ -5,7 +5,8 @@ import java.util.List;
 /**
  * Utilisateur de tâches Squalix
  */
-public class TasksUserDTO {
+public class TasksUserDTO
+{
 
     /**
      * Identifiant (au sens technique) de l'objet
@@ -25,9 +26,9 @@ public class TasksUserDTO {
      * Méthode d'accès pour mId
      * 
      * @return la l'identifiant (au sens technique) de l'objet
-     * 
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
@@ -36,17 +37,18 @@ public class TasksUserDTO {
      * 
      * @param pId le nouvel identifiant
      */
-    public void setId(long pId) {
+    public void setId( long pId )
+    {
         mId = pId;
     }
 
     /**
      * Méthode d'accès à mAnalysisTasks
      * 
-     * @return la liste des tâches d'analyses 
-     *
+     * @return la liste des tâches d'analyses
      */
-    public List getAnalysisTasks() {
+    public List getAnalysisTasks()
+    {
         return mAnalysisTasks;
     }
 
@@ -54,19 +56,19 @@ public class TasksUserDTO {
      * Méthode d'accès à mName
      * 
      * @return le nom du profile
-     * 
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
 
     /**
      * Méthode d'accès à mTerminationTasks
      * 
-     * @return la liste des tâches finales 
-     * 
+     * @return la liste des tâches finales
      */
-    public List getTerminationTasks() {
+    public List getTerminationTasks()
+    {
         return mTerminationTasks;
     }
 
@@ -75,7 +77,8 @@ public class TasksUserDTO {
      * 
      * @param pAnalysisTasks la nouvelle liste des tâches d'analyses
      */
-    public void setAnalysisTasks(List pAnalysisTasks) {
+    public void setAnalysisTasks( List pAnalysisTasks )
+    {
         mAnalysisTasks = pAnalysisTasks;
     }
 
@@ -84,7 +87,8 @@ public class TasksUserDTO {
      * 
      * @param pName le nouveau nom du profile
      */
-    public void setName(String pName) {
+    public void setName( String pName )
+    {
         mName = pName;
     }
 
@@ -93,7 +97,8 @@ public class TasksUserDTO {
      * 
      * @param pTerminationTasks la nouvelle liste de tâches finales
      */
-    public void setTerminationTasks(List pTerminationTasks) {
+    public void setTerminationTasks( List pTerminationTasks )
+    {
         mTerminationTasks = pTerminationTasks;
     }
 

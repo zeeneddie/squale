@@ -27,65 +27,71 @@ import com.airfrance.squalecommon.enterpriselayer.facade.rule.AuditComputing;
 import com.airfrance.squalecommon.enterpriselayer.facade.rule.QualityGridImport;
 
 /**
- * @author M400841
- *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class ResultsApplicationComponentAccessTest extends SqualeTestCase {
+public class ResultsApplicationComponentAccessTest
+    extends SqualeTestCase
+{
 
     /**
      * @throws JrafEnterpriseException si erreur
      * @throws JrafDaoException si erreur
      */
-    public void testGetApplicationResults() throws JrafEnterpriseException, JrafDaoException {
+    public void testGetApplicationResults()
+        throws JrafEnterpriseException, JrafDaoException
+    {
         getSession().beginTransaction();
         ResultsApplicationComponentAccess resultAccess = new ResultsApplicationComponentAccess();
         // Chargement de la grille
-        InputStream stream = getClass().getClassLoader().getResourceAsStream("data/grid/grid_compute.xml");
+        InputStream stream = getClass().getClassLoader().getResourceAsStream( "data/grid/grid_compute.xml" );
         StringBuffer errors = new StringBuffer();
         Collection grids;
-        grids = QualityGridImport.createGrid(stream, errors);
-        QualityGridBO grid = (QualityGridBO) QualityGridDAOImpl.getInstance().load(getSession(), new Long(((QualityGridDTO) grids.iterator().next()).getId()));
+        grids = QualityGridImport.createGrid( stream, errors );
+        QualityGridBO grid =
+            (QualityGridBO) QualityGridDAOImpl.getInstance().load(
+                                                                   getSession(),
+                                                                   new Long(
+                                                                             ( (QualityGridDTO) grids.iterator().next() ).getId() ) );
         // Création de l'application
-        ApplicationBO application = getComponentFactory().createApplication(getSession());
+        ApplicationBO application = getComponentFactory().createApplication( getSession() );
         // Création du projet
-        ProjectBO project = getComponentFactory().createProject(getSession(), application, grid);
+        ProjectBO project = getComponentFactory().createProject( getSession(), application, grid );
         // création du profil du projet
-        ProjectProfileBO profileBO = getComponentFactory().createProjectProfile(getSession());
-        project.setProfile(profileBO);
-        ProjectDAOImpl.getInstance().save(getSession(), project);
+        ProjectProfileBO profileBO = getComponentFactory().createProjectProfile( getSession() );
+        project.setProfile( profileBO );
+        ProjectDAOImpl.getInstance().save( getSession(), project );
         // Création de l'audit
         AuditBO audit = new AuditBO();
-        audit.setStatus(AuditBO.TERMINATED);
-        audit.setName("audit1");
-        AuditDAOImpl.getInstance().create(getSession(), audit);
-        application.addAudit(audit);
-        AbstractComponentDAOImpl.getInstance().save(getSession(), application);
-        project.addAudit(audit);
-        AbstractComponentDAOImpl.getInstance().save(getSession(), project);
+        audit.setStatus( AuditBO.TERMINATED );
+        audit.setName( "audit1" );
+        AuditDAOImpl.getInstance().create( getSession(), audit );
+        application.addAudit( audit );
+        AbstractComponentDAOImpl.getInstance().save( getSession(), application );
+        project.addAudit( audit );
+        AbstractComponentDAOImpl.getInstance().save( getSession(), project );
         // Création du package
-        PackageBO pkg = getComponentFactory().createPackage(getSession(), project);
-        pkg.addAudit(audit);
-        AbstractComponentDAOImpl.getInstance().save(getSession(), pkg);
+        PackageBO pkg = getComponentFactory().createPackage( getSession(), project );
+        pkg.addAudit( audit );
+        AbstractComponentDAOImpl.getInstance().save( getSession(), pkg );
         // Création de la classe
-        ClassBO cls = getComponentFactory().createClass(getSession(), pkg);
-        cls.addAudit(audit);
-        AbstractComponentDAOImpl.getInstance().save(getSession(), cls);
+        ClassBO cls = getComponentFactory().createClass( getSession(), pkg );
+        cls.addAudit( audit );
+        AbstractComponentDAOImpl.getInstance().save( getSession(), cls );
         // Création de la méthode
-        MethodBO method = getComponentFactory().createMethod(getSession(), cls);
-        method.addAudit(audit);
-        AbstractComponentDAOImpl.getInstance().save(getSession(), cls);
-        getComponentFactory().createMeasures(getSession(), audit, project, cls, method);
+        MethodBO method = getComponentFactory().createMethod( getSession(), cls );
+        method.addAudit( audit );
+        AbstractComponentDAOImpl.getInstance().save( getSession(), cls );
+        getComponentFactory().createMeasures( getSession(), audit, project, cls, method );
         // Calcul de l'audit
-        AuditComputing.computeAuditResult(getSession(), project, audit);
+        AuditComputing.computeAuditResult( getSession(), project, audit );
         getSession().commitTransactionWithoutClose();
-        ComponentDTO appliDTO = ComponentTransform.bo2Dto(application);
+        ComponentDTO appliDTO = ComponentTransform.bo2Dto( application );
         List components = new ArrayList();
-        components.add(appliDTO);
-        List appliResults = resultAccess.getApplicationResults(components, null);
+        components.add( appliDTO );
+        List appliResults = resultAccess.getApplicationResults( components, null );
         // On doit avoir les résultats pour sloc et comments de rsm
-        assertEquals(1, appliResults.size());
+        assertEquals( 1, appliResults.size() );
     }
 
 }

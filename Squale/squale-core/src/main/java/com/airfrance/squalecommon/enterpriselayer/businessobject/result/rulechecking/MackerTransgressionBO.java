@@ -3,10 +3,11 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.result.ruleche
 /**
  * Résultat de transgression de Macker
  * 
- * @hibernate.subclass
- * discriminator-value="MackerTransgression"
+ * @hibernate.subclass discriminator-value="MackerTransgression"
  */
-public class MackerTransgressionBO extends RuleCheckingTransgressionBO {
+public class MackerTransgressionBO
+    extends RuleCheckingTransgressionBO
+{
     // Vide. Cette classe sert juste à avoir un nom de subclass différent
     // dans la base.
 }

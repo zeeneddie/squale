@@ -5,16 +5,17 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureB
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO;
 
 /**
- * @hibernate.subclass
- * discriminator-value="CkjmClassMetrics"
+ * @hibernate.subclass discriminator-value="CkjmClassMetrics"
  */
-public class CkjmClassMetricsBO extends MeasureBO {
-    
+public class CkjmClassMetricsBO
+    extends MeasureBO
+{
+
     /**
      * Couplage efferent
      */
     private final static String CBO = "cbo";
-    
+
     /**
      * Couplage afferent
      */
@@ -23,20 +24,21 @@ public class CkjmClassMetricsBO extends MeasureBO {
     /**
      * Constructeur par défaut.
      */
-    public CkjmClassMetricsBO() {
+    public CkjmClassMetricsBO()
+    {
         super();
-        getMetrics().put(CBO, new IntegerMetricBO());
-        getMetrics().put(CA, new IntegerMetricBO());       
+        getMetrics().put( CBO, new IntegerMetricBO() );
+        getMetrics().put( CA, new IntegerMetricBO() );
     }
 
     /**
      * Méthode d'accès à la métrique couplage efferent
      * 
      * @return la valuer du cbo
-     * 
      */
-    public Integer getCbo() {
-        return (Integer) ((MetricBO) getMetrics().get(CBO)).getValue();
+    public Integer getCbo()
+    {
+        return (Integer) ( (MetricBO) getMetrics().get( CBO ) ).getValue();
     }
 
     /**
@@ -44,18 +46,19 @@ public class CkjmClassMetricsBO extends MeasureBO {
      * 
      * @param pCbo la nouvelle valeur du cbo
      */
-    public void setCbo(int pCbo) {
-        ((IntegerMetricBO) getMetrics().get(CBO)).setValue(new Integer(pCbo));
+    public void setCbo( int pCbo )
+    {
+        ( (IntegerMetricBO) getMetrics().get( CBO ) ).setValue( new Integer( pCbo ) );
     }
 
     /**
      * Méthode d'accès à la métrique couplage afferent
      * 
      * @return la valuer du ca
-     * 
      */
-    public Integer getCa() {
-        return (Integer) ((IntegerMetricBO) getMetrics().get(CA)).getValue();
+    public Integer getCa()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( CA ) ).getValue();
     }
 
     /**
@@ -63,7 +66,8 @@ public class CkjmClassMetricsBO extends MeasureBO {
      * 
      * @param pCa la nouvelle valeur du ca
      */
-    public void setCa(int pCa) {
-        ((IntegerMetricBO) getMetrics().get(CA)).setValue(new Integer(pCa));
+    public void setCa( int pCa )
+    {
+        ( (IntegerMetricBO) getMetrics().get( CA ) ).setValue( new Integer( pCa ) );
     }
 }

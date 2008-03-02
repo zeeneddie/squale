@@ -15,104 +15,135 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRul
 /**
  * Transformation d'une règle qualité
  */
-public class QualityRuleTransform implements QualityRuleBOVisitor {
+public class QualityRuleTransform
+    implements QualityRuleBOVisitor
+{
 
     /** Le prefixe de la règle */
     private static String RULE_PREFIX = "rule.";
 
     /**
      * Conversion
+     * 
      * @param pQualityRuleRule objet à convertir
      * @param pQualityRuleDTO résultat de la conversion
      */
-    public static void bo2Dto(QualityRuleDTO pQualityRuleDTO, QualityRuleBO pQualityRuleRule) {
-        pQualityRuleDTO.setId(pQualityRuleRule.getId());
-        pQualityRuleDTO.setName(RULE_PREFIX + pQualityRuleRule.getName());
-        pQualityRuleDTO.setHelpKey(RULE_PREFIX + pQualityRuleRule.getHelpKey());
-        pQualityRuleDTO.setId(pQualityRuleRule.getId());
+    public static void bo2Dto( QualityRuleDTO pQualityRuleDTO, QualityRuleBO pQualityRuleRule )
+    {
+        pQualityRuleDTO.setId( pQualityRuleRule.getId() );
+        pQualityRuleDTO.setName( RULE_PREFIX + pQualityRuleRule.getName() );
+        pQualityRuleDTO.setHelpKey( RULE_PREFIX + pQualityRuleRule.getHelpKey() );
+        pQualityRuleDTO.setId( pQualityRuleRule.getId() );
     }
 
     /**
      * Conversion d'une règle qualité
+     * 
      * @param pQualityRuleRule règle qualité
      * @param pDeepTransform indique si les objets liés sont aussi transformés
      * @return règle qualité
      */
-    public static QualityRuleDTO bo2Dto(QualityRuleBO pQualityRuleRule, boolean pDeepTransform) {
-        QualityRuleDTO result = (QualityRuleDTO) pQualityRuleRule.accept(new QualityRuleTransform(), Boolean.valueOf(pDeepTransform));
+    public static QualityRuleDTO bo2Dto( QualityRuleBO pQualityRuleRule, boolean pDeepTransform )
+    {
+        QualityRuleDTO result =
+            (QualityRuleDTO) pQualityRuleRule.accept( new QualityRuleTransform(), Boolean.valueOf( pDeepTransform ) );
         return result;
     }
 
-    /** (non-Javadoc)
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO, java.lang.Object)
+    /**
+     * (non-Javadoc)
+     * 
+     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO,
+     *      java.lang.Object)
      */
-    public Object visit(FactorRuleBO pFactorRule, Object pArgument) {
+    public Object visit( FactorRuleBO pFactorRule, Object pArgument )
+    {
         FactorRuleDTO result = new FactorRuleDTO();
-        bo2Dto(result, pFactorRule);
-        if (((Boolean) pArgument).booleanValue()) {
+        bo2Dto( result, pFactorRule );
+        if ( ( (Boolean) pArgument ).booleanValue() )
+        {
             Iterator factorIt = pFactorRule.getCriteria().keySet().iterator();
-            while (factorIt.hasNext()) {
+            while ( factorIt.hasNext() )
+            {
                 CriteriumRuleBO currentCriteriumBO = (CriteriumRuleBO) factorIt.next();
-                result.addCriterium((CriteriumRuleDTO) (currentCriteriumBO).accept(this, pArgument), (Float) pFactorRule.getCriteria().get(currentCriteriumBO));
+                result.addCriterium( (CriteriumRuleDTO) ( currentCriteriumBO ).accept( this, pArgument ),
+                                     (Float) pFactorRule.getCriteria().get( currentCriteriumBO ) );
             }
         }
         return result;
     }
 
-    /** (non-Javadoc)
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO, java.lang.Object)
+    /**
+     * (non-Javadoc)
+     * 
+     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO,
+     *      java.lang.Object)
      */
-    public Object visit(CriteriumRuleBO pCriteriumRule, Object pArgument) {
+    public Object visit( CriteriumRuleBO pCriteriumRule, Object pArgument )
+    {
         CriteriumRuleDTO result = new CriteriumRuleDTO();
-        bo2Dto(result, pCriteriumRule);
-        if (((Boolean) pArgument).booleanValue()) {
+        bo2Dto( result, pCriteriumRule );
+        if ( ( (Boolean) pArgument ).booleanValue() )
+        {
             Iterator practiceIt = pCriteriumRule.getPractices().keySet().iterator();
-            while (practiceIt.hasNext()) {
+            while ( practiceIt.hasNext() )
+            {
                 PracticeRuleBO currentPracticeBO = (PracticeRuleBO) practiceIt.next();
-                result.addPractice((PracticeRuleDTO) currentPracticeBO.accept(this, pArgument), (Float) pCriteriumRule.getPractices().get(currentPracticeBO));
+                result.addPractice( (PracticeRuleDTO) currentPracticeBO.accept( this, pArgument ),
+                                    (Float) pCriteriumRule.getPractices().get( currentPracticeBO ) );
             }
         }
         return result;
     }
 
-    /** (non-Javadoc)
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO, java.lang.Object)
+    /**
+     * (non-Javadoc)
+     * 
+     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO,
+     *      java.lang.Object)
      */
-    public Object visit(PracticeRuleBO pPracticeRule, Object pArgument) {
+    public Object visit( PracticeRuleBO pPracticeRule, Object pArgument )
+    {
         PracticeRuleDTO result = new PracticeRuleDTO();
-        bo2Dto(result, pPracticeRule);
+        bo2Dto( result, pPracticeRule );
         // Traitement de la formule
-        if (pPracticeRule.getFormula() != null) {
+        if ( pPracticeRule.getFormula() != null )
+        {
             // Traitement du cas de RuleChecking
-            if ((pPracticeRule.getFormula() != null) && pPracticeRule.getFormula().getComponentLevel().equals("project")) { // TODO externaliser cette chaîne
-                result.setRuleChecking(true);
+            if ( ( pPracticeRule.getFormula() != null )
+                && pPracticeRule.getFormula().getComponentLevel().equals( "project" ) )
+            { // TODO externaliser cette chaîne
+                result.setRuleChecking( true );
             }
             // Conversion de la formule et de la fonction de pondération si demandé
-            result.setFormulaType(pPracticeRule.getFormula().getType());
-            if (((Boolean) pArgument).booleanValue()) {
-                result.setFormula(AbstractFormulaTransform.bo2Dto(pPracticeRule.getFormula()));
-                result.setWeightingFunction(pPracticeRule.getWeightFunction());
+            result.setFormulaType( pPracticeRule.getFormula().getType() );
+            if ( ( (Boolean) pArgument ).booleanValue() )
+            {
+                result.setFormula( AbstractFormulaTransform.bo2Dto( pPracticeRule.getFormula() ) );
+                result.setWeightingFunction( pPracticeRule.getWeightFunction() );
             }
         }
         // l'effort
-        result.setEffort(pPracticeRule.getEffort());
+        result.setEffort( pPracticeRule.getEffort() );
         return result;
     }
 
-
     /**
-     * dto -> bo
-     * On ne peut modifier que les formules et l'effort
+     * dto -> bo On ne peut modifier que les formules et l'effort
+     * 
      * @param practiceBO le bo
      * @param pRuleDTO le dto
      */
-    public static void dto2Bo(PracticeRuleBO practiceBO, PracticeRuleDTO pRuleDTO) {
-        practiceBO.setEffort(pRuleDTO.getEffort());
-        if (pRuleDTO.getWeightingFunction() != null) {
-            practiceBO.setWeightFunction(pRuleDTO.getWeightingFunction());
+    public static void dto2Bo( PracticeRuleBO practiceBO, PracticeRuleDTO pRuleDTO )
+    {
+        practiceBO.setEffort( pRuleDTO.getEffort() );
+        if ( pRuleDTO.getWeightingFunction() != null )
+        {
+            practiceBO.setWeightFunction( pRuleDTO.getWeightingFunction() );
         }
-        if (pRuleDTO.getFormula() != null) {
-            practiceBO.setFormula(AbstractFormulaTransform.dto2Bo(pRuleDTO.getFormula()));
+        if ( pRuleDTO.getFormula() != null )
+        {
+            practiceBO.setFormula( AbstractFormulaTransform.dto2Bo( pRuleDTO.getFormula() ) );
         }
     }
 }

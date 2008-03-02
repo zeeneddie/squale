@@ -10,21 +10,27 @@ import org.apache.commons.lang.exception.NestableException;
 
 /**
  * @author M400843
- *
  */
-public class ComputeException extends NestableException {
+public class ComputeException
+    extends NestableException
+{
     /**
      * Construit une ComputeException avec le message spécifié
+     * 
      * @param pMessage Le message
      */
-    public ComputeException(String pMessage){
-        super(pMessage);
+    public ComputeException( String pMessage )
+    {
+        super( pMessage );
     }
+
     /**
-     * Construit une ComputeException avec la cause spécifiée 
+     * Construit une ComputeException avec la cause spécifiée
+     * 
      * @param pException La cause de l'exception
      */
-    public ComputeException(Throwable pException) {
-        super(pException);
+    public ComputeException( Throwable pException )
+    {
+        super( pException );
     }
 }

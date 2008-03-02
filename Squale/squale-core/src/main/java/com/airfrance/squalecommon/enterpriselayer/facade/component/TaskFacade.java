@@ -17,7 +17,8 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefB
 
 /**
  */
-public class TaskFacade {
+public class TaskFacade
+{
 
     /**
      * provider de persistence
@@ -26,39 +27,47 @@ public class TaskFacade {
 
     /**
      * récupère toutes les taches existantes
+     * 
      * @param pProjectId l'id du projet
      * @return la collection de taches
      * @throws JrafEnterpriseException en cas d'échec
      */
-    public static Collection getAllTasks(Long pProjectId) throws JrafEnterpriseException {
+    public static Collection getAllTasks( Long pProjectId )
+        throws JrafEnterpriseException
+    {
 
         ISession session = null;
         Collection collBo = new ArrayList();
-        Collection collDto = new ArrayList(0);
-        try {
+        Collection collDto = new ArrayList( 0 );
+        try
+        {
             session = PERSISTENTPROVIDER.getSession();
             // On récupère le projet
-            ProjectBO project = (ProjectBO)ProjectDAOImpl.getInstance().get(session, pProjectId);
-            /* On va ajouter les tâches dans leur ordre d'éxécution c-a-d :
-                1 - les tâches d'analyses du source manager
-                2 - les tâches d'analyses du profil
-                3 - les tâches terminales du profil
-                4 - les tâches terminales du source manager
-            */
-            collBo.addAll(project.getSourceManager().getAnalysisTasks());
-            collBo.addAll(project.getProfile().getAnalysisTasks());
-            collBo.addAll(project.getProfile().getTerminationTasks());
-            collBo.addAll(project.getSourceManager().getTerminationTasks());
+            ProjectBO project = (ProjectBO) ProjectDAOImpl.getInstance().get( session, pProjectId );
+            /*
+             * On va ajouter les tâches dans leur ordre d'éxécution c-a-d : 1 - les tâches d'analyses du source manager
+             * 2 - les tâches d'analyses du profil 3 - les tâches terminales du profil 4 - les tâches terminales du
+             * source manager
+             */
+            collBo.addAll( project.getSourceManager().getAnalysisTasks() );
+            collBo.addAll( project.getProfile().getAnalysisTasks() );
+            collBo.addAll( project.getProfile().getTerminationTasks() );
+            collBo.addAll( project.getSourceManager().getTerminationTasks() );
             // on caste chaque élément de la collection de taskBO en TaskDTO
             Iterator it = collBo.iterator();
-            while(it.hasNext()){
-                TaskRefBO taskRef = (TaskRefBO)it.next();
-                collDto.add(TaskTransform.bo2dto(taskRef));
+            while ( it.hasNext() )
+            {
+                TaskRefBO taskRef = (TaskRefBO) it.next();
+                collDto.add( TaskTransform.bo2dto( taskRef ) );
             }
-        } catch (JrafDaoException e) {
-            FacadeHelper.convertException(e, TaskFacade.class.getName() + ".getAllTasks");
-        } finally {
-            FacadeHelper.closeSession(session, TaskFacade.class.getName() + ".getAllTasks");
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, TaskFacade.class.getName() + ".getAllTasks" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, TaskFacade.class.getName() + ".getAllTasks" );
         }
         return collDto;
     }

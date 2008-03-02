@@ -8,15 +8,18 @@ import com.airfrance.squalecommon.enterpriselayer.facade.component.TaskFacade;
 
 /**
  */
-public class TaskAdministrationComponentAccess extends DefaultExecuteComponent {
+public class TaskAdministrationComponentAccess
+    extends DefaultExecuteComponent
+{
 
-    
     /**
      * @param pProjectId l'id du projet
      * @return la liste des taches du projet dans leur ordre d'exécution
      * @throws JrafEnterpriseException en cas d'échec
      */
-    public Collection getAllTasks(Long pProjectId) throws JrafEnterpriseException {
-        return TaskFacade.getAllTasks(pProjectId);
+    public Collection getAllTasks( Long pProjectId )
+        throws JrafEnterpriseException
+    {
+        return TaskFacade.getAllTasks( pProjectId );
     }
 }

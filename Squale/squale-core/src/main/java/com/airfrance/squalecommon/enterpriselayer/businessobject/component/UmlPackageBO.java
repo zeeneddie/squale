@@ -8,50 +8,59 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.UnexpectedRelat
 
 /**
  * Représente un package UML
- * @author m400842
  * 
- * @hibernate.subclass
- * lazy="true"
- * discriminator-value="UmlPackage"
+ * @author m400842
+ * @hibernate.subclass lazy="true" discriminator-value="UmlPackage"
  */
-public class UmlPackageBO extends AbstractComplexComponentBO {
+public class UmlPackageBO
+    extends AbstractComplexComponentBO
+{
 
     /**
      * Instancie un nouveau composant.
+     * 
      * @param pName Nom du composant.
      * @roseuid 42AFF06C033D
      */
-    public UmlPackageBO(final String pName) {
+    public UmlPackageBO( final String pName )
+    {
         super();
-        setName(pName);
+        setName( pName );
     }
 
     /**
      * Constructeur par défaut.
+     * 
      * @roseuid 42CBA5D60359
      */
-    public UmlPackageBO() {
+    public UmlPackageBO()
+    {
         super();
     }
 
     /**
      * Constructeur complet.
+     * 
      * @param pName nom du composant
      * @param pChildren les enfants
      * @param pParent Composant parent
      * @throws UnexpectedRelationException si la relation ne peut etre ajouté
      * @roseuid 42CBA5D60369
      */
-    public UmlPackageBO(String pName, Collection pChildren, AbstractComplexComponentBO pParent)
-        throws UnexpectedRelationException {
-        super(pName, pChildren, pParent);
+    public UmlPackageBO( String pName, Collection pChildren, AbstractComplexComponentBO pParent )
+        throws UnexpectedRelationException
+    {
+        super( pName, pChildren, pParent );
     }
 
-    /** 
+    /**
      * {@inheritDoc}
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor, java.lang.Object)
+     * 
+     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor,
+     *      java.lang.Object)
      */
-    public Object accept(ComponentVisitor pVisitor, Object pArgument) {
-        return pVisitor.visit(this, pArgument);
+    public Object accept( ComponentVisitor pVisitor, Object pArgument )
+    {
+        return pVisitor.visit( this, pArgument );
     }
 }

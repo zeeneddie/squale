@@ -8,143 +8,117 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.Ru
 /**
  * Item de transgression
  * 
- * @hibernate.class 
- * table="RuleCheckingTransgressionItem"
- * mutable="true"
- * lazy="true"
+ * @hibernate.class table="RuleCheckingTransgressionItem" mutable="true" lazy="true"
  */
-public class RuleCheckingTransgressionItemBO implements Serializable {
-    
+public class RuleCheckingTransgressionItemBO
+    implements Serializable
+{
+
     /** Mot-clé du message qui sera remplacé par le chemin du fichier */
     public static final String PATH_KEY = "#path#";
-    
+
     /** Mot-clé du message qui sera remplacé par le numéro de ligne */
     public static final String LINE_KEY = "#line#";
-    
+
     /**
      * Identifiant (au sens technique) de l'objet
      */
     protected long mId = -1;
-    
+
     /** Le fichier du composant concerné par la transgression */
     private String mComponentFile;
-    
+
     /** La ligne qui transgresse la règle */
     private int mLine;
-    
+
     /** Détail de la transgression */
     private String mMessage;
-    
+
     /** Composant concerné par la transgression */
     private AbstractComponentBO mComponent;
-    
+
     /** Règle transgressée */
     private RuleBO mRule;
-    
+
     /** Composant en relation avec la transgression */
     private AbstractComponentBO mComponentInvolved;
 
     /**
      * Constructeur par défaut
      */
-    public RuleCheckingTransgressionItemBO() {
+    public RuleCheckingTransgressionItemBO()
+    {
         mId = -1;
         mComponentFile = "";
     }
 
     /**
      * @return l'identifiant (au sens technique) de l'objet
-     * 
-     * @hibernate.id generator-class="native" 
-     * type="long" 
-     * column="ItemId" 
-     * unsaved-value="-1" 
-     * length="19"
+     * @hibernate.id generator-class="native" type="long" column="ItemId" unsaved-value="-1" length="19"
      * @hibernate.generator-param name="sequence" value="TransgressionItem_sequence"
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
     /**
      * @return la ligne
-     * 
-     * @hibernate.property
-     * name="line" 
-     * column="Line" 
-     * type="int" 
-     * length="10" 
-     * not-null="true"
+     * @hibernate.property name="line" column="Line" type="int" length="10" not-null="true"
      */
-    public int getLine() {
+    public int getLine()
+    {
         return mLine;
     }
 
     /**
      * @return le fichier du composant
-     * 
-     * @hibernate.property 
-     * name="componentFile" 
-     * column="Path"
-     * length="3000"
-     * type="string" 
+     * @hibernate.property name="componentFile" column="Path" length="3000" type="string"
      */
-    public String getComponentFile() {
-        return (null == mComponentFile) ? "" : mComponentFile;
+    public String getComponentFile()
+    {
+        return ( null == mComponentFile ) ? "" : mComponentFile;
     }
 
     /**
      * @return le détail de la transgession
-     * 
-     * @hibernate.property 
-     * name="message" 
-     * column="Message" 
-     * not-null="true" 
-     * length="3000"
-     * type="string" 
-     * unique="false"
+     * @hibernate.property name="message" column="Message" not-null="true" length="3000" type="string" unique="false"
      */
-    public String getMessage() {
-        return mMessage.replaceAll(PATH_KEY, getComponentFile()).replaceAll(LINE_KEY, ""+getLine());
+    public String getMessage()
+    {
+        return mMessage.replaceAll( PATH_KEY, getComponentFile() ).replaceAll( LINE_KEY, "" + getLine() );
     }
-    
+
     /**
      * @return le composant concerné par la transgression
-     * 
-     * @hibernate.many-to-one
-     * name="component" 
-     * column="ComponentId" 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
-     * cascade="all"
+     * @hibernate.many-to-one name="component" column="ComponentId"
+     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     *                        cascade="all"
      */
-    public AbstractComponentBO getComponent() {
+    public AbstractComponentBO getComponent()
+    {
         return mComponent;
     }
 
     /**
      * @return la règle transgressée
-     * 
-     * @hibernate.many-to-one
-     * name="rule" 
-     * column="RuleId" 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"
-     * cascade="all"
-     * not-null="true"
+     * @hibernate.many-to-one name="rule" column="RuleId"
+     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"
+     *                        cascade="all" not-null="true"
      */
-    public RuleBO getRule() {
+    public RuleBO getRule()
+    {
         return mRule;
     }
 
     /**
      * @return le composant en relation avec la transgression
-     * 
-     * @hibernate.many-to-one
-     * name="component" 
-     * column="ComponentInvolvedId" 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
-     * cascade="all"
+     * @hibernate.many-to-one name="component" column="ComponentInvolvedId"
+     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     *                        cascade="all"
      */
-    public AbstractComponentBO getComponentInvolved() {
+    public AbstractComponentBO getComponentInvolved()
+    {
         return mComponentInvolved;
     }
 
@@ -153,7 +127,8 @@ public class RuleCheckingTransgressionItemBO implements Serializable {
      * 
      * @param pId l'identifiant (au sens technique) de l'objet
      */
-    public void setId(long pId) {
+    public void setId( long pId )
+    {
         mId = pId;
     }
 
@@ -162,7 +137,8 @@ public class RuleCheckingTransgressionItemBO implements Serializable {
      * 
      * @param pMessage le détail de la transgession
      */
-    public void setMessage(String pMessage) {
+    public void setMessage( String pMessage )
+    {
         mMessage = pMessage;
     }
 
@@ -171,7 +147,8 @@ public class RuleCheckingTransgressionItemBO implements Serializable {
      * 
      * @param pComponent le composant concerné par la transgression
      */
-    public void setComponent(AbstractComponentBO pComponent) {
+    public void setComponent( AbstractComponentBO pComponent )
+    {
         mComponent = pComponent;
     }
 
@@ -180,7 +157,8 @@ public class RuleCheckingTransgressionItemBO implements Serializable {
      * 
      * @param pRule la règle transgressée
      */
-    public void setRule(RuleBO pRule) {
+    public void setRule( RuleBO pRule )
+    {
         mRule = pRule;
     }
 
@@ -189,20 +167,24 @@ public class RuleCheckingTransgressionItemBO implements Serializable {
      * 
      * @param pComponentInvolved le composant en relation avec la transgression
      */
-    public void setComponentInvolved(AbstractComponentBO pComponentInvolved) {
+    public void setComponentInvolved( AbstractComponentBO pComponentInvolved )
+    {
         mComponentInvolved = pComponentInvolved;
     }
+
     /**
      * @param pComponentFile le fichier du composant
      */
-    public void setComponentFile(String pComponentFile) {
+    public void setComponentFile( String pComponentFile )
+    {
         mComponentFile = pComponentFile;
     }
 
     /**
      * @param pLine la ligne
      */
-    public void setLine(int pLine) {
+    public void setLine( int pLine )
+    {
         mLine = pLine;
     }
 

@@ -8,110 +8,125 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FormulaVis
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
 
 /**
- * Conversion de formule
- * Une formule qui est composée de paramètres doit être convertie
- * avant de pouvoir être évaluée.
+ * Conversion de formule Une formule qui est composée de paramètres doit être convertie avant de pouvoir être évaluée.
  */
-public class FormulaConverter implements FormulaVisitor {
-    
+public class FormulaConverter
+    implements FormulaVisitor
+{
+
     /** Préfixe de function utilisée */
-    public final static String FUNCTION_PREFIX="factor_";
-    
+    public final static String FUNCTION_PREFIX = "factor_";
+
     /**
-     * Conversion de formule
-     * La formule passée en paramètre est convertie sous sa forme Python
+     * Conversion de formule La formule passée en paramètre est convertie sous sa forme Python
+     * 
      * @param pFormula formule
      * @return formule convertie
      */
-    public String convertFormula(AbstractFormulaBO pFormula) {
-        
+    public String convertFormula( AbstractFormulaBO pFormula )
+    {
+
         // TODO : Renvoyer tuple contenant le nom de la fonction et la String que l'on renvoie actuellement
         // pour pouvoir récupérer le nom de la fonction et ainsi éviter une duplication du code.
-        
+
         // Utilisation de StringBuffer pour les performances
         StringBuffer buf = new StringBuffer();
         // Définition de la fonction
-        buf.append("def "+FUNCTION_PREFIX);
+        buf.append( "def " + FUNCTION_PREFIX );
         // L'id de la fonction est ajouté pour assurer l'unicité
         long id = pFormula.getId();
         // Traitement des formules transientes
-        if (id<0) {
+        if ( id < 0 )
+        {
             id = 0;
         }
-        buf.append(id);
+        buf.append( id );
         // Placement des paramètres, un par type de mesure
-        buf.append('(');
+        buf.append( '(' );
         Iterator measureKinds = pFormula.getMeasureKinds().iterator();
         int i = 0;
-        while (measureKinds.hasNext()) {
+        while ( measureKinds.hasNext() )
+        {
             // Placement de la virgule après le premier paramètre
-            if (i>0) {
-                buf.append(", ");
+            if ( i > 0 )
+            {
+                buf.append( ", " );
             }
-            buf.append((String)measureKinds.next());
+            buf.append( (String) measureKinds.next() );
             i++;
         }
-        buf.append("):\n");
+        buf.append( "):\n" );
         // Vérification de l'existence de la condition de trigger
-        if ((pFormula.getTriggerCondition()!=null)&&
-            (pFormula.getTriggerCondition().trim().length()>0)) {
-                // Ajout d'un if pour traiter le cas du trigger
-            buf.append("  if ");
-            buf.append(pFormula.getTriggerCondition());
-            buf.append(":\n");
+        if ( ( pFormula.getTriggerCondition() != null ) && ( pFormula.getTriggerCondition().trim().length() > 0 ) )
+        {
+            // Ajout d'un if pour traiter le cas du trigger
+            buf.append( "  if " );
+            buf.append( pFormula.getTriggerCondition() );
+            buf.append( ":\n" );
         }
         // Partie variable en fonction du type de formule
         // utilisation du visiteur
-        pFormula.accept(this, buf);
+        pFormula.accept( this, buf );
         return buf.toString();
     }
-    
 
-    /** (non-Javadoc)
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.ConditionFormulaBO, java.lang.Object)
+    /**
+     * (non-Javadoc)
+     * 
+     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.ConditionFormulaBO,
+     *      java.lang.Object)
      */
-    public Object visit(ConditionFormulaBO pConditionFormula, Object pArgument) {
+    public Object visit( ConditionFormulaBO pConditionFormula, Object pArgument )
+    {
         StringBuffer buffer = (StringBuffer) pArgument;
-        final String indentation="    ";
+        final String indentation = "    ";
         // Traitement des conditions
-        Iterator conditions =  pConditionFormula.getMarkConditions().iterator();
+        Iterator conditions = pConditionFormula.getMarkConditions().iterator();
         int i = 0;
-        while (conditions.hasNext()) {
+        while ( conditions.hasNext() )
+        {
             String condition = (String) conditions.next();
-            buffer.append(indentation);
-            if (i==0) {
-                buffer.append("if ");
-            } else {
-                buffer.append("elif ");
+            buffer.append( indentation );
+            if ( i == 0 )
+            {
+                buffer.append( "if " );
             }
-            buffer.append(condition);
-            buffer.append(":\n");
-            buffer.append(indentation);
-            buffer.append("    return ");
-            buffer.append(i);
-            buffer.append('\n');
+            else
+            {
+                buffer.append( "elif " );
+            }
+            buffer.append( condition );
+            buffer.append( ":\n" );
+            buffer.append( indentation );
+            buffer.append( "    return " );
+            buffer.append( i );
+            buffer.append( '\n' );
             i++;
         }
         // Traitement du else
-        buffer.append(indentation);
-        buffer.append("else:\n");
-        buffer.append(indentation);
-        buffer.append("    return ");
-        buffer.append(i);
-        buffer.append('\n');
+        buffer.append( indentation );
+        buffer.append( "else:\n" );
+        buffer.append( indentation );
+        buffer.append( "    return " );
+        buffer.append( i );
+        buffer.append( '\n' );
         return null;
     }
 
-    /** (non-Javadoc)
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.SimpleFormulaBO, java.lang.Object)
+    /**
+     * (non-Javadoc)
+     * 
+     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.SimpleFormulaBO,
+     *      java.lang.Object)
      */
-    public Object visit(SimpleFormulaBO pSimpleFormula, Object pArgument) {
+    public Object visit( SimpleFormulaBO pSimpleFormula, Object pArgument )
+    {
         StringBuffer buffer = (StringBuffer) pArgument;
-        final String indentation="    ";
-        buffer.append(indentation);
-        buffer.append("return ");
-        buffer.append(pSimpleFormula.getFormula());
-        buffer.append('\n');
+        final String indentation = "    ";
+        buffer.append( indentation );
+        buffer.append( "return " );
+        buffer.append( pSimpleFormula.getFormula() );
+        buffer.append( '\n' );
         return null;
     }
 }

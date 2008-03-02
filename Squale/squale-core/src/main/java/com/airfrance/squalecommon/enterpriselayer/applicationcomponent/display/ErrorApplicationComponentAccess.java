@@ -21,67 +21,78 @@ import com.airfrance.squalecommon.enterpriselayer.facade.quality.ErrorFacade;
 import com.airfrance.squalecommon.util.messages.CommonMessages;
 
 /**
- * <p>Title : ErrorApplicationComponentAccess.java</p>
- * <p>Description : Application component error </p>
- * <p>Copyright : Copyright (c) 2005</p>
- * <p>Company : AIRFRANCE</p>
- * Classe permettant de récupérer les erreurs en fonction des paramètres d'audits et
- * de taches qui ont généré les erreurs
+ * <p>
+ * Title : ErrorApplicationComponentAccess.java
+ * </p>
+ * <p>
+ * Description : Application component error
+ * </p>
+ * <p>
+ * Copyright : Copyright (c) 2005
+ * </p>
+ * <p>
+ * Company : AIRFRANCE
+ * </p>
+ * Classe permettant de récupérer les erreurs en fonction des paramètres d'audits et de taches qui ont généré les
+ * erreurs
  */
-public class ErrorApplicationComponentAccess extends DefaultExecuteComponent {
+public class ErrorApplicationComponentAccess
+    extends DefaultExecuteComponent
+{
 
     /**
      * Nombre d'audits a récupérer par defaut
      */
-    private static final Integer NB_AUDITS = new Integer(CommonMessages.getInt("audit.nombre"));
+    private static final Integer NB_AUDITS = new Integer( CommonMessages.getInt( "audit.nombre" ) );
 
     /**
-     * Index a partir duquel on souhaite récupérer les audits par defaut
-     * Les données sont récupérées du plus récent au plus vieux
+     * Index a partir duquel on souhaite récupérer les audits par defaut Les données sont récupérées du plus récent au
+     * plus vieux
      */
-    private static final Integer INDEX_DEPART_AUDIT =
-        new Integer(CommonMessages.getInt("audit.index"));
+    private static final Integer INDEX_DEPART_AUDIT = new Integer( CommonMessages.getInt( "audit.index" ) );
 
     /** log */
-    private static Log LOG = LogFactory.getLog(ErrorApplicationComponentAccess.class);
+    private static Log LOG = LogFactory.getLog( ErrorApplicationComponentAccess.class );
 
     /**
-     * Permet de récupérer les erreurs d'un projet relatifs à un audit et une tache
-     * donné
-     * @param pError ErrorDTO renseignant l'ID de l'audit et du projet
-     * si AuditID < 0, recuperation des erreurs pour le dernier audit
-     * si Task = null, recuperation des erreurs pour toutes les taches
+     * Permet de récupérer les erreurs d'un projet relatifs à un audit et une tache donné
+     * 
+     * @param pError ErrorDTO renseignant l'ID de l'audit et du projet si AuditID < 0, recuperation des erreurs pour le
+     *            dernier audit si Task = null, recuperation des erreurs pour toutes les taches
      * @param pNbLignes nombre de lignes
      * @param pIndexDepart index de depart
      * @return Collection de ErrorDTO
      * @throws JrafEnterpriseException Exception JRAF
      * @roseuid 42CBFBF800B5
      */
-    public Collection getErrors(ErrorDTO pError, Integer pNbLignes, Integer pIndexDepart)
-        throws JrafEnterpriseException {
+    public Collection getErrors( ErrorDTO pError, Integer pNbLignes, Integer pIndexDepart )
+        throws JrafEnterpriseException
+    {
 
         // Initialisation
         Collection collection = null; // retour de l'AC
 
-        if(pError != null){
+        if ( pError != null )
+        {
 
             // on verifie que les champs necessaires sont renseignes
-            pError = validateErrorDTO(pError);
-            if (pError!=null) { 
+            pError = validateErrorDTO( pError );
+            if ( pError != null )
+            {
                 // Execution de la methode
-                collection = ErrorFacade.getErrors(pError, pNbLignes, pIndexDepart);
+                collection = ErrorFacade.getErrors( pError, pNbLignes, pIndexDepart );
             }
 
         }
 
         return collection;
     }
-    
+
     /**
-     * Permet de récupérer une liste d'erreurs pour un projet, un audit et 
-     * plusieurs audits
-     * @param pAudits liste des AuditDTO renseignant l'identifiant, sinon <code>null</code> si on souhaite 
-     * les deux derniers audits de suivi
+     * Permet de récupérer une liste d'erreurs pour un projet, un audit et plusieurs audits
+     * 
+     * @param pAudits liste des AuditDTO renseignant l'identifiant, sinon <code>null</code> si on souhaite les deux
+     *            derniers audits de suivi
      * @param pError ErrorDTO avec un ID de composant renseigne au minimum
      * @param pNbLignes nombre de lignes
      * @param pIndexDepart index de depart
@@ -89,12 +100,9 @@ public class ErrorApplicationComponentAccess extends DefaultExecuteComponent {
      * @throws JrafEnterpriseException Exception JRAF
      * @roseuid 42CBFBF80105
      */
-    public Collection getErrorsByAudit(
-        List pAudits,
-        ErrorDTO pError,
-        Integer pNbLignes,
-        Integer pIndexDepart)
-        throws JrafEnterpriseException {
+    public Collection getErrorsByAudit( List pAudits, ErrorDTO pError, Integer pNbLignes, Integer pIndexDepart )
+        throws JrafEnterpriseException
+    {
 
         // Initialsiation
         Collection collection = null; // retour de l'AC
@@ -102,24 +110,23 @@ public class ErrorApplicationComponentAccess extends DefaultExecuteComponent {
         List lastAudits = pAudits; // audits souhaites
 
         // Verifie si les audits sont renseignes
-        if (pError.getProjectId() > 0) {
-            if (pAudits == null) {
+        if ( pError.getProjectId() > 0 )
+        {
+            if ( pAudits == null )
+            {
 
                 project = new ComponentDTO();
-                project.setID(pError.getProjectId());
+                project.setID( pError.getProjectId() );
                 // recuperation des 2 derniers audits pour tous les audits
-                lastAudits =
-                    AuditFacade.getLastAudits(
-                        project,
-                        NB_AUDITS,
-                        INDEX_DEPART_AUDIT,
-                        null,AuditBO.FAILED);
+                lastAudits = AuditFacade.getLastAudits( project, NB_AUDITS, INDEX_DEPART_AUDIT, null, AuditBO.FAILED );
             }
 
-            collection = ErrorFacade.getErrorsByAudit(lastAudits, pError, pNbLignes, pIndexDepart);
+            collection = ErrorFacade.getErrorsByAudit( lastAudits, pError, pNbLignes, pIndexDepart );
 
-        } else {
-            LOG.error(ACMessages.getString("ac.exception.error.geterrorsbyaudit.negativeprojectid"));
+        }
+        else
+        {
+            LOG.error( ACMessages.getString( "ac.exception.error.geterrorsbyaudit.negativeprojectid" ) );
         }
 
         return collection;
@@ -127,8 +134,8 @@ public class ErrorApplicationComponentAccess extends DefaultExecuteComponent {
 
     /**
      * Permet de récupérer des erreurs pour un projet, un audit et une liste de taches
-     * @param pTaskKeys liste des cles de taches souhaitées, sinon <code>null</code> pour
-     * tooutes les taches
+     * 
+     * @param pTaskKeys liste des cles de taches souhaitées, sinon <code>null</code> pour tooutes les taches
      * @param pError ErrorDTO avec identifiant du composant au minimum
      * @param pNbLignes nombre de lignes
      * @param pIndexDepart index de depart
@@ -136,28 +143,26 @@ public class ErrorApplicationComponentAccess extends DefaultExecuteComponent {
      * @throws JrafEnterpriseException Exception JRAF
      * @roseuid 42CBFBF8023B
      */
-    public Collection getErrorsByTask(
-        List pTaskKeys,
-        ErrorDTO pError,
-        Integer pNbLignes,
-        Integer pIndexDepart)
-        throws JrafEnterpriseException {
+    public Collection getErrorsByTask( List pTaskKeys, ErrorDTO pError, Integer pNbLignes, Integer pIndexDepart )
+        throws JrafEnterpriseException
+    {
 
-        // Initialisation  
+        // Initialisation
         Collection collection = null;
 
-        pError = validateErrorDTO(pError);
+        pError = validateErrorDTO( pError );
 
-        if (pError != null) {
-            collection = ErrorFacade.getErrorsByTask(pTaskKeys, pError, pNbLignes, pIndexDepart);
+        if ( pError != null )
+        {
+            collection = ErrorFacade.getErrorsByTask( pTaskKeys, pError, pNbLignes, pIndexDepart );
         }
 
         return collection;
     }
 
     /**
-     * Permet de récupérer des erreurs pour une liste de composants et une liste 
-     * d'audits donnés
+     * Permet de récupérer des erreurs pour une liste de composants et une liste d'audits donnés
+     * 
      * @param pAuditDTOs liste des AuditDTOs souhaités
      * @param pTaskKeys liste des clés des taches
      * @param pError ErrorDTO avec ID du composant renseigné
@@ -168,13 +173,10 @@ public class ErrorApplicationComponentAccess extends DefaultExecuteComponent {
      * @deprecated ne sera pas implemente
      * @roseuid 42CBFBF80336
      */
-    public Collection getErrorsByAuditAndTask(
-        List pAuditDTOs,
-        List pTaskKeys,
-        ErrorDTO pError,
-        Integer pNbLignes,
-        Integer pIndexDepart)
-        throws JrafEnterpriseException {
+    public Collection getErrorsByAuditAndTask( List pAuditDTOs, List pTaskKeys, ErrorDTO pError, Integer pNbLignes,
+                                               Integer pIndexDepart )
+        throws JrafEnterpriseException
+    {
 
         // Mise des parametres a null
         pAuditDTOs = null;
@@ -189,32 +191,38 @@ public class ErrorApplicationComponentAccess extends DefaultExecuteComponent {
 
     /**
      * Permet de completer l'objet ErrorDTO si des données sont manquantes
+     * 
      * @param pErrorDTO ErrorDTO
      * @return ErrorDTO avec la bonne initialisation
      * @throws JrafEnterpriseException exception JRAF
      */
-    private ErrorDTO validateErrorDTO(ErrorDTO pErrorDTO) throws JrafEnterpriseException {
+    private ErrorDTO validateErrorDTO( ErrorDTO pErrorDTO )
+        throws JrafEnterpriseException
+    {
 
         // initialisation
         AuditDTO lastAudit = null; // dernier audit du projet
 
         // teste si l'identifiant de l'audit est negatif
-        if (pErrorDTO.getAuditId() < 0) {
+        if ( pErrorDTO.getAuditId() < 0 )
+        {
 
             // initialisation du composant
             ComponentDTO project = new ComponentDTO(); // parametre de AuditFacade
-            project.setID(pErrorDTO.getProjectId());
+            project.setID( pErrorDTO.getProjectId() );
 
-            lastAudit = AuditFacade.getLastAudit(project, null);
+            lastAudit = AuditFacade.getLastAudit( project, null );
 
-            if (lastAudit != null) {
-                pErrorDTO.setAuditId(lastAudit.getID());
+            if ( lastAudit != null )
+            {
+                pErrorDTO.setAuditId( lastAudit.getID() );
             }
         }
 
         // teste si l'identifiant du projet ou de l'audit est negatif
-        if (pErrorDTO.getProjectId() < 0 || pErrorDTO.getAuditId() < 0) {
-            LOG.error(ACMessages.getString("ac.exception.error.validateerrordto.negativeid"));
+        if ( pErrorDTO.getProjectId() < 0 || pErrorDTO.getAuditId() < 0 )
+        {
+            LOG.error( ACMessages.getString( "ac.exception.error.validateerrordto.negativeid" ) );
             pErrorDTO = null;
         }
 
@@ -229,19 +237,24 @@ public class ErrorApplicationComponentAccess extends DefaultExecuteComponent {
      * @return les noms des tâches possédant des erreurs
      * @throws JrafEnterpriseException en cas d'échec
      */
-    public List getAllTasks(Long pProjectId, String pAuditId) throws JrafEnterpriseException {
-        List results = new ArrayList(0);
+    public List getAllTasks( Long pProjectId, String pAuditId )
+        throws JrafEnterpriseException
+    {
+        List results = new ArrayList( 0 );
         // Liste vide si l'audit n'est pas renseigné
-        if(null != pAuditId) {
-            results = ErrorFacade.getAllTasks(pProjectId, new Long(Long.parseLong(pAuditId)));
+        if ( null != pAuditId )
+        {
+            results = ErrorFacade.getAllTasks( pProjectId, new Long( Long.parseLong( pAuditId ) ) );
         }
         return results;
     }
 
     /**
      * Constructeur par défaut
+     * 
      * @roseuid 42CBFBF90034
      */
-    public ErrorApplicationComponentAccess() {
+    public ErrorApplicationComponentAccess()
+    {
     }
 }

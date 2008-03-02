@@ -13,18 +13,14 @@ import com.airfrance.squalecommon.util.mapping.Mapping;
 
 /**
  * Représente un composant du projet au sens implémentation.
- * @author m400842
  * 
- * @hibernate.class 
- * table="Component"
- * mutable="true"
- * lazy="true"
- * discriminator-value="AbstractComponent"
- * @hibernate.discriminator 
- * column="subclass"
- *
+ * @author m400842
+ * @hibernate.class table="Component" mutable="true" lazy="true" discriminator-value="AbstractComponent"
+ * @hibernate.discriminator column="subclass"
  */
-public abstract class AbstractComponentBO implements Serializable {
+public abstract class AbstractComponentBO
+    implements Serializable
+{
 
     /**
      * Identifiant (au sens technique) de l'objet
@@ -59,72 +55,58 @@ public abstract class AbstractComponentBO implements Serializable {
 
     /**
      * @return le booléen indiquant si le composant courant est exclu du plan d'action
-     * 
-     * @hibernate.property 
-     * name="excludedFromActionPlan" 
-     * column="Excluded" 
-     * type="boolean" 
-     * not-null="true" 
-     * unique="false"
-     * 
+     * @hibernate.property name="excludedFromActionPlan" column="Excluded" type="boolean" not-null="true" unique="false"
      */
-    public boolean getExcludedFromActionPlan() {
+    public boolean getExcludedFromActionPlan()
+    {
         return excludedFromActionPlan;
     }
 
     /**
      * @return la justification du composant
-     * 
-     * @hibernate.property 
-     * name="justification" 
-     * column="Justification" 
-     * type="string" 
-     * length="4000"
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @hibernate.property name="justification" column="Justification" type="string" length="4000" not-null="false"
+     *                     unique="false"
      */
-    public String getJustification() {
+    public String getJustification()
+    {
         return justification;
     }
 
     /**
      * @param pExcluded le booléen indiquant si il faut exclure le composant ou pas
      */
-    public void setExcludedFromActionPlan(boolean pExcluded) {
+    public void setExcludedFromActionPlan( boolean pExcluded )
+    {
         excludedFromActionPlan = pExcluded;
     }
 
     /**
      * @param pJustification la nouvelle valeur de la justification
      */
-    public void setJustification(String pJustification) {
+    public void setJustification( String pJustification )
+    {
         justification = pJustification;
     }
 
     /**
-     * Récupère la clé correspondant au composant 
+     * Récupère la clé correspondant au composant
+     * 
      * @return la clé
      */
-    public String getType() {
-        return Mapping.getComponentName(getClass());
+    public String getType()
+    {
+        return Mapping.getComponentName( getClass() );
     }
+
     /**
      * Access method for the mName property.
      * 
-     * @return   the current value of the mName property
-     * 
-     * @hibernate.property 
-     * name="name" 
-     * column="Name" 
-     * type="string" 
-     * length="1024"
-     * not-null="true" 
-     * unique="false"
-     * 
+     * @return the current value of the mName property
+     * @hibernate.property name="name" column="Name" type="string" length="1024" not-null="true" unique="false"
      * @roseuid 42BACECB0228
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
 
@@ -134,31 +116,24 @@ public abstract class AbstractComponentBO implements Serializable {
      * @param pName the new value of the mName property
      * @roseuid 42BACECB0238
      */
-    public void setName(String pName) {
+    public void setName( String pName )
+    {
         mName = pName;
     }
 
     /**
      * Access method for the mId property.
      * 
-     * @return   the current value of the mId property
-     * 
-     * Note: unsaved-value An identifier property value that indicates that an instance 
-     * is newly instantiated (unsaved), distinguishing it from transient instances that 
-     * were saved or loaded in a previous session.  If not specified you will get an exception like this:
-     * another object associated with the session has the same identifier
-     * 
-     * @hibernate.id generator-class="native"
-     * type="long" 
-     * column="ComponentId" 
-     * unsaved-value="-1" 
-     * length="19"
-     * @hibernate.generator-param name="sequence" value="component_sequence" 
-     * 
-     * 
+     * @return the current value of the mId property Note: unsaved-value An identifier property value that indicates
+     *         that an instance is newly instantiated (unsaved), distinguishing it from transient instances that were
+     *         saved or loaded in a previous session. If not specified you will get an exception like this: another
+     *         object associated with the session has the same identifier
+     * @hibernate.id generator-class="native" type="long" column="ComponentId" unsaved-value="-1" length="19"
+     * @hibernate.generator-param name="sequence" value="component_sequence"
      * @roseuid 42BFCA590082
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
@@ -166,20 +141,21 @@ public abstract class AbstractComponentBO implements Serializable {
      * Sets the value of the mId property.
      * 
      * @param pId the new value of the mId property
-     * 
      * @roseuid 42BFCA5900F0
      */
-    public void setId(long pId) {
-        //        mTranscientId = pId;
+    public void setId( long pId )
+    {
+        // mTranscientId = pId;
         mId = pId;
     }
 
     /**
-    * Sets the value of the mId property.
-    * 
-    * @param pId the new value of the mId property
-    */
-    public void setPersistedId(long pId) {
+     * Sets the value of the mId property.
+     * 
+     * @param pId the new value of the mId property
+     */
+    public void setPersistedId( long pId )
+    {
         mId = pId;
     }
 
@@ -187,15 +163,13 @@ public abstract class AbstractComponentBO implements Serializable {
      * Access method for the mParent property.
      * 
      * @return le composant parent
-     * 
-     * @hibernate.many-to-one 
-     * column="Parent" 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
-     * cascade="save-update"
-     * 
+     * @hibernate.many-to-one column="Parent"
+     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
+     *                        cascade="save-update"
      * @roseuid 42CB90ED038C
      */
-    public AbstractComplexComponentBO getParent() {
+    public AbstractComplexComponentBO getParent()
+    {
         return mParent;
     }
 
@@ -205,8 +179,9 @@ public abstract class AbstractComponentBO implements Serializable {
      * @param pParent le composant parent
      * @roseuid 42CB90EE0050
      */
-    //    * @throws UnexpectedRelationException si la relation ne peut etre ajouté
-    public void setParent(AbstractComplexComponentBO pParent) /*throws UnexpectedRelationException*/ {
+    // * @throws UnexpectedRelationException si la relation ne peut etre ajouté
+    public void setParent( AbstractComplexComponentBO pParent ) /* throws UnexpectedRelationException */
+    {
         mParent = pParent;
     }
 
@@ -217,18 +192,21 @@ public abstract class AbstractComponentBO implements Serializable {
      * @deprecated
      * @roseuid 42CB90EE0050
      */
-    public void setParentForce(AbstractComplexComponentBO pParent) {
+    public void setParentForce( AbstractComplexComponentBO pParent )
+    {
         mParent = pParent;
     }
 
     /**
      * Constructeur par défaut.
+     * 
      * @roseuid 42CB90EE01B7
      */
-    public AbstractComponentBO() {
+    public AbstractComponentBO()
+    {
         mId = -1;
         Collection emptyCol = new HashSet();
-        setAudits(emptyCol);
+        setAudits( emptyCol );
     }
 
     /**
@@ -239,27 +217,33 @@ public abstract class AbstractComponentBO implements Serializable {
      * @roseuid 42CB90EE0282
      */
     // * @throws UnexpectedRelationException si la relation ne peut etre ajouté
-    public AbstractComponentBO(String pName, AbstractComplexComponentBO pParent) /* throws UnexpectedRelationException */ {
+    public AbstractComponentBO( String pName, AbstractComplexComponentBO pParent ) /*
+                                                                                     * throws
+                                                                                     * UnexpectedRelationException
+                                                                                     */
+    {
         mId = -1;
         Collection emptyCol = new HashSet();
-        setAudits(emptyCol);
+        setAudits( emptyCol );
         mName = pName;
-        setParent(pParent);
+        setParent( pParent );
     }
 
     /**
      * @see java.lang.Object#equals(java.lang.Object)
      * @roseuid 42E617A903AE
      */
-    public boolean equals(Object pObj) {
+    public boolean equals( Object pObj )
+    {
         boolean ret = false;
         AbstractComponentBO component = null;
-        if (pObj instanceof AbstractComponentBO) {
+        if ( pObj instanceof AbstractComponentBO )
+        {
             component = (AbstractComponentBO) pObj;
             EqualsBuilder equalsBuilder = new EqualsBuilder();
-            equalsBuilder.append(mName, component.getName());
-            //            equalsBuilder.append(this.getClass(), pObj.getClass());
-            equalsBuilder.append(mId, component.getId()); // Attention: utilisation de l'id est 
+            equalsBuilder.append( mName, component.getName() );
+            // equalsBuilder.append(this.getClass(), pObj.getClass());
+            equalsBuilder.append( mId, component.getId() ); // Attention: utilisation de l'id est
             // fortement déconseillée par Hibernate
             ret = equalsBuilder.isEquals();
         }
@@ -270,10 +254,11 @@ public abstract class AbstractComponentBO implements Serializable {
      * @see java.lang.Object#hashCode()
      * @roseuid 42E617A903BD
      */
-    public int hashCode() {
+    public int hashCode()
+    {
         HashCodeBuilder hashBuilder = new HashCodeBuilder();
-        hashBuilder.append(mName);
-        hashBuilder.append(mId); // Attention: utilisation de l'id est 
+        hashBuilder.append( mName );
+        hashBuilder.append( mId ); // Attention: utilisation de l'id est
         // fortement déconseillée par Hibernate
         return hashBuilder.toHashCode();
     }
@@ -282,61 +267,65 @@ public abstract class AbstractComponentBO implements Serializable {
      * @see java.lang.Object#toString()
      * @roseuid 42E617A903BE
      */
-    public String toString() {
-        ToStringBuilder stringBuilder = new ToStringBuilder(this);
-        stringBuilder.append("Name", mName);
-        stringBuilder.append("Id", mId); // Attention: utilisation de l'id est 
+    public String toString()
+    {
+        ToStringBuilder stringBuilder = new ToStringBuilder( this );
+        stringBuilder.append( "Name", mName );
+        stringBuilder.append( "Id", mId ); // Attention: utilisation de l'id est
         // fortement déconseillée par Hibernate
         return stringBuilder.toString();
     }
 
     /**
      * Récupère les audits liés à ce composant
+     * 
      * @return les audits
-     * 
-     * @hibernate.set 
-     * table="Components_Audits"
-     * lazy="true" 
-     * cascade="none" 
-     * inverse="false"
-     * 
-     * @hibernate.collection-key 
-     *   column="ComponentId"
-     * @hibernate.collection-many-to-many 
-     *   class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO" 
-     *   column="AuditId"
+     * @hibernate.set table="Components_Audits" lazy="true" cascade="none" inverse="false"
+     * @hibernate.collection-key column="ComponentId"
+     * @hibernate.collection-many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+     *                                    column="AuditId"
      */
-    public Collection getAudits() {
+    public Collection getAudits()
+    {
         return mAudits;
     }
 
     /**
      * Affecte les audits liés à ce composant
+     * 
      * @param pCollection les audits
      */
-    private void setAudits(Collection pCollection) {
+    private void setAudits( Collection pCollection )
+    {
         mAudits = pCollection;
     }
 
     /**
      * ajoute un audit à ce composant
+     * 
      * @param pAudit l'audit à ajouter
      */
-    public void addAudit(AuditBO pAudit) {
-        mAudits.add(pAudit);
+    public void addAudit( AuditBO pAudit )
+    {
+        mAudits.add( pAudit );
     }
 
     /**
      * vérifie si un audit est rattaché au composant
-     * @param pIdAudit id de l'audit à vérifier, <b>Attention</b>, si l'id passé est -1, le résultat ne sera pas valide.
+     * 
+     * @param pIdAudit id de l'audit à vérifier, <b>Attention</b>, si l'id passé est -1, le résultat ne sera pas
+     *            valide.
      * @return <code>true</code> si l'audit est rattaché à ce composant
      */
-    public boolean containsAuditById(long pIdAudit) {
+    public boolean containsAuditById( long pIdAudit )
+    {
         boolean ret = false;
         Iterator it = getAudits().iterator();
-        while (it.hasNext() && (false == ret)) {
+        while ( it.hasNext() && ( false == ret ) )
+        {
             AuditBO audit = (AuditBO) it.next();
-            if (audit.getId() == pIdAudit) { // si -1 la question se pose...
+            if ( audit.getId() == pIdAudit )
+            { // si -1 la question se pose...
                 ret = true;
             }
         }
@@ -346,24 +335,30 @@ public abstract class AbstractComponentBO implements Serializable {
     /**
      * @return <code>true</code> si le composant possède un audit terminé
      */
-    public boolean hasResults() {
+    public boolean hasResults()
+    {
         boolean hasResult = false;
-        for (Iterator it = getAudits().iterator(); it.hasNext() && !hasResult;) {
+        for ( Iterator it = getAudits().iterator(); it.hasNext() && !hasResult; )
+        {
             AuditBO audit = (AuditBO) it.next();
-            if (audit.getStatus() == AuditBO.TERMINATED) {
+            if ( audit.getStatus() == AuditBO.TERMINATED )
+            {
                 hasResult = true;
             }
         }
         return hasResult;
     }
-    
+
     /**
      * @return le nom complet du composant
      */
-    public String getFullName() {
+    public String getFullName()
+    {
         AbstractComplexComponentBO currentParent = getParent();
         String fullName = getName();
-        while(currentParent != null && !(currentParent instanceof ProjectBO) && !(currentParent instanceof ApplicationBO)) {
+        while ( currentParent != null && !( currentParent instanceof ProjectBO )
+            && !( currentParent instanceof ApplicationBO ) )
+        {
             fullName = currentParent.getName() + "." + fullName;
             currentParent = currentParent.getParent();
         }
@@ -373,14 +368,12 @@ public abstract class AbstractComponentBO implements Serializable {
     /**
      * Access method for the mProject property.
      * 
-     * @return le Projet auquel appartient 
-     * 
-     * @hibernate.many-to-one 
-     * column="ProjectId" 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
-     * 
+     * @return le Projet auquel appartient
+     * @hibernate.many-to-one column="ProjectId"
+     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
      */
-    public AbstractComplexComponentBO getProject() {
+    public AbstractComplexComponentBO getProject()
+    {
         return mProject;
     }
 
@@ -389,7 +382,8 @@ public abstract class AbstractComponentBO implements Serializable {
      * 
      * @param componentBO Nouveau projet
      */
-    public void setProject(AbstractComplexComponentBO componentBO) {
+    public void setProject( AbstractComplexComponentBO componentBO )
+    {
         mProject = componentBO;
     }
 
@@ -398,6 +392,6 @@ public abstract class AbstractComponentBO implements Serializable {
      * @param pArgument argument
      * @return objet
      */
-    public abstract Object accept(ComponentVisitor pVisitor, Object pArgument);
+    public abstract Object accept( ComponentVisitor pVisitor, Object pArgument );
 
 }

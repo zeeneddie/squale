@@ -15,11 +15,11 @@ import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
 /**
  * Façade du Serveur d'exécution de Squalix
  */
-public class ServeurFacade {
+public class ServeurFacade
+{
     /**
      * provider de persistence
      */
@@ -27,26 +27,35 @@ public class ServeurFacade {
 
     /**
      * Retourne la liste des serveurs
-     * @return la liste des serveurs 
+     * 
+     * @return la liste des serveurs
      * @throws JrafEnterpriseException si une exception survient
      */
-    public static Collection listeServeurs() throws JrafEnterpriseException {
+    public static Collection listeServeurs()
+        throws JrafEnterpriseException
+    {
         ISession lSession = null;
         Collection lCollBo = new ArrayList();
         Collection lCollDto = new ArrayList();
-        try {
+        try
+        {
             lSession = PERSISTENTPROVIDER.getSession();
-            lCollBo = (Collection) ServeurDAOImpl.getInstance().listeServeurs(lSession);
+            lCollBo = (Collection) ServeurDAOImpl.getInstance().listeServeurs( lSession );
             Iterator it = lCollBo.iterator();
-            while (it.hasNext()) {
-                lCollDto.add(ServeurTransform.bo2dto((ServeurBO)it.next()));
+            while ( it.hasNext() )
+            {
+                lCollDto.add( ServeurTransform.bo2dto( (ServeurBO) it.next() ) );
             }
-        } catch (JrafDaoException e) {
-            FacadeHelper.convertException(e, null);
-        } finally {
-            FacadeHelper.closeSession(lSession, null);
         }
-                 
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, null );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( lSession, null );
+        }
+
         return lCollDto;
     }
 }

@@ -9,240 +9,270 @@ import java.util.Map;
 
 /**
  */
-public class UserDTO implements Serializable {
+public class UserDTO
+    implements Serializable
+{
 
     /**
      * email de l'utilisateur
      */
     private String mEmail;
+
     /**
      * Indique si l'utilisateur ne souhaite pas recevoir d'emails automatiques
      */
     private boolean mUnsubscribed;
-    
+
     /**
      * nom complet de l'utilisateur
      */
     private String mFullName;
-    
+
     /**
      * Verification si l'utilisateur est administrateur
      */
-    private ProfileDTO mDefaultProfile; 
-    
+    private ProfileDTO mDefaultProfile;
+
     /**
-     Matricule de l'utilisateur
+     * Matricule de l'utilisateur
      */
     private String mMatricule;
-    
+
     /**
-     Mot de passe de l'utilisateur
+     * Mot de passe de l'utilisateur
      */
     private String mPassword = "";
-    
+
     /**
-     Couple applications sous forme de ComponentDTO / ProfileDTO
+     * Couple applications sous forme de ComponentDTO / ProfileDTO
      */
     private Map mProfiles;
-    
+
     /**
-     Applications en cours de validation sous forme de ComponentDTO
+     * Applications en cours de validation sous forme de ComponentDTO
      */
     private List mApplicationsInCreation;
+
     /**
-     Applications publiques sous forme de ComponentDTO
+     * Applications publiques sous forme de ComponentDTO
      */
     private List mPublicApplications;
-    
+
     /**
-     * Identifiant de l'utilisateur 
+     * Identifiant de l'utilisateur
      */
     private long mID = -1;
-    
+
     /**
-     Constructeur vide
-     @roseuid 42CD1F53032B
+     * Constructeur vide
+     * 
+     * @roseuid 42CD1F53032B
      */
-    public UserDTO() {
+    public UserDTO()
+    {
         mProfiles = new HashMap();
     }
-    
+
     /**
-     Access method for the mMatricule property.
-     
-     @return   the current value of the mMatricule property
-     @roseuid 42CD1F530335
+     * Access method for the mMatricule property.
+     * 
+     * @return the current value of the mMatricule property
+     * @roseuid 42CD1F530335
      */
-    public String getMatricule() {
+    public String getMatricule()
+    {
         return mMatricule;
     }
-    
+
     /**
-     Sets the value of the mMatricule property.
-     pMatricule is transformed to lowercase
-     @param pMatricule the new value of the mMatricule property
-     @roseuid 42CD1F530336
+     * Sets the value of the mMatricule property. pMatricule is transformed to lowercase
+     * 
+     * @param pMatricule the new value of the mMatricule property
+     * @roseuid 42CD1F530336
      */
-    public void setMatricule(String pMatricule) {
+    public void setMatricule( String pMatricule )
+    {
         // TODO : pas transformé en minuscule dans le BO??
-    	if (pMatricule!=null){
-    		mMatricule = pMatricule.toLowerCase();
-    	}
+        if ( pMatricule != null )
+        {
+            mMatricule = pMatricule.toLowerCase();
+        }
     }
-    
+
     /**
-     Access method for the mPassword property.
-     
-     @return   the current value of the mPassword property
-     @roseuid 42CD1F53035E
+     * Access method for the mPassword property.
+     * 
+     * @return the current value of the mPassword property
+     * @roseuid 42CD1F53035E
      */
-    public String getPassword() {
+    public String getPassword()
+    {
         return mPassword;
     }
-    
+
     /**
-     Sets the value of the mPassword property.
-     
-     @param pPassword the new value of the mPassword property
-     @roseuid 42CD1F530368
+     * Sets the value of the mPassword property.
+     * 
+     * @param pPassword the new value of the mPassword property
+     * @roseuid 42CD1F530368
      */
-    public void setPassword(String pPassword) {
+    public void setPassword( String pPassword )
+    {
         mPassword = pPassword;
     }
-    
+
     /**
-     Access method for the mApplication property.
-     
-     @return   the current value of the mApplication property
-     @roseuid 42CD1F530386
+     * Access method for the mApplication property.
+     * 
+     * @return the current value of the mApplication property
+     * @roseuid 42CD1F530386
      */
-    public Map getProfiles() {
+    public Map getProfiles()
+    {
         return mProfiles;
     }
-    
+
     /**
-     Sets the value of the mApplication property.
-     
-     @param pProfiles the new value of the mApplication property
-     @roseuid 42CD1F530387
+     * Sets the value of the mApplication property.
+     * 
+     * @param pProfiles the new value of the mApplication property
+     * @roseuid 42CD1F530387
      */
-    public void setProfiles(Map pProfiles) {
+    public void setProfiles( Map pProfiles )
+    {
         mProfiles = pProfiles;
     }
-    
+
     /**
      * @return la liste des applications en cours de validation
      */
-    public List getApplicationsInCreation() {
+    public List getApplicationsInCreation()
+    {
         return mApplicationsInCreation;
     }
-    
+
     /**
      * @return la liste des applications publiques
      */
-    public List getPublicApplications() {
+    public List getPublicApplications()
+    {
         return mPublicApplications;
     }
-    
+
     /**
      * Modifie la liste des applications en cours de validation
+     * 
      * @param pInCreation la liste des applications en cours de création
      */
-    public void setApplicationsInCreation(List pInCreation) {
+    public void setApplicationsInCreation( List pInCreation )
+    {
         mApplicationsInCreation = pInCreation;
     }
-    
+
     /**
      * Modifie la liste des applications publiques
+     * 
      * @param pPublicApplications la liste des applications publiques
      */
-    public void setPublicApplications(List pPublicApplications) {
+    public void setPublicApplications( List pPublicApplications )
+    {
         mPublicApplications = pPublicApplications;
-        
+
     }
-    
+
     /**
-     Access method for the mID property.
-     
-     @return   the current value of the mID property
+     * Access method for the mID property.
+     * 
+     * @return the current value of the mID property
      */
-    public long getID() {
+    public long getID()
+    {
         return mID;
     }
-    
+
     /**
-     Sets the value of the mID property.
-     
-     @param pID the new value of the mID property
+     * Sets the value of the mID property.
+     * 
+     * @param pID the new value of the mID property
      */
-    public void setID(long pID) {
+    public void setID( long pID )
+    {
         mID = pID;
     }
-    
+
     /**
-     Access method for the mDefaultProfile property.
-     
-     @return   the current value of the mDefaultProfile property
+     * Access method for the mDefaultProfile property.
+     * 
+     * @return the current value of the mDefaultProfile property
      */
-    public ProfileDTO getDefaultProfile() {
+    public ProfileDTO getDefaultProfile()
+    {
         return mDefaultProfile;
     }
-    
+
     /**
-     Sets the value of the mDefaultProfile property.
-     
-     @param pDefaultProfile the new value of the mDefaultProfile property
+     * Sets the value of the mDefaultProfile property.
+     * 
+     * @param pDefaultProfile the new value of the mDefaultProfile property
      */
-    public void setDefaultProfile(ProfileDTO pDefaultProfile) {
+    public void setDefaultProfile( ProfileDTO pDefaultProfile )
+    {
         mDefaultProfile = pDefaultProfile;
     }
-    
+
     /**
-     Access method for the mEmail property.
-     
-     @return   the current value of the mEmail property
+     * Access method for the mEmail property.
+     * 
+     * @return the current value of the mEmail property
      */
-    public String getEmail() {
+    public String getEmail()
+    {
         return mEmail;
     }
-    
+
     /**
-     Sets the value of the mEmail property.
-     
-     @param pEmail the new value of the mEmail property
+     * Sets the value of the mEmail property.
+     * 
+     * @param pEmail the new value of the mEmail property
      */
-    public void setEmail(String pEmail) {
+    public void setEmail( String pEmail )
+    {
         mEmail = pEmail;
     }
-    
+
     /**
-     Access method for the mFullName property.
-     
-     @return   the current value of the mFullName property
+     * Access method for the mFullName property.
+     * 
+     * @return the current value of the mFullName property
      */
-    public String getFullName() {
+    public String getFullName()
+    {
         return mFullName;
     }
-    
+
     /**
-     Sets the value of the mFullName property.
-     
-     @param pFullName the new value of the mFullName property
+     * Sets the value of the mFullName property.
+     * 
+     * @param pFullName the new value of the mFullName property
      */
-    public void setFullName(String pFullName) {
+    public void setFullName( String pFullName )
+    {
         mFullName = pFullName;
     }
+
     /**
      * @return true si l'utilisateur s'est désabonné de l'envoi d'email
      */
-    public boolean isUnsubscribed() {
+    public boolean isUnsubscribed()
+    {
         return mUnsubscribed;
     }
 
     /**
      * @param pUnsubscribed true si l'utilisateur s'est désabonné de l'envoi d'email
      */
-    public void setUnsubscribed(boolean pUnsubscribed) {
+    public void setUnsubscribed( boolean pUnsubscribed )
+    {
         mUnsubscribed = pUnsubscribed;
     }
 }

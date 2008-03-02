@@ -8,7 +8,9 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 /**
  * Composant
  */
-public class ComponentDTO implements Serializable {
+public class ComponentDTO
+    implements Serializable
+{
 
     /**
      * ID en base du composant
@@ -19,7 +21,7 @@ public class ComponentDTO implements Serializable {
      * Nom du composant
      */
     private String mName = null;
-    
+
     /**
      * Le nom complet du composant
      */
@@ -60,7 +62,7 @@ public class ComponentDTO implements Serializable {
 
     /** un booléen permettant de savoir si le composant est à exclure du plan d'action */
     private boolean excludedFromActionPlan;
-    
+
     /** indique si le composant a des résultats */
     private boolean mHasResults;
 
@@ -68,7 +70,7 @@ public class ComponentDTO implements Serializable {
      * Date de derniere modification par un utilisateur quelconque
      */
     private Date mLastUpdate;
-    
+
     /**
      * Nom du dernier utilisateur ayant modifié l'application
      */
@@ -77,36 +79,42 @@ public class ComponentDTO implements Serializable {
     /**
      * @return true si le composant est exclu du plan d'action
      */
-    public boolean getExcludedFromActionPlan() {
+    public boolean getExcludedFromActionPlan()
+    {
         return excludedFromActionPlan;
     }
 
     /**
      * @return la justification du composant
      */
-    public String getJustification() {
+    public String getJustification()
+    {
         return justification;
     }
 
     /**
      * @param pExcluded le booléen indiquant si il faut exclure le composant ou pas
      */
-    public void setExcludedFromActionPlan(boolean pExcluded) {
+    public void setExcludedFromActionPlan( boolean pExcluded )
+    {
         excludedFromActionPlan = pExcluded;
     }
 
     /**
      * @param pJustification la nouvelle valeur de la justification
      */
-    public void setJustification(String pJustification) {
+    public void setJustification( String pJustification )
+    {
         justification = pJustification;
     }
 
     /**
      * Constructeur par défaut
+     * 
      * @roseuid 42CB915F02F4
      */
-    public ComponentDTO() {
+    public ComponentDTO()
+    {
         // initialisation des valeurs par défaut
         excludedFromActionPlan = false;
         justification = "";
@@ -115,10 +123,11 @@ public class ComponentDTO implements Serializable {
     /**
      * Access method for the mName property.
      * 
-     * @return   the current value of the mName property
+     * @return the current value of the mName property
      * @roseuid 42CB915F033A
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
 
@@ -128,17 +137,19 @@ public class ComponentDTO implements Serializable {
      * @param pName the new value of the mName property
      * @roseuid 42CB915F0344
      */
-    public void setName(String pName) {
+    public void setName( String pName )
+    {
         mName = pName;
     }
 
     /**
      * Access method for the mType property.
      * 
-     * @return   the current value of the mType property
+     * @return the current value of the mType property
      * @roseuid 42CB9160001A
      */
-    public String getType() {
+    public String getType()
+    {
         return mType;
     }
 
@@ -148,16 +159,18 @@ public class ComponentDTO implements Serializable {
      * @param pType the new value of the mType property
      * @roseuid 42CB9160006A
      */
-    public void setType(String pType) {
+    public void setType( String pType )
+    {
         mType = pType;
     }
 
     /**
      * Access method for the mFileName property.
      * 
-     * @return   the current value of the mFileName property
+     * @return the current value of the mFileName property
      */
-    public String getFileName() {
+    public String getFileName()
+    {
         return mFileName;
     }
 
@@ -166,17 +179,19 @@ public class ComponentDTO implements Serializable {
      * 
      * @param pFileName the new value of the mFileName property
      */
-    public void setFileName(String pFileName) {
+    public void setFileName( String pFileName )
+    {
         mFileName = pFileName;
     }
 
     /**
      * Access method for the mID property.
      * 
-     * @return   the current value of the mID property
+     * @return the current value of the mID property
      * @roseuid 42CB916000A6
      */
-    public long getID() {
+    public long getID()
+    {
         return mID;
     }
 
@@ -186,29 +201,32 @@ public class ComponentDTO implements Serializable {
      * @param pID the new value of the mID property
      * @roseuid 42CB91600100
      */
-    public void setID(long pID) {
+    public void setID( long pID )
+    {
         mID = pID;
     }
 
     /**
-     * Permet de construire un ComponentDTO par rapport à un id et un composant.
-     * Doit etre fait pour manipuler des projets et sous-projets en tant que 
-     * composant.
+     * Permet de construire un ComponentDTO par rapport à un id et un composant. Doit etre fait pour manipuler des
+     * projets et sous-projets en tant que composant.
+     * 
      * @param pID ID du composant
      * @param pName Nom du composant
      * @roseuid 42D4C6A90348
      */
-    public ComponentDTO(long pID, String pName) {
-        setID(pID);
-        setName(pName);
+    public ComponentDTO( long pID, String pName )
+    {
+        setID( pID );
+        setName( pName );
     }
 
     /**
      * Access method for the mIDParent property.
      * 
-     * @return   the current value of the mIDParent property
+     * @return the current value of the mIDParent property
      */
-    public long getIDParent() {
+    public long getIDParent()
+    {
         return mIDParent;
     }
 
@@ -217,39 +235,45 @@ public class ComponentDTO implements Serializable {
      * 
      * @param pIDParent the new value of the mIDParent property
      */
-    public void setIDParent(long pIDParent) {
+    public void setIDParent( long pIDParent )
+    {
         mIDParent = pIDParent;
     }
 
     /**
      * {@inheritDoc}
+     * 
      * @param pObj le ComponentDTO à comparer
-     * @return true si <code>this</code>et <code>pObj</code> sont égaux 
+     * @return true si <code>this</code>et <code>pObj</code> sont égaux
      * @see java.lang.Object#equals(java.lang.Object)
      */
-    public boolean equals(Object pObj) {
+    public boolean equals( Object pObj )
+    {
         boolean ret = false;
         EqualsBuilder eqBuilder = new EqualsBuilder();
-        if (pObj instanceof ComponentDTO) {
+        if ( pObj instanceof ComponentDTO )
+        {
             ComponentDTO comp = (ComponentDTO) pObj;
-            eqBuilder.append(mID, comp.getID()); // pas beau
-            eqBuilder.append(mIDParent, comp.getIDParent());
-            eqBuilder.append(mName, comp.getName());
-            eqBuilder.append(mType, comp.getType());
+            eqBuilder.append( mID, comp.getID() ); // pas beau
+            eqBuilder.append( mIDParent, comp.getIDParent() );
+            eqBuilder.append( mName, comp.getName() );
+            eqBuilder.append( mType, comp.getType() );
 
             ret = eqBuilder.isEquals();
         }
         return ret;
     }
-    
+
     /**
      * Constructeur
+     * 
      * @param pId l'id
      * @param pIdParent l'id du parent
      * @param pName le nom
      * @param pType le type
      */
-    public ComponentDTO(long pId, long pIdParent, String pName, String pType) {
+    public ComponentDTO( long pId, long pIdParent, String pName, String pType )
+    {
         mID = pId;
         mIDParent = pIdParent;
         mName = pName;
@@ -259,9 +283,10 @@ public class ComponentDTO implements Serializable {
     /**
      * Access method for the mNumberOfChildren property.
      * 
-     * @return   the current value of the mNumberOfChildren property
+     * @return the current value of the mNumberOfChildren property
      */
-    public int getNumberOfChildren() {
+    public int getNumberOfChildren()
+    {
         return mNumberOfChildren;
     }
 
@@ -270,34 +295,42 @@ public class ComponentDTO implements Serializable {
      * 
      * @param pNumberOfChildren the new value of the mNumberOfChildren property
      */
-    public void setNumberOfChildren(int pNumberOfChildren) {
+    public void setNumberOfChildren( int pNumberOfChildren )
+    {
         mNumberOfChildren = pNumberOfChildren;
     }
 
     /**
      * @return technologie du composant s'il s'agit d'un projet
      */
-    public String getTechnology() {
+    public String getTechnology()
+    {
         return mTechnology;
     }
 
     /**
      * @param pTechnology du composant s'il s'agit d'un projet
      */
-    public void setTechnology(String pTechnology) {
+    public void setTechnology( String pTechnology )
+    {
         mTechnology = pTechnology;
     }
 
-    /** 
+    /**
      * {@inheritDoc}
+     * 
      * @see java.lang.Object#hashCode()
      * @return le hashcode
      */
-    public int hashCode() {
+    public int hashCode()
+    {
         int result;
-        if (getName() != null) {
+        if ( getName() != null )
+        {
             result = getName().hashCode();
-        } else {
+        }
+        else
+        {
             result = super.hashCode();
         }
         return result;
@@ -306,70 +339,80 @@ public class ComponentDTO implements Serializable {
     /**
      * @return true si le composant a des résultats
      */
-    public boolean getHasResults() {
+    public boolean getHasResults()
+    {
         return mHasResults;
     }
 
     /**
      * @param pHasResults indique si le composant a des résultats
      */
-    public void setHasResults(boolean pHasResults) {
+    public void setHasResults( boolean pHasResults )
+    {
         mHasResults = pHasResults;
     }
 
     /**
      * @return le nom complet
      */
-    public String getFullName() {
+    public String getFullName()
+    {
         return mFullName;
     }
 
     /**
      * @param pFullName le nom complet
      */
-    public void setFullName(String pFullName) {
+    public void setFullName( String pFullName )
+    {
         mFullName = pFullName;
     }
 
     /**
      * @return le dernier utilisateur ayant modifié l'application
      */
-    public String getLastUser() {
+    public String getLastUser()
+    {
         return mLastUser;
     }
 
     /**
      * @param pUser le dernier utilisateur ayant modifié l'application
      */
-    public void setLastUser(String pUser) {
+    public void setLastUser( String pUser )
+    {
         mLastUser = pUser;
     }
 
     /**
      * @return la date de dernière modification
      */
-    public Date getLastUpdate() {
+    public Date getLastUpdate()
+    {
         return mLastUpdate;
     }
 
     /**
      * @param pDate la date de dernière modification
      */
-    public void setLastUpdate(Date pDate) {
+    public void setLastUpdate( Date pDate )
+    {
         mLastUpdate = pDate;
     }
 
     /**
      * @return le numéro de ligne de la méthode dans le fichier
      */
-    public String getStartLine() {
+    public String getStartLine()
+    {
         return mStartLine;
     }
 
     /**
      * @param pLine le numéro de ligne de la méthode dans le fichier
      */
-    public void setStartLine(String pLine) {
+    public void setStartLine( String pLine )
+    {
         mStartLine = pLine;
     }
 

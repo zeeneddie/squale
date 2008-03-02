@@ -3,9 +3,10 @@ package com.airfrance.squalecommon.util;
 /**
  * 
  */
-public class SqualeCommonConstants {
+public class SqualeCommonConstants
+{
 
-    //  Clés pour la gestion des mails
+    // Clés pour la gestion des mails
 
     /** Les destinataires sont seulement les admins */
     public final static String ONLY_ADMINS = "onlyAdmins";

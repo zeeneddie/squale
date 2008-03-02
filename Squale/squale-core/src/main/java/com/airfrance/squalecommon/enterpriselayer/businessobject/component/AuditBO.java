@@ -16,13 +16,13 @@ import com.airfrance.squalecommon.util.messages.CommonMessages;
 
 /**
  * Représente un audit exécuté ou à venir et ses paramètres
- * @author m400842
  * 
- * @hibernate.class 
- * table="AuditBO"
- * mutable="true"
+ * @author m400842
+ * @hibernate.class table="AuditBO" mutable="true"
  */
-public class AuditBO implements Serializable {
+public class AuditBO
+    implements Serializable
+{
     /**
      * Identifiant (au sens technique) de l'objet
      */
@@ -37,30 +37,35 @@ public class AuditBO implements Serializable {
      * Pour récupérer tous les status d'audits (utilisé par FAcade et DAO)
      */
     public static final int ALL_STATUS = -1;
+
     /**
      * Audit non réalisé
      */
     public static final int NOT_ATTEMPTED = 0;
+
     /**
      * audit effectué sans erreur
      */
     public static final int TERMINATED = 1;
+
     /**
      * Une erreur à eu lieu sur l'audit
      */
     public static final int FAILED = 2;
+
     /**
      * Audit supprimé
      */
     public static final int DELETED = 3;
+
     /**
      * Audit partiel
      */
     public static final int PARTIAL = 4;
 
     /**
-      * Audit partiel
-      */
+     * Audit partiel
+     */
     public static final int RUNNING = 5;
 
     /**
@@ -87,8 +92,8 @@ public class AuditBO implements Serializable {
     private Date mDate;
 
     /**
-     * Date de version des sources (dans le cas d'un audit de jalon)
-     * Par défaut cette date = date de réalisation de l'audit
+     * Date de version des sources (dans le cas d'un audit de jalon) Par défaut cette date = date de réalisation de
+     * l'audit
      */
     private Date mHistoricalDate;
 
@@ -96,7 +101,7 @@ public class AuditBO implements Serializable {
      * Contient la clé du type d'audit : suivi ou milestone
      */
     private String mType;
-    
+
     /** La version de Squale ayant généré l'audit */
     private double mSqualeVersion;
 
@@ -122,8 +127,8 @@ public class AuditBO implements Serializable {
     private Collection mAuditDisplayConfs = new ArrayList();
 
     /**
-     * Constructeur.
-     * Crée un nouvel audit.
+     * Constructeur. Crée un nouvel audit.
+     * 
      * @param pName Nom de l'audit.
      * @param pDate Date prévue de réalisation de l'audit.
      * @param pType Type de l'audit : suivi ou milestone.
@@ -131,7 +136,9 @@ public class AuditBO implements Serializable {
      * @param pStatus statut de l'audit
      * @param pQualityResults résultats qualité de l'audit
      */
-    public AuditBO(final String pName, final Date pDate, final String pType, final String pComments, final int pStatus, final Collection pQualityResults) {
+    public AuditBO( final String pName, final Date pDate, final String pType, final String pComments,
+                    final int pStatus, final Collection pQualityResults )
+    {
         mId = -1;
         mName = pName;
         mDate = pDate;
@@ -139,15 +146,15 @@ public class AuditBO implements Serializable {
         mComments = pComments;
         mStatus = pStatus;
         mQualityResults = pQualityResults;
-        Collection emptyCol = new ArrayList(0);
-        setComponents(emptyCol);
+        Collection emptyCol = new ArrayList( 0 );
+        setComponents( emptyCol );
         mHistoricalDate = pDate;
         mSqualeVersion = getCurrentSqualeVersion();
     }
 
     /**
-     * Constructeur complet.
-     * Crée un nouveal audit.
+     * Constructeur complet. Crée un nouveal audit.
+     * 
      * @param pName Nom de l'audit.
      * @param pDate Date prévue de réalisation de l'audit.
      * @param pType Type de l'audit : suivi ou milestone.
@@ -156,7 +163,9 @@ public class AuditBO implements Serializable {
      * @param pQualityResults résultats qualité de l'audit
      * @param pHistoricDate la date de version des sources
      */
-    public AuditBO(final String pName, final Date pDate, final String pType, final String pComments, final int pStatus, final Collection pQualityResults, final Date pHistoricDate) {
+    public AuditBO( final String pName, final Date pDate, final String pType, final String pComments,
+                    final int pStatus, final Collection pQualityResults, final Date pHistoricDate )
+    {
         mId = -1;
         mName = pName;
         mDate = pDate;
@@ -164,8 +173,8 @@ public class AuditBO implements Serializable {
         mComments = pComments;
         mStatus = pStatus;
         mQualityResults = pQualityResults;
-        Collection emptyCol = new ArrayList(0);
-        setComponents(emptyCol);
+        Collection emptyCol = new ArrayList( 0 );
+        setComponents( emptyCol );
         mHistoricalDate = pHistoricDate;
         mSqualeVersion = getCurrentSqualeVersion();
     }
@@ -173,19 +182,12 @@ public class AuditBO implements Serializable {
     /**
      * Access method for the mName property.
      * 
-     * @return   the current value of the mName property
-     * 
-     * @hibernate.property 
-     * name="name" 
-     * column="Name" 
-     * type="string" 
-     * //     *   length=""
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mName property
+     * @hibernate.property name="name" column="Name" type="string" // * length="" not-null="false" unique="false"
      * @roseuid 42BACEF50362
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
 
@@ -195,26 +197,21 @@ public class AuditBO implements Serializable {
      * @param pName the new value of the mName property
      * @roseuid 42BACEF50363
      */
-    public void setName(String pName) {
+    public void setName( String pName )
+    {
         mName = pName;
     }
 
     /**
      * Access method for the mDate property.
      * 
-     * @return   the current value of the mDate property
-     * 
-     * @hibernate.property 
-     * name="date" 
-     * column="auditDate" 
-     * type="timestamp" 
-     * //     *   length=""
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mDate property
+     * @hibernate.property name="date" column="auditDate" type="timestamp" // * length="" not-null="false"
+     *                     unique="false"
      * @roseuid 42BACEF50372
      */
-    public Date getDate() {
+    public Date getDate()
+    {
         return mDate;
     }
 
@@ -224,26 +221,20 @@ public class AuditBO implements Serializable {
      * @param pDate the new value of the mDate property
      * @roseuid 42BACEF50373
      */
-    public void setDate(Date pDate) {
+    public void setDate( Date pDate )
+    {
         mDate = pDate;
     }
 
     /**
      * Access method for the mType property.
      * 
-     * @return   the current value of the mType property
-     * 
-     * @hibernate.property 
-     * name="type" 
-     * column="auditType" 
-     * type="string" 
-     * //     *   length=""
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mType property
+     * @hibernate.property name="type" column="auditType" type="string" // * length="" not-null="false" unique="false"
      * @roseuid 42BACEF50382
      */
-    public String getType() {
+    public String getType()
+    {
         return mType;
     }
 
@@ -253,26 +244,20 @@ public class AuditBO implements Serializable {
      * @param pType the new value of the mType property
      * @roseuid 42BACEF50383
      */
-    public void setType(String pType) {
+    public void setType( String pType )
+    {
         mType = pType;
     }
 
     /**
      * Access method for the mStatus property.
      * 
-     * @return   the current value of the mStatus property
-     * 
-     * @hibernate.property 
-     * name="status" 
-     * column="Status" 
-     * type="integer" 
-     * length="10"
-     * not-null="true"
-     * unique="false"
-     * 
+     * @return the current value of the mStatus property
+     * @hibernate.property name="status" column="Status" type="integer" length="10" not-null="true" unique="false"
      * @roseuid 42BACEF50392
      */
-    public int getStatus() {
+    public int getStatus()
+    {
         return mStatus;
     }
 
@@ -282,28 +267,22 @@ public class AuditBO implements Serializable {
      * @param pStatus the new value of the mStatus property
      * @roseuid 42BACEF503A1
      */
-    public void setStatus(int pStatus) {
+    public void setStatus( int pStatus )
+    {
         mStatus = pStatus;
     }
 
     /**
      * Access method for the mQualityResults property.
      * 
-     * @return   the current value of the mQualityResults property
-     * 
-     * @hibernate.bag 
-     * lazy="true" 
-     * cascade="none" 
-     * inverse="true"
-     * 
-     * @hibernate.collection-key 
-     * column="AuditId"
-     * @hibernate.collection-one-to-many 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
-     * 
+     * @return the current value of the mQualityResults property
+     * @hibernate.bag lazy="true" cascade="none" inverse="true"
+     * @hibernate.collection-key column="AuditId"
+     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
      * @roseuid 42BACEF503B0
      */
-    public Collection getQualityResults() {
+    public Collection getQualityResults()
+    {
         return mQualityResults;
     }
 
@@ -313,30 +292,24 @@ public class AuditBO implements Serializable {
      * @param pQualityResults the new value of the mQualityResults property
      * @roseuid 42BACEF503B1
      */
-    public void setQualityResults(Collection pQualityResults) {
+    public void setQualityResults( Collection pQualityResults )
+    {
         mQualityResults = pQualityResults;
     }
 
     /**
      * Access method for the mId property.
      * 
-     * @return   the current value of the mId property
-     * 
-     * Note: unsaved-value An identifier property value that indicates that an instance 
-     * is newly instantiated (unsaved), distinguishing it from transient instances that 
-     * were saved or loaded in a previous session.  If not specified you will get an exception like this:
-     * another object associated with the session has the same identifier
-     * 
-     * @hibernate.id generator-class="native"
-     * type="long" 
-     * column="AuditId" 
-     * unsaved-value="-1" 
-     * length="19"
-     * @hibernate.generator-param name="sequence" value="audit_sequence" 
-     * 
+     * @return the current value of the mId property Note: unsaved-value An identifier property value that indicates
+     *         that an instance is newly instantiated (unsaved), distinguishing it from transient instances that were
+     *         saved or loaded in a previous session. If not specified you will get an exception like this: another
+     *         object associated with the session has the same identifier
+     * @hibernate.id generator-class="native" type="long" column="AuditId" unsaved-value="-1" length="19"
+     * @hibernate.generator-param name="sequence" value="audit_sequence"
      * @roseuid 42BFDEB701B4
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
@@ -346,26 +319,21 @@ public class AuditBO implements Serializable {
      * @param pId the new value of the mId property
      * @roseuid 42BFDEB701F2
      */
-    public void setId(long pId) {
+    public void setId( long pId )
+    {
         mId = pId;
     }
 
     /**
      * Access method for the mComments property.
      * 
-     * @return   the current value of the mComments property
-     * 
-     * @hibernate.property 
-     * name="comments" 
-     * column="Comments" 
-     * type="string" 
-     * //     *   length=""
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mComments property
+     * @hibernate.property name="comments" column="Comments" type="string" // * length="" not-null="false"
+     *                     unique="false"
      * @roseuid 42C94DA102DA
      */
-    public String getComments() {
+    public String getComments()
+    {
         return mComments;
     }
 
@@ -375,34 +343,39 @@ public class AuditBO implements Serializable {
      * @param pComments the new value of the mComments property
      * @roseuid 42C94DA10309
      */
-    public void setComments(String pComments) {
+    public void setComments( String pComments )
+    {
         mComments = pComments;
     }
 
     /**
      * Constructeur par défaut.
+     * 
      * @roseuid 42CB9F670080
      */
-    public AuditBO() {
+    public AuditBO()
+    {
         mId = -1;
         mStatus = NOT_ATTEMPTED;
         mSqualeVersion = getCurrentSqualeVersion();
-        Collection emptyCol = new ArrayList(0);
-        setComponents(emptyCol);
+        Collection emptyCol = new ArrayList( 0 );
+        setComponents( emptyCol );
     }
 
     /**
      * @see java.lang.Object#equals(java.lang.Object)
      */
-    public boolean equals(Object pObj) {
+    public boolean equals( Object pObj )
+    {
         boolean ret = false;
         AuditBO measure = null;
-        if (pObj instanceof AuditBO) {
+        if ( pObj instanceof AuditBO )
+        {
             measure = (AuditBO) pObj;
             EqualsBuilder equalsBuilder = new EqualsBuilder();
-            equalsBuilder.append(mName, measure.getName());
-            equalsBuilder.append(mDate, measure.getDate());
-            equalsBuilder.append(mId, measure.getId()); // Attention: utilisation de l'id est 
+            equalsBuilder.append( mName, measure.getName() );
+            equalsBuilder.append( mDate, measure.getDate() );
+            equalsBuilder.append( mId, measure.getId() ); // Attention: utilisation de l'id est
             // fortement déconseillée par Hibernate
             ret = equalsBuilder.isEquals();
         }
@@ -412,11 +385,12 @@ public class AuditBO implements Serializable {
     /**
      * @see java.lang.Object#hashCode()
      */
-    public int hashCode() {
+    public int hashCode()
+    {
         HashCodeBuilder hashBuilder = new HashCodeBuilder();
-        hashBuilder.append(mName);
-        hashBuilder.append(mDate);
-        hashBuilder.append(mId); // Attention: utilisation de l'id est 
+        hashBuilder.append( mName );
+        hashBuilder.append( mDate );
+        hashBuilder.append( mId ); // Attention: utilisation de l'id est
         // fortement déconseillée par Hibernate
         return hashBuilder.toHashCode();
     }
@@ -424,97 +398,97 @@ public class AuditBO implements Serializable {
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        ToStringBuilder stringBuilder = new ToStringBuilder(this);
-        stringBuilder.append("Name", mName);
-        stringBuilder.append("Date", mDate);
-        stringBuilder.append("Id", mId); // Attention: utilisation de l'id est 
+    public String toString()
+    {
+        ToStringBuilder stringBuilder = new ToStringBuilder( this );
+        stringBuilder.append( "Name", mName );
+        stringBuilder.append( "Date", mDate );
+        stringBuilder.append( "Id", mId ); // Attention: utilisation de l'id est
         // fortement déconseillée par Hibernate
         return stringBuilder.toString();
     }
+
     /**
      * Récupère les composants liés à cet audit
+     * 
      * @return la liste des composants
-     * 
-     * @hibernate.bag 
-     * table="Components_Audits"
-     * lazy="true" 
-     * cascade="none" 
-     * inverse="true"
-     * 
-     * @hibernate.collection-key 
-     *   column="AuditId"
-     * @hibernate.collection-many-to-many 
-     *   class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO" 
-     *   column="ComponentId"
+     * @hibernate.bag table="Components_Audits" lazy="true" cascade="none" inverse="true"
+     * @hibernate.collection-key column="AuditId"
+     * @hibernate.collection-many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     *                                    column="ComponentId"
      */
-    public Collection getComponents() {
+    public Collection getComponents()
+    {
         return mComponents;
     }
 
     /**
      * Affecte les composant à l'audit
+     * 
      * @param pCollection la collection de composants
      */
-    private void setComponents(Collection pCollection) {
+    private void setComponents( Collection pCollection )
+    {
         mComponents = pCollection;
     }
 
     /**
-     * Ajoute un composant à l'audit. 
+     * Ajoute un composant à l'audit.
+     * 
      * @param pComponent le composant à ajouter
      * @deprecated ne sera pas mis à jour en base
      */
-    public void addComponent(AbstractComponentBO pComponent) {
-        mComponents.add(pComponent);
+    public void addComponent( AbstractComponentBO pComponent )
+    {
+        mComponents.add( pComponent );
     }
 
     /**
-     * 
      * @return grilles qualité de l'audit
-     * 
-     * @hibernate.bag 
-     * lazy="true" 
-     * inverse="true"
-     * 
-     * @hibernate.collection-key 
-     * column="AuditId"
-     * @hibernate.collection-one-to-many 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditGridBO"
+     * @hibernate.bag lazy="true" inverse="true"
+     * @hibernate.collection-key column="AuditId"
+     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditGridBO"
      */
-    public Collection getAuditGrids() {
+    public Collection getAuditGrids()
+    {
         return mAuditGrids;
     }
 
     /**
-     * 
      * @param pAuditGrids grilles qualité de l'audit
      */
-    public void setAuditGrids(Collection pAuditGrids) {
+    public void setAuditGrids( Collection pAuditGrids )
+    {
         mAuditGrids = pAuditGrids;
     }
 
     /**
      * Ajout d'une grille qualité relative à l'audit
+     * 
      * @param pAuditGrid grille qualité d'audit
      */
-    public void addAuditGrid(AuditGridBO pAuditGrid) {
-        mAuditGrids.add(pAuditGrid);
+    public void addAuditGrid( AuditGridBO pAuditGrid )
+    {
+        mAuditGrids.add( pAuditGrid );
     }
 
     /**
      * Obtention de la grille d'audit correspondant à un projet
+     * 
      * @param pProject projet
      * @return grille d'audit correspondante ou null si non trouvée
      */
-    public AuditGridBO getAuditGrid(ProjectBO pProject) {
+    public AuditGridBO getAuditGrid( ProjectBO pProject )
+    {
         AuditGridBO result = null;
         Iterator auditGridsIt = getAuditGrids().iterator();
         // Parcours de chaque grille qualité à la recherche de celle
         // correspondant
-        while (auditGridsIt.hasNext() && (result == null)) {
+        while ( auditGridsIt.hasNext() && ( result == null ) )
+        {
             AuditGridBO auditGrid = (AuditGridBO) auditGridsIt.next();
-            if (auditGrid.getProject().getId() == pProject.getId()) {
+            if ( auditGrid.getProject().getId() == pProject.getId() )
+            {
                 result = auditGrid;
             }
         }
@@ -523,38 +497,38 @@ public class AuditBO implements Serializable {
 
     /**
      * @return la date de verion des sources
-     * 
-     * @hibernate.property 
-     * name="historicalDate" 
-     * column="historicalDate" 
-     * type="timestamp"
+     * @hibernate.property name="historicalDate" column="historicalDate" type="timestamp"
      */
-    public Date getHistoricalDate() {
+    public Date getHistoricalDate()
+    {
         return mHistoricalDate;
     }
 
     /**
      * @param pHistoricalDate la date de version des sources
      */
-    public void setHistoricalDate(Date pHistoricalDate) {
+    public void setHistoricalDate( Date pHistoricalDate )
+    {
         mHistoricalDate = pHistoricalDate;
     }
 
     /**
-     * Récupère la date d'exécution de l'audit ou dans le cas d'un audit
-     * de jalon, sa date de version pour avoir une cohérence dans l'ordre
-     * des audits par rapport au version du composant.
+     * Récupère la date d'exécution de l'audit ou dans le cas d'un audit de jalon, sa date de version pour avoir une
+     * cohérence dans l'ordre des audits par rapport au version du composant.
+     * 
      * @return la date "réelle" de l'audit
      */
-    public Date getRealDate() {
+    public Date getRealDate()
+    {
         Date real = mDate;
-        if (mType.equals(MILESTONE) && null != mHistoricalDate) {
+        if ( mType.equals( MILESTONE ) && null != mHistoricalDate )
+        {
             real = mHistoricalDate;
         }
         return real;
     }
 
-    //  Stats pour admins
+    // Stats pour admins
 
     /**
      * La date réelle de commencement avec l'heure
@@ -566,7 +540,7 @@ public class AuditBO implements Serializable {
      */
     private Date mEndDate;
 
-    /** 
+    /**
      * la durée de l'audit sous forme XXhYYmZZs
      */
     private String mDuration;
@@ -578,87 +552,78 @@ public class AuditBO implements Serializable {
 
     /**
      * @return la durée de l'audit
-     * 
-     * @hibernate.property 
-     * name="duration" 
-     * column="Duration" 
-     * type="string"
-    
+     * @hibernate.property name="duration" column="Duration" type="string"
      */
-    public String getDuration() {
+    public String getDuration()
+    {
         return mDuration;
     }
 
     /**
      * @return la date de fin de l'audit
-     * 
-     * @hibernate.property 
-     * name="endDate" 
-     * column="END_DATE" 
-     * type="timestamp"
+     * @hibernate.property name="endDate" column="END_DATE" type="timestamp"
      */
-    public Date getEndDate() {
+    public Date getEndDate()
+    {
         return mEndDate;
     }
 
     /**
      * @return la taille max du filesystem
-     * 
-     * @hibernate.property 
-     * name="maxFSSize" 
-     * column="MAX_FILE_SYSTEM_SIZE" 
-     * type="long" 
+     * @hibernate.property name="maxFSSize" column="MAX_FILE_SYSTEM_SIZE" type="long"
      */
-    public Long getMaxFileSystemSize() {
+    public Long getMaxFileSystemSize()
+    {
         return mMaxFileSystemSize;
     }
 
     /**
      * @return la date de début
-     * 
-     * @hibernate.property 
-     * name="realBeginDate" 
-     * column="BEGINNING_DATE" 
-     * type="timestamp" 
+     * @hibernate.property name="realBeginDate" column="BEGINNING_DATE" type="timestamp"
      */
-    public Date getRealBeginningDate() {
+    public Date getRealBeginningDate()
+    {
         return mRealBeginningDate;
     }
 
     /**
      * @param pDuration la durée de l'audit
      */
-    public void setDuration(String pDuration) {
+    public void setDuration( String pDuration )
+    {
         mDuration = pDuration;
     }
 
     /**
-     * @param pEndDate la date de fin 
+     * @param pEndDate la date de fin
      */
-    public void setEndDate(Date pEndDate) {
+    public void setEndDate( Date pEndDate )
+    {
         mEndDate = pEndDate;
     }
 
     /**
      * @param pSize la taille du file system
      */
-    public void setMaxFileSystemSize(Long pSize) {
+    public void setMaxFileSystemSize( Long pSize )
+    {
         mMaxFileSystemSize = pSize;
     }
 
     /**
      * @param pRealBeginningDate la date réelle de début
      */
-    public void setRealBeginningDate(Date pRealBeginningDate) {
+    public void setRealBeginningDate( Date pRealBeginningDate )
+    {
         mRealBeginningDate = pRealBeginningDate;
     }
 
     /**
-     * Cette méthode calcule la durée d'un audit 
-     * et la formate pour affichage
-     * Sert pour les stats sur les audits (niveau admin)
+     * Cette méthode calcule la durée d'un audit et la formate pour affichage Sert pour les stats sur les audits (niveau
+     * admin)
      */
-    public void calculeDuration() {
+    public void calculeDuration()
+    {
         // Les différents constantes permettant de formater
         final int nbMilliSecondsInAnHour = 3600000;
         final int nbMillSecondsInAMinute = 60000;
@@ -666,104 +631,111 @@ public class AuditBO implements Serializable {
         final int nbMillSecondsInASecond = 1000;
         // Calcule les différents valeurs pour le formatage
         // seulement si on a pu avoir le temps de l'audit
-        String result = CommonMessages.getString("audit.calculation.impossible");
-        if (getRealBeginningDate() != null && getEndDate() != null) {
+        String result = CommonMessages.getString( "audit.calculation.impossible" );
+        if ( getRealBeginningDate() != null && getEndDate() != null )
+        {
             long duration = getEndDate().getTime() - getRealBeginningDate().getTime(); // en ms
             long nbHours = duration / nbMilliSecondsInAnHour;
-            long nbMinutes = (duration / nbMillSecondsInAMinute) % nbOfMinutesInAnHour;
+            long nbMinutes = ( duration / nbMillSecondsInAMinute ) % nbOfMinutesInAnHour;
             // Dans le cas des arrondis, on ajuste à la bonne valeur
-            // Dans ce cas, vu l'arrondi en dessous il va manquer une minute, on en rajoute une pour que 
+            // Dans ce cas, vu l'arrondi en dessous il va manquer une minute, on en rajoute une pour que
             // l'affichage de la durée soit cohérent avec les dates.
-            if (((getEndDate().getTime() / nbMillSecondsInASecond) % nbOfMinutesInAnHour) < ((getRealBeginningDate().getTime() / nbMillSecondsInASecond) % nbOfMinutesInAnHour)) {
-                if (nbMinutes == nbOfMinutesInAnHour - 1) {
+            if ( ( ( getEndDate().getTime() / nbMillSecondsInASecond ) % nbOfMinutesInAnHour ) < ( ( getRealBeginningDate().getTime() / nbMillSecondsInASecond ) % nbOfMinutesInAnHour ) )
+            {
+                if ( nbMinutes == nbOfMinutesInAnHour - 1 )
+                {
                     // Dans ce cas on change d'heure
                     nbHours++;
                     nbMinutes = 0;
-                } else {
+                }
+                else
+                {
                     nbMinutes++;
                 }
             }
             result = nbHours + ":";
             // pour afficher les minutes sur 2 chiffres
-            if (nbMinutes < 10) {
+            if ( nbMinutes < 10 )
+            {
                 result += "0";
             }
             result += nbMinutes;
         }
-        setDuration(result);
+        setDuration( result );
 
     }
 
     /**
-     * @hibernate.property 
-     * name="squaleVersion" 
-     * column="squale_version" 
-     * type="double" 
-     * 
+     * @hibernate.property name="squaleVersion" column="squale_version" type="double"
      * @return la version de SQUALE
      */
-    public double getSqualeVersion() {
+    public double getSqualeVersion()
+    {
         return mSqualeVersion;
     }
 
     /**
      * @param pVersion la version de SQUALE
      */
-    public void setSqualeVersion(double pVersion) {
+    public void setSqualeVersion( double pVersion )
+    {
         mSqualeVersion = pVersion;
     }
-    
+
     /**
      * @return la version courante de SQUALE
      */
-    public static double getCurrentSqualeVersion() {
-        return Double.parseDouble(CommonMessages.getString("audit.squale.version"));
+    public static double getCurrentSqualeVersion()
+    {
+        return Double.parseDouble( CommonMessages.getString( "audit.squale.version" ) );
     }
 
     /**
      * @return les configurations
-     * 
-     * @hibernate.bag 
-     * lazy="true" 
-     * inverse="true"
-     * 
-     * @hibernate.collection-key 
-     * column="AuditId"
-     * @hibernate.collection-one-to-many 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO"
+     * @hibernate.bag lazy="true" inverse="true"
+     * @hibernate.collection-key column="AuditId"
+     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO"
      */
-    public Collection getAuditDisplayConfs() {
+    public Collection getAuditDisplayConfs()
+    {
         return mAuditDisplayConfs;
     }
 
     /**
      * @param pAuditDisplayConfs les configurations
      */
-    public void setAuditDisplayConfs(Collection pAuditDisplayConfs) {
+    public void setAuditDisplayConfs( Collection pAuditDisplayConfs )
+    {
         mAuditDisplayConfs = pAuditDisplayConfs;
     }
 
     /**
      * Ajout de l'ensemble des configurations relative à l'audit
+     * 
      * @param pAuditDisplayConf l'ensemble des configurations
      */
-    public void addAuditDisplayConf(AuditDisplayConfBO pAuditDisplayConf) {
-        mAuditGrids.add(pAuditDisplayConf);
+    public void addAuditDisplayConf( AuditDisplayConfBO pAuditDisplayConf )
+    {
+        mAuditGrids.add( pAuditDisplayConf );
     }
 
     /**
      * Obtention des configurations liées à l'audit correspondant à un projet
+     * 
      * @param pProject projet
      * @return les configurations correspondantes ou null si non trouvées
      */
-    public AuditDisplayConfBO getDisplayConf(ProjectBO pProject) {
+    public AuditDisplayConfBO getDisplayConf( ProjectBO pProject )
+    {
         AuditDisplayConfBO result = null;
         Iterator auditConfsIt = getAuditDisplayConfs().iterator();
         // Parcours de configuration à la recherche de celle
         // correspondant
-        while (auditConfsIt.hasNext() && (result == null)) {
+        while ( auditConfsIt.hasNext() && ( result == null ) )
+        {
             AuditDisplayConfBO auditConf = (AuditDisplayConfBO) auditConfsIt.next();
-            if (auditConf.getProject().getId() == pProject.getId()) {
+            if ( auditConf.getProject().getId() == pProject.getId() )
+            {
                 result = auditConf;
             }
         }

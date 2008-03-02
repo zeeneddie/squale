@@ -6,15 +6,18 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumR
 /**
  * Transformation d'un critère
  */
-public class CriteriumRuleTransform {
+public class CriteriumRuleTransform
+{
     /**
      * Conversion
+     * 
      * @param pCriteriumRule objet à convertir
      * @return résultat de la conversion
      */
-    public static CriteriumRuleDTO bo2Dto(CriteriumRuleBO pCriteriumRule) {
+    public static CriteriumRuleDTO bo2Dto( CriteriumRuleBO pCriteriumRule )
+    {
         CriteriumRuleDTO result = new CriteriumRuleDTO();
-        QualityRuleTransform.bo2Dto(result, pCriteriumRule);
+        QualityRuleTransform.bo2Dto( result, pCriteriumRule );
         return result;
     }
 

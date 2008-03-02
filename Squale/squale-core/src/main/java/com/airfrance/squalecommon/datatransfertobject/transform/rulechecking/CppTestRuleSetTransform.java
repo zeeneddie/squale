@@ -6,37 +6,42 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.cp
 /**
  * Transformation DTO-BO de RuleSet
  */
-public class CppTestRuleSetTransform {
+public class CppTestRuleSetTransform
+{
 
     /**
-     *  Constructeur prive
-     *
+     * Constructeur prive
      */
-    private CppTestRuleSetTransform() {
+    private CppTestRuleSetTransform()
+    {
 
     }
 
     /**
      * DTO -> BO pour un CppTestRuleSet
+     * 
      * @return BO
      * @param pRuleSetDTO DTO
      */
-    public static CppTestRuleSetBO dto2Bo(CppTestRuleSetDTO pRuleSetDTO) {
+    public static CppTestRuleSetBO dto2Bo( CppTestRuleSetDTO pRuleSetDTO )
+    {
         CppTestRuleSetBO bo = new CppTestRuleSetBO();
-        RuleSetTransform.dto2Bo(pRuleSetDTO, bo);
-        bo.setCppTestName(pRuleSetDTO.getCppTestName());
+        RuleSetTransform.dto2Bo( pRuleSetDTO, bo );
+        bo.setCppTestName( pRuleSetDTO.getCppTestName() );
         return bo;
     }
 
     /**
      * BO -> DTO pour un RuleSet
+     * 
      * @param pRuleSetBO BO
      * @return pRuleSetDTO DTO
      */
-    public static CppTestRuleSetDTO bo2Dto(CppTestRuleSetBO pRuleSetBO) {
+    public static CppTestRuleSetDTO bo2Dto( CppTestRuleSetBO pRuleSetBO )
+    {
         CppTestRuleSetDTO dto = new CppTestRuleSetDTO();
-        RuleSetTransform.bo2Dto(pRuleSetBO, dto);
-        dto.setCppTestName(pRuleSetBO.getCppTestName());
+        RuleSetTransform.bo2Dto( pRuleSetBO, dto );
+        dto.setCppTestName( pRuleSetBO.getCppTestName() );
         return dto;
     }
 

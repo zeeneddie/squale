@@ -5,20 +5,14 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Lanceur de tâches
- * Possède un nom unique.
- * Possède des tâches d'analyses définies dans un ordre précis
- * Possède des tâches dites finales définies dans un ordre précis
+ * Lanceur de tâches Possède un nom unique. Possède des tâches d'analyses définies dans un ordre précis Possède des
+ * tâches dites finales définies dans un ordre précis
  * 
- * @hibernate.class 
- * table="Tasks_User"
- * lazy="true"
- * discriminator-value="AbstractTasksUser"
- * @hibernate.discriminator 
- *   column="subclass"
- * 
+ * @hibernate.class table="Tasks_User" lazy="true" discriminator-value="AbstractTasksUser"
+ * @hibernate.discriminator column="subclass"
  */
-public abstract class AbstractTasksUserBO {
+public abstract class AbstractTasksUserBO
+{
 
     /**
      * Identifiant (au sens technique) de l'objet
@@ -37,7 +31,8 @@ public abstract class AbstractTasksUserBO {
     /**
      * Constructeur par défaut
      */
-    public AbstractTasksUserBO() {
+    public AbstractTasksUserBO()
+    {
         mId = -1;
         mName = "";
         mAnalysisTasks = new ArrayList();
@@ -48,16 +43,11 @@ public abstract class AbstractTasksUserBO {
      * Méthode d'accès pour mId
      * 
      * @return la l'identifiant (au sens technique) de l'objet
-     * 
-     * @hibernate.id generator-class="native"
-     * type="long" 
-     * column="AbstractTasksUserId" 
-     * unsaved-value="-1" 
-     * length="19"
-     * @hibernate.generator-param name="sequence" value="tasksUser_sequence" 
-     * 
+     * @hibernate.id generator-class="native" type="long" column="AbstractTasksUserId" unsaved-value="-1" length="19"
+     * @hibernate.generator-param name="sequence" value="tasksUser_sequence"
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
@@ -66,33 +56,23 @@ public abstract class AbstractTasksUserBO {
      * 
      * @param pId le nouvel identifiant
      */
-    public void setId(long pId) {
+    public void setId( long pId )
+    {
         mId = pId;
     }
 
     /**
      * Méthode d'accès à mAnalysisTasks
      * 
-     * @return la liste des tâches d'analyses 
-     * 
-     * @hibernate.list 
-     * table="Analysis_Task" 
-     * cascade="all"
-     * 
-     * @hibernate.collection-key 
-     * column="TasksUserId"
-     * 
-     * @hibernate.collection-index 
-     * column="AnalysisTaskIndex" 
-     * type="int" 
-     * length="10"
-     * 
-     * @hibernate.collection-many-to-many 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO"
-     * column="TaskRefId"
-     *
+     * @return la liste des tâches d'analyses
+     * @hibernate.list table="Analysis_Task" cascade="all"
+     * @hibernate.collection-key column="TasksUserId"
+     * @hibernate.collection-index column="AnalysisTaskIndex" type="int" length="10"
+     * @hibernate.collection-many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO"
+     *                                    column="TaskRefId"
      */
-    public List getAnalysisTasks() {
+    public List getAnalysisTasks()
+    {
         return mAnalysisTasks;
     }
 
@@ -100,43 +80,25 @@ public abstract class AbstractTasksUserBO {
      * Méthode d'accès à mName
      * 
      * @return le nom du profile
-     * 
-     * @hibernate.property 
-     * name="name" 
-     * column="Name" 
-     * type="string" 
-     * length="255"
-     * not-null="true" 
-     * unique="true"
-     * 
+     * @hibernate.property name="name" column="Name" type="string" length="255" not-null="true" unique="true"
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
 
     /**
      * Méthode d'accès à mTerminationTasks
      * 
-     * @return la liste des tâches finales 
-     * 
-     * @hibernate.list 
-     * table="Termination_Task" 
-     * cascade="all"
-     * 
-     * @hibernate.collection-key 
-     * column="TasksUserId"
-     * 
-     * @hibernate.collection-index 
-     * column="TerminationTaskIndex" 
-     * type="int" 
-     * length="10"
-     * 
-     * @hibernate.collection-many-to-many 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO"
-     * column="TaskRefId"
-     * 
+     * @return la liste des tâches finales
+     * @hibernate.list table="Termination_Task" cascade="all"
+     * @hibernate.collection-key column="TasksUserId"
+     * @hibernate.collection-index column="TerminationTaskIndex" type="int" length="10"
+     * @hibernate.collection-many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO"
+     *                                    column="TaskRefId"
      */
-    public List getTerminationTasks() {
+    public List getTerminationTasks()
+    {
         return mTerminationTasks;
     }
 
@@ -145,7 +107,8 @@ public abstract class AbstractTasksUserBO {
      * 
      * @param pAnalysisTasks la nouvelle liste des tâches d'analyses
      */
-    public void setAnalysisTasks(List pAnalysisTasks) {
+    public void setAnalysisTasks( List pAnalysisTasks )
+    {
         mAnalysisTasks = pAnalysisTasks;
     }
 
@@ -154,7 +117,8 @@ public abstract class AbstractTasksUserBO {
      * 
      * @param pName le nouveau nom du profile
      */
-    public void setName(String pName) {
+    public void setName( String pName )
+    {
         mName = pName;
     }
 
@@ -163,18 +127,19 @@ public abstract class AbstractTasksUserBO {
      * 
      * @param pTerminationTasks la nouvelle liste de tâches finales
      */
-    public void setTerminationTasks(List pTerminationTasks) {
+    public void setTerminationTasks( List pTerminationTasks )
+    {
         mTerminationTasks = pTerminationTasks;
     }
 
     /**
-     * Ajoute une tâche d'analyse à la fin de la liste des tâches
-     * d'analyses
+     * Ajoute une tâche d'analyse à la fin de la liste des tâches d'analyses
      * 
      * @param pTask la tâche à ajouter
      */
-    public void addAnalysisTask(TaskRefBO pTask) {
-        mAnalysisTasks.add(pTask);
+    public void addAnalysisTask( TaskRefBO pTask )
+    {
+        mAnalysisTasks.add( pTask );
     }
 
     /**
@@ -182,40 +147,41 @@ public abstract class AbstractTasksUserBO {
      * 
      * @param pTask la tâche à supprimer
      */
-    public void removeTerminationTask(TaskRefBO pTask) {
-        mTerminationTasks.remove(pTask);
+    public void removeTerminationTask( TaskRefBO pTask )
+    {
+        mTerminationTasks.remove( pTask );
     }
 
     /**
-     * Supprime une tâche d'analyse de la liste des tâches
-     * d'analyses
+     * Supprime une tâche d'analyse de la liste des tâches d'analyses
      * 
      * @param pTask la tâche à supprimer
      */
-    public void removeAnalysisTask(TaskRefBO pTask) {
-        mAnalysisTasks.remove(pTask);
+    public void removeAnalysisTask( TaskRefBO pTask )
+    {
+        mAnalysisTasks.remove( pTask );
     }
 
     /**
-     * Ajoute une tâche à exécuter en dernier à la fin 
-     * de la liste des tâches finales
+     * Ajoute une tâche à exécuter en dernier à la fin de la liste des tâches finales
      * 
      * @param pTask la tâche à ajouter
      */
-    public void addTerminationTask(TaskRefBO pTask) {
-        mTerminationTasks.add(pTask);
+    public void addTerminationTask( TaskRefBO pTask )
+    {
+        mTerminationTasks.add( pTask );
     }
 
     /**
-     * Retourne la liste de toutes les tâches pouvant
-     * être configurées
+     * Retourne la liste de toutes les tâches pouvant être configurées
      * 
      * @return les tâches configurables
      */
-    public Collection getConfigurableTasks() {
+    public Collection getConfigurableTasks()
+    {
         Collection tasks = new ArrayList();
-        tasks.addAll(getConfigurableTasks(mAnalysisTasks));
-        tasks.addAll(getConfigurableTasks(mTerminationTasks));
+        tasks.addAll( getConfigurableTasks( mAnalysisTasks ) );
+        tasks.addAll( getConfigurableTasks( mTerminationTasks ) );
         return tasks;
     }
 
@@ -225,13 +191,16 @@ public abstract class AbstractTasksUserBO {
      * @param pTasks une liste de TaskBO
      * @return la collection des tâches configurables
      */
-    private Collection getConfigurableTasks(List pTasks) {
+    private Collection getConfigurableTasks( List pTasks )
+    {
         Collection tasks = new ArrayList();
         TaskRefBO task;
-        for (int i = 0; i < pTasks.size(); i++) {
-            task = (TaskRefBO) pTasks.get(i);
-            if (task.getTask().isConfigurable()) {
-                tasks.add(task.getTask());
+        for ( int i = 0; i < pTasks.size(); i++ )
+        {
+            task = (TaskRefBO) pTasks.get( i );
+            if ( task.getTask().isConfigurable() )
+            {
+                tasks.add( task.getTask() );
             }
         }
         return tasks;

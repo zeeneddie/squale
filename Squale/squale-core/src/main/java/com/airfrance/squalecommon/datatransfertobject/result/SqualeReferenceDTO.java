@@ -8,23 +8,29 @@ import java.util.Date;
 import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
 
 /**
- @author m400841 (by Rose)
+ * @author m400841 (by Rose)
  */
-public class SqualeReferenceDTO implements Serializable {
+public class SqualeReferenceDTO
+    implements Serializable
+{
     /**
      * Grille qualité
      */
     private QualityGridDTO mGrid;
+
     /**
      * @return grille
      */
-    public QualityGridDTO getGrid() {
+    public QualityGridDTO getGrid()
+    {
         return mGrid;
     }
+
     /**
      * @param pGridDTO grille
      */
-    public void setGrid(QualityGridDTO pGridDTO) {
+    public void setGrid( QualityGridDTO pGridDTO )
+    {
         mGrid = pGridDTO;
     }
 
@@ -34,32 +40,32 @@ public class SqualeReferenceDTO implements Serializable {
     private boolean mPublic;
 
     /**
-     Facteurs.
+     * Facteurs.
      */
     private Collection mFactorValues = new ArrayList();
 
     /**
-     Nomber de ligne de code
+     * Nomber de ligne de code
      */
     private int mCodeLineNumber;
 
     /**
-     Nombre de méthodes.
+     * Nombre de méthodes.
      */
     private int mMethodNumber;
 
     /**
-     Nombre de classes
+     * Nombre de classes
      */
     private int mClassNumber;
 
     /**
-     Identifiant (au sens technique) de l'objet
+     * Identifiant (au sens technique) de l'objet
      */
     protected long mId;
 
     /**
-     <code>true</code> si cette référence est masquée à un utilisateur non-admin
+     * <code>true</code> si cette référence est masquée à un utilisateur non-admin
      */
     private boolean mHidden;
 
@@ -88,121 +94,135 @@ public class SqualeReferenceDTO implements Serializable {
      */
     private Date mDate;
 
-    /** le type de l'audit*/
+    /** le type de l'audit */
     private String mAuditType;
 
     /**
-     Constructeur vide
-     @roseuid 42CD3C1B0034
+     * Constructeur vide
+     * 
+     * @roseuid 42CD3C1B0034
      */
-    public SqualeReferenceDTO() {
+    public SqualeReferenceDTO()
+    {
     }
 
     /**
-     Access method for the mCodeLineNumber property.
-     
-     @return   the current value of the mCodeLineNumber property
-     @roseuid 42CD3C1F02ED
+     * Access method for the mCodeLineNumber property.
+     * 
+     * @return the current value of the mCodeLineNumber property
+     * @roseuid 42CD3C1F02ED
      */
-    public int getCodeLineNumber() {
+    public int getCodeLineNumber()
+    {
         return mCodeLineNumber;
     }
 
     /**
-     Sets the value of the mCodeLineNumber property.
-     
-     @param pCodeLineNumber the new value of the mCodeLineNumber property
-     @roseuid 42CD3C1F0333
+     * Sets the value of the mCodeLineNumber property.
+     * 
+     * @param pCodeLineNumber the new value of the mCodeLineNumber property
+     * @roseuid 42CD3C1F0333
      */
-    public void setCodeLineNumber(int pCodeLineNumber) {
+    public void setCodeLineNumber( int pCodeLineNumber )
+    {
         mCodeLineNumber = pCodeLineNumber;
     }
 
     /**
-     Access method for the mMethodNumber property.
-     
-     @return   the current value of the mMethodNumber property
-     @roseuid 42CD3C1F03B5
+     * Access method for the mMethodNumber property.
+     * 
+     * @return the current value of the mMethodNumber property
+     * @roseuid 42CD3C1F03B5
      */
-    public int getMethodNumber() {
+    public int getMethodNumber()
+    {
         return mMethodNumber;
     }
 
     /**
-     Sets the value of the mMethodNumber property.
-     
-     @param pMethodNumber the new value of the mMethodNumber property
-     @roseuid 42CD3C200027
+     * Sets the value of the mMethodNumber property.
+     * 
+     * @param pMethodNumber the new value of the mMethodNumber property
+     * @roseuid 42CD3C200027
      */
-    public void setMethodNumber(int pMethodNumber) {
+    public void setMethodNumber( int pMethodNumber )
+    {
         mMethodNumber = pMethodNumber;
     }
 
     /**
-     Access method for the mClassNumber property.
-     
-     @return   the current value of the mClassNumber property
-     @roseuid 42CD3C20009F
+     * Access method for the mClassNumber property.
+     * 
+     * @return the current value of the mClassNumber property
+     * @roseuid 42CD3C20009F
      */
-    public int getClassNumber() {
+    public int getClassNumber()
+    {
         return mClassNumber;
     }
 
     /**
-     Sets the value of the mClassNumber property.
-     
-     @param pClassNumber the new value of the mClassNumber property
-     @roseuid 42CD3C2000DB
+     * Sets the value of the mClassNumber property.
+     * 
+     * @param pClassNumber the new value of the mClassNumber property
+     * @roseuid 42CD3C2000DB
      */
-    public void setClassNumber(int pClassNumber) {
+    public void setClassNumber( int pClassNumber )
+    {
         mClassNumber = pClassNumber;
     }
 
     /**
-     Access method for the mId property.
-     
-     @return   the current value of the mId property
-     @roseuid 42CD3C2001C2
+     * Access method for the mId property.
+     * 
+     * @return the current value of the mId property
+     * @roseuid 42CD3C2001C2
      */
-    public long getId() {
+    public long getId()
+    {
         return mId;
     }
 
     /**
-     Sets the value of the mId property.
-     
-     @param pId the new value of the mId property
-     @roseuid 42CD3C2001EA
+     * Sets the value of the mId property.
+     * 
+     * @param pId the new value of the mId property
+     * @roseuid 42CD3C2001EA
      */
-    public void setId(long pId) {
+    public void setId( long pId )
+    {
         mId = pId;
     }
 
     /**
-     Determines if the mValidated property is true.
-     
-     @return   <code>true<code> if the mValidated property is true
+     * Determines if the mValidated property is true.
+     * 
+     * @return <code>true<code> if the mValidated property is true
      @roseuid 42CD3C200280
      */
-    public boolean getHidden() {
+    public boolean getHidden()
+    {
         return mHidden;
     }
 
     /**
      * Sets the value of the mHidden property.
+     * 
      * @param pHidden the new value of the mHidden property
      * @roseuid 42CD3C200281
      */
-    public void setHidden(boolean pHidden) {
+    public void setHidden( boolean pHidden )
+    {
         mHidden = pHidden;
     }
 
     /**
      * Access method for the mApplicationName property.
      * 
-     * @return   the current value of the mApplicationName property
+     * @return the current value of the mApplicationName property
      */
-    public String getApplicationName() {
+    public String getApplicationName()
+    {
         return mApplicationName;
     }
 
@@ -211,16 +231,18 @@ public class SqualeReferenceDTO implements Serializable {
      * 
      * @param pApplicationName the new value of the mApplicationName property
      */
-    public void setApplicationName(String pApplicationName) {
+    public void setApplicationName( String pApplicationName )
+    {
         mApplicationName = pApplicationName;
     }
 
     /**
      * Access method for the mProjectName property.
      * 
-     * @return   the current value of the mProjectName property
+     * @return the current value of the mProjectName property
      */
-    public String getProjectName() {
+    public String getProjectName()
+    {
         return mProjectName;
     }
 
@@ -229,16 +251,18 @@ public class SqualeReferenceDTO implements Serializable {
      * 
      * @param pProjectName the new value of the mProjectName property
      */
-    public void setProjectName(String pProjectName) {
+    public void setProjectName( String pProjectName )
+    {
         mProjectName = pProjectName;
     }
 
     /**
      * Access method for the mLanguage property.
      * 
-     * @return   the current value of the mLanguage property
+     * @return the current value of the mLanguage property
      */
-    public String getLanguage() {
+    public String getLanguage()
+    {
         return mLanguage;
     }
 
@@ -247,16 +271,18 @@ public class SqualeReferenceDTO implements Serializable {
      * 
      * @param pLanguage the new value of the mLanguage property
      */
-    public void setLanguage(String pLanguage) {
+    public void setLanguage( String pLanguage )
+    {
         mLanguage = pLanguage;
     }
 
     /**
      * Access method for the mVersion property.
      * 
-     * @return   the current value of the mVersion property
+     * @return the current value of the mVersion property
      */
-    public String getVersion() {
+    public String getVersion()
+    {
         return mVersion;
     }
 
@@ -265,16 +291,18 @@ public class SqualeReferenceDTO implements Serializable {
      * 
      * @param pVersion the new value of the mVersion property
      */
-    public void setVersion(String pVersion) {
+    public void setVersion( String pVersion )
+    {
         mVersion = pVersion;
     }
 
     /**
      * Access method for the mDate property.
      * 
-     * @return   the current value of the mDate property
+     * @return the current value of the mDate property
      */
-    public Date getDate() {
+    public Date getDate()
+    {
         return mDate;
     }
 
@@ -283,7 +311,8 @@ public class SqualeReferenceDTO implements Serializable {
      * 
      * @param pDate the new value of the mDate property
      */
-    public void setDate(Date pDate) {
+    public void setDate( Date pDate )
+    {
         mDate = pDate;
     }
 
@@ -292,43 +321,50 @@ public class SqualeReferenceDTO implements Serializable {
      * 
      * @return the Hashmap of factor
      */
-    public Collection getFactorValues() {
+    public Collection getFactorValues()
+    {
         return mFactorValues;
     }
 
     /**
      * Sets the value of the mFactors property.
+     * 
      * @param pFactorValue valeur du facteur
      */
-    public void addFactorValue(ReferenceFactorDTO pFactorValue) {
-        mFactorValues.add(pFactorValue);
+    public void addFactorValue( ReferenceFactorDTO pFactorValue )
+    {
+        mFactorValues.add( pFactorValue );
     }
 
     /**
      * @param pPublic caractère public
      */
-    public void setPublic(boolean pPublic) {
+    public void setPublic( boolean pPublic )
+    {
         mPublic = pPublic;
     }
 
     /**
      * @return caractère public
      */
-    public boolean isPublic() {
+    public boolean isPublic()
+    {
         return mPublic;
     }
 
     /**
      * @return le type de l'audit
      */
-    public String getAuditType() {
+    public String getAuditType()
+    {
         return mAuditType;
     }
 
     /**
      * @param pType le type de l'audit
      */
-    public void setAuditType(String pType) {
+    public void setAuditType( String pType )
+    {
         mAuditType = pType;
     }
 

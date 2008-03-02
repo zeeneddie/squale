@@ -6,25 +6,30 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRule
 /**
  * Transformation d'un facteur
  */
-public class FactorRuleTransform {
+public class FactorRuleTransform
+{
     /**
      * Conversion
+     * 
      * @param pFactorRule objet à convertir
      * @return résultat de la conversion
      */
-    public static FactorRuleDTO bo2Dto(FactorRuleBO pFactorRule) {
+    public static FactorRuleDTO bo2Dto( FactorRuleBO pFactorRule )
+    {
         FactorRuleDTO result = new FactorRuleDTO();
-        bo2Dto(result, pFactorRule);
+        bo2Dto( result, pFactorRule );
         return result;
     }
 
     /**
      * Conversion
+     * 
      * @param pFactorRule objet à convertir
      * @param pDto objet converti
      */
-    public static void bo2Dto(FactorRuleDTO pDto, FactorRuleBO pFactorRule) {
-        QualityRuleTransform.bo2Dto(pDto, pFactorRule);
+    public static void bo2Dto( FactorRuleDTO pDto, FactorRuleBO pFactorRule )
+    {
+        QualityRuleTransform.bo2Dto( pDto, pFactorRule );
     }
 
 }

@@ -7,25 +7,28 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.Pr
 /**
  * Transformation DTO-BO de ProjectRuleSet
  */
-public class ProjectRuleSetTransform {
+public class ProjectRuleSetTransform
+{
 
     /**
-     *  Constructeur prive
-     *
+     * Constructeur prive
      */
-    private ProjectRuleSetTransform() {
+    private ProjectRuleSetTransform()
+    {
 
     }
 
     /**
      * BO -> DTO pour un RuleSet
+     * 
      * @param pRuleSetBO BO
      * @return pRuleSetDTO DTO
      */
-    public static ProjectRuleSetDTO bo2Dto(ProjectRuleSetBO pRuleSetBO) {
+    public static ProjectRuleSetDTO bo2Dto( ProjectRuleSetBO pRuleSetBO )
+    {
         ProjectRuleSetDTO dto = new ProjectRuleSetDTO();
-        RuleSetTransform.bo2Dto(pRuleSetBO, dto);
-        dto.setProject(ComponentTransform.bo2Dto(pRuleSetBO.getProject()));
+        RuleSetTransform.bo2Dto( pRuleSetBO, dto );
+        dto.setProject( ComponentTransform.bo2Dto( pRuleSetBO.getProject() ) );
         return dto;
     }
 

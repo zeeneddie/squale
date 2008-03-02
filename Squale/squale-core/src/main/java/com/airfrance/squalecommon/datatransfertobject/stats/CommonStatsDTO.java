@@ -2,11 +2,12 @@ package com.airfrance.squalecommon.datatransfertobject.stats;
 
 /**
  */
-public class CommonStatsDTO {
+public class CommonStatsDTO
+{
 
     /**
-      * Le nombre de projets
-      */
+     * Le nombre de projets
+     */
     protected int mNbProjects;
 
     /**
@@ -17,28 +18,32 @@ public class CommonStatsDTO {
     /**
      * @return le nombre de lignes de codes
      */
-    public int getLoc() {
+    public int getLoc()
+    {
         return mLoc;
     }
 
     /**
      * @return le nombre de projets
      */
-    public int getNbProjects() {
+    public int getNbProjects()
+    {
         return mNbProjects;
     }
 
     /**
      * @param pLoc le nombre de lignes de code
      */
-    public void setLoc(int pLoc) {
+    public void setLoc( int pLoc )
+    {
         mLoc = pLoc;
     }
 
     /**
      * @param pNbProjects le nombre de projets
      */
-    public void setNbProjects(int pNbProjects) {
+    public void setNbProjects( int pNbProjects )
+    {
         mNbProjects = pNbProjects;
     }
 

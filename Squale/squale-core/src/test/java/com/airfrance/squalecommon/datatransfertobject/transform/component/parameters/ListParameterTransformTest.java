@@ -11,20 +11,25 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.param
 /**
  * Test pour ListParameterTransform
  */
-public class ListParameterTransformTest extends SqualeTestCase {
+public class ListParameterTransformTest
+    extends SqualeTestCase
+{
 
     /**
      * Test la transformation dto -> bo
+     * 
      * @throws Exception si erreur
      */
-    public void testDto2Bo() throws Exception {
+    public void testDto2Bo()
+        throws Exception
+    {
         ListParameterDTO listDTO = new ListParameterDTO();
         List list = new ArrayList();
         StringParameterDTO strParamDTO = new StringParameterDTO();
-        strParamDTO.setValue("Test");
-        list.add(strParamDTO);
-        listDTO.setParameters(list);
-        ListParameterBO listBO = (ListParameterBO) ListParameterTransform.dto2Bo(listDTO);
-        assertEquals(1, listBO.getParameters().size());
+        strParamDTO.setValue( "Test" );
+        list.add( strParamDTO );
+        listDTO.setParameters( list );
+        ListParameterBO listBO = (ListParameterBO) ListParameterTransform.dto2Bo( listDTO );
+        assertEquals( 1, listBO.getParameters().size() );
     }
 }

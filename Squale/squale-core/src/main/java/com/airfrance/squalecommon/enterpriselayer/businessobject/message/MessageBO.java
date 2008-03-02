@@ -3,19 +3,20 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.message;
 /**
  * Message internationalisé
  * 
- * @hibernate.class 
- * table="Message"
- * mutable="true"
+ * @hibernate.class table="Message" mutable="true"
  */
-public class MessageBO implements Comparable {
+public class MessageBO
+    implements Comparable
+{
     /** Identificateur de message */
     private MessageId mId = new MessageId();
 
     /**
      * @return id de message
-     * @hibernate.id    generator-class="assigned"
+     * @hibernate.id generator-class="assigned"
      */
-    public MessageId getId() {
+    public MessageId getId()
+    {
         return mId;
     }
 
@@ -24,21 +25,18 @@ public class MessageBO implements Comparable {
 
     /**
      * @return texte
-     * 
-     * @hibernate.property 
-     * name="title" 
-     * column="Title" 
-     * type="string"
-     * length="4000"
+     * @hibernate.property name="title" column="Title" type="string" length="4000"
      */
-    public String getTitle() {
+    public String getTitle()
+    {
         return mTitle;
     }
-    
+
     /**
      * @param pTitle le nouveau titre
      */
-    public void setTitle(String pTitle){
+    public void setTitle( String pTitle )
+    {
         mTitle = pTitle;
     }
 
@@ -47,60 +45,72 @@ public class MessageBO implements Comparable {
 
     /**
      * @return texte
-     * 
-     * @hibernate.property 
-     * name="text" 
-     * column="Text" 
-     * type="string" 
-     * not-null="true" 
-     * length="4000"
+     * @hibernate.property name="text" column="Text" type="string" not-null="true" length="4000"
      */
-    public String getText() {
+    public String getText()
+    {
         return mText;
     }
 
     /**
      * @param pText texte
      */
-    public void setText(String pText) {
+    public void setText( String pText )
+    {
         mText = pText;
     }
 
-    /** (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
-    public boolean equals(Object obj) {
+    public boolean equals( Object obj )
+    {
         boolean result;
-        if (obj instanceof MessageBO) {
+        if ( obj instanceof MessageBO )
+        {
             MessageBO message = (MessageBO) obj;
-            result = getId().equals(message.getId());
-        } else {
-            result = super.equals(obj);
+            result = getId().equals( message.getId() );
+        }
+        else
+        {
+            result = super.equals( obj );
         }
         return result;
     }
 
-    /** (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#hashCode()
      */
-    public int hashCode() {
+    public int hashCode()
+    {
         int result;
-        if (getId() != null) {
+        if ( getId() != null )
+        {
             result = getId().hashCode();
-        } else {
+        }
+        else
+        {
             result = super.hashCode();
         }
         return result;
     }
 
-    /** (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
-    public int compareTo(Object o) {
+    public int compareTo( Object o )
+    {
         int result = 0;
-        if (o instanceof MessageBO) {
+        if ( o instanceof MessageBO )
+        {
             MessageBO message = (MessageBO) o;
-            result = getId().compareTo(message.getId());
+            result = getId().compareTo( message.getId() );
         }
         return result;
     }
@@ -108,40 +118,41 @@ public class MessageBO implements Comparable {
     /**
      * @param pId id
      */
-    public void setId(MessageId pId) {
+    public void setId( MessageId pId )
+    {
         mId = pId;
     }
 
     /**
-     * 
      * @return langue
      */
-    public String getLang() {
+    public String getLang()
+    {
         return getId().getLang();
     }
 
     /**
-     * 
      * @return clef
      */
-    public String getKey() {
+    public String getKey()
+    {
         return getId().getKey();
     }
 
     /**
-     * 
      * @param pLocale langue
      */
-    public void setLang(String pLocale) {
-        getId().setLang(pLocale);
+    public void setLang( String pLocale )
+    {
+        getId().setLang( pLocale );
     }
 
     /**
-     * 
      * @param pKey clef
      */
-    public void setKey(String pKey) {
-        getId().setKey(pKey);
+    public void setKey( String pKey )
+    {
+        getId().setKey( pKey );
     }
 
 }

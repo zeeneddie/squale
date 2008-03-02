@@ -8,32 +8,36 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRule
 
 /**
  * Contient le résultat du facteur associé
- * @author m400842
  * 
- * @hibernate.subclass
- * discriminator-value="FactorResult"
+ * @author m400842
+ * @hibernate.subclass discriminator-value="FactorResult"
  */
-public class FactorResultBO extends QualityResultBO {
-    
-    
+public class FactorResultBO
+    extends QualityResultBO
+{
+
     /**
      * Constructeur par défaut
+     * 
      * @roseuid 42C9372303CE
      */
-    public FactorResultBO() {
+    public FactorResultBO()
+    {
         super();
     }
-    
+
     /**
      * Constructeur complet
+     * 
      * @param pMeanMark la note moyenne
      * @param pProject le sous-projet correspondant
      * @param pAudit l'audit correspondant
      * @param pRule la FactorRule correspondante
      * @roseuid 42C937240063
      */
-    public FactorResultBO(float pMeanMark, ProjectBO pProject, AuditBO pAudit, FactorRuleBO pRule) {
-        super(pMeanMark, pProject, pAudit);
+    public FactorResultBO( float pMeanMark, ProjectBO pProject, AuditBO pAudit, FactorRuleBO pRule )
+    {
+        super( pMeanMark, pProject, pAudit );
         mRule = pRule;
     }
 }

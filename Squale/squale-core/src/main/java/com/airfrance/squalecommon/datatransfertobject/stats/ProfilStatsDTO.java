@@ -2,7 +2,9 @@ package com.airfrance.squalecommon.datatransfertobject.stats;
 
 /**
  */
-public class ProfilStatsDTO extends CommonStatsDTO {
+public class ProfilStatsDTO
+    extends CommonStatsDTO
+{
 
     /**
      * Le nom du profil
@@ -12,14 +14,16 @@ public class ProfilStatsDTO extends CommonStatsDTO {
     /**
      * @return le nom du profil
      */
-    public String getProfileName() {
+    public String getProfileName()
+    {
         return mProfileName;
     }
 
     /**
      * @param pProfileName le nouveau nom du profile
      */
-    public void setProfileName(String pProfileName) {
+    public void setProfileName( String pProfileName )
+    {
         mProfileName = pProfileName;
     }
 

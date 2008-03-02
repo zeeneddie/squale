@@ -9,11 +9,11 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
 /**
  * @author m401540
  * @version 1.0
- * 
- * @hibernate.subclass
- * discriminator-value="Int"
+ * @hibernate.subclass discriminator-value="Int"
  */
-public class IntegerMetricBO extends NumberMetricBO {
+public class IntegerMetricBO
+    extends NumberMetricBO
+{
 
     /**
      * Valeur entière du mérique
@@ -23,17 +23,11 @@ public class IntegerMetricBO extends NumberMetricBO {
     /**
      * Access method for the mValue property.
      * 
-     * @return   the current value of the mName property
-     * 
-     * @hibernate.property 
-     * name="Value" 
-     * column="Number_val" 
-     * type="integer" 
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mName property
+     * @hibernate.property name="Value" column="Number_val" type="integer" not-null="false" unique="false"
      */
-    public Object getValue() {
+    public Object getValue()
+    {
         return mValue;
     }
 
@@ -42,7 +36,8 @@ public class IntegerMetricBO extends NumberMetricBO {
      * 
      * @param pValue the new value of the mValue property
      */
-    public void setValue(Object pValue) {
+    public void setValue( Object pValue )
+    {
         mValue = (Integer) pValue;
     }
 
@@ -51,15 +46,19 @@ public class IntegerMetricBO extends NumberMetricBO {
      * 
      * @param pValue the new value of the mValue property
      */
-    public void setValue(int pValue) {
-        mValue = new Integer(pValue);
+    public void setValue( int pValue )
+    {
+        mValue = new Integer( pValue );
     }
 
-    /** (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO#isPrintable()
      */
-    public boolean isPrintable() {
+    public boolean isPrintable()
+    {
         return true;
-    }   
+    }
 
 }

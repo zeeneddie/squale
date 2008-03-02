@@ -31,7 +31,9 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 
 /**
  */
-public class UserFacade implements IFacade {
+public class UserFacade
+    implements IFacade
+{
 
     /**
      * Persistence provider
@@ -40,21 +42,25 @@ public class UserFacade implements IFacade {
 
     /**
      * Constructeur vide
+     * 
      * @roseuid 42CBFFB20158
      */
-    private UserFacade() {
+    private UserFacade()
+    {
     }
 
     /**
      * retourne une collection de application pour un utilisateur donné
+     * 
      * @param pUser utilisateur donné
      * @return Collection de applicationDTO (lastAudit ne sera pas instancié)
      * @throws JrafEnterpriseException exception JRAF
-     * @deprecated l'utilisateur logué recoit l'objet UserDTO qui contient la liste
-     * de application.
+     * @deprecated l'utilisateur logué recoit l'objet UserDTO qui contient la liste de application.
      * @roseuid 42CBFFB2014C
      */
-    public static Collection getApplicationList(UserDTO pUser) throws JrafEnterpriseException {
+    public static Collection getApplicationList( UserDTO pUser )
+        throws JrafEnterpriseException
+    {
 
         // Initialisation du retour et des BO
         Collection applicationDTOs = null;
@@ -63,29 +69,35 @@ public class UserFacade implements IFacade {
 
         ISession session = null;
 
-        try {
+        try
+        {
 
             session = PERSISTENTPROVIDER.getSession();
 
             UserDAOImpl userDAO = UserDAOImpl.getInstance();
 
-            userBO = (UserBO) userDAO.loadWithMatricule(session, pUser.getMatricule());
+            userBO = (UserBO) userDAO.loadWithMatricule( session, pUser.getMatricule() );
 
             // Recuperation des cles qui sont des applicationBO
-            keyCollection = (userBO.getRights()).keySet();
+            keyCollection = ( userBO.getRights() ).keySet();
 
-            //ajout au retour des BO transformes en DTO
+            // ajout au retour des BO transformes en DTO
             Iterator iterator = keyCollection.iterator();
-            while (iterator.hasNext()) {
+            while ( iterator.hasNext() )
+            {
 
-                applicationDTOs.add(ComponentTransform.bo2Dto((ApplicationBO) iterator.next()));
+                applicationDTOs.add( ComponentTransform.bo2Dto( (ApplicationBO) iterator.next() ) );
 
             }
 
-        } catch (JrafDaoException e) {
-            FacadeHelper.convertException(e, UserFacade.class.getName() + ".getApplicationList");
-        } finally {
-            FacadeHelper.closeSession(session, UserFacade.class.getName() + ".getApplicationList");
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, UserFacade.class.getName() + ".getApplicationList" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, UserFacade.class.getName() + ".getApplicationList" );
         }
 
         return applicationDTOs;
@@ -93,20 +105,24 @@ public class UserFacade implements IFacade {
 
     /**
      * Retourne le UserDTO en renseignant l'identifiant
+     * 
      * @param pUser utilisateur donné
      * @param pAdmin indique si le privilège admin est placé
-     * @return UserDTO avec l'identifiant 
+     * @return UserDTO avec l'identifiant
      * @throws JrafEnterpriseException exception JRAF
      */
-    public static UserDTO getUser(UserDTO pUser, Boolean pAdmin) throws JrafEnterpriseException {
+    public static UserDTO getUser( UserDTO pUser, Boolean pAdmin )
+        throws JrafEnterpriseException
+    {
 
-        // Initialisation 
+        // Initialisation
         UserBO userBO = null; // retour de la DAO
         UserDTO userDTO = null; // retour de la facade
 
         ISession session = null;
 
-        try {
+        try
+        {
             // récupération d'une session
             session = PERSISTENTPROVIDER.getSession();
 
@@ -115,76 +131,87 @@ public class UserFacade implements IFacade {
             // traitement different si on initialise l'identifiant dans le UserDTO :
             // si l'id est connu, l'utilisateur est déjà authentifié, donc pas besoin de vérifier
             // son mot de passe
-            if (pUser.getID() < 0) {
+            if ( pUser.getID() < 0 )
+            {
                 // récupération du UserBO à partir du matricule
-                userBO = (UserBO) userDAO.loadWithMatricule(session, pUser.getMatricule());
-            } else {
+                userBO = (UserBO) userDAO.loadWithMatricule( session, pUser.getMatricule() );
+            }
+            else
+            {
                 // récupération du UserBO à partir de l'id
-                Long userID = new Long(pUser.getID());
-                userBO = (UserBO) userDAO.get(session, userID);
+                Long userID = new Long( pUser.getID() );
+                userBO = (UserBO) userDAO.get( session, userID );
             }
 
             // Traitement du cas du user guest : on affecte un profil en fonction
             // du privilège administrateur
-            if (userBO == null) {
-                userBO = createDefaultUser(session, pUser.getMatricule(), pAdmin);
+            if ( userBO == null )
+            {
+                userBO = createDefaultUser( session, pUser.getMatricule(), pAdmin );
             }
 
             // transformation du UserBO en UserDTO
-            userDTO = UserTransform.bo2Dto(userBO);
+            userDTO = UserTransform.bo2Dto( userBO );
             // ajout des droits de l'utilisateurs sur les différentes applications
-            setRights(session, userDTO, userBO, pAdmin);
+            setRights( session, userDTO, userBO, pAdmin );
 
-        } catch (JrafDaoException e) {
-            FacadeHelper.convertException(e, UserFacade.class.getName() + ".getApplicationList");
-        } finally {
-            FacadeHelper.closeSession(session, UserFacade.class.getName() + ".getApplicationList");
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, UserFacade.class.getName() + ".getApplicationList" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, UserFacade.class.getName() + ".getApplicationList" );
         }
 
         return userDTO;
     }
 
-    
     /**
-     * Return the complete userDTO corresponding with the identifier and the password 
+     * Return the complete userDTO corresponding with the identifier and the password
+     * 
      * @param pUser The userDTO with the identifier and the password inside
-     * @return UserDTO found 
+     * @return UserDTO found
      * @throws JrafEnterpriseException exception JRAF
      */
-    public static UserDTO getUserByMatriculeAndPassword(UserDTO pUser) throws JrafEnterpriseException {
-    
-    
-    
-    UserBO userBO = null; 
-    UserDTO userDTO = null; 
+    public static UserDTO getUserByMatriculeAndPassword( UserDTO pUser )
+        throws JrafEnterpriseException
+    {
 
-    ISession session = null;
+        UserBO userBO = null;
+        UserDTO userDTO = null;
 
-    try {
-        
-        session = PERSISTENTPROVIDER.getSession();
+        ISession session = null;
 
-        UserDAOImpl userDAO = UserDAOImpl.getInstance();
+        try
+        {
 
-        
-        userBO = (UserBO) userDAO.loadWithMatriculeAndPassword(session, pUser.getMatricule(), pUser.getPassword());
-        
-       
-        userDTO = UserTransform.bo2Dto(userBO);
+            session = PERSISTENTPROVIDER.getSession();
 
-    } catch (JrafDaoException e) {
-        FacadeHelper.convertException(e, UserFacade.class.getName() );
-    } finally {
-        FacadeHelper.closeSession(session, UserFacade.class.getName() );
+            UserDAOImpl userDAO = UserDAOImpl.getInstance();
+
+            userBO = (UserBO) userDAO.loadWithMatriculeAndPassword( session, pUser.getMatricule(), pUser.getPassword() );
+
+            userDTO = UserTransform.bo2Dto( userBO );
+
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, UserFacade.class.getName() );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, UserFacade.class.getName() );
+        }
+
+        return userDTO;
     }
 
-    return userDTO;
-}
-    
     /**
-     * Permet d'ajouter des droits au UserDTO
-     * Dans le cas d'un utilisateur avec un privilège admin,
-     * tous les applications validés sont ajoutés à l'utilisateur
+     * Permet d'ajouter des droits au UserDTO Dans le cas d'un utilisateur avec un privilège admin, tous les
+     * applications validés sont ajoutés à l'utilisateur
+     * 
      * @param pSession session hibernate
      * @param pUserDTO UserDTO de destination
      * @param pUserBO UserBO contenant les droits
@@ -192,7 +219,9 @@ public class UserFacade implements IFacade {
      * @return UserDTO renseigné entierement
      * @throws JrafEnterpriseException exception Jraf
      */
-    private static UserDTO setRights(ISession pSession, UserDTO pUserDTO, UserBO pUserBO, Boolean pAdmin) throws JrafEnterpriseException {
+    private static UserDTO setRights( ISession pSession, UserDTO pUserDTO, UserBO pUserBO, Boolean pAdmin )
+        throws JrafEnterpriseException
+    {
 
         // Initialisation
         UserDTO userDTO = pUserDTO; // retour de la methode
@@ -202,22 +231,26 @@ public class UserFacade implements IFacade {
         List applicationsInCreation = new ArrayList();
         ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance(); // initialisation de Dao
 
-        try {
+        try
+        {
             // Un administrateur a accès à toutes les applications confirmées
-            if (pAdmin.booleanValue()) {
+            if ( pAdmin.booleanValue() )
+            {
                 ApplicationBO rightKey = null;
                 Long applicationId = null;
                 Iterator applicationIterator = null;
                 // on ne veut pas les applications à supprimer
                 // Récupération de toutes les applications validées
-                applicationIterator = applicationDAO.findWhereStatus(pSession, ApplicationBO.VALIDATED).iterator();
+                applicationIterator = applicationDAO.findWhereStatus( pSession, ApplicationBO.VALIDATED ).iterator();
                 // Affectation des droits admin sur les applications validées
-                fillRights(pSession, applicationIterator, ProfileBO.ADMIN_PROFILE_NAME, rights, null);
+                fillRights( pSession, applicationIterator, ProfileBO.ADMIN_PROFILE_NAME, rights, null );
                 // Récupération de toutes les applications a valider
-                applicationIterator = applicationDAO.findWhereStatus(pSession, ApplicationBO.IN_CREATION).iterator();
+                applicationIterator = applicationDAO.findWhereStatus( pSession, ApplicationBO.IN_CREATION ).iterator();
                 // Affectation des droits pour l'utilisateur courant admin sur les applications à valider
-                fillRights(pSession, applicationIterator, ProfileBO.ADMIN_PROFILE_NAME, rights, null);
-            } else {
+                fillRights( pSession, applicationIterator, ProfileBO.ADMIN_PROFILE_NAME, rights, null );
+            }
+            else
+            {
                 // Initialisation de la map à partir des droits utilisateur
                 // L'utilisation d'une map permet de surcharger si besoin les droits par défaut accordés
                 // sur l'application publique
@@ -227,45 +260,54 @@ public class UserFacade implements IFacade {
                 Long applicationId = null;
                 // La liste des ids des applications appartenant à l'utilisateur
                 String userAppli = "";
-                while (applicationIterator.hasNext()) {
+                while ( applicationIterator.hasNext() )
+                {
                     // Chargement de l'application
-                    applicationId = new Long(((ApplicationBO) applicationIterator.next()).getId());
-                    rightKey = (ApplicationBO) applicationDAO.get(pSession, applicationId);
+                    applicationId = new Long( ( (ApplicationBO) applicationIterator.next() ).getId() );
+                    rightKey = (ApplicationBO) applicationDAO.get( pSession, applicationId );
                     userAppli += ", " + applicationId;
                     // visibilité uniquement sur les applications validées ou en cours de création
-                    if (rightKey.getStatus() == ApplicationBO.VALIDATED) {
-                        rights.put(ComponentTransform.bo2Dto(rightKey), ProfileTransform.bo2Dto((ProfileBO) pUserBO.getRights().get(rightKey)));
-                     } else if (rightKey.getStatus() == ApplicationBO.IN_CREATION) {
-                        rights.put(ComponentTransform.bo2Dto(rightKey), ProfileTransform.bo2Dto((ProfileBO) pUserBO.getRights().get(rightKey)));
-                        applicationsInCreation.add(ComponentTransform.bo2Dto(rightKey));
+                    if ( rightKey.getStatus() == ApplicationBO.VALIDATED )
+                    {
+                        rights.put( ComponentTransform.bo2Dto( rightKey ),
+                                    ProfileTransform.bo2Dto( (ProfileBO) pUserBO.getRights().get( rightKey ) ) );
+                    }
+                    else if ( rightKey.getStatus() == ApplicationBO.IN_CREATION )
+                    {
+                        rights.put( ComponentTransform.bo2Dto( rightKey ),
+                                    ProfileTransform.bo2Dto( (ProfileBO) pUserBO.getRights().get( rightKey ) ) );
+                        applicationsInCreation.add( ComponentTransform.bo2Dto( rightKey ) );
                     }
                 }
                 // Recupération des applications publiques qui n'appartiennent pas à l'utilisateur
-                if(userAppli.length() > 0) {
+                if ( userAppli.length() > 0 )
+                {
                     // On supprime le première virgule inutile
-                    userAppli = userAppli.substring(1);
+                    userAppli = userAppli.substring( 1 );
                 }
-                publicApplicationsBO = applicationDAO.findPublic(pSession, userAppli);
+                publicApplicationsBO = applicationDAO.findPublic( pSession, userAppli );
                 applicationIterator = publicApplicationsBO.iterator();
                 // Affectation des droits reader
-                fillRights(pSession, applicationIterator, ProfileBO.READER_PROFILE_NAME, rights, publicApplicationsDTO);
-                
-            }
-            userDTO.setProfiles(rights);
-            userDTO.setApplicationsInCreation(applicationsInCreation);
-            userDTO.setPublicApplications(publicApplicationsDTO);
+                fillRights( pSession, applicationIterator, ProfileBO.READER_PROFILE_NAME, rights, publicApplicationsDTO );
 
-        } catch (JrafDaoException e) {
-            FacadeHelper.convertException(e, UserFacade.class.getName() + ".setRights");
+            }
+            userDTO.setProfiles( rights );
+            userDTO.setApplicationsInCreation( applicationsInCreation );
+            userDTO.setPublicApplications( publicApplicationsDTO );
+
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, UserFacade.class.getName() + ".setRights" );
         }
 
         return userDTO;
     }
 
     /**
-     * Affectation des droits
-     * Le paramètre pRights est mis à jour pour contenir l'ensemble des applications avec leur droit
-     * associé
+     * Affectation des droits Le paramètre pRights est mis à jour pour contenir l'ensemble des applications avec leur
+     * droit associé
+     * 
      * @param pSession session
      * @param pApplicationIterator applications concernées
      * @param pProfile profil à utiliser
@@ -273,135 +315,167 @@ public class UserFacade implements IFacade {
      * @param pPublicAppli la liste des applications publiques ayant des résultats
      * @throws JrafDaoException si erreur
      */
-    static private void fillRights(ISession pSession, Iterator pApplicationIterator, String pProfile, Map pRights, List pPublicAppli) throws JrafDaoException {
+    static private void fillRights( ISession pSession, Iterator pApplicationIterator, String pProfile, Map pRights,
+                                    List pPublicAppli )
+        throws JrafDaoException
+    {
         // Affectation dans la Map pour chaque application du profil administrateur
         ProfileDAOImpl profileDAO = ProfileDAOImpl.getInstance();
-        ProfileDTO adminProfile = ProfileTransform.bo2Dto((ProfileBO) profileDAO.loadByKey(pSession, pProfile));
+        ProfileDTO adminProfile = ProfileTransform.bo2Dto( (ProfileBO) profileDAO.loadByKey( pSession, pProfile ) );
         ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
-        while (pApplicationIterator.hasNext()) {
+        while ( pApplicationIterator.hasNext() )
+        {
             // Chargement de l'application
-            Long applicationId = new Long(((ApplicationBO) pApplicationIterator.next()).getId());
-            ApplicationBO rightKey = (ApplicationBO) applicationDAO.get(pSession, applicationId);
-            if (rightKey.getStatus() != ApplicationBO.DELETED) {
-                pRights.put(ComponentTransform.bo2Dto(rightKey), adminProfile);
+            Long applicationId = new Long( ( (ApplicationBO) pApplicationIterator.next() ).getId() );
+            ApplicationBO rightKey = (ApplicationBO) applicationDAO.get( pSession, applicationId );
+            if ( rightKey.getStatus() != ApplicationBO.DELETED )
+            {
+                pRights.put( ComponentTransform.bo2Dto( rightKey ), adminProfile );
                 // La liste des applications publiques peut être nulle dans le cas
                 // où l'utilisateur est administrateur car dans ce cas on ne les différencie pas
-                if (pPublicAppli != null && rightKey.getPublic()) {
-                    pPublicAppli.add(ComponentTransform.bo2Dto(rightKey));
+                if ( pPublicAppli != null && rightKey.getPublic() )
+                {
+                    pPublicAppli.add( ComponentTransform.bo2Dto( rightKey ) );
                 }
             }
         }
     }
 
     /**
-     * Création ou mise à jour de l'utilisateur
-     * La création se fait avec un profil minimal, la mise à jour ne concerne que l'adresse email ou le nom
+     * Création ou mise à jour de l'utilisateur La création se fait avec un profil minimal, la mise à jour ne concerne
+     * que l'adresse email ou le nom
+     * 
      * @param pUser utilisateur donné
      * @param pAdmin indique si le privilège admin est placé
-     * @return UserDTO avec l'identifiant 
+     * @return UserDTO avec l'identifiant
      * @throws JrafEnterpriseException exception JRAF
      */
-    public static UserDTO createOrUpdateUser(UserDTO pUser, Boolean pAdmin) throws JrafEnterpriseException {
-        // Initialisation 
+    public static UserDTO createOrUpdateUser( UserDTO pUser, Boolean pAdmin )
+        throws JrafEnterpriseException
+    {
+        // Initialisation
         UserBO userBO = null; // retour de la DAO
         UserDTO userDTO = null; // retour de la facade
         ISession session = null;
-        try {
+        try
+        {
             // récupération d'une session
             session = PERSISTENTPROVIDER.getSession();
             UserDAOImpl userDAO = UserDAOImpl.getInstance();
             // traitement different si on initialise l'identifiant dans le UserDTO :
             // si l'id est connu, l'utilisateur est déjà authentifié, donc pas besoin de vérifier
             // son mot de passe
-            if (pUser.getID() < 0) {
+            if ( pUser.getID() < 0 )
+            {
                 // récupération du UserBO à partir du matricule
-                userBO = (UserBO) userDAO.loadWithMatricule(session, pUser.getMatricule());
-            } else {
+                userBO = (UserBO) userDAO.loadWithMatricule( session, pUser.getMatricule() );
+            }
+            else
+            {
                 // récupération du UserBO à partir de l'id
-                Long userID = new Long(pUser.getID());
-                userBO = (UserBO) userDAO.get(session, userID);
+                Long userID = new Long( pUser.getID() );
+                userBO = (UserBO) userDAO.get( session, userID );
             }
             // Traitement du cas du user guest : on affecte un profil en fonction
             // du privilège administrateur
-            if (userBO == null) {
-                userBO = createDefaultUser(session, pUser.getMatricule(), pAdmin);
+            if ( userBO == null )
+            {
+                userBO = createDefaultUser( session, pUser.getMatricule(), pAdmin );
             }
             // Mise à jour des infomations du BO en fonction du DTO
-            userBO.setEmail(pUser.getEmail());
-            userBO.setFullName(pUser.getFullName());
-            userBO.setUnsubscribed(pUser.isUnsubscribed());
+            userBO.setEmail( pUser.getEmail() );
+            userBO.setFullName( pUser.getFullName() );
+            userBO.setUnsubscribed( pUser.isUnsubscribed() );
             // Sauvegarde dans la base
-            userDAO.save(session, userBO);
+            userDAO.save( session, userBO );
             // transformation du UserBO en UserDTO
-            userDTO = UserTransform.bo2Dto(userBO);
+            userDTO = UserTransform.bo2Dto( userBO );
             // ajout des droits de l'utilisateurs sur les différentes applications
-            setRights(session, userDTO, userBO, pAdmin);
-        } catch (JrafDaoException e) {
-            FacadeHelper.convertException(e, UserFacade.class.getName() + ".getApplicationList");
-        } finally {
-            FacadeHelper.closeSession(session, UserFacade.class.getName() + ".getApplicationList");
+            setRights( session, userDTO, userBO, pAdmin );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, UserFacade.class.getName() + ".getApplicationList" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, UserFacade.class.getName() + ".getApplicationList" );
         }
         return userDTO;
     }
 
     /**
-     * Création d'un utilisateur par défaut
-     * L'utilisateur est crée avec le matricule passé en paramètre et le profil par défaut
-     * en fonction du droit admin (soit admin soit default)
+     * Création d'un utilisateur par défaut L'utilisateur est crée avec le matricule passé en paramètre et le profil par
+     * défaut en fonction du droit admin (soit admin soit default)
+     * 
      * @param pSession session
      * @param pMatricule matricule
      * @param pAdmin indique si le profil admin est requis
      * @return user créé
      * @throws JrafDaoException si erreur
      */
-    static private UserBO createDefaultUser(ISession pSession, String pMatricule, Boolean pAdmin) throws JrafDaoException {
+    static private UserBO createDefaultUser( ISession pSession, String pMatricule, Boolean pAdmin )
+        throws JrafDaoException
+    {
         UserBO userBO = new UserBO();
-        userBO.setMatricule(pMatricule);
+        userBO.setMatricule( pMatricule );
         ProfileDAOImpl profileDAO = ProfileDAOImpl.getInstance();
         UserDAOImpl userDAO = UserDAOImpl.getInstance();
         ProfileBO defaultProfile;
-        if (pAdmin.booleanValue()) {
-            defaultProfile = (ProfileBO) profileDAO.loadByKey(pSession, ProfileBO.ADMIN_PROFILE_NAME);
-        } else {
-            defaultProfile = (ProfileBO) profileDAO.loadByKey(pSession, ProfileBO.DEFAULT_PROFILE_NAME);
+        if ( pAdmin.booleanValue() )
+        {
+            defaultProfile = (ProfileBO) profileDAO.loadByKey( pSession, ProfileBO.ADMIN_PROFILE_NAME );
         }
-        userBO.setDefaultProfile(defaultProfile);
-        // Sauvegarde de l'utilisateur 
-        userDAO.save(pSession, userBO);
+        else
+        {
+            defaultProfile = (ProfileBO) profileDAO.loadByKey( pSession, ProfileBO.DEFAULT_PROFILE_NAME );
+        }
+        userBO.setDefaultProfile( defaultProfile );
+        // Sauvegarde de l'utilisateur
+        userDAO.save( pSession, userBO );
         return userBO;
     }
 
     /**
-     * @param pId l'id de l'application 
+     * @param pId l'id de l'application
      * @param pProfile le profil utilisateur recherché pour cette application
-     * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés
-     * de l'envoi automatique d'email.
+     * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés de l'envoi
+     *            automatique d'email.
      * @return l'ensemble des utilisateurs ayant <code>pProfile</code> comme droit sur l'application
      * @throws JrafEnterpriseException en cas d'échecs
      */
-    public static Collection getUsersWithEmails(Long pId, String pProfile, boolean pUnsubscribed) throws JrafEnterpriseException {
+    public static Collection getUsersWithEmails( Long pId, String pProfile, boolean pUnsubscribed )
+        throws JrafEnterpriseException
+    {
         Collection result = new ArrayList(); // retour de la facade
         ISession session = null;
-        try {
+        try
+        {
             // récupération d'une session
             session = PERSISTENTPROVIDER.getSession();
             UserDAOImpl userDAO = UserDAOImpl.getInstance();
             // Obtention des users avec le profil pProfile sur l'application
-            ProfileBO profileBO = ProfileDAOImpl.getInstance().loadByKey(session, pProfile);
-            Collection applicationUsers = userDAO.findWhereApplicationAndProfileAndHaveEmails(session, pId, profileBO, pUnsubscribed);
+            ProfileBO profileBO = ProfileDAOImpl.getInstance().loadByKey( session, pProfile );
+            Collection applicationUsers =
+                userDAO.findWhereApplicationAndProfileAndHaveEmails( session, pId, profileBO, pUnsubscribed );
             Iterator it = applicationUsers.iterator();
             // Transformation des userBO en DTO
-            while (it.hasNext()) {
+            while ( it.hasNext() )
+            {
                 UserBO userBO = (UserBO) it.next();
-                UserDTO userDTO = UserTransform.bo2Dto(userBO);
-                result.add(userDTO);
+                UserDTO userDTO = UserTransform.bo2Dto( userBO );
+                result.add( userDTO );
             }
-        } catch (JrafDaoException e) {
+        }
+        catch ( JrafDaoException e )
+        {
             // Renvoi d'une exception
-            FacadeHelper.convertException(e, UserFacade.class.getName() + ".getManagers");
-        } finally {
+            FacadeHelper.convertException( e, UserFacade.class.getName() + ".getManagers" );
+        }
+        finally
+        {
             // Fermeture de la session
-            FacadeHelper.closeSession(session, UserFacade.class.getName() + ".getManagers");
+            FacadeHelper.closeSession( session, UserFacade.class.getName() + ".getManagers" );
         }
 
         return result;
@@ -409,33 +483,41 @@ public class UserFacade implements IFacade {
 
     /**
      * Obtention des utilisateurs avec le profil administrateur
-     * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés
-     * de l'envoi automatique d'email.
-     * @return utilisateurs avec le profil administrateur ou ayant le profil manager
-     * sur l'application concernée
+     * 
+     * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés de l'envoi
+     *            automatique d'email.
+     * @return utilisateurs avec le profil administrateur ou ayant le profil manager sur l'application concernée
      * @throws JrafEnterpriseException si erreur
      */
-    static public Collection getAdminsWithEmails(boolean pUnsubscribed) throws JrafEnterpriseException {
+    static public Collection getAdminsWithEmails( boolean pUnsubscribed )
+        throws JrafEnterpriseException
+    {
         Collection result = new ArrayList(); // retour de la facade
         ISession session = null;
-        try {
+        try
+        {
             // récupération d'une session
             session = PERSISTENTPROVIDER.getSession();
             UserDAOImpl userDAO = UserDAOImpl.getInstance();
             // Obtention des utilisateurs avec le profil admin
-            Collection adminUsers = userDAO.findWhereAdminAndHaveEmails(session, pUnsubscribed);
+            Collection adminUsers = userDAO.findWhereAdminAndHaveEmails( session, pUnsubscribed );
             Iterator it = adminUsers.iterator();
             // transformation du UserBO en UserDTO
-            while (it.hasNext()) {
-                UserDTO userDTO = UserTransform.bo2Dto((UserBO) it.next());
-                result.add(userDTO);
+            while ( it.hasNext() )
+            {
+                UserDTO userDTO = UserTransform.bo2Dto( (UserBO) it.next() );
+                result.add( userDTO );
             }
-        } catch (JrafDaoException e) {
+        }
+        catch ( JrafDaoException e )
+        {
             // Renvoi d'une exception
-            FacadeHelper.convertException(e, UserFacade.class.getName() + ".getAdminUsers");
-        } finally {
+            FacadeHelper.convertException( e, UserFacade.class.getName() + ".getAdminUsers" );
+        }
+        finally
+        {
             // Fermeture de la session
-            FacadeHelper.closeSession(session, UserFacade.class.getName() + ".getAdminUsers");
+            FacadeHelper.closeSession( session, UserFacade.class.getName() + ".getAdminUsers" );
         }
         return result;
     }

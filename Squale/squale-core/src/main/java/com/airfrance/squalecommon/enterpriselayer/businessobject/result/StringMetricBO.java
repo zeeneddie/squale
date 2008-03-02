@@ -9,11 +9,11 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
 /**
  * @author m401540
  * @version 1.0
- * 
- * @hibernate.subclass
- * discriminator-value="Str"
+ * @hibernate.subclass discriminator-value="Str"
  */
-public class StringMetricBO extends MetricBO {
+public class StringMetricBO
+    extends MetricBO
+{
 
     /**
      * Valeur chaine du mérique
@@ -23,18 +23,11 @@ public class StringMetricBO extends MetricBO {
     /**
      * Access method for the mValue property.
      * 
-     * @return   the current value of the mName property
-     * 
-     * @hibernate.property 
-     * name="Value" 
-     * column="String_val" 
-     * type="string" 
-     * length=4000
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mName property
+     * @hibernate.property name="Value" column="String_val" type="string" length=4000 not-null="false" unique="false"
      */
-    public Object getValue() {
+    public Object getValue()
+    {
         return mValue;
     }
 
@@ -43,15 +36,19 @@ public class StringMetricBO extends MetricBO {
      * 
      * @param pValue the new value of the mValue property
      */
-    public void setValue(Object pValue) {
+    public void setValue( Object pValue )
+    {
         mValue = (String) pValue;
     }
-    /** (non-Javadoc)
+
+    /**
+     * (non-Javadoc)
+     * 
      * @see com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO#isPrintable()
      */
-    public boolean isPrintable() {
+    public boolean isPrintable()
+    {
         return true;
-    }   
-
+    }
 
 }

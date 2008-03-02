@@ -28,7 +28,8 @@ import com.airfrance.squalecommon.util.file.FileUtility;
 /**
  * Facade pour PMD
  */
-public class PmdFacade {
+public class PmdFacade
+{
 
     /**
      * Provider de persistence
@@ -36,115 +37,151 @@ public class PmdFacade {
     private static final IPersistenceProvider PERSISTENTPROVIDER = PersistenceHelper.getPersistenceProvider();
 
     /** Log */
-    private static Log LOG = LogFactory.getLog(PmdFacade.class);
+    private static Log LOG = LogFactory.getLog( PmdFacade.class );
 
     /**
      * Parsing du fichier de configuration
+     * 
      * @param pStream flux à lire
      * @param pErrors erreurs rencontrées
      * @return ruleset créé
      * @throws JrafEnterpriseException si erreur
      */
-    public static PmdRuleSetDTO importPmdConfig(InputStream pStream, StringBuffer pErrors) throws JrafEnterpriseException {
+    public static PmdRuleSetDTO importPmdConfig( InputStream pStream, StringBuffer pErrors )
+        throws JrafEnterpriseException
+    {
         ISession session = null;
         PmdRuleSetDTO dto = null;
-        try {
+        try
+        {
             session = PERSISTENTPROVIDER.getSession();
             PmdConfigParser parser = new PmdConfigParser();
             // Importation du fichier
-            byte[] bytes = FileUtility.toByteArrayImpl(pStream);
-            PmdRuleSetBO ruleset = parser.parseFile(new ByteArrayInputStream(bytes), pErrors);
-            if (ruleset.getLanguage().equals("jsp")) {
+            byte[] bytes = FileUtility.toByteArrayImpl( pStream );
+            PmdRuleSetBO ruleset = parser.parseFile( new ByteArrayInputStream( bytes ), pErrors );
+            if ( ruleset.getLanguage().equals( "jsp" ) )
+            {
                 // On ajoute une règle pour remonter les erreurs de parsing dû aux JSPs con conforme
                 // au XHTML
                 RuleBO xhtmlRule = new RuleBO();
-                xhtmlRule.setRuleSet(ruleset);
-                xhtmlRule.setCode(PmdRuleSetBO.XHTML_RULE_NAME);
-                xhtmlRule.setCategory(PmdRuleSetBO.XHTML_RULE_CATEGORY);
-                xhtmlRule.setSeverity(PmdRuleSetBO.XHTML_RULE_SEVERITY);
-                ruleset.addRule(xhtmlRule);
+                xhtmlRule.setRuleSet( ruleset );
+                xhtmlRule.setCode( PmdRuleSetBO.XHTML_RULE_NAME );
+                xhtmlRule.setCategory( PmdRuleSetBO.XHTML_RULE_CATEGORY );
+                xhtmlRule.setSeverity( PmdRuleSetBO.XHTML_RULE_SEVERITY );
+                ruleset.addRule( xhtmlRule );
             }
-            if (pErrors.length() == 0) {
+            if ( pErrors.length() == 0 )
+            {
                 // On lui positionne le numéro de version
-                ruleset.setValue(bytes);
-                ruleset = PmdRuleSetDAOImpl.getInstance().createPmdRuleSet(session, ruleset);
+                ruleset.setValue( bytes );
+                ruleset = PmdRuleSetDAOImpl.getInstance().createPmdRuleSet( session, ruleset );
                 // 
-                dto = PmdTransform.bo2Dto(ruleset);
+                dto = PmdTransform.bo2Dto( ruleset );
             }
-        } catch (JrafDaoException e) {
-            LOG.error(e.getMessage(), e);
-            FacadeHelper.convertException(e, PmdFacade.class.getName() + ".importPmdConfig");
-        } catch (IOException e) {
-            LOG.error(e.getMessage(), e);
-            FacadeHelper.convertException(e, PmdFacade.class.getName() + ".importPmdConfig");
-        } finally {
+        }
+        catch ( JrafDaoException e )
+        {
+            LOG.error( e.getMessage(), e );
+            FacadeHelper.convertException( e, PmdFacade.class.getName() + ".importPmdConfig" );
+        }
+        catch ( IOException e )
+        {
+            LOG.error( e.getMessage(), e );
+            FacadeHelper.convertException( e, PmdFacade.class.getName() + ".importPmdConfig" );
+        }
+        finally
+        {
             // Fermeture de la session
-            FacadeHelper.closeSession(session, PmdFacade.class.getName() + ".importPmdConfig");
+            FacadeHelper.closeSession( session, PmdFacade.class.getName() + ".importPmdConfig" );
         }
         return dto;
     }
 
     /**
      * Obtention de tous les rulesets Pmd
+     * 
      * @return tous les rulesets PMD sous la forme de PmdRuleSetDTO
      * @throws JrafEnterpriseException si erreur
      */
-    public static Collection getAllPmdConfigs() throws JrafEnterpriseException {
+    public static Collection getAllPmdConfigs()
+        throws JrafEnterpriseException
+    {
         Collection result = new ArrayList();
         ISession session = null;
-        try {
+        try
+        {
             session = PERSISTENTPROVIDER.getSession();
-            List rulesets = PmdRuleSetDAOImpl.getInstance().findAll(session);
-            for (Iterator it = rulesets.iterator(); it.hasNext();) {
-                result.add(PmdTransform.bo2Dto((PmdRuleSetBO) it.next()));
+            List rulesets = PmdRuleSetDAOImpl.getInstance().findAll( session );
+            for ( Iterator it = rulesets.iterator(); it.hasNext(); )
+            {
+                result.add( PmdTransform.bo2Dto( (PmdRuleSetBO) it.next() ) );
             }
-        } catch (JrafDaoException e) {
-            LOG.error(e.getMessage(), e);
-            FacadeHelper.convertException(e, PmdFacade.class.getName() + ".getAllPmdConfigs");
-        } finally {
+        }
+        catch ( JrafDaoException e )
+        {
+            LOG.error( e.getMessage(), e );
+            FacadeHelper.convertException( e, PmdFacade.class.getName() + ".getAllPmdConfigs" );
+        }
+        finally
+        {
             // Fermeture de la session
-            FacadeHelper.closeSession(session, PmdFacade.class.getName() + ".getAllPmdConfigs");
+            FacadeHelper.closeSession( session, PmdFacade.class.getName() + ".getAllPmdConfigs" );
         }
         return result;
     }
 
     /**
      * Suppression des configurations PMD
+     * 
      * @param pRuleSets collection de rulesets PMD sous la forme de PmdRuleSetDTO
      * @return rulesets ne pouvant être détruits car utilisés
      * @throws JrafEnterpriseException si erreur
      */
-    public static Collection deletePmdConfigs(Collection pRuleSets) throws JrafEnterpriseException {
+    public static Collection deletePmdConfigs( Collection pRuleSets )
+        throws JrafEnterpriseException
+    {
         ISession session = null;
         Collection result = new ArrayList();
-        try {
+        try
+        {
             // récupération d'une session
             session = PERSISTENTPROVIDER.getSession();
             PmdRuleSetDAOImpl pmdRuleSetDAO = PmdRuleSetDAOImpl.getInstance();
             Iterator ruleSetsIt = pRuleSets.iterator();
             // Parcours des rulesets à détruire
             ArrayList rulesetsId = new ArrayList();
-            RuleCheckingTransgressionDAOImpl ruleCheckingTransgressionDAO = RuleCheckingTransgressionDAOImpl.getInstance();
-            while (ruleSetsIt.hasNext()) {
+            RuleCheckingTransgressionDAOImpl ruleCheckingTransgressionDAO =
+                RuleCheckingTransgressionDAOImpl.getInstance();
+            while ( ruleSetsIt.hasNext() )
+            {
                 PmdRuleSetDTO checkstyleDTO = (PmdRuleSetDTO) ruleSetsIt.next();
-                Long ruleSetId = new Long(checkstyleDTO.getId());
+                Long ruleSetId = new Long( checkstyleDTO.getId() );
                 // On vérifie que le jeu de règles n'est pas utilisé
-                // au niveau des mesures réalisées, pour les projets paramétrés mais non encore audités, on ne le gère pas
-                if (ruleCheckingTransgressionDAO.isRuleSetUsed(session, ruleSetId)) {
-                    result.add(checkstyleDTO);
-                } else {
+                // au niveau des mesures réalisées, pour les projets paramétrés mais non encore audités, on ne le gère
+                // pas
+                if ( ruleCheckingTransgressionDAO.isRuleSetUsed( session, ruleSetId ) )
+                {
+                    result.add( checkstyleDTO );
+                }
+                else
+                {
                     // Ajout dans les rulesets à détruire
-                    rulesetsId.add(ruleSetId);
+                    rulesetsId.add( ruleSetId );
                 }
             }
             // Destruction des rulesets qui ne sont plus référencés
-            if (rulesetsId.size() > 0) {
-                pmdRuleSetDAO.removePmdRuleSets(session, rulesetsId);
+            if ( rulesetsId.size() > 0 )
+            {
+                pmdRuleSetDAO.removePmdRuleSets( session, rulesetsId );
             }
-        } catch (JrafDaoException e) {
-            FacadeHelper.convertException(e, PmdFacade.class.getName() + ".get");
-        } finally {
-            FacadeHelper.closeSession(session, PmdFacade.class.getName() + ".get");
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, PmdFacade.class.getName() + ".get" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, PmdFacade.class.getName() + ".get" );
         }
         return result;
     }

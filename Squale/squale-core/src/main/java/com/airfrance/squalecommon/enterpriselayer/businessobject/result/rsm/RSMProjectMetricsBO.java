@@ -5,10 +5,11 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureB
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO;
 
 /**
- * @hibernate.subclass
- * discriminator-value="RSMProjectMetrics"
+ * @hibernate.subclass discriminator-value="RSMProjectMetrics"
  */
-public class RSMProjectMetricsBO extends MeasureBO {
+public class RSMProjectMetricsBO
+    extends MeasureBO
+{
 
     /**
      * Le nombre de lignes de codes
@@ -38,21 +39,24 @@ public class RSMProjectMetricsBO extends MeasureBO {
     /**
      * Constructeur par défaut.
      */
-    public RSMProjectMetricsBO() {
+    public RSMProjectMetricsBO()
+    {
         super();
-        getMetrics().put(NUMBER_OF_CLASSES, new IntegerMetricBO());
-        getMetrics().put(NUMBER_OF_METHODS, new IntegerMetricBO());
-        getMetrics().put(SLOC, new IntegerMetricBO());
-        getMetrics().put(COMMENTS, new IntegerMetricBO());
-        getMetrics().put(NUMBER_OF_CODE_LINES, new IntegerMetricBO());
+        getMetrics().put( NUMBER_OF_CLASSES, new IntegerMetricBO() );
+        getMetrics().put( NUMBER_OF_METHODS, new IntegerMetricBO() );
+        getMetrics().put( SLOC, new IntegerMetricBO() );
+        getMetrics().put( COMMENTS, new IntegerMetricBO() );
+        getMetrics().put( NUMBER_OF_CODE_LINES, new IntegerMetricBO() );
     }
 
     /**
      * Méthode d'accès à la métrique SLOC
+     * 
      * @return la valeur du sloc
      */
-    public Integer getSloc() {
-        return (Integer) ((MetricBO) getMetrics().get(SLOC)).getValue();
+    public Integer getSloc()
+    {
+        return (Integer) ( (MetricBO) getMetrics().get( SLOC ) ).getValue();
     }
 
     /**
@@ -60,8 +64,9 @@ public class RSMProjectMetricsBO extends MeasureBO {
      * 
      * @param pSLOC la nouvelle valeur du SLOC
      */
-    public void setSloc(Integer pSLOC) {
-        ((IntegerMetricBO) getMetrics().get(SLOC)).setValue(pSLOC);
+    public void setSloc( Integer pSLOC )
+    {
+        ( (IntegerMetricBO) getMetrics().get( SLOC ) ).setValue( pSLOC );
         // gere le total, nouveau de comportement de RSM par rapport à PureComments
         manageTotal();
 
@@ -70,29 +75,34 @@ public class RSMProjectMetricsBO extends MeasureBO {
     /**
      * gere le total, nouveau de comportement de RSM par rapport à PureComments
      */
-    private void manageTotal() {
-        //  Met à jour le nombre total de lignes de code
+    private void manageTotal()
+    {
+        // Met à jour le nombre total de lignes de code
         // en faisant la somme
         // On ajoute a chaque fois car on ne sait pas dans quel ordre sont calculés les différentes mesures,
         // mais on sait quelles ne sont calculées qu'une seule fois
         int newValue = 0;
-        if (((IntegerMetricBO) getMetrics().get(SLOC)) != null && ((IntegerMetricBO) getMetrics().get(SLOC)).getValue() != null) {
-            newValue += ((Integer) ((IntegerMetricBO) getMetrics().get(SLOC)).getValue()).intValue();
+        if ( ( (IntegerMetricBO) getMetrics().get( SLOC ) ) != null
+            && ( (IntegerMetricBO) getMetrics().get( SLOC ) ).getValue() != null )
+        {
+            newValue += ( (Integer) ( (IntegerMetricBO) getMetrics().get( SLOC ) ).getValue() ).intValue();
         }
-        if (((IntegerMetricBO) getMetrics().get(COMMENTS)) != null && ((IntegerMetricBO) getMetrics().get(COMMENTS)).getValue() != null) {
-            newValue += ((Integer) ((IntegerMetricBO) getMetrics().get(COMMENTS)).getValue()).intValue();
+        if ( ( (IntegerMetricBO) getMetrics().get( COMMENTS ) ) != null
+            && ( (IntegerMetricBO) getMetrics().get( COMMENTS ) ).getValue() != null )
+        {
+            newValue += ( (Integer) ( (IntegerMetricBO) getMetrics().get( COMMENTS ) ).getValue() ).intValue();
         }
-        ((IntegerMetricBO) getMetrics().get(NUMBER_OF_CODE_LINES)).setValue(new Integer(newValue));
+        ( (IntegerMetricBO) getMetrics().get( NUMBER_OF_CODE_LINES ) ).setValue( new Integer( newValue ) );
     }
 
     /**
      * Méthode d'accès à la métrique commentaires
      * 
      * @return la valeur sur le nombre de lignes de commentaires
-     * 
      */
-    public Integer getComments() {
-        return (Integer) ((IntegerMetricBO) getMetrics().get(COMMENTS)).getValue();
+    public Integer getComments()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( COMMENTS ) ).getValue();
     }
 
     /**
@@ -100,31 +110,33 @@ public class RSMProjectMetricsBO extends MeasureBO {
      * 
      * @param pComments la nouvelle valeur du nombre de commentaires
      */
-    public void setComments(Integer pComments) {
-        ((IntegerMetricBO) getMetrics().get(COMMENTS)).setValue(pComments);
+    public void setComments( Integer pComments )
+    {
+        ( (IntegerMetricBO) getMetrics().get( COMMENTS ) ).setValue( pComments );
         // gere le total, nouveau de comportement de RSM par rapport à PureComments
         manageTotal();
     }
 
     /**
-        * Sets the value of the mNumberOfClasses property.
-        * 
-        * @param pNumberOfClasses the new value of the mNumberOfClasses property
-        * @roseuid 42C416B702DB
-        */
-    public void setNumberOfClasses(Integer pNumberOfClasses) {
-        ((IntegerMetricBO) getMetrics().get(NUMBER_OF_CLASSES)).setValue(pNumberOfClasses);
+     * Sets the value of the mNumberOfClasses property.
+     * 
+     * @param pNumberOfClasses the new value of the mNumberOfClasses property
+     * @roseuid 42C416B702DB
+     */
+    public void setNumberOfClasses( Integer pNumberOfClasses )
+    {
+        ( (IntegerMetricBO) getMetrics().get( NUMBER_OF_CLASSES ) ).setValue( pNumberOfClasses );
     }
 
     /**
      * Access method for the mNumberOfMethods property.
      * 
-     * @return   the current value of the mNumberOfMethods property
-     * 
+     * @return the current value of the mNumberOfMethods property
      * @roseuid 42C416B70339
      */
-    public Integer getNumberOfMethods() {
-        return (Integer) ((IntegerMetricBO) getMetrics().get(NUMBER_OF_METHODS)).getValue();
+    public Integer getNumberOfMethods()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( NUMBER_OF_METHODS ) ).getValue();
     }
 
     /**
@@ -133,15 +145,17 @@ public class RSMProjectMetricsBO extends MeasureBO {
      * @param pNumberOfMethods the new value of the mNumberOfMethods property
      * @roseuid 42C416B70367
      */
-    public void setNumberOfMethods(Integer pNumberOfMethods) {
-        ((IntegerMetricBO) getMetrics().get(NUMBER_OF_METHODS)).setValue(pNumberOfMethods);
+    public void setNumberOfMethods( Integer pNumberOfMethods )
+    {
+        ( (IntegerMetricBO) getMetrics().get( NUMBER_OF_METHODS ) ).setValue( pNumberOfMethods );
     }
 
     /**
      * @return le nombre de lignes
      */
-    public Integer getNumberofcodelines() {
-        return (Integer) ((IntegerMetricBO) getMetrics().get(NUMBER_OF_CODE_LINES)).getValue();
+    public Integer getNumberofcodelines()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( NUMBER_OF_CODE_LINES ) ).getValue();
     }
 
 }

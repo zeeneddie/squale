@@ -12,33 +12,38 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.Volu
 /**
  * Test du DAO des configurations d'affichage
  */
-public class AbstractDisplayConfDAOImplTest extends SqualeTestCase {
-    
+public class AbstractDisplayConfDAOImplTest
+    extends SqualeTestCase
+{
+
     /**
      * Teste la récupération des configurations en fonction du subclass
+     * 
      * @throws JrafDaoException si erreur
      */
-    public void testFindAllSubclass() throws JrafDaoException {
+    public void testFindAllSubclass()
+        throws JrafDaoException
+    {
         getSession().beginTransaction();
         // On crée deux configurations de type différent
         AbstractDisplayConfDAOImpl dao = AbstractDisplayConfDAOImpl.getInstance();
         // Un bubble
         BubbleConfBO bubble = new BubbleConfBO();
-        bubble.setXTre("project.mccabe.evg");
-        bubble.setYTre("project.mccabe.vg");
-        dao.create(getSession(), bubble);
+        bubble.setXTre( "project.mccabe.evg" );
+        bubble.setYTre( "project.mccabe.vg" );
+        dao.create( getSession(), bubble );
         // Une volumétrie
         VolumetryConfBO volumetry = new VolumetryConfBO();
-        volumetry.setComponentType(DisplayConfConstants.VOLUMETRY_APPLICATION_TYPE);
-        volumetry.addTre("project.rsm.sloc");
-        dao.create(getSession(), volumetry);
+        volumetry.setComponentType( DisplayConfConstants.VOLUMETRY_APPLICATION_TYPE );
+        volumetry.addTre( "project.rsm.sloc" );
+        dao.create( getSession(), volumetry );
         getSession().commitTransactionWithoutClose();
-        Collection all = dao.findAll(getSession());
-        assertEquals(2, all.size());
-        //On veut récupérer toutes les configurations des bubble
-        Collection bubbles = dao.findAllSubclass(getSession(), BubbleConfBO.class);
-        assertEquals(1, bubbles.size());
-        
+        Collection all = dao.findAll( getSession() );
+        assertEquals( 2, all.size() );
+        // On veut récupérer toutes les configurations des bubble
+        Collection bubbles = dao.findAllSubclass( getSession(), BubbleConfBO.class );
+        assertEquals( 1, bubbles.size() );
+
     }
 
 }

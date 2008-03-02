@@ -19,13 +19,13 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurB
 
 /**
  * Représente une application Air France
- * @author m400842
  * 
- * @hibernate.subclass
- * lazy="true"
- * discriminator-value="Application"
+ * @author m400842
+ * @hibernate.subclass lazy="true" discriminator-value="Application"
  */
-public class ApplicationBO extends AbstractComplexComponentBO {
+public class ApplicationBO
+    extends AbstractComplexComponentBO
+{
 
     /**
      * Fréquence d'audit en nombre de jour
@@ -47,10 +47,12 @@ public class ApplicationBO extends AbstractComplexComponentBO {
      * L'application est en création (non validée)
      */
     public static final int IN_CREATION = 0;
+
     /**
      * L'application est validée.
      */
     public static final int VALIDATED = 1;
+
     /**
      * L'application est supprimée.
      */
@@ -88,30 +90,26 @@ public class ApplicationBO extends AbstractComplexComponentBO {
 
     /**
      * Instancie un nouveau composant.
+     * 
      * @param pName Nom du composant.
      * @roseuid 42AFF0B3011B
      */
-    public ApplicationBO(final String pName) {
+    public ApplicationBO( final String pName )
+    {
         super();
-        setName(pName);
+        setName( pName );
     }
 
     /**
      * Access method for the mAuditFrequency property.
      * 
-     * @return   the current value of the mAuditFrequency property
-     * 
-     * @hibernate.property 
-     * name="auditFrequency" 
-     * column="AuditFrequency" 
-     * type="integer" 
-     * length="10"
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mAuditFrequency property
+     * @hibernate.property name="auditFrequency" column="AuditFrequency" type="integer" length="10" not-null="false"
+     *                     unique="false"
      * @roseuid 42BACECB0380
      */
-    public int getAuditFrequency() {
+    public int getAuditFrequency()
+    {
         return mAuditFrequency;
     }
 
@@ -121,26 +119,21 @@ public class ApplicationBO extends AbstractComplexComponentBO {
      * @param pAuditFrequency the new value of the mAuditFrequency property
      * @roseuid 42BACECB0381
      */
-    public void setAuditFrequency(int pAuditFrequency) {
+    public void setAuditFrequency( int pAuditFrequency )
+    {
         mAuditFrequency = pAuditFrequency;
     }
 
     /**
      * Access method for the mResultsStorageOptions property.
      * 
-     * @return   the current value of the mResultsStorageOptions property
-     * 
-     * @hibernate.property 
-     * name="resultsStorageOptions" 
-     * column="ResultsStorageOptions" 
-     * type="integer" 
-     * length="10"
-     * not-null="false" 
-     * unique="false"
-     * 
+     * @return the current value of the mResultsStorageOptions property
+     * @hibernate.property name="resultsStorageOptions" column="ResultsStorageOptions" type="integer" length="10"
+     *                     not-null="false" unique="false"
      * @roseuid 42BACECB0383
      */
-    public int getResultsStorageOptions() {
+    public int getResultsStorageOptions()
+    {
         return mResultsStorageOptions;
     }
 
@@ -150,25 +143,20 @@ public class ApplicationBO extends AbstractComplexComponentBO {
      * @param pResultsStorageOptions the new value of the mResultsStorageOptions property
      * @roseuid 42BACECB0390
      */
-    public void setResultsStorageOptions(int pResultsStorageOptions) {
+    public void setResultsStorageOptions( int pResultsStorageOptions )
+    {
         mResultsStorageOptions = pResultsStorageOptions;
     }
 
     /**
      * Retourne le statut de l'application
      * 
-     * @return   the mStatus property is true
-     * 
-     * @hibernate.property 
-     * name="status" 
-     * column="Status" 
-     * type="integer" 
-     * length="10"
-     * unique="false"
-     * 
+     * @return the mStatus property is true
+     * @hibernate.property name="status" column="Status" type="integer" length="10" unique="false"
      * @roseuid 42CAA72C0133
      */
-    public int getStatus() {
+    public int getStatus()
+    {
         return mStatus;
     }
 
@@ -178,20 +166,24 @@ public class ApplicationBO extends AbstractComplexComponentBO {
      * @param pStatus le status du projet
      * @roseuid 42CAA72C020E
      */
-    public void setStatus(int pStatus) {
+    public void setStatus( int pStatus )
+    {
         mStatus = pStatus;
     }
 
     /**
      * Constructeur par défaut.
+     * 
      * @roseuid 42CB9778032A
      */
-    public ApplicationBO() {
+    public ApplicationBO()
+    {
         super();
     }
 
     /**
      * Constructeur complet.
+     * 
      * @param pName nom du composant
      * @param pAuditFrequency fréquence d'audit
      * @param pResultsStorageOptions options de stockage des résultats
@@ -200,84 +192,75 @@ public class ApplicationBO extends AbstractComplexComponentBO {
      * @param pChildren Collection d'enfants
      * @param pSiteId le site de l'application
      * @param pExternalDev le booléen indiquant si c'est un développement externe
-     * @param pIsInProduction un booléen indiquant si l'application était déjà en production
-     * au moment de sa création dans SQUALE
+     * @param pIsInProduction un booléen indiquant si l'application était déjà en production au moment de sa création
+     *            dans SQUALE
      * @throws UnexpectedRelationException si la relation ne peut etre ajouté
      * @roseuid 42CB9779000D
      */
-    public ApplicationBO(
-        String pName,
-        int pAuditFrequency,
-        int pResultsStorageOptions,
-        int pStatus,
-        Collection pAudits,
-        Collection pChildren,
-        long pSiteId,
-        boolean pExternalDev,
-        boolean pIsInProduction)
-        throws UnexpectedRelationException {
-        super(pName, pChildren, null);
+    public ApplicationBO( String pName, int pAuditFrequency, int pResultsStorageOptions, int pStatus,
+                          Collection pAudits, Collection pChildren, long pSiteId, boolean pExternalDev,
+                          boolean pIsInProduction )
+        throws UnexpectedRelationException
+    {
+        super( pName, pChildren, null );
         mAuditFrequency = pAuditFrequency;
         mResultsStorageOptions = pResultsStorageOptions;
         mStatus = pStatus;
         mAudits = pAudits;
         mServeurBO = new ServeurBO();
-        mServeurBO.setServeurId(pSiteId);
+        mServeurBO.setServeurId( pSiteId );
         mExternalDev = pExternalDev;
         mIsInProduction = pIsInProduction;
     }
 
     /**
      * Récupère l'attribut mPublic
+     * 
      * @return projet est-il public
-     * 
-     * @hibernate.property 
-     * name="public" 
-     * column="PublicApplication" 
-     * type="boolean" 
-     * unique="false"
-     * 
+     * @hibernate.property name="public" column="PublicApplication" type="boolean" unique="false"
      */
-    public boolean getPublic() {
+    public boolean getPublic()
+    {
         return mPublic;
     }
 
     /**
      * Affecte pPublic à l'attribut mPublic.
+     * 
      * @param pPublic projet est-il publique
      * @roseuid 42CE36C203DF
      */
-    public void setPublic(boolean pPublic) {
+    public void setPublic( boolean pPublic )
+    {
         mPublic = pPublic;
     }
 
     /**
      * Récupère l'attribut mLastUpdate
-     * @return la date de dernière modification.
      * 
-     * @hibernate.property 
-     * name="lastUpdate" 
-     * column="LastUpdate" 
-     * type="timestamp" 
-     * not-null="false" 
-     * unique="false"
+     * @return la date de dernière modification.
+     * @hibernate.property name="lastUpdate" column="LastUpdate" type="timestamp" not-null="false" unique="false"
      */
-    public Date getLastUpdate() {
+    public Date getLastUpdate()
+    {
         return mLastUpdate;
     }
 
     /**
      * Modifie l'attribut mLastUpdate
+     * 
      * @param pDate la date
      */
-    public void setLastUpdate(Date pDate) {
+    public void setLastUpdate( Date pDate )
+    {
         mLastUpdate = pDate;
     }
 
     /**
      * Affecte la date courante à l'attribut mLastUpdate
      */
-    public void setLastUpdate() {
+    public void setLastUpdate()
+    {
         Calendar cal = new GregorianCalendar();
         mLastUpdate = cal.getTime();
     }
@@ -285,11 +268,15 @@ public class ApplicationBO extends AbstractComplexComponentBO {
     /**
      * @see java.lang.Object#equals(java.lang.Object)
      */
-    public boolean equals(Object pObj) {
+    public boolean equals( Object pObj )
+    {
         boolean ret = false;
-        if (pObj instanceof ApplicationBO) {
+        if ( pObj instanceof ApplicationBO )
+        {
             ApplicationBO appli = (ApplicationBO) pObj;
-            ret = (getName() != null) && (appli.getName() != null) && getName().equals(appli.getName()) && (getStatus() == appli.getStatus());
+            ret =
+                ( getName() != null ) && ( appli.getName() != null ) && getName().equals( appli.getName() )
+                    && ( getStatus() == appli.getStatus() );
         }
         return ret;
     }
@@ -297,154 +284,137 @@ public class ApplicationBO extends AbstractComplexComponentBO {
     /**
      * @see java.lang.Object#hashCode()
      */
-    public int hashCode() {
+    public int hashCode()
+    {
         return getName() == null ? super.hashCode() : getName().hashCode();
     }
 
     /**
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        ToStringBuilder stringBuilder = new ToStringBuilder(this);
-        stringBuilder.append("Name", mName);
+    public String toString()
+    {
+        ToStringBuilder stringBuilder = new ToStringBuilder( this );
+        stringBuilder.append( "Name", mName );
         return stringBuilder.toString();
     }
 
     /**
      * @return le booléen indiquant si le dev a été fait en externe ou pas
-     * @hibernate.property 
-     * name="externalDev" 
-     * column="EXTERNAL_DEV" 
-     * type="boolean" 
-     * unique="false"
-     
+     * @hibernate.property name="externalDev" column="EXTERNAL_DEV" type="boolean" unique="false"
      */
-    public boolean getExternalDev() {
+    public boolean getExternalDev()
+    {
         return mExternalDev;
     }
 
     /**
-     * @return le booléen indiquant si l'application était déjà en production au
-     * moment de sa création dans squale
-     * 
-     * @hibernate.property 
-     * name="inProduction" 
-     * column="IN_PRODUCTION" 
-     * type="boolean" 
-     * unique="false"
+     * @return le booléen indiquant si l'application était déjà en production au moment de sa création dans squale
+     * @hibernate.property name="inProduction" column="IN_PRODUCTION" type="boolean" unique="false"
      */
-    public boolean getInProduction() {
+    public boolean getInProduction()
+    {
         return mIsInProduction;
     }
 
     /**
      * @param pExternal le booléen indiquant si le dev a été fait en externe
      */
-    public void setExternalDev(boolean pExternal) {
+    public void setExternalDev( boolean pExternal )
+    {
         mExternalDev = pExternal;
     }
 
     /**
      * @param pInProduction le booléen indiquant si l'application était déjà en production au
      */
-    public void setInProduction(boolean pInProduction) {
+    public void setInProduction( boolean pInProduction )
+    {
         mIsInProduction = pInProduction;
     }
 
     /**
      * @return le dernier utilisateur ayant modifié l'application
-     * 
-     * @hibernate.property 
-     * name="lastUser" 
-     * column="lastUser" 
-     * type="string" 
-     * length="1024"
-     * unique="false"
+     * @hibernate.property name="lastUser" column="lastUser" type="string" length="1024" unique="false"
      */
-    public String getLastUser() {
+    public String getLastUser()
+    {
         return mLastUser;
     }
 
     /**
      * @param pUser le dernier utilisateur ayant modifié l'application
      */
-    public void setLastUser(String pUser) {
+    public void setLastUser( String pUser )
+    {
         mLastUser = pUser;
     }
 
     /**
      * Retourne le serveur de l'application
-     * @return le serveur de l'application
      * 
-     * @hibernate.many-to-one
-     * lazy="true"
-     * name="serveurBO"
-     * column="Serveur"
-     * type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
-     * not-null="false"
-     * insert="true"
-     * update="true"
+     * @return le serveur de l'application
+     * @hibernate.many-to-one lazy="true" name="serveurBO" column="Serveur"
+     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
+     *                        not-null="false" insert="true" update="true"
      */
-    public ServeurBO getServeurBO() {
+    public ServeurBO getServeurBO()
+    {
         return mServeurBO;
     }
 
     /**
      * Modifie le serveur de l'application
+     * 
      * @param pServeurBO le serveur de l'application
      */
-    public void setServeurBO(ServeurBO pServeurBO) {
+    public void setServeurBO( ServeurBO pServeurBO )
+    {
         mServeurBO = pServeurBO;
     }
 
     /**
      * @return les 3 derniers accès utilisateur
-     * 
-     * @hibernate.list 
-     * name="UserAccesses"
-     * table="UserAccess"
-     * cascade="all"
-     * 
-     * @hibernate.collection-key 
-     * column="ApplicationId"
-     * 
-     * @hibernate.collection-index 
-     * column="AccessIndex" 
-     * type="long" 
-     * length="19"
-     * 
-     * @hibernate.collection-one-to-many
-     * column="UserAccessId" 
-     * class="com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO" 
+     * @hibernate.list name="UserAccesses" table="UserAccess" cascade="all"
+     * @hibernate.collection-key column="ApplicationId"
+     * @hibernate.collection-index column="AccessIndex" type="long" length="19"
+     * @hibernate.collection-one-to-many column="UserAccessId"
+     *                                   class="com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO"
      */
-    public List getUserAccesses() {
+    public List getUserAccesses()
+    {
         return mUserAccesses;
     }
 
     /**
      * @param pAccessBOs les accès utilisateur
      */
-    public void setUserAccesses(List pAccessBOs) {
+    public void setUserAccesses( List pAccessBOs )
+    {
         mUserAccesses = pAccessBOs;
     }
 
     /**
-     * Ajoute un accès en supprimant le dernier élément du tableau et en décalant les autres élements
-     * afin d'ajouter l'accès en premier
+     * Ajoute un accès en supprimant le dernier élément du tableau et en décalant les autres élements afin d'ajouter
+     * l'accès en premier
+     * 
      * @param pAccessBO l'accès à ajouter
      * @param maxSize le nombre limite d'accès à conserver
      */
-    public void addUserAccess(UserAccessBO pAccessBO, int maxSize) {
+    public void addUserAccess( UserAccessBO pAccessBO, int maxSize )
+    {
         // On n'ajoute l'élément seulement si il n'existe pas déjà
-        if (!mUserAccesses.contains(pAccessBO)) {
+        if ( !mUserAccesses.contains( pAccessBO ) )
+        {
             // On affecte l'application
-            pAccessBO.setApplication(this);
+            pAccessBO.setApplication( this );
             // On ajoute l'élément en début de liste
-            mUserAccesses.add(0, pAccessBO);
+            mUserAccesses.add( 0, pAccessBO );
             // Si la taille max est atteinte, on supprime le dernier élément
             int stackSize = mUserAccesses.size();
-            if (stackSize > maxSize) {
-                mUserAccesses.remove(stackSize - 1);
+            if ( stackSize > maxSize )
+            {
+                mUserAccesses.remove( stackSize - 1 );
             }
         }
     }
@@ -453,18 +423,21 @@ public class ApplicationBO extends AbstractComplexComponentBO {
      * @param pFrequencies les fréquences max autorisées
      * @return true si on a changé la fréquence de l'application
      */
-    public boolean changeFrequency(Collection pFrequencies) {
+    public boolean changeFrequency( Collection pFrequencies )
+    {
         boolean hasChanged = false;
-        if (null != mUserAccesses && mUserAccesses.size() > 0) {
+        if ( null != mUserAccesses && mUserAccesses.size() > 0 )
+        {
             // Le dernier accès utilisateur
-            Date lastAccess = ((UserAccessBO) mUserAccesses.get(0)).getDate();
+            Date lastAccess = ( (UserAccessBO) mUserAccesses.get( 0 ) ).getDate();
             // On fait ensuite une recherche sur le nombre de jours max des fréquences
             // afin de vérifier que la fréquence de l'application respecte la configuration SQUALIX
-            int nbDaysMax = findFrequency(lastAccess, pFrequencies);
+            int nbDaysMax = findFrequency( lastAccess, pFrequencies );
             // On vérifie la fréquence (> 0 car peut avoir que des audits de jalon)
-            if (mAuditFrequency > 0 && mAuditFrequency < nbDaysMax) {
+            if ( mAuditFrequency > 0 && mAuditFrequency < nbDaysMax )
+            {
                 // On change la fréquence
-                setAuditFrequency(nbDaysMax);
+                setAuditFrequency( nbDaysMax );
                 hasChanged = true;
             }
         }
@@ -474,9 +447,10 @@ public class ApplicationBO extends AbstractComplexComponentBO {
     /**
      * @param lastAccess le dernier accès utilisateur
      * @param pFrequencies les fréquences. La collection ne doit pas être nulle ni vide.
-     * @return la fréquence 
+     * @return la fréquence
      */
-    private int findFrequency(Date lastAccess, Collection pFrequencies) {
+    private int findFrequency( Date lastAccess, Collection pFrequencies )
+    {
         // initialisation
         int frequencyToChange = -1; // Si la fréquence ne doit pas être changée, on retourne -1
         // constantes pour le calcul du nombre de jour
@@ -487,23 +461,30 @@ public class ApplicationBO extends AbstractComplexComponentBO {
         // On récupère le nombre de jours depuis le dernier accès
         Calendar today = Calendar.getInstance();
         Calendar access = Calendar.getInstance();
-        access.setTime(lastAccess);
+        access.setTime( lastAccess );
         // on compte le nombre de jours qui séparent les deux dates
-        int nbDays = new Long((today.getTimeInMillis() - access.getTimeInMillis()) / HOURS_IN_DAY / MINUTES_IN_HOUR / SECONDS_IN_MINUTE / MILLI_IN_SECOND).intValue();
+        int nbDays =
+            new Long( ( today.getTimeInMillis() - access.getTimeInMillis() ) / HOURS_IN_DAY / MINUTES_IN_HOUR
+                / SECONDS_IN_MINUTE / MILLI_IN_SECOND ).intValue();
         // On va créer la liste des fréquences triées par nombre de jours
-        List frequencies = new ArrayList(pFrequencies);
-        Collections.sort(frequencies);
+        List frequencies = new ArrayList( pFrequencies );
+        Collections.sort( frequencies );
         AuditFrequencyBO frequency = null;
-        frequency = (AuditFrequencyBO) frequencies.get(0);
+        frequency = (AuditFrequencyBO) frequencies.get( 0 );
         int curFreq = frequency.getDays();
-        if (curFreq < nbDays) {
+        if ( curFreq < nbDays )
+        {
             boolean found = false;
             // Tant qu'on a pas trouvé la limite on itère
-            for (int i = 1; !found && i < frequencies.size(); i++) {
-                frequency = (AuditFrequencyBO) frequencies.get(i);
-                if(frequency.getDays() < nbDays) {
+            for ( int i = 1; !found && i < frequencies.size(); i++ )
+            {
+                frequency = (AuditFrequencyBO) frequencies.get( i );
+                if ( frequency.getDays() < nbDays )
+                {
                     curFreq = frequency.getFrequency();
-                } else {
+                }
+                else
+                {
                     found = true;
                 }
             }
@@ -512,11 +493,14 @@ public class ApplicationBO extends AbstractComplexComponentBO {
         return frequencyToChange;
     }
 
-    /** 
+    /**
      * {@inheritDoc}
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor, java.lang.Object)
+     * 
+     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor,
+     *      java.lang.Object)
      */
-    public Object accept(ComponentVisitor pVisitor, Object pArgument) {
-        return pVisitor.visit(this, pArgument);
+    public Object accept( ComponentVisitor pVisitor, Object pArgument )
+    {
+        return pVisitor.visit( this, pArgument );
     }
 }

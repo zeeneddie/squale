@@ -4,38 +4,45 @@
  */
 package com.airfrance.squalecommon.daolayer.result.mccabe;
 
+import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO;
 
 /**
  * @author M400843
- *
  */
-public class McCabeMethodMetricsDAOImpl extends AbstractDAOImpl {
+public class McCabeMethodMetricsDAOImpl
+    extends AbstractDAOImpl
+{
     /**
      * Instance singleton
      */
     private static McCabeMethodMetricsDAOImpl instance = null;
 
     /** initialisation du singleton */
-    static {
+    static
+    {
         instance = new McCabeMethodMetricsDAOImpl();
     }
 
     /**
      * Constructeur prive
+     * 
      * @throws JrafDaoException
      */
-    private McCabeMethodMetricsDAOImpl() {
-        initialize(McCabeQAMethodMetricsBO.class);
+    private McCabeMethodMetricsDAOImpl()
+    {
+        initialize( McCabeQAMethodMetricsBO.class );
     }
 
     /**
      * Retourne un singleton du DAO
+     * 
      * @return singleton du DAO
      * @deprecated
      */
-    public static McCabeMethodMetricsDAOImpl getInstance() {
+    public static McCabeMethodMetricsDAOImpl getInstance()
+    {
         return instance;
     }
 }

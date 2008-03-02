@@ -7,20 +7,21 @@
 package com.airfrance.squalecommon.enterpriselayer.facade.checkstyle.xml;
 
 /**
- * 
  * @author sportorico
- *
  */
-public class CheckstyleParsingException extends Exception {
+public class CheckstyleParsingException
+    extends Exception
+{
     /**
      * Constructeur avec message.
-     * @param pMessage message de l'exception.
      * 
+     * @param pMessage message de l'exception.
      */
 
-    public  CheckstyleParsingException (final java.lang.String pMessage) {
-        super(pMessage);
-        
+    public CheckstyleParsingException( final java.lang.String pMessage )
+    {
+        super( pMessage );
+
     }
 
 }

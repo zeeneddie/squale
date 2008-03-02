@@ -6,7 +6,9 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AuditFre
 /**
  * DAO pour les fréquences d'audits
  */
-public class AuditFrequencyDAOImpl extends AbstractDAOImpl {
+public class AuditFrequencyDAOImpl
+    extends AbstractDAOImpl
+{
 
     /**
      * Instance singleton
@@ -14,22 +16,26 @@ public class AuditFrequencyDAOImpl extends AbstractDAOImpl {
     private static AuditFrequencyDAOImpl instance = null;
 
     /** initialisation du singleton */
-    static {
+    static
+    {
         instance = new AuditFrequencyDAOImpl();
     }
 
     /**
      * Constructeur prive
      */
-    private AuditFrequencyDAOImpl() {
-        initialize(AuditFrequencyBO.class);
+    private AuditFrequencyDAOImpl()
+    {
+        initialize( AuditFrequencyBO.class );
     }
 
     /**
      * Retourne un singleton du DAO
+     * 
      * @return singleton du DAO
      */
-    public static AuditFrequencyDAOImpl getInstance() {
+    public static AuditFrequencyDAOImpl getInstance()
+    {
         return instance;
     }
 }

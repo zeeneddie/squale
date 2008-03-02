@@ -3,11 +3,13 @@ package com.airfrance.squalecommon.datatransfertobject.config;
 /**
  * Paramètre de tâche
  */
-public class TaskParameterDTO {
+public class TaskParameterDTO
+{
     /**
      * Nom du paramètre
      */
     private String mName;
+
     /**
      * Valeur du paramètre
      */
@@ -18,33 +20,34 @@ public class TaskParameterDTO {
      * 
      * @return le nom
      */
-    public String getName() {
+    public String getName()
+    {
         return mName;
     }
-    
+
     /**
-     * 
      * @param pName nom
      */
-    public void setName(String pName) {
+    public void setName( String pName )
+    {
         mName = pName;
     }
-    
-    
+
     /**
      * Méthode d'accès à mValue
      * 
      * @return la valeur
      */
-    public String getValue() {
+    public String getValue()
+    {
         return mValue;
     }
-    
+
     /**
-     * 
      * @param pValue nom
      */
-    public void setValue(String pValue) {
+    public void setValue( String pValue )
+    {
         mValue = pValue;
     }
 

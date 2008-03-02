@@ -12,22 +12,29 @@ import com.airfrance.squalecommon.util.initialisor.JRafConfigurator;
 /**
  *
  */
-public class QualityGridApplicationComponentAccessTest extends SqualeTestCase {
+public class QualityGridApplicationComponentAccessTest
+    extends SqualeTestCase
+{
 
     /**
      * Test sur la récupération des grilles qualités
      */
-    public void testGetGrids() {
+    public void testGetGrids()
+    {
         QualityGridApplicationComponentAccess comp = new QualityGridApplicationComponentAccess();
-        try {
+        try
+        {
             JRafConfigurator.initialize();
-            Collection grids = comp.getGrids(Boolean.FALSE);
+            Collection grids = comp.getGrids( Boolean.FALSE );
             Iterator gridsIterator = grids.iterator();
-            while (gridsIterator.hasNext()) {
-                QualityGridConfDTO grid = comp.getGrid((QualityGridDTO) gridsIterator.next());
+            while ( gridsIterator.hasNext() )
+            {
+                QualityGridConfDTO grid = comp.getGrid( (QualityGridDTO) gridsIterator.next() );
             }
-        } catch (JrafEnterpriseException e) {
-            fail("unexpected exception");
+        }
+        catch ( JrafEnterpriseException e )
+        {
+            fail( "unexpected exception" );
             e.printStackTrace();
         }
     }

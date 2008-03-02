@@ -19,9 +19,10 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.Profile
 
 /**
  * @author M400843
- *
  */
-public class ProfileDAOImpl extends AbstractDAOImpl {
+public class ProfileDAOImpl
+    extends AbstractDAOImpl
+{
     /**
      * Instance singleton
      */
@@ -31,52 +32,63 @@ public class ProfileDAOImpl extends AbstractDAOImpl {
     private static Log LOG;
 
     /** initialisation du singleton */
-    static {
+    static
+    {
         instance = new ProfileDAOImpl();
     }
 
     /**
      * Constructeur prive
+     * 
      * @throws JrafDaoException
      */
-    private ProfileDAOImpl() {
-        initialize(ProfileBO.class);
-        if (null == LOG) {
-            LOG = LogFactory.getLog(UserDAOImpl.class);
+    private ProfileDAOImpl()
+    {
+        initialize( ProfileBO.class );
+        if ( null == LOG )
+        {
+            LOG = LogFactory.getLog( UserDAOImpl.class );
         }
     }
 
     /**
      * Retourne un singleton du DAO
+     * 
      * @return singleton du DAO
      */
-    public static ProfileDAOImpl getInstance() {
+    public static ProfileDAOImpl getInstance()
+    {
         return instance;
     }
 
     /**
      * Récupère ProfileBO associé à la clé passée en paramètre
+     * 
      * @param pSession la session
      * @param pKey clé du profil
      * @return ProfileBO
      * @throws JrafDaoException exception Dao
      */
-    public ProfileBO loadByKey(ISession pSession, String pKey) throws JrafDaoException{
-        LOG.debug(DAOMessages.getString("dao.entry_method"));
+    public ProfileBO loadByKey( ISession pSession, String pKey )
+        throws JrafDaoException
+    {
+        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = "where ";
         whereClause += getAlias() + ".name = '" + pKey + "'";
-        
+
         ProfileBO profile = null;
-        Collection col = findWhere(pSession, whereClause);
-        if(col.size() >= 1) {
+        Collection col = findWhere( pSession, whereClause );
+        if ( col.size() >= 1 )
+        {
             profile = (ProfileBO) col.iterator().next();
-            if(col.size() > 1 ) {
-                String tab[] = {pKey};
-                LOG.warn(DAOMessages.getString("profile.many.key", tab));
+            if ( col.size() > 1 )
+            {
+                String tab[] = { pKey };
+                LOG.warn( DAOMessages.getString( "profile.many.key", tab ) );
             }
         }
 
-        LOG.debug(DAOMessages.getString("dao.exit_method"));
+        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return profile;
     }
 }

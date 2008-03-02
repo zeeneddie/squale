@@ -9,23 +9,29 @@ import com.airfrance.squalecommon.datatransfertobject.config.SqualixConfiguratio
 /**
  * Test pour SqualixConfigFacade
  */
-public class SqualixConfigFacadeTest extends SqualeTestCase {
+public class SqualixConfigFacadeTest
+    extends SqualeTestCase
+{
 
     /**
      * Test la récupération de la configuration en base
      */
-    public void testCreateConfig() {
+    public void testCreateConfig()
+    {
         StringBuffer errors = new StringBuffer();
-        InputStream stream = getClass().getClassLoader().getResourceAsStream("data/config/squalix-config_simple.xml");
+        InputStream stream = getClass().getClassLoader().getResourceAsStream( "data/config/squalix-config_simple.xml" );
         SqualixConfigurationDTO conf;
-        try {
-            ConfigurationImport.createConfig(stream, errors);
+        try
+        {
+            ConfigurationImport.createConfig( stream, errors );
             conf = SqualixConfigFacade.getConfig();
-            assertEquals(1, conf.getProfiles().size());
-            assertTrue(errors.length() == 0);
-        } catch (JrafEnterpriseException e) {
+            assertEquals( 1, conf.getProfiles().size() );
+            assertTrue( errors.length() == 0 );
+        }
+        catch ( JrafEnterpriseException e )
+        {
             e.printStackTrace();
-            fail("unexpected exception");
+            fail( "unexpected exception" );
         }
     }
 }

@@ -8,148 +8,166 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleForm
 import com.airfrance.squalecommon.util.initialisor.JRafConfigurator;
 
 /**
- * Test de l'interpréteur de formule
- * L'interpréteur de formule est testé pour la vérification de syntaxe
- * ainsi que pour la vérification de l'évaluation des formules
+ * Test de l'interpréteur de formule L'interpréteur de formule est testé pour la vérification de syntaxe ainsi que pour
+ * la vérification de l'évaluation des formules
  */
-public class FormulaInterpreterTest extends SqualeTestCase {
+public class FormulaInterpreterTest
+    extends SqualeTestCase
+{
 
     /**
      * Constructor for FormulaInterpreterTest.
+     * 
      * @param arg0 nom
      */
-    public FormulaInterpreterTest(String arg0) {
-        super(arg0);
+    public FormulaInterpreterTest( String arg0 )
+    {
+        super( arg0 );
         JRafConfigurator.initialize();
     }
 
     /**
      * Test de vérification de la syntaxe
-     *
      */
-    public void testCheckSyntax() {
+    public void testCheckSyntax()
+    {
         ConditionFormulaBO formula = new ConditionFormulaBO();
-        formula.setId(1);
-        formula.addMarkCondition("mccabe.sumvg == 3");
-        formula.addMarkCondition("mccabe.sumvg == 30");
-        formula.addMarkCondition("mccabe.sumvg == 32");
-        formula.setTriggerCondition("mccabe.sumvg == 12");
-        formula.setComponentLevel("class");
-        formula.addMeasureKind("mccabe");
-        formula.addMeasureKind("ckjm");
+        formula.setId( 1 );
+        formula.addMarkCondition( "mccabe.sumvg == 3" );
+        formula.addMarkCondition( "mccabe.sumvg == 30" );
+        formula.addMarkCondition( "mccabe.sumvg == 32" );
+        formula.setTriggerCondition( "mccabe.sumvg == 12" );
+        formula.setComponentLevel( "class" );
+        formula.addMeasureKind( "mccabe" );
+        formula.addMeasureKind( "ckjm" );
         FormulaInterpreter inter = new FormulaInterpreter();
-        try {
-            inter.checkSyntax(formula);
-            assertTrue("Formule correcte", true);
-        } catch (FormulaException e) {
+        try
+        {
+            inter.checkSyntax( formula );
+            assertTrue( "Formule correcte", true );
+        }
+        catch ( FormulaException e )
+        {
             e.printStackTrace();
-            fail("Unexpected exception");
+            fail( "Unexpected exception" );
         }
-        formula.setTriggerCondition("trigger.0");
-        try {
-            inter.checkSyntax(formula);
-            fail("Expected exception");
-        } catch (FormulaException e) {
-            assertTrue("Formule incorrecte", true);
+        formula.setTriggerCondition( "trigger.0" );
+        try
+        {
+            inter.checkSyntax( formula );
+            fail( "Expected exception" );
         }
-        formula.setTriggerCondition("mccabe.unknown == 12");
-        try {
-            inter.checkSyntax(formula);
-            fail("Expected exception");
-        } catch (FormulaException e) {
-            assertTrue("Formule incorrecte", true);
+        catch ( FormulaException e )
+        {
+            assertTrue( "Formule incorrecte", true );
+        }
+        formula.setTriggerCondition( "mccabe.unknown == 12" );
+        try
+        {
+            inter.checkSyntax( formula );
+            fail( "Expected exception" );
+        }
+        catch ( FormulaException e )
+        {
+            assertTrue( "Formule incorrecte", true );
         }
     }
 
     /**
      * Test d'évaluation d'expression
-     *
      */
-    public void testEvaluateCondition() {
+    public void testEvaluateCondition()
+    {
         ConditionFormulaBO formula = new ConditionFormulaBO();
-        formula.setTriggerCondition("mccabe.wmc >= 8");
-        formula.addMarkCondition("mccabe.maxvg >= 0.5 * mccabe.sumvg");
-        formula.addMarkCondition("mccabe.maxvg >= 0.4 * mccabe.sumvg");
-        formula.addMarkCondition("mccabe.maxvg >= 0.3 * mccabe.sumvg");
-        formula.addMeasureKind("mccabe");
-        formula.setId(1);
+        formula.setTriggerCondition( "mccabe.wmc >= 8" );
+        formula.addMarkCondition( "mccabe.maxvg >= 0.5 * mccabe.sumvg" );
+        formula.addMarkCondition( "mccabe.maxvg >= 0.4 * mccabe.sumvg" );
+        formula.addMarkCondition( "mccabe.maxvg >= 0.3 * mccabe.sumvg" );
+        formula.addMeasureKind( "mccabe" );
+        formula.setId( 1 );
         McCabeQAClassMetricsBO measure = new McCabeQAClassMetricsBO();
         MeasureBO[] measures = new MeasureBO[1];
         measures[0] = measure;
-        measure.setMaxvg(new Integer(9));
-        measure.setSumvg(new Integer(31));
-        measure.setWmc(new Integer(10));
+        measure.setMaxvg( new Integer( 9 ) );
+        measure.setSumvg( new Integer( 31 ) );
+        measure.setWmc( new Integer( 10 ) );
         FormulaInterpreter inter = new FormulaInterpreter();
         Number val;
-        try {
+        try
+        {
             // Test des valeurs dans l'intervalle 0..3
-            val = inter.evaluate(formula, measures);
-            assertEquals(3, val.intValue());
-            measure.setMaxvg(new Integer(10));
-            val = inter.evaluate(formula, measures);
-            assertEquals(2, val.intValue());
-            measure.setMaxvg(new Integer(13));
-            val = inter.evaluate(formula, measures);
-            assertEquals(1, val.intValue());
-            measure.setMaxvg(new Integer(16));
-            val = inter.evaluate(formula, measures);
-            assertEquals(0, val.intValue());
+            val = inter.evaluate( formula, measures );
+            assertEquals( 3, val.intValue() );
+            measure.setMaxvg( new Integer( 10 ) );
+            val = inter.evaluate( formula, measures );
+            assertEquals( 2, val.intValue() );
+            measure.setMaxvg( new Integer( 13 ) );
+            val = inter.evaluate( formula, measures );
+            assertEquals( 1, val.intValue() );
+            measure.setMaxvg( new Integer( 16 ) );
+            val = inter.evaluate( formula, measures );
+            assertEquals( 0, val.intValue() );
             // Test avec trigger non vérifié
-            measure.setWmc(new Integer(7));
-            val = inter.evaluate(formula, measures);
-            assertNull(val);
-        } catch (FormulaException e) {
+            measure.setWmc( new Integer( 7 ) );
+            val = inter.evaluate( formula, measures );
+            assertNull( val );
+        }
+        catch ( FormulaException e )
+        {
             e.printStackTrace();
-            fail("Exception inattendue");
+            fail( "Exception inattendue" );
         }
     }
 
     /**
      * Test d'évaluation d'expression simple
-     *
      */
-    public void testEvaluateSimple() {
+    public void testEvaluateSimple()
+    {
         SimpleFormulaBO formula = new SimpleFormulaBO();
-        formula.setTriggerCondition("mccabe.wmc >= 8");
-        formula.setFormula("mccabe.sumvg / mccabe.maxvg");
-        formula.addMeasureKind("mccabe");
-        formula.setId(1);
+        formula.setTriggerCondition( "mccabe.wmc >= 8" );
+        formula.setFormula( "mccabe.sumvg / mccabe.maxvg" );
+        formula.addMeasureKind( "mccabe" );
+        formula.setId( 1 );
         McCabeQAClassMetricsBO measure = new McCabeQAClassMetricsBO();
         MeasureBO[] measures = new MeasureBO[1];
         measures[0] = measure;
-        measure.setMaxvg(new Integer(9));
-        measure.setSumvg(new Integer(31));
-        measure.setWmc(new Integer(10));
+        measure.setMaxvg( new Integer( 9 ) );
+        measure.setSumvg( new Integer( 31 ) );
+        measure.setWmc( new Integer( 10 ) );
         FormulaInterpreter inter = new FormulaInterpreter();
         Number val;
-        try {
+        try
+        {
             // Test des valeurs dans l'intervalle 0..3
-            val = inter.evaluate(formula, measures);
-            assertEquals(3, val.intValue());
-            measure.setMaxvg(new Integer(11));
-            val = inter.evaluate(formula, measures);
-            assertEquals(2, val.intValue());
-            measure.setMaxvg(new Integer(16));
-            val = inter.evaluate(formula, measures);
-            assertEquals(1, val.intValue());
-            measure.setMaxvg(new Integer(32));
-            val = inter.evaluate(formula, measures);
-            assertEquals(0, val.intValue());
+            val = inter.evaluate( formula, measures );
+            assertEquals( 3, val.intValue() );
+            measure.setMaxvg( new Integer( 11 ) );
+            val = inter.evaluate( formula, measures );
+            assertEquals( 2, val.intValue() );
+            measure.setMaxvg( new Integer( 16 ) );
+            val = inter.evaluate( formula, measures );
+            assertEquals( 1, val.intValue() );
+            measure.setMaxvg( new Integer( 32 ) );
+            val = inter.evaluate( formula, measures );
+            assertEquals( 0, val.intValue() );
             // Test de valeur > 3, la note est ramenée à 3
-            measure.setMaxvg(new Integer(5));
-            val = inter.evaluate(formula, measures);
-            assertEquals(3, val.intValue());
+            measure.setMaxvg( new Integer( 5 ) );
+            val = inter.evaluate( formula, measures );
+            assertEquals( 3, val.intValue() );
             // Test de valeur < 0, la note est ramenée à 0
-            measure.setMaxvg(new Integer(-5));
-            val = inter.evaluate(formula, measures);
-            assertEquals(0, val.intValue());
+            measure.setMaxvg( new Integer( -5 ) );
+            val = inter.evaluate( formula, measures );
+            assertEquals( 0, val.intValue() );
             // Test avec trigger non vérifié
-            measure.setWmc(new Integer(7));
-            val = inter.evaluate(formula, measures);
-            assertNull(val);
-        } catch (FormulaException e) {
+            measure.setWmc( new Integer( 7 ) );
+            val = inter.evaluate( formula, measures );
+            assertNull( val );
+        }
+        catch ( FormulaException e )
+        {
             e.printStackTrace();
-            fail("Exception inattendue");
+            fail( "Exception inattendue" );
         }
     }
 

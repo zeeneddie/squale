@@ -20,8 +20,9 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Appli
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 
-
-public class UserDAOImpl extends AbstractDAOImpl {
+public class UserDAOImpl
+    extends AbstractDAOImpl
+{
     /**
      * Instance singleton
      */
@@ -31,74 +32,96 @@ public class UserDAOImpl extends AbstractDAOImpl {
     private static Log LOG;
 
     /** initialisation du singleton */
-    static {
+    static
+    {
         instance = new UserDAOImpl();
     }
 
     /**
      * Constructeur prive
+     * 
      * @throws JrafDaoException
      */
-    private UserDAOImpl() {
-        initialize(UserBO.class);
-        if (null == LOG) {
-            LOG = LogFactory.getLog(UserDAOImpl.class);
+    private UserDAOImpl()
+    {
+        initialize( UserBO.class );
+        if ( null == LOG )
+        {
+            LOG = LogFactory.getLog( UserDAOImpl.class );
         }
     }
 
     /**
      * Retourne un singleton du DAO
+     * 
      * @return singleton du DAO
      */
-    public static UserDAOImpl getInstance() {
+    public static UserDAOImpl getInstance()
+    {
         return instance;
     }
 
     /**
      * Permet de récupérer UserBO en fonction du matricule
+     * 
      * @param pSession session Hibernate
      * @param pMatricule matricule de l'utilisateur
      * @return UserBO associé au matricule
      * @throws JrafDaoException exception DAO
      */
-    public UserBO loadWithMatricule(ISession pSession, String pMatricule) throws JrafDaoException {
+    public UserBO loadWithMatricule( ISession pSession, String pMatricule )
+        throws JrafDaoException
+    {
         UserBO user = null;
         String whereClause = "where ";
         whereClause += getAlias() + ".matricule = '" + pMatricule + "'";
-        Collection col = findWhere(pSession, whereClause);
-        if (col.size() != 1) {
-            if (col.size() > 1) {
+        Collection col = findWhere( pSession, whereClause );
+        if ( col.size() != 1 )
+        {
+            if ( col.size() > 1 )
+            {
                 String tab[] = { pMatricule };
-                LOG.warn(DAOMessages.getString("user.many.matricule", tab));
+                LOG.warn( DAOMessages.getString( "user.many.matricule", tab ) );
             }
-        } else {
+        }
+        else
+        {
             user = (UserBO) col.iterator().next();
         }
         return user;
     }
-    
-    
+
     /**
      * Permet de récupérer UserBO en fonction du matricule et du password
+     * 
      * @param pSession session Hibernate
      * @param pMatricule matricule de l'utilisateur
      * @param pPassword password du user
      * @return UserBO associé au matricule
      * @throws JrafDaoException exception DAO
      */
-    public UserBO loadWithMatriculeAndPassword(ISession pSession, String pMatricule, String pPassword) throws JrafDaoException {
+    public UserBO loadWithMatriculeAndPassword( ISession pSession, String pMatricule, String pPassword )
+        throws JrafDaoException
+    {
         UserBO user = null;
         String whereClause = "where ";
-        whereClause += getAlias() + ".matricule = '" + pMatricule + "' AND "+getAlias()+".password = '"+pPassword+"'";
-        Collection col = findWhere(pSession, whereClause);
-        if (col.size() != 1) {
-            if (col.size() > 1) {
+        whereClause +=
+            getAlias() + ".matricule = '" + pMatricule + "' AND " + getAlias() + ".password = '" + pPassword + "'";
+        Collection col = findWhere( pSession, whereClause );
+        if ( col.size() != 1 )
+        {
+            if ( col.size() > 1 )
+            {
                 String tab[] = { pMatricule };
-                LOG.warn(DAOMessages.getString("user.many.matricule", tab));
-            }else if (col.size() == 0){
-            	user = new UserBO();
+                LOG.warn( DAOMessages.getString( "user.many.matricule", tab ) );
             }
-        } else {
+            else if ( col.size() == 0 )
+            {
+                user = new UserBO();
+            }
+        }
+        else
+        {
             user = (UserBO) col.iterator().next();
         }
         return user;
@@ -106,55 +129,69 @@ public class UserDAOImpl extends AbstractDAOImpl {
 
     /**
      * Permet de récupérer la liste des administrateurs SQUALE
+     * 
      * @param pSession session Hibernate
-     * @param needEmail un booléen indiquant si il faut prendre en compte
-     * dans la requete le fait que le mail doit etre défini ou pas
-     * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés
-     * de l'envoi automatique d'email.
+     * @param needEmail un booléen indiquant si il faut prendre en compte dans la requete le fait que le mail doit etre
+     *            défini ou pas
+     * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés de l'envoi
+     *            automatique d'email.
      * @return la liste des utilisateurs administrateur du portail
      * @throws JrafDaoException exception Dao
      */
-    public Collection findWhereAdmin(ISession pSession, boolean needEmail, boolean pUnsubscribed) throws JrafDaoException {
+    public Collection findWhereAdmin( ISession pSession, boolean needEmail, boolean pUnsubscribed )
+        throws JrafDaoException
+    {
         String whereClause = "where ";
         // profil admin ayant un email défini
         whereClause += getAlias() + ".defaultProfile.name = '" + ProfileBO.ADMIN_PROFILE_NAME + "'";
-        if (needEmail) {
+        if ( needEmail )
+        {
             whereClause += " AND " + getAlias() + ".email is not null";
         }
-        if(!pUnsubscribed) {
+        if ( !pUnsubscribed )
+        {
             // On ne prend que les abonnés
             whereClause += " AND " + getAlias() + ".unsubscribed=false";
         }
-        Collection ret = findWhere(pSession, whereClause);
+        Collection ret = findWhere( pSession, whereClause );
         return ret;
     }
 
     /**
      * Permet de récupérer la liste des administrateurs SQUALE
+     * 
      * @param pSession session Hibernate
-     * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés
-     * de l'envoi automatique d'email.
+     * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés de l'envoi
+     *            automatique d'email.
      * @return la liste des utilisateurs administrateur du portail
      * @throws JrafDaoException exception Dao
      */
-    public Collection findWhereAdminAndHaveEmails(ISession pSession, boolean pUnsubscribed) throws JrafDaoException {
-        return findWhereAdmin(pSession, true, pUnsubscribed);
+    public Collection findWhereAdminAndHaveEmails( ISession pSession, boolean pUnsubscribed )
+        throws JrafDaoException
+    {
+        return findWhereAdmin( pSession, true, pUnsubscribed );
     }
 
     /**
      * Récupère tous les utilisateurs qui sont assigné au projet
+     * 
      * @param pSession la session
      * @param pApplication l'application
      * @return une collection d'utilisateurs
      * @throws JrafDaoException exception Dao
      */
-    public Collection findWhereApplication(ISession pSession, ApplicationBO pApplication) throws JrafDaoException {
+    public Collection findWhereApplication( ISession pSession, ApplicationBO pApplication )
+        throws JrafDaoException
+    {
         Collection retUsers = null;
-        if (null != pApplication) {
+        if ( null != pApplication )
+        {
             String whereClause = "where ";
             whereClause += pApplication.getId() + " in indices(" + getAlias() + ".rights)";
-            retUsers = findWhere(pSession, whereClause);
-        } else {
+            retUsers = findWhere( pSession, whereClause );
+        }
+        else
+        {
             retUsers = new ArrayList();
         }
         return retUsers;
@@ -162,30 +199,41 @@ public class UserDAOImpl extends AbstractDAOImpl {
 
     /**
      * Récupère tous les utilisateurs qui sont assigné au projet avec un profil particulier
+     * 
      * @param pSession la session
      * @param pId l'id de l'application
      * @param pProfile profil recherché
-     * @param needEmail un booléen indiquant si il faut prendre en compte
-     * dans la requete le fait que le mail doit etre défini ou pas
-     * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés
-     * de l'envoi automatique d'email.
+     * @param needEmail un booléen indiquant si il faut prendre en compte dans la requete le fait que le mail doit etre
+     *            défini ou pas
+     * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés de l'envoi
+     *            automatique d'email.
      * @return une collection d'utilisateurs
      * @throws JrafDaoException exception Dao
      */
-    public Collection findWhereApplicationAndProfile(ISession pSession, Long pId, ProfileBO pProfile, boolean needEmail, boolean pUnsubscribed) throws JrafDaoException {
+    public Collection findWhereApplicationAndProfile( ISession pSession, Long pId, ProfileBO pProfile,
+                                                      boolean needEmail, boolean pUnsubscribed )
+        throws JrafDaoException
+    {
         Collection retUsers = null;
-        if (null != pId) {
+        if ( null != pId )
+        {
             String whereClause = "where ";
-            whereClause += pId + " in indices(" + getAlias() + ".rights)" + " AND " + getAlias() + ".rights[" + pId + "].name='" + pProfile.getName() + "'";
-            if (needEmail) {
+            whereClause +=
+                pId + " in indices(" + getAlias() + ".rights)" + " AND " + getAlias() + ".rights[" + pId + "].name='"
+                    + pProfile.getName() + "'";
+            if ( needEmail )
+            {
                 whereClause += " AND " + getAlias() + ".email is not null";
             }
-            if(!pUnsubscribed) {
+            if ( !pUnsubscribed )
+            {
                 // On ne prend pas les désabonnés
                 whereClause += " AND " + getAlias() + ".unsubscribed=false";
             }
-            retUsers = findWhere(pSession, whereClause);
-        } else {
+            retUsers = findWhere( pSession, whereClause );
+        }
+        else
+        {
             retUsers = new ArrayList();
         }
         return retUsers;
@@ -193,16 +241,20 @@ public class UserDAOImpl extends AbstractDAOImpl {
 
     /**
      * Permet de récupérer la liste des administrateurs SQUALE
+     * 
      * @param pSession session Hibernate
      * @param pId l'id de l'application
      * @param pProfile profil recherché
-     * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés
-     * de l'envoi automatique d'email.
+     * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés de l'envoi
+     *            automatique d'email.
      * @return la liste des utilisateurs administrateur du portail
      * @throws JrafDaoException exception Dao
      */
-    public Collection findWhereApplicationAndProfileAndHaveEmails(ISession pSession, Long pId, ProfileBO pProfile, boolean pUnsubscribed) throws JrafDaoException {
-        return findWhereApplicationAndProfile(pSession, pId, pProfile, true, pUnsubscribed);
+    public Collection findWhereApplicationAndProfileAndHaveEmails( ISession pSession, Long pId, ProfileBO pProfile,
+                                                                   boolean pUnsubscribed )
+        throws JrafDaoException
+    {
+        return findWhereApplicationAndProfile( pSession, pId, pProfile, true, pUnsubscribed );
     }
 
 }

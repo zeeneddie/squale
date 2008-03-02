@@ -17,7 +17,9 @@ import com.airfrance.squalecommon.util.mapping.Mapping;
 
 /**
  */
-public class MetricDAOImpl extends AbstractDAOImpl {
+public class MetricDAOImpl
+    extends AbstractDAOImpl
+{
 
     /**
      * Instance singleton
@@ -25,76 +27,92 @@ public class MetricDAOImpl extends AbstractDAOImpl {
     private static MetricDAOImpl instance = null;
 
     /** initialisation du singleton */
-    static {
+    static
+    {
         instance = new MetricDAOImpl();
     }
 
     /**
      * Constructeur prive
+     * 
      * @throws JrafDaoException
      */
-    private MetricDAOImpl() {
-        initialize(MetricBO.class);
+    private MetricDAOImpl()
+    {
+        initialize( MetricBO.class );
     }
 
     /**
      * Retourne un singleton du DAO
+     * 
      * @return singleton du DAO
      */
-    public static MetricDAOImpl getInstance() {
+    public static MetricDAOImpl getInstance()
+    {
         return instance;
     }
 
     /**
      * Retourne la volumétrie d'un projet
+     * 
      * @param pSession le session
      * @param pProjectId l'id du projet
-     * @return la volumétrie des applis du site 
+     * @return la volumétrie des applis du site
      * @throws JrafDaoException en cas d'échec
      */
-    public int getVolumetry(ISession pSession, Long pProjectId) throws JrafDaoException {
+    public int getVolumetry( ISession pSession, Long pProjectId )
+        throws JrafDaoException
+    {
         String whereClause = " where " + getAlias() + ".name='sloc'";
         whereClause += " AND " + getAlias() + ".measure.component=" + pProjectId;
-        Collection coll = findWhere(pSession, whereClause);
+        Collection coll = findWhere( pSession, whereClause );
         int counter = 0;
         Iterator it = coll.iterator();
-        while (it.hasNext()) {
+        while ( it.hasNext() )
+        {
             IntegerMetricBO value = (IntegerMetricBO) it.next();
-            counter += ((Integer) value.getValue()).intValue();
+            counter += ( (Integer) value.getValue() ).intValue();
         }
         return counter;
     }
 
     /**
-     * Retourne la volumétrie d'un site 
+     * Retourne la volumétrie d'un site
+     * 
      * @param pSession le session
      * @param pSiteId l'id du site
-     * @return la volumétrie des applis du site 
+     * @return la volumétrie des applis du site
      * @throws JrafDaoException en cas d'échec
      */
-    public int getVolumetryBySite(ISession pSession, long pSiteId) throws JrafDaoException {
+    public int getVolumetryBySite( ISession pSession, long pSiteId )
+        throws JrafDaoException
+    {
         String whereClause = " where " + getAlias() + ".name='sloc'";
         whereClause += " AND " + getAlias() + ".measure.component.parent.serveurBO.serveurId='" + pSiteId + "'";
-        Collection coll = findWhere(pSession, whereClause);
+        Collection coll = findWhere( pSession, whereClause );
         int counter = 0;
         Iterator it = coll.iterator();
-        while (it.hasNext()) {
+        while ( it.hasNext() )
+        {
             IntegerMetricBO value = (IntegerMetricBO) it.next();
-            counter += ((Integer) value.getValue()).intValue();
+            counter += ( (Integer) value.getValue() ).intValue();
         }
         return counter;
     }
 
     /**
-     * Retourne la volumétrie des derniers audits réussis par rapport à un site et à un profil
-     * pour les derniers audits exécutés (réussis ou partiels)
+     * Retourne la volumétrie des derniers audits réussis par rapport à un site et à un profil pour les derniers audits
+     * exécutés (réussis ou partiels)
+     * 
      * @param pSession le session
      * @param pSiteId l'id du site
      * @param pProfile le profil du projet (java, cpp...)
-     * @return la volumétrie des applis du site 
+     * @return la volumétrie des applis du site
      * @throws JrafDaoException en cas d'échec
      */
-    public int getVolumetryBySiteAndProfil(ISession pSession, long pSiteId, String pProfile) throws JrafDaoException {
+    public int getVolumetryBySiteAndProfil( ISession pSession, long pSiteId, String pProfile )
+        throws JrafDaoException
+    {
         // TODO : Il faudrait gérer en configuration les métriques nécessaires au calcul de la volumétrie
         // On sélectionne le nom de la métrique correspondant au nombre de lignes
         String whereClause = " where (" + getAlias() + ".name='sloc'";
@@ -113,19 +131,23 @@ public class MetricDAOImpl extends AbstractDAOImpl {
         whereClause += getAlias() + ".measure.audit.status asc, nvl(";
         whereClause += getAlias() + ".measure.audit.historicalDate, ";
         whereClause += getAlias() + ".measure.audit.date) desc";
-        List results = findWhere(pSession, whereClause);
+        List results = findWhere( pSession, whereClause );
         int result = 0;
         long lastProjectId = -1;
         long lastAuditId = -1;
-        for(int i = 0; i<results.size(); i++) {
-            MetricBO cur = (MetricBO) results.get(i);
-            if(cur.getMeasure().getComponent().getId() != lastProjectId) {
+        for ( int i = 0; i < results.size(); i++ )
+        {
+            MetricBO cur = (MetricBO) results.get( i );
+            if ( cur.getMeasure().getComponent().getId() != lastProjectId )
+            {
                 // Il s'agit d'entiers
-                result += ((Integer)cur.getValue()).intValue();
+                result += ( (Integer) cur.getValue() ).intValue();
                 lastAuditId = cur.getMeasure().getAudit().getId();
-            } else if(cur.getMeasure().getAudit().getId() == lastAuditId) {
+            }
+            else if ( cur.getMeasure().getAudit().getId() == lastAuditId )
+            {
                 // On ajoute la valeur car il s'agit d'une volumétrie différente
-                result += ((Integer)cur.getValue()).intValue(); 
+                result += ( (Integer) cur.getValue() ).intValue();
             }
             lastProjectId = cur.getMeasure().getComponent().getId();
         }
@@ -133,30 +155,33 @@ public class MetricDAOImpl extends AbstractDAOImpl {
     }
 
     /**
-       * Récupération des mesures sur un audit
-       * @param pSession session Hibernate
-       * @param pAppliID identifiant de l'appli
-       * @param pSince la date a partir de laquelle on veut calculer les ROI
-       * @return ensemble des mesures à l'exclusion des
-       * transgressions
-       * @throws JrafDaoException exception DAO
-       */
-    public Collection findROIWhereApplicationSinceDate(ISession pSession, Long pAppliID, Date pSince) throws JrafDaoException {
+     * Récupération des mesures sur un audit
+     * 
+     * @param pSession session Hibernate
+     * @param pAppliID identifiant de l'appli
+     * @param pSince la date a partir de laquelle on veut calculer les ROI
+     * @return ensemble des mesures à l'exclusion des transgressions
+     * @throws JrafDaoException exception DAO
+     */
+    public Collection findROIWhereApplicationSinceDate( ISession pSession, Long pAppliID, Date pSince )
+        throws JrafDaoException
+    {
         String whereClause = "where ";
         whereClause += getAlias() + ".measure.component.id = '" + pAppliID + "'";
         whereClause += " and ";
         whereClause += getAlias() + ".measure.class = 'Roi'";
         whereClause += " and ";
-        whereClause += getAlias() + ".measure.audit.date > " + DAOUtils.makeQueryDate(pSince);
+        whereClause += getAlias() + ".measure.audit.date > " + DAOUtils.makeQueryDate( pSince );
         // Un nom de subclass correspondant à une transgression doit finir par 'Transgression'
         // TODO : Il faudra sûrement considérer les transgressions comme des mesures à part...
         whereClause += " and " + getAlias() + ".class not like '%Transgression'";
-        Collection col = findWhere(pSession, whereClause);
+        Collection col = findWhere( pSession, whereClause );
         return col;
     }
 
     /**
      * Retourne les valeur distinct de mesure de type Integer données par leur TRE
+     * 
      * @param pSession Session Jraf
      * @param pProjectId Id du projet
      * @param pAuditId Id de l'audit courant
@@ -164,31 +189,34 @@ public class MetricDAOImpl extends AbstractDAOImpl {
      * @return Liste de masures distinctes (Collection de Object[])
      * @throws JrafDaoException si pb de BD
      */
-    public IntegerMetricBO findIntegerMetricWhere(ISession pSession, long pProjectId, long pAuditId, String pTreKey) throws JrafDaoException {
+    public IntegerMetricBO findIntegerMetricWhere( ISession pSession, long pProjectId, long pAuditId, String pTreKey )
+        throws JrafDaoException
+    {
         IntegerMetricBO result = null;
-        StringBuffer whereClause = new StringBuffer("where ");
-        whereClause.append(getAlias());
-        whereClause.append(".measure.audit.id=");
-        whereClause.append(pAuditId);
-        whereClause.append(" and ");
-        whereClause.append(getAlias());
-        whereClause.append(".measure.component.id=");
-        whereClause.append(pProjectId);
-        whereClause.append(" and ");
-        whereClause.append(getAlias());
-        whereClause.append(".measure.class=");
-        whereClause.append(Mapping.getMetricClass(pTreKey).getName());
-        whereClause.append(" and ");
-        whereClause.append(getAlias());
-        whereClause.append(".name='");
-        whereClause.append(pTreKey.substring(pTreKey.lastIndexOf('.')+1));
-        whereClause.append("'");
-        whereClause.append(" and ");
-        whereClause.append(getAlias());
-        whereClause.append(".class='Int'");
-        List results = findWhere(pSession, whereClause.toString());
-        if(results.size() > 0) {
-            result = (IntegerMetricBO)results.get(0);
+        StringBuffer whereClause = new StringBuffer( "where " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".measure.audit.id=" );
+        whereClause.append( pAuditId );
+        whereClause.append( " and " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".measure.component.id=" );
+        whereClause.append( pProjectId );
+        whereClause.append( " and " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".measure.class=" );
+        whereClause.append( Mapping.getMetricClass( pTreKey ).getName() );
+        whereClause.append( " and " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".name='" );
+        whereClause.append( pTreKey.substring( pTreKey.lastIndexOf( '.' ) + 1 ) );
+        whereClause.append( "'" );
+        whereClause.append( " and " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".class='Int'" );
+        List results = findWhere( pSession, whereClause.toString() );
+        if ( results.size() > 0 )
+        {
+            result = (IntegerMetricBO) results.get( 0 );
         }
         return result;
     }

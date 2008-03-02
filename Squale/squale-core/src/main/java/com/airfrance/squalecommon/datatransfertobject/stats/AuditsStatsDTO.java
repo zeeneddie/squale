@@ -2,7 +2,8 @@ package com.airfrance.squalecommon.datatransfertobject.stats;
 
 /**
  */
-public class AuditsStatsDTO {
+public class AuditsStatsDTO
+{
 
     /**
      * Le nombre total d'audits partiels
@@ -32,70 +33,80 @@ public class AuditsStatsDTO {
     /**
      * @return Le nombre d'audits failed
      */
-    public int getNbFailed() {
+    public int getNbFailed()
+    {
         return mNbFailed;
     }
 
     /**
      * @return Le nombre d'audits partiels
      */
-    public int getNbPartial() {
+    public int getNbPartial()
+    {
         return mNbPartial;
     }
 
     /**
      * @return Le nombre d'audits programmés
      */
-    public int getNbNotAttempted() {
+    public int getNbNotAttempted()
+    {
         return mNbNotAttempted;
     }
 
     /**
      * @return Le nombre d'audits réussis
      */
-    public int getNbSuccessfuls() {
+    public int getNbSuccessfuls()
+    {
         return mNbSuccessfuls;
     }
 
     /**
      * @return Le nombre total d'audits
      */
-    public int getNbTotal() {
+    public int getNbTotal()
+    {
         return mNbTotal;
     }
 
     /**
      * @param pNbFailed le nouveau nombre d'audits en échec
      */
-    public void setNbFailed(int pNbFailed) {
+    public void setNbFailed( int pNbFailed )
+    {
         mNbFailed = pNbFailed;
     }
 
     /**
      * @param pNbNotAttempted le nouveau nombre d'audits programmés
      */
-    public void setNbNotAttempted(int pNbNotAttempted) {
+    public void setNbNotAttempted( int pNbNotAttempted )
+    {
         mNbNotAttempted = pNbNotAttempted;
     }
 
     /**
      * @param pNbSuccessfuls le nouveau nombre d'audits réussis
      */
-    public void setNbSuccessfuls(int pNbSuccessfuls) {
+    public void setNbSuccessfuls( int pNbSuccessfuls )
+    {
         mNbSuccessfuls = pNbSuccessfuls;
     }
 
     /**
      * @param pNbTotal le nouveau nombre d'audits en échec
      */
-    public void setNbTotal(int pNbTotal) {
+    public void setNbTotal( int pNbTotal )
+    {
         mNbTotal = pNbTotal;
     }
 
     /**
      * @param pNbPartial le nombre d'audits partiels
      */
-    public void setNbPartial(int pNbPartial) {
+    public void setNbPartial( int pNbPartial )
+    {
         mNbPartial = pNbPartial;
     }
 

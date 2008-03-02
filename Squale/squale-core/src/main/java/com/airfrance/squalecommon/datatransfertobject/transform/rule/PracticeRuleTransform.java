@@ -6,15 +6,18 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRu
 /**
  * Transformation d'une pratique
  */
-public class PracticeRuleTransform {
+public class PracticeRuleTransform
+{
     /**
      * Conversion
+     * 
      * @param pPracticeRule objet à convertir
      * @return résultat de la conversion
      */
-    public static PracticeRuleDTO bo2Dto(PracticeRuleBO pPracticeRule) {
+    public static PracticeRuleDTO bo2Dto( PracticeRuleBO pPracticeRule )
+    {
         PracticeRuleDTO result = new PracticeRuleDTO();
-        QualityRuleTransform.bo2Dto(result, pPracticeRule);
+        QualityRuleTransform.bo2Dto( result, pPracticeRule );
         return result;
     }
 

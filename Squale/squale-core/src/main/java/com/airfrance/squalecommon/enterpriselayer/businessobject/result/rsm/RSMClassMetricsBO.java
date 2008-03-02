@@ -4,10 +4,11 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerM
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO;
 
 /**
- * @hibernate.subclass
- * discriminator-value="RSMClassMetrics"
+ * @hibernate.subclass discriminator-value="RSMClassMetrics"
  */
-public class RSMClassMetricsBO extends RSMMetricsBO {
+public class RSMClassMetricsBO
+    extends RSMMetricsBO
+{
 
     /**
      * Le nombre de lignes de codes
@@ -37,23 +38,24 @@ public class RSMClassMetricsBO extends RSMMetricsBO {
     /**
      * Constructeur par défaut.
      */
-    public RSMClassMetricsBO() {
-        //super();
-        getMetrics().put(SLOC, new IntegerMetricBO());
-        getMetrics().put(COMMENTS, new IntegerMetricBO());
-        getMetrics().put(PUBLIC_DATA, new IntegerMetricBO());
-        getMetrics().put(PROTECTED_DATA, new IntegerMetricBO());
-        getMetrics().put(PRIVATE_DATA, new IntegerMetricBO());
+    public RSMClassMetricsBO()
+    {
+        // super();
+        getMetrics().put( SLOC, new IntegerMetricBO() );
+        getMetrics().put( COMMENTS, new IntegerMetricBO() );
+        getMetrics().put( PUBLIC_DATA, new IntegerMetricBO() );
+        getMetrics().put( PROTECTED_DATA, new IntegerMetricBO() );
+        getMetrics().put( PRIVATE_DATA, new IntegerMetricBO() );
     }
 
     /**
      * Méthode d'accès à la métrique SLOC
      * 
      * @return la valeur du sloc
-     * 
      */
-    public Integer getSloc() {
-        return (Integer) ((MetricBO) getMetrics().get(SLOC)).getValue();
+    public Integer getSloc()
+    {
+        return (Integer) ( (MetricBO) getMetrics().get( SLOC ) ).getValue();
     }
 
     /**
@@ -61,8 +63,9 @@ public class RSMClassMetricsBO extends RSMMetricsBO {
      * 
      * @param pSLOC la nouvelle valeur du SLOC
      */
-    public void setSloc(Integer pSLOC) {
-        ((IntegerMetricBO) getMetrics().get(SLOC)).setValue(pSLOC);
+    public void setSloc( Integer pSLOC )
+    {
+        ( (IntegerMetricBO) getMetrics().get( SLOC ) ).setValue( pSLOC );
     }
 
     /**
@@ -70,8 +73,9 @@ public class RSMClassMetricsBO extends RSMMetricsBO {
      * 
      * @return la valeur du nombre de données publiques
      */
-    public Integer getPublicData() {
-        return (Integer) ((MetricBO) getMetrics().get(PUBLIC_DATA)).getValue();
+    public Integer getPublicData()
+    {
+        return (Integer) ( (MetricBO) getMetrics().get( PUBLIC_DATA ) ).getValue();
     }
 
     /**
@@ -79,8 +83,9 @@ public class RSMClassMetricsBO extends RSMMetricsBO {
      * 
      * @param pPublic la nouvelle valeur du nombre de données publiques
      */
-    public void setPublicData(Integer pPublic) {
-        ((IntegerMetricBO) getMetrics().get(PUBLIC_DATA)).setValue(pPublic);
+    public void setPublicData( Integer pPublic )
+    {
+        ( (IntegerMetricBO) getMetrics().get( PUBLIC_DATA ) ).setValue( pPublic );
     }
 
     /**
@@ -88,8 +93,9 @@ public class RSMClassMetricsBO extends RSMMetricsBO {
      * 
      * @return la valeur du nombre de données publiques
      */
-    public Integer getProtectedData() {
-        return (Integer) ((MetricBO) getMetrics().get(PROTECTED_DATA)).getValue();
+    public Integer getProtectedData()
+    {
+        return (Integer) ( (MetricBO) getMetrics().get( PROTECTED_DATA ) ).getValue();
     }
 
     /**
@@ -97,18 +103,19 @@ public class RSMClassMetricsBO extends RSMMetricsBO {
      * 
      * @param pProtected la nouvelle valeur du nombre de données protégées
      */
-    public void setProtectedData(Integer pProtected) {
-        ((IntegerMetricBO) getMetrics().get(PROTECTED_DATA)).setValue(pProtected);
+    public void setProtectedData( Integer pProtected )
+    {
+        ( (IntegerMetricBO) getMetrics().get( PROTECTED_DATA ) ).setValue( pProtected );
     }
 
     /**
      * Méthode d'accès à la métrique nombre de données privées
      * 
      * @return la valeur du nombre de données privées
-     * 
      */
-    public Integer getPrivateData() {
-        return (Integer) ((MetricBO) getMetrics().get(PRIVATE_DATA)).getValue();
+    public Integer getPrivateData()
+    {
+        return (Integer) ( (MetricBO) getMetrics().get( PRIVATE_DATA ) ).getValue();
     }
 
     /**
@@ -116,18 +123,19 @@ public class RSMClassMetricsBO extends RSMMetricsBO {
      * 
      * @param pPrivateData la nouvelle valeur du nombre de données privées
      */
-    public void setPrivateData(Integer pPrivateData) {
-        ((IntegerMetricBO) getMetrics().get(PRIVATE_DATA)).setValue(pPrivateData);
+    public void setPrivateData( Integer pPrivateData )
+    {
+        ( (IntegerMetricBO) getMetrics().get( PRIVATE_DATA ) ).setValue( pPrivateData );
     }
 
     /**
      * Méthode d'accès à la métrique commentaires
      * 
      * @return la valeur sur le nombre de lignes de commentaires
-     * 
      */
-    public Integer getComments() {
-        return (Integer) ((IntegerMetricBO) getMetrics().get(COMMENTS)).getValue();
+    public Integer getComments()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( COMMENTS ) ).getValue();
     }
 
     /**
@@ -135,8 +143,9 @@ public class RSMClassMetricsBO extends RSMMetricsBO {
      * 
      * @param pComments la nouvelle valeur du nombre de commentaires
      */
-    public void setComments(Integer pComments) {
-        ((IntegerMetricBO) getMetrics().get(COMMENTS)).setValue(pComments);
+    public void setComments( Integer pComments )
+    {
+        ( (IntegerMetricBO) getMetrics().get( COMMENTS ) ).setValue( pComments );
     }
 
 }

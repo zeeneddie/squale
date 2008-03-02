@@ -21,7 +21,8 @@ import com.airfrance.squalecommon.enterpriselayer.facade.rule.xml.GridImport;
 /**
  * Importation de grille qualité
  */
-public class QualityGridImport {
+public class QualityGridImport
+{
     /**
      * provider de persistence
      */
@@ -29,84 +30,103 @@ public class QualityGridImport {
 
     /**
      * Importation d'une grille sans création dans la base
+     * 
      * @param pStream flux de grille
      * @param pErrors erreurs de traitement ou vide si aucune erreur n'est rencontrée
      * @return collection de grilles importées sous la forme de QualityGridDTO
      * @throws JrafEnterpriseException si erreur
      */
-    public static Collection importGrid(InputStream pStream, StringBuffer pErrors) throws JrafEnterpriseException {
+    public static Collection importGrid( InputStream pStream, StringBuffer pErrors )
+        throws JrafEnterpriseException
+    {
         GridImport gridImport = new GridImport();
         // Importation des grilles
-        Collection grids = gridImport.importGrid(pStream, pErrors);
+        Collection grids = gridImport.importGrid( pStream, pErrors );
         // Conversion de chacune des grilles
         // et vérification de leur existence
         ArrayList result = new ArrayList();
         Iterator gridsIt = grids.iterator();
         ISession session = null;
-        try {
+        try
+        {
             // récupération d'une session
             session = PERSISTENTPROVIDER.getSession();
             // Vérification de la grille
             QualityGridChecker gridChecker = new QualityGridChecker();
             // Parcours des grilles
-            while (gridsIt.hasNext()) {
+            while ( gridsIt.hasNext() )
+            {
                 QualityGridBO gridBO = (QualityGridBO) gridsIt.next();
                 // Vérification de la grille
-                gridChecker.checkGrid(gridBO, pErrors);
-                QualityGridDTO gridDTO = QualityGridTransform.bo2Dto(gridBO);
+                gridChecker.checkGrid( gridBO, pErrors );
+                QualityGridDTO gridDTO = QualityGridTransform.bo2Dto( gridBO );
                 // Affectation de l'ID dans le cas d'une grille déjà présente dans
                 // la base de données
-                QualityGridBO existingGrid = QualityGridDAOImpl.getInstance().findWhereName(session, gridBO.getName());
-                if (existingGrid != null) {
-                    gridDTO.setId(existingGrid.getId()); // Cette information sera exploitée par la partie WEB
+                QualityGridBO existingGrid = QualityGridDAOImpl.getInstance().findWhereName( session, gridBO.getName() );
+                if ( existingGrid != null )
+                {
+                    gridDTO.setId( existingGrid.getId() ); // Cette information sera exploitée par la partie WEB
                 }
-                result.add(gridDTO);
+                result.add( gridDTO );
             }
-        } catch (JrafDaoException e) {
+        }
+        catch ( JrafDaoException e )
+        {
             // Renvoi d'une exception
-            FacadeHelper.convertException(e, QualityGridFacade.class.getName() + ".get");
-        } finally {
+            FacadeHelper.convertException( e, QualityGridFacade.class.getName() + ".get" );
+        }
+        finally
+        {
             // Fermeture de la session
-            FacadeHelper.closeSession(session, QualityGridFacade.class.getName() + ".get");
+            FacadeHelper.closeSession( session, QualityGridFacade.class.getName() + ".get" );
         }
         return result;
     }
 
     /**
      * Importation d'une grille et création dans la base
+     * 
      * @param pStream flux de grille
      * @param pErrors erreurs de traitement ou vide si aucune erreur n'est rencontrée
      * @return collection de grilles importées sous la forme de QualityGridDTO
      * @throws JrafEnterpriseException si erreur
      */
-    public static Collection createGrid(InputStream pStream, StringBuffer pErrors) throws JrafEnterpriseException {
+    public static Collection createGrid( InputStream pStream, StringBuffer pErrors )
+        throws JrafEnterpriseException
+    {
         GridImport gridImport = new GridImport();
         // Importation des grilles
-        Collection grids = gridImport.importGrid(pStream, pErrors);
+        Collection grids = gridImport.importGrid( pStream, pErrors );
         // Conversion de chacune des grilles
         // et vérification de leur existence
         ArrayList result = new ArrayList();
         Iterator gridsIt = grids.iterator();
         ISession session = null;
-        try {
+        try
+        {
             // récupération d'une session
             session = PERSISTENTPROVIDER.getSession();
             QualityGridDAOImpl gridDAO = QualityGridDAOImpl.getInstance();
             ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
             // Parcours des grilles
-            while (gridsIt.hasNext()) {
+            while ( gridsIt.hasNext() )
+            {
                 QualityGridBO gridBO = (QualityGridBO) gridsIt.next();
-                gridBO = gridDAO.createGrid(session, gridBO);
+                gridBO = gridDAO.createGrid( session, gridBO );
                 // Mise à jour des projets utilisant la même grille qualité
-                projectDAO.updateQualityGrid(session, gridBO);
+                projectDAO.updateQualityGrid( session, gridBO );
                 // Transformation en DTO
-                QualityGridDTO gridDTO = QualityGridTransform.bo2Dto(gridBO);
-                result.add(gridDTO);
+                QualityGridDTO gridDTO = QualityGridTransform.bo2Dto( gridBO );
+                result.add( gridDTO );
             }
-        } catch (JrafDaoException e) {
-            FacadeHelper.convertException(e, QualityGridFacade.class.getName() + ".get");
-        } finally {
-            FacadeHelper.closeSession(session, QualityGridFacade.class.getName() + ".get");
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, QualityGridFacade.class.getName() + ".get" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, QualityGridFacade.class.getName() + ".get" );
         }
         return result;
     }

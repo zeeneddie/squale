@@ -7,27 +7,32 @@ import com.airfrance.jraf.spi.initializer.IInitializable;
 import com.airfrance.jraf.spi.initializer.IInitializableBean;
 import com.airfrance.jraf.spi.provider.IProvider;
 
-public class Initializer implements IInitializable, IInitializableBean {
+public class Initializer
+    implements IInitializable, IInitializableBean
+{
 
-	public Initializer(){
-		super();
-	}
-	
-	
-	public IProvider initialize(Map objectInitialize)
-			throws JrafConfigException {
-		
-		return initialize();
-	}
+    public Initializer()
+    {
+        super();
+    }
 
-	public IProvider initialize() throws JrafConfigException {
-		IProvider mailer = new JavaMailProviderImpl();
-		return mailer;
-	}
+    public IProvider initialize( Map objectInitialize )
+        throws JrafConfigException
+    {
 
-	public void afterPropertiesSet() {
-		
+        return initialize();
+    }
 
-	}
+    public IProvider initialize()
+        throws JrafConfigException
+    {
+        IProvider mailer = new JavaMailProviderImpl();
+        return mailer;
+    }
+
+    public void afterPropertiesSet()
+    {
+
+    }
 
 }
