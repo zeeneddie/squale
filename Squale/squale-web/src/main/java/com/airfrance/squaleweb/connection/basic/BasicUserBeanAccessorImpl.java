@@ -114,4 +114,15 @@ public class BasicUserBeanAccessorImpl
     {
         return userBean;
     }
+
+    /**
+     * Set the user bean for this accessor
+     * 
+     * @param userBean The bean corresponding to the user
+     */
+    public void setUserBean( IUserBean userBean )
+    {
+        this.userBean = userBean;
+    }
+
 }
