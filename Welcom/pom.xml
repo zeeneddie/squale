@@ -15,7 +15,7 @@
 	<name>Welcom</name>
 	<description>Welcom UI Framework</description>
 	<properties>
-		<jraf.version>2.6-SNAPSHOT</jraf.version>
+		<squale.props.jraf.version>2.6-SNAPSHOT</squale.props.jraf.version>
 	</properties>
 	<build>
 		<resources>
@@ -34,27 +34,27 @@
 		<dependency>
 			<groupId>org.squale.jraf</groupId>
 			<artifactId>jraf-bootstrap</artifactId>
-			<version>${jraf.version}</version>
+			<version>${squale.props.jraf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.squale.jraf</groupId>
 			<artifactId>jraf-commons</artifactId>
-			<version>${jraf.version}</version>
+			<version>${squale.props.jraf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.squale.jraf</groupId>
 			<artifactId>jraf-helper</artifactId>
-			<version>${jraf.version}</version>
+			<version>${squale.props.jraf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.squale.jraf</groupId>
 			<artifactId>jraf-spi</artifactId>
-			<version>${jraf.version}</version>
+			<version>${squale.props.jraf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.squale.jraf</groupId>
 			<artifactId>jraf-provider-hibernate</artifactId>
-			<version>${jraf.version}</version>
+			<version>${squale.props.jraf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.jexcelapi</groupId>
