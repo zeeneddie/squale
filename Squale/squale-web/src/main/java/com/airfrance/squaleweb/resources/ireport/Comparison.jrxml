@@ -70,7 +70,7 @@
 						key="image-1"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<graphicElement stretchType="NoStretch" pen="None" fill="Solid" />
-					<imageExpression class="java.lang.String"><![CDATA["/images/tetiere-squale.gif"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -272,22 +272,6 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[msg($R{export.pdf.page.footer}, $V{date}, $P{userName})]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement
-						mode="Transparent"
-						x="445"
-						y="30"
-						width="90"
-						height="12"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="staticText-1"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" lineSpacing="Single">
-						<font fontName="Arial" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
-					</textElement>
-				<text><![CDATA[http://squale.airfrance.fr]]></text>
-				</staticText>
 			</band>
 		</pageFooter>
 		<summary>
