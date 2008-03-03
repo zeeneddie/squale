@@ -154,3 +154,26 @@ Insert into serveur VALUES(1, 'squaleSrv');
 COMMIT;
 --Dépend de l'environnement...
 --Ces valeurs servent lors de la configuration d'une application car le serveur est un champs obligatoire!
+
+
+-- Table USERBO
+Insert into USERBO
+   (USERID, MATRICULE, PASSWORD,PROFILEID )
+ Values
+   (1, 'squaleAdmin','admin',1);
+
+Insert into USERBO
+   (USERID, MATRICULE, PASSWORD,PROFILEID )
+Values
+   (2, 'squaleUserA','aa',4);
+
+Insert into USERBO
+   (USERID, MATRICULE, PASSWORD,PROFILEID)
+ Values
+   (3, 'squaleUserB','bb',4);
+   
+Insert into USERBO
+   (USERID, MATRICULE, PASSWORD,PROFILEID)
+ Values
+   (4, 'squaleUserC','cc',4);
+commit;
