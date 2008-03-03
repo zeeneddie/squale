@@ -25,10 +25,6 @@
 			http://http://svn.javaforge.com/svn/squale/squale/trunk/squaleParentPOM/
 		</url>
 	</scm>
-	<properties>
-		<!-- TODO : to remove when tests are OK -->
-		<maven.test.skip>true</maven.test.skip>
-	</properties>
 	<modules>
 		<module>squale-core</module>
 		<module>squale-ear</module>
@@ -38,6 +34,8 @@
 	<properties>
 		<jraf.version>2.6-SNAPSHOT</jraf.version>
 		<welcom.version>2.5-SNAPSHOT</welcom.version>
+		<!-- TODO : to remove when tests are OK -->
+		<maven.test.skip>true</maven.test.skip>
 	</properties>
 	<build>
 		<resources>
