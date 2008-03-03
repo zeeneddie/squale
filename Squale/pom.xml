@@ -32,8 +32,12 @@
 		<module>squalix</module>
 	</modules>
 	<properties>
-		<jraf.version>2.6-SNAPSHOT</jraf.version>
-		<welcom.version>2.5-SNAPSHOT</welcom.version>
+		<squale.props.jraf.version>
+			2.6-SNAPSHOT
+		</squale.props.jraf.version>
+		<squale.props.welcom.version>
+			2.5-SNAPSHOT
+		</squale.props.welcom.version>
 		<!-- TODO : to remove when tests are OK -->
 		<maven.test.skip>true</maven.test.skip>
 	</properties>
@@ -77,52 +81,52 @@
 			<dependency>
 				<groupId>org.squale.jraf</groupId>
 				<artifactId>jraf-bootstrap</artifactId>
-				<version>${jraf.version}</version>
+				<version>${squale.props.jraf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.squale.jraf</groupId>
 				<artifactId>jraf-commons</artifactId>
-				<version>${jraf.version}</version>
+				<version>${squale.props.jraf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.squale.jraf</groupId>
 				<artifactId>jraf-helper</artifactId>
-				<version>${jraf.version}</version>
+				<version>${squale.props.jraf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.squale.jraf</groupId>
 				<artifactId>jraf-provider-accessdelegate</artifactId>
-				<version>${jraf.version}</version>
+				<version>${squale.props.jraf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.squale.jraf</groupId>
 				<artifactId>jraf-provider-hibernate</artifactId>
-				<version>${jraf.version}</version>
+				<version>${squale.props.jraf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.squale.jraf</groupId>
 				<artifactId>jraf-provider-logging</artifactId>
-				<version>${jraf.version}</version>
+				<version>${squale.props.jraf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.squale.jraf</groupId>
 				<artifactId>jraf-struts-initializer</artifactId>
-				<version>${jraf.version}</version>
+				<version>${squale.props.jraf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.squale.jraf</groupId>
 				<artifactId>jraf-web-initializer</artifactId>
-				<version>${jraf.version}</version>
+				<version>${squale.props.jraf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.squale.jraf</groupId>
 				<artifactId>jraf-spi</artifactId>
-				<version>${jraf.version}</version>
+				<version>${squale.props.jraf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.squale.welcom</groupId>
 				<artifactId>welcom</artifactId>
-				<version>${welcom.version}</version>
+				<version>${squale.props.welcom.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>asm</groupId>
