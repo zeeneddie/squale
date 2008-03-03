@@ -169,11 +169,14 @@ public class UserFacade
     }
 
     /**
-     * Return the complete userDTO corresponding with the identifier and the password
+     * This method do the search of a user by his identifier and his password 
+     * This method return in a userDTO all information concerning the user who 
+     * corresponding to the identifier and the password. if there is no user 
+     * corresponding, the method return a null userDTO.
      * 
      * @param pUser The userDTO with the identifier and the password inside
-     * @return UserDTO found
-     * @throws JrafEnterpriseException exception JRAF
+     * @return UserDTO the user found or null if he is not found
+     * @throws JrafEnterpriseException exception intervened during the search of the user in the data base
      */
     public static UserDTO getUserByMatriculeAndPassword( UserDTO pUser )
         throws JrafEnterpriseException

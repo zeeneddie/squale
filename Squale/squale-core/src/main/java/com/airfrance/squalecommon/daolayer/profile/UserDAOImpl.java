@@ -92,13 +92,15 @@ public class UserDAOImpl
     }
 
     /**
-     * Permet de récupérer UserBO en fonction du matricule et du password
+     * This method permit to search a user in the database according to its identifier and its password.
+     * If a user with the identifier and the password, the method return this user. If the method found nothing 
+     * it return a null user 
      * 
-     * @param pSession session Hibernate
-     * @param pMatricule matricule de l'utilisateur
-     * @param pPassword password du user
-     * @return UserBO associé au matricule
-     * @throws JrafDaoException exception DAO
+     * @param pSession Hibernate session
+     * @param pMatricule user identifier
+     * @param pPassword user password
+     * @return UserBO return the user found in the data base or null if it not found
+     * @throws JrafDaoException exception happened during the search in the data base
      */
     public UserBO loadWithMatriculeAndPassword( ISession pSession, String pMatricule, String pPassword )
         throws JrafDaoException

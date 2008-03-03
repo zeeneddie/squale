@@ -48,6 +48,16 @@ public class LoginApplicationComponentAccess
         return userDTO;
     }
 
+    
+    /**
+     * This method authenticate a user
+     * if the user is authenticate this method return the user with all his information in the userDTO
+     * if the user is not authenticate, the method return a null userDTO 
+     * 
+     * @param pUser : userDTO containing only identifier and password
+     * @return userDTO return a user with all his information if he is authenticated, otherwise the method return a null userDTO  
+     * @throws JrafEnterpriseException exception happened during the search in the data base
+     */
     public UserDTO userAuthentication( UserDTO pUser )
         throws JrafEnterpriseException
     {
