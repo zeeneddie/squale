@@ -65,7 +65,7 @@ public class ManagerAuditAction
                 // On met en attribut de requête l'action appelante pour le bouton retour
                 // Il y a au moins un audit, on le récupère pour avoir les informations
                 AuditForm audit = (AuditForm) form.getAudits().get( 0 );
-                pRequest.setAttribute( SqualeWebConstants.RETURN_ACTION_KEY, "/squale/audits.do?action=list&kind="
+                pRequest.setAttribute( SqualeWebConstants.RETURN_ACTION_KEY, "audits.do?action=list&kind="
                     + SqualeWebActionUtils.getAuditKind( audit.getStatus() ) + "&applicationId="
                     + audit.getApplicationId() );
             }
@@ -109,7 +109,7 @@ public class ManagerAuditAction
                 forward = pMapping.findForward( "purge" );
                 // On met en attribut de requête l'action appelante pour le bouton retour
                 pRequest.setAttribute( SqualeWebConstants.RETURN_ACTION_KEY,
-                                       "/squale/adminNotAttemptedAudit.do?action=displayNotAttemptedAndRunning" );
+                                       "adminNotAttemptedAudit.do?action=displayNotAttemptedAndRunning" );
             }
         }
         catch ( Exception e )
@@ -244,14 +244,14 @@ public class ManagerAuditAction
                 // On vient de la liste des audits en echec d'une application
                 String oldPAuditId = pRequest.getParameter( "oldPreviousAuditId" );
                 pRequest.setAttribute( SqualeWebConstants.RETURN_ACTION_KEY,
-                                       "/squale/audits.do?action=list&kind=failed&applicationId="
+                                       "audits.do?action=list&kind=failed&applicationId="
                                            + form.getApplicationId() + "&currentAuditId=" + oldAuditId
                                            + "&previousAuditId=" + oldPAuditId );
             }
             else
             {
                 // On retourne sur la page d'accueil
-                pRequest.setAttribute( SqualeWebConstants.RETURN_ACTION_KEY, "/squale/index.do" );
+                pRequest.setAttribute( SqualeWebConstants.RETURN_ACTION_KEY, "index.do" );
             }
         }
         catch ( Exception e )

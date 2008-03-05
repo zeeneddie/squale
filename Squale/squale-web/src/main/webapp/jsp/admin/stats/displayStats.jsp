@@ -16,7 +16,7 @@ if (null == applisStatsParamPanel) {
 %>
 <af:page>
 	<af:head>
-		<script type="text/javascript" src="/squale/jslib/manage_tab.js"></script>
+		<!--<script type="text/javascript" src="jslib/manage_tab.js"></script> -->
 	</af:head>
 	<af:body>
 		<af:canvasCenter titleKey="stats.page.title">

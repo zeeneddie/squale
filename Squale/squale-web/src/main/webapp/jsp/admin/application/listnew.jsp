@@ -28,7 +28,7 @@ Affiche la liste des nouvelles applications en attente de confirmation
 					<af:cols id="appli">
 						<af:colSelect />
 						<af:col property="applicationName" key="application.name"
-							href="/squale/manageApplication.do?action=selectApplicationToConfig"
+							href="manageApplication.do?action=selectApplicationToConfig"
 							paramName="appli" paramId="applicationId"
 							paramProperty="applicationId" sortable="true" />
 						<af:col property="lastUpdate" key="application.last_update"

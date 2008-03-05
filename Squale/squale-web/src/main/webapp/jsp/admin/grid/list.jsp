@@ -42,7 +42,7 @@ administrateur
 					emptyKey="table.results.none">
 					<af:cols id="element" selectable="true">
 						<af:col property="name" key="grid.name" sortable="true"
-							href="/squale/grid.do?action=detail" paramName="element"
+							href="grid.do?action=detail" paramName="element"
 							paramId="gridId" paramProperty="id" width="250px" />
 						<af:col property="updateDate" key="grid.updateDate"
 							sortable="true" type="DATE" dateFormatKey="datetime.format.grid"

@@ -45,7 +45,7 @@
 <af:canvasLeft>
 	<af:menu>
 		<af:menuItem key="menu.application.summary" color="2"
-			action='<%="/squale/application.do?action=summary&applicationId=" + applicationId + paramsLink%>' />
+			action='<%="application.do?action=summary&applicationId=" + applicationId + paramsLink%>' />
 		<logic:notEqual name="<%=children.toString()%>" value="1"
 			scope="session">
 			<logic:present
@@ -59,7 +59,7 @@ Collections.sort(list, new ComponentComparator());
 						name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY%>"
 						scope="session" id="element" type="ProjectForm" property="list">
 						<af:menuItem key="<%=SqualeWebActionUtils.formatStringForMenuItem(element.getProjectName())%>" color="2" 
-							action="<%=\"/squale/project.do?action=select&projectId=\"+element.getId() + paramsLink%>" />
+							action="<%=\"project.do?action=select&projectId=\"+element.getId() + paramsLink%>" />
 					</logic:iterate>
 				</af:menuItem>
 			</logic:present>
@@ -67,11 +67,11 @@ Collections.sort(list, new ComponentComparator());
 
 		<af:menuItem key="menu.application.audits" color="2">
 			<af:menuItem key="menu.application.audits.terminated" color="2"
-				action='<%="/squale/audits.do?action=list&kind=terminated&applicationId=" + applicationId + paramsLink%>' />
+				action='<%="audits.do?action=list&kind=terminated&applicationId=" + applicationId + paramsLink%>' />
 			<af:menuItem key="menu.application.audits.failed" color="2"
-				action='<%="/squale/audits.do?action=list&kind=failed&applicationId=" + applicationId + paramsLink%>' />
+				action='<%="audits.do?action=list&kind=failed&applicationId=" + applicationId + paramsLink%>' />
 			<af:menuItem key="menu.application.audits.partial" color="2"
-				action='<%="/squale/audits.do?action=list&kind=partial&applicationId=" + applicationId + paramsLink%>' />
+				action='<%="audits.do?action=list&kind=partial&applicationId=" + applicationId + paramsLink%>' />
 		</af:menuItem>
 	</af:menu>
 	<jsp:include page="left_common.jsp" flush="true" />

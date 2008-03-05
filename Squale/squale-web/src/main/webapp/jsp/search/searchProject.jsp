@@ -1,12 +1,15 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
-<%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
-<%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic" %>
-<%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
+<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean"%>
+<%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic"%>
+<%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
 
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils" %>
-<%@page import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm"%>
+<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils"%>
+<%@page
+	import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"%>
 
 <%--
 	Permet de rechercher un projet parmis les applications visibles par l'utilisateur.
@@ -41,8 +44,9 @@
 					<bean:message key="search.projects_found" />
 					<br />
 					<bean:define name="searchProjectForm" property="projectForms"
-						id="projectForms" type="java.util.Map"/>
-					<bean:define id="nbProjects" value='<%=""+projectForms.keySet().size()%>'/>
+						id="projectForms" type="java.util.Map" />
+					<bean:define id="nbProjects"
+						value='<%=""+projectForms.keySet().size()%>' />
 					<br />
 					<logic:equal name="nbProjects" value="0">
 						<bean:message key="table.results.none" />
@@ -52,21 +56,23 @@
 							emptyKey="table.results.none">
 							<af:cols id="project">
 								<%
-									// On va récupéré le statut de l'audit
-									AuditForm audit = (AuditForm) projectForms.get((ProjectForm)project);
-									String auditStatus = "";
-									if(null != audit) {
-										// On rend l'audit accessible
-										pageContext.setAttribute("audit", audit);
-										// On prend en compte le statut seulement si celui-ci est en échec
-										// ou partiel (traitement différent si réussi et pas de traitement si
-										// en cours ou supprimé)
-										if(audit.getStatus() == AuditBO.FAILED || audit.getStatus() == AuditBO.PARTIAL) {
-											auditStatus = ""+audit.getStatus();
-										}
-									}
-									// On rend le statut de l'audit accessible
-									pageContext.setAttribute("auditStatus", auditStatus);
+								            // On va récupéré le statut de l'audit
+								            AuditForm audit = (AuditForm) projectForms.get( (ProjectForm) project );
+								            String auditStatus = "";
+								            if ( null != audit )
+								            {
+								                // On rend l'audit accessible
+								                pageContext.setAttribute( "audit", audit );
+								                // On prend en compte le statut seulement si celui-ci est en échec
+								                // ou partiel (traitement différent si réussi et pas de traitement si
+								                // en cours ou supprimé)
+								                if ( audit.getStatus() == AuditBO.FAILED || audit.getStatus() == AuditBO.PARTIAL )
+								                {
+								                    auditStatus = "" + audit.getStatus();
+								                }
+								            }
+								            // On rend le statut de l'audit accessible
+								            pageContext.setAttribute( "auditStatus", auditStatus );
 								%>
 								<bean:define id="applicationId" name="project"
 									property="applicationId" />
@@ -87,23 +93,24 @@
 										<af:col key="search.project.tab.name" property="projectName"
 											sortable="true" paramName="audit" paramId="currentAuditId"
 											paramProperty="id"
-											href='<%="/squale/audits.do?action=select&kind="+auditStatus%>' />
+											href='<%="audits.do?action=select&kind="+auditStatus%>' />
 									</logic:equal>
 									<logic:equal name="auditStatus" value='<%=""+AuditBO.FAILED%>'>
 										<af:col key="search.project.tab.name" property="projectName"
 											sortable="true" paramName="audit" paramId="currentAuditId"
 											paramProperty="id"
-											href='<%="/squale/project_errors.do?action=errors&projectId="+projectId+"&applicationId=" + applicationId%>' />
+											href='<%="project_errors.do?action=errors&projectId="+projectId+"&applicationId=" + applicationId%>' />
 									</logic:equal>
 								</logic:equal>
 								<af:col key="search.application.tab.name"
 									property="applicationName" sortable="true" />
 								<%-- permettant un lien direct vers l'administration du projet --%>
-								<af:col key="projects.manage" property="hasTerminatedAudit"><%-- On met une propriété bidon juste pour pas avoir d'erreur --%>
-									<a href='<%="/squale/config_project.do?action=selectProjectToModify&applicationId="+applicationId 
-											 	+"&projectId="+projectId %>' >
-										<bean:message key="project.manage" />
-									</a>	
+								<af:col key="projects.manage" property="hasTerminatedAudit">
+									<%-- On met une propriété bidon juste pour pas avoir d'erreur --%>
+									<a
+										href='<%="config_project.do?action=selectProjectToModify&applicationId="+applicationId 
+											 	+"&projectId="+projectId %>'>
+									<bean:message key="project.manage" /> </a>
 								</af:col>
 							</af:cols>
 						</af:table>

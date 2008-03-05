@@ -1,14 +1,17 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
+	prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants" %>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm" %>
+<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants"%>
+<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm"%>
 <%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
 
 <%
@@ -21,7 +24,7 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 %>
 
 
-<script type="text/javascript" src="/squale/jslib/information.js"></script>
+<script type="text/javascript" src="jslib/information.js"></script>
 
 <bean:define id="projectId" name="projectSummaryForm"
 	property="projectId" type="String" />
@@ -38,12 +41,12 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 		<jsp:include page="/jsp/xiti/xiti_header_common.jsp" />
 	</af:head>
 	<af:body canvasLeftPageInclude="/jsp/canvas/project_menu.jsp">
-	
+
 		<%-- inclusion pour le marquage XITI spécifique à la page--%>
 		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
 			<jsp:param name="page" value="Consultation::Projet" />
 		</jsp:include>
-		
+
 		<%-- une autre valeur que "true" indique qu'on est passé par une autre vue 
 			que celle composant directement --%>
 		<%-- TODO FAB : gérer la suppression du traceur... --%>
@@ -56,18 +59,20 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 			previousAuditId="<%=previousAuditId%>"/>--%>
 		<af:canvasCenter>
 			<br />
-			<squale:resultsHeader name="projectSummaryForm" displayComparable="true"/>
+			<squale:resultsHeader name="projectSummaryForm"
+				displayComparable="true" />
 			<br />
-			<div style="color:#f00">
-				<html:errors property="exportIDE"/><br /><br/>
+			<div style="color: #f00"><html:errors property="exportIDE" /><br />
+			<br />
 			</div>
 			<logic:equal name="projectSummaryForm" property="haveErrors"
 				scope="session" value="true">
-				<img src="/squale/images/pictos/warning.png" alt="warning_image"/>
+				<img src="images/pictos/warning.png" alt="warning_image" />
 				<a
 					href='<%="project_errors.do?action=errors&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'>
 				<B><U><%=errorLink%></U></B> </a>
-				<br /><br/>
+				<br />
+				<br />
 			</logic:equal>
 			<h2><bean:message key="project.results.summary.subtitle" /></h2>
 			<br />
@@ -85,9 +90,11 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 					<html:img src="<%=srcKiviat%>" usemap="<%=imgMapKiviat%>"
 						border="0" />
 					<br />
-					<b><bean:message key="image.legend" /></b><br/>
-					<bean:message key="project.results.kiviat.details" /><br/>
-					<af:form action="/project.do?action=select" scope="session"
+					<b><bean:message key="image.legend" /></b>
+					<br />
+					<bean:message key="project.results.kiviat.details" />
+					<br />
+					<af:form action="project.do?action=select" scope="session"
 						method="POST">
 						<%-- on passe le paramètre projectId en caché --%>
 						<input name="projectId" value="<%=projectId%>" type="hidden">
@@ -124,7 +131,7 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 								<af:col key="project.result.factor.name" property="name"
 									width="150px">
 									<html:link
-										href='<%="/squale/project.do?action=factor&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
+										href='<%="project.do?action=factor&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
 										paramId="which" paramProperty="id" paramName="factor">
 										<bean:message name="factor" property="name" />
 									</html:link>
@@ -138,8 +145,8 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 									<squale:trend name="factor" current="currentMark"
 										predecessor="predecessorMark" />
 								</af:col>
-								<af:col key="empty" property="currentMark" width="150px"
-									paramId="param">
+								<!-- key="empty" paramId="param" -->
+								<af:col property="currentMark" width="150px">
 									<%-- Recupere l'image --%>
 									<squale:picto name="factor" property="currentMark" />
 								</af:col>
@@ -164,8 +171,9 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 							<af:col property="name" width="30px">
 								<bean:define name="element" property="name" id="name"
 									type="String" />
-								<squale:history projectId="<%=projectId%>" auditId="<%=currentAuditId%>"
-									ruleId="<%=name%>" kind="metric" previousAuditId="<%=previousAuditId%>"/>
+								<squale:history projectId="<%=projectId%>"
+									auditId="<%=currentAuditId%>" ruleId="<%=name%>" kind="metric"
+									previousAuditId="<%=previousAuditId%>" />
 							</af:col>
 						</af:cols>
 					</af:table>
@@ -192,13 +200,12 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 					L'export IDE n'est disponible que pour les versions >= 3.2 et pour les profils
 					qui le permettent 
 				--%>
-				<logic:greaterEqual name="auditSqualeVersion" 
-					value="3.2">
-					<logic:equal name="projectSummaryForm" property="exportIDE" value="true"> 
-						<% String urlExportIde = "/squale/project.do?action=exportIDE&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId;%>
+				<logic:greaterEqual name="auditSqualeVersion" value="3.2">
+					<logic:equal name="projectSummaryForm" property="exportIDE"
+						value="true">
+						<% String urlExportIde = "project.do?action=exportIDE&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId;%>
 						<af:button type="form" name="export.ide"
-							onclick="<%=urlExportIde%>"
-							toolTipKey="toolTip.export.ide" />
+							onclick="<%=urlExportIde%>" toolTipKey="toolTip.export.ide" />
 					</logic:equal>
 				</logic:greaterEqual>
 			</af:buttonBar>

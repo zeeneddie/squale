@@ -51,7 +51,7 @@ public class MarkTag
     private String format( String markToFormat )
     {
         // Si la note est nulle on affiche un "-"
-        String result = "<img src=\"" + "/squale/images/pictos/na.gif" + "\" border=\"0\" />";
+        String result = "<img src=\"" + "images/pictos/na.gif" + "\" border=\"0\" />";
         String markResult = SqualeWebActionUtils.formatFloat( markToFormat );
         // Si on a pu récupérér une note correcte, on la renvoie sinon on affiche le "-"
         if ( !SqualeWebActionUtils.DASH.equals( markResult ) )

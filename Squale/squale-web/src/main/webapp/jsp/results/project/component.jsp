@@ -1,21 +1,24 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
-<%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
-<%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
-<%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic" %>
+<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean"%>
+<%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
+<%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentType" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm" %>
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
+<%@ page
+	import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentType"%>
+<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants"%>
+<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm"%>
+<%@ page
+	import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
 
-<script type="text/javascript" src="/squale/jslib/information.js"></script>
-<script type="text/javascript" src="/squale/jslib/manage_tab.js"></script>
+<script type="text/javascript" src="jslib/information.js"></script>
+<script type="text/javascript" src="jslib/manage_tab.js"></script>
 <script type="text/javascript"
-	src="/squale/jslib/manage_components_comments.js"></script>
+	src="jslib/manage_components_comments.js"></script>
 
 <bean:define id="form" name="componentForm" type="ComponentForm" />
 <bean:define id="applicationId" name="componentForm"
@@ -104,12 +107,12 @@ if (2 == bracketSplit.length) {
 			componentName="<%=componentName%>" projectId="<%=projectId%>"
 			currentAuditId="<%=currentAuditId%>"
 			previousAuditId="<%=previousAuditId%>" />
-	
+
 		<%-- inclusion pour le marquage XITI spécifique à la page--%>
 		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
 			<jsp:param name="page" value="Consultation::Composant" />
 		</jsp:include>
-		
+
 		<af:canvasCenter>
 			<br />
 			<squale:resultsHeader name="componentForm" />
@@ -141,8 +144,10 @@ if (2 == bracketSplit.length) {
 				<input type="hidden" name="<%="filterPanel"%>"
 					id="<%="filterPanel"%>" value="<%=expanded%>" />
 				<%-- On n'affiche le filtre que si le composant peut avoir des enfants --%>
-				<logic:notEqual name="componentForm" property="type" value="<%=ComponentType.METHOD%>">
-					<logic:notEqual name="componentForm" property="type" value="<%=ComponentType.JSP%>">
+				<logic:notEqual name="componentForm" property="type"
+					value="<%=ComponentType.METHOD%>">
+					<logic:notEqual name="componentForm" property="type"
+						value="<%=ComponentType.JSP%>">
 						<af:dropDownPanel titleKey="reference.filter"
 							expanded="<%=Boolean.valueOf(expanded).booleanValue()%>"
 							onExpand="changeVarValue('filterPanel', 'true');"
@@ -150,8 +155,8 @@ if (2 == bracketSplit.length) {
 							<table width="50%" class="formulaire" cellpadding="0"
 								cellspacing="0" border="0" align="center">
 								<tr class="fondClair">
-									<td><af:field property="filter" key="project.component.filter" />
-									</td>
+									<td><af:field property="filter"
+										key="project.component.filter" /></td>
 								</tr>
 							</table>
 							<af:buttonBar>
@@ -167,8 +172,8 @@ if (2 == bracketSplit.length) {
 					remontés si c'est le cas
 				--%>
 				<logic:notEmpty name="errorMsg">
-					<div style="color: #f00"><bean:write name="errorMsg" filter="false" />
-					<br />
+					<div style="color: #f00"><bean:write name="errorMsg"
+						filter="false" /> <br />
 					<br />
 					</div>
 				</logic:notEmpty>
@@ -184,7 +189,7 @@ if (2 == bracketSplit.length) {
 								<af:cols id="element">
 									<af:col property="name" sortable="true"
 										key="project.component.name"
-										href='<%="/squale/project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
+										href='<%="project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
 										paramName="element" paramId="component" paramProperty="id" />
 									<af:col property="type" sortable="true"
 										key="project.component.type">
@@ -215,7 +220,7 @@ if (2 == bracketSplit.length) {
 									</af:col>
 									<af:col property="name" key="practice.name">
 										<html:link
-											href='<%="/squale/project.do?action=practice&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
+											href='<%="project.do?action=practice&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
 											paramId="which" paramProperty="id" paramName="element">
 											<bean:message name="element" property="name" />
 										</html:link>
@@ -302,7 +307,7 @@ pageContext.setAttribute("isNumber", "" + matchesMark);%>
 							property="list" scope="session" id="componentIt">
 							<bean:define name="componentIt" property="id" id="compId" />
 							<a
-								href='<%="/squale/project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&component=" + compId.toString()%>'>
+								href='<%="project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&component=" + compId.toString()%>'>
 							<bean:write name="componentIt" property="name" /></a>
         					&gt;
         				</logic:iterate> <%-- Pour afficher en non cliquable le nom du composant courant

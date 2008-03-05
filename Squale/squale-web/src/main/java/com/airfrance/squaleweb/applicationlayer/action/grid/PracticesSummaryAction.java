@@ -123,7 +123,7 @@ public class PracticesSummaryAction
             ( (ResultListForm) pForm ).setList( list );
             // On est passé par un menu donc on réinitialise le traceur
             // On ajoute le lien de la page pour avoir le lien lors de la sélection d'une pratique
-            updateHistTracker( WebMessages.getString( pRequest, "practices.meteo" ), "/squale/meteo.do?action=meteo",
+            updateHistTracker( WebMessages.getString( pRequest, "practices.meteo" ), "meteo.do?action=meteo",
                                TrackerStructure.TOP_VIEW, pRequest, true );
         }
         catch ( Exception e )

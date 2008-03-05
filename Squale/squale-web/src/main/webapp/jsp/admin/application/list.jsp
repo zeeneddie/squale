@@ -29,7 +29,7 @@ administrateur
 				emptyKey="table.results.none" pageLength="30">
 				<af:cols id="appli">
 					<af:col property="applicationName"
-						href="/squale/manageApplication.do?action=selectApplicationToConfig"
+						href="manageApplication.do?action=selectApplicationToConfig"
 						paramName="appli" paramId="applicationId" paramProperty="id"
 						sortable="true" key="application.name" />
 					<af:col property="lastUpdate" key="application.last_update"
@@ -60,7 +60,7 @@ administrateur
 				emptyKey="table.results.none" pageLength="30">
 				<af:cols id="appli">
 					<af:col property="applicationName"
-						href="/squale/manageApplication.do?action=selectApplicationToConfig"
+						href="manageApplication.do?action=selectApplicationToConfig"
 						paramName="appli" paramId="applicationId" paramProperty="id" />
 				</af:cols>
 			</af:table>

@@ -1,16 +1,18 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
+	prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultRulesCheckingForm" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultRulesCheckingForm"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page import="java.lang.String"%>
-<%@ page import="java.util.ListIterator" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils" %>
+<%@ page import="java.util.ListIterator"%>
+<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils"%>
 
 <bean:define id="projectId" name="projectSummaryForm"
 	property="projectId" type="String" />
@@ -42,15 +44,16 @@ request.setAttribute("practiceInformationForm", infoForm);
 		<squale:tracker directWay="false" projectId="<%=projectId%>"
 			currentAuditId="<%=currentAuditId%>"
 			previousAuditId="<%=previousAuditId%>" />
-	
+
 		<%-- inclusion pour le marquage XITI spécifique à la page--%>
 		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
 			<jsp:param name="page" value="Consultation::Pratique" />
 		</jsp:include>
-		
+
 		<af:canvasCenter>
 			<br />
-			<squale:resultsHeader name="projectSummaryForm" displayComparable="true"/>
+			<squale:resultsHeader name="projectSummaryForm"
+				displayComparable="true" />
 			<br />
 			<br />
 			<h2><bean:message key="project.results.practice.subtitle"
@@ -84,7 +87,7 @@ request.setAttribute("practiceInformationForm", infoForm);
 				</THEAD>
 				<tr>
 					<td width="14">
-					<div align="center"><img src="/squale/images/pictos/error.png"></div>
+					<div align="center"><img src="images/pictos/error.png"></div>
 					</td>
 					<td>
 					<div align="left"><bean:message
@@ -97,7 +100,7 @@ request.setAttribute("practiceInformationForm", infoForm);
 				</tr>
 				<tr>
 					<td width="14">
-					<div align="center"><img src="/squale/images/pictos/warning.png"></div>
+					<div align="center"><img src="images/pictos/warning.png"></div>
 					</td>
 					<td>
 					<div align="left"><bean:message
@@ -110,7 +113,7 @@ request.setAttribute("practiceInformationForm", infoForm);
 				</tr>
 				<tr>
 					<td width="14">
-					<div align="center"><img src="/squale/images/pictos/info.png"></div>
+					<div align="center"><img src="images/pictos/info.png"></div>
 					</td>
 					<td>
 					<div align="left"><bean:message
@@ -154,7 +157,9 @@ if (dbMessage != null) {
 						<af:col property="nameRule"
 							key="project.result.practice.rulesChecking.rule.name"
 							sortable="true" type="String">
-							<img src="<%=SqualeWebActionUtils.getImageForRuleSeverity(severity)%>" style="float:left" />
+							<img
+								src="<%=SqualeWebActionUtils.getImageForRuleSeverity(severity)%>"
+								style="float: left" />
 							<logic:equal name="resultForm" property="transgressionsNumber"
 								value="0">
 								<%=ruleName%>
@@ -204,8 +209,8 @@ String link =
 			<br />
 
 			<%-- On affiche la description de la pratique --%>
-			<fieldset><legend><b><bean:message key="qualimetric_element.title" /></b></legend>
-			<br />
+			<fieldset><legend><b><bean:message
+				key="qualimetric_element.title" /></b></legend> <br />
 			<jsp:include page="/jsp/results/project/information_common.jsp">
 				<jsp:param name="expandedDescription" value="false" />
 			</jsp:include> <br />

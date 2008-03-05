@@ -48,7 +48,7 @@ public class ResultsHeaderTag
         // le nom de l'application :
         // lien comme si on venait du menu application->"nom de l'application"
         param[0] =
-            "<a href='/squale/application.do?action=summary&applicationId=" + appliId + "'>"
+            "<a href='application.do?action=summary&applicationId=" + appliId + "'>"
                 + (String) RequestUtils.lookup( pageContext, mName, "applicationName", null ) + "</a>";
         // On affiche le nom de l'application en gras
         blockquote.append( "<b>" );
@@ -61,15 +61,14 @@ public class ResultsHeaderTag
         if ( null != param[0] && param[0].length() > 0 )
         {
             param[0] =
-                "<a href='/squale/project.do?action=select&projectId=" + projectId + paramsLink + "'>" + param[0]
-                    + "</a>";
+                "<a href='project.do?action=select&projectId=" + projectId + paramsLink + "'>" + param[0] + "</a>";
             blockquote.append( "<b>" );
             blockquote.append( WebMessages.getString( locale, "description.name.project", param ) );
             blockquote.append( "</b> <br />" );
         }
         // Le nom de l'audit courant
         param[0] =
-            "<a href='/squale/audits.do?action=select&currentAuditId=" + auditId + "'>"
+            "<a href='audits.do?action=select&currentAuditId=" + auditId + "'>"
                 + (String) RequestUtils.lookup( pageContext, mName, "auditName", null ) + "</a>";
         // On affiche le nom de l'audit courant
         // lien idem à la sélection de l'audit
@@ -90,8 +89,7 @@ public class ResultsHeaderTag
         {
             // On ajoute un lien
             // lien idem à la sélection de l'audit
-            param[0] =
-                "<a href='/squale/audits.do?action=select&currentAuditId=" + previousAuditId + "'>" + param[0] + "</a>";
+            param[0] = "<a href='audits.do?action=select&currentAuditId=" + previousAuditId + "'>" + param[0] + "</a>";
         }
         blockquote.append( "<b>" );
         blockquote.append( WebMessages.getString( locale, "description.name.previous.audit", param ) );

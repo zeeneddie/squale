@@ -14,7 +14,7 @@
 	<af:head>
 		<script type="text/javascript">
 			function reloadWithServerName(serverName) {
-				location.href="/squale/audits.do?action=displayTerminated&<%=AuditAction.SERVER_NAME_KEY%>="+serverName;
+				location.href="audits.do?action=displayTerminated&<%=AuditAction.SERVER_NAME_KEY%>="+serverName;
 			}
 		</script>
 	</af:head>

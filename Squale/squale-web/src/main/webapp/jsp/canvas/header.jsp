@@ -131,13 +131,13 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 			action="ack_newapplication.do?action=list" accessKey="admin" />
 		<af:menuItem key="menu.administration.audits" color="2">
 			<af:menuItem key="menu.administration.not_attempted_audit" color="2"
-				action="/squale/adminNotAttemptedAudit.do?action=displayNotAttemptedAndRunning"
+				action="adminNotAttemptedAudit.do?action=displayNotAttemptedAndRunning"
 				accessKey="admin" />
 			<af:menuItem key="menu.administration.terminated_audits" color="2"
-				action="/squale/audits.do?action=displayTerminated"
+				action="audits.do?action=displayTerminated"
 				accessKey="admin" />
 			<af:menuItem key="menu.administration.failed_audits" color="2"
-				action="/squale/auditsFailed.do?action=displayFailedOrPartial"
+				action="auditsFailed.do?action=displayFailedOrPartial"
 				accessKey="admin" />
 		</af:menuItem>
 		<af:menuItem key="menu.administration.communication" color="2">
@@ -158,14 +158,14 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 			<af:menuItem key="menu.administration.checkstyle" color="2"
 				action="checkstyle.do?action=list" accessKey="admin" />
 			<af:menuItem key="menu.administration.portail" color="2"
-				action="/squale/loadConfig.do" accessKey="admin" />
+				action="loadConfig.do" accessKey="admin" />
 		</af:menuItem>
 		<af:menuItem key="menu.administration.stats" color="2"
 			accessKey="admin">
 			<af:menuItem key="menu.administration.roi" color="2"
-				action="/squale/roi.do?action=display" accessKey="admin" />
+				action="roi.do?action=display" accessKey="admin" />
 			<af:menuItem key="menu.administration.stats.general" color="2"
-				action="/squale/stats.do?action=displayAdmin" accessKey="admin" />
+				action="stats.do?action=displayAdmin" accessKey="admin" />
 		</af:menuItem>
 		<af:menuItem key="menu.administration.messages" color="2"
 			action="utilLink.do?action=message" accessKey="admin" />

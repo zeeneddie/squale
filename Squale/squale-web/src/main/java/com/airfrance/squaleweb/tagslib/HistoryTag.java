@@ -112,9 +112,9 @@ public class HistoryTag
         String help = WebMessages.getString( pRequest, "tooltips.history" );
         // Création du lien
         String link =
-            "/squale/review.do?action=review&projectId=" + projectId + complementaryRequest + "&which=" + ruleId + "\"";
+            "review.do?action=review&projectId=" + projectId + complementaryRequest + "&which=" + ruleId + "\"";
         // Création du tag image
-        String image = "<img src=\"/squale/images/pictos/icon_history.gif\" title=\"" + help + "\" border=\"0\" />";
+        String image = "<img src=\"images/pictos/icon_history.gif\" title=\"" + help + "\" border=\"0\" />";
         // Création du tag représentant l'appel à l'historique
         String result = "<a href=\"" + link + "\" class=\"nobottom\">" + image + "</a>";
 

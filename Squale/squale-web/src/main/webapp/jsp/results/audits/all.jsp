@@ -1,7 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
+	prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
@@ -9,10 +10,10 @@
 <%-- recupere le type de list dans le parametre kind du formulaire --%>
 <bean:define name="splitAuditsListForm" property="kind" id="kind"
 	type="String" />
-<bean:define name="splitAuditsListForm" property="currentAuditId" id="currentAuditId"
-	type="String" />
-<bean:define name="splitAuditsListForm" property="previousAuditId" id="previousAuditId"
-	type="String" />
+<bean:define name="splitAuditsListForm" property="currentAuditId"
+	id="currentAuditId" type="String" />
+<bean:define name="splitAuditsListForm" property="previousAuditId"
+	id="previousAuditId" type="String" />
 <%
 /* recuperation des differents "messages" de la jsp dépendant du type des audits */
 // Le titre
@@ -20,7 +21,7 @@ String title = "application.results.audits." + kind + ".title";
 // Les détails
 String details = "application.results.audits." + kind + ".details";
 // On construit le lien lorsqu'on cliquera sur un audit
-String link = "/squale/audits.do?action=select&kind=" + kind + "&oldAudit=" + currentAuditId + "&oldPreviousAudit=" + previousAuditId;
+String link = "audits.do?action=select&kind=" + kind + "&oldAudit=" + currentAuditId + "&oldPreviousAudit=" + previousAuditId;
 %>
 
 
@@ -41,11 +42,10 @@ String link = "/squale/audits.do?action=select&kind=" + kind + "&oldAudit=" + cu
 				<br />
 				<bean:message key="<%=details%>" />
 			</af:dropDownPanel>
-			<div style="color: #f00"><html:errors />
-				<html:messages id="message" message="true">
-					<bean:write name="message" />
-				</html:messages>
-			</div>
+			<div style="color: #f00"><html:errors /> <html:messages
+				id="message" message="true">
+				<bean:write name="message" />
+			</html:messages></div>
 			<br />
 			<af:form action="purgeAuditAction.do" scope="session" method="POST"
 				name="selectForm"
@@ -57,7 +57,8 @@ String link = "/squale/audits.do?action=select&kind=" + kind + "&oldAudit=" + cu
 					<af:cols id="element" selectable="true">
 						<af:col property="realDate" key="audit.date" sortable="true"
 							href="<%=link%>" paramName="element" paramId="currentAuditId"
-							paramProperty="id" type="DATE" width="200px" dateFormatKey="datetime.format"/>
+							paramProperty="id" type="DATE" width="200px"
+							dateFormatKey="datetime.format" />
 						<af:col property="name" key="audit.label" sortable="true"
 							href="<%=link%>" paramName="element" paramId="currentAuditId"
 							paramProperty="id" width="250px" />
@@ -81,11 +82,11 @@ String link = "/squale/audits.do?action=select&kind=" + kind + "&oldAudit=" + cu
 			<%-- On affiche un encadré pour expliquer la comparaison de deux audits sauf dans le cas des audits en échec non comparable --%>
 			<logic:notEqual name="splitAuditsListForm" property="kind"
 				value="failed">
-				<fieldset><legend><img src="/squale/images/pictos/info.png" alt="info_image"
-					style="float: left" /> <b><bean:message
-					key="application.results.audits.comparison.legend" /></b> </legend>
-				<bean:message key="application.results.audits.comparison.details" />
-				</fieldset>
+				<fieldset><legend><img
+					src="images/pictos/info.png" alt="info_image" style="float: left" />
+				<b><bean:message
+					key="application.results.audits.comparison.legend" /></b> </legend> <bean:message
+					key="application.results.audits.comparison.details" /></fieldset>
 			</logic:notEqual>
 		</af:canvasCenter>
 	</af:body>

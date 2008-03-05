@@ -1,13 +1,16 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
+	prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants" %>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultForm" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.CriteriumForm" %>
+<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants"%>
+<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultForm"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.results.CriteriumForm"%>
 
 <%-- Page de presentation des criteres / pratiques d'un facteur
 		Attribut en entree :
@@ -21,8 +24,8 @@
 		Voir l'action factor de ProjectResultsAction
  --%>
 
-<script type="text/javascript" src="/squale/jslib/manage_tab.js"></script>
-<script type="text/javascript" src="/squale/jslib/information.js"></script>
+<script type="text/javascript" src="jslib/manage_tab.js"></script>
+<script type="text/javascript" src="jslib/information.js"></script>
 
 <bean:define id="projectId" name="projectSummaryForm"
 	property="projectId" type="String" />
@@ -41,22 +44,24 @@
 		<%-- inclusion pour le marquage XITI --%>
 		<jsp:include page="/jsp/xiti/xiti_header_common.jsp" />
 	</af:head>
-	
+
 	<af:body canvasLeftPageInclude="/jsp/canvas/project_menu.jsp">
 		<squale:tracker directWay="false" projectId="<%=projectId%>"
 			currentAuditId="<%=currentAuditId%>"
 			previousAuditId="<%=previousAuditId%>" />
-	
+
 		<%-- inclusion pour le marquage XITI spécifique à la page--%>
 		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
 			<jsp:param name="page" value="Consultation::Facteur" />
 		</jsp:include>
-		
+
 		<af:canvasCenter>
 			<br />
-			<squale:resultsHeader name="projectSummaryForm" displayComparable="true"/>
+			<squale:resultsHeader name="projectSummaryForm"
+				displayComparable="true" />
 			<br />
-			<h2><bean:message key="project.results.criteria.subtitle" arg0="<%=WebMessages.getString(request, factorName)%>"/></h2>
+			<h2><bean:message key="project.results.criteria.subtitle"
+				arg0="<%=WebMessages.getString(request, factorName)%>" /></h2>
 			<br />
 			<%-- Système d'onglets pour le détail des critères --%>
 			<af:tabbedPane name="criteriumdetail">
@@ -83,11 +88,9 @@
 							<td><squale:trend name="resForm" current="currentMark"
 								predecessor="predecessorMark" /></td>
 							<td><squale:picto name="resForm" property="currentMark" /></td>
-							<td>
-								<squale:history projectId="<%=projectId%>" auditId="<%=currentAuditId%>"
-												ruleId="<%=(String) which%>" kind="result" 
-												previousAuditId="<%=previousAuditId%>"/>
-							</td>
+							<td><squale:history projectId="<%=projectId%>"
+								auditId="<%=currentAuditId%>" ruleId="<%=(String) which%>"
+								kind="result" previousAuditId="<%=previousAuditId%>" /></td>
 						</tr>
 
 					</table>
@@ -118,8 +121,9 @@
 							<af:col property="name" width="30px">
 								<bean:define name="criterium" property="id" id="id"
 									type="String" />
-								<squale:history projectId="<%=projectId%>" auditId="<%=currentAuditId%>"
-									ruleId="<%=(String) id%>" kind="result" previousAuditId="<%=previousAuditId%>"/>
+								<squale:history projectId="<%=projectId%>"
+									auditId="<%=currentAuditId%>" ruleId="<%=(String) id%>"
+									kind="result" previousAuditId="<%=previousAuditId%>" />
 							</af:col>
 						</af:cols>
 					</af:table>
@@ -133,8 +137,7 @@
 					<af:tab key="<%=criteriumName%>" name="<%=criteriumName%>">
 						<br />
 						<%-- 1er tableau = rappel du resultat du facteur --%>
-						<table border="0" cellspacing="0" class="tblh"
-							style="width: 100%">
+						<table border="0" cellspacing="0" class="tblh" style="width: 100%">
 							<THEAD>
 								<tr>
 									<th><bean:message key="project.result.factor.name" /></th>
@@ -152,14 +155,14 @@
 								<td><squale:trend name="resForm" current="currentMark"
 									predecessor="predecessorMark" /></td>
 								<td><squale:picto name="resForm" property="currentMark" /></td>
-								<td><squale:history projectId="<%=projectId%>" auditId="<%=currentAuditId%>"
-									ruleId="<%=(String) which%>" kind="result" previousAuditId="<%=previousAuditId%>"/></td>
+								<td><squale:history projectId="<%=projectId%>"
+									auditId="<%=currentAuditId%>" ruleId="<%=(String) which%>"
+									kind="result" previousAuditId="<%=previousAuditId%>" /></td>
 							</tr>
 						</table>
 						<br />
 						<%-- 2eme tableau = rappel du resultat du critère --%>
-						<table border="0" cellspacing="0" class="tblh"
-							style="width: 100%">
+						<table border="0" cellspacing="0" class="tblh" style="width: 100%">
 							<THEAD>
 								<tr>
 									<th><bean:message key="project.result.criterium.name" /></th>
@@ -179,8 +182,9 @@
 								<td><squale:picto name="criterium" property="currentMark" /></td>
 								<td><%-- lien vers l'historique--%> <bean:define
 									name="criterium" property="id" id="idCriterium" type="String" />
-								<squale:history projectId="<%=projectId%>" auditId="<%=currentAuditId%>"
-									ruleId="<%=idCriterium%>" kind="result" previousAuditId="<%=previousAuditId%>"/></td>
+								<squale:history projectId="<%=projectId%>"
+									auditId="<%=currentAuditId%>" ruleId="<%=idCriterium%>"
+									kind="result" previousAuditId="<%=previousAuditId%>" /></td>
 							</tr>
 						</table>
 						<br />
@@ -196,18 +200,12 @@
 									<logic:greaterEqual name="practice" property="currentMark"
 										value="0">
 										<%
-// On construit le lien vers les résultats de la pratique
-String link =
-    "/squale/project.do?action=practice&projectId="
-        + projectId
-        + "&currentAuditId="
-        + currentAuditId
-        + "&previousAuditId="
-        + previousAuditId
-        + "&which="
-        + ((ResultForm) practice).getId()
-        + "&whichParent="
-        + ((ResultForm) practice).getTreParent();%>
+										            // On construit le lien vers les résultats de la pratique
+										            String link =
+										                "project.do?action=practice&projectId=" + projectId + "&currentAuditId=" + currentAuditId
+										                    + "&previousAuditId=" + previousAuditId + "&which=" + ( (ResultForm) practice ).getId()
+										                    + "&whichParent=" + ( (ResultForm) practice ).getTreParent();
+										%>
 										<a href="<%=link%>"> <bean:message name="practice"
 											property="name" /> </a>
 									</logic:greaterEqual>
@@ -240,8 +238,8 @@ String link =
 									<bean:define name="practice" property="id" id="id"
 										type="String" />
 									<squale:history projectId="<%=projectId%>" ruleId="<%=id%>"
-										kind="result" auditId="<%=currentAuditId%>" 
-										previousAuditId="<%=previousAuditId%>"/>
+										kind="result" auditId="<%=currentAuditId%>"
+										previousAuditId="<%=previousAuditId%>" />
 								</af:col>
 							</af:cols>
 						</af:table>

@@ -1,17 +1,19 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
+	prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
+<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
 <%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm" %>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm"%>
 
 <%
-// Le toolTip pour le pieChart
-String imageDetails = WebMessages.getString(request, "image.piechart");
+            // Le toolTip pour le pieChart
+            String imageDetails = WebMessages.getString( request, "image.piechart" );
 %>
 
 <bean:define id="applicationName" name="resultListForm"
@@ -29,12 +31,12 @@ String imageDetails = WebMessages.getString(request, "image.piechart");
 		<jsp:include page="/jsp/xiti/xiti_header_common.jsp" />
 	</af:head>
 	<af:body canvasLeftPageInclude="/jsp/canvas/application_menu.jsp">
-	
+
 		<%-- inclusion pour le marquage XITI spécifique à la page--%>
 		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
 			<jsp:param name="page" value="Consultation::Application" />
 		</jsp:include>
-		
+
 		<af:canvasCenter>
 			<br />
 			<br />
@@ -52,7 +54,7 @@ String imageDetails = WebMessages.getString(request, "image.piechart");
 					<bean:define id="imgMapPieChart" name="resultListForm"
 						property="pieChart.useMapName" type="String" />
 					<%-- ligne necessaire --%>
-					<%=((GraphMaker) ((ResultListForm) (request.getSession().getAttribute("resultListForm"))).getPieChart()).getMapDescription()%>
+					<%=( (GraphMaker) ( (ResultListForm) ( request.getSession().getAttribute( "resultListForm" ) ) ).getPieChart() ).getMapDescription()%>
 					<html:img src="<%=srcPieChart%>" usemap="<%=imgMapPieChart%>"
 						border="0" />
 					<br />
@@ -75,15 +77,21 @@ String imageDetails = WebMessages.getString(request, "image.piechart");
 							qu'il n'y a pas de résultats --%>
 						<logic:notEqual name="gridResult" property="gridName" value="">
 							<center>
-							<h3><bean:message key="project_creation.field.quality_grid" /> <bean:write
-								name="gridResult" property="gridName" /></h3>
+							<h3><bean:message key="project_creation.field.quality_grid" />
+							<bean:write name="gridResult" property="gridName" /></h3>
 							</center>
 							<af:table name="gridResult" property="results" scope="page"
 								totalLabelPos="none" emptyKey="table.results.none"
 								displayNavigation="false">
-								<%String paramsLink = "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId;%>
-								<%String projectLink = "/squale/project.do?action=select" + paramsLink;%>
-								<%String factorLink = "/squale/project.do?action=factor" + paramsLink;%>
+								<%
+								String paramsLink = "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId;
+								%>
+								<%
+								String projectLink = "project.do?action=select" + paramsLink;
+								%>
+								<%
+								String factorLink = "project.do?action=factor" + paramsLink;
+								%>
 								<af:cols id="element">
 									<af:col property="name" key="project.name" sortable="false"
 										href="<%=projectLink%>" paramName="element"
@@ -96,7 +104,9 @@ String imageDetails = WebMessages.getString(request, "image.piechart");
 										<bean:define id="projectId" name="element" property="id" />
 										<af:col property='<%="factors[" + index + "].currentMark"%>'
 											key="<%=factorName%>">
-											<%String link = factorLink + "&projectId=" + projectId.toString() + "&which=" + factorId.toString();%>
+											<%
+											String link = factorLink + "&projectId=" + projectId.toString() + "&which=" + factorId.toString();
+											%>
 											<a href="<%=link%>" class="nobottom"> <squale:mark
 												name="factor" mark="currentMark" /> <squale:trend
 												name="factor" current="currentMark"
@@ -118,7 +128,7 @@ String imageDetails = WebMessages.getString(request, "image.piechart");
 					<%-- ligne necessaire --%>
 					<bean:define id="description" name="resultListForm"
 						property="kiviat.mapDescription" type="String" />
-					<%=((GraphMaker) ((ResultListForm) (request.getSession().getAttribute("resultListForm"))).getKiviat()).getMapDescription()%>
+					<%=( (GraphMaker) ( (ResultListForm) ( request.getSession().getAttribute( "resultListForm" ) ) ).getKiviat() ).getMapDescription()%>
 					<html:img src="<%=srcKiviat%>" usemap="<%=imgMapKiviat%>"
 						border="0" />
 					<br />

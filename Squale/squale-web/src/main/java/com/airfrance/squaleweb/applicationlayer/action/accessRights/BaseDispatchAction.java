@@ -174,7 +174,7 @@ public abstract class BaseDispatchAction
                 name = st.nextToken();
             }
             lastOne.setDisplayName( name );
-            lastOne.setLink( "<a href=\"/squale/project_component.do?action=component&component=" + pId );
+            lastOne.setLink( "<a href=\"project_component.do?action=component&component=" + pId );
             list.add( lastOne );
             pRequest.getSession().setAttribute( SqualeWebConstants.TRACKER_COMPONENT, list );
         }

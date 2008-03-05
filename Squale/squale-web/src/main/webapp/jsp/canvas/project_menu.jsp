@@ -34,18 +34,18 @@
 <af:canvasLeft>
 	<af:menu>
 		<af:menuItem key="menu.project.summary" color="2"
-			action='<%="/squale/project.do?action=summary&projectId="+projectId+paramsLink%>' />
+			action='<%="project.do?action=summary&projectId="+projectId+paramsLink%>' />
 		<af:menuItem key="menu.project.components" color="2">
-			<af:menuItem key="menu.project.components.all" action='<%="/squale/project_component.do?action=root&which=components.all&projectId="+projectId+paramsLink%>' color="2"/>
-			<af:menuItem key="menu.project.components.excluded" action='<%="/squale/project_component.do?action=root&which=components.excluded&projectId="+projectId+paramsLink%>' color="2"/>
+			<af:menuItem key="menu.project.components.all" action='<%="project_component.do?action=root&which=components.all&projectId="+projectId+paramsLink%>' color="2"/>
+			<af:menuItem key="menu.project.components.excluded" action='<%="project_component.do?action=root&which=components.excluded&projectId="+projectId+paramsLink%>' color="2"/>
 		</af:menuItem>
 		<af:menuItem key="menu.application.audits" color="2">
 			<af:menuItem key="menu.application.audits.terminated" color="2"
-				action='<%="/squale/audits.do?action=list&kind=terminated&applicationId="+applicationId+paramsLink%>' />
+				action='<%="audits.do?action=list&kind=terminated&applicationId="+applicationId+paramsLink%>' />
 			<af:menuItem key="menu.application.audits.failed" color="2"
-				action='<%="/squale/audits.do?action=list&kind=failed&applicationId="+applicationId+paramsLink%>' />
+				action='<%="audits.do?action=list&kind=failed&applicationId="+applicationId+paramsLink%>' />
 			<af:menuItem key="menu.application.audits.partial" color="2"
-				action='<%="/squale/audits.do?action=list&kind=partial&applicationId="+applicationId+paramsLink%>' />
+				action='<%="audits.do?action=list&kind=partial&applicationId="+applicationId+paramsLink%>' />
 		</af:menuItem>
 		
 		<af:menuItem key="menu.histo" color="2" />
@@ -55,12 +55,12 @@
 			   <bean:define id="kindKey" name="kind" property="key" type="String"/>
 		       <af:menuItem key="<%=kindKey%>" color="2">
 		       		<logic:iterate id="kindValue" name="kind" property="value" type="String">
-						<af:menuItem key="<%=kindValue%>" color="2" action="<%=\"/squale/top.do?action=display&componenttype=\"+kindKey+\"&tre=\"+kindValue+\"&projectId=\"+projectId+paramsLink%>"/>
+						<af:menuItem key="<%=kindValue%>" color="2" action="<%=\"top.do?action=display&componenttype=\"+kindKey+\"&tre=\"+kindValue+\"&projectId=\"+projectId+paramsLink%>"/>
 		       		</logic:iterate>
 		       </af:menuItem>
 			</logic:iterate>
-			<af:menuItem key="practices.meteo" action="<%=\"/squale/meteo.do?action=meteo&projectId=\"+projectId+paramsLink%>" color="2" />
-			<af:menuItem key="bubbleGraph"  color="2" action="<%=\"/squale/top.do?action=displayBubble&projectId=\"+projectId+paramsLink%>"/> 
+			<af:menuItem key="practices.meteo" action="<%=\"meteo.do?action=meteo&projectId=\"+projectId+paramsLink%>" color="2" />
+			<af:menuItem key="bubbleGraph"  color="2" action="<%=\"top.do?action=displayBubble&projectId=\"+projectId+paramsLink%>"/> 
 		</af:menuItem>
 		
 		
@@ -73,7 +73,7 @@ Collections.sort(list, new ComponentComparator());%>
 				<logic:iterate name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY%>" scope="session" id="element"
 					type="ProjectForm" property="list">
 					<af:menuItem key="<%=SqualeWebActionUtils.formatStringForMenuItem(element.getProjectName())%>" color="2"
-						action="<%=\"/squale/project.do?action=select&projectId=\"+element.getId()+paramsLink%>" />
+						action="<%=\"project.do?action=select&projectId=\"+element.getId()+paramsLink%>" />
 				</logic:iterate>
 			</af:menuItem>
 		</logic:present>
@@ -85,7 +85,7 @@ Collections.sort(list, new ComponentComparator());%>
 		--%>
 		<logic:equal name="comparisonAvailable" value="true">
 			<af:menuItem key="menu.project.evolution" color="2"
-						action="<%=\"/squale/evolution.do?action=list&projectId=\"+projectId+paramsLink%>"/>
+						action="<%=\"evolution.do?action=list&projectId=\"+projectId+paramsLink%>"/>
 		</logic:equal>
 	</af:menu>
 	<jsp:include page="left_common.jsp" flush="true"/>

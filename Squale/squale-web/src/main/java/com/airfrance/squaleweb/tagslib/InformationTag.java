@@ -58,9 +58,9 @@ public class InformationTag
                                                                                                                        "" );
         // il ne faut pas passer le nom réel mais le nom sous forme de clé (rule.xxx ....)
         String result =
-            "<a href=\"javascript:display_popup('/squale/information.do?action=retrieveInformation&elementName="
-                + practiceKey + "&ruleId=" + ruleIdValue + "','popup_1');\" class=\"nobottom\"> " + "<img src=\""
-                + "/squale/images/pictos/icon_catalog.gif\" title=\""
+            "<a href=\"javascript:display_popup('information.do?action=retrieveInformation&elementName=" + practiceKey
+                + "&ruleId=" + ruleIdValue + "','popup_1');\" class=\"nobottom\"> " + "<img src=\""
+                + "images/pictos/icon_catalog.gif\" title=\""
                 // pour échapper les quotes, il est necessaire de les remplacer par " \' "
                 + pictureHelp.replaceAll( "'", "\\\\'" ) + "\" border=\"0\" /> </a>";
         return result;

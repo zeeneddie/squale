@@ -41,8 +41,8 @@ public class SqualeWebActionUtils
      * Images en fonction de la note 0..3
      */
     public static final String[] IMG =
-        { "/squale/images/pictos/bad.png", "/squale/images/pictos/good.png", "/squale/images/pictos/best.png",
-            "/squale/images/pictos/super.png", "/squale/images/pictos/na.gif" };
+        { "images/pictos/bad.png", "images/pictos/good.png", "images/pictos/best.png",
+            "images/pictos/super.png", "images/pictos/na.gif" };
 
     /**
      * Constante "-" pour l'affichage
@@ -67,7 +67,7 @@ public class SqualeWebActionUtils
      */
     public static String getImageForTrend( String currentMark, String predecessorMark )
     {
-        String result = "/squale/images/pictos/na.gif";
+        String result = "images/pictos/na.gif";
         // Dans ce cas, c'est simple: il n'y a pas eu d'évolution
         // la note précédente peut etre null ou initialisée à la chaine vide (pour le form)
         if ( isValidMark( currentMark ) && isValidMark( predecessorMark ) )
@@ -78,29 +78,29 @@ public class SqualeWebActionUtils
             if ( Math.abs( diff ) < BETTER )
             {
                 // l'évolution n'est pas significative, flèche constante
-                result = "/squale/images/pictos/ar_blueAF.gif";
+                result = "images/pictos/ar_blueAF.gif";
             }
             else if ( Math.abs( diff ) < MUCH_BETTER )
             {
                 // changement peu significatif
                 if ( diff < 0 )
                 { // légère dégradation
-                    result = "/squale/images/pictos/ar_blueAF_RD.gif";
+                    result = "images/pictos/ar_blueAF_RD.gif";
                 }
                 else
                 { // légère amélioration
-                    result = "/squale/images/pictos/ar_blueAF_RU.gif";
+                    result = "images/pictos/ar_blueAF_RU.gif";
                 }
             }
             else
             {
                 if ( diff < 0 )
                 { // dégradation significative
-                    result = "/squale/images/pictos/ar_blueAF_D.gif";
+                    result = "images/pictos/ar_blueAF_D.gif";
                 }
                 else
                 { // amélioration significative
-                    result = "/squale/images/pictos/ar_blueAF_U.gif";
+                    result = "images/pictos/ar_blueAF_U.gif";
                 }
             }
         }
@@ -439,15 +439,15 @@ public class SqualeWebActionUtils
         String result;
         if ( pErrorLevel.equals( ErrorBO.CRITICITY_FATAL ) )
         {
-            result = "/squale/images/pictos/error.png";
+            result = "images/pictos/error.png";
         }
         else if ( pErrorLevel.equals( ErrorBO.CRITICITY_WARNING ) )
         {
-            result = "/squale/images/pictos/warning.png";
+            result = "images/pictos/warning.png";
         }
         else
         {
-            result = "/squale/images/pictos/info.png";
+            result = "images/pictos/info.png";
         }
         return result;
     }
@@ -463,15 +463,15 @@ public class SqualeWebActionUtils
         String result;
         if ( pSeverity.equals( ConstantRulesChecking.ERROR_LABEL ) )
         {
-            result = "/squale/images/pictos/error.png";
+            result = "images/pictos/error.png";
         }
         else if ( pSeverity.equals( ConstantRulesChecking.WARNING_LABEL ) )
         {
-            result = "/squale/images/pictos/warning.png";
+            result = "images/pictos/warning.png";
         }
         else
         {
-            result = "/squale/images/pictos/info.png";
+            result = "images/pictos/info.png";
         }
         return result;
     }

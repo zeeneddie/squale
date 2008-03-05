@@ -2,11 +2,12 @@
 
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
+	prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
+<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
 
 <bean:define id="projectId" name="topListForm" property="projectId"
 	type="String" />
@@ -30,12 +31,12 @@
 		<squale:tracker directWay="false" projectId="<%=projectId%>"
 			currentAuditId="<%=currentAuditId%>"
 			previousAuditId="<%=previousAuditId%>" />
-	
+
 		<%-- inclusion pour le marquage XITI spécifique à la page--%>
 		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
 			<jsp:param name="page" value="ConsultationExpert::top" />
 		</jsp:include>
-		
+
 		<af:canvasCenter>
 			<br />
 			<squale:resultsHeader name="topListForm" />
@@ -57,7 +58,7 @@
 					emptyKey="table.results.none">
 					<af:cols id="element">
 						<af:col property="name" contentTruncate="80" key="component.name"
-							href='<%="/squale/project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
+							href='<%="project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
 							paramName="element" paramId="component" paramProperty="id"
 							sortable="true" />
 						<af:col property="metrics[0]" type="NUMBER" key="<%=currentTre%>"

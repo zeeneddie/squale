@@ -1,15 +1,17 @@
 
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
+	prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultForm" %>
+<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants"%>
+<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultForm"%>
 
-<script type="text/javascript" src="/squale/jslib/information.js"></script>
+<script type="text/javascript" src="jslib/information.js"></script>
 
 <bean:define id="projectId" name="resultListForm" property="projectId"
 	type="String" />
@@ -25,15 +27,15 @@
 		<jsp:include page="/jsp/xiti/xiti_header_common.jsp" />
 	</af:head>
 	<af:body canvasLeftPageInclude="/jsp/canvas/project_menu.jsp">
-	
+
 		<%-- inclusion pour le marquage XITI spécifique à la page--%>
 		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
 			<jsp:param name="page" value="ConsultationExpert::Resume" />
 		</jsp:include>
-		
+
 		<af:canvasCenter>
 			<br />
-			<squale:resultsHeader name="resultListForm" displayComparable="true"/>
+			<squale:resultsHeader name="resultListForm" displayComparable="true" />
 			<br />
 			<h2><bean:message key="project.results.title" /></h2>
 			<br />
@@ -49,7 +51,11 @@
 							<squale:info name="practice" practiceName="name" ruleId="id" />
 						</af:col>
 						<af:col property="name" key="project.result.practice.name">
-							<%String link = "/squale/project.do?action=practice&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&which=" + ((ResultForm) practice).getId();%>
+							<%
+							                String link =
+							                "project.do?action=practice&projectId=" + projectId + "&currentAuditId=" + currentAuditId
+							                    + "&previousAuditId=" + previousAuditId + "&which=" + ( (ResultForm) practice ).getId();
+							%>
 							<a href="<%=link%>"> <bean:message name="practice"
 								property="name" /> </a>
 						</af:col>

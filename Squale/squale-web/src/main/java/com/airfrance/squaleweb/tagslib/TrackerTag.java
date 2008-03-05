@@ -115,12 +115,12 @@ public class TrackerTag
                 String practiceName =
                     WebMessages.getString( (HttpServletRequest) pageContext.getRequest(), practiceKey );
                 String link =
-                    "/squale/project.do?action=practice&which=" + practiceKey + mProjectOrApplicationIdLink
+                    "project.do?action=practice&which=" + practiceKey + mProjectOrApplicationIdLink
                         + "&whichParent=" + factorKey + mAuditLink;
                 String linkFactor =
-                    "/squale/project.do?action=factor&which=" + factorKey + mProjectOrApplicationIdLink + mAuditLink;
+                    "project.do?action=factor&which=" + factorKey + mProjectOrApplicationIdLink + mAuditLink;
                 String linkName = WebMessages.getString( (HttpServletRequest) pageContext.getRequest(), factorKey );
-                result += "<a href=\"/squale/project.do?action=summary\" > < " + projectName + " > </a> &gt";
+                result += "<a href=\"project.do?action=summary\" > < " + projectName + " > </a> &gt";
                 result += "<a href=\"" + linkFactor + "\"> < " + linkName + "> </a> &gt";
                 result += "<a href=\"" + link + "\" > <" + practiceName + "> </a> ";
             }

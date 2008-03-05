@@ -1,12 +1,16 @@
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
+	prefix="logic"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="/WEB-INF/tlds/c-1_0.tld" prefix="c"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.GeneralParametersForm" %>
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.GeneralParametersForm"%>
+<%@ page
+	import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
+<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
 
 <%--
 Liste les tâches à configurer en fonction du profile et du source management
@@ -24,7 +28,7 @@ boolean expanded = false;
 <logic:empty name="tool">
 	<% request.setAttribute("tool", ""); %>
 </logic:empty>
-<bean:define id="toolBean" name="tool"  />
+<bean:define id="toolBean" name="tool" />
 
 <%-- On va interdire l'ecriture pour les lecteurs --%>
 <bean:define id="profile"
@@ -32,7 +36,8 @@ boolean expanded = false;
 	property="<%=\"profile(\"+applicationId+\")\"%>" />
 <af:page>
 	<af:head>
-		<script type="text/javascript" src="theme/charte_v03_001/js/format_page.js"></script>
+		<script type="text/javascript"
+			src="theme/charte_v03_001/js/format_page.js"></script>
 		<script type="text/javascript">
 			/* 
 				Permet de soumettre un formulaire sans le valider
@@ -85,22 +90,27 @@ String pageTask = "add_project_" + taskName.toLowerCase() + "_conf.jsp";%>
 				<af:dropDownPanel titleKey="<%=keyTask%>"
 					headerStyle="padding-left:20px;" contentStyle="padding:5px;"
 					lazyLoading="true" expanded="<%=expanded%>">
-					<c:import url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true" context="/squale" />
+					
+					<c:import
+						url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true" />
 					<div id="conteneur"><jsp:include page="<%=pageTask%>" /></div>
 				</af:dropDownPanel>
 				<br />
 			</logic:iterate>
 			<%-- page de configuration générale --%>
 			<%expanded = false;%>
-			<logic:equal name="toolBean" value="<%=new GeneralParametersForm().getTaskName()%>">
+			<logic:equal name="toolBean"
+				value="<%=new GeneralParametersForm().getTaskName()%>">
 				<%expanded = true;%>
 			</logic:equal>
 			<af:dropDownPanel titleKey="project_configuration.advanced.tasks"
 				headerStyle="padding-left:20px;" contentStyle="padding:5px;"
 				lazyLoading="true" expanded="<%=expanded%>">
-				<c:import url='/generalConfiguration.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true'
-					context="/squale" />
-				<div id="conteneur"><jsp:include page="add_project_general_parameters.jsp" /></div>
+
+				<c:import
+					url='/generalConfiguration.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true' />
+				<div id="conteneur"><jsp:include
+					page="add_project_general_parameters.jsp" /></div>
 			</af:dropDownPanel>
 
 			<br />
@@ -127,8 +137,9 @@ String pageTask = "add_project_" + taskName.toLowerCase() + "_conf.jsp";%>
 					<af:dropDownPanel titleKey="<%=keyTask%>"
 						headerStyle="padding-left:20px;" contentStyle="padding:5px;"
 						lazyLoading="false" expanded="<%=expanded%>">
-						<c:import url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true" 
-									context="/squale" />
+						
+						<c:import
+							url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true" />
 						<div id="conteneur"><jsp:include page="<%=pageTask%>" /></div>
 					</af:dropDownPanel>
 					<br />
