@@ -6,11 +6,11 @@
 	<parent>
 		<groupId>org.squale</groupId>
 		<artifactId>project-root</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0-beta-1</version>
 	</parent>
 	<groupId>org.squale.jraf</groupId>
 	<artifactId>jraf</artifactId>
-	<version>2.6-SNAPSHOT</version>
+	<version>2.6</version>
 	<packaging>pom</packaging>
 	<name>Jraf framework</name>
 	<description>Jraf framework</description>
@@ -19,7 +19,6 @@
 		<module>jraf-commons</module>
 		<module>jraf-helper</module>
 		<module>jraf-provider-accessdelegate</module>
-		<!--module>jraf-provider-accessdelegate-ejb</module-->
 		<module>jraf-provider-hibernate</module>
 		<module>jraf-provider-logging</module>
 		<module>jraf-provider-logging-cexi</module>
