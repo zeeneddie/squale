@@ -160,20 +160,20 @@ COMMIT;
 Insert into USERBO
    (USERID, MATRICULE, PASSWORD,PROFILEID )
  Values
-   (1, 'squaleAdmin','admin',1);
+   (1, 'squaleadmin','admin',1);
 
 Insert into USERBO
    (USERID, MATRICULE, PASSWORD,PROFILEID )
 Values
-   (2, 'squaleUserA','aa',4);
+   (2, 'squaleusera','aa',4);
 
 Insert into USERBO
    (USERID, MATRICULE, PASSWORD,PROFILEID)
  Values
-   (3, 'squaleUserB','bb',4);
+   (3, 'squaleuserb','bb',4);
    
 Insert into USERBO
    (USERID, MATRICULE, PASSWORD,PROFILEID)
  Values
-   (4, 'squaleUserC','cc',4);
+   (4, 'squaleuserc','cc',4);
 commit;
