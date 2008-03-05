@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.squale.app</groupId>
 		<artifactId>squale</artifactId>
-		<version>4.0-alpha1-SNAPSHOT</version>
+		<version>4.0-alpha-1-SNAPSHOT</version>
 	</parent>
 	<artifactId>squalix</artifactId>
 	<packaging>jar</packaging>
@@ -20,7 +20,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>${javaSourceCompatibility}</source>
+					<source>${squale.props.javaSourceCompatibility}</source>
 					<!-- TODO FAB : Squalix doit être compilé en 1.5 -->
 					<target>1.5</target>
 				</configuration>

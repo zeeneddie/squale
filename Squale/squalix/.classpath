@@ -17,7 +17,7 @@
   <classpathentry kind="var" path="M2_REPO/cglib/cglib/2.1_3/cglib-2.1_3.jar" sourcepath="M2_REPO/cglib/cglib/2.1_3/cglib-2.1_3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/checkstyle/checkstyle/4.3/checkstyle-4.3.jar"/>
   <classpathentry kind="var" path="M2_REPO/checkstyle/checkstyle-optional/4.3/checkstyle-optional-4.3.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/tools/ckjm/1.8-Squale-SNAPSHOT/ckjm-1.8-Squale-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/tools/ckjm/1.8-squale/ckjm-1.8-squale.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar" sourcepath="M2_REPO/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-beanutils/commons-beanutils-core/1.7.0/commons-beanutils-core-1.7.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-cli/commons-cli/1.0/commons-cli-1.0.jar" sourcepath="M2_REPO/commons-cli/commons-cli/1.0/commons-cli-1.0-sources.jar"/>
@@ -41,15 +41,15 @@
   <classpathentry kind="var" path="M2_REPO/jdepend/jdepend/2.9.1/jdepend-2.9.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/jdom/jdom/b9/jdom-b9.jar"/>
   <classpathentry kind="var" path="M2_REPO/jfree/jfreechart/1.0.2/jfreechart-1.0.2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-bootstrap/2.6-SNAPSHOT/jraf-bootstrap-2.6-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-commons/2.6-SNAPSHOT/jraf-commons-2.6-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-helper/2.6-SNAPSHOT/jraf-helper-2.6-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-accessdelegate/2.6-SNAPSHOT/jraf-provider-accessdelegate-2.6-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6-SNAPSHOT/jraf-provider-hibernate-2.6-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-logging/2.6-SNAPSHOT/jraf-provider-logging-2.6-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-spi/2.6-SNAPSHOT/jraf-spi-2.6-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-struts-initializer/2.6-SNAPSHOT/jraf-struts-initializer-2.6-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-web-initializer/2.6-SNAPSHOT/jraf-web-initializer-2.6-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-bootstrap/2.6/jraf-bootstrap-2.6.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-bootstrap/2.6/jraf-bootstrap-2.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-commons/2.6/jraf-commons-2.6.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-commons/2.6/jraf-commons-2.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-helper/2.6/jraf-helper-2.6.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-helper/2.6/jraf-helper-2.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-accessdelegate/2.6/jraf-provider-accessdelegate-2.6.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-provider-accessdelegate/2.6/jraf-provider-accessdelegate-2.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6/jraf-provider-hibernate-2.6.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6/jraf-provider-hibernate-2.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-logging/2.6/jraf-provider-logging-2.6.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-provider-logging/2.6/jraf-provider-logging-2.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-spi/2.6/jraf-spi-2.6.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-spi/2.6/jraf-spi-2.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-struts-initializer/2.6/jraf-struts-initializer-2.6.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-struts-initializer/2.6/jraf-struts-initializer-2.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-web-initializer/2.6/jraf-web-initializer-2.6.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-web-initializer/2.6/jraf-web-initializer-2.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.0.1B/jta-1.0.1B.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar" sourcepath="M2_REPO/junit/junit/3.8.1/junit-3.8.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/python/jython/2.2/jython-2.2.jar" sourcepath="M2_REPO/org/python/jython/2.2/jython-2.2-sources.jar"/>
