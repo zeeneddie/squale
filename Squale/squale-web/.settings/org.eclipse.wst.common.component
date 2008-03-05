@@ -78,31 +78,31 @@
     <dependent-module archiveName="jfreechart-1.0.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/jfree/jfreechart/1.0.2/jfreechart-1.0.2.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="jraf-bootstrap-2.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-bootstrap/2.6-SNAPSHOT/jraf-bootstrap-2.6-SNAPSHOT.jar">
+    <dependent-module archiveName="jraf-bootstrap-2.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-bootstrap/2.6/jraf-bootstrap-2.6.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="jraf-commons-2.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-commons/2.6-SNAPSHOT/jraf-commons-2.6-SNAPSHOT.jar">
+    <dependent-module archiveName="jraf-commons-2.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-commons/2.6/jraf-commons-2.6.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="jraf-helper-2.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-helper/2.6-SNAPSHOT/jraf-helper-2.6-SNAPSHOT.jar">
+    <dependent-module archiveName="jraf-helper-2.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-helper/2.6/jraf-helper-2.6.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="jraf-provider-accessdelegate-2.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-provider-accessdelegate/2.6-SNAPSHOT/jraf-provider-accessdelegate-2.6-SNAPSHOT.jar">
+    <dependent-module archiveName="jraf-provider-accessdelegate-2.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-provider-accessdelegate/2.6/jraf-provider-accessdelegate-2.6.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="jraf-provider-hibernate-2.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6-SNAPSHOT/jraf-provider-hibernate-2.6-SNAPSHOT.jar">
+    <dependent-module archiveName="jraf-provider-hibernate-2.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6/jraf-provider-hibernate-2.6.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="jraf-provider-logging-2.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-provider-logging/2.6-SNAPSHOT/jraf-provider-logging-2.6-SNAPSHOT.jar">
+    <dependent-module archiveName="jraf-provider-logging-2.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-provider-logging/2.6/jraf-provider-logging-2.6.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="jraf-spi-2.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-spi/2.6-SNAPSHOT/jraf-spi-2.6-SNAPSHOT.jar">
+    <dependent-module archiveName="jraf-spi-2.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-spi/2.6/jraf-spi-2.6.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="jraf-struts-initializer-2.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-struts-initializer/2.6-SNAPSHOT/jraf-struts-initializer-2.6-SNAPSHOT.jar">
+    <dependent-module archiveName="jraf-struts-initializer-2.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-struts-initializer/2.6/jraf-struts-initializer-2.6.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="jraf-web-initializer-2.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-web-initializer/2.6-SNAPSHOT/jraf-web-initializer-2.6-SNAPSHOT.jar">
+    <dependent-module archiveName="jraf-web-initializer-2.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/jraf/jraf-web-initializer/2.6/jraf-web-initializer-2.6.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
     <dependent-module archiveName="jstl-1.1.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/javax/servlet/jstl/1.1.2/jstl-1.1.2.jar">
@@ -147,7 +147,7 @@
     <dependent-module archiveName="struts-legacy-1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/struts/struts-legacy/1.1/struts-legacy-1.1.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
-    <dependent-module archiveName="welcom-2.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/welcom/welcom/2.5-SNAPSHOT/welcom-2.5-SNAPSHOT.jar">
+    <dependent-module archiveName="welcom-2.5.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/squale/welcom/welcom/2.5/welcom-2.5.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
     <dependent-module archiveName="xml-apis-1.3.02.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/xml-apis/xml-apis/1.3.02/xml-apis-1.3.02.jar">
