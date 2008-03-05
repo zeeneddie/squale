@@ -27,16 +27,16 @@
   <classpathentry kind="var" path="M2_REPO/javax/sql/jdbc-stdext/2.0/jdbc-stdext-2.0.jar" sourcepath="M2_REPO/javax/sql/jdbc-stdext/2.0/jdbc-stdext-2.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/eclipse/jdtcore/3.1.0/jdtcore-3.1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/jfree/jfreechart/1.0.2/jfreechart-1.0.2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-bootstrap/2.6-SNAPSHOT/jraf-bootstrap-2.6-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-commons/2.6-SNAPSHOT/jraf-commons-2.6-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-helper/2.6-SNAPSHOT/jraf-helper-2.6-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6-SNAPSHOT/jraf-provider-hibernate-2.6-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-spi/2.6-SNAPSHOT/jraf-spi-2.6-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-bootstrap/2.6/jraf-bootstrap-2.6.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-commons/2.6/jraf-commons-2.6.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-helper/2.6/jraf-helper-2.6.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6/jraf-provider-hibernate-2.6.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-spi/2.6/jraf-spi-2.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/servlet/jsp-api/2.0/jsp-api-2.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.0.1B/jta-1.0.1B.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar" sourcepath="M2_REPO/junit/junit/3.8.1/junit-3.8.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sourceforge/jexcelapi/jxl/2.6.5/jxl-2.6.5.jar"/>
-  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14.jar" sourcepath="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.8/log4j-1.2.8.jar" sourcepath="M2_REPO/log4j/log4j/1.2.8/log4j-1.2.8-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/logkit/logkit/1.0.1/logkit-1.0.1.jar" sourcepath="M2_REPO/logkit/logkit/1.0.1/logkit-1.0.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/odmg/odmg/3.0/odmg-3.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/oracle/ojdbc14/10.2.0.2.0/ojdbc14-10.2.0.2.0.jar"/>
