@@ -4,6 +4,12 @@
   <projects>
     <project>squale-web</project>
   </projects>
-  <buildSpec/>
-  <natures/>
+  <buildSpec>
+    <buildCommand>
+      <name>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
+  </natures>
 </projectDescription>
