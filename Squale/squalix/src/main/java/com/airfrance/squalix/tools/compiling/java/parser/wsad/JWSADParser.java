@@ -491,7 +491,8 @@ public class JWSADParser
             {
                 pMethod.invoke( this, new Object[] { pProject, plugins[i].trim() } );
             }
-            while ( null != ( line = reader.readLine() ) && !stop )
+            line=reader.readLine();
+            while ( null != line && !stop )
             {
                 if ( line.endsWith( "," ) )
                 {
@@ -506,7 +507,7 @@ public class JWSADParser
                     stop = true;
                     pMethod.invoke( this, new Object[] { pProject, line.trim() } );
                 }
-
+                line=reader.readLine();
             }
         }
     }

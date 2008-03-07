@@ -125,18 +125,20 @@ public class ComponentRepository
     private void addToCollection( AbstractComponentBO pComponent, String pParentName )
     {
         // Création de la clé
-        if ( null == pParentName )
+        String newParentName = pParentName;
+        
+        if ( null == newParentName )
         {
-            pParentName = pComponent.getName();
+            newParentName = pComponent.getName();
         }
         else
         {
-            pParentName += KEY_SEPARATOR + pComponent.getName();
+            newParentName += KEY_SEPARATOR + pComponent.getName();
         }
         Map map = getMapForComponent( pComponent );
         if ( pComponent instanceof AbstractComplexComponentBO )
         {
-            map.put( pParentName, pComponent );
+            map.put( newParentName, pComponent );
             Collection children = ( (AbstractComplexComponentBO) pComponent ).getChildren();
             if ( null != children )
             {
@@ -146,14 +148,14 @@ public class ComponentRepository
                 Iterator it = children.iterator();
                 while ( it.hasNext() )
                 {
-                    addToCollection( (AbstractComponentBO) it.next(), pParentName );
+                    addToCollection( (AbstractComponentBO) it.next(), newParentName );
                 }
             }
         }
         else
         {
             // Sinon, il s'agit d'une méthode, on l'ajoute simplement à sa map
-            map.put( pParentName, pComponent );
+            map.put( newParentName, pComponent );
         }
     }
 

@@ -752,17 +752,19 @@ public class JCompilingTask
         /* CODE HISTORIQUE : à modifier en utilisant un HashSet */
 
         StringBuffer result = new StringBuffer();
+        String str1 = pString1;
+        String str2 = pString2;
 
         /* si l'une et / ou l'autre des chaînes fournies est nulle */
-        if ( null == pString1 )
+        if ( null == str1 )
         {
             /* alors on l'affecte vide */
-            pString1 = "";
+            str1 = "";
         }
-        if ( null == pString2 )
+        if ( null == str2 )
         {
             /* alors on l'affecte vide */
-            pString2 = "";
+            str2 = "";
         }
 
         /*
@@ -770,14 +772,14 @@ public class JCompilingTask
          */
         ArrayList list1 =
             new ArrayList(
-                           (List) Arrays.asList( (String[]) ( pString1.split( mConfiguration.getClasspathSeparator() ) ) ) );
+                           (List) Arrays.asList( (String[]) ( str1.split( mConfiguration.getClasspathSeparator() ) ) ) );
 
         /*
          * on crée une 2nde liste en cassant la 2nde chaîne selon le séparateur de classpath
          */
         ArrayList list2 =
             new ArrayList(
-                           (List) Arrays.asList( (String[]) ( pString2.split( mConfiguration.getClasspathSeparator() ) ) ) );
+                           (List) Arrays.asList( (String[]) ( str2.split( mConfiguration.getClasspathSeparator() ) ) ) );
 
         /* si aucune des listes n'est vide */
         if ( null != list1 && null != list2 )

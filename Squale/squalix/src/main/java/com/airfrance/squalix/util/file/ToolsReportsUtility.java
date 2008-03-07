@@ -48,11 +48,12 @@ public class ToolsReportsUtility
      */
     public static String clearReportName( String pName )
     {
-        if ( pName.matches( "\".*\"," ) )
+        String newName = pName;
+        if ( newName.matches( "\".*\"," ) )
         {
-            pName = pName.substring( 1, pName.length() - 2 );
+            newName = newName.substring( 1, pName.length() - 2 );
         }
-        return pName;
+        return newName;
     }
 
     /**

@@ -203,22 +203,23 @@ public class JDependTask
             {
                 // pour mémoriser le parent courant afin de le conserver
                 // pour faire l'appel récursif sur chaque enfant
-                String parentMemory = pParent;
+                String newParent = pParent;
                 filename = list[i].getName();
                 File f = new File( filename );
                 // il ne faut pas ajouter un "." au début
-                if ( !pParent.equals( "" ) )
+                if ( !newParent.equals( "" ) )
                 {
-                    pParent += "." + filename;
+                    newParent += "." + filename;
                 }
                 else
                 {
-                    pParent = filename;
+                    newParent = filename;
                 }
                 // et on recommence sur chaque fils
-                buildValidPackagesSet( list[i], pParent );
+                buildValidPackagesSet( list[i], newParent );
                 // réattribue la bonne valeur
-                pParent = parentMemory;
+                newParent = pParent;
+
 
             }
         }

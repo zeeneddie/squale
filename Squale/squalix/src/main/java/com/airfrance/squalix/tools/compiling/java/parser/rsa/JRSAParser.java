@@ -185,11 +185,13 @@ public class JRSAParser
         // Chaque ligne peut-être CR LF | LF | CR(not followed by LF) code ASCII 13 et 10";
         // On récupère toutes les valeurs (commence par un espace et se termine par un espace)
         BufferedReader reader = new BufferedReader( new FileReader( pManifest ) );
-        String line;
+        
         StringBuffer value = new StringBuffer();
-        while ( null != ( line = reader.readLine() ) && !line.startsWith( CLASS_PATH ) )
+        String line = reader.readLine() ;
+        while ( null != line  && !line.startsWith( CLASS_PATH ) )
         {
             // on parse jusqu'à trouver la partie qui nous intéresse
+            line = reader.readLine();
         }
         if ( null != line )
         {
@@ -211,7 +213,8 @@ public class JRSAParser
                 }
             }
             // On parcours jusqu'à ce qu'in ligne ne commence pas par un espace
-            while ( null != ( line = reader.readLine() ) && line.matches( " +.*" ) )
+            line = reader.readLine();
+            while ( null != line  && line.matches( " +.*" ) )
             {
                 // Si il y a plus d'un espace en début de ligne
                 // ou un espace sans rien derrière
@@ -240,6 +243,7 @@ public class JRSAParser
                         value.setLength( 0 );
                     }
                 }
+                line = reader.readLine();
             }
         }
     }

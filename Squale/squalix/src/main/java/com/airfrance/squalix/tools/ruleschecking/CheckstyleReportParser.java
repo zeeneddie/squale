@@ -97,11 +97,12 @@ public class CheckstyleReportParser
          */
         public void setName( String pFileName )
         {
-            if ( pFileName.startsWith( mFilePrefix ) )
+            String newFileName = pFileName;
+            if ( newFileName.startsWith( mFilePrefix ) )
             {
-                pFileName = pFileName.substring( mFilePrefix.length() );
+                newFileName = newFileName.substring( mFilePrefix.length() );
             }
-            mName = pFileName;
+            mName = newFileName;
         }
 
         /**
@@ -113,11 +114,12 @@ public class CheckstyleReportParser
          */
         public void setError( String pLine, String pColumn, String pSeverity, String pMessage, String pSource )
         {
-            if ( pColumn == null )
+            String newColumn = pColumn;
+            if (newColumn == null )
             {
-                pColumn = "0";
+                newColumn = "0";
             }
-            mReportHandler.processError( mName, pLine, pColumn, pSeverity, pMessage, pSource );
+            mReportHandler.processError( mName, pLine, newColumn, pSeverity, pMessage, pSource );
         }
 
         /**

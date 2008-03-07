@@ -38,16 +38,16 @@ public class TestCommon {
     
 
     public String getDisplayString(String test) {
-        String result = "test:" ;
+        String result = test ;
         for (int i = 0; i < 10; i++) {
             if (i == 1) {
-                test += i;
+                result += i;
             } else {
-                test = "-" + i;
+                result = "-" + i;
             }
             String whatFor = "?";
         }
-        return "la valeur du nombre de test est : " + test;
+        return "la valeur du nombre de test est : " + result;
     }
     
     

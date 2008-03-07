@@ -308,17 +308,18 @@ public class JavaParser
     {
         // Si le nom de la classe est un chiffre alors il s'agit d'une class anonyme, on la renomme
         // pour avoir une similitude avec McCabe.
-        if ( pName.matches( "[0-9]+" ) )
+        String newName = pName;
+        if ( newName.matches( "[0-9]+" ) )
         {
-            pName = ANONYMOUS_CLASS_NAME + pName;
+            newName = ANONYMOUS_CLASS_NAME + newName;
         }
         // Si le nom de la classe est le nom d'une classe anonyme remontée par McCabe, on la renomme
         // pour avoir une similitude avec les .class (l'identifiant sera donné au niveau de getClass()).
-        if ( pName.startsWith( MC_CABE_ANONYMOUS_CLASS_NAME ) )
+        if ( newName.startsWith( MC_CABE_ANONYMOUS_CLASS_NAME ) )
         {
-            pName = ANONYMOUS_CLASS_NAME;
+            newName = ANONYMOUS_CLASS_NAME;
         }
-        return pName;
+        return newName;
     }
 
     /**
@@ -381,17 +382,18 @@ public class JavaParser
      */
     public String clearReportName( String pName )
     {
+        String newName = pName;
         // On supprime les noms des methodes qui contiennent des classes internes
         // remontées par McCabe (ex : classeExterne.nomMethodeCE`classeInterne.nomMethodeCI)
-        pName = pName.replaceAll( "\\.[^\\.]+`", "." );
+        newName = newName.replaceAll( "\\.[^\\.]+`", "." );
         // On nettoie le nom dans le cas d'une classe anonyme définie dans une
         // méthode (method) car McCabe remonte ce cas de cette façon :
         // Pour une classe : package.ClassName.method(args)$_Anon_001_
         // Pour une méthode : package.ClassName.method(args)$_Anon_001_.subMethod(args)
         // Or on veut une cohérence avec le compilateur java qui n'indique pas la méthode
         // dans laquelle la classe est définie.
-        pName = pName.replaceAll( "\\.[^\\.]+\\(.*\\)\\$", "\\$" );
-        return pName;
+        newName = newName.replaceAll( "\\.[^\\.]+\\(.*\\)\\$", "\\$" );
+        return newName;
     }
 
     /**

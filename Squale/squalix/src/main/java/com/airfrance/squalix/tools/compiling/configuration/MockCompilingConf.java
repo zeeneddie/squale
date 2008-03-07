@@ -47,11 +47,12 @@ public class MockCompilingConf
     public void setRootDirectory( String pRootDirectory )
     {
         // On rajoute éventuellement un "/" en bout
-        if ( !pRootDirectory.endsWith( "/" ) )
+        String newRootDirectory = pRootDirectory;
+        if ( !newRootDirectory.endsWith( "/" ) )
         {
-            pRootDirectory += "/";
+            newRootDirectory += "/";
         }
-        mRootDirectory = pRootDirectory;
+        mRootDirectory = newRootDirectory;
     }
 
     /**

@@ -531,13 +531,14 @@ public abstract class AbstractTask
             // TODO voir comment on peut traiter ces dépassements de chaîne
             // defaçon plus générique (via Hibernate ?)
             final int maxLength = 2000;
-            if ( pMessage.length() > maxLength )
+            String newMessage = pMessage;
+            if ( newMessage.length() > maxLength )
             {
-                pMessage = pMessage.substring( 0, maxLength );
+                newMessage = newMessage.substring( 0, maxLength );
             }
             // on est sur une erreur qui a été provoquée
             // par un ProcessManager, on doit affecter le niveau de criticité WARNING par défaut
-            ErrorBO error = new ErrorBO( pMessage, pMessage, pCriticyLevel, mName, mAudit, mProject );
+            ErrorBO error = new ErrorBO( newMessage, newMessage, pCriticyLevel, mName, mAudit, mProject );
             mErrors.add( error );
         }
     }

@@ -96,18 +96,19 @@ public class JspFileUtility
     {
         // since we don't mangle extensions like the servlet does,
         // we need to check for keywords as class names
-        for ( int i = 0; i < JspNameMangler.keywords.length && !pName.endsWith( "%" ); ++i )
+        String newName = pName;
+        for ( int i = 0; i < JspNameMangler.keywords.length && !newName.endsWith( "%" ); ++i )
         {
-            if ( pName.equals( JspNameMangler.keywords[i] ) )
+            if ( newName.equals( JspNameMangler.keywords[i] ) )
             {
-                pName += "%";
+                newName += "%";
             }
         }
 
         // Fix for invalid characters. If you think of more add to the list.
-        StringBuffer modifiedClassName = new StringBuffer( pName.length() );
+        StringBuffer modifiedClassName = new StringBuffer( newName.length() );
         // first char is more restrictive than the rest
-        char firstChar = pName.charAt( 0 );
+        char firstChar = newName.charAt( 0 );
         if ( Character.isJavaIdentifierStart( firstChar ) )
         {
             modifiedClassName.append( firstChar );
@@ -117,9 +118,9 @@ public class JspFileUtility
             modifiedClassName.append( mangleChar( firstChar ) );
         }
         // this is the rest
-        for ( int i = 1; i < pName.length(); i++ )
+        for ( int i = 1; i < newName.length(); i++ )
         {
-            char subChar = pName.charAt( i );
+            char subChar = newName.charAt( i );
             if ( Character.isJavaIdentifierPart( subChar ) )
             {
                 modifiedClassName.append( subChar );
@@ -142,14 +143,15 @@ public class JspFileUtility
     {
         // La conversion du caractère spécial sera de 6 caractères
         final int nbChar = 6;
-        if ( ch == File.separatorChar )
+        char newChar = ch;
+        if ( newChar == File.separatorChar )
         {
-            ch = '/';
+            newChar = '/';
         }
         // Il converti en hexadécimal précédé de "_"
         // et d'autant de zéro que nécessaire pour compléter les 6
         // caractères
-        String s = Integer.toHexString( ch );
+        String s = Integer.toHexString( newChar );
         int nzeros = ( nbChar - 1 ) - s.length();
         char[] result = new char[nbChar];
         result[0] = '_';

@@ -47,11 +47,12 @@ public class SourceCodeAnalyserConfig
     {
         // On ajoute éventuellement un / à la fin si il n'est
         // pas déjà présent
-        if ( !pRootDirectory.endsWith( "/" ) )
+        String newRootDirectory = pRootDirectory;
+        if ( !newRootDirectory.endsWith( "/" ) )
         {
-            pRootDirectory += "/";
+            newRootDirectory += "/";
         }
-        mRootDirectory = pRootDirectory;
+        mRootDirectory = newRootDirectory;
     }
 
     /**

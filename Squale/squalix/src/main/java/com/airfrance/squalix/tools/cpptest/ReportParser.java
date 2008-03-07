@@ -136,9 +136,10 @@ public class ReportParser
                 if ( pValue.startsWith( mFilePrefix ) )
                 {
                     // On ne prend pas le préfixe du fichier qui n'appartient pas à l'utilisateur
-                    pValue = pValue.substring( mFilePrefix.length() );
-                }
+                    mFile = pValue.substring( mFilePrefix.length() );
+                }else{
                 mFile = pValue;
+                }
             }
             else if ( pName.equals( "line" ) )
             {

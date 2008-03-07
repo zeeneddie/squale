@@ -139,13 +139,14 @@ public class ZipFileUtility
         File destFile = getDestFile( pDest, pArchive.getName() );
         // On supprime l'archive que l'on vient d'extraire car on en a plus besoin
         // si pDest est un parent
-        if ( pArchive.getAbsolutePath().startsWith( pDest.getAbsolutePath() ) )
+        File newArchive = pArchive;
+        if ( newArchive.getAbsolutePath().startsWith( pDest.getAbsolutePath() ) )
         {
-            pArchive.delete();
+            newArchive.delete();
         }
-        pArchive = destFile;
+        newArchive = destFile;
         // car par exemple d'un .tar.gz
-        extractArchiveFile( pArchive, pDest );
+        extractArchiveFile( newArchive, pDest );
     }
 
     /**

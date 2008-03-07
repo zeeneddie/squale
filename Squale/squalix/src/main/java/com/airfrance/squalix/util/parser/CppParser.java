@@ -365,11 +365,12 @@ public class CppParser
      */
     public static String clearName( String pName )
     {
+        String newName = pName;
         String badEnd = ".*[/.:\\$#]$";
-        while ( pName.matches( badEnd ) )
+        while ( newName.matches( badEnd ) )
         {
-            pName = pName.substring( 0, pName.length() - 1 );
+            newName = newName.substring( 0, pName.length() - 1 );
         }
-        return pName;
+        return newName;
     }
 }

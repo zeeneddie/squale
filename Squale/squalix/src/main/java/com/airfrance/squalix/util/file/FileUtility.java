@@ -351,7 +351,7 @@ public class FileUtility
     {
         // Pour avoir une comparaison indépendante entre les différents système d'exploitation
         // on remplace tous les "\" par des "/" unix
-        pSuffix = pSuffix.replace( '\\', '/' );
+        String newSuffix = pSuffix.replace( '\\', '/' );
         File result = null;
         // On récupère tous les fichiers et dossiers du répertoire pDirectory
         File[] files = pDirectory.listFiles();
@@ -364,9 +364,9 @@ public class FileUtility
                 File file = files[i];
                 if ( file.isDirectory() )
                 {
-                    result = findFileWithPathSuffix( file, pSuffix );
+                    result = findFileWithPathSuffix( file, newSuffix );
                 }
-                else if ( file.getAbsolutePath().replace( '\\', '/' ).endsWith( pSuffix ) )
+                else if ( file.getAbsolutePath().replace( '\\', '/' ).endsWith( newSuffix ) )
                 {
                     return file;
                 }
@@ -475,21 +475,22 @@ public class FileUtility
         throws IOException
     {
         String result = pFilename;
-        if ( null != pFilename )
+        if ( null != result )
         {
             // On remplace les éventuels "\" par des "/" pour avoir un ensemble
             // cohérent dans la base et pouvoir faire des comparaisons sans risque
-            pFilename = pFilename.replace( '\\', '/' );
-            if ( null != pPrefix )
+            result = pFilename.replace( '\\', '/' );
+            String newPrefix = pPrefix;
+            if ( null != newPrefix )
             {
                 // On récupère le chemin absolu de la racine du projet
                 // en unifiant les séparateurs pour la compraison
-                pPrefix = pPrefix.replace( '\\', '/' );
+                newPrefix = pPrefix.replace( '\\', '/' );
             }
-            if ( pFilename.startsWith( pPrefix ) )
+            if ( result.startsWith( newPrefix ) )
             {
                 // Si le chemin débute par le chemin de la racine, on l'ampute
-                result = pFilename.substring( pPrefix.length() );
+                result = result.substring( newPrefix.length() );
                 if ( result.startsWith( "/" ) )
                 {
                     // On l'enlève
