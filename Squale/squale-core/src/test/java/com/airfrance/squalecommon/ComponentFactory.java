@@ -109,7 +109,9 @@ public class ComponentFactory
     public UserBO createUser( ISession pSession )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         UserBO user = new UserBO();
         user.setMatricule( "matricule" );
         HashMap rights = new HashMap();
@@ -150,7 +152,9 @@ public class ComponentFactory
     public TaskBO createTask( ISession pSession, String pClassName, boolean pIsConfigurable, String pName )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         TaskBO task = new TaskBO();
         task.setClassName( pClassName );
         task.setConfigurable( pIsConfigurable );
@@ -183,7 +187,9 @@ public class ComponentFactory
     public ApplicationBO createApplicationWithSite( ISession pSession, String pSiteName )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         ApplicationBO application = new ApplicationBO();
         application.setName( "application" + pSiteName );
         ServeurBO server = createServer( pSession, pSiteName );
@@ -212,7 +218,9 @@ public class ComponentFactory
     public ServeurBO createServer( ISession pSession, String pName )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         ServeurBO server = new ServeurBO();
         server.setName( pName );
         // On liste les serveurs
@@ -256,7 +264,9 @@ public class ComponentFactory
                                     ProjectProfileBO pProfile, SourceManagementBO pManager, MapParameterBO pParameters )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         ProjectBO project = new ProjectBO();
         project.setName( "project" + ( projectnb++ == 0 ? "" : String.valueOf( projectnb ) ) );
         project.setParent( pApplication );
@@ -296,7 +306,9 @@ public class ComponentFactory
     public AuditBO createAuditWithStatus( ISession pSession, ProjectBO pProject, Integer pStatus )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         AuditBO audit = new AuditBO();
         audit.setName( "audit" );
 
@@ -361,7 +373,9 @@ public class ComponentFactory
     public PackageBO createPackage( ISession pSession, ProjectBO pProject )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         PackageBO pkg = new PackageBO();
         pkg.setName( "package" );
         pkg.setParent( pProject );
@@ -383,7 +397,9 @@ public class ComponentFactory
     public PackageBO createPackage( ISession pSession, String pPackageName, PackageBO pPackage )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         PackageBO pkg = new PackageBO();
         pkg.setName( pPackageName );
         pkg.setParent( pPackage );
@@ -404,7 +420,9 @@ public class ComponentFactory
     public ClassBO createClass( ISession pSession, PackageBO pPackage )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         // Création de la classe
         ClassBO cls = new ClassBO();
         cls.setName( "class" );
@@ -426,7 +444,9 @@ public class ComponentFactory
     public ClassBO createCppClass( ISession pSession, ProjectBO pProject )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         // Création de la classe
         ClassBO cls = new ClassBO();
         cls.setName( "class" );
@@ -448,7 +468,9 @@ public class ComponentFactory
     public MethodBO createMethod( ISession pSession, ClassBO pClass )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         // Création de la méthode
         MethodBO method = new MethodBO();
         method.setName( "method" );
@@ -470,7 +492,9 @@ public class ComponentFactory
     public QualityGridBO createGrid( ISession pSession )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         QualityGridBO grid = new QualityGridBO();
         grid.setName( "grid" );
         QualityGridDAOImpl.getInstance().create( pSession, grid );
@@ -503,7 +527,9 @@ public class ComponentFactory
     public ProjectProfileBO createProjectProfileWithName( ISession pSession, String pName )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         ProjectProfileBO profile = new ProjectProfileBO();
         profile.setName( pName );
         ProjectProfileDAOImpl.getInstance().create( pSession, profile );
@@ -521,7 +547,9 @@ public class ComponentFactory
     public SourceManagementBO createSourceManagement( ISession pSession )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         SourceManagementBO manager = new SourceManagementBO();
         manager.setName( "manager" );
         SourceManagementDAOImpl.getInstance().create( pSession, manager );
@@ -539,7 +567,9 @@ public class ComponentFactory
     public MapParameterBO createParameters( ISession pSession )
         throws JrafDaoException
     {
+        //CHECKSTYLE:OFF
         pSession = getSession( pSession );
+        //CHECKSTYLE:ON
         MapParameterBO params = new MapParameterBO();
         ProjectParameterDAOImpl.getInstance().create( pSession, params );
         return params;

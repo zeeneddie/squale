@@ -105,7 +105,9 @@ public class AuditFacade
         {
             if ( pSession == null )
             {
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
             AuditDAOImpl auditDAO = AuditDAOImpl.getInstance();
             // Chargement de l'objet AuditBO + suppression
@@ -528,7 +530,9 @@ public class AuditFacade
             // creation d'une session Hibernate
             if ( pSession == null )
             {
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
 
             // Initialisation des DAO

@@ -48,7 +48,9 @@ public class MessagesDTO
     {
         if ( pLang == null )
         {
+            //CHECKSTYLE:OFF
             pLang = "";
+            //CHECKSTYLE:ON
         }
         Map langMap = (Map) mMessages.get( pLang );
         // Création de la map pour la langue si besoin

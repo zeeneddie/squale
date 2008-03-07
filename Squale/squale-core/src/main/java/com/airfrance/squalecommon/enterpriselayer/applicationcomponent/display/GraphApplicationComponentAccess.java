@@ -52,12 +52,14 @@ public class GraphApplicationComponentAccess
                                       Long pRuleId )
         throws JrafEnterpriseException
     {
+        
+        Date newAuditTime = pAuditTime;
 
         if ( !( pAuditTime instanceof Date ) )
         {
             GregorianCalendar gc = (GregorianCalendar) GregorianCalendar.getInstance();
             gc.add( GregorianCalendar.DAY_OF_MONTH, -AUDIT_TIME.intValue() );
-            pAuditTime = gc.getTime();
+            newAuditTime = gc.getTime();
         }
 
         // Initialisation
@@ -66,7 +68,7 @@ public class GraphApplicationComponentAccess
         // Recuperation dans la facade du GraphDTO
         if ( pComponent != null )
         {
-            result = MeasureFacade.getHistoricGraph( pComponent, pTreKey, pTreLabel, pAuditTime, pRuleId );
+            result = MeasureFacade.getHistoricGraph( pComponent, pTreKey, pTreLabel, newAuditTime, pRuleId );
         }
 
         return result;

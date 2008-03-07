@@ -547,11 +547,12 @@ public class ComponentFacade
             AbstractComponentBO parent = pComponent.getParent();
 
             // tant que l'on trouve un parent est que l'on a pas trouvé le bon nombre composant parents,
-            while ( parent != null && pNbParents != 0 )
+            int nbParentsMeter = pNbParents;
+            while ( parent != null && nbParentsMeter != 0 )
             {
-                if ( pNbParents >= 0 )
+                if ( nbParentsMeter >= 0 )
                 {
-                    pNbParents--;
+                    nbParentsMeter--;
                 }
 
                 // si l'on est pas arrivé au niveau projet (à forciori application)

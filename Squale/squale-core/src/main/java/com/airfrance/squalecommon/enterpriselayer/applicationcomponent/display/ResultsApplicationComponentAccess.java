@@ -492,7 +492,8 @@ public class ResultsApplicationComponentAccess
         // audit sur lequel on requiert des resultats
         ResultsDTO currentResults = null;
         // ResultsDTO pour les projets et les TREs
-        while ( auditIterator.hasNext() && pResultDTOs != null )
+        List newResultDTOs = pResultDTOs;
+        while ( auditIterator.hasNext() && newResultDTOs != null )
         {
 
             // Initialisation de l'audit courant et chargement de resultats projets / TREs
@@ -507,15 +508,15 @@ public class ResultsApplicationComponentAccess
             if ( currentResults != null )
             {
                 // Ajout des résultats sur le RésultDTO de pResultDTOs correspondant au bon audit
-                ResultsDTO resultDTO = ( (ResultsDTO) pResultDTOs.get( auditIterator.nextIndex() - 1 ) );
+                ResultsDTO resultDTO = ( (ResultsDTO) newResultDTOs.get( auditIterator.nextIndex() - 1 ) );
                 resultDTO.getResultMap().putAll( currentResults.getResultMap() );
             }
             else
             {
-                pResultDTOs = null;
+                newResultDTOs = null;
             }
         }
-        return pResultDTOs;
+        return newResultDTOs;
     }
 
     /**
@@ -873,12 +874,12 @@ public class ResultsApplicationComponentAccess
      */
     private ComponentDTO validateComponent( ComponentDTO pComponent )
     {
-
-        if ( pComponent != null )
+        ComponentDTO newComponent = pComponent;
+        if ( newComponent != null )
         {
-            if ( pComponent.getID() < 0 )
+            if ( newComponent.getID() < 0 )
             {
-                pComponent = null;
+                newComponent = null;
                 LOG.error( ACMessages.getString( "ac.exception.results.validatecomponent.idnegative" ) );
             }
         }
@@ -886,7 +887,7 @@ public class ResultsApplicationComponentAccess
         {
             LOG.error( ACMessages.getString( "ac.exception.results.validatecomponent.componentnull" ) );
         }
-        return pComponent;
+        return newComponent;
     }
 
     /**

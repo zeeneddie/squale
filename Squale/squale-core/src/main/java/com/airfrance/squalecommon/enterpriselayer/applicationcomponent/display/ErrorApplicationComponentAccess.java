@@ -71,16 +71,17 @@ public class ErrorApplicationComponentAccess
 
         // Initialisation
         Collection collection = null; // retour de l'AC
+        ErrorDTO newError = pError;
 
-        if ( pError != null )
+        if ( newError != null )
         {
 
             // on verifie que les champs necessaires sont renseignes
-            pError = validateErrorDTO( pError );
-            if ( pError != null )
+            newError = validateErrorDTO( newError );
+            if ( newError != null )
             {
                 // Execution de la methode
-                collection = ErrorFacade.getErrors( pError, pNbLignes, pIndexDepart );
+                collection = ErrorFacade.getErrors( newError, pNbLignes, pIndexDepart );
             }
 
         }
@@ -150,11 +151,11 @@ public class ErrorApplicationComponentAccess
         // Initialisation
         Collection collection = null;
 
-        pError = validateErrorDTO( pError );
+        ErrorDTO newError = validateErrorDTO( pError );
 
-        if ( pError != null )
+        if ( newError != null )
         {
-            collection = ErrorFacade.getErrorsByTask( pTaskKeys, pError, pNbLignes, pIndexDepart );
+            collection = ErrorFacade.getErrorsByTask( pTaskKeys, newError, pNbLignes, pIndexDepart );
         }
 
         return collection;
@@ -173,6 +174,7 @@ public class ErrorApplicationComponentAccess
      * @deprecated ne sera pas implemente
      * @roseuid 42CBFBF80336
      */
+    /* TODO BFR --> deprecated method to suppress
     public Collection getErrorsByAuditAndTask( List pAuditDTOs, List pTaskKeys, ErrorDTO pError, Integer pNbLignes,
                                                Integer pIndexDepart )
         throws JrafEnterpriseException
@@ -188,7 +190,7 @@ public class ErrorApplicationComponentAccess
         Collection collection = null; // retour de l'AC
         return collection;
     }
-
+    */
     /**
      * Permet de completer l'objet ErrorDTO si des données sont manquantes
      * 
@@ -202,33 +204,34 @@ public class ErrorApplicationComponentAccess
 
         // initialisation
         AuditDTO lastAudit = null; // dernier audit du projet
+        ErrorDTO newErrorDTO = pErrorDTO;
 
         // teste si l'identifiant de l'audit est negatif
-        if ( pErrorDTO.getAuditId() < 0 )
+        if ( newErrorDTO.getAuditId() < 0 )
         {
 
             // initialisation du composant
             ComponentDTO project = new ComponentDTO(); // parametre de AuditFacade
-            project.setID( pErrorDTO.getProjectId() );
+            project.setID( newErrorDTO.getProjectId() );
 
             lastAudit = AuditFacade.getLastAudit( project, null );
 
             if ( lastAudit != null )
             {
-                pErrorDTO.setAuditId( lastAudit.getID() );
+                newErrorDTO.setAuditId( lastAudit.getID() );
             }
         }
 
         // teste si l'identifiant du projet ou de l'audit est negatif
-        if ( pErrorDTO.getProjectId() < 0 || pErrorDTO.getAuditId() < 0 )
+        if ( newErrorDTO.getProjectId() < 0 || newErrorDTO.getAuditId() < 0 )
         {
             LOG.error( ACMessages.getString( "ac.exception.error.validateerrordto.negativeid" ) );
-            pErrorDTO = null;
+            newErrorDTO = null;
         }
 
         // aucun traitement si la tache est nul. Cas traite au niveau facade
 
-        return pErrorDTO;
+        return newErrorDTO;
     }
 
     /**

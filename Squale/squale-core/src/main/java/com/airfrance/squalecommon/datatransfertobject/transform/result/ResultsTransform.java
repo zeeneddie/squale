@@ -39,6 +39,7 @@ public class ResultsTransform
      * @return ResultsBO
      * @deprecated non utilisé car les résultats ne seront pas modifiés par la facade
      */
+    /* TODO BEF --> deprecated method to suppress
     public static List dto2Bo( ResultsDTO pResultsDTO )
     {
 
@@ -47,10 +48,10 @@ public class ResultsTransform
 
         pResultsDTO = null; // traitement du parametre
 
-        /* Non implémenté car les résultats ne seront pas modifiés par la facade */
+        // Non implémenté car les résultats ne seront pas modifiés par la facade 
 
         return list;
-    }
+    }*/
 
     /**
      * Permet de convertir la liste d'objets metiers en valeurs
@@ -121,22 +122,25 @@ public class ResultsTransform
      * @return null
      * @deprecated utiliser le MeasureTransform
      */
+   
     private static Float bo2DtoMeasure( MeasureBO pResultsBO )
     {
+        
+        MeasureBO newResultsBO = pResultsBO;
 
         // Initialisation
         Float value = null; // Initialisation du retour
 
-        pResultsBO = null; // traitement du parametre
+        newResultsBO = null; // traitement du parametre
 
-        /* Non implémenté car externalisé dans MeasureTransform */
+        // Non implémenté car externalisé dans MeasureTransform 
 
         return value;
 
     }
 
     /**
-     * Transforme un MakBO en un Float correspondant à l'attribut "value"
+     * Transforme un MarkBO en un Float correspondant à l'attribut "value"
      * 
      * @param pResultBO MarkBO associe
      * @return Float

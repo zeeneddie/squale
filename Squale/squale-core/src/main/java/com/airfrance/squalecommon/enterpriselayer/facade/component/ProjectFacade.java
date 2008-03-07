@@ -80,7 +80,9 @@ public class ProjectFacade
         {
             if ( pSession == null )
             {
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
 
             // Initialisation des DAO
@@ -287,29 +289,23 @@ public class ProjectFacade
     public static ProjectConfDTO get( ProjectConfDTO pProjectConf )
         throws JrafEnterpriseException
     {
-
         // Initialisation du BO associé et de l'ID
         ProjectBO projectBO = null; // projet DTO
         List resultsCalculated = new ArrayList(); // liste des resultats calculés
         Long projectID = null; // identifiant du projet
-
+        ProjectConfDTO newProjectConf = pProjectConf;
         ISession session = null;
-
         try
         {
-
-            projectID = new Long( pProjectConf.getId() );
-
+            projectID = new Long( newProjectConf.getId() );
             session = PERSISTENTPROVIDER.getSession();
-
             ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
-
             // Chargement du BO associé
             projectBO = (ProjectBO) projectDAO.get( session, projectID );
             // Transformation du BO en DTO
             if ( null != projectBO )
             {
-                pProjectConf = ProjectConfTransform.bo2Dto( projectBO );
+                newProjectConf = ProjectConfTransform.bo2Dto( projectBO );
             }
         }
         catch ( JrafDaoException e )
@@ -321,7 +317,7 @@ public class ProjectFacade
             FacadeHelper.closeSession( session, ProjectFacade.class.getName() + ".get" );
         }
 
-        return pProjectConf;
+        return newProjectConf;
 
     }
 
@@ -348,7 +344,9 @@ public class ProjectFacade
         {
             if ( pSession == null )
             {
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
 
             // Initialisation des DAOs

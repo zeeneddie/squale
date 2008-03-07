@@ -214,7 +214,9 @@ public class ApplicationFacade
             // Création d'une session locale si besoin
             if ( pSession == null )
             {
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
             // Initialisation des DAO
             ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
@@ -481,13 +483,16 @@ public class ApplicationFacade
 
         // Initialisation des variables temporaires
         ApplicationBO applicationBO = null;
+        ApplicationConfDTO newApplicationConf = pApplicationConf;
 
         try
         {
 
             if ( pSession == null )
             {
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
 
             ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
@@ -495,7 +500,7 @@ public class ApplicationFacade
             ProfileDAOImpl profileDAO = ProfileDAOImpl.getInstance();
 
             // Transformation du DTO en BO + creation de l'objet en base
-            applicationBO = ApplicationConfTransform.dto2Bo( pApplicationConf );
+            applicationBO = ApplicationConfTransform.dto2Bo( newApplicationConf );
             applicationBO = applicationDAO.create( pSession, applicationBO );
 
             userBO = (UserBO) userDAO.get( pSession, userID );
@@ -516,17 +521,17 @@ public class ApplicationFacade
                 Collection userBOs = new ArrayList();
                 userBOs.add( userBO );
 
-                pApplicationConf = ApplicationConfTransform.bo2Dto( applicationBO, userBOs );
+                newApplicationConf = ApplicationConfTransform.bo2Dto( applicationBO, userBOs );
             }
             else
             {
-                pApplicationConf = null;
+                newApplicationConf = null;
             }
 
         }
         catch ( JrafDaoException e )
         {
-            pApplicationConf = null;
+            newApplicationConf = null;
             if ( applicationBO != null )
             {
                 LOG.info( FacadeMessages.getString( "facade.exception.applicationfacade.insert.existence" ), e );
@@ -536,7 +541,7 @@ public class ApplicationFacade
         {
             FacadeHelper.closeSession( pSession, ApplicationFacade.class.getName() + ".insert" );
         }
-        return pApplicationConf;
+        return newApplicationConf;
     }
 
     /**
@@ -622,7 +627,9 @@ public class ApplicationFacade
             if ( pSession == null )
             {
                 // si aucune session, on en récupère une
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
             // Récupération d'une instance de ApplicationDAOImpl
             ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
@@ -687,7 +694,9 @@ public class ApplicationFacade
         {
             if ( pSession == null )
             {
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
 
             // Initialisation des DAO
@@ -866,7 +875,9 @@ public class ApplicationFacade
 
             if ( pSession == null )
             {
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
 
             ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
@@ -913,7 +924,9 @@ public class ApplicationFacade
             if ( pSession == null )
             {
                 // si aucune session n'est passée
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
             // transformation du ApplicationConfDTO en ApplicationBO
             applicationBO = ApplicationConfTransform.dto2Bo( pApplicationConf );

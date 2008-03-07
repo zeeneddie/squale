@@ -288,7 +288,9 @@ public class SqualeReferenceFacade
             if ( pSession == null )
             {
                 // si aucune session n'a été fournie à la façade, on en récupère une
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENCEPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
 
             SqualeReferenceDAOImpl referenceDao = SqualeReferenceDAOImpl.getInstance();
@@ -351,7 +353,9 @@ public class SqualeReferenceFacade
             // Initialisation de la session
             if ( pSession == null )
             {
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENCEPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
             // Récupération d'une instance de SqualeReferenceDAOImpl
             SqualeReferenceDAOImpl referenceDao = SqualeReferenceDAOImpl.getInstance();
@@ -403,7 +407,9 @@ public class SqualeReferenceFacade
             // Initialisation de la session
             if ( pSession == null )
             {
+                //CHECKSTYLE:OFF
                 pSession = PERSISTENCEPROVIDER.getSession();
+                //CHECKSTYLE:ON
             }
             // Récupération d'une instance de SqualeReferenceDAOImpl
             SqualeReferenceDAOImpl referenceDao = SqualeReferenceDAOImpl.getInstance();
