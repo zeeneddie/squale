@@ -135,6 +135,16 @@ public class BubbleConfBO
         return pVisitor.visit( this, pArgument );
     }
 
+    
+    /**
+     * Redefinition of the hashCode method
+     * {@inheritDoc} 
+     * @return return the hash number of the object
+     */
+    public int hashCode(){
+        return super.hashCode();
+    }
+    
     /**
      * {@inheritDoc}
      * 

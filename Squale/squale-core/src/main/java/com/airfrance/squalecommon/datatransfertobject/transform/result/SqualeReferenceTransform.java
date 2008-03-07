@@ -38,6 +38,7 @@ public class SqualeReferenceTransform
      * @return SqualeReferenceBO
      * @deprecated non utilisé
      */
+    /*    TODO BFR --> deprecated method to suppress
     public static SqualeReferenceBO dto2Bo( SqualeReferenceDTO pSqualeReferenceDTO )
     {
 
@@ -47,7 +48,7 @@ public class SqualeReferenceTransform
 
         return squaleReferenceBO;
 
-    }
+    }*/
 
     /**
      * Transforme un objet SqualeReferenceBO en objet SqualeReferenceDTO

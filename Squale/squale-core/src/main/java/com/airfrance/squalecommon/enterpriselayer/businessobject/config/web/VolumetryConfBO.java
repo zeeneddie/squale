@@ -96,4 +96,15 @@ public class VolumetryConfBO
         }
         return result;
     }
+    
+    /**
+     * Redefinition of the hashCode method
+     * {@inheritDoc} 
+     * @return return the hash number of the object
+     */
+    public int hashCode(){
+        return super.hashCode();
+    }
+    
+    
 }
