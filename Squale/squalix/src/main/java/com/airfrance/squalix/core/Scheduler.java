@@ -36,6 +36,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.result.roi.RoiM
 import com.airfrance.squalecommon.enterpriselayer.facade.config.SqualixConfigFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.quality.SqualeReferenceFacade;
 import com.airfrance.squalecommon.util.SqualeCommonConstants;
+import com.airfrance.squalecommon.util.SqualeCommonUtils;
 import com.airfrance.squalecommon.util.mail.IMailerProvider;
 import com.airfrance.squalecommon.util.mail.MailerHelper;
 import com.airfrance.squalix.core.exception.ConfigurationException;
@@ -261,9 +262,8 @@ public class Scheduler
                 String content = header + Messages.getString( "mail.running_audit.exists.content" );
                 String dest = SqualeCommonConstants.ONLY_ADMINS;
                 // On envoir le mail qu'aux abonnés
-                // TODO FAB : décommenter quand l'envoi d'email sera OK
-                // SqualeCommonUtils.notifyByEmail(mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object,
-                // content, false);
+                SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object,
+                                                 content, false );
             }
             // Exécuter les audits
             launchAudits( audits, stop );
@@ -294,9 +294,8 @@ public class Scheduler
             String header = Messages.getString( "mail.header" );
             String object = sender + Messages.getString( "mail.rotation.audit.shutDown.object" );
             String content = header + Messages.getString( "mail.rotation.audit.shutDown.content" );
-            // TODO FAB : décommenter quand l'envoi d'email sera OK
-            // SqualeCommonUtils.notifyByEmail(mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content,
-            // false);
+            SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content,
+                                             false );
         }
         finally
         {
@@ -341,9 +340,8 @@ public class Scheduler
                         + Messages.getString( "mail.application_frequency.changed.content", new String[] {
                             appli.getName(), "" + oldFreq, "" + appli.getAuditFrequency() } );
                 String dest = SqualeCommonConstants.ONLY_ADMINS;
-                // TODO FAB : décommenter quand l'envoi d'email sera OK
-                // SqualeCommonUtils.notifyByEmail(mMailer, null, SqualeCommonConstants.MANAGERS_AND_ADMINS, null,
-                // object, content, false);
+                SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.MANAGERS_AND_ADMINS, null,
+                                                 object, content, false );
             }
         }
         mSession.commitTransactionWithoutClose();
@@ -394,9 +392,8 @@ public class Scheduler
             String sender = Messages.getString( "mail.sender.squalix" );
             String object = sender + Messages.getString( "mail.rotation.audit.unknown.object" );
             String content = header + Messages.getString( "mail.rotation.audit.unknown.content" );
-            // TODO FAB : à remettre par la suite
-            // SqualeCommonUtils.notifyByEmail(mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content,
-            // false);
+            SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content,
+                                             false );
         }
         return result;
     }
@@ -565,8 +562,7 @@ public class Scheduler
         if ( sendMail )
         {
             // complément d'infos
-            // TODO FAB : décommenter quand l'envoi d'email sera OK
-            // SqualeCommonUtils.notifyByEmail(mMailer, null, dest, new Long(pApplicationId), object, content, false);
+            SqualeCommonUtils.notifyByEmail( mMailer, null, dest, new Long( pApplicationId ), object, content, false );
         }
     }
 
@@ -870,9 +866,8 @@ public class Scheduler
                 result = false;
                 object = sender + Messages.getString( "mail.audits.notDone.object" );
                 content = header + Messages.getString( "mail.audits.notDone.content" );
-                // TODO FAB : décommenter quand l'envoi d'email sera OK
-                // SqualeCommonUtils.notifyByEmail(mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object,
-                // content, false);
+                SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object,
+                                                 content, false );
             } // sinon le script de rotation a été exécutée, on peut continuer normalement
         }
         // le script de rotation a été bien lancée, on avertit juste les administrateurs
@@ -881,9 +876,8 @@ public class Scheduler
         {
             object = sender + Messages.getString( "mail.rotation.done.object" );
             content = header + Messages.getString( "mail.rotation.one.content" );
-            // TODO FAB : décommenter quand l'envoi d'email sera OK
-            // SqualeCommonUtils.notifyByEmail(mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content,
-            // false);
+            SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content,
+                                             false );
             AuditDAOImpl.getInstance().reportRotationAudit( mSession );
         }
         return result;

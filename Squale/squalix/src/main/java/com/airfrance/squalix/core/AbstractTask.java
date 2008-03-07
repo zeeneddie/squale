@@ -33,6 +33,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.param
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
 import com.airfrance.squalecommon.util.SqualeCommonConstants;
+import com.airfrance.squalecommon.util.SqualeCommonUtils;
 import com.airfrance.squalecommon.util.mail.IMailerProvider;
 import com.airfrance.squalecommon.util.mail.MailerHelper;
 import com.airfrance.squalix.messages.Messages;
@@ -394,8 +395,7 @@ public abstract class AbstractTask
                         Messages.getString( "mail.header" ) + Messages.getString( "mail.task.failed.content", infos );
                     String dest = SqualeCommonConstants.ONLY_ADMINS;
                     IMailerProvider mailer = MailerHelper.getMailerProvider();
-                    // TODO FAB : remttre
-                    // SqualeCommonUtils.notifyByEmail(mailer, null, dest, null, object, content, false);
+                    SqualeCommonUtils.notifyByEmail(mailer, null, dest, null, object, content, false);
                 }
                 // Pas de conversion InitialMessage -> Message
                 try
