@@ -29,7 +29,8 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Proje
 import com.airfrance.squalix.core.CoreMessages;
 
 /**
- * @author M401540 Thread séparé de purge
+ * Thread séparée de purge
+ * @author M401540 
  */
 public class Purge
     extends Thread
