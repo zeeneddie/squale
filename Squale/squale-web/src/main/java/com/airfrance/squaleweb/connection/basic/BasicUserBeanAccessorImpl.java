@@ -94,7 +94,7 @@ public class BasicUserBeanAccessorImpl
     /**
      * This method return the userBean of the bean accessor
      * 
-     * @param pRequest the request used
+     * @param request the request used
      * @return the authenticated userBean of the bean accessor
      * @throws ConnectionException
      */

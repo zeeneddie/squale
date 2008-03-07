@@ -35,7 +35,8 @@ public class LoginFilter
      * @param request : The http request
      * @param response : The servlet response
      * @param chain : The chain of filter
-     * @throws ServletException, IOException
+     * @throws ServletException
+     * @throws IOException
      */
 
     public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain )

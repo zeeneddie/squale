@@ -33,7 +33,7 @@ public class UserLoginAction
      * @param response : The servlet response
      * @return return the action to do
      */
-    public ActionForward execute( ActionMapping pMapping, ActionForm form, HttpServletRequest request,
+    public ActionForward execute( ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                   HttpServletResponse response )
     {
         ActionForward forward = null;
@@ -46,11 +46,11 @@ public class UserLoginAction
         boolean isUser = UserBeanAccessorHelper.getUserBeanAccessor().isUser( user );
         if ( isUser )
         {
-            forward = pMapping.findForward( "success" );
+            forward = mapping.findForward( "success" );
         }
         else
         {
-            forward = pMapping.findForward( "failure" );
+            forward = mapping.findForward( "failure" );
             loginForm.setPass( null );
             ActionErrors error = new ActionErrors();
             ActionMessage message = new ActionMessage( "authentication.error" );
