@@ -181,7 +181,9 @@ public class TrackerTag
         String result = "";
         if ( list == null )
         {
+            //CHECKSTYLE:OFF
             list = new ArrayList();
+            //CHECKSTYLE:ON
         }
         TrackerStructure ts;
         // on limite l'affichage aux TRACKER_ELEMENTS_NUMBER

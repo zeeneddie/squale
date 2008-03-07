@@ -372,7 +372,8 @@ public class CreateProjectAction
                 "/manageApplication.do?" + "action=selectApplicationToConfig&applicationId=" + applicationDTO.getId();
             forward = new ActionForward( action );
             // Appel de la couche métier
-            if ( ( dto = (ProjectConfDTO) ac.execute( "saveProject", paramIn ) ) != null )
+            dto = (ProjectConfDTO) ac.execute( "saveProject", paramIn );
+            if ( dto != null )
             {
                 project.setProjectId( "" + dto.getId() );
                 // permet d'envoyer un mail si un nouveau projet est crée

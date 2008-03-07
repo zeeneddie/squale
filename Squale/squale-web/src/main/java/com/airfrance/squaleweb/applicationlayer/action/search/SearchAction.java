@@ -68,10 +68,10 @@ public class SearchAction
             else
             {
                 // On reset le formulaire
-                pForm =
+                ActionForm searchForm =
                     WTransformerFactory.objToForm( SearchProjectTransformer.class, new Object[] { new HashMap(),
                         new ArrayList() } );
-                pRequest.getSession().setAttribute( "searchProjectForm", pForm );
+                pRequest.getSession().setAttribute( "searchProjectForm", searchForm );
             }
             forward = pMapping.findForward( "list" );
         }

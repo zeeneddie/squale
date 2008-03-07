@@ -928,7 +928,8 @@ public class ProjectResultsAction
             "";
         try
         {
-            if ( null == ( forward = init( pMapping, pRequest, pForm ) ) )
+            forward = init( pMapping, pRequest, pForm );
+            if ( null == forward )
             {
                 param = (String) pRequest.getParameter( "tre" );
                 factorParent = (String) pRequest.getParameter( "factorParent" );

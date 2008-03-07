@@ -117,12 +117,12 @@ public class ReferenceListAction
         }
 
         // Comme le form est en session, on le remet à jour
-        pForm = new SetOfReferencesListForm();
+        SetOfReferencesListForm newForm = new SetOfReferencesListForm();
         // Récupère les références et les structures
-        getReferences( commonApplis, isUserAdmin( pRequest ), pRequest, pForm );
+        getReferences( commonApplis, isUserAdmin( pRequest ), pRequest, newForm );
         // Remet à jour le form en session
         pRequest.getSession().removeAttribute( "setOfReferencesListForm" );
-        pRequest.getSession().setAttribute( "setOfReferencesListForm", pForm );
+        pRequest.getSession().setAttribute( "setOfReferencesListForm", newForm );
 
     }
 

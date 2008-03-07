@@ -160,7 +160,7 @@ public class BugTrackingQCForm
     }
 
     /**
-     * @param pLogin insere ce login
+     * @param pQCLogin insere ce login
      */
     public void setQCLogin( String pQCLogin )
     {
@@ -168,7 +168,7 @@ public class BugTrackingQCForm
     }
 
     /**
-     * @param pUrl insere cet URL
+     * @param pQCUrl insere cet URL
      */
     public void setQCUrl( String pQCUrl )
     {
@@ -176,7 +176,7 @@ public class BugTrackingQCForm
     }
 
     /**
-     * @param pPwd insere ce password
+     * @param pQCPassword insere ce password
      */
     public void setQCPassword( String pQCPassword )
     {
@@ -184,7 +184,7 @@ public class BugTrackingQCForm
     }
 
     /**
-     * @param pTrace insere cet emplacement pour la trace
+     * @param pQCTrace insere cet emplacement pour la trace
      */
     public void setQCTrace( String pQCTrace )
     {

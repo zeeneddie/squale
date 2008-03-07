@@ -45,6 +45,7 @@ public class RoiAction
     {
         ActionForward forward = null;
         ActionErrors errors = new ActionErrors();
+        ActionForm theForm = pForm; 
         try
         {
             forward = pMapping.findForward( "show" );
@@ -53,8 +54,8 @@ public class RoiAction
             // On récupère le ROI sous forme de DTO
             RoiDTO roiDto = (RoiDTO) ac.execute( "getROI", new Object[] { new Long( -1 ) } );
             // On transforme le form
-            pForm = WTransformerFactory.objToForm( RoiTransformer.class, roiDto );
-            pRequest.getSession().setAttribute( "roiForm", pForm );
+            theForm = WTransformerFactory.objToForm( RoiTransformer.class, roiDto );
+            pRequest.getSession().setAttribute( "roiForm", theForm );
         }
         catch ( Exception e )
         {
@@ -115,8 +116,8 @@ public class RoiAction
             // On le modifie avec la nouvelle application
             roiDto = (RoiDTO) ac.execute( "getROI", new Object[] { new Long( roiDto.getApplicationId() ) } );
             // On transforme le form
-            pForm = WTransformerFactory.objToForm( RoiTransformer.class, roiDto );
-            pRequest.getSession().setAttribute( "roiForm", pForm );
+            ActionForm newForm = WTransformerFactory.objToForm( RoiTransformer.class, roiDto );
+            pRequest.getSession().setAttribute( "roiForm", newForm );
         }
         catch ( Exception e )
         {
@@ -152,8 +153,8 @@ public class RoiAction
                 StringBuffer acErrors = new StringBuffer();
                 roiDto = (RoiDTO) ac.execute( "updateFormula", new Object[] { roiDto, acErrors } );
                 // On transforme le form
-                pForm = WTransformerFactory.objToForm( RoiTransformer.class, roiDto );
-                pRequest.getSession().setAttribute( "roiForm", pForm );
+                ActionForm newForm = WTransformerFactory.objToForm( RoiTransformer.class, roiDto );
+                pRequest.getSession().setAttribute( "roiForm", newForm );
                 if ( acErrors.length() > 0 )
                 {
                     // Affichage des messages d'erreur

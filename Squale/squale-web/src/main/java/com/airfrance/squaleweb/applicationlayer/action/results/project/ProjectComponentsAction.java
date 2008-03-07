@@ -246,16 +246,17 @@ public class ProjectComponentsAction
         boolean reload = true;
         String which = ( (String) pRequest.getParameter( "which" ) );
         boolean excluded = ( which != null && which.equals( "components.excluded" ) );
+        ComponentDTO compo = pDto;
         // Récupération du composant
         while ( reload )
         {
             IApplicationComponent ac = AccessDelegateHelper.getInstance( "Component" );
-            Object[] paramIn = { pDto };
-            pDto = (ComponentDTO) ac.execute( "get", paramIn );
+            Object[] paramIn = { compo };
+            compo = (ComponentDTO) ac.execute( "get", paramIn );
             // Initialise le form
-            WTransformerFactory.objToForm( ComponentTransformer.class, ( (WActionForm) pForm ), new Object[] { pDto } );
+            WTransformerFactory.objToForm( ComponentTransformer.class, ( (WActionForm) pForm ), new Object[] { compo } );
             // Récupération des parents et composition du mot complet
-            List parentDtoList = getParentList( pDto );
+            List parentDtoList = getParentList( compo );
 
             // Récupération de la liste pour l'onglet "info générale"
             Object[] infoListTab = new Object[1];
@@ -301,7 +302,7 @@ public class ProjectComponentsAction
             if ( !( (ComponentForm) pForm ).getType().equals( ComponentType.METHOD )
                 && !( (ComponentForm) pForm ).getType().equals( ComponentType.JSP ) )
             {
-                Object[] paramIn3 = { pDto, null, pAuditDTO, ( (ComponentForm) pForm ).getFilter() };
+                Object[] paramIn3 = { compo, null, pAuditDTO, ( (ComponentForm) pForm ).getFilter() };
                 Collection childrenDTO = getChildren( pRequest, ac, paramIn3 );
                 ComponentListForm childrenList =
                     (ComponentListForm) WTransformerFactory.objToForm( ComponentListTransformer.class,
@@ -316,7 +317,7 @@ public class ProjectComponentsAction
                     ComponentForm child = (ComponentForm) childrenList.getList().get( 0 );
                     if ( child.getType().equals( ComponentType.PACKAGE ) )
                     {
-                        pDto.setID( child.getId() );
+                        compo.setID( child.getId() );
                         reload = true;
                         // reset du form
                         ( (ComponentForm) pForm ).reset( pMapping, pRequest );

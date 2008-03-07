@@ -640,14 +640,15 @@ public abstract class BaseDispatchAction
             }
             // si on a pu récupérer l'application, on affecte la variable
             // pour pouvoir récupérer les projets
+            String newAppliId = appliId; 
             if ( appliDTO != null )
             {
-                appliId = "" + appliDTO.getID();
+                newAppliId = "" + appliDTO.getID();
             }
-            if ( appliId != null && !"".equals( appliId ) )
+            if ( newAppliId != null && !"".equals( newAppliId ) )
             { // tout peut etre nul, page d'accueil par exemple
                 // Récupère les 2 derniers audits
-                tab = retrieve2LastAudits( new Long( appliId ).longValue(), pRequest, BY_APPLI_ID );
+                tab = retrieve2LastAudits( new Long( newAppliId ).longValue(), pRequest, BY_APPLI_ID );
                 currentAuditDTO = tab[0];
                 previousAuditDTO = tab[1];
             }

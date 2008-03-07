@@ -77,6 +77,19 @@ public class ApplicationForm
         justification = pJustification;
     }
 
+    
+    
+    /**
+     * Redefinition of the hashCode method
+     * {@inheritDoc} 
+     * @return return the hash number of the object
+     */
+    public int hashCode(){
+        return super.hashCode();
+    }
+
+    
+    
     /**
      * @see java.lang.Object#equals(java.lang.Object)
      * @param obj l'objet à comparer
@@ -95,6 +108,8 @@ public class ApplicationForm
         }
         return result;
     }
+    
+    
 
     /**
      * @return true si le composant a des résultats

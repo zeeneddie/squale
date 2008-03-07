@@ -436,14 +436,15 @@ public class LogonBean
     private static int getNextLastLetter( int cptForLetter, char appliFirstLetter, String[] split )
     {
         int size = split.length;
+        int currentIndex = cptForLetter;
         int index = size;
-        for ( ; cptForLetter < size && index == size; cptForLetter++ )
+        for ( ; currentIndex < size && index == size; currentIndex++ )
         {
             // Si l'application rentre bien dans ce nouveau groupe on prend cette dernière
             // lettre sinon on avance pour trouver le bon groupe
-            if ( split[cptForLetter].toUpperCase().charAt( 0 ) >= appliFirstLetter )
+            if ( split[currentIndex].toUpperCase().charAt( 0 ) >= appliFirstLetter )
             {
-                index = cptForLetter;
+                index = currentIndex;
             }
         }
         return index;
