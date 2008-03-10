@@ -50,7 +50,7 @@
 	<field name="results" class="java.util.Collection"/>
 
 	<variable name="pictos" class="java.lang.Object" resetType="Report" calculation="Nothing">
-		<variableExpression><![CDATA[new String[]{ "/squale/images/pictos/na.gif", "/squale/images/pictos/bad.png", "/squale/images/pictos/good.png", "/squale/images/pictos/best.png" }]]></variableExpression>
+		<variableExpression><![CDATA[new String[]{ "images/pictos/na.gif", "images/pictos/bad.png", "images/pictos/good.png", "images/pictos/best.png" }]]></variableExpression>
 	</variable>
 	<variable name="date" class="java.lang.String" resetType="Report" calculation="Nothing">
 		<variableExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></variableExpression>
