@@ -2,6 +2,7 @@ package com.airfrance.squaleweb.applicationlayer.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.Globals;
 import org.apache.struts.action.ActionErrors;
@@ -13,6 +14,7 @@ import org.apache.struts.action.ActionMessage;
 import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
 import com.airfrance.squaleweb.applicationlayer.formbean.UserLoginForm;
+import com.airfrance.squaleweb.connection.AuthenticationBean;
 import com.airfrance.squaleweb.connection.UserBeanAccessorHelper;
 
 /**
@@ -24,8 +26,8 @@ public class UserLoginAction
 {
 
     /**
-     * This method try to do the connection of the user if the authentication succeed then the action login.do is call
-     * if the authentication failed then the user is redirect to the login.jsp page
+     * This method try to do the connection of the user. If the authentication succeed then the action login.do is call.
+     * If the authentication failed then the user is redirect to the login.jsp page
      * 
      * @param mapping : The mapping
      * @param form : The form to read
@@ -43,12 +45,13 @@ public class UserLoginAction
         UserDTO user = new UserDTO();
         user.setMatricule( login );
         user.setPassword( password );
-        boolean isUser = UserBeanAccessorHelper.getUserBeanAccessor().isUser( user );
-        if ( isUser )
+        AuthenticationBean isUser = UserBeanAccessorHelper.getUserBeanAccessor().isUser( user );
+        if ( isUser != null && isUser.getIdentifier() != null)
         {
+            HttpSession session = request.getSession();
+            session.setAttribute( "AuthenticatedUser", isUser );
             forward = mapping.findForward( "success" );
-        }
-        else
+        }else
         {
             forward = mapping.findForward( "failure" );
             loginForm.setPass( null );

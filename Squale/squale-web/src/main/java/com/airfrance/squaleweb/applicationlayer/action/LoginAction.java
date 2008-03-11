@@ -18,6 +18,7 @@ import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
 import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.UserForm;
+import com.airfrance.squaleweb.connection.AuthenticationBean;
 import com.airfrance.squaleweb.connection.IUserBeanAccessor;
 import com.airfrance.squaleweb.connection.UserBeanAccessorHelper;
 import com.airfrance.squaleweb.connection.exception.ConnectionException;
@@ -107,6 +108,7 @@ public class LoginAction
     }
 
     /**
+     * 
      * @param pRequest la requête
      * @return l'utilisateur connecté sous forme de LoginBean
      * @throws ConnectionException si erreur de récupération de l'utilisateur connecté
@@ -117,10 +119,10 @@ public class LoginAction
         throws ConnectionException, JrafEnterpriseException, WTransformerException
     {
         // Obtention des informations sur l'utilisateur connecté
+        
+        AuthenticationBean authent =(AuthenticationBean)pRequest.getSession().getAttribute( "AuthenticatedUser" );
+        String name = authent.getIdentifier();
         IUserBeanAccessor userBeanAccessor = UserBeanAccessorHelper.getUserBeanAccessor();
-        // String name = "squaleUser";
-        // pRequest.getRemoteUser();
-        String name = userBeanAccessor.getUserBean().getIdentifier();
         boolean isAdmin = userBeanAccessor.getUserBean( pRequest ).isAdmin();
         UserDTO user = new UserDTO();
         user.setMatricule( name );

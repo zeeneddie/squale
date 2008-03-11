@@ -10,12 +10,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import com.airfrance.squaleweb.connection.AuthenticationBean;
 
-import com.airfrance.squaleweb.connection.UserBeanAccessorHelper;
 
 /**
- * 
- *
+ * This class defined a filter
+ * This filter intercept the call to all file *.jsp and *.do
+ * It verifies if the user is logged or not   
  */
 public class LoginFilter
     implements Filter
@@ -35,8 +36,8 @@ public class LoginFilter
      * @param request : The http request
      * @param response : The servlet response
      * @param chain : The chain of filter
-     * @throws ServletException
-     * @throws IOException
+     * @throws ServletException : Exception happen during the redirection 
+     * @throws IOException : Exception happen during the redirection
      */
 
     public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain )
@@ -49,7 +50,11 @@ public class LoginFilter
             HttpServletRequest httpServletRequest = (HttpServletRequest) request;
             HttpSession session = httpServletRequest.getSession( false );
 
-            // If the forward action is /ident.do, then we do the action directly without authentication
+            /*
+             * If the forward action is /ident.do, then we do the action directly without test
+             * if the user is authenticate or not
+             */ 
+            
             String path = httpServletRequest.getServletPath();
             if ( path.indexOf( "ident.do" ) > 0 )
             {
@@ -60,7 +65,8 @@ public class LoginFilter
             if ( session != null )
             {
                 // verify if the user is connected or not
-                if ( UserBeanAccessorHelper.getUserBeanAccessor().isConnect() )
+                AuthenticationBean authent = (AuthenticationBean)session.getAttribute( "AuthenticatedUser" );
+                if ( authent!=null )
                 {
                     chain.doFilter( request, response );
                     return;
@@ -75,12 +81,13 @@ public class LoginFilter
     }
 
     /**
-     * 
+     * Method for initialization of the filter.
+     * @param arg0 parameter for the initialization of the filter
+     * @throws ServletException : exception happen during the initialization
      */
     public void init( FilterConfig arg0 )
         throws ServletException
     {
-        // TODO Auto-generated method stub
 
     }
 

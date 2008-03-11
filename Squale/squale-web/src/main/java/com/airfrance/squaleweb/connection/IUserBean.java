@@ -14,11 +14,4 @@ public interface IUserBean
      */
     public boolean isAdmin();
 
-    /**
-     * This method return the identifier of the userBean
-     * 
-     * @return send the identifier of the userBean
-     */
-    public String getIdentifier();
-
 }

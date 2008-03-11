@@ -3,22 +3,20 @@ package com.airfrance.squaleweb.applicationlayer.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
-import com.airfrance.squaleweb.connection.UserBeanAccessorHelper;
 
 /**
- * action class for the disconnection of the user
+ * Action class for the disconnection of the user
  */
 public class UserLogoutAction
     extends DefaultAction
 {
 
     /**
-     * This method disconnect the user and redirects to the login.jsp page
+     * This method disconnect the user and redirects it to the login.jsp page
      * 
      * @param mapping : The mapping
      * @param form : The form to read
@@ -32,7 +30,8 @@ public class UserLogoutAction
 
         ActionForward forward = null;
         HttpSession session = request.getSession();
-        UserBeanAccessorHelper.getUserBeanAccessor().disConnect( session );
+        session.invalidate();
+        //session.setAttribute( "AuthenticatedUser", null );
         forward = mapping.findForward( "success" );
         return forward;
     }

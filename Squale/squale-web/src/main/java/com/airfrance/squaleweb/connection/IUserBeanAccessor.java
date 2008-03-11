@@ -1,8 +1,6 @@
 package com.airfrance.squaleweb.connection;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
 import com.airfrance.squaleweb.connection.exception.ConnectionException;
 
@@ -17,17 +15,11 @@ public interface IUserBeanAccessor
      * 
      * @param pRequest the request used
      * @return the authenticated userBean of the bean accessor
-     * @throws ConnectionException
+     * @throws ConnectionException : Exception happen during the call for authentication
      */
-    public IUserBean getUserBean( HttpServletRequest pRequest )
+    IUserBean getUserBean( HttpServletRequest pRequest )
         throws ConnectionException;
 
-    /**
-     * This method return the userBean of the bean accessor
-     * 
-     * @return The userBean of the bean accessor
-     */
-    public IUserBean getUserBean();
 
     /**
      * This method do the authentication of the user.
@@ -35,20 +27,8 @@ public interface IUserBeanAccessor
      * @param user object with only the identify and the password fill
      * @return true if the user is recognized
      */
-    public boolean isUser( UserDTO user );
+    AuthenticationBean isUser( UserDTO user );
 
-    /**
-     * This method indicate if the user is connected to the application or not
-     * 
-     * @return true if the user is connected
-     */
-    public boolean isConnect();
-
-    /**
-     * This method disconnect the user from the application
-     * 
-     * @param session The session in used
-     */
-    public void disConnect( HttpSession session );
+    
 
 }

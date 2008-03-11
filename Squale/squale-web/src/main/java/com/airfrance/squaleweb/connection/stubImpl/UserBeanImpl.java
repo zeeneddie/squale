@@ -5,36 +5,34 @@ import java.util.List;
 
 import com.airfrance.squaleweb.connection.IUserBean;
 
+/**
+ * This class is a stub implementation of userBean.
+ * So in this case the method isAdmin always return true
+ */
 public class UserBeanImpl
     implements IUserBean
 {
 
-    private static final String ADMIN_PROFILE = "P_SQUALE_ADMIN-TECH";
-
-    /** */
-    protected String matricule;
-
-    /** Les profils */
+    /** Profiles list */
     protected List profiles;
 
     /**
-     * Constructeur par défaut
+     * Default constructor
      */
     public UserBeanImpl()
     {
         profiles = new ArrayList( 0 );
-        profiles.add( ADMIN_PROFILE );
     }
 
+    /**
+     * In this implementation the authenticated user is always an admin
+     * @return true
+     */
     public boolean isAdmin()
     {
         return true;
     }
 
-    public String getIdentifier()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
+
 
 }

@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
 import com.airfrance.jraf.helper.AccessDelegateHelper;
 import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
 import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
+import com.airfrance.squaleweb.connection.AuthenticationBean;
 import com.airfrance.squaleweb.connection.IUserBean;
 import com.airfrance.squaleweb.connection.IUserBeanAccessor;
 import com.airfrance.squaleweb.connection.exception.ConnectionException;
 
 /**
- * This class is the basic implementation of the userBean accessor. This class contains methods for authentication,
- * verify connection and disconnection. In the basic implementation the authentication verification is done directly in
- * the squale database (in the userBO table)
+ * This class is the basic implementation of the userBean accessor. This class contains methods for authentication.
+ * In the basic implementation the authentication verification is done directly in the squale database (in the userBO table)
  */
 public class BasicUserBeanAccessorImpl
     implements IUserBeanAccessor
@@ -38,13 +36,14 @@ public class BasicUserBeanAccessorImpl
 
     /**
      * This method do the authentication of the user.
-     * 
-     * @param user object with only the identify and the password fill
-     * @return true if the user is recognized
+     * This method return an authenticationBean with the user authenticated inside if the authentication succeed.
+     * The AuthenticationBean returned is null if the authentication failed. 
+     * @param user : Object with only the identifier and the password fill
+     * @return The AuthenticationBean fill if the authentication succeed or null if it failed 
      */
-    public boolean isUser( UserDTO user )
+    public AuthenticationBean isUser( UserDTO user )
     {
-        boolean isUser = false;
+        AuthenticationBean authent = null;
         try
         {
             IApplicationComponent ac = AccessDelegateHelper.getInstance( "Login" );
@@ -54,57 +53,33 @@ public class BasicUserBeanAccessorImpl
             {
                 List profiles = new ArrayList();
                 profiles.add( userInBase.getDefaultProfile().getName() );
-                userBean = new BasicUserBeanImpl( userInBase.getMatricule(), profiles );
-                isUser = true;
+                authent = new AuthenticationBean (userInBase.getMatricule(),profiles);
             }
         }
         catch ( JrafEnterpriseException e )
         {
             e.printStackTrace();
         }
-        return isUser;
+        return authent;
     }
 
-    /**
-     * This method indicate if the user is connected to the application or not
-     * 
-     * @return true if the user is connected
-     */
-    public boolean isConnect()
-    {
-        boolean isConnect = false;
-        if ( userBean.getIdentifier() != null )
-        {
-            isConnect = true;
-        }
-        return isConnect;
-    }
-
-    /**
-     * This method disconnect the user from the application
-     * 
-     * @param session The session in used
-     */
-    public void disConnect( HttpSession session )
-    {
-        userBean = new BasicUserBeanImpl();
-        session.invalidate();
-    }
 
     /**
      * This method return the userBean of the bean accessor
      * 
      * @param request the request used
      * @return the authenticated userBean of the bean accessor
-     * @throws ConnectionException
+     * @throws ConnectionException : not use in this implementation
      */
     public IUserBean getUserBean( HttpServletRequest request )
         throws ConnectionException
     {
-        // userBean = new UserBeanImpl();
+        AuthenticationBean authent = (AuthenticationBean)request.getSession().getAttribute( "AuthenticatedUser" );
+        userBean = new BasicUserBeanImpl(authent.getProfiles());
         return userBean;
     }
 
+    
     /**
      * This method return the userBean of the bean accessor
      * 
@@ -118,11 +93,11 @@ public class BasicUserBeanAccessorImpl
     /**
      * Set the user bean for this accessor
      * 
-     * @param userBean The bean corresponding to the user
+     * @param pUserBean The bean corresponding to the user
      */
-    public void setUserBean( IUserBean userBean )
+    public void setUserBean( IUserBean pUserBean )
     {
-        this.userBean = userBean;
+        userBean = pUserBean;
     }
 
 }

@@ -1,24 +1,26 @@
 package com.airfrance.squaleweb.connection.stubImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
+import com.airfrance.squaleweb.connection.AuthenticationBean;
 import com.airfrance.squaleweb.connection.IUserBean;
 import com.airfrance.squaleweb.connection.IUserBeanAccessor;
 import com.airfrance.squaleweb.connection.exception.ConnectionException;
 
+/**
+ * This class is a stub implementation of the accessor for authentication 
+ */
 public class UserBeanAccessorImpl
     implements IUserBeanAccessor
 {
 
     /**
-     * L'utilisateur connecté
+     * AuthenticatedUser
      */
     private IUserBean userBean;
 
     /**
-     * Constructeur par défaut
+     * Default Constructor
      */
     public UserBeanAccessorImpl()
     {
@@ -26,9 +28,9 @@ public class UserBeanAccessorImpl
     }
 
     /**
-     * Constructeur
+     * One arguments constructor
      * 
-     * @param pUserBean l'utilisateur
+     * @param pUserBean the user
      */
     public UserBeanAccessorImpl( IUserBean pUserBean )
     {
@@ -36,7 +38,10 @@ public class UserBeanAccessorImpl
     }
 
     /**
-     * 
+     * This method return a userBean
+     * @param request : the request
+     * @return a userBean
+     * @throws ConnectionException : not use in this implementation
      */
     public IUserBean getUserBean( HttpServletRequest request )
         throws ConnectionException
@@ -46,6 +51,7 @@ public class UserBeanAccessorImpl
     }
 
     /**
+     * Getter method for the userBean of this accessor
      * @return l'utilisateur
      */
     public IUserBean getUserBean()
@@ -54,28 +60,27 @@ public class UserBeanAccessorImpl
     }
 
     /**
-     * @param pBean l'utilisateur
+     * Setter method for the userBean of this accessor
+     * @param pBean : The userBean of the user
      */
     public void setUserBean( IUserBean pBean )
     {
         userBean = pBean;
     }
 
-    public boolean isConnect()
+   
+
+    /**
+     * This method return an authenticationBean with the user authenticated inside.
+     * @param user : the userDto with the identifier and the password write in the login.jsp page by the user.
+     * @return the AuthenticationBean of the authenticated user
+     */
+    public AuthenticationBean isUser( UserDTO user )
     {
-        // TODO Auto-generated method stub
-        return false;
+        AuthenticationBean authent = new AuthenticationBean ("squaleuser",null);
+        
+        return authent;
     }
 
-    public boolean isUser( UserDTO user )
-    {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    public void disConnect( HttpSession session )
-    {
-        // TODO Auto-generated method stub
-
-    }
+    
 }
