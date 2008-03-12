@@ -16,7 +16,7 @@ public class SqualeExportExcelUtils
 
     /**
      * Pied-de-page générique aux documents XLS : footerLeft appli/project page/total crée le "date" par "matricule"
-     * http://squale.airfrance.fr
+     * 
      * 
      * @param locale la locale
      * @param appli le nom de l'application
@@ -41,7 +41,6 @@ public class SqualeExportExcelUtils
         footer.getRight().appendPageNumber();
         footer.getRight().append( "/" );
         footer.getRight().appendTotalPages();
-        footer.getRight().append( "\nhttp://squale.airfrance.fr" );
         // Au centre
         footer.getCentre().append( appli );
         footer.getCentre().append( "/" );
