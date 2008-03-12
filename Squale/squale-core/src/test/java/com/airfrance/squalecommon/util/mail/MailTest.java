@@ -23,9 +23,9 @@ public class MailTest
         // Test d'envoi de mail avec une adresse en dur
         String title = "Test unitaire de mail";
         String content = "Test unitaire de mail";
-        SqualeCommonUtils.notifyByEmail( mail, "japanont1@airfrance.fr", null, title, content, false );
+        SqualeCommonUtils.notifyByEmail( mail, "bfranchet@qualixo.com", null, title, content, false );
         // avec un expéditeur
-        SqualeCommonUtils.notifyByEmail( mail, "japanont1@airfrance.fr", null, title + "_expediteur", content, false );
+        SqualeCommonUtils.notifyByEmail( mail, "bfranchet@qualixo.com", null, title + "_expediteur", content, false );
     }
 
 }
