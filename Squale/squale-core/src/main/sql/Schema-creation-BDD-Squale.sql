@@ -338,7 +338,7 @@
         Name varchar2(255),
         MeasureId number(19,0),
         Boolean_val number(1,0),
-        String_val varchar2(255),
+        String_val varchar2(4000),
         Blob_val blob,
         Number_val float,
         primary key (MetricId)
