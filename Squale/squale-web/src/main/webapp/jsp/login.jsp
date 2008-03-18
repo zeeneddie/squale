@@ -6,6 +6,8 @@
 <TITLE>Login</TITLE>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link href="theme/charte_v03_001/css/master.css" type="text/css" rel="stylesheet">
+<script language="javascript" src="jslib/behaviour-1.1.js"></script>
+<script language="javascript" src="jslib/welcom.js"></script>
 
 </HEAD>
 <BODY id="app" class="metiers">
