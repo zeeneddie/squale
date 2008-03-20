@@ -69,7 +69,7 @@ if (modification != null) {
 					</tr>
 					<tr>
 						<af:field key="application_creation.config.public" type="CHECKBOX"
-							property="public" styleClassLabel="td1" accessKey="admin"/>
+							property="public" accessKey="admin" styleClassLabel="td1" overridePageAccess="true"  />
 					</tr>
 
 					<tr>

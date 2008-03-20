@@ -44,7 +44,7 @@
 		<tr>
 			<af:field styleClassLabel="td1" isRequired="true"
 				key="project_creation.jsp.web_app_path"
-				property="webAppPath" size="60" />
+				property="webAppPath" size="60" disabled="<%=disabled%>" />
 		</tr>
 		<tr>
 			<td class="td1"><bean:message key="project_creation.jsp.j2ee_version" />*

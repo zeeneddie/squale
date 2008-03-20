@@ -212,7 +212,7 @@ kindOfTask = (kindOfTask != null) ? kindOfTask : "";%>
 		property="compilationRules" isRequired="true"
 		value="<%=\"\"+nbOfRule.intValue()%>" disabled="true" size="1" />
 	<af:table name="jCompilingForm" property="compilationRules"
-		displayNavigation="none" emptyKey="table.results.none">
+		displayNavigation="none" emptyKey="table.results.none" displayFooter="false">
 		<logic:greaterThan name="nbOfRule" value="0">
 			<af:cols id="rule" selectable="<%=!disabled%>">
 				<af:col property="kindOfTask" key="project_creation.compiling.type" />
@@ -265,8 +265,10 @@ kindOfTask = (kindOfTask != null) ? kindOfTask : "";%>
 				</logic:equal>
 			</af:cols>
 		</logic:greaterThan>
-		<logic:notEqual name="userProfile"
-			value="<%=ProfileBO.READER_PROFILE_NAME%>">
+		
+	</af:table>
+	<logic:notEqual name="userProfile"
+		 value="<%=ProfileBO.READER_PROFILE_NAME%>" >
 			<af:buttonBar>
 				<logic:equal name="jCompilingForm" property="antRulesAvailable"
 					value="true">
@@ -295,7 +297,7 @@ kindOfTask = (kindOfTask != null) ? kindOfTask : "";%>
 				</logic:greaterThan>
 			</af:buttonBar>
 		</logic:notEqual>
-	</af:table>
+	
 	<br />
 	<table id="excludedDirTable" width="100%" class="tblh" cellpadding="0"
 		cellspacing="0" border="0">
