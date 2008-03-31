@@ -87,6 +87,7 @@ public class ManageApplicationAction
                 IApplicationComponent ac = AccessDelegateHelper.getInstance( "ApplicationAdmin" );
                 ApplicationConfDTO applicationDTO =
                     (ApplicationConfDTO) WTransformerFactory.formToObj( ApplicationConfTransformer.class, application )[0];
+
                 // On change le nom de l'utilisateur et la date de dernière modification
                 applicationDTO.setLastUser( ( (LogonBean) pRequest.getSession().getAttribute( WConstants.USER_KEY ) ).getMatricule() );
                 applicationDTO.setLastUpdate( Calendar.getInstance().getTime() );
@@ -375,6 +376,8 @@ public class ManageApplicationAction
             {
                 ManageApplicationUtils.getCreateApplicationForm( applicationId, pRequest );
                 loadLastBranchAuditInSession( pRequest, dto.getId() );
+                // Add an user access for this application
+                addUserAccess( pRequest, dto.getId() );
                 forward = pMapping.findForward( "application_summary" );
             }
         }
@@ -984,6 +987,22 @@ public class ManageApplicationAction
     }
 
     /**
+     * Confirmation fot deleting (not physically) an application
+     * 
+     * @param pMapping mapping.
+     * @param pForm bean
+     * @param pRequest HTTP request.
+     * @param pResponse servlet response.
+     * @return action to realize.
+     */
+    public ActionForward deleteConfirm( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                        HttpServletResponse pResponse )
+    {
+        pRequest.setAttribute( "hide", "true" );
+        return pMapping.findForward( "application_confirm_purge" );
+    }
+
+    /**
      * Confirmation de purge d'une application. La purge d'une application se fait après avoir eu une confirmation de
      * celle-ci
      * 
@@ -997,6 +1016,70 @@ public class ManageApplicationAction
                                        HttpServletResponse pResponse )
     {
         return pMapping.findForward( "application_confirm_purge" );
+    }
+
+    /**
+     * Hide an application for not admin users without delete it physically: - remove users - if it's public, becomes
+     * private - disactive audits - delete current not attempted audits - rename application like
+     * applicationName(year)(month)(day)(hour)(minute)
+     * 
+     * @param pMapping mapping
+     * @param pForm bean
+     * @param pRequest request
+     * @param pResponse response
+     * @return action to do
+     */
+    public ActionForward deleteApplication( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                            HttpServletResponse pResponse )
+    {
+        ActionMessages errors = new ActionMessages();
+        ActionForward forward;
+        try
+        {
+            // Préparation de l'application
+            CreateApplicationForm form = (CreateApplicationForm) pForm;
+            ApplicationConfDTO applicationConf = new ApplicationConfDTO();
+            applicationConf.setId( new Long( form.getApplicationId() ).longValue() );
+            applicationConf.setName( form.getApplicationName() );
+            // Purge de l'application
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "Purge" );
+            Object[] paramIn = { applicationConf };
+            ac.execute( "hideApplication", paramIn );
+
+            // Envoi d'un mail aux administrateurs et aux gestionnaires de l'application pour leur signaler
+            // qu'une application a été supprimée
+            String sender = WebMessages.getString( getLocale( pRequest ), "mail.sender.squale" );
+            String header = WebMessages.getString( getLocale( pRequest ), "mail.header" );
+            String object = sender + WebMessages.getString( pRequest, "mail.appli.deleted.object" );
+            SimpleDateFormat formator =
+                new SimpleDateFormat( WebMessages.getString( getLocale( pRequest ), "date.format.simple" ) );
+            String today = formator.format( Calendar.getInstance().getTime() );
+            Object[] params = { form.getApplicationName(), today, pRequest.getRemoteUser() };
+            String content =
+                header + MessageFormat.format( WebMessages.getString( pRequest, "mail.appli.deleted.content" ), params );
+            content += "\n\n" + WebMessages.getString( pRequest, "mail.appli.deleted.content.users" );
+            // On affiche les utilisateurs de l'application
+            for ( Iterator it = form.getRights().keySet().iterator(); it.hasNext(); )
+            {
+                String user = (String) it.next();
+                content +=
+                    "\n" + user + " - "
+                        + WebMessages.getString( getLocale( pRequest ), (String) form.getRights().get( user ) );
+            }
+            SqualeCommonUtils.notifyByEmail( MailerHelper.getMailerProvider(),
+                                             SqualeCommonConstants.MANAGERS_AND_ADMINS,
+                                             new Long( applicationConf.getId() ), object, content, false );
+
+            forward = applicationEndPurge( pMapping, pRequest, errors, form, applicationConf );
+        }
+        catch ( Exception e )
+        {
+            // Traitement factorisé des exceptions et transfert vers la page d'erreur
+            handleException( e, errors, pRequest );
+            saveMessages( pRequest, errors );
+            forward = pMapping.findForward( "total_failure" );
+        }
+        return forward;
     }
 
     /**
@@ -1049,23 +1132,7 @@ public class ManageApplicationAction
                                              SqualeCommonConstants.MANAGERS_AND_ADMINS,
                                              new Long( applicationConf.getId() ), object, content, false );
 
-            // On recharge les profils de l'utilisateur
-            ActionUtils.refreshUser( pRequest );
-            // On place un message de confirmation de la purge
-            ActionMessage message = new ActionMessage( "info.purge_application", applicationConf.getName() );
-            errors.add( ActionMessages.GLOBAL_MESSAGE, message );
-            saveMessages( pRequest, errors );
-            // On redirige vers la page de fin de purge dépendant du statut de l'application et de l'utilisateurs
-            // lors de la suppression
-            LogonBean user = (LogonBean) pRequest.getSession().getAttribute( WConstants.USER_KEY );
-            if ( ApplicationBO.IN_CREATION == form.getStatus() && user.isAdmin() )
-            {
-                forward = pMapping.findForward( "ack_application_end_purge" );
-            }
-            else
-            {
-                forward = pMapping.findForward( "application_end_purge" );
-            }
+            forward = applicationEndPurge( pMapping, pRequest, errors, form, applicationConf );
         }
         catch ( Exception e )
         {
@@ -1073,6 +1140,44 @@ public class ManageApplicationAction
             handleException( e, errors, pRequest );
             saveMessages( pRequest, errors );
             forward = pMapping.findForward( "total_failure" );
+        }
+        return forward;
+    }
+
+    /**
+     * Common forward for purge
+     * 
+     * @param pMapping mapping
+     * @param pRequest request
+     * @param pErrors errors
+     * @param pForm bean
+     * @param pApplicationConf application configuration (DTO)
+     * @return action forward
+     * @throws JrafEnterpriseException if JRAF error
+     * @throws WTransformerException if Transformation error
+     */
+    private ActionForward applicationEndPurge( ActionMapping pMapping, HttpServletRequest pRequest,
+                                               ActionMessages pErrors, CreateApplicationForm pForm,
+                                               ApplicationConfDTO pApplicationConf )
+        throws JrafEnterpriseException, WTransformerException
+    {
+        ActionForward forward;
+        // On recharge les profils de l'utilisateur
+        ActionUtils.refreshUser( pRequest );
+        // On place un message de confirmation de la purge
+        ActionMessage message = new ActionMessage( "info.purge_application", pApplicationConf.getName() );
+        pErrors.add( ActionMessages.GLOBAL_MESSAGE, message );
+        saveMessages( pRequest, pErrors );
+        // On redirige vers la page de fin de purge dépendant du statut de l'application et de l'utilisateurs
+        // lors de la suppression
+        LogonBean user = (LogonBean) pRequest.getSession().getAttribute( WConstants.USER_KEY );
+        if ( ApplicationBO.IN_CREATION == pForm.getStatus() && user.isAdmin() )
+        {
+            forward = pMapping.findForward( "ack_application_end_purge" );
+        }
+        else
+        {
+            forward = pMapping.findForward( "application_end_purge" );
         }
         return forward;
     }

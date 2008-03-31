@@ -124,6 +124,8 @@ public class CreateProjectAction
             {
                 forward = pMapping.findForward( "project" );
                 pRequest.getSession().setAttribute( "modification", "true" );
+                // Add an user access for this application
+                addUserAccess( pRequest, Long.parseLong( project.getApplicationId() ) );
             }
             else
             {
@@ -171,7 +173,14 @@ public class CreateProjectAction
             if ( null != project )
             {
                 forward = pMapping.findForward( "project" );
-                pRequest.getSession().removeAttribute( "modification" );
+                if ( null != pRequest.getParameter( "modification" ) )
+                {
+                    pRequest.setAttribute( "modification", "true" );
+                }
+                else
+                {
+                    pRequest.getSession().removeAttribute( "modification" );
+                }
             }
             else
             {
