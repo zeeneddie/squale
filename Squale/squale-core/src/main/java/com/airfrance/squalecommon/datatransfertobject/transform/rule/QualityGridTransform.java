@@ -52,6 +52,20 @@ public class QualityGridTransform
     }
 
     /**
+     * Conversion for name and date
+     * 
+     * @param pQualityGrid grid to convert
+     * @return result of conversion
+     */
+    public static QualityGridDTO bo2DtoLight( QualityGridBO pQualityGrid )
+    {
+        QualityGridDTO result = new QualityGridDTO();
+        result.setUpdateDate( pQualityGrid.getDateOfUpdate() );
+        result.setName( pQualityGrid.getName() );
+        return result;
+    }
+
+    /**
      * Conversion
      * 
      * @param pQualityGrid grille à convertir
