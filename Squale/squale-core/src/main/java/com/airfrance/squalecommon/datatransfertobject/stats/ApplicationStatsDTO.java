@@ -49,12 +49,23 @@ public class ApplicationStatsDTO
     /** Date du dernier accès utilisateur */
     private Date mLastAccess;
 
+    /** Indicate if application is archived (i.e. has no users) */
+    private boolean mArchived;
+
     /**
      * @return false si aucun audit réussis présent dans les n derniers jours
      */
     public boolean isActivatedApplication()
     {
         return mActivatedApplication;
+    }
+
+    /**
+     * @return true if application has no users
+     */
+    public boolean isArchived()
+    {
+        return mArchived;
     }
 
     /**
@@ -159,6 +170,14 @@ public class ApplicationStatsDTO
     public void setActivatedApplication( boolean pActivated )
     {
         mActivatedApplication = pActivated;
+    }
+
+    /**
+     * @param pArchived true if application has no users
+     */
+    public void setArchived( boolean pArchived )
+    {
+        mArchived = pArchived;
     }
 
     /**
