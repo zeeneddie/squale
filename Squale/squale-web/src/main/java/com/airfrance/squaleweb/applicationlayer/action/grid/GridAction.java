@@ -140,9 +140,12 @@ public class GridAction
                 Collection usedGrids = (Collection) ac.execute( "deleteGrids", new Object[] { grids } );
                 if ( usedGrids.size() > 0 )
                 {
-                    // Affichage d'une erreur sir des grilles sont utilisées
+                    // Affichage d'une erreur si des grilles sont utilisées
+                    // avec les noms des grilles non supprimées
                     ActionMessage error = new ActionError( "error.gridUsed" );
                     errors.add( ActionErrors.GLOBAL_ERROR, error );
+                    WActionForm form = WTransformerFactory.objToForm( GridListTransformer.class, usedGrids );
+                    pRequest.getSession().setAttribute( "usedGrids", form );
                 }
                 // On remet à jour la liste des grilles
                 Collection newgrids = (Collection) ac.execute( "getGrids", new Object[] { Boolean.FALSE } );
