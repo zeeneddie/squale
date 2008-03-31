@@ -1,8 +1,10 @@
 package com.airfrance.squalix.tools.compiling.jsp.bean;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.tools.ant.BuildListener;
 
@@ -39,6 +41,11 @@ public class J2eeWSADProject
     private String mClasspath;
 
     /**
+     * Map between generated .java and .jsp path ex: p1.p2.myClass -> /myPath/p1/p2/myClass.jsp
+     */
+    protected Map mGeneratedClassesName = new HashMap();
+
+    /**
      * Chemins vers les JSPs de la forme mJspPaths[i][0] -> chemin absolu du répertoire source jsp d'index i dans les
      * paramétres de configuration mJspPaths[i][1] -> liste des .jsp à compiler du répertoire mJspPaths[i][0]
      */
@@ -57,6 +64,17 @@ public class J2eeWSADProject
     {
         mJspPaths = new Object[0][0];
         mJspDestPath = JAVA_DEST;
+    }
+
+    /**
+     * Add a link
+     * 
+     * @param fullClassName full java className
+     * @param absolutePath jsp absolute path
+     */
+    public void addGeneratedClasseName( String fullClassName, String absolutePath )
+    {
+        mGeneratedClassesName.put( fullClassName, absolutePath );
     }
 
     /**
@@ -139,4 +157,11 @@ public class J2eeWSADProject
         }
     }
 
+    /**
+     * @return map between generated .java and .jsp path
+     */
+    public Map getGeneratedClassesName()
+    {
+        return mGeneratedClassesName;
+    }
 }
