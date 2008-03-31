@@ -6,12 +6,22 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.component.para
 public class StringParameterBO
     extends ProjectParameterBO
 {
-
     /**
      * Constructeur
      */
     public StringParameterBO()
     {
+        this( null );
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param pValue value of string
+     */
+    public StringParameterBO( String pValue )
+    {
+        mValue = pValue;
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Les paramètres des projets
  */
@@ -71,6 +73,9 @@ public class ParametersConstants
 
     /** Les librairies utilisateur eclipse */
     public final static String ECLIPSE_LIBS = "eclipseLibs";
+
+    /** Advanced options for plugin command */
+    public final static String ECLIPSE_ADVANCED_OPTIONS = "advancedOptions";
 
     /** Les répertoire exclus de la compilation */
     public final static String EXCLUDED_DIRS = "excludedDirs";
@@ -211,5 +216,66 @@ public class ParametersConstants
 
     /** Le classpath dans le cas d'un projet java */
     public final static String CLASSPATH = "classpath";
+
+    // ********************* Quality Center extraction task *******
+    /** Entry in parameters map */
+    public final static String QC = "qc";
+
+    /** Path to data base */
+    public final static String QC_URL = "url";
+
+    /** User readonly to access data base */
+    public final static String QC_USER = "user";
+
+    /** Password */
+    public final static String QC_PASSWORD = "password";
+
+    /** Database name */
+    public final static String QC_DB_NAME = "dbName";
+
+    /** Admin database name */
+    public final static String QC_ADMIN_DB_NAME = "dbAdminName";
+
+    /** Prefix database name */
+    public final static String QC_PREFIX_DB_NAME = "dbPrefixName";
+
+    /** Date of last version */
+    public final static String QC_LAST_DATE = "lastDate";
+
+    /** Date of previous version */
+    public final static String QC_PREVIOUS_DATE = "prevDate";
+
+    /** format de date */
+    public static final SimpleDateFormat QC_DATE_FORMAT = new SimpleDateFormat( "dd/MM/yyyy" );
+
+    /** Included requirements */
+    public final static String QC_INCLUDED_REQ = "incReq";
+
+    /** Included TestPlan */
+    public final static String QC_INCLUDED_TEST_PLAN = "incTestPlan";
+
+    /** Included TestLab */
+    public final static String QC_INCLUDED_TEST_LAB = "incTestLab";
+
+    /** Covered requirements states */
+    public final static String QC_REQ_COVERED = "coveredReq";
+
+    /** Passed tests states */
+    public final static String QC_TEST_PASSED = "passedTest";
+
+    /** Passed steps states */
+    public final static String QC_STEP_PASSED = "passedStep";
+
+    /** Ok runs states */
+    public final static String QC_RUN_OK = "okRun";
+
+    /** Closed defects states */
+    public final static String QC_CLOSED_DEFECT = "closedDefect";
+
+    /** Opened requirements states */
+    public final static String QC_OPENED_REQ = "openedReq";
+
+    /** To validated requirements states */
+    public final static String QC_TO_VALIDATE_REQ = "toValidatedReq";
 
 }
