@@ -35,6 +35,7 @@ import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationLi
 import com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectListForm;
 import com.airfrance.squaleweb.applicationlayer.tracker.Tracker;
 import com.airfrance.squaleweb.applicationlayer.tracker.TrackerStructure;
+import com.airfrance.squaleweb.resources.WebMessages;
 import com.airfrance.squaleweb.transformer.ApplicationListTransformer;
 import com.airfrance.squaleweb.transformer.ProjectListTransformer;
 import com.airfrance.squaleweb.util.ExceptionWrapper;
@@ -640,7 +641,7 @@ public abstract class BaseDispatchAction
             }
             // si on a pu récupérer l'application, on affecte la variable
             // pour pouvoir récupérer les projets
-            String newAppliId = appliId; 
+            String newAppliId = appliId;
             if ( appliDTO != null )
             {
                 newAppliId = "" + appliDTO.getID();
@@ -943,4 +944,26 @@ public abstract class BaseDispatchAction
         pRequest.getSession().setAttribute( SqualeWebConstants.TOP_KEY, topMenu );
     }
 
+    /**
+     * Add an user access to the application with id <code>pAppliId</code>
+     * 
+     * @param pRequest request
+     * @param pAppliId id of application
+     * @throws JrafEnterpriseException if error
+     */
+    public void addUserAccess( HttpServletRequest pRequest, long pAppliId )
+        throws JrafEnterpriseException
+    {
+        // If the user is not a SQUALE administrator,
+        // we save access
+        LogonBean user = (LogonBean) getWILogonBean( pRequest );
+        if ( !user.isAdmin() )
+        {
+            String matricule = pRequest.getRemoteUser();
+            Integer maxAccesses =
+                new Integer( Integer.parseInt( WebMessages.getString( pRequest, "application.max.accesses" ) ) );
+            Object[] accessParams = new Object[] { new Long( pAppliId ), matricule, maxAccesses };
+            AccessDelegateHelper.getInstance( "ApplicationAdmin" ).execute( "addUserAccess", accessParams );
+        }
+    }
 }
