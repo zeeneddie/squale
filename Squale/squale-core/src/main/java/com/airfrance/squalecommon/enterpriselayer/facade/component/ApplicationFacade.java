@@ -1,5 +1,3 @@
-//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\facade\\ApplicationFacade.java
-
 package com.airfrance.squalecommon.enterpriselayer.facade.component;
 
 import java.util.ArrayList;
@@ -26,6 +24,7 @@ import com.airfrance.squalecommon.daolayer.component.ApplicationDAOImpl;
 import com.airfrance.squalecommon.daolayer.component.AuditDAOImpl;
 import com.airfrance.squalecommon.daolayer.profile.ProfileDAOImpl;
 import com.airfrance.squalecommon.daolayer.profile.UserDAOImpl;
+import com.airfrance.squalecommon.daolayer.result.SqualeReferenceDAOImpl;
 import com.airfrance.squalecommon.datatransfertobject.component.ApplicationConfDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
@@ -37,6 +36,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Audit
 import com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.result.SqualeReferenceBO;
 import com.airfrance.squalecommon.enterpriselayer.facade.FacadeMessages;
 import com.airfrance.squalecommon.util.messages.CommonMessages;
 
@@ -214,9 +214,9 @@ public class ApplicationFacade
             // Création d'une session locale si besoin
             if ( pSession == null )
             {
-                //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
             }
             // Initialisation des DAO
             ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
@@ -490,9 +490,9 @@ public class ApplicationFacade
 
             if ( pSession == null )
             {
-                //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
             }
 
             ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
@@ -627,9 +627,9 @@ public class ApplicationFacade
             if ( pSession == null )
             {
                 // si aucune session, on en récupère une
-                //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
             }
             // Récupération d'une instance de ApplicationDAOImpl
             ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
@@ -694,9 +694,9 @@ public class ApplicationFacade
         {
             if ( pSession == null )
             {
-                //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
             }
 
             // Initialisation des DAO
@@ -875,9 +875,9 @@ public class ApplicationFacade
 
             if ( pSession == null )
             {
-                //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
             }
 
             ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
@@ -924,9 +924,9 @@ public class ApplicationFacade
             if ( pSession == null )
             {
                 // si aucune session n'est passée
-                //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
             }
             // transformation du ApplicationConfDTO en ApplicationBO
             applicationBO = ApplicationConfTransform.dto2Bo( pApplicationConf );
@@ -1039,30 +1039,26 @@ public class ApplicationFacade
 
     /**
      * @param pSession la session
-     * @param pApplications les applications de l'utilisateur
+     * @param pApplicationId application accessed
      * @param pMatricule le matricule de l'utilisateur
      * @param maxSize le nombre max d'accès à sauvegarder
      * @throws JrafDaoException si erreur
      */
-    public static void addUserAccess( ISession pSession, Collection pApplications, String pMatricule, Integer maxSize )
+    public static void addUserAccess( ISession pSession, Long pApplicationId, String pMatricule, Integer maxSize )
         throws JrafDaoException
     {
         // Initialisation du DAO
         ApplicationDAOImpl appliDAO = ApplicationDAOImpl.getInstance();
         ApplicationBO appliBO = null;
-        for ( Iterator it = pApplications.iterator(); it.hasNext(); )
-        {
-            Long appliId = new Long( ( (ComponentDTO) it.next() ).getID() );
-            // On récupère l'application
-            appliBO = (ApplicationBO) appliDAO.get( pSession, appliId );
-            if ( null != appliBO && appliBO.getStatus() == ApplicationBO.VALIDATED )
-            { // code défensif
-                // On ajoute l'accès utilisateur
-                UserAccessBO userAccess = new UserAccessBO( pMatricule, Calendar.getInstance().getTime() );
-                appliBO.addUserAccess( userAccess, maxSize.intValue() );
-                // On sauvegarde l'application
-                appliDAO.save( pSession, appliBO );
-            }
+        // On récupère l'application
+        appliBO = (ApplicationBO) appliDAO.get( pSession, pApplicationId );
+        if ( null != appliBO && appliBO.getStatus() == ApplicationBO.VALIDATED )
+        { // code défensif
+            // On ajoute l'accès utilisateur
+            UserAccessBO userAccess = new UserAccessBO( pMatricule, Calendar.getInstance().getTime() );
+            appliBO.addUserAccess( userAccess, maxSize.intValue() );
+            // On sauvegarde l'application
+            appliDAO.save( pSession, appliBO );
         }
     }
 
@@ -1098,6 +1094,77 @@ public class ApplicationFacade
         {
             FacadeHelper.closeSession( session, ApplicationFacade.class.getName() + ".updateLastModifParams" );
         }
-
     }
+
+    /**
+     * Hide an application for not admin users without delete it physically: - remove users - if it's public, becomes
+     * private - disactive audits - delete current not attempted audits - set public status in repository
+     * 
+     * @param pApplicationConf application to hide
+     * @param pSession hibernate session
+     * @throws JrafEnterpriseException if error
+     */
+    public static void hideApplication( ApplicationConfDTO pApplicationConf, ISession pSession )
+        throws JrafEnterpriseException
+    {
+
+        // Initialisation
+        ApplicationBO appliBO = null; // application to delete
+        Long appliId = new Long( pApplicationConf.getId() ); // application id
+        try
+        {
+            if ( pSession == null )
+            {
+                pSession = PERSISTENTPROVIDER.getSession();
+            }
+            ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
+            // Load application from database
+            appliBO = (ApplicationBO) applicationDAO.get( pSession, appliId );
+            if ( appliBO != null )
+            {
+                // remove users
+                purgeUsers( pSession, appliBO, new ArrayList( 0 ) );
+                // set public status to private
+                appliBO.setPublic( false );
+                // Disactive audits
+                appliBO.setAuditFrequency( -1 );
+                // save modification
+                applicationDAO.save( pSession, appliBO );
+                // delete not attempted audits
+                AuditDAOImpl auditDAO = AuditDAOImpl.getInstance();
+                List auditsToDelete =
+                    auditDAO.findWhereComponent( pSession, appliBO.getId(), null, null, AuditBO.ALL_TYPES,
+                                                 AuditBO.NOT_ATTEMPTED );
+                for ( Iterator it = auditsToDelete.iterator(); it.hasNext(); )
+                {
+                    auditDAO.remove( pSession, (AuditBO) it.next() );
+                }
+                // If public audit exists in repository, set to private
+                SqualeReferenceDAOImpl refDAO = SqualeReferenceDAOImpl.getInstance();
+                Collection refs = refDAO.findReferencesByAppliName( pSession, appliBO.getName() );
+                for ( Iterator it = refs.iterator(); it.hasNext(); )
+                {
+                    SqualeReferenceBO ref = (SqualeReferenceBO) it.next();
+                    if ( ref.getPublic() )
+                    {
+                        ref.setPublic( false );
+                        refDAO.save( pSession, ref );
+                    }
+                }
+            }
+            else
+            {
+                LOG.error( FacadeMessages.getString( "facade.exception.applicationfacade.hide.applinull" ) );
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, ApplicationFacade.class.getName() + ".hideApplication" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( pSession, ApplicationFacade.class.getName() + ".hideApplication" );
+        }
+    }
+
 }

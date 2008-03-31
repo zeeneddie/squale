@@ -127,6 +127,7 @@ public class UserFacade
             session = PERSISTENTPROVIDER.getSession();
 
             UserDAOImpl userDAO = UserDAOImpl.getInstance();
+            ProfileDAOImpl profileDAO = ProfileDAOImpl.getInstance();
 
             // traitement different si on initialise l'identifiant dans le UserDTO :
             // si l'id est connu, l'utilisateur est déjà authentifié, donc pas besoin de vérifier
@@ -149,6 +150,15 @@ public class UserFacade
             {
                 userBO = createDefaultUser( session, pUser.getMatricule(), pAdmin );
             }
+            else
+            {
+                // We update the user profil (case of non admin gest who becomes an admin later)
+                if ( pAdmin.booleanValue() && !ProfileBO.ADMIN_PROFILE_NAME.equals( userBO.getDefaultProfile() ) )
+                {
+                    userBO.setDefaultProfile( profileDAO.loadByKey( session, ProfileBO.ADMIN_PROFILE_NAME ) );
+                    userDAO.save( session, userBO );
+                }
+            }
 
             // transformation du UserBO en UserDTO
             userDTO = UserTransform.bo2Dto( userBO );
@@ -169,9 +179,8 @@ public class UserFacade
     }
 
     /**
-     * This method do the search of a user by his identifier and his password 
-     * This method return in a userDTO all information concerning the user who 
-     * corresponding to the identifier and the password. if there is no user 
+     * This method do the search of a user by his identifier and his password This method return in a userDTO all
+     * information concerning the user who corresponding to the identifier and the password. if there is no user
      * corresponding, the method return a null userDTO.
      * 
      * @param pUser The userDTO with the identifier and the password inside
