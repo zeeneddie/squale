@@ -220,6 +220,8 @@ public class AuditAction
                 {
                     forward = pMapping.findForward( "application" );
                 }
+                // In all cases, add user access for the application
+                addUserAccess( pRequest, applicationId.longValue() );
             }
         }
         catch ( Exception e )
