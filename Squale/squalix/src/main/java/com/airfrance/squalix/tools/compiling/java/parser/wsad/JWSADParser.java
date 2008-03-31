@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -466,50 +467,66 @@ public class JWSADParser
      * @param pManifest le manifest
      * @param pBlock le block à trouver
      * @param pMethod la méthode à appeler pour chaque ligne trouvée
-     * @throws Exception si erreur
+     * @throws ConfigurationException si erreur
      */
     private void parseManifest( JWSADProject pProject, File pManifest, String pBlock, Method pMethod )
-        throws Exception
+        throws ConfigurationException
     {
-        // On récupère toutes les valeurs (commence par un espace et se termine par un espace)
-        BufferedReader reader = new BufferedReader( new FileReader( pManifest ) );
-        String line = reader.readLine();
-        String plugin = "";
+        try
+        {
+            // On récupère toutes les valeurs (commence par un espace et se termine par un espace)
+            BufferedReader reader = new BufferedReader( new FileReader( pManifest ) );
+            String line = reader.readLine();
+            String plugin = "";
 
-        while ( null != line && !line.startsWith( pBlock ) )
-        {
-            // on parse jusqu'à trouver la partie qui nous intéresse
-            line = reader.readLine();
-        }
-        if ( null != line )
-        {
-            boolean stop = !line.endsWith( "," );
-            // On récupère chaque plugin du Require-Bundle
-            line = line.replaceFirst( pBlock + ": ", "" );
-            String[] plugins = line.split( "," );
-            for ( int i = 0; i < plugins.length; i++ )
+            while ( null != line && !line.startsWith( pBlock ) )
             {
-                pMethod.invoke( this, new Object[] { pProject, plugins[i].trim() } );
+                // on parse jusqu'à trouver la partie qui nous intéresse
+                line = reader.readLine();
             }
-            line=reader.readLine();
-            while ( null != line && !stop )
+            if ( null != line )
             {
-                if ( line.endsWith( "," ) )
+                boolean stop = !line.endsWith( "," );
+                // On récupère chaque plugin du Require-Bundle
+                line = line.replaceFirst( pBlock + ": ", "" );
+                String[] plugins = line.split( "," );
+                for ( int i = 0; i < plugins.length; i++ )
                 {
-                    plugins = line.split( "," );
-                    for ( int i = 0; i < plugins.length; i++ )
+                    pMethod.invoke( this, new Object[] { pProject, plugins[i].trim() } );
+                }
+                line = reader.readLine();
+                while ( null != line && !stop )
+                {
+                    if ( line.endsWith( "," ) )
                     {
-                        pMethod.invoke( this, new Object[] { pProject, plugins[i].trim() } );
+                        plugins = line.split( "," );
+                        for ( int i = 0; i < plugins.length; i++ )
+                        {
+                            pMethod.invoke( this, new Object[] { pProject, plugins[i].trim() } );
+                        }
                     }
+                    else
+                    {
+                        stop = true;
+                        pMethod.invoke( this, new Object[] { pProject, line.trim() } );
+                    }
+                    line = reader.readLine();
                 }
-                else
-                {
-                    stop = true;
-                    pMethod.invoke( this, new Object[] { pProject, line.trim() } );
-                }
-                line=reader.readLine();
             }
         }
+        catch ( IOException ioe )
+        {
+            throw new ConfigurationException( ioe.getMessage() );
+        }
+        catch ( InvocationTargetException ite )
+        {
+            throw new ConfigurationException( ite.getTargetException().getMessage() );
+        }
+        catch ( IllegalAccessException iae )
+        {
+            throw new ConfigurationException( iae.getMessage() );
+        }
+
     }
 
     /**
@@ -885,8 +902,10 @@ public class JWSADParser
             String replacePath = ( pProject.getPath() + "/" + pPath ).replaceAll( "//", "/" );
             for ( int i = 0; null != pProject.getExcludedDirs() && i < pProject.getExcludedDirs().size(); i++ )
             {
-                String currentEx = ( (String) pProject.getExcludedDirs().get( i ) ).replaceAll( "//", "/" );
-                currentEx = currentEx.replaceFirst( replacePath + "/*", "" );
+                // On récupère le répertoire exclu et on lui rajoute un "/" en bout de nom pour spécifier la fin
+                // du nom
+                String currentEx = ( (String) pProject.getExcludedDirs().get( i ) + "/" ).replaceAll( "//", "/" );
+                currentEx = currentEx.replaceFirst( replacePath + "/+", "" );
                 // Si il s'agit d'un répertoire fils du répertoire source, on l'ajoute dans les exclusions
                 // on vérifie donc si il ne s'ahit pas du répertoire source lui-même (currentEx.length() > 0)
                 // et que ce répertoire exclu n'est pas un parent (!replacePath.startsWith(currentEx))
