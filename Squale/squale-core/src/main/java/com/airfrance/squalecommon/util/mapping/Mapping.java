@@ -152,6 +152,10 @@ public class Mapping
         measures.put(
                       "extbugtrackingqc.project",
                       com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.ExtBugTrackingMetricsBO.class );
+        // Test manager QC
+        measures.put(
+                      "testmanagerqc.project",
+                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.qc.ExtTestManagerQCMetricsBO.class );
     }
 
     /**
