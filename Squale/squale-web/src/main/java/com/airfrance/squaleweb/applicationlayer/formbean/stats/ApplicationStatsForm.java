@@ -11,6 +11,9 @@ public class ApplicationStatsForm
     /** Indique si l'application est validée */
     private boolean mValidatedApplication;
 
+    /** True for archived application (= application without users) */
+    private String mArchivedApplication;
+
     /** Indique si l'application est validée sous forme de chaîne */
     private String mValidatedApplicationStr;
 
@@ -56,6 +59,14 @@ public class ApplicationStatsForm
     public String getActivatedApplication()
     {
         return mActivatedApplication;
+    }
+
+    /**
+     * @return X if application has users
+     */
+    public String getArchivedApplication()
+    {
+        return mArchivedApplication;
     }
 
     /**
@@ -160,6 +171,14 @@ public class ApplicationStatsForm
     public void setActivatedApplication( String pActivated )
     {
         mActivatedApplication = pActivated;
+    }
+
+    /**
+     * @param pArchived X if application has users
+     */
+    public void setArchivedApplication( String pArchived )
+    {
+        mArchivedApplication = pArchived;
     }
 
     /**
