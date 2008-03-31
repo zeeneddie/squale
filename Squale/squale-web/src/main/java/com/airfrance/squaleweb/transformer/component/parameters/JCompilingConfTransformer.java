@@ -98,49 +98,67 @@ public class JCompilingConfTransformer
 
         if ( null != eclipseParams )
         {
-            StringParameterDTO isEclipseCompilation =
-                (StringParameterDTO) eclipseParams.getParameters().get( ParametersConstants.ECLIPSE_COMPILATION );
-            if ( null != isEclipseCompilation && isEclipseCompilation.getValue().equals( "false" ) )
+            eclipseParamsObjToForm( eclipseParams, jCompilingForm );
+        }
+    }
+
+    /**
+     * Set eclipse parameters in form PRECONDITION : <code>eclipseParams</code> is not null
+     * 
+     * @param eclipseParams eclipse parameters
+     * @param jCompilingForm form
+     */
+    private void eclipseParamsObjToForm( MapParameterDTO eclipseParams, JCompilingForm jCompilingForm )
+    {
+        StringParameterDTO isEclipseCompilation =
+            (StringParameterDTO) eclipseParams.getParameters().get( ParametersConstants.ECLIPSE_COMPILATION );
+        if ( null != isEclipseCompilation && isEclipseCompilation.getValue().equals( "false" ) )
+        {
+            jCompilingForm.setEclipseCompilation( false );
+        }
+        else
+        {
+            // On compilation avec Eclipse
+            // Les variables eclipse
+            MapParameterDTO eclipseVars =
+                (MapParameterDTO) eclipseParams.getParameters().get( ParametersConstants.ECLIPSE_VARS );
+            List vars = new ArrayList();
+            if ( null != eclipseVars )
             {
-                jCompilingForm.setEclipseCompilation( false );
+                for ( Iterator it = eclipseVars.getParameters().keySet().iterator(); it.hasNext(); )
+                {
+                    String varName = (String) it.next();
+                    vars.add( new EclipseVarForm(
+                                                  varName,
+                                                  ( (StringParameterDTO) eclipseVars.getParameters().get( varName ) ).getValue() ) );
+                }
             }
-            else
+            jCompilingForm.setEclipseVars( vars );
+            // Les librairies eclipse
+            MapParameterDTO eclipseLibs =
+                (MapParameterDTO) eclipseParams.getParameters().get( ParametersConstants.ECLIPSE_LIBS );
+            List libs = new ArrayList();
+            if ( null != eclipseLibs )
             {
-                // On compilation avec Eclipse
-                // Les variables eclipse
-                MapParameterDTO eclipseVars =
-                    (MapParameterDTO) eclipseParams.getParameters().get( ParametersConstants.ECLIPSE_VARS );
-                List vars = new ArrayList();
-                if ( null != eclipseVars )
+                for ( Iterator it = eclipseLibs.getParameters().keySet().iterator(); it.hasNext(); )
                 {
-                    for ( Iterator it = eclipseVars.getParameters().keySet().iterator(); it.hasNext(); )
+                    String libName = (String) it.next();
+                    ListParameterDTO libsParams = ( (ListParameterDTO) eclipseLibs.getParameters().get( libName ) );
+                    String[] libsTab = new String[libsParams.getParameters().size()];
+                    for ( int l = 0; l < libsParams.getParameters().size(); l++ )
                     {
-                        String varName = (String) it.next();
-                        vars.add( new EclipseVarForm(
-                                                      varName,
-                                                      ( (StringParameterDTO) eclipseVars.getParameters().get( varName ) ).getValue() ) );
+                        libsTab[l] = ( (StringParameterDTO) libsParams.getParameters().get( l ) ).getValue();
                     }
+                    libs.add( new EclipseUserLibForm( libName, libsTab ) );
                 }
-                jCompilingForm.setEclipseVars( vars );
-                // Les librairies eclipse
-                MapParameterDTO eclipseLibs =
-                    (MapParameterDTO) eclipseParams.getParameters().get( ParametersConstants.ECLIPSE_LIBS );
-                List libs = new ArrayList();
-                if ( null != eclipseLibs )
-                {
-                    for ( Iterator it = eclipseLibs.getParameters().keySet().iterator(); it.hasNext(); )
-                    {
-                        String libName = (String) it.next();
-                        ListParameterDTO libsParams = ( (ListParameterDTO) eclipseLibs.getParameters().get( libName ) );
-                        String[] libsTab = new String[libsParams.getParameters().size()];
-                        for ( int l = 0; l < libsParams.getParameters().size(); l++ )
-                        {
-                            libsTab[l] = ( (StringParameterDTO) libsParams.getParameters().get( l ) ).getValue();
-                        }
-                        libs.add( new EclipseUserLibForm( libName, libsTab ) );
-                    }
-                    jCompilingForm.setEclipseLibs( libs );
-                }
+                jCompilingForm.setEclipseLibs( libs );
+            }
+            // Advanced options
+            StringParameterDTO advancedOptions =
+                (StringParameterDTO) eclipseParams.getParameters().get( ParametersConstants.ECLIPSE_ADVANCED_OPTIONS );
+            if ( null != advancedOptions )
+            {
+                jCompilingForm.setAdvancedOptions( advancedOptions.getValue() );
             }
         }
     }
@@ -314,23 +332,7 @@ public class JCompilingConfTransformer
         dialectParam.setValue( jCompilingForm.getDialect() );
         mapParameter.getParameters().put( ParametersConstants.DIALECT, dialectParam );
         // excludedDirs
-        String[] excludedDirsTab = SqualeWebActionUtils.cleanValues( jCompilingForm.getExcludeDirectories() );
-        ListParameterDTO excludedDirsList = new ListParameterDTO();
-        List paramsList = new ArrayList();
-        // On remplit la liste avec les données du tableau
-        for ( int i = 0; i < excludedDirsTab.length; i++ )
-        {
-            StringParameterDTO strParam = new StringParameterDTO();
-            strParam.setValue( excludedDirsTab[i] );
-            paramsList.add( strParam );
-        }
-        excludedDirsList.setParameters( paramsList );
-        mapParameter.getParameters().put( ParametersConstants.EXCLUDED_DIRS, excludedDirsList );
-        // si il n'y a plus de répertoires exclus, on supprime le paramètre correspondant
-        if ( excludedDirsTab.length == 0 )
-        {
-            mapParameter.getParameters().remove( ParametersConstants.EXCLUDED_DIRS );
-        }
+        excludeDirsFormToObj( SqualeWebActionUtils.cleanValues( jCompilingForm.getExcludeDirectories() ), mapParameter );
         // wsad ou ant
         List compilationRules = jCompilingForm.getCompilationRules();
         boolean isAnt = false;
@@ -386,6 +388,32 @@ public class JCompilingConfTransformer
     }
 
     /**
+     * Set excludedDirs in the parameters map
+     * 
+     * @param excludedDirsTab excluded directories paths
+     * @param mapParameter project parameters
+     */
+    private void excludeDirsFormToObj( String[] excludedDirsTab, MapParameterDTO mapParameter )
+    {
+        ListParameterDTO excludedDirsList = new ListParameterDTO();
+        List paramsList = new ArrayList();
+        // On remplit la liste avec les données du tableau
+        for ( int i = 0; i < excludedDirsTab.length; i++ )
+        {
+            StringParameterDTO strParam = new StringParameterDTO();
+            strParam.setValue( excludedDirsTab[i] );
+            paramsList.add( strParam );
+        }
+        excludedDirsList.setParameters( paramsList );
+        mapParameter.getParameters().put( ParametersConstants.EXCLUDED_DIRS, excludedDirsList );
+        // si il n'y a plus de répertoires exclus, on supprime le paramètre correspondant
+        if ( excludedDirsTab.length == 0 )
+        {
+            mapParameter.getParameters().remove( ParametersConstants.EXCLUDED_DIRS );
+        }
+    }
+
+    /**
      * Modifie les paramètres eclipse
      * 
      * @param jCompilingForm le formulaire
@@ -429,6 +457,13 @@ public class JCompilingConfTransformer
                     libsMap.getParameters().put( userLibForm.getName(), libsDTO );
                 }
                 eclipseParams.getParameters().put( ParametersConstants.ECLIPSE_LIBS, libsMap );
+            }
+            // Advanced options
+            if ( jCompilingForm.getAdvancedOptions().length() > 0 )
+            {
+                StringParameterDTO advancedOptions = new StringParameterDTO();
+                advancedOptions.setValue( jCompilingForm.getAdvancedOptions().trim() );
+                eclipseParams.getParameters().put( ParametersConstants.ECLIPSE_ADVANCED_OPTIONS, advancedOptions );
             }
         }
         eclipseParams.getParameters().put( ParametersConstants.ECLIPSE_COMPILATION, isEclipseCompilation );

@@ -77,9 +77,14 @@ public class PmdConfTransformer
     {
         PmdForm pmdForm = (PmdForm) pForm;
         MapParameterDTO projectParams = (MapParameterDTO) pObject[0];
-        MapParameterDTO pmdParams = (MapParameterDTO) projectParams.getParameters().get( ParametersConstants.PMD );
         TaskDTO task = (TaskDTO) pObject[1];
         Collection versions = (Collection) pObject[2];
+        MapParameterDTO pmdParams = (MapParameterDTO) projectParams.getParameters().get( ParametersConstants.PMD );
+        if ( pmdForm.isNewConf() )
+        {
+            // First configuration --> get default rulesets values
+            pmdParams = getOrBuildPmdParams( task, projectParams );
+        }
         // On construit la liste des rulesets pour le java et le jsp
         HashSet javaSet = new HashSet();
         HashSet jspSet = new HashSet();
@@ -125,6 +130,57 @@ public class PmdConfTransformer
                 }
             }
         }
+    }
+
+    /**
+     * @param pTask pmd task
+     * @param projectParams project parameters
+     * @return pmd's parameters set by user or the default ones
+     */
+    private MapParameterDTO getOrBuildPmdParams( TaskDTO pTask, MapParameterDTO projectParams )
+    {
+        MapParameterDTO pmdParams = (MapParameterDTO) projectParams.getParameters().get( ParametersConstants.PMD );
+        if ( null == pmdParams )
+        {
+            pmdParams = new MapParameterDTO();
+        }
+        if ( null == pmdParams.getParameters().get( ParametersConstants.PMD_JAVA_RULESET_NAME ) )
+        {
+            StringParameterDTO param = new StringParameterDTO( getDefaultRuleSet( pTask, "java" ) );
+            if ( param.getValue().length() > 0 )
+            {
+                pmdParams.getParameters().put( ParametersConstants.PMD_JAVA_RULESET_NAME, param );
+            }
+        }
+        if ( null == pmdParams.getParameters().get( ParametersConstants.PMD_JSP_RULESET_NAME ) )
+        {
+            StringParameterDTO param = new StringParameterDTO( getDefaultRuleSet( pTask, "jsp" ) );
+            if ( param.getValue().length() > 0 )
+            {
+                pmdParams.getParameters().put( ParametersConstants.PMD_JSP_RULESET_NAME, param );
+            }
+        }
+        projectParams.getParameters().put( ParametersConstants.PMD, pmdParams );
+        return pmdParams;
+    }
+
+    /**
+     * @param pTask task
+     * @param pLanguage java or jsp language
+     * @return java ruleset default value
+     */
+    private String getDefaultRuleSet( TaskDTO pTask, String pLanguage )
+    {
+        String result = "";
+        for ( Iterator it = pTask.getParameters().iterator(); it.hasNext() && ( result.length() == 0 ); )
+        {
+            TaskParameterDTO param = (TaskParameterDTO) it.next();
+            if ( param.getName().equals( pLanguage + "ruleset" ) )
+            {
+                result = param.getValue();
+            }
+        }
+        return result;
     }
 
     /**

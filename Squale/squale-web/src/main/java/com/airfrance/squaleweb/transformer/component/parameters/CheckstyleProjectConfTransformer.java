@@ -6,6 +6,8 @@ import java.util.Iterator;
 
 import com.airfrance.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
+import com.airfrance.squalecommon.datatransfertobject.config.TaskDTO;
+import com.airfrance.squalecommon.datatransfertobject.config.TaskParameterDTO;
 import com.airfrance.squalecommon.datatransfertobject.rulechecking.CheckstyleDTO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.CheckstyleForm;
@@ -43,6 +45,7 @@ public class CheckstyleProjectConfTransformer
     {
         int index = 0;
         MapParameterDTO projectParamsDTO = (MapParameterDTO) pObject[index++];
+        TaskDTO task = (TaskDTO) pObject[index++];
         Collection versions = (Collection) pObject[index++];
 
         CheckstyleForm form = (CheckstyleForm) pForm;
@@ -51,6 +54,15 @@ public class CheckstyleProjectConfTransformer
         if ( params != null )
         {
             form.setSelectedRuleSet( params.getValue().trim() );
+        }
+        else if ( form.isNewConf() )
+        {
+            params = new StringParameterDTO( getDefaultRuleSet( task ) );
+            if ( params.getValue().length() > 0 )
+            {
+                projectParamsDTO.getParameters().put( ParametersConstants.CHECKSTYLE_RULESET_NAME, params );
+                form.setSelectedRuleSet( params.getValue() );
+            }
         }
 
         // Mettre la liste des versions disponibles dans la formbean
@@ -62,6 +74,24 @@ public class CheckstyleProjectConfTransformer
             set.add( ( (CheckstyleDTO) it.next() ).getName() );
         }
         form.setVersions( (String[]) set.toArray( new String[] {} ) );
+    }
+
+    /**
+     * @param pTask checkstyle task
+     * @return default ruleset
+     */
+    private String getDefaultRuleSet( TaskDTO pTask )
+    {
+        String result = "";
+        for ( Iterator it = pTask.getParameters().iterator(); it.hasNext() && ( result.length() == 0 ); )
+        {
+            TaskParameterDTO param = (TaskParameterDTO) it.next();
+            if ( param.getName().equals( "ruleset" ) )
+            {
+                result = param.getValue();
+            }
+        }
+        return result;
     }
 
     /**
