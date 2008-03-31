@@ -85,11 +85,11 @@ if (null == applisStatsParamPanel) {
 							</logic:equal>
 						</af:col>
 						<af:col key="stats.state.col" property="lastAuditIsTerminated"
-							sortable="true">
-						</af:col>
+							sortable="true" />
 						<af:col key="stats.active.col" property="activatedApplication"
-							sortable="true">
-						</af:col>
+							sortable="true" />
+                        <af:col key="stats.archived.col" property="archivedApplication"
+                            sortable="true" />
 						<af:col key="stats.last_audit_date.col"
 							property="lastTerminatedAuditDate"/>
 						<af:col key="stats.last_audit_duration.col"
