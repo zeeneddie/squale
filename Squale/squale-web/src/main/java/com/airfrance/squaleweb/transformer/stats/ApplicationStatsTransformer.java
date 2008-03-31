@@ -48,6 +48,7 @@ public class ApplicationStatsTransformer
         // On modifie tous les attributs du fromulaire renseigné par le DTO
         // On transforme en String ici pour l'export Excel
         form.setActivatedApplication( WebMessages.getString( locale, "stats.active." + dto.isActivatedApplication() ) );
+        form.setArchivedApplication( WebMessages.getString( locale, "stats.archived." + dto.isArchived() ) );
         form.setApplicationName( dto.getApplicationName() );
         form.setFirstTerminatedAuditDate( getFormattedDate( dto.getFirstTerminatedAuditDate(), locale ) );
         form.setLastAccess( getFormattedDate( dto.getLastAccess(), locale ) );
