@@ -109,7 +109,9 @@
 		<form-bean name="bugTrackingQCForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.externalTask.BugTrackingQCForm">
 		</form-bean>
 		<form-bean name="userLoginForm" type="com.airfrance.squaleweb.applicationlayer.formbean.UserLoginForm">
-		</form-bean>
+		</form-bean>        
+		<form-bean name="testManagerQCForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.externalTask.qc.TestManagerQCForm">
+        </form-bean>
 	</form-beans>
 
 
@@ -594,7 +596,17 @@
 			</forward>
 			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
 			</forward>
-		</action>
+		</action>        
+		<action path="/TestManagerQCTask" input="/jsp/admin/project/add_project_testmanagerqctask_conf.jsp" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction" name="testManagerQCForm" scope="session" parameter="action" validate="false">
+            <forward name="config" path="/jsp/admin/project/add_project_testmanagerqctask_conf.jsp">
+            </forward>
+        </action>
+        <action path="/add_project_testmanagerqctask_config" input="/jsp/admin/project/config_project.jsp" parameter="action" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction" name="testManagerQCForm" scope="session">
+            <forward name="configure" path="/jsp/admin/project/config_project.jsp">
+            </forward>
+            <forward name="failure" path="/jsp/admin/project/config_project.jsp">
+            </forward>
+        </action>
 		<action path="/ident" type="com.airfrance.squaleweb.applicationlayer.action.UserLoginAction" parameter="action" name="userLoginForm"  input="/jsp/login.jsp" scope="session" validate="false">
 			<forward name="success" path="/login.do">
 			</forward>

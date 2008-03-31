@@ -67,6 +67,8 @@
 		<component name="purgeAudit" />
 		
 		<component name="purgeApplication" />
+		       
+        <component name="hideApplication" />
 
 	</applicationComponent>
 	
