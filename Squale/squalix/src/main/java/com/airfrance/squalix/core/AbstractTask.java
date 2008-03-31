@@ -395,7 +395,7 @@ public abstract class AbstractTask
                         Messages.getString( "mail.header" ) + Messages.getString( "mail.task.failed.content", infos );
                     String dest = SqualeCommonConstants.ONLY_ADMINS;
                     IMailerProvider mailer = MailerHelper.getMailerProvider();
-                    SqualeCommonUtils.notifyByEmail(mailer, null, dest, null, object, content, false);
+                    SqualeCommonUtils.notifyByEmail( mailer, null, dest, null, object, content, false );
                 }
                 // Pas de conversion InitialMessage -> Message
                 try
@@ -573,25 +573,40 @@ public abstract class AbstractTask
             }
             else
             {
-                // ou un objet plus complexe de type parameter
-                // un simpleStringParameterBO indiquant directement le répertoire
-                if ( pParam instanceof StringParameterBO )
+                // ou une liste de répertoires
+                if ( pParam instanceof List )
                 {
-                    // appel simple de la méthode
-                    mMaxFileSystemSize = calculateRecursiveSize( new File( ( (StringParameterBO) pParam ).getValue() ) );
+                    List list = (List) pParam;
+                    for ( int i = 0; i < list.size(); i++ )
+                    {
+                        // et cumul sur chaque répertoire
+                        mMaxFileSystemSize += calculateRecursiveSize( new File( (String) list.get( i ) ) );
+                    }
                 }
                 else
                 {
-                    // ou une liste de répertoires
-                    if ( pParam instanceof ListParameterBO )
+                    // ou un objet plus complexe de type parameter
+                    // un simpleStringParameterBO indiquant directement le répertoire
+                    if ( pParam instanceof StringParameterBO )
                     {
-                        // récupère la liste des répertoires
-                        List list = ( (ListParameterBO) pParam ).getParameters();
-                        for ( int i = 0; i < list.size(); i++ )
+                        // appel simple de la méthode
+                        mMaxFileSystemSize =
+                            calculateRecursiveSize( new File( ( (StringParameterBO) pParam ).getValue() ) );
+                    }
+                    else
+                    {
+                        // ou une liste de répertoires
+                        if ( pParam instanceof ListParameterBO )
                         {
-                            // et cumul sur chaque répertoire
-                            mMaxFileSystemSize +=
-                                calculateRecursiveSize( new File( ( (StringParameterBO) ( list.get( i ) ) ).getValue() ) );
+                            // récupère la liste des répertoires
+                            List list = ( (ListParameterBO) pParam ).getParameters();
+                            for ( int i = 0; i < list.size(); i++ )
+                            {
+                                // et cumul sur chaque répertoire
+                                mMaxFileSystemSize +=
+                                    calculateRecursiveSize( new File(
+                                                                      ( (StringParameterBO) ( list.get( i ) ) ).getValue() ) );
+                            }
                         }
                     }
                 }
