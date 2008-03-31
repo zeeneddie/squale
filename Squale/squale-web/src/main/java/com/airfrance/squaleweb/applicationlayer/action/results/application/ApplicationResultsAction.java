@@ -78,6 +78,8 @@ public class ApplicationResultsAction
         ActionForward forward;
         try
         {
+            // Add an user access for this application
+            addUserAccess( pRequest, ActionUtils.getCurrentApplication( pRequest ).getId() );
             forward = checkApplication( pMapping, pRequest );
             // Si forward est renseigné, l'application contient un seul projet
             // On redirige donc vers le projet adéquat
@@ -304,9 +306,9 @@ public class ApplicationResultsAction
                                                                           PieChartMaker.DEFAULT_HEIGHT ) );
             // L'image du kiviat
             parameters.put( "kiviatChart", (java.awt.Image) request.getSession().getAttribute( "kiviatChart" ) ); // Le
-                                                                                                                    // nom
-                                                                                                                    // de
-                                                                                                                    // l'utilisateur
+            // nom
+            // de
+            // l'utilisateur
             LogonBean logon = (LogonBean) request.getSession().getAttribute( WConstants.USER_KEY );
             parameters.put( "userName", logon.getMatricule() );
             PDFFactory.generatePDFToHTTPResponse( data, response, "", PDFEngine.JASPERREPORTS );
