@@ -9,10 +9,14 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
+import com.airfrance.squalecommon.datatransfertobject.message.MessagesDTO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import com.airfrance.squalecommon.enterpriselayer.facade.message.MessageFacade;
 import com.airfrance.squalix.tools.compiling.CompilingMessages;
 import com.airfrance.squalix.tools.compiling.java.beans.JWSADProject;
 import com.airfrance.squalix.tools.compiling.java.configuration.EclipseCompilingConfiguration;
@@ -60,6 +64,9 @@ public class EclipseCompiler
     /** Log pour récupérer les répertoires de compilation */
     private static final String OUTPUTS_LOG = "INFO: OUTPUT_DIRS=";
 
+    /** Default advanced options */
+    private static final String DEFAULT_ADVANCED_OPTIONS = "-os win32 -arch x86 -ws win32";
+
     /**
      * Liste des projets eclipse.
      */
@@ -92,22 +99,34 @@ public class EclipseCompiler
     /** L'option -userLibs */
     private String userLibsOption = "";
 
+    /** Advanced eclipse launcher options (like -os, -arch, -ws) */
+    private String advancedOptions = DEFAULT_ADVANCED_OPTIONS;
+
     /**
      * Constructeur.
      * 
      * @param pProjectList liste des projets eclipse à compiler.
      * @param pViewPath le viewPath
-     * @param eclipseVars les variables eclipse définies par l'utilisateur
-     * @param eclipseLibs les librairies eclipse définies par l'utilisateur
+     * @param eclipseParams Eclipse parameters defined by user
      */
-    public EclipseCompiler( List pProjectList, String pViewPath, MapParameterBO eclipseVars, MapParameterBO eclipseLibs )
+    public EclipseCompiler( List pProjectList, String pViewPath, MapParameterBO eclipseParams )
     {
         projectList = pProjectList;
         mViewPath = pViewPath;
         errors = new ArrayList();
         outputDirs = new ArrayList();
-        buildVarsOption( eclipseVars );
-        buildUserLibsOption( eclipseLibs );
+        if ( null != eclipseParams )
+        {
+            buildVarsOption( (MapParameterBO) eclipseParams.getParameters().get( ParametersConstants.ECLIPSE_VARS ) );
+            buildUserLibsOption( (MapParameterBO) eclipseParams.getParameters().get( ParametersConstants.ECLIPSE_LIBS ) );
+            setAdvancedOptions( (StringParameterBO) eclipseParams.getParameters().get(
+                                                                                       ParametersConstants.ECLIPSE_ADVANCED_OPTIONS ) );
+        }
+        else
+        {
+            setAdvancedOptions( null );
+        }
+
     }
 
     /**
@@ -127,6 +146,10 @@ public class EclipseCompiler
         // On parse le fichier de configuration de la compilation eclipse
         EclipseCompilingConfiguration conf = new EclipseCompilingConfiguration();
         conf.parse( new FileInputStream( new File( "config/eclipsecompiling-config.xml" ) ) );
+
+        // On supprime les dossiers dans le cas où l'audit se serait arrêté brutalement.
+        FileUtility.deleteRecursively( new File( conf.getWorkspace() ) );
+        FileUtility.deleteRecursively( conf.getEclipseHome() );
 
         // On crée le workspace si il n'existe pas
         File workspaceDir = new File( conf.getWorkspace() );
@@ -192,7 +215,19 @@ public class EclipseCompiler
             curOption = curOption.replaceAll( "\\[user_libs\\]", userLibsOption );
             curOption = curOption.replaceAll( "\\[workspace\\]", conf.getWorkspace() );
             curOption = curOption.replaceAll( "\\[excluded_patterns\\]", excludedPatterns );
-            command.add( curOption );
+            // Particular case of advanced options which may contain more than one option
+            if ( curOption.matches( "\\[advanced_options\\]" ) )
+            {
+                String[] advancedOptionsTab = advancedOptions.split( " " );
+                for ( int o = 0; o < advancedOptionsTab.length; o++ )
+                {
+                    command.add( advancedOptionsTab[o] );
+                }
+            }
+            else
+            {
+                command.add( curOption );
+            }
         }
 
         // On crée le process
@@ -204,6 +239,47 @@ public class EclipseCompiler
 
         // On demarre le processus et on retoune 0 si l'execution s'est bien déroulée
         return compileProcess.startProcess( this );
+    }
+
+    /**
+     * Set advanced options for launching plugin. Advanced options are necessary to specify os configuration in order to
+     * get plugins linked to OS like org.eclipse.swt.win32.win32.x86_3.2.0.v3232m.jar (see
+     * http://help.eclipse.org/help21/index.jsp?topic=/org.eclipse.platform.doc.user/tasks/running_eclipse.htm)
+     * 
+     * @param advancedOptionsParam advanced options define in project parameters
+     */
+    private void setAdvancedOptions( StringParameterBO advancedOptionsParam )
+    {
+        // Get user parameter if exists
+        if ( null != advancedOptionsParam )
+        {
+            advancedOptions = advancedOptionsParam.getValue();
+        }
+        else
+        {
+            // get key configuration for advanced options
+            try
+            {
+                MessagesDTO webMsg = MessageFacade.getMessages();
+                String advancedKey = webMsg.getMessage( "fr", "eclipse.compilation.advanced.options" );
+                if ( null != advancedKey )
+                {
+                    advancedOptions = advancedKey;
+                }
+                else
+                {
+                    // Log warning for administrator
+                    LOGGER.warn( "Advanced options configuration key (eclipse.compilation.advanced.options ) "
+                        + "is not set!! Reload message.xml file." );
+
+                }
+            }
+            catch ( JrafEnterpriseException e )
+            {
+                // Log warning and take default advanced options
+                LOGGER.warn( "Cannot get advanced options configuration key: " + e.getMessage() );
+            }
+        }
     }
 
     /**
@@ -327,7 +403,13 @@ public class EclipseCompiler
     private String buildSunLibs( String bootClasspath, String dialect )
     {
         StringBuffer libs = new StringBuffer( "" );
-        addCompilingRessources( new File( bootClasspath ), libs );
+        String[] bootClasspathSplitting = bootClasspath.split( ECLIPSE_PATH_SEP );
+        // Parcours du bootclasspath et récupération des .jars et .zip
+        for ( int i = 0; i < bootClasspathSplitting.length; i++ )
+        {
+            addCompilingRessources( new File( bootClasspathSplitting[i].trim() ), libs );
+        }
+
         // On crée le descripteur vers le dossier contenant les jars à ajouter pour la compilation
         StringBuffer path = new StringBuffer( CompilingMessages.getString( "dir.root.java" ) );
         path.append( "/" );
@@ -468,6 +550,24 @@ public class EclipseCompiler
         String[] outputDirsSplitting = pOutputLog.split( ECLIPSE_PATH_SEP );
         for ( int i = 0; i < outputDirsSplitting.length; i++ )
         {
+            // If path name has spaces, we move all classes in an another directory
+            // without spaces (see CkjmTask) and we replace classes directory in tempory classpath
+            if ( outputDirsSplitting[i].indexOf( ' ' ) != -1 )
+            {
+                // List classes
+                File[] classesToMove = new File( outputDirsSplitting[i] ).listFiles();
+                // Change outputdir (unique name to be sure the classes are renamming)
+                String curDir = outputDirsSplitting[i];
+                outputDirsSplitting[i] = ( (JWSADProject) projectList.get( 0 ) ).getDestPath() + i;
+                // Replace it in classpath
+                classpath = classpath.replaceAll( curDir, outputDirsSplitting[i] );
+                File cleanOutputFile = new File( outputDirsSplitting[i] );
+                cleanOutputFile.mkdirs();
+                for ( int f = 0; f < classesToMove.length; f++ )
+                {
+                    classesToMove[f].renameTo( new File( outputDirsSplitting[i], classesToMove[f].getName() ) );
+                }
+            }
             outputDirs.add( outputDirsSplitting[i] );
         }
     }
@@ -477,10 +577,11 @@ public class EclipseCompiler
      * 
      * @param pErrorMessage le message
      * @param pErrorLevel la criticité
+     * @param pNbErrors the number of created errors
      */
-    private void createError( String pErrorMessage, String pErrorLevel, int nbErrors )
+    private void createError( String pErrorMessage, String pErrorLevel, int pNbErrors )
     {
-        if ( nbErrors < MAX_ERRORS )
+        if ( pNbErrors < MAX_ERRORS )
         {
             ErrorBO error = new ErrorBO();
             error.setMessage( pErrorMessage );
