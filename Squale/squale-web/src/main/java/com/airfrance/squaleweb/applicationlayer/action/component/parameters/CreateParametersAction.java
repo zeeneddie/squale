@@ -42,6 +42,11 @@ public class CreateParametersAction
             // Affectation au projet courant
             CreateProjectForm project = (CreateProjectForm) pRequest.getSession().getAttribute( "createProjectForm" );
             pForm.reset( pMapping, pRequest );
+            // Indicate if it's a new project
+            if ( null != pRequest.getSession().getAttribute( "modification" ) )
+            {
+                ( (AbstractParameterForm) pForm ).setNewConf( false );
+            }
             WTransformerFactory.objToForm( ( (AbstractParameterForm) pForm ).getTransformer(), ( (WActionForm) pForm ),
                                            getTransformerParameters( project, pRequest ) );
             // On ajout le nom du formulaire pour pouvoir le récupérer
@@ -137,12 +142,16 @@ public class CreateParametersAction
             CreateProjectForm project = (CreateProjectForm) pRequest.getSession().getAttribute( "createProjectForm" );
             // On supprime toutes les entrées liées à la tâche dans les paramètres du projet
             String[] constants = ( (AbstractParameterForm) pForm ).getParametersConstants();
+            // Modification asked by user so it's not a new configuration
+            ( (AbstractParameterForm) pForm ).setNewConf( false );
             for ( int i = 0; i < constants.length; i++ )
             {
                 project.getParameters().getParameters().remove( constants[i] );
             }
             // On sauvegarde le projet
             new CreateProjectAction().saveProject( pMapping, project, pRequest, pResponse );
+            // Change status for configuration
+            ( (AbstractParameterForm) pForm ).setNewConf( false );
         }
         catch ( Exception e )
         {
