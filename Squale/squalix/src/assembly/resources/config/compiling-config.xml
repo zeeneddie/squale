@@ -6,15 +6,23 @@
 			<separators>
 				<separator name="classpath" value=";" />
 			</separators>
+			<!-- les chemins peuvent être des .jar, .zip ou répertoires -->
 			<bootclasspaths>
-				<bootclasspath version="1.3"
-					path="${BOOTCLASSPATH-1.3}" />
-				<bootclasspath version="1.4"
-					path="${BOOTCLASSPATH-1.4}" />
-				<bootclasspath version="1.5"
-					path="${BOOTCLASSPATH-1.5}" />
-			</bootclasspaths>
+            	<bootclasspath version="1.3">
+            		<lib path="/app/SQUALE/OUTILS/JAVA/1.3.1.03/" />
+            	</bootclasspath>
+            	<bootclasspath version="1.4">
+            		<lib path="/app/SQUALE/OUTILS/JAVA/1.4.0/" />
+            	</bootclasspath>
+            	<bootclasspath version="1.5">
+            		<lib path="/app/SQUALE/OUTILS/JAVA/jdk1.5.0_09/jre/lib" />
+            	</bootclasspath>
+            </bootclasspaths>
 			<default_jdk_version>1_4</default_jdk_version>
+			<!-- 
+            	Chemin de destination des .class
+            	ATTENTION : Le chemin ne doit pas contenir d'espaces (voir la tâche CKJM) 
+            -->
 			<dest_dir>bin/</dest_dir>
 			<required_memory>1024m</required_memory>
 			<eclipse_bundle_path>

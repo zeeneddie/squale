@@ -2,6 +2,11 @@
 
 <!DOCTYPE mockcompiling-configuration  PUBLIC "-//MockCompiling Configuration DTD //EN" "file:../src/config/mockcompiling-config.dtd">
 
+
+<!--
+	Permet d'indiquer le répertoire dans lequel seront copiés les .class 
+	ATTENTION : Le chemin ne doit pas contenir d'espaces (voir la tâche CKJM)
+-->
 <mockcompiling-configuration>
 	<rootPath>${ENV-COMPILED-SOURCES-ROOT}</rootPath>
 </mockcompiling-configuration>

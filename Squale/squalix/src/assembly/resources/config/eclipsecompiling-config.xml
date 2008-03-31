@@ -8,6 +8,12 @@
 		<executable>${ENV-ECLIPSE-EXECUTABLE}</executable>
 		<options>
 			<option>-jar [squale_eclipse_home]/startup.jar</option>
+			<!-- 
+				Advanced options are in a configuration key 
+				(see eclipse.compilation.advanced.options in message.xml)
+				or setting by an administrator in java compilation configuration from SqualeWeb. 
+			-->
+			<option>[advanced_options]</option>
 			<option>-data [workspace]</option>
 			<option>
 				-application
