@@ -117,10 +117,10 @@ public class QualityGridFacade
             while ( it.hasNext() )
             {
                 curGrid = (QualityGridBO) it.next();
-                // On ajoute le nom de la grille seulement si elle est inutilisée
+                // On ajoute le nom de la grille seulement si elle est inutilisée (sans audits)
                 if ( !auditGridDAO.isGridUsed( session, new Long( curGrid.getId() ) ) )
                 {
-                    result.add( curGrid.getName() );
+                    result.add( QualityGridTransform.bo2DtoLight( curGrid ) );
                 }
             }
         }
