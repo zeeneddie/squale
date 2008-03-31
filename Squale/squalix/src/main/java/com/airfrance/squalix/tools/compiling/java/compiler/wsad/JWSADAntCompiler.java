@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Javac;
+import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.types.Path;
 
 import com.airfrance.squalix.tools.compiling.CompilingMessages;
@@ -121,8 +122,7 @@ public class JWSADAntCompiler
         // super.setTarget(mProject.getJavaVersion().replaceAll(JWSADAntCompiler.UNDERSCORE, JWSADAntCompiler.DOT));
         super.setSource( mProject.getJavaVersion().replaceAll( JWSADAntCompiler.UNDERSCORE, JWSADAntCompiler.DOT ) );
         // le classpath des classes de l'API utilisé
-        Path bootClasspath = new Path( mAntProject );
-        bootClasspath.setPath( mProject.getBootClasspath() );
+        Path bootClasspath = createBootClasspath();
         super.setBootclasspath( bootClasspath );
         // TODO: en attendant que DINB installe le jdk
         super.setExecutable( CompilingMessages.getString( "javac.executable.1_5" ) );
@@ -146,6 +146,40 @@ public class JWSADAntCompiler
         LOGGER.info( "compilation réussie pour le projet " + mProject.getName() );
         path = null;
         fDest = null;
+    }
+
+    /**
+     * Create bpath for bootclasspath option
+     * 
+     * @return the bootclasspath javac option
+     */
+    private Path createBootClasspath()
+    {
+        Path bootClasspath = new Path( mAntProject );
+        // iterate on path to only include .jar and .zip file
+        String[] bootPaths = mProject.getBootClasspath().split( ";" );
+        for ( int i = 0; i < bootPaths.length; i++ )
+        {
+            File curBoot = new File( bootPaths[i] );
+            if ( curBoot.isDirectory() )
+            {
+                FileSet jarAndZipFs = new FileSet();
+                // Pattern for getting all .jar and .zip
+                jarAndZipFs.setIncludes( "**/*.jar, **/*.zip" );
+                jarAndZipFs.setDir( curBoot );
+                bootClasspath.addFileset( jarAndZipFs );
+            }
+            else if ( curBoot.isFile() )
+            {
+                // We add simple file
+                bootClasspath.setLocation( curBoot );
+            }
+            else
+            {
+                LOGGER.warn( "Cannot find bootclasspath lib: " + curBoot.getAbsolutePath() );
+            }
+        }
+        return bootClasspath;
     }
 
     /**
