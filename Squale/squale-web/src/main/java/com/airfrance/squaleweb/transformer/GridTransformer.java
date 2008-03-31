@@ -69,6 +69,7 @@ public class GridTransformer
         QualityGridDTO dto = (QualityGridDTO) pObject[0];
         dto.setId( gridForm.getId() );
         dto.setName( gridForm.getName() );
+        dto.setUpdateDate( gridForm.getUpdateDate() );
     }
 
 }

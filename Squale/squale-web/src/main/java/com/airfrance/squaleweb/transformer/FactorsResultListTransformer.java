@@ -131,7 +131,12 @@ public class FactorsResultListTransformer
                 FactorsResultListForm f = (FactorsResultListForm) gridsForm.get( auditGrid.getGrid() );
                 f.getResults().add( bean );
                 // si il y a des résultats comparable, on l'indique
-                form.setComparableAudits( bean.getComparableAudits() );
+                if ( bean.getComparableAudits() )
+                {
+                    // we change attribute only if audits are comparable because an audit is
+                    // comparable if at least one project is comparable.
+                    form.setComparableAudits( bean.getComparableAudits() );
+                }
             }
         }
     }

@@ -71,17 +71,17 @@ public class PracticeResultTransformer
             practiceResult.setIntRepartition( (Integer[]) resultDTO.getIntRepartitionPracticeMap().get( audits.get( 0 ) ) );
             practiceResult.setFloatRepartition( (Integer[]) resultDTO.getFloatRepartitionPracticeMap().get(
                                                                                                             audits.get( 0 ) ) );
-            // Calcul d'une tendance si un audit antérieur est présent
-            if ( audits.size() > 1 )
+        }
+        // Calcul d'une tendance si un audit antérieur est présent
+        if ( audits.size() > 1 )
+        {
+            String valueStr2 = "";
+            Float value2 = ( (Float) ( ( (List) resultDTO.getResultMap().get( pProject ) ).get( 1 ) ) );
+            if ( null != value2 )
             {
-                String valueStr2 = "";
-                Float value2 = ( (Float) ( ( (List) resultDTO.getResultMap().get( pProject ) ).get( 1 ) ) );
-                if ( null != value2 )
-                {
-                    valueStr2 += value2;
-                }
-                practiceResult.setPredecessorMark( valueStr2 );
+                valueStr2 += value2;
             }
+            practiceResult.setPredecessorMark( valueStr2 );
         }
     }
 

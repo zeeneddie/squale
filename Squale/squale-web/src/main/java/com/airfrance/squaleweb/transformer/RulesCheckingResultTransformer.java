@@ -88,15 +88,13 @@ public class RulesCheckingResultTransformer
                 getRulesCheckingForm( (Map) resultDTO.getIntRepartitionPracticeMap().get( audits.get( 0 ) ),
                                       practiceResult, lang );
             practiceResult.setList( result );
-
-            // Calcul d'une tendance si un audit antérieur est présent
-            if ( audits.size() > 1 )
-            {
-                Float value2 = (Float) ( ( (List) resultDTO.getResultMap().get( pProject ) ).get( 1 ) );
-                practiceResult.setPredecessorMark( "" + value2 );
-            }
         }
-
+        // Calcul d'une tendance si un audit antérieur est présent
+        if ( audits.size() > 1 )
+        {
+            Float value2 = (Float) ( ( (List) resultDTO.getResultMap().get( pProject ) ).get( 1 ) );
+            practiceResult.setPredecessorMark( "" + value2 );
+        }
     }
 
     /**

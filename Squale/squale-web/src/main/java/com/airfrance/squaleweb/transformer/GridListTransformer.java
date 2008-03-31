@@ -53,8 +53,12 @@ public class GridListTransformer
         if ( pObject.length > 1 )
         {
             // On récupère les grilles sans profil ni audit
-            // sans transformation car la liste ne contient que des String
-            gridListForm.setUnlinkedGrids( (ArrayList) pObject[1] );
+            ArrayList uListGridForm = new ArrayList();
+            for ( Iterator uIt = ( (ArrayList) pObject[1] ).iterator(); uIt.hasNext(); )
+            {
+                uListGridForm.add( WTransformerFactory.objToForm( GridTransformer.class, uIt.next() ) );
+            }
+            gridListForm.setUnlinkedGrids( uListGridForm );
         }
     }
 
