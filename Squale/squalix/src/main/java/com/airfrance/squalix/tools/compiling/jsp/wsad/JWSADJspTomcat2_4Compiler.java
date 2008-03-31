@@ -28,7 +28,7 @@ public class JWSADJspTomcat2_4Compiler
      * @see com.airfrance.squalix.tools.compiling.jsp.wsad.AbstractTomcatCompiler#setJavaArgs(org.apache.tools.ant.taskdefs.Java,
      *      java.lang.String, java.lang.String, java.io.File)
      */
-    protected void setJavaArgs( Java java, String packageName, String className, File jspFile )
+    protected void setJavaArgs( Java java, String packageName, File jspFile )
     {
         // Version des sources
         java.createArg().setValue( "-source" );
@@ -42,9 +42,6 @@ public class JWSADJspTomcat2_4Compiler
         // Package : On indique un nom de package généré
         java.createArg().setValue( "-p" );
         java.createArg().setValue( packageName );
-        // Package : On indique un nom de la classe générée
-        java.createArg().setValue( "-c" );
-        java.createArg().setValue( className );
         // On indique le chemin racine vers l'application web
         java.createArg().setValue( "-webapp" );
         java.createArg().setValue( mJ2eeProject.getPath() );

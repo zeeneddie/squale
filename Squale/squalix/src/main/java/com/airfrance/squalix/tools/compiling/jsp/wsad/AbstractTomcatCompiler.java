@@ -12,7 +12,6 @@ import org.apache.tools.ant.types.Path;
 import com.airfrance.squalix.tools.compiling.CompilingMessages;
 import com.airfrance.squalix.tools.compiling.jsp.bean.J2eeWSADProject;
 import com.airfrance.squalix.tools.compiling.jsp.configuration.JspCompilingConfiguration;
-import com.airfrance.squalix.util.file.FileUtility;
 import com.airfrance.squalix.util.file.JspFileUtility;
 
 /**
@@ -67,54 +66,55 @@ public abstract class AbstractTomcatCompiler
         String currentJsp;
         String jspName;
         File currentFile;
-        File movedJsp;
-        File renamingFile = null;
         // On compile JSP par JSP pour pouvoir maitriser le nom des sources Java générées
         for ( int i = 0; i < mJ2eeProject.getJspPaths().length; i++ )
         {
             jspList = (List) mJ2eeProject.getJspPaths()[i][J2eeWSADProject.JSP_LIST_ID];
+            String rootPackage = getPackage( i );
             for ( int j = 0; j < jspList.size(); j++ )
             {
-                currentJsp = (String) jspList.get( j );
+                currentJsp = ( (String) jspList.get( j ) ).replaceAll( "\\\\", "/" );
                 // on construit le chemin absolu de la jsp
                 currentFile = new File( currentJsp );
-                // On copie la jsp à la racine du répertoire d'application car sinon le nom du package
-                // n'est pas toujours respecté (prend aussi en compte le chemin sous le répertoire WebContent
-                // ou tout le chemin si il n'est pas relatif au WebContent)
-                jspName = currentFile.getName().replaceFirst( "\\.jsp", "" );
-                movedJsp = new File( mJ2eeProject.getPath() + File.separator + jspName + ".jsp" );
-                // Si un fichier existe déjà avec ce nom dans le répertoire on renomme la jsp pour
-                // éviter les conflits
-                if ( movedJsp.exists() )
-                {
-                    // On renomme le fichier
-                    movedJsp = new File( mJ2eeProject.getPath() + File.separator + JSP_RENAMING + jspName + ".jsp" );
-                }
-                // On copie la jsp
-                FileUtility.copyFile( currentFile, movedJsp );
 
                 // On récupère la ligne de commande java
-                java =
-                    getJavaExecutable(
-                                       getPackage( i, currentFile.getParent().replaceAll( "\\\\", "/" ) ),
-                                       JspFileUtility.convertWithJspNameMangler( currentFile.getName().replaceAll(
-                                                                                                                   "\\.jsp",
-                                                                                                                   "" ) ),
-                                       movedJsp );
+                java = getJavaExecutable( rootPackage, currentFile );
+
                 // On exécute
                 java.execute();
-                // On supprime la jsp créee
-                movedJsp.delete();
+                // On map le nom de la classe générée avec son fichier jsp
+                mJ2eeProject.addGeneratedClasseName( JspFileUtility.getJspFullClassName( rootPackage,
+                                                                                         getJspUri( currentJsp ) ),
+                                                     currentJsp );
             }
         }
     }
 
     /**
-     * @param pId l'index du répertoire source
-     * @param pJspDir le répertoire parent de la jsp en cours de génération
-     * @return le package à donner au .java généré
+     * Build relative jsp path
+     * 
+     * @param jspPath absolute jsp path
+     * @return relative jsp path
      */
-    private String getPackage( int pId, String pJspDir )
+    private String getJspUri( String jspPath )
+    {
+        String result = jspPath;
+        if ( jspPath.startsWith( mJ2eeProject.getPath() ) )
+        {
+            result = jspPath.replaceFirst( mJ2eeProject.getPath().replaceAll( "\\\\", "/" ) + "/*", "" );
+        }
+        if ( result.startsWith( "/" ) )
+        {
+            result = result.substring( 1 );
+        }
+        return result;
+    }
+
+    /**
+     * @param pId l'index du répertoire source
+     * @return le package root à donner au .java généré
+     */
+    private String getPackage( int pId )
     {
         // On donne un nom de package par défaut permettant de résoudre le répertoire
         // source (ex jsp -> index 0; jsp1 -> index 1) et les conflits éventuels
@@ -124,24 +124,6 @@ public abstract class AbstractTomcatCompiler
         {
             packageName += pId;
         }
-        // On prend le chemin relatif par rapport au répertoire donné dans les paramétres de configuration
-        String relativePath =
-            pJspDir.replaceAll( "\\\\", "/" ).replaceFirst(
-                                                            ( (String) mJ2eeProject.getJspPaths()[pId][J2eeWSADProject.DIR_ID] ).replace(
-                                                                                                                                          '\\',
-                                                                                                                                          '/' )
-                                                                + "/*", "" );
-        relativePath = relativePath.trim();
-        if ( relativePath.length() > 0 )
-        {
-            String[] packages = relativePath.split( "/" );
-            for ( int i = 0; i < packages.length; i++ )
-            {
-                // On construit le package en convertissant le nom pour que la classe puisse compiler
-                // dans le cas où le nom serait un mot réservé à java ou possédant des caractères interdits
-                packageName += "." + JspFileUtility.convertWithJspNameMangler( packages[i] );
-            }
-        }
         return packageName;
     }
 
@@ -149,11 +131,10 @@ public abstract class AbstractTomcatCompiler
      * Modifie les arguments d'exécution du compilateur Jsp
      * 
      * @param packageName le nom du package à donner à la classe générée
-     * @param className le nom de la classe à donner au .java généré
      * @param jspFile la page JSP
      * @return l'exécutable java
      */
-    protected Java getJavaExecutable( String packageName, String className, File jspFile )
+    protected Java getJavaExecutable( String packageName, File jspFile )
     {
         Java java = (Java) ( antProject.createTask( "java" ) );
         antProject.addBuildListener( mJ2eeProject.getListener() );
@@ -167,17 +148,16 @@ public abstract class AbstractTomcatCompiler
         java.setClasspath( classpath );
         // Le nom de la classe à exécuter
         java.setClassname( getClassname() );
-        setJavaArgs( java, packageName, className, jspFile );
+        setJavaArgs( java, packageName, jspFile );
         return java;
     }
 
     /**
      * @param java l'exécutable
      * @param packageName le nom du package à donner à la classe générée
-     * @param className le nom de la classe à donner au .java généré
      * @param jspFile la page JSP
      */
-    protected abstract void setJavaArgs( Java java, String packageName, String className, File jspFile );
+    protected abstract void setJavaArgs( Java java, String packageName, File jspFile );
 
     /**
      * @return le nom de la classe à exécuter
