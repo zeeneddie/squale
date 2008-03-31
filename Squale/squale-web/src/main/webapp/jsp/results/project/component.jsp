@@ -65,7 +65,7 @@ if (null != errorMsg) {
 String tabSelectedName = (String) request.getParameter("selectedTab");
 // Si il n'y a pas l'attribut, on met le premier par défaut sauf dans le cas où
 // l'on vient de la page mark.jsp
-if (null == tabSelectedName) {
+if (null == tabSelectedName || tabSelectedName.length() == 0) {
     tabSelectedName = "childrenTab";
     if (request.getParameter(SqualeWebConstants.FROM_MARK_PAGE_KEY) != null || form.getChildren() == null) {
         tabSelectedName = "resultsTab";
@@ -235,7 +235,7 @@ if (2 == bracketSplit.length) {
 										<squale:history componentId="<%=componentId.toString()%>"
 											auditId="<%=currentAuditId%>" ruleId="<%=id%>" kind="result"
 											projectId="<%=projectId%>"
-											previousAuditId="<%=previousAuditId%>" />
+											previousAuditId="<%=previousAuditId%>" selectedTab="resultsTab"/>
 									</af:col>
 								</af:cols>
 							</logic:greaterThan>
@@ -285,7 +285,7 @@ pageContext.setAttribute("isNumber", "" + matchesMark);%>
 											<squale:history componentId="<%=componentId.toString()%>"
 												ruleId="<%=name%>" projectId="<%=projectId%>"
 												auditId="<%=currentAuditId%>"
-												previousAuditId="<%=previousAuditId%>" />
+												previousAuditId="<%=previousAuditId%>" selectedTab="resultsTab"/>
 										</logic:equal>
 									</af:col>
 								</af:cols>

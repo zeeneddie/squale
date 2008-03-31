@@ -13,6 +13,8 @@
 <%@ page
 	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm"%>
 <%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
+<%@ page import="com.airfrance.squaleweb.tagslib.HistoryTag"%>
+
 
 <%
 // Le chemin du traceur
@@ -21,6 +23,13 @@ String directComponentWay = (String) session.getAttribute(SqualeWebConstants.TRA
 ComponentForm component = (ComponentForm) session.getAttribute("componentForm");
 // Lien vers les erreurs du projet
 String errorLink = WebMessages.getString(request, "errors.consult");
+// Parameter indicates which tab must be selected
+String selectedTab = request.getParameter(HistoryTag.SELECTED_TAB_KEY);
+if(selectedTab == null) {
+    // First tab by default
+    selectedTab = "kiviat";
+}
+
 %>
 
 
@@ -79,7 +88,7 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 			<af:tabbedPane name="projectsummary">
 				<%-- Kiviat --%>
 				<af:tab key="project.results.kiviat.tab" name="kiviat"
-					lazyLoading="false">
+					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("kiviat")%>'>
 					<%String imageDetails1 = WebMessages.getString(request, "image.project.factors");%>
 					<bean:define id="srcKiviat" name="projectSummaryForm"
 						property="kiviat.srcName" type="String" />
@@ -120,7 +129,7 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 				</af:tab>
 				<%-- Facteurs et tendances --%>
 				<af:tab key="project.results.factors.tab" name="factors"
-					lazyLoading="false">
+					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("factors")%>'>
 					<af:dropDownPanel titleKey="buttonTag.menu.aide">
 						<bean:message key="project.results.factors.details" />
 					</af:dropDownPanel>
@@ -156,7 +165,7 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 				</af:tab>
 				<%-- Volumétrie --%>
 				<af:tab key="project.results.volumetry.tab" name="volumetry"
-					lazyLoading="false">
+					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("volumetry")%>'>
 					<af:dropDownPanel titleKey="buttonTag.menu.aide">
 						<bean:message key="project.results.volumetry.details" />
 					</af:dropDownPanel>
@@ -173,7 +182,8 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 									type="String" />
 								<squale:history projectId="<%=projectId%>"
 									auditId="<%=currentAuditId%>" ruleId="<%=name%>" kind="metric"
-									previousAuditId="<%=previousAuditId%>" />
+									previousAuditId="<%=previousAuditId%>"
+									toolTip="tooltips.history.metric" selectedTab="volumetry"/>
 							</af:col>
 						</af:cols>
 					</af:table>

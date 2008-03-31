@@ -11,6 +11,7 @@
 	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultForm"%>
 <%@ page
 	import="com.airfrance.squaleweb.applicationlayer.formbean.results.CriteriumForm"%>
+<%@ page import="com.airfrance.squaleweb.tagslib.HistoryTag"%>	
 
 <%-- Page de presentation des criteres / pratiques d'un facteur
 		Attribut en entree :
@@ -37,6 +38,16 @@
 <bean:define id="which" name="resForm" property="id" />
 <bean:define id="factorName" name="resForm" property="name"
 	type="String" />
+	
+<%
+// Parameter indicates which tab must be selected
+String selectedTab = request.getParameter(HistoryTag.SELECTED_TAB_KEY);
+if(selectedTab == null) {
+    // First tab by default
+    selectedTab = "synthese";
+}
+%>
+	
 
 <%-- Haut de page = info sur le facteur --%>
 <af:page titleKey="project.results.title">
@@ -67,7 +78,7 @@
 			<af:tabbedPane name="criteriumdetail">
 				<%-- Premier onglet de synthèse --%>
 				<af:tab key="project.result.factor.synthese" name="synthese"
-					lazyLoading="false">
+					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("synthese")%>'>
 					<br />
 					<%-- 1er tableau = rappel du resultat du facteur --%>
 					<table border="0" cellspacing="0" class="tblh">
@@ -90,7 +101,7 @@
 							<td><squale:picto name="resForm" property="currentMark" /></td>
 							<td><squale:history projectId="<%=projectId%>"
 								auditId="<%=currentAuditId%>" ruleId="<%=(String) which%>"
-								kind="result" previousAuditId="<%=previousAuditId%>" /></td>
+								kind="result" previousAuditId="<%=previousAuditId%>" selectedTab="synthese"/></td>
 						</tr>
 
 					</table>
@@ -123,7 +134,7 @@
 									type="String" />
 								<squale:history projectId="<%=projectId%>"
 									auditId="<%=currentAuditId%>" ruleId="<%=(String) id%>"
-									kind="result" previousAuditId="<%=previousAuditId%>" />
+									kind="result" previousAuditId="<%=previousAuditId%>" selectedTab="synthese"/>
 							</af:col>
 						</af:cols>
 					</af:table>
@@ -134,7 +145,8 @@
 					type="CriteriumForm" scope="request">
 					<bean:define name="criterium" property="name" id="criteriumName"
 						type="String" />
-					<af:tab key="<%=criteriumName%>" name="<%=criteriumName%>">
+					<af:tab key="<%=criteriumName%>" name="<%=criteriumName%>"
+							isTabSelected='<%=""+selectedTab.equals(criteriumName)%>'>
 						<br />
 						<%-- 1er tableau = rappel du resultat du facteur --%>
 						<table border="0" cellspacing="0" class="tblh" style="width: 100%">
@@ -157,7 +169,8 @@
 								<td><squale:picto name="resForm" property="currentMark" /></td>
 								<td><squale:history projectId="<%=projectId%>"
 									auditId="<%=currentAuditId%>" ruleId="<%=(String) which%>"
-									kind="result" previousAuditId="<%=previousAuditId%>" /></td>
+									kind="result" previousAuditId="<%=previousAuditId%>" 
+									selectedTab="<%=criteriumName%>" /></td>
 							</tr>
 						</table>
 						<br />
@@ -184,7 +197,8 @@
 									name="criterium" property="id" id="idCriterium" type="String" />
 								<squale:history projectId="<%=projectId%>"
 									auditId="<%=currentAuditId%>" ruleId="<%=idCriterium%>"
-									kind="result" previousAuditId="<%=previousAuditId%>" /></td>
+									kind="result" previousAuditId="<%=previousAuditId%>" 
+									selectedTab="<%=criteriumName%>" /></td>
 							</tr>
 						</table>
 						<br />
@@ -239,7 +253,8 @@
 										type="String" />
 									<squale:history projectId="<%=projectId%>" ruleId="<%=id%>"
 										kind="result" auditId="<%=currentAuditId%>"
-										previousAuditId="<%=previousAuditId%>" />
+										previousAuditId="<%=previousAuditId%>"
+										selectedTab="<%=criteriumName%>" />
 								</af:col>
 							</af:cols>
 						</af:table>

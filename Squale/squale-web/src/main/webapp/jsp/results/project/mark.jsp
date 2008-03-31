@@ -10,6 +10,7 @@
 <%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants"%>
 <%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils"%>
 <%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
+<%@ page import="com.airfrance.welcom.taglib.table.InternalTableUtil" %>
 
 <bean:define name="markForm" property="practiceId" id="practiceKey"
 	type="String" />
@@ -96,6 +97,7 @@ String directComponentWay = (String) session.getAttribute(SqualeWebConstants.TRA
 				<af:cols id="component">
 					<bean:define id="fullName" name="component" property="fullName"
 						type="String" />
+					<bean:define id="name" name="component" property="name" type="String"/>
 					<bean:define id="componentId" name="component" property="id"
 						type="Long" />
 					<%
@@ -112,8 +114,8 @@ String directComponentWay = (String) session.getAttribute(SqualeWebConstants.TRA
 						%>
 					<af:col property="name" sortable="true" key="component.name"
 						width="400px" contentTruncate="80">
-						<a href="<%=urlComponent%>" title="<%=fullName%>"><bean:write
-							name="component" property="name" /></a>
+						<a href="<%=urlComponent%>" title="<%=fullName%>">
+							<%=InternalTableUtil.getTruncatedString(name, "80", "string")%></a>
 					</af:col>
 					<af:col property="metrics[0]" sortable="true"
 						key="project.result.practice.value" type="NUMBER">
