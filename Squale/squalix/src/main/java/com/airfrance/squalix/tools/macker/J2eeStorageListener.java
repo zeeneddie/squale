@@ -3,6 +3,7 @@ package com.airfrance.squalix.tools.macker;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.jraf.spi.persistence.ISession;
@@ -27,19 +28,25 @@ public class J2eeStorageListener
     /** Répertoire contenant les jsps compilées */
     private String mCompiledJsp;
 
+    /** le lien entre le nom des fichiers .java générés et le nom initial des jsps */
+    private Map mJspMapNames;
+
     /**
      * Constructeur par défaut
      * 
      * @param pSession la session
      * @param pProject le projet à auditer
      * @param pConfiguration la configuration Macker
+     * @param jspNamesMap le lien entre le nom des fichiers .java générés et le nom initial des jsps
      */
-    public J2eeStorageListener( ISession pSession, ProjectBO pProject, MackerConfiguration pConfiguration )
+    public J2eeStorageListener( ISession pSession, ProjectBO pProject, MackerConfiguration pConfiguration,
+                                Map jspNamesMap )
     {
         super( pSession, pProject, pConfiguration );
         this.mParser = new J2EEParser( pProject );
         mJspPaths = pConfiguration.getJsps();
         mCompiledJsp = pConfiguration.getJspRoot();
+        mJspMapNames = jspNamesMap;
     }
 
     /**
@@ -65,8 +72,8 @@ public class J2eeStorageListener
             { // Il s'agit d'une jsp compilée
                 // On récupère le nom absolu du fichier parmis les jsps
                 // si elle existe et peut être persistée
-                absoluteFileName = getAbsoluteFileName( pFullName );
-                if ( null != absoluteFileName )
+                absoluteFileName = (String) mJspMapNames.get( pFullName );
+                if ( null != absoluteFileName && mIncludedFiles.contains( absoluteFileName ) )
                 { // Il faut créer une jsp
                     // On récupère la jsp
                     String name =

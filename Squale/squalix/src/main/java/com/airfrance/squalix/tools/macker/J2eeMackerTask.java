@@ -1,6 +1,8 @@
 package com.airfrance.squalix.tools.macker;
 
+import java.net.URLClassLoader;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,8 +56,13 @@ public class J2eeMackerTask
             try
             {
                 macker = configMacker( mConfiguration.getFilesToAnalyze(), mConfiguration.getConfigFile() );
+                // On modifie le classpath pour exécuter Macker afin d'avoir le build classpath pour la résolution
+                // de l'ensemble des classes.
+                macker.setClassLoader( new URLClassLoader( getClasspathURLs() ) );
                 /* On lance l'analyse en attachant notre événement à Macker: */
-                mListener = new J2eeStorageListener( getSession(), mProject, mConfiguration );
+                mListener =
+                    new J2eeStorageListener( getSession(), mProject, mConfiguration,
+                                             (Map) getData().getData( TaskData.JSP_MAP_NAMES ) );
                 macker.addListener( mListener );
                 macker.checkRaw();
                 // On fait persister les mesures

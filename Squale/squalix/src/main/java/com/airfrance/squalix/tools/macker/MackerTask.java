@@ -127,7 +127,7 @@ public class MackerTask
      * 
      * @return les URLs
      */
-    private URL[] getClasspathURLs()
+    protected URL[] getClasspathURLs()
     {
         ArrayList urlsList = new ArrayList();
         // On découpe le classpath des paramètres temporaires
@@ -354,8 +354,18 @@ public class MackerTask
         Iterator filesIt = pFilesToAnalyse.iterator();
         while ( filesIt.hasNext() )
         {
-            // On ajoute à macker les fichiers compilés
-            macker.addClass( new File( (String) filesIt.next() ) );
+            try
+            {
+                macker.addClass( new File( (String) filesIt.next() ) );
+            }
+            catch ( IllegalStateException ise )
+            {
+                // On log juste un warning. Cette erreur peut survenir lorsque
+                // l'utilisateur a par exemple laisser des .class dans le répertoire
+                // de génération des .class
+                LOGGER.warn( ise.getMessage() );
+                initError( ise.getMessage() );
+            }
         }
         // On indique le fichier de configuration
         macker.addRulesFile( pConfigFile );
