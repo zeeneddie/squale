@@ -525,6 +525,20 @@ public class JWSADProject
     }
 
     /**
+     * @param pBootClasspath les chemins pour l'option -bootclasspath de javac
+     */
+    public void setBootClasspath( List pBootClasspath )
+    {
+        StringBuffer boot = new StringBuffer( mBootClasspath );
+        for ( int i = 0; i < pBootClasspath.size(); i++ )
+        {
+            boot.append( (String) pBootClasspath.get( i ) );
+            boot.append( ";" );
+        }
+        mBootClasspath = boot.toString();
+    }
+
+    /**
      * @param pBootClasspath le chemin pour l'option -bootclasspath de javac
      */
     public void setBootClasspath( String pBootClasspath )
