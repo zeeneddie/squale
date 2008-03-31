@@ -113,7 +113,15 @@
 			<name>kind</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-		</attribute>
+		</attribute>        
+		<attribute>
+            <name>toolTip</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>selectedTab</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
 	</tag>
 	<tag>
 		<name>tracker</name>
