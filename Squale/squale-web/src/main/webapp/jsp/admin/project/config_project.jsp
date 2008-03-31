@@ -90,7 +90,7 @@ String pageTask = "add_project_" + taskName.toLowerCase() + "_conf.jsp";%>
 				<af:dropDownPanel titleKey="<%=keyTask%>"
 					headerStyle="padding-left:20px;" contentStyle="padding:5px;"
 					lazyLoading="true" expanded="<%=expanded%>">
-					
+
 					<c:import
 						url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true" />
 					<div id="conteneur"><jsp:include page="<%=pageTask%>" /></div>
@@ -137,7 +137,7 @@ String pageTask = "add_project_" + taskName.toLowerCase() + "_conf.jsp";%>
 					<af:dropDownPanel titleKey="<%=keyTask%>"
 						headerStyle="padding-left:20px;" contentStyle="padding:5px;"
 						lazyLoading="false" expanded="<%=expanded%>">
-						
+
 						<c:import
 							url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true" />
 						<div id="conteneur"><jsp:include page="<%=pageTask%>" /></div>
@@ -148,8 +148,14 @@ String pageTask = "add_project_" + taskName.toLowerCase() + "_conf.jsp";%>
 
 			<af:buttonBar>
 				<%-- dans ce cas on spécifie et l'id de l'application et l'id du projet car le lien n'a pas encore été fait --%>
-				<af:button type="form" name="retour" toolTipKey="toolTip.retour"
-					onclick="<%=\"config_project.do?action=selectProjectToModify&applicationId=\"+applicationId + \"&projectId=\"+ projectId%>" />
+				<logic:empty name="modification">
+					<af:button type="form" name="retour" toolTipKey="toolTip.retour"
+						onclick="<%=\"config_project.do?action=selectProjectToModify&applicationId=\"+applicationId + \"&projectId=\"+ projectId%>" />
+				</logic:empty>
+				<logic:notEmpty name="modification">
+					<af:button type="form" name="retour" toolTipKey="toolTip.retour"
+						onclick="<%=\"config_project.do?action=selectProjectToView&applicationId=\"+applicationId + \"&projectId=\"+ projectId+\"&modification=true\"%>" />
+				</logic:notEmpty>
 				<logic:notEqual name="profile"
 					value="<%=ProfileBO.READER_PROFILE_NAME%>">
 					<af:button type="form" name="end.configuration"

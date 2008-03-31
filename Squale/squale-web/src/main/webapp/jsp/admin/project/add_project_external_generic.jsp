@@ -45,7 +45,11 @@ Collection fields = conf.getInfoConfigTask();
 %>
 
 <br />
-<bean:message key="<%=helpKey%>" />
+<af:dropDownPanel titleKey="buttonTag.menu.aide">
+    <bean:message key="<%=helpKey%>" />
+    <br /><br />
+</af:dropDownPanel>
+
 
 <af:form action="<%=actionDo%>">
 	<%-- attribut projectId pour les droits d'accès --%>
