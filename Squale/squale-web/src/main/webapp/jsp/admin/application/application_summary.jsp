@@ -1,16 +1,21 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
+	prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm" %>
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils" %>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm"%>
+<%@ page
+	import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
+<%@ page
+	import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"%>
+<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils"%>
+<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
 
 <bean:define id="applicationId" name="createApplicationForm"
 	property="applicationId" type="String" />
+<bean:size name="createApplicationForm" property="rights" id="nbUsers" />
 
 <%-- On va interdire l'ecriture pour les lecteurs --%>
 <bean:define id="profile"
@@ -37,8 +42,9 @@ session.removeAttribute("modification");
 <af:page accessKey="default">
 	<af:body>
 		<af:canvasCenter titleKey="application_creation.subtitle.config">
-			<b> <bean:message key="application.creation.field.application_name" />
-			<bean:write scope="session" name="createApplicationForm"
+			<b> <bean:message
+				key="application.creation.field.application_name" /> <bean:write
+				scope="session" name="createApplicationForm"
 				property="applicationName" /> </b>
 			<br />
 			<logic:equal name="profile"
@@ -50,51 +56,73 @@ session.removeAttribute("modification");
 				<bean:message key="application_config.help" />
 			</af:dropDownPanel>
 			<br>
-			<table class="formulaire" cellpadding="0"
-					cellspacing="0" border="0"><tr><td>
-			<table>
-					<tr>
-					<td><b><bean:message
-						key="application_creation.config.site" /></b></td>
-					<td><bean:write scope="session" name="createApplicationForm"
-						property="serveurForm.name" /></td>
+			<table class="formulaire" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td>
+					<table>
+						<logic:equal name="nbUsers" value="0">
+							<tr align="center">
+								<td>-- <bean:message
+									key="application_creation.config.archived" /> --</td>
+							</tr>
+						</logic:equal>
+
+						<tr>
+							<td><b><bean:message
+								key="application_creation.config.site" /></b></td>
+							<td><bean:write scope="session" name="createApplicationForm"
+								property="serveurForm.name" /></td>
+						</tr>
+						<tr>
+							<td><b><bean:message key="audit.type_long" /></b></td>
+							<td><logic:equal scope="session"
+								name="createApplicationForm" property="milestone" value="true">
+								<bean:message key="audit.type.milestone" />
+							</logic:equal> <logic:notEqual scope="session" name="createApplicationForm"
+								property="milestone" value="true">
+								<bean:message key="audit.type.normal" />
+								<br />
+								<bean:message key="application_creation.config.audit_frequency" />
+								<bean:write scope="session" name="createApplicationForm"
+									property="auditFrequency" />
+							</logic:notEqual></td>
+						</tr>
+						<tr>
+							<td><b><bean:message
+								key="application_creation.config.purge_frequency" /></b></td>
+							<td><bean:write scope="session" name="createApplicationForm"
+								property="purgeDelay" /></td>
+						</tr>
+						<tr>
+							<td><b><bean:message
+								key="application_creation.config.inProduction" /></b></td>
+							<td><html:checkbox property="isInProduction"
+								name="createApplicationForm" disabled="true" /></td>
+						</tr>
+						<tr>
+							<td><b><bean:message
+								key="application_creation.config.externalDev" /></b></td>
+							<td><html:checkbox property="externalDev"
+								name="createApplicationForm" disabled="true" /></td>
+						</tr>
+					</table>
+					</td>
 				</tr>
 				<tr>
-					<td><b><bean:message key="audit.type_long" /></b></td>
-					<td><logic:equal scope="session" name="createApplicationForm"
-						property="milestone" value="true">
-						<bean:message key="audit.type.milestone" />
-					</logic:equal> <logic:notEqual scope="session"
-						name="createApplicationForm" property="milestone" value="true">
-						<bean:message key="audit.type.normal" />
-						<br />
-						<bean:message key="application_creation.config.audit_frequency" />
-						<bean:write scope="session" name="createApplicationForm"
-							property="auditFrequency" />
-					</logic:notEqual></td>
+					<td>&nbsp;</td>
 				</tr>
-				<tr>
-					<td><b><bean:message
-						key="application_creation.config.purge_frequency" /></b></td>
-					<td><bean:write scope="session" name="createApplicationForm"
-						property="purgeDelay" /></td>
-				</tr>
-				<tr>
-					<td><b><bean:message
-						key="application_creation.config.inProduction" /></b></td>
-					<td><html:checkbox property="isInProduction" name="createApplicationForm" disabled="true"/></td>
-				</tr>
-				<tr>
-					<td><b><bean:message
-						key="application_creation.config.externalDev" /></b></td>
-					<td><html:checkbox property="externalDev" name="createApplicationForm" disabled="true"/></td>
-				</tr>
-			</table></td></tr><tr><td>&nbsp;</td></tr></table>
+			</table>
 			<logic:notEqual name="profile"
 				value="<%=ProfileBO.READER_PROFILE_NAME%>">
 				<af:buttonBar>
-					<af:button name="supprimer"
+					<logic:greaterThan name="nbUsers" value="0">
+						<af:button name="supprimer"
+							messageConfirmationKey="application_purge.confirm"
+							onclick='<%="manageApplication.do?action=deleteConfirm&applicationId=" + applicationId%>' />
+					</logic:greaterThan>
+					<af:button name="physicallyRemove"
 						messageConfirmationKey="application_purge.confirm"
+						accessKey="admin"
 						onclick='<%="manageApplication.do?action=purgeConfirm&applicationId=" + applicationId%>' />
 					<af:button name="modify.configuration"
 						onclick='<%="utilLink.do?action=configApplication&applicationId=" + applicationId + "&modification=true"%>' />
@@ -172,8 +200,8 @@ session.removeAttribute("modification");
 					<bean:message key="application.audit.branch.add.help" />
 				</af:dropDownPanel>
 				<br />
-				<div style="color: #f00"><html:messages id="msg" message="true"
-					property="branchMsg">
+				<div style="color: #f00"><html:messages id="msg"
+					message="true" property="branchMsg">
 					<bean:write name="msg" />
 					<br>
 				</html:messages></div>
@@ -198,7 +226,8 @@ session.removeAttribute("modification");
 			<%}%>
 
 			<br />
-			<h2><bean:message key="applications_creation.list.projects.title" /></h2>
+			<h2><bean:message
+				key="applications_creation.list.projects.title" /></h2>
 			<af:dropDownPanel titleKey="buttonTag.menu.aide">
 				<bean:message key="applications_creation.list.projects.details" />
 			</af:dropDownPanel>
@@ -208,8 +237,8 @@ session.removeAttribute("modification");
 				<b><bean:write name="msg" /></b>
 				<br>
 			</html:messages></div>
-			<div style="color: #f00"><html:errors property="invalid.selection" />
-			</div>
+			<div style="color: #f00"><html:errors
+				property="invalid.selection" /></div>
 			<af:form action="manageApplication.do">
 				<input type="hidden"
 					name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM%>"
@@ -263,7 +292,8 @@ session.removeAttribute("modification");
 				<bean:size name="createApplicationForm"
 					property="accessListForm.list" id="nbAccesses" />
 				<logic:greaterThan name="nbAccesses" value="0">
-					<fieldset><legend> <b><bean:message key="last.user.accesses.title"
+					<fieldset><legend> <b><bean:message
+						key="last.user.accesses.title"
 						arg0='<%=WebMessages.getString(request, "application.max.accesses")%>' /></b>
 					</legend>
 					<table>

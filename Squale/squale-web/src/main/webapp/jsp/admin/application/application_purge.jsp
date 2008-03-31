@@ -24,7 +24,12 @@
 				<INPUT type="hidden" name="applicationId" value="<%=applicationId%>"/>
 				<af:buttonBar>
 					<af:button singleSend="true" callMethod="selectApplicationToConfig" name="annuler" type="form" />
-					<af:button singleSend="true" callMethod="purge" name="valider" type="form" messageConfirmationKey="application_purge.confirm"/>
+					<logic:empty name="hide">
+						<af:button singleSend="true" callMethod="purge" name="valider" type="form" messageConfirmationKey="application_purge.confirm"/>
+					</logic:empty>
+                    <logic:notEmpty name="hide">
+                        <af:button singleSend="true" callMethod="deleteApplication" name="valider" type="form"/>
+                    </logic:notEmpty>
 				</af:buttonBar>
 			</af:form>
 			

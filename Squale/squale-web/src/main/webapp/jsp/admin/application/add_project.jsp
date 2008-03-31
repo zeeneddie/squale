@@ -11,6 +11,9 @@
 	property="applicationId" type="String" />
 <bean:define id="projectId" name="createProjectForm"
 	property="projectId" type="String" />
+<bean:define id="gridInit" name="createProjectForm"
+    property="qualityGrid" type="String" />
+	
 
 <%-- On va interdire l'ecriture pour les lecteurs --%>
 <bean:define id="userProfile"
@@ -50,10 +53,9 @@ if (modification != null) {
 			}
 			
 			/* Modifie la liste des grilles en fonction du profil sélectionné */
-			function setGridList(profileName) {
+			function setGridList(profileName, gridName) {
 				/* On va sélectionner la grille si elle existe dans la nouvelle liste */
 				index = 0;
-				gridName = document.createProjectForm.qualityGrid.value;
 				grids = profilesGridsTab[profileName];
 				var reg=new RegExp(";", "g");
 				/* On crée le tableau des grilles à partir de la chaîne passée en paramètre */
@@ -71,8 +73,8 @@ if (modification != null) {
 			}
 			
 			/* Permet d'initialiser les grilles en fonction du profil sélectionné */
-			function initGrids() {
-				setGridList(document.createProjectForm.profile.value);
+			function initGrids(gridName) {
+				setGridList(document.createProjectForm.profile.value, gridName);
 			}
 			
 			/* Permet d'indiquer à l'utilisateur de sélectionner un profil pour pouvoir sélectionner une grille */
@@ -83,7 +85,7 @@ if (modification != null) {
 			}
 		</script>
 	</af:head>
-	<af:body onload="initGrids()">
+	<af:body onload='<%="initGrids(\'"+gridInit+"\')"%>'>
 		<af:canvasCenter titleKey="application_modification.title"
 			subTitleKey="<%=subtitle%>">
 			<div style="color: #f00"><logic:equal name="userProfile"
@@ -128,7 +130,7 @@ if (modification != null) {
 							key="project_creation.field.project_profile" />*</td>
 						<td><af:select property="profile" lazyLoading="false" 
 							isRequired="true" disabled="<%=disabled%>" 
-							onchange='setGridList(this.options[this.selectedIndex].value)'>
+							onchange='setGridList(this.options[this.selectedIndex].value, this.form.qualityGrid.value)'>
 							<af:option key="empty" value="" />
 							<logic:iterate id="profile" name="profiles">
 								<bean:define id="profileName" name="profile" property="name"
