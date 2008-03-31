@@ -61,8 +61,8 @@ public class PmdTask
                     LOGGER.info( PmdMessages.getString( "pmd.processing.language", param.getValue() ) );
                     oneLangAtLeast = true;
                     AbstractPmdProcessing processing = factory.createPmdProcessing( param.getValue() ); // Récupération
-                                                                                                        // du fichier de
-                                                                                                        // ruleset
+                    // du fichier de
+                    // ruleset
                     PmdRuleSetBO ruleset = getRuleSet( param.getValue() );
                     // La tâche peut avoir été annulée
                     if ( mStatus != CANCELLED )
@@ -75,7 +75,7 @@ public class PmdTask
                         persistor.storeResults( getSession(), report );
                     }
                 }
-                else
+                else if ( !param.getName().matches( ".*ruleset" ) )
                 {
                     throw new ConfigurationException( PmdMessages.getString( "exception.parameter.invalid",
                                                                              new Object[] { param.getName(),
