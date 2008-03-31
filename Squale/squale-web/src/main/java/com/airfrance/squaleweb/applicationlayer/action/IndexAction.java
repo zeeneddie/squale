@@ -16,10 +16,8 @@ import com.airfrance.jraf.helper.AccessDelegateHelper;
 import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
 import com.airfrance.squaleweb.applicationlayer.action.message.AdminNewsAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationListForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm;
-import com.airfrance.squaleweb.resources.WebMessages;
 import com.airfrance.squaleweb.transformer.ApplicationListTransformer;
 import com.airfrance.squaleweb.transformer.SplitAuditsListTransformer;
 import com.airfrance.welcom.struts.bean.WActionForm;
@@ -92,19 +90,6 @@ public class IndexAction
             // avec la langue correspondant à celle du navigateur
             pRequest.setAttribute( "lang", pRequest.getLocale().getLanguage() );
             newsAction.listNews( pMapping, pForm, pRequest, pResponse );
-
-            // On récupère l'application
-            // L'utilisateur accède à ses applications, si il n'est pas administrateur SQUALE,
-            // on enregistre l'accès
-            LogonBean user = (LogonBean) getWILogonBean( pRequest );
-            if ( !user.isAdmin() )
-            {
-                String matricule = pRequest.getRemoteUser();
-                Integer maxAccesses =
-                    new Integer( Integer.parseInt( WebMessages.getString( pRequest, "application.max.accesses" ) ) );
-                Object[] accessParams = new Object[] { userApplicationsDTO, matricule, maxAccesses };
-                AccessDelegateHelper.getInstance( "ApplicationAdmin" ).execute( "addUserAccess", accessParams );
-            }
 
             forward = pMapping.findForward( "success" );
         }
