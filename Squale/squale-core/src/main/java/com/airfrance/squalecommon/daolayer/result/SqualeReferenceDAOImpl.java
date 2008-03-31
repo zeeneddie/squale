@@ -162,9 +162,7 @@ public class SqualeReferenceDAOImpl
         throws JrafDaoException
     {
         SqualeReferenceBO result = null;
-        String whereClause = "where ";
-        whereClause += getAlias() + ".applicationName = '" + pAppliName + "'";
-        Collection coll = findWhere( pSession, whereClause );
+        Collection coll = findWhere( pSession, getByAppliNameClause(pAppliName));
         // il peut y avoir plusieurs résultats, en fait un par projet de l'application
         // mais on ne veut récupérer que des informations communes à tous les projets
         // type de l'audit, date de l'audit...
@@ -175,6 +173,29 @@ public class SqualeReferenceDAOImpl
         }
         return result;
     }
+    /**
+     * @param pSession la session
+     * @param pAppliName le nom de l'application recherchée
+     * @return les objets référence correspondant à l'application si elle existe, null sinon
+     * @throws JrafDaoException en cas d'échec
+     */
+    public Collection findReferencesByAppliName(ISession pSession, String pAppliName) throws JrafDaoException {
+        return findWhere(pSession, getByAppliNameClause(pAppliName));
+    }
+    
+    /**
+     * @param pAppliName application's name
+     * @return where clause with application's name condition
+     */
+    private String getByAppliNameClause(String pAppliName) {
+        StringBuffer whereClause = new StringBuffer("where ");
+        whereClause.append(getAlias());
+        whereClause.append(".applicationName = '");
+        whereClause.append(pAppliName);
+        whereClause.append("'");
+        return whereClause.toString();
+    }
+
 
     /**
      * Remonte toutes les applications distinctes stockées dans le référentiel

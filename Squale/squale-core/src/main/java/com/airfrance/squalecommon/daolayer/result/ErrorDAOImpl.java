@@ -104,6 +104,11 @@ public class ErrorDAOImpl
         throws JrafDaoException
     {
         List errors;
+        int startId = 0;
+        if ( null != pIndexDepart )
+        {
+            startId = pIndexDepart.intValue();
+        }
         // Création de la requete :
         // sélection pour l'audit demandé et le projet
         String whereClause = getWhereProjectAndAudit( pAuditID, pProjectId );
@@ -125,6 +130,12 @@ public class ErrorDAOImpl
                 List col;
                 String taskName = (String) it.next();
                 String newWhereClause = whereClause + "'" + taskName + "'";
+                // On tri par id --> ordre d'enregistrement
+                whereClause += " order by " + getAlias() + ".id";
+                if ( null != pNbLignes )
+                {
+                    col = (List) findWhereScrollable( pSession, newWhereClause, pNbLignes.intValue(), startId, false );
+                }
                 col = (List) findWhere( pSession, newWhereClause );
                 if ( null != col && col.size() != 0 )
                 {
@@ -132,13 +143,6 @@ public class ErrorDAOImpl
                     errors.addAll( col );
                 }
             }
-            // On tri par id --> ordre d'enregistrement
-            whereClause += " order by " + getAlias() + ".id";
-        }
-        if ( null != pNbLignes )
-        {
-            // si un certain nombre de lignes a été demandé on ne retourne que les résultats demandés
-            errors = errors.subList( pIndexDepart.intValue(), pNbLignes.intValue() );
         }
         return errors;
     }

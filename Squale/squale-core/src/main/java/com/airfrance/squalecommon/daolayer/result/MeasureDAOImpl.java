@@ -193,7 +193,7 @@ public class MeasureDAOImpl
     }
 
     /**
-     * Permet de récupérer les notes en fonction d'une liste de noms de TREs
+     * Permet de récupérer les notes en fonction d'une liste de noms de TREs.
      * 
      * @param pSession session Hibernate
      * @param pComponentID identifiant du composant
@@ -261,7 +261,8 @@ public class MeasureDAOImpl
     }
 
     /**
-     * Retourne les valeur distinct de mesure de type Integer données par leur TRE
+     * Retourne les valeur distinct de mesure de type Integer données par leur TRE. Le TRE ne peut pas porter sur un
+     * projet ou application!
      * 
      * @param pSession Session Jraf
      * @param pProjectId Id du projet
@@ -279,6 +280,10 @@ public class MeasureDAOImpl
         String distinct = "";
         String where = "";
         // Creation de la requete
+        // /!\ Requete optimisée car longue en prod
+        // TOUTES MODIF DOIT ETRE TESTEES EN FAISANT LE SELECT EN PROD !!
+        // Cette requête prend moins d'1 seconde en production
+
         for ( int i = 0; i < pTreKey.length; i++ )
         {
             // selecte sur n metric
@@ -304,11 +309,11 @@ public class MeasureDAOImpl
                                                                + distinct
                                                                + ", count(*), min(c.id) from "
                                                                // On ne recherche pas le type du composant afin
-                                                                // d'optimiser la requête car la recherche
+                                                               // d'optimiser la requête car la recherche
                                                                // est déjà faite par le type de la métrique.
                                                                + AbstractComponentBO.class.getName() + " c" + from
-                                                               + " where (c.project.id =" + pProjectId + " or c.id="
-                                                               + pProjectId + ")" + where + " group by " + distinct );
+                                                               + " where (c.project.id =" + pProjectId + ")" + where
+                                                               + " group by " + distinct );
             results = q.list();
         }
         catch ( HibernateException e )
