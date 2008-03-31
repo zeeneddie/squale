@@ -6,6 +6,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.squalecommon.SqualeTestCase;
 import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
 import com.airfrance.squalecommon.daolayer.component.ProjectParameterDAOImpl;
@@ -148,4 +149,30 @@ public class JspCompilingTaskTest
         ArrayList jspsExcluded = FileManager.checkFileNumber( JSP_SOURCES_DIR + "/" + EXLUDED_DIR, ".jsp" );
         assertEquals( jsps.size() - jspsExcluded.size(), classes.size() );
     }
+
+    /**
+     * Test task execution with a missing parameter
+     * 
+     * @throws JrafDaoException if error
+     */
+    public void testExecuteWithoutParams()
+        throws JrafDaoException
+    {
+        getSession().beginTransaction();
+        mProject.getParameters().getParameters().remove( ParametersConstants.J2EE_VERSION );
+        ProjectParameterDAOImpl.getInstance().save( getSession(), mProject.getParameters() );
+        ProjectDAOImpl.getInstance().save( getSession(), mProject );
+        getSession().commitTransactionWithoutClose();
+        JspCompilingTask task = new JspCompilingTask();
+        mData.putData( TaskData.CLASSPATH, "" );
+        mData.putData( TaskData.VIEW_PATH, "" );
+        task.setData( mData );
+        task.setAuditId( new Long( mAudit.getId() ) );
+        task.setProjectId( new Long( mProject.getId() ) );
+        task.setApplicationId( new Long( mAppli.getId() ) );
+        task.setStatus( AbstractTask.NOT_ATTEMPTED );
+        task.run();
+        assertTrue( task.getStatus() == AbstractTask.FAILED );
+    }
+
 }
