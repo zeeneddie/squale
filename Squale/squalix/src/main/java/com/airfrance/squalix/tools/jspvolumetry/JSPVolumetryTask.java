@@ -89,7 +89,7 @@ public class JSPVolumetryTask
      * @param pDirectory répertoire de lancement
      * @return le ProcessManager normal
      */
-    private ProcessManager createProcessManager( String pArguments, File pDirectory )
+    private ProcessManager createProcessManager( String[] pArguments, File pDirectory )
     {
         return new ProcessManager( pArguments, null, pDirectory );
     }
@@ -118,7 +118,8 @@ public class JSPVolumetryTask
                     String jspDirPath = viewPath + ( (StringParameterBO) jspDir.get( i ) ).getValue();
                     // exécute le script
                     execResult =
-                        process( script.getAbsolutePath() + " " + jspDirPath + " " + mConfiguration.getResultFilePath() );
+                        process( new String[] { script.getAbsolutePath(), jspDirPath,
+                            mConfiguration.getResultFilePath() } );
                     // Les deux résultats sont inscrits dans le fichier de résultats
                     parseFile();
                 }
@@ -158,6 +159,8 @@ public class JSPVolumetryTask
             mNbJsps += Integer.parseInt( br.readLine().trim() );
             mNbJSPLoc += Integer.parseInt( br.readLine().trim() );
             br.close();
+            // delete file
+            resultFile.delete();
         }
         else
         {
@@ -172,7 +175,7 @@ public class JSPVolumetryTask
      * @throws IOException en cas d'éche de lecture
      * @throws InterruptedException si le processus est uinterrompu anormalement
      */
-    private int process( String pCommand )
+    private int process( String[] pCommand )
         throws IOException, InterruptedException
     {
         mProcess = createProcessManager( pCommand, mConfiguration.getWorkspace() );
