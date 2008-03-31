@@ -19,6 +19,8 @@ import com.airfrance.squaleweb.resources.WebMessages;
 public class HistoryTag
     extends TagSupport
 {
+    /** Attribute name for selected tab */
+    public static final String SELECTED_TAB_KEY = "selectedTab";
 
     /** le nom du (de la) facteur/critère/pratique ou du composant */
     private String name;
@@ -43,6 +45,12 @@ public class HistoryTag
      */
     private String kind;
 
+    /** Image title attribute */
+    private String toolTip = "tooltips.history";
+
+    /** Tab selected (if empty, first tab is selected) */
+    private String selectedTab = "";
+
     /**
      * @see javax.servlet.jsp.tagext.TagSupport#doEndTag() {@inheritDoc} Méthode de lancement du tag
      */
@@ -64,55 +72,73 @@ public class HistoryTag
         // attention: le rule id est rempli dynamiquement depuis la jsp,
         // il ne faut surtout pas le passer en paramètre de cette péthode après avoir fait un lookup
         // On crée les paramètres à passer dans la requête
-        String complementaryRequest = "";
-        int i;
+        StringBuffer complementaryRequest = new StringBuffer( "" );
         // type de la règle
         if ( kind != null )
         {
-            complementaryRequest = "&kind=" + kind;
+            complementaryRequest.append( "&kind=" );
+            complementaryRequest.append( kind );
         }
         // L'id du composant
         if ( componentId != null )
         {
-            complementaryRequest += "&component=" + componentId;
+            complementaryRequest.append( "&component=" );
+            complementaryRequest.append( componentId );
         }
         // L'id de l'audit courant
         if ( auditId != null )
         {
-            complementaryRequest += "&currentAuditId=" + auditId;
+            complementaryRequest.append( "&currentAuditId=" );
+            complementaryRequest.append( auditId );
         }
         // L'id de la'audit précédent
         if ( previousAuditId != null )
         {
-            complementaryRequest += "&previousAuditId=" + previousAuditId;
+            complementaryRequest.append( "&previousAuditId=" );
+            complementaryRequest.append( previousAuditId );
         }
         // L'action appelante
-        String oldAction =
-            pRequest.getContextPath() + ( (ActionMapping) pRequest.getAttribute( Globals.MAPPING_KEY ) ).getPath()
-                + ".do?";
+        StringBuffer oldAction = new StringBuffer( pRequest.getContextPath() );
+        oldAction.append( ( (ActionMapping) pRequest.getAttribute( Globals.MAPPING_KEY ) ).getPath() );
+        oldAction.append( ".do?" );
         // On ajoute les paramètres
         Enumeration enumParams = pRequest.getParameterNames();
         while ( enumParams.hasMoreElements() )
         {
             String paramName = (String) enumParams.nextElement();
-            oldAction += paramName + "=" + pRequest.getParameter( paramName ) + "&";
+            // seleted tab key changed with each tag
+            if ( !paramName.equals( SELECTED_TAB_KEY ) )
+            {
+                oldAction.append( paramName );
+                oldAction.append( "=" );
+                oldAction.append( pRequest.getParameter( paramName ) );
+                oldAction.append( "&" );
+            }
         }
-        // On enlève le dernier "&"
-        oldAction = oldAction.substring( 0, oldAction.length() - 1 );
+        // We add selectedTab attribute
+        oldAction.append( SELECTED_TAB_KEY );
+        oldAction.append( "=" );
+        oldAction.append( selectedTab );
         try
         {
             // On encode par précaution
-            complementaryRequest += "&oldAction=" + URLEncoder.encode( oldAction, "UTF-8" );
+            complementaryRequest.append( "&oldAction=" );
+            complementaryRequest.append( URLEncoder.encode( oldAction.toString(), "UTF-8" ) );
         }
         catch ( UnsupportedEncodingException e )
         {
             // On encode pas
-            complementaryRequest += "&oldAction=" + oldAction;
+            complementaryRequest.append( "&oldAction=" );
+            complementaryRequest.append( oldAction );
         }
-        String help = WebMessages.getString( pRequest, "tooltips.history" );
+        String help = WebMessages.getString( pRequest, toolTip );
         // Création du lien
-        String link =
-            "review.do?action=review&projectId=" + projectId + complementaryRequest + "&which=" + ruleId + "\"";
+        StringBuffer link = new StringBuffer( "review.do?action=review&projectId=" );
+        link.append( projectId );
+        link.append( complementaryRequest );
+        link.append( "&which=" );
+        link.append( ruleId );
+        link.append( "\"" );
         // Création du tag image
         String image = "<img src=\"images/pictos/icon_history.gif\" title=\"" + help + "\" border=\"0\" />";
         // Création du tag représentant l'appel à l'historique
@@ -242,5 +268,37 @@ public class HistoryTag
     public void setPreviousAuditId( String pPreviousAuditId )
     {
         previousAuditId = pPreviousAuditId;
+    }
+
+    /**
+     * @return tooltip
+     */
+    public String getToolTip()
+    {
+        return toolTip;
+    }
+
+    /**
+     * @param pTooltip new tooltip
+     */
+    public void setToolTip( String pTooltip )
+    {
+        toolTip = pTooltip;
+    }
+
+    /**
+     * @return selected tab name
+     */
+    public String getSelectedTab()
+    {
+        return selectedTab;
+    }
+
+    /**
+     * @param pTab selected tab name
+     */
+    public void setSelectedTab( String pTab )
+    {
+        selectedTab = pTab;
     }
 }
