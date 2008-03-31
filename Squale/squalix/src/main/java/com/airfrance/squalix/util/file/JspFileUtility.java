@@ -21,6 +21,16 @@ public class JspFileUtility
     public static final String JSP_EXTENSION = ".jsp";
 
     /**
+     * Java keywords
+     */
+    private static final String JAVA_KEYWORDS[] =
+        { "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue",
+            "default", "do", "double", "else", "enum", "extends", "final", "finally", "float", "for", "goto", "if",
+            "implements", "import", "instanceof", "int", "interface", "long", "native", "new", "package", "private",
+            "protected", "public", "return", "short", "static", "strictfp", "super", "switch", "synchronized", "this",
+            "throws", "transient", "try", "void", "volatile", "while" };
+
+    /**
      * Dans le cas des compilation des jsps, un nom de package ou classe interdit en java mais autorisé pour les JSPs
      * est renommé.<br/> Par exemple <b>package
      * </p>
@@ -41,12 +51,9 @@ public class JspFileUtility
         // de la classe
         String[] decomposed = pFullName.split( "\\." );
         String covertedDirName = "";
-        // Le premier package correspons au package par défaut des JPSs donné lors de la persistance
-        // du composant (ie. {jsp}) donc on l'ignore.
-        // Le deuxième package indique l'index du répertoire source dans la liste donnée en paramètre
+        // Le premier package indique l'index du répertoire source dans la liste donnée en paramètre
         // ex : jsp -> index 0; jsp1 -> index1
-        // On commence donc au package 3 pour la recherche du fichier
-        for ( int i = 2; i < decomposed.length - 1; i++ )
+        for ( int i = 0; i < decomposed.length - 1; i++ )
         {
             covertedDirName += decomposed[i] + "/";
         }
@@ -250,5 +257,136 @@ public class JspFileUtility
             return result;
         }
 
+    }
+
+    /**
+     * @param basePackageName root package for this jsp
+     * @param jspUri jsp relative path
+     * @return full classname for this jsp
+     * @see tomcat source code
+     */
+    public static String getJspFullClassName( String basePackageName, String jspUri )
+    {
+        int iSep = jspUri.lastIndexOf( '/' ) + 1;
+        String className = makeJavaIdentifier( jspUri.substring( iSep ) );
+        String packageName = getServletPackageName( basePackageName, jspUri );
+        return packageName + "." + className;
+    }
+
+    /**
+     * Package name for the generated class is make up of the base package name, which is user settable, and the derived
+     * package name. The derived package name directly mirrors the file heirachy of the JSP page.
+     * 
+     * @see tomcat source code
+     */
+    public static String getServletPackageName( String basePackageName, String jspUri )
+    {
+        String result = basePackageName;
+        String dPackageName = getDerivedPackageName( jspUri );
+        if ( dPackageName.length() > 0 )
+        {
+            result += "." + dPackageName;
+        }
+        return result;
+    }
+
+    /**
+     * @param jspUri relative jsp path
+     * @return package's name converted by Tomcat
+     * @see Tomcat source code
+     */
+    private static String getDerivedPackageName( String jspUri )
+    {
+        String derivedPackageName = null;
+        int iSep = jspUri.lastIndexOf( '/' );
+        derivedPackageName = ( iSep > 0 ) ? makeJavaPackage( jspUri.substring( 0, iSep ) ) : "";
+        return derivedPackageName;
+    }
+
+    /**
+     * Converts the given path to a Java package or fully-qualified class name
+     * 
+     * @param path Path to convert
+     * @return Java package corresponding to the given path
+     */
+    public static final String makeJavaPackage( String path )
+    {
+        String classNameComponents[] = path.split( "/" );
+        StringBuffer legalClassNames = new StringBuffer();
+        for ( int i = 0; i < classNameComponents.length; i++ )
+        {
+            legalClassNames.append( makeJavaIdentifier( classNameComponents[i] ) );
+            if ( i < classNameComponents.length - 1 )
+            {
+                legalClassNames.append( '.' );
+            }
+        }
+        return legalClassNames.toString();
+    }
+
+    /**
+     * Converts the given identifier to a legal Java identifier
+     * 
+     * @param identifier Identifier to convert
+     * @return Legal Java identifier corresponding to the given identifier
+     */
+    public static final String makeJavaIdentifier( String identifier )
+    {
+        StringBuffer modifiedIdentifier = new StringBuffer( identifier.length() );
+        if ( !Character.isJavaIdentifierStart( identifier.charAt( 0 ) ) )
+        {
+            modifiedIdentifier.append( '_' );
+        }
+        for ( int i = 0; i < identifier.length(); i++ )
+        {
+            char ch = identifier.charAt( i );
+            if ( Character.isJavaIdentifierPart( ch ) && ch != '_' )
+            {
+                modifiedIdentifier.append( ch );
+            }
+            else if ( ch == '.' )
+            {
+                modifiedIdentifier.append( '_' );
+            }
+            else
+            {
+                modifiedIdentifier.append( mangleChar( ch ) );
+            }
+        }
+        if ( isJavaKeyword( modifiedIdentifier.toString() ) )
+        {
+            modifiedIdentifier.append( '_' );
+        }
+        return modifiedIdentifier.toString();
+    }
+
+    /**
+     * Test whether the argument is a Java keyword
+     * 
+     * @param key the key to test
+     * @return true if <code>key</code> is a java keyword
+     */
+    public static boolean isJavaKeyword( String key )
+    {
+        int i = 0;
+        int j = JAVA_KEYWORDS.length;
+        while ( i < j )
+        {
+            int k = ( i + j ) / 2;
+            int result = JAVA_KEYWORDS[k].compareTo( key );
+            if ( result == 0 )
+            {
+                return true;
+            }
+            if ( result < 0 )
+            {
+                i = k + 1;
+            }
+            else
+            {
+                j = k;
+            }
+        }
+        return false;
     }
 }

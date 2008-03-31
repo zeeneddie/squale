@@ -146,7 +146,7 @@ public class FileUtility
                 else
                 {
                     // On ajoute le nom absolu du fichier au fichiers inclus
-                    includedFileNames.add( srcFile.getCanonicalPath() );
+                    includedFileNames.add( srcFile.getCanonicalPath().replaceAll( "\\\\", "/" ) );
                 }
             }
             catch ( IOException ioe )
