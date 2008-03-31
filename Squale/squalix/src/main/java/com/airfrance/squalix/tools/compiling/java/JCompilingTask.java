@@ -514,13 +514,9 @@ public class JCompilingTask
     {
         MapParameterBO eclipseMap = (MapParameterBO) pMap.getParameters().get( ParametersConstants.ECLIPSE );
         StringParameterBO isEclipse = null;
-        MapParameterBO eclipseVars = null;
-        MapParameterBO eclipseLibs = null;
         if ( null != eclipseMap )
         {
             isEclipse = (StringParameterBO) eclipseMap.getParameters().get( ParametersConstants.ECLIPSE_COMPILATION );
-            eclipseVars = (MapParameterBO) eclipseMap.getParameters().get( ParametersConstants.ECLIPSE_VARS );
-            eclipseLibs = (MapParameterBO) eclipseMap.getParameters().get( ParametersConstants.ECLIPSE_LIBS );
 
         }
         if ( null != isEclipse && isEclipse.getValue().equals( "false" ) )
@@ -545,8 +541,7 @@ public class JCompilingTask
             // On compile avec le plugin eclipse
             // On récupère les variables et librairies définies par l'utilisateur
             EclipseCompilerImpl eclipseCompiler =
-                new EclipseCompilerImpl( pJWSADProjectList, (String) mData.getData( TaskData.VIEW_PATH ), eclipseVars,
-                                         eclipseLibs );
+                new EclipseCompilerImpl( pJWSADProjectList, (String) mData.getData( TaskData.VIEW_PATH ), eclipseMap );
             JComponent component = new JComponent( eclipseCompiler );
             addToComponents( component );
         }
@@ -568,6 +563,8 @@ public class JCompilingTask
                 File bundleFile =
                     FileUtility.getAbsoluteFile( (String) mData.getData( TaskData.VIEW_PATH ),
                                                  new File( bundlePath.getValue() ) );
+                // On passe le fichie en readonly
+                bundleFile.setReadOnly();
                 if ( bundleFile.isDirectory() )
                 {
                     bundleDir = bundleFile.getAbsolutePath();
@@ -771,15 +768,13 @@ public class JCompilingTask
          * on crée une 1ère liste en cassant la 1ère chaîne selon le séparateur de classpath
          */
         ArrayList list1 =
-            new ArrayList(
-                           (List) Arrays.asList( (String[]) ( str1.split( mConfiguration.getClasspathSeparator() ) ) ) );
+            new ArrayList( (List) Arrays.asList( (String[]) ( str1.split( mConfiguration.getClasspathSeparator() ) ) ) );
 
         /*
          * on crée une 2nde liste en cassant la 2nde chaîne selon le séparateur de classpath
          */
         ArrayList list2 =
-            new ArrayList(
-                           (List) Arrays.asList( (String[]) ( str2.split( mConfiguration.getClasspathSeparator() ) ) ) );
+            new ArrayList( (List) Arrays.asList( (String[]) ( str2.split( mConfiguration.getClasspathSeparator() ) ) ) );
 
         /* si aucune des listes n'est vide */
         if ( null != list1 && null != list2 )
