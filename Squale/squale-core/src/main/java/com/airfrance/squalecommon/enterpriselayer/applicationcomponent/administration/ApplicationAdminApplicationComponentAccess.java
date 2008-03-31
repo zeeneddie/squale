@@ -498,19 +498,19 @@ public class ApplicationAdminApplicationComponentAccess
     /**
      * Ajoute un accès utilisateur à la date du jour
      * 
-     * @param pApplications les applications de l'utilisateur
+     * @param pApplicationId application id
      * @param pMatricule le matricule de l'utilisateur
      * @param maxSize le nombre max d'accès à sauvegarder
      * @throws JrafEnterpriseException si erreur
      */
-    public void addUserAccess( Collection pApplications, String pMatricule, Integer maxSize )
+    public void addUserAccess( Long pApplicationId, String pMatricule, Integer maxSize )
         throws JrafEnterpriseException
     {
         try
         {
             ISession session = PERSISTENTPROVIDER.getSession();
             session.beginTransaction();
-            ApplicationFacade.addUserAccess( session, pApplications, pMatricule, maxSize );
+            ApplicationFacade.addUserAccess( session, pApplicationId, pMatricule, maxSize );
             session.commitTransaction();
         }
         catch ( JrafDaoException e )

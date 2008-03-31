@@ -143,4 +143,43 @@ public class PurgeApplicationComponentAccess
         }
         return status;
     }
+
+    /**
+     * Hide an application for not admin users without delete it physically: - remove users - if it's public, becomes
+     * private - disactive audits - delete current not attempted audits - rename application like
+     * applicationName(year)(month)(day)(hour)(minute)
+     * 
+     * @param pApplicationConf application to hide
+     * @return 1 if success 0 else
+     * @throws JrafEnterpriseException if error
+     */
+    public Integer hideApplication( ApplicationConfDTO pApplicationConf )
+        throws JrafEnterpriseException
+    {
+        Integer status = new Integer( 0 );
+        ISession session = null;
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            session.beginTransaction();
+            // Hide application with ApplicationFacade
+            ApplicationFacade.hideApplication( pApplicationConf, session );
+            session.commitTransaction();
+        }
+        catch ( Exception e )
+        {
+            // rollback
+            String tab[] = { String.valueOf( pApplicationConf.getId() ) };
+            String message = ACMessages.getString( "ac.exception.purge.purgeapplication", tab );
+            status = new Integer( 1 );
+            if ( session != null )
+            {
+                session.rollbackTransaction();
+            }
+            LOG.fatal( message, e );
+            throw new JrafEnterpriseException( message, e );
+        }
+        return status;
+    }
+
 }
