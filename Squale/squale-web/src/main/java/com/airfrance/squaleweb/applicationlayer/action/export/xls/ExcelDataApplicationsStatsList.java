@@ -69,6 +69,8 @@ public class ExcelDataApplicationsStatsList
         et.addHeader( "stats.state.col", "lastAuditIsTerminated" );
         // Active ou non
         et.addHeader( "stats.active.col", "activatedApplication" );
+        // Archived or not
+        et.addHeader( "stats.archived.col", "archivedApplication" );
         // Date dernier audit terminé
         et.addHeader( "stats.last_audit_date.col", "lastTerminatedAuditDate" );
         // Duré dernier audit
