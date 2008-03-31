@@ -120,6 +120,8 @@ public class ProjectResultsAction
 
         try
         {
+            // Add an user access for this application
+            addUserAccess( pRequest, ActionUtils.getCurrentApplication( pRequest ).getId() );
             // On supprime l'attribut en session
             pRequest.getSession().removeAttribute( ALL_FACTORS );
             forward = init( pMapping, pRequest, pForm );
@@ -468,11 +470,11 @@ public class ProjectResultsAction
         if ( null != value )
         {
             SqualeWebActionUtils.setValue( factorResult, "setCurrentMark", "" + value.floatValue() );
-            if ( audits.size() > 1 )
-            {
-                Float value2 = (Float) ( ( (List) resultDTO.getResultMap().get( pProject ) ).get( 1 ) );
-                factorResult.setPredecessorMark( "" + value2 );
-            }
+        }
+        if ( audits.size() > 1 )
+        {
+            Float value2 = (Float) ( ( (List) resultDTO.getResultMap().get( pProject ) ).get( 1 ) );
+            factorResult.setPredecessorMark( "" + value2 );
         }
         return factorResult;
     }
@@ -524,21 +526,15 @@ public class ProjectResultsAction
                 if ( null != value && value.floatValue() != -1 )
                 {
                     SqualeWebActionUtils.setValue( criteriumForm, "setCurrentMark", "" + value.floatValue() );
-                    // Calcul de la tendance s'il existe un audit précédent
-                    if ( audits.size() > 1 )
-                    {
-                        Float value2 = (Float) ( ( (List) resultDTO.getResultMap().get( audits.get( 1 ) ) ).get( i ) );
-                        criteriumForm.setPredecessorMark( "" + value2 );
-                    }
-                    getCriteriumResult( (CriteriumRuleDTO) names.get( i ), criteriumForm, pAudits, pProject );
-                    criteria.add( criteriumForm );
                 }
-                else
+                // Calcul de la tendance s'il existe un audit précédent
+                if ( audits.size() > 1 )
                 {
-                    // Le résultat étant nul, on ne calcule pas de tendance
-                    getCriteriumResult( (CriteriumRuleDTO) names.get( i ), criteriumForm, pAudits, pProject );
-                    criteria.add( criteriumForm );
+                    Float value2 = (Float) ( ( (List) resultDTO.getResultMap().get( audits.get( 1 ) ) ).get( i ) );
+                    criteriumForm.setPredecessorMark( "" + value2 );
                 }
+                getCriteriumResult( (CriteriumRuleDTO) names.get( i ), criteriumForm, pAudits, pProject );
+                criteria.add( criteriumForm );
             }
             results.setList( criteria );
         }
@@ -586,19 +582,14 @@ public class ProjectResultsAction
             {
                 // Conversion de la valeur en texte
                 SqualeWebActionUtils.setValue( resultForm, "setCurrentMark", "" + value.floatValue() );
-                // Calcul de la tendance s'il existe un audit antérieur
-                if ( audits.size() > 1 )
-                {
-                    Float value2 = (Float) ( ( (List) resultDTO.getResultMap().get( audits.get( 1 ) ) ).get( i ) );
-                    resultForm.setPredecessorMark( "" + value2 );
-                }
-                practices.add( resultForm );
             }
-            else
+            // Calcul de la tendance s'il existe un audit antérieur
+            if ( audits.size() > 1 )
             {
-                // Pas de calcul de tendance car pas de valeur
-                practices.add( resultForm );
+                Float value2 = (Float) ( ( (List) resultDTO.getResultMap().get( audits.get( 1 ) ) ).get( i ) );
+                resultForm.setPredecessorMark( "" + value2 );
             }
+            practices.add( resultForm );
         }
         pCriteriumForm.setPractices( practices );
     }

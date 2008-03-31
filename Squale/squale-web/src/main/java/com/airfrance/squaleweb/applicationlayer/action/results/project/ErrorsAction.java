@@ -63,6 +63,8 @@ public class ErrorsAction
             WActionForm projectForm = initProject( pMapping, pRequest );
             ComponentDTO project =
                 (ComponentDTO) WTransformerFactory.formToObj( ProjectTransformer.class, projectForm )[0];
+            // Add an user access for this application
+            addUserAccess( pRequest, project.getIDParent() );
             // On récupère l'id de l'audit courant
             String currentAuditId = (String) pRequest.getAttribute( "currentAuditId" );
             if ( null == currentAuditId )
@@ -297,7 +299,7 @@ public class ErrorsAction
         // on doit le mettre sous forme de listes
         List task = new ArrayList( 0 );
         task.add( pTaskName );
-        Object[] paramIn3 = { task, error, null, null };
+        Object[] paramIn3 = { task, error, new Integer( ErrorBO.NB_MAX_ERRORS ), new Integer( 0 ) };
         Collection errorsCollection = ( (Collection) ac.execute( "getErrorsByTask", paramIn3 ) );
         return errorsCollection;
     }
