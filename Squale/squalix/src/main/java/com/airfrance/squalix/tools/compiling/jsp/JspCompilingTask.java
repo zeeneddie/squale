@@ -93,25 +93,24 @@ public class JspCompilingTask
         {
             viewPath += "/";
         }
-        if ( isConfigurationSetting() )
+        try
         {
-            try
-            {
-                String servletVersion = setJ2eeWSADProject( j2eeProject, viewPath );
-                // On lance le compilateur
-                AbstractTomcatCompiler compiler =
-                    new TomcatCompilerFactory().createCompiler( j2eeProject, servletVersion );
-                compiler.compileJsp();
-            }
-            catch ( Exception be )
-            {
-                throw new TaskException( be );
-            }
-            // on modifie les paramètres temporaires pour ajouter le répertoire
-            // des .java des JSPs qui viennent d'être compilées
-            mData.putData( TaskData.JSP_TO_JAVA_DIR, j2eeProject.getJspDestPath() );
-            compileJava( viewPath, j2eeProject );
+            setConfiguration();
+            String servletVersion = setJ2eeWSADProject( j2eeProject, viewPath );
+            // On lance le compilateur
+            AbstractTomcatCompiler compiler = new TomcatCompilerFactory().createCompiler( j2eeProject, servletVersion );
+            compiler.compileJsp();
+            // On ajoute les liens entres les.java générés et les .jsp dans les paramètres temporaires
+            mData.putData( TaskData.JSP_MAP_NAMES, j2eeProject.getGeneratedClassesName() );
         }
+        catch ( Exception be )
+        {
+            throw new TaskException( be );
+        }
+        // on modifie les paramètres temporaires pour ajouter le répertoire
+        // des .java des JSPs qui viennent d'être compilées
+        mData.putData( TaskData.JSP_TO_JAVA_DIR, j2eeProject.getJspDestPath() );
+        compileJava( viewPath, j2eeProject );
     }
 
     /**
@@ -203,47 +202,34 @@ public class JspCompilingTask
     }
 
     /**
-     * @return true si la tâche a été correctement configurée
+     * Set task configuration
+     * 
+     * @throws ConfigurationException if task is not set
      */
-    private boolean isConfigurationSetting()
+    private void setConfiguration()
+        throws ConfigurationException
     {
         // On récupère la version servlet utilisée
         StringParameterBO webapp = (StringParameterBO) mProject.getParameter( ParametersConstants.WEB_APP );
         if ( webapp == null )
         {
             // erreur de configuration
-            String message = CompilingMessages.getString( "jsp.exception.webb_app_not_set" );
-            // On affiche un warning sans lancer d'exception, la tâche ne sera pas exécutée.
-            initError( message );
-            LOGGER.warn( message );
-            // Les paramètres sont mal configurés, on annule la tâche
-            mStatus = CANCELLED;
+            throw new ConfigurationException( CompilingMessages.getString( "jsp.exception.webb_app_not_set" ) );
         }
         // On récupère la version j2ee utilisée
         StringParameterBO j2eeScr = (StringParameterBO) mProject.getParameter( ParametersConstants.J2EE_VERSION );
         if ( j2eeScr == null )
         {
             // erreur de configuration
-            String message = CompilingMessages.getString( "jsp.exception.servlet_version_not_set" );
-            // On affiche un warning sans lancer d'exception, la tâche ne sera pas exécutée.
-            initError( message );
-            LOGGER.warn( message );
-            // Les paramètres sont mal configurés, on annule la tâche
-            mStatus = CANCELLED;
+            throw new ConfigurationException( CompilingMessages.getString( "jsp.exception.servlet_version_not_set" ) );
         }
         // On récupère la liste des chemins vers les jsps du projet
         ListParameterBO jspsList = (ListParameterBO) mProject.getParameter( ParametersConstants.JSP );
         if ( null == jspsList )
         {
             // erreur de configuration
-            String message = CompilingMessages.getString( "jsp.exception.sources_not_found" );
-            // On affiche un warning sans lancer d'exception, la tâche ne sera pas exécutée.
-            initError( message );
-            LOGGER.warn( message );
-            // Les paramètres sont mal configurés, on annule la tâche
-            mStatus = CANCELLED;
+            throw new ConfigurationException( CompilingMessages.getString( "jsp.exception.sources_not_found" ) );
         }
-        return mStatus != CANCELLED;
     }
 
     /**
@@ -274,7 +260,7 @@ public class JspCompilingTask
         // On récupère le répertoire racine de l'application dans les paramètres du projet
         String webAppPath = ( (StringParameterBO) mProject.getParameter( ParametersConstants.WEB_APP ) ).getValue();
         File webApp = FileUtility.getAbsoluteFile( viewPath, new File( webAppPath ) );
-        if ( null == webApp )
+        if ( !webApp.exists() )
         {
             // On lance une erreur de configuration
             LOGGER.warn( "Web application directory not found for project " + mProject.getName() );
@@ -344,19 +330,21 @@ public class JspCompilingTask
             // On le crée
             dest.mkdirs();
             jwsadProject.setDestPath( dest.getAbsolutePath() );
+            jwsadProject.setClasspath( j2eeProject.getClasspath() );
             // On récupère les répertoires des .class (hors jsp) du projet pour l'ajouter au classpath
             List classesDirs = (List) mData.getData( TaskData.CLASSES_DIRS );
             for ( int i = 0; i < classesDirs.size(); i++ )
             {
-                jwsadProject.setClasspath( j2eeProject.getClasspath() + ";" + (String) classesDirs.get( i ) );
+                jwsadProject.setClasspath( jwsadProject.getClasspath() + ";" + (String) classesDirs.get( i ) );
             }
+            // On modifie le classpath des paramètres temporaires
             jwsadProject.setSrcPath( j2eeProject.getJspDestPath() );
             jwsadProject.setJavaVersion( ( (StringParameterBO) mProject.getParameter( ParametersConstants.DIALECT ) ).getValue() );
             JWSADAntCompiler compiler = new JWSADAntCompiler( jwsadProject );
             isJavaComplation = true;
             compiler.doCompilation();
             mData.putData( TaskData.JSP_CLASSES_DIR, jwsadProject.getDestPath() );
-            StringBuffer classpath = new StringBuffer( (String) mData.getData( TaskData.CLASSPATH ) );
+            StringBuffer classpath = new StringBuffer( jwsadProject.getClasspath() );
             // On ajoute le répertoire des .class jsp au classpath pour mccabe
             if ( classpath.length() > 0 && !classpath.toString().endsWith( ";" ) )
             {
@@ -545,6 +533,11 @@ public class JspCompilingTask
         { // Filtrage JSP
             // on enlève le chemin de la vue qui n'est pas une information nécessaire
             compileErrorMessage = pMessage.replaceAll( (String) mData.getData( TaskData.VIEW_PATH ), "" );
+            // Il s'agit d'une exception Jasper
+            if ( compileErrorMessage.matches( ".*JasperException.*" ) )
+            {
+                pLevel = ErrorBO.CRITICITY_FATAL;
+            }
             initError( compileErrorMessage, pLevel );
             compileErrorMessage = "";
         }
