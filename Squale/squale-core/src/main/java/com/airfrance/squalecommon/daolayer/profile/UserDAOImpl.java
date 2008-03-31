@@ -92,9 +92,8 @@ public class UserDAOImpl
     }
 
     /**
-     * This method permit to search a user in the database according to its identifier and its password.
-     * If a user with the identifier and the password, the method return this user. If the method found nothing 
-     * it return a null user 
+     * This method permit to search a user in the database according to its identifier and its password. If a user with
+     * the identifier and the password, the method return this user. If the method found nothing it return a null user
      * 
      * @param pSession Hibernate session
      * @param pMatricule user identifier
@@ -188,15 +187,40 @@ public class UserDAOImpl
         Collection retUsers = null;
         if ( null != pApplication )
         {
-            String whereClause = "where ";
-            whereClause += pApplication.getId() + " in indices(" + getAlias() + ".rights)";
-            retUsers = findWhere( pSession, whereClause );
+            retUsers = findWhere( pSession, getWhereApplicationClause( pApplication.getId() ) );
+
         }
         else
         {
             retUsers = new ArrayList();
         }
         return retUsers;
+    }
+
+    /**
+     * @param session hivernate session
+     * @param pAppliId application's id
+     * @return number of users declared for this application
+     * @throws JrafDaoException if error
+     */
+    public int countWhereApplication( ISession session, long pAppliId )
+        throws JrafDaoException
+    {
+        return countWhere( session, getWhereApplicationClause( pAppliId ) ).intValue();
+    }
+
+    /**
+     * @param pAppliId application's id
+     * @return where clause for query with application id as condition
+     */
+    private String getWhereApplicationClause( long pAppliId )
+    {
+        StringBuffer whereClause = new StringBuffer( "where " );
+        whereClause.append( pAppliId );
+        whereClause.append( " in indices(" );
+        whereClause.append( getAlias() );
+        whereClause.append( ".rights)" );
+        return whereClause.toString();
     }
 
     /**
