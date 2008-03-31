@@ -19,23 +19,6 @@ public class ApplicationStatsTransformer
 {
 
     /**
-     * @param pApplis les applications
-     * @param pDaysForTerminatedAudit le nombre de jours max pour lesquels il doit y avoir au moins un audit réussi pour
-     *            que l'application soit active
-     * @param pDaysForAllAudits le nombre de jours défini pour compter les audits
-     * @return les statistiques de chaque application sous forme d'une liste de DTO
-     */
-    public static List bo2Dto( List pApplis, int pDaysForTerminatedAudit, int pDaysForAllAudits )
-    {
-        List stats = new ArrayList();
-        for ( int i = 0; i < pApplis.size(); i++ )
-        {
-            stats.add( bo2Dto( (ApplicationBO) pApplis.get( i ), pDaysForTerminatedAudit, pDaysForAllAudits ) );
-        }
-        return stats;
-    }
-
-    /**
      * Transformation en DTO des statistiques d'une application
      * 
      * @param pApplicationBO l'application
