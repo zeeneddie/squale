@@ -15,6 +15,8 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Proje
 public class ErrorBO
     implements Serializable
 {
+    /** Maximum for a task */
+    public static final int NB_MAX_ERRORS = 500;
 
     /**
      * Identifiant (au sens technique) de l'objet
