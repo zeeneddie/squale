@@ -6,6 +6,7 @@ import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
 import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm;
+
 import com.airfrance.squaleweb.taskconfig.qc.ExtBugTrackingQCTaskConfig;
 import com.airfrance.squaleweb.transformer.component.parameters.external.BugTrackingQCConfTransformer;
 
@@ -28,11 +29,6 @@ public class BugTrackingQCForm
     /** L'emplacement de la trace */
     private String mQCTrace;
 
-    /** */
-    // private String mKey;
-    /** */
-    // private Collection mFields;
-
     /**
      * Le constructeur
      */
@@ -42,9 +38,6 @@ public class BugTrackingQCForm
         mQCPassword = "";
         mQCUrl = "";
         mQCTrace = "";
-        // QCConfigTask config = new QCConfigTask();
-        // mKey=config.getHelpKeyTask();
-        // mFields = config.getInfoConfigTask();
 
     }
 
@@ -117,7 +110,10 @@ public class BugTrackingQCForm
     }
 
     /**
+     * {@inheritdoc}
      * 
+     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest)
      */
     public void reset( ActionMapping mapping, HttpServletRequest request )
     {
@@ -190,29 +186,4 @@ public class BugTrackingQCForm
     {
         mQCTrace = pQCTrace;
     }
-
-    /**
-     * @return retourne la liste des champs à afficher
-     */
-    // public Collection getFields() {
-    // return mFields;
-    // / }
-    /**
-     * @return retourne le la clé générique
-     */
-    // public String getKey() {
-    // return mKey;
-    // }
-    /**
-     * @param list place la liste des champs à afficher
-     */
-    // public void setFields(List list) {
-    // mFields = list;
-    // }
-    /**
-     * @param string Place la clé générique
-     */
-    // public void setKey(String string) {
-    // mKey = string;
-    // }
 }
