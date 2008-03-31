@@ -21,22 +21,30 @@ administrateur
 			<bean:message key="grids_admin.details" />
 			<br />
 			<br />
-			<div style="color: #f00"><html:messages id="msg" message="true">
-				<bean:write name="msg" />
-				<br>
-			</html:messages></div>
 			<%-- Affichage d'un message d'erreur si des grilles ne sont liées à aucun profil ni aucun audit --%>
-			<bean:size id="unlinkedGridsSize" name="gridListForm" property="unlinkedGrids" />
+			<bean:define id="unlinkedGridsSize" name="gridListForm" property="unlinkedGrids" />
 			<logic:greaterThan name="unlinkedGridsSize" value="0">
 				<div style="color: #f00">
 					<bean:message key="grids_admin.existing.unlinkedGrids" />
 					<ul>
-					<logic:iterate name="gridListForm" property="unlinkedGrids" id="gridName">
-						<li><%=gridName%></li>
+					<logic:iterate name="gridListForm" property="unlinkedGrids" id="unlikedGrid">
+						<li><af:write name="unlikedGrid" property="name"/> 
+                                (<af:write name="unlikedGrid" property="updateDate" dateFormatKey="datetime.format.grid"/>)</li>
 					</logic:iterate>
 					</ul>
 				</div>
-			</logic:greaterThan>
+			</logic:greaterThan>            <br />
+            <div style="color: #f00"><html:messages id="msg" message="true">
+                <bean:write name="msg" />
+                <logic:notEmpty name="usedGrids">
+                    <ul>
+                    <logic:iterate name="usedGrids" property="grids" id="grid">
+                        <li><af:write name="grid" property="name"/> - <af:write name="grid" property="updateDate" formatKey="datetime.format.grid"/></li>
+                    </logic:iterate>
+                    </ul>
+                </logic:notEmpty>
+                <br>
+            </html:messages></div>
 			<af:form action="grid.do" scope="session" method="POST">
 				<af:table name="gridListForm" property="grids" totalLabelPos="none"
 					emptyKey="table.results.none">
