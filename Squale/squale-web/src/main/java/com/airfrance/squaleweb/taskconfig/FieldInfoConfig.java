@@ -23,6 +23,7 @@ public class FieldInfoConfig
      * @param pProperty Nom du champ
      * @param pIsRequired Champ obligatoire ?
      * @param pSize Taille du field
+     * @param pType the type
      */
     public FieldInfoConfig( String pKey, String pProperty, String pIsRequired, String pSize, String pType )
     {
