@@ -441,6 +441,10 @@
 	    -->
 
         </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.qc.ExtTestManagerQCMetricsBO"
+            discriminator-value="TestManagerQCMetrics"
+        ></subclass>
 
     </class>
 
