@@ -11,11 +11,14 @@ import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
 import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
 import com.airfrance.jraf.spi.persistence.ISession;
 import com.airfrance.squalecommon.daolayer.component.ApplicationDAOImpl;
+import com.airfrance.squalecommon.daolayer.profile.UserDAOImpl;
 import com.airfrance.squalecommon.daolayer.stats.SiteAndProfilStatsDICTDAOImpl;
 import com.airfrance.squalecommon.daolayer.stats.SiteStatsDICTDAOImpl;
+import com.airfrance.squalecommon.datatransfertobject.stats.ApplicationStatsDTO;
 import com.airfrance.squalecommon.datatransfertobject.stats.SetOfStatsDTO;
 import com.airfrance.squalecommon.datatransfertobject.transform.stats.ApplicationStatsTransformer;
 import com.airfrance.squalecommon.datatransfertobject.transform.stats.StatsTransform;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 
 /**
  */
@@ -81,6 +84,7 @@ public class StatsFacade
         // Initialisation
         ISession session = null;
         ApplicationDAOImpl appliDAO = ApplicationDAOImpl.getInstance();
+        UserDAOImpl userDAO = UserDAOImpl.getInstance();
         List results = new ArrayList();
         try
         {
@@ -88,7 +92,18 @@ public class StatsFacade
             // On récupère toutes les applications non supprimées triées par ordre alphabétique
             List allApplis = appliDAO.findNotDeleted( session );
             // On effectue la transformation en statistiques
-            results.addAll( ApplicationStatsTransformer.bo2Dto( allApplis, pDaysForTerminatedAudit, pDaysForAllAudits ) );
+            for ( int i = 0; i < allApplis.size(); i++ )
+            {
+                ApplicationBO appliBO = (ApplicationBO) allApplis.get( i );
+                ApplicationStatsDTO statsDTO =
+                    ApplicationStatsTransformer.bo2Dto( appliBO, pDaysForTerminatedAudit, pDaysForAllAudits );
+                // Test if it's an archived application (= 0 user)
+                if ( userDAO.countWhereApplication( session, appliBO.getId() ) == 0 )
+                {
+                    statsDTO.setArchived( true );
+                }
+                results.add( statsDTO );
+            }
 
         }
         catch ( JrafDaoException jde )
@@ -102,5 +117,4 @@ public class StatsFacade
 
         return results;
     }
-
 }
