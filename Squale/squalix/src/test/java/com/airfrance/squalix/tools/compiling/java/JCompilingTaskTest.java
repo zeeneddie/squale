@@ -17,13 +17,13 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.param
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import com.airfrance.squalix.core.AbstractTask;
 import com.airfrance.squalix.core.TaskData;
 import com.airfrance.squalix.tools.compiling.utility.FileManager;
 
 /**
- * Test de compilation d'un projet UNIT_KO : Test ok mais non directement testable du fait du changement temporaire dans
- * la compilation pour avoir la version 1.5 de java. Le test passe si dans la classe de compilation Java
- * (JWSADAntCompiler) on revient au code précédent la particularité 1.5
+ * Il faut penser à modifier les clés javac.executable.1_5 et java.executable.1_5 dans le fichier compiling.properties
+ * pour indiquer le chemin vers java et javac en local.
  */
 public class JCompilingTaskTest
     extends SqualeTestCase
@@ -127,6 +127,13 @@ public class JCompilingTaskTest
         mProject.getParameters().getParameters().put( ParametersConstants.DIALECT, dialect );
         mProject.getParameters().getParameters().put( ParametersConstants.SOURCES, listSrcBO );
 
+        // On compile avec javac et pas avec le plugin eclipse
+        MapParameterBO eclipse = new MapParameterBO();
+        StringParameterBO isEclipse = new StringParameterBO();
+        isEclipse.setValue( "false" );
+        eclipse.getParameters().put( ParametersConstants.ECLIPSE_COMPILATION, isEclipse );
+        mProject.getParameters().getParameters().put( ParametersConstants.ECLIPSE, eclipse );
+
         // on sauve la modification sur les params
         ProjectParameterDAOImpl.getInstance().create( getSession(), mProject.getParameters() );
         ProjectDAOImpl.getInstance().save( getSession(), mProject );
@@ -152,12 +159,12 @@ public class JCompilingTaskTest
         classFileList = FileManager.checkFileNumber( mDestDir, CLASS_EXTENSION );
         ArrayList javaFileList = FileManager.checkFileNumber( mRootDir, JAVA_EXTENSION );
         assertTrue( javaFileList.size() != 0 );
-        // Il y a 12 fichiers java donnés mais avec les dépendances
-        // et les classes internes ça fait en fait 14 fichiers compilés
-        final int nbFiles = 12;
-        assertEquals( nbFiles, javaFileList.size() );
-        final int nbCompiledFiles = 14;
-        assertEquals( classFileList.size(), nbCompiledFiles );
+        // Il y a 10 fichiers java donnés mais avec les dépendances
+        // et les classes internes ça fait en fait 12 fichiers compilés
+        final int nbFiles = 10;
+        assertEquals( javaFileList.size(), nbFiles );
+        final int nbCompiledFiles = 13;
+        assertEquals( nbCompiledFiles, classFileList.size() );
     }
 
     /**
@@ -274,7 +281,7 @@ public class JCompilingTaskTest
 
         // On ajoute le bundle
         StringParameterBO bundle = new StringParameterBO();
-        bundle.setValue( "./data/Project4RCPCompilationTest/bundle.zip" );
+        bundle.setValue( "Project4RCPCompilationTest/bundle.zip" );
         mProject.getParameters().getParameters().put( ParametersConstants.BUNDLE_PATH, bundle );
         getSession().beginTransaction();
 
@@ -297,10 +304,20 @@ public class JCompilingTaskTest
         classFileList = FileManager.checkFileNumber( mDestDir, CLASS_EXTENSION );
         ArrayList javaFileList = FileManager.checkFileNumber( mRootDir, JAVA_EXTENSION );
         assertTrue( javaFileList.size() != 0 );
-        // Il y a 2 fichiers java
-        final int nbFiles = 2;
+        // Il y a 1 fichier java
+        final int nbFiles = 1;
         assertEquals( javaFileList.size(), nbFiles );
-        final int nbCompiledFiles = 2;
+        final int nbCompiledFiles = 1;
         assertEquals( nbCompiledFiles, classFileList.size() );
+
+        // On teste la récupération des erreurs lorsqu'un plugin n'est pas trouvé
+        mTask.setStatus( AbstractTask.NOT_ATTEMPTED );
+        bundle.setValue( "Project4RCPCompilationTest/src" );
+        mProject.getParameters().getParameters().put( ParametersConstants.BUNDLE_PATH, bundle );
+        getSession().beginTransaction();
+        ProjectDAOImpl.getInstance().save( getSession(), mProject );
+        getSession().commitTransactionWithoutClose();
+        mTask.run();
+        assertEquals( AbstractTask.FAILED, mTask.getStatus() );
     }
 }
