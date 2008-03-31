@@ -50,6 +50,7 @@ Class-Path: lib/compiling_ressources/java/1_4/j2ee.jar
  lib/fscontext.jar 
  lib/pmd-3.8.jar 
  lib/providerutil.jar 
+ lib/ApiQC_2_0.jar 
  /exploit/mq/mq/java/lib/com.ibm.mqjms.jar 
  /exploit/mq/mq/java/lib/com.ibm.mq.jar 
  /app/USE/prod/bin/lib/mail.jar 
