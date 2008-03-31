@@ -65,6 +65,11 @@ public class JCompilingForm
     private List mEclipseLibs = new ArrayList( 0 );
 
     /**
+     * Advanced options for eclipse launcher
+     */
+    private String mAdvancedOptions = "";
+
+    /**
      * @return Nom des répertoires à exclure de la compilation
      */
     public String[] getExcludeDirectories()
@@ -333,6 +338,22 @@ public class JCompilingForm
     public void setEclipseCompilation( boolean pEclipseCompilation )
     {
         mEclipseCompilation = pEclipseCompilation;
+    }
+
+    /**
+     * @return eclipse advanced options
+     */
+    public String getAdvancedOptions()
+    {
+        return mAdvancedOptions;
+    }
+
+    /**
+     * @param pAdvancedOptions eclipse advanced options
+     */
+    public void setAdvancedOptions( String pAdvancedOptions )
+    {
+        mAdvancedOptions = pAdvancedOptions;
     }
 
 }

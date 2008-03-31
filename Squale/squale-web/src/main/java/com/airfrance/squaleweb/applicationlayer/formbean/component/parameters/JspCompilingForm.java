@@ -74,17 +74,6 @@ public class JspCompilingForm
     }
 
     /**
-     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping,
-     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
-     */
-    public void reset( ActionMapping mapping, HttpServletRequest request )
-    {
-        setWebAppPath( "" );
-        setJ2eeVersion( "" );
-        setExcludeJspDir( new String[0] );
-    }
-
-    /**
      * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
      *      {@inheritDoc}
      */
@@ -104,14 +93,16 @@ public class JspCompilingForm
         // Version des servlets obligatoire
         if ( getJ2eeVersion().length() == 0 )
         {
-            addError( "j2eeVersion", "error.field.required" );
+            addError( "j2eeVersion", "project_creation.jsp.j2ee_version.required" );
         }
         // Chemin vers le répertoire d'application Web
         setWebAppPath( getWebAppPath().trim() );
         if ( getWebAppPath().length() == 0 )
         {
-            addError( "webAppPath", "error.field.required" );
+            addError( "webAppPath", "project_creation.jsp.web_app_path.required" );
         }
+        // Clean excluded directories
+        setExcludeJspDir( SqualeWebActionUtils.cleanValues( getExcludeJspDir() ) );
     }
 
     /**

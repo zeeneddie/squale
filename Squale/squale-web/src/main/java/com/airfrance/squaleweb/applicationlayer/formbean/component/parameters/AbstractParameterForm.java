@@ -12,6 +12,8 @@ import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
 public abstract class AbstractParameterForm
     extends RootForm
 {
+    /** Indicate if it's the first time this task is setting */
+    protected boolean newConf = true;
 
     /**
      * @return le transformer du bean
@@ -66,5 +68,21 @@ public abstract class AbstractParameterForm
      * @param pRequest la requête
      */
     protected abstract void validateConf( ActionMapping pMapping, HttpServletRequest pRequest );
+
+    /**
+     * @return true if it's the first time this task is setting
+     */
+    public boolean isNewConf()
+    {
+        return newConf;
+    }
+
+    /**
+     * @param pNewConf indicate if it's the first time this task is setting
+     */
+    public void setNewConf( boolean pNewConf )
+    {
+        newConf = pNewConf;
+    }
 
 }
