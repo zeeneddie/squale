@@ -5,7 +5,14 @@
 	La configuration des types de récupération des sources se fait par l'action dont le nom correspond à
 	l'attribut name du tag sourcemanagement.
 	Chaque profile doit commencer la tâche d'analyse de récupération des sources du projet et terminer
-	par sa tâche de terminaison  -->
+	par sa tâche de terminaison 
+	
+	!! ATTENTION : Les TREs pour la configuration du scatterplot ne doivent pas être sur un projet
+	ou une application et doit correspondre à des entiers !!
+	
+	Le paramètre "ruleset" des tâches PmdTask et RulesCheckingTask sert à définir un ruleset par défaut
+	lors de la configuration des tâches. (NB : Pour PMD, le nom du paramètre est précédé du langage associé).
+-->
 <configuration>
 	<stoptimes>
 		<stoptime day="monday" time="4:00"></stoptime>
@@ -45,8 +52,6 @@
 		<task name="CpdTask" class="com.airfrance.squalix.tools.cpd.CpdTask" configurable="false" mandatory="false"></task>
 		<task name="PmdTask" class="com.airfrance.squalix.tools.pmd.PmdTask" mandatory="false"></task>
 		<task name="JSPVolumetryTask" class="com.airfrance.squalix.tools.jspvolumetry.JSPVolumetryTask" configurable="false"></task>
-		
-		<task name="ExtBugTrackingQCTask" class="com.airfrance.squalix.tools.external.bugtracking.qc.ExtBugTrackingQCTask" configurable="true" mandatory="false"></task>
 		
 		<!-- a lancer impérativement après McCabe ou un autre outil car on a besoin que les données existent déjà
 			RSM ne peut pas créer correctement les méthodBO -->
@@ -106,11 +111,14 @@
 				<task-ref name="JavaRSMTask"></task-ref>
 				<task-ref name="JDependTask"></task-ref>
 				<task-ref name="CkjmTask"></task-ref>
-				<task-ref name="RulesCheckingTask"></task-ref>
+				<task-ref name="RulesCheckingTask">
+					<parameter name="ruleset" value="default" />
+				</task-ref>
 				<task-ref name="MackerTask"></task-ref>
 				<task-ref name="UMLQualityTask"></task-ref>
 				<task-ref name="PmdTask">
 					<parameter name="language" value="java" />
+					<parameter name="javaruleset" value="af.java.default" />
 				</task-ref>
 				<task-ref name="CpdTask">
 					<parameter name="language" value="java" />
@@ -155,11 +163,14 @@
 				<task-ref name="JavaRSMTask"></task-ref>
 				<task-ref name="JDependTask"></task-ref>
 				<task-ref name="CkjmTask"></task-ref>
-				<task-ref name="RulesCheckingTask"></task-ref>
+				<task-ref name="RulesCheckingTask">
+					<parameter name="ruleset" value="default" />
+				</task-ref>
 				<task-ref name="MackerTask"></task-ref>
 				<task-ref name="UMLQualityTask"></task-ref>
 				<task-ref name="PmdTask">
 					<parameter name="language" value="java" />
+					<parameter name="javaruleset" value="af.java.default" />
 				</task-ref>
 				<task-ref name="CpdTask">
 					<parameter name="language" value="java" />
@@ -252,12 +263,16 @@
 				<task-ref name="JavaRSMTask"></task-ref>
 				<task-ref name="JDependTask"></task-ref>
 				<task-ref name="CkjmTask"></task-ref>
-				<task-ref name="RulesCheckingTask"></task-ref>
+				<task-ref name="RulesCheckingTask">
+					<parameter name="ruleset" value="default" />
+				</task-ref>
 				<task-ref name="J2eeMackerTask"></task-ref>
 				<task-ref name="UMLQualityTask"></task-ref>
 				<task-ref name="PmdTask">
 					<parameter name="language" value="java" />
+					<parameter name="javaruleset" value="af.java.default" />
 					<parameter name="language" value="jsp" />
+					<parameter name="jspruleset" value="af.jsp.default" />
 				</task-ref>
 				<task-ref name="CpdTask">
 					<parameter name="language" value="java" />
@@ -309,12 +324,16 @@
 				<task-ref name="JavaRSMTask"></task-ref>
 				<task-ref name="JDependTask"></task-ref>
 				<task-ref name="CkjmTask"></task-ref>
-				<task-ref name="RulesCheckingTask"></task-ref>
+				<task-ref name="RulesCheckingTask">
+					<parameter name="ruleset" value="default" />
+				</task-ref>
 				<task-ref name="J2eeMackerTask"></task-ref>
 				<task-ref name="UMLQualityTask"></task-ref>
 				<task-ref name="PmdTask">
 					<parameter name="language" value="java" />
+					<parameter name="javaruleset" value="af.java.default" />
 					<parameter name="language" value="jsp" />
+					<parameter name="jspruleset" value="af.jsp.default" />
 				</task-ref>
 				<task-ref name="CpdTask">
 					<parameter name="language" value="java" />
