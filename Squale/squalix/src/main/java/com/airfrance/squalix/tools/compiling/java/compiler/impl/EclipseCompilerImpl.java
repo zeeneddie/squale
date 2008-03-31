@@ -36,13 +36,11 @@ public class EclipseCompilerImpl
      * 
      * @param pProjectList liste des projets WSAD à compiler.
      * @param pViewPath le view path
-     * @param eclipseVars les variables eclipse
-     * @param eclipseLibs les librairies utilisateurs eclipse
+     * @param eclipseParams eclipse parameters
      */
-    public EclipseCompilerImpl( List pProjectList, String pViewPath, MapParameterBO eclipseVars,
-                                MapParameterBO eclipseLibs )
+    public EclipseCompilerImpl( List pProjectList, String pViewPath, MapParameterBO eclipseParams )
     {
-        eclipseCompiler = new EclipseCompiler( pProjectList, pViewPath, eclipseVars, eclipseLibs );
+        eclipseCompiler = new EclipseCompiler( pProjectList, pViewPath, eclipseParams );
     }
 
     /**
