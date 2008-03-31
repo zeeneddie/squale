@@ -7,7 +7,13 @@
                 <separator name="classpath" value=";" />
             </separators>
             <bootclasspaths>
-            	<bootclasspath version="1.4" path="C:/j2sdk1.4.2_12/jre/lib/rt.jar" />
+            	<bootclasspath version="1.4">                    
+            		<lib path="C:/j2sdk1.4.2_12/jre/lib/"/>
+                </bootclasspath>
+                <bootclasspath version="1.5">
+                    <lib path="C:/jdk1.5.0_14/jre/lib" />
+                </bootclasspath>
+
             </bootclasspaths>
             <default_jdk_version>1_4</default_jdk_version>
             <dest_dir>bin/</dest_dir>
