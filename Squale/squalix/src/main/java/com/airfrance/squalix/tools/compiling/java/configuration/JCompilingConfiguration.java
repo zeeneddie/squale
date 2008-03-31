@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -72,8 +73,8 @@ public class JCompilingConfiguration
     private File mExportedLibsDir = new File( "" );
 
     /**
-     * Les classpath des APIs java dont la clé est la version de java. 1.3 -> /chemin1_3VersLe_rt.jar 1.4 ->
-     * /chemin1_4VersLe_rt.jar 1.5 -> /chemin1_5VersLe_rt.jar
+     * Lib to add to the javac bootclasspath option depend on dialect. 1.3 -> pathtoJreLib1_3 1.4 -> pathToJreLib1_4 1.5 ->
+     * pathToJreLib1_5
      */
     private HashMap mBootclasspaths = new HashMap();
 
@@ -242,20 +243,20 @@ public class JCompilingConfiguration
 
         boolean throwException = false;
 
-        /* noeud non nul et de type ELEMENT */
+        // not null and element type
         if ( null != myNode && Node.ELEMENT_NODE == myNode.getNodeType() )
         {
-            /* on récupère le 1er noeud fils */
+            // We get the first child node
             myNode =
                 ConfigUtility.getNodeByTagName(
                                                 myNode,
                                                 CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath" ) );
 
-            /* si ce noeud existe */
+            // If node exists
             if ( null != myNode )
             {
                 NamedNodeMap attrMap = null;
-                String attrValue = null, attrName = null;
+                String javaVersion = null;
 
                 /* tant qu'il y a des noeuds */
                 while ( null != myNode )
@@ -265,28 +266,19 @@ public class JCompilingConfiguration
                         /* on récupère les attributs du noeud */
                         attrMap = myNode.getAttributes();
 
-                        /* attribut "clé" */
-                        attrName =
+                        /* attribut "version" */
+                        javaVersion =
                             ( attrMap.getNamedItem( CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath.version" ) ) ).getNodeValue().trim();
 
-                        /* attribut "valeur" */
-                        attrValue =
-                            ( attrMap.getNamedItem( CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath.path" ) ) ).getNodeValue().trim();
-
-                        // On invoque la méthode d'ajout
-                        ( (Method) ( mMap.get( CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath" ) ) ) ).invoke(
-                                                                                                                                                      this,
-                                                                                                                                                      new String[] {
-                                                                                                                                                          attrName,
-                                                                                                                                                          attrValue } );
+                        // We will get all children nodes
+                        getBootClasspathLibsFromXML( myNode, javaVersion );
                     }
                     /* on itère */
                     myNode = myNode.getNextSibling();
                 }
 
                 attrMap = null;
-                attrName = null;
-                attrValue = null;
+                javaVersion = null;
 
                 /* erreur rencontrée --> exception à lancer */
             }
@@ -307,6 +299,84 @@ public class JCompilingConfiguration
         if ( throwException )
         {
             /* exception lancée */
+            throw new Exception( CompilingMessages.getString( "exception.xml.node_not_found" ) );
+        }
+    }
+
+    /**
+     * Add bootclasspath lib to the bootclasspath map with javaVersion key
+     * 
+     * @param pNode root node containing all lib tag definitions
+     * @param javaVersion java dialect
+     * @throws Exception if error
+     */
+    private void getBootClasspathLibsFromXML( Node pNode, String javaVersion )
+        throws Exception
+    {
+
+        boolean throwException = false;
+
+        // not null and element type
+        if ( null != pNode && Node.ELEMENT_NODE == pNode.getNodeType() )
+        {
+            // We get the first child node
+            pNode =
+                ConfigUtility.getNodeByTagName(
+                                                pNode,
+                                                CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath.lib" ) );
+
+            // If node exists
+            if ( null != pNode )
+            {
+
+                NamedNodeMap attrMap = null;
+                String attrPath = null;
+
+                /* While there are nodes */
+                while ( null != pNode )
+                {
+                    if ( Node.ELEMENT_NODE == pNode.getNodeType() )
+                    {
+                        /* on récupère les attributs du noeud */
+                        attrMap = pNode.getAttributes();
+
+                        /* "path" attribute */
+                        attrPath =
+                            ( attrMap.getNamedItem( CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath.lib.path" ) ) ).getNodeValue().trim();
+
+                        // We invoke add method
+                        ( (Method) ( mMap.get( CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath" ) ) ) ).invoke(
+                                                                                                                                                      this,
+                                                                                                                                                      new String[] {
+                                                                                                                                                          javaVersion,
+                                                                                                                                                          attrPath } );
+                    }
+                    /* on itère */
+                    pNode = pNode.getNextSibling();
+                }
+
+                attrMap = null;
+                attrPath = null;
+
+                /* have error --> launch exception */
+            }
+            else
+            {
+                throwException = true;
+            }
+            /* have erreor --> launch exception */
+        }
+        else
+        {
+            throwException = true;
+        }
+
+        pNode = null;
+
+        /* have error */
+        if ( throwException )
+        {
+            /* launched exception */
             throw new Exception( CompilingMessages.getString( "exception.xml.node_not_found" ) );
         }
     }
@@ -575,22 +645,28 @@ public class JCompilingConfiguration
 
     /**
      * @param pDialect la version java sous la forme 1.4, 1.3,...
-     * @return le chemin vers l'api java de la version java pDialect
+     * @return les chemins vers les libs jre de l'api java de la version java pDialect
      */
-    public String getBootclasspath( String pDialect )
+    public List getBootclasspath( String pDialect )
     {
-        return (String) mBootclasspaths.get( pDialect );
+        return (List) mBootclasspaths.get( pDialect );
     }
 
     /**
      * Ajoute une entrée pour l'option -booclasspath de javac
      * 
      * @param pDialect le dialect java qui sert de clé
-     * @param pPath le chemin vers le rt.jar correspondant à la version de java
+     * @param pPath le chemin vers une librairie de l'API sun de version pDialect
      */
     public void addBootclasspath( String pDialect, String pPath )
     {
-        mBootclasspaths.put( pDialect, pPath );
+        ArrayList libs = (ArrayList) mBootclasspaths.get( pDialect );
+        if ( libs == null )
+        {
+            libs = new ArrayList();
+        }
+        libs.add( pPath );
+        mBootclasspaths.put( pDialect, libs );
     }
 
 }
