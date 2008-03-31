@@ -36,7 +36,10 @@ import com.airfrance.squalix.util.repository.ComponentRepository;
  * Tâche Ckjm.<br/> Calcule le CBO (couplage entre les classes) des classes du projet à auditer.<br/> La tâche de
  * compilation java doit avoir été éxécutée avant afin que le chemin du répertoire contenant les ".class" (CLASSES_DIRS)
  * soit présent dans les paramètres temporaires.<br/> La tâche du source manager associé au projet doit avoir été
- * éxécutée avant afin que le chemin de la vue (VIEW_PATH) soit présent dans les paramètres temporaires.<br/>
+ * éxécutée avant afin que le chemin de la vue (VIEW_PATH) soit présent dans les paramètres temporaires.<br/> No path
+ * in CLASSES_DIRS parameter must contains spaces else ckjm won't work correctly because ckjm considers a classe name
+ * with space as a jar file following by the classe name to analyze (see ckjm documentation :
+ * http://www.spinellis.gr/sw/ckjm/doc/oper.html)
  */
 public class CkjmTask
     extends AbstractTask
