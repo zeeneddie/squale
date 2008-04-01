@@ -31,6 +31,8 @@
 		<!-- taches obligatoires -->
 		<task name="ClearCaseTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseTask" standard="true"></task>
 		<task name="ClearCaseCleanerTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseCleanerTask" configurable="false"></task>
+		<task name="ScmTask" class="com.airfrance.squalix.tools.scm.task.ScmTask" standard="true"></task>
+		<task name="ScmCleanerTask" class="com.airfrance.squalix.tools.scm.task.ScmCleanerTask" configurable="false"></task>		
 		<task name="JCompilingTask" class="com.airfrance.squalix.tools.compiling.java.JCompilingTask" standard="true"></task>
 		<task name="JCompilingCleanerTask" class="com.airfrance.squalix.tools.compiling.java.JCompilingCleanerTask" configurable="false"></task>
 		<task name="JspCompilingTask" class="com.airfrance.squalix.tools.compiling.jsp.JspCompilingTask" standard="true"></task>
@@ -75,6 +77,14 @@
 				<task-ref name="SourceCodeAnalyserCleanerTask"></task-ref>
 			</termination>
 		</sourcemanagement>
+		<sourcemanagement name="Scm">
+			<analysis>
+				<task-ref name="ScmTask"></task-ref>
+			</analysis>
+			<termination>
+				<task-ref name="ScmCleanerTask"></task-ref>
+			</termination>
+		</sourcemanagement>	
 	</sourcemanagements>
 	<profiles>
 		<profile name="java">
