@@ -1115,7 +1115,9 @@ public class ApplicationFacade
         {
             if ( pSession == null )
             {
+                // CHECKSTYLE:OFF Assign value to null parameter pSession
                 pSession = PERSISTENTPROVIDER.getSession();
+                // CHECKSTYLE:ON
             }
             ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
             // Load application from database
