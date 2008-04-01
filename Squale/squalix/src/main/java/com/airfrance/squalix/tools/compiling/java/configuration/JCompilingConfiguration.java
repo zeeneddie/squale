@@ -315,30 +315,31 @@ public class JCompilingConfiguration
     {
 
         boolean throwException = false;
+        Node node = pNode;
 
         // not null and element type
-        if ( null != pNode && Node.ELEMENT_NODE == pNode.getNodeType() )
+        if ( null != node && Node.ELEMENT_NODE == node.getNodeType() )
         {
             // We get the first child node
-            pNode =
+            node =
                 ConfigUtility.getNodeByTagName(
-                                                pNode,
+                                                node,
                                                 CompilingMessages.getString( "configuration.java.general.bootclasspaths.bootclasspath.lib" ) );
 
             // If node exists
-            if ( null != pNode )
+            if ( null != node )
             {
 
                 NamedNodeMap attrMap = null;
                 String attrPath = null;
 
                 /* While there are nodes */
-                while ( null != pNode )
+                while ( null != node )
                 {
-                    if ( Node.ELEMENT_NODE == pNode.getNodeType() )
+                    if ( Node.ELEMENT_NODE == node.getNodeType() )
                     {
                         /* on récupère les attributs du noeud */
-                        attrMap = pNode.getAttributes();
+                        attrMap = node.getAttributes();
 
                         /* "path" attribute */
                         attrPath =
@@ -352,7 +353,7 @@ public class JCompilingConfiguration
                                                                                                                                                           attrPath } );
                     }
                     /* on itère */
-                    pNode = pNode.getNextSibling();
+                    node = node.getNextSibling();
                 }
 
                 attrMap = null;
@@ -371,7 +372,7 @@ public class JCompilingConfiguration
             throwException = true;
         }
 
-        pNode = null;
+        node = null;
 
         /* have error */
         if ( throwException )

@@ -534,11 +534,12 @@ public class JspCompilingTask
             // on enlève le chemin de la vue qui n'est pas une information nécessaire
             compileErrorMessage = pMessage.replaceAll( (String) mData.getData( TaskData.VIEW_PATH ), "" );
             // Il s'agit d'une exception Jasper
+            String errorLevel = pLevel;
             if ( compileErrorMessage.matches( ".*JasperException.*" ) )
             {
-                pLevel = ErrorBO.CRITICITY_FATAL;
+                errorLevel = ErrorBO.CRITICITY_FATAL;
             }
-            initError( compileErrorMessage, pLevel );
+            initError( compileErrorMessage, errorLevel );
             compileErrorMessage = "";
         }
     }
