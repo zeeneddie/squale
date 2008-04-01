@@ -330,6 +330,31 @@
 				<version>2.0</version>
 				<scope>provided</scope>
 			</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-cvsexe</artifactId>
+			<version>1.0</version>			
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-cvsjava</artifactId>
+			<version>1.0</version>			
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-svnexe</artifactId>
+			<version>1.0</version>			
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-local</artifactId>
+			<version>1.0</version>
+		</dependency>				
 		</dependencies>
 	</dependencyManagement>
 </project>
