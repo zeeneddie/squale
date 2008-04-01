@@ -150,6 +150,26 @@
 			<groupId>jndi</groupId>
 			<artifactId>fscontext</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-cvsexe</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-cvsjava</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-svnexe</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-local</artifactId>		
+		</dependency>				
 		<!-- On est hors container, donc il faut ces dépendances en runtime -->
 		<!--dependency>
 			<groupId>javax.servlet</groupId>
