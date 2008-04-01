@@ -20,9 +20,11 @@
   <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1/commons-logging-1.1.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.1/commons-logging-1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-net/commons-net/1.4.0/commons-net-1.4.0.jar" sourcepath="M2_REPO/commons-net/commons-net/1.4.0/commons-net-1.4.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-validator/commons-validator/1.1.4/commons-validator-1.1.4.jar" sourcepath="M2_REPO/commons-validator/commons-validator/1.1.4/commons-validator-1.1.4-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/netbeans/lib/cvsclient/20060125/cvsclient-20060125.jar"/>
   <classpathentry kind="var" path="M2_REPO/dbunit/dbunit/2.1/dbunit-2.1.jar" sourcepath="M2_REPO/dbunit/dbunit/2.1/dbunit-2.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" sourcepath="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/ehcache/ehcache/1.1/ehcache-1.1.jar" sourcepath="M2_REPO/ehcache/ehcache/1.1/ehcache-1.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/ch/ethz/ganymed/ganymed-ssh2/build210/ganymed-ssh2-build210.jar" sourcepath="M2_REPO/ch/ethz/ganymed/ganymed-ssh2/build210/ganymed-ssh2-build210-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate/3.1/hibernate-3.1.jar" sourcepath="M2_REPO/org/hibernate/hibernate/3.1/hibernate-3.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/hsqldb/hsqldb/1.8.0.1/hsqldb-1.8.0.1.jar" sourcepath="M2_REPO/hsqldb/hsqldb/1.8.0.1/hsqldb-1.8.0.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/lowagie/itext/1.3.1/itext-1.3.1.jar"/>
@@ -50,8 +52,17 @@
   <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.8/log4j-1.2.8.jar" sourcepath="M2_REPO/log4j/log4j/1.2.8/log4j-1.2.8-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/logkit/logkit/1.0.1/logkit-1.0.1.jar" sourcepath="M2_REPO/logkit/logkit/1.0.1/logkit-1.0.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/mail/mail/1.4/mail-1.4.jar" sourcepath="M2_REPO/javax/mail/mail/1.4/mail-1.4-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/scm/maven-scm-api/1.0/maven-scm-api-1.0.jar" sourcepath="M2_REPO/org/apache/maven/scm/maven-scm-api/1.0/maven-scm-api-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/scm/maven-scm-provider-cvs-commons/1.0/maven-scm-provider-cvs-commons-1.0.jar" sourcepath="M2_REPO/org/apache/maven/scm/maven-scm-provider-cvs-commons/1.0/maven-scm-provider-cvs-commons-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/scm/maven-scm-provider-cvsexe/1.0/maven-scm-provider-cvsexe-1.0.jar" sourcepath="M2_REPO/org/apache/maven/scm/maven-scm-provider-cvsexe/1.0/maven-scm-provider-cvsexe-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/scm/maven-scm-provider-cvsjava/1.0/maven-scm-provider-cvsjava-1.0.jar" sourcepath="M2_REPO/org/apache/maven/scm/maven-scm-provider-cvsjava/1.0/maven-scm-provider-cvsjava-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/scm/maven-scm-provider-local/1.0/maven-scm-provider-local-1.0.jar" sourcepath="M2_REPO/org/apache/maven/scm/maven-scm-provider-local/1.0/maven-scm-provider-local-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/scm/maven-scm-provider-svn-commons/1.0/maven-scm-provider-svn-commons-1.0.jar" sourcepath="M2_REPO/org/apache/maven/scm/maven-scm-provider-svn-commons/1.0/maven-scm-provider-svn-commons-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/maven/scm/maven-scm-provider-svnexe/1.0/maven-scm-provider-svnexe-1.0.jar" sourcepath="M2_REPO/org/apache/maven/scm/maven-scm-provider-svnexe/1.0/maven-scm-provider-svnexe-1.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/odmg/odmg/3.0/odmg-3.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/oro/oro/2.0.8/oro-2.0.8.jar" sourcepath="M2_REPO/oro/oro/2.0.8/oro-2.0.8-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/plexus/plexus-utils/1.1/plexus-utils-1.1.jar" sourcepath="M2_REPO/org/codehaus/plexus/plexus-utils/1.1/plexus-utils-1.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/regexp/regexp/1.3/regexp-1.3.jar" sourcepath="M2_REPO/regexp/regexp/1.3/regexp-1.3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar" sourcepath="M2_REPO/javax/servlet/servlet-api/2.4/servlet-api-2.4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring/2.0.1/spring-2.0.1.jar" sourcepath="M2_REPO/org/springframework/spring/2.0.1/spring-2.0.1-sources.jar"/>
   <classpathentry kind="src" path="/squale-core"/>

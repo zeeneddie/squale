@@ -48,10 +48,16 @@
     <dependent-module archiveName="commons-validator-1.1.4.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/commons-validator/commons-validator/1.1.4/commons-validator-1.1.4.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
+    <dependent-module archiveName="cvsclient-20060125.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/netbeans/lib/cvsclient/20060125/cvsclient-20060125.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
     <dependent-module archiveName="dom4j-1.6.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
     <dependent-module archiveName="ehcache-1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/ehcache/ehcache/1.1/ehcache-1.1.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="ganymed-ssh2-build210.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/ch/ethz/ganymed/ganymed-ssh2/build210/ganymed-ssh2-build210.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
     <dependent-module archiveName="hibernate-3.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/hibernate/hibernate/3.1/hibernate-3.1.jar">
@@ -126,10 +132,37 @@
     <dependent-module archiveName="mail-1.4.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/javax/mail/mail/1.4/mail-1.4.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
+    <dependent-module archiveName="maven-scm-api-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/apache/maven/scm/maven-scm-api/1.0/maven-scm-api-1.0.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="maven-scm-provider-cvs-commons-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/apache/maven/scm/maven-scm-provider-cvs-commons/1.0/maven-scm-provider-cvs-commons-1.0.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="maven-scm-provider-cvsexe-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/apache/maven/scm/maven-scm-provider-cvsexe/1.0/maven-scm-provider-cvsexe-1.0.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="maven-scm-provider-cvsjava-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/apache/maven/scm/maven-scm-provider-cvsjava/1.0/maven-scm-provider-cvsjava-1.0.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="maven-scm-provider-local-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/apache/maven/scm/maven-scm-provider-local/1.0/maven-scm-provider-local-1.0.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="maven-scm-provider-svn-commons-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/apache/maven/scm/maven-scm-provider-svn-commons/1.0/maven-scm-provider-svn-commons-1.0.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="maven-scm-provider-svnexe-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/apache/maven/scm/maven-scm-provider-svnexe/1.0/maven-scm-provider-svnexe-1.0.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
     <dependent-module archiveName="odmg-3.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/odmg/odmg/3.0/odmg-3.0.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
     <dependent-module archiveName="oro-2.0.8.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/oro/oro/2.0.8/oro-2.0.8.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="plexus-utils-1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/codehaus/plexus/plexus-utils/1.1/plexus-utils-1.1.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="regexp-1.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/regexp/regexp/1.3/regexp-1.3.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
     <dependent-module archiveName="spring-2.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/springframework/spring/2.0.1/spring-2.0.1.jar">

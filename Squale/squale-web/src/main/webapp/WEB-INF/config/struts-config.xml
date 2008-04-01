@@ -50,6 +50,8 @@
 		</form-bean>
 		<form-bean name="clearCaseForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.ClearCaseForm">
 		</form-bean>
+		<form-bean name="scmForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.ScmForm">
+		</form-bean>		
 		<form-bean name="jCompilingForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.JCompilingForm">
 		</form-bean>
 		<form-bean name="cppTestForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.CppTestForm">
@@ -292,13 +294,23 @@
 		<action path="/ClearCaseTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateClearCaseParametersAction" name="clearCaseForm" parameter="action" input="/jsp/admin/project/add_project_clearcasetask_conf.jsp" validate="false" scope="session">
 			<forward name="config" path="/jsp/admin/project/add_project_clearcasetask_conf.jsp">
 			</forward>
-		</action>
+		</action>		
 		<action path="/add_project_clearcase_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateClearCaseParametersAction" parameter="action" name="clearCaseForm" scope="session" input="/jsp/admin/project/config_project.jsp">
 			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
 			</forward>
 			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
 			</forward>
 		</action>
+		<action path="/ScmTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateScmParametersAction" name="scmForm" parameter="action" input="/jsp/admin/project/add_project_scmtask_conf.jsp" validate="false" scope="session">
+			<forward name="config" path="/jsp/admin/project/add_project_scmtask_conf.jsp">
+			</forward>
+		</action>			
+		<action path="/add_project_scm_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateScmParametersAction" parameter="action" name="scmForm" scope="session" input="/jsp/admin/project/config_project.jsp">
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>				
 		<action path="/JCompilingTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateJCompilingParametersAction" name="jCompilingForm" input="/jsp/admin/project/add_project_jcompilingtask_conf.jsp" parameter="action" scope="session" validate="false">
 			<forward name="config" path="/jsp/admin/project/add_project_jcompilingtask_conf.jsp">
 			</forward>
