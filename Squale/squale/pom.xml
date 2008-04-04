@@ -26,10 +26,10 @@
 		</url>
 	</scm>
 	<modules>
-		<module>squale-core</module>
-		<module>squale-ear</module>
-		<module>squale-web</module>
-		<module>squalix</module>
+		<module>../squale-core</module>
+		<module>../squale-ear</module>
+		<module>../squale-web</module>
+		<module>../squalix</module>
 	</modules>
 	<properties>
 		<squale.props.jraf.version>2.6</squale.props.jraf.version>
