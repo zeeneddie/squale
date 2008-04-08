@@ -1,150 +1,99 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="squaleCommon" basedir="." default="all">
-
-	<!-- lecture du fichier de properties -->
-	<property file="${basedir}/build.properties" />
-
-	<!-- definition des proprietes -->
-	<!-- standard -->
-  	<property name="src.dir" location="${basedir}/src"/>
-	<property name="classes.dir" value="${basedir}/classes" />
+<project name="Hibernate Utils" basedir=".">
 	
-	<property name="generated.dir" value="${basedir}/generated" />
-	<property name="generated.ddl.dir" value="${generated.dir}/ddl" />
-
-	<property name="mapping.full.path" value="${src.dir}/mapping" />
-	<property name="config.full.path" value="${basedir}/../squaleWeb/WebContent/WEB-INF/config" />
-	<property name="hibernate.config.file" value="hibernate.cfg.xml" />
-	<property name="schema.export.file" value="schema-export-${type.ext}.sql" />	
-
-	 
-	<!-- classpath du projet --> 
-	<path id="project.class.path">
-		<pathelement location="${classes.dir}"/>
-		<!-- librairies -->
-		<fileset dir="${basedir}/lib">
-			<include name="**/*.jar"/>
-			<include name="**/*.zip"/>
-		</fileset>	
-		
-		<fileset dir="${basedir}/../squalix/lib/compiling_ressources/java/1_4">
-			<include name="**/*.jar"/>
-			<include name="**/*.zip"/>
-		</fileset>	
-
-		<!-- librairies contenues dans l'ear -->
-		<fileset dir="${ear.dir}">
-			<include name="**/*.jar"/>
-		</fileset>
-		
-		<!-- parser xdoclet -->
-		<fileset dir="lib/xdoclet/">
-  			<include name="**/*.jar" />
-		</fileset>
-	</path>  	  
+	<property name="project.basedir" value="${basedir}/.." />
 	
-	<!-- Specifique WSAD -->
-  	<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-  	<!-- Parametres de compilation -->
-	<property name="javac.debug" value="on"/>
-	<property name="javac.optimize" value="off"/>
-	<property name="javac.nowarn" value="false"/>
-	<property name="javac.verbose" value="false"/>
-	<property name="javac.listfiles" value="true"/>
+	<property name="project.srcdir" value="${project.basedir}/src/main/java" />
+	<property name="project.targetdir" value="${project.basedir}/target" />
+	<property name="project.targetdir.ddl" value="${project.targetdir}/generated-ddl" />
+	<property name="project.targetdir.hbm" value="${project.targetdir}/generated-hbm/mapping" />
+	<!-- TODO: should find a way to prevent the use of a path relative to the web project -->
+	<property name="hibernate.cfg.file.path" value="${project.basedir}/../squale-web/src/main/webapp/WEB-INF/config/hibernate.cfg.xml" />
 	
-	<!-- tache hibernate pour l'exportation de schema de base -->
-	<taskdef name="schemaexport"
-		classname="org.hibernate.tool.hbm2ddl.SchemaExportTask"
-		classpathref="project.class.path"/>
-		
-	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    
-	<!-- Verification de la version java qui doit etre 1.4 pour produire le schema -->
-   <target name="checkjavaversion" >
-
-     <condition property="isJavaVersionCorrect">
-         <equals arg1="${ant.java.version}"
-                 arg2="1.4" />
-     </condition>
-
-     <fail unless="isJavaVersionCorrect">
-           The java version should be 1.4!
-           Start ant with JRE 1.4 and not from eclipse 2.1. </fail>
-
-   </target>
-   
-	<!-- construit le mapping dont les fichiers sont precises dans le
-		fichier hibernate.cfg.xml
-	-->
+	<!-- ================================================================== -->
+	<!-- Retrieves all required libs thanks to Maven						-->
+	<!-- ================================================================== -->
+	<target name="retrieve-libs" description="Retrieves all required libs thanks to Maven">
+		<echo>Retrieving libs and copying them into ${project.targetdir}/dependency</echo>
+		<exec executable="mvn.bat" dir="${project.basedir}">
+			<arg value="clean"/>
+			<arg value="compile"/>
+			<arg value="dependency:copy-dependencies"/>
+		</exec>
+	</target>
 	
-	<target name="hbm2ddl" description="construire le ddl" depends="checkjavaversion">
-		<echo message="mapping.full.path=${mapping.full.path}" />
-		<schemaexport 
-			config="${config.full.path}/${hibernate.config.file}"
-			quiet="no" 
-			text="yes"
-			drop="no"
-			delimiter=";"
-			output="${generated.ddl.dir}/${schema.export.file}">
-		</schemaexport>
-		<echo message="schema.export.file=${schema.export.file}" />
+	<!-- ================================================================== -->
+	<!-- Init classpath														-->
+	<!-- ================================================================== -->
+	<target name="init" description="Init variables and classpath" depends="retrieve-libs">
+		<echo>Initializing project from folder: ${project.basedir}</echo>
+		<tstamp>
+        	<format property="today" pattern="dd-MM-yyyy"/>
+    	</tstamp>
+		<echo>Defining classpath...</echo>
+		<path id="project.classpath">
+			<!-- Compiled classes -->
+			<pathelement location="${project.targetdir}/classes"/>
+			<!-- Project dependencies -->
+			<fileset dir="${project.targetdir}/dependency">
+				<include name="**/*.jar"/>
+			</fileset>
+			<!-- xdoclet dependencies -->
+			<fileset dir="${basedir}/lib">
+				<include name="**/*.jar"/>
+			</fileset>
+		</path>
 	</target>
 
 	
-	<!-- =================================================================== -->
-	<!-- tache de création des fichiers de mapping -->
-	<!-- =================================================================== -->
-	<target name="create-mapping" depends="">
-		<taskdef
-		name="hibernate2"
-		classname="xdoclet.modules.hibernate.HibernateDocletTask"
-		classpathref="project.class.path"
-		/>
+	<!-- ================================================================== -->
+	<!-- HBM file generation												-->
+	<!-- 																	-->
+	<!-- Note: the files are generated in target/generated-hbm, so it is 	-->
+	<!--       necessary to merge them with the source files which are in 	-->
+	<!--       the src/main/resources/mapping folder.						-->
+	<!-- ================================================================== -->
+	<target name="java2hbm" description="Generates HBM files" depends="init">
+		<taskdef name="hibernate2"
+			classname="xdoclet.modules.hibernate.HibernateDocletTask"
+			classpathref="project.classpath"/>
 
-		<tstamp>
-        	<format property="TODAY" pattern="d-MM-yy"/>
-    	</tstamp>
-    	
-		<!-- Creation du fichier destination -->
-		<mkdir dir="${mapping.full.path}"/>
-    	
-    	<hibernate2 force="yes" destDir="${mapping.full.path}"
-    		verbose="true"
+		<echo>Generating HBM files to ${project.targetdir.hbm}</echo>
+		<mkdir dir="${project.targetdir.hbm}"/>
+    	<hibernate2 force="yes" destDir="${project.targetdir.hbm}"
     		excludedtags="@version,@author,@todo"
-	    	addedtags="@xdoclet-generated at ${TODAY}"
-	    	mergeDir="${mapping.full.path}">
-			
-    		<!-- Fichiers à intégrer dans le parsing -->
-    		<fileset dir="${src.dir}">
+	    	addedtags="@xdoclet-generated at ${today}">
+    		<!-- Java source files to include -->
+    		<fileset dir="${project.srcdir}">
 				<include name="**/*.java" />
 			</fileset>
-
-    		<hibernate version="3.0" validateXML="true"
-            		prefixWithPackageStructure="false"/> 
+    		<hibernate version="3.0" validateXML="true" prefixWithPackageStructure="false"/> 
     	</hibernate2>
 	</target>
 	
-	<!-- =================================================================== -->
-	<!-- Gestion de l'API Mail  -->
-	<!-- =================================================================== -->
-	<target name="apiMail">
-		<javadoc access="public" author="true" classpathref="project.class.path"
-				destdir="${basedir}/delivery/mail/doc"
-            	nodeprecated="false" nodeprecatedlist="false"
-            	noindex="false" nonavbar="false" notree="false"
-            	packagenames="com.airfrance.squalecommon.util.mail"
-            	sourcepath="${basedir}/src"
-            	splitindex="true" use="true" version="true"/>
-    <jar destfile="${basedir}/delivery/mail/apiMail.jar"
-         basedir="${classes.dir}"
-         includes="com/airfrance/squalecommon/util/mail/*"
-         excludes="com/airfrance/squalecommon/util/mail/xmedia"/>
+	
+	<!-- ================================================================== -->
+	<!-- DDL generation														-->
+	<!-- 																	-->
+	<!-- Note: this assumes that the HBM files located in the source folder	--> 
+	<!--       (src/main/resources/mapping) are correct. 					-->
+	<!--       See the java2hbm target for this purpose						-->
+	<!-- ================================================================== -->
+	<target name="hbm2ddl" description="Generates DDL file" depends="init">
+		<taskdef name="schemaexport"
+			classname="org.hibernate.tool.hbm2ddl.SchemaExportTask"
+			classpathref="project.classpath"/>
+		
+		<echo>Generating DDL files to ${project.targetdir.ddl}</echo>
+		<mkdir dir="${project.targetdir.ddl}"/>
+		<schemaexport 
+			config="${hibernate.cfg.file.path}" 
+			text="yes"
+			drop="no"
+			delimiter=";"
+			output="${project.targetdir.ddl}/schema-export-${today}.sql">
+		</schemaexport>
+		<echo message="[Completed] DDL file can be found at ${project.targetdir.ddl}/schema-export-${today}.sql" />
 	</target>
-
- 
- 	<!-- execution de toutes les taches -->
- 	<target name="all" depends="" >
- 	</target>
  
 </project>
