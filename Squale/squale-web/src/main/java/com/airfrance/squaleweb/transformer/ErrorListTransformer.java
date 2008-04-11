@@ -57,6 +57,7 @@ public class ErrorListTransformer
                 // On insère dans la map avec le message en clé
                 if ( map.get( error.getMessage() ) != null )
                 {
+                    error = (ErrorForm) map.get( error.getMessage() );
                     error.setNbOcc( error.getNbOcc() + 1 );
                 }
                 map.put( error.getMessage(), error );
