@@ -169,7 +169,8 @@ public class JavaStorageListener
                 Iterator it = violation.getMessages().iterator();
                 if ( it.hasNext() )
                 {
-                    code = (String) it.next();
+                	// Delete all spaces in message for future comparison
+                    code = ((String) it.next()).trim();
                 }
                 // On récupère le nombre de transgression pour cette règle
                 Integer nbOcc = (Integer) mNbOcc.get( code );
