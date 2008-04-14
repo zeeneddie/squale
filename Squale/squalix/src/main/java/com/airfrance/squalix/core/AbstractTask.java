@@ -358,6 +358,7 @@ public abstract class AbstractTask
         // la liste a été initialisée à 0 éléments
         if ( mErrors.size() > 0 )
         {
+            boolean hasFatalError = false;
             Iterator it = mErrors.iterator();
             while ( it.hasNext() )
             {
@@ -373,12 +374,15 @@ public abstract class AbstractTask
                 if ( mStatus != FAILED && error.getLevel() == ErrorBO.CRITICITY_FATAL )
                 {
                     mStatus = FAILED;
+                    hasFatalError = true;
                 }
-                // Si la tache a échouée, on met la dernière error
-                // au niveau de criticité maximale
                 if ( !it.hasNext() && mStatus == FAILED )
                 {
-                    error.setLevel( ErrorBO.CRITICITY_FATAL );
+                    // If task has failed, we set the last error in fatal criticity
+                    // if task doesn't already contain one.
+                    if(!hasFatalError) {
+                        error.setLevel( ErrorBO.CRITICITY_FATAL );
+                    }
                     // Dans le cas d'une erreur fatale, on prévient les admins
                     // que la tache a échoué
                     Date current = Calendar.getInstance().getTime();
