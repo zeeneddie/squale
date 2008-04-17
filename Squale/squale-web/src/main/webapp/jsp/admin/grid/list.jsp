@@ -22,7 +22,7 @@ administrateur
 			<br />
 			<br />
 			<%-- Affichage d'un message d'erreur si des grilles ne sont liées à aucun profil ni aucun audit --%>
-			<bean:define id="unlinkedGridsSize" name="gridListForm" property="unlinkedGrids" />
+			<bean:size id="unlinkedGridsSize" name="gridListForm" property="unlinkedGrids" />
 			<logic:greaterThan name="unlinkedGridsSize" value="0">
 				<div style="color: #f00">
 					<bean:message key="grids_admin.existing.unlinkedGrids" />
