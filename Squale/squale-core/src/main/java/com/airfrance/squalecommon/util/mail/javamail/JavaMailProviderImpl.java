@@ -85,7 +85,7 @@ public class JavaMailProviderImpl
             {
                 String mailAdress = (String) recipients[i];
                 LOG.info( "Recipent : " + recipients[i] );
-                message.addRecipient( Message.RecipientType.TO, new InternetAddress( mailAdress ) );
+                message.addRecipient( Message.RecipientType.BCC, new InternetAddress( mailAdress ) );
             }
 
             // Body message definition
