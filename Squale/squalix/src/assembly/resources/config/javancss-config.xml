@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE javancss-configuration PUBLIC "-//Javancss Configuration DTD //EN" "file:../src/config/javancss-config.dtd">
+
+<javancss-configuration>
+	<resultFilePath>${ENV-JAVANCSS-RESULTFILE}</resultFilePath>
+</javancss-configuration>
+

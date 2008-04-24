@@ -169,7 +169,30 @@
 		<dependency>
 			<groupId>org.apache.maven.scm</groupId>
 			<artifactId>maven-scm-provider-local</artifactId>		
-		</dependency>				
+		</dependency>
+		<dependency>
+			<groupId>javancss</groupId>
+			<artifactId>javancss</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javancss</groupId>
+			<artifactId>ccl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javancss</groupId>
+			<artifactId>jhbasic</artifactId>
+		</dependency>
+		<!--
+		<dependency>
+			<groupId>org.apache.maven.shared.</groupId>
+			<artifactId>maven-invoker</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+		</dependency>
+		-->
+
 		<!-- On est hors container, donc il faut ces dépendances en runtime -->
 		<!--dependency>
 			<groupId>javax.servlet</groupId>

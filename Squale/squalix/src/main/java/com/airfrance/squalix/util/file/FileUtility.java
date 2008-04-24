@@ -669,4 +669,49 @@ public class FileUtility
         }
         return result;
     }
+
+    /**
+     * This method search in a list of path the elements which endings with the nameToFind. It's useful for search a
+     * complete path for a file for which there is only the end of the path.
+     * 
+     * @param cutPath List of path file
+     * @param nameToFind The file name to find
+     * @return return The element in the list which endings by the nameToFind
+     */
+    public static List findFileName( List cutPath, String nameToFind )
+    {
+        List result = new ArrayList();
+        for ( int i = 0; i < cutPath.size(); i++ )
+        {
+            String compare = (String) cutPath.get( i );
+            if ( compare.endsWith( nameToFind ) )
+            {
+                result.add( compare );
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * This method cut path. The string viewPathName is suppress from the beginning of the path. So the list of path
+     * file pass in argument have to begin with the argument viewPathName. For each element in the list the method cut
+     * the beginning of the path and create a new list.
+     * 
+     * @param includedFile List of path file to cut
+     * @param viewPathName The string to suppress
+     * @return the list of path file cut
+     */
+    public static List cutPath( List includedFile, String viewPathName )
+    {
+        List cutIncludedFile = new ArrayList();
+        for ( int i = 0; i < includedFile.size(); i++ )
+        {
+            String ini = (String) includedFile.get( i );
+            String[] cut = ini.split( viewPathName, 2 );
+            cutIncludedFile.add( cut[1] );
+        }
+        return cutIncludedFile;
+    }
+
 }

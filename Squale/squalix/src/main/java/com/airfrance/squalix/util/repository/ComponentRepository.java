@@ -126,7 +126,7 @@ public class ComponentRepository
     {
         // Création de la clé
         String newParentName = pParentName;
-        
+
         if ( null == newParentName )
         {
             newParentName = pComponent.getName();
@@ -355,6 +355,58 @@ public class ComponentRepository
         MethodDAOImpl dao = MethodDAOImpl.getInstance();
         result = dao.findMethodeByName( mSession, pMethodName, pFileName, pAuditId );
         return result;
+    }
+
+    /**
+     * This method search the component give in arguments in the list of all componentBO already existent
+     * 
+     * @param component Component to search
+     * @return The componentBO associate if it is found or null if it is not found
+     */
+    public AbstractComponentBO getComponent( AbstractComponentBO component )
+    {
+        Map map = getMapForComponent( component );
+        String key = buildKey( component );
+        AbstractComponentBO persistentComponent = (AbstractComponentBO) map.get( key );
+        return persistentComponent;
+    }
+
+    /**
+     * This method give access to the attribute mClasses
+     * 
+     * @return the list of classBO already persist
+     */
+    public Map getClasses()
+    {
+        return mClasses;
+    }
+
+    /**
+     * This method give access to the attribute mMethods
+     * 
+     * @return the list of methodBo already persist
+     */
+    public Map getMethods()
+    {
+        return mMethods;
+    }
+
+    /**
+     * Compare two component by there key. This method use the buildKey() method of the ComponentRepository class to
+     * build the key
+     * 
+     * @param pComponent First component to compare
+     * @param pComponentToCompare Second component to compare
+     * @return true if there key are the same
+     */
+    public boolean compare( AbstractComponentBO pComponent, AbstractComponentBO pComponentToCompare )
+    {
+        boolean bool = false;
+        if ( buildKey( pComponent ).compareTo( buildKey( pComponentToCompare ) ) == 0 )
+        {
+            bool = true;
+        }
+        return bool;
     }
 
 }
