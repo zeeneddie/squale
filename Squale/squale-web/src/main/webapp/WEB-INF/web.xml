@@ -110,14 +110,5 @@
 		<res-auth>Container</res-auth>
 		<res-sharing-scope>Shareable</res-sharing-scope>
 	</resource-ref>
-	
-	<!-- Chemin racine des logs -->
-	<env-entry>
-		<description>Chemin racine des logs</description>
-		<env-entry-name>logDataRoot</env-entry-name>
-                <!-- ENV-WEB-LOG-ROOT -->
-		<env-entry-value>D:/logs</env-entry-value>
-		<env-entry-type>java.lang.String</env-entry-type>
-	</env-entry>
 
 </web-app>
