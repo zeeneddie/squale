@@ -156,6 +156,19 @@ public class Mapping
         measures.put(
                       "testmanagerqc.project",
                       com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.qc.ExtTestManagerQCMetricsBO.class );
+        // Javancss
+        measures.put(
+                      "javancss.project",
+                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssProjectMetricsBO.class );
+        measures.put(
+                      "javancss.package",
+                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssPackageMetricsBO.class );
+        measures.put(
+                      "javancss.class",
+                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssClassMetricsBO.class );
+        measures.put(
+                      "javancss.method",
+                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssMethodMetricsBO.class );
     }
 
     /**

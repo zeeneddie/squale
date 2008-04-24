@@ -1384,6 +1384,86 @@
 		key="jspvolumetry.project.numberOfJSPCodeLines">
 		JSP code lines
 	</message>
+	<message lang="fr"
+		key="javancss.project.ncss">
+		Nombre de lignes de code
+	</message>
+	<message lang="en"
+		key="javancss.project.ncss">
+		Source lines number
+	</message>
+	<message lang="fr"
+		key="javancss.project.classes">
+		Nombre de classes
+	</message>
+	<message lang="en"
+		key="javancss.project.classes">
+		Number classes
+	</message>
+	<message lang="fr"
+		key="javancss.project.methods">
+		Nombre de méthodes
+	</message>
+	<message lang="en"
+		key="javancss.project.methods">
+		Number of methods
+	</message>
+	<message lang="fr"
+		key="javancss.project.javadocs">
+		Nombre de javadoc
+	</message>
+	<message lang="en"
+		key="javancss.project.javadocs">
+		Number of javadoc
+	</message>
+	<message lang="fr"
+		key="javancss.project.javadocsLines">
+		Nombre de lignes de javadoc
+	</message>
+	<message lang="en"
+		key="javancss.project.javadocsLines">
+		Number of javadoc lines
+	</message>
+	<message lang="fr"
+		key="javancss.project.singleCommentsLines">
+		Nombre de lignes de commentaire simple
+	</message>
+	<message lang="en"
+		key="javancss.project.singleCommentsLines">
+		Number of single comments lines 
+	</message>
+	<message lang="fr"
+		key="javancss.project.multiCommentsLines">
+		Nombre de lignes de commentaire multilignes
+	</message>
+	<message lang="en"
+		key="javancss.project.multiCommentsLines">
+		Number of line of multi lines comments
+	</message>
+	<message lang="fr"
+		key="javancss.project.lines">
+		Nombre de lignes dans le projet (tout compris)
+	</message>
+	<message lang="en"
+		key="javancss.project.lines">
+		Number of line in the project (all include)
+	</message>
+	<message lang="fr"
+		key="javancss.project.maxVg">
+		Valeur maximale de la complexité cyclomatique
+	</message>
+	<message lang="en"
+		key="javancss.project.maxVg">
+		Max value of the cyclomatic complexity
+	</message>
+	<message lang="fr"
+		key="javancss.project.sumVg">
+		Somme des complexités cyclomatique
+	</message>
+	<message lang="en"
+		key="javancss.project.sumVg">
+		Sum of all cyclomatic complexity
+	</message>
 
 	<!--  Packages  -->
 	<!--  Message pour les packages  -->
@@ -1432,7 +1512,80 @@
 	</message>
 	<message lang="en" key="jdepend.package.ca">
 		Afferent coupling
+	</message>	
+	<message lang="fr"
+		key="javancss.package.ncss">
+		Nombre de lignes de code
 	</message>
+	<message lang="en"
+		key="javancss.package.ncss">
+		Source lines number
+	</message>
+	<message lang="fr"
+		key="javancss.package.classes">
+		Nombre de classes
+	</message>
+	<message lang="en"
+		key="javancss.package.classes">
+		Number classes
+	</message>
+	<message lang="fr"
+		key="javancss.package.methods">
+		Nombre de méthodes
+	</message>
+	<message lang="en"
+		key="javancss.package.methods">
+		Number of methods
+	</message>
+	<message lang="fr"
+		key="javancss.package.javadocs">
+		Nombre de javadoc
+	</message>
+	<message lang="en"
+		key="javancss.package.javadocs">
+		Number of javadoc
+	</message>
+	<message lang="fr"
+		key="javancss.package.javadocsLines">
+		Nombre de lignes de javadoc
+	</message>
+	<message lang="en"
+		key="javancss.package.javadocsLines">
+		Number of javadoc lines
+	</message>
+	<message lang="fr"
+		key="javancss.package.singleCommentsLines">
+		Nombre de lignes de commentaire simple
+	</message>
+	<message lang="en"
+		key="javancss.package.singleCommentsLines">
+		Number of single comments lines 
+	</message>
+	<message lang="fr"
+		key="javancss.package.multiCommentsLines">
+		Nombre de lignes de commentaire multilignes
+	</message>
+	<message lang="en"
+		key="javancss.package.multiCommentsLines">
+		Number of line of multi lines comments
+	</message>
+	<message lang="fr"
+		key="javancss.package.maxVg">
+		Valeur maximale de la complexité cyclomatique
+	</message>
+	<message lang="en"
+		key="javancss.package.maxVg">
+		Max value of the cyclomatic complexity
+	</message>
+	<message lang="fr"
+		key="javancss.package.sumVg">
+		Somme des complexités cyclomatique
+	</message>
+	<message lang="en"
+		key="javancss.package.sumVg">
+		Sum of all cyclomatic complexity
+	</message>
+	
 
 	<!--  Classes  -->
 	<message lang="fr" key="mccabe.class.sloc">
@@ -1513,6 +1666,88 @@
 	<message lang="en" key="ckjm.class.cbo">
 		Couplage between object
 	</message>
+	<message lang="fr" key="rsm.class.private">
+		Nombre de méthodes privées
+	</message>
+	<message lang="en" key="rsm.class.private">
+		Number of private methods
+	</message>
+	<message lang="fr" key="rsm.class.sloc">
+		Nombre de lignes de code
+	</message>
+	<message lang="en" key="rsm.class.sloc">
+		Number of code lines
+	</message>
+	<message lang="fr" key="rsm.class.protectedData">
+		Nombre de méthodes protégées
+	</message>
+	<message lang="en" key="rsm.class.protectedData">
+		Number of protected methods
+	</message>
+	<message lang="fr" key="rsm.class.public">
+		Nombre de méthodes publiques
+	</message>
+	<message lang="en" key="rsm.class.public">
+		Number of public methods
+	</message>
+	<message lang="fr" key="rsm.class.comments">
+		Nombre de lignes de commentaires
+	</message>
+	<message lang="en" key="rsm.class.comments">
+		Number of comments
+	</message>
+	<message lang="fr"
+		key="javancss.class.ncss">
+		Nombre de lignes de code
+	</message>
+	<message lang="en"
+		key="javancss.class.ncss">
+		Source lines number
+	</message>
+	<message lang="fr"
+		key="javancss.class.classes">
+		Nombre de classes
+	</message>
+	<message lang="en"
+		key="javancss.class.classes">
+		Number classes
+	</message>
+	<message lang="fr"
+		key="javancss.class.methods">
+		Nombre de méthodes
+	</message>
+	<message lang="en"
+		key="javancss.class.methods">
+		Number of methods
+	</message>
+	<message lang="fr"
+		key="javancss.class.javadocs">
+		Nombre de javadoc
+	</message>
+	<message lang="en"
+		key="javancss.class.javadocs">
+		Number of javadoc
+	</message>
+	<message lang="fr"
+		key="javancss.class.maxVg">
+		Valeur maximale de la complexité cyclomatique
+	</message>
+	<message lang="en"
+		key="javancss.class.maxVg">
+		Max value of the cyclomatic complexity
+	</message>
+	<message lang="fr"
+		key="javancss.class.sumVg">
+		Somme des complexités cyclomatique
+	</message>
+	<message lang="en"
+		key="javancss.class.sumVg">
+		Sum of all cyclomatic complexity
+	</message>
+	
+	
+	
+	
 	<message lang="fr" key="umlquality.umlclass.NOBD">
 		Nombre d'attributs publics dans la classe
 	</message>
@@ -1550,8 +1785,7 @@
 		Dependencies as supplier
 	</message>
 	<message lang="fr" key="umlquality.umlclass.NVM">
-		Nombre d'opérations de la classe qui redéfinissent une opération
-		héritée
+		Nombre d'opérations de la classe qui redéfinissent une opération héritée
 	</message>
 	<message lang="en" key="umlquality.umlclass.NVM">
 		Number of overriding methods
@@ -1592,36 +1826,11 @@
 	<message lang="en" key="umlquality.umlclass.NII">
 		Number of implemented interfaces
 	</message>
-	<message lang="fr" key="rsm.class.private">
-		Nombre de méthodes privées
-	</message>
-	<message lang="en" key="rsm.class.private">
-		Number of private methods
-	</message>
-	<message lang="fr" key="rsm.class.sloc">
-		Nombre de lignes de code
-	</message>
-	<message lang="en" key="rsm.class.sloc">
-		Number of code lines
-	</message>
-	<message lang="fr" key="rsm.class.protectedData">
-		Nombre de méthodes protégées
-	</message>
-	<message lang="en" key="rsm.class.protectedData">
-		Number of protected methods
-	</message>
-	<message lang="fr" key="rsm.class.public">
-		Nombre de méthodes publiques
-	</message>
-	<message lang="en" key="rsm.class.public">
-		Number of public methods
-	</message>
-	<message lang="fr" key="rsm.class.comments">
-		Nombre de lignes de commentaires
-	</message>
-	<message lang="en" key="rsm.class.comments">
-		Number of comments
-	</message>
+	
+	
+	
+	
+	
 	<!-- Interfaces -->
 	<message lang="fr" key="umlquality.umlinterface.numAnc">
 		Nombre d'ancêtres de l'Interface
@@ -1697,6 +1906,33 @@
 		Nombre d'appel à d'autres méthodes
 	</message>
 	<message lang="en" key="mccabe.method.fanout">Fan out</message>
+	<message lang="fr"
+		key="javancss.method.ncss">
+		Nombre de lignes de code
+	</message>
+	<message lang="en"
+		key="javancss.method.ncss">
+		Source lines number
+	</message>
+	<message lang="fr"
+		key="javancss.method.ccn">
+		Complexité cyclomatique
+	</message>
+	<message lang="en"
+		key="javancss.method.ccn">
+		Cyclomatic complexity number
+	</message>
+	<message lang="fr"
+		key="javancss.method.javadocs">
+		Nombre de javadoc
+	</message>
+	<message lang="en"
+		key="javancss.method.javadocs">
+		Number of javadoc
+	</message>
+	
+	
+	
 	<!-- Jsp -->
 	<message lang="fr" key="mccabe.jsp.nlmixed">
 		Nombre de lignes mixtes (code et commentaires)
@@ -2967,6 +3203,12 @@
 		QC bugtracking external task
 	</message>
 
+	<message lang="fr" key="JavancssTask.name"> Tâche Javancss 
+	</message>
+	
+	<message lang="en" key="JavancssTask.name"> Javancss task 
+	</message>
+
 	<!--  Messages pour les graphes   -->
 	<message lang="fr" key="roi.graph.xTitle">Date des audits</message>
 	<message lang="en" key="roi.graph.xTitle">Audits date</message>
@@ -2984,6 +3226,7 @@
 	<message lang="en" key="ref.j2ee">J2ee</message>
 	<message lang="fr" key="ref.archinet">Archinet</message>
 	<message lang="en" key="ref.archinet">Archinet</message>
+
 
 	<!-- Configuration pour l'ordonnencement des audits -->
 	<message lang="fr" key="application.max.accesses">3</message>

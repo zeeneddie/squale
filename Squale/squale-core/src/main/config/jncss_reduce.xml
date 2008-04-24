@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.0//EN" "file:../com/airfrance/squalecommon/dtd/squalix-config-1.0.dtd">
+<!--  Fichier de configuration de squalix définissant les profiles possibles, les différents types
+	de récupération des sources,...
+	La configuration des types de récupération des sources se fait par l'action dont le nom correspond à
+	l'attribut name du tag sourcemanagement.
+	Chaque profile doit commencer la tâche d'analyse de récupération des sources du projet et terminer
+	par sa tâche de terminaison  -->
+<configuration>
+	<stoptimes>
+		<stoptime day="monday" time="4:00"></stoptime>
+		<stoptime day="tuesday" time="4:00"></stoptime>
+		<stoptime day="wednesday" time="4:00"></stoptime>
+		<stoptime day="thursday" time="4:00"></stoptime>
+		<stoptime day="friday" time="4:00"></stoptime>
+	</stoptimes>
+	<!-- Paramétrage de la fréquence max des audits en fonction des accès -->
+	<frequencies>
+		<frequency days="5" frequency="5" />
+		<frequency days="20" frequency="15" />
+		<frequency days="45" frequency="30" />
+	</frequencies>
+	<tasks>
+		<!-- taches obligatoires -->
+		<task name="ClearCaseTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseTask" standard="true"></task>
+		<task name="ClearCaseCleanerTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseCleanerTask" configurable="false"></task>
+		<task name="JCompilingTask" class="com.airfrance.squalix.tools.compiling.java.JCompilingTask" standard="true"></task>
+		<task name="JCompilingCleanerTask" class="com.airfrance.squalix.tools.compiling.java.JCompilingCleanerTask" configurable="false"></task>
+		<task name="JspCompilingTask" class="com.airfrance.squalix.tools.compiling.jsp.JspCompilingTask" standard="true"></task>
+		<task name="SourceCodeAnalyserTask" class="com.airfrance.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserTask" standard="true"></task>
+		<task name="SourceCodeAnalyserCleanerTask" class="com.airfrance.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserCleanerTask" configurable="false"></task>
+		<task name="JavaMockCompilingTask" class="com.airfrance.squalix.tools.compiling.java.JavaMockCompilingTask" standard="true"></task>
+		<task name="JavaMockCompilingCleanerTask" class="com.airfrance.squalix.tools.compiling.java.JavaMockCompilingCleanerTask" configurable="false"></task>
+		<task name="CppMcCabeTask" class="com.airfrance.squalix.tools.mccabe.CppMcCabeTask" standard="true"></task>
+		<task name="JavaMcCabeTask" class="com.airfrance.squalix.tools.mccabe.JavaMcCabeTask" configurable="false"></task>
+		<!-- taches facultatives -->
+		<task name="CppTestTask" class="com.airfrance.squalix.tools.cpptest.CppTestTask" standard="true" mandatory="false"></task>
+		<task name="ComputeResultTask" class="com.airfrance.squalix.tools.computing.project.ComputeResultTask" configurable="false" mandatory="false"></task>
+		<task name="RulesCheckingTask" class="com.airfrance.squalix.tools.ruleschecking.RulesCheckingTask" mandatory="false"></task>
+		<task name="CkjmTask" class="com.airfrance.squalix.tools.ckjm.CkjmTask" configurable="false" mandatory="false"></task>
+		<task name="JDependTask" class="com.airfrance.squalix.tools.jdepend.JDependTask" configurable="false" mandatory="false"></task>
+		<task name="MackerTask" class="com.airfrance.squalix.tools.macker.MackerTask" mandatory="false"></task>
+		<task name="J2eeMackerTask" class="com.airfrance.squalix.tools.macker.J2eeMackerTask" mandatory="false"></task>
+		<task name="UMLQualityTask" class="com.airfrance.squalix.tools.umlquality.UMLQualityTask" mandatory="false"></task>
+		<task name="CpdTask" class="com.airfrance.squalix.tools.cpd.CpdTask" configurable="false" mandatory="false"></task>
+		<task name="PmdTask" class="com.airfrance.squalix.tools.pmd.PmdTask" mandatory="false"></task>
+		<task name="JSPVolumetryTask" class="com.airfrance.squalix.tools.jspvolumetry.JSPVolumetryTask" configurable="false"></task>
+		
+		<task name="JavancssTask" class="com.airfrance.squalix.tools.javancss.JavancssTask" configurable="false" mandatory="true"></task>
+		
+		<!-- a lancer impérativement après McCabe ou un autre outil car on a besoin que les données existent déjà
+			RSM ne peut pas créer correctement les méthodBO -->
+		<task name="JavaRSMTask" class="com.airfrance.squalix.tools.rsm.JavaRSMTask" configurable="false"></task>
+		<task name="CppRSMTask" class="com.airfrance.squalix.tools.rsm.CppRSMTask" configurable="false"></task>
+	</tasks>
+	<sourcemanagements>
+		<sourcemanagement name="clearcase">
+			<analysis>
+				<task-ref name="ClearCaseTask"></task-ref>
+			</analysis>
+			<termination>
+				<task-ref name="ClearCaseCleanerTask"></task-ref>
+			</termination>
+		</sourcemanagement>
+		<sourcemanagement name="Local">
+			<analysis>
+				<task-ref name="SourceCodeAnalyserTask"></task-ref>
+			</analysis>
+			<termination>
+				<task-ref name="SourceCodeAnalyserCleanerTask"></task-ref>
+			</termination>
+		</sourcemanagement>
+	</sourcemanagements>
+	<profiles>
+		<profile name="java">
+			<!-- Configuration de SqualeWeb dépendant de ce profil -->
+			<integrityConstraints>
+				<!-- Les grilles disponibles pour ce profil -->
+				<grids>
+					<grid name="javancss"/>
+					<grid name="java"/>
+					<grid name="java2"/>
+				</grids>
+				<!-- Les différentes configurations des graphiques -->
+			</integrityConstraints>
+			<analysis>
+				<task-ref name="JCompilingTask"></task-ref>
+				<task-ref name="JavaMcCabeTask"></task-ref>
+				<task-ref name="JavaRSMTask"></task-ref>
+				<task-ref name="JDependTask"></task-ref>
+				<task-ref name="CkjmTask"></task-ref>
+				<task-ref name="RulesCheckingTask"></task-ref>
+				<task-ref name="MackerTask"></task-ref>
+				<task-ref name="UMLQualityTask"></task-ref>
+				<task-ref name="PmdTask">
+					<parameter name="language" value="java" />
+				</task-ref>
+				<task-ref name="CpdTask">
+					<parameter name="language" value="java" />
+				</task-ref>
+				<task-ref name="JavancssTask"></task-ref>
+			</analysis>
+			<termination>
+				<task-ref name="JCompilingCleanerTask"></task-ref>
+				<task-ref name="ComputeResultTask"></task-ref>
+			</termination>
+		</profile>
+		
+		<profile name="java compiled">
+			<!-- Configuration de SqualeWeb dépendant de ce profil -->
+			<integrityConstraints>
+				<!-- Les grilles disponibles pour ce profil -->
+				<grids>
+					<grid name="java"/>
+				</grids>
+				<!-- Les différentes configurations des graphiques -->
+				
+			</integrityConstraints>
+			<analysis>
+				<task-ref name="JavaMockCompilingTask"></task-ref>
+				<task-ref name="JavaMcCabeTask"></task-ref>
+				<task-ref name="JavaRSMTask"></task-ref>
+				<task-ref name="JDependTask"></task-ref>
+				<task-ref name="CkjmTask"></task-ref>
+				<task-ref name="RulesCheckingTask"></task-ref>
+				<task-ref name="MackerTask"></task-ref>
+				<task-ref name="UMLQualityTask"></task-ref>
+				<task-ref name="PmdTask">
+					<parameter name="language" value="java" />
+				</task-ref>
+				<task-ref name="CpdTask">
+					<parameter name="language" value="java" />
+				</task-ref>
+
+			</analysis>
+			<termination>
+				<task-ref name="ComputeResultTask"></task-ref>
+				<task-ref name="JavaMockCompilingCleanerTask"></task-ref>
+			</termination>
+		</profile>
+		<profile name="cpp" exportIDE="false">
+			<!-- Configuration de SqualeWeb dépendant de ce profil -->
+			<integrityConstraints>
+				<!-- Les grilles disponibles pour ce profil -->
+				<grids>
+					<grid name="cpp"/>
+				</grids>
+				<!-- Les différentes configurations des graphiques -->
+				
+			</integrityConstraints>
+			<analysis>
+				<task-ref name="CppTestTask"></task-ref>
+				<task-ref name="CppMcCabeTask"></task-ref>
+				<task-ref name="CppRSMTask"></task-ref>
+				<task-ref name="UMLQualityTask"></task-ref>
+				<task-ref name="CpdTask">
+					<parameter name="language" value="cpp" />
+				</task-ref>
+			</analysis>
+			<termination>
+				<task-ref name="ComputeResultTask"></task-ref>
+			</termination>
+		</profile>
+		<profile name="j2ee">
+			<!-- Configuration de SqualeWeb dépendant de ce profil -->
+			<integrityConstraints>
+				<!-- Les grilles disponibles pour ce profil -->
+				<grids>
+					<grid name="archinet"/>
+					<grid name="java"/>
+				</grids>
+				<!-- Les différentes configurations des graphiques -->
+				
+			</integrityConstraints>
+			<analysis>
+				<task-ref name="JSPVolumetryTask"></task-ref>
+				<task-ref name="JCompilingTask"></task-ref>
+				<task-ref name="JspCompilingTask"></task-ref>
+				<task-ref name="JavaMcCabeTask"></task-ref>
+				<task-ref name="JavaRSMTask"></task-ref>
+				<task-ref name="JDependTask"></task-ref>
+				<task-ref name="CkjmTask"></task-ref>
+				<task-ref name="RulesCheckingTask"></task-ref>
+				<task-ref name="J2eeMackerTask"></task-ref>
+				<task-ref name="UMLQualityTask"></task-ref>
+				<task-ref name="PmdTask">
+					<parameter name="language" value="java" />
+					<parameter name="language" value="jsp" />
+				</task-ref>
+				<task-ref name="CpdTask">
+					<parameter name="language" value="java" />
+					<parameter name="language" value="jsp" />
+				</task-ref>
+			</analysis>
+			<termination>
+				<task-ref name="ComputeResultTask"></task-ref>
+				<task-ref name="JCompilingCleanerTask"></task-ref>
+			</termination>
+		</profile>
+		<profile name="j2ee compiled">
+			<!-- Configuration de SqualeWeb dépendant de ce profil -->
+			<integrityConstraints>
+				<!-- Les grilles disponibles pour ce profil -->
+				<grids>
+					<grid name="archinet"/>
+					<grid name="java"/>
+				</grids>
+				<!-- Les différentes configurations des graphiques -->
+				
+			</integrityConstraints>
+			<analysis>
+				<task-ref name="JavaMockCompilingTask"></task-ref>
+				<task-ref name="JspCompilingTask"></task-ref>
+				<task-ref name="JavaMcCabeTask"></task-ref>
+				<task-ref name="JavaRSMTask"></task-ref>
+				<task-ref name="JDependTask"></task-ref>
+				<task-ref name="CkjmTask"></task-ref>
+				<task-ref name="RulesCheckingTask"></task-ref>
+				<task-ref name="J2eeMackerTask"></task-ref>
+				<task-ref name="UMLQualityTask"></task-ref>
+				<task-ref name="PmdTask">
+					<parameter name="language" value="java" />
+					<parameter name="language" value="jsp" />
+				</task-ref>
+				<task-ref name="CpdTask">
+					<parameter name="language" value="java" />
+					<parameter name="language" value="jsp" />
+				</task-ref>
+			</analysis>
+			<termination>
+				<task-ref name="ComputeResultTask"></task-ref>
+				<task-ref name="JavaMockCompilingCleanerTask"></task-ref>
+			</termination>
+		</profile>
+	</profiles>
+</configuration>

@@ -101,7 +101,7 @@ public class XmlImport
      * @param pException exception
      * @param pErrors erreurs
      */
-    private void handleException( Exception pException, StringBuffer pErrors )
+    protected void handleException( Exception pException, StringBuffer pErrors )
     {
         String message = CommonMessages.getString( "xml.parsing.error", new Object[] { pException.getMessage() } );
         pErrors.append( message );
