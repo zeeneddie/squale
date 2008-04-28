@@ -17,11 +17,11 @@
 
 
 		<property name="connection.provider_class">org.hibernate.connection.DriverManagerConnectionProvider</property>
-		<property name="connection.username">${ENV-HIBERNATE-USERNAME}</property>
-		<property name="connection.password">${ENV-HIBERNATE-PASSWORD}</property>
-		<property name="connection.url">${ENV-HIBERNATE-URL}</property>
-		<property name="connection.driver_class">${ENV-HIBERNATE-DRIVER}</property>
-		<property name="dialect">${ENV-HIBERNATE-DIALECT}</property>
+		<property name="connection.username">${squale.db.connection.username}</property>
+		<property name="connection.password">${squale.db.connection.password}</property>
+		<property name="connection.url">${squale.db.connection.url}</property>
+		<property name="connection.driver_class">${squale.db.connection.driver_class}</property>
+		<property name="dialect">${squale.db.dialect}</property>
 		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
 		<property name="jdbc.use_streams_for_binary">true</property>
 
