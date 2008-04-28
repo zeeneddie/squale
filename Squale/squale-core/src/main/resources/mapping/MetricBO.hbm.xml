@@ -131,27 +131,6 @@
 		containing the additional properties and place it in your merge dir.
 	    -->
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.FloatMetricBO"
-            discriminator-value="Float"
-        >
-        <property
-            name="value"
-            type="float"
-            update="true"
-            insert="true"
-            column="Number_val"
-            not-null="false"
-            unique="false"
-        />
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-FloatMetricBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
             name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO"
             discriminator-value="Int"
         >
@@ -168,6 +147,27 @@
 	    <!--
             	To add non XDoclet property mappings, create a file named
                 hibernate-properties-IntegerMetricBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.FloatMetricBO"
+            discriminator-value="Float"
+        >
+        <property
+            name="value"
+            type="float"
+            update="true"
+            insert="true"
+            column="Number_val"
+            not-null="false"
+            unique="false"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-FloatMetricBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 

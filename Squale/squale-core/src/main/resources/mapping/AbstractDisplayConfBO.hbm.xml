@@ -41,49 +41,6 @@
             containing the additional properties and place it in your merge dir.
         -->
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO"
-            lazy="true"
-            discriminator-value="volumetry"
-        >
-        <property
-            name="componentType"
-            type="string"
-            update="true"
-            insert="true"
-            column="componentType"
-        />
-
-        <set
-            name="tres"
-            table="Volumetry_Measures"
-            lazy="false"
-            inverse="false"
-            cascade="none"
-            sort="unsorted"
-        >
-
-            <key
-                column="VolumetryId"
-            >
-            </key>
-
-            <element
-                column="Measure"
-                type="string"
-                not-null="true"
-                unique="false"
-            />
-
-        </set>
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-VolumetryConfBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
             name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.BubbleConfBO"
             lazy="true"
             discriminator-value="bubble"
@@ -127,6 +84,49 @@
 	    <!--
             	To add non XDoclet property mappings, create a file named
                 hibernate-properties-BubbleConfBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO"
+            lazy="true"
+            discriminator-value="volumetry"
+        >
+        <property
+            name="componentType"
+            type="string"
+            update="true"
+            insert="true"
+            column="componentType"
+        />
+
+        <set
+            name="tres"
+            table="Volumetry_Measures"
+            lazy="false"
+            inverse="false"
+            cascade="none"
+            sort="unsorted"
+        >
+
+            <key
+                column="VolumetryId"
+            >
+            </key>
+
+            <element
+                column="Measure"
+                type="string"
+                not-null="true"
+                unique="false"
+            />
+
+        </set>
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-VolumetryConfBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 

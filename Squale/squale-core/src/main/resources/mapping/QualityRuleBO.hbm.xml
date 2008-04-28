@@ -70,48 +70,6 @@
             containing the additional properties and place it in your merge dir.
         -->
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO"
-            lazy="false"
-            discriminator-value="PracticeRule"
-        >
-
-        <many-to-one
-            name="formula"
-            class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO"
-            cascade="all"
-            outer-join="auto"
-            update="true"
-            insert="true"
-            column="Formula"
-        />
-
-        <property
-            name="weightFunction"
-            type="string"
-            update="true"
-            insert="true"
-            column="WeightFunction"
-            unique="false"
-        />
-
-        <property
-            name="effort"
-            type="integer"
-            update="true"
-            insert="true"
-            column="effort"
-            length="10"
-            unique="false"
-        />
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-PracticeRuleBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
             name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"
             lazy="false"
             discriminator-value="FactorRule"
@@ -187,6 +145,48 @@
 	    <!--
             	To add non XDoclet property mappings, create a file named
                 hibernate-properties-CriteriumRuleBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO"
+            lazy="false"
+            discriminator-value="PracticeRule"
+        >
+
+        <many-to-one
+            name="formula"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO"
+            cascade="all"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="Formula"
+        />
+
+        <property
+            name="weightFunction"
+            type="string"
+            update="true"
+            insert="true"
+            column="WeightFunction"
+            unique="false"
+        />
+
+        <property
+            name="effort"
+            type="integer"
+            update="true"
+            insert="true"
+            column="effort"
+            length="10"
+            unique="false"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-PracticeRuleBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 

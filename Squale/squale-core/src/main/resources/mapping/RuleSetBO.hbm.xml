@@ -82,23 +82,22 @@
             containing the additional properties and place it in your merge dir.
         -->
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.ProjectRuleSetBO"
-            discriminator-value="ProjectRuleSet"
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO"
+            discriminator-value="Checkstyle"
         >
-
-        <many-to-one
-            name="project"
-            class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
-            cascade="all"
-            outer-join="auto"
+        <property
+            name="value"
+            type="com.airfrance.jraf.provider.persistence.hibernate.BinaryBlobType"
             update="true"
             insert="true"
-            column="ProjectId"
+            column="FileContent"
+            not-null="false"
+            unique="false"
         />
 
 	    <!--
             	To add non XDoclet property mappings, create a file named
-                hibernate-properties-ProjectRuleSetBO.xml
+                hibernate-properties-CheckstyleRuleSetBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 
@@ -135,27 +134,6 @@
 
         </subclass>
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO"
-            discriminator-value="Checkstyle"
-        >
-        <property
-            name="value"
-            type="com.airfrance.jraf.provider.persistence.hibernate.BinaryBlobType"
-            update="true"
-            insert="true"
-            column="FileContent"
-            not-null="false"
-            unique="false"
-        />
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-CheckstyleRuleSetBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
             name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.cpptest.CppTestRuleSetBO"
             discriminator-value="CppTest"
         >
@@ -172,6 +150,28 @@
 	    <!--
             	To add non XDoclet property mappings, create a file named
                 hibernate-properties-CppTestRuleSetBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.ProjectRuleSetBO"
+            discriminator-value="ProjectRuleSet"
+        >
+
+        <many-to-one
+            name="project"
+            class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
+            cascade="all"
+            outer-join="auto"
+            update="true"
+            insert="true"
+            column="ProjectId"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-ProjectRuleSetBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 

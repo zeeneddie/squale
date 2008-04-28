@@ -83,28 +83,6 @@
             containing the additional properties and place it in your merge dir.
         -->
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.FactorResultBO"
-            discriminator-value="FactorResult"
-        >
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-FactorResultBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.CriteriumResultBO"
-            discriminator-value="CriteriumResult"
-        >
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-CriteriumResultBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
             name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO"
             discriminator-value="PracticeResult"
         >
@@ -139,6 +117,28 @@
 	    <!--
             	To add non XDoclet property mappings, create a file named
                 hibernate-properties-PracticeResultBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.CriteriumResultBO"
+            discriminator-value="CriteriumResult"
+        >
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-CriteriumResultBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.FactorResultBO"
+            discriminator-value="FactorResult"
+        >
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-FactorResultBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 

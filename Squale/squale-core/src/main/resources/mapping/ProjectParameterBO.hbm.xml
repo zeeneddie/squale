@@ -40,42 +40,6 @@
             containing the additional properties and place it in your merge dir.
         -->
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO"
-            discriminator-value="Map"
-        >
-
-        <map
-            name="parameters"
-            table="ProjectParameters"
-            lazy="false"
-            sort="unsorted"
-            cascade="all"
-        >
-
-            <key
-                column="MapId"
-            >
-            </key>
-
-            <index
-                column="Key"
-                type="string"
-            />
-
-            <one-to-many
-                  class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"
-            />
-
-        </map>
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-MapParameterBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
             name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO"
             discriminator-value="List"
         >
@@ -107,6 +71,42 @@
 	    <!--
             	To add non XDoclet property mappings, create a file named
                 hibernate-properties-ListParameterBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO"
+            discriminator-value="Map"
+        >
+
+        <map
+            name="parameters"
+            table="ProjectParameters"
+            lazy="false"
+            sort="unsorted"
+            cascade="all"
+        >
+
+            <key
+                column="MapId"
+            >
+            </key>
+
+            <index
+                column="Key"
+                type="string"
+            />
+
+            <one-to-many
+                  class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"
+            />
+
+        </map>
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-MapParameterBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 

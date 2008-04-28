@@ -115,75 +115,6 @@
             containing the additional properties and place it in your merge dir.
         -->
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO"
-            lazy="true"
-            discriminator-value="Method"
-        >
-        <property
-            name="longFileName"
-            type="string"
-            update="true"
-            insert="true"
-            column="LongFileName"
-            length="2048"
-            not-null="false"
-            unique="false"
-        />
-
-        <property
-            name="startLine"
-            type="integer"
-            update="true"
-            insert="true"
-            column="StartLine"
-            length="10"
-            not-null="false"
-            unique="false"
-        />
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-MethodBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO"
-            lazy="true"
-            discriminator-value="UmlInterface"
-        >
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-UmlInterfaceBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.JspBO"
-            lazy="true"
-            discriminator-value="Jsp"
-        >
-        <property
-            name="fileName"
-            type="string"
-            update="true"
-            insert="true"
-            column="LongFileName"
-            length="2048"
-            not-null="false"
-            unique="false"
-        />
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-JspBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
             name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
             lazy="true"
             discriminator-value="AbstractComplexComponent"
@@ -213,58 +144,14 @@
 		containing the additional properties and place it in your merge dir.
 	    -->
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlClassBO"
-            lazy="true"
-            discriminator-value="UmlClass"
-        >
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-UmlClassBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
             name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlModelBO"
             lazy="true"
             discriminator-value="UmlModel"
         >
+
 	    <!--
             	To add non XDoclet property mappings, create a file named
                 hibernate-properties-UmlModelBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO"
-            lazy="true"
-            discriminator-value="Class"
-        >
-        <property
-            name="fileName"
-            type="string"
-            update="true"
-            insert="true"
-            column="LongFileName"
-            length="2048"
-        />
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-ClassBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO"
-            lazy="true"
-            discriminator-value="UmlPackage"
-        >
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-UmlPackageBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 
@@ -396,13 +283,61 @@
 
         </subclass>
         <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO"
+            lazy="true"
+            discriminator-value="UmlPackage"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-UmlPackageBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO"
+            lazy="true"
+            discriminator-value="Class"
+        >
+        <property
+            name="fileName"
+            type="string"
+            update="true"
+            insert="true"
+            column="LongFileName"
+            length="2048"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-ClassBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
             name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO"
             lazy="true"
             discriminator-value="Package"
         >
+
 	    <!--
             	To add non XDoclet property mappings, create a file named
                 hibernate-properties-PackageBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlClassBO"
+            lazy="true"
+            discriminator-value="UmlClass"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-UmlClassBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 
@@ -492,6 +427,76 @@
 	    -->
 
         </subclass>
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO"
+            lazy="true"
+            discriminator-value="UmlInterface"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-UmlInterfaceBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.JspBO"
+            lazy="true"
+            discriminator-value="Jsp"
+        >
+        <property
+            name="fileName"
+            type="string"
+            update="true"
+            insert="true"
+            column="LongFileName"
+            length="2048"
+            not-null="false"
+            unique="false"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-JspBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO"
+            lazy="true"
+            discriminator-value="Method"
+        >
+        <property
+            name="longFileName"
+            type="string"
+            update="true"
+            insert="true"
+            column="LongFileName"
+            length="2048"
+            not-null="false"
+            unique="false"
+        />
+
+        <property
+            name="startLine"
+            type="integer"
+            update="true"
+            insert="true"
+            column="StartLine"
+            length="10"
+            not-null="false"
+            unique="false"
+        />
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-MethodBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
 
         </subclass>
 

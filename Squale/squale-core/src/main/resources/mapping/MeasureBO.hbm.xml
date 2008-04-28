@@ -95,6 +95,102 @@
             containing the additional properties and place it in your merge dir.
         -->
         <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssMetricsBO"
+            discriminator-value="JavancssMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-JavancssMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssClassMetricsBO"
+            discriminator-value="JavancssClassMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-JavancssClassMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssPackageMetricsBO"
+            discriminator-value="JavancssPackageMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-JavancssPackageMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssProjectMetricsBO"
+            discriminator-value="JavancssProjectMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-JavancssProjectMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+
+        </subclass>
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssMethodMetricsBO"
+            discriminator-value="JavancssMethodMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-JavancssMethodMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.misc.CommentsBO"
+            discriminator-value="Comments"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-CommentsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.GraphBO"
+            discriminator-value="Graph"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-GraphBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMProjectMetricsBO"
+            discriminator-value="RSMProjectMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-RSMProjectMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
             name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.roi.RoiMetricsBO"
             discriminator-value="Roi"
         >
@@ -107,15 +203,39 @@
 
         </subclass>
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.jdepend.JDependPackageMetricsBO"
-            discriminator-value="JDependPackageMetrics"
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMMetricsBO"
+            discriminator-value="RSMMetrics"
         >
 
 	    <!--
             	To add non XDoclet property mappings, create a file named
-                hibernate-properties-JDependPackageMetricsBO.xml
+                hibernate-properties-RSMMetricsBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMClassMetricsBO"
+            discriminator-value="RSMClassMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-RSMClassMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMMethodMetricsBO"
+            discriminator-value="RSMMethodMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-RSMMethodMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
 
         </subclass>
         <subclass
@@ -170,6 +290,28 @@
 
         </subclass>
         <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.CppTestTransgressionBO"
+            discriminator-value="CppTestTransgression"
+        >
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-CppTestTransgressionBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.CheckstyleTransgressionBO"
+            discriminator-value="CheckstyleTransgression"
+        >
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-CheckstyleTransgressionBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
             name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.JspPmdTransgressionBO"
             discriminator-value="JspPmdTransgression"
         >
@@ -202,24 +344,38 @@
 	    -->
 
         </subclass>
+
+        </subclass>
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.CheckstyleTransgressionBO"
-            discriminator-value="CheckstyleTransgression"
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.jspvolumetry.JSPVolumetryProjectBO"
+            discriminator-value="JSPVolumetryProject"
         >
+
 	    <!--
             	To add non XDoclet property mappings, create a file named
-                hibernate-properties-CheckstyleTransgressionBO.xml
+                hibernate-properties-JSPVolumetryProjectBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 
         </subclass>
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.CppTestTransgressionBO"
-            discriminator-value="CppTestTransgression"
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.ExtBugTrackingMetricsBO"
+            discriminator-value="ExtBugTrackingMetrics"
         >
+
 	    <!--
             	To add non XDoclet property mappings, create a file named
-                hibernate-properties-CppTestTransgressionBO.xml
+                hibernate-properties-ExtBugTrackingMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.qc.ExtTestManagerQCMetricsBO"
+            discriminator-value="TestManagerQCMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-ExtTestManagerQCMetricsBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 
@@ -227,13 +383,84 @@
 
         </subclass>
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.misc.CommentsBO"
-            discriminator-value="Comments"
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.jdepend.JDependPackageMetricsBO"
+            discriminator-value="JDependPackageMetrics"
         >
 
 	    <!--
             	To add non XDoclet property mappings, create a file named
-                hibernate-properties-CommentsBO.xml
+                hibernate-properties-JDependPackageMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityMetricsBO"
+            discriminator-value="UMLQualityMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-UMLQualityMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityInterfaceMetricsBO"
+            discriminator-value="UMLQualityInterfaceMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-UMLQualityInterfaceMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityClassMetricsBO"
+            discriminator-value="UMLQualityClassMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-UMLQualityClassMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityModelMetricsBO"
+            discriminator-value="UMLQualityModelMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-UMLQualityModelMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityPackageMetricsBO"
+            discriminator-value="UMLQualityPackageMetrics"
+        >
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-UMLQualityPackageMetricsBO.xml
+		containing the additional properties and place it in your merge dir.
+	    -->
+
+        </subclass>
+
+        </subclass>
+        <subclass
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.ckjm.CkjmClassMetricsBO"
+            discriminator-value="CkjmClassMetrics"
+        >
+
+	    <!--
+            	To add non XDoclet property mappings, create a file named
+                hibernate-properties-CkjmClassMetricsBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 
@@ -273,18 +500,6 @@
 
         </subclass>
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAProjectMetricsBO"
-            discriminator-value="ProjectMetrics"
-        >
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-McCabeQAProjectMetricsBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
             name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAJspMetricsBO"
             discriminator-value="JSPMetrics"
         >
@@ -296,155 +511,20 @@
 	    -->
 
         </subclass>
-
-        </subclass>
         <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.jspvolumetry.JSPVolumetryProjectBO"
-            discriminator-value="JSPVolumetryProject"
+            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAProjectMetricsBO"
+            discriminator-value="ProjectMetrics"
         >
 
 	    <!--
             	To add non XDoclet property mappings, create a file named
-                hibernate-properties-JSPVolumetryProjectBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityMetricsBO"
-            discriminator-value="UMLQualityMetrics"
-        >
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-UMLQualityMetricsBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityClassMetricsBO"
-            discriminator-value="UMLQualityClassMetrics"
-        >
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-UMLQualityClassMetricsBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityModelMetricsBO"
-            discriminator-value="UMLQualityModelMetrics"
-        >
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-UMLQualityModelMetricsBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityInterfaceMetricsBO"
-            discriminator-value="UMLQualityInterfaceMetrics"
-        >
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-UMLQualityInterfaceMetricsBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityPackageMetricsBO"
-            discriminator-value="UMLQualityPackageMetrics"
-        >
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-UMLQualityPackageMetricsBO.xml
+                hibernate-properties-McCabeQAProjectMetricsBO.xml
 		containing the additional properties and place it in your merge dir.
 	    -->
 
         </subclass>
 
         </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMProjectMetricsBO"
-            discriminator-value="RSMProjectMetrics"
-        >
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-RSMProjectMetricsBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMMetricsBO"
-            discriminator-value="RSMMetrics"
-        >
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-RSMMetricsBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMClassMetricsBO"
-            discriminator-value="RSMClassMetrics"
-        >
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-RSMClassMetricsBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMMethodMetricsBO"
-            discriminator-value="RSMMethodMetrics"
-        >
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-RSMMethodMetricsBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.GraphBO"
-            discriminator-value="Graph"
-        >
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-GraphBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.ckjm.CkjmClassMetricsBO"
-            discriminator-value="CkjmClassMetrics"
-        >
-
-	    <!--
-            	To add non XDoclet property mappings, create a file named
-                hibernate-properties-CkjmClassMetricsBO.xml
-		containing the additional properties and place it in your merge dir.
-	    -->
-
-        </subclass>
-        <subclass
-            name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.qc.ExtTestManagerQCMetricsBO"
-            discriminator-value="TestManagerQCMetrics"
-        ></subclass>
 
     </class>
 
