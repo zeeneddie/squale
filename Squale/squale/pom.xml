@@ -27,21 +27,20 @@
 	</scm>
 	<modules>
 		<module>../squale-core</module>
-		<module>../squale-ear</module>
 		<module>../squale-web</module>
 		<module>../squalix</module>
+		<!--module>../squale-ear</module-->
 	</modules>
 	<properties>
 		<squale.props.jraf.version>2.6</squale.props.jraf.version>
 		<squale.props.welcom.version>2.5</squale.props.welcom.version>
-		<!-- TODO : to remove when tests are OK -->
+		<!-- TODO : to remove when tests have been reworked -->
 		<maven.test.skip>true</maven.test.skip>
 	</properties>
 	<build>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
 			</resource>
 			<resource>
 				<directory>src/main/java</directory>
@@ -53,7 +52,6 @@
 		<testResources>
 			<testResource>
 				<directory>src/test/resources</directory>
-				<filtering>true</filtering>
 			</testResource>
 			<testResource>
 				<directory>src/test/java</directory>
@@ -325,17 +323,17 @@
 			<dependency>
 				<groupId>org.apache.maven.scm</groupId>
 				<artifactId>maven-scm-provider-cvsexe</artifactId>
-				<version>1.0</version>			
+				<version>1.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.maven.scm</groupId>
 				<artifactId>maven-scm-provider-cvsjava</artifactId>
-				<version>1.0</version>			
+				<version>1.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.maven.scm</groupId>
 				<artifactId>maven-scm-provider-svnexe</artifactId>
-				<version>1.0</version>			
+				<version>1.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.maven.scm</groupId>
@@ -384,4 +382,72 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<profiles>
+		<profile>
+			<!-- Configuration for test environment -->
+			<id>env-test</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<filters>
+					<filter>
+						src/filters/filter-env-test.properties
+					</filter>
+				</filters>
+			</build>
+			<properties>
+				<squale.db.jdbc.maven.groupId>
+					com.oracle
+				</squale.db.jdbc.maven.groupId>
+				<squale.db.jdbc.maven.artifactId>
+					ojdbc14
+				</squale.db.jdbc.maven.artifactId>
+				<squale.db.jdbc.maven.version>
+					10.2.0.2.0
+				</squale.db.jdbc.maven.version>
+				<squale.db.connection.url>
+					jdbc:oracle:thin:@squaleSrv:1521:XE
+				</squale.db.connection.url>
+				<squale.db.connection.username>
+					squale
+				</squale.db.connection.username>
+				<squale.db.connection.password>
+					squale
+				</squale.db.connection.password>
+				<squale.db.connection.driver_class>
+					oracle.jdbc.driver.OracleDriver
+				</squale.db.connection.driver_class>
+				<squale.db.dialect>
+					org.hibernate.dialect.OracleDialect
+				</squale.db.dialect>
+			</properties>
+		</profile>
+		<!-- Adding a profile here allows to override the above properties for a specific environment
+		<profile>
+			<id>env-XXX</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<filters>
+					<filter>
+						src/filters/filter-env-XXX.properties
+					</filter>
+				</filters>
+			</build>
+			<properties>
+				<squale.db.connection.url>
+					jdbc:oracle:thin:@fooServer:1521:XE
+				</squale.db.connection.url>
+				<squale.db.connection.username>
+					squaleUsername
+				</squale.db.connection.username>
+				<squale.db.connection.password>
+					squalePassword
+				</squale.db.connection.password>
+			</properties>
+		</profile>
+		-->
+	</profiles>
 </project>
