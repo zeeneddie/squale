@@ -79,7 +79,6 @@
 				<grids>
 					<grid name="javancss"/>
 					<grid name="java"/>
-					<grid name="java2"/>
 				</grids>
 				<!-- Les différentes configurations des graphiques -->
 				<displayConfigurations>
@@ -104,8 +103,6 @@
 			</integrityConstraints>
 			<analysis>
 				<task-ref name="JCompilingTask"></task-ref>
-				<task-ref name="JavaMcCabeTask"></task-ref>
-				<task-ref name="JavaRSMTask"></task-ref>
 				<task-ref name="JDependTask"></task-ref>
 				<task-ref name="CkjmTask"></task-ref>
 				<task-ref name="RulesCheckingTask"></task-ref>
@@ -253,8 +250,7 @@
 				<task-ref name="JSPVolumetryTask"></task-ref>
 				<task-ref name="JCompilingTask"></task-ref>
 				<task-ref name="JspCompilingTask"></task-ref>
-				<task-ref name="JavaMcCabeTask"></task-ref>
-				<task-ref name="JavaRSMTask"></task-ref>
+				<task-ref name="JavancssTask"></task-ref>
 				<task-ref name="JDependTask"></task-ref>
 				<task-ref name="CkjmTask"></task-ref>
 				<task-ref name="RulesCheckingTask"></task-ref>
