@@ -28,7 +28,7 @@ div#header hr{height:1px;width:100%;border:0;margin:0;z-index:999;position:absol
 div.ciel01{	background-image:url(../img/bg/header_01.gif);}
 div.ciel02{	background-image:url(../img/bg/header_02.gif);}
 div.ciel03{	background-image:url(../img/bg/header_03.gif);}
-div.ciel04{	background-image:url(../img/bg/header_04.gif);}
+div.ciel04{	/*background-image:url(../img/bg/header_04.gif);*/}
 /*-- visuel du header --*/
 div#header div#visuel {margin:0px auto;width:1000px;height:103px;background: no-repeat url(../img/tetiere/tetiere_isole.jpg);font-family:Arial, Helvetica, sans-serif;font-size:2.5em;text-align:left;}
 div#header div#visuel p {font:22px Arial, Helvetica, sans-serif;font-weight:bold;color:#fff;background-color:inherit;margin:55px 0 0 10px;}
@@ -94,11 +94,11 @@ div#footer {clear:both;height:20px;width:100%;background-image:url(../img/lignag
 /*---------- styles specifiques a un site de type APPLICATION ------------*/
 /*------------------------------------------------------------------------*/
 body#app {text-align:left;background-color:#fff;color:#252525;}
-#app div#header {width:100%;height:62px;color:#fff;}
-#app div#header div#visuel {height:62px;margin:0;background: no-repeat top left url(../img/tetiere/tetiere_vide.jpg);}
+#app div#header {background-color: #FFFFFF;width:100%;height:62px;color:#fff;}
+#app div#header div#visuel {height:62px;margin:0;/*background: no-repeat top left url(../img/tetiere/tetiere_vide.jpg);*/}
 #app div#header div#visuel p {font:20px Arial, Helvetica, sans-serif;font-weight:bold;background-color:inherit;margin:0;padding-left:20px;padding-top:22px;}
 #app div#header hr{top:55px;}
-#app div#conteneur{padding:0px;margin-left:20px;margin-right:20px;margin-top:1px; height:70%;text-align:left;width:auto;}
+#app div#conteneur{padding:0px;/*margin-left:20px;margin-right:20px*/;margin-top:1px; /*height:70%;*/ display:table;text-align:left;width:97%;}
 #app div#conteneur div#gauche{width:160px;margin-right:20px;padding:0;}
 #app div#conteneur div#traceur{padding-right:0;}
 #app div#conteneur div#contenu{float:none !important; float:left;clear:right; padding-left:0px !important;padding:0;margin-left:0; overflow:hidden;width:auto;}

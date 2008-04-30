@@ -12,8 +12,13 @@
 </HEAD>
 <BODY id="app" class="metiers">
 	<div id="header" class="ciel04">
-		<hr class="bg_theme">
-		<div id="visuel" style="background-image: url(theme/charte_v03_001/img/tetiere/squale-banner.gif)"></div>
+	<hr class="bg_theme">
+	<div id="visuel" 
+		style="float:left;width:30%;background-image: url(theme/charte_v03_001/img/tetiere/squale-banner-left.gif)">
+	</div>
+	<div id="visuel" 
+		style="float:right;width:70%;background: right no-repeat;background-image: url(theme/charte_v03_001/img/tetiere/squale-banner-right.gif)">
+	</div> 
 	</div>
 	<div id="navigation" class="bg_theme"></div>
 	<BR/>

@@ -16,11 +16,14 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 %>
 <div id="header" class="ciel04">
 <hr class="bg_theme">
-<div id="visuel"
-	style="background-image: url(theme/charte_v03_001/img/tetiere/squale-banner.gif)">
+<div id="visuel" 
+	style="float:left;width:30%;background-image: url(theme/charte_v03_001/img/tetiere/squale-banner-left.gif)">
 </div>
+<div id="visuel" 
+	style="float:right;width:70%;background: right no-repeat;background-image: url(theme/charte_v03_001/img/tetiere/squale-banner-right.gif)">
+</div> 
 </div>
-<div id="navigation" class="bg_theme"><af:menu>
+<div id="navigation" class="bg_theme" style="clear:both"><af:menu>
 	<af:menuItem key="menu.homepage" color="2" action="index.do"></af:menuItem>
 	<af:menuItem key="menu.applications" color="2">
 		<af:menuItem key="menu.view_all_applications" color="2"
