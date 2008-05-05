@@ -24,8 +24,7 @@
 	property="previousAuditId" type="String" />
 
 
-<af:page titleKey="application.results.title"
-	titleKeyArg0="<%=applicationName%>">
+<af:page titleKey="application.results.title" titleKeyArg0="<%=applicationName%>">
 	<af:head>
 		<%-- inclusion pour le marquage XITI --%>
 		<jsp:include page="/jsp/xiti/xiti_header_common.jsp" />
@@ -45,24 +44,6 @@
 			<h2><bean:message key="application.results.summary.subtitle" /></h2>
 			<br />
 			<af:tabbedPane name="applicationsummary">
-				<%-- Piechart --%>
-				<af:tab key="application.results.volumetry.tab" name="piechart"
-					lazyLoading="false">
-					<br />
-					<bean:define id="srcPieChart" name="resultListForm"
-						property="pieChart.srcName" type="String" />
-					<bean:define id="imgMapPieChart" name="resultListForm"
-						property="pieChart.useMapName" type="String" />
-					<%-- ligne necessaire --%>
-					<%=( (GraphMaker) ( (ResultListForm) ( request.getSession().getAttribute( "resultListForm" ) ) ).getPieChart() ).getMapDescription()%>
-					<html:img src="<%=srcPieChart%>" usemap="<%=imgMapPieChart%>"
-						border="0" />
-					<br />
-					<b><bean:message key="image.legend" /></b>
-					<br />
-					<bean:message key="application.results.piechart" />
-
-				</af:tab>
 				<%-- Factors --%>
 				<af:tab key="application.results.factors.tab" name="factors"
 					lazyLoading="false">
@@ -135,6 +116,23 @@
 					<b><bean:message key="image.legend" /></b>
 					<br />
 					<bean:message key="application.results.kiviat" />
+				</af:tab>
+				<%-- Piechart --%>
+				<af:tab key="application.results.volumetry.tab" name="piechart"
+					lazyLoading="false">
+					<br />
+					<bean:define id="srcPieChart" name="resultListForm"
+						property="pieChart.srcName" type="String" />
+					<bean:define id="imgMapPieChart" name="resultListForm"
+						property="pieChart.useMapName" type="String" />
+					<%-- ligne necessaire --%>
+					<%=( (GraphMaker) ( (ResultListForm) ( request.getSession().getAttribute( "resultListForm" ) ) ).getPieChart() ).getMapDescription()%>
+					<html:img src="<%=srcPieChart%>" usemap="<%=imgMapPieChart%>"
+						border="0" />
+					<br />
+					<b><bean:message key="image.legend" /></b>
+					<br />
+					<bean:message key="application.results.piechart" />
 				</af:tab>
 			</af:tabbedPane>
 			<br />

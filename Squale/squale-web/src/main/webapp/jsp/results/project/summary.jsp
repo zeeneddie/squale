@@ -27,7 +27,7 @@ String errorLink = WebMessages.getString(request, "errors.consult");
 String selectedTab = request.getParameter(HistoryTag.SELECTED_TAB_KEY);
 if(selectedTab == null) {
     // First tab by default
-    selectedTab = "kiviat";
+    selectedTab = "factors";
 }
 
 %>
@@ -86,6 +86,42 @@ if(selectedTab == null) {
 			<h2><bean:message key="project.results.summary.subtitle" /></h2>
 			<br />
 			<af:tabbedPane name="projectsummary">
+				<%-- Facteurs et tendances --%>
+				<af:tab key="project.results.factors.tab" name="factors"
+					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("factors")%>'>
+					<af:dropDownPanel titleKey="buttonTag.menu.aide">
+						<bean:message key="project.results.factors.details" />
+					</af:dropDownPanel>
+					<af:form action="project.do?action=summary&selected=factors">
+						<af:table name="projectSummaryForm" property="factors.factors"
+							scope="session">
+							<af:cols idIndex="index" id="factor">
+								<af:col key="project.result.factor.name" property="name"
+									width="150px">
+									<html:link
+										href='<%="project.do?action=factor&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
+										paramId="which" paramProperty="id" paramName="factor">
+										<bean:message name="factor" property="name" />
+									</html:link>
+								</af:col>
+								<af:col key="project.result.factor.value" property="currentMark"
+									width="150px">
+									<squale:mark name="factor" mark="currentMark" />
+								</af:col>
+								<af:col key="project.result.factor.tendance"
+									property="currentMark" width="150px">
+									<squale:trend name="factor" current="currentMark"
+										predecessor="predecessorMark" />
+								</af:col>
+								<!-- key="empty" paramId="param" -->
+								<af:col property="currentMark" width="150px">
+									<%-- Recupere l'image --%>
+									<squale:picto name="factor" property="currentMark" />
+								</af:col>
+							</af:cols>
+						</af:table>
+					</af:form>
+				</af:tab>
 				<%-- Kiviat --%>
 				<af:tab key="project.results.kiviat.tab" name="kiviat"
 					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("kiviat")%>'>
@@ -125,42 +161,6 @@ if(selectedTab == null) {
 								<af:button type="form" name="valider" />
 							</af:buttonBar>
 						</logic:equal>
-					</af:form>
-				</af:tab>
-				<%-- Facteurs et tendances --%>
-				<af:tab key="project.results.factors.tab" name="factors"
-					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("factors")%>'>
-					<af:dropDownPanel titleKey="buttonTag.menu.aide">
-						<bean:message key="project.results.factors.details" />
-					</af:dropDownPanel>
-					<af:form action="project.do?action=summary&selected=factors">
-						<af:table name="projectSummaryForm" property="factors.factors"
-							scope="session">
-							<af:cols idIndex="index" id="factor">
-								<af:col key="project.result.factor.name" property="name"
-									width="150px">
-									<html:link
-										href='<%="project.do?action=factor&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
-										paramId="which" paramProperty="id" paramName="factor">
-										<bean:message name="factor" property="name" />
-									</html:link>
-								</af:col>
-								<af:col key="project.result.factor.value" property="currentMark"
-									width="150px">
-									<squale:mark name="factor" mark="currentMark" />
-								</af:col>
-								<af:col key="project.result.factor.tendance"
-									property="currentMark" width="150px">
-									<squale:trend name="factor" current="currentMark"
-										predecessor="predecessorMark" />
-								</af:col>
-								<!-- key="empty" paramId="param" -->
-								<af:col property="currentMark" width="150px">
-									<%-- Recupere l'image --%>
-									<squale:picto name="factor" property="currentMark" />
-								</af:col>
-							</af:cols>
-						</af:table>
 					</af:form>
 				</af:tab>
 				<%-- Volumétrie --%>
