@@ -4,10 +4,7 @@
 	prefix="logic"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="/squale" prefix="squale"%>
-
 <%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils"%>
-
-<script type="text/javascript" src="jslib/manage_tab.js"></script>
 <bean:define id="applicationId" name="errorListForm"
 	property="applicationId" type="String" />
 <bean:define id="projectId" name="errorListForm" property="projectId"
@@ -92,3 +89,4 @@ if (null == expanded) {
 			onclick="<%=\"config_project.do?action=selectProjectToModify&applicationId=\"+applicationId + \"&projectId=\"+projectId%>" />
 	</af:buttonBar>
 </af:canvasCenter>
+<script type="text/javascript" src="jslib/manage_tab.js"></script>
