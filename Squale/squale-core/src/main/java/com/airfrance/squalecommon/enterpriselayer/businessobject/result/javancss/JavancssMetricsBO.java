@@ -27,16 +27,7 @@ public class JavancssMetricsBO
      */
     private static final  String JAVADOCS = "javadocs";
     
-    /**
-     * Max value of the cyclomatic complexity in the component
-     */
-    private static final  String MAXVG = "maxVg" ;
-    
-    /**
-     * Sum of cyclomatic complexity on the component
-     */
-    private static final  String  SUMVG = "sumVg";
-    
+   
 
     /**
      * Default constructor
@@ -46,8 +37,6 @@ public class JavancssMetricsBO
         super();
         getMetrics().put( NCSS, new IntegerMetricBO() );
         getMetrics().put( JAVADOCS, new IntegerMetricBO() );
-        getMetrics().put( MAXVG, new IntegerMetricBO() );
-        getMetrics().put( SUMVG, new IntegerMetricBO() );
     }
 
     /**
@@ -107,47 +96,5 @@ public class JavancssMetricsBO
     {
         mComponentName = componentName;
     }
-    /**
-     * Get the value of SumVg for the component
-     * 
-     * @return the value of SumVg
-     */
-    public Integer getSumVg()
-    {
-        return (Integer) ( (IntegerMetricBO) getMetrics().get( SUMVG ) ).getValue();
-    }
 
-    /**
-     * Set the sumVg for the component
-     * 
-     * @param pSumVg The value of SumVg
-     */
-    public void setSumVg( int pSumVg )
-    {
-        ( (IntegerMetricBO) getMetrics().get( SUMVG ) ).setValue( pSumVg );
-    }
-
-    
-    
-    /**
-     * Get the value of MaxVg for the component
-     * 
-     * @return the value of MaxVg
-     */
-    public Integer getMaxVg()
-    {
-        return (Integer) ( (IntegerMetricBO) getMetrics().get( MAXVG ) ).getValue();
-    }
-
-    /**
-     * Set the sumVg for the component
-     * 
-     * @param pMaxVg The value of MaxVg
-     */
-    public void setMaxVg( int pMaxVg )
-    {
-        ( (IntegerMetricBO) getMetrics().get( MAXVG ) ).setValue( pMaxVg );
-    }
-    
-    
 }

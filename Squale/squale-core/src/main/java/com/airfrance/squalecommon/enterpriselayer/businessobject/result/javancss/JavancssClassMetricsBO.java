@@ -20,6 +20,17 @@ public class JavancssClassMetricsBO
      * Number of methods
      */
     private static final String METHODS = "methods";
+    
+    /**
+     * Max value of the cyclomatic complexity in the component
+     */
+    private static final  String MAXVG = "maxVg" ;
+    
+    /**
+     * Sum of cyclomatic complexity on the component
+     */
+    private static final  String  SUMVG = "sumVg";
+    
 
     /**
      * Default constructor
@@ -29,6 +40,8 @@ public class JavancssClassMetricsBO
         super();
         getMetrics().put( CLASSES, new IntegerMetricBO() );
         getMetrics().put( METHODS, new IntegerMetricBO() );
+        getMetrics().put( MAXVG, new IntegerMetricBO() );
+        getMetrics().put( SUMVG, new IntegerMetricBO() );
     }
 
     /**
@@ -69,6 +82,47 @@ public class JavancssClassMetricsBO
     public void setMethods( int pMethods )
     {
         ( (IntegerMetricBO) getMetrics().get( METHODS ) ).setValue( pMethods );
+    }
+    /**
+     * Get the value of SumVg for the component
+     * 
+     * @return the value of SumVg
+     */
+    public Integer getSumVg()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( SUMVG ) ).getValue();
+    }
+
+    /**
+     * Set the sumVg for the component
+     * 
+     * @param pSumVg The value of SumVg
+     */
+    public void setSumVg( int pSumVg )
+    {
+        ( (IntegerMetricBO) getMetrics().get( SUMVG ) ).setValue( pSumVg );
+    }
+
+    
+    
+    /**
+     * Get the value of MaxVg for the component
+     * 
+     * @return the value of MaxVg
+     */
+    public Integer getMaxVg()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( MAXVG ) ).getValue();
+    }
+
+    /**
+     * Set the sumVg for the component
+     * 
+     * @param pMaxVg The value of MaxVg
+     */
+    public void setMaxVg( int pMaxVg )
+    {
+        ( (IntegerMetricBO) getMetrics().get( MAXVG ) ).setValue( pMaxVg );
     }
 
 }

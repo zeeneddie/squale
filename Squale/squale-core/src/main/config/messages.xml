@@ -1386,7 +1386,7 @@
 	</message>
 	<message lang="fr"
 		key="javancss.project.ncss">
-		Nombre de lignes de code
+		Nombre de lignes de code source
 	</message>
 	<message lang="en"
 		key="javancss.project.ncss">
@@ -1398,7 +1398,7 @@
 	</message>
 	<message lang="en"
 		key="javancss.project.classes">
-		Number classes
+		Number of classes
 	</message>
 	<message lang="fr"
 		key="javancss.project.methods">
@@ -1464,6 +1464,41 @@
 		key="javancss.project.sumVg">
 		Sum of all cyclomatic complexity
 	</message>
+	<message lang="fr"
+		key="javancss.project.numberOfClasses">
+		Nombre de classes
+	</message>
+	<message lang="en"
+		key="javancss.project.numberOfClasses">
+		Number of classes
+	</message>
+	<message lang="fr"
+		key="javancss.project.numberOfMethods">
+		Nombre de méthodes
+	</message>
+	<message lang="en"
+		key="javancss.project.numberOfMethods">
+		Number of methods
+	</message>
+	<message lang="fr"
+		key="javancss.project.numberOfCommentsLines">
+		Nombre total de lignes de commentaires
+	</message>
+	<message lang="en"
+		key="javancss.project.numberOfCommentsLines">
+		Total number of comments lines
+	</message>
+	<message lang="fr"
+		key="javancss.project.numberOfCodeLines">
+		Nombre total de lignes
+	</message>
+	<message lang="en"
+		key="javancss.project.numberOfCodeLines">
+		Total number of lines
+	</message>
+	
+	
+	
 
 	<!--  Packages  -->
 	<!--  Message pour les packages  -->
@@ -1515,11 +1550,11 @@
 	</message>	
 	<message lang="fr"
 		key="javancss.package.ncss">
-		Nombre de lignes de code
+		Nombre de lignes de code source
 	</message>
 	<message lang="en"
 		key="javancss.package.ncss">
-		Source lines number
+		Number of source lines
 	</message>
 	<message lang="fr"
 		key="javancss.package.classes">
@@ -1527,7 +1562,7 @@
 	</message>
 	<message lang="en"
 		key="javancss.package.classes">
-		Number classes
+		Number of classes
 	</message>
 	<message lang="fr"
 		key="javancss.package.methods">
@@ -1698,11 +1733,11 @@
 	</message>
 	<message lang="fr"
 		key="javancss.class.ncss">
-		Nombre de lignes de code
+		Nombre de lignes de code source
 	</message>
 	<message lang="en"
 		key="javancss.class.ncss">
-		Source lines number
+		Number of source lines
 	</message>
 	<message lang="fr"
 		key="javancss.class.classes">
@@ -1710,7 +1745,7 @@
 	</message>
 	<message lang="en"
 		key="javancss.class.classes">
-		Number classes
+		Number of classes
 	</message>
 	<message lang="fr"
 		key="javancss.class.methods">
@@ -1908,11 +1943,11 @@
 	<message lang="en" key="mccabe.method.fanout">Fan out</message>
 	<message lang="fr"
 		key="javancss.method.ncss">
-		Nombre de lignes de code
+		Nombre de lignes de code source
 	</message>
 	<message lang="en"
 		key="javancss.method.ncss">
-		Source lines number
+		Number of source lines
 	</message>
 	<message lang="fr"
 		key="javancss.method.ccn">
