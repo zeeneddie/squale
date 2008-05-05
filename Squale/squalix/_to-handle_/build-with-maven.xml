@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Squale" basedir="." default="build-all">
+
+	<property name="SqualeClassesDir" location="${basedir}/../target/classes"/>
+  
+	<path id="SqualeClasspath">
+	</path>
+	
+	<target name="build-all">
+		<exec executable="mvn" dir="${basedir}/../../squale">
+			<arg value="clean"/>
+			<arg value="install"/>
+		</exec>
+	</target>
+
+</project>
