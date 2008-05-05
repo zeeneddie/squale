@@ -40,7 +40,6 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Metho
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssClassMetricsBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssMethodMetricsBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssPackageMetricsBO;
@@ -92,6 +91,9 @@ public class JavancssTask
     /** Path of the .xml report */
     private String outputFilename;
 
+    /** Number of classes */
+    private int numberOfClasses;
+
     /**
      * Defaults constructor
      */
@@ -113,12 +115,12 @@ public class JavancssTask
         try
         {
             initialize();
-            if (mStatus == RUNNING)
+            if ( mStatus == RUNNING )
             {
                 LOGGER.info( JavancssMessages.getString( "javancss.initialize.end" ) );
                 doJavaNcss();
             }
-            if (mStatus == RUNNING)
+            if ( mStatus == RUNNING )
             {
                 LOGGER.info( JavancssMessages.getString( "javancss.toolexecution.end" ) );
                 persisteMeasures();
@@ -192,7 +194,7 @@ public class JavancssTask
                                           (ListParameterBO) mProject.getParameter( ParametersConstants.EXCLUDED_PATTERNS ),
                                           (ListParameterBO) mProject.getParameter( ParametersConstants.EXCLUDED_DIRS ),
                                           JAVA_FILE_EXTENSION );
-        
+
     }
 
     /**
@@ -249,14 +251,14 @@ public class JavancssTask
         {
             InputStream inp = new FileInputStream( outputFilename );
             parsingResult = par.parsing( inp );
-            parsingResult.getProjectMetrics().setLine( lau.getLOC() );
+            parsingResult.getProjectMetrics().setLines( lau.getLOC() );
         }
         catch ( FileNotFoundException e )
         {
             String message = JavancssMessages.getString( "javancss.exception.result.file_not_exist" );
-            throw new TaskException( message);
+            throw new TaskException( message );
         }
-        
+
     }
 
     /**
@@ -298,15 +300,7 @@ public class JavancssTask
         throws TaskException, JrafDaoException
     {
 
-        JavancssProjectMetricsBO projectResults = parsingResult.getProjectMetrics();
-
-        // Recording of project level results
-        projectResults.setAudit( getAudit() );
-        projectResults.setComponent( getProject() );
-        projectResults.setTaskName( getName() );
-        // MeasureDAOImpl.getInstance().create( getSession(), projectResults );
-
-        // Recording of package level results
+        // Completion of the package level BO
         ArrayList packageResults = parsingResult.getPackageResult();
         for ( int i = 0; i < packageResults.size(); i++ )
         {
@@ -315,18 +309,30 @@ public class JavancssTask
             packageMetrics.setAudit( getAudit() );
             packageMetrics.setComponent( repository.persisteComponent( packBO ) );
             packageMetrics.setTaskName( getName() );
-            // MeasureDAOImpl.getInstance().create( getSession(), packageMetrics );
         }
 
-        // Recording of classes level results
-        persiteClassesMeasures();
+        // Completion of classes level BO
+        completeClassesMeasures();
 
-        // Recording of methods level results
-        persiteMethodsMeasures();
+        // Completion and recording of methods level results
+        completeMethodsMeasures();
 
+        // Completion and recording of project level results
+        JavancssProjectMetricsBO projectResults = parsingResult.getProjectMetrics();
+        projectResults.setCommentsLines( projectResults.getJavadocsLines().intValue()
+            + projectResults.getMultiCommentsLines().intValue() + projectResults.getSingleCommentsLines().intValue() );
+        projectResults.setLoc( projectResults.getCommentsLines().intValue() + projectResults.getNcss().intValue() );
+        projectResults.setClassNumber( numberOfClasses );
+        projectResults.setMethodNumber( parsingResult.getMethodsResult().size() );
+        projectResults.setAudit( getAudit() );
+        projectResults.setComponent( getProject() );
+        projectResults.setTaskName( getName() );
         MeasureDAOImpl.getInstance().create( getSession(), projectResults );
 
+        // Recording of the package level results
         MeasureDAOImpl.getInstance().saveAll( getSession(), parsingResult.getPackageResult() );
+
+        // Recording of the class level results
         MeasureDAOImpl.getInstance().saveAll( getSession(), parsingResult.getClassesResult() );
 
         LOGGER.info( JavancssMessages.getString( "javancss.persistence.end" ) );
@@ -338,7 +344,7 @@ public class JavancssTask
      * @throws TaskException Exception Happen during the search of the path of the class
      * @throws JrafDaoException Exception happen during the the persistence
      */
-    private void persiteClassesMeasures()
+    private void completeClassesMeasures()
         throws TaskException, JrafDaoException
 
     {
@@ -360,13 +366,13 @@ public class JavancssTask
                 classesMetrics.setAudit( getAudit() );
                 classesMetrics.setComponent( repository.persisteComponent( classBO ) );
                 classesMetrics.setTaskName( getName() );
-                // MeasureDAOImpl.getInstance().create( getSession(), classesMetrics );
+                numberOfClasses = numberOfClasses + classesMetrics.getClasses().intValue() + 1;
             }
             else if ( result.size() == 0 )
             {
                 String message = JavancssMessages.getString( "javancss.exception.findfilename.noMatch", nameToFind );
                 LOGGER.error( message );
-                throw new TaskException(message);
+                throw new TaskException( message );
             }
             else
             {
@@ -382,9 +388,9 @@ public class JavancssTask
      * This method do the persistence of the method level metric for javancss results
      * 
      * @throws JrafDaoException Exception happen during the persistence
-     * @throws TaskException exception happened
+     * @throws TaskException exception happened during the persistence in the base
      */
-    private void persiteMethodsMeasures()
+    private void completeMethodsMeasures()
         throws JrafDaoException, TaskException
     {
         ArrayList methodsResults = parsingResult.getMethodsResult();
@@ -399,89 +405,117 @@ public class JavancssTask
             // If the method give by javancss is inside an anonymous class, the method results is not persist
             if ( !methPathName.contains( "$" ) )
             {
-                doPersistence = true;
-                ArrayList methodMatch = new ArrayList();
-                MethodBO methBO = parser.getMethod( methPathName, "" );
-                MethodBO repoMethBO = (MethodBO) repository.getComponent( methBO );
-                if ( repoMethBO == null )
-                {
-                    // Searching of the complete path name of the classes which contain the method
-                    AbstractComplexComponentBO compoBo = (AbstractComplexComponentBO) methBO.getParent();
-                    while ( ( compoBo.getParent() instanceof ClassBO ) )
-                    {
-                        compoBo = compoBo.getParent();
-                    }
-                    ClassBO classBo = (ClassBO) repository.getComponent( compoBo );
-                    methBO.setLongFileName( classBo.getFileName() );
-                    ( (ClassBO) methBO.getParent() ).setFileName( classBo.getFileName() );
-                    // As javancss doesn't give the full name for arguments type, we search correspondence between the
-                    // method name give by javancss and those we have in the database. That mean javancss can't be the
-                    // task which create methods component.
-                    methodMatch = MethodBOHelper.searchMethodBO( methBO, allMethods,repository );
-                    if ( methodMatch.size() == 1 )
-                    {
-                        methBO = (MethodBO) methodMatch.get( 0 );
-                    }
-                    else if ( methodMatch.size() > 1 )
-                    {
-                        doPersistence = false;
-                        String message =
-                            JavancssMessages.getString( "javancss.warning.method.manyMatch", methBO.getName() );
-                        LOGGER.warn( message );
-                        initError( message );
-                    }
-                }
-                else
-                {
-                    methBO = repoMethBO;
-                }
-                methodMetrics.setAudit( getAudit() );
-                methodMetrics.setComponent( methBO );
-                methodMetrics.setTaskName( getName() );
-                computeClass( methodMetrics );
-                
-                if ( doPersistence )
-                {
-                    
-                    methodMetrics.setComponent( repository.persisteComponent( methBO ) );
-                    if (methodMetrics.getComponent().getId()==22179)
-                    {
-                        LOGGER.info( methBO.getName() );
-                        LOGGER.info( methBO.getLongFileName() );
-                        LOGGER.info( methodMetrics.getComponent().getName() );
-                        LOGGER.info( methodMetrics.getComponent().getFullName() );
-                    }
-                    MeasureDAOImpl.getInstance().create( getSession(), methodMetrics );
-                }
+                ifNotInsideAnonym( methPathName, methodMetrics, allMethods );
+            }
+            else
+            {
+                ifIsInsideAnonym( methPathName, methodMetrics );
             }
         }
     }
 
     /**
+     * This method contains the action to do when the method is not inside an anonymous class
+     * 
+     * @param methPathName The path name of the method link to the metric to persist
+     * @param methodMetrics The metrics bo to persist
+     * @param allMethods The repository of all existent methods
+     * @throws JrafDaoException exception happened during the persistence in the base
+     */
+    public void ifNotInsideAnonym( String methPathName, JavancssMethodMetricsBO methodMetrics, Collection allMethods )
+        throws JrafDaoException
+    {
+        boolean doPersistence = true;
+        ArrayList methodMatch = new ArrayList();
+        MethodBO methBO = parser.getMethod( methPathName, "" );
+        MethodBO repoMethBO = (MethodBO) repository.getComponent( methBO );
+        if ( repoMethBO == null )
+        {
+            // Searching of the complete path name of the classes which contain the method
+            AbstractComplexComponentBO compoBo = (AbstractComplexComponentBO) methBO.getParent();
+            while ( ( compoBo.getParent() instanceof ClassBO ) )
+            {
+                compoBo = compoBo.getParent();
+            }
+            ClassBO classBo = (ClassBO) repository.getComponent( compoBo );
+            methBO.setLongFileName( classBo.getFileName() );
+            ( (ClassBO) methBO.getParent() ).setFileName( classBo.getFileName() );
+            // As javancss doesn't give the full name for arguments type, we search correspondence between the
+            // method name give by javancss and those we have in the database. That mean javancss can't be the
+            // task which create methods component.
+            methodMatch = MethodBOHelper.searchMethodBO( methBO, allMethods, repository );
+            if ( methodMatch.size() == 1 )
+            {
+                methBO = (MethodBO) methodMatch.get( 0 );
+            }
+            else if ( methodMatch.size() > 1 )
+            {
+                doPersistence = false;
+                String message = JavancssMessages.getString( "javancss.warning.method.manyMatch", methBO.getName() );
+                LOGGER.warn( message );
+                initError( message );
+            }
+        }
+        else
+        {
+            methBO = repoMethBO;
+        }
+        methodMetrics.setAudit( getAudit() );
+        methodMetrics.setComponent( methBO );
+        methodMetrics.setTaskName( getName() );
+        int ccn = methodMetrics.getCcn().intValue();
+        AbstractComplexComponentBO compo = methodMetrics.getComponent().getParent();
+        computeClass( ccn, compo );
+
+        if ( doPersistence )
+        {
+
+            methodMetrics.setComponent( repository.persisteComponent( methBO ) );
+            MeasureDAOImpl.getInstance().create( getSession(), methodMetrics );
+        }
+    }
+
+    /**
+     * This method contains the action to do when the method is inside an anonymous class
+     * 
+     * @param methPathName The path name of the method link to the metric to persist
+     * @param methodMetrics The metrics bo to use
+     */
+    public void ifIsInsideAnonym( String methPathName, JavancssMethodMetricsBO methodMetrics )
+    {
+        String pathName = methPathName;
+        int ccn = methodMetrics.getCcn().intValue();
+        // we cut the part of the anonymous class in order to get the class which contains the anonymous class
+        pathName = pathName.substring( 0, pathName.lastIndexOf( '$' ) );
+        ClassBO repoclazzBO = null;
+        do
+        {
+            pathName = pathName.substring( 0, pathName.lastIndexOf( "." ) );
+            ClassBO clazzBO = parser.getClass( pathName );
+            repoclazzBO = (ClassBO) repository.getComponent( clazzBO );
+        }
+        while ( repoclazzBO == null );
+        computeClass( ccn, repoclazzBO );
+    }
+
+    /**
      * Compute of the maxVg and sumVg for the class level result
      * 
-     * @param meth The JavancssMethodMetricsBO associate to the method parent of the class
-     * @throws TaskException
+     * @param component The JavancssMethodMetricsBO associate to the method parent of the class
+     * @param ccn The cyclomatic complexity of the method
      */
-    private void computeClass( JavancssMethodMetricsBO meth )
-        throws TaskException
+    private void computeClass( int ccn, AbstractComplexComponentBO component )
     {
-        int ccn = meth.getCcn().intValue();
-        AbstractComplexComponentBO compo = meth.getComponent().getParent();
-        JavancssClassMetricsBO metricClassCompo = null;
+        AbstractComplexComponentBO compo = component;
         while ( !( compo.getParent() instanceof PackageBO ) )
         {
             compo = compo.getParent();
         }
-
+        JavancssClassMetricsBO metricClassCompo = null;
         ArrayList classesResults = parsingResult.getClassesResult();
         int i = 0;
         do
         {
-            if ( i == classesResults.size() )
-            {
-                throw new TaskException( meth.getComponent().getName() );
-            }
             metricClassCompo = (JavancssClassMetricsBO) classesResults.get( i );
             i++;
         }
@@ -508,7 +542,6 @@ public class JavancssTask
      * 
      * @param ccn The ccn value to test
      * @param component The parent ClassBO
-     * @throws TaskException
      */
     private void computePackage( int ccn, AbstractComplexComponentBO component )
     {
@@ -521,8 +554,7 @@ public class JavancssTask
             metricPackageCompo = (JavancssPackageMetricsBO) packageResults.get( i );
             i++;
         }
-        while ( !repository.compare( compo,  metricPackageCompo.getComponent()));
-                        //!compo.equals( metricPackageCompo.getComponent() ) );
+        while ( !repository.compare( compo, metricPackageCompo.getComponent() ) );
         if ( metricPackageCompo.getSumVg() == null )
         {
             metricPackageCompo.setSumVg( ccn );

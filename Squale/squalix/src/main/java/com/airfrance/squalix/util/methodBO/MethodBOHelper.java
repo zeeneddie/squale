@@ -23,6 +23,7 @@ public class MethodBOHelper
      * 
      * @param methBO The object MethodBO to search
      * @param allMethods The collection of object already persist
+     * @param repository The repository of existent component
      * @return The list of existent MethodBO corresponding
      */
     public static ArrayList searchMethodBO( MethodBO methBO, Collection allMethods, ComponentRepository repository )
@@ -33,7 +34,6 @@ public class MethodBOHelper
         {
             MethodBO existentMethod = (MethodBO) it.next();
             if (repository.compare( methBO, existentMethod ))  
-//methBO.getLongFileName().compareTo( existentMethod.getLongFileName() ) == 0 )
             {
                 ArrayList splitExist = splitMethod( existentMethod );
                 ArrayList splitMeth = splitMethod( methBO );
