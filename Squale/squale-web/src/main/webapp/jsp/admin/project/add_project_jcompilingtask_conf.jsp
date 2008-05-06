@@ -431,7 +431,7 @@ kindOfTask = (kindOfTask != null) ? kindOfTask : "";%>
 					property="needBundle" disabled="<%=disabled%>" />
 			</tr>
 			<%-- Chemin vers le bundle eclipse si nécessaire --%>
-			<tr style="" id="bundlePathField">
+			<tr style="<%=displayBundlePath%>" id="bundlePathField">
 				<af:field styleClassLabel="td1"
 					key="project_creation.java.bundle_path" property="bundlePath"
 					size="60" disabled="<%=disabled%>" />
@@ -451,7 +451,7 @@ kindOfTask = (kindOfTask != null) ? kindOfTask : "";%>
 		<br />
 		<br />
 		<%-- Configuration eclipse --%>
-		<div id="eclipseDiv" style="">
+		<div id="eclipseDiv" style="<%=displayEclipseParams%>">
 		<h3><bean:message
 			key="project_creation.compiling.java.eclipse.variable.title" /></h3>
 		<%-- variables eclipse --%> <af:dropDownPanel
