@@ -33,7 +33,7 @@
 	</modules>
 	<properties>
 		<squale.props.jraf.version>2.6</squale.props.jraf.version>
-		<squale.props.welcom.version>2.5</squale.props.welcom.version>
+		<squale.props.welcom.version>2.5.1-SNAPSHOT</squale.props.welcom.version>
 		<!-- TODO : to remove when tests have been reworked -->
 		<maven.test.skip>true</maven.test.skip>
 	</properties>
