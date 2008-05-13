@@ -959,7 +959,7 @@ public abstract class BaseDispatchAction
         LogonBean user = (LogonBean) getWILogonBean( pRequest );
         if ( !user.isAdmin() )
         {
-            String matricule = pRequest.getRemoteUser();
+            String matricule = user.getMatricule();
             Integer maxAccesses =
                 new Integer( Integer.parseInt( WebMessages.getString( pRequest, "application.max.accesses" ) ) );
             Object[] accessParams = new Object[] { new Long( pAppliId ), matricule, maxAccesses };

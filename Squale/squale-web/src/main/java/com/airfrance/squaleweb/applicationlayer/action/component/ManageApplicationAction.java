@@ -651,9 +651,10 @@ public class ManageApplicationAction
             }
             else
             {
+                LogonBean user = (LogonBean) getWILogonBean( pRequest );
                 // On enregistre les paramètres de dernières modifications pour l'application
                 ac.execute( "updateLastModifParams", new Object[] {
-                    new Long( Long.parseLong( applicationForm.getApplicationId() ) ), pRequest.getRemoteUser(),
+                    new Long( Long.parseLong( applicationForm.getApplicationId() ) ), user.getMatricule(),
                     Calendar.getInstance().getTime() } );
                 // On recharge l'application en session
                 ApplicationConfDTO applicationDTO =
@@ -1054,7 +1055,8 @@ public class ManageApplicationAction
             SimpleDateFormat formator =
                 new SimpleDateFormat( WebMessages.getString( getLocale( pRequest ), "date.format.simple" ) );
             String today = formator.format( Calendar.getInstance().getTime() );
-            Object[] params = { form.getApplicationName(), today, pRequest.getRemoteUser() };
+            LogonBean identifiedUser = (LogonBean) getWILogonBean( pRequest );
+            Object[] params = { form.getApplicationName(), today, identifiedUser.getMatricule() };
             String content =
                 header + MessageFormat.format( WebMessages.getString( pRequest, "mail.appli.deleted.content" ), params );
             content += "\n\n" + WebMessages.getString( pRequest, "mail.appli.deleted.content.users" );
@@ -1116,7 +1118,8 @@ public class ManageApplicationAction
             SimpleDateFormat formator =
                 new SimpleDateFormat( WebMessages.getString( getLocale( pRequest ), "date.format.simple" ) );
             String today = formator.format( Calendar.getInstance().getTime() );
-            Object[] params = { form.getApplicationName(), today, pRequest.getRemoteUser() };
+            LogonBean identifiedUser = (LogonBean) getWILogonBean( pRequest );
+            Object[] params = { form.getApplicationName(), today, identifiedUser.getMatricule() };
             String content =
                 header + MessageFormat.format( WebMessages.getString( pRequest, "mail.appli.deleted.content" ), params );
             content += "\n\n" + WebMessages.getString( pRequest, "mail.appli.deleted.content.users" );

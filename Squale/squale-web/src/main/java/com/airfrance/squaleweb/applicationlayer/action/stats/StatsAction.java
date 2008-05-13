@@ -17,6 +17,7 @@ import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
 import com.airfrance.squalecommon.datatransfertobject.stats.SetOfStatsDTO;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
 import com.airfrance.squaleweb.applicationlayer.action.export.xls.ExcelDataApplicationsStatsList;
+import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
 import com.airfrance.squaleweb.applicationlayer.formbean.stats.SetOfStatsForm;
 import com.airfrance.squaleweb.transformer.stats.SetOfStatsTransformer;
 import com.airfrance.squaleweb.util.SqualeWebActionUtils;
@@ -126,10 +127,11 @@ public class StatsAction
     {
         try
         {
+            LogonBean user = (LogonBean) getWILogonBean( pRequest );
             ExcelDataApplicationsStatsList data =
                 new ExcelDataApplicationsStatsList( pRequest.getLocale(), getResources( pRequest ),
                                                     ( (SetOfStatsForm) pForm ).getListOfApplicationsStatsForm(),
-                                                    pRequest.getRemoteUser() );
+                                                    user.getMatricule() );
             String today =
                 SqualeWebActionUtils.getFormattedDate( pRequest.getLocale(), Calendar.getInstance().getTime(),
                                                        "date.format.simple.underscore" );
