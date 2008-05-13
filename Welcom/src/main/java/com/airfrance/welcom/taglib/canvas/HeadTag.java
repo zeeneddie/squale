@@ -66,7 +66,6 @@ public class HeadTag
         doTitle();
 
         CanvasUtil.appendCssJs( this, pageContext );
-
         return EVAL_PAGE;
     }
 
@@ -76,8 +75,8 @@ public class HeadTag
     public int doEndTag()
         throws JspException
     {
-        ResponseUtils.write( pageContext, "</HEAD>" );
-
+        ResponseUtils.write( pageContext, "</HEAD>" ); 
+        this.release();
         return super.doEndTag();
     }
 

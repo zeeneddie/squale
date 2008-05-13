@@ -66,7 +66,6 @@ public class CanvasCenterTag
     public int doStartTag()
         throws JspException
     {
-
         final StringBuffer sb = new StringBuffer();
         sb.append( render.drawStart( pageContext.getRequest().getAttribute( CanvasLeftMenuTag.KEY_CANVASLEFT ) != null ) );
 
@@ -143,7 +142,7 @@ public class CanvasCenterTag
         throws JspException
     {
         ResponseUtils.write( pageContext, render.drawEnd() );
-
+        this.release();
         return EVAL_PAGE;
     }
 
