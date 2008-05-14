@@ -15,7 +15,7 @@
 	<name>Welcom</name>
 	<description>Welcom UI Framework</description>
 	<properties>
-		<squale.props.jraf.version>2.6.1-SNAPSHOT</squale.props.jraf.version>
+		<squale.props.jraf.version>2.6</squale.props.jraf.version>
 	</properties>
 	<build>
 		<resources>
