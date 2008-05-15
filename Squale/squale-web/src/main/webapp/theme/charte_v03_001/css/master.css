@@ -52,7 +52,7 @@ div#conteneur div#gauche{float:left;width:230px;padding-left:20px;margin:0;}
 /*--- colonne de droite ---*/
 div#conteneur div#droite{float:right;width:230px;margin-left:0px;margin-right:0px;padding:0px;overflow:hidden;}
 /*--- colonne centrale (contenu) ---*/
-div#conteneur div#contenu{padding-left:20px !important;padding-left:16px;margin:0;overflow:hidden;width:500px;
+div#conteneur div#contenu{padding-left:20px !important;/*padding-left:16px*/;margin:0;/*overflow:hidden;width:500px;*/
 /* Pour masquer la suite qu'a IE 5.x et PAS IE 6  */
 	voice-family: "\"}\"";
   	voice-family:inherit;
@@ -101,7 +101,7 @@ body#app {text-align:left;background-color:#fff;color:#252525;}
 #app div#conteneur{padding:0px;/*margin-left:20px;margin-right:20px*/;margin-top:1px; /*height:70%;*/ display:table;text-align:left;width:97%;}
 #app div#conteneur div#gauche{width:160px;margin-right:20px;padding:0;}
 #app div#conteneur div#traceur{padding-right:0;}
-#app div#conteneur div#contenu{float:none !important; float:left;clear:right; padding-left:0px !important;padding:0;margin-left:0; overflow:hidden;width:auto;}
+#app div#conteneur div#contenu{float:none !important; float:left;clear:right; padding-left:0px !important;padding:0;margin-left:0; overflow:auto;/*display:table;*/width:auto;}
 /*----------------------------------------------------------------*/
 /*---------- styles specifiques a un site MAJEUR      ------------*/
 /*----------------------------------------------------------------*/
