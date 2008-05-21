@@ -287,18 +287,6 @@ public class ResultsApplicationComponentAccess
             SqualeReferenceFacade.getProjectResults( pNbLignes, pIndexDepart, pIsAdmin.booleanValue(), pUserId );
         return collection;
     }
-    
-    /**
-     * Get the list of references belong to current user
-     * 
-     * @param pUserId user id
-     * @param pIsAdmin if user is SQUALE's administrator
-     * @return List of SqualeReferenceDTO
-     * @throws JrafEnterpriseException if error
-     */
-    public Collection getUserReferences(Long pUserId, Boolean pIsAdmin) throws JrafEnterpriseException {
-        return SqualeReferenceFacade.getUserReferences(pUserId, pIsAdmin);
-    }
 
     /**
      * Obtention des métriques d'applications
