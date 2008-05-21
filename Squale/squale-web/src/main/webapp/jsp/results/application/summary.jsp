@@ -16,6 +16,8 @@
             String imageDetails = WebMessages.getString( request, "image.piechart" );
 %>
 
+<bean:define id="applicationId" name="resultListForm"
+	property="applicationId" type="String" />
 <bean:define id="applicationName" name="resultListForm"
 	property="applicationName" type="String" />
 <bean:define id="currentAuditId" name="resultListForm"
