@@ -114,6 +114,8 @@
 		</form-bean>        
 		<form-bean name="testManagerQCForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.externalTask.qc.TestManagerQCForm">
         </form-bean>
+        <form-bean name="auditReportParamForm" type="com.airfrance.squaleweb.applicationlayer.formbean.export.AuditReportParamForm">
+        </form-bean>
 	</form-beans>
 
 
@@ -627,6 +629,14 @@
 		</action>
 		<action path="/logout" type="com.airfrance.squaleweb.applicationlayer.action.UserLogoutAction">
 			<forward name="success" path="/jsp/login.jsp">
+			</forward>
+		</action>
+		<action path="/param_audit_report" type="com.airfrance.squaleweb.applicationlayer.action.results.audit.AuditReportAction" name="auditReportParamForm" scope="session" input="/jsp/export/auditReportParam.jsp" validate="false">
+			<forward name="param" path="/jsp/export/auditReportParam.jsp">
+			</forward>
+		</action>
+		<action path="/export_audit_report" type="com.airfrance.squaleweb.applicationlayer.action.results.audit.AuditReportAction" name="auditReportParamForm" scope="session" input="/jsp/export/auditReportParam.jsp">
+			<forward name="failure" path="/jsp/export/auditReportParam.jsp">
 			</forward>
 		</action>
 	</action-mappings>

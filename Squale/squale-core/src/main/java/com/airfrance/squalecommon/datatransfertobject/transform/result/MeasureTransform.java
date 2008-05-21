@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -161,6 +162,26 @@ public class MeasureTransform
         results.put( pObject, resultList );
 
         return results;
+    }
+    
+    /**
+     * Transform measures to map
+     * key : tre
+     * value : score for this tre
+     * @param pMeasures measures
+     * @param pTREKeys measures keys
+     * @return map
+     */
+    public static Map bo2dtoForMetric(Collection pMeasures, List pTREKeys) {
+        Map metricsValues = new HashMap();
+        Iterator it = pTREKeys.iterator();
+        while ( it.hasNext() )
+        {
+            String key = (String) it.next();
+            MeasureBO measure = getMeasure( pMeasures, key );
+            metricsValues.put( key, getValue( measure, key ) );
+        }
+        return metricsValues;
     }
 
     /**

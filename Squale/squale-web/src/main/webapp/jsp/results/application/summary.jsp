@@ -22,6 +22,8 @@
 	property="currentAuditId" type="String" />
 <bean:define id="previousAuditId" name="resultListForm"
 	property="previousAuditId" type="String" />
+<bean:define id="comparable" name="resultListForm"
+	property="comparableAudits" type="Boolean" />
 
 
 <af:page titleKey="application.results.title" titleKeyArg0="<%=applicationName%>">
@@ -148,6 +150,10 @@
 					<af:button type="form" name="export.pdf"
 						onclick='<%="application.do?action=exportPDF&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
 						toolTipKey="toolTip.export.pdf.application.result" />
+					<af:button type="form" name="export.audit_report"
+						onclick='<%="param_audit_report.do?action=param&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&comparable="+comparable.toString()%>'
+						toolTipKey="toolTip.export.audit_report" />
+							
 				</af:buttonBar>
 			</logic:greaterThan>
 		</af:canvasCenter>

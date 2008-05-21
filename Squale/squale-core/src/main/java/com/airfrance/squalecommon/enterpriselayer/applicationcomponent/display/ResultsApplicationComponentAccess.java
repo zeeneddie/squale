@@ -20,6 +20,7 @@ import com.airfrance.squalecommon.enterpriselayer.applicationcomponent.ACMessage
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.squalecommon.enterpriselayer.facade.component.AuditFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.component.ComponentFacade;
+import com.airfrance.squalecommon.enterpriselayer.facade.export.audit.AuditReportFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.quality.ErrorFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.quality.MeasureFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.quality.QualityResultFacade;
@@ -285,6 +286,18 @@ public class ResultsApplicationComponentAccess
         collection =
             SqualeReferenceFacade.getProjectResults( pNbLignes, pIndexDepart, pIsAdmin.booleanValue(), pUserId );
         return collection;
+    }
+    
+    /**
+     * Get the list of references belong to current user
+     * 
+     * @param pUserId user id
+     * @param pIsAdmin if user is SQUALE's administrator
+     * @return List of SqualeReferenceDTO
+     * @throws JrafEnterpriseException if error
+     */
+    public Collection getUserReferences(Long pUserId, Boolean pIsAdmin) throws JrafEnterpriseException {
+        return SqualeReferenceFacade.getUserReferences(pUserId, pIsAdmin);
     }
 
     /**
@@ -972,6 +985,21 @@ public class ResultsApplicationComponentAccess
         throws JrafEnterpriseException
     {
         return QualityResultFacade.getWorstPractices( pAuditId, pProjectId, pHasLimit.booleanValue() );
+    }
+    
+    /**
+     * Build list of projects for audit report
+     * 
+     * @param pAppliId application id
+     * @param pCurAuditId current audit id
+     * @param pPrevAuditId previous audit id
+     * @param nbTop number of top to retrieve (maximum)
+     * @param maxScore maximal score for score's components for top
+     * @return list of project for audit report
+     * @throws JrafEnterpriseException if error
+     */
+    public List getProjectReports(Long pAppliId, Long pCurAuditId, Long pPrevAuditId, Integer nbTop, Float maxScore) throws JrafEnterpriseException {
+        return AuditReportFacade.getProjectReports( pAppliId, pCurAuditId, pPrevAuditId, nbTop, maxScore );
     }
 
 }

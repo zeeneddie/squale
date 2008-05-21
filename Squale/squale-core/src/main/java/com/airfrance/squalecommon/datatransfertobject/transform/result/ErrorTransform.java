@@ -7,6 +7,8 @@
 package com.airfrance.squalecommon.datatransfertobject.transform.result;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.airfrance.squalecommon.datatransfertobject.result.ErrorDTO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
@@ -77,6 +79,22 @@ public class ErrorTransform
 
         return errorDTO;
 
+    }
+
+    /**
+     * Transforms a list of ErrorBO in ErroDTO
+     * 
+     * @param pErrorsBO list of ErrorBO
+     * @return list of ErrorDTO
+     */
+    public static List bo2Dto( List pErrorsBO )
+    {
+        List errorsDTO = new ArrayList();
+        for ( int i = 0; i < pErrorsBO.size(); i++ )
+        {
+            errorsDTO.add( bo2Dto( (ErrorBO) pErrorsBO.get( i ) ) );
+        }
+        return errorsDTO;
     }
 
 }

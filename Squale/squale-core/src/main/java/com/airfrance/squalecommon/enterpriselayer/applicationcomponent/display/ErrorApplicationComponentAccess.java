@@ -174,23 +174,12 @@ public class ErrorApplicationComponentAccess
      * @deprecated ne sera pas implemente
      * @roseuid 42CBFBF80336
      */
-    /* TODO BFR --> deprecated method to suppress
-    public Collection getErrorsByAuditAndTask( List pAuditDTOs, List pTaskKeys, ErrorDTO pError, Integer pNbLignes,
-                                               Integer pIndexDepart )
-        throws JrafEnterpriseException
-    {
-
-        // Mise des parametres a null
-        pAuditDTOs = null;
-        pTaskKeys = null;
-        pError = null;
-        pNbLignes = null;
-        pIndexDepart = null;
-
-        Collection collection = null; // retour de l'AC
-        return collection;
-    }
-    */
+    /*
+     * TODO BFR --> deprecated method to suppress public Collection getErrorsByAuditAndTask( List pAuditDTOs, List
+     * pTaskKeys, ErrorDTO pError, Integer pNbLignes, Integer pIndexDepart ) throws JrafEnterpriseException { // Mise
+     * des parametres a null pAuditDTOs = null; pTaskKeys = null; pError = null; pNbLignes = null; pIndexDepart = null;
+     * Collection collection = null; // retour de l'AC return collection; }
+     */
     /**
      * Permet de completer l'objet ErrorDTO si des données sont manquantes
      * 
@@ -250,6 +239,21 @@ public class ErrorApplicationComponentAccess
             results = ErrorFacade.getAllTasks( pProjectId, new Long( Long.parseLong( pAuditId ) ) );
         }
         return results;
+    }
+
+    /**
+     * Get errors for a list of audits and a criticity level (facultative)
+     * 
+     * @param pAuditsDTO list of audits (currentt audit, previous audit)
+     * @param pCriticity level of errors
+     * @return list of map of errors for each audit (same order) like : (current audit map, previous audit map) key :
+     *         project name value : List of ErrorDTO for this project and this audit
+     * @throws JrafEnterpriseException if error
+     */
+    public List getAllErrors( List pAuditsDTO, String pCriticity )
+        throws JrafEnterpriseException
+    {
+        return ErrorFacade.getAllErrors( pAuditsDTO, pCriticity );
     }
 
     /**

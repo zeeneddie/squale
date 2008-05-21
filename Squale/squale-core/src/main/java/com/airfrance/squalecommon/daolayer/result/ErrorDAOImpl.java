@@ -246,4 +246,28 @@ public class ErrorDAOImpl
         commonWhereClause.append( pProjectId );
         return commonWhereClause.toString();
     }
+
+    /**
+     * Get all errors for an audit, a project and a criticity (facultative)
+     * @param pSession hibernate session
+     * @param pAuditId audit id condition
+     * @param pProjectId project id condition
+     * @param pLevel level of error criticity (error, warning, info) or null if level has not have to be
+     * a condition for search
+     * @return list of ErrorBO occured while executing audit on the project
+     * @throws JrafDaoException if error occured
+     */
+    public List findAllWhere( ISession pSession, Long pAuditId, Long pProjectId, String pLevel ) throws JrafDaoException
+    {
+        StringBuffer whereClause = new StringBuffer( getWhereProjectAndAudit( pAuditId, pProjectId ) );
+        if ( pLevel != null )
+        {
+            whereClause.append( " and " );
+            whereClause.append( getAlias() );
+            whereClause.append( ".level='" );
+            whereClause.append( pLevel );
+            whereClause.append( "'" );
+        }
+        return findWhere( pSession, whereClause.toString() );
+    }
 }

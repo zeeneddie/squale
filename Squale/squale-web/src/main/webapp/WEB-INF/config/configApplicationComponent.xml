@@ -155,6 +155,8 @@
 		<component name="getErrorsByAuditAndTask" />
 		
 		<component name="getAllTasks" />
+		
+		<component name="getAllErrors" />
 
 	</applicationComponent>
 	
@@ -223,6 +225,8 @@
 		<component name="getChangedComponentResults" />
 		
 		<component name="getWorstPractices" />
+		
+		<component name="getProjectReports" />
 		
 	</applicationComponent>
 

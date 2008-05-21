@@ -1,0 +1,43 @@
+<!-- Typical usage:
+
+    <!DOCTYPE exportPPT PUBLIC "-//Squale//DTD PPT Mapping 1.0//EN" "dtd/ppt_mapping-1.0.dtd" >
+    
+    <exportPPT class="com.airfrance.squaleweb.applicationlayer.action.export.ppt.AuditReportPPTData">
+		<set methodName="setProfilePieChart" slide="13" where="SQUALE_PIE_CHART"/>
+		<set methodName="setProfileVolTab" slide="13" where="SQUALE_VOl_PROFILE_TAB"/>
+		<set methodName="setApplicationQualityResults" slide="13" where="SQUALE_global_results"/>
+		<set methodName="setPieChart" slide="16" where="SQUALE_pie_chart_vol"/>
+		<set methodName="setKiviatChart" slide="16" where="SQUALE_kiviat_chart"/>
+		...
+		<add methodName="addScatterplotSlides" model="1"/>
+		<add methodName="addAllAuditResultsDetailed" model="1"/>
+	</exportPPT>
+
+-->
+<!ELEMENT add
+   EMPTY
+>
+<!ATTLIST add
+methodName CDATA #IMPLIED
+>
+<!ATTLIST add
+model CDATA #IMPLIED
+>
+<!ELEMENT set
+   EMPTY
+>
+<!ATTLIST set
+where CDATA #IMPLIED
+>
+<!ATTLIST set
+methodName CDATA #IMPLIED
+>
+<!ATTLIST set
+slide CDATA #IMPLIED
+>
+<!ELEMENT exportPPT
+   (set*, add*)
+>
+<!ATTLIST exportPPT
+class CDATA #IMPLIED
+>

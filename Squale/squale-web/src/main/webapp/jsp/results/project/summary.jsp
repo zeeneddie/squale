@@ -35,6 +35,8 @@ if(selectedTab == null) {
 
 <script type="text/javascript" src="jslib/information.js"></script>
 
+<bean:define id="applicationId" name="projectSummaryForm"
+	property="applicationId" type="String" />
 <bean:define id="projectId" name="projectSummaryForm"
 	property="projectId" type="String" />
 <bean:define id="currentAuditId" name="projectSummaryForm"
@@ -43,6 +45,8 @@ if(selectedTab == null) {
 	property="previousAuditId" type="String" />
 <bean:define id="auditSqualeVersion" name="projectSummaryForm"
 	property="auditSqualeVersion" type="String" />
+<bean:define id="comparable" name="projectSummaryForm"
+	property="comparableAudits" type="Boolean" />
 
 <af:page titleKey="project.results.title">
 	<af:head>
@@ -196,6 +200,7 @@ if(selectedTab == null) {
 					String urlExportPDF = "project.do?action=exportPDF&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId; 
 					String urlExportActionPlan = "project.do?action=exportPDFActionPlan&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId;
 					String urlExportDetailedActionPlan = "project.do?action=exportPDFDetailedActionPlan&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId;
+					String urlExportPpt = "param_audit_report.do?action=param&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&comparable="+comparable.toString();
 				%>
 				<af:button type="form" name="export.project.pdf"
 					onclick="<%=\"javascript:xt_clic_AF_v2('T','Rapport::Synthese',null,null);location.href='\"+urlExportPDF+\"'\"%>"
@@ -206,6 +211,9 @@ if(selectedTab == null) {
 				<af:button type="form" name="export.pdf.detailed.plan"
 					onclick="<%=\"javascript:xt_clic_AF_v2('T','Rapport::PlanActionDetail',null,null);location.href='\"+urlExportDetailedActionPlan+\"'\"%>"
 					toolTipKey="toolTip.export.pdf.detailed.plan" />
+				<af:button type="form" name="export.audit_report"
+					onclick="<%=urlExportPpt%>"
+					toolTipKey="toolTip.export.audit_report" accessKey="admin"/>
 				<%-- 
 					L'export IDE n'est disponible que pour les versions >= 3.2 et pour les profils
 					qui le permettent 

@@ -319,7 +319,7 @@ public class MeasureFacade
      * @param pTREKeys liste de clés de TREs
      * @return une collection de classe de TRE
      */
-    private static Collection getTREClasses( List pTREKeys )
+    public static Collection getTREClasses( List pTREKeys )
     {
         Set trClasses = new HashSet();
         Iterator it = pTREKeys.iterator();

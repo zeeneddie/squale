@@ -4,6 +4,7 @@ package com.airfrance.squalecommon.enterpriselayer.facade.quality;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,10 +15,12 @@ import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
 import com.airfrance.jraf.spi.enterpriselayer.IFacade;
 import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
 import com.airfrance.jraf.spi.persistence.ISession;
+import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
 import com.airfrance.squalecommon.daolayer.result.ErrorDAOImpl;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.result.ErrorDTO;
 import com.airfrance.squalecommon.datatransfertobject.transform.result.ErrorTransform;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
 
 /**
@@ -307,5 +310,50 @@ public class ErrorFacade
             FacadeHelper.closeSession( session, ErrorFacade.class.getName() + ".getAllTasks" );
         }
         return results;
+    }
+    
+    /**
+     * Get errors for a list of audits and a criticity level (facultative)
+     * 
+     * @param pAuditsDTO list of audits (currentt audit, previous audit)
+     * @param pCriticity level of errors
+     * @return list of map of errors for each audit (same order) like : 
+     * (current audit map, previous audit map)
+     * key : project name
+     * value : List of ErrorDTO for this project and this audit 
+     * @throws JrafEnterpriseException if error
+     */
+    public static List getAllErrors(List pAuditsDTO, String pCriticity) throws JrafEnterpriseException {
+        // Initialisation
+        List errors = new ArrayList();
+        ISession session = null;
+        ErrorDAOImpl errorDAO = ErrorDAOImpl.getInstance();
+        ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
+        try {
+            // Get hibernate session
+            session = PERSISTENTPROVIDER.getSession();
+            Long currentAuditId;
+            Collection currentProjects;
+            ProjectBO currentProject;
+            for(int i=0; i<pAuditsDTO.size(); i++) {
+                currentAuditId = new Long(((AuditDTO) pAuditsDTO.get( i )).getID());
+                // Get projects for the current audit
+                currentProjects = projectDAO.findWhere( session, currentAuditId );
+                // Get errors by project
+                int nbProjects = currentProjects.size();
+                HashMap auditErrors = new HashMap(nbProjects);
+                for(Iterator projetIt=currentProjects.iterator(); projetIt.hasNext();) {
+                    currentProject = (ProjectBO)projetIt.next();
+                    auditErrors.put( currentProject.getName(),  ErrorTransform.bo2Dto( errorDAO.findAllWhere( session, currentAuditId, new Long(currentProject.getId()), pCriticity )));
+                }
+                // Add map in list returned
+                errors.add( auditErrors );
+            }
+        } catch(JrafDaoException jde) {
+            FacadeHelper.convertException( jde, ErrorFacade.class.getName() + ".getAllErrors" );
+        } finally {
+            FacadeHelper.closeSession( session, ErrorFacade.class.getName() + ".getAllErrors" );
+        }
+        return errors;
     }
 }
