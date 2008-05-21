@@ -152,7 +152,7 @@
 						toolTipKey="toolTip.export.pdf.application.result" />
 					<af:button type="form" name="export.audit_report"
 						onclick='<%="param_audit_report.do?action=param&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&comparable="+comparable.toString()%>'
-						toolTipKey="toolTip.export.audit_report" />
+						toolTipKey="toolTip.export.audit_report" accessKey="admin"/>
 							
 				</af:buttonBar>
 			</logic:greaterThan>
