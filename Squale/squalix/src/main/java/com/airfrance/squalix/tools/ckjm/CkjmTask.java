@@ -208,8 +208,14 @@ public class CkjmTask
                     ClassBO classBO = mParser.getClass( classNameWithPackage, relativeFileName );
                     // On fait persister la classe et on construit la mesure ckjm associée
                     ckjmMetric.setComponent( mRepository.persisteComponent( classBO ) );
+                    ckjmMetric.setWmc( pContainer.getMetrics( classNameWithPackage ).getWmc() );
+                    ckjmMetric.setDit( pContainer.getMetrics( classNameWithPackage ).getDit() );
+                    ckjmMetric.setNoc( pContainer.getMetrics( classNameWithPackage ).getNoc() );
                     ckjmMetric.setCbo( pContainer.getMetrics( classNameWithPackage ).getCbo() );
+                    ckjmMetric.setRfc( pContainer.getMetrics( classNameWithPackage ).getRfc() );
+                    ckjmMetric.setLcom( pContainer.getMetrics( classNameWithPackage ).getLcom() );
                     ckjmMetric.setCa( pContainer.getMetrics( classNameWithPackage ).getCa() );
+                    ckjmMetric.setNpm( pContainer.getMetrics( classNameWithPackage ).getNpm() );
                     // On fait persister la mesure
                     MeasureDAOImpl.getInstance().create( getSession(), ckjmMetric );
                     getSession().commitTransactionWithoutClose();
