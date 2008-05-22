@@ -25,6 +25,7 @@ import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
 import com.airfrance.jraf.spi.enterpriselayer.IFacade;
 import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
 import com.airfrance.jraf.spi.persistence.ISession;
+import com.airfrance.squalecommon.daolayer.component.AbstractComponentDAOImpl;
 import com.airfrance.squalecommon.daolayer.component.ApplicationDAOImpl;
 import com.airfrance.squalecommon.daolayer.component.AuditDAOImpl;
 import com.airfrance.squalecommon.daolayer.component.AuditDisplayConfDAOImpl;
@@ -38,7 +39,9 @@ import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
 import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.AuditTransform;
+import com.airfrance.squalecommon.datatransfertobject.transform.component.ComponentTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.result.MeasureTransform;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO;
@@ -242,6 +245,46 @@ public class MeasureFacade
             FacadeHelper.closeSession( session, MeasureFacade.class.getName() + ".getMeasuresByTRE" );
         }
         return results;
+    }
+
+    /**
+     * Retrieves components which have a precise score for some tres
+     * 
+     * @param pProjectId project id
+     * @param pAuditId Audit id
+     * @param pTreKeys keys of tres to find
+     * @param pTreValues value of tres
+     * @param pMax number of components max to return
+     * @return list of components
+     * @throws JrafEnterpriseException if error
+     */
+    public static List<ComponentDTO> getComponentsWhereTres( Long pProjectId, Long pAuditId, String[] pTreKeys, String[] pTreValues,
+                                               Integer pMax )
+        throws JrafEnterpriseException
+    {
+        List<ComponentDTO> components = new ArrayList<ComponentDTO>();
+        AbstractComponentDAOImpl dao = AbstractComponentDAOImpl.getInstance();
+        // Hibernate session
+        ISession session = null;
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            List<AbstractComponentBO> componentsBO = dao.findWhereTres( session, pProjectId, pAuditId, pTreKeys, pTreValues, pMax );
+            // bo -> dto
+            for ( int i = 0; i < componentsBO.size(); i++ )
+            {
+                components.add( ComponentTransform.bo2Dto( componentsBO.get( i ) ) );
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, MeasureFacade.class.getName() + ".getComponentsWhereTres" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, MeasureFacade.class.getName() + ".getComponentsWhereTres" );
+        }
+        return components;
     }
 
     /**
@@ -565,13 +608,11 @@ public class MeasureFacade
                 double[] xMeasures = new double[measures.size()];
                 double[] yMeasures = new double[measures.size()];
                 double[] total = new double[measures.size()];
-                long[] components = new long[measures.size()];
                 Iterator it = measures.iterator();
                 // Constantes pour la récupérations des valeurs dans le tableau des résultats remontés de la base
                 final int VG_ID = 0;
                 final int EVG_ID = 1;
                 final int TOTAL_ID = 2;
-                final int COMPONENT_ID = 3;
                 while ( it.hasNext() )
                 {
                     Object[] res = (Object[]) it.next();
@@ -582,8 +623,6 @@ public class MeasureFacade
                     xMeasures[i] = evg.doubleValue();
                     Integer tt = (Integer) res[TOTAL_ID];
                     total[i] = tt.doubleValue();
-                    Long cmp = (Long) res[COMPONENT_ID];
-                    components[i] = cmp.longValue();
                     i++;
                 }
                 // Positions des axes
@@ -591,11 +630,11 @@ public class MeasureFacade
                 Long vertical = new Long( bubble.getVerticalAxisPos() );
                 // construction des paramètres de la série
                 String displayedXTre = bubble.getXTre().substring( bubble.getXTre().lastIndexOf( "." ) + 1 );
-                String displayedYTre = bubble.getXTre().substring( bubble.getXTre().lastIndexOf( "." ) + 1 );
+                String displayedYTre = bubble.getYTre().substring( bubble.getYTre().lastIndexOf( "." ) + 1 );
                 String measuresKinds = "(" + displayedXTre + "," + displayedYTre + ",total)";
                 result =
-                    new Object[] { horizontal, vertical, measuresKinds, yMeasures, xMeasures, total, components,
-                        yMeasures, xMeasures, total };
+                    new Object[] { horizontal, vertical, measuresKinds, yMeasures, xMeasures, total, yMeasures,
+                        xMeasures, total, tre };
             }
         }
         catch ( Exception e )

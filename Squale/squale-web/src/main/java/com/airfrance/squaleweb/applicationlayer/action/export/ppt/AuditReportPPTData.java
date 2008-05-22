@@ -420,7 +420,7 @@ public class AuditReportPPTData
                                                  + SqualeWebActionUtils.IMG[SqualeWebActionUtils.generatePicto( score )] );
             if ( pictoSrc != null )
             {
-                projectResults.append( "<img src=\"" + pictoSrc.toString() + "\"></img>" );
+                projectResults.append( "<img src=\"" + pictoSrc.toString() + "\" border=\"0\"></img>" );
             }
         }
 
@@ -464,8 +464,8 @@ public class AuditReportPPTData
                 String textToAdd =
                     curProject.getName()
                         + "\r"
-                        + ( curProject.getNbLines() / sumOfLines )
-                        * 100
+                        + (int)((double)( (double)curProject.getNbLines() / (double)sumOfLines )
+                        * 100)
                         + "%\r"
                         + WebMessages.getString( request,
                                                  "export.audit_report.presentation.add.slide.scatterplot.bullet2" );
@@ -512,10 +512,10 @@ public class AuditReportPPTData
                               (double[]) curProject.getScatterplotMeasures()[indexInParam++],
                               (double[]) curProject.getScatterplotMeasures()[indexInParam++] );
         JFreeChart chartBubble =
-            bubbleMaker.getChart( null, null, null, (long[]) curProject.getScatterplotMeasures()[indexInParam++],
+            bubbleMaker.getChart( null, null, null, (double[]) curProject.getScatterplotMeasures()[indexInParam++],
                                   (double[]) curProject.getScatterplotMeasures()[indexInParam++],
                                   (double[]) curProject.getScatterplotMeasures()[indexInParam++],
-                                  (double[]) curProject.getScatterplotMeasures()[indexInParam] );
+                                  (String[]) curProject.getScatterplotMeasures()[indexInParam] );
         return chartBubble;
     }
 
@@ -538,8 +538,8 @@ public class AuditReportPPTData
     /**
      * Add all projects results For each project and each factor we add a slide containing an array of quality results
      * (>=0) for each practices add slide with the "ten" (can be change by a configuration key:
-     * export.audit_report.nb_top) worst components (or transgression) for each practice worst component have a score 
-     * < 2 (configurable with key: export.audit_report.max_score_top)
+     * export.audit_report.nb_top) worst components (or transgression) for each practice worst component have a score
+     * inferior to 2 (configurable with key: export.audit_report.max_score_top)
      * 
      * @param model model to applied
      * @throws IOException if error

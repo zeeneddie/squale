@@ -33,19 +33,27 @@ import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
 import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
+import com.airfrance.squaleweb.applicationlayer.action.export.xls.ExcelDataComponentsResultsList;
 import com.airfrance.squaleweb.applicationlayer.action.export.xls.ExcelDataTopList;
 import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
+import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm;
+import com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentResultListForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.results.TopListForm;
 import com.airfrance.squaleweb.applicationlayer.tracker.TrackerStructure;
 import com.airfrance.squaleweb.resources.WebMessages;
+import com.airfrance.squaleweb.transformer.ComponentResultListTransformer;
 import com.airfrance.squaleweb.util.SqualeWebConstants;
 import com.airfrance.squaleweb.util.graph.BubbleMaker;
 import com.airfrance.squaleweb.util.graph.GraphMaker;
 import com.airfrance.welcom.outils.excel.ExcelFactory;
+import com.airfrance.welcom.outils.excel.ExcelGenerateurException;
 import com.airfrance.welcom.outils.pdf.PDFDataJasperReports;
 import com.airfrance.welcom.outils.pdf.PDFEngine;
 import com.airfrance.welcom.outils.pdf.PDFFactory;
+import com.airfrance.welcom.struts.bean.WActionForm;
+import com.airfrance.welcom.struts.transformer.WTransformerException;
+import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 import com.airfrance.welcom.struts.util.WConstants;
 
 /**
@@ -55,6 +63,11 @@ import com.airfrance.welcom.struts.util.WConstants;
 public class TopAction
     extends ReaderAction
 {
+    /** Keyword for tres keys attribute */
+    public static final String TRE_KEYS_KEYWORD = "treKeys";
+
+    /** Keyword for tre values attribute */
+    public static final String TRE_VALUES_KEYWORD = "treValues";
 
     /**
      * Selectionne un nouveau projet courant à visualiser.
@@ -214,8 +227,9 @@ public class TopAction
                                       (double[]) inputParams[indexInParam++], (double[]) inputParams[indexInParam++] );
                 chartBubble =
                     bubbleMaker.getChart( projectId.toString(), currentAuditId.toString(), previousAuditId.toString(),
-                                          (long[]) inputParams[indexInParam++], (double[]) inputParams[indexInParam++],
-                                          (double[]) inputParams[indexInParam++], (double[]) inputParams[indexInParam] );
+                                          (double[]) inputParams[indexInParam++],
+                                          (double[]) inputParams[indexInParam++],
+                                          (double[]) inputParams[indexInParam++], (String[]) inputParams[indexInParam] );
             }
             else
             {
@@ -223,13 +237,70 @@ public class TopAction
                 bubbleMaker = new BubbleMaker( pRequest.getLocale(), new Long( 0 ), new Long( 0 ) );
                 chartBubble =
                     bubbleMaker.getChart( projectId.toString(), currentAuditId.toString(), previousAuditId.toString(),
-                                          new long[0], new double[0], new double[0], new double[0] );
+                                          new double[0], new double[0], new double[0], new String[0] );
             }
             // On met en session
             pRequest.getSession().setAttribute( SqualeWebConstants.BUBBLE_GRAPH, bubbleMaker );
             pRequest.getSession().setAttribute( SqualeWebConstants.BUBBLE_CHART, chartBubble );
         }
         return chartBubble;
+    }
+
+    /**
+     * Redirige vers une jsp affichant le scatterplott
+     * 
+     * @param pMapping le mapping.
+     * @param pForm le formulaire à lire.
+     * @param pRequest la requête HTTP.
+     * @param pResponse la réponse de la servlet.
+     * @return l'action à réaliser.
+     */
+    public ActionForward displayComponents( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                            HttpServletResponse pResponse )
+    {
+        ActionForward forward = null;
+        ActionErrors errors = new ActionErrors();
+        try
+        {
+            // if request is not build correctly
+            forward = pMapping.findForward( "total_failure" );
+            // retrieve tres and values in request
+            String tres = pRequest.getParameter( TRE_KEYS_KEYWORD );
+            String values = pRequest.getParameter( TRE_VALUES_KEYWORD );
+            if ( null != tres && tres.length() > 0 && null != values && values.length() > 0 )
+            {
+                String[] treKeys = tres.split( "," );
+                String[] treValues = values.split( "," );
+                IApplicationComponent ac = AccessDelegateHelper.getInstance( "Results" );
+                Object[] paramIn =
+                    { new Long( ( (RootForm) pForm ).getProjectId() ), new Long(( (RootForm) pForm ).getCurrentAuditId()),
+                    treKeys, treValues,
+                        new Integer( WebMessages.getString( pRequest.getLocale(), "component.max" ) ) };
+                // Number of components is limited
+                List result = (List) ac.execute( "getComponentsWhereTres", paramIn );
+                WTransformerFactory.objToForm( ComponentResultListTransformer.class, (WActionForm)pForm, new Object[]{result, treKeys, treValues} );
+                forward = pMapping.findForward( "success" );
+            }
+        }
+        catch ( NumberFormatException nfe )
+        {
+            // error in request
+            handleException( nfe, errors, pRequest );
+        }
+        catch ( JrafEnterpriseException jee )
+        {
+            handleException( jee, errors, pRequest );
+        }
+        catch ( WTransformerException wte )
+        {
+            handleException( wte, errors, pRequest );
+        }
+        if ( !errors.isEmpty() )
+        {
+            saveMessages( pRequest, errors );
+            forward = pMapping.findForward( "total_failure" );
+        }
+        return forward;
     }
 
     /**
@@ -301,6 +372,35 @@ public class TopAction
         pTopListForm.setComponentListForm( components );
 
     }
+
+    /**
+     * Export components list to XLS format
+     * 
+     * @param mapping mapping
+     * @param form bean
+     * @param request http request
+     * @param response response
+     * @return null (change http response header)
+     * @throws ServletException if error
+     */
+    public ActionForward exportComponentsToExcel( ActionMapping mapping, ActionForm form, HttpServletRequest request,
+                                                  HttpServletResponse response )
+    throws ServletException
+{
+    // user name
+    LogonBean logon = (LogonBean) request.getSession().getAttribute( WConstants.USER_KEY );
+    try
+    {
+        // we have to get full name of components
+        ExcelDataComponentsResultsList data =
+            new ExcelDataComponentsResultsList( request.getLocale(), getResources( request ), (ComponentResultListForm) form,
+                                  logon.getMatricule() );
+        ExcelFactory.generateExcelToHTTPResponse( data, response, "SQUALE_components.xls" );
+    } catch(ExcelGenerateurException ege) {
+        throw new ServletException( ege );
+    }
+    return null;
+}
 
     /**
      * Exporte la liste des tops au format XLS

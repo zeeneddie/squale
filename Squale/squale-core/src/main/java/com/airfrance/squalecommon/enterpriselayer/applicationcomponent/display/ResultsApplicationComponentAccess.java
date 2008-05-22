@@ -810,6 +810,24 @@ public class ResultsApplicationComponentAccess
     }
 
     /**
+     * Retrieves components which have a precise score for some tres
+     * 
+     * @param pProjectId project id
+     * @param pAuditId Audit id
+     * @param pTreKeys keys of tres to find
+     * @param pTreValues value of tres
+     * @param pMax number of components max to return
+     * @return list of components
+     * @throws JrafEnterpriseException if error
+     */
+    public List<ComponentDTO> getComponentsWhereTres( Long pProjectId, Long pAuditId, String[] pTreKeys, String[] pTreValues,
+                                               Integer pMax )
+        throws JrafEnterpriseException
+    {
+        return MeasureFacade.getComponentsWhereTres( pProjectId, pAuditId, pTreKeys, pTreValues, pMax );
+    }
+
+    /**
      * Initialise l'audit si celui-ci n'est pas renseigne (null ou identifiant negatif)
      * 
      * @param pAudit AuditDTO à valider

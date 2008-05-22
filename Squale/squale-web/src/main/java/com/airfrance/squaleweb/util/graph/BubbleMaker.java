@@ -403,14 +403,14 @@ public class BubbleMaker
      * @param pProjectId l'Id du projet
      * @param pCurrentAuditId l'Id de l'audit courant
      * @param pPreviousAuditId l'id de l'audit précédent
-     * @param pComponentId les composants du projets
      * @param pVgs tableau des valeurs vg
      * @param pEvgs tableau des valeurs evg
      * @param pTotal nombre de méthodes ayant la même valeur (vg, evg)
+     * @param pTres metrics tres
      * @return le diagramme JFreeChart.
      */
     public JFreeChart getChart( String pProjectId, String pCurrentAuditId, String pPreviousAuditId,
-                                long[] pComponentId, double[] pVgs, double[] pEvgs, double[] pTotal )
+                                double[] pVgs, double[] pEvgs, double[] pTotal, String[] pTres )
     {
         JFreeChart retChart = super.getChart();
         if ( null == retChart )
@@ -421,8 +421,14 @@ public class BubbleMaker
             mProjectId = pProjectId;
             mPreviousAuditId = pPreviousAuditId;
             mCurrentAuditId = pCurrentAuditId;
-            BubbleUrlGenerator generator =
-                new BubbleUrlGenerator( pProjectId, pCurrentAuditId, pPreviousAuditId, pComponentId );
+            BubbleUrlGenerator generator = null;
+                
+            if(pTres.length < 2) {
+                generator =
+                    new BubbleUrlGenerator( pProjectId, pCurrentAuditId, pPreviousAuditId, pVgs, pEvgs, "", "");
+            } else {
+                generator = new BubbleUrlGenerator( pProjectId, pCurrentAuditId, pPreviousAuditId, pVgs, pEvgs, pTres[0], pTres[1]);
+            }
             retChart.getXYPlot().getRenderer().setURLGenerator( generator );
 
             BubbleToolTipGenerator toolTipGenerator = new BubbleToolTipGenerator( pVgs, pEvgs, pTotal );

@@ -8,6 +8,8 @@ package com.airfrance.squaleweb.util.graph;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.data.xy.XYDataset;
 
+import com.airfrance.squaleweb.applicationlayer.action.results.project.TopAction;
+
 /**
  * @author 6370258 Classe de génération de liens spécifiques à chaque point du graphe de type Bubble
  */
@@ -15,11 +17,21 @@ public class BubbleUrlGenerator
     extends AbstractURLGenerator
     implements XYURLGenerator
 {
+    /**
+     * Array of vg values
+     */
+    private double[] tbVgs;
 
     /**
-     * Composants du projet (i.e les méthodes)
+     * Array of evg values
      */
-    private long[] tbComponentId;
+    private double[] tbEvgs;
+
+    /** vg metrics tres */
+    private String mVgTre;
+
+    /** evg metrics tres */
+    private String mEvgTre;
 
     /**
      * Constructeur par défaut
@@ -34,16 +46,22 @@ public class BubbleUrlGenerator
      * @param pProjectId Id du projet
      * @param pAuditId Id de l'audit courant
      * @param pPreviousAuditId l'id de l'audit précédent
-     * @param pComponentId composants du projet à représenter sur le graphe
+     * @param pVgs array of vg values
+     * @param pEvgs array of evg values
+     * @param vgTre vg tre
+     * @param evgTre evg tre
      */
-    public BubbleUrlGenerator( String pProjectId, String pAuditId, String pPreviousAuditId, long[] pComponentId )
+    public BubbleUrlGenerator( String pProjectId, String pAuditId, String pPreviousAuditId, double[] pVgs,
+                               double[] pEvgs, String vgTre, String evgTre)
     {
         // Initialisation des attributs
         mProjectId = pProjectId;
         mCurrentAuditId = pAuditId;
         mPreviousAuditId = pPreviousAuditId;
-        tbComponentId = new long[pComponentId.length];
-        System.arraycopy( pComponentId, 0, tbComponentId, 0, pComponentId.length );
+        mVgTre = vgTre;
+        mEvgTre = evgTre;
+        tbVgs = pVgs;
+        tbEvgs = pEvgs;
 
     }
 
@@ -58,8 +76,8 @@ public class BubbleUrlGenerator
     public String generateURL( XYDataset pDataset, int pSeries, int pItem )
     {
         String url =
-            "project_component.do?action=component&projectId=" + mProjectId + "&currentAuditId=" + mCurrentAuditId
-                + "&component=" + tbComponentId[pItem];
+            "component_tres.do?action=displayComponents&projectId=" + mProjectId + "&currentAuditId=" + mCurrentAuditId
+                + "&" + TopAction.TRE_KEYS_KEYWORD + "=" + mVgTre + "," + mEvgTre + "&" + TopAction.TRE_VALUES_KEYWORD + "=" + tbVgs[pItem] + "," + tbEvgs[pItem];
         // On ne rajout l'audit précédent à l'url que si il est valide
         if ( mPreviousAuditId != null && !"-1".equals( mPreviousAuditId ) )
         {
@@ -67,5 +85,4 @@ public class BubbleUrlGenerator
         }
         return url;
     }
-
 }

@@ -116,6 +116,8 @@
         </form-bean>
         <form-bean name="auditReportParamForm" type="com.airfrance.squaleweb.applicationlayer.formbean.export.AuditReportParamForm">
         </form-bean>
+        <form-bean name="ComponentResultListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentResultListForm">
+        </form-bean>
 	</form-beans>
 
 
@@ -637,6 +639,10 @@
 		</action>
 		<action path="/export_audit_report" type="com.airfrance.squaleweb.applicationlayer.action.results.audit.AuditReportAction" name="auditReportParamForm" scope="session" input="/jsp/export/auditReportParam.jsp">
 			<forward name="failure" path="/jsp/export/auditReportParam.jsp">
+			</forward>
+		</action>
+		<action path="/component_tres" type="com.airfrance.squaleweb.applicationlayer.action.results.project.TopAction" name="ComponentResultListForm" scope="session" >
+			<forward name="success" path="/jsp/results/project/componentsWithTres.jsp">
 			</forward>
 		</action>
 	</action-mappings>

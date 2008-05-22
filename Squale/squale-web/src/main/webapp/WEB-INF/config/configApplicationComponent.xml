@@ -216,6 +216,8 @@
 		
 		<component name="getTopResults" />
 		
+		<component name="getComponentsWhereTres" />
+		
 		<component name="getProjectAuditGrid" />
 		
 		<component name="getAllPractices" />

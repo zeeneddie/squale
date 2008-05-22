@@ -9,12 +9,16 @@ package com.airfrance.squalecommon.daolayer.component;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 
 import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import com.airfrance.jraf.provider.persistence.hibernate.SessionImpl;
 import com.airfrance.jraf.spi.persistence.ISession;
 import com.airfrance.squalecommon.daolayer.DAOMessages;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
@@ -240,5 +244,68 @@ public class AbstractComponentDAOImpl
             whereClause.append( getAlias() + ".name like '%" + pFilter + "%'" );
         }
         return whereClause.toString();
+    }
+
+    /**
+     * Get components which have somme values for some tres
+     * 
+     * @param pSession session
+     * @param pProjectId project id
+     * @param pAuditId audit id
+     * @param pTreKeys tres
+     * @param pTreValues value of tres
+     * @param pMax number of result to get
+     * @return list of components
+     * @throws JrafDaoException if error in database
+     */
+    public List<AbstractComponentBO> findWhereTres( ISession pSession, long pProjectId, long pAuditId,
+                                                    String[] pTreKeys, String[] pTreValues, Integer pMax )
+        throws JrafDaoException
+    {
+        SessionImpl sessionHibernate = (SessionImpl) pSession;
+        List<AbstractComponentBO> results = new ArrayList<AbstractComponentBO>();
+        String from = "";
+        String distinct = "";
+        String where = "";
+        // Creation de la requete
+        // /!\ Requete optimisée car longue en prod
+        // TOUTES MODIF DOIT ETRE TESTEES EN FAISANT LE SELECT EN PROD !!
+        // Cette requête prend moins d'1 seconde en production
+
+        for ( int i = 0; i < pTreKeys.length; i++ )
+        {
+            // selecte sur n metric
+            // => construction des selects, from, et where de la query
+            if ( i > 0 )
+            {
+                distinct += ",";
+            }
+            from += ",IntegerMetricBO metric" + i;
+            where +=
+                " and metric" + i + ".measure.audit.id=" + pAuditId + " and metric" + i + ".measure.component.id="
+                    + getAlias() + ".id" + " and metric" + i + ".measure.class="
+                    + Mapping.getMetricClass( pTreKeys[i] ).getName() + " and metric" + i + ".name = '"
+                    + pTreKeys[i].substring( pTreKeys[i].lastIndexOf( '.' ) + 1 ) + "'" + " and metric" + i + ".value="
+                    + pTreValues[i];
+        }
+        // execution de la requete
+        try
+        {
+            // remonte les valeurs distinctes en une seule requete pour des raisons de perf
+            Query q =
+                sessionHibernate.getSession().createQuery( "select " + getAlias() + " "
+                // On ne recherche pas le type du composant afin
+                    // d'optimiser la requête car la recherche
+                    // est déjà faite par le type de la métrique.
+                    + getRequete() + from + " where (" + getAlias() + ".project.id =" + pProjectId + ")" + where ).setMaxResults(
+                                                                                                                                  pMax );
+            results = q.list();
+        }
+        catch ( HibernateException e )
+        {
+            throw new JrafDaoException( e );
+        }
+
+        return results;
     }
 }
