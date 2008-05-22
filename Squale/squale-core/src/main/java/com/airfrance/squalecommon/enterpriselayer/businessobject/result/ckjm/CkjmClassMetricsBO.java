@@ -5,36 +5,138 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureB
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO;
 
 /**
+ * Business object of the metric of CKJM
  * @hibernate.subclass discriminator-value="CkjmClassMetrics"
  */
 public class CkjmClassMetricsBO
     extends MeasureBO
 {
-
     /**
-     * Couplage efferent
+     * Weighted methods per class
      */
-    private final static String CBO = "cbo";
-
+    private static final  String WMC = "wmc";
+    
     /**
-     * Couplage afferent
+     * Depth of Inheritance Tree
      */
-    private final static String CA = "ca";
+    private static final String DIT = "dit";
+    
+    /**
+     * Number of Children
+     */
+    private static final String NOC = "noc";
+    
+    /**
+     *  Coupling between objects 
+     */
+    private static final String CBO = "cbo";
+    
+    
+    /**
+     * Response for a Class
+     */    
+    private static final String RFC = "rfc";
+    
+    /**
+     * Lack of cohesion in methods
+     */
+    private static final String LCOM = "lcom";
 
     /**
-     * Constructeur par défaut.
+     * Afferent couplings
+     */
+    private static final String CA = "ca";
+    
+    /**
+     * Number of Public Methods
+     */
+    private static final String NPM = "npm";
+
+    
+    /**
+     * Default constructor
      */
     public CkjmClassMetricsBO()
     {
         super();
+        getMetrics().put( WMC, new IntegerMetricBO() );
+        getMetrics().put( DIT, new IntegerMetricBO() );
+        getMetrics().put( NOC, new IntegerMetricBO() );
         getMetrics().put( CBO, new IntegerMetricBO() );
+        getMetrics().put( RFC, new IntegerMetricBO() );
+        getMetrics().put( LCOM, new IntegerMetricBO() );
         getMetrics().put( CA, new IntegerMetricBO() );
+        getMetrics().put( NPM, new IntegerMetricBO() );
+    }
+
+    
+
+    
+    
+    /**
+     * Getter method for the WMC metric
+     * 
+     * @return The value of WMC
+     */
+    public Integer getWmc()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( WMC ) ).getValue();
     }
 
     /**
-     * Méthode d'accès à la métrique couplage efferent
+     * Setter method for the WMC metric
      * 
-     * @return la valuer du cbo
+     * @param pWmc The new WMC value
+     */
+    public void setWmc( int pWmc )
+    {
+        ( (IntegerMetricBO) getMetrics().get( WMC ) ).setValue( new Integer( pWmc ) );
+    }
+    
+    /**
+     * Getter method for the DIT metric
+     * 
+     * @return The value of DIT
+     */
+    public Integer getDit()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( DIT ) ).getValue();
+    }
+
+    /**
+     * Setter method for the DIT metric
+     * 
+     * @param pDit The new value of DIT
+     */
+    public void setDit( int pDit )
+    {
+        ( (IntegerMetricBO) getMetrics().get( DIT ) ).setValue( new Integer( pDit ) );
+    }
+    
+    /**
+     * Getter method for the NOC metric
+     * 
+     * @return The value of NOC
+     */
+    public Integer getNoc()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( NOC ) ).getValue();
+    }
+
+    /**
+     * Setter method for the NOC metric
+     * 
+     * @param pNoc The new value of NOC
+     */
+    public void setNoc( int pNoc )
+    {
+        ( (IntegerMetricBO) getMetrics().get( NOC ) ).setValue( new Integer( pNoc ) );
+    }
+    
+    /**
+     * Getter method for the CBO metric
+     * 
+     * @return The value of CBO
      */
     public Integer getCbo()
     {
@@ -42,19 +144,59 @@ public class CkjmClassMetricsBO
     }
 
     /**
-     * Change la valuer de la métrique couplage efferent
+     * Setter method for the CBO metric
      * 
-     * @param pCbo la nouvelle valeur du cbo
+     * @param pCbo The new value of CBO
      */
     public void setCbo( int pCbo )
     {
         ( (IntegerMetricBO) getMetrics().get( CBO ) ).setValue( new Integer( pCbo ) );
     }
+    
+    /**
+     * Getter method for the RFC metric
+     * 
+     * @return The value of RFC
+     */
+    public Integer getRfc()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( RFC ) ).getValue();
+    }
 
     /**
-     * Méthode d'accès à la métrique couplage afferent
+     * Setter method for the RFC metric
      * 
-     * @return la valuer du ca
+     * @param pRfc The new value of RFC
+     */
+    public void setRfc( int pRfc )
+    {
+        ( (IntegerMetricBO) getMetrics().get( RFC ) ).setValue( new Integer( pRfc ) );
+    }
+    
+    /**
+     * Getter method for the LCOM metrics
+     * 
+     * @return The value of LCOM
+     */
+    public Integer getLcom()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( LCOM ) ).getValue();
+    }
+
+    /**
+     * Setter method for the LCOM metrics
+     * 
+     * @param pLcom The new value of LCOM
+     */
+    public void setLcom( int pLcom )
+    {
+        ( (IntegerMetricBO) getMetrics().get( LCOM ) ).setValue( new Integer( pLcom ) );
+    }
+    
+    /**
+     * Getter method for the CA metric
+     * 
+     * @return The value of CA
      */
     public Integer getCa()
     {
@@ -62,12 +204,33 @@ public class CkjmClassMetricsBO
     }
 
     /**
-     * Change la valuer de la métrique couplage afferent
+     * Setter method for the CA metric
      * 
-     * @param pCa la nouvelle valeur du ca
+     * @param pCa The new value of CA
      */
     public void setCa( int pCa )
     {
         ( (IntegerMetricBO) getMetrics().get( CA ) ).setValue( new Integer( pCa ) );
     }
+    
+    /**
+     * Getter method for the NPM metric
+     * 
+     * @return The value of NPM
+     */
+    public Integer getNpm()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( NPM ) ).getValue();
+    }
+
+    /**
+     * Setter method for the NPM metric
+     * 
+     * @param pNpm The new value of NPM
+     */
+    public void setNpm( int pNpm )
+    {
+        ( (IntegerMetricBO) getMetrics().get( NPM ) ).setValue( new Integer( pNpm ) );
+    }
+    
 }

@@ -1693,14 +1693,56 @@
 	<message lang="en" key="mccabe.class.dependsUponChild">
 		Depends upon child
 	</message>
-	<message lang="fr" key="ckjm.class.ca">Couplage afférent</message>
-	<message lang="en" key="ckjm.class.ca">Afferent coupling</message>
+		<!-- ckjm -->
+	<message lang="fr" key="ckjm.class.wmc">
+		Nombre pondéré de méthodes par classes 
+	</message>
+	<message lang="en" key="ckjm.class.wmc">
+		Weighted methods per class
+	</message>
+	<message lang="fr" key="ckjm.class.dit">
+		Profondeur d'héritage
+	</message>
+	<message lang="en" key="ckjm.class.dit">
+		Depth of Inheritance Tree
+	</message>
+	<message lang="fr" key="ckjm.class.noc">
+		Nombre de classes dérivées
+	</message>
+	<message lang="en" key="ckjm.class.noc">
+		Number of Children
+	</message>
 	<message lang="fr" key="ckjm.class.cbo">
-		Couplage entre objet
+		Couplage entre classes 
 	</message>
 	<message lang="en" key="ckjm.class.cbo">
 		Couplage between object
 	</message>
+	<message lang="fr" key="ckjm.class.rfc">
+		Nombre de méthodes accessibles
+	</message>
+	<message lang="en" key="ckjm.class.rfc">
+		Response for a Class
+	</message>
+	<message lang="fr" key="ckjm.class.lcom">
+		Cohérence de la classe
+	</message>
+	<message lang="en" key="ckjm.class.lcom">
+		Lack of cohesion in methods
+	</message>
+	<message lang="fr" key="ckjm.class.ca">
+		Couplage afférent
+	</message>
+	<message lang="en" key="ckjm.class.ca">
+		Afferent coupling
+	</message>
+	<message lang="fr" key="ckjm.class.npm">
+		Nombre de méthodes publiques
+	</message>
+	<message lang="en" key="ckjm.class.npm">
+		Number of Public Methods
+	</message>
+		<!-- RSM -->
 	<message lang="fr" key="rsm.class.private">
 		Nombre de méthodes privées
 	</message>
