@@ -9,13 +9,13 @@
 			<!-- les chemins peuvent être des .jar, .zip ou répertoires -->
 			<bootclasspaths>
             	<bootclasspath version="1.3">
-            		<lib path="/app/SQUALE/OUTILS/JAVA/1.3.1.03/" />
+            		<lib path="${BOOTCLASSPATH-1.3}" />
             	</bootclasspath>
             	<bootclasspath version="1.4">
-            		<lib path="/app/SQUALE/OUTILS/JAVA/1.4.0/" />
+            		<lib path="${BOOTCLASSPATH-1.4}" />
             	</bootclasspath>
             	<bootclasspath version="1.5">
-            		<lib path="/app/SQUALE/OUTILS/JAVA/jdk1.5.0_09/jre/lib" />
+            		<lib path="${BOOTCLASSPATH-1.5}" />
             	</bootclasspath>
             </bootclasspaths>
 			<default_jdk_version>1_4</default_jdk_version>
