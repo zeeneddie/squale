@@ -7,14 +7,14 @@
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<fileSets>
 		<fileSet>
-			<directory>target</directory>
+			<directory>${basedir}/target</directory>
 			<includes>
 				<include>${pom.artifactId}-${pom.version}.jar</include>
 			</includes>
 			<outputDirectory>/</outputDirectory>
 		</fileSet>
 		<fileSet>
-			<directory>src/assembly/resources</directory>
+			<directory>${basedir}/src/assembly/resources</directory>
 			<excludes>
 				<!-- we don't want go.sh to be filtered, as it would have Win EOL -->
 				<exclude>go.sh</exclude>
@@ -23,7 +23,7 @@
 			<filtered>true</filtered>
 		</fileSet>
 		<fileSet>
-			<directory>src/assembly/resources</directory>
+			<directory>${basedir}/src/assembly/resources</directory>
 			<includes>
 				<include>go.sh</include>
 			</includes>
