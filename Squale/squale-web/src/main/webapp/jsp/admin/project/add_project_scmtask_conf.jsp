@@ -33,13 +33,7 @@
 	
 	<table width="100%" class=formulaire cellpadding="0" cellspacing="0"
 		border="0">
-
-		<%-- Path to audit --%>
-		<tr class="fondClair">
-			<af:field key="project_creation.field.pathToAudit" name="scmForm"
-				property="pathToAudit" isRequired="true" styleClassLabel="td1"
-				size="100" disabled="<%=disabled%>" />
-		</tr>			
+			
 		<%-- Login --%>
 		<tr class="fondClair">
 			<af:field key="project_creation.field.login" name="scmForm"
@@ -53,9 +47,28 @@
 				disabled="<%=disabled%>" />
 		</tr>		
 	</table>
+	
+	<%-- Path to audit --%>	
+	<table id="locationsTable" width="100%" class="formulaire" cellpadding="0"
+		 border="0">
+		<tr class="trtete">
+		</tr>		 
+		<tr style="display: none">
+			<af:field styleClassLabel="td1"
+				key="project_creation.field.pathToAudit" property="location"
+				value="" size="60" />
+		</tr>
+		<squale:iteratePaths name="scmForm"
+			key="project_creation.field.pathToAudit" property="location"
+			isRequired="true" disabled="<%=disabled%>" />
+	</table>	
 
 	<logic:notEqual name="userProfile"
 		value="<%=ProfileBO.READER_PROFILE_NAME%>">
+		<af:buttonBar>
+			<af:button name="add.scmPath" toolTipKey="toolTip.add.vob"
+				onclick="addField('locationsTable', 1);" singleSend="false" />
+		</af:buttonBar>	
 		<jsp:include page="common_parameters_buttons.jsp" />
 	</logic:notEqual>
 </af:form>

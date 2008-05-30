@@ -1,8 +1,12 @@
 package com.airfrance.squaleweb.transformer.component.parameters;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import com.airfrance.squalecommon.datatransfertobject.component.parameters.ListParameterDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
@@ -54,15 +58,30 @@ public class ScmConfTransformer
             ScmForm scmForm = (ScmForm) pForm;
             Map ccParams = params.getParameters();
 
-            // Path to audit
-            StringParameterDTO pathToAudit = (StringParameterDTO) ccParams.get( ParametersConstants.SCMPATH );
-            scmForm.setPathToAudit( pathToAudit.getValue() );
             // User profile to connect to the remote repository
             StringParameterDTO login = (StringParameterDTO) ccParams.get( ParametersConstants.SCMLOGIN );
             scmForm.setLogin( login.getValue() );
             // Password
             StringParameterDTO password = (StringParameterDTO) ccParams.get( ParametersConstants.SCMPASSWORD );
             scmForm.setPassword( password.getValue() );
+            // Location of paths to audit
+            ListParameterDTO locationsDTO = (ListParameterDTO) ccParams.get( ParametersConstants.SCMLOCATION );
+            List locationsList = locationsDTO.getParameters();
+            Iterator it = locationsList.iterator();
+            String[] locations = new String[locationsList.size()];
+            int index = 0;
+            while ( it.hasNext() )
+            {
+                StringParameterDTO location = (StringParameterDTO) it.next();            
+                if (location.getValue() == null) {
+                    locations[index] = " ";                    
+                } else {
+                    locations[index] = location.getValue();
+                }
+
+                index++;
+            }
+            scmForm.setLocation( locations );
         }
     }
 
@@ -97,11 +116,7 @@ public class ScmConfTransformer
         MapParameterDTO params = (MapParameterDTO) pObject[0];
         ScmForm scmForm = (ScmForm) pForm;
         // Specific parameters of Scm are added to general project's
-        Map scmParams = new HashMap();
-        // pathToAudit:
-        StringParameterDTO pathToAudit = new StringParameterDTO();
-        pathToAudit.setValue( scmForm.getPathToAudit() );
-        scmParams.put( ParametersConstants.SCMPATH, pathToAudit );
+        Map<String, Object> scmParams = new HashMap<String, Object>();
         // user profile
         StringParameterDTO login = new StringParameterDTO();
         login.setValue( scmForm.getLogin() );
@@ -109,7 +124,19 @@ public class ScmConfTransformer
         // password
         StringParameterDTO password = new StringParameterDTO();
         password.setValue( scmForm.getPassword() );
-        scmParams.put( ParametersConstants.SCMPASSWORD, password );
+        scmParams.put( ParametersConstants.SCMPASSWORD, password );       
+        // location
+        ListParameterDTO locations = new ListParameterDTO();
+        ArrayList<StringParameterDTO> locationsList = new ArrayList<StringParameterDTO>();
+        String[] location = scmForm.getLocation();
+        for ( int i = 0; i < location.length; i++ )
+        {
+            StringParameterDTO strParam = new StringParameterDTO();
+            strParam.setValue( location[i] );
+            locationsList.add( strParam );
+        }
+        locations.setParameters( locationsList );
+        scmParams.put( ParametersConstants.SCMLOCATION, locations );      
 
         MapParameterDTO scmMap = new MapParameterDTO();
         scmMap.setParameters( scmParams );

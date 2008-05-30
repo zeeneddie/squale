@@ -1,20 +1,14 @@
 package com.airfrance.squaleweb.applicationlayer.formbean.component.parameters;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.maven.scm.manager.BasicScmManager;
-import org.apache.maven.scm.manager.ScmManager;
-import org.apache.maven.scm.provider.cvslib.cvsjava.CvsJavaScmProvider;
-import org.apache.maven.scm.provider.local.LocalScmProvider;
-import org.apache.maven.scm.provider.svn.svnexe.SvnExeScmProvider;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 import com.airfrance.squaleweb.transformer.component.parameters.ScmConfTransformer;
+import com.airfrance.squaleweb.util.SqualeWebActionUtils;
 
 /**
  * Bean to set scm task
@@ -22,11 +16,6 @@ import com.airfrance.squaleweb.transformer.component.parameters.ScmConfTransform
 public class ScmForm
     extends AbstractParameterForm
 {
-
-    /**
-     * Path to audit
-     */
-    private String mPathToAudit;
 
     /**
      * User profile to connect to the remote repository
@@ -39,33 +28,38 @@ public class ScmForm
     private String mPassword;
 
     /**
+     * Liste des noms de VOBs relatives à un projet
+     */
+    private String[] mLocation;
+
+    /**
      * Constructor
      */
     public ScmForm()
     {
-        mPathToAudit = "";
+        mLocation = new String[0];
         mLogin = "";
         mPassword = "";
     }
 
     /**
-     * Access method
+     * Access method for the mVOBName property.
      * 
-     * @return the current value of the mPathsToAudit property
+     * @return the current value of the mVOBName property
      */
-    public String getPathToAudit()
+    public String[] getLocation()
     {
-        return mPathToAudit;
+        return mLocation;
     }
 
     /**
-     * Sets the value of the mPathToAudit property.
+     * Sets the value of the mLocation property.
      * 
-     * @param pPathToAudit the new value of the mPathToAudit property
+     * @param pLocation the new value of the mLocation property
      */
-    public void setPathToAudit( String pPathToAudit )
+    public void setLocation( String[] pLocation )
     {
-        mPathToAudit = pPathToAudit;
+        mLocation = pLocation;
     }
 
     /**
@@ -149,9 +143,9 @@ public class ScmForm
      */
     public void reset( ActionMapping mapping, HttpServletRequest request )
     {
-        setPathToAudit( "" );
         setLogin( "" );
         setPassword( "" );
+        setLocation( new String[0] );
     }
 
     /**
@@ -173,82 +167,10 @@ public class ScmForm
      */
     protected void validateConf( ActionMapping pMapping, HttpServletRequest pRequest )
     {
-        final String scmPrefix = "scm:";
-
-        // Path to audit field is mandatory
-        setPathToAudit( getPathToAudit().trim() );
-        if ( getPathToAudit().length() == 0 )
+        setLocation( SqualeWebActionUtils.cleanValues( getLocation() ) );
+        if ( getLocation().length == 0 )
         {
-            addError( "pathToAudit", new ActionError( "error.field.required" ) );
+            addError( "location", new ActionError( "error.invalid_path" ) );
         }
-        else
-        {
-            // If the path to audit doesn't start with "scm:", it is an incorrect url
-            if ( !getPathToAudit().startsWith( scmPrefix ) )
-            {
-                addError( "pathToAudit", new ActionError( "error.invalid_path" ) );
-            }
-            else
-            {
-                // Checks if the path to the repository is right
-                if ( !isRepositoryValidated() )
-                {
-                    addError( "pathToAudit", new ActionError( "error.invalid_path" ) );
-                }
-            }
-        }
-    }
-
-    /**
-     * Validation of the path to the repository
-     * 
-     * @return boolean to indicate if the path is correct
-     */
-    private boolean isRepositoryValidated()
-    {
-        boolean bValidation = false;
-        List errorsList = null;
-
-        ScmManager scmManager = new BasicScmManager();
-
-        // Look-up the type of repository, extracted from the path to audit (example : the url scm:svn:http://... tracks
-        // svn);
-        if ( getPathToAudit().startsWith( "scm:cvs" ) )
-        {
-            scmManager.setScmProvider( "cvs", new CvsJavaScmProvider() );
-            errorsList = scmManager.validateScmRepository( getPathToAudit() );
-        }
-        else
-        {
-            // Validates the path for a local directory
-            if ( getPathToAudit().startsWith( "scm:local" ) )
-            {
-                scmManager.setScmProvider( "local", new LocalScmProvider() );
-                errorsList = scmManager.validateScmRepository( getPathToAudit() );
-            }
-            else
-            {
-                // Checks the access to a subversion repository
-                if ( getPathToAudit().startsWith( "scm:svn" ) )
-                {
-                    scmManager.setScmProvider( "svn", new SvnExeScmProvider() );
-                    errorsList = scmManager.validateScmRepository( getPathToAudit() );
-                }
-                else
-                {
-                    // The repository (cvs, svn,...) couldn't be found : so an element is added in the list to indicate
-                    // errors
-                    errorsList = new ArrayList();
-                    errorsList.add( " " );
-                }
-
-            }
-        }
-        // Some errors ?
-        if ( errorsList == null || errorsList.size() <= 0 )
-        {
-            bValidation = true;
-        }
-        return bValidation;
     }
 }
