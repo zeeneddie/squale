@@ -1,6 +1,7 @@
 package com.airfrance.squalix.tools.scm.task;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import org.apache.maven.scm.manager.ScmManager;
 import org.apache.maven.scm.repository.ScmRepository;
 import org.apache.maven.scm.repository.ScmRepositoryException;
 import org.codehaus.plexus.util.StringUtils;
+
+import com.airfrance.squalix.util.file.FileUtility;
 
 /**
  * abstract class to connect to a repository (Cvs, Svn or local by example)
@@ -64,6 +67,7 @@ public abstract class AbstractRepository
         throws ScmRepositoryException, NoSuchScmProviderException
     {
         ScmRepository repository = scmManager.makeScmRepository( pScmUrl.trim() );
+
         repository.getProviderRepository().setPersistCheckout( true );
         if ( !StringUtils.isEmpty( pLogin ) )
         {
@@ -97,11 +101,13 @@ public abstract class AbstractRepository
      * 
      * @param scmRepository repository sources are stored
      * @param workingDirectory local directory where sources are analyzed
+     * @param temporaryDirectory temporary directory to store check out
      * @return true is check-out is completed
      * @throws ScmException Scm exception
+     * @throws IOException Exception in files
      */
-    public boolean isCheckOut( ScmRepository scmRepository, File workingDirectory )
-        throws ScmException
+    public boolean isCheckOut( ScmRepository scmRepository, File temporaryDirectory, File workingDirectory )
+        throws ScmException, IOException
     {
         boolean checkOut = true;
         // Temporary directory already exists !!
@@ -119,7 +125,13 @@ public abstract class AbstractRepository
             checkOut = false;
         }
         // Check-out sources into the temporary directory
-        CheckOutScmResult result = scmManager.checkOut( scmRepository, new ScmFileSet( workingDirectory ) );
+        CheckOutScmResult result = scmManager.checkOut( scmRepository, new ScmFileSet( temporaryDirectory ) );
+
+        // Copy local check out directory into local source code directory
+        FileUtility.copyDirInto( temporaryDirectory, workingDirectory );
+
+        // Deletion of the temporary directory
+        FileUtility.deleteRecursively( temporaryDirectory );
 
         // Log check-out
         checkResult( result );

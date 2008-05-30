@@ -2,13 +2,15 @@ package com.airfrance.squalix.tools.scm.task;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.maven.scm.ScmException;
 import org.apache.maven.scm.repository.ScmRepository;
 
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
@@ -63,8 +65,8 @@ public class ScmTask
                 throw new ConfigurationException( message );
             }
             // Retrieve absolute path of the project
-            StringParameterBO pathToAudit =
-                (StringParameterBO) taskParam.getParameters().get( ParametersConstants.SCMPATH );
+            ListParameterBO pathToAudit =
+                (ListParameterBO) taskParam.getParameters().get( ParametersConstants.SCMLOCATION );
             if ( pathToAudit == null )
             {
                 String message = ScmMessages.getString( "exception.path.not_found" );
@@ -101,31 +103,44 @@ public class ScmTask
         getData().putData( TaskData.VIEW_PATH, dest.getAbsolutePath() + "/" );
 
         // Retrieve settings of the current project
-        StringParameterBO path = (StringParameterBO) pTaskParam.getParameters().get( ParametersConstants.SCMPATH );
         StringParameterBO login = (StringParameterBO) pTaskParam.getParameters().get( ParametersConstants.SCMLOGIN );
         StringParameterBO password =
             (StringParameterBO) pTaskParam.getParameters().get( ParametersConstants.SCMPASSWORD );
         // Execute check-out
-        checkOutFromRepository( dest, path.getValue(), login.getValue(), password.getValue() );
+        ListParameterBO locationListBO =
+            (ListParameterBO) pTaskParam.getParameters().get( ParametersConstants.SCMLOCATION );
+        List locationList = locationListBO.getParameters();
+        String path = null;
 
-        if ( dest.listFiles().length == 0 )
+        // Create a temporary directory to store check outs
+        File tempDirectory = new File( mConfiguration.getScmDirectory() );
+        Iterator it = locationList.iterator();
+        String[] locations = new String[locationList.size()];
+        int index = 0;
+        while ( it.hasNext() )
         {
-            // If the directory is empty, an exception is sent
-            String message = ScmMessages.getString( "exception.empty_dir" );
-            throw new IOException( message );
+            StringParameterBO location = (StringParameterBO) it.next();
+            if ( location.getValue() != null )
+            {
+                checkOutFromRepository( tempDirectory, dest, location.getValue(), login.getValue(), password.getValue() );
+
+            }
+            index++;
         }
     }
 
     /**
      * Try to get sources from the repository
      * 
-     * @param pTemporaryDirectory local directory where are stored data to audit
+     * @param pTemporaryDirectory local directory where check out are stored
+     * @param pSourceDirectory directory where data are analyzed
      * @param pPath path to acess to the remote repository to audit
      * @param pLogin id to connect to the remote repository
      * @param pPassword password to connect to the remote repository
      * @throws Exception exception when the remote repository connection occurs
      */
-    protected void checkOutFromRepository( File pTemporaryDirectory, String pPath, String pLogin, String pPassword )
+    protected void checkOutFromRepository( File pTemporaryDirectory, File pSourceDirectory, String pPath,
+                                           String pLogin, String pPassword )
         throws Exception
     {
         AbstractRepository remoteRepository = null;
@@ -161,7 +176,7 @@ public class ScmTask
                 scmRepository = remoteRepository.getScmRepository( pPath, pLogin, pPassword );
 
                 // Does an error occur ?
-                if ( !remoteRepository.isCheckOut( scmRepository, pTemporaryDirectory ) )
+                if ( !remoteRepository.isCheckOut( scmRepository, pTemporaryDirectory, pSourceDirectory ) )
                 {
                     throw new TaskException( ScmMessages.getString( "exception.task.no_checkout" ) );
                 }

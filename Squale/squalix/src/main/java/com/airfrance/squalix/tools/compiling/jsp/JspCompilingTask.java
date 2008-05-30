@@ -537,7 +537,7 @@ public class JspCompilingTask
             String errorLevel = pLevel;
             if ( compileErrorMessage.matches( ".*JasperException.*" ) )
             {
-                errorLevel = ErrorBO.CRITICITY_FATAL;
+   //             errorLevel = ErrorBO.CRITICITY_FATAL;
             }
             initError( compileErrorMessage, errorLevel );
             compileErrorMessage = "";

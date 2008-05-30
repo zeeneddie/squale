@@ -1,7 +1,11 @@
 <?xml version='1.0' encoding="utf-8"?>
 <!ELEMENT sourcecodeanalyser-configuration
-   (rootPath)
+   (rootPath, scmTempPath)
 >
 <!ELEMENT rootPath
+   (#PCDATA)
+>
+
+<!ELEMENT scmTempPath
    (#PCDATA)
 >

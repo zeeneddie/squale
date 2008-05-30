@@ -23,6 +23,9 @@ public class ScmConfig
 
     /** Root directory */
     private String mRootDirectory;
+    
+    /** Scm temporary directory */
+    private String mScmDirectory;
 
     /**
      * Constructor by default
@@ -45,6 +48,16 @@ public class ScmConfig
     /**
      * Accessor
      * 
+     * @return accessor for the mScmTempDirectory
+     */
+    public String getScmDirectory()
+    {
+        return mScmDirectory;
+    }    
+    
+    /**
+     * Accessor
+     * 
      * @param pRootDirectory accessor for the mRootDirectory property
      */
     public void setRootDirectory( String pRootDirectory )
@@ -57,6 +70,22 @@ public class ScmConfig
         }
         mRootDirectory = newRootDirectory;
     }
+    
+    /**
+     * Accessor
+     * 
+     * @param pScmDirectory accessor for the mScmDirectory property
+     */
+    public void setScmDirectory( String pScmDirectory )
+    {
+        // The character "/" may be added at the end
+        String newScmDirectory = pScmDirectory;
+        if ( !newScmDirectory.endsWith( "/" ) )
+        {
+            newScmDirectory += "/";
+        }
+        mScmDirectory = newScmDirectory;
+    }    
 
     /**
      * Reading of the configuration
@@ -71,12 +100,17 @@ public class ScmConfig
         Digester digester =
             preSetupDigester( "-//SourceCodeAnalyser Configuration DTD //EN",
                               "/config/sourcecodeanalyser-config-1.0.dtd", errors );
-        // Traitement du répertoire racine
+        // Root node
         digester.addCallMethod( "sourcecodeanalyser-configuration/rootPath", "setRootDirectory", 1,
                                 new Class[] { String.class } );
         digester.addCallParam( "sourcecodeanalyser-configuration/rootPath", 0 );
+        
+        // Scm temporary node
+        digester.addCallMethod( "sourcecodeanalyser-configuration/scmTempPath", "setScmDirectory", 1,
+                                new Class[] { String.class } );
+        digester.addCallParam( "sourcecodeanalyser-configuration/scmTempPath", 0 );        
         digester.push( this );
-        // Appel du parser
+        // Parsing
         parse( digester, pStream, errors );
         if ( errors.length() > 0 )
         {
