@@ -116,14 +116,14 @@ public class ParametersConstants
 
     // Scm parameters:
 
-    /** Url to audit */
-    public static final String SCMPATH = "scmpath";
-
     /** User to connect to the remote repository */
     public static final String SCMLOGIN = "scmlogin";
 
     /** Password */
     public static final String SCMPASSWORD = "scmpassword";
+    
+    /** Location **/
+    public static final String SCMLOCATION = "scmlocation";
 
     // *************** Projet C++ ******************************************
 

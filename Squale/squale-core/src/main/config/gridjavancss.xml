@@ -202,11 +202,11 @@
             <conditionformula>
                 <level>class</level>
                 <measures>
-                    <measure>mccabe</measure>
+                    <measure>ckjm</measure>
                 </measures>
                 <trigger></trigger>
                 <conditions>
-                    <condition>mccabe.dependsUponChild</condition>
+                    <condition>0</condition>
                     <condition>0</condition> 
                     <condition>0</condition>
                 </conditions>
@@ -218,10 +218,10 @@
             <simpleformula>
                 <level>method</level>
                 <measures>
-                    <measure>mccabe</measure>
+                    <measure>javancss</measure>
                 </measures>
-                <trigger>(mccabe.vg > 5 or mccabe.nsloc > 30) and mccabe.nsloc != 0</trigger>
-                <formula> (mccabe.ncloc+mccabe.nlmixed)*9./(mccabe.ncloc+mccabe.nsloc+mccabe.nlmixed) / (1. - 10**(-mccabe.vg /15.))</formula>
+                <trigger>0</trigger>
+                <formula>0</formula>
             </simpleformula>
             <helpKey>documentationKey</helpKey>
         </practice>
@@ -274,13 +274,13 @@
 			<conditionformula>
 				<level>class</level>
 				<measures>
-					<measure>mccabe</measure>
+					<measure>ckjm</measure>
 				</measures>
 				<trigger></trigger>
 				<conditions>
-					<condition>mccabe.dit > 7</condition>
-					<condition>mccabe.dit > 6</condition>
-					<condition>mccabe.dit > 5</condition>
+					<condition>ckjm.dit > 7</condition>
+					<condition>ckjm.dit > 6</condition>
+					<condition>ckjm.dit > 5</condition>
 				</conditions>
 			</conditionformula>
 		</practice>
@@ -306,13 +306,13 @@
             <conditionformula>
                 <level>class</level>
                 <measures>
-                    <measure>mccabe</measure>
+                    <measure>ckjm</measure>
                 </measures>
                 <trigger></trigger>
                 <conditions>
-                    <condition>mccabe.locm >= 100</condition>
-                    <condition>mccabe.locm > 50</condition>
-                    <condition>mccabe.locm > 0</condition>
+                    <condition>ckjm.lcom >= 100</condition>
+                    <condition>ckjm.lcom > 50</condition>
+                    <condition>ckjm.lcom > 0</condition>
                 </conditions>
             </conditionformula>
         </practice>
@@ -421,11 +421,12 @@
 			<conditionformula>
 				<level>class</level>
 				<measures>
-					<measure>mccabe</measure>
+					<measure>ckjm</measure>
+					<measure>javancss</measure>					
 				</measures>
 				<trigger></trigger>
 				<conditions>
-					<condition>(mccabe.sumvg >= 10)and(mccabe.noc==0)and(mccabe.rfc>=40)and(mccabe.dit==1)</condition>
+					<condition>(javancss.sumVg >= 10)and(ckjm.noc==0)and(ckjm.rfc>=40)and(ckjm.dit==1)</condition>
 					<condition>0</condition>
 					<condition>0</condition>
 				</conditions>

@@ -3138,23 +3138,11 @@
 	<message lang="en" key="ClearCaseCleanerTask.name">
 		ClearCase's final task
 	</message>
-	<message lang="fr" key="ScmLocalTask.name">
-		Tâche Scm d'accès aux sources en local
+	<message lang="fr" key="ScmTask.name">
+		Tâche Scm d'accès aux sources
 	</message>
-	<message lang="en" key="ScmLocalTask.name">
+	<message lang="en" key="ScmTask.name">
 		Scm's task to get local sources
-	</message>
-	<message lang="fr" key="ScmCvsTask.name">
-		Tâche Scm d'accès aux sources d'un dépôt Cvs
-	</message>
-	<message lang="en" key="ScmCvsTask.name">
-		Scm's task to get sources from a Cvs repository
-	</message>
-	<message lang="fr" key="ScmSvnTask.name">
-		Tâche Scm d'accès aux sources d'un dépôt Svn
-	</message>
-	<message lang="en" key="ScmSvnTask.name">
-		Scm's task to get sources from a Svn repository
 	</message>
 	<message lang="fr" key="ScmCleanerTask.name">
 		Tâche Scm de complétude
