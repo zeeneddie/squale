@@ -90,7 +90,7 @@ public class JavaMailProviderImpl
 
             // Body message definition
             message.setSubject( subject );
-            message.setText( content );
+            message.setText( content, "iso-8859-1" );
 
             // Send of the mail
             Transport.send( message );
