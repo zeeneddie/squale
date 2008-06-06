@@ -136,14 +136,17 @@ public abstract class AbstractRepository
         // Log check-out
         checkResult( result );
 
-        List checkedOutFiles = result.getCheckedOutFiles();
-        if ( checkedOutFiles != null )
+        if (LOGGER.isDebugEnabled())
         {
-            // Display all objects in check-out
-            for ( Iterator it = checkedOutFiles.iterator(); it.hasNext(); )
+            List checkedOutFiles = result.getCheckedOutFiles();
+            if ( checkedOutFiles != null )
             {
-                ScmFile file = (ScmFile) it.next();
-                LOGGER.info( ScmMessages.getString( "logs.task.checkout" ) + file.getPath() );
+                // Display all objects in check-out
+                for ( Iterator it = checkedOutFiles.iterator(); it.hasNext(); )
+                {
+                    ScmFile file = (ScmFile) it.next();
+                    LOGGER.debug( ScmMessages.getString( "logs.task.checkout" ) + file.getPath() );
+                }
             }
         }
         return checkOut;
