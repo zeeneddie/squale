@@ -15,11 +15,12 @@ public class MethodBOHelper
 
     /**
      * This method search the correspondence between an object methodBO and objects methodBO already persist. This
-     * method take into account the case when there is not the full name for the arguments of the method to search. For
-     * example : the name of the method search is : test(String, String, int) whereas the the good name is :
-     * test(java.lang.String, java.lang.String, int) In this case this method will return all the object already persist
-     * which seems to : test( *.String, *.String, int). Note that this method also take into account the longFuileName
-     * of the object method for do the selection.
+     * method do the search when there is not the full name for the arguments of the method to search. For example : the
+     * name of the method search is : test(String, String, int) whereas the the good name is : test(java.lang.String,
+     * java.lang.String, int) In this case this method will return all the object already persist which seems to : test(
+     * *.String, *.String, int). Note that this method also take into account the longFileName of the object method for
+     * do the selection. This method suppose that the search in the repository with the complete name
+     * (repository.getComponent(...)) has already be done.
      * 
      * @param methBO The object MethodBO to search
      * @param allMethods The collection of object already persist
@@ -29,39 +30,21 @@ public class MethodBOHelper
     public static ArrayList searchMethodBO( MethodBO methBO, Collection allMethods, ComponentRepository repository )
     {
         ArrayList methodMatch = new ArrayList();
+
+        // We search our MethodBO in all the already existent MethodBO
         Iterator it = allMethods.iterator();
         while ( it.hasNext() )
         {
+            // We do the comparison by splitting the method name
             MethodBO existentMethod = (MethodBO) it.next();
-            if (repository.compare( methBO, existentMethod ))  
             {
-                ArrayList splitExist = splitMethod( existentMethod );
-                ArrayList splitMeth = splitMethod( methBO );
-
-                if ( ( (String) splitExist.get( 0 ) ).compareTo( ( (String) splitMeth.get( 0 ) ) ) == 0 )
+                if ( repository.compare( methBO.getParent(), existentMethod.getParent() ) )
                 {
-
-                    if ( splitExist.size() == splitMeth.size() )
+                    Boolean isMatching = splitSearch( existentMethod, methBO );
+                    if ( isMatching )
                     {
-                        // Begin from 1 because the first element is the name of the method and not an
-                        // argument of the method
-                        int cpt = 1;
-                        boolean isOk = true;
-                        while ( cpt < splitExist.size() && isOk )
-                        {
-                            String methArg = (String) splitMeth.get( cpt );
-                            String existArg = (String) splitExist.get( cpt );
+                        methodMatch.add( existentMethod );
 
-                            if ( !( existArg ).endsWith( "." + methArg ) && existArg.compareTo( methArg ) != 0 )
-                            {
-                                isOk = false;
-                            }
-                            cpt++;
-                        }
-                        if ( isOk )
-                        {
-                            methodMatch.add( existentMethod );
-                        }
                     }
                 }
             }
@@ -70,7 +53,42 @@ public class MethodBOHelper
     }
 
     /**
-     * This method split the attribute name of a methodBO. The first element of the list return is the name of the
+     * This method do the comparison between two MethodBO by splitting them.
+     * 
+     * @param existentMethod The method already existent
+     * @param methBO The method we search
+     * @return true if the two method match
+     */
+    private static boolean splitSearch( MethodBO existentMethod, MethodBO methBO )
+    {
+        ArrayList splitExist = splitMethod( existentMethod );
+        ArrayList splitMeth = splitMethod( methBO );
+        boolean isMatching = false;
+
+        if ( ( (String) splitExist.get( 0 ) ).compareTo( ( (String) splitMeth.get( 0 ) ) ) == 0
+            && splitExist.size() == splitMeth.size() )
+        {
+            // Begin from 1 because the first element is the name of the method and not an
+            // argument of the method
+            isMatching = true;
+            int cpt = 1;
+            while ( cpt < splitExist.size() && isMatching )
+            {
+                String methArg = (String) splitMeth.get( cpt );
+                String existArg = (String) splitExist.get( cpt );
+
+                if ( !( existArg ).endsWith( "." + methArg ) && existArg.compareTo( methArg ) != 0 )
+                {
+                    isMatching = false;
+                }
+                cpt++;
+            }
+        }
+        return isMatching;
+    }
+
+    /**
+     * This method split the attribute 'name' of a methodBO. The first element of the list return is the name of the
      * method. The other element of the list are the arguments of the method.
      * 
      * @param method The object MethodBO to transform
