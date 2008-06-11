@@ -2,7 +2,7 @@ package com.airfrance.squalix.tools.scm.task;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.Iterator;
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -106,86 +106,102 @@ public class ScmTask
         StringParameterBO login = (StringParameterBO) pTaskParam.getParameters().get( ParametersConstants.SCMLOGIN );
         StringParameterBO password =
             (StringParameterBO) pTaskParam.getParameters().get( ParametersConstants.SCMPASSWORD );
-        // Execute check-out
         ListParameterBO locationListBO =
             (ListParameterBO) pTaskParam.getParameters().get( ParametersConstants.SCMLOCATION );
         List locationList = locationListBO.getParameters();
-        String path = null;
 
-        // Create a temporary directory to store check outs
-        File tempDirectory = new File( mConfiguration.getScmDirectory() );
-        Iterator it = locationList.iterator();
-        String[] locations = new String[locationList.size()];
-        int index = 0;
-        while ( it.hasNext() )
-        {
-            StringParameterBO location = (StringParameterBO) it.next();
-            if ( location.getValue() != null )
-            {
-                checkOutFromRepository( tempDirectory, dest, location.getValue(), login.getValue(), password.getValue() );
-
-            }
-            index++;
-        }
+        // Initialize repository before running check-out
+        initializeScmRepository( dest, locationList, login.getValue(), password.getValue() );
     }
 
     /**
      * Try to get sources from the repository
      * 
-     * @param pTemporaryDirectory local directory where check out are stored
      * @param pSourceDirectory directory where data are analyzed
-     * @param pPath path to acess to the remote repository to audit
+     * @param pLocationList list of directories to check out
      * @param pLogin id to connect to the remote repository
      * @param pPassword password to connect to the remote repository
      * @throws Exception exception when the remote repository connection occurs
      */
-    protected void checkOutFromRepository( File pTemporaryDirectory, File pSourceDirectory, String pPath,
-                                           String pLogin, String pPassword )
+    protected void initializeScmRepository( File pSourceDirectory, List<StringParameterBO> pLocationList,
+                                            String pLogin, String pPassword )
+
         throws Exception
     {
         AbstractRepository remoteRepository = null;
+        String location = null;
 
-        // Example : "scm:cvs:pserver:myServer:/directory/subdirectory:myModule"
-        if ( pPath.startsWith( "scm:cvs" ) )
+        for ( StringParameterBO locationBO : pLocationList )
         {
-            remoteRepository = new RepositoryCvs();
-        }
-        else
-        {
-            // Example : "scm:svn:https://svn.squale.org/squale"
-            if ( pPath.startsWith( "scm:svn" ) )
+            location = locationBO.getValue();
+            if ( location != null )
             {
-                remoteRepository = new RepositorySvn();
-            }
-            else
-            {
-                // Example : "scm:local:/apps/myApp"
-                if ( pPath.startsWith( "scm:local" ) )
+                // Example : "scm:cvs:pserver:myServer:/directory/subdirectory:myModule"
+                if ( location.startsWith( "scm:cvs" ) )
                 {
-                    remoteRepository = new RepositoryLocal();
+                    remoteRepository =
+                        new RepositoryCvs( location, mConfiguration.getScmDirectory(), location, pLogin, pPassword );
+                }
+                else
+                {
+                    // Example : "scm:svn:https://svn.squale.org/squale"
+                    if ( location.startsWith( "scm:svn" ) )
+                    {
+                        remoteRepository =
+                            new RepositorySvn( location, mConfiguration.getScmDirectory(), location, pLogin, pPassword );
+                    }
+                    else
+                    {
+                        // Example : "scm:local:/apps/myApp"
+                        if ( location.startsWith( "scm:local" ) )
+                        {
+                            remoteRepository =
+                                new RepositoryLocal( location, mConfiguration.getScmDirectory(), location, pLogin,
+                                                     pPassword );
+                        }
+                    }
                 }
             }
+            // Execute check out from the repository
+            if ( remoteRepository != null )
+            {
+                checkOutFromRepository( remoteRepository, pSourceDirectory );
+            }
         }
-        if ( remoteRepository != null )
-        {
-            ScmRepository scmRepository;
-            String[] tab = { pPath, pTemporaryDirectory.getAbsolutePath() };
-            LOGGER.info( ScmMessages.getString( "logs.task.repository", tab ) );
-            try
-            {
-                scmRepository = remoteRepository.getScmRepository( pPath, pLogin, pPassword );
 
-                // Does an error occur ?
-                if ( !remoteRepository.isCheckOut( scmRepository, pTemporaryDirectory, pSourceDirectory ) )
-                {
-                    throw new TaskException( ScmMessages.getString( "exception.task.no_checkout" ) );
-                }
-            }
-            catch ( ScmException e )
+    }
+
+    /**
+     * Launch check out from a remote repository into a local temporary directory
+     * 
+     * @param pRemoteRepository remote repository type
+     * @param pSourceDirectory local directory where source code is analyzed once check out is performed
+     * @throws IOException exception
+     * @throws TaskException exception
+     */
+    private void checkOutFromRepository( AbstractRepository pRemoteRepository, File pSourceDirectory )
+        throws IOException, TaskException
+    {
+        ScmRepository scmRepository;
+        String[] tab = { pRemoteRepository.getLocation(), pRemoteRepository.getScmTemporaryDirectory() };
+        LOGGER.info( ScmMessages.getString( "logs.task.repository", tab ) );
+        try
+        {
+            // Check out sources
+            scmRepository = pRemoteRepository.getScmRepository();
+            pRemoteRepository.checkOut( new File( mConfiguration.getScmDirectory() ), scmRepository, pSourceDirectory );
+
+            // Does an error occur ?
+            if ( !pRemoteRepository.isCheckOut() )
             {
-                LOGGER.error( ScmMessages.getString( "exception.task.no_repository" ) );
-                throw new TaskException( e );
+                throw new TaskException( ScmMessages.getString( "exception.task.no_checkout" ) );
             }
+        }
+        catch ( ScmException e )
+        {
+            LOGGER.error( ScmMessages.getString( "exception.task.no_repository" ) );
+            throw new TaskException( e );
         }
     }
+
 }
