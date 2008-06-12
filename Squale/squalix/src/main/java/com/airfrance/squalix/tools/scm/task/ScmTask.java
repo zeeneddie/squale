@@ -134,6 +134,7 @@ public class ScmTask
         for ( StringParameterBO locationBO : pLocationList )
         {
             location = locationBO.getValue();
+            remoteRepository = null;
             if ( location != null )
             {
                 // Example : "scm:cvs:pserver:myServer:/directory/subdirectory:myModule"
