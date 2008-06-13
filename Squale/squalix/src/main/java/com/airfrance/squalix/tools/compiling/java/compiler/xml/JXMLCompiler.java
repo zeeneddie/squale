@@ -19,6 +19,8 @@ import com.airfrance.squalix.tools.compiling.java.beans.JXMLProject;
 import com.airfrance.squalix.tools.compiling.java.configuration.JCompilingConfiguration;
 
 /**
+ * Ant Compilation
+ * 
  * @author m400832 (by rose)
  * @version 1.0
  */
@@ -33,7 +35,7 @@ public class JXMLCompiler
     /**
      * Projet à compiler.
      */
-    private JXMLProject mProject = null;
+    private JXMLProject mProject;
 
     /**
      * Constructeur.
@@ -108,11 +110,6 @@ public class JXMLCompiler
             helper.parse( project, buildFile );
 
             /*
-             * Récupération du classpath dans le fichier build.xml et du classes_dir.
-             */
-            antClasspath( project );
-
-            /*
              * Ajout de la tâche à lancer.
              */
             Vector targets = new Vector();
@@ -132,6 +129,11 @@ public class JXMLCompiler
              * Exécution de la tâche ANT.
              */
             project.executeTargets( targets );
+
+            /*
+             * Récupération du classpath dans le fichier build.xml et du classes_dir.
+             */
+            antClasspath( project );
 
             /* ménage */
             project = null;
