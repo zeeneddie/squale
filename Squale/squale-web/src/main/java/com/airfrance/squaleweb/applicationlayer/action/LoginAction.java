@@ -30,6 +30,8 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 import com.airfrance.welcom.struts.util.WConstants;
 
 /**
+ * Struts Action that handles login into Squale.
+ * 
  * @version 1.0
  * @author
  */
@@ -42,16 +44,12 @@ public class LoginAction
     private static Log log = LogFactory.getLog( LoginAction.class );
 
     /**
-     * @param pMapping le mapping.
-     * @param pForm le formulaire à lire.
-     * @param pRequest la requête HTTP.
-     * @param pResponse la réponse de la servlet.
-     * @return l'action à réaliser.
+     * ${@inheritDoc}
      */
+    @Override
     public ActionForward execute( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
                                   HttpServletResponse pResponse )
     {
-
         ActionForward forward = null;
         boolean sessionOk = initUserInSession( pRequest );
         if ( sessionOk )
@@ -66,7 +64,17 @@ public class LoginAction
             }
             else
             {
-                forward = pMapping.findForward( "success" );
+                String requestedPagePath = (String) pRequest.getSession().getAttribute( "requestedPagePath" );
+                if ( requestedPagePath != null )
+                {
+                    // a specific page was required prior to login: go there
+                    forward = new ActionForward( requestedPagePath, true );
+                }
+                else
+                {
+                    // normal login: go to main page
+                    forward = pMapping.findForward( "success" );
+                }
             }
         }
         else
@@ -78,7 +86,9 @@ public class LoginAction
     }
 
     /**
-     * @param pRequest la requpete
+     * Inits the user in session
+     * 
+     * @param pRequest la requete
      * @return true si l'utilisateur a pu être initialisé et enregistré en session
      */
     public boolean initUserInSession( HttpServletRequest pRequest )
@@ -108,6 +118,7 @@ public class LoginAction
     }
 
     /**
+     * Returns the bean that stands for the authenticated user.
      * 
      * @param pRequest la requête
      * @return l'utilisateur connecté sous forme de LoginBean
@@ -119,8 +130,8 @@ public class LoginAction
         throws ConnectionException, JrafEnterpriseException, WTransformerException
     {
         // Obtention des informations sur l'utilisateur connecté
-        
-        AuthenticationBean authent =(AuthenticationBean)pRequest.getSession().getAttribute( "AuthenticatedUser" );
+
+        AuthenticationBean authent = (AuthenticationBean) pRequest.getSession().getAttribute( "AuthenticatedUser" );
         String name = authent.getIdentifier();
         IUserBeanAccessor userBeanAccessor = UserBeanAccessorHelper.getUserBeanAccessor();
         boolean isAdmin = userBeanAccessor.getUserBean( pRequest ).isAdmin();
