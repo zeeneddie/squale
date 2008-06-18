@@ -94,7 +94,8 @@ public class LoginFilter
     {
         String requestedPagePath = request.getServletPath();
 
-        if ( requestedPagePath.contains( "logout.do" ) || requestedPagePath.contains( "login.do" ) )
+        if ( requestedPagePath.contains( "logout.do" ) || requestedPagePath.contains( "login.do" )
+            || requestedPagePath.contains( "index.jsp" ) )
         {
             // we don't want to remember those requests
             requestedPagePath = null;
