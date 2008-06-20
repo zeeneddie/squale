@@ -450,6 +450,7 @@ function fDomOffset ( oObj, sProp ) {
 
 /*-------- Menu.ouvrir()*/
 function _mVx_Menu_ouvrir(_element_declencheur) { 
+	
 	mVx_masquerCombos();
 	if(_element_declencheur.parent.parent == null) {
 		/* si on est dans la barre de menu horizontal */
@@ -480,8 +481,10 @@ function _mVx_Menu_ouvrir(_element_declencheur) {
 				var ozoneMenus = document.getElementById("zoneMenus");
 				/* Pour IE car il ne voit pas la hauteur du div !!!! */
 				Decalage = (fDomOffset (ozoneMenus, 'offsetTop') + 16) + "px";
+				
 			} else {
 				Decalage = (document.getElementById("zoneMenus").offsetTop + 16) + "px";
+				
 			}			
 			this.getObjetHTML().style.top = Decalage;
 			/********************/
@@ -510,7 +513,17 @@ function _mVx_Menu_ouvrir(_element_declencheur) {
 				var onomDIVGauche = document.getElementById(nomDIVGauche);	
 				Decalage = (fDomOffset (onomDIVGauche, 'offsetLeft') + document.getElementById(nomDIVGauche).offsetWidth) + "px";
 			} else {
-				Decalage = document.getElementById(nomDIVGauche).offsetLeft + document.getElementById(nomDIVGauche).offsetWidth + "px";
+				/* 
+				modif 20082006 ajout de test version FireFox/3.0
+				*/
+				var firefox = navigator.userAgent;
+				var taille = firefox.length;
+				var version = firefox.substring(taille-11,taille);
+				if(version == "Firefox/3.0"){
+					Decalage = document.getElementById(nomDIVGauche).parentNode.offsetLeft + document.getElementById(nomDIVGauche).offsetWidth + "px";
+				}else{
+					Decalage = document.getElementById(nomDIVGauche).offsetLeft + document.getElementById(nomDIVGauche).offsetWidth + "px";
+				}
 			}			
 			/********************/
 			
@@ -522,12 +535,25 @@ function _mVx_Menu_ouvrir(_element_declencheur) {
 			*/
 
 			/****** by EM ********/
+			var DecalageTop = "";
 			if(mVx_ie && mVx_ie_version >= 5.5) {
 				/* Pour IE car il ne voit pas la largeur de la colonne de gauche !!!! */
-				this.getObjetHTML().style.top = (fDomOffset (onomDIVGauche, 'offsetTop') + _element_declencheur.getObjetHTML().offsetTop - 1) + "px";
+				DecalageTop = (fDomOffset (onomDIVGauche, 'offsetTop') + _element_declencheur.getObjetHTML().offsetTop - 1) + "px";
 			} else {
-				this.getObjetHTML().style.top = (document.getElementById(nomDIVGauche).offsetTop + _element_declencheur.getObjetHTML().offsetTop) + "px";
+				/* 
+				modif 20082006 ajout de test version FireFox/3.0
+				*/
+				var firefox = navigator.userAgent;
+				var taille = firefox.length;
+				var version = firefox.substring(taille-11,taille);
+				if(version == "Firefox/3.0"){
+					DecalageTop = (document.getElementById(nomDIVGauche).parentNode.offsetTop + _element_declencheur.getObjetHTML().offsetTop) -1+ "px";
+				}else{
+					DecalageTop = (document.getElementById(nomDIVGauche).offsetTop + _element_declencheur.getObjetHTML().offsetTop) + "px";
+				}
 			}
+			
+			this.getObjetHTML().style.top  = DecalageTop;
 			/********************/
 		}
 	}
