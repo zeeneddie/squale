@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class lazy="true" table="AuditFrequency" name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO">
+    <id unsaved-value="-1" name="id" type="long" column="AuditFrequencyId" length="19">
+      <generator class="native">
+        <param name="sequence">auditFrequency_sequence</param>
+      </generator>
+    </id>
+    <property name="days" length="9" column="Nb_days" update="true" not-null="true" type="int" insert="true"/>
+    <property name="frequency" length="9" column="Frequency" update="true" not-null="true" type="int" insert="true"/>
+  </class>
+</hibernate-mapping>

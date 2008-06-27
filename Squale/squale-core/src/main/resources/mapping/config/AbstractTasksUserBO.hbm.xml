@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class discriminator-value="AbstractTasksUser" lazy="true" table="Tasks_User" name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.AbstractTasksUserBO">
+    <id unsaved-value="-1" name="id" type="long" column="AbstractTasksUserId" length="19">
+      <generator class="native">
+        <param name="sequence">tasksUser_sequence</param>
+      </generator>
+    </id>
+    <discriminator column="subclass"/>
+    <list cascade="all" lazy="false" table="Analysis_Task" name="analysisTasks">
+      <key column="TasksUserId"/>
+      <index type="int" column="AnalysisTaskIndex" length="10"/>
+      <many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO" column="TaskRefId" outer-join="auto"/>
+    </list>
+    <property name="name" length="255" column="Name" update="true" unique="true" not-null="true" type="string" insert="true"/>
+    <list cascade="all" lazy="false" table="Termination_Task" name="terminationTasks">
+      <key column="TasksUserId"/>
+      <index type="int" column="TerminationTaskIndex" length="10"/>
+      <many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO" column="TaskRefId" outer-join="auto"/>
+    </list>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO" lazy="true" discriminator-value="Profile">
+      <set inverse="false" cascade="all" lazy="true" table="Profiles_DisplayConfs" sort="unsorted" name="profileDisplayConfs">
+        <key column="ProfileId"/>
+        <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.Profile_DisplayConfBO"/>
+      </set>
+      <set cascade="none" lazy="true" table="Profiles_Grids" sort="unsorted" name="grids">
+        <key column="ProfileId"/>
+        <many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO" column="GridId" outer-join="auto"/>
+      </set>
+      <property name="exportIDE" column="export_IDE" update="true" unique="false" type="boolean" insert="true"/>
+    </subclass>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO" lazy="false" discriminator-value="SourceManagement">
+      <property name="milestoneAudit" column="MilestoneAudit" update="true" type="boolean" insert="true"/>
+      <property name="normalAudit" column="NormalAudit" update="true" type="boolean" insert="true"/>
+    </subclass>
+  </class>
+</hibernate-mapping>

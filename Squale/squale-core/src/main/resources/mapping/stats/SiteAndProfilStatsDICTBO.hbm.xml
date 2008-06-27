@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="Stats_squale_dict_annexe" name="com.airfrance.squalecommon.enterpriselayer.businessobject.stats.SiteAndProfilStatsDICTBO">
+    <id unsaved-value="-1" name="id" type="long" column="Id" length="19">
+      <generator class="native">
+        <param name="sequence">stats_annexe_sequence</param>
+      </generator>
+    </id>
+    <property name="nbOfCodesLines" column="NB_LIGNES" update="true" type="integer" insert="true"/>
+    <property name="profil" length="50" column="Profil" update="true" type="string" insert="true"/>
+    <property name="nbProjects" column="NB_PROJETS" update="true" type="integer" insert="true"/>
+    <many-to-one insert="true" column="Serveur" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO" not-null="false" name="serveurBO"/>
+  </class>
+</hibernate-mapping>

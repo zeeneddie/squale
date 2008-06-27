@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class mutable="true" lazy="true" table="QualityGrid" name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO">
+    <id unsaved-value="-1" name="id" type="long" column="QualityGridId" length="19">
+      <generator class="native">
+        <param name="sequence">qualitygrid_sequence</param>
+      </generator>
+    </id>
+    <property name="name" column="Name" update="true" unique="false" not-null="true" type="string" insert="true"/>
+    <set inverse="true" cascade="none" lazy="true" table="Profiles_Grids" sort="unsorted" name="profiles">
+      <key column="GridId"/>
+      <many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO" column="ProfileId" outer-join="auto"/>
+    </set>
+    <property name="dateOfUpdate" column="DateOfUpdate" update="true" unique="false" not-null="true" type="timestamp" insert="true"/>
+    <set inverse="false" cascade="all" lazy="true" table="GridFactor_Rule" sort="natural" name="factors">
+      <key column="QualityGridId"/>
+      <many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO" column="FactorRuleId" outer-join="auto"/>
+    </set>
+  </class>
+</hibernate-mapping>

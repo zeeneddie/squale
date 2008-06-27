@@ -165,7 +165,7 @@
 
     create table Analysis_Task (
         TasksUserId number(19,0) not null,
-        TaskRefId number(19,0) ,
+        TaskRefId number(19,0) not null,
         AnalysisTaskIndex number(10,0) not null,
         primary key (TasksUserId, AnalysisTaskIndex)
     );
@@ -184,11 +184,11 @@
         Status number(10,0) not null,
         Comments varchar2(255),
         historicalDate date,
-        Duration varchar2(255),
+        Duration varchar2(10),
         END_DATE date,
         MAX_FILE_SYSTEM_SIZE number(19,0),
         BEGINNING_DATE date,
-        squale_version NUMBER(9,4) default 3.1 not null,
+        squale_version double precision,
         primary key (AuditId)
     );
 
@@ -218,26 +218,26 @@
     create table Component (
         ComponentId number(19,0) not null,
         subclass varchar2(255) not null,
-        Excluded number(1,0),
+        Excluded number(1,0) not null,
         Justification varchar2(4000),
         Name varchar2(1024) not null,
         Parent number(19,0),
         ProjectId number(19,0),
-        LongFileName varchar2(2048),
-        StartLine number(10,0) default 0,
         AuditFrequency number(10,0),
         ResultsStorageOptions number(10,0),
         Status number(10,0),
         PublicApplication number(1,0),
         LastUpdate date,
-        EXTERNAL_DEV number(1,0) default 1,
-        IN_PRODUCTION number(1,0) default 1,
+        EXTERNAL_DEV number(1,0),
+        IN_PRODUCTION number(1,0),
         lastUser varchar2(1024),
         Serveur number(19,0),
+        LongFileName varchar2(2048),
         ProfileBO number(19,0),
         ParametersSet number(19,0),
         QualityGrid number(19,0),
         SourceManager number(19,0),
+        StartLine number(10,0),
         primary key (ComponentId)
     );
 
@@ -249,7 +249,7 @@
 
     create table CriteriumPractice_Rule (
         CriteriumRuleId number(19,0) not null,
-        Weight float default 1 not null,
+        Weight float not null,
         PracticeRuleId number(19,0) not null,
         primary key (CriteriumRuleId, PracticeRuleId)
     );
@@ -267,7 +267,7 @@
 
     create table FactorCriterium_Rule (
         FactorRuleId number(19,0) not null,
-        Weight float default 1 not null,
+        Weight float not null,
         CriteriumRuleId number(19,0) not null,
         primary key (FactorRuleId, CriteriumRuleId)
     );
@@ -337,10 +337,10 @@
         subclass varchar2(255) not null,
         Name varchar2(255),
         MeasureId number(19,0),
-        Boolean_val number(1,0),
-        String_val varchar2(4000),
         Blob_val blob,
+        Boolean_val number(1,0),
         Number_val float,
+        String_val varchar2(4000),
         primary key (MetricId)
     );
 
@@ -348,15 +348,15 @@
         ModuleId number(19,0) not null,
         Message varchar2(255),
         Name varchar2(255),
-        RuleId number(19,0),
+        RuleId number(19,0) not null,
         primary key (ModuleId)
     );
 
     create table News (
-        Id number(19,0) not null ,
-        Key varchar2(4000) ,
-        Beginning_Date date ,
-        End_Date date ,
+        Id number(19,0) not null,
+        Key varchar2(4000) not null,
+        Beginning_Date date not null,
+        End_Date date not null,
         primary key (Id)
     );
 
@@ -388,19 +388,19 @@
     );
 
     create table Profiles_Grids (
-        GridId number(19,0) not null,
         ProfileId number(19,0) not null,
+        GridId number(19,0) not null,
         primary key (ProfileId, GridId)
     );
 
     create table ProjectParameter (
         ParameterId number(19,0) not null,
         subclass varchar2(255) not null,
-        Value varchar2(255),
-        MapId number(19,0),
-        Key varchar2(255),
+        Value varchar2(1024),
         ListId number(19,0),
         Rank number(10,0),
+        MapId number(19,0),
+        Key varchar2(255),
         primary key (ParameterId)
     );
 
@@ -428,24 +428,24 @@
         Name varchar2(255) not null,
         DateOfCreation date not null,
         Formula number(19,0),
-        WeightFunction varchar2(255) default null,
-        effort integer,
+        WeightFunction varchar2(255),
+        effort number(10,0),
         primary key (QualityRuleId)
     );
 
     create table Rule (
         RuleId number(19,0) not null,
-        subclass varchar2(255),
+        subclass varchar2(255) not null,
         Category varchar2(255),
         Code varchar2(255),
-        RuleSetId number(19,0),
+        RuleSetId number(19,0) not null,
         Severity varchar2(255),
         primary key (RuleId)
     );
 
     create table RuleCheckingTransgressionItem (
         ItemId number(19,0) not null,
-        Line number(10,0) default 0 not null,
+        Line number(10,0) not null,
         Path varchar2(3000),
         Message varchar2(3000) not null,
         ComponentId number(19,0),
@@ -457,19 +457,19 @@
 
     create table RuleSet (
         RuleSetId number(19,0) not null,
-        subclass varchar2(255),
+        subclass varchar2(255) not null,
         Name varchar2(255),
         DateOfUpdate date not null,
         ProjectId number(19,0),
         FileContent blob,
+        CppTestName varchar2(255) unique,
         Language varchar2(255),
-        CppTestName varchar2(255),
         primary key (RuleSetId)
     );
 
     create table Serveur (
         ServeurId number(19,0) not null,
-        Name varchar2(256) not null,
+        Name varchar2(256) not null unique,
         primary key (ServeurId)
     );
 
@@ -485,14 +485,14 @@
         CodeLineNumber number(10,0),
         MethodNumber number(10,0),
         ClassNumber number(10,0),
-        HIDDEN number(1,0),
-        AUDIT_TYPE varchar2(100),
+        HIDDEN number(1,0) not null,
+        AUDIT_TYPE varchar2(50) not null,
         primary key (ReferencielId)
     );
 
     create table Stats_squale_dict (
         Id number(19,0) not null,
-        NB_FACTEURS_ACCEPTES number(10,0) ,
+        NB_FACTEURS_ACCEPTES number(10,0),
         NB_FACTEURS_ACCEPTES_RESERVES number(10,0),
         NB_FACTEURS_REFUSES number(10,0),
         NB_TOTAL_APPLI number(10,0),
@@ -513,7 +513,7 @@
     create table Stats_squale_dict_annexe (
         Id number(19,0) not null,
         NB_LIGNES number(10,0),
-        Profil varchar2(4000),
+        Profil varchar2(50),
         NB_PROJETS number(10,0),
         Serveur number(19,0),
         primary key (Id)
@@ -528,11 +528,11 @@
 
     create table Task (
         TaskId number(19,0) not null,
-        Name varchar2(255) not null ,
+        Name varchar2(255) not null unique,
         Class varchar2(2048) not null,
         Configurable number(1,0) not null,
-        Standard number(1,0) default 0 not null,
-        Mandatory number(1,0) default 0 not null,
+        Standard number(1,0),
+        Mandatory number(1,0),
         primary key (TaskId)
     );
 
@@ -553,23 +553,23 @@
     create table Tasks_User (
         AbstractTasksUserId number(19,0) not null,
         subclass varchar2(255) not null,
-        Name varchar2(255) not null,
+        Name varchar2(255) not null unique,
+        export_IDE number(1,0),
         MilestoneAudit number(1,0),
         NormalAudit number(1,0),
-        export_IDE number(1,0) default 1,
         primary key (AbstractTasksUserId)
     );
 
     create table Termination_Task (
         TasksUserId number(19,0) not null,
-        TaskRefId number(19,0),
+        TaskRefId number(19,0) not null,
         TerminationTaskIndex number(10,0) not null,
         primary key (TasksUserId, TerminationTaskIndex)
     );
 
     create table UserAccess (
         UserAccessId number(19,0) not null,
-        ApplicationId number(19,0),
+        ApplicationId number(19,0) not null,
         accessDate date not null,
         matricule varchar2(1024) not null,
         AccessIndex number(10,0),
@@ -583,7 +583,7 @@
         Password varchar2(255),
         Email varchar2(255),
         ProfileId number(19,0) not null,
-        unsubscribed number(1,0)  default 0   not null,
+        unsubscribed number(1,0),
         primary key (UserId)
     );
 
@@ -603,11 +603,11 @@
     create table displayConf (
         ConfId number(19,0) not null,
         subclass varchar2(255) not null,
-        componentType varchar2(255),
         X_TRE varchar2(400),
         Y_TRE varchar2(400),
         X_POS number(19,0),
         Y_POS number(19,0),
+        componentType varchar2(255),
         primary key (ConfId)
     );
 
@@ -622,13 +622,13 @@
         references Tasks_User;
 
     alter table AuditDisplayConfBO 
-        add constraint FK_AUDITCONF_AUDIT
+        add constraint FKBF5515D87E8A4226 
         foreign key (AuditId) 
         references AuditBO
 		on delete cascade;
 
     alter table AuditDisplayConfBO 
-        add constraint FK_AUDITCONF_COMPONENT 
+        add constraint FKBF5515D883596FA2 
         foreign key (ProjectId) 
         references Component
 		on delete cascade;
@@ -639,13 +639,13 @@
         references displayConf;
 
     alter table AuditGridBO 
-        add constraint FK_AUDITGRID_AUDITID 
+        add constraint FK71AB79AE7E8A4226 
         foreign key (AuditId) 
         references AuditBO
 		on delete cascade;
 
     alter table AuditGridBO 
-        add constraint FK_AUDITGRID_PROJECTID 
+        add constraint FK71AB79AE83596FA2 
         foreign key (ProjectId) 
         references Component
 		on delete cascade;

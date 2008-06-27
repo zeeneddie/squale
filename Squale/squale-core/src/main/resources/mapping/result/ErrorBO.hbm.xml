@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class mutable="true" table="Error" name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO">
+    <id unsaved-value="-1" name="id" type="long" column="ErrorId" length="19">
+      <generator class="native">
+        <param name="sequence">error_sequence</param>
+      </generator>
+    </id>
+    <property name="initialMessage" length="2048" column="InitialMessage" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    <property name="message" length="2048" column="Message" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    <property name="level" column="CriticityLevel" update="true" type="string" insert="true"/>
+    <property name="taskName" column="TaskName" update="true" type="string" insert="true"/>
+    <many-to-one insert="true" column="AuditId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO" not-null="true" name="audit"/>
+    <many-to-one insert="true" column="ProjectId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO" not-null="true" name="project"/>
+  </class>
+</hibernate-mapping>

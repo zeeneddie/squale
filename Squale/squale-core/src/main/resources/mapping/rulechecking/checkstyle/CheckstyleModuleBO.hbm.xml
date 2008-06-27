@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class mutable="true" table="Module" name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleModuleBO">
+    <id unsaved-value="-1" name="id" type="long" column="ModuleId" length="19">
+      <generator class="native">
+        <param name="sequence">Module_sequence</param>
+      </generator>
+    </id>
+    <property name="message" column="Message" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    <property name="name" column="Name" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    <many-to-one insert="true" column="RuleId" cascade="save-update" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleBO" not-null="true" name="rule"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class mutable="true" lazy="true" table="RuleCheckingTransgressionItem" name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO">
+    <id unsaved-value="-1" name="id" type="long" column="ItemId" length="19">
+      <generator class="native">
+        <param name="sequence">TransgressionItem_sequence</param>
+      </generator>
+    </id>
+    <property name="line" length="10" column="Line" update="true" not-null="true" type="int" insert="true"/>
+    <property name="componentFile" length="3000" column="Path" update="true" type="string" insert="true"/>
+    <property name="message" length="3000" column="Message" update="true" unique="false" not-null="true" type="string" insert="true"/>
+    <many-to-one insert="true" column="ComponentId" cascade="all" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO" name="component"/>
+    <many-to-one insert="true" column="RuleId" cascade="all" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO" not-null="true" name="rule"/>
+    <many-to-one insert="true" column="ComponentInvolvedId" cascade="all" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO" name="componentInvolved"/>
+  </class>
+</hibernate-mapping>

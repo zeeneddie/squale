@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class discriminator-value="AbstractComponent" mutable="true" lazy="true" table="Component" name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO">
+    <id unsaved-value="-1" name="id" type="long" column="ComponentId" length="19">
+      <generator class="native">
+        <param name="sequence">component_sequence</param>
+      </generator>
+    </id>
+    <discriminator column="subclass"/>
+    <property name="excludedFromActionPlan" column="Excluded" update="true" unique="false" not-null="true" type="boolean" insert="true"/>
+    <property name="justification" length="4000" column="Justification" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    <property name="name" length="1024" column="Name" update="true" unique="false" not-null="true" type="string" insert="true"/>
+    <many-to-one insert="true" column="Parent" cascade="save-update" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO" name="parent"/>
+    <set inverse="false" cascade="none" lazy="true" table="Components_Audits" sort="unsorted" name="audits">
+      <key column="ComponentId"/>
+      <many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO" column="AuditId" outer-join="auto"/>
+    </set>
+    <many-to-one insert="true" column="ProjectId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO" name="project"/>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO" lazy="true" discriminator-value="AbstractComplexComponent">
+      <bag cascade="none" lazy="true" table="AbstractComplexComponent_children" name="children">
+        <key column="Parent"/>
+        <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"/>
+      </bag>
+      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO" lazy="true" discriminator-value="Application">
+        <property name="auditFrequency" length="10" column="AuditFrequency" update="true" unique="false" not-null="false" type="integer" insert="true"/>
+        <property name="resultsStorageOptions" length="10" column="ResultsStorageOptions" update="true" unique="false" not-null="false" type="integer" insert="true"/>
+        <property name="status" length="10" column="Status" update="true" unique="false" type="integer" insert="true"/>
+        <property name="public" column="PublicApplication" update="true" unique="false" type="boolean" insert="true"/>
+        <property name="lastUpdate" column="LastUpdate" update="true" unique="false" not-null="false" type="timestamp" insert="true"/>
+        <property name="externalDev" column="EXTERNAL_DEV" update="true" unique="false" type="boolean" insert="true"/>
+        <property name="inProduction" column="IN_PRODUCTION" update="true" unique="false" type="boolean" insert="true"/>
+        <property name="lastUser" length="1024" column="lastUser" update="true" unique="false" type="string" insert="true"/>
+        <many-to-one insert="true" column="Serveur" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO" not-null="false" name="serveurBO"/>
+        <list cascade="all" lazy="false" table="UserAccess" name="userAccesses">
+          <key column="ApplicationId"/>
+          <index type="long" column="AccessIndex" length="19"/>
+          <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO"/>
+        </list>
+      </subclass>
+      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO" lazy="true" discriminator-value="Class">
+        <property name="fileName" length="2048" column="LongFileName" update="true" type="string" insert="true"/>
+      </subclass>
+      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO" lazy="true" discriminator-value="Package"/>
+      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO" lazy="true" discriminator-value="Project">
+        <many-to-one insert="true" column="ProfileBO" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO" not-null="false" name="profile"/>
+        <many-to-one insert="true" column="ParametersSet" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO" not-null="false" name="parameters"/>
+        <many-to-one insert="true" column="QualityGrid" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO" not-null="false" name="qualityGrid"/>
+        <bag inverse="true" cascade="none" lazy="true" name="qualityResults">
+          <key column="ProjectId"/>
+          <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"/>
+        </bag>
+        <many-to-one insert="true" column="SourceManager" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO" not-null="false" name="sourceManager"/>
+        <property name="status" length="10" column="Status" update="true" unique="false" type="integer" insert="true"/>
+      </subclass>
+      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlClassBO" lazy="true" discriminator-value="UmlClass"/>
+      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlModelBO" lazy="true" discriminator-value="UmlModel"/>
+      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO" lazy="true" discriminator-value="UmlPackage"/>
+    </subclass>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.JspBO" lazy="true" discriminator-value="Jsp">
+      <property name="fileName" length="2048" column="LongFileName" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    </subclass>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO" lazy="true" discriminator-value="Method">
+      <property name="longFileName" length="2048" column="LongFileName" update="true" unique="false" not-null="false" type="string" insert="true"/>
+      <property name="startLine" length="10" column="StartLine" update="true" unique="false" not-null="false" type="integer" insert="true"/>
+    </subclass>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO" lazy="true" discriminator-value="UmlInterface"/>
+  </class>
+</hibernate-mapping>

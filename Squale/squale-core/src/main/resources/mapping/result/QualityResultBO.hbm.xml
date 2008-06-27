@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class discriminator-value="QualityResult" mutable="true" table="QualityResult" name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO">
+    <id unsaved-value="-1" name="id" type="long" column="QualityResultId" length="19">
+      <generator class="native">
+        <param name="sequence">qualityres_sequence</param>
+      </generator>
+    </id>
+    <discriminator column="subclass"/>
+    <many-to-one insert="true" column="QualityRuleId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO" not-null="true" name="rule"/>
+    <property name="meanMark" column="MeanMark" update="true" unique="false" not-null="true" type="float" insert="true"/>
+    <many-to-one insert="true" column="ProjectId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO" not-null="true" name="project"/>
+    <many-to-one insert="true" column="AuditId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO" not-null="true" name="audit"/>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.CriteriumResultBO" discriminator-value="CriteriumResult"/>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.FactorResultBO" discriminator-value="FactorResult"/>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO" discriminator-value="PracticeResult">
+      <array cascade="none" table="PracticeResult_Repartition" name="floatRepartition">
+        <key column="PracticeResultId"/>
+        <index type="long" column="Repartition" length="19"/>
+        <element not-null="false" type="java.lang.Integer" column="Repartition_value" length="10" unique="false"/>
+      </array>
+    </subclass>
+  </class>
+</hibernate-mapping>

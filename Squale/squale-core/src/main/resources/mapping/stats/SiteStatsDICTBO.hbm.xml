@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class mutable="true" table="Stats_squale_dict" name="com.airfrance.squalecommon.enterpriselayer.businessobject.stats.SiteStatsDICTBO">
+    <id unsaved-value="-1" name="id" type="long" column="Id" length="19">
+      <generator class="native">
+        <param name="sequence">stats_sequence</param>
+      </generator>
+    </id>
+    <property name="nbOfAcceptedFactors" column="NB_FACTEURS_ACCEPTES" update="true" type="integer" insert="true"/>
+    <property name="nbOfAcceptedWithReservesFactors" column="NB_FACTEURS_ACCEPTES_RESERVES" update="true" type="integer" insert="true"/>
+    <property name="nbOfRefusedFactors" column="NB_FACTEURS_REFUSES" update="true" type="integer" insert="true"/>
+    <property name="nbTotalAppli" column="NB_TOTAL_APPLI" update="true" type="integer" insert="true"/>
+    <property name="nbTotalAppliWithAudit" column="NB_APPLI_AVEC_AUDIT_EXECUTE" update="true" type="integer" insert="true"/>
+    <property name="nbTotalAppliWithSuccesfulAudit" column="NB_APPLI_AVEC_AUDIT_REUSSI" update="true" type="integer" insert="true"/>
+    <property name="today" column="Date_calcul" update="true" type="timestamp" insert="true"/>
+    <property name="roi" column="ROI_EN_MHI" update="true" type="double" insert="true"/>
+    <property name="nbAppliToValidate" column="NB_APPLI_A_VALIDER" update="true" type="integer" insert="true"/>
+    <property name="nbFailedAudits" column="NB_AUDITS_ECHECS" update="true" type="integer" insert="true"/>
+    <property name="nbNotAttemptedAudit" column="NB_AUDITS_PROGRAMME" update="true" type="integer" insert="true"/>
+    <property name="nbPartialAudits" column="NB_AUDITS_PARTIELS" update="true" type="integer" insert="true"/>
+    <property name="nbSuccessfulAudits" column="NB_AUDITS_REUSSIS" update="true" type="integer" insert="true"/>
+    <property name="nbTotalAppliWithoutAudit" column="NB_APPLI_AVEC_AUCUN_AUDIT" update="true" type="integer" insert="true"/>
+    <many-to-one insert="true" column="Serveur" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO" not-null="false" name="serveurBO"/>
+  </class>
+</hibernate-mapping>

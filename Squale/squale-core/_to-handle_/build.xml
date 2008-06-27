@@ -39,7 +39,7 @@
 				<include name="**/*.jar"/>
 			</fileset>
 			<!-- xdoclet dependencies -->
-			<fileset dir="${basedir}/lib">
+			<fileset dir="${basedir}/lib/xdoclet2">
 				<include name="**/*.jar"/>
 			</fileset>
 		</path>
@@ -47,30 +47,29 @@
 
 	
 	<!-- ================================================================== -->
-	<!-- HBM file generation												-->
+	<!-- HBM file generation with xdoclet 2									-->
 	<!-- 																	-->
 	<!-- Note: the files are generated in target/generated-hbm, so it is 	-->
 	<!--       necessary to merge them with the source files which are in 	-->
 	<!--       the src/main/resources/mapping folder.						-->
 	<!-- ================================================================== -->
-	<target name="java2hbm" description="Generates HBM files" depends="init">
-		<taskdef name="hibernate2"
-			classname="xdoclet.modules.hibernate.HibernateDocletTask"
-			classpathref="project.classpath"/>
-
-		<echo>Generating HBM files to ${project.targetdir.hbm}</echo>
-		<mkdir dir="${project.targetdir.hbm}"/>
-    	<hibernate2 force="yes" destDir="${project.targetdir.hbm}"
-    		excludedtags="@version,@author,@todo"
-	    	addedtags="@xdoclet-generated at ${today}">
-    		<!-- Java source files to include -->
-    		<fileset dir="${project.srcdir}">
-				<include name="**/*.java" />
-			</fileset>
-    		<hibernate version="3.0" validateXML="true" prefixWithPackageStructure="false"/> 
-    	</hibernate2>
-	</target>
-	
+		
+		<target name="java2hbm" description="Generates HBM files with xdoclet2" depends="init">
+				<taskdef name="xdoclet2"
+					classname="org.xdoclet.ant.XDocletTask"
+					classpathref="project.classpath"/>
+				<echo>Generating HBM files to ${project.targetdir.hbm}</echo>
+				<mkdir dir="${project.targetdir.hbm}"/>
+		    	<xdoclet2> 
+		    		<fileset dir="${project.srcdir}">
+						<include name="**/*.java" />
+					</fileset>
+		        <component
+		            classname="org.xdoclet.plugin.hibernate.HibernateMappingPlugin"
+		        	destDir="${project.targetdir.hbm}"
+		            version="3.0"/>		              
+	    	</xdoclet2>
+		</target>
 	
 	<!-- ================================================================== -->
 	<!-- DDL generation														-->
@@ -95,5 +94,9 @@
 		</schemaexport>
 		<echo message="[Completed] DDL file can be found at ${project.targetdir.ddl}/schema-export-${today}.sql" />
 	</target>
+	
+	
+	
+	
  
 </project>

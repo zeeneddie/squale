@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class lazy="true" table="Serveur" name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO">
+    <id unsaved-value="-1" name="serveurId" type="long" column="ServeurId" length="19">
+      <generator class="assigned"/>
+    </id>
+    <property name="name" length="256" column="Name" update="true" unique="true" not-null="true" type="string" insert="true"/>
+  </class>
+</hibernate-mapping>

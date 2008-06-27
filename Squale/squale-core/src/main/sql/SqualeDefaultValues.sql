@@ -1,0 +1,13 @@
+alter table AUDITBO modify SQUALE_VERSION default 4.0 ;
+alter table COMPONENT modify STARTLINE default 0 ;
+alter table COMPONENT modify EXTERNAL_DEV default 1 ;
+alter table COMPONENT modify IN_PRODUCTION default 1 ;
+alter table CRITERIUMPRACTICE_RULE modify WEIGHT default 1 ;
+alter table FACTORCRITERIUM_RULE modify WEIGHT default 1 ;
+alter table QUALITYRULE modify WEIGHTFUNCTION default null ;
+alter table RULECHECKINGTRANSGRESSIONITEM modify LINE default 0 ;
+alter table TASK modify STANDARD default 0 ;
+alter table TASK modify MANDATORY default 0 ;
+alter table TASKS_USER modify EXPORT_IDE default 1 ;
+alter table USERBO modify UNSUBSCRIBED default 0 ;
+commit;

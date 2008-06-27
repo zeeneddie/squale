@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class discriminator-value="Rule" mutable="true" lazy="true" table="Rule" name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO">
+    <id unsaved-value="-1" name="id" type="long" column="RuleId" length="19">
+      <generator class="native">
+        <param name="sequence">Rule_sequence</param>
+      </generator>
+    </id>
+    <discriminator column="subclass"/>
+    <property name="category" column="Category" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    <property name="code" column="Code" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    <many-to-one insert="true" column="RuleSetId" cascade="save-update" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO" not-null="true" name="ruleSet"/>
+    <property name="severity" column="Severity" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleBO" discriminator-value="Checkstyle">
+      <set cascade="all" lazy="true" sort="unsorted" name="modules">
+        <key column="RuleId"/>
+        <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleModuleBO"/>
+      </set>
+    </subclass>
+  </class>
+</hibernate-mapping>

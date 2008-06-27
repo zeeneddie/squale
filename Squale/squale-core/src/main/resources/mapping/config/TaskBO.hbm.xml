@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class lazy="true" table="Task" name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskBO">
+    <id unsaved-value="-1" name="id" type="long" column="TaskId" length="19">
+      <generator class="native">
+        <param name="sequence">task_sequence</param>
+      </generator>
+    </id>
+    <property name="name" length="255" column="Name" update="true" unique="true" not-null="true" type="string" insert="true"/>
+    <property name="className" length="2048" column="Class" update="true" unique="false" not-null="true" type="string" insert="true"/>
+    <property name="configurable" column="Configurable" update="true" unique="false" not-null="true" type="boolean" insert="true"/>
+    <property name="standard" column="Standard" update="true" unique="false" not-null="false" type="boolean" insert="true"/>
+    <property name="mandatory" column="Mandatory" update="true" unique="false" not-null="false" type="boolean" insert="true"/>
+  </class>
+</hibernate-mapping>

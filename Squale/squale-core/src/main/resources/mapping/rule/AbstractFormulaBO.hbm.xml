@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class discriminator-value="AbstractFormula" table="Formula" name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO">
+    <id unsaved-value="-1" name="id" type="long" column="FormulaId" length="19">
+      <generator class="native">
+        <param name="sequence">formula_sequence</param>
+      </generator>
+    </id>
+    <discriminator not-null="true" type="string" column="subclass"/>
+    <property name="componentLevel" column="ComponentLevel" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    <property name="triggerCondition" length="4000" column="TriggerCondition" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    <bag cascade="none" lazy="false" table="Formula_Measures" name="measureKinds">
+      <key column="FormulaId"/>
+      <element not-null="false" type="string" column="Measure" unique="false"/>
+    </bag>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO" discriminator-value="ConditionFormula">
+      <list cascade="none" lazy="false" table="Formula_Conditions" name="markConditions">
+        <key column="FormulaId"/>
+        <index type="long" column="Rank" length="19"/>
+        <element not-null="false" type="string" column="Value" length="4000" unique="false"/>
+      </list>
+    </subclass>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO" discriminator-value="SimpleFormula">
+      <property name="formula" length="4000" column="Formula" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    </subclass>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class lazy="true" table="StopTimeBO" name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.StopTimeBO">
+    <id unsaved-value="-1" name="id" type="long" column="StopTimeId" length="19">
+      <generator class="native">
+        <param name="sequence">stoptime_sequence</param>
+      </generator>
+    </id>
+    <property name="day" length="9" column="DayOfWeek" update="true" not-null="true" type="string" insert="true"/>
+    <property name="time" length="5" column="TimeOfDay" update="true" not-null="true" type="string" insert="true"/>
+  </class>
+</hibernate-mapping>
