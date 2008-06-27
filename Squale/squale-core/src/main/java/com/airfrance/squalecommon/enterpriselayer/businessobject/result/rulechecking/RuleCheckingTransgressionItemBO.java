@@ -64,7 +64,7 @@ public class RuleCheckingTransgressionItemBO
 
     /**
      * @return la ligne
-     * @hibernate.property name="line" column="Line" type="int" length="10" not-null="true"
+     * @hibernate.property name="line" column="Line" type="int" length="10" not-null="true" update="true" insert="true"
      */
     public int getLine()
     {
@@ -73,7 +73,7 @@ public class RuleCheckingTransgressionItemBO
 
     /**
      * @return le fichier du composant
-     * @hibernate.property name="componentFile" column="Path" length="3000" type="string"
+     * @hibernate.property name="componentFile" column="Path" length="3000" type="string" update="true" insert="true"
      */
     public String getComponentFile()
     {
@@ -83,6 +83,7 @@ public class RuleCheckingTransgressionItemBO
     /**
      * @return le détail de la transgession
      * @hibernate.property name="message" column="Message" not-null="true" length="3000" type="string" unique="false"
+     *                     update="true" insert="true"
      */
     public String getMessage()
     {
@@ -91,9 +92,8 @@ public class RuleCheckingTransgressionItemBO
 
     /**
      * @return le composant concerné par la transgression
-     * @hibernate.many-to-one name="component" column="ComponentId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
-     *                        cascade="all"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     *                        column="ComponentId" cascade="all" outer-join="auto" update="true" insert="true"
      */
     public AbstractComponentBO getComponent()
     {
@@ -102,9 +102,9 @@ public class RuleCheckingTransgressionItemBO
 
     /**
      * @return la règle transgressée
-     * @hibernate.many-to-one name="rule" column="RuleId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"
-     *                        cascade="all" not-null="true"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"
+     *                        column="RuleId" cascade="all" not-null="true" outer-join="auto" update="true"
+     *                        insert="true"
      */
     public RuleBO getRule()
     {
@@ -113,9 +113,8 @@ public class RuleCheckingTransgressionItemBO
 
     /**
      * @return le composant en relation avec la transgression
-     * @hibernate.many-to-one name="component" column="ComponentInvolvedId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
-     *                        cascade="all"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     *                        column="ComponentInvolvedId" cascade="all" outer-join="auto" update="true" insert="true"
      */
     public AbstractComponentBO getComponentInvolved()
     {

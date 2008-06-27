@@ -30,6 +30,7 @@ public class ServeurBO
     /**
      * @return le nom du serveur
      * @hibernate.property name="name" column="Name" type="string" length="256" not-null="true" unique="true"
+     *                     update="true" insert="true"
      */
     public String getName()
     {

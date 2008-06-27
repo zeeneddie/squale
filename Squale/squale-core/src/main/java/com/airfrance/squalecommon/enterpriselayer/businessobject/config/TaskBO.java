@@ -68,6 +68,7 @@ public class TaskBO
      * 
      * @return le nom de la tâche
      * @hibernate.property name="name" column="Name" type="string" length="255" not-null="true" unique="true"
+     *                     update="true" insert="true"
      */
     public String getName()
     {
@@ -89,6 +90,7 @@ public class TaskBO
      * 
      * @return le nom de la classe associée à la tâche
      * @hibernate.property name="class" column="Class" type="string" length="2048" not-null="true" unique="false"
+     *                     update="true" insert="true"
      */
     public String getClassName()
     {
@@ -110,6 +112,7 @@ public class TaskBO
      * 
      * @return true si la tâche est configurable
      * @hibernate.property name="configurable" column="Configurable" type="boolean" not-null="true" unique="false"
+     *                     update="true" insert="true"
      */
     public boolean isConfigurable()
     {
@@ -128,7 +131,8 @@ public class TaskBO
 
     /**
      * @return true si la tâche fait partie de la configuration minimum d'un projet
-     * @hibernate.property name="standard" column="Standard" type="boolean" not-null="true" unique="false"
+     * @hibernate.property name="standard" column="Standard" type="boolean" not-null="false" unique="false" update="true"
+     *                     insert="true"
      */
     public boolean isStandard()
     {
@@ -145,7 +149,8 @@ public class TaskBO
 
     /**
      * @return true si la tâche est obligatoire
-     * @hibernate.property name="mandatory" column="Mandatory" type="boolean" not-null="true" unique="false"
+     * @hibernate.property name="mandatory" column="Mandatory" type="boolean" not-null="false" unique="false"
+     *                     update="true" insert="true"
      */
     public boolean isMandatory()
     {

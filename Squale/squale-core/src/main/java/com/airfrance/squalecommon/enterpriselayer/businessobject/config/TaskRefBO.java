@@ -52,8 +52,8 @@ public class TaskRefBO
      * 
      * @return les paramètres
      * @hibernate.bag table="TaskParameter" lazy="true" cascade="all"
-     * @hibernate.collection-key column="TaskRefId"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskParameterBO"
+     * @hibernate.key column="TaskRefId"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskParameterBO"
      */
     public Collection getParameters()
     {
@@ -86,6 +86,7 @@ public class TaskRefBO
      * @return tâche
      * @hibernate.many-to-one column="TaskId" cascade="all"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskBO"
+     *                        outer-join="auto" update="true" insert="true"
      */
     public TaskBO getTask()
     {

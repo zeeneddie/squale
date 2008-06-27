@@ -48,9 +48,10 @@ public class PracticeResultBO
      * 
      * @return the current value of the mRepartition property
      * @hibernate.array table="PracticeResult_Repartition" cascade="none"
-     * @hibernate.collection-key column="PracticeResultId"
-     * @hibernate.collection-index column="Repartition" type="long" length="19"
-     * @hibernate.collection-element column="Repartition_value" type="java.lang.Integer" length="10"
+     * @hibernate.key column="PracticeResultId"
+     * @hibernate.index column="Repartition" type="long" length="19"
+     * @hibernate.element column="Repartition_value" type="java.lang.Integer" length="10" not-null="false"
+     *                    unique="false"
      * @roseuid 42BACEE30323
      */
     public Integer[] getFloatRepartition()

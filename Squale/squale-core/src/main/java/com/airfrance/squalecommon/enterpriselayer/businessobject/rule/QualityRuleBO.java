@@ -53,7 +53,8 @@ public abstract class QualityRuleBO
 
     /**
      * @return la clé de l'aide
-     * @hibernate.property name="helpKey" column="Name" type="string" unique="false" column="Help_Key" cascade="all"
+     * @hibernate.property name="helpKey" column="Name" type="string" unique="false" column="Help_Key" update="true"
+     *                     insert="true"
      */
     public String getHelpKey()
     {
@@ -116,7 +117,8 @@ public abstract class QualityRuleBO
     }
 
     /**
-     * @hibernate.property name="name" column="Name" type="string" not-null="true" unique="false"
+     * @hibernate.property name="name" column="Name" type="string" not-null="true" unique="false" update="true"
+     *                     insert="true"
      * @return nom
      */
     public String getName()
@@ -162,8 +164,8 @@ public abstract class QualityRuleBO
      * Récupère la date de création
      * 
      * @return la date de création
-     * @hibernate.property name="dateOfCreation" column="DateOfCreation" type="timestamp" not-null="true" unique="false" // *
-     *                     lenght=""
+     * @hibernate.property name="dateOfCreation" column="DateOfCreation" type="timestamp" not-null="true" unique="false"
+     *                     update="true" insert="true"
      * @roseuid 42C405930155
      */
     public Date getDateOfCreation()

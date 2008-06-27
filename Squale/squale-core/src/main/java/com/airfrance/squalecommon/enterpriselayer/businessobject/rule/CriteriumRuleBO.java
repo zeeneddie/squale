@@ -6,7 +6,7 @@ import java.util.TreeMap;
 /**
  * Règle de calcul d'un critère
  * 
- * @hibernate.subclass name="CriteriumRule" discriminator-value="CriteriumRule" lazy="false"
+ * @hibernate.subclass discriminator-value="CriteriumRule" lazy="false"
  */
 public class CriteriumRuleBO
     extends QualityRuleBO
@@ -30,11 +30,11 @@ public class CriteriumRuleBO
      * Access method for the mPractices property.
      * 
      * @return the current value of the mPractices property
-     * @hibernate.map name="practices" table="CriteriumPractice_Rule" lazy="true" cascade="all" sort="natural"
+     * @hibernate.map table="CriteriumPractice_Rule" lazy="true" cascade="all" sort="natural"
      * @hibernate.index-many-to-many column="PracticeRuleId"
      *                               class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO"
-     * @hibernate.collection-key column="CriteriumRuleId"
-     * @hibernate.collection-element column="Weight" type="float" not-null="true"
+     * @hibernate.key column="CriteriumRuleId"
+     * @hibernate.element column="Weight" type="float" not-null="true" unique="false"
      */
     public SortedMap getPractices()
     {

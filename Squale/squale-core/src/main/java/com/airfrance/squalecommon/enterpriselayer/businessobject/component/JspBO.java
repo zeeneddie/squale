@@ -51,7 +51,7 @@ public class JspBO
     /**
      * @return le chemin du fichier à partir du projet
      * @hibernate.property name="fileName" column="LongFileName" type="string" length="2048" not-null="false"
-     *                     unique="false"
+     *                     unique="false" update="true" insert="true"
      */
     public String getFileName()
     {

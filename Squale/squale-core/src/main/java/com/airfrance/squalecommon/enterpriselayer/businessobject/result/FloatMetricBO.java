@@ -16,7 +16,8 @@ public class FloatMetricBO
      * Access method for the mValue property.
      * 
      * @return the current value of the mName property
-     * @hibernate.property name="Value" column="Number_val" type="float" not-null="false" unique="false"
+     * @hibernate.property name="Value" column="Number_val" type="float" not-null="false" unique="false" update="true"
+     *                     insert="true"
      */
     public Object getValue()
     {

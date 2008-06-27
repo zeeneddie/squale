@@ -11,7 +11,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.Ru
 /**
  * Jeu de règles Checkstyle
  * 
- * @hibernate.subclass mutable="true" discriminator-value="Checkstyle"
+ * @hibernate.subclass discriminator-value="Checkstyle"
  */
 
 public class CheckstyleRuleSetBO
@@ -28,7 +28,7 @@ public class CheckstyleRuleSetBO
      * @return the current value of the FileName property
      * @hibernate.property name="Value" column="FileContent"
      *                     type="com.airfrance.jraf.provider.persistence.hibernate.BinaryBlobType" not-null="false"
-     *                     unique="false"
+     *                     unique="false" update="true" insert="true"
      */
     public byte[] getValue()
     {

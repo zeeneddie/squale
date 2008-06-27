@@ -32,7 +32,8 @@ public class AuditFrequencyBO
 
     /**
      * @return la durée le depuis dernier accès
-     * @hibernate.property name="days" column="Nb_days" type="int" length="9" not-null="true"
+     * @hibernate.property name="days" column="Nb_days" type="int" length="9" not-null="true" update="true"
+     *                     insert="true"
      */
     public int getDays()
     {
@@ -41,7 +42,8 @@ public class AuditFrequencyBO
 
     /**
      * @return la fréquence max d'audit
-     * @hibernate.property name="frequency" column="Frequency" type="int" length="9" not-null="true"
+     * @hibernate.property name="frequency" column="Frequency" type="int" length="9" not-null="true" update="true"
+     *                     insert="true"
      */
     public int getFrequency()
     {

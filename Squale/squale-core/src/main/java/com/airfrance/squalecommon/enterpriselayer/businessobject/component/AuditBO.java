@@ -183,7 +183,7 @@ public class AuditBO
      * Access method for the mName property.
      * 
      * @return the current value of the mName property
-     * @hibernate.property name="name" column="Name" type="string" // * length="" not-null="false" unique="false"
+     * @hibernate.property name="name" column="Name" type="string" update="true" insert="true"
      * @roseuid 42BACEF50362
      */
     public String getName()
@@ -206,8 +206,7 @@ public class AuditBO
      * Access method for the mDate property.
      * 
      * @return the current value of the mDate property
-     * @hibernate.property name="date" column="auditDate" type="timestamp" // * length="" not-null="false"
-     *                     unique="false"
+     * @hibernate.property name="date" column="auditDate" type="timestamp" update="true" insert="true"
      * @roseuid 42BACEF50372
      */
     public Date getDate()
@@ -230,7 +229,7 @@ public class AuditBO
      * Access method for the mType property.
      * 
      * @return the current value of the mType property
-     * @hibernate.property name="type" column="auditType" type="string" // * length="" not-null="false" unique="false"
+     * @hibernate.property name="type" column="auditType" type="string" update="true" insert="true"
      * @roseuid 42BACEF50382
      */
     public String getType()
@@ -254,6 +253,7 @@ public class AuditBO
      * 
      * @return the current value of the mStatus property
      * @hibernate.property name="status" column="Status" type="integer" length="10" not-null="true" unique="false"
+     *                     update="true" insert="true"
      * @roseuid 42BACEF50392
      */
     public int getStatus()
@@ -277,8 +277,8 @@ public class AuditBO
      * 
      * @return the current value of the mQualityResults property
      * @hibernate.bag lazy="true" cascade="none" inverse="true"
-     * @hibernate.collection-key column="AuditId"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
+     * @hibernate.key column="AuditId" 
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
      * @roseuid 42BACEF503B0
      */
     public Collection getQualityResults()
@@ -328,8 +328,7 @@ public class AuditBO
      * Access method for the mComments property.
      * 
      * @return the current value of the mComments property
-     * @hibernate.property name="comments" column="Comments" type="string" // * length="" not-null="false"
-     *                     unique="false"
+     * @hibernate.property name="comments" column="Comments" type="string" update="true" insert="true"
      * @roseuid 42C94DA102DA
      */
     public String getComments()
@@ -413,9 +412,9 @@ public class AuditBO
      * 
      * @return la liste des composants
      * @hibernate.bag table="Components_Audits" lazy="true" cascade="none" inverse="true"
-     * @hibernate.collection-key column="AuditId"
-     * @hibernate.collection-many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
-     *                                    column="ComponentId"
+     * @hibernate.key column="AuditId"
+     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     *                         column="ComponentId" outer-join="auto"
      */
     public Collection getComponents()
     {
@@ -445,9 +444,9 @@ public class AuditBO
 
     /**
      * @return grilles qualité de l'audit
-     * @hibernate.bag lazy="true" inverse="true"
-     * @hibernate.collection-key column="AuditId"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditGridBO"
+     * @hibernate.bag lazy="true" inverse="true" cascade="none"
+     * @hibernate.key column="AuditId"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditGridBO"
      */
     public Collection getAuditGrids()
     {
@@ -497,7 +496,7 @@ public class AuditBO
 
     /**
      * @return la date de verion des sources
-     * @hibernate.property name="historicalDate" column="historicalDate" type="timestamp"
+     * @hibernate.property name="historicalDate" column="historicalDate" type="timestamp" update="true" insert="true"
      */
     public Date getHistoricalDate()
     {
@@ -552,7 +551,7 @@ public class AuditBO
 
     /**
      * @return la durée de l'audit
-     * @hibernate.property name="duration" column="Duration" type="string"
+     * @hibernate.property name="duration" column="Duration" type="string" update="true" insert="true" length="10"
      */
     public String getDuration()
     {
@@ -561,7 +560,7 @@ public class AuditBO
 
     /**
      * @return la date de fin de l'audit
-     * @hibernate.property name="endDate" column="END_DATE" type="timestamp"
+     * @hibernate.property name="endDate" column="END_DATE" type="timestamp" update="true" insert="true"
      */
     public Date getEndDate()
     {
@@ -570,7 +569,7 @@ public class AuditBO
 
     /**
      * @return la taille max du filesystem
-     * @hibernate.property name="maxFSSize" column="MAX_FILE_SYSTEM_SIZE" type="long"
+     * @hibernate.property name="maxFSSize" column="MAX_FILE_SYSTEM_SIZE" type="long" update="true" insert="true"
      */
     public Long getMaxFileSystemSize()
     {
@@ -579,7 +578,7 @@ public class AuditBO
 
     /**
      * @return la date de début
-     * @hibernate.property name="realBeginDate" column="BEGINNING_DATE" type="timestamp"
+     * @hibernate.property name="realBeginDate" column="BEGINNING_DATE" type="timestamp" update="true" insert="true"
      */
     public Date getRealBeginningDate()
     {
@@ -666,7 +665,7 @@ public class AuditBO
     }
 
     /**
-     * @hibernate.property name="squaleVersion" column="squale_version" type="double"
+     * @hibernate.property name="squaleVersion" column="squale_version" type="double" update="true" insert="true"
      * @return la version de SQUALE
      */
     public double getSqualeVersion()
@@ -692,9 +691,9 @@ public class AuditBO
 
     /**
      * @return les configurations
-     * @hibernate.bag lazy="true" inverse="true"
-     * @hibernate.collection-key column="AuditId"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO"
+     * @hibernate.bag lazy="true" inverse="true" cascade="none"
+     * @hibernate.key column="AuditId"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO"
      */
     public Collection getAuditDisplayConfs()
     {

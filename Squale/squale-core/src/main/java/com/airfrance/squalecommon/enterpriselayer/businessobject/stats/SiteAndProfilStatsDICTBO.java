@@ -57,7 +57,7 @@ public class SiteAndProfilStatsDICTBO
 
     /**
      * @return le nombre de lignes de code pour ce site et ce profil
-     * @hibernate.property name="nbOfCodesLines" column="NB_LIGNES" type="integer" not-null="true" cascade="all"
+     * @hibernate.property name="nbOfCodesLines" column="NB_LIGNES" type="integer" update="true" insert="true"
      */
     public int getNbOfCodesLines()
     {
@@ -66,7 +66,7 @@ public class SiteAndProfilStatsDICTBO
 
     /**
      * @return le profil
-     * @hibernate.property name="Profil" column="Profil" type="string" not-null="true" length="4000" cascade="all"
+     * @hibernate.property name="Profil" column="Profil" type="string" length="50" update="true" insert="true"
      */
     public String getProfil()
     {
@@ -75,7 +75,7 @@ public class SiteAndProfilStatsDICTBO
 
     /**
      * @return le nombre de projets disponibles
-     * @hibernate.property name="nbProjects" column="NB_PROJETS" type="integer" not-null="true" cascade="all"
+     * @hibernate.property name="nbProjects" column="NB_PROJETS" type="integer" update="true" insert="true"
      */
     public int getNbProjects()
     {
@@ -127,9 +127,9 @@ public class SiteAndProfilStatsDICTBO
     }
 
     /**
-     * @hibernate.many-to-one name="serveurBO"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
-     *                        column="Serveur" not-null="false" lazy="true" update="true" insert="true"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
+     *                        column="Serveur" not-null="false" update="true" insert="true" cascade="none"
+     *                        outer-join="auto"
      * @return le serveur
      */
     public ServeurBO getServeurBO()

@@ -65,11 +65,11 @@ public abstract class AbstractTasksUserBO
      * Méthode d'accès à mAnalysisTasks
      * 
      * @return la liste des tâches d'analyses
-     * @hibernate.list table="Analysis_Task" cascade="all"
-     * @hibernate.collection-key column="TasksUserId"
-     * @hibernate.collection-index column="AnalysisTaskIndex" type="int" length="10"
-     * @hibernate.collection-many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO"
-     *                                    column="TaskRefId"
+     * @hibernate.list table="Analysis_Task" cascade="all" lazy="false"
+     * @hibernate.key column="TasksUserId"
+     * @hibernate.index column="AnalysisTaskIndex" type="int" length="10"
+     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO"
+     *                         column="TaskRefId" outer-join="auto"
      */
     public List getAnalysisTasks()
     {
@@ -81,6 +81,7 @@ public abstract class AbstractTasksUserBO
      * 
      * @return le nom du profile
      * @hibernate.property name="name" column="Name" type="string" length="255" not-null="true" unique="true"
+     *                     update="true" insert="true"
      */
     public String getName()
     {
@@ -91,11 +92,11 @@ public abstract class AbstractTasksUserBO
      * Méthode d'accès à mTerminationTasks
      * 
      * @return la liste des tâches finales
-     * @hibernate.list table="Termination_Task" cascade="all"
-     * @hibernate.collection-key column="TasksUserId"
-     * @hibernate.collection-index column="TerminationTaskIndex" type="int" length="10"
-     * @hibernate.collection-many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO"
-     *                                    column="TaskRefId"
+     * @hibernate.list table="Termination_Task" cascade="all" lazy="false"
+     * @hibernate.key column="TasksUserId"
+     * @hibernate.index column="TerminationTaskIndex" type="int" length="10"
+     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO"
+     *                         column="TaskRefId" outer-join="auto"
      */
     public List getTerminationTasks()
     {

@@ -5,7 +5,7 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.rule;
  * entier ou d'un flottant. Cette note doit appartenir à l'intervalle 0..3, elle est ajustée si besoin lors de la
  * collecte des résultats
  * 
- * @hibernate.subclass name="SimpleFormula" discriminator-value="SimpleFormula"
+ * @hibernate.subclass discriminator-value="SimpleFormula"
  */
 public class SimpleFormulaBO
     extends AbstractFormulaBO
@@ -26,7 +26,7 @@ public class SimpleFormulaBO
 
     /**
      * @return formule
-     * @hibernate.property name="formula" column="Formula" type="string" not-null="false" unique="false" length="4000"
+     * @hibernate.property name="formula" column="Formula" type="string" not-null="false" unique="false" length="4000" insert="true" update="true"
      */
     public String getFormula()
     {

@@ -16,10 +16,10 @@ public class MapParameterBO
     private Map mParameters = new HashMap();
 
     /**
-     * @hibernate.map name="parametersMap" table="ProjectParameters" lazy="false" cascade="all"
-     * @hibernate.collection-index column="Key" type="string"
-     * @hibernate.collection-key column="MapId"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"
+     * @hibernate.map table="ProjectParameters" lazy="false" cascade="all" sort="unsorted"
+     * @hibernate.index column="Key" type="string"
+     * @hibernate.key column="MapId"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"
      * @return la map de paramètres
      */
     public Map getParameters()

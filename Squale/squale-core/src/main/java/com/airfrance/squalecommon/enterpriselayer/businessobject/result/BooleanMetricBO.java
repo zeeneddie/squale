@@ -23,6 +23,7 @@ public class BooleanMetricBO
      * 
      * @return the current value of the mName property
      * @hibernate.property name="Value" column="Boolean_val" type="boolean" not-null="false" unique="false"
+     *                     update="true" insert="true"
      */
     public Object getValue()
     {

@@ -10,7 +10,7 @@ import java.util.List;
  * Ainsi la note 0 est attribuée si la première condition est satisfaite et ainsi de suite. La meilleure note étant
  * attribuée si aucune des conditions n'est satisfaite.
  * 
- * @hibernate.subclass name="ConditionFormula" discriminator-value="ConditionFormula"
+ * @hibernate.subclass discriminator-value="ConditionFormula"
  */
 public class ConditionFormulaBO
     extends AbstractFormulaBO
@@ -21,10 +21,10 @@ public class ConditionFormulaBO
 
     /**
      * @return conditions
-     * @hibernate.list table="Formula_Conditions" cascade="none"
-     * @hibernate.collection-key column="FormulaId"
-     * @hibernate.collection-index column="Rank" type="long" length="19"
-     * @hibernate.collection-element column="Value" type="string" length="4000"
+     * @hibernate.list table="Formula_Conditions" cascade="none" lazy="false"
+     * @hibernate.key column="FormulaId"
+     * @hibernate.index column="Rank" type="long" length="19"
+     * @hibernate.element column="Value" type="string" length="4000" not-null="false" unique="false"
      */
     public List getMarkConditions()
     {

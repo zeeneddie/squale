@@ -44,9 +44,9 @@ public class AuditDisplayConfBO
 
     /**
      * @return la configuration
-     * @hibernate.many-to-one name="displayConf" column="ConfId"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO"
-     *                        not-null="false" lazy="false"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO"
+     *                        column="ConfId" not-null="false" lazy="false" cascade="none" outer-join="auto"
+     *                        update="true" insert="true" 
      */
     public AbstractDisplayConfBO getDisplayConf()
     {
@@ -55,9 +55,9 @@ public class AuditDisplayConfBO
 
     /**
      * @return le projet
-     * @hibernate.many-to-one name="project" column="ProjectId"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
-     *                        not-null="false"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
+     *                        column="ProjectId" not-null="false" cascade="none" outer-join="auto" update="true"
+     *                        insert="true" 
      */
     public ProjectBO getProject()
     {
@@ -84,6 +84,7 @@ public class AuditDisplayConfBO
      * @return l'audit
      * @hibernate.many-to-one column="AuditId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+     *                        cascade="none" outer-join="auto" update="true" insert="true"
      */
     public AuditBO getAudit()
     {

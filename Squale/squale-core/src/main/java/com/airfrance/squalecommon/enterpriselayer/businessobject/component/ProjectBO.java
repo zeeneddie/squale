@@ -123,9 +123,9 @@ public class ProjectBO
      * Access method for the mProfile property.
      * 
      * @return the current value of the mProfile property
-     * @hibernate.many-to-one name="profile" column="ProfileBO" lazy="false"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
-     *                        not-null="false"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
+     *                        column="ProfileBO" not-null="false" cascade="none" outer-join="auto" update="true"
+     *                        insert="true"
      */
     public ProjectProfileBO getProfile()
     {
@@ -144,9 +144,9 @@ public class ProjectBO
     }
 
     /**
-     * @hibernate.many-to-one name="parametersSet" column="ParametersSet"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO"
-     *                        not-null="false"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO"
+     *                        column="ParametersSet" not-null="false" cascade="none" outer-join="auto" update="true"
+     *                        insert="true" 
      * @return la map de parametres
      */
     public MapParameterBO getParameters()
@@ -166,9 +166,9 @@ public class ProjectBO
      * Access method for the mQualityGrid property.
      * 
      * @return the current value of the mQualityRules property
-     * @hibernate.many-to-one name="qualityGrid" column="QualityGrid"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
-     *                        not-null="false"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+     *                        column="QualityGrid" not-null="false" cascade="none" outer-join="auto" update="true"
+     *                        insert="true"
      * @roseuid 42BACECC0238
      */
     public QualityGridBO getQualityGrid()
@@ -192,8 +192,8 @@ public class ProjectBO
      * 
      * @return the current value of the mQualityResults property
      * @hibernate.bag lazy="true" cascade="none" inverse="true"
-     * @hibernate.collection-key column="ProjectId"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
+     * @hibernate.key column="ProjectId"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
      * @roseuid 42BACECC0248
      */
     public Collection getQualityResults()
@@ -214,9 +214,9 @@ public class ProjectBO
 
     /**
      * @return le nom du source manager
-     * @hibernate.many-to-one name="sourceManager" column="SourceManager" lazy="false"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO"
-     *                        not-null="false"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO"
+     *                        column="SourceManager" not-null="false" cascade="none" outer-join="auto" update="true"
+     *                        insert="true"
      */
     public SourceManagementBO getSourceManager()
     {
@@ -246,7 +246,8 @@ public class ProjectBO
      * Retourne le statut du projet
      * 
      * @return the mStatus property
-     * @hibernate.property name="status" column="Status" type="integer" length="10" unique="false"
+     * @hibernate.property name="status" column="Status" type="integer" length="10" unique="false" update="true"
+     *                     insert="true"
      */
     public int getStatus()
     {

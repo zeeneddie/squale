@@ -221,9 +221,9 @@ public class RuleCheckingTransgressionBO
      * Access method for the mVersion property.
      * 
      * @return the current Version
-     * @hibernate.many-to-one name="ruleSet" column="RuleSetId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO"
-     *                        cascade="save-update" not-null="false"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO"
+     *                        column="RuleSetId" cascade="save-update" not-null="false" outer-join="auto" update="true"
+     *                        insert="true" 
      */
     public RuleSetBO getRuleSet()
     {
@@ -243,8 +243,8 @@ public class RuleCheckingTransgressionBO
     /**
      * @return les détails des transgressions
      * @hibernate.bag table="RuleCheckingTransgressionItem" lazy="true" cascade="all"
-     * @hibernate.collection-key column="MeasureId"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO"
+     * @hibernate.key column="MeasureId"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO"
      */
     public Collection getDetails()
     {

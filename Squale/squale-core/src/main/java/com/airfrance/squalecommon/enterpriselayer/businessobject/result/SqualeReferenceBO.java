@@ -29,9 +29,9 @@ public class SqualeReferenceBO
      * Access method for the mQualityGrid property.
      * 
      * @return the current value of the mQualityRules property
-     * @hibernate.many-to-one name="qualityGrid" column="QualityGrid"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
-     *                        not-null="false"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+     *                        column="QualityGrid" not-null="false" cascade="none" outer-join="auto" update="true"
+     *                        insert="true"
      */
     public QualityGridBO getQualityGrid()
     {
@@ -112,7 +112,8 @@ public class SqualeReferenceBO
      * Récupère l'attribut mPublic
      * 
      * @return projet est-il public
-     * @hibernate.property name="public" column="PublicApplication" type="boolean" unique="false"
+     * @hibernate.property name="public" column="PublicApplication" type="boolean" unique="false" update="true"
+     *                     insert="true"
      */
     public boolean getPublic()
     {
@@ -134,8 +135,7 @@ public class SqualeReferenceBO
      * Access method for the mApplicationName property.
      * 
      * @return the current value of the mApplicationName property
-     * @hibernate.property name="projectName" column="ApplicationName" type="string" // * length="" not-null="true"
-     *                     unique="false"
+     * @hibernate.property name="projectName" column="ApplicationName" type="string" update="true" insert="true"
      * @roseuid 42CA31D902B7
      */
     public String getApplicationName()
@@ -158,8 +158,7 @@ public class SqualeReferenceBO
      * Access method for the mProjectName property.
      * 
      * @return the current value of the mProjectName property
-     * @hibernate.property name="projectName" column="ProjectName" type="string" // * length="" not-null="true"
-     *                     unique="false"
+     * @hibernate.property name="projectName" column="ProjectName" type="string" update="true" insert="true"
      * @roseuid 42CA31D90324
      */
     public String getProjectName()
@@ -182,8 +181,7 @@ public class SqualeReferenceBO
      * Access method for the mLanguage property.
      * 
      * @return the current value of the mLanguage property
-     * @hibernate.property name="language" column="ProjectLanguage" type="string" // * length="" not-null="true"
-     *                     unique="false"
+     * @hibernate.property name="language" column="ProjectLanguage" type="string" update="true" insert="true"
      * @roseuid 42CA31DA0046
      */
     public String getLanguage()
@@ -206,7 +204,7 @@ public class SqualeReferenceBO
      * Access method for the mVersion property.
      * 
      * @return the current value of the mVersion property
-     * @hibernate.property name="version" column="Version" type="string" // * length="" not-null="false" unique="false"
+     * @hibernate.property name="version" column="Version" type="string" update="true" insert="true"
      * @roseuid 42CA31DA0130
      */
     public String getVersion()
@@ -229,8 +227,7 @@ public class SqualeReferenceBO
      * Access method for the mDate property.
      * 
      * @return the current value of the mDate property
-     * @hibernate.property name="date" column="AuditDate" type="timestamp" // * length="" not-null="false"
-     *                     unique="false"
+     * @hibernate.property name="date" column="AuditDate" type="timestamp" update="true" insert="true"
      * @roseuid 42CA31DA0298
      */
     public Date getDate()
@@ -253,11 +250,11 @@ public class SqualeReferenceBO
      * Access method for the Factors property.
      * 
      * @return the current value of the mFactors property
-     * @hibernate.map name="factors" table="FactorRef" lazy="false" cascade="all" sort="natural"
+     * @hibernate.map table="FactorRef" lazy="false" cascade="all" sort="natural"
      * @hibernate.index-many-to-many column="Rule"
      *                               class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"
-     * @hibernate.collection-key column="ReferencielId"
-     * @hibernate.collection-element column="Factor_Value" type="float" not-null="false"
+     * @hibernate.key column="ReferencielId"
+     * @hibernate.element column="Factor_Value" type="float" not-null="false" unique="false"
      */
     public SortedMap getFactors()
     {
@@ -279,7 +276,7 @@ public class SqualeReferenceBO
      * 
      * @return the current value of the mCodeLineNumber property
      * @hibernate.property name="codeLineNumber" column="CodeLineNumber" type="integer" length="10" not-null="false"
-     *                     unique="false"
+     *                     unique="false" update="true" insert="true"
      * @roseuid 42CA31DE00C3
      */
     public int getCodeLineNumber()
@@ -303,7 +300,7 @@ public class SqualeReferenceBO
      * 
      * @return the current value of the mMethodNumber property
      * @hibernate.property name="methodNumber" column="MethodNumber" type="integer" length="10" not-null="false"
-     *                     unique="false"
+     *                     unique="false" update="true" insert="true"
      * @roseuid 42CA31DE017E
      */
     public int getMethodNumber()
@@ -327,7 +324,7 @@ public class SqualeReferenceBO
      * 
      * @return the current value of the mClassNumber property
      * @hibernate.property name="classNumber" column="ClassNumber" type="integer" length="10" not-null="false"
-     *                     unique="false"
+     *                     unique="false" update="true" insert="true"
      * @roseuid 42CA31DE022A
      */
     public int getClassNumber()
@@ -378,12 +375,7 @@ public class SqualeReferenceBO
      * 
      * @return <code>true<code> if the mValidated property is true
      * 
-     * @hibernate.property 
-     * name="hidden" 
-     * column="HIDDEN" 
-     * type="boolean" 
-     * not-null="true" 
-     * unique="false"
+     * @hibernate.property name="hidden" column="HIDDEN" type="boolean" not-null="true" unique="false" update="true" insert="true"
      * 
      * @roseuid 42CA3F8901C8
      */
@@ -416,6 +408,7 @@ public class SqualeReferenceBO
     /**
      * @return le type de l'audit
      * @hibernate.property name="auditType" column="AUDIT_TYPE" type="string" length="50" not-null="true" unique="false"
+     *                     update="true" insert="true"
      */
     public String getAuditType()
     {

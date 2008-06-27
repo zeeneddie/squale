@@ -126,8 +126,8 @@ public class SiteStatsDICTBO
 
     /**
      * @return le nombre de facteurs acceptés
-     * @hibernate.property name="nbOfAcceptedFactors" column="NB_FACTEURS_ACCEPTES" type="integer" not-null="true"
-     *                     cascade="all"
+     * @hibernate.property name="nbOfAcceptedFactors" column="NB_FACTEURS_ACCEPTES" type="integer" update="true"
+     *                     insert="true"
      */
     public int getNbOfAcceptedFactors()
     {
@@ -137,7 +137,7 @@ public class SiteStatsDICTBO
     /**
      * @return le nombre de facteurs acceptés avec réserves
      * @hibernate.property name="nbOfAcceptedWithReservesFactors" column="NB_FACTEURS_ACCEPTES_RESERVES" type="integer"
-     *                     not-null="true" cascade="all"
+     *                     update="true" insert="true"
      */
     public int getNbOfAcceptedWithReservesFactors()
     {
@@ -146,8 +146,8 @@ public class SiteStatsDICTBO
 
     /**
      * @return le nombre de facteurs refusés
-     * @hibernate.property name="nbOfRefusedFactors" column="NB_FACTEURS_REFUSES" type="integer" not-null="true"
-     *                     cascade="all"
+     * @hibernate.property name="nbOfRefusedFactors" column="NB_FACTEURS_REFUSES" type="integer" update="true"
+     *                     insert="true"
      */
     public int getNbOfRefusedFactors()
     {
@@ -156,7 +156,7 @@ public class SiteStatsDICTBO
 
     /**
      * @return le nombre d'applications
-     * @hibernate.property name="nbTotalAppli" column="NB_TOTAL_APPLI" type="integer" not-null="true" cascade="all"
+     * @hibernate.property name="nbTotalAppli" column="NB_TOTAL_APPLI" type="integer" update="true" insert="true"
      */
     public int getNbTotalAppli()
     {
@@ -166,7 +166,7 @@ public class SiteStatsDICTBO
     /**
      * @return le nombre d'applications
      * @hibernate.property name="nbTotalAppliWithAudit" column="NB_APPLI_AVEC_AUDIT_EXECUTE" type="integer"
-     *                     not-null="true" cascade="all"
+     *                     update="true" insert="true"
      */
     public int getNbTotalAppliWithAudit()
     {
@@ -176,7 +176,7 @@ public class SiteStatsDICTBO
     /**
      * @return le nombre d'applications
      * @hibernate.property name="nbTotalAppliWithSuccesfulAudit" column="NB_APPLI_AVEC_AUDIT_REUSSI" type="integer"
-     *                     not-null="true" cascade="all"
+     *                     update="true" insert="true"
      */
     public int getNbTotalAppliWithSuccesfulAudit()
     {
@@ -185,7 +185,7 @@ public class SiteStatsDICTBO
 
     /**
      * @return la date du jour
-     * @hibernate.property name="today" column="Date_calcul" type="timestamp" not-null="true" cascade="all"
+     * @hibernate.property name="today" column="Date_calcul" type="timestamp" update="true" insert="true"
      */
     public Date getToday()
     {
@@ -194,7 +194,7 @@ public class SiteStatsDICTBO
 
     /**
      * @return le retour d'investissement pour ce site
-     * @hibernate.property name="roi" column="ROI_EN_MHI" type="double" not-null="true" cascade="all"
+     * @hibernate.property name="roi" column="ROI_EN_MHI" type="double" update="true" insert="true"
      */
     public double getRoi()
     {
@@ -203,8 +203,8 @@ public class SiteStatsDICTBO
 
     /**
      * @return le nombre d'appli à valider
-     * @hibernate.property name="applisToValidate" column="NB_APPLI_A_VALIDER" type="integer" not-null="true"
-     *                     cascade="all"
+     * @hibernate.property name="applisToValidate" column="NB_APPLI_A_VALIDER" type="integer" update="true"
+     *                     insert="true"
      */
     public int getNbAppliToValidate()
     {
@@ -213,7 +213,7 @@ public class SiteStatsDICTBO
 
     /**
      * @return le nombre d'audits ayant échoués
-     * @hibernate.property name="failedAudits" column="NB_AUDITS_ECHECS" type="integer" not-null="true" cascade="all"
+     * @hibernate.property name="failedAudits" column="NB_AUDITS_ECHECS" type="integer" update="true" insert="true"
      */
     public int getNbFailedAudits()
     {
@@ -222,8 +222,8 @@ public class SiteStatsDICTBO
 
     /**
      * @return le nombre d'audits programmés
-     * @hibernate.property name="notAttemptedAudits" column="NB_AUDITS_PROGRAMME" type="integer" not-null="true"
-     *                     cascade="all"
+     * @hibernate.property name="notAttemptedAudits" column="NB_AUDITS_PROGRAMME" type="integer" update="true"
+     *                     insert="true"
      */
     public int getNbNotAttemptedAudit()
     {
@@ -232,7 +232,7 @@ public class SiteStatsDICTBO
 
     /**
      * @return le nombre d'audits partiels
-     * @hibernate.property name="partialAudits" column="NB_AUDITS_PARTIELS" type="integer" not-null="true" cascade="all"
+     * @hibernate.property name="partialAudits" column="NB_AUDITS_PARTIELS" type="integer" update="true" insert="true"
      */
     public int getNbPartialAudits()
     {
@@ -241,8 +241,7 @@ public class SiteStatsDICTBO
 
     /**
      * @return le nombre d'audits réussis
-     * @hibernate.property name="successfulAudits" column="NB_AUDITS_REUSSIS" type="integer" not-null="true"
-     *                     cascade="all"
+     * @hibernate.property name="successfulAudits" column="NB_AUDITS_REUSSIS" type="integer" update="true" insert="true"
      */
     public int getNbSuccessfulAudits()
     {
@@ -251,8 +250,8 @@ public class SiteStatsDICTBO
 
     /**
      * @return le nombre d'applications sans audits
-     * @hibernate.property name="applisWithoutAudits" column="NB_APPLI_AVEC_AUCUN_AUDIT" type="integer" not-null="true"
-     *                     cascade="all"
+     * @hibernate.property name="applisWithoutAudits" column="NB_APPLI_AVEC_AUCUN_AUDIT" type="integer" update="true"
+     *                     insert="true"
      */
     public int getNbTotalAppliWithoutAudit()
     {
@@ -388,9 +387,9 @@ public class SiteStatsDICTBO
     }
 
     /**
-     * @hibernate.many-to-one name="serveurBO"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
-     *                        column="Serveur" not-null="false" lazy="true" update="true" insert="true"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
+     *                        column="Serveur" not-null="false" update="true" insert="true" cascade="none"
+     *                        outer-join="auto"
      * @return le serveur
      */
     public ServeurBO getServeurBO()

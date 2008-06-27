@@ -6,7 +6,7 @@ import com.airfrance.squalecommon.util.ConstantRulesChecking;
 /**
  * Jeu de règles PMD Le fichier PMD est stocké sous la forme d'un Blob dans la base de données
  * 
- * @hibernate.subclass mutable="true" discriminator-value="Pmd"
+ * @hibernate.subclass  discriminator-value="Pmd"
  */
 public class PmdRuleSetBO
     extends RuleSetBO
@@ -35,7 +35,7 @@ public class PmdRuleSetBO
      * @return the current value of the FileName property
      * @hibernate.property name="Value" column="FileContent"
      *                     type="com.airfrance.jraf.provider.persistence.hibernate.BinaryBlobType" not-null="false"
-     *                     unique="false"
+     *                     unique="false" update="true" insert="true"
      */
     public byte[] getValue()
     {
@@ -54,7 +54,8 @@ public class PmdRuleSetBO
      * Access method for the mLanguage property.
      * 
      * @return language
-     * @hibernate.property name="Language" column="Language" type="string" not-null="false" unique="false"
+     * @hibernate.property name="Language" column="Language" type="string" not-null="false" unique="false" update="true"
+     *                     insert="true"
      */
     public String getLanguage()
     {

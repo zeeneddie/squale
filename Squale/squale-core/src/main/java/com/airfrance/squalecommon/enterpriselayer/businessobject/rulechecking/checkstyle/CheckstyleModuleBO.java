@@ -80,7 +80,8 @@ public class CheckstyleModuleBO
      * Access method for the mMessage property.
      * 
      * @return the current value of the mMessage property
-     * @hibernate.property name="Message" column="Message" type="string" not-null="false" unique="false"
+     * @hibernate.property name="Message" column="Message" type="string" not-null="false" unique="false" update="true"
+     *                     insert="true"
      */
     public String getMessage()
     {
@@ -101,7 +102,8 @@ public class CheckstyleModuleBO
      * Access method for the mName property.
      * 
      * @return the current value of the mName property
-     * @hibernate.property name="Name" column="Name" type="string" not-null="false" unique="false"
+     * @hibernate.property name="Name" column="Name" type="string" not-null="false" unique="false" update="true"
+     *                     insert="true"
      */
 
     public String getName()
@@ -123,9 +125,9 @@ public class CheckstyleModuleBO
      * Access method for the mRule property.
      * 
      * @return the current Rule
-     * @hibernate.many-to-one name="rule" column="RuleId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleBO"
-     *                        cascade="save-update" not-null="true"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleBO"
+     *                        column="RuleId" cascade="save-update" not-null="true" outer-join="auto" update="true"
+     *                        insert="true"
      */
     public RuleBO getRule()
     {

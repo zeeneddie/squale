@@ -18,7 +18,7 @@ public class BinaryMetricBO
      * @return the current value of the mName property
      * @hibernate.property name="Value" column="Blob_val"
      *                     type="com.airfrance.jraf.provider.persistence.hibernate.BinaryBlobType" not-null="false"
-     *                     unique="false"
+     *                     unique="false" update="true" insert="true"
      */
     public Object getValue()
     {

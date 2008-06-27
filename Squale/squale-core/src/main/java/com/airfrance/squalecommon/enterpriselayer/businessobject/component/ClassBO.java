@@ -60,7 +60,7 @@ public class ClassBO
 
     /**
      * @return le chemin du fichier à partir du projet
-     * @hibernate.property name="fileName" column="LongFileName" type="string" length="2048"
+     * @hibernate.property name="fileName" column="LongFileName" type="string" length="2048" update="true" insert="true"
      */
     public String getFileName()
     {

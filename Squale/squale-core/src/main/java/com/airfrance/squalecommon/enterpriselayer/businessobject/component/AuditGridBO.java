@@ -52,9 +52,9 @@ public class AuditGridBO
 
     /**
      * @return grille
-     * @hibernate.many-to-one name="grid" column="QualityGridId"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
-     *                        not-null="false"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+     *                        column="QualityGridId" not-null="false" cascade="none" outer-join="auto" update="true"
+     *                        insert="true" 
      */
     public QualityGridBO getGrid()
     {
@@ -63,9 +63,9 @@ public class AuditGridBO
 
     /**
      * @return grille
-     * @hibernate.many-to-one name="project" column="ProjectId"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
-     *                        not-null="false"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
+     *                        column="ProjectId" not-null="false" cascade="none" outer-join="auto" update="true"
+     *                        insert="true"
      */
     public ProjectBO getProject()
     {
@@ -92,6 +92,7 @@ public class AuditGridBO
      * @return grilles qualité de l'audit
      * @hibernate.many-to-one column="AuditId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+     *                        cascade="none" outer-join="auto" update="true" insert="true"
      */
     public AuditBO getAudit()
     {

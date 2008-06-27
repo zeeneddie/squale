@@ -58,7 +58,8 @@ public abstract class MetricBO
      * Access method for the mName property.
      * 
      * @return the current value of the mName property
-     * @hibernate.property name="Name" column="Name" type="string" not-null="false" unique="false"
+     * @hibernate.property name="Name" column="Name" type="string" not-null="false" unique="false" update="true"
+     *                     insert="true"
      */
     public String getName()
     {
@@ -77,8 +78,8 @@ public abstract class MetricBO
      * Access method for the mMeasure property.
      * 
      * @return the current measure
-     * @hibernate.many-to-one name="measure" column="MeasureId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO"
+     *                        column="MeasureId" cascade="none" outer-join="auto" update="true" insert="true"
      */
     public MeasureBO getMeasure()
     {

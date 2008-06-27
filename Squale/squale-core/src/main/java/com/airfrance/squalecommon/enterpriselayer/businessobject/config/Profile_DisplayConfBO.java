@@ -19,9 +19,9 @@ public class Profile_DisplayConfBO
 
     /**
      * @return la configuration d'affichage
-     * @hibernate.many-to-one name="displayConf" column="Profile_ConfId"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO"
-     *                        not-null="false" cascade="none"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO"
+     *                        column="Profile_ConfId" not-null="false" cascade="none" outer-join="auto" update="true"
+     *                        insert="true"
      */
     public AbstractDisplayConfBO getDisplayConf()
     {
@@ -40,9 +40,9 @@ public class Profile_DisplayConfBO
 
     /**
      * @return le profil
-     * @hibernate.many-to-one name="displayConf" column="ProfileId"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
-     *                        not-null="false" cascade="none"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
+     *                        column="ProfileId" not-null="false" cascade="none" outer-join="auto" update="true"
+     *                        insert="true"
      */
     public ProjectProfileBO getProfile()
     {

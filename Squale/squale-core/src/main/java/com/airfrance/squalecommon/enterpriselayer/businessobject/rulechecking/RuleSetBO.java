@@ -86,10 +86,10 @@ public abstract class RuleSetBO
      * Access method for the mRules property.
      * 
      * @return the current value of the mRules property
-     * @hibernate.map name="rules" lazy="true" cascade="all"
-     * @hibernate.collection-index column="Code" type="string"
-     * @hibernate.collection-key column="RuleSetId"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"
+     * @hibernate.map lazy="true" cascade="all" sort="unsorted"
+     * @hibernate.index column="Code" type="string"
+     * @hibernate.key column="RuleSetId"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"
      */
 
     public Map getRules()
@@ -111,7 +111,8 @@ public abstract class RuleSetBO
      * Access method for the mVersion property.
      * 
      * @return the current value of the Version property
-     * @hibernate.property name="name" column="Name" not-null="false" type="string" unique="false"
+     * @hibernate.property name="name" column="Name" not-null="false" type="string" unique="false" update="true"
+     *                     insert="true"
      */
     public String getName()
     {
@@ -133,6 +134,7 @@ public abstract class RuleSetBO
      * 
      * @return la date de mise à jour
      * @hibernate.property name="dateOfUpdate" column="DateOfUpdate" type="timestamp" not-null="true" unique="false"
+     *                     update="true" insert="true"
      */
     public Date getDateOfUpdate()
     {

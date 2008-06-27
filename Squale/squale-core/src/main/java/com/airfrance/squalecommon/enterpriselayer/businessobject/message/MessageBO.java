@@ -13,7 +13,8 @@ public class MessageBO
 
     /**
      * @return id de message
-     * @hibernate.id generator-class="assigned"
+     * 
+     * @hibernate.composite-id
      */
     public MessageId getId()
     {
@@ -25,7 +26,7 @@ public class MessageBO
 
     /**
      * @return texte
-     * @hibernate.property name="title" column="Title" type="string" length="4000"
+     * @hibernate.property name="title" column="Title" type="string" length="4000" update="true" insert="true"
      */
     public String getTitle()
     {
@@ -45,7 +46,8 @@ public class MessageBO
 
     /**
      * @return texte
-     * @hibernate.property name="text" column="Text" type="string" not-null="true" length="4000"
+     * @hibernate.property name="text" column="Text" type="string" not-null="true" length="4000" update="true"
+     *                     insert="true"
      */
     public String getText()
     {

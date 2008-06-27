@@ -69,7 +69,7 @@ public class UserAccessBO
      * @return l'application
      * @hibernate.many-to-one column="ApplicationId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO"
-     *                        cascade="none" not-null="true"
+     *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      */
     public ApplicationBO getApplication()
     {
@@ -78,7 +78,7 @@ public class UserAccessBO
 
     /**
      * @return la date d'accès
-     * @hibernate.property name="date" column="accessDate" type="timestamp" not-null="true"
+     * @hibernate.property name="date" column="accessDate" type="timestamp" not-null="true" update="true" insert="true"
      */
     public Date getDate()
     {
@@ -95,7 +95,8 @@ public class UserAccessBO
 
     /**
      * @return le matricule de l'utilisateur
-     * @hibernate.property name="matricule" column="matricule" type="string" length="1024" not-null="true"
+     * @hibernate.property name="matricule" column="matricule" type="string" length="1024" not-null="true" update="true"
+     *                     insert="true"
      */
     public String getMatricule()
     {

@@ -105,7 +105,7 @@ public class ApplicationBO
      * 
      * @return the current value of the mAuditFrequency property
      * @hibernate.property name="auditFrequency" column="AuditFrequency" type="integer" length="10" not-null="false"
-     *                     unique="false"
+     *                     unique="false" insert="true" update="true"
      * @roseuid 42BACECB0380
      */
     public int getAuditFrequency()
@@ -128,8 +128,8 @@ public class ApplicationBO
      * Access method for the mResultsStorageOptions property.
      * 
      * @return the current value of the mResultsStorageOptions property
-     * @hibernate.property name="resultsStorageOptions" column="ResultsStorageOptions" type="integer" length="10"
-     *                     not-null="false" unique="false"
+     * @hibernate.property column="ResultsStorageOptions" type="integer" length="10" not-null="false" unique="false"
+     *                     insert="true" update="true" name="resultsStorageOptions"
      * @roseuid 42BACECB0383
      */
     public int getResultsStorageOptions()
@@ -152,7 +152,8 @@ public class ApplicationBO
      * Retourne le statut de l'application
      * 
      * @return the mStatus property is true
-     * @hibernate.property name="status" column="Status" type="integer" length="10" unique="false"
+     * @hibernate.property name="status" column="Status" type="integer" length="10" unique="false" insert="true"
+     *                     update="true"
      * @roseuid 42CAA72C0133
      */
     public int getStatus()
@@ -217,7 +218,8 @@ public class ApplicationBO
      * Récupère l'attribut mPublic
      * 
      * @return projet est-il public
-     * @hibernate.property name="public" column="PublicApplication" type="boolean" unique="false"
+     * @hibernate.property column="PublicApplication" type="boolean" unique="false" insert="true" update="true"
+     *                     name="public"
      */
     public boolean getPublic()
     {
@@ -240,6 +242,7 @@ public class ApplicationBO
      * 
      * @return la date de dernière modification.
      * @hibernate.property name="lastUpdate" column="LastUpdate" type="timestamp" not-null="false" unique="false"
+     *                     insert="true" update="true"
      */
     public Date getLastUpdate()
     {
@@ -301,7 +304,8 @@ public class ApplicationBO
 
     /**
      * @return le booléen indiquant si le dev a été fait en externe ou pas
-     * @hibernate.property name="externalDev" column="EXTERNAL_DEV" type="boolean" unique="false"
+     * @hibernate.property column="EXTERNAL_DEV" type="boolean" unique="false" insert="true" update="true"
+     *                     name="externalDev"
      */
     public boolean getExternalDev()
     {
@@ -310,7 +314,8 @@ public class ApplicationBO
 
     /**
      * @return le booléen indiquant si l'application était déjà en production au moment de sa création dans squale
-     * @hibernate.property name="inProduction" column="IN_PRODUCTION" type="boolean" unique="false"
+     * @hibernate.property name="inProduction" column="IN_PRODUCTION" type="boolean" unique="false" insert="true"
+     *                     update="true"
      */
     public boolean getInProduction()
     {
@@ -335,7 +340,8 @@ public class ApplicationBO
 
     /**
      * @return le dernier utilisateur ayant modifié l'application
-     * @hibernate.property name="lastUser" column="lastUser" type="string" length="1024" unique="false"
+     * @hibernate.property column="lastUser" type="string" length="1024" unique="false" insert="true" update="true"
+     *                     name="lastUser"
      */
     public String getLastUser()
     {
@@ -354,10 +360,11 @@ public class ApplicationBO
      * Retourne le serveur de l'application
      * 
      * @return le serveur de l'application
-     * @hibernate.many-to-one lazy="true" name="serveurBO" column="Serveur"
-     *                        type="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
-     *                        not-null="false" insert="true" update="true"
+     * @hibernate.many-to-one column="Serveur"
+     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
+     *                        not-null="false" insert="true" update="true" cascade="none" outer-join="auto"
      */
+    // name="serveurBO"
     public ServeurBO getServeurBO()
     {
         return mServeurBO;
@@ -375,11 +382,10 @@ public class ApplicationBO
 
     /**
      * @return les 3 derniers accès utilisateur
-     * @hibernate.list name="UserAccesses" table="UserAccess" cascade="all"
-     * @hibernate.collection-key column="ApplicationId"
-     * @hibernate.collection-index column="AccessIndex" type="long" length="19"
-     * @hibernate.collection-one-to-many column="UserAccessId"
-     *                                   class="com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO"
+     * @hibernate.list table="UserAccess" cascade="all" lazy="false"
+     * @hibernate.key column="ApplicationId"
+     * @hibernate.index column="AccessIndex" type="long" length="19"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO"
      */
     public List getUserAccesses()
     {

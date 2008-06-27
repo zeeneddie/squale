@@ -73,7 +73,7 @@ public class ErrorBO
      * 
      * @return the current value of the mInitialMessage property
      * @hibernate.property name="initialMessage" column="InitialMessage" type="string" length="2048" not-null="false"
-     *                     unique="false"
+     *                     unique="false" update="true" insert="true"
      * @roseuid 42BACEE203CF
      */
     public String getInitialMessage()
@@ -97,6 +97,7 @@ public class ErrorBO
      * 
      * @return the current value of the mMessage property
      * @hibernate.property name="message" column="Message" type="string" length="2048" not-null="false" unique="false"
+     *                     update="true" insert="true"
      * @roseuid 42BACEE203DF
      */
     public String getMessage()
@@ -119,8 +120,7 @@ public class ErrorBO
      * Access method for the mLevel property.
      * 
      * @return the current value of the mLevel property
-     * @hibernate.property name="level" column="CriticityLevel" type="string" // * length="" not-null="false"
-     *                     unique="false"
+     * @hibernate.property name="level" column="CriticityLevel" type="string" update="true" insert="true"
      * @roseuid 42BACEE30006
      */
     public String getLevel()
@@ -143,8 +143,7 @@ public class ErrorBO
      * Access method for the mTaskName property.
      * 
      * @return the current value of the mTaskName property
-     * @hibernate.property name="taskName" column="TaskName" type="string" // * length="" not-null="false"
-     *                     unique="false"
+     * @hibernate.property name="taskName" column="TaskName" type="string" update="true" insert="true"
      * @roseuid 42BACEE30016
      */
     public String getTaskName()
@@ -169,7 +168,7 @@ public class ErrorBO
      * @return the current value of the mAudit property
      * @hibernate.many-to-one column="AuditId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
-     *                        cascade="none" not-null="true"
+     *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE30025
      */
     public AuditBO getAudit()
@@ -221,7 +220,7 @@ public class ErrorBO
      * @return the current value of the mProject property
      * @hibernate.many-to-one column="ProjectId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
-     *                        cascade="none" not-null="true"
+     *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BFF47A033C
      */
     public ProjectBO getProject()

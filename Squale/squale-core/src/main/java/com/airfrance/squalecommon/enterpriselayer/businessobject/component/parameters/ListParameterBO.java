@@ -16,10 +16,10 @@ public class ListParameterBO
     private List mParameters = new ArrayList();
 
     /**
-     * @hibernate.list table="ProjectParameter" cascade="all"
-     * @hibernate.collection-key column="ListId"
-     * @hibernate.collection-index column="Rank" type="long" length="19"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"
+     * @hibernate.list table="ProjectParameter" cascade="all" lazy="false"
+     * @hibernate.key column="ListId"
+     * @hibernate.index column="Rank" type="long" length="19"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"
      * @return la liste de paramètres
      */
     public List getParameters()

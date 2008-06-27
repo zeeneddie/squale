@@ -61,8 +61,7 @@ public class UserBO
      * Access method for the mFullName property.
      * 
      * @return the current value of the mFullName property
-     * @hibernate.property name="fullName" column="FullName" type="string" // * length="" not-null="false"
-     *                     unique="false"
+     * @hibernate.property name="fullName" column="FullName" type="string" update="true" insert="true"
      * @roseuid 42BACED8021E
      */
     public String getFullName()
@@ -85,8 +84,7 @@ public class UserBO
      * Access method for the mMatricule property.
      * 
      * @return the current value of the mMatricule property
-     * @hibernate.property name="matricule" column="Matricule" type="string" // * length="" not-null="true"
-     *                     unique="true"
+     * @hibernate.property name="matricule" column="Matricule" type="string" update="true" insert="true"
      * @roseuid 42BACED8022A
      */
     public String getMatricule()
@@ -109,8 +107,7 @@ public class UserBO
      * Access method for the mPassword property.
      * 
      * @return the current value of the mPassword property
-     * @hibernate.property name="password" column="Password" type="string" // * length="" not-null="false"
-     *                     unique="false"
+     * @hibernate.property name="password" column="Password" type="string" update="true" insert="true"
      * @roseuid 42BACED80239
      */
     public String getPassword()
@@ -133,7 +130,7 @@ public class UserBO
      * Access method for the mEmail property.
      * 
      * @return the current value of the mEmail property
-     * @hibernate.property name="email" column="Email" type="string" // * length="" not-null="false" unique="false"
+     * @hibernate.property name="email" column="Email" type="string" update="true" insert="true"
      * @roseuid 42BACED8024A
      */
     public String getEmail()
@@ -156,12 +153,12 @@ public class UserBO
      * Access method for the mRights property.
      * 
      * @return the current value of the mRights property
-     * @hibernate.map name="rights" table="User_Rights" lazy="true" cascade="none"
+     * @hibernate.map table="User_Rights" lazy="true" cascade="none" sort="unsorted" //name="rights"
      * @hibernate.index-many-to-many column="ApplicationId"
      *                               class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO"
-     * @hibernate.collection-key column="UserId"
-     * @hibernate.collection-many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"
-     *                                    column="ProfileId"
+     * @hibernate.key column="UserId"
+     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"
+     *                         column="ProfileId" outer-join="auto"
      * @roseuid 42BACED8025A
      */
     public Map getRights()
@@ -244,7 +241,7 @@ public class UserBO
      * @return le profil par défaut
      * @hibernate.many-to-one column="ProfileId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"
-     *                        cascade="none" not-null="true"
+     *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42D268A801AC
      */
     public ProfileBO getDefaultProfile()
@@ -265,7 +262,8 @@ public class UserBO
 
     /**
      * @return true si l'utilisateur s'est désabonné de l'envoi d'email
-     * @hibernate.property name="unsubscribed" column="unsubscribed" type="boolean" unique="false"
+     * @hibernate.property name="unsubscribed" column="unsubscribed" type="boolean" unique="false" update="true"
+     *                     insert="true"
      */
     public boolean isUnsubscribed()
     {

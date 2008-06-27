@@ -64,7 +64,7 @@ public class ProfileBO
      * Access method for the mName property.
      * 
      * @return the current value of the mName property
-     * @hibernate.property name="name" column="Name" type="string" // * length="" not-null="true" unique="true"
+     * @hibernate.property name="name" column="Name" type="string" update="true" insert="true"
      * @roseuid 42BACED70352
      */
     public String getName()
@@ -87,11 +87,11 @@ public class ProfileBO
      * Access method for the mRights property.
      * 
      * @return the current value of the mRights property
-     * @hibernate.map name="rights" table="Profile_Rights" lazy="true" cascade="none"
+     * @hibernate.map table="Profile_Rights" lazy="true" cascade="none" sort="unsorted" //name="rights"
      * @hibernate.index-many-to-many column="AtomicRightsId"
      *                               class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.AtomicRightsBO"
-     * @hibernate.collection-key column="ProfileId"
-     * @hibernate.collection-element column="Rights_Value" type="string" // * length="" not-null="true"
+     * @hibernate.key column="ProfileId"
+     * @hibernate.element column="Rights_Value" type="string" not-null="false" unique="false"
      * @roseuid 42BACED70355
      */
     public Map getRights()

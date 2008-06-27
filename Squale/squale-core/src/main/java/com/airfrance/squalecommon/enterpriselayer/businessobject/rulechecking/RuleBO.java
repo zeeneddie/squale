@@ -50,7 +50,8 @@ public class RuleBO
      * Access method for the mCategory property.
      * 
      * @return the current value of the mCategory property
-     * @hibernate.property name="Category" column="Category" type="string" not-null="false" unique="false"
+     * @hibernate.property name="Category" column="Category" type="string" not-null="false" unique="false" update="true"
+     *                     insert="true"
      */
 
     public String getCategory()
@@ -73,7 +74,8 @@ public class RuleBO
      * Access method for the mCode property.
      * 
      * @return the current value of the mCode property
-     * @hibernate.property name="Code" column="Code" type="string" not-null="false" unique="false"
+     * @hibernate.property name="Code" column="Code" type="string" not-null="false" unique="false" update="true"
+     *                     insert="true"
      */
 
     public String getCode()
@@ -110,9 +112,9 @@ public class RuleBO
      * Access method for the mVersion property.
      * 
      * @return the current Version
-     * @hibernate.many-to-one name="version" column="RuleSetId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO"
-     *                        cascade="save-update" not-null="true"
+     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO"
+     *                        column="RuleSetId" cascade="save-update" not-null="true" outer-join="auto" update="true"
+     *                        insert="true"
      */
     public RuleSetBO getRuleSet()
     {
@@ -143,7 +145,8 @@ public class RuleBO
      * Access method for the mSeverity property.
      * 
      * @return the current value of the mSeverity property
-     * @hibernate.property name="Severity" column="Severity" type="string" not-null="false" unique="false"
+     * @hibernate.property name="Severity" column="Severity" type="string" not-null="false" unique="false" update="true"
+     *                     insert="true"
      */
     public String getSeverity()
     {

@@ -9,7 +9,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * Règle de calcul d'un facteur
  * 
  * @author m400842
- * @hibernate.subclass name="FactorRule" discriminator-value="FactorRule" lazy="false"
+ * @hibernate.subclass discriminator-value="FactorRule" lazy="false"
  */
 public class FactorRuleBO
     extends QualityRuleBO
@@ -24,11 +24,11 @@ public class FactorRuleBO
      * Access method for the mCriteria property.
      * 
      * @return the current value of the mCriteria property
-     * @hibernate.map name="factors" table="FactorCriterium_Rule" lazy="true" cascade="all" sort="natural"
+     * @hibernate.map table="FactorCriterium_Rule" lazy="true" cascade="all" sort="natural"
      * @hibernate.index-many-to-many column="CriteriumRuleId"
      *                               class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO"
-     * @hibernate.collection-key column="FactorRuleId"
-     * @hibernate.collection-element column="Weight" type="float" not-null="true"
+     * @hibernate.key column="FactorRuleId"
+     * @hibernate.element column="Weight" type="float" not-null="true" unique="false"
      */
     public SortedMap getCriteria()
     {

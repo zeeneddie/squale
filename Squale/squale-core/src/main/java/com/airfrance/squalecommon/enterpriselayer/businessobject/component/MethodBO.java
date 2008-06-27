@@ -56,7 +56,7 @@ public class MethodBO
     /**
      * @return le chemin complet du fichier au projet
      * @hibernate.property name="longFileName" column="LongFileName" type="string" length="2048" not-null="false"
-     *                     unique="false"
+     *                     unique="false" update="true" insert="true"
      */
     public String getLongFileName()
     {
@@ -66,7 +66,7 @@ public class MethodBO
     /**
      * @return le numéro de ligne de la méthode dans le fichier
      * @hibernate.property name="startLine" column="StartLine" type="integer" length="10" not-null="false"
-     *                     unique="false"
+     *                     unique="false" update="true" insert="true"
      */
     public int getStartLine()
     {

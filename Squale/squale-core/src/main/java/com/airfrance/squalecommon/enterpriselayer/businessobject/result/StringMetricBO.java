@@ -24,7 +24,7 @@ public class StringMetricBO
      * Access method for the mValue property.
      * 
      * @return the current value of the mName property
-     * @hibernate.property name="Value" column="String_val" type="string" length=4000 not-null="false" unique="false"
+     * @hibernate.property name="Value" column="String_val" length="4000" type="string" update="true" insert="true"
      */
     public Object getValue()
     {

@@ -55,7 +55,7 @@ public class BubbleConfBO
 
     /**
      * @return le tre métier sur l'axe des v
-     * @hibernate.property name="xTre" column="X_TRE" type="string" length="400"
+     * @hibernate.property name="xTre" column="X_TRE" type="string" length="400" update="true" insert="true"
      */
     public String getXTre()
     {
@@ -64,7 +64,7 @@ public class BubbleConfBO
 
     /**
      * @return le tre métier sur l'axe des y
-     * @hibernate.property name="yTre" column="Y_TRE" type="string" length="400"
+     * @hibernate.property name="yTre" column="Y_TRE" type="string" length="400" update="true" insert="true"
      */
     public String getYTre()
     {
@@ -89,7 +89,7 @@ public class BubbleConfBO
 
     /**
      * @return la position de l'axe horizontal
-     * @hibernate.property name="xPos" column="X_POS" type="long" length="3"
+     * @hibernate.property name="xPos" column="X_POS" type="long" length="3" update="true" insert="true"
      */
     public long getHorizontalAxisPos()
     {
@@ -98,7 +98,7 @@ public class BubbleConfBO
 
     /**
      * @return la position de l'axe vertical
-     * @hibernate.property name="yPos" column="Y_POS" type="long" length="3"
+     * @hibernate.property name="yPos" column="Y_POS" type="long" length="3" update="true" insert="true"
      */
     public long getVerticalAxisPos()
     {

@@ -55,7 +55,8 @@ public abstract class AbstractComponentBO
 
     /**
      * @return le booléen indiquant si le composant courant est exclu du plan d'action
-     * @hibernate.property name="excludedFromActionPlan" column="Excluded" type="boolean" not-null="true" unique="false"
+     * @hibernate.property name="excludedFromActionPlan" update="true" insert="true" column="Excluded" type="boolean"
+     *                     not-null="true" unique="false"
      */
     public boolean getExcludedFromActionPlan()
     {
@@ -64,8 +65,8 @@ public abstract class AbstractComponentBO
 
     /**
      * @return la justification du composant
-     * @hibernate.property name="justification" column="Justification" type="string" length="4000" not-null="false"
-     *                     unique="false"
+     * @hibernate.property name="justification" update="true" insert="true" column="Justification" type="string"
+     *                     length="4000" not-null="false" unique="false"
      */
     public String getJustification()
     {
@@ -102,7 +103,8 @@ public abstract class AbstractComponentBO
      * Access method for the mName property.
      * 
      * @return the current value of the mName property
-     * @hibernate.property name="name" column="Name" type="string" length="1024" not-null="true" unique="false"
+     * @hibernate.property name="name" update="true" insert="true" column="Name" type="string" length="1024"
+     *                     not-null="true" unique="false"
      * @roseuid 42BACECB0228
      */
     public String getName()
@@ -163,7 +165,7 @@ public abstract class AbstractComponentBO
      * Access method for the mParent property.
      * 
      * @return le composant parent
-     * @hibernate.many-to-one column="Parent"
+     * @hibernate.many-to-one outer-join="auto" update="true" insert="true" column="Parent"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
      *                        cascade="save-update"
      * @roseuid 42CB90ED038C
@@ -280,10 +282,10 @@ public abstract class AbstractComponentBO
      * Récupère les audits liés à ce composant
      * 
      * @return les audits
-     * @hibernate.set table="Components_Audits" lazy="true" cascade="none" inverse="false"
-     * @hibernate.collection-key column="ComponentId"
-     * @hibernate.collection-many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
-     *                                    column="AuditId"
+     * @hibernate.set table="Components_Audits" lazy="true" cascade="none" inverse="false" sort="unsorted"
+     * @hibernate.key column="ComponentId"
+     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+     *                         column="AuditId" outer-join="auto"
      */
     public Collection getAudits()
     {
@@ -371,6 +373,7 @@ public abstract class AbstractComponentBO
      * @return le Projet auquel appartient
      * @hibernate.many-to-one column="ProjectId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
+     *                        outer-join="auto" update="true" insert="true" cascade="none"
      */
     public AbstractComplexComponentBO getProject()
     {

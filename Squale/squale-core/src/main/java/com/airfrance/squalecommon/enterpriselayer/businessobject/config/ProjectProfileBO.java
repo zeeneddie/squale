@@ -28,9 +28,9 @@ public class ProjectProfileBO
      * Récupère les configurations d'affichage liées à ce profil
      * 
      * @return les configurations
-     * @hibernate.set table="Profiles_DisplayConfs" lazy="true" cascade="all" inverse="false"
-     * @hibernate.collection-key column="ProfileId"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.Profile_DisplayConfBO"
+     * @hibernate.set table="Profiles_DisplayConfs" lazy="true" cascade="all" inverse="false" sort="unsorted"
+     * @hibernate.key column="ProfileId"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.Profile_DisplayConfBO"
      */
     public Set getProfileDisplayConfs()
     {
@@ -41,10 +41,10 @@ public class ProjectProfileBO
      * Récupère les grilles liées à ce profil
      * 
      * @return les grilles
-     * @hibernate.set table="Profiles_Grids" lazy="true"
-     * @hibernate.collection-key column="ProfileId"
-     * @hibernate.collection-many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
-     *                                    column="GridId"
+     * @hibernate.set table="Profiles_Grids" lazy="true" sort="unsorted" cascade="none"
+     * @hibernate.key column="ProfileId"
+     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+     *                         column="GridId" outer-join="auto"
      */
     public Set getGrids()
     {
@@ -52,7 +52,8 @@ public class ProjectProfileBO
     }
 
     /**
-     * @hibernate.property name="exportIDE" column="export_IDE" type="boolean" unique="false"
+     * @hibernate.property name="exportIDE" column="export_IDE" type="boolean" unique="false" update="true"
+     *                     insert="true"
      * @return true si le profil permet l'export IDE
      */
     public boolean getExportIDE()

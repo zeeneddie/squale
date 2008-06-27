@@ -79,7 +79,8 @@ public class QualityGridBO
     }
 
     /**
-     * @hibernate.property name="name" column="Name" type="string" not-null="true" unique="false"
+     * @hibernate.property name="name" column="Name" type="string" not-null="true" unique="false" update="true"
+     *                     insert="true"
      * @return nom
      */
     public String getName()
@@ -99,10 +100,10 @@ public class QualityGridBO
      * Récupère les profils liés à cette grille
      * 
      * @return les profils
-     * @hibernate.set table="Profiles_Grids" lazy="true" inverse="true"
-     * @hibernate.collection-key column="GridId"
-     * @hibernate.collection-many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
-     *                                    column="ProfileId"
+     * @hibernate.set table="Profiles_Grids" lazy="true" inverse="true" cascade="none" sort="unsorted"
+     * @hibernate.key column="GridId"
+     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
+     *                         column="ProfileId" outer-join="auto"
      */
     public Set getProfiles()
     {
@@ -114,6 +115,7 @@ public class QualityGridBO
      * 
      * @return la date de mise à jour
      * @hibernate.property name="dateOfUpdate" column="DateOfUpdate" type="timestamp" not-null="true" unique="false"
+     *                     update="true" insert="true"
      */
     public Date getDateOfUpdate()
     {
@@ -135,9 +137,9 @@ public class QualityGridBO
      * 
      * @return the current value of the mFactors property
      * @hibernate.set table="GridFactor_Rule" lazy="true" cascade="all" inverse="false" sort="natural"
-     * @hibernate.collection-key column="QualityGridId"
-     * @hibernate.collection-many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"
-     *                                    column="FactorRuleId"
+     * @hibernate.key column="QualityGridId"
+     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"
+     *                         column="FactorRuleId" outer-join="auto"
      */
     public SortedSet getFactors()
     {

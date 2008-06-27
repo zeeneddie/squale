@@ -53,7 +53,7 @@ public class AtomicRightsBO
      * Access method for the mName property.
      * 
      * @return the current value of the mName property
-     * @hibernate.property name="name" column="Name" type="string" // * length="" not-null="true" unique="true"
+     * @hibernate.property name="name" column="Name" type="string" update="true" insert="true"
      * @roseuid 42BACED70267
      */
     public String getName()

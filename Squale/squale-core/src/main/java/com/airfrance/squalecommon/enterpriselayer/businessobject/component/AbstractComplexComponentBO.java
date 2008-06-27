@@ -55,9 +55,9 @@ public abstract class AbstractComplexComponentBO
      * Récupère la collection de composants enfants.
      * 
      * @return les enfants
-     * @hibernate.bag table="AbstractComplexComponent_children" lazy="true" // * cascade="save-update" inverse="true"
-     * @hibernate.collection-key column="Parent"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     * @hibernate.bag table="AbstractComplexComponent_children" lazy="true" cascade="none"
+     * @hibernate.key column="Parent"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
      * @roseuid 42CB92FF008C
      */
     public Collection getChildren()

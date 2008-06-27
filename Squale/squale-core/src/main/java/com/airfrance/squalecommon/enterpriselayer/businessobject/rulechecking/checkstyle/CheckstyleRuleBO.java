@@ -23,9 +23,9 @@ public class CheckstyleRuleBO
      * Access method for the mModules property.
      * 
      * @return the current value of the mModules property
-     * @hibernate.set name="modules" lazy="true" cascade="all"
-     * @hibernate.collection-key column="RuleId"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleModuleBO"
+     * @hibernate.set lazy="true" cascade="all" sort="unsorted"
+     * @hibernate.key column="RuleId"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleModuleBO"
      */
 
     public Set getModules()

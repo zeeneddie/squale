@@ -29,7 +29,7 @@ public class SourceManagementBO
      * Méthode d'accès à mMilestoneAudit
      * 
      * @return true si l'audit de jalon est possible
-     * @hibernate.property name="milestoneAudit" column="MilestoneAudit" type="boolean"
+     * @hibernate.property name="milestoneAudit" column="MilestoneAudit" type="boolean" update="true" insert="true"
      */
     public boolean isMilestoneAudit()
     {
@@ -40,7 +40,7 @@ public class SourceManagementBO
      * Méthode d'accès à mNormalAudit
      * 
      * @return true si l'audit de suivi est possible
-     * @hibernate.property name="normalAudit" column="NormalAudit" type="boolean"
+     * @hibernate.property name="normalAudit" column="NormalAudit" type="boolean" update="true" insert="true"
      */
     public boolean isNormalAudit()
     {

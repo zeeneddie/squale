@@ -60,7 +60,7 @@ public abstract class QualityResultBO
      * @return the current value of the mRule property
      * @hibernate.many-to-one column="QualityRuleId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO"
-     *                        cascade="none" not-null="true"
+     *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE300E1
      */
     public QualityRuleBO getRule()
@@ -83,7 +83,8 @@ public abstract class QualityResultBO
      * Access method for the mMeanMark property.
      * 
      * @return the current value of the mMeanMark property
-     * @hibernate.property name="meanMark" column="MeanMark" type="float" not-null="true" unique="false"
+     * @hibernate.property name="meanMark" column="MeanMark" type="float" not-null="true" unique="false" update="true"
+     *                     insert="true"
      * @roseuid 42BACEE40006
      */
     public float getMeanMark()
@@ -108,7 +109,7 @@ public abstract class QualityResultBO
      * @return the current value of the mProject property
      * @hibernate.many-to-one column="ProjectId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
-     *                        cascade="none" not-null="true"
+     *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE40016
      */
     public ProjectBO getProject()
@@ -133,7 +134,7 @@ public abstract class QualityResultBO
      * @return the current value of the mAudit property
      * @hibernate.many-to-one column="AuditId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
-     *                        cascade="none" not-null="true"
+     *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE40019
      */
     public AuditBO getAudit()

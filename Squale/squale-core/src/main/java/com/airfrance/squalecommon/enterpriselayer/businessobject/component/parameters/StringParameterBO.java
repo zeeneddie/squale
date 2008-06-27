@@ -30,7 +30,8 @@ public class StringParameterBO
     private String mValue;
 
     /**
-     * @hibernate.property name="Value" column="Value" type="string" not-null="false" unique="false"
+     * @hibernate.property name="Value" column="Value" length="1024" type="string" not-null="false" unique="false"
+     *                     update="true" insert="true"
      * @return la valeur du paramètre
      */
     public String getValue()

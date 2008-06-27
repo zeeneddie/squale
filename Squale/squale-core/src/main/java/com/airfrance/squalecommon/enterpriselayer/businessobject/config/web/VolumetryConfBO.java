@@ -20,7 +20,7 @@ public class VolumetryConfBO
 
     /**
      * @return le type du composant
-     * @hibernate.property name="componentType" column="componentType" type="string"
+     * @hibernate.property name="componentType" column="componentType" type="string" insert="true" update="true"
      */
     public String getComponentType()
     {
@@ -29,9 +29,9 @@ public class VolumetryConfBO
 
     /**
      * @return les TREs
-     * @hibernate.set table="Volumetry_Measures" lazy="false" inverse="false"
-     * @hibernate.collection-key column="VolumetryId"
-     * @hibernate.collection-element column="Measure" type="string" not-null="true"
+     * @hibernate.set table="Volumetry_Measures" lazy="false" inverse="false" cascade="none" sort="unsorted"
+     * @hibernate.key column="VolumetryId" 
+     * @hibernate.element column="Measure" type="string" not-null="true" unique="false"
      */
     public Set getTres()
     {
@@ -96,15 +96,15 @@ public class VolumetryConfBO
         }
         return result;
     }
-    
+
     /**
-     * Redefinition of the hashCode method
-     * {@inheritDoc} 
+     * Redefinition of the hashCode method {@inheritDoc}
+     * 
      * @return return the hash number of the object
      */
-    public int hashCode(){
+    public int hashCode()
+    {
         return super.hashCode();
     }
-    
-    
+
 }

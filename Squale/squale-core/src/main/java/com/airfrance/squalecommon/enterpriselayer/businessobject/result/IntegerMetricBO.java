@@ -24,7 +24,8 @@ public class IntegerMetricBO
      * Access method for the mValue property.
      * 
      * @return the current value of the mName property
-     * @hibernate.property name="Value" column="Number_val" type="integer" not-null="false" unique="false"
+     * @hibernate.property name="Value" column="Number_val" type="integer" not-null="false" unique="false" update="true"
+     *                     insert="true" 
      */
     public Object getValue()
     {

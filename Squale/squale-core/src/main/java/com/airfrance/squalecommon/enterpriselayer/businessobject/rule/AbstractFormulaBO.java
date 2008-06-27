@@ -37,7 +37,7 @@ public abstract class AbstractFormulaBO
 
     /**
      * @return niveau du composant associé
-     * @hibernate.property name="componentLevel" column="ComponentLevel" type="string" not-null="false" unique="false"
+     * @hibernate.property name="componentLevel" column="ComponentLevel" type="string" not-null="false" unique="false" insert="true" update="true"
      */
     public String getComponentLevel()
     {
@@ -91,7 +91,7 @@ public abstract class AbstractFormulaBO
     /**
      * @return trigger
      * @hibernate.property name="triggerCondition" column="TriggerCondition" type="string" length="4000"
-     *                     not-null="false" unique="false"
+     *                     not-null="false" unique="false" insert = "true" update ="true"
      */
     public String getTriggerCondition()
     {
@@ -108,9 +108,9 @@ public abstract class AbstractFormulaBO
 
     /**
      * @return mesures
-     * @hibernate.bag table="Formula_Measures" lazy="false"
-     * @hibernate.collection-key column="FormulaId"
-     * @hibernate.collection-element column="Measure" type="string"
+     * @hibernate.bag table="Formula_Measures" lazy="false" cascade="none"
+     * @hibernate.key column="FormulaId"
+     * @hibernate.element column="Measure" type="string" not-null="false" unique="false"
      */
     public Collection getMeasureKinds()
     {

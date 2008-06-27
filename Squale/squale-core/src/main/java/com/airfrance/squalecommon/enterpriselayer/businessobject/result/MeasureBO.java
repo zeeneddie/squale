@@ -49,10 +49,10 @@ public abstract class MeasureBO
      * Access method for the mMetrics property.
      * 
      * @return the current value of the mTaskName property
-     * @hibernate.map name="metrics" lazy="true" cascade="save-update"
-     * @hibernate.collection-index column="Name" type="string"
-     * @hibernate.collection-key column="MeasureId"
-     * @hibernate.collection-one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO"
+     * @hibernate.map lazy="true" cascade="save-update" sort="unsorted"
+     * @hibernate.index column="Name" type="string"
+     * @hibernate.key column="MeasureId"
+     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO"
      */
     public Map getMetrics()
     {
@@ -73,7 +73,8 @@ public abstract class MeasureBO
      * Access method for the mTaskName property.
      * 
      * @return the current value of the mTaskName property
-     * @hibernate.property name="TaskName" column="TaskName" type="string" not-null="false" unique="false"
+     * @hibernate.property name="TaskName" column="TaskName" type="string" not-null="false" unique="false" update="true"
+     *                     insert="true"
      * @roseuid 42BACEE30268
      */
     public String getTaskName()
@@ -87,7 +88,7 @@ public abstract class MeasureBO
      * @return the current value of the mAudit property
      * @hibernate.many-to-one column="AuditId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
-     *                        cascade="none" not-null="true"
+     *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE30277
      */
     public AuditBO getAudit()
@@ -112,7 +113,7 @@ public abstract class MeasureBO
      * @return the current value of the mComponent property
      * @hibernate.many-to-one column="ComponentId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
-     *                        cascade="save-update" not-null="true"
+     *                        cascade="save-update" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE3027A
      */
     public AbstractComponentBO getComponent()

@@ -4,7 +4,7 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.rule;
  * Règle de calcul d'une pratique
  * 
  * @author m400842
- * @hibernate.subclass name="PracticeRule" discriminator-value="PracticeRule" lazy="false"
+ * @hibernate.subclass discriminator-value="PracticeRule" lazy="false"
  */
 public class PracticeRuleBO
     extends QualityRuleBO
@@ -41,6 +41,7 @@ public class PracticeRuleBO
      * @return formula
      * @hibernate.many-to-one column="Formula" cascade="all"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO"
+     *                        outer-join="auto" update="true" insert="true"
      */
     public AbstractFormulaBO getFormula()
     {
@@ -57,7 +58,8 @@ public class PracticeRuleBO
 
     /**
      * @return la fonction de pondération
-     * @hibernate.property name="weightFunction" column="WeightFunction" type="string" unique="false" cascade="all"
+     * @hibernate.property name="weightFunction" column="WeightFunction" type="string" unique="false" update="true"
+     *                     insert="true"
      */
     public String getWeightFunction()
     {
@@ -66,7 +68,8 @@ public class PracticeRuleBO
 
     /**
      * @return l'effort de correction de la pratique
-     * @hibernate.property name="effort" column="effort" type="integer" length="10" unique="false"
+     * @hibernate.property name="effort" column="effort" type="integer" length="10" unique="false" update="true"
+     *                     insert="true"
      */
     public int getEffort()
     {

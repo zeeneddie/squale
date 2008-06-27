@@ -16,6 +16,7 @@ public class CppTestRuleSetBO
     /**
      * @return nom
      * @hibernate.property name="cppTestName" column="CppTestName" not-null="false" type="string" unique="true"
+     *                     update="true" insert="true"
      */
     public String getCppTestName()
     {

@@ -26,7 +26,8 @@ public class NewsBO
 
     /**
      * @return la clé
-     * @hibernate.property name="key" column="Key" type="string" not-null="true" length="4000"
+     * @hibernate.property name="key" column="Key" type="string" not-null="true" length="4000" update="true"
+     *                     insert="true"
      */
     public String getKey()
     {
@@ -44,6 +45,7 @@ public class NewsBO
     /**
      * @return la date de début de validité
      * @hibernate.property name="beginningDate" column="Beginning_Date" type="timestamp" not-null="true" unique="false"
+     *                     update="true" insert="true"
      */
     public Date getBeginningDate()
     {
@@ -53,6 +55,7 @@ public class NewsBO
     /**
      * @return la date de fin de validité
      * @hibernate.property name="endDate" column="End_Date" type="timestamp" not-null="true" unique="false"
+     *                     update="true" insert="true"
      */
     public Date getEndDate()
     {

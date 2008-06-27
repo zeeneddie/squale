@@ -16,7 +16,7 @@ public class MessageId
 
     /**
      * @return clef
-     * @hibernate.property not-null="true"
+     * @hibernate.key-property column="key" type="java.lang.String"
      */
     public String getKey()
     {
@@ -25,7 +25,7 @@ public class MessageId
 
     /**
      * @return locale
-     * @hibernate.property not-null="true" length="6"
+     * @hibernate.key-property length="6" type="java.lang.String" column="lang"
      */
     public String getLang()
     {

@@ -44,7 +44,8 @@ public class MarkBO
      * Access method for the mValue property.
      * 
      * @return the current value of the mValue property
-     * @hibernate.property name="value" column="Value" type="float" not-null="true" unique="false"
+     * @hibernate.property name="value" column="Value" type="float" not-null="true" unique="false" update="true"
+     *                     insert="true"
      */
     public float getValue()
     {
@@ -67,7 +68,7 @@ public class MarkBO
      * @return the current value of the mComponent property
      * @hibernate.many-to-one column="ComponentId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
-     *                        cascade="none" not-null="true"
+     *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE3015E
      */
     public AbstractComponentBO getComponent()
@@ -92,7 +93,7 @@ public class MarkBO
      * @return the current value of the mPractice property
      * @hibernate.many-to-one column="PracticeResultId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO"
-     *                        cascade="none" not-null="true"
+     *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE30161
      */
     public PracticeResultBO getPractice()

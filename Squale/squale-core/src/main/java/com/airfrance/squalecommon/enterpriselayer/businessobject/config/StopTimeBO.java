@@ -46,7 +46,8 @@ public class StopTimeBO
      * Méthode d'accès à mDay
      * 
      * @return le jour de la semaine
-     * @hibernate.property name="day" column="DayOfWeek" type="string" length="9" not-null="true"
+     * @hibernate.property name="day" column="DayOfWeek" type="string" length="9" not-null="true" update="true"
+     *                     insert="true"
      */
     public String getDay()
     {
@@ -57,7 +58,8 @@ public class StopTimeBO
      * Méthode d'accès à mTime
      * 
      * @return l'heure du jour
-     * @hibernate.property name="time" column="TimeOfDay" type="string" length="5" not-null="true"
+     * @hibernate.property name="time" column="TimeOfDay" type="string" length="5" not-null="true" update="true"
+     *                     insert="true"
      */
     public String getTime()
     {

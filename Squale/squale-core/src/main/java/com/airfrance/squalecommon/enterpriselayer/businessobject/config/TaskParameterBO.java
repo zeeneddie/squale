@@ -49,7 +49,8 @@ public class TaskParameterBO
      * Méthode d'accès à mName
      * 
      * @return le nom
-     * @hibernate.property name="name" column="Name" type="string" length="255" not-null="true"
+     * @hibernate.property name="name" column="Name" type="string" length="255" not-null="true" update="true"
+     *                     insert="true"
      */
     public String getName()
     {
@@ -68,7 +69,8 @@ public class TaskParameterBO
      * Méthode d'accès à mValue
      * 
      * @return la valeur
-     * @hibernate.property name="name" column="Value" type="string" length="255" not-null="true"
+     * @hibernate.property name="name" column="Value" type="string" length="255" not-null="true" update="true"
+     *                     insert="true"
      */
     public String getValue()
     {
