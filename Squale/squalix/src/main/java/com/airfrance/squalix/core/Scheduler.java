@@ -43,6 +43,7 @@ import com.airfrance.squalix.core.exception.ConfigurationException;
 import com.airfrance.squalix.core.purge.Purge;
 import com.airfrance.squalix.messages.Messages;
 import com.airfrance.squalix.stats.ComputeStats;
+import com.airfrance.squalix.util.sourcesrecovering.SourcesRecoveringOptimisation;
 import com.airfrance.squalix.util.stoptime.StopTimeHelper;
 
 /**
@@ -414,7 +415,7 @@ public class Scheduler
             // pour chaque audit lance les auditExecutors associés
             while ( it.hasNext() && !pStopTime.isTimeToStop() )
             {
-
+                SourcesRecoveringOptimisation.reinit();
                 audit = (AuditBO) it.next();
                 audit.setRealBeginningDate( Calendar.getInstance().getTime() );
                 launchAudit( audit );
@@ -691,12 +692,17 @@ public class Scheduler
                 analyze.addAll( analyzeProfil );
                 termination.addAll( terminationProfil );
                 termination.addAll( terminationSource );
-                // Crée l'éxécuteur associé
-                ae = new AuditExecutor( analyze, termination, pAudit, project );
+                // Es-ce le dernier projet de l'audit  ?
+                boolean lastProject = false;
+                if ( !it.hasNext() )
+                {
+                    lastProject = true;
+                }
+                // creation de lauditexecutor associé
+                ae = new AuditExecutor( analyze, termination, pAudit, project, lastProject );
                 ae.setScheduler( this );
                 aeList.add( ae );
                 mAudits.add( ae );
-                // Re-initialisation
                 analyze = new ArrayList( 0 );
                 termination = new ArrayList( 0 );
             }
@@ -882,4 +888,5 @@ public class Scheduler
         }
         return result;
     }
+
 }

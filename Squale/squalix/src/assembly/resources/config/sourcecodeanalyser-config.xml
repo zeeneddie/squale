@@ -4,5 +4,4 @@
 
 <sourcecodeanalyser-configuration>
 	<rootPath>${ENV-SOURCECODEANALYSER-ROOT}</rootPath>
-	<scmTempPath>${ENV-SOURCECODEANALYSER-TMP}</scmTempPath>
 </sourcecodeanalyser-configuration>

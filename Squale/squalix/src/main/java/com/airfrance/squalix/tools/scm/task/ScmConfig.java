@@ -23,7 +23,7 @@ public class ScmConfig
 
     /** Root directory */
     private String mRootDirectory;
-    
+
     /** Scm temporary directory */
     private String mScmDirectory;
 
@@ -53,8 +53,8 @@ public class ScmConfig
     public String getScmDirectory()
     {
         return mScmDirectory;
-    }    
-    
+    }
+
     /**
      * Accessor
      * 
@@ -70,7 +70,7 @@ public class ScmConfig
         }
         mRootDirectory = newRootDirectory;
     }
-    
+
     /**
      * Accessor
      * 
@@ -85,7 +85,7 @@ public class ScmConfig
             newScmDirectory += "/";
         }
         mScmDirectory = newScmDirectory;
-    }    
+    }
 
     /**
      * Reading of the configuration
@@ -98,17 +98,14 @@ public class ScmConfig
     {
         StringBuffer errors = new StringBuffer();
         Digester digester =
-            preSetupDigester( "-//SourceCodeAnalyser Configuration DTD //EN",
-                              "/config/sourcecodeanalyser-config-1.0.dtd", errors );
+            preSetupDigester( "-//Scm Configuration DTD //EN", "/config/scm-config.dtd", errors );
         // Root node
-        digester.addCallMethod( "sourcecodeanalyser-configuration/rootPath", "setRootDirectory", 1,
-                                new Class[] { String.class } );
-        digester.addCallParam( "sourcecodeanalyser-configuration/rootPath", 0 );
-        
+        digester.addCallMethod( "scm-configuration/rootPath", "setRootDirectory", 1, new Class[] { String.class } );
+        digester.addCallParam( "scm-configuration/rootPath", 0 );
+
         // Scm temporary node
-        digester.addCallMethod( "sourcecodeanalyser-configuration/scmTempPath", "setScmDirectory", 1,
-                                new Class[] { String.class } );
-        digester.addCallParam( "sourcecodeanalyser-configuration/scmTempPath", 0 );        
+        digester.addCallMethod( "scm-configuration/scmTempPath", "setScmDirectory", 1, new Class[] { String.class } );
+        digester.addCallParam( "scm-configuration/scmTempPath", 0 );
         digester.push( this );
         // Parsing
         parse( digester, pStream, errors );

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE scm-configuration PUBLIC "-//Scm Configuration DTD //EN" "file:../src/config/scm-config.dtd">
+
+<scm-configuration>
+	<rootPath>${ENV-SCM-ROOT}</rootPath>
+	<scmTempPath>${ENV-SCM-TMP}</scmTempPath>
+</scm-configuration>

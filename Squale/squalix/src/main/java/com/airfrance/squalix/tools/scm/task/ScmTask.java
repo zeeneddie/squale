@@ -18,6 +18,7 @@ import com.airfrance.squalix.core.AbstractTask;
 import com.airfrance.squalix.core.TaskData;
 import com.airfrance.squalix.core.TaskException;
 import com.airfrance.squalix.core.exception.ConfigurationException;
+import com.airfrance.squalix.util.sourcesrecovering.SourcesRecoveringOptimisation;
 
 /**
  * Analyseur de code source disponible sous forme d'arborescence de fichiers
@@ -96,7 +97,7 @@ public class ScmTask
         throws Exception
     {
         // Check out into a directory whose the name is set in an XML file to parse
-        mConfiguration.parse( new FileInputStream( "config/sourcecodeanalyser-config.xml" ) );
+        mConfiguration.parse( new FileInputStream( "config/scm-config.xml" ) );
         // The directory is created
         File dest = new File( mConfiguration.getRootDirectory() );
         // Append "/" to the path
@@ -134,39 +135,51 @@ public class ScmTask
         for ( StringParameterBO locationBO : pLocationList )
         {
             location = locationBO.getValue();
-            remoteRepository = null;
-            if ( location != null )
+            if ( !SourcesRecoveringOptimisation.pathAlreadyRecovered( location, mApplication ) )
             {
-                // Example : "scm:cvs:pserver:myServer:/directory/subdirectory:myModule"
-                if ( location.startsWith( "scm:cvs" ) )
+                remoteRepository = null;
+                if ( location != null )
                 {
-                    remoteRepository =
-                        new RepositoryCvs( location, mConfiguration.getScmDirectory(), location, pLogin, pPassword );
-                }
-                else
-                {
-                    // Example : "scm:svn:https://svn.squale.org/squale"
-                    if ( location.startsWith( "scm:svn" ) )
+                    // Example : "scm:cvs:pserver:myServer:/directory/subdirectory:myModule"
+                    if ( location.startsWith( "scm:cvs" ) )
                     {
                         remoteRepository =
-                            new RepositorySvn( location, mConfiguration.getScmDirectory(), location, pLogin, pPassword );
+                            new RepositoryCvs( location, mConfiguration.getScmDirectory(), location, pLogin, pPassword );
                     }
                     else
                     {
-                        // Example : "scm:local:/apps/myApp"
-                        if ( location.startsWith( "scm:local" ) )
+                        // Example : "scm:svn:https://svn.squale.org/squale"
+                        if ( location.startsWith( "scm:svn" ) )
                         {
                             remoteRepository =
-                                new RepositoryLocal( location, mConfiguration.getScmDirectory(), location, pLogin,
-                                                     pPassword );
+                                new RepositorySvn( location, mConfiguration.getScmDirectory(), location, pLogin,
+                                                   pPassword );
+                        }
+                        else
+                        {
+                            // Example : "scm:local:/apps/myApp"
+                            if ( location.startsWith( "scm:local" ) )
+                            {
+                                remoteRepository =
+                                    new RepositoryLocal( location, mConfiguration.getScmDirectory(), location, pLogin,
+                                                         pPassword );
+                            }
                         }
                     }
                 }
+                // Execute check out from the repository
+                if ( remoteRepository != null )
+                {
+                    checkOutFromRepository( remoteRepository, pSourceDirectory );
+                }
+                if ( ScmMessages.getString( "properties.task.optimization" ).equals( "true" ) )
+                {
+                    SourcesRecoveringOptimisation.addToPathRecovered( location, mApplication );
+                }
             }
-            // Execute check out from the repository
-            if ( remoteRepository != null )
+            else
             {
-                checkOutFromRepository( remoteRepository, pSourceDirectory );
+                LOGGER.info( ScmMessages.getString( "logs.task.optimization", location ) );
             }
         }
 

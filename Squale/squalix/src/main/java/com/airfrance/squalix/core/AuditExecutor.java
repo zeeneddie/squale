@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
@@ -74,36 +75,37 @@ public class AuditExecutor
     private Scheduler mScheduler = null;
 
     /**
-     * Constructeur.<br>
-     * Instancie toutes les tâches de l'arbre, et exécute un audit sur le projet.
+     * Constructor.<br>
+     * Create the audit executor which contains task and termination task to execute for an audit.
      * 
-     * @param pAudit Audit correspondant.
-     * @param pProject projet sur lequel réaliser l'audit.
-     * @param pTasks les taches d'analyse à réaliser
-     * @param pTerminationTasks les tâches à réaliser lorsque toutes les analyses ont été terminées.
-     * @throws Exception si l'Audit ne peut-être créé.
+     * @param pAudit The audit to do.
+     * @param pProject Project on which we realize the audit.
+     * @param pTasks Analyze tasks to realize.
+     * @param pTerminationTasks Termination task to realize
+     * @param lastProject Is it the last project ?
      * @roseuid 42AE866F01F7
      */
     public AuditExecutor( final List pTasks, final List pTerminationTasks, final AuditBO pAudit,
-                          final ProjectBO pProject )
-        throws Exception
+                          final ProjectBO pProject, boolean lastProject )
     {
-        // Le TaskData contenant les différents paramètres temporaires.
-        // Vide au départ, il sera potentiellement modifié par chaque tâche
-        // ce qui permettra aux tâches suivantes de récupérer les informations
-        // dont elles ont besoin et qui dépendent d'une tâche précédemment exécutée.
+        /*
+         * The TaskData contains some temporary parameter. Empty at the beginning, it could be modified by each task.
+         * Then the following tasks could recover the informations they need and which depends from a previous task.
+         */
         TaskData taskData = new TaskData();
+        ApplicationBO appli = (ApplicationBO) pProject.getParent();
         // Creation des tâches d'analyse
         mTasks = new ArrayList();
         AbstractTask task = null;
         for ( int i = 0; i < pTasks.size(); i++ )
         {
-            // On instancie chaque tache
+            // Creation of each task
             task =
                 TaskUtility.createTask( (TaskRefBO) pTasks.get( i ), pProject.getId(), pProject.getParent().getId(),
                                         pAudit.getId(), taskData );
-            // La liste des tâches est complétée par la nouvelle
+            // The list of task is completed with the new one
             mTasks.add( task );
+
         }
 
         // Creation des tâches de complétude sur le même schéma
@@ -113,9 +115,49 @@ public class AuditExecutor
             task =
                 TaskUtility.createTask( (TaskRefBO) pTerminationTasks.get( i ), pProject.getId(),
                                         pProject.getParent().getId(), pAudit.getId(), taskData );
-            // La liste des tâches de terminaison est complétée par la nouvelle
-            mTerminationTasks.add( task );
+
+            // Is the task a source code recovering termination task ?
+            if ( task instanceof AbstractSourceTerminationTask )
+            {
+                // if yes then we should determine if task does the optimization of the source code recovering
+                AbstractSourceTerminationTask sourceterminationtask = (AbstractSourceTerminationTask) task;
+                if ( sourceterminationtask.doOptimization() )
+                {
+                    // If the task does the optimization of the source code recovering then we don't add this task to
+                    // the list and we keep it for after
+                    appli.getSourceCodeTerminationTask().add( pTerminationTasks.get( i ) );
+
+                }
+                else
+                {
+                    // If the task doesn't do the optimization of the source code recovering then we add it to list of
+                    // termination task
+                    mTerminationTasks.add( task );
+                }
+            }
+            else
+            {
+                // if the task is not a source code recovering termination task then we add it to the list of
+                // termination task
+                mTerminationTasks.add( task );
+            }
         }
+        // Is it the last project of this Audit ?
+        if ( lastProject )
+        {
+            // If yes then we add all source code termination task we keep
+            Iterator keepTaskIt = appli.getSourceCodeTerminationTask().iterator();
+            while ( keepTaskIt.hasNext() )
+            {
+                // Creation of each task
+                task =
+                    TaskUtility.createTask( (TaskRefBO) keepTaskIt.next(), pProject.getId(),
+                                            pProject.getParent().getId(), pAudit.getId(), taskData );
+                // The termination task list is completed with the new one
+                mTerminationTasks.add( task );
+            }
+        }
+
         mAudit = pAudit;
         mProject = pProject;
     }
@@ -207,14 +249,13 @@ public class AuditExecutor
     }
 
     /**
-     * Access method for the mTasks property.
+     * Getter method for the mTerminationTasks property.
      * 
-     * @return the current value of the mTasks property
-     * @roseuid 42C2A3B000C5
+     * @return the current value of the mTerminationTasks property
      */
-    public List getTasks()
+    public List getTerminationTasks()
     {
-        return mTasks;
+        return mTerminationTasks;
     }
 
     /**

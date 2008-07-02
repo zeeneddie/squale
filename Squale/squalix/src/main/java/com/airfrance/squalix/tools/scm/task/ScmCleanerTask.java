@@ -2,20 +2,22 @@ package com.airfrance.squalix.tools.scm.task;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
-import com.airfrance.squalix.core.AbstractTask;
+import com.airfrance.squalix.core.AbstractSourceTerminationTask;
 import com.airfrance.squalix.core.TaskException;
+import com.airfrance.squalix.core.exception.ConfigurationException;
 import com.airfrance.squalix.util.file.FileUtility;
 
 /**
- * Supprime le répertoire crée par la tâche d'analyse du code source
+ * Suppress the directory create by the source code recovering task 
  */
 public class ScmCleanerTask
-    extends AbstractTask
+    extends AbstractSourceTerminationTask
 {
 
     /**
-     * Constructeur
+     * Default constructor
      */
     public ScmCleanerTask()
     {
@@ -32,18 +34,36 @@ public class ScmCleanerTask
     {
         try
         {
-            // On récupère la configuration de la tâche
+            // Recovering of the task configuration
             ScmConfig conf = new ScmConfig();
-            conf.parse( new FileInputStream( "config/sourcecodeanalyser-config.xml" ) );
-            // On supprime le répertoire
+            conf.parse( new FileInputStream( "config/scm-config.xml" ) );
+            // Removal of the directory
             File dir = new File( conf.getRootDirectory() );
             FileUtility.deleteRecursively( dir );
         }
-        catch ( Exception e )
+        catch ( FileNotFoundException e )
         {
-            throw new TaskException( e );
+            throw new TaskException (e);
+        }
+        catch ( ConfigurationException e )
+        {
+            throw new TaskException (e);
         }
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean doOptimization()
+    {
+        boolean doOptimisation = false;
+        if ( ScmMessages.getString( "properties.task.optimization" ).equals("true") )
+        {
+            doOptimisation = true;
+        }
+        return doOptimisation;
     }
 
 }

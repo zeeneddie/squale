@@ -5,7 +5,7 @@ package com.airfrance.squalix.tools.clearcase.task;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalix.core.AbstractTask;
+import com.airfrance.squalix.core.AbstractSourceTerminationTask;
 import com.airfrance.squalix.core.TaskException;
 import com.airfrance.squalix.tools.clearcase.configuration.ClearCaseConfiguration;
 import com.airfrance.squalix.tools.clearcase.configuration.ClearCaseMessages;
@@ -21,7 +21,7 @@ import com.airfrance.squalix.util.process.ProcessManager;
  * @version 2.1
  */
 public class ClearCaseCleanerTask
-    extends AbstractTask
+    extends AbstractSourceTerminationTask
     implements ProcessErrorHandler
 {
 
@@ -117,5 +117,19 @@ public class ClearCaseCleanerTask
     public void processError( String pErrorMessage )
     {
         initError( pErrorMessage );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean doOptimization()
+    {
+        boolean doOptimization = false;
+        if ( ClearCaseMessages.getString( "properties.task.optimization" ).equals( "true" ) )
+        {
+            doOptimization = true;
+        }
+        return doOptimization;
     }
 }

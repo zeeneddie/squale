@@ -15,6 +15,7 @@ import com.airfrance.squalix.core.TaskData;
 import com.airfrance.squalix.core.TaskException;
 import com.airfrance.squalix.core.exception.ConfigurationException;
 import com.airfrance.squalix.util.file.FileUtility;
+import com.airfrance.squalix.util.sourcesrecovering.SourcesRecoveringOptimisation;
 
 /**
  * Analyseur de code source disponible sous forme d'arborescence de fichiers
@@ -70,7 +71,7 @@ public class SourceCodeAnalyserTask
                 throw new ConfigurationException( message );
             }
             // On met à jour le view_path des paramètres temporaires
-            modifyViewPathInTempMap( new File( path.getValue() ) );
+            modifyViewPathInTempMap( path );
 
             // positionne les données sur la taille du file System
             affectFileSystemSize( mConfiguration.getRootDirectory(), true );
@@ -82,27 +83,50 @@ public class SourceCodeAnalyserTask
     }
 
     /**
-     * Modifie le paramètre <code>view_path</code> des paramètres temporaires. Extrait si besoin le fichier compressé
+     * Modify the parameter <code>view_path</code> of the temporary parameter. Do the recovering of the source code,
+     * and uncompress if it necessary
      * 
-     * @param pFile le fichier vers l'arborescence du projets
-     * @throws Exception si erreur
+     * @param path the parameter which contains the path to the source code
+     * @throws Exception happened during during the recovering of the source code
      */
-    private void modifyViewPathInTempMap( File pFile )
+    private void modifyViewPathInTempMap( StringParameterBO path )
         throws Exception
     {
-        // On va extraire ou copier les informations dans le répertoire défini
-        // dans le fichier XML de la configuration
+        // we extract or copy the information into the destination directory
+        // First we parse the xml configuration file in order to recover the destination directory
         mConfiguration.parse( new FileInputStream( "config/sourcecodeanalyser-config.xml" ) );
-        // On crée ce répertoire
+        // we create the directory
         File dest = new File( mConfiguration.getRootDirectory() );
-        // On affecte la valeur au view_path en rajoutant un "/" en bout en cas
+        // we associate this destination directory to the VIEW_PATH variable
         getData().putData( TaskData.VIEW_PATH, dest.getAbsolutePath() + "/" );
-        FileUtility.copyOrExtractInto( pFile, dest );
-        if ( dest.listFiles().length == 0 )
+
+        // Does this source code already recovered ?
+        if ( !SourcesRecoveringOptimisation.pathAlreadyRecovered( path.getValue(), mApplication ) )
         {
-            // si le répertoire de destination est vide, on lance une exception
-            String message = SourceCodeAnalyserMessages.getString( "exception.empty_dir", pFile.getAbsoluteFile() );
-            throw new IOException( message );
+            // If no we do the recovering
+            // We create the file which is supposed contains the source code
+            File sourcePath = new File( path.getValue() );
+            // recovering of the source code
+            FileUtility.copyOrExtractInto( sourcePath, dest );
+            if ( dest.listFiles().length == 0 )
+            {
+                // If the destination directory is empty, then we launch an exception
+                String message =
+                    SourceCodeAnalyserMessages.getString( "exception.empty_dir", sourcePath.getAbsoluteFile() );
+                throw new IOException( message );
+            }
+            // We had this path to the source code to the list of path already recovered
+            if ( SourceCodeAnalyserMessages.getString( "properties.task.optimization" ).equals( "true" ) )
+            {
+                SourcesRecoveringOptimisation.addToPathRecovered( path.getValue(), mApplication );
+            }
+
         }
+        else
+        {
+            // if the recovering of this source code has already been done, then we indicate this in the log
+            LOGGER.info( SourceCodeAnalyserMessages.getString( "logs.task.optimization", path.getValue() ) );
+        }
+
     }
 }
