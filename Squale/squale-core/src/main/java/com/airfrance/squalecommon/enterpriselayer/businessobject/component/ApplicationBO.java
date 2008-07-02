@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -87,6 +88,12 @@ public class ApplicationBO
      * Application publique
      */
     private boolean mPublic;
+
+    /**
+     * List of all source code recovering termination task. Attribute use when the source code recovering optimization
+     * is enabled
+     */
+    private HashSet<Object> sourceCodeTerminationTask;
 
     /**
      * Instancie un nouveau composant.
@@ -180,6 +187,7 @@ public class ApplicationBO
     public ApplicationBO()
     {
         super();
+        sourceCodeTerminationTask = new HashSet<Object>();
     }
 
     /**
@@ -212,6 +220,7 @@ public class ApplicationBO
         mServeurBO.setServeurId( pSiteId );
         mExternalDev = pExternalDev;
         mIsInProduction = pIsInProduction;
+        sourceCodeTerminationTask = new HashSet<Object>();
     }
 
     /**
@@ -509,4 +518,25 @@ public class ApplicationBO
     {
         return pVisitor.visit( this, pArgument );
     }
+
+    /**
+     * Get the list of source code recovering termination task which should be done at the end of the audit
+     * 
+     * @return The list of source code recovering termination task
+     */
+    public HashSet<Object> getSourceCodeTerminationTask()
+    {
+        return sourceCodeTerminationTask;
+    }
+
+    /**
+     * Set the list of source code recovering termination task which should be done at the end of the audit
+     * 
+     * @param pSourceCodeTerminationTask The list of source code recovering termination task
+     */
+    public void setSourceCodeTerminationTask( HashSet<Object> pSourceCodeTerminationTask )
+    {
+        sourceCodeTerminationTask = pSourceCodeTerminationTask;
+    }
+
 }
