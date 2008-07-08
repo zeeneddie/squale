@@ -27,41 +27,49 @@
 		<property name="dialect">${squale.db.dialect}</property>
 
 		<!-- begin mapping files -->
-		<mapping resource="mapping/AbstractComponentBO.hbm.xml" />
-		<mapping resource="mapping/AbstractFormulaBO.hbm.xml" />
-		<mapping resource="mapping/AtomicRightsBO.hbm.xml" />
-		<mapping resource="mapping/AuditBO.hbm.xml" />
-		<mapping resource="mapping/ErrorBO.hbm.xml" />
-		<mapping resource="mapping/MarkBO.hbm.xml" />
-		<mapping resource="mapping/MeasureBO.hbm.xml" />
-		<mapping resource="mapping/ProfileBO.hbm.xml" />
-		<mapping resource="mapping/QualityResultBO.hbm.xml" />
-		<mapping resource="mapping/QualityRuleBO.hbm.xml" />
-		<mapping resource="mapping/SqualeReferenceBO.hbm.xml" />
-		<mapping resource="mapping/UserBO.hbm.xml" />
-		<mapping resource="mapping/MetricBO.hbm.xml" />
-		<mapping resource="mapping/QualityGridBO.hbm.xml" />
-		<mapping resource="mapping/AuditGridBO.hbm.xml" />
-		<mapping resource="mapping/MessageBO.hbm.xml" />
-		<mapping resource="mapping/RuleSetBO.hbm.xml" />
-		<mapping resource="mapping/RuleBO.hbm.xml" />
-		<mapping resource="mapping/CheckstyleModuleBO.hbm.xml" />
-		<mapping resource="mapping/TaskBO.hbm.xml" />
-		<mapping resource="mapping/AbstractTasksUserBO.hbm.xml" />
-		<mapping resource="mapping/StopTimeBO.hbm.xml" />
-		<mapping resource="mapping/AuditFrequencyBO.hbm.xml" />
-		<mapping resource="mapping/ProjectParameterBO.hbm.xml" />
-		<mapping resource="mapping/RuleCheckingTransgressionItemBO.hbm.xml" />
-		<mapping resource="mapping/TaskParameterBO.hbm.xml" />
-		<mapping resource="mapping/TaskRefBO.hbm.xml" />
-		<mapping resource="mapping/NewsBO.hbm.xml" />
-		<mapping resource="mapping/SiteStatsDICTBO.hbm.xml" />
-		<mapping resource="mapping/SiteAndProfilStatsDICTBO.hbm.xml" />
-		<mapping resource="mapping/ServeurBO.hbm.xml" />
-		<mapping resource="mapping/UserAccessBO.hbm.xml" />
-		<mapping resource="mapping/AbstractDisplayConfBO.hbm.xml" />
-		<mapping resource="mapping/Profile_DisplayConfBO.hbm.xml" />
-		<mapping resource="mapping/AuditDisplayConfBO.hbm.xml" />
+		<mapping resource="mapping/access/UserAccessBO.hbm.xml" />
+		
+		<mapping resource="mapping/component/AbstractComponentBO.hbm.xml" />
+		<mapping resource="mapping/component/AuditBO.hbm.xml" />
+		<mapping resource="mapping/component/AuditDisplayConfBO.hbm.xml" />
+		<mapping resource="mapping/component/AuditGridBO.hbm.xml" />
+		<mapping resource="mapping/component/parameters/ProjectParameterBO.hbm.xml" />
+		
+		<mapping resource="mapping/config/AbstractTasksUserBO.hbm.xml" />
+		<mapping resource="mapping/config/AuditFrequencyBO.hbm.xml" />
+		<mapping resource="mapping/config/Profile_DisplayConfBO.hbm.xml" />
+		<mapping resource="mapping/config/ServeurBO.hbm.xml" />
+		<mapping resource="mapping/config/StopTimeBO.hbm.xml" />
+		<mapping resource="mapping/config/TaskBO.hbm.xml" />
+		<mapping resource="mapping/config/TaskParameterBO.hbm.xml" />
+		<mapping resource="mapping/config/TaskRefBO.hbm.xml" />
+		<mapping resource="mapping/config/web/AbstractDisplayConfBO.hbm.xml" />
+		
+		<mapping resource="mapping/message/MessageBO.hbm.xml" />
+		<mapping resource="mapping/message/NewsBO.hbm.xml" />
+		
+		<mapping resource="mapping/profile/AtomicRightsBO.hbm.xml" />
+		<mapping resource="mapping/profile/ProfileBO.hbm.xml" />
+		<mapping resource="mapping/profile/UserBO.hbm.xml" />
+		
+		<mapping resource="mapping/result/ErrorBO.hbm.xml" />
+		<mapping resource="mapping/result/MarkBO.hbm.xml" />
+		<mapping resource="mapping/result/MeasureBO.hbm.xml" />
+		<mapping resource="mapping/result/MetricBO.hbm.xml" />
+		<mapping resource="mapping/result/QualityResultBO.hbm.xml" />
+		<mapping resource="mapping/result/SqualeReferenceBO.hbm.xml" />
+		<mapping resource="mapping/result/rulechecking/RuleCheckingTransgressionItemBO.hbm.xml" />
+		
+		<mapping resource="mapping/rule/AbstractFormulaBO.hbm.xml" />
+		<mapping resource="mapping/rule/QualityGridBO.hbm.xml" />		
+		<mapping resource="mapping/rule/QualityRuleBO.hbm.xml" />		
+		
+		<mapping resource="mapping/rulechecking/RuleBO.hbm.xml" />		
+		<mapping resource="mapping/rulechecking/RuleSetBO.hbm.xml" />		
+		<mapping resource="mapping/rulechecking/checkstyle/CheckstyleModuleBO.hbm.xml" />
+		
+		<mapping resource="mapping/stats/SiteStatsDICTBO.hbm.xml" />
+		<mapping resource="mapping/stats/SiteAndProfilStatsDICTBO.hbm.xml" />
 		<!-- end mapping files   -->
 
 	</session-factory>
