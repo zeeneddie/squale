@@ -514,12 +514,10 @@ function _mVx_Menu_ouvrir(_element_declencheur) {
 				Decalage = (fDomOffset (onomDIVGauche, 'offsetLeft') + document.getElementById(nomDIVGauche).offsetWidth) + "px";
 			} else {
 				/* 
-				modif 20082006 ajout de test version FireFox/3.0
+				modif 2008_07_21 ajout de test version FireFox/3.X
 				*/
 				var firefox = navigator.userAgent;
-				var taille = firefox.length;
-				var version = firefox.substring(taille-11,taille);
-				if(version == "Firefox/3.0"){
+				if(firefox.match("Firefox/3.")!=null){
 					Decalage = document.getElementById(nomDIVGauche).parentNode.offsetLeft + document.getElementById(nomDIVGauche).offsetWidth + "px";
 				}else{
 					Decalage = document.getElementById(nomDIVGauche).offsetLeft + document.getElementById(nomDIVGauche).offsetWidth + "px";
@@ -541,12 +539,10 @@ function _mVx_Menu_ouvrir(_element_declencheur) {
 				DecalageTop = (fDomOffset (onomDIVGauche, 'offsetTop') + _element_declencheur.getObjetHTML().offsetTop - 1) + "px";
 			} else {
 				/* 
-				modif 20082006 ajout de test version FireFox/3.0
+				modif 2008_07_21  ajout de test version FireFox/3.X
 				*/
 				var firefox = navigator.userAgent;
-				var taille = firefox.length;
-				var version = firefox.substring(taille-11,taille);
-				if(version == "Firefox/3.0"){
+				if(firefox.match("Firefox/3.")!=null){
 					DecalageTop = (document.getElementById(nomDIVGauche).parentNode.offsetTop + _element_declencheur.getObjetHTML().offsetTop) -1+ "px";
 				}else{
 					DecalageTop = (document.getElementById(nomDIVGauche).offsetTop + _element_declencheur.getObjetHTML().offsetTop) + "px";
