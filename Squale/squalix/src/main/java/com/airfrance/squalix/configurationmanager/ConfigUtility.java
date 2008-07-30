@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,13 +29,61 @@ import com.airfrance.squalix.messages.Messages;
  * @author m400842 (by rose)
  * @version 1.0
  */
-public class ConfigUtility
+public final class ConfigUtility
 {
 
     /**
      * Logger
      */
     private static final Log LOGGER = LogFactory.getLog( ConfigUtility.class );
+
+    /**
+     * Default private constructor
+     */
+    private ConfigUtility()
+    {
+    }
+
+    /**
+     * This method parses the given String to replace any "${...}"-like variable by the corresponding system property.
+     * If no property is found, then the variable is left as is.
+     * 
+     * @param originalString the string to filter
+     * @return the filtered String
+     */
+    public static String filterStringWithSystemProps( String originalString )
+    {
+        String result = originalString;
+
+        // Defines a "${...}"-like variable
+        Pattern pattern = Pattern.compile( "\\$\\{(\\w||\\.)*\\}" );
+        Matcher matcher = pattern.matcher( result );
+        // try to find occurrences
+        int searchIndex = 0;
+        while ( matcher.find( searchIndex ) )
+        {
+            String propVar = matcher.group();
+            // retrieve the name of the variable
+            String propName = matcher.group().substring( 2, propVar.length() - 1 );
+            // and try to retrieve its value
+            String propValue = System.getProperty( propName );
+            if ( propValue != null )
+            {
+                // need to quote the string to prevent "\" to be removed
+                result = matcher.replaceFirst( Matcher.quoteReplacement( propValue ) );
+                searchIndex = matcher.start() + propValue.length();
+            }
+            else
+            {
+                // do nothing but increase the search index
+                searchIndex = matcher.end();
+            }
+            // keep on analyzing the string for other matches
+            matcher = pattern.matcher( result );
+        }
+
+        return result;
+    }
 
     /**
      * Retourne l'élément racine du document XML de configuration.
@@ -115,8 +165,8 @@ public class ConfigUtility
     }
 
     /**
-     * Retourne un élément directement enfant avec le nom désiré, ou null si celui-ci n'existe pas.<br />
-     * Si plusieurs éléments enfants portent le même nom, seul le premier est renvoyé.
+     * Retourne un élément directement enfant avec le nom désiré, ou null si celui-ci n'existe pas.<br /> Si plusieurs
+     * éléments enfants portent le même nom, seul le premier est renvoyé.
      * 
      * @param pParent Le noeud parent.
      * @param pName Le nom de l'élément recherché, insensible à la casse.
