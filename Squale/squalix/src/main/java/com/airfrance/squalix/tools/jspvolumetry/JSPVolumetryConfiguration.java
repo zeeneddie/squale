@@ -54,14 +54,20 @@ public class JSPVolumetryConfiguration
         // Workspace
         config.mWorkspace =
             new File(
-                      ConfigUtility.getNodeByTagName( root, JSPVolumetryMessages.getString( "configuration.workspace" ) ).getFirstChild().getNodeValue().trim() );
+                      ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                                 root,
+                                                                                                 JSPVolumetryMessages.getString( "configuration.workspace" ) ).getFirstChild().getNodeValue().trim() ) );
         // Emplacement du fichier de résultat
         config.mResultFile =
             new File(
-                      ConfigUtility.getNodeByTagName( root, JSPVolumetryMessages.getString( "configuration.resultfile" ) ).getFirstChild().getNodeValue().trim() );
+                      ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                                 root,
+                                                                                                 JSPVolumetryMessages.getString( "configuration.resultfile" ) ).getFirstChild().getNodeValue().trim() ) );
         // Emplacement du fichier de résultat
         config.mScriptPath =
-            ConfigUtility.getNodeByTagName( root, JSPVolumetryMessages.getString( "configuration.script" ) ).getFirstChild().getNodeValue().trim();
+            ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                       root,
+                                                                                       JSPVolumetryMessages.getString( "configuration.script" ) ).getFirstChild().getNodeValue().trim() );
         return config;
     }
 

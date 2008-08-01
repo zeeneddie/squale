@@ -341,32 +341,36 @@ public class McCabeConfiguration
     {
         // le fichier de log
         pConfiguration.mLogger =
-            FileUtility.getLogFile( ConfigUtility.getNodeByTagName(
-                                                                    pNode,
-                                                                    McCabeMessages.getString( "configuration.general.logger" ) ).getFirstChild().getNodeValue().trim() );
+            FileUtility.getLogFile( ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                                               pNode,
+                                                                                                               McCabeMessages.getString( "configuration.general.logger" ) ).getFirstChild().getNodeValue().trim() ) );
         // le fichier de log des erreurs
         String errorLogName = McCabeMessages.getString( "configuration.general.error.logger" );
         pConfiguration.mErrorLogger =
-            FileUtility.getLogFile( ConfigUtility.getNodeByTagName( pNode, errorLogName ).getFirstChild().getNodeValue().trim() );
+            FileUtility.getLogFile( ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName( pNode,
+                                                                                                               errorLogName ).getFirstChild().getNodeValue().trim() ) );
         // Workspace
         pConfiguration.mWorkspace =
             new File(
-                      ConfigUtility.getNodeByTagName( pNode,
-                                                      McCabeMessages.getString( "configuration.general.workspace" ) ).getFirstChild().getNodeValue().trim() );
+                      ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                                 pNode,
+                                                                                                 McCabeMessages.getString( "configuration.general.workspace" ) ).getFirstChild().getNodeValue().trim() ) );
         // On effectue le nettoyage dans le cas où la tâche s'est arrêtée brusquement:
         deleteOldSubWorkspace( pConfiguration.mWorkspace );
         // Chemin du fichier contenant les rapports
         pConfiguration.mReportsPath =
             new File(
-                      ConfigUtility.getNodeByTagName( pNode,
-                                                      McCabeMessages.getString( "configuration.general.reportspath" ) ).getFirstChild().getNodeValue().trim() );
+                      ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                                 pNode,
+                                                                                                 McCabeMessages.getString( "configuration.general.reportspath" ) ).getFirstChild().getNodeValue().trim() ) );
         // Commandes
         Node commandsNode =
             ConfigUtility.getNodeByTagName( pNode, McCabeMessages.getString( "configuration.general.commands" ) );
         // Commande cli
         pConfiguration.mCliCommand =
-            ConfigUtility.getNodeByTagName( commandsNode,
-                                            McCabeMessages.getString( "configuration.general.commands.clicommand" ) ).getFirstChild().getNodeValue().trim();
+            ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                       commandsNode,
+                                                                                       McCabeMessages.getString( "configuration.general.commands.clicommand" ) ).getFirstChild().getNodeValue().trim() );
         // Commandes parser
         StringTokenizer token =
             new StringTokenizer(
@@ -526,7 +530,7 @@ public class McCabeConfiguration
         {
             if ( parameterNode.getNodeType() == Node.ELEMENT_NODE )
             {
-                parameters.add( parameterNode.getFirstChild().getNodeValue() );
+                parameters.add( ConfigUtility.filterStringWithSystemProps( parameterNode.getFirstChild().getNodeValue() ) );
             }
             parameterNode = parameterNode.getNextSibling();
         }

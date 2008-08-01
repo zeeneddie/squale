@@ -32,4 +32,4 @@ SQUALIX_HOME=`dirname $0`
 cd ${SQUALIX_HOME}
 # On enleve le -Xms512M pour éviter les "java.io.IOException: Not enough space" lors des fork sur dev8ts
 # a priori du a un /tmp plein...
-${JAVA_HOME}/bin/java -DentityExpansionLimit=500000 -Djava.awt.headless=true $DEBUG -Xmx512M -Xss7M -jar  ${SQUALIX_HOME}/${project.build.finalName}.jar ${SQUALIX_HOME} -s $type
+${JAVA_HOME}/bin/java -Dsquale.home=/home/bfranchet/.squale -DentityExpansionLimit=500000 -Djava.awt.headless=true $DEBUG -Xmx512M -Xss7M -jar  ${SQUALIX_HOME}/${project.build.finalName}.jar ${SQUALIX_HOME} -s $type -Dsquale.home=/home/bfranchet/.squale

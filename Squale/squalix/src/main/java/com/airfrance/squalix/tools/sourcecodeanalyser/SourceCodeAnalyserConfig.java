@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.airfrance.squalecommon.util.xml.XmlImport;
+import com.airfrance.squalix.configurationmanager.ConfigUtility;
 import com.airfrance.squalix.core.exception.ConfigurationException;
 
 /**
@@ -52,7 +53,7 @@ public class SourceCodeAnalyserConfig
         {
             newRootDirectory += "/";
         }
-        mRootDirectory = newRootDirectory;
+        mRootDirectory = ConfigUtility.filterStringWithSystemProps( newRootDirectory );
     }
 
     /**

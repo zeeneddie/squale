@@ -625,7 +625,7 @@ public class JCompilingConfiguration
      */
     public void setEclipseBundleDir( String pEclipseBundleDir )
     {
-        mEclipseBundleDir = pEclipseBundleDir;
+        mEclipseBundleDir = ConfigUtility.filterStringWithSystemProps( pEclipseBundleDir );
     }
 
     /**
@@ -641,7 +641,7 @@ public class JCompilingConfiguration
      */
     public void setExportedLibsDir( String pExportedLibsDir )
     {
-        mExportedLibsDir = new File( pExportedLibsDir );
+        mExportedLibsDir = new File( ConfigUtility.filterStringWithSystemProps( pExportedLibsDir ) );
     }
 
     /**
@@ -666,7 +666,7 @@ public class JCompilingConfiguration
         {
             libs = new ArrayList();
         }
-        libs.add( pPath );
+        libs.add( ConfigUtility.filterStringWithSystemProps( pPath ) );
         mBootclasspaths.put( pDialect, libs );
     }
 

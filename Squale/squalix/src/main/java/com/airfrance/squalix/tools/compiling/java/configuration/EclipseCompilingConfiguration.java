@@ -10,6 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.airfrance.squalecommon.util.xml.XmlImport;
+import com.airfrance.squalix.configurationmanager.ConfigUtility;
 import com.airfrance.squalix.core.exception.ConfigurationException;
 import com.airfrance.squalix.tools.compiling.CompilingMessages;
 
@@ -140,7 +141,7 @@ public class EclipseCompilingConfiguration
      */
     public void setCommand( String pCommand )
     {
-        mCommand = pCommand;
+        mCommand = ConfigUtility.filterStringWithSystemProps( pCommand );
     }
 
     /**
@@ -156,7 +157,7 @@ public class EclipseCompilingConfiguration
      */
     public void setWorkspace( String pWorkspace )
     {
-        mWorkspace = pWorkspace;
+        mWorkspace = ConfigUtility.filterStringWithSystemProps( pWorkspace );
     }
 
     /**
@@ -180,7 +181,7 @@ public class EclipseCompilingConfiguration
      */
     public void setEclipseHome( String pHome )
     {
-        mEclipseHome = new File( pHome );
+        mEclipseHome = new File( ConfigUtility.filterStringWithSystemProps( pHome ) );
     }
 
     /**
@@ -188,7 +189,7 @@ public class EclipseCompilingConfiguration
      */
     public void setSqualeEclipsePlugins( String pSqualeHome )
     {
-        mSqualeEclipsePlugins = new File( pSqualeHome );
+        mSqualeEclipsePlugins = new File( ConfigUtility.filterStringWithSystemProps( pSqualeHome ) );
     }
 
     /**
@@ -212,7 +213,7 @@ public class EclipseCompilingConfiguration
      */
     public void setCopyScript( String pCopyScript )
     {
-        mCopyScript = pCopyScript;
+        mCopyScript = ConfigUtility.filterStringWithSystemProps( pCopyScript );
     }
 
     /**
@@ -220,7 +221,7 @@ public class EclipseCompilingConfiguration
      */
     public void setRightScript( String pRightScript )
     {
-        mRightScript = pRightScript;
+        mRightScript = ConfigUtility.filterStringWithSystemProps( pRightScript );
     }
 
 }

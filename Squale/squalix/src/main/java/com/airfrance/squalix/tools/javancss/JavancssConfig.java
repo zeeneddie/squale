@@ -6,6 +6,7 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.airfrance.squalecommon.util.xml.XmlImport;
+import com.airfrance.squalix.configurationmanager.ConfigUtility;
 import com.airfrance.squalix.core.exception.ConfigurationException;
 
 /**
@@ -45,7 +46,8 @@ public class JavancssConfig
         Digester digester =
             preSetupDigester( "-//Javancss Configuration DTD //EN", "/config/javancss-config.dtd", errors );
         // Root directory treatment
-        digester.addCallMethod( "javancss-configuration/resultFilePath", "setResultFilePath", 1, new Class[] { String.class } );
+        digester.addCallMethod( "javancss-configuration/resultFilePath", "setResultFilePath", 1,
+                                new Class[] { String.class } );
         digester.addCallParam( "javancss-configuration/resultFilePath", 0 );
         digester.push( this );
         // Parser call
@@ -53,7 +55,7 @@ public class JavancssConfig
         if ( errors.length() > 0 )
         {
             throw new ConfigurationException( JavancssMessages.getString( "javancss.exception.configuration.parse",
-                                                                     new Object[] { errors.toString() } ) );
+                                                                          new Object[] { errors.toString() } ) );
         }
     }
 
@@ -74,7 +76,7 @@ public class JavancssConfig
      */
     public void setResultFilePath( String pResultFilePath )
     {
-        resultFilePath = pResultFilePath;
+        resultFilePath = ConfigUtility.filterStringWithSystemProps( pResultFilePath );
     }
 
 }

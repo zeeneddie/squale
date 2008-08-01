@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.airfrance.squalecommon.util.xml.XmlImport;
+import com.airfrance.squalix.configurationmanager.ConfigUtility;
 import com.airfrance.squalix.core.exception.ConfigurationException;
 
 /**
@@ -80,7 +81,7 @@ public class CppTestConfiguration
      */
     public void setReportDirectory( String pDirectory )
     {
-        mReportDirectory = pDirectory;
+        mReportDirectory = ConfigUtility.filterStringWithSystemProps( pDirectory );
     }
 
     /**
@@ -96,7 +97,7 @@ public class CppTestConfiguration
      */
     public void setLogger( String pLogger )
     {
-        mLogger = pLogger;
+        mLogger = ConfigUtility.filterStringWithSystemProps( pLogger );
     }
 
 }

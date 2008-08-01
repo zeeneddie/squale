@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.airfrance.squalecommon.util.xml.XmlImport;
+import com.airfrance.squalix.configurationmanager.ConfigUtility;
 import com.airfrance.squalix.core.exception.ConfigurationException;
 
 /**
@@ -68,7 +69,7 @@ public class ScmConfig
         {
             newRootDirectory += "/";
         }
-        mRootDirectory = newRootDirectory;
+        mRootDirectory = ConfigUtility.filterStringWithSystemProps( newRootDirectory );
     }
 
     /**
@@ -84,7 +85,7 @@ public class ScmConfig
         {
             newScmDirectory += "/";
         }
-        mScmDirectory = newScmDirectory;
+        mScmDirectory = ConfigUtility.filterStringWithSystemProps( newScmDirectory );
     }
 
     /**
@@ -97,8 +98,7 @@ public class ScmConfig
         throws ConfigurationException
     {
         StringBuffer errors = new StringBuffer();
-        Digester digester =
-            preSetupDigester( "-//Scm Configuration DTD //EN", "/config/scm-config.dtd", errors );
+        Digester digester = preSetupDigester( "-//Scm Configuration DTD //EN", "/config/scm-config.dtd", errors );
         // Root node
         digester.addCallMethod( "scm-configuration/rootPath", "setRootDirectory", 1, new Class[] { String.class } );
         digester.addCallParam( "scm-configuration/rootPath", 0 );

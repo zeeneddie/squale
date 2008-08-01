@@ -218,25 +218,39 @@ public class RSMConfiguration
         // Workspace
         pConfiguration.mWorkspace =
             new File(
-                      ConfigUtility.getNodeByTagName( pNode, RSMMessages.getString( "configuration.workspace" ) ).getFirstChild().getNodeValue().trim() );
+                      ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                                 pNode,
+                                                                                                 RSMMessages.getString( "configuration.workspace" ) ).getFirstChild().getNodeValue().trim() ) );
         // Chemin du fichier contenant les rapports
         pConfiguration.mReportPath =
-            ConfigUtility.getNodeByTagName( pNode, RSMMessages.getString( "configuration.reportpath" ) ).getFirstChild().getNodeValue().trim();
+            ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                       pNode,
+                                                                                       RSMMessages.getString( "configuration.reportpath" ) ).getFirstChild().getNodeValue().trim() );
         // Chemin du rapport de méthodes après préprocessing
         pConfiguration.mMethodsReportPath =
-            ConfigUtility.getNodeByTagName( pNode, RSMMessages.getString( "configuration.reportmethodspath" ) ).getFirstChild().getNodeValue().trim();
+            ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                       pNode,
+                                                                                       RSMMessages.getString( "configuration.reportmethodspath" ) ).getFirstChild().getNodeValue().trim() );
         // Chemin du rapport de classes après préprocessing
         pConfiguration.mClassReportPath =
-            ConfigUtility.getNodeByTagName( pNode, RSMMessages.getString( "configuration.reportclassespath" ) ).getFirstChild().getNodeValue().trim();
+            ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                       pNode,
+                                                                                       RSMMessages.getString( "configuration.reportclassespath" ) ).getFirstChild().getNodeValue().trim() );
         // Chemin du fichier auxillliaire utilisé pour le préprocessing
         pConfiguration.mAuxFile =
-            ConfigUtility.getNodeByTagName( pNode, RSMMessages.getString( "configuration.auxfile" ) ).getFirstChild().getNodeValue().trim();
+            ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                       pNode,
+                                                                                       RSMMessages.getString( "configuration.auxfile" ) ).getFirstChild().getNodeValue().trim() );
         // Commande d'exécution
         pConfiguration.mExecCommand =
-            ConfigUtility.getNodeByTagName( pNode, RSMMessages.getString( "configuration.execcommand" ) ).getFirstChild().getNodeValue().trim();
+            ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                       pNode,
+                                                                                       RSMMessages.getString( "configuration.execcommand" ) ).getFirstChild().getNodeValue().trim() );
         // Commande d'exécution
         pConfiguration.mInputFile =
-            ConfigUtility.getNodeByTagName( pNode, RSMMessages.getString( "configuration.inputfile" ) ).getFirstChild().getNodeValue().trim();
+            ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                       pNode,
+                                                                                       RSMMessages.getString( "configuration.inputfile" ) ).getFirstChild().getNodeValue().trim() );
     }
 
     /**
