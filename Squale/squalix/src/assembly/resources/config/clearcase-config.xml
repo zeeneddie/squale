@@ -13,7 +13,7 @@
 		</pattern>
 		<pattern key="\{VOBS_PATH\}"></pattern>
 		<pattern key="\{CC_STORAGE_PATH\}">
-			/app/SQUALE/clearcase/cc_storage/views/
+			${ENV-CLEARCASE-STORAGE}
 		</pattern>
 		<pattern key="\{SNAPSHOT_PATH\}">
 			${ENV-CLEARCASE-SNAPSHOT}

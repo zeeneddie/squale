@@ -477,7 +477,7 @@ public class ClearCaseConfiguration
                             String value = currentNode.getNodeValue().trim();
                             if ( value.length() > 0 )
                             {
-                                nodeValue = value;
+                                nodeValue = ConfigUtility.filterStringWithSystemProps( value );
                             }
                         }
                     }
