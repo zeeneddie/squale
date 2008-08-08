@@ -39,11 +39,11 @@ public final class PPTFactory
             pptdata.modifyPresentation();
             
             
-            // save changes in a file
+            /* save changes in a file --> This line shall be used for debug purpose in a unit test
             FileOutputStream out = new FileOutputStream("C:/slideshow2.ppt" );
             pptdata.getPresentation().write( out );
             out.close();
-            
+            */
             
             response.setContentType( CONTENT_TYPE );
             if ( ( ( attachementFileName != null ) && ( attachementFileName.length() > 0 ) ) )
