@@ -554,7 +554,7 @@
 	</factorset>
 
 	<gridset>
-		<grid name="javancss">
+		<grid name="grid-oss">
 			<factor-ref name="architecture" />
 			<factor-ref name="conformity" />
 			<factor-ref name="evolutionarity" />
