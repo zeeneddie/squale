@@ -7,7 +7,7 @@
 	</path>
 	
 	<target name="build-all">
-		<exec executable="mvn" dir="${basedir}/../../squale">
+		<exec executable="mvn" dir="${basedir}/../../squale" failonerror="true">
 			<arg value="clean"/>
 			<arg value="install"/>
 		</exec>
