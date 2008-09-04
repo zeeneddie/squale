@@ -61,7 +61,8 @@ public class GeneralParametersTransformer
         {
             generalForm.setIncludePatterns( getPatternsTab( includedList ) );
         }
-        if ( profile.matches( ".*j2ee.*" ) )
+        // FIXME (line from AF code base) this test is ugly: should find another way to decide wether to set this parameter...
+        if ( profile.matches( ".*(j2ee|jee|web).*" ) )
         {
             generalForm.setJspSourcesRequired( true );
             // sources JSP
