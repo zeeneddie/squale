@@ -2,19 +2,19 @@
 <project name="Squale" basedir="." default="build-all">
 
 	<property name="SqualeClassesDir" location="${basedir}/../target/classes"/>
+	
+	<path id="SqualeClasspath">
+		<fileset dir="${basedir}/target/dependency">
+			<include name="**/*.jar" /> 
+		</fileset>		
+	</path>	
   
 	<target name="build-all">
-		<exec executable="mvn" dir="${basedir}/../../squale">
+		<exec executable="mvn" dir="${basedir}/../../squale" failonerror="true">
 			<arg value="clean"/>
 			<arg value="install"/>
 			<arg value="dependency:copy-dependencies"/>
 		</exec>
 	</target>
-	
-	<path id="SqualeClasspath">
-		<fileset dir="${basedir}/../target/dependency">
-			<include name="**/*.jar" /> 
-		</fileset>		
-	</path>	
 
 </project>
