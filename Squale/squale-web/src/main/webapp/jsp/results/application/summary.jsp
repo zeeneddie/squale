@@ -1,15 +1,22 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
-	prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
+<%@ page import="com.airfrance.welcom.struts.util.WConstants" %>
+<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.LogonBean" %>
 <%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
 <%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
-<%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm"%>
+<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm"%>
+
+<%
+// Récupération de l'utilisateur en session pour savoir si celui-ci est administrateur
+// SQUALE
+LogonBean sessionUser = (LogonBean) request.getSession().getAttribute(WConstants.USER_KEY);
+boolean isAdmin = sessionUser.isAdmin();
+%>
 
 <%
             // Le toolTip pour le pieChart
@@ -35,12 +42,12 @@
 	</af:head>
 	<af:body canvasLeftPageInclude="/jsp/canvas/application_menu.jsp">
 
-		<%-- inclusion pour le marquage XITI spécifique à la page--%>
-		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
-			<jsp:param name="page" value="Consultation::Application" />
-		</jsp:include>
-
 		<af:canvasCenter>
+			<%-- inclusion pour le marquage XITI spécifique à la page--%>
+			<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
+				<jsp:param name="page" value="Consultation::Application" />
+			</jsp:include>
+
 			<br />
 			<br />
 			<squale:resultsHeader name="resultListForm" displayComparable="true" />
@@ -152,10 +159,11 @@
 					<af:button type="form" name="export.pdf"
 						onclick='<%="application.do?action=exportPDF&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
 						toolTipKey="toolTip.export.pdf.application.result" />
+				<%if (isAdmin) {%>
 					<af:button type="form" name="export.audit_report"
 						onclick='<%="param_audit_report.do?action=param&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&comparable="+comparable.toString()%>'
 						toolTipKey="toolTip.export.audit_report" accessKey="admin"/>
-							
+				<%} //isAdmin %>
 				</af:buttonBar>
 			</logic:greaterThan>
 		</af:canvasCenter>

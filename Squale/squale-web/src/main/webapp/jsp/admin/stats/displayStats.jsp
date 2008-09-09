@@ -16,7 +16,7 @@ if (null == applisStatsParamPanel) {
 %>
 <af:page>
 	<af:head>
-		<!--<script type="text/javascript" src="jslib/manage_tab.js"></script> -->
+		<script type="text/javascript" src="jslib/manage_tab.js"></script>
 	</af:head>
 	<af:body>
 		<af:canvasCenter titleKey="stats.page.title">
@@ -93,7 +93,7 @@ if (null == applisStatsParamPanel) {
 						<af:col key="stats.last_audit_date.col"
 							property="lastTerminatedAuditDate"/>
 						<af:col key="stats.last_audit_duration.col"
-							property="lastAuditDuration" sortable="true" type="NUMBER" />
+							property="lastAuditDuration" sortable="false" type="NUMBER" />
 						<af:col key="stats.nb_audits_last_days.col" property="nbAudits"
 							sortable="true" type="NUMBER" />
 						<af:col key="stats.nb_terminated_audits.col"

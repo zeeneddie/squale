@@ -193,7 +193,7 @@ public class JavaMockCompilingTask
                     File[] files = compiledDir.listFiles();
                     for ( int j = 0; j < files.length; j++ )
                     {
-                        FileUtility.copyInto( files[j], root );
+                        FileUtility.copyIntoDir( files[j], root );
                     }
                 }
                 else

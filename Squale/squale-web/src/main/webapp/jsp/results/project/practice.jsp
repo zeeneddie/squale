@@ -37,12 +37,12 @@ request.setAttribute("practiceInformationForm", infoForm);
 			currentAuditId="<%=currentAuditId%>"
 			previousAuditId="<%=previousAuditId%>" />
 	
-		<%-- inclusion pour le marquage XITI spécifique à la page--%>
-		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
-			<jsp:param name="page" value="Consultation::Pratique" />
-		</jsp:include>
-		
 		<af:canvasCenter>
+			<%-- inclusion pour le marquage XITI spécifique à la page--%>
+			<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
+				<jsp:param name="page" value="Consultation::Pratique" />
+			</jsp:include>
+
 			<br />
 			<squale:resultsHeader name="projectSummaryForm" displayComparable="true"/>
 			<br />

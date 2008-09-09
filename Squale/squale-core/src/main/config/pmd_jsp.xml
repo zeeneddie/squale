@@ -28,12 +28,6 @@
         <property name="squaleSeverity" value="warning"/>
     </properties>
   </rule>
-  <rule ref="rulesets/basic-jsp.xml/NoClassAttribute" >
-    <properties>
-        <property name="squaleCategory" value="jspstandard"/>
-        <property name="squaleSeverity" value="info"/>
-    </properties>
-  </rule>
   <rule ref="rulesets/basic-jsp.xml/NoJspForward" >
     <properties>
         <property name="squaleCategory" value="jspstandard"/>

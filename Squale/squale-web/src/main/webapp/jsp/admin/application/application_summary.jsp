@@ -1,15 +1,11 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
-	prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 
-<%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm"%>
-<%@ page
-	import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
-<%@ page
-	import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"%>
+<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm"%>
+<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
+<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"%>
 <%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils"%>
 <%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
 

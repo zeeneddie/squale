@@ -65,13 +65,15 @@ public class AuditReportAction
             // Get warnings for current audit
             // Get audits in session (not null)
             List auditsDTO = ActionUtils.getCurrentAuditsAsDTO( pRequest );
-            ((RootForm)pForm).setComparableAudits( true );
-            String comparable = pRequest.getParameter( "comparable" );
-            // remove previous audit if audits aren't comparable
-            if(null != comparable && !comparable.equalsIgnoreCase( "true" ) && auditsDTO.size() == 2) {
-                auditsDTO.remove( 1 );
-                ((RootForm)pForm).setComparableAudits( false );
+            String comparableStr = pRequest.getParameter( "comparable" );
+            boolean comparable = false;
+            if ( null != comparableStr && comparableStr.equalsIgnoreCase( "true" ) && auditsDTO.size() == 2) {
+            	comparable = true;
             }
+            ((RootForm)pForm).setComparableAudits( comparable );
+            if ( ! comparable && auditsDTO.size() == 2)  {
+                auditsDTO.remove( 1 );
+            } 
             // Call application component layer
             IApplicationComponent ac = AccessDelegateHelper.getInstance( "Error" );
             List errorsMaps = (List) ac.execute( "getAllErrors", new Object[] { auditsDTO, ErrorBO.CRITICITY_WARNING } );
@@ -119,7 +121,12 @@ public class AuditReportAction
             // Get previous results only if it's possible
             if ( auditReportForm.getComparableAudits() )
             {
-                prevAuditId = new Long( auditReportForm.getPreviousAuditId() );
+				try {
+					prevAuditId = new Long( auditReportForm.getPreviousAuditId() );
+				} catch (NumberFormatException e) {
+					// No previous audit available
+					prevAuditId = (long) 0;
+				}
             }
             // Get max score for top
             float maxScore;

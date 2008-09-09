@@ -25,13 +25,13 @@
 			<%-- Help --%>
 			<af:dropDownPanel titleKey="buttonTag.menu.aide">
 				<%--  If existing a previous audit--%>
-				<logic:notEqual value="" name="auditReportParamForm" property="previousAuditId">
+				<logic:equal value="true" name="auditReportParamForm" property="comparableAudits">
 					<bean:message key="export.audit_report_two_audits.help" arg0="<%=currentAuditName%>" arg1="<%=previousAuditName%>" arg2="<%=auditsSelectionUrl%>"/>
-				</logic:notEqual>
-				<%-- If generation will be done without comparison --%>
-				<logic:equal value="" name="auditReportParamForm" property="previousAuditId">
-					<bean:message key="export.audit_report_one_audit.help" arg0="<%=currentAuditName%>" arg1="<%=auditsSelectionUrl%>" />
 				</logic:equal>
+				<%-- If generation will be done without comparison --%>
+				<logic:notEqual value="true" name="auditReportParamForm" property="comparableAudits">
+					<bean:message key="export.audit_report_one_audit.help" arg0="<%=currentAuditName%>" arg1="<%=auditsSelectionUrl%>" />
+				</logic:notEqual>
 			</af:dropDownPanel>
 			<br />
 			<jsp:include page="list_errors_common.jsp">
@@ -39,7 +39,7 @@
 				<jsp:param name="property" value="currentAuditErrors"/>
 			</jsp:include>
 			
-			<%--  If existing a previous audit and if audits are camparable --%>
+			<%--  If existing a previous audit and if audits are comparable --%>
 			<logic:equal value="true" name="auditReportParamForm" property="comparableAudits">
 				<br/>
 				<jsp:include page="list_errors_common.jsp">

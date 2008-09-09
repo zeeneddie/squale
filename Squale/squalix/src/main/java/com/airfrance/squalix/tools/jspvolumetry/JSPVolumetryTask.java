@@ -105,12 +105,21 @@ public class JSPVolumetryTask
         try
         {
             int execResult = 0;
+            List jspDir = null;
+
             initialize();
             // String nbJspsCommand = mConfiguration.getNbJspsCommand();
             // String nbJspsLocCommand = mConfiguration.getNbJspsLocCommand();
             File script = new File( mConfiguration.getScriptPath() );
-            List jspDir = ( (ListParameterBO) ( mProject.getParameter( ParametersConstants.JSP ) ) ).getParameters();
+            // chargement du nom des répertoires contenant les pages JSP à analyser
+            ListParameterBO lListParameterBO = (ListParameterBO) ( mProject.getParameter( ParametersConstants.JSP ) );
+            if ( lListParameterBO != null )
+            {
+                jspDir = lListParameterBO.getParameters();
+            }
             String viewPath = (String) mData.getData( TaskData.VIEW_PATH );
+
+            // exécution de la tâche si un répertoire JSP au moins a été défini par l'utilisateur
             if ( jspDir != null )
             {
                 for ( int i = 0; i < jspDir.size(); i++ )
@@ -120,19 +129,24 @@ public class JSPVolumetryTask
                     execResult =
                         process( new String[] { script.getAbsolutePath(), jspDirPath,
                             mConfiguration.getResultFilePath() } );
-                    // Les deux résultats sont inscrits dans le fichier de résultats
+                    // Les résultats sont inscrits dans le fichier de résultats
                     parseFile();
                 }
+
+                // crée l'objet à persister
+                JSPVolumetryProjectBO volumetry = new JSPVolumetryProjectBO();
+                // positionne les champs
+                volumetry.setComponent( getProject() );
+                volumetry.setAudit( getAudit() );
+                volumetry.setJSPsLOC( new Integer( mNbJSPLoc ) );
+                volumetry.setNumberOfJSPs( new Integer( mNbJsps ) );
+                // sauvegarde l'objet
+                persists( volumetry );
             }
-            // crée l'objet à persister
-            JSPVolumetryProjectBO volumetry = new JSPVolumetryProjectBO();
-            // positionne les champs
-            volumetry.setComponent( getProject() );
-            volumetry.setAudit( getAudit() );
-            volumetry.setJSPsLOC( new Integer( mNbJSPLoc ) );
-            volumetry.setNumberOfJSPs( new Integer( mNbJsps ) );
-            // sauvegarde l'objet
-            persists( volumetry );
+            else
+            {
+                throw new TaskException( "exception.missing.dir" );
+            }
         }
         catch ( Exception e )
         {

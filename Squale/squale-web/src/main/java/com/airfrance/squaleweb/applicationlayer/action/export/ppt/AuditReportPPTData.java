@@ -1,7 +1,10 @@
 package com.airfrance.squaleweb.applicationlayer.action.export.ppt;
 
 import java.awt.Color;
+import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +18,8 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.poi.hslf.model.MasterSheet;
 import org.apache.poi.hslf.model.Slide;
 import org.apache.poi.hslf.model.Table;
@@ -26,6 +31,7 @@ import com.airfrance.squalecommon.datatransfertobject.export.audit.PracticeRepor
 import com.airfrance.squalecommon.datatransfertobject.export.audit.ProjectReportDTO;
 import com.airfrance.squalecommon.datatransfertobject.export.audit.QualityReportDTO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
+import com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
 import com.airfrance.squaleweb.applicationlayer.formbean.export.AuditReportParamForm;
 import com.airfrance.squaleweb.resources.WebMessages;
 import com.airfrance.squaleweb.util.SqualeWebActionUtils;
@@ -42,7 +48,26 @@ public class AuditReportPPTData
 
     /** List of projects data needed to create ppt */
     protected List projectReports;
+    
+    /**
+     * Logger
+     */
+    private static Log log = LogFactory.getLog( AuditReportPPTData.class );
 
+    public AuditReportPPTData(HttpServletRequest pRequest, File prez, File model, File mapping, List pProjectReports ) throws PPTGeneratorException {
+        projectReports = pProjectReports;
+        this.request = pRequest;
+        try
+        {
+        	setPresentation(new FileInputStream(prez));
+        	setModel(new FileInputStream(model));
+        	setMapping(new FileInputStream(mapping));
+        } 
+        catch ( FileNotFoundException e )
+        {
+            throw new PPTGeneratorException( e.getMessage() );
+        }
+   }
     /**
      * Constructor
      * 
@@ -56,6 +81,11 @@ public class AuditReportPPTData
     {
         projectReports = pProjectReports;
         this.request = pRequest;
+
+        if ( ! GraphicsEnvironment.isHeadless() ) {
+        	log.warn("java.awt.headless is not activated on WAS JVM. Graphic generation will fail !");
+        }
+        
         try
         {
             setPresentation( params.getPresentation().getInputStream() );
@@ -82,10 +112,12 @@ public class AuditReportPPTData
     public void setProfilePieChart( Slide slideToSet, Rectangle where )
         throws IOException
     {
-        // Build volumetry map by profile
+    	log.info("AuditReturn - setProfilePieChart");
+    	// Build volumetry map by profile
         HashMap profileVolMap = new HashMap();
         for ( int i = 0; i < projectReports.size(); i++ )
         {
+        	log.info("AuditReturn - setProfilePieChart Project n°" + i);
             ProjectReportDTO curProject = (ProjectReportDTO) projectReports.get( i );
             String profileName = curProject.getProfileName();
             Long nbLinesByProfile = (Long) profileVolMap.get( profileName );
@@ -101,6 +133,7 @@ public class AuditReportPPTData
         JFreeChart pieChart = pieMaker.getChart( new HashMap(), request );
         // Image of pieChart
         addJFreeChart( slideToSet, pieChart, where );
+    	log.info("AuditReturn - setProfilePieChart done");
     }
 
     /**
@@ -113,10 +146,12 @@ public class AuditReportPPTData
     public void setPieChart( Slide slideToSet, Rectangle where )
         throws IOException
     {
+    	log.info("AuditReturn - setPieChart");
         // Build volumetry map
         HashMap volMap = new HashMap();
         for ( int i = 0; i < projectReports.size(); i++ )
         {
+        	log.info("AuditReturn - setPieChart Project n°" + i);
             ProjectReportDTO curProject = (ProjectReportDTO) projectReports.get( i );
             Long nbLinesByProfile = (Long) volMap.get( curProject.getName() );
             if ( nbLinesByProfile == null )
@@ -131,6 +166,7 @@ public class AuditReportPPTData
         JFreeChart pieChart = pieMaker.getChart( new HashMap(), request );
         // add graph in slide
         addJFreeChart( slideToSet, pieChart, where );
+    	log.info("AuditReturn - setPieChart done");
     }
 
     /**
@@ -143,10 +179,12 @@ public class AuditReportPPTData
     public void setKiviatChart( Slide slideToSet, Rectangle where )
         throws IOException
     {
-        // Build factors results map
+    	log.info("AuditReturn - setKiviatChart");
+       // Build factors results map
         KiviatMaker kiviatMaker = new KiviatMaker();
         for ( int i = 0; i < projectReports.size(); i++ )
         {
+        	log.info("AuditReturn - setKiviatChart Project n°" + i);
             ProjectReportDTO curProject = (ProjectReportDTO) projectReports.get( i );
             kiviatMaker.addValues( curProject.getName(), buildSortedMapForKiviat( curProject.getQualityResults() ),
                                    request );
@@ -154,6 +192,7 @@ public class AuditReportPPTData
         JFreeChart kiviatChart = kiviatMaker.getChart();
         // add kiviat
         addJFreeChart( slideToSet, kiviatChart, where );
+    	log.info("AuditReturn - setKiviatChart done");
     }
 
     /**
@@ -181,11 +220,13 @@ public class AuditReportPPTData
      * @param slideToSet slide to modify
      * @param where place to add shape
      * @throws IOException if error
+     * @throws PPTGeneratorException 
      */
     public void setProfileVolTab( Slide slideToSet, Rectangle where )
-        throws IOException
+        throws IOException, PPTGeneratorException
     {
-        // Create a map of map of lists in order to create the volumetry profile array
+       	log.info("AuditReturn - setProfileVolTab");
+       // Create a map of map of lists in order to create the volumetry profile array
         // key: profileName; value: mapTre
         // mapTre --> key: treName; value: List of String
         final int nbPredefinedCols = 2;
@@ -197,6 +238,7 @@ public class AuditReportPPTData
         for ( int i = 0; i < projectReports.size(); i++ )
         {
             ProjectReportDTO curProject = (ProjectReportDTO) projectReports.get( i );
+        	log.info("AuditReturn - setProfileVolTab Project n°" + i + " : " + curProject.getName() );
             // add project name on titles line
             titles.add( curProject.getName() );
             TreeMap tresMap = (TreeMap) globalMap.get( curProject.getProfileName() );
@@ -207,6 +249,7 @@ public class AuditReportPPTData
             for ( Iterator tresIt = curProject.getVolumetryMeasures().keySet().iterator(); tresIt.hasNext(); )
             {
                 String curTre = (String) tresIt.next();
+            	log.debug("AuditReturn - setProfileVolTab Measure : " + curTre );
                 // add line in tab for this tre
                 ArrayList valuesForTre = (ArrayList) tresMap.get( curTre );
                 if ( null == valuesForTre )
@@ -217,6 +260,7 @@ public class AuditReportPPTData
                 valuesForTre.set( i, curProject.getVolumetryMeasures().get( curTre ).toString() );
                 tresMap.put( curTre, valuesForTre );
             }
+        	log.debug("AuditReturn - setProfileVolTab Measure iteration done "  );
             globalMap.put( curProject.getProfileName(), tresMap );
         }
         // add the two last titles
@@ -224,7 +268,9 @@ public class AuditReportPPTData
         // create table with map
         // addPicture( slideToSet, htmlToImage( createVolByProfileTable( where, titles, globalMap ).toString() ), where
         // );
+    	log.debug("AuditReturn - setProfileVolTab end processing "  );
         addHtmlPicture( slideToSet, createVolByProfileTable( where, titles, globalMap ).toString(), where.x, where.y );
+       	log.info("AuditReturn - setProfileVolTab done");
     }
 
     /**
@@ -304,14 +350,17 @@ public class AuditReportPPTData
      * @param slideToSet slide to set
      * @param where place to add results
      * @throws IOException if error
+     * @throws PPTGeneratorException 
      */
     public void setApplicationQualityResults( Slide slideToSet, Rectangle where )
-        throws IOException
+        throws IOException, PPTGeneratorException
     {
+       	log.info("AuditReturn - setApplicationQualityResults");
         // Create map for fill table
         TreeMap factorsMap = new TreeMap();
         for ( int i = 0; i < projectReports.size(); i++ )
         {
+        	log.info("AuditReturn - setApplicationQualityResults Project n°" + i);
             ProjectReportDTO curProject = (ProjectReportDTO) projectReports.get( i );
             for ( int j = 0; j < curProject.getQualityResults().size(); j++ )
             {
@@ -329,6 +378,7 @@ public class AuditReportPPTData
         }
         // create table and add it to the slide in function of the map previously created
         createApplicationResultsTable( slideToSet, where, factorsMap );
+       	log.info("AuditReturn - setApplicationQualityResults done");
     }
 
     /**
@@ -338,9 +388,10 @@ public class AuditReportPPTData
      * @param where place to add results
      * @param factorsMap information about cells
      * @throws IOException if error
+     * @throws PPTGeneratorException 
      */
     private void createApplicationResultsTable( Slide slideToSet, Rectangle where, TreeMap factorsMap )
-        throws IOException
+        throws IOException, PPTGeneratorException
     {
         StringBuffer html = new StringBuffer( "<html><body><table border='1'>" );
         StringBuffer title = new StringBuffer( "<tr bgcolor=\"#00FFFF\">" );
@@ -435,11 +486,13 @@ public class AuditReportPPTData
     public void addScatterplotSlides( MasterSheet model )
         throws IOException
     {
+       	log.info("AuditReturn - addScatterplotSlides");
         // for each project we create a new slide containing:
         // scatterplot graph and ratio
         for ( int i = 0; i < projectReports.size(); i++ )
         {
-            ProjectReportDTO curProject = (ProjectReportDTO) projectReports.get( i );
+           log.info("AuditReturn - addScatterplotSlides Project n°" + i);
+           ProjectReportDTO curProject = (ProjectReportDTO) projectReports.get( i );
             if ( null != curProject.getScatterplotMeasures() )
             {
                 // create slide
@@ -492,6 +545,7 @@ public class AuditReportPPTData
                                                                                    bubbleHeight ) );
             }
         }
+       	log.info("AuditReturn - addScatterplotSlides done");
     }
 
     /**
@@ -543,13 +597,16 @@ public class AuditReportPPTData
      * 
      * @param model model to applied
      * @throws IOException if error
+     * @throws PPTGeneratorException 
      */
     public void addAllAuditResultsDetailed( MasterSheet model )
-        throws IOException
+        throws IOException, PPTGeneratorException
     {
+       	log.info("AuditReturn - addAllAuditResultsDetailed");
         final Rectangle pictAnchor = new Rectangle( 30, 150, 600, 200 );
         for ( int i = 0; i < projectReports.size(); i++ )
         {
+            log.info("AuditReturn - addAllAuditResultsDetailed Project n°" + i);
             ProjectReportDTO curProject = (ProjectReportDTO) projectReports.get( i );
             List practiceTopId = new ArrayList();
             // iterate on its results
@@ -601,6 +658,7 @@ public class AuditReportPPTData
                                                factor.getMeanMark() );
             }
         }
+       	log.info("AuditReturn - addAllAuditResultsDetailed done");
     }
 
     /**
@@ -725,6 +783,7 @@ public class AuditReportPPTData
     private void addTopForPractice( PracticeReportDTO practiceReportDTO, MasterSheet model, List practicesId )
         throws IOException
     {
+       	log.info("AuditReturn - addTopForPractice " + practiceReportDTO.getRule().getName());
         Long practiceId = new Long( practiceReportDTO.getRule().getId() );
         if ( practiceReportDTO.getWorstResults().size() > 0 && !practicesId.contains( practiceId ) )
         {

@@ -6,15 +6,21 @@
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
+<%@ page import="com.airfrance.welcom.struts.util.WConstants" %>
+<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.LogonBean" %>
 <%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants"%>
 <%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
-<%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm"%>
-<%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm"%>
+<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm"%>
+<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm"%>
 <%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
 <%@ page import="com.airfrance.squaleweb.tagslib.HistoryTag"%>
 
+<%
+// Récupération de l'utilisateur en session pour savoir si celui-ci est administrateur
+// SQUALE
+LogonBean sessionUser = (LogonBean) request.getSession().getAttribute(WConstants.USER_KEY);
+boolean isAdmin = sessionUser.isAdmin();
+%>
 
 <%
 // Le chemin du traceur
@@ -55,11 +61,6 @@ if(selectedTab == null) {
 	</af:head>
 	<af:body canvasLeftPageInclude="/jsp/canvas/project_menu.jsp">
 
-		<%-- inclusion pour le marquage XITI spécifique à la page--%>
-		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
-			<jsp:param name="page" value="Consultation::Projet" />
-		</jsp:include>
-
 		<%-- une autre valeur que "true" indique qu'on est passé par une autre vue 
 			que celle composant directement --%>
 		<%-- TODO FAB : gérer la suppression du traceur... --%>
@@ -71,6 +72,11 @@ if(selectedTab == null) {
 			currentAuditId="<%=currentAuditId%>"
 			previousAuditId="<%=previousAuditId%>"/>--%>
 		<af:canvasCenter>
+			<%-- inclusion pour le marquage XITI spécifique à la page--%>
+			<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
+				<jsp:param name="page" value="Consultation::Projet" />
+			</jsp:include>
+
 			<br />
 			<squale:resultsHeader name="projectSummaryForm"
 				displayComparable="true" />
@@ -127,7 +133,7 @@ if(selectedTab == null) {
 					</af:form>
 				</af:tab>
 				<%-- Kiviat --%>
-				<af:tab key="project.results.kiviat.tab" name="kiviat"
+				<af:tab key="project.results.kiviat.tab" name="kiviat" 
 					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("kiviat")%>'>
 					<%String imageDetails1 = WebMessages.getString(request, "image.project.factors");%>
 					<bean:define id="srcKiviat" name="projectSummaryForm"
@@ -156,6 +162,8 @@ if(selectedTab == null) {
 							<table class="formulaire" cellpadding="0" cellspacing="0"
 								border="0" width="100px">
 								<tr>
+									<%-- nom du tab à afficher (kiviat) après soumission de la requête --%>
+									<input type="hidden" name="<%=HistoryTag.SELECTED_TAB_KEY%>" value="kiviat" />
 									<af:field key="project.results.allFactors"
 										name="projectSummaryForm" property="allFactors"
 										type="CHECKBOX" styleClassLabel="td1" styleClass="normal" />
@@ -211,9 +219,11 @@ if(selectedTab == null) {
 				<af:button type="form" name="export.pdf.detailed.plan"
 					onclick="<%=\"javascript:xt_clic_AF_v2('T','Rapport::PlanActionDetail',null,null);location.href='\"+urlExportDetailedActionPlan+\"'\"%>"
 					toolTipKey="toolTip.export.pdf.detailed.plan" />
+				<%if (isAdmin) {%>
 				<af:button type="form" name="export.audit_report"
 					onclick="<%=urlExportPpt%>"
 					toolTipKey="toolTip.export.audit_report" accessKey="admin"/>
+				<%} //isAdmin %>
 				<%-- 
 					L'export IDE n'est disponible que pour les versions >= 3.2 et pour les profils
 					qui le permettent 

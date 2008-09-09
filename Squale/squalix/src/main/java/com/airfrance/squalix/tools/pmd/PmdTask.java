@@ -108,12 +108,7 @@ public class PmdTask
         MapParameterBO params = (MapParameterBO) getProject().getParameter( ParametersConstants.PMD );
         if ( params == null )
         {
-            String message = PmdMessages.getString( "warning.task.not_set" );
-            // On affiche un warning sans lancer d'exception, la tâche ne sera pas exécutée.
-            initError( message );
-            LOGGER.warn( message );
-            // Les paramètres ne sont pas configurés, on annule la tâche
-            mStatus = CANCELLED;
+            cancelTaskWithMessage( "warning.task.not_set" );
         }
         else
         {
@@ -138,8 +133,31 @@ public class PmdTask
                 throw new ConfigurationException( message );
             }
             ruleset = PmdRuleSetDAOImpl.getInstance().findRuleSet( getSession(), param.getValue(), pLanguage );
+            // the task is canceled if the returned ruleset is null
+            // (case of a database incoherence)
+            if ( ruleset == null )
+            {
+                cancelTaskWithMessage( "exception.rulesets.notloaded" );
+            }
 
         }
         return ruleset;
     }
+
+    /**
+     * Cancels the task and displays a message in both the log file and the web interface.
+     * 
+     * @param pMessageKey the message resource's key to log (from the local resource bundle)
+     */
+    private void cancelTaskWithMessage( String pMessageKey )
+    {
+        String lMessage = PmdMessages.getString( pMessageKey );
+        // displaying of the message in the web interface
+        initError( lMessage );
+        // displaying of the message in the log file
+        LOGGER.warn( lMessage );
+        // cancellation of the task
+        mStatus = CANCELLED;
+    }
+
 }

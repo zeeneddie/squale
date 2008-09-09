@@ -37,7 +37,7 @@ Permet l'importation d grille qualité
 				<af:buttonBar>
 					<af:button type="form" name="valider" toolTipKey="toolTip.valider"
 						callMethod="importMessages" singleSend="true" />
-					<af:button type="form" name="messages.reload" toolTipKey="toolTip.valider"
+					<af:button type="form" name="messages.reload" toolTipKey="toolTip.recharger"
 						callMethod="reloadMessages" singleSend="true" />
 				</af:buttonBar>
 			</af:form>

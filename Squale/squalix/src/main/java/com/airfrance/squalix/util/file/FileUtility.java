@@ -2,8 +2,6 @@ package com.airfrance.squalix.util.file;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +17,10 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tools.ant.DirectoryScanner;
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.taskdefs.Chmod;
+import org.apache.tools.ant.taskdefs.Copy;
+import org.apache.tools.ant.types.FileSet;
 
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
@@ -514,7 +516,7 @@ public class FileUtility
         File currentSrc = new File( pDest + "/" + pSrc.getName() );
         if ( pSrc.isDirectory() )
         {
-            copyDirInto( pSrc, currentSrc );
+            copyIntoDir( pSrc, currentSrc );
         }
         else if ( pSrc.isFile() )
         {
@@ -526,31 +528,8 @@ public class FileUtility
             }
             else
             {
-                copyFileInto( pSrc, pDest );
+                copyIntoDir( pSrc, pDest );
             }
-        }
-    }
-
-    /**
-     * Copie tous les fichiers de pSrc dans pDest
-     * 
-     * @param pSrc le fichier (compressé ou non) ou répertoire source
-     * @param pDest le répertoire de destination qui existe déjà
-     * @throws IOException si erreur de flux
-     */
-    public static void copyInto( File pSrc, File pDest )
-        throws IOException
-    {
-        // On crée les répertoires
-        pDest.mkdirs();
-        File currentSrc = new File( pDest + "/" + pSrc.getName() );
-        if ( pSrc.isDirectory() )
-        {
-            copyDirInto( pSrc, currentSrc );
-        }
-        else if ( pSrc.isFile() )
-        {
-            copyFileInto( pSrc, pDest );
         }
     }
 
@@ -561,21 +540,26 @@ public class FileUtility
      * @param pDest le répertoire de destination
      * @throws IOException si erreur de flux
      */
-    public static void copyDirInto( File pSrc, File pDest )
+    public static void copyIntoDir( File pSrc, File pDest ) /* ex copyDirInfo */
         throws IOException
     {
         // On crée les répertoires
         pDest.mkdirs();
-        // On récupère tous les dossiers et les fichiers correspondant au pattern
-        // des fichiers à analyser
-        File[] list = pSrc.listFiles();
-        // On parcours récursivement tous les dossiers pour stocker
-        // tous les fichiers correspondant au pattern qu'ils contiennent
-        for ( int i = 0; i < list.length; i++ )
-        {
-            File file = list[i];
-            copyInto( file, pDest );
-        }
+    	// Copy is done using ant task
+    	Copy copyFile = new Copy();
+    	copyFile.setProject( new Project() );
+    	copyFile.init();
+    	if ( pSrc.isFile() ) {
+        	copyFile.setFile( pSrc );
+    	} else {
+    		// This is a directory, fileset is requested by ant task
+    		FileSet files = new FileSet();
+    		files.setDir(pSrc.getParentFile());
+    		files.setIncludes(pSrc.getName() + "/**");
+    		copyFile.addFileset(files);
+    	}
+    	copyFile.setTodir( pDest );
+    	copyFile.execute();
     }
 
     /**
@@ -594,7 +578,7 @@ public class FileUtility
         {
             // On copie tous le répertoire dans celui défini dans le fichier de configuration
             // sans désarchiver les archives si il y en a
-            copyInto( pSrc, pDest );
+            copyIntoDir( pSrc, pDest );
         }
         else
         {
@@ -609,23 +593,19 @@ public class FileUtility
             }
             ZipFileUtility.extractArchiveFile( pSrc, pDest );
         }
+        
+        if ( pDest.exists() && pDest.isDirectory() ) {
+        	// Chmod sur les scripts executable pour la target UNIX
+        	Chmod chmod = new Chmod();
+        	chmod.setProject(new Project());
+        	chmod.setDir(pDest);
+        	chmod.setIncludes(FileMessages.getString("file.pattern.executablefile"));
+        	chmod.setPerm("ugo+rx");
+        	chmod.execute();
+        }
     }
 
-    /**
-     * Copie le fichier pSrc dans le répertoire pDest
-     * 
-     * @param pSrc le fichier source
-     * @param pDest le répertoire de destination
-     * @throws IOException si erreur de flux
-     */
-    private static void copyFileInto( File pSrc, File pDest )
-        throws IOException
-    {
-        File fileDest = new File( pDest, pSrc.getName() );
-        copyFile( pSrc, fileDest );
-    }
-
-    /**
+   /**
      * Copie le fichier pSrc dans le fichier pDest
      * 
      * @param pSrc le fichier source
@@ -635,16 +615,13 @@ public class FileUtility
     public static void copyFile( File pSrc, File pDest )
         throws IOException
     {
-        int count;
-        FileInputStream input = new FileInputStream( pSrc );
-        FileOutputStream output = new FileOutputStream( pDest );
-        while ( ( count = input.read() ) != -1 )
-        {
-            output.write( count );
-        }
-        output.flush();
-        output.close();
-        input.close();
+    	// Copy is done using ant task
+    	Copy copyFile = new Copy();
+    	copyFile.setProject( new Project() );
+    	copyFile.init();
+    	copyFile.setFile( pSrc );
+    	copyFile.setTofile( pDest );
+    	copyFile.execute();
     }
 
     /**

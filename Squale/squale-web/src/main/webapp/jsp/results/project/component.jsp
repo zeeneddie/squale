@@ -108,12 +108,13 @@ if (2 == bracketSplit.length) {
 			currentAuditId="<%=currentAuditId%>"
 			previousAuditId="<%=previousAuditId%>" />
 
-		<%-- inclusion pour le marquage XITI spécifique à la page--%>
-		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
-			<jsp:param name="page" value="Consultation::Composant" />
-		</jsp:include>
 
 		<af:canvasCenter>
+			<%-- inclusion pour le marquage XITI spécifique à la page--%>
+			<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
+				<jsp:param name="page" value="Consultation::Composant" />
+			</jsp:include>
+
 			<br />
 			<squale:resultsHeader name="componentForm" />
 			<br />

@@ -51,12 +51,12 @@ String evolution = WebMessages.getString(request, "tracker.mark.history");
 			currentAuditId="<%=currentAuditId%>"
 			previousAuditId="<%=previousAuditId%>" />
 	
-		<%-- inclusion pour le marquage XITI spécifique à la page--%>
-		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
-			<jsp:param name="page" value="ConsultationExpert::historique" />
-		</jsp:include>
-
 		<af:canvasCenter>
+			<%-- inclusion pour le marquage XITI spécifique à la page--%>
+			<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
+				<jsp:param name="page" value="ConsultationExpert::historique" />
+			</jsp:include>
+
 			<br />
 			<squale:resultsHeader name="paramReviewForm" />
 			<br />

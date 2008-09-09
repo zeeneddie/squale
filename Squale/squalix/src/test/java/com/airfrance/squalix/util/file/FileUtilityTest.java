@@ -75,7 +75,7 @@ public class FileUtilityTest
     {
         File src = new File( "lib" );
         File dest = new File( "data/copyInto" );
-        FileUtility.copyInto( src, dest );
+        FileUtility.copyIntoDir( src, dest );
     }
 
     /**

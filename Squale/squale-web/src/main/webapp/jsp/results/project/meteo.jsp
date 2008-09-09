@@ -28,12 +28,12 @@
 	</af:head>
 	<af:body canvasLeftPageInclude="/jsp/canvas/project_menu.jsp">
 
-		<%-- inclusion pour le marquage XITI spécifique à la page--%>
-		<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
-			<jsp:param name="page" value="ConsultationExpert::Resume" />
-		</jsp:include>
-
 		<af:canvasCenter>
+			<%-- inclusion pour le marquage XITI spécifique à la page--%>
+			<jsp:include page="/jsp/xiti/xiti_body_common.jsp">
+				<jsp:param name="page" value="ConsultationExpert::Resume" />
+			</jsp:include>
+
 			<br />
 			<squale:resultsHeader name="resultListForm" displayComparable="true" />
 			<br />

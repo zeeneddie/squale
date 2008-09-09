@@ -1,8 +1,10 @@
 package com.airfrance.squaleweb.applicationlayer.action.export.ppt;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
+import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -13,9 +15,8 @@ import java.lang.reflect.Method;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -572,29 +573,33 @@ public class PPTData
      * @param html html to convert
      * @return html converted to png
      * @throws IOException if error
+     * @throws PPTGeneratorException 
      */
     protected byte[] htmlToImage( String html )
-        throws IOException
+        throws IOException, PPTGeneratorException
     {
-        JEditorPane editor = new JEditorPane();
-        editor.setContentType( "text/html" );
-        editor.setText( html );
-        JPanel panel = new JPanel();
-        panel.add( editor );
-        JFrame frame = new JFrame();
-        frame.getRootPane().setLayout( new BorderLayout() );
-        frame.getRootPane().add( panel );
-        frame.pack();
-        BufferedImage bufferSave =
-            new BufferedImage( panel.getPreferredSize().width, panel.getPreferredSize().height,
-                               BufferedImage.TYPE_3BYTE_BGR );
-        Graphics g = bufferSave.getGraphics();
-        g.setColor( Color.WHITE );
-        g.fillRect( 0, 0, panel.getPreferredSize().width, panel.getPreferredSize().height );
-        panel.paint( g );
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        ImageIO.write( bufferSave, "png", out );
-        return out.toByteArray();
+    	try {
+    		JEditorPane editor = new JEditorPane();
+	        editor.setContentType( "text/html" );
+	        editor.setText( html );
+	        editor.setSize(editor.getPreferredSize());
+	        editor.addNotify();
+	        LOGGER.debug("Panel is built");
+	        BufferedImage bufferSave =
+	            new BufferedImage( editor.getPreferredSize().width, editor.getPreferredSize().height,
+	                               BufferedImage.TYPE_3BYTE_BGR );
+	        Graphics g = bufferSave.getGraphics();
+	        g.setColor( Color.WHITE );
+	        g.fillRect( 0, 0, editor.getPreferredSize().width, editor.getPreferredSize().height );
+	        editor.paint( g );
+	        LOGGER.debug("graphics is drawn");
+	        ByteArrayOutputStream out = new ByteArrayOutputStream();
+	        ImageIO.write( bufferSave, "png", out );
+	        return out.toByteArray();
+    	} catch ( HeadlessException e ) {
+    		LOGGER.error("X Server no initialized or -Djava.awt.headless=true not set !");
+    		throw new PPTGeneratorException("X Server no initialized or -Djava.awt.headless=true not set !");
+    	}
     }
     
     /**
@@ -605,27 +610,57 @@ public class PPTData
      * @param x horizontal position
      * @param y vertical position
      * @throws IOException if error
+     * @throws PPTGeneratorException 
      */
-    protected void addHtmlPicture( Slide slideToSet, String html, int x, int y ) throws IOException
+    protected void addHtmlPicture( Slide slideToSet, String html, int x, int y ) throws IOException, PPTGeneratorException
     {
-        JEditorPane editor = new JEditorPane();
-        editor.setContentType( "text/html" );
-        editor.setText( html );
-        JPanel panel = new JPanel();
-        panel.add( editor );
-        JFrame frame = new JFrame();
-        frame.getRootPane().setLayout( new BorderLayout() );
-        frame.getRootPane().add( panel );
-        frame.pack();
-        BufferedImage bufferSave =
-            new BufferedImage( panel.getPreferredSize().width, panel.getPreferredSize().height,
-                               BufferedImage.TYPE_3BYTE_BGR );
-        Graphics g = bufferSave.getGraphics();
-        g.setColor( Color.WHITE );
-        g.fillRect( 0, 0, panel.getPreferredSize().width, panel.getPreferredSize().height );
-        panel.paint( g );
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        ImageIO.write( bufferSave, "png", out );
-        addPicture( slideToSet, out.toByteArray(), new Rectangle(x, y, panel.getPreferredSize().width, panel.getPreferredSize().height) );
+    	try {
+    		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment(); 
+    		if ( ! ge.isHeadlessInstance() ) {
+    			LOGGER.warn("Runtime is not configured for supporting graphiv manipulation !");
+    		}
+    		JEditorPane editor = new JEditorPane();
+	        editor.setContentType( "text/html" );
+	        editor.setText( html );
+	        LOGGER.debug("Editor pane is built");
+	        editor.setSize(editor.getPreferredSize());
+	        editor.addNotify(); // Serveur X requis
+	        LOGGER.debug("Panel rendering is done");
+	        BufferedImage bufferSave =
+	            new BufferedImage( editor.getPreferredSize().width, editor.getPreferredSize().height,
+	                               BufferedImage.TYPE_3BYTE_BGR );
+	        Graphics g = bufferSave.getGraphics();
+	        g.setColor( Color.WHITE );
+	        g.fillRect( 0, 0, editor.getPreferredSize().width, editor.getPreferredSize().height );
+	        editor.paint( g );
+	        LOGGER.debug("graphics is drawn");
+	        ByteArrayOutputStream out = new ByteArrayOutputStream();
+	        ImageIO.write( bufferSave, "png", out );
+	        LOGGER.debug("image is written");
+	        addPicture( slideToSet, out.toByteArray(), new Rectangle(x, y, editor.getPreferredSize().width, editor.getPreferredSize().height) );
+	        LOGGER.debug("image is added");
+    	} catch ( HeadlessException e ) {
+    		LOGGER.error("X Server no initialized or -Djava.awt.headless=true not set !");
+    		throw new PPTGeneratorException("X Server no initialized or -Djava.awt.headless=true not set !");
+    	}
+    }
+
+    private BufferedImage convertImgToBufferedImg(Image limage, String l)
+    {
+        if(limage instanceof BufferedImage)
+        {
+            return((BufferedImage)limage);
+        }
+        else
+        {
+            Image lImage = new ImageIcon(limage).getImage();
+            BufferedImage bufferedimage = new BufferedImage(lImage.getWidth(null),
+                                                            lImage.getHeight(null),
+                                                            BufferedImage.TYPE_INT_RGB);
+            Graphics gr = bufferedimage.createGraphics();
+            gr.drawImage(lImage,0,0,null);
+            gr.dispose();
+            return(bufferedimage);
+        }
     }
 }

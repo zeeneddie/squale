@@ -107,7 +107,7 @@
 								<%-- permettant un lien direct vers l'administration du projet --%>
 								<af:col key="projects.manage" property="hasTerminatedAudit">
 									<%-- On met une propriété bidon juste pour pas avoir d'erreur --%>
-									<a
+									<a 
 										href='<%="config_project.do?action=selectProjectToModify&applicationId="+applicationId 
 											 	+"&projectId="+projectId %>'>
 									<bean:message key="project.manage" /> </a>

@@ -1116,7 +1116,7 @@ public class JWSADParser
                 if ( currentFile.isFile()
                     && currentFile.getName().endsWith( JWSADParser.DOT + JParserConfiguration.EXT_CLASS ) )
                 {
-                    FileUtility.copyInto( currentFile, pDest );
+                    FileUtility.copyIntoDir( currentFile, pDest );
                 }
             }
         }

@@ -14,7 +14,7 @@
 	<div id="header" class="ciel04">
 	<hr class="bg_theme">
 	<div id="visuel" 
-		style="float:left;width:30%;background-image: url(theme/charte_v03_001/img/tetiere/squale-banner-left.gif)">
+		style="float:left;width:29%;background-image: url(theme/charte_v03_001/img/tetiere/squale-banner-left.gif)">
 	</div>
 	<div id="visuel" 
 		style="float:right;width:70%;background: right no-repeat;background-image: url(theme/charte_v03_001/img/tetiere/squale-banner-right.gif)">

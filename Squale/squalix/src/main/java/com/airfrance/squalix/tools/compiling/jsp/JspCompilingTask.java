@@ -298,7 +298,7 @@ public class JspCompilingTask
             File log4j = new File( "config/log4j.properties" );
             if ( log4j.exists() )
             {
-                FileUtility.copyInto( log4j, new File( j2eeProject.getPath(), "WEB-INF/classes" ) );
+                FileUtility.copyIntoDir( log4j, new File( j2eeProject.getPath(), "WEB-INF/classes" ) );
             }
             LOGGER.debug( "Classpath pour la compilation des JSPs : " + j2eeProject.getClasspath() );
         }
