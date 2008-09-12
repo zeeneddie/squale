@@ -243,7 +243,7 @@ public abstract class AbstractRepository
             CheckOutScmResult result = scmManager.checkOut( scmRepository, new ScmFileSet( temporaryDirectory ) );
 
             // Copy local check out directory into local source code directory
-            FileUtility.copyIntoDir(defaultTemporaryDirectory, workingDirectory );
+            FileUtility.copyContentIntoDir( defaultTemporaryDirectory, workingDirectory );
 
             // Deletion of the temporary directory
             FileUtility.deleteRecursively( defaultTemporaryDirectory );
