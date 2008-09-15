@@ -6,7 +6,7 @@
 /* v1.3 - 14/02/2007 - GL - Evolution majeure : decoupage du contenu en c1-c1-c1 ou c2-c1 ou c3 alternativement pour les sites UNI ou MAJ.
 /*                        + debug : redefinition de la font pour les objets de formulaire suite probleme d'heritage de styles des objets de formulaire*/
 /*                        + debug important : suite decalage du #conteneur constate sur ecran configure en 1024px, modifications de : #droite -> margin-left:0 ; #conteneur -> padding-left:0 ; lienContextuel -> padding-left:20px ; lienTransversaux -> margin:0; #navigation -> padding-left:0; */
-/*                        + ajout : classes txt_error et bg_error pour la gestion de la couleur (C00000) texte ou background des erreurs de saisie. */
+/*                        + ajout : classes txt_error et bg_error pour la gestion de la couleur (f3ba5d) texte ou background des erreurs de saisie. */
 /* v1.3.1 - 05/03/2007 - GL - debug : perte du style de la font sur les input dans un tblv ou tblh. ajout des style font-family.*/
 /*							+ debug : ajout de la marge droite du fieldset.*/
 /*                          + debug welcom : padding a 0 (au lieu de 6px 20px) dans onglet_contenu, suite probleme constate sur IE largeur des tables dans le contenu onglet. */
@@ -35,7 +35,7 @@ div#header div#visuel p {font:22px Arial, Helvetica, sans-serif;font-weight:bold
 /*--- header visuel multilangue ---*/
 div#multilangue {float:left;margin:14px 10px;}
 div#multilangue a{font:10px Verdana, Arial, Helvetica, sans-serif;text-decoration:none;border:0;background-image:url(../img/picto/cie/ar.gif);background-repeat:no-repeat; padding-left:15px;color:#FFFFFF;background-color:inherit;}
-div#multilangue a:hover{color:#e60003;background-color:inherit;}
+div#multilangue a:hover{color:#f3ba5d;background-color:inherit;}
 /*--- navigation horizontale  ---*/
 div#navigation {width:100%;height:32px;background-image:url(../img/lignage/lignage_trans.gif);background-repeat:repeat-x;background-position:left bottom;}
 /*--- identite ---*/
@@ -44,9 +44,9 @@ div#identite img{vertical-align:top;}
 /*--- le conteneur ---*/
 div#conteneur{margin:-5px auto;padding-left:0;width:1000px;text-align:left;min-height:80%;}
 /*--- traceur ---*/
-div#conteneur div#traceur{font-weight:bold; font-size:0.9em; line-height:1.5em ;text-align:right;color:#051039;background-color:inherit;padding-right:20px;}
-div#conteneur div#traceur a {font-weight:normal;text-decoration:underline; border-bottom:0;color:#051039;background-color:inherit;}/* lien traceur*/
-div#conteneur div#traceur a:hover{color:#e60003;background-color:inherit;}
+div#conteneur div#traceur{font-weight:bold; font-size:0.9em; line-height:1.5em ;text-align:right;color:#2e5880;background-color:inherit;padding-right:20px;}
+div#conteneur div#traceur a {font-weight:normal;text-decoration:underline; border-bottom:0;color:#2e5880;background-color:inherit;}/* lien traceur*/
+div#conteneur div#traceur a:hover{color:#f3ba5d;background-color:inherit;}
 /*--- colonne de gauche ---*/
 div#conteneur div#gauche{float:left;width:230px;padding-left:20px;margin:0;}
 /*--- colonne de droite ---*/
@@ -113,18 +113,18 @@ body#app {text-align:left;background-color:#fff;color:#252525;}
 /*------- styles de la typographie    ----------*/
 /*----------------------------------------------*/
 /* textes courants */
-h1 {font-size:160%; font-weight:bold;  margin:0 0 10px 0;padding:0 0 12px 0;line-height:normal; color:#051039; background-color:inherit;width:100%;} /* titre, couleur bleu AF */
+h1 {font-size:160%; font-weight:bold;  margin:0 0 10px 0;padding:0 0 12px 0;line-height:normal; color:#2e5880; background-color:inherit;width:100%;} /* titre, couleur bleu AF */
 p.intro {font-size:100%; font-weight:bold; margin:20px 0 20px 0; padding:0; line-height: 1em;} /* introduction, couleur texte courant */
 p.surtitre {font-size:90%; font-weight:bold; margin:10px 0 0 0; padding:0;text-transform:uppercase;} /* surtitre, majuscules, couleur theme*/
-h2 {font-size:130%; font-weight:bold; margin:0; padding:0 0 2px 0;line-height:normal;color:#051039; border-bottom:solid #ccc 1px;background-color:inherit;width:100%;} /* intertitre, couleur bleu AF */
-h3 {font-size:110%; font-weight:bold;margin:0;padding:0;line-height: 1.1em;color:#051039; background-color:inherit;} 
+h2 {font-size:130%; font-weight:bold; margin:10px 0 0; padding:0 0 2px 0;line-height:normal;color:#2e5880; border-bottom:solid #ccc 1px;background-color:inherit;width:100%;font-variant: small-caps;} /* intertitre, couleur bleu AF */
+h3 {font-size:110%; font-weight:bold;margin:0;padding:0;line-height: 1.1em;color:#2e5880; background-color:inherit;} 
 .auteur_date {font-size:90%; font-weight:bold;text-align:right;margin: -10px 0px 0px 0px;}
 /* liens */
 a {font-weight:bold;text-decoration:none; color:#434343; border-bottom:1px solid #808080;background-color:inherit;}/* lien hypertexte*/
 a:visited{font-weight:bold; text-decoration:none; color:#808080;background-color:inherit;}/*lien hypertexte visite*/
 a.picto, a.ancre, a.picto_metiers, a.picto_parcours, a.picto_entrenous, a.picto_pratique, a.picto_environnement, a.picto_cie {border-bottom:0px ;background-repeat:no-repeat; padding-left:15px;} /*lien interne ou externe et ancre */
-a.picto, a.ancre, a.picto_metiers, a.picto_parcours, a.picto_entrenous, a.picto_pratique, a.picto_environnement, a.picto_cie,a.ancre:visited,a.ico {color:#051039;background-color:inherit;} /* lien interne ou externe et ancre en bleu AF */
-a:hover, a.picto:hover, a.ancre:hover {font-weight:bold; color:#e60003;background-color:inherit;}/*rollover des liens */
+a.picto, a.ancre, a.picto_metiers, a.picto_parcours, a.picto_entrenous, a.picto_pratique, a.picto_environnement, a.picto_cie,a.ancre:visited,a.ico {color:#2e5880;background-color:inherit;} /* lien interne ou externe et ancre en bleu AF */
+a:hover, a.picto:hover, a.ancre:hover {font-weight:bold; color:#f3ba5d;background-color:inherit;}/*rollover des liens */
 a.ancre {margin-left:15px;}
 a img {border:none;}/*image dans lien*/
 a.nobottom, a.ico { border-bottom:0;}/*liens non soulignes*/
@@ -134,7 +134,7 @@ a.ico img {float:none; margin:0;padding-top:5px;vertical-align:text-bottom;}/*im
 ul {list-style-type:square;}
 hr {height:1px;border:0;color:#ddd6ce;background-color:#ddd6ce;} /* color pour IE et bgcolor pour firefox */
 /* blockquote */
-blockquote {background-color:#e4e6ee;margin:0px;padding:10px;color:inherit;overflow:hidden;}/*encadre*/
+blockquote {background-color:#F5F5F5;border:1px solid #BBBBBB;margin:0px;padding:10px;color:inherit;overflow:hidden;}/*encadre*/
 blockquote.ps {background-color:#fff;border-width:1px; border-style:solid;color:inherit;}
 #uni #gauche blockquote, #uni #droite blockquote, #maj #gauche blockquote, #maj #droite blockquote{width:208px;} /* particularité pour site UNI */
 #app #gauche blockquote{width:138px;} /* particularité pour site APP */
@@ -146,7 +146,7 @@ blockquote.ps {background-color:#fff;border-width:1px; border-style:solid;color:
 .environnement h1 {background: repeat-x left bottom url(../img/picto/environnement/filetH1.gif);}
 .cie h1 {background: repeat-x left bottom url(../img/picto/cie/filetH1.gif);}
 /*p.surtitre et .exergue et texte force a la couleur d'un theme */
-.metiers p.surtitre, .metiers .exergue, .txt_metiers {color:#ea5a00;background-color:inherit;}
+.metiers p.surtitre, .metiers .exergue, .txt_metiers {color:#f3ba5d;background-color:inherit;}
 .parcours p.surtitre, .parcours .exergue, .txt_parcours {color:#fbc100;background-color:inherit;}
 .entrenous p.surtitre, .entrenous .exergue, .txt_entrenous {color:#a3d900;background-color:inherit;}
 .pratique p.surtitre , .pratique .exergue, .txt_pratique {color:#0094d5;background-color:inherit;}
@@ -175,11 +175,11 @@ ul.ancre{margin-top:0; margin-bottom:0;margin-left:-6px !important;margin-left:3
 .environnement ul.ancre {list-style-image:url(../img/picto/environnement/ancre.gif);}
 .cie ul.ancre {list-style-image:url(../img/picto/cie/ancre.gif);}
 ul.ancre li a {border-bottom:0px ;background-repeat:no-repeat; margin-left:-1px;}
-ul.ancre li a:visited {color:#051039;background-color:inherit;}
+ul.ancre li a:visited {color:#2e5880;background-color:inherit;}
 /* hr ancres*/
 .metiers hr.ancre_haut,.parcours hr.ancre_haut,.entrenous hr.ancre_haut,.pratique hr.ancre_haut,.environnement hr.ancre_haut,.cie hr.ancre_haut {height:3px;background-color:inherit;color:#fff;border-bottom: 1px solid #E1DDD4;}
 .metiers hr.ancre_bas,.parcours hr.ancre_bas,.entrenous hr.ancre_bas,.pratique hr.ancre_bas,.environnement hr.ancre_bas,.cie hr.ancre_bas {height:3px;background-color:inherit;color:#fff;border-top: 1px solid #E1DDD4;}
-.metiers hr.ancre_haut {border-top: 1px solid #ef5a00;} .metiers hr.ancre_bas {border-bottom: 1px solid #ea5a00;}
+.metiers hr.ancre_haut {border-top: 1px solid #ef5a00;} .metiers hr.ancre_bas {border-bottom: 1px solid #f3ba5d;}
 .parcours hr.ancre_haut {border-top: 1px solid #fbc100;} .parcours hr.ancre_bas {border-bottom: 1px solid #fbc100;}
 .entrenous hr.ancre_haut {border-top: 1px solid #a3d900;} .entrenous hr.ancre_bas {border-bottom: 1px solid #a3d900;}
 .pratique hr.ancre_haut {border-top: 1px solid #0094d5;} .pratique hr.ancre_bas {border-bottom: 1px solid #0094d5;}
@@ -193,7 +193,7 @@ ul.ancre li a:visited {color:#051039;background-color:inherit;}
 .environnement a.retour_top, .environnement a.retour_top:visited {clear:both;display:block;float:right; width:auto; padding-right:120px; background:no-repeat top right url(../img/picto/environnement/retour.gif); font-size:1em; text-decoration:none; border-bottom:1px; color:#252525;background-color:inherit;}
 .cie a.retour_top, .cie a.retour_top:visited {clear:both;display:block;float:right; width:auto; padding-right:120px; background:no-repeat top right url(../img/picto/cie/retour.gif); font-size:1em; text-decoration:none; border-bottom:1px; color:#252525;background-color:inherit;}
 /* les blockquotes*/
-.metiers blockquote.ps {border-color:#ea5a00;}
+.metiers blockquote.ps {border-color:#f3ba5d;}
 .parcours blockquote.ps {border-color:#fbc100;}
 .entrenous blockquote.ps {border-color:#a3d900;}
 .pratique blockquote.ps {border-color:#0094d5;}
@@ -254,7 +254,7 @@ table.tblh table.tblv tfoot th, table.tblh table.tblv tfoot td, table.tblh table
 /* tableau : zone pour la pagination */
 div.pagination {text-align:right;margin-top:3px;margin-bottom:5px;font:0.9em Verdana, Arial, Helvetica, sans-serif;}
 div.pagination  a:visited{color:#434343;background-color:inherit;}
-div.pagination a:hover {color:#e60003;background-color:inherit;}
+div.pagination a:hover {color:#f3ba5d;background-color:inherit;}
 /* les images mutualisees */
 .flottante {float: left;margin: 5px 20px 10px 0px;}
 /* les blocs */
@@ -264,7 +264,7 @@ div.pagination a:hover {color:#e60003;background-color:inherit;}
 /* les blocs de type 2. Le titre prend la couleur du theme */
 .bloc2 {text-align:left; width:230px;overflow:hidden;}
 .bloc2 .titre {border-bottom:solid #fff 1px;padding-left:20px; margin:0;font:1em Verdana, Arial, Helvetica, sans-serif;	font-weight:bold;text-transform:uppercase;	line-height:1.6em ;}
-.metiers .bloc2 .titre  {background-color:#ea5a00;color:#fff;}
+.metiers .bloc2 .titre  {background-color:#f3ba5d;color:#fff;}
 .parcours .bloc2 .titre  {background-color:#fbc100;color:#fff;}
 .entrenous .bloc2 .titre  {background-color:#a3d900;color:#fff;}
 .pratique .bloc2 .titre  {background-color:#0094d5;color:#fff;}
@@ -282,7 +282,7 @@ div.recherche_avancee a:visited {color:#252525; border-bottom:none;background-co
 div.recherche_avancee a:hover {color:#fff;background-color:#a4acc8;}
 /* formulaire du moteur de recherche couleur du theme */
 .metiers div.recherche_theme, .parcours div.recherche_theme, .entrenous div.recherche_theme, .pratique div.recherche_theme, .environnement div.recherche_theme, .cie div.recherche_theme {background-color:#e1ddd4;color:inherit;}
-.metiers div.recherche_theme input.ok {background-color:#ea5a00;color:#fff;}
+.metiers div.recherche_theme input.ok {background-color:#f3ba5d;color:#fff;}
 .parcours div.recherche_theme  input.ok {background-color:#fbc100;color:#fff;}
 .entrenous div.recherche_theme input.ok {background-color:#a3d900;color:#fff;}
 .pratique div.recherche_theme input.ok {background-color:#0094d5;color:#fff;}
@@ -291,16 +291,16 @@ div.recherche_avancee a:hover {color:#fff;background-color:#a4acc8;}
 /* formulaire du moteur de recherche: particularite pour APP */
 #app div.recherche, #app div.recherche_avancee a {width:140px;margin:0;padding:5px 10px }
 /* bouton dynamique de type a, submit et button */
-a.btn{display:block;float:left;margin:0 20px 0 0;font-size:1em;font-weight:bold;line-height:1.5em;text-align:right;color:#fff;background-color:#051039;width:auto;padding-left:5em;padding-right:1em;text-decoration:none;border-right:0px;border-left:0px;border-top:1px solid #fff;border-bottom:1px solid #fff;background-repeat:no-repeat;background-position:left;cursor:pointer;}
-input.btn{display:block;float:left;margin:0 20px 0 0;font-size:1em;font-weight:bold;line-height:normal;text-align:right;color:#fff;background-color:#051039;width:auto;height:17px;padding-left:5em !important;padding-left:1em;padding-right:1em;padding-top:0;padding-bottom:2px;text-decoration:none;border-right:1px solid #051039;border-left:1px solid #051039;border-top:1px solid #fff;border-bottom:1px solid #fff;background-repeat:no-repeat;background-position:left;cursor:pointer;}
-a.btn:visited  {color:#fff;background-color:#051039;}
-a.btn:hover  {background-color:#c00000; color:#fff;}
+a.btn{display:block;float:left;margin:0 20px 0 0;font-size:1em;font-weight:bold;line-height:1.5em;text-align:right;color:#fff;background-color:#2e5880;width:auto;padding-left:5em;padding-right:1em;text-decoration:none;border-right:0px;border-left:0px;border-top:1px solid #fff;border-bottom:1px solid #fff;background-repeat:no-repeat;background-position:left;cursor:pointer;}
+input.btn{display:block;float:left;margin:0 20px 0 0;font-size:1em;font-weight:bold;line-height:normal;text-align:right;color:#fff;background-color:#2e5880;width:auto;height:17px;padding-left:5em !important;padding-left:1em;padding-right:1em;padding-top:0;padding-bottom:2px;text-decoration:none;border-right:1px solid #2e5880;border-left:1px solid #2e5880;border-top:1px solid #fff;border-bottom:1px solid #fff;background-repeat:no-repeat;background-position:left;cursor:pointer;}
+a.btn:visited  {color:#fff;background-color:#2e5880;}
+a.btn:hover  {background-color:#f3ba5d; color:#fff;}
 a.right {text-align:left; background-position:right; padding-right:5em; padding-left:1em;float:right;margin:0 0 0 20px;}
 input.right {text-align:left; background-position:right;padding-right:5em !important;padding-right:1em; padding-left:1em !important;float:right;margin:0 0 0 20px;}
 /* bouton sur fond blanc */
-a.white, input.white {font-size:0.9em;background-color:#f0eeec;color:#313131;border-top:1px solid #051039;border-bottom:1px solid #051039;border-right:0;border-left:0;}
+a.white, input.white {font-size:0.9em;background-color:#f0eeec;color:#313131;border-top:1px solid #2e5880;border-bottom:1px solid #2e5880;border-right:0;border-left:0;}
 a.white:visited {color:#313131;background-color:#f0eeec;}
-a.white:hover {background-color:#c00000;color:#fff;}
+a.white:hover {background-color:#f3ba5d;color:#fff;}
 /* MENU action */
 .menu_action {position:relative;margin:10px 0;} /*firefox */
 .menu_action a{ font-size:0.9em;font-weight:bold;display:block;height:17px;color: #313131;background-color:#f0eeec;background-repeat:no-repeat;background-position:right;text-decoration:none;text-align:left;border-bottom:1px solid #fff;padding:2px 0px 0px 20px;}
@@ -311,12 +311,12 @@ a.white:hover {background-color:#c00000;color:#fff;}
 /* les onglets */
 div.onglet{width:100%;margin:0;padding:0}
 div.onglet a{font-size:0.9em;font-weight:bold;line-height:1.7em;text-align:left;color:#fff;background-color:#3675ae;float:left;width:auto;padding-left:10px;padding-right:10px;text-decoration:none;border-bottom:0px;background-image:url(../img/onglets/onglet.gif);background-position:right top;background-repeat:no-repeat;cursor:pointer;}
-div.onglet_contenu {clear:both;width:auto;border-top:1px solid #051039;color:inherit;background-color:#E4F0FA;margin:0;padding:0;text-align:left;}
-div.onglet a.on, div.onglet a.on:hover, div.onglet a.on:visited{background-color:#051039;color:#fff;}
+div.onglet_contenu {clear:both;width:auto;border-top:1px solid #2e5880;color:inherit;background-color:#E4F0FA;margin:0;padding:0;text-align:left;}
+div.onglet a.on, div.onglet a.on:hover, div.onglet a.on:visited{background-color:#2e5880;color:#fff;}
 div.onglet a:visited {color:#fff;background-color:#3675ae;}
-div.onglet a:hover  {color:#fff;background-color:#051039;}
+div.onglet a:hover  {color:#fff;background-color:#2e5880;}
 /* onglet ON et rollover a la couleur du theme */
-.metiers  .bgtheme a.on,  .metiers  .bgtheme a.on:visited, .metiers .bgtheme a:hover, .metiers .bgtheme a.on:hover{background-color:#ea5a00;color:#fff;}
+.metiers  .bgtheme a.on,  .metiers  .bgtheme a.on:visited, .metiers .bgtheme a:hover, .metiers .bgtheme a.on:hover{background-color:#f3ba5d;color:#fff;}
 .parcours .bgtheme a.on, .parcours .bgtheme a.on:visited, .parcours .bgtheme a:hover, .parcours .bgtheme a.on:hover{background-color:#fbc100;color:#fff;}
 .entrenous  .bgtheme a.on, .entrenous .bgtheme a.on:visited, .entrenous .bgtheme a:hover, .entrenous .bgtheme a.on:hover{background-color:#a3d900;color:#fff;}
 .pratique  .bgtheme a.on, .pratique .bgtheme a.on:visited, .pratique .bgtheme a:hover, .metiers .pratique a.on:hover{background-color:#0094d5;color:#fff;}
@@ -326,18 +326,18 @@ div.onglet a:hover  {color:#fff;background-color:#051039;}
 /*------- gestion specifique des couleurs  -----*/
 /*----------------------------------------------*/
 /* couleur de theme defaut pour texte / couleur de theme forcee pour texte / autres couleur de texte */
-.metiers .txt_theme, .txt_metiers {color:#ea5a00;background-color:inherit;}
+.metiers .txt_theme, .txt_metiers {color:#f3ba5d;background-color:inherit;}
 .parcours .txt_theme,.txt_parcours {color:#fbc100;background-color:inherit;}
 .entrenous .txt_theme,.txt_entrenous {color:#a3d900;background-color:inherit;}
 .pratique .txt_theme,.txt_pratique {color:#0094d5;background-color:inherit;}
 .environnement .txt_theme,.txt_environnement {color:#822f8e;background-color:inherit;}
 .cie .txt_theme,.txt_cie {color:#0d3f96;background-color:inherit;}
-.txt_bleuaf {color:#051039;background-color:inherit;}/*bleu air france*/
-.txt_error {color:#c00000;background-color:inherit;}/*erreur de saisie*/
+.txt_bleuaf {color:#2e5880;background-color:inherit;}/*bleu air france*/
+.txt_error {color:#f3ba5d;background-color:inherit;}/*erreur de saisie*/
 /* background couleurs institutionnelles */
-.bg_institutionnel_1 {color:inherit;background-color:#051039;} .bg_institutionnel_2 {color:inherit;background-color:#d2c9b4;} .bg_institutionnel_3 {color:inherit;background-color:#ffffff;} .bg_institutionnel_4 {color:inherit;background-color:#ff0000;}
+.bg_institutionnel_1 {color:inherit;background-color:#2e5880;} .bg_institutionnel_2 {color:inherit;background-color:#d2c9b4;} .bg_institutionnel_3 {color:inherit;background-color:#ffffff;} .bg_institutionnel_4 {color:inherit;background-color:#ff0000;}
 /* background couleurs vives */
-.bg_v1, .tblh .bg_v1, .tblv .bg_v1, .formulaire .bg_v1{background-color:#e60003;color:inherit;}
+.bg_v1, .tblh .bg_v1, .tblv .bg_v1, .formulaire .bg_v1{background-color:#f3ba5d;color:inherit;}
 .bg_v2, .tblh .bg_v2, .tblv .bg_v2, .formulaire .bg_v2{background-color:#9f0033;color:inherit;}
 .bg_v3, .tblh .bg_v3, .tblv .bg_v3, .formulaire .bg_v3{background-color:#7b61b4;color:inherit;}
 .bg_v4, .tblh .bg_v4, .tblv .bg_v4, .formulaire .bg_v4{background-color:#10435b;color:inherit;}
@@ -361,22 +361,22 @@ div.onglet a:hover  {color:#fff;background-color:#051039;}
 .bg_c12, .tblh .bg_c12, .tblv .bg_c12, .formulaire .bg_c12 {background-color:#f78704;color:inherit;}
 .bg_c13, .tblh .bg_c13, .tblv .bg_c13, .formulaire .bg_c13{background-color:#99cc33;color:inherit;}
 .bg_c14, .tblh .bg_c14, .tblv .bg_c14, .formulaire .bg_c14{background-color:#008880;color:inherit;}
-.bg_error, .tblh .bg_error, .tblv .bg_error, .formulaire .bg_error{background-color:#c00000;color:#fff;}/*erreur de saisie*/
+.bg_error, .tblh .bg_error, .tblv .bg_error, .formulaire .bg_error{background-color:#f3ba5d;color:#fff;}/*erreur de saisie*/
 /* background couleurs de theme defaut et background couleurs de theme force*/
-.metiers .bg_theme, .bg_metiers {background-color:#ea5a00;color:inherit;}
+.metiers .bg_theme, .bg_metiers {background-color:#f3ba5d;color:inherit;}
 .parcours .bg_theme, .bg_parcours {background-color:#fbc100;color:inherit;}
 .entrenous .bg_theme, .bg_entrenous {background-color:#a3d900;color:inherit;}
 .pratique .bg_theme, .bg_pratique {background-color:#0094d5;color:inherit;}
 .environnement .bg_theme, .bg_environnement {background-color:#822f82;color:inherit;}
 .cie .bg_theme, .bg_cie {background-color:#0d3f96;color:inherit;}
 /* couleurs de <hr> . Utilisees pour le filet colore dans le header. color pour IE et bgcolor pour firefox */
-.metiers hr.bg_theme {color:#ea5a00;background-color:#ea5a00;}
+.metiers hr.bg_theme {color:transparent;background-color:transparent;}
 .parcours hr.bg_theme {color:#fbc100;background-color:#fbc100;}
 .entrenous hr.bg_theme {color:#a3d900;background-color:#a3d900;}
 .pratique hr.bg_theme {color:#0094d5;background-color:#0094d5;}
 .environnement hr.bg_theme {color:#822f8e;background-color:#822f8e;}
 .cie hr.bg_theme {color:#0d3f96;background-color:#0d3f96;}
-hr.bg_v1{color:#e60003;background-color:#e60003;} hr.bg_v2{color:#9f0033;background-color:#9f0033;} hr.bg_v3{color:#7b61b4;background-color:#7b61b4;} hr.bg_v4{color:#10435b;background-color:#10435b;} hr.bg_v5{color:#106a92;background-color:#106a92;} hr.bg_v6{color:#009e89;background-color:#009e89;} hr.bg_v7{color:#466000;background-color:#466000;} hr.bg_v8{color:#7c6355;background-color:#7c6355;} hr.bg_v9{color:#dec417;background-color:#dec417;} hr.bg_c1{color:#8ad3f5;background-color:#8ad3f5;} hr.bg_c2{color:#94d3dc;background-color:#94d3dc;} hr.bg_c3{color:#a4acc8;background-color:#a4acc8;} hr.bg_c4{color:#7592be;background-color:#7592be;} hr.bg_c5{color:#4f6c99;background-color:#4f6c99;} hr.bg_c6{color:#e1ddd4;background-color:#e1ddd4;} hr.bg_c7{color:#cdc8bf;background-color:#cdc8bf;} hr.bg_c8{color:#f2e1c5;background-color:#f2e1c5;} hr.bg_c9{color:#e9cd9e;background-color:#e9cd9e;} hr.bg_c10{color:#434343;background-color:#434343;} hr.bg_c11{color:#ea6a9a;background-color:#ea6a9a;} 
+hr.bg_v1{color:#f3ba5d;background-color:#f3ba5d;} hr.bg_v2{color:#9f0033;background-color:#9f0033;} hr.bg_v3{color:#7b61b4;background-color:#7b61b4;} hr.bg_v4{color:#10435b;background-color:#10435b;} hr.bg_v5{color:#106a92;background-color:#106a92;} hr.bg_v6{color:#009e89;background-color:#009e89;} hr.bg_v7{color:#466000;background-color:#466000;} hr.bg_v8{color:#7c6355;background-color:#7c6355;} hr.bg_v9{color:#dec417;background-color:#dec417;} hr.bg_c1{color:#8ad3f5;background-color:#8ad3f5;} hr.bg_c2{color:#94d3dc;background-color:#94d3dc;} hr.bg_c3{color:#a4acc8;background-color:#a4acc8;} hr.bg_c4{color:#7592be;background-color:#7592be;} hr.bg_c5{color:#4f6c99;background-color:#4f6c99;} hr.bg_c6{color:#e1ddd4;background-color:#e1ddd4;} hr.bg_c7{color:#cdc8bf;background-color:#cdc8bf;} hr.bg_c8{color:#f2e1c5;background-color:#f2e1c5;} hr.bg_c9{color:#e9cd9e;background-color:#e9cd9e;} hr.bg_c10{color:#434343;background-color:#434343;} hr.bg_c11{color:#ea6a9a;background-color:#ea6a9a;} 
 hr.bg_c12{color:#f78704;background-color:#f78704;} hr.bg_c13{color:#99cc33;background-color:#99cc33;} hr.bg_c14{color:#008880;background-color:#008880;} 
 /* styles specifiques pour WELCOM */
 .td1 {text-align:right;font-weight:bold;}

@@ -82,17 +82,17 @@ width:12px;
 
 .wIntro {font-size:100%; font-weight:bold; margin:20px 0 20px 0; padding:0; line-height: 1em;}
 
-.wTitreGeneral {font-size:130%; font-weight:bold; margin:0; padding:0;line-height: 1.4em;color:#051039; border-bottom:solid #ccc 1px;background-color:inherit;width:100%;}
-.wTitreParagraphe {font-size:110%; font-weight:bold;margin:0;padding:0;line-height: 1.1em;color:#051039; background-color:inherit;} 
+.wTitreGeneral {font-size:130%; font-weight:bold; margin:0; padding:0;line-height: 1.4em;color:#2e5880; border-bottom:solid #ccc 1px;background-color:inherit;width:100%;}
+.wTitreParagraphe {font-size:110%; font-weight:bold;margin:0;padding:0;line-height: 1.1em;color:#2e5880; background-color:inherit;} 
 
-.exergue {font-style:italic;font-weight:bold;color:#ea5a00;background-color:inherit;}
+.exergue {font-style:italic;font-weight:bold;color:#f3ba5d;background-color:inherit;}
 .surtitre{
 	 font-size:90%;
 	 font-weight:bold;
 	 margin:10px 0 0 0;
 	 padding:0;
 	 text-transform:uppercase;
-	 color:#ea5a00;background-color:inherit;
+	 color:#f3ba5d;background-color:inherit;
 }
 
 p{

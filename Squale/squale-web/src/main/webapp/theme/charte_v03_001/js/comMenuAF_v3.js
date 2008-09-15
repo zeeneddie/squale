@@ -87,14 +87,14 @@ grisClair = "#ECEAE7";
 grisFonce = "#252525";
 grismoyen ="#E1DDD5";
 
-bleuFonce = "#051039";
-bleu = "#485891";
+bleuFonce = "#2e5880";
+bleu = "#4f7fad";
 blanc = "#FFF";
 
 CouleurFleche = bleuFonce;
 
 CouleurCompagnie = "#0D3F96";
-CouleurMetiers = "#EA5A00";
+CouleurMetiers = "#f3ba5d";
 CouleurPratique = "#0094D5";
 CouleurParcours  = "#FBC100";
 CouleurEntrenous = "#A3D900";
@@ -154,7 +154,7 @@ mVx_style_couleur_ancre_element_survol = new Array(
 
 
 mVx_style_couleur_ancre_element_fond = new Array(
-	new Array(bleuFonce, bleuFonce, bleuFonce, bleuFonce, bleuFonce, bleuFonce),
+	new Array("transparent", "transparent", "transparent", "transparent", "transparent", "transparent"),
 	new Array(blanc, blanc, blanc, blanc, blanc, blanc)
 );
 

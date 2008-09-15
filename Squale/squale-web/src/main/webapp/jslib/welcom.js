@@ -858,7 +858,7 @@ var myrules = {
 			setCursor(element);
 		};
 		element.onmouseout = function(){
-			element.style.backgroundColor= "#051039"; 
+			element.style.backgroundColor= "#2e5880"; 
 			element.style.cursor = "default";
 		};	
 	},
