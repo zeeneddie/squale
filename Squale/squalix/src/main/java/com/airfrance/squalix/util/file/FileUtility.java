@@ -536,13 +536,15 @@ public class FileUtility
     }
 
     /**
-     * Copie un répertoire
-     * 
-     * @param pSrc le fichier (compressé ou non) ou répertoire source
-     * @param pDest le répertoire de destination
+     * Copy pSrc into pDest
+     * <li>If pSrc is a <b>directory</b>, the directory is copied into pDest (to copy the content of the directory, use
+     * use copyContentIntoDir instead)
+     * <li>If pSrc is a <b>file</b>, the file is copied info pDest.
+     * @param pSrc source file (compressed or not) or source directory
+     * @param pDest target directory
      * @throws IOException si erreur de flux
      */
-    public static void copyIntoDir( File pSrc, File pDest ) /* ex copyDirInfo */
+    public static void copyIntoDir( File pSrc, File pDest ) /* ex copyInto */
         throws IOException
     {
         // On crée les répertoires
@@ -564,62 +566,30 @@ public class FileUtility
     	copyFile.execute();
     }
 
-// ------------------------------ DEBUT DE COPIE DE L'ANCIEN CODE ------------------------------
-    // TODO FIXME : cf. Bug #96
-    // appel de la méthode #copyContentIntoDir dans AbstractRepository, qui appelait #copyDirInto
-    // avant que celle-ci ne soit refactorée en #CopyIntoDir
-    public static void copyContentIntoDir( File pSrc, File pDest ) 
+    /**
+     * Copy pSrcDir content into pDest
+     * <li>If pSrcDir is a <b>directory</b>, the directory is copied into pDest (to copy the content of the directory, use
+     * use copyContentIntoDir instead)
+     * @param pSrcDir source directory
+     * @param pDest target directory
+     * @throws IOException si erreur de flux
+     */
+    public static void copyDirContentIntoDir( File pSrcDir, File pDest ) 
         throws IOException
     {
         // On crée les répertoires
         pDest.mkdirs();
         // On récupère tous les dossiers et les fichiers correspondant au pattern
         // des fichiers à analyser
-        File[] list = pSrc.listFiles();
+        File[] list = pSrcDir.listFiles();
         // On parcours récursivement tous les dossiers pour stocker
         // tous les fichiers correspondant au pattern qu'ils contiennent
         for ( int i = 0; i < list.length; i++ )
         {
             File file = list[i];
-            copyInto( file, pDest );
+            copyIntoDir( file, pDest );
         }
     }
-    public static void copyInto( File pSrc, File pDest )
-        throws IOException
-    {
-        // On crée les répertoires
-        pDest.mkdirs();
-        File currentSrc = new File( pDest + "/" + pSrc.getName() );
-        if ( pSrc.isDirectory() )
-        {
-            copyContentIntoDir( pSrc, currentSrc );
-        }
-        else if ( pSrc.isFile() )
-        {
-            copyFileInto( pSrc, pDest );
-        }
-    }
-    private static void copyFileInto( File pSrc, File pDest )
-        throws IOException
-    {
-        File fileDest = new File( pDest, pSrc.getName() );
-        copyFile_AncienCode( pSrc, fileDest );
-    }
-    public static void copyFile_AncienCode( File pSrc, File pDest )
-        throws IOException
-    {
-        int count;
-        FileInputStream input = new FileInputStream( pSrc );
-        FileOutputStream output = new FileOutputStream( pDest );
-        while ( ( count = input.read() ) != -1 )
-        {
-            output.write( count );
-        }
-        output.flush();
-        output.close();
-        input.close();
-    }
- // ------------------------------ FIN DE COPIE DE L'ANCIEN CODE ------------------------------
     
     /**
      * Copie le répertoire dans le répertoire source ou extrait l'archive dans le répertoire source.
