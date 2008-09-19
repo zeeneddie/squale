@@ -138,6 +138,9 @@
 		</action>
 		<action path="/login" type="com.airfrance.squaleweb.applicationlayer.action.LoginAction">
 			<forward name="success" path="/index.do"/>
+			<!-- Use the following line instead of the previous one if you prefer to have the application listing -->
+			<!-- as a welcom page instead of the original one: -->
+			<!--forward name="success" path="/all_applications.do?action=listNotPublic"/-->
 			<forward name="email" path="/display_account.do?action=detail"/>
 		</action>
 		<action path="/all_applications" type="com.airfrance.squaleweb.applicationlayer.action.results.application.AllApplicationsAction" name="resultListForm" scope="session" parameter="action">
