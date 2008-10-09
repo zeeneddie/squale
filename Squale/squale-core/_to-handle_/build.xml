@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- ==================================================================== -->
+<!-- 		Ant Script used to generate Hibernate related resources		  -->
+<!-- ==================================================================== -->
+	
 <project name="Hibernate Utils" basedir=".">
 	
 	<property name="project.basedir" value="${basedir}/.." />
