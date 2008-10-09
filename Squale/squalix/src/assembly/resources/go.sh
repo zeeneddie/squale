@@ -1,4 +1,4 @@
-rm ../../logs/*
+rm ../logs/*
 dos2unix *.sh
 dos2unix resources/*.sh
 chmod u+x *.sh
