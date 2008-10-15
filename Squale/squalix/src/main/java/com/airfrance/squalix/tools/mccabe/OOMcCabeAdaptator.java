@@ -20,7 +20,7 @@ import com.airfrance.squalix.util.repository.ComponentRepository;
  * Est en charge de remplacer tous les noms des méthodes par les objets correspondant.<br>
  * Ceci permet d'utiliser les relations proposées par la base de données.<br>
  */
-public class McCabeAdaptator
+public class OOMcCabeAdaptator
 {
 
     /**
@@ -41,7 +41,7 @@ public class McCabeAdaptator
     /**
      * Logger
      */
-    private static final Log LOGGER = LogFactory.getLog( McCabeAdaptator.class );
+    private static final Log LOGGER = LogFactory.getLog( OOMcCabeAdaptator.class );
 
     /**
      * Constructeur
@@ -49,7 +49,7 @@ public class McCabeAdaptator
      * @param pParser le parser
      * @param pRepository le repository
      */
-    public McCabeAdaptator( LanguageParser pParser, ComponentRepository pRepository )
+    public OOMcCabeAdaptator( LanguageParser pParser, ComponentRepository pRepository )
     {
         mParser = pParser;
         mRepository = pRepository;

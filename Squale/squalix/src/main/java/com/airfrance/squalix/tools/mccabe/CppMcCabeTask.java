@@ -30,7 +30,7 @@ import com.airfrance.squalix.util.process.ProcessManager;
  * référencer l'ensemble des fichiers d'include à prendre en compte
  */
 public class CppMcCabeTask
-    extends AbstractMcCabeTask
+    extends OOMcCabeTask
     implements CSVParser.CSVHandler
 {
 

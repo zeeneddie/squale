@@ -17,7 +17,6 @@ import com.airfrance.squalix.core.AbstractTask;
 import com.airfrance.squalix.core.TaskData;
 import com.airfrance.squalix.core.TaskException;
 import com.airfrance.squalix.util.file.FileUtility;
-import com.airfrance.squalix.util.parser.LanguageParser;
 import com.airfrance.squalix.util.process.ProcessErrorHandler;
 import com.airfrance.squalix.util.process.ProcessManager;
 import com.airfrance.squalix.util.process.ProcessOutputHandler;
@@ -47,17 +46,6 @@ public abstract class AbstractMcCabeTask
      * Logger
      */
     private static final Log LOGGER = LogFactory.getLog( AbstractMcCabeTask.class );
-
-    /**
-     * Instance du persisteur McCabe
-     */
-    protected McCabePersistor mPersistor = null;
-
-    /** Le parser */
-    protected LanguageParser mParser;
-
-    /** Le template de la classe à utiliser */
-    protected String mClassTemplate = "csv.template.class";
 
     /** Buffer pour écrire les erreurs */
     protected BufferedWriter mErrorWriter;
@@ -112,7 +100,7 @@ public abstract class AbstractMcCabeTask
 
                 // Une fois que tous les rapports ont été générés et parsés,
                 // on peut générer les résultats de niveau projet
-                mPersistor.persistProjectResult();
+                persistProjectResult();
             }
 
             // positionne les données sur la taille du file System
@@ -145,7 +133,7 @@ public abstract class AbstractMcCabeTask
      * 
      * @exception Exception si un probleme d'initialisation apparait
      */
-    private void initialize()
+    protected void initialize()
         throws Exception
     {
         // On récupère la configuration du module McCabe, personnalisée
@@ -176,11 +164,9 @@ public abstract class AbstractMcCabeTask
         createProjectConfigurationFile( pcfFile );
         // On crée une instance de persisteur et du template utilisant la session déjà ouverte
         setParser();
-        setClassTemplate();
-        mPersistor =
-            new McCabePersistor( mParser, mConfiguration, mAudit, getSession(), getData(), mName, mClassTemplate );
+        setPersistor();
         LOGGER.info( McCabeMessages.getString( "logs.initialized" ) + mProject.getParent().getName() + " - "
-            + mProject.getName() );
+                     + mProject.getName() );
     }
 
     /**
@@ -363,26 +349,8 @@ public abstract class AbstractMcCabeTask
      * @param pReport rapport à parser
      * @throws Exception si erreur
      */
-    private void parseReport( final String pReport )
-        throws Exception
-    {
-        String reportFileName = computeReportFileName( pReport );
-        // Parser le rapport généré
-        // Il y a deux méthodes de parsing des rapports, une pour les rapports de méthodes
-        // et l'autre pour les rapports de classe. Ainsi, il suffit que le nom du rapport
-        // débute par METHOD ou CLASS pour que la bonne méthode soit sélectionné, le reste
-        // est laissé à l'appréciation de l'utilisateur. Ceci permet de versionner, dater
-        // les noms de rapports.
-
-        if ( pReport.startsWith( McCabeMessages.getString( "reports.profile.class" ) ) )
-        {
-            mPersistor.parseClassReport( reportFileName );
-        }
-        else if ( pReport.startsWith( McCabeMessages.getString( "reports.profile.module" ) ) )
-        {
-            mPersistor.parseMethodReport( reportFileName, mData );
-        }
-    }
+    protected abstract void parseReport( final String pReport )
+    throws Exception ;
 
     /**
      * Détermination du fichier de rapport
@@ -476,15 +444,21 @@ public abstract class AbstractMcCabeTask
     }
 
     /**
-     * Modifie le parser
+     * Modifie le parser.
      */
     public abstract void setParser();
 
-    /**
-     * Modifie le template niveau classe
-     */
-    public abstract void setClassTemplate();
 
+    /**
+     * Positionne la classe de persistance.
+     */
+    protected abstract void setPersistor() throws Exception ;
+
+    /**
+     * Calcule et enregistre les métriques McCabe de niveau projet.
+     */
+    public abstract void persistProjectResult() ;
+    
     /**
      * @see com.airfrance.squalix.util.process.ProcessOutputHandler#processOutput(java.lang.String)
      */

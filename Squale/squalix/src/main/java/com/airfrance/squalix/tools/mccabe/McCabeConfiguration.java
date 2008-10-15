@@ -397,8 +397,6 @@ public class McCabeConfiguration
             params[i] = token.nextToken();
         }
         pConfiguration.mMetricsCommand = params;
-        // Liste des rapports
-        pConfiguration.mReports = getStrListFromNode( pNode, "configuration.general.reports" );
         /* Les filtre */
         Node filterNode =
             ConfigUtility.getNodeByTagName( pNode, McCabeMessages.getString( "configuration.general.filter" ) );
@@ -536,6 +534,8 @@ public class McCabeConfiguration
         }
         // Conversion en tableau de String
         pConfiguration.mParseParameters = (String[]) parameters.toArray( type );
+        // Liste des rapports
+        pConfiguration.mReports = getStrListFromNode( pNode, "configuration.profiles.reports" );
     }
 
     /**

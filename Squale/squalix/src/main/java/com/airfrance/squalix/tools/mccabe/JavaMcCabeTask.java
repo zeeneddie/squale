@@ -17,7 +17,7 @@ import com.airfrance.squalix.util.parser.J2EEParser;
  * L'ordre des rapports dans le configuration est respécté.
  */
 public class JavaMcCabeTask
-    extends AbstractMcCabeTask
+    extends OOMcCabeTask
     implements CSVParser.CSVHandler
 {
 
