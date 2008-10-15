@@ -186,7 +186,7 @@
 				</from>
 			</allow>
 		</access-rule>
-		<access-rule severity="error">
+		<!--access-rule severity="error">
 			<message>Acces non valide a la persistance</message>
 			<deny>
 				<to pattern="persistance" />
@@ -197,7 +197,7 @@
 					<include pattern="persistance" />
 				</from>
 			</allow>
-		</access-rule>
+		</access-rule-->
 		<access-rule severity="error">
 			<message>Acces non valide a l'api JDBC</message>
 			<deny>
