@@ -28,7 +28,7 @@
 			<include class="${nom_projet}.**.jspbean.**" />
 		</pattern>
 
-		<!-- Bus de donn�es JRaf (DTO) -->
+		<!-- Bus de donnees JRaf (DTO) -->
 
 		<pattern name="dto">
 			<include class="${nom_projet}.datatransfertobject.**" />
@@ -44,7 +44,7 @@
 			<include class="${nom_projet}.comparator.**" />
 		</pattern>
 
-		<!-- Variables m�tier -->
+		<!-- Variables metier -->
 
 		<pattern name="application-component">
 			<include class="${nom_projet}.enterpriselayer.applicationcomponent.**" />
@@ -114,7 +114,7 @@
 				</from>
 			</allow>
 		</access-rule>
-		<!-- L'acc�s aux actions-servlet n'est autoris� que depuis les JSP -->
+		<!-- L'acces aux actions-servlet n'est autorise que depuis les JSP -->
 		<access-rule severity="error">
 			<message>Acces non valide aux actions-servlet</message>
 			<deny>
@@ -127,7 +127,7 @@
 				</from>
 			</allow>
 		</access-rule>
-		<access-rule severity="error">
+		<!--access-rule severity="error">
 			<message>
 				Acces non valide aux application-component
 			</message>
@@ -168,7 +168,7 @@
 					<include pattern="dtotransform" />
 				</from>
 			</allow>
-		</access-rule>
+		</access-rule-->
 		<access-rule severity="error">
 			<message>Acces non valide aux DTO</message>
 			<deny>
