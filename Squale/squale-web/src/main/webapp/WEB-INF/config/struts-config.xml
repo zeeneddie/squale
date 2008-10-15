@@ -94,6 +94,8 @@
 		</form-bean>
 		<form-bean name="cppMcCabeForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.CppMcCabeForm">
 		</form-bean>
+		<form-bean name="cobolMcCabeForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.CobolMcCabeForm">
+		</form-bean>
 		<form-bean name="generalParametersForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.GeneralParametersForm">
 		</form-bean>
 		<form-bean name="jspCompilingForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.JspCompilingForm">
@@ -326,6 +328,10 @@
 			<forward name="config" path="/jsp/admin/project/add_project_cppmccabetask_conf.jsp">
 			</forward>
 		</action>
+		<action path="/CobolMcCabeTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateCobolMcCabeParametersAction" name="cobolMcCabeForm" input="/jsp/admin/project/add_project_cobolmccabetask_conf.jsp" parameter="action" validate="false" scope="session">
+			<forward name="config" path="/jsp/admin/project/add_project_cobolmccabetask_conf.jsp">
+			</forward>
+		</action>
 		<action path="/message" type="com.airfrance.squaleweb.applicationlayer.action.message.MessageAction" name="createMessageForm" scope="request">
 			<forward name="success_messages" path="/jsp/admin/message/message.jsp">
 			</forward>
@@ -342,6 +348,12 @@
 			<forward name="success" path="/jsp/admin/checkstyle/new.jsp"></forward>
 		</action>
 		<action path="/add_project_cpp_mccabe_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateCppMcCabeParametersAction" parameter="action" name="cppMcCabeForm" scope="session" input="/jsp/admin/project/config_project.jsp">
+  			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+  			</forward>
+  			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+  			</forward>
+  		</action>
+		<action path="/add_project_cobol_mccabe_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateCobolMcCabeParametersAction" parameter="action" name="cobolMcCabeForm" scope="session" input="/jsp/admin/project/config_project.jsp">
   			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
   			</forward>
   			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
