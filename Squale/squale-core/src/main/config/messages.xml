@@ -3057,6 +3057,12 @@
 	<message lang="en" key="task.cppmccabetask.configuration">
 		McCabe's configuration
 	</message>
+	<message lang="fr" key="task.cobolmccabetask.configuration">
+		Configuration de McCabe
+	</message>
+	<message lang="en" key="task.cobolmccabetask.configuration">
+		McCabe's configuration
+	</message>
 	<message lang="fr" key="task.cpptesttask.configuration">
 		Configuration de CppTest
 	</message>
@@ -3175,6 +3181,12 @@
 	</message>
 	<message lang="en" key="CppMcCabeTask.name">
 		McCabe task for Cpp profile
+	</message>
+	<message lang="fr" key="CobolMcCabeTask.name">
+		Tâche McCabe
+	</message>
+	<message lang="en" key="CobolMcCabeTask.name">
+		McCabe task
 	</message>
 	<message lang="fr" key="J2eeMcCabeTask.name">Tâche McCabe</message>
 	<message lang="en" key="J2eeMcCabeTask.name">McCabe task</message>

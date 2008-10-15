@@ -40,6 +40,7 @@
 		<task name="SourceCodeAnalyserCleanerTask" class="com.airfrance.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserCleanerTask" configurable="false"></task>
 		<task name="JavaMockCompilingTask" class="com.airfrance.squalix.tools.compiling.java.JavaMockCompilingTask" standard="true"></task>
 		<task name="JavaMockCompilingCleanerTask" class="com.airfrance.squalix.tools.compiling.java.JavaMockCompilingCleanerTask" configurable="false"></task>
+		<task name="CobolMcCabeTask" class="com.airfrance.squalix.tools.mccabe.CobolMcCabeTask" standard="true"></task>
 		<task name="CppMcCabeTask" class="com.airfrance.squalix.tools.mccabe.CppMcCabeTask" standard="true"></task>
 		<task name="JavaMcCabeTask" class="com.airfrance.squalix.tools.mccabe.JavaMcCabeTask" configurable="false"></task>
 		<!-- taches facultatives -->
@@ -353,6 +354,43 @@
 			<termination>
 				<task-ref name="ComputeResultTask"></task-ref>
 				<task-ref name="JavaMockCompilingCleanerTask"></task-ref>
+			</termination>
+		</profile>
+		<profile name="cobol" exportIDE="false">
+			<!-- Configuration de SqualeWeb dépendant de ce profil -->
+			<integrityConstraints>
+				<!-- Les grilles disponibles pour ce profil -->
+				<grids>
+					<grid name="cobol"/>
+				</grids>
+				<!-- Les différentes configurations des graphiques -->
+				<displayConfigurations>
+					<!-- La configuration du scatterplot -->
+					<bubble xtre="mccabe.method.vg" ytre="mccabe.method.evg" xPos="10" yPos="7" />
+					<!-- La configuration de la volumétrie -->
+					<volumetries>
+						<!-- configuration du graphe de volumétrie niveau application -->
+						<volumetry component="application">
+							<tre name="rsm.project.sloc" />
+						</volumetry>
+						<!-- configuration de la volumétrie niveau projet -->
+						<volumetry component="project">
+							<tre name="rsm.project.sloc" />
+							<tre name="rsm.project.comments" />
+							<tre name="mccabe.project.numberOfClasses" />
+							<tre name="mccabe.project.numberOfMethods" />
+							<tre name="rsm.project.numberofcodelines" />
+						</volumetry>
+					</volumetries>
+				</displayConfigurations>
+			</integrityConstraints>
+			<analysis>
+				<task-ref name="CobolMcCabeTask"></task-ref>
+				<task-ref name="UMLQualityTask"></task-ref>
+				<task-ref name="CpdTask"></task-ref>
+			</analysis>
+			<termination>
+				<task-ref name="ComputeResultTask"></task-ref>
 			</termination>
 		</profile>
 	</profiles>
