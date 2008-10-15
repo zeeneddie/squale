@@ -95,8 +95,8 @@ public class McCabePersistorTest
             config.setProject( mProject );
             config.setSubWorkspace( new File( "data/results/mccabe" ) );
 
-            McCabePersistor persistor =
-                new McCabePersistor( new JavaParser( mProject ), config, mAudit, getSession(), mData, "JavaMcCabeTask",
+            OOMcCabePersistor persistor =
+                new OOMcCabePersistor( new JavaParser( mProject ), config, mAudit, getSession(), mData, "JavaMcCabeTask",
                                      "csv.java.template.class" );
             persistor.parseClassReport( "data/mccabe/sample/java/CLASSES.csv" );
             // Vérification des objets créés
@@ -124,8 +124,8 @@ public class McCabePersistorTest
             config.setProject( mProject );
             config.setSubWorkspace( new File( "data/results/mccabe" ) );
 
-            McCabePersistor persistor =
-                new McCabePersistor( new JavaParser( mProject ), config, mAudit, getSession(), mData, "JavaMcCabeTask",
+            OOMcCabePersistor persistor =
+                new OOMcCabePersistor( new JavaParser( mProject ), config, mAudit, getSession(), mData, "JavaMcCabeTask",
                                      "csv.java.template.class" );
             persistor.parseMethodReport( "data/mccabe/sample/java/METHODES.csv", mData );
             Collection coll =
@@ -152,8 +152,8 @@ public class McCabePersistorTest
             McCabeConfiguration config = new McCabeConfiguration();
             config.setProject( mProject );
             config.setSubWorkspace( new File( "data/results/mccabe" ) );
-            McCabePersistor persistor =
-                new McCabePersistor( new CppParser( mProject ), config, mAudit, getSession(), mData, "CppMcCabeTask",
+            OOMcCabePersistor persistor =
+                new OOMcCabePersistor( new CppParser( mProject ), config, mAudit, getSession(), mData, "CppMcCabeTask",
                                      "csv.template.class" );
             persistor.parseClassReport( "data/mccabe/sample/cpp/CLASSES.csv" );
             Collection coll =
@@ -181,8 +181,8 @@ public class McCabePersistorTest
             config.setProject( mProject );
             config.setSubWorkspace( new File( "data/results/mccabe" ) );
 
-            McCabePersistor persistor =
-                new McCabePersistor( new CppParser( mProject ), config, mAudit, getSession(), mData, "CppMcCabeTask",
+            OOMcCabePersistor persistor =
+                new OOMcCabePersistor( new CppParser( mProject ), config, mAudit, getSession(), mData, "CppMcCabeTask",
                                      "csv.template" );
             persistor.parseMethodReport( "data/mccabe/sample/cpp/METHODES.csv", mData );
             Collection coll =

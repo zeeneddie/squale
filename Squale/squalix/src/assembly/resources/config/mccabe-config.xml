@@ -2,18 +2,19 @@
 <configuration>
   <general>
     <commands>
+<!-- ENV-MCCABE-CLI -->
       <clicommand>${ENV-MCCABE-CLI}</clicommand>
       <parsercommand>parse</parsercommand>
       <metricscommand>metrics -report %report_name% -ss -output %report_out%</metricscommand>
     </commands>
+<!-- ENV-MCCABE-WORKSPACE -->
     <workspace>${ENV-MCCABE-WORKSPACE}</workspace>
+<!-- ENV-MCCABE-LOG -->
     <logger>${ENV-MCCABE-LOG}</logger>
+<!-- ENV-MCCABE-LOG-ERROR -->
     <logger-err>${ENV-MCCABE-LOG-ERROR}</logger-err>
+<!-- ENV-MCCABE-RPT -->
     <reportspath>${ENV-MCCABE-RPT}</reportspath>
-    <reports>
-      <report>METHODES</report>
-      <report>CLASSES</report>
-    </reports>
     <filter>
     	<errorToWarningMessages>
     		<message>ERR-gra2sc: 3012\.1: Completed build of class chart with warnings\. See the root/server window for details.*</message>
@@ -22,6 +23,7 @@
     	</errorToWarningMessages>
     	<ignoringMessages>
     		<message>ERR-cli: 1053\.117: Can't create directory '/OUTILS/McCabe/current/repos'.*</message>
+			<message>ERR-cli: 1053\.117: Can't create directory '/exploit/OUTILS/McCabe/current/repos'.*</message>
     		<message>CRIT-cli: 1085\.304.*</message>
     	</ignoringMessages>
     	<addFileNameMessages>
@@ -57,6 +59,10 @@
         <parameter>-DATA</parameter>
         <parameter>-OVERLOAD</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="j2ee1.3">
       <parser>cw_Java_inst</parser>
@@ -77,6 +83,10 @@
         <parameter>-DATA</parameter>
         <parameter>-OVERLOAD</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="j2ee compiled1.3">
       <parser>cw_Java_inst</parser>
@@ -97,6 +107,10 @@
         <parameter>-DATA</parameter>
         <parameter>-OVERLOAD</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="java compiled1.3">
       <parser>cw_Java_inst</parser>
@@ -117,6 +131,10 @@
         <parameter>-DATA</parameter>
         <parameter>-OVERLOAD</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="java1.4">
       <parser>cw_Java_inst</parser>
@@ -137,6 +155,10 @@
         <parameter>-DATA</parameter>
         <parameter>-OVERLOAD</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="j2ee1.4">
       <parser>cw_Java_inst</parser>
@@ -157,6 +179,10 @@
         <parameter>-DATA</parameter>
         <parameter>-OVERLOAD</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="java compiled1.4">
       <parser>cw_Java_inst</parser>
@@ -177,6 +203,10 @@
         <parameter>-DATA</parameter>
         <parameter>-OVERLOAD</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="j2ee compiled1.4">
       <parser>cw_Java_inst</parser>
@@ -197,6 +227,10 @@
         <parameter>-DATA</parameter>
         <parameter>-OVERLOAD</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="java1.5">
       <parser>cw_Java_inst</parser>
@@ -217,6 +251,10 @@
         <parameter>-DATA</parameter>
         <parameter>-OVERLOAD</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="j2ee1.5">
       <parser>cw_Java_inst</parser>
@@ -237,6 +275,10 @@
         <parameter>-DATA</parameter>
         <parameter>-OVERLOAD</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="java compiled1.5">
       <parser>cw_Java_inst</parser>
@@ -257,6 +299,10 @@
         <parameter>-DATA</parameter>
         <parameter>-OVERLOAD</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="j2ee compiled1.5">
       <parser>cw_Java_inst</parser>
@@ -277,6 +323,10 @@
         <parameter>-DATA</parameter>
         <parameter>-OVERLOAD</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="cppSunws_5x">
       <parser>cw_C++_inst</parser>
@@ -295,6 +345,10 @@
         <parameter>-NONINST</parameter>
         <parameter>-NPP</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
     </profile>
     <profile name="cppForte">
       <parser>cw_C++_inst</parser>
@@ -313,6 +367,33 @@
         <parameter>-NONINST</parameter>
         <parameter>-NPP</parameter>
       </parameters>
+      <reports>
+        <report>METHODES</report>
+        <report>CLASSES</report>
+      </reports>
+    </profile>
+    <profile name="cobolIbm_341">
+      <parser>cw_COBOL_inst</parser>
+      <extensions>cob, txt</extensions>
+     <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>VS3</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-APPEND</parameter>
+        <parameter>-KEEPCOMMENTS</parameter>
+        <parameter>-LITERALCALLS</parameter>
+        <parameter>-MAINFRAME</parameter>
+        <parameter>-MC</parameter>
+        <parameter>-PARSE_REPORT</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-PROGSCOPE</parameter>
+        <parameter>-SRCREF</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-NONINST</parameter>
+      </parameters>
+      <reports>
+        <report>COBOL</report>
+      </reports>
     </profile>
   </profiles>
 </configuration>

@@ -52,6 +52,23 @@
 			<field name="startLine" type="java.lang.Integer" column="9"></field>
 		</fields>
 	</template>
+
+	<template name="mccabe.cobol">
+		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO</csvbean>
+		<header size="0" />
+		<footer size="0" />
+		<fields>
+			<field name="componentName" type="java.lang.String" column="0"></field>
+			<field name="ncloc" type="java.lang.Integer" column="1"></field>
+			<field name="nsloc" type="java.lang.Integer" column="2"></field>
+			<field name="nl" type="java.lang.Integer" column="3"></field>
+			<field name="vg" type="java.lang.Integer" column="4"></field>
+			<field name="evg" type="java.lang.Integer" column="5"></field>
+			<field name="ivg" type="java.lang.Integer" column="6"></field>
+			<field name="filename" type="java.lang.String" column="7"></field>
+			<field name="startLine" type="java.lang.Integer" column="8"></field>
+		</fields>
+	</template>
 	
 	<template name="umlquality.class">
 		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityClassMetricsBO</csvbean>
