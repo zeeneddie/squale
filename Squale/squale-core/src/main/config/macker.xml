@@ -168,7 +168,7 @@
 					<include pattern="dtotransform" />
 				</from>
 			</allow>
-		</access-rule-->
+		</access-rule>
 		<access-rule severity="error">
 			<message>Acces non valide aux DTO</message>
 			<deny>
@@ -186,7 +186,7 @@
 				</from>
 			</allow>
 		</access-rule>
-		<!--access-rule severity="error">
+		<access-rule severity="error">
 			<message>Acces non valide a la persistance</message>
 			<deny>
 				<to pattern="persistance" />
