@@ -77,6 +77,11 @@
 		<pattern name="hibernate">
 			<include class="${nom_projet}.**.blob.*" />
 		</pattern>
+
+		<!-- le scheduler est une classe a part -->
+		<pattern name="scheduler">
+			<include class="${nom_projet}.**.Scheduler" />
+		</pattern>
 		
 		<!-- on definit toutes les classes sauf celle du projet 
 			(la reciproque en fait) -->
@@ -127,7 +132,8 @@
 				</from>
 			</allow>
 		</access-rule>
-		<!--access-rule severity="error">
+		<!-- DEBUT là -->
+		<access-rule severity="error">
 			<message>
 				Acces non valide aux application-component
 			</message>
@@ -197,7 +203,7 @@
 					<include pattern="persistance" />
 				</from>
 			</allow>
-		</access-rule-->
+		</access-rule><!-- FIN ICI -->
 		<access-rule severity="error">
 			<message>Acces non valide a l'api JDBC</message>
 			<deny>
@@ -206,6 +212,7 @@
 			<allow>
 				<from>
 					<include pattern="hibernate" />
+					<include pattern="scheduler" />
 				</from>
 			</allow>
 		</access-rule>
@@ -218,6 +225,7 @@
 				<from>
 					<include pattern="facades" />
 					<include pattern="dtotransform" />
+					<include pattern="scheduler" />
 				</from>
 			</allow>
 		</access-rule>
