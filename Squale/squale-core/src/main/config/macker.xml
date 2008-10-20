@@ -132,8 +132,7 @@
 				</from>
 			</allow>
 		</access-rule>
-		<!-- DEBUT là -->
-		<access-rule severity="error">
+		<!--access-rule severity="error">
 			<message>
 				Acces non valide aux application-component
 			</message>
@@ -203,7 +202,7 @@
 					<include pattern="persistance" />
 				</from>
 			</allow>
-		</access-rule><!-- FIN ICI -->
+		</access-rule-->
 		<access-rule severity="error">
 			<message>Acces non valide a l'api JDBC</message>
 			<deny>
