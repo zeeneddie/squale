@@ -1,11 +1,13 @@
 package com.airfrance.squaleweb.applicationlayer.action.component;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -49,10 +51,14 @@ import com.airfrance.squaleweb.transformer.AuditTransformer;
 import com.airfrance.squaleweb.transformer.ProjectConfTransformer;
 import com.airfrance.squaleweb.transformer.ServeurListTransformer;
 import com.airfrance.squaleweb.util.SqualeWebActionUtils;
+import com.airfrance.welcom.struts.ajax.WHttpEasyCompleteResponse;
 import com.airfrance.welcom.struts.bean.WActionForm;
+import com.airfrance.welcom.struts.easycomplete.WEasyCompleteUtil;
 import com.airfrance.welcom.struts.transformer.WTransformerException;
 import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 import com.airfrance.welcom.struts.util.WConstants;
+import com.inetpsa.clp.LDAPUser;
+import com.inetpsa.clp.exception.LDAPException;
 
 /**
  */
@@ -1202,6 +1208,71 @@ public class ManageApplicationAction
             lAuditForm = (AuditForm) WTransformerFactory.objToForm( AuditTransformer.class, new Object[] { lAuditDTO } );
         }
         pRequest.getSession().setAttribute( "auditForm2", lAuditForm );
+    }
+
+    /**
+     * Method called to fill the suggest input field when adding a user to an application. The "ch" parameter passed
+     * along the request gives the string that the user has just typed in.
+     * 
+     * @param mapping the mapping.
+     * @param form the form
+     * @param request the HTTP request.
+     * @param response the servlet response.
+     * @return null (because the response is an XML stream)
+     */
+    public ActionForward findUserForAutocomplete( final ActionMapping mapping, final ActionForm form,
+                                                  final HttpServletRequest request, final HttpServletResponse response )
+    {
+        // TODO: finish this up
+
+        // retrieves the string that the user has just typed in
+        String stringFirstChars = request.getParameter( "ch" );
+        stringFirstChars = WEasyCompleteUtil.filter( stringFirstChars );
+
+        // create the response object
+        WHttpEasyCompleteResponse easyComplete = new WHttpEasyCompleteResponse( response );
+
+        // and fill it with the users' information
+
+        /* -------------------------------------------------------------- */
+        // This is a example code snippet used to test the suggest field
+        // This must be encapsulated in a wider generic security API
+        /* -------------------------------------------------------------- */
+        // searching LDAP user is available only when the string is 3 characters long
+        /*
+        if ( stringFirstChars.length() > 2 )
+        {
+            try
+            {
+                LDAPUser user = new LDAPUser();
+                Enumeration users = user.findUserByUid( stringFirstChars );
+                while ( users.hasMoreElements() )
+                {
+                    LDAPUser ldapUser = (LDAPUser) users.nextElement();
+                    String value = ldapUser.getUid();
+                    String label = ldapUser.getFirstName() + " " + ldapUser.getLastName();
+                    easyComplete.addValueLabel( value, label );
+                }
+            }
+            catch ( LDAPException e )
+            {
+                e.printStackTrace();
+            }
+        }
+        */
+        // TODO : need to see why only the 10 first results are displayed...
+        /* ------------------------------------------------------ */
+
+        try
+        {
+            easyComplete.close();
+        }
+        catch ( IOException e )
+        {
+            // there's nothing we can do about it, forget it
+        }
+
+        return null;
     }
 
 }

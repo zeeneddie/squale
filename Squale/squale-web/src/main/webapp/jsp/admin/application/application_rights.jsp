@@ -8,6 +8,7 @@
 <%@ page import="org.apache.struts.action.ActionMessages" %>
 
 <script type="text/javascript" src="theme/charte_v03_001/js/format_page.js" ></script>
+<script type="text/javascript" src="jslib/auto-complete.js" ></script>
 
 <%--
 Configure les autorisations associées à l'application
@@ -29,7 +30,8 @@ if (modification != null) {
 
 <bean:define id="applicationId" name="createApplicationForm"
 	property="applicationId" type="String" />
-
+<%-- Callback URL used to find user for the suggest input field --%>
+<bean:define id="callbackUrl"><html:rewrite page="/add_user.do?action=findUserForAutocomplete"/></bean:define>
 
 <af:page>
 	<af:body>
@@ -61,7 +63,7 @@ if (modification != null) {
 					<%-- ligne en double non affiché pour permettre la reproduction d'une ligne vide --%>
 					<tr style="display: none">
 						<td align="center"><af:field key="empty" property="matricule"
-							writeTD="false" value="" /></td>
+							writeTD="false" value="" easyCompleteCallBackUrl="<%=callbackUrl%>"/></td>
 						<td><af:select property="rightProfile" lazyLoading="false">
 							<logic:iterate name="myRightProfiles" id="myRightProfile"
 								type="java.lang.String">
@@ -77,8 +79,9 @@ if (modification != null) {
 						<bean:define name="user" property="key" id="userMatricule"
 							type="String" />
 						<tr>
-							<td align="center"><af:field key="empty" property="matricule"
-								writeTD="false" value="<%=userMatricule%>" /></td>
+							<td align="center"> 
+								<af:field key="empty" property="matricule"
+								writeTD="false" value="<%=userMatricule%>" easyCompleteCallBackUrl="<%=callbackUrl%>"/></td>
 							<td><bean:define name="user" property="value" id="right"
 								type="String" /> <af:select property="rightProfile"
 								lazyLoading="false">

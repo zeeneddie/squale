@@ -15,13 +15,15 @@ div.iconClose{
 
 div.notsel{		
 	cursor:pointer;
-	display: block;	
+	display: block;
+	text-align: left;
 }
 
 div.sel{		
 	cursor:pointer;
 	background-color:#e9cd9e;	
-	display: block;	
+	display: block;
+	text-align: left;
 }
 
 div.ddlist{
