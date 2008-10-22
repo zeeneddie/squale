@@ -29,6 +29,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.print.attribute.standard.OutputDeviceAssigned;
+
 import javancss.Javancss;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -216,6 +219,12 @@ public class JavancssTask
         {
             configuration.parse( new FileInputStream( "config/javancss-config.xml" ) );
             outputFilename = configuration.getResultFilePath();
+            File outputFile = new File(outputFilename);
+            File ouputDirectory = outputFile.getParentFile();
+            if ( !ouputDirectory.exists() )
+            {
+                ouputDirectory.mkdir();
+            }
         }
         catch ( FileNotFoundException e )
         {
