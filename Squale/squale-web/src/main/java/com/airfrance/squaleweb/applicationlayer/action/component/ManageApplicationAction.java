@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -57,8 +56,6 @@ import com.airfrance.welcom.struts.easycomplete.WEasyCompleteUtil;
 import com.airfrance.welcom.struts.transformer.WTransformerException;
 import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 import com.airfrance.welcom.struts.util.WConstants;
-import com.inetpsa.clp.LDAPUser;
-import com.inetpsa.clp.exception.LDAPException;
 
 /**
  */
