@@ -3,141 +3,7 @@
 
 <squale>
 	<practiceset>
-		<!-- Connexion a la base QC -->
-		<practice name="acceptancetestcodecoverage"></practice>
-
-		<practice name="acceptancetestscenario"></practice>
-
-		<practice name="umlswissarmyknife" effort="2">
-			<weight>lambda x:9.**-x</weight>
-			<conditionformula>
-				<level>umlclass</level>
-				<measures>
-					<measure>umlquality</measure>
-				</measures>
-				<trigger></trigger>
-				<conditions>
-					<condition>(umlquality.NOC==0)and(umlquality.RFC>=40)and(umlquality.DIT==1)</condition>
-					<condition>0</condition>
-					<condition>0</condition>
-				</conditions>
-			</conditionformula>
-		</practice>
-		
-		<practice name="umlinheritancedepth" effort="3">
-			<weight>lambda x:9.**-x</weight>
-			<conditionformula>
-				<level>umlclass</level>
-				<measures>
-					<measure>umlquality</measure>
-				</measures>
-				<trigger></trigger>
-				<conditions>
-					<condition>umlquality.DIT > 7</condition>
-					<condition>umlquality.DIT > 6</condition>
-					<condition>umlquality.DIT > 5</condition>
-				</conditions>
-			</conditionformula>
-		</practice>
-		
-		<practice name="umlpresenceofpublicsfields" effort="1">
-			<weight>lambda x:9.**-x</weight>
-			<conditionformula>
-				<level>umlclass</level>
-				<measures>
-					<measure>umlquality</measure>
-				</measures>
-				<trigger></trigger>
-				<conditions>
-					<condition>umlquality.NOBD</condition>
-					<condition>0</condition>
-					<condition>0</condition>
-				</conditions>
-			</conditionformula>
-		</practice>
-		
-		<practice name="umlnumberofmethods" effort="2">
-			<weight>lambda x:30.**-x</weight>
-			<simpleformula>
-				<level>umlclass</level>
-				<measures>
-					<measure>umlquality</measure>
-				</measures>
-				<trigger></trigger>
-				<formula>exp((30.-umlquality.numOps)/15.)</formula>
-			</simpleformula>
-		</practice>
-		
-		<practice name="umlclasseswithoutmethods" effort="2">
-			<weight>lambda x:9.**-x</weight>
-			<conditionformula>
-				<level>umlclass</level>
-				<measures>
-					<measure>umlquality</measure>
-				</measures>
-				<trigger></trigger>
-				<conditions>
-					<condition>umlquality.numOps == 0 and not umlquality.numAttr > 2</condition>
-					<condition>0</condition>
-					<condition>0</condition>
-				</conditions>
-			</conditionformula>
-		</practice>
-		
-		<practice name="umlclasseswithoutfield" effort="2">
-			<weight>lambda x:9.**-x</weight>
-			<conditionformula>
-				<level>umlclass</level>
-				<measures>
-					<measure>umlquality</measure>
-				</measures>
-				<trigger></trigger>
-				<conditions>
-					<condition>umlquality.numAttr == 0</condition>
-					<condition>0</condition>
-					<condition>0</condition>
-				</conditions>
-			</conditionformula>
-		</practice>
-		
-		<practice name="umlisolatedclasses" effort="2">
-			<weight>lambda x:9.**-x</weight>
-			<conditionformula>
-				<level>umlclass</level>
-				<measures>
-					<measure>umlquality</measure>
-				</measures>
-				<trigger></trigger>
-				<conditions>
-					<condition>(umlquality.depClient==0) and (umlquality.depSupp==0)</condition>
-					<condition>0</condition>
-					<condition>0</condition>
-				</conditions>
-			</conditionformula>
-		</practice>
-		
-		<practice name="umlclassspecialization" effort="3">
-			<weight>lambda x:9.**-x</weight>
-			<conditionformula>
-				<level>umlclass</level>
-				<measures>
-					<measure>umlquality</measure>
-				</measures>
-				<trigger>umlquality.numOps > 0</trigger>
-				<conditions>
-					<condition>(umlquality.DIT*umlquality.NVM)/umlquality.numOps>0</condition>
-					<condition>0</condition>
-					<condition>0</condition>
-				</conditions>
-			</conditionformula>
-		</practice>
-
-		<practice name="aqplan"></practice>
-
-		<practice name="architecturefile"></practice>
-
-		<practice name="automaticacceptancetest"></practice>
-
+		<!-- pratique non utilisée pour le moment -->
 		<practice name="blob" effort="50">
 			<weight>lambda x:9.**-x</weight>
 			<conditionformula>
@@ -154,36 +20,18 @@
 			</conditionformula>
 		</practice>
 
-		<practice name="classspecialization"></practice>
-
 		<practice name="copypaste" effort="30">
 			<weight>lambda x:9**-x</weight>
             <simpleformula>
                 <level>project</level>
                 <measures>
                     <measure>copypaste</measure>
-                    <measure>rsm</measure>
-                </measures>
-                <trigger></trigger>
-                <formula>3*(2./3.)**(100.*copypaste.duplicateLinesNumber/rsm.sloc)</formula>
-            </simpleformula>
-		</practice>
-
-        <practice name="dependonchild" effort="20">
-			<weight>lambda x:9.**-x</weight>
-            <conditionformula>
-                <level>class</level>
-                <measures>
                     <measure>mccabe</measure>
                 </measures>
                 <trigger></trigger>
-                <conditions>
-                    <condition>mccabe.dependsUponChild</condition>
-                    <condition>0</condition> 
-                    <condition>0</condition>
-                </conditions>
-            </conditionformula>
-        </practice>
+                <formula>3*(2./3.)**(100.*copypaste.duplicateLinesNumber/mccabe.projectsloc)</formula>
+            </simpleformula>
+		</practice>
 
         <practice name="documentation" effort="10">
 			<weight>lambda x:9.**-x</weight>
@@ -191,96 +39,15 @@
                 <level>method</level>
                 <measures>
                     <measure>mccabe</measure>
-                    <measure>rsm</measure>
                 </measures>
                 <trigger>(mccabe.vg > 5 or mccabe.nsloc > 30) and mccabe.nsloc != 0</trigger>
-                <formula> (rsm.comments)*9./(rsm.comments+mccabe.nsloc) / (1. - 10**(-mccabe.vg /15.))</formula>
+                <formula> (mccabe.ncloc)*9./(mccabe.ncloc+mccabe.nsloc) / (1. - 10**(-mccabe.vg /15.))</formula>
             </simpleformula>
             <helpKey>documentationKey</helpKey>
         </practice>
 
-		<practice name="documentationstandard" effort="6">
-			<simpleformula>
-				<level>project</level>
-				<measures>
-					<measure>rsm</measure>
-					<measure>cpptest</measure>
-				</measures>
-				<trigger>cpptest.hasRule("documentationstandard")</trigger>
-				<formula>3*(2./3.)**((125.*(cpptest.getTotalErrorNumberForCategory("documentationstandard")+cpptest.getTotalWarningNumberForCategory("documentationstandard")+cpptest.getTotalInfoNumberForCategory("documentationstandard")))/rsm.sloc)</formula>
-			</simpleformula>
-		</practice>
-
-		<practice name="efferentcoupling" effort="100">
-			<weight>lambda x:20.**-x</weight>
-			<simpleformula>
-				<level>class</level>
-				<measures>
-					<measure>mccabe</measure>
-				</measures>
-				<trigger></trigger>
-				<formula>exp((10-mccabe.cbo)/3.)</formula>
-				<!--
-					<condition>mccabe.cbo >= 10</condition>
-					<condition>mccabe.cbo >= 8</condition>
-					<condition>mccabe.cbo >= 6</condition>
-				-->
-			</simpleformula>
-		</practice>
-
-		<practice name="ergonomynorms"></practice>
-
-		<practice name="formatingstandard" effort="1">
-			<simpleformula>
-				<level>project</level>
-				<measures>
-					<measure>rsm</measure>
-					<measure>cpptest</measure>
-				</measures>
-				<!-- on ne note pas si il n'y a pas de règles définies pour cette pratique-->
-				<trigger>cpptest.hasRule("formatingstandard")</trigger>
-				<formula>3*(2./3.)**((2000.*(cpptest.getTotalErrorNumberForCategory("formatingstandard"))+200.*(cpptest.getTotalWarningNumberForCategory("formatingstandard"))+5.*(cpptest.getTotalInfoNumberForCategory("formatingstandard")))/rsm.sloc)</formula>
-			</simpleformula>
-		</practice>
-
-		<practice name="inheritancedepth" effort="20">
-			<weight>lambda x:9.**-x</weight>
-			<conditionformula>
-				<level>class</level>
-				<measures>
-					<measure>mccabe</measure>
-				</measures>
-				<trigger></trigger>
-				<conditions>
-					<condition>mccabe.dit > 7</condition>
-					<condition>mccabe.dit > 6</condition>
-					<condition>mccabe.dit > 5</condition>
-				</conditions>
-			</conditionformula>
-		</practice>
-
-		<practice name="functionalspecification"></practice>
-
-		<practice name="integrationtestsprocedure"></practice>
-
-        <practice name="lackofcohesioninmethod" effort="20">
-			<weight>lambda x:9.**-x</weight>
-            <conditionformula>
-                <level>class</level>
-                <measures>
-                    <measure>mccabe</measure>
-                </measures>
-                <trigger></trigger>
-                <conditions>
-                    <condition>mccabe.locm >= 100</condition>
-                    <condition>mccabe.locm > 50</condition>
-                    <condition>mccabe.locm > 0</condition>
-                </conditions>
-            </conditionformula>
-        </practice>
-
-		<practice name="methodsize" effort="20">
-			<weight>lambda x:20.**-x</weight>
+		<practice name="modulesize" effort="20">
+			<weight>lambda x:30.**-x</weight>
 			<simpleformula>
 				<level>method</level>
 				<measures>
@@ -296,56 +63,8 @@
 			</simpleformula>
 		</practice>
 
-		<practice name="modelingdiagrams"></practice>
-
-		<practice name="modelsreasoning"></practice>
-
-		<practice name="namingstandard" effort="4">
-			<simpleformula>
-				<level>project</level>
-				<measures>
-					<measure>rsm</measure>
-					<measure>cpptest</measure>
-				</measures>
-				<trigger>cpptest.hasRule("namingstandard")</trigger>
-				<formula>3*(2./3.)**((1500.*(cpptest.getTotalErrorNumberForCategory("namingstandard"))+100.*(cpptest.getTotalWarningNumberForCategory("namingstandard"))+10.*(cpptest.getTotalInfoNumberForCategory("namingstandard")))/rsm.sloc)</formula>
-			</simpleformula>		
-
-		</practice>
-
-		<practice name="numberofmethods" effort="20">
-			<weight>lambda x:20.**-x</weight>
-			<simpleformula>
-				<level>class</level>
-				<measures>
-					<measure>mccabe</measure>
-				</measures>
-				<trigger></trigger>
-				<formula>(mccabe.sumvg>=80) and exp((30-mccabe.wmc)/15.) or (mccabe.sumvg>=50 and mccabe.wmc>=15) and (2+(20-mccabe.wmc)/30.) or (mccabe.sumvg>=30) and (3+(15-mccabe.wmc)/15.) or 3.</formula>
-<!--
-                    <condition>mccabe.wmc >= 30 and mccabe.sumvg >= 80</condition>
-                    <condition>mccabe.wmc >= 20 and mccabe.sumvg >= 50</condition>
-                    <condition>mccabe.wmc >= 15 and mccabe.sumvg >= 30</condition>
--->
-			</simpleformula>		
-		</practice>
-
-		<practice name="programmingstandard" effort="15">
-			<simpleformula>
-				<level>project</level>
-				<measures>
-					<measure>rsm</measure>
-					<measure>cpptest</measure>
-				</measures>
-				<trigger>cpptest.hasRule("programmingstandard")</trigger>
-				<formula>3*(2./3.)**((1500.*(cpptest.getTotalErrorNumberForCategory("programmingstandard"))+100.*(cpptest.getTotalWarningNumberForCategory("programmingstandard"))+10.*(cpptest.getTotalInfoNumberForCategory("programmingstandard")))/rsm.sloc)</formula>
-			</simpleformula>		
-		</practice>
-
-		<practice name="riskanalysis"></practice>
-
 		<practice name="spaghetticode" effort="30">
-			<weight>lambda x:20.**-x</weight>
+			<weight>lambda x:30.**-x</weight>
 			<simpleformula>
 				<level>method</level>
 				<measures>
@@ -360,133 +79,45 @@
 				-->
 			</simpleformula>
 		</practice>
-
-		<practice name="swissarmyknife" effort="35">
-			<weight>lambda x:9.**-x</weight>
-			<conditionformula>
-				<level>class</level>
-				<measures>
-					<measure>mccabe</measure>
-				</measures>
-				<trigger></trigger>
-				<conditions>
-					<condition>(mccabe.sumvg >= 10)and(mccabe.noc==0)and(mccabe.rfc>=40)and(mccabe.dit==1)</condition>
-					<condition>0</condition>
-					<condition>0</condition>
-				</conditions>
-			</conditionformula>
-		</practice>
-
-		<practice name="unittestsprocedure"></practice>
-
 	</practiceset>
 
 	<criteriumset>
-		<criterium name="acceptancetest">
-			<practice-ref name="acceptancetestcodecoverage" weight="1" />
-			<practice-ref name="acceptancetestscenario" weight="1" />
-			<practice-ref name="automaticacceptancetest" weight="1" />
-			<practice-ref name="riskanalysis" weight="1" />
-		</criterium>
-
-		<criterium name="architecturerelevance">
-			<practice-ref name="architecturefile" weight="1" />
-			<practice-ref name="dependonchild" weight="1" />
-		</criterium>
-
 		<criterium name="comprehension">
-			<practice-ref name="classspecialization" weight="1" />
 			<practice-ref name="documentation" weight="1" />
-			<practice-ref name="documentationstandard" weight="1" />
-			<practice-ref name="inheritancedepth" weight="1" />
-		</criterium>
-
-		<criterium name="homogeneity">
-			<practice-ref name="formatingstandard" weight="1" />
-			<practice-ref name="namingstandard" weight="2" />
-			<practice-ref name="programmingstandard" weight="3" />
-		</criterium>
-
-		<criterium name="modeling">
-			<practice-ref name="umlswissarmyknife" weight="1" />
-			<practice-ref name="umlinheritancedepth" weight="1" />
-			<practice-ref name="umlpresenceofpublicsfields" weight="1" />
-			<practice-ref name="umlnumberofmethods" weight="1" />
-			<practice-ref name="umlclasseswithoutmethods" weight="1" />
-			<practice-ref name="umlclasseswithoutfield" weight="1" />
-			<practice-ref name="umlisolatedclasses" weight="1" />
-			<practice-ref name="umlclassspecialization" weight="1" />
-			<practice-ref name="modelingdiagrams" weight="8" />
-			<practice-ref name="modelsreasoning" weight="8" />
 		</criterium>
 
 		<criterium name="modularity">
-			<practice-ref name="blob" weight="1" />
 			<practice-ref name="copypaste" weight="1" />
-			<practice-ref name="efferentcoupling" weight="1" />
-			<practice-ref name="swissarmyknife" weight="1" />
 		</criterium>
 
 		<criterium name="simplicity">
-			<practice-ref name="methodsize" weight="1" />
-			<practice-ref name="numberofmethods" weight="1" />
+			<practice-ref name="modulesize" weight="1" />
 			<practice-ref name="spaghetticode" weight="1" />
 		</criterium>
-
-		<criterium name="taskaptitude">
-			<practice-ref name="aqplan" weight="1" />
-			<practice-ref name="ergonomynorms" weight="1" />
-			<practice-ref name="functionalspecification" weight="1" />
-		</criterium>
-
-		<criterium name="testquality">
-			<practice-ref name="integrationtestsprocedure" weight="1" />
-			<practice-ref name="unittestsprocedure" weight="1" />
-		</criterium>
-
 	</criteriumset>
 
 	<factorset>
-		<factor name="architecture">
-			<criterium-ref name="architecturerelevance" weight="2" />
-			<criterium-ref name="modeling" weight="1" />
-		</factor>
-
-		<factor name="conformity">
-			<criterium-ref name="acceptancetest" weight="1" />
-			<criterium-ref name="modeling" weight="1" />
-			<criterium-ref name="taskaptitude" weight="1" />
-		</factor>
-
 		<factor name="evolutionarity">
 			<criterium-ref name="comprehension" weight="1" />
-			<criterium-ref name="homogeneity" weight="1" />
-			<criterium-ref name="modeling" weight="1" />
 			<criterium-ref name="modularity" weight="1" />
 		</factor>
 
 		<factor name="maintainability">
 			<criterium-ref name="comprehension" weight="1" />
-			<criterium-ref name="homogeneity" weight="1" />
 			<criterium-ref name="simplicity" weight="1" />
 		</factor>
 
 		<factor name="reliability">
 			<criterium-ref name="simplicity" weight="1" />
-			<criterium-ref name="testquality" weight="1" />
 		</factor>
 
 		<factor name="reusecapacity">
 			<criterium-ref name="comprehension" weight="1" />
-			<criterium-ref name="testquality" weight="1" />
 		</factor>
-
 	</factorset>
 
 	<gridset>
 		<grid name="cobol">
-			<factor-ref name="architecture" />
-			<factor-ref name="conformity" />
 			<factor-ref name="evolutionarity" />
 			<factor-ref name="maintainability" />
 			<factor-ref name="reliability" />
