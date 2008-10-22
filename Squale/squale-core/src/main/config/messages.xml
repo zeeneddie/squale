@@ -119,6 +119,10 @@
 	<message lang="fr" key="rule.methodsize">
 		Taille de la méthode
 	</message>
+	<message lang="en" key="rule.modulesize">Module size</message>
+	<message lang="fr" key="rule.modulesize">
+		Taille du module
+	</message>
 	<message lang="en" key="rule.methodsize">Method size</message>
 	<message lang="fr" key="rule.jspsize">Taille de la JSP</message>
 	<message lang="en" key="rule.jspsize">JSP size</message>
@@ -1356,6 +1360,11 @@
 		Nombre de lignes
 	</message>
 	<message lang="en" key="mccabe.project.sloc">Line number</message>
+
+	<message lang="fr" key="mccabe.project.projectnl">
+   	    Nombre de lignes
+	</message>
+	<message lang="en" key="mccabe.project.projectnl">Line number</message>
 
 	<message lang="fr" key="purecomments.project.cloc">
 		Nombre de lignes de commentaire
@@ -3025,6 +3034,8 @@
 	<message lang="en" key="metric.cpd.jsp">JSP Copy-paste</message>
 	<message lang="fr" key="metric.cpd.cpp">Copier-coller C++</message>
 	<message lang="en" key="metric.cpd.cpp">C++ copy-paste</message>
+	<message lang="fr" key="metric.cpd.cobol">Copier-coller Cobol</message>
+	<message lang="en" key="metric.cpd.cobol">Cobol copy-paste</message>
 
 	<!--  Messages pour la configuration des tâches Squalix  -->
 	<message lang="fr" key="task.clearcasetask.configuration">

@@ -375,11 +375,9 @@
 						</volumetry>
 						<!-- configuration de la volumétrie niveau projet -->
 						<volumetry component="project">
-							<tre name="rsm.project.sloc" />
-							<tre name="rsm.project.comments" />
+							<tre name="mccabe.project.projectnl" />
 							<tre name="mccabe.project.numberOfClasses" />
 							<tre name="mccabe.project.numberOfMethods" />
-							<tre name="rsm.project.numberofcodelines" />
 						</volumetry>
 					</volumetries>
 				</displayConfigurations>
@@ -387,7 +385,9 @@
 			<analysis>
 				<task-ref name="CobolMcCabeTask"></task-ref>
 				<task-ref name="UMLQualityTask"></task-ref>
-				<task-ref name="CpdTask"></task-ref>
+				<task-ref name="CpdTask">
+					<parameter name="language" value="cobol" />
+				</task-ref>
 			</analysis>
 			<termination>
 				<task-ref name="ComputeResultTask"></task-ref>
