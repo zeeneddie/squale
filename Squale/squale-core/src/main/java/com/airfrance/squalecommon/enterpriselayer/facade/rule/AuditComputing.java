@@ -44,11 +44,18 @@ import com.airfrance.squalecommon.util.mapping.Mapping;
  * rattachée à un projet. Les règles sont exprimées en fonction de métriques obtenues par des outils comme mccabe par
  * exemple.
  */
-public class AuditComputing
+public final class AuditComputing
 {
     /** Log */
     private static Log LOG = LogFactory.getLog( AuditComputing.class );
 
+    /**
+     * Define private constructor for utility class
+     */
+    private AuditComputing()
+    {
+    }
+    
     /**
      * Calcul d'un audit Le calcul d'un audit se fait à partir des pratiques pour remonter vers les facteurs
      * 
@@ -205,6 +212,7 @@ public class AuditComputing
             // Le calcul se fait par une moyenne simple sur les critères
             // calculés si au moins 2 criteres ont été calculés
             int nbCriteria = 0; // Nombre de criteres calculés
+            float sumOfCriteriaWeight = 0;
             float criteriaSum = 0; // Note cumulée
             // Parcours des criteres du facteur
             Iterator it = factor.getCriteria().keySet().iterator();
@@ -215,7 +223,10 @@ public class AuditComputing
                 // Nota : criteriumResult ne peut pas être null
                 if ( -1 != criteriumResult.getMeanMark() )
                 {
-                    criteriaSum += criteriumResult.getMeanMark();
+                    float criteriaWeight =
+                        ( (Float) factor.getCriteria().get( criteriumResult.getRule() ) ).floatValue();
+                    criteriaSum += criteriumResult.getMeanMark() * criteriaWeight;
+                    sumOfCriteriaWeight += criteriaWeight;
                     nbCriteria++;
                 }
             }
@@ -223,8 +234,7 @@ public class AuditComputing
             if ( nbCriteria > 1 )
             {
                 // calcul de la note du facteur
-                // TODO prendre en compte le weight du critere pour le calcul
-                result.setMeanMark( criteriaSum / nbCriteria );
+                result.setMeanMark( criteriaSum / sumOfCriteriaWeight );
                 QualityResultDAOImpl.getInstance().save( pSession, result );
             }
             else
@@ -255,7 +265,8 @@ public class AuditComputing
             CriteriumResultBO result = (CriteriumResultBO) pCriteria.get( criterium );
             // La moyenne se fait par un moyenne simple sur les pratiques
             // calculés si au moins deux pratiques ont été calculées
-            int nbPractices = 0; // Nombre de criteres calculés
+            int nbPractices = 0;
+            float sumOfPracticesWeight = 0;
             float practicesSum = 0; // Note cumulée
             // Parcours des pratiques du critère
             Iterator it = criterium.getPractices().keySet().iterator();
@@ -266,7 +277,10 @@ public class AuditComputing
                 // Nota : criteriumResult ne peut pas être null
                 if ( -1 != praticeResult.getMeanMark() )
                 {
-                    practicesSum += praticeResult.getMeanMark();
+                    float practiceWeight =
+                        ( (Float) criterium.getPractices().get( praticeResult.getRule() ) ).floatValue();
+                    practicesSum += praticeResult.getMeanMark() * practiceWeight;
+                    sumOfPracticesWeight += practiceWeight;
                     nbPractices++;
                 }
             }
@@ -274,8 +288,7 @@ public class AuditComputing
             if ( nbPractices > 1 )
             {
                 // calcul de la note du facteur
-                // TODO prendre en compte le weight de la pratique pour le calcul
-                result.setMeanMark( practicesSum / nbPractices );
+                result.setMeanMark( practicesSum / sumOfPracticesWeight );
                 QualityResultDAOImpl.getInstance().save( pSession, result );
             }
             else
@@ -462,7 +475,7 @@ public class AuditComputing
         AbstractFormulaBO formula = pPractice.getFormula();
         String[] measureKinds = new String[formula.getMeasureKinds().size()];
         formula.getMeasureKinds().toArray( measureKinds );
-        MeasureBO measures[] = new MeasureBO[formula.getMeasureKinds().size()];
+        MeasureBO[] measures = new MeasureBO[formula.getMeasureKinds().size()];
         Long projectId = new Long( pProject.getId() );
         // Récupération de chaque mesure
         boolean measuresNotNull = true;
@@ -514,7 +527,7 @@ public class AuditComputing
         throws WeightFunctionException
     {
         /*
-         * Formule : meanMark = weigh^-1(1/N * sum(weight(note(component)))) Cela revient à faire la moyenne des notes
+         * Formule : meanMark = weigh^-1(1/N sum(weight(note(component)))) Cela revient à faire la moyenne des notes
          * auxquelles on applique la fonction la fonction de pondération weight puis à appliquer la fonction inverse
          */
         // Moyenne des notes : 1/N * sum(weight(note(component))
@@ -552,6 +565,8 @@ public class AuditComputing
     }
 
     /**
+     * Fait le calcul de la fonction inverse.
+     * 
      * @param pInterpreter l'interpréteur pour une fonction de pondération
      * @param pFunction la fonction de pondération
      * @param pY : pFunction(x) = pY
@@ -656,7 +671,7 @@ public class AuditComputing
         AbstractFormulaBO formula = pPractice.getFormula();
         String[] measureKinds = new String[formula.getMeasureKinds().size()];
         formula.getMeasureKinds().toArray( measureKinds );
-        MeasureBO measures[] = new MeasureBO[formula.getMeasureKinds().size()];
+        MeasureBO[] measures = new MeasureBO[formula.getMeasureKinds().size()];
         Long componentId = null;
         // Traitement de la note pour chaque composant
         Iterator it = pChildren.iterator();
