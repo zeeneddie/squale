@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 
 /**
@@ -12,6 +13,11 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Proje
 
 public class CobolParser
 {
+
+    /**
+     * Nom du package racine comportant l'ensemble des programmes.
+     */
+    private final String ROOT_PACKAGE = "source";
 
     /**
      * Nom donné par McCabe au module principal d'un programme.
@@ -87,8 +93,11 @@ public class CobolParser
      */
     public ClassBO getProgram( final String pPrgName, final String pFilename )
     {
+        // création d'un package racine comportant l'ensemble des programmes
+        PackageBO lPackageBO = new PackageBO( ROOT_PACKAGE );
+        lPackageBO.setParent( mProject );
         ClassBO lClassBO = new ClassBO( pPrgName );
-        lClassBO.setParent( mProject );
+        lClassBO.setParent( lPackageBO );
         lClassBO.setFileName( pFilename );
         return lClassBO;
     }

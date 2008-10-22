@@ -52,7 +52,7 @@ public class CobolMcCabeAdaptator
      * @param pModuleResult ensemble des métriques du module devant être enregistrés en base
      * @throws JrafDaoException si exception Jraf
      */
-    public void adaptModuleResult( final McCabeQAMethodMetricsBO pModuleResult )
+    public String adaptModuleResult( final McCabeQAMethodMetricsBO pModuleResult )
         throws JrafDaoException
     {
         // analyse des noms de programme et de module
@@ -60,8 +60,6 @@ public class CobolMcCabeAdaptator
         String lFileName = pModuleResult.getFilename();
         List<String> lPrgAndModuleNames = new ArrayList<String>();
         mParser.getPrgAndModuleNamesForModule( lFullModuleName, lPrgAndModuleNames );
-
-        // TODO: gestion du cas où le nom du composant n'est pas correctement analysé
 
         // enregistrement du programme si non présent en base
         ClassBO lPrgBO = mParser.getProgram( lPrgAndModuleNames.get( 0 ), lFileName );
@@ -77,6 +75,7 @@ public class CobolMcCabeAdaptator
         // association des résultats au module avant enregistrement
         pModuleResult.setComponent( lModuleBO );
 
+        return lPrgAndModuleNames.get( 0 );
     }
 
 }

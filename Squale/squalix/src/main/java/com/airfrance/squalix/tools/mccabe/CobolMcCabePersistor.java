@@ -3,6 +3,8 @@ package com.airfrance.squalix.tools.mccabe;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -51,6 +53,11 @@ public class CobolMcCabePersistor
     private int mNumberOfPrograms;
 
     /**
+     * Nombre total de ligne du projet.
+     */
+    private int mTotalNl;
+
+    /**
      * Constructeur.
      * 
      * @param pSession la session de persistence utilisée par la tâche.
@@ -88,16 +95,23 @@ public class CobolMcCabePersistor
         // association des métriques avec le composant Cobol avant enregistrement en base
         McCabeQAMethodMetricsBO bo = null;
         Iterator<McCabeQAMethodMetricsBO> it = moduleResults.iterator();
+        Set<String> lSetOfProgramNames = new TreeSet<String>();
         while ( it.hasNext() )
         {
             bo = it.next();
             bo.setAudit( mAudit );
             bo.setTaskName( mTaskName );
             // association des métriques avec les composants Cobol
-            mAdaptator.adaptModuleResult( bo );
+            String lPrgName = mAdaptator.adaptModuleResult( bo );
+            // ajout du nom du programme dans l'ensemble (si non présent)
+            lSetOfProgramNames.add( lPrgName );
             // incrément du nombre de modules
             mNumberOfModules++;
+            // incrément du nombre de lignes
+            mTotalNl += bo.getNl();
         }
+        // calcul du nombre final de programmes analysés
+        mNumberOfPrograms = lSetOfProgramNames.size();
 
         // enregistrement en base des métriques McCabe
         LOGGER.info( McCabeMessages.getString( "logs.debug.report_parsing_database" ) );
@@ -120,6 +134,7 @@ public class CobolMcCabePersistor
         metrics.setTaskName( mTaskName );
         metrics.setNumberOfClasses( new Integer( mNumberOfPrograms ) );
         metrics.setNumberOfMethods( new Integer( mNumberOfModules ) );
+        metrics.setTotalNl( mTotalNl );
         try
         {
             MeasureDAOImpl.getInstance().create( mSession, metrics );

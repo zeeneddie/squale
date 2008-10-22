@@ -53,7 +53,7 @@ public class CobolMcCabeTask
      */
     public void processLine( List line )
     {
-        // TODO Auto-generated method stub
+        // aucun traitement particulier
     }
 
     /*
@@ -75,6 +75,8 @@ public class CobolMcCabeTask
     {
         String lReportFileName = computeReportFileName( pReport );
         mPersistor.parseCobolReport( lReportFileName );
+        // la tâche est terminée avec succès si le rapport est correctement analysé
+        mStatus = TERMINATED;
         // conversion de toutes les erreurs 'fatales' en avertissements
         convertFatalToWarningErrors();
     }
