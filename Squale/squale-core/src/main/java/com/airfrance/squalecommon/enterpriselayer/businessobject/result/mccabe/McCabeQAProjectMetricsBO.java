@@ -24,6 +24,11 @@ public final class McCabeQAProjectMetricsBO
     private final static String NUMBEROFMETHODS = "numberOfMethods";
 
     /**
+     * Nombre total de lignes du projet.
+     */
+    private final static String PROJECTNL = "projectnl";
+
+    /**
      * Constructeur
      * 
      * @roseuid 42B9751A0293
@@ -33,6 +38,7 @@ public final class McCabeQAProjectMetricsBO
         super();
         getMetrics().put( NUMBEROFCLASSES, new IntegerMetricBO() );
         getMetrics().put( NUMBEROFMETHODS, new IntegerMetricBO() );
+        getMetrics().put( PROJECTNL, new IntegerMetricBO() );
     }
 
     /**
@@ -79,4 +85,24 @@ public final class McCabeQAProjectMetricsBO
         ( (IntegerMetricBO) getMetrics().get( NUMBEROFMETHODS ) ).setValue( pNumberOfMethods );
     }
 
+    /**
+     * Retourne le nombre total de lignes du projet.
+     * 
+     * @return le nombre total de lignes du projet.
+     */
+    public Integer getProjectsloc()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( PROJECTNL ) ).getValue();
+    }
+
+    /**
+     * Positionne le nombre total de lignes du projet.
+     * 
+     * @param pTotalSLoc le nombre total de lignes du projet.
+     */
+    public void setTotalNl( Integer pTotalNl )
+    {
+        ( (IntegerMetricBO) getMetrics().get( PROJECTNL ) ).setValue( pTotalNl );
+    }
+    
 }
