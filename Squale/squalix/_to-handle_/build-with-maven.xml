@@ -8,8 +8,8 @@
 	
 	<target name="build-all">
 		<exec executable="mvn" dir="${basedir}/../../squale" failonerror="true">
-			<arg value="clean"/>
-			<arg value="install"/>
+			<!--arg value="install"/-->
+			<arg value="validate"/>
 		</exec>
 	</target>
 
