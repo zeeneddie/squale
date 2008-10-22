@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- ********************************* -->
+<!-- Bridge Ant 2 Maven used by Squale -->
+<!-- ********************************* -->
+
 <project name="Squale" basedir="." default="build-all">
 
 	<property name="SqualeClassesDir" location="${basedir}/../target/classes"/>
@@ -8,7 +13,8 @@
 	
 	<target name="build-all">
 		<exec executable="mvn" dir="${basedir}/../../squale" failonerror="true">
-			<!--arg value="install"/-->
+			<!-- we do not call "clean install" because it is supposed 		-->
+			<!-- to have already been done in the analysis of "squale-core" -->
 			<arg value="validate"/>
 		</exec>
 	</target>

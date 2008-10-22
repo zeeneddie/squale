@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- ********************************* -->
+<!-- Bridge Ant 2 Maven used by Squale -->
+<!-- ********************************* -->
+
 <project name="Squale" basedir="." default="build-all">
 
 	<property name="SqualeClassesDir" location="${basedir}/../target/classes"/>
