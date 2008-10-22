@@ -4,9 +4,6 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.param
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 
-import net.sourceforge.pmd.cpd.AnyLanguage;
-import net.sourceforge.pmd.cpd.Language;
-
 /**
  * Détection de copier/coller en jsp
  */
@@ -15,16 +12,6 @@ public class JspCpdProcessing
 {
     /** Seuil de détection de copier/coller */
     private static final int JSP_THRESHOLD = 100;
-
-    /**
-     * {@inheritDoc}
-     * 
-     * @see com.airfrance.squalix.tools.cpd.AbstractCpdTask#getLanguage()
-     */
-    protected Language getLanguage()
-    {
-        return new AnyLanguage( getExtensions()[0] );
-    }
 
     /**
      * {@inheritDoc}

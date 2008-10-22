@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import net.sourceforge.pmd.cpd.AnyLanguage;
 import net.sourceforge.pmd.cpd.CPD;
 import net.sourceforge.pmd.cpd.Language;
 
@@ -50,11 +51,15 @@ public abstract class AbstractCpdProcessing
     }
 
     /**
-     * Obtention du langage
+     * Retourne le langage à passer en paramètre de l'exécution de CPD.<br />
+     * Le langage est, par défaut, défini par les extensions à considérer pour l'analyse du copier-coller.
      * 
-     * @return langage
+     * @return le langage à passer en paramètre de l'exécution de CPD
      */
-    protected abstract Language getLanguage();
+    protected Language getLanguage()
+    {
+        return new AnyLanguage( getExtensions()[0] );
+    }
 
     /**
      * Obtention du nombre minimal de léxèmes identiques

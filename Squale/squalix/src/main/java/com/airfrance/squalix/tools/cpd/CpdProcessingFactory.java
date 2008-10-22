@@ -29,6 +29,10 @@ public class CpdProcessingFactory
         {
             result = new JspCpdProcessing();
         }
+        else if ( pLanguage.equals( "cobol" ) )
+        {
+            result = new CobolCpdProcessing();
+        }
         else
         {
             throw new CpdFactoryException( CpdMessages.getString( "exception.unknown.language", pLanguage ) );
