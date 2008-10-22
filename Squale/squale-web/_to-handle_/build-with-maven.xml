@@ -9,9 +9,10 @@
 	<property name="SqualeClassesDir" location="${basedir}/../target/classes"/>
 	
 	<path id="SqualeClasspath">
-		<fileset dir="${basedir}/../target/dependency">
+		<!-- Classpath not necessary as we do not compile JSPs -->
+		<!--fileset dir="${basedir}/../target/dependency">
 			<include name="**/*.jar" /> 
-		</fileset>		
+		</fileset-->		
 	</path>	
   
 	<target name="build-all">
