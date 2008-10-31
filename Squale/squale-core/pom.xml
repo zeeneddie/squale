@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.squale.app</groupId>
 		<artifactId>squale</artifactId>
-		<version>4.1</version>
+		<version>4.2-SNAPSHOT</version>
 	</parent>
 	<artifactId>squale-core</artifactId>
 	<packaging>jar</packaging>
