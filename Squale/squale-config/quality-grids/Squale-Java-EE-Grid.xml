@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE squale PUBLIC "-//Squale//DTD Grid Configuration 1.1//EN" "file:../com/airfrance/squalecommon/dtd/grid-1.1.dtd">
+
+<squale>
+	<practiceset>
+		<practice name="acceptancetestcodecoverage"></practice>
+
+		<practice name="acceptancetestscenario"></practice>
+
+		<practice name="afferentcoupling" effort="150">
+			<weight>lambda x:30.**-x</weight>
+			<simpleformula>
+				<level>class</level>
+				<measures>
+					<measure>ckjm</measure>
+				</measures>
+				<trigger></trigger>
+				<formula>exp((30.-ckjm.ca)/10.)</formula>
+			</simpleformula>
+		</practice>
+		
+		<practice name="antipatternpredetection"></practice>
+
+		<practice name="aqplan"></practice>
+
+		<practice name="automaticacceptancetest"></practice>
+
+		<practice name="classspecialization"></practice>
+		
+		<practice name="codeorganisation"></practice>
+
+		<practice name="copypaste" effort="30">
+            <simpleformula>
+                <level>project</level>
+                <measures>
+                    <measure>copypaste</measure>
+                    <measure>javancss</measure>
+                </measures>
+                <trigger></trigger>
+                <formula>3*(2./3.)**(100.*copypaste.duplicateLinesNumber/javancss.ncss)</formula>
+            </simpleformula>
+		</practice>
+
+		<practice name="dependencycycle" effort="10">
+			<weight>lambda x:3**-x</weight>
+			<conditionformula>
+				<level>package</level>
+				<measures>
+					<measure>jdepend</measure>
+				</measures>
+				<trigger></trigger>
+				<conditions>
+					<condition>jdepend.cycle</condition>
+					<condition>0</condition>
+					<condition>0</condition>
+				</conditions>
+			</conditionformula>
+		</practice>
+
+        <practice name="documentation"></practice>
+		
+		<practice name="documentationquality"></practice>
+
+		<practice name="documentationstandard" effort="6">
+			<simpleformula>
+				<level>project</level>
+				<measures>
+					<measure>javancss</measure>
+					<measure>checkstyle</measure>
+				</measures>
+				<trigger>checkstyle.hasRule("documentationstandard")</trigger>
+				<formula>3*(2./3.)**((500.*checkstyle.getTotalErrorNumberForCategory("documentationstandard")+30.*checkstyle.getTotalWarningNumberForCategory("documentationstandard")+5.*checkstyle.getTotalInfoNumberForCategory("documentationstandard"))/javancss.ncss)</formula>
+			</simpleformula>
+		</practice>
+
+		<practice name="efferentcoupling" effort="100">
+			<weight>lambda x:9.**-x</weight>
+			<simpleformula>
+				<level>class</level>
+				<measures>
+					<measure>ckjm</measure>
+				</measures>
+				<trigger></trigger>
+				<formula>exp((10-ckjm.cbo)/3.)</formula>
+			</simpleformula>
+		</practice>
+
+		<practice name="ergonomynorms"></practice>
+		
+		<practice name="exceptionhandling"></practice>
+
+		<practice name="formatingstandard" effort="1">
+			<simpleformula>
+				<level>project</level>
+				<measures>
+					<measure>javancss</measure>
+					<measure>checkstyle</measure>
+				</measures>
+				<trigger>checkstyle.hasRule("formatingstandard")</trigger>
+				<formula>3*(2./3.)**((100.*(checkstyle.getTotalErrorNumberForCategory("formatingstandard"))+20.*(checkstyle.getTotalWarningNumberForCategory("formatingstandard"))+5.*(checkstyle.getTotalInfoNumberForCategory("formatingstandard")))/javancss.ncss)</formula>
+			</simpleformula>
+		</practice>
+		
+		<practice name="functionalsecurityaspects"></practice>
+		
+		<practice name="implementationmatchmodel"></practice>
+
+		<practice name="inheritancedepth" effort="20">
+			<weight>lambda x:9.**-x</weight>
+			<conditionformula>
+				<level>class</level>
+				<measures>
+					<measure>ckjm</measure>
+				</measures>
+				<trigger></trigger>
+				<conditions>
+					<condition>ckjm.dit > 5</condition>
+					<condition>ckjm.dit > 4</condition>
+					<condition>ckjm.dit > 3</condition>
+				</conditions>
+			</conditionformula>
+		</practice>
+		
+		<practice name="functionallimitstesting"></practice>
+
+		<practice name="functionalspecification"></practice>
+		
+		<practice name="implementationmatchspecification"></practice>
+		
+		<practice name="integrationtestcoverage"></practice>
+
+        <practice name="jspdocumentation"></practice>
+        
+		<practice name="jspsize" effort="15"></practice>
+		
+		<practice name="jspstandard" effort="15">
+			<simpleformula>
+				<level>project</level>
+				<measures>
+					<measure>jsppmd</measure>
+				</measures>
+				<trigger>jsppmd.hasRule("jspstandard")</trigger>
+				<formula>3*(2./3.)**(100*(jsppmd.getTotalErrorNumberForCategory("jspstandard"))+20*(jsppmd.getTotalWarningNumberForCategory("jspstandard"))+5*(jsppmd.getTotalInfoNumberForCategory("jspstandard")))</formula>
+			</simpleformula>		
+		</practice>
+		
+		<practice name="jspspaghetticode" effort="20"></practice>
+		
+		<practice name="layeredarchitecture"></practice>
+
+		<practice name="layerrespect" effort="40">
+			<simpleformula>
+				<level>project</level>
+				<measures>
+					<measure>javancss</measure>
+					<measure>macker</measure>
+				</measures>
+				<trigger></trigger>
+				<formula>3*(2./3.)**((500.*macker.getTotalErrorNumber()+30.*macker.getTotalWarningNumber()+5.*macker.getTotalInfoNumber())/javancss.classes)</formula>
+			</simpleformula>
+		</practice>
+
+		<practice name="lackofcohesioninmethod" effort="20">
+			<weight>lambda x:9.**-x</weight>
+            <conditionformula>
+                <level>class</level>
+                <measures>
+                    <measure>ckjm</measure>
+                </measures>
+                <trigger></trigger>
+                <conditions>
+                    <condition>ckjm.lcom >= 100</condition>
+                    <condition>ckjm.lcom > 50</condition>
+                    <condition>ckjm.lcom > 0</condition>
+                </conditions>
+            </conditionformula>
+        </practice>
+		
+		<practice name="loadtesting"></practice>
+		
+		<practice name="mechanismchoices"></practice>
+
+		<practice name="methodsize" effort="20">
+			<weight>lambda x:9.**-x</weight>
+			<simpleformula>
+				<level>method</level>
+				<measures>
+					<measure>javancss</measure>
+				</measures>
+				<trigger></trigger>
+				<formula>exp((70-javancss.ncss)/30.)</formula>
+			</simpleformula>
+		</practice>
+
+		<practice name="modelingdiagrams"></practice>
+
+		<practice name="modelsreasoning"></practice>
+
+		<practice name="namingstandard" effort="4">
+			<simpleformula>
+				<level>project</level>
+				<measures>
+					<measure>javancss</measure>
+					<measure>checkstyle</measure>
+				</measures>
+				<trigger>checkstyle.hasRule("namingstandard")</trigger>
+				<formula>3*(2./3.)**((200.*(checkstyle.getTotalErrorNumberForCategory("namingstandard"))+25.*(checkstyle.getTotalWarningNumberForCategory("namingstandard"))+5.*(checkstyle.getTotalInfoNumberForCategory("namingstandard")))/javancss.ncss)</formula>
+			</simpleformula>		
+		</practice>
+
+		<practice name="numberofmethods" effort="20">
+			<weight>lambda x:30.**-x</weight>
+			<simpleformula>
+				<level>class</level>
+				<measures>
+					<measure>javancss</measure>
+				</measures>
+				<trigger></trigger>
+				<formula>(javancss.sumVg>=80) and exp((30-javancss.methods)/15.) or (javancss.sumVg>=50 and javancss.methods>=15) and (2+(20-javancss.methods)/30.) or (javancss.sumVg>=30) and (3+(15-javancss.methods)/15.) or 3.</formula>
+			</simpleformula>		
+		</practice>
+		
+		<practice name="packagingcompliance"></practice>
+		
+		<practice name="packagenamingrespectlayers"></practice>
+		
+		<practice name="portability"></practice>
+
+		<practice name="programmingstandard" effort="15">
+			<simpleformula>
+				<level>project</level>
+				<measures>
+					<measure>javancss</measure>
+					<measure>checkstyle</measure>
+					<measure>javapmd</measure>
+				</measures>
+				<trigger>checkstyle.hasRule("programmingstandard") or javapmd.hasRule("programmingstandard")</trigger>
+				<formula>3*(2./3.)**((200.*(checkstyle.getTotalErrorNumberForCategory("programmingstandard")+javapmd.getTotalErrorNumberForCategory("programmingstandard"))+25.*(checkstyle.getTotalWarningNumberForCategory("programmingstandard")+javapmd.getTotalWarningNumberForCategory("programmingstandard"))+5.*(checkstyle.getTotalInfoNumberForCategory("programmingstandard")+javapmd.getTotalInfoNumberForCategory("programmingstandard")))/javancss.ncss)</formula>
+			</simpleformula>		
+		</practice>
+
+		<practice name="riskanalysis"></practice>
+		
+		<practice name="robustnesstesting"></practice>
+		
+		<practice name="securityconventions" effort="15">
+			<simpleformula>
+				<level>project</level>
+				<measures>
+					<measure>javancss</measure>
+					<measure>checkstyle</measure>
+				</measures>
+				<trigger>checkstyle.hasRule("securitystandard")</trigger>
+				<formula>3*(2./3.)**((500.*checkstyle.getTotalErrorNumberForCategory("securitystandard")+30.*checkstyle.getTotalWarningNumberForCategory("securitystandard")+5.*checkstyle.getTotalInfoNumberForCategory("securitystandard"))/javancss.ncss)</formula>
+			</simpleformula>
+		</practice>
+		
+		<practice name="securitytechnicaldesignfile"></practice>
+
+		<practice name="spaghetticode" effort="30">
+			<weight>lambda x:9.**-x</weight>
+			<simpleformula>
+				<level>method</level>
+				<measures>
+					<measure>javancss</measure>
+				</measures>
+				<trigger></trigger>
+				<formula>exp((6-javancss.ccn)/4.)</formula>
+			</simpleformula>
+		</practice>
+
+		<practice name="stabilityabstractnesslevel" effort="200">
+			<weight>lambda x:3.**-x</weight>
+			<simpleformula>
+				<level>package</level>
+				<measures>
+					<measure>jdepend</measure>
+				</measures>
+				<trigger></trigger>
+				<formula>3+2*(25-jdepend.distance)/25.</formula>
+			</simpleformula>
+		</practice>
+
+		<practice name="swissarmyknife" effort="35">
+			<weight>lambda x:30.**-x</weight>
+			<conditionformula>
+				<level>class</level>
+				<measures>
+					<measure>ckjm</measure>
+				</measures>
+				<trigger></trigger>
+				<conditions>
+					<!--condition>(javancss.sumVg >= 10)and(ckjm.noc==0)and(ckjm.rfc>=40)and(ckjm.dit==1)</condition--> <!-- Ancienne formule AF -->
+					<condition>(ckjm.ca > 20) and (ckjm.lcom > 50) and (ckjm.rfc > 30)</condition>
+					<condition>0</condition>
+					<condition>0</condition>
+				</conditions>
+			</conditionformula>
+		</practice>
+		
+		<practice name="technologychoices"></practice>
+		
+		<practice name="technicalsecurityaspects"></practice>
+		
+		<practice name="technicalspecfile"></practice>
+		
+		<practice name="tracingstandard" effort="8">
+			<simpleformula>
+				<level>project</level>
+				<measures>
+					<measure>javancss</measure>
+					<measure>checkstyle</measure>
+				</measures>
+				<trigger>checkstyle.hasRule("documentationstandard")</trigger>
+				<formula>3*(2./3.)**((500.*checkstyle.getTotalErrorNumberForCategory("tracingstandard")+30.*checkstyle.getTotalWarningNumberForCategory("tracingstandard")+5.*checkstyle.getTotalInfoNumberForCategory("tracingstandard"))/javancss.ncss)</formula>
+			</simpleformula>
+		</practice>
+		
+		<practice name="unittestcoverage"></practice>
+
+	</practiceset>
+
+	<criteriumset>
+		<criterium name="acceptancetest">
+			<practice-ref name="acceptancetestscenario" weight="1" />
+			<practice-ref name="riskanalysis" weight="1" />
+			<practice-ref name="automaticacceptancetest" weight="1" />
+			<practice-ref name="acceptancetestcodecoverage" weight="1" />
+			<practice-ref name="functionallimitstesting" weight="1" />
+		</criterium>
+
+		<criterium name="architecturemodularity">
+			<practice-ref name="layeredarchitecture" weight="1" />
+			<practice-ref name="stabilityabstractnesslevel" weight="3" />
+			<practice-ref name="dependencycycle" weight="1" />
+		</criterium>
+
+		<criterium name="architecturerelevance">
+			<practice-ref name="technicalspecfile" weight="1" />
+			<practice-ref name="codeorganisation" weight="1" />
+			<practice-ref name="mechanismchoices" weight="1" />
+			<practice-ref name="technologychoices" weight="1" />
+			<practice-ref name="securitytechnicaldesignfile" weight="1" />
+		</criterium>
+
+		<criterium name="architecturerespect">
+			<practice-ref name="packagenamingrespectlayers" weight="1" />
+			<practice-ref name="layerrespect" weight="3" />
+			<practice-ref name="dependencycycle" weight="1" />
+		</criterium>
+
+		<criterium name="comprehension">
+			<practice-ref name="documentation" weight="1" />
+			<practice-ref name="jspdocumentation" weight="1" />
+			<practice-ref name="inheritancedepth" weight="1" />
+			<practice-ref name="classspecialization" weight="1" />
+			<practice-ref name="documentationquality" weight="1" />			
+			<practice-ref name="documentationstandard" weight="1" />
+		</criterium>
+
+		<criterium name="exploitability">
+			<practice-ref name="portability" weight="1" />
+			<practice-ref name="packagingcompliance" weight="1" />
+			<practice-ref name="tracingstandard" weight="1" />
+		</criterium> 
+
+		<criterium name="homogeneity">
+			<practice-ref name="formatingstandard" weight="1" />
+			<practice-ref name="namingstandard" weight="1" />
+			<practice-ref name="programmingstandard" weight="1" />
+			<practice-ref name="jspstandard" weight="1" />
+		</criterium>
+
+		<criterium name="integrationcapacity">
+			<practice-ref name="afferentcoupling" weight="1" />
+			<practice-ref name="efferentcoupling" weight="1" />
+		</criterium>
+
+		<criterium name="modeling">
+			<practice-ref name="modelingdiagrams" weight="1" />
+			<practice-ref name="antipatternpredetection" weight="1" />
+			<practice-ref name="implementationmatchmodel" weight="1" />
+			<practice-ref name="modelsreasoning" weight="1" />
+		</criterium>
+
+		<criterium name="modularity">
+			<practice-ref name="efferentcoupling" weight="1" />
+			<practice-ref name="copypaste" weight="1" />
+			<practice-ref name="swissarmyknife" weight="1" />
+			<practice-ref name="lackofcohesioninmethod" weight="1" />
+		</criterium>
+
+		<criterium name="security">
+			<practice-ref name="securityconventions" weight="1" />
+			<practice-ref name="functionalsecurityaspects" weight="1" />
+			<practice-ref name="technicalsecurityaspects" weight="1" />
+			<practice-ref name="implementationmatchspecification" weight="1" />
+		</criterium>
+
+		<criterium name="simplicity">
+			<practice-ref name="spaghetticode" weight="1" />
+			<practice-ref name="jspspaghetticode" weight="1" />
+			<practice-ref name="numberofmethods" weight="1" />
+			<practice-ref name="methodsize" weight="1" />	
+			<practice-ref name="jspsize" weight="1" />
+		</criterium>
+
+		<criterium name="stability">
+			<practice-ref name="robustnesstesting" weight="1" />
+			<practice-ref name="loadtesting" weight="1" />
+			<practice-ref name="exceptionhandling" weight="1" />
+			<practice-ref name="tracingstandard" weight="1" />
+		</criterium>
+
+		<criterium name="taskaptitude">
+			<practice-ref name="functionalspecification" weight="1" />
+			<practice-ref name="aqplan" weight="1" />
+			<practice-ref name="ergonomynorms" weight="1" />
+		</criterium>
+
+		<criterium name="technicaltests">
+			<practice-ref name="unittestcoverage" weight="1" />
+			<practice-ref name="integrationtestcoverage" weight="1" />
+		</criterium>
+
+	</criteriumset>
+
+	<factorset>
+		<factor name="conformity">
+			<criterium-ref name="taskaptitude" weight="1" />
+			<criterium-ref name="modeling" weight="1" />
+			<criterium-ref name="acceptancetest" weight="1" />
+		</factor>
+		
+		<factor name="architecture">
+			<criterium-ref name="architecturerelevance" weight="1" />
+			<criterium-ref name="architecturemodularity" weight="1" />
+			<criterium-ref name="architecturerespect" weight="2" />
+		</factor>
+
+		<factor name="maintainability">
+			<criterium-ref name="homogeneity" weight="1" />
+			<criterium-ref name="comprehension" weight="1" />
+			<criterium-ref name="simplicity" weight="1" />
+			<criterium-ref name="integrationcapacity" weight="1" />
+		</factor>
+
+		<factor name="evolutionarity">
+			<criterium-ref name="homogeneity" weight="1" />
+			<criterium-ref name="comprehension" weight="1" />
+			<criterium-ref name="modeling" weight="1" />
+			<criterium-ref name="modularity" weight="1" />
+		</factor>
+
+		<factor name="reusecapacity">
+			<criterium-ref name="comprehension" weight="1" />
+			<criterium-ref name="exploitability" weight="1" />
+			<criterium-ref name="integrationcapacity" weight="1" />
+			<criterium-ref name="technicaltests" weight="1" />
+		</factor>
+		
+		<factor name="reliability">
+			<criterium-ref name="stability" weight="1" />
+			<criterium-ref name="simplicity" weight="1" />
+			<criterium-ref name="technicaltests" weight="1" />
+			<criterium-ref name="security" weight="1" />
+		</factor>
+
+	</factorset>
+
+	<gridset>
+		<grid name="squale-java-ee">
+			<factor-ref name="conformity" />
+			<factor-ref name="architecture" />
+			<factor-ref name="maintainability" />
+			<factor-ref name="evolutionarity" />
+			<factor-ref name="reusecapacity" />
+			<factor-ref name="reliability" />
+		</grid>
+	</gridset>
+</squale>

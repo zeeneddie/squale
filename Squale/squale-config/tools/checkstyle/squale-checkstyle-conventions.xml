@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.1//EN" 
+	"http://www.puppycrawl.com/dtds/configuration_1_1.dtd">
+	
+<module name="Checker">
+	<metadata name="checkstyle.version" value="squale-conventions-1.1.0"/>
+	<module name="TreeWalker">
+
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<metadata name="checkstyle.rule.practice" value="securitystandard"/>
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	
+		<!-- Aucun pour le moment -->
+	
+
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<metadata name="checkstyle.rule.practice" value="tracingstandard"/>
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	
+		<module name="com.puppycrawl.tools.checkstyle.checks.GenericIllegalRegexpCheck">
+			<property name="severity" value="warning"/>
+			<property name="format" value="System\.(out|err)\.print"/>
+			<property name="message" 
+				value="Utiliser des fonctionnalites de logging au lieu de 'System.out/err'."/>
+            <metadata name="checkstyle.rule.name" value="TRA01"/>
+		</module>
+		
+		
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<metadata name="checkstyle.rule.practice" value="programmingstandard"/>
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		
+		<module name="com.puppycrawl.tools.checkstyle.checks.imports.IllegalImportCheck">
+			<property name="severity" value="warning"/>
+			<property name="illegalPkgs" value="sun,com.ibm,com.oracle"/>
+			<metadata name="checkstyle.rule.name" value="COD00"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck">
+			<property name="severity" value="info"/>
+            <metadata name="checkstyle.rule.name" value="COD01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck">
+			<property name="severity" value="info"/>
+            <metadata name="checkstyle.rule.name" value="COD01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck">
+			<property name="severity" value="info"/>
+            <metadata name="checkstyle.rule.name" value="COD02"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD03"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck">
+			<property name="severity" value="warning"/>
+			<property name="protectedAllowed" value="true"/>
+            <metadata name="checkstyle.rule.name" value="COD04"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.sizes.FileLengthCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD05"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyForInitializerPadCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD06"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.MissingSwitchDefaultCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD07"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.InnerAssignmentCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD08"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.blocks.AvoidNestedBlocksCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD09"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.AvoidInlineConditionalsCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD10"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.CovariantEqualsCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD11"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.ExplicitInitializationCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD12"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.FallThroughCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD13"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.MultipleVariableDeclarationsCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD14"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.sizes.AnonInnerLengthCheck">
+			<property name="severity" value="warning"/>
+			<property name="max" value="50"/>
+            <metadata name="checkstyle.rule.name" value="COD15"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.ReturnCountCheck">
+			<property name="severity" value="warning"/>
+			<property name="max" value="3"/>
+            <metadata name="checkstyle.rule.name" value="COD16"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.sizes.ParameterNumberCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD17"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.blocks.EmptyBlockCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD18"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.EmptyStatementCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD18"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.EqualsHashCodeCheck">
+			<property name="severity" value="error"/>
+            <metadata name="checkstyle.rule.name" value="COD19"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.NestedIfDepthCheck">
+			<property name="severity" value="warning"/>
+			<property name="max" value="5"/>
+            <metadata name="checkstyle.rule.name" value="COD20"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.StringLiteralEqualityCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD21"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.IllegalCatchCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD22"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.NestedTryDepthCheck">
+			<property name="severity" value="warning"/>
+			<property name="max" value="2"/>
+            <metadata name="checkstyle.rule.name" value="COD23"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanExpressionCheck">
+			<property name="severity" value="info"/>
+            <metadata name="checkstyle.rule.name" value="COD24"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanReturnCheck">
+			<property name="severity" value="info"/>
+            <metadata name="checkstyle.rule.name" value="COD24"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.DefaultComesLastCheck">
+			<property name="severity" value="error"/>
+            <metadata name="checkstyle.rule.name" value="COD25"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.ParameterAssignmentCheck">
+			<property name="severity" value="error"/>
+            <metadata name="checkstyle.rule.name" value="COD26"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.SuperCloneCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD27"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.coding.SuperFinalizeCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD28"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.design.FinalClassCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD29"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.design.HideUtilityClassConstructorCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD30"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.design.InterfaceIsTypeCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD31"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.design.MutableExceptionCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD32"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.design.ThrowsCountCheck">
+			<property name="severity" value="warning"/>
+			<property name="max" value="3"/>
+            <metadata name="checkstyle.rule.name" value="COD33"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.ArrayTypeStyleCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COD34"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.GenericIllegalRegexpCheck">
+			<property name="severity" value="warning"/>
+			<property name="format" value="System\.exit"/>
+			<property name="message" 
+				value="Interdiction de terminer un programme avec System.exit."/>
+            <metadata name="checkstyle.rule.name" value="COD35"/>
+		</module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.GenericIllegalRegexpCheck">
+            <property name="severity" value="error"/>
+            <property name="format" value="CHECKSTYLE:OFF(\s)*$"/>
+            <property name="message" value="Il est obligatoire de commenter pourquoi le code suivant est exclu des vérifications Checkstyle."/>
+            <metadata name="checkstyle.rule.name" value="COD36"/>
+        </module>
+		
+		
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<metadata name="checkstyle.rule.practice" value="documentationstandard"/>
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		
+		<module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="COM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck">
+			<property name="severity" value="warning"/>
+			<property name="excludeScope" value="nothing"/>
+			<property name="checkEmptyJavadoc" value="true"/>
+			<property name="checkFirstSentence" value="false"/>
+            <metadata name="checkstyle.rule.name" value="COM02"/>
+		</module>
+		
+		
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<metadata name="checkstyle.rule.practice" value="formatingstandard"/>
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->		
+        <module name="com.puppycrawl.tools.checkstyle.checks.blocks.LeftCurlyCheck">
+            <property name="severity" value="info"/>
+            <metadata name="checkstyle.rule.name" value="FOR01"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.blocks.RightCurlyCheck">
+            <property name="severity" value="info"/>
+            <metadata name="checkstyle.rule.name" value="FOR01"/>
+        </module>
+        <module name="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="FOR02"/>
+        </module>
+		
+		
+		
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<metadata name="checkstyle.rule.practice" value="namingstandard"/>
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		
+		<module name="com.puppycrawl.tools.checkstyle.checks.naming.AbstractClassNameCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="NOM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.naming.ConstantNameCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="NOM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.naming.LocalFinalVariableNameCheck">
+			<property name="severity" value="warning"/>
+			<property name="format" 
+				value="^[a-z][a-zA-Z0-9]*$|^[a-z]?_[a-zA-Z0-9]*$"/>
+            <metadata name="checkstyle.rule.name" value="NOM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck">
+			<property name="severity" value="warning"/>
+			<property name="format" 
+				value="^[a-z][a-zA-Z0-9]*$|^[a-z]?_[a-zA-Z0-9]*$"/>
+            <metadata name="checkstyle.rule.name" value="NOM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.naming.MemberNameCheck">
+			<property name="severity" value="warning"/>
+			<property name="format" 
+				value="^[a-z][a-zA-Z0-9]*$|^[a-z]?_[a-zA-Z0-9]*$"/>
+            <metadata name="checkstyle.rule.name" value="NOM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.naming.MethodNameCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="NOM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="NOM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.naming.ParameterNameCheck">
+			<property name="severity" value="warning"/>
+			<property name="format" 
+				value="^[a-z][a-zA-Z0-9]*$|^[a-z]?_[a-zA-Z0-9]*$"/>
+            <metadata name="checkstyle.rule.name" value="NOM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.naming.StaticVariableNameCheck">
+			<property name="severity" value="warning"/>
+			<property name="format" 
+				value="^[a-z][a-zA-Z0-9]*$|^[a-z]?_[a-zA-Z0-9]*$"/>
+            <metadata name="checkstyle.rule.name" value="NOM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.naming.TypeNameCheck">
+			<property name="severity" value="warning"/>
+            <metadata name="checkstyle.rule.name" value="NOM01"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.modifier.ModifierOrderCheck">
+			<property name="severity" value="info"/>
+            <metadata name="checkstyle.rule.name" value="NOM02"/>
+		</module>
+		<module name="com.puppycrawl.tools.checkstyle.checks.modifier.RedundantModifierCheck">
+			<property name="severity" value="info"/>
+            <metadata name="checkstyle.rule.name" value="NOM03"/>
+		</module>
+		
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<!-- Le Check suivant ne rentre dans aucune categorie, mais est 	--> 
+		<!-- necessaire pour le SuppressionCommentFilter 					-->
+		<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<module name="com.puppycrawl.tools.checkstyle.checks.FileContentsHolder">
+		</module>
+		
+	</module>
+	<module name="SuppressionCommentFilter">
+	</module>
+</module>

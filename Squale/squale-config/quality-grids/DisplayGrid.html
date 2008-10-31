@@ -1,0 +1,55 @@
+<html>
+
+<!-- HTML file used to visualize the quality grid in a table fashion way -->
+<!-- This works only with NSCP 7.1+ / Mozilla 1.4.1+ / Safari, which use -->
+<!-- the standard DOM Level 2 technique. -->
+
+<head>
+	<link href="DisplayGrid-resources/DisplayGrid.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript">
+		var returnval = 0;
+		var stylesheet, xmlFile, cache, doc;
+		function showGrid(){
+			if (document.implementation && document.implementation.createDocument) {
+				xmlFile = document.implementation.createDocument("", "", null);
+				stylesheet = document.implementation.createDocument("", "", null);
+				if (xmlFile.load){
+					gridToShow = document.getElementById("gridToDisplay").value;
+					xmlFile.load(gridToShow);
+					stylesheet.load("DisplayGrid-resources/DisplayGrid-Xml2Html.xsl");
+				} else {
+					alert("Document could not be loaded by browser.");
+				}
+				xmlFile.addEventListener("load", transform, false);
+				stylesheet.addEventListener("load", transform, false);
+			}else {
+				alert("XSL transformation not supported by the browser. Please use Firefox or Opera.");
+			}
+		}
+		function transform(){
+			var processor = new XSLTProcessor();
+			processor.importStylesheet(stylesheet); 
+			doc = processor.transformToDocument(xmlFile);
+			document.getElementById("data").innerHTML = doc.documentElement.innerHTML;
+		}
+		function showHide(element) {
+			elementToChange = element.nextSibling;
+			if (elementToChange.style.display == 'none') {
+				elementToChange.style.display = 'block';
+			} else {
+				elementToChange.style.display = 'none';
+			}
+		}
+	</script>
+</head>
+<body onload="showGrid();">
+	<p>
+		Select which quality grid to display : 
+		<select id="gridToDisplay" onchange="showGrid();">
+			<option value="Squale-Java-SE-Grid.xml">JSE Grid</option>
+			<option value="Squale-Java-EE-Grid.xml">JEE Grid</option>
+		</select>
+	</p>
+	<div id="data"><!-- this is where the transformed data goes --></div>
+</body>
+</html>

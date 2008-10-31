@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<ruleset name="squale-pmd-jsp-1.0.0" language="jsp"
+    xmlns="http://pmd.sf.net/ruleset/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+    xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+
+  <description>
+  	This ruleset checks my code for bad stuff
+  </description>
+
+  <!-- We'll use the entire 'strings' ruleset -->
+  <rule ref="rulesets/basic-jsp.xml/NoLongScripts" >
+    <properties>
+        <property name="squaleCategory" value="jspstandard"/>
+        <property name="squaleSeverity" value="info"/>
+    </properties>
+  </rule>
+  <rule ref="rulesets/basic-jsp.xml/NoScriptlets" >
+    <properties>
+        <property name="squaleCategory" value="jspstandard"/>
+        <property name="squaleSeverity" value="warning"/>
+    </properties>
+  </rule>
+  <rule ref="rulesets/basic-jsp.xml/NoInlineStyleInformation" >
+    <properties>
+        <property name="squaleCategory" value="jspstandard"/>
+        <property name="squaleSeverity" value="warning"/>
+    </properties>
+  </rule>
+  <rule ref="rulesets/basic-jsp.xml/NoClassAttribute" >
+    <properties>
+        <property name="squaleCategory" value="jspstandard"/>
+        <property name="squaleSeverity" value="info"/>
+    </properties>
+  </rule>
+  <rule ref="rulesets/basic-jsp.xml/NoJspForward" >
+    <properties>
+        <property name="squaleCategory" value="jspstandard"/>
+        <property name="squaleSeverity" value="error"/>
+    </properties>
+  </rule>
+  <rule ref="rulesets/basic-jsp.xml/NoHtmlComments" >
+    <properties>
+        <property name="squaleCategory" value="jspstandard"/>
+        <property name="squaleSeverity" value="error"/>
+    </properties>
+  </rule>
+  <rule ref="rulesets/basic-jsp.xml/DuplicateJspImports" >
+    <properties>
+        <property name="squaleCategory" value="jspstandard"/>
+        <property name="squaleSeverity" value="error"/>
+    </properties>
+  </rule>
+
+</ruleset>

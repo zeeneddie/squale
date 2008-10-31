@@ -1,0 +1,134 @@
+body {
+	font: 12px Verdana;
+}
+
+#gridBox {
+	padding: 10px;
+}
+
+
+/* ============== FACTORS ============== */
+
+DIV.factor {
+	margin-bottom: 10px;
+	border: dotted 1px black;
+	background-color: #F8F8F8;
+	padding: 0 10 10 10;
+	font-size: 18px;
+}
+
+DIV.factorName {
+	padding: 5px;
+}
+
+SPAN.factorName {
+	font-weight: bolder;
+	font-variant: small-caps;
+}
+
+
+/* ============== CRITERIA ============== */
+
+DIV.criteria {
+	margin: 10 10 10 40;
+	border: solid 1px green;
+	background-color: #EEEEEE;
+	padding: 10px;
+	font-size: 14px;
+}
+
+DIV.criteriaHeader {
+	height: 20px;
+}
+
+DIV.criteriaName {
+	color: green;
+	float: left;
+}
+
+SPAN.criteriaName {
+	font-weight: bolder;
+	font-variant: small-caps;
+}
+
+DIV.criteriaWeight {
+	color: green;
+	float: right;
+}
+
+SPAN.criteriaWeight {
+}
+
+
+/* ============== PRACTICE ============== */
+
+DIV.practice {
+	margin: 10 10 10 40;
+	border: solid 1px blue;
+	background-color: white;
+	padding: 10px;
+	font-size: 12px;
+}
+
+DIV.practiceHeader {
+	height: 20px;
+}
+
+DIV.practiceName {
+	color: blue;
+	float: left;
+}
+
+SPAN.practiceName {
+	font-weight: bolder;
+	font-variant: small-caps;
+}
+
+DIV.practiceWeight {
+	color: blue;
+	float: right;
+}
+
+SPAN.practiceWeight {
+}
+
+DIV.practiceNotComputed {
+	color: lightgrey;
+	font-style: italic;
+}
+
+DIV.details {
+	padding: 5 5 10 30;
+}
+
+SPAN.label{
+	margin-right: 2px;
+	font-weight: bold;
+}
+
+DIV.formula {
+	border: dotted 1px blue;
+	padding: 10px;
+}
+
+DIV.formula DIV {
+	padding: 10px;
+	color: red;
+	text-align: center;
+}
+
+TABLE.conditionformula {
+	border: solid 1px grey;
+	font-size: 12px;
+}
+
+TABLE.conditionformula TH {
+	border: solid 1px grey;
+	background-color: #DDDDFE;
+	padding: 10px;
+}
+
+TABLE.conditionformula TD {
+	border: solid 1px grey;
+	padding: 5px;
+}
