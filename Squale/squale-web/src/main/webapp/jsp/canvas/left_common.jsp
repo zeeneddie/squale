@@ -9,4 +9,6 @@
 	<ul><li><a href="list_projects.do?action=searchProject&firstCall=true"  title="Rechercher un projet" style="BACKGROUND-IMAGE:url(theme/charte_v03_001/img/ico/neutre/magnif.gif)" ><bean:message key="buttonTag.menu.rechercher"/></a></li></ul>
 	<ul><li><a href="mailto:LDIF_ADMIN_SQUALE"  title="Envoyer un mail à la liste de diffusion" style="BACKGROUND-IMAGE:url(theme/charte_v03_001/img/ico/neutre/mail.gif)" ><bean:message key="buttonTag.menu.contact"/></a></li></ul>
 	<ul><li><a href="stats.do?action=displayUser"  title="Quelques statistiques" style="BACKGROUND-IMAGE:url(theme/charte_v03_001/img/ico/neutre/tools.gif)" ><bean:message key="buttonTag.menu.stats"/></a></li></ul>
+	<%-- Add a JSP fragment filtered during build time, that shows the running Squale version --%>
+	<jsp:include page="squale_version_identifier.jsp" flush="true"/>
 </div>

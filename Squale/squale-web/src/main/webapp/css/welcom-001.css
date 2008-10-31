@@ -1,3 +1,8 @@
+#squale-identifier {
+	background-color: lightgrey;
+	color: grey;
+	font-variant: small-caps;
+}
 
 div.richbox{
 	position:absolute;
