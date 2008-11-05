@@ -28,6 +28,7 @@
 		<property name="jdbc.use_streams_for_binary">true</property>
 
 		<property name="dialect">org.hibernate.dialect.OracleDialect</property>
+		<!-- <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property> -->
 
 		<!-- begin mapping files -->
 		<mapping resource="mapping/access/UserAccessBO.hbm.xml" />
@@ -38,6 +39,7 @@
 		<mapping resource="mapping/component/AuditGridBO.hbm.xml" />
 		<mapping resource="mapping/component/parameters/ProjectParameterBO.hbm.xml" />
 		
+		<mapping resource="mapping/config/AdminParamsBO.hbm.xml"/>
 		<mapping resource="mapping/config/AbstractTasksUserBO.hbm.xml" />
 		<mapping resource="mapping/config/AuditFrequencyBO.hbm.xml" />
 		<mapping resource="mapping/config/Profile_DisplayConfBO.hbm.xml" />
