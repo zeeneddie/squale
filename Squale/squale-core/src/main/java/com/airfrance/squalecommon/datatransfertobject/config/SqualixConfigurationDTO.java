@@ -3,6 +3,9 @@ package com.airfrance.squalecommon.datatransfertobject.config;
 import java.io.Serializable;
 import java.util.Collection;
 
+import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
+
 /**
  * Configuration Squalix
  */
@@ -21,6 +24,11 @@ public class SqualixConfigurationDTO
 
     /** La liste des profils */
     private Collection mProfiles;
+
+    /**
+     * The list of a configuration parameter (adminParamsBO)
+     */
+    private Collection<AdminParamsDTO> adminParams;
 
     /**
      * Méthode d'accès pour mStopTimes
@@ -83,7 +91,19 @@ public class SqualixConfigurationDTO
     }
 
     /**
-     * @return la liste des fréquences max des audits
+     * Setter method for the Frequencies Collection
+     * 
+     * @param pCollection The new Collection of max frequencies for the audit
+     */
+    public void setFrequencies( Collection pCollection )
+    {
+        mFrequencies = pCollection;
+    }
+
+    /**
+     * Getter method for the frequencies Collection
+     * 
+     * @return the collection of max frequencies for the audit
      */
     public Collection getFrequencies()
     {
@@ -91,10 +111,22 @@ public class SqualixConfigurationDTO
     }
 
     /**
-     * @param pCollection la liste des fréquences max des audits
+     * Getter method for the Collection of adminParamsDTO
+     * 
+     * @return the adminParamsDTO Collection
      */
-    public void setFrequencies( Collection pCollection )
+    public Collection<AdminParamsDTO> getAdminParams()
     {
-        mFrequencies = pCollection;
+        return adminParams;
+    }
+
+    /**
+     * Setter method for the adminParams Collection
+     * 
+     * @param pAdminParams the new Collection of adminParamsDTO
+     */
+    public void setAdminParams( Collection<AdminParamsDTO> pAdminParams )
+    {
+        adminParams = pAdminParams;
     }
 }

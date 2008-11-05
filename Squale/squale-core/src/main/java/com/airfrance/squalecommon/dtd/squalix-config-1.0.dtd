@@ -1,8 +1,39 @@
 <?xml version='1.0' encoding="UTF-8"?>
 
 <!ELEMENT configuration
-   (stoptimes, frequencies?,tasks,sourcemanagements,profiles)
+   (stoptimes, frequencies?,tasks,sourcemanagements,profiles,admin-params)
 >
+<!ELEMENT admin-params
+   (mail)
+>
+<!ELEMENT mail
+   (smtp-server?,sender-address?,admin-mailing-list,smtp-authent-needed?,smtp-username?,smtp-password?)
+>
+
+<!ELEMENT smtp-server
+	(#PCDATA)
+>
+
+<!ELEMENT sender-address
+	(#PCDATA)
+>
+
+<!ELEMENT admin-mailing-list
+	(#PCDATA)
+>
+
+<!ELEMENT smtp-authent-needed
+	(#PCDATA)
+>
+
+<!ELEMENT smtp-username
+	(#PCDATA)
+>
+
+<!ELEMENT smtp-password
+	(#PCDATA)
+>
+
 <!ELEMENT stoptimes
    (stoptime*)
 >

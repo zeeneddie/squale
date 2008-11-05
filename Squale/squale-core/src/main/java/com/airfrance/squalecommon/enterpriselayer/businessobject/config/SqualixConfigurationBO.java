@@ -22,6 +22,11 @@ public class SqualixConfigurationBO
     private Collection mProfiles;
 
     /**
+     * The list of a configuration parameter (adminParamsBO)
+     */
+    private Collection<AdminParamsBO> adminParams;
+
+    /**
      * Le constructeur par défaut
      */
     public SqualixConfigurationBO()
@@ -30,6 +35,7 @@ public class SqualixConfigurationBO
         mFrequencies = new ArrayList();
         mSourceManagements = new ArrayList();
         mProfiles = new ArrayList();
+        adminParams= new ArrayList<AdminParamsBO>();
     }
 
     /**
@@ -123,7 +129,9 @@ public class SqualixConfigurationBO
     }
 
     /**
-     * @return la liste des fréquences max des audits
+     * Getter method for the frequencies Collection
+     * 
+     * @return the collection of max frequencies for the audit
      */
     public Collection getFrequencies()
     {
@@ -131,7 +139,9 @@ public class SqualixConfigurationBO
     }
 
     /**
-     * @param pCollection la liste des fréquences max des audits
+     * Setter method for the Frequencies Collection
+     * 
+     * @param pCollection The new Collection of max frequencies for the audit
      */
     public void setFrequencies( Collection pCollection )
     {
@@ -146,6 +156,36 @@ public class SqualixConfigurationBO
     public void addFrequency( AuditFrequencyBO pFrequency )
     {
         mFrequencies.add( pFrequency );
+    }
+
+    /**
+     * Getter method for the Collection of adminParamsBO
+     * 
+     * @return the adminParamsBO Collection
+     */
+    public Collection<AdminParamsBO> getAdminParams()
+    {
+        return adminParams;
+    }
+
+    /**
+     * Setter method for the adminParams Collection
+     * 
+     * @param pAdminParams the new Collection of adminParamsBO
+     */
+    public void setAdminParams( Collection<AdminParamsBO> pAdminParams )
+    {
+        adminParams = pAdminParams;
+    }
+    
+    /**
+     * Add an adminParam to the Collection of adminParams
+     * 
+     * @param adminParam The adminParamsBO to add to the Collection
+     */
+    public void addAdminParam(AdminParamsBO adminParam)
+    {
+        adminParams.add( adminParam );
     }
 
 }

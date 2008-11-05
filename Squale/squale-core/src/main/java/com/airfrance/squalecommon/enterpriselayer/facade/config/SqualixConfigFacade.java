@@ -11,16 +11,20 @@ import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
 import com.airfrance.jraf.spi.enterpriselayer.IFacade;
 import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
 import com.airfrance.jraf.spi.persistence.ISession;
+import com.airfrance.squalecommon.daolayer.config.AdminParamsDAOImpl;
 import com.airfrance.squalecommon.daolayer.config.AuditFrequencyDAOImpl;
 import com.airfrance.squalecommon.daolayer.config.ProjectProfileDAOImpl;
 import com.airfrance.squalecommon.daolayer.config.SourceManagementDAOImpl;
 import com.airfrance.squalecommon.daolayer.config.StopTimeDAOImpl;
+import com.airfrance.squalecommon.datatransfertobject.config.AdminParamsDTO;
 import com.airfrance.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
+import com.airfrance.squalecommon.datatransfertobject.transform.config.AdminParamsTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.config.AuditFrequencyTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.config.ProjectProfileTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.config.SourceManagementTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.config.StopTimeTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.config.TaskTransform;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
@@ -63,6 +67,9 @@ public class SqualixConfigFacade
             // On récupère les récupérateurs de sources:
             Collection managersDTO = getSourceManagements( session );
             result.setSourceManagements( managersDTO );
+            // Recovering of the adminParams
+            Collection<AdminParamsDTO> adminParamsDTOCollection = getAdminParams( session );
+            result.setAdminParams( adminParamsDTOCollection );
         }
         catch ( JrafDaoException e )
         {
@@ -252,5 +259,19 @@ public class SqualixConfigFacade
             }
         }
         return tasks;
+    }
+    
+    /**
+     * return the collection of adminParamsDTO set in the database
+     * 
+     * @param session hiberntae session
+     * @return The collection of all adminParmas record in the database
+     * @throws JrafDaoException Exception happened during the search
+     */
+    private static Collection<AdminParamsDTO> getAdminParams (ISession session) throws JrafDaoException
+    {
+        AdminParamsDAOImpl dao = AdminParamsDAOImpl.getInstance();
+        Collection<AdminParamsBO> adminParamsCollection= dao.findAll( session );
+        return AdminParamsTransform.bo2dto( adminParamsCollection );
     }
 }

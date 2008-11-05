@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.BubbleConfBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SqualixConfigurationBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.StopTimeBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
@@ -142,6 +143,54 @@ public class SqualixConfigImport
         configDigester.addSetNext( "configuration/profiles/profile/termination/task-ref", "addTerminationTask" );
 
         configDigester.addSetNext( "configuration/profiles/profile", "addProfile" );
+
+        // mail - smtp server
+        configDigester.addObjectCreate( "configuration/admin-params/mail/smtp-server", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/mail/smtp-server", "setAdminParam", 2, new Class[] {
+            String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/mail/smtp-server", 0 );
+        configDigester.addCallParam( "configuration/admin-params/mail/smtp-server", 1 );
+        configDigester.addSetNext( "configuration/admin-params/mail/smtp-server", "addAdminParam" );
+
+        // mail - default sender
+        configDigester.addObjectCreate( "configuration/admin-params/mail/sender-address", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/mail/sender-address", "setAdminParam", 2,
+                                      new Class[] { String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/mail/sender-address", 0 );
+        configDigester.addCallParam( "configuration/admin-params/mail/sender-address", 1 );
+        configDigester.addSetNext( "configuration/admin-params/mail/sender-address", "addAdminParam" );
+
+        // mail - squale's administrators mailing list
+        configDigester.addObjectCreate( "configuration/admin-params/mail/admin-mailing-list", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/mail/admin-mailing-list", "setAdminParam", 2,
+                                      new Class[] { String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/mail/admin-mailing-list", 0 );
+        configDigester.addCallParam( "configuration/admin-params/mail/admin-mailing-list", 1 );
+        configDigester.addSetNext( "configuration/admin-params/mail/admin-mailing-list", "addAdminParam" );
+
+        // mail - smtp authentication needed ?
+        configDigester.addObjectCreate( "configuration/admin-params/mail/smtp-authent-needed", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/mail/smtp-authent-needed", "setAdminParam", 2,
+                                      new Class[] { String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/mail/smtp-authent-needed", 0 );
+        configDigester.addCallParam( "configuration/admin-params/mail/smtp-authent-needed", 1 );
+        configDigester.addSetNext( "configuration/admin-params/mail/smtp-authent-needed", "addAdminParam" );
+
+        // mail - smtp authentication : user name
+        configDigester.addObjectCreate( "configuration/admin-params/mail/smtp-username", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/mail/smtp-username", "setAdminParam", 2, new Class[] {
+            String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/mail/smtp-username", 0 );
+        configDigester.addCallParam( "configuration/admin-params/mail/smtp-username", 1 );
+        configDigester.addSetNext( "configuration/admin-params/mail/smtp-username", "addAdminParam" );
+
+        // mail - smtp authentication : password
+        configDigester.addObjectCreate( "configuration/admin-params/mail/smtp-password", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/mail/smtp-password", "setAdminParam", 2, new Class[] {
+            String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/mail/smtp-password", 0 );
+        configDigester.addCallParam( "configuration/admin-params/mail/smtp-password", 1 );
+        configDigester.addSetNext( "configuration/admin-params/mail/smtp-password", "addAdminParam" );
 
         return configDigester;
     }

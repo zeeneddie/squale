@@ -17,4 +17,14 @@ public class MailException
         super( e );
     }
 
+    /**
+     * Constructor
+     * 
+     * @param message Error message
+     */
+    public MailException( String message )
+    {
+        super( message );
+    }
+
 }

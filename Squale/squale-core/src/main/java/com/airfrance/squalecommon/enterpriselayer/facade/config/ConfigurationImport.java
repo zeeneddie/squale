@@ -15,6 +15,7 @@ import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
 import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
 import com.airfrance.jraf.spi.persistence.ISession;
 import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
+import com.airfrance.squalecommon.daolayer.config.AdminParamsDAOImpl;
 import com.airfrance.squalecommon.daolayer.config.AuditFrequencyDAOImpl;
 import com.airfrance.squalecommon.daolayer.config.Profile_DisplayConfDAOImpl;
 import com.airfrance.squalecommon.daolayer.config.ProjectProfileDAOImpl;
@@ -23,14 +24,17 @@ import com.airfrance.squalecommon.daolayer.config.StopTimeDAOImpl;
 import com.airfrance.squalecommon.daolayer.config.TaskDAOImpl;
 import com.airfrance.squalecommon.daolayer.config.web.AbstractDisplayConfDAOImpl;
 import com.airfrance.squalecommon.daolayer.rule.QualityGridDAOImpl;
+import com.airfrance.squalecommon.datatransfertobject.config.AdminParamsDTO;
 import com.airfrance.squalecommon.datatransfertobject.config.ProjectProfileDTO;
 import com.airfrance.squalecommon.datatransfertobject.config.SourceManagementDTO;
 import com.airfrance.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
+import com.airfrance.squalecommon.datatransfertobject.transform.config.AdminParamsTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.config.AuditFrequencyTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.config.ProjectProfileTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.config.SourceManagementTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.config.StopTimeTransform;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AbstractTasksUserBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.Profile_DisplayConfBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
@@ -39,7 +43,9 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SqualixC
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.StopTimeBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import com.airfrance.squalecommon.enterpriselayer.facade.config.adminParams.MailConfigFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.config.xml.SqualixConfigImport;
+import com.airfrance.squalecommon.util.mail.IMailerProvider;
 
 /**
  * Importation de la configuration Squalix
@@ -80,6 +86,9 @@ public class ConfigurationImport
         // Les profils
         Collection profilesDTO = ProjectProfileTransform.bo2dto( configBO.getProfiles() );
         configDTO.setProfiles( profilesDTO );
+        // The adminParams
+        Collection<AdminParamsDTO> adminParamsDTO = AdminParamsTransform.bo2dto( configBO.getAdminParams() );
+        configDTO.setAdminParams( adminParamsDTO );
         return configDTO;
     }
 
@@ -97,6 +106,7 @@ public class ConfigurationImport
         SqualixConfigurationDTO configDTO = new SqualixConfigurationDTO();
         Collection stopTimesDTO = new ArrayList();
         Collection frequenciesDTO = new ArrayList();
+        Collection<AdminParamsDTO> adminParamsDTO = new ArrayList<AdminParamsDTO>();
         SqualixConfigImport configImport = new SqualixConfigImport();
         // Importation de la configuration
         SqualixConfigurationBO configBO = configImport.importConfig( pStream, pErrors );
@@ -105,6 +115,7 @@ public class ConfigurationImport
         {
             // récupération d'une session
             session = PERSISTENTPROVIDER.getSession();
+            session.beginTransaction();
             // On créer la configuration en supprimant les précédents
             // paramètres généraux
             stopTimesDTO = createStopTimes( session, configBO.getStopTimes() );
@@ -137,6 +148,12 @@ public class ConfigurationImport
                 Collection profilesDTO = createProfiles( session, pErrors, configBO.getProfiles() );
                 configDTO.setProfiles( profilesDTO );
             }
+
+            // Insert the adminParams
+            adminParamsDTO = createAdminParams( session, configBO.getAdminParams() );
+            configDTO.setAdminParams( adminParamsDTO );
+            session.commitTransactionWithoutClose();
+
         }
         catch ( Exception e )
         {
@@ -429,7 +446,7 @@ public class ConfigurationImport
                 }
                 // On fait un traitement particulier pour les configurations car on ne supprime
                 // pas les configurations lors d'un update
-                checkDisplayConfiguration( existingProfileBO );
+                checkDisplayConfiguration( pSession, existingProfileBO );
                 profileDAO.save( pSession, existingProfileBO );
                 profilesDTO.add( profileDTO );
             }
@@ -452,7 +469,7 @@ public class ConfigurationImport
     private static Set getQualityGrids( ISession pSession, Set pGrids, StringBuffer pErrors )
         throws JrafDaoException
     {
-        Set persistent_grids = new HashSet( pGrids.size() );
+        Set persistentGrids = new HashSet( pGrids.size() );
         // On va récupérer les grilles une par une pour repérer les cas d'erreur
         for ( Iterator it = pGrids.iterator(); it.hasNext(); )
         {
@@ -468,24 +485,25 @@ public class ConfigurationImport
             }
             else
             {
-                persistent_grids.add( grid );
+                persistentGrids.add( grid );
             }
         }
-        return persistent_grids;
+        return persistentGrids;
     }
 
     /**
      * Rend les configurations du profil persistantes
      * 
+     * @param session The hibernate session
      * @param profileBO le profile à sauvegarder
      * @throws JrafDaoException si erreur
      * @throws JrafEnterpriseException si erreur
      */
-    private static void checkDisplayConfiguration( ProjectProfileBO profileBO )
+    private static void checkDisplayConfiguration( ISession session, ProjectProfileBO profileBO )
         throws JrafDaoException, JrafEnterpriseException
     {
         // Initialisation
-        ISession session = null;
+        ISession session2 = null;
         Profile_DisplayConfDAOImpl profilConfDAO = Profile_DisplayConfDAOImpl.getInstance();
         // On récupère les configurations liées au profil
         Set confs = profileBO.getProfileDisplayConfs();
@@ -502,13 +520,15 @@ public class ConfigurationImport
         List confBOInDb;
         try
         {
-            session = PERSISTENTPROVIDER.getSession();
+            session2 = PERSISTENTPROVIDER.getSession();
+            confBOInDb = dao.findAll( session2 );
+
             for ( Iterator it = confs.iterator(); it.hasNext(); )
             {
                 profile_conf = (Profile_DisplayConfBO) it.next();
                 profile_conf.setProfile( profileBO );
                 confBO = profile_conf.getDisplayConf();
-                confBOInDb = dao.findAllSubclass( session, confBO.getClass() );
+                // confBOInDb = dao.findAllSubclass( session, confBO.getClass() );
                 if ( confBOInDb.contains( confBO ) )
                 {
                     // La configuration existe en base, on l'ajoute directement
@@ -533,7 +553,7 @@ public class ConfigurationImport
         }
         finally
         {
-            FacadeHelper.closeSession( session, ConfigurationImport.class.getName() + ".checkDisplayConfiguration" );
+            FacadeHelper.closeSession( session2, ConfigurationImport.class.getName() + ".checkDisplayConfiguration" );
         }
     }
 
@@ -576,5 +596,28 @@ public class ConfigurationImport
             managersDTO.add( managerDTO );
         }
         return managersDTO;
+    }
+
+    /**
+     * This method do the record in database of the adminParamsBO.
+     * 
+     * @param session hibernate session
+     * @param allAdminParams The collection of allAdminParamsBO to persist
+     * @return return the collection of all adminParamsDTO
+     * @throws JrafDaoException exception happened during the record in the database.
+     */
+    private static Collection<AdminParamsDTO> createAdminParams( ISession session,
+                                                                 Collection<AdminParamsBO> allAdminParams )
+        throws JrafDaoException
+    {
+        AdminParamsDAOImpl adminParamDAO = AdminParamsDAOImpl.getInstance();
+        boolean oneMatch;
+        oneMatch = adminParamDAO.createOrUpdate( session, allAdminParams );
+        if ( !oneMatch )
+        {
+            String message = ConfigMessages.getString( "mail.manyMatch" );
+            throw new JrafDaoException( message );
+        }
+        return AdminParamsTransform.bo2dto( allAdminParams );
     }
 }
