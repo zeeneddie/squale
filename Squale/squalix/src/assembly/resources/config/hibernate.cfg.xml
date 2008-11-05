@@ -34,6 +34,7 @@
 		<mapping resource="mapping/component/AuditGridBO.hbm.xml" />
 		<mapping resource="mapping/component/parameters/ProjectParameterBO.hbm.xml" />
 		
+		<mapping resource="mapping/config/AdminParamsBO.hbm.xml"/>
 		<mapping resource="mapping/config/AbstractTasksUserBO.hbm.xml" />
 		<mapping resource="mapping/config/AuditFrequencyBO.hbm.xml" />
 		<mapping resource="mapping/config/Profile_DisplayConfBO.hbm.xml" />
