@@ -95,6 +95,8 @@
 
     drop table Volumetry_Measures cascade constraints;
 
+    drop table adminParams cascade constraints;
+
     drop table displayConf cascade constraints;
 
     drop sequence Module_sequence;
@@ -104,6 +106,8 @@
     drop sequence Rule_sequence;
 
     drop sequence TransgressionItem_sequence;
+
+    drop sequence adminparams_sequence;
 
     drop sequence auditFrequency_sequence;
 
@@ -600,6 +604,13 @@
         primary key (VolumetryId, Measure)
     );
 
+    create table adminParams (
+        AdminParamsId number(19,0) not null,
+        paramKey varchar2(255) not null,
+        paramaValue varchar2(255) not null,
+        primary key (AdminParamsId)
+    );
+
     create table displayConf (
         ConfId number(19,0) not null,
         subclass varchar2(255) not null,
@@ -985,6 +996,8 @@
     create sequence Rule_sequence;
 
     create sequence TransgressionItem_sequence;
+
+    create sequence adminparams_sequence;
 
     create sequence auditFrequency_sequence;
 
