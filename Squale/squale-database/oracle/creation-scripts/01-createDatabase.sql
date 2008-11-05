@@ -569,7 +569,7 @@
 
     create table UserAccess (
         UserAccessId number(19,0) not null,
-        ApplicationId number(19,0) not null,
+        ApplicationId number(19,0),
         accessDate date not null,
         matricule varchar2(1024) not null,
         AccessIndex number(10,0),
