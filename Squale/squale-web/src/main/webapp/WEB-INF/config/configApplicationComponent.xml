@@ -352,4 +352,10 @@
 	
 	</applicationComponent>
 	
+	<applicationComponent name="Mail" description="Mail configuration" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.MailConfigurationAccess">
+		
+		<component name="getAdminMailingList"></component>
+		
+	</applicationComponent>
+	
 </listApplicationComponent>

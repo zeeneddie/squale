@@ -14,8 +14,10 @@ import org.apache.struts.action.ActionMessages;
 
 import com.airfrance.jraf.helper.AccessDelegateHelper;
 import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
+import com.airfrance.squalecommon.enterpriselayer.facade.config.adminParams.MailConfigFacade;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.AdminAction;
 import com.airfrance.squaleweb.applicationlayer.formbean.UploadFileForm;
+import com.airfrance.squaleweb.servlet.UserSqualeSessionContext;
 
 /**
  * Importation d'une configuratiopn Squalix
@@ -68,6 +70,11 @@ public class ConfigCreationAction
                 }
                 else
                 {
+                    IApplicationComponent ac1 = AccessDelegateHelper.getInstance( "Mail" );
+                    String mailingList = ac1.execute( "getAdminMailingList" ).toString();
+                    UserSqualeSessionContext sessionContext = UserSqualeSessionContext.getContext( pRequest.getSession() );
+                    sessionContext.setSqualeAdminsMailingList( mailingList );
+                    UserSqualeSessionContext.setContext( pRequest.getSession(), sessionContext );
                     forward = pMapping.findForward( "success" );
                 }
             }

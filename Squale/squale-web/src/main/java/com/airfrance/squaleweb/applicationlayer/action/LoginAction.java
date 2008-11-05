@@ -1,7 +1,11 @@
 package com.airfrance.squaleweb.applicationlayer.action;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,8 +17,12 @@ import org.apache.struts.action.ActionMessages;
 
 import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
 import com.airfrance.jraf.helper.AccessDelegateHelper;
+import com.airfrance.jraf.helper.PersistenceHelper;
 import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
+import com.airfrance.jraf.spi.persistence.ISession;
+import com.airfrance.squalecommon.daolayer.config.AdminParamsDAOImpl;
 import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
 import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.UserForm;
@@ -22,6 +30,7 @@ import com.airfrance.squaleweb.connection.AuthenticationBean;
 import com.airfrance.squaleweb.connection.IUserBeanAccessor;
 import com.airfrance.squaleweb.connection.UserBeanAccessorHelper;
 import com.airfrance.squaleweb.connection.exception.ConnectionException;
+import com.airfrance.squaleweb.servlet.UserSqualeSessionContext;
 import com.airfrance.squaleweb.transformer.LogonBeanTransformer;
 import com.airfrance.squaleweb.transformer.UserTransformer;
 import com.airfrance.squaleweb.util.ExceptionWrapper;
@@ -54,6 +63,7 @@ public class LoginAction
         boolean sessionOk = initUserInSession( pRequest );
         if ( sessionOk )
         {
+
             // On redirige vers la gestion de son compte si l'email OU le nom n'est pas renseigné
             // Sinon on redirige vers la page d'accueil
             LogonBean logonBean = (LogonBean) pRequest.getSession().getAttribute( WConstants.USER_KEY );
@@ -97,10 +107,14 @@ public class LoginAction
         boolean success;
         try
         {
+
             LogonBean logonBeanSecurity = getUser( pRequest );
 
             pRequest.getSession().setAttribute( WConstants.USER_KEY, logonBeanSecurity );
             success = true;
+
+            // Set the Squale's administrator mailing list
+            configAdminMailingList( pRequest.getSession() );
         }
         catch ( Exception e )
         {
@@ -148,6 +162,23 @@ public class LoginAction
             Boolean.valueOf( isAdmin ) } );
 
         return logonBeanSecurity;
+    }
+
+    /**
+     * This method set in session a variable which contains Squale's administrator mailing list. The information set in
+     * this variable come from the database
+     * 
+     * @param session The http session
+     * @throws JrafEnterpriseException Error happen during the search in the database
+     */
+    private void configAdminMailingList( HttpSession session )
+        throws JrafEnterpriseException
+    {
+        IApplicationComponent ac = AccessDelegateHelper.getInstance( "Mail" );
+        String mailingList = ac.execute( "getAdminMailingList" ).toString();
+        UserSqualeSessionContext sessionContext = UserSqualeSessionContext.getContext( session );
+        sessionContext.setSqualeAdminsMailingList( mailingList );
+        UserSqualeSessionContext.setContext( session, sessionContext );
     }
 
 }
