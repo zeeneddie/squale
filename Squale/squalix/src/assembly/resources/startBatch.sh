@@ -1,35 +1,43 @@
 #!/bin/sh
 ulimit -n 1024
 
+# Definition of the serveur id
+# The value of this variable should be the id given to this server in the table server of the database.
+
 case "`hostname`" in 
 	dev8ts)
-		type=2
+		hostId=2
 		;;
 	qvgdev03)
-		type=4
+		hostId=4
 		;;
 	tlsdev02)
-		type=3
+		hostId=3
 		;;
 	qvidssx1)
-		type=1
+		hostId=1
 		;;
 	*)
-		type=1
+		hostId=1
 		;;
 esac
 
-JAVA_HOME=${START-BATCH-JAVA-HOME}
-export JAVA_HOME
+# Definition of JAVA_HOME
+#JAVA_HOME=${START-BATCH-JAVA-HOME}
+#export JAVA_HOME
 
 LANG=fr
 export LANG
+
+# Definition of the debug launch
 if [ "$1" = "-debug" ]; then
  DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044"
  echo "Lancement un mode debug sur le port 1044"
 fi
+
 SQUALIX_HOME=`dirname $0`
 cd ${SQUALIX_HOME}
-# On enleve le -Xms512M pour éviter les "java.io.IOException: Not enough space" lors des fork sur dev8ts
-# a priori du a un /tmp plein...
-${JAVA_HOME}/bin/java -Dsquale.home=$SQUALE_HOME -DentityExpansionLimit=500000 -Djava.awt.headless=true $DEBUG -Xmx512M -Xss7M -jar  ${SQUALIX_HOME}/${project.build.finalName}.jar ${SQUALIX_HOME} -s $type
+# The -Xms512M has been remove for prevent the "java.io.IOException: Not enough space" during the fork on dev8ts
+# which is probably due to an empty /tmp ...
+# The java command line
+${JAVA_HOME}/bin/java -Dsquale.home=$SQUALE_HOME -DentityExpansionLimit=500000 -Djava.awt.headless=true $DEBUG -Xmx512M -Xss7M -jar  ${SQUALIX_HOME}/${project.build.finalName}.jar ${SQUALIX_HOME} -s $hostId
