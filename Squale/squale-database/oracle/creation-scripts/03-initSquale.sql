@@ -165,15 +165,11 @@ Insert into UserBO
 Insert into UserBO
    (USERID, MATRICULE, PASSWORD,PROFILEID )
 Values
-   (2, 'squaleusera','aa',4);
+   (2, 'user1','user1',4);
 
 Insert into UserBO
    (USERID, MATRICULE, PASSWORD,PROFILEID)
  Values
-   (3, 'squaleuserb','bb',4);
-   
-Insert into UserBO
-   (USERID, MATRICULE, PASSWORD,PROFILEID)
- Values
-   (4, 'squaleuserc','cc',4);
+   (3, 'user2','user2',4);
+
 commit;
