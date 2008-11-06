@@ -170,12 +170,12 @@
 	</profiles>
 	<admin-params>
 		<mail>
-			<smtp-server></smtp-server>
-			<sender-address></sender-address>
 			<admin-mailing-list></admin-mailing-list><!-- mandatory -->
+			<!--<smtp-server></smtp-server>-->
+			<!--<sender-address></sender-address>-->
 			<!--<smtp-authent-needed></smtp-authent-needed>--><!-- true or false. False by default -->
-			<!--<smtp-username></smtp-username>
-			<smtp-password></smtp-password>-->
+			<!--<smtp-username></smtp-username>-->
+			<!--<smtp-password></smtp-password>-->
 		</mail>
 	</admin-params>
 </configuration>
