@@ -95,6 +95,19 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>
+							src/assembly/squale-distrib.xml
+						</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
@@ -370,18 +383,6 @@
 				<artifactId>poi-scratchpad</artifactId>
 				<version>3.0.2-FINAL</version>
 			</dependency>
-			<!-- TODO : to be used when adding Maven support
-			<dependency>
-				<groupId>org.apache.maven.shared.</groupId>
-				<artifactId>maven-invoker</artifactId>
-				<version>2.0.7</version>	
-			</dependency>
-			<dependency>
-				<groupId>org.codehaus.plexus</groupId>
-				<artifactId>plexus-utils</artifactId>
-				<version>1.5.1</version>
-			</dependency>
-			-->
 			<!-- PROVIDED DEPENDENCIES -->
 			<dependency>
 				<groupId>javax.servlet</groupId>
@@ -398,6 +399,25 @@
 		</dependencies>
 	</dependencyManagement>
 	<profiles>
+		<profile>
+			<!-- Configuration for distrib generation -->
+			<id>distrib</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<configuration>
+							<descriptors>
+								<descriptor>
+									src/assembly/squalix-batch-package.xml
+								</descriptor>
+							</descriptors>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 		<profile>
 			<!-- Configuration for test environment -->
 			<id>env-test</id>

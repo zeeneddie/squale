@@ -56,18 +56,15 @@
 							<goal>attached</goal>
 						</goals>
 						<phase>package</phase>
+						<configuration>
+							<descriptors>
+								<descriptor>
+									src/assembly/squalix-batch-package.xml
+								</descriptor>
+							</descriptors>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<descriptors>
-						<descriptor>
-							src/assembly/squalix-batch-package.xml
-						</descriptor>
-						<descriptor>
-							src/assembly/server-package.xml
-						</descriptor>
-					</descriptors>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

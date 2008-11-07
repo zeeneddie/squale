@@ -1,0 +1,2 @@
+This is the folder where Squale Web will store its log file, as long as 
+SQUALE_HOME has been defined to be the folder that contains "SqualeWeb/logs". 

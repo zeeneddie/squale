@@ -1,0 +1,2 @@
+This is the folder where Squalix will store its log file, as long as 
+SQUALE_HOME has been defined to be the folder that contains "Squalix/logs". 

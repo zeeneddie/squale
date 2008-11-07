@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+	<id>distrib</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<!-- ********* DATABASE FILES ********* -->
+		<fileSet>
+			<outputDirectory>/01-database-files
+			</outputDirectory>
+			<directory>../squale-database</directory>
+		</fileSet>
+		<!-- ********* WEBAPP FILES ********* -->
+		<fileSet>
+			<outputDirectory>/02-squaleweb-files
+			</outputDirectory>
+			<directory>../squale-web/target</directory>
+			<includes>
+				<include>squale-web-${pom.version}.war
+				</include>
+			</includes>
+		</fileSet>
+		<!-- ********* SQUALIX FILES ********* -->
+		<fileSet>
+			<outputDirectory>/03-squalix-files</outputDirectory>
+			<directory>src/assembly/resources</directory>
+		</fileSet>
+		<fileSet>
+			<outputDirectory>/03-squalix-files/squale-home/Squalix/bin
+			</outputDirectory>
+			<directory>../squalix/server-files</directory>
+		</fileSet>
+		<fileSet>
+			<outputDirectory>/03-squalix-files/squale-home/Squalix/bin
+			</outputDirectory>
+			<directory>../squalix/target</directory>
+			<includes>
+				<include>squalix-${pom.version}-batch-package.zip
+				</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</assembly>
