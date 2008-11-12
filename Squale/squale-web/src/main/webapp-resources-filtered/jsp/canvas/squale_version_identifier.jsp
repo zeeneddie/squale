@@ -1,1 +1,1 @@
-<ul><li><a id="squale-identifier" href="http://www.squale.org"  title="Squale version ${pom.version}" >Squale ${pom.version}</a></li></ul>
+<ul><li><a id="squale-identifier" href="${LEFT-MENU-SQUALE-LINK-URL}"  title="${LEFT-MENU-SQUALE-LINK-TOOLTIP}" >Squale ${pom.version}</a></li></ul>
