@@ -6,6 +6,6 @@
     <id unsaved-value="-1" name="serveurId" type="long" column="ServeurId" length="19">
       <generator class="assigned"/>
     </id>
-    <property name="name" length="256" column="Name" update="true" unique="true" not-null="true" type="string" insert="true"/>
+    <property name="name" column="Name" update="true" unique="true" not-null="true" type="string" insert="true"/>
   </class>
 </hibernate-mapping>

@@ -8,7 +8,7 @@
         <param name="sequence">news_sequence</param>
       </generator>
     </id>
-    <property name="key" length="4000" column="Key" update="true" not-null="true" type="string" insert="true"/>
+    <property name="key" length="4000" column="NewsKey" update="true" not-null="true" type="string" insert="true"/>
     <property name="beginningDate" column="Beginning_Date" update="true" unique="false" not-null="true" type="timestamp" insert="true"/>
     <property name="endDate" column="End_Date" update="true" unique="false" not-null="true" type="timestamp" insert="true"/>
   </class>

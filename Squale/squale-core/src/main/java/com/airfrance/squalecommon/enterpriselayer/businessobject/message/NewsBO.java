@@ -26,7 +26,7 @@ public class NewsBO
 
     /**
      * @return la clé
-     * @hibernate.property name="key" column="Key" type="string" not-null="true" length="4000" update="true"
+     * @hibernate.property name="key" column="NewsKey" type="string" not-null="true" length="4000" update="true"
      *                     insert="true"
      */
     public String getKey()

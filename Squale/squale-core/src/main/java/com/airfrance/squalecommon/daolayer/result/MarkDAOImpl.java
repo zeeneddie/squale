@@ -17,6 +17,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Abstr
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MarkBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
+import com.airfrance.squalecommon.util.database.DatabaseTypeFactory;
 
 /**
  * @author M400843
@@ -515,9 +516,12 @@ public class MarkDAOImpl
                 query += getPracticesInClause( practices );
             }
         }
-        query += " and rownum < " + pLimit;
-        // On ordonne par type et nom de composant
-        query += " order by  m1.component.class,  m1.component.name asc";
+        
+        // On ordonne par type et nom de composant; on limite le nombre de résultat
+        // On récupére la bonne string en fonction de la base de donnée utilisée
+        query += DatabaseTypeFactory.getInstance().resNumberLimit(pLimit);
+        
+        
         LOG.debug( query );
         return find( pSession, query );
     }

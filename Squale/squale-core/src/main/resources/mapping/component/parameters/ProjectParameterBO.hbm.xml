@@ -19,7 +19,7 @@
     <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO" discriminator-value="Map">
       <map cascade="all" lazy="false" table="ProjectParameters" sort="unsorted" name="parameters">
         <key column="MapId"/>
-        <index type="string" column="Key"/>
+        <index type="string" column="IndexKey"/>
         <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"/>
       </map>
     </subclass>

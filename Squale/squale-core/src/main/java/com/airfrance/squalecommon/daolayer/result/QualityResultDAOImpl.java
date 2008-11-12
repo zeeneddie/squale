@@ -310,7 +310,7 @@ public class QualityResultDAOImpl
         // On tri pour récupérer les résultats selon le dernier audit réussi ou partiel
         // si il n'y a aucun audit réussi
         whereClause += " order by " + getAlias() + ".project.id, ";
-        whereClause += getAlias() + ".audit.status asc, nvl(";
+        whereClause += getAlias() + ".audit.status asc, coalesce(";
         whereClause += getAlias() + ".audit.historicalDate, ";
         whereClause += getAlias() + ".audit.date) desc";
         LOG.debug( "countFactorsByAcceptanceLevelAndSite:" + whereClause );

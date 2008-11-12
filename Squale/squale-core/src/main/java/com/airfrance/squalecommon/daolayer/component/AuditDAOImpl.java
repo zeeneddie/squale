@@ -220,7 +220,7 @@ public class AuditDAOImpl
         whereClause += " OR ";
         whereClause += getAlias() + ".historicalDate > " + DAOUtils.makeQueryDate( pDate ) + ")";
 
-        whereClause += " order by nvl(" + getAlias() + ".historicalDate," + getAlias() + ".date) desc";
+        whereClause += " order by coalesce(" + getAlias() + ".historicalDate," + getAlias() + ".date) desc";
 
         LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return (List) findWhere( pSession, whereClause );
@@ -326,7 +326,7 @@ public class AuditDAOImpl
             whereClause += " AND " + getAlias() + ".status = " + pStatus;
         }
         // tri par date (date historique prioritaire)
-        whereClause += " order by nvl(" + getAlias() + ".historicalDate, " + getAlias() + ".date) desc";
+        whereClause += " order by coalesce(" + getAlias() + ".historicalDate, " + getAlias() + ".date) desc";
         LOG.info( "whereClause = " + whereClause );
         int start = 0;
         int nbLines = 0;
@@ -386,7 +386,7 @@ public class AuditDAOImpl
         whereClause += " AND " + getAlias() + ".status <> " + AuditBO.NOT_ATTEMPTED;
         whereClause += " AND " + getAlias() + ".status <> " + AuditBO.RUNNING;
         // tri par date (date historique prioritaire)
-        whereClause += " order by nvl(" + getAlias() + ".historicalDate, " + getAlias() + ".date) desc";
+        whereClause += " order by coalesce(" + getAlias() + ".historicalDate, " + getAlias() + ".date) desc";
         LOG.info( "whereClause = " + whereClause );
         int start = 0;
         int nbLines = 0;
@@ -461,7 +461,7 @@ public class AuditDAOImpl
         // tri par date (date historique prioritaire)
         // on utilise la fonction nvl d'oracle pour prendre en compte la date d'exécutio
         // quand la date historique est nulle
-        whereClause += " order by nvl(" + getAlias() + ".historicalDate, " + getAlias() + ".date) desc";
+        whereClause += " order by coalesce(" + getAlias() + ".historicalDate, " + getAlias() + ".date) desc";
 
         LOG.info( "whereClause = " + whereClause );
         List r = (List) findWhereScrollable( pSession, whereClause, 1, 0, false );

@@ -128,7 +128,7 @@ public class MetricDAOImpl
         whereClause += " AND (" + getAlias() + ".measure.audit.status=" + AuditBO.TERMINATED;
         whereClause += " or " + getAlias() + ".measure.audit.status=" + AuditBO.PARTIAL + ")";
         whereClause += " order by " + getAlias() + ".measure.component.id, ";
-        whereClause += getAlias() + ".measure.audit.status asc, nvl(";
+        whereClause += getAlias() + ".measure.audit.status asc, coalesce(";
         whereClause += getAlias() + ".measure.audit.historicalDate, ";
         whereClause += getAlias() + ".measure.audit.date) desc";
         List results = findWhere( pSession, whereClause );

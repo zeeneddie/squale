@@ -155,7 +155,7 @@ public class NewsDAOImpl
     public Collection findWhereNewsKeyIs( ISession pSession, String pKey )
         throws JrafDaoException
     {
-        String whereClause = "where key like '" + pKey + "'";
+        String whereClause = "where "+getAlias()+".key like '" + pKey + "'";
         return findWhere( pSession, whereClause );
     }
 }

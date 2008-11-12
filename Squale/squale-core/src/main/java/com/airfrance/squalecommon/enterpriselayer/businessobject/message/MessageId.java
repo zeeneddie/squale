@@ -16,7 +16,7 @@ public class MessageId
 
     /**
      * @return clef
-     * @hibernate.key-property column="key" type="java.lang.String"
+     * @hibernate.key-property column="MessageKey" type="java.lang.String"
      */
     public String getKey()
     {
