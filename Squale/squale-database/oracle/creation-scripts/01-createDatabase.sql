@@ -329,11 +329,11 @@
     );
 
     create table Message (
-        key varchar2(255) not null,
+        MessageKey varchar2(255) not null,
         lang varchar2(6) not null,
         Title varchar2(4000),
         Text varchar2(4000) not null,
-        primary key (key, lang)
+        primary key (MessageKey, lang)
     );
 
     create table Metric (
@@ -358,7 +358,7 @@
 
     create table News (
         Id number(19,0) not null,
-        Key varchar2(4000) not null,
+        NewsKey varchar2(4000) not null,
         Beginning_Date date not null,
         End_Date date not null,
         primary key (Id)
@@ -404,7 +404,7 @@
         ListId number(19,0),
         Rank number(10,0),
         MapId number(19,0),
-        Key varchar2(255),
+        IndexKey varchar2(255),
         primary key (ParameterId)
     );
 
@@ -473,7 +473,7 @@
 
     create table Serveur (
         ServeurId number(19,0) not null,
-        Name varchar2(256) not null unique,
+        Name varchar2(255) not null unique,
         primary key (ServeurId)
     );
 

@@ -1,0 +1,13 @@
+alter table AuditBO alter SQUALE_VERSION set default 4.0 ;
+alter table Component alter STARTLINE set default 0 ;
+alter table Component alter EXTERNAL_DEV set default 1 ;
+alter table Component alter IN_PRODUCTION set default 1 ;
+alter table CriteriumPractice_Rule alter WEIGHT set default 1 ;
+alter table FactorCriterium_Rule alter WEIGHT set default 1 ;
+alter table QualityRule alter WEIGHTFUNCTION set default null ;
+alter table RuleCheckingTransgressionItem alter LINE set default 0 ;
+alter table Task alter STANDARD set default 0 ;
+alter table Task alter MANDATORY set default 0 ;
+alter table Tasks_User alter EXPORT_IDE set default 1 ;
+alter table UserBO alter UNSUBSCRIBED set default 0 ;
+commit;
