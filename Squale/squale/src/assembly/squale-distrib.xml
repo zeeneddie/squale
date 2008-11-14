@@ -41,5 +41,10 @@
 				</include>
 			</includes>
 		</fileSet>
+		<!-- ********* CONFIG FILES ********* -->
+		<fileSet>
+			<outputDirectory>/04-config-files</outputDirectory>
+			<directory>../squale-config</directory>
+		</fileSet>		
 	</fileSets>
 </assembly>
