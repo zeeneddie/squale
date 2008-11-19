@@ -327,13 +327,15 @@ public class QualityGridFacade
             ArrayList gridsId = new ArrayList();
             AuditGridDAOImpl auditGridDAO = AuditGridDAOImpl.getInstance();
             ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
+            QualityGridDAOImpl qualityGridDAO = QualityGridDAOImpl.getInstance();
+            
             while ( gridsIt.hasNext() )
             {
                 QualityGridDTO gridDTO = (QualityGridDTO) gridsIt.next();
                 Long gridId = new Long( gridDTO.getId() );
                 // On vérifie que la grille n'est pas utilisée
                 // au niveau d''un projet ou au niveau d'un audit réalisé
-                if ( projectDAO.isGridUsed( session, gridId ) || auditGridDAO.isGridUsed( session, gridId ) )
+                if ( projectDAO.isGridUsed( session, gridId ) || auditGridDAO.isGridUsed( session, gridId ) || qualityGridDAO.hasProfile( session, gridId ))
                 {
                     result.add( gridDTO );
                 }
@@ -345,7 +347,6 @@ public class QualityGridFacade
             // Destruction des grilles qui ne sont plus référencées
             if ( gridsId.size() > 0 )
             {
-                QualityGridDAOImpl qualityGridDAO = QualityGridDAOImpl.getInstance();
                 qualityGridDAO.removeGrids( session, gridsId );
             }
         }

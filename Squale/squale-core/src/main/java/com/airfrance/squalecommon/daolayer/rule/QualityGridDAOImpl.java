@@ -238,4 +238,26 @@ public class QualityGridDAOImpl
         return result;
     }
 
+    /**
+     * This method indicate if the grid associate to the id give in argument is linked to a profile
+     * 
+     * @param session hibernate session
+     * @param gridId id of the grid
+     * @return true if the grid associate to the id is linked to a profile
+     * @throws JrafDaoException Exception happened during the search in the database
+     */
+    public boolean hasProfile( ISession session, long gridId )
+        throws JrafDaoException
+    {
+        StringBuffer whereClause = new StringBuffer( "where " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".id= " );
+        whereClause.append( gridId );
+        whereClause.append( " AND "  );
+        whereClause.append( getAlias() );
+        whereClause.append( ".profiles.size > 0" );
+        Collection col = findWhere( session, whereClause.toString() );
+        return col.size() > 0;
+    }
+
 }
