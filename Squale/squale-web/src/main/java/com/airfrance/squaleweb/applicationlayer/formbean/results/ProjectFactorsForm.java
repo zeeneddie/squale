@@ -37,6 +37,12 @@ public class ProjectFactorsForm
     private Collection mFactors = new ArrayList();
 
     /**
+     * Attribute not in use Attribute needed for prevent an error in the console which happen with the tag af:col
+     * Example of this case in homepage/resultbyGrid.jsp
+     */
+    private String value;
+
+    /**
      * Constructeur.
      */
     public ProjectFactorsForm()
@@ -133,5 +139,26 @@ public class ProjectFactorsForm
     public void setFactors( Collection pList )
     {
         mFactors = pList;
+    }
+
+    /**
+     * Getter method for the attribute value
+     * 
+     * @return value
+     */
+    public String getValue()
+    {
+        return value;
+    }
+
+    /**
+     * Setter method for the attribute value
+     * 
+     * @param mValue The new value
+     */
+    public void setValue( String mValue )
+    {
+
+        value = mValue;
     }
 }
