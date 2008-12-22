@@ -170,7 +170,7 @@
 	</profiles>
 	<admin-params>
 		<mail>
-			<admin-mailing-list></admin-mailing-list><!-- mandatory -->
+			<admin-mailing-list>--</admin-mailing-list><!-- mandatory -->
 			<!--<smtp-server></smtp-server>-->
 			<!--<sender-address></sender-address>-->
 			<!--<smtp-authent-needed></smtp-authent-needed>--><!-- true or false. False by default -->
