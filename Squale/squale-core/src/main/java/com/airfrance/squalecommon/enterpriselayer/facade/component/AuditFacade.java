@@ -105,9 +105,9 @@ public class AuditFacade
         {
             if ( pSession == null )
             {
-                //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
             }
             AuditDAOImpl auditDAO = AuditDAOImpl.getInstance();
             // Chargement de l'objet AuditBO + suppression
@@ -357,22 +357,51 @@ public class AuditFacade
     }
 
     /**
-     * @param pApplications les applications
-     * @param pDate la date
-     * @param pWithFailedAudits indique si les audits en échec doivent également être collectés
-     * @return les audits pour les applications de pApplications dont l'exécution s'est effectué après pDate (si ce
-     *         paramètre n'est pas nul)
-     * @throws JrafEnterpriseException si erreur
+     * The list of audits for the applications of pApplications which have been done after pDate (if this parameter is
+     * not null) and whose status aren't in pExcludedStatus.
+     * 
+     * @param pApplications The applications
+     * @param pDate The date
+     * @param pExcludedStatus The list of status which should be excluded
+     * @return The list of audits
+     * @throws JrafEnterpriseException If an error occur
      */
-    public static Collection getAllAuditsAfterDate( Collection pApplications, Date pDate, boolean pWithFailedAudits )
+    public static Collection getAllAuditsAfterDate( Collection pApplications, Date pDate, Integer[] pExcludedStatus )
         throws JrafEnterpriseException
     {
-        Collection results = new ArrayList();
-        for ( Iterator it = pApplications.iterator(); it.hasNext(); )
+
+        // Initialization
+        List auditBOs = null;
+        List auditDTOs = new ArrayList();
+        List appliIds = new ArrayList();
+        ISession session = null;
+
+        // Creation of the list of applications id's
+        Iterator it = pApplications.iterator();
+        while ( it.hasNext() )
         {
-            results.addAll( getAllAuditsAfterDate( (ComponentDTO) it.next(), pDate, pWithFailedAudits ) );
+            ComponentDTO currentComponent = (ComponentDTO) it.next();
+            appliIds.add( new Long( currentComponent.getID() ) );
         }
-        return results;
+
+        try
+        {
+            // The hibernate session
+            session = PERSISTENTPROVIDER.getSession();
+            AuditDAOImpl auditDAO = AuditDAOImpl.getInstance();
+            auditBOs = auditDAO.findAfterDateWhereComponents( session, appliIds, pDate, pExcludedStatus, null );
+            auditDTOs = bo2DtoWithApplication( session, auditBOs );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, AuditFacade.class.getName() + ".getAllAuditsAfterDate" );
+        }
+
+        finally
+        {
+            FacadeHelper.closeSession( session, AuditFacade.class.getName() + ".getAllAuditsAfterDate" );
+        }
+        return auditDTOs;
     }
 
     /**
@@ -523,16 +552,16 @@ public class AuditFacade
         AuditBO auditBO = null; // objet metier audit a ajouter
         ApplicationBO applicationBO = null; // projet relatif a l'audit
         Long applicationID = new Long( pAudit.getApplicationId() );
-        // identifiant du projet relatif a un audit
 
+        // identifiant du projet relatif a un audit
         try
         {
             // creation d'une session Hibernate
             if ( pSession == null )
             {
-                //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
                 pSession = PERSISTENTPROVIDER.getSession();
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
             }
 
             // Initialisation des DAO

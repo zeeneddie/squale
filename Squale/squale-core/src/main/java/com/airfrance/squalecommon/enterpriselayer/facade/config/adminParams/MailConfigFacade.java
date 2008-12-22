@@ -19,7 +19,7 @@ public final class MailConfigFacade
     implements IFacade
 {
     /**
-     * Persistence provider
+     * Persistent provider
      */
     private static final IPersistenceProvider PERSISTENTPROVIDER = PersistenceHelper.getPersistenceProvider();
 

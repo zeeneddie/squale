@@ -333,17 +333,19 @@ public class ComponentApplicationComponentAccess
     }
 
     /**
-     * @param pApplications les applications
-     * @param pDate la date
-     * @param pWithFailedAudits indique si les audits en échec doivent également être collectés
-     * @return les audits pour les applications de pApplications dont l'exécution s'est effectué après pDate (si ce
-     *         paramètre n'est pas nul)
-     * @throws JrafEnterpriseException si erreur
+     * This method return the list of AuditDTO done (or to do) after the date (pDate) given in argument and which status
+     * is not in pExcludedStatus list
+     * 
+     * @param pApplications The applications for which we search audits
+     * @param pDate The limit date
+     * @param pExcludedStatus The list of audit status excluded from the search
+     * @return The list of auditDTO corresponding to the criteria given in arguments
+     * @throws JrafEnterpriseException Error happen during the search
      */
-    public Collection getAllAuditsAfterDate( Collection pApplications, Date pDate, Boolean pWithFailedAudits )
+    public Collection getAllAuditsAfterDate( Collection pApplications, Date pDate, Integer[] pExcludedStatus )
         throws JrafEnterpriseException
     {
-        return AuditFacade.getAllAuditsAfterDate( pApplications, pDate, pWithFailedAudits.booleanValue() );
+        return AuditFacade.getAllAuditsAfterDate( pApplications, pDate, pExcludedStatus );
     }
 
     /**
