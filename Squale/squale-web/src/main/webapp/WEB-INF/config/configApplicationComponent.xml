@@ -358,4 +358,12 @@
 		
 	</applicationComponent>
 	
+	<applicationComponent name="Homepage" description="Homepage configuration" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.homepage.HomepageApplicationComponentAccess">
+		
+		<component name="getHomepageConfig"></component>
+		
+		<component name="saveHomepageConfig"></component>
+		
+	</applicationComponent>
+	
 </listApplicationComponent>

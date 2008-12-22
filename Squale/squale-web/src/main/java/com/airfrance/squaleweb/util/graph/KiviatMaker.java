@@ -54,6 +54,12 @@ public class KiviatMaker
     private DefaultCategoryDataset mDataset = new DefaultCategoryDataset();
 
     /**
+     * The default gap for the plot. it's the gap between the border of the plot and what is draw in it. It's near same
+     * than padding
+     */
+    public static final double DEFAULT_GAP = 0.3;
+
+    /**
      * Constructeur par défaur
      */
     public KiviatMaker()
@@ -71,7 +77,9 @@ public class KiviatMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() {@inheritDoc}
+     * {@inheritDoc}
+     * 
+     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() 
      */
     protected int getDefaultHeight()
     {
@@ -79,7 +87,9 @@ public class KiviatMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() {@inheritDoc}
+     * {@inheritDoc}
+     * 
+     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() 
      */
     protected int getDefaultWidth()
     {
@@ -129,25 +139,47 @@ public class KiviatMaker
     }
 
     /**
-     * @return le diagramme JFreeChart
+     * Create the JreeChart object. This method assume that we want display the legend
+     * 
+     * @return The JreeChart object
      */
     public JFreeChart getChart()
     {
+        return getChart( true, true );
+    }
+
+    /**
+     * Create the JreeChart object
+     * 
+     * @param showLegend indicate if it should display the legend or not
+     * @param showBackground indicate if we want showBackground
+     * @return The JreeChart object
+     */
+    public JFreeChart getChart( boolean showLegend, boolean showBackground )
+    {
         JFreeChart retChart = super.getChart();
-        // si le graph n'est pas encore construit, il faut le construire
+
+        // Creation of the graph if it not already exist
         if ( null == retChart )
         {
 
+            // Creation of the plot
             SpiderWebPlot plot = new SpiderWebPlot( mDataset );
 
+            // Creation of the picture. The plot is inside the picture
             retChart = new JFreeChart( mTitle, TextTitle.DEFAULT_FONT, plot, false );
-            LegendTitle legendtitle = new LegendTitle( plot );
-            legendtitle.setPosition( RectangleEdge.BOTTOM );
-            retChart.addSubtitle( legendtitle );
 
-            plot.setBaseSeriesOutlineStroke( new BasicStroke( 2.0f ) );
+            // Display of the legend
+            if ( showLegend )
+            {
+                LegendTitle legendtitle = new LegendTitle( plot );
+                legendtitle.setPosition( RectangleEdge.BOTTOM );
+                retChart.addSubtitle( legendtitle );
+            }
 
-            // Ajoute les couleurs des 3 notes 1,2,3 (manque l'echelle !)
+            // Definition of the style of the three first draw in the spiderWEbPlot.
+            // This three first draw represent the scale for the mark 1.0, 2.0 and 3.0 in the plot
+            // First we define the style
             final float miterLimit = 10.0f;
             final float[] dashPattern = { 5.0f, 3.0f };
             BasicStroke dash = new BasicStroke( 1.0f, BasicStroke.CAP_SQUARE, // End cap
@@ -155,7 +187,7 @@ public class KiviatMaker
                                                 miterLimit, // Miter limit
                                                 dashPattern, // Dash pattern
                                                 0.0f );
-
+            // We associate this style to the draw
             plot.setSeriesPaint( 0, new Color( WebMessages.getInt( "kiviat.color.1" ) ) );
             plot.setSeriesOutlineStroke( 0, dash );
             plot.setSeriesPaint( 1, new Color( WebMessages.getInt( "kiviat.color.2" ) ) );
@@ -163,9 +195,26 @@ public class KiviatMaker
             plot.setSeriesPaint( 2, new Color( WebMessages.getInt( "kiviat.color.3" ) ) );
             plot.setSeriesOutlineStroke( 2, dash );
 
+            // Define the gap what is draw and the border of the plot
+            plot.setInteriorGap( DEFAULT_GAP );
+
+            // Define the style of the line stroke
+            plot.setBaseSeriesOutlineStroke( new BasicStroke( 2.0f ) );
+
+            // The max value put in the plot (for the scale)
             plot.setMaxValue( SCALE_MAX_VALUE );
+
+            // Indicate if we want fill the inner of the draw
             plot.setWebFilled( FILL_RADAR );
 
+            if ( !showBackground )
+            {
+                // Set the background of the picture to white
+                retChart.setBackgroundPaint( Color.WHITE );
+
+                // Set the border of the plot to white
+                plot.setOutlinePaint( Color.WHITE );
+            }
             super.setChart( retChart );
         }
         return retChart;

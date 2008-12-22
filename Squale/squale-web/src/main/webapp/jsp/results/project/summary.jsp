@@ -1,8 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
-	prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
@@ -41,18 +40,12 @@ if(selectedTab == null) {
 
 <script type="text/javascript" src="jslib/information.js"></script>
 
-<bean:define id="applicationId" name="projectSummaryForm"
-	property="applicationId" type="String" />
-<bean:define id="projectId" name="projectSummaryForm"
-	property="projectId" type="String" />
-<bean:define id="currentAuditId" name="projectSummaryForm"
-	property="currentAuditId" type="String" />
-<bean:define id="previousAuditId" name="projectSummaryForm"
-	property="previousAuditId" type="String" />
-<bean:define id="auditSqualeVersion" name="projectSummaryForm"
-	property="auditSqualeVersion" type="String" />
-<bean:define id="comparable" name="projectSummaryForm"
-	property="comparableAudits" type="Boolean" />
+<bean:define id="applicationId" name="projectSummaryForm" property="applicationId" type="String" />
+<bean:define id="projectId" name="projectSummaryForm" property="projectId" type="String" />
+<bean:define id="currentAuditId" name="projectSummaryForm" property="currentAuditId" type="String" />
+<bean:define id="previousAuditId" name="projectSummaryForm"	property="previousAuditId" type="String" />
+<bean:define id="auditSqualeVersion" name="projectSummaryForm" property="auditSqualeVersion" type="String" />
+<bean:define id="comparable" name="projectSummaryForm" property="comparableAudits" type="Boolean" />
 
 <af:page titleKey="project.results.title">
 	<af:head>
@@ -78,17 +71,15 @@ if(selectedTab == null) {
 			</jsp:include>
 
 			<br />
-			<squale:resultsHeader name="projectSummaryForm"
-				displayComparable="true" />
+			<squale:resultsHeader name="projectSummaryForm" displayComparable="true" />
 			<br />
-			<div style="color: #f00"><html:errors property="exportIDE" /><br />
+			<div style="color: #f00"><html:errors property="exportIDE" />
+			<br />
 			<br />
 			</div>
-			<logic:equal name="projectSummaryForm" property="haveErrors"
-				scope="session" value="true">
+			<logic:equal name="projectSummaryForm" property="haveErrors" scope="session" value="true">
 				<img src="images/pictos/warning.png" alt="warning_image" />
-				<a
-					href='<%="project_errors.do?action=errors&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'>
+				<a href='<%="project_errors.do?action=errors&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'>
 				<B><U><%=errorLink%></U></B> </a>
 				<br />
 				<br />

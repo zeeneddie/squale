@@ -27,7 +27,7 @@
 		
 		<property name="jdbc.use_streams_for_binary">true</property>
 
-		<property name="dialect">org.hibernate.dialect.OracleDialect</property>
+		<!-- <property name="dialect">org.hibernate.dialect.OracleDialect</property> -->
 		<!-- <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property> -->
 
 		<!-- begin mapping files -->
@@ -49,6 +49,7 @@
 		<mapping resource="mapping/config/TaskParameterBO.hbm.xml" />
 		<mapping resource="mapping/config/TaskRefBO.hbm.xml" />
 		<mapping resource="mapping/config/web/AbstractDisplayConfBO.hbm.xml" />
+		<mapping resource="mapping/config/web/HomepageComponentBO.hbm.xml"/>
 		
 		<mapping resource="mapping/message/MessageBO.hbm.xml" />
 		<mapping resource="mapping/message/NewsBO.hbm.xml" />

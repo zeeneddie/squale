@@ -120,6 +120,10 @@
         </form-bean>
         <form-bean name="ComponentResultListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentResultListForm">
         </form-bean>
+        <form-bean name="HomepageManagementForm" type="com.airfrance.squaleweb.applicationlayer.formbean.homepagemanagement.HomepageManagementForm">
+        </form-bean>
+        <form-bean name="homepageForm" type="com.airfrance.squaleweb.applicationlayer.formbean.HomepageForm">
+        </form-bean>
 	</form-beans>
 
 
@@ -195,7 +199,7 @@
 			<forward name="component" path="/jsp/results/project/component.jsp">
 			</forward>
 		</action>
-		<action path="/index" type="com.airfrance.squaleweb.applicationlayer.action.IndexAction" name="splitAuditsListForm" scope="session" validate="false">
+		<action path="/index" type="com.airfrance.squaleweb.applicationlayer.action.IndexAction" name="homepageForm" scope="session" validate="false">
 			<forward name="success" path="/jsp/homepage.jsp">
 			</forward>
 		</action>
@@ -658,6 +662,10 @@
 		</action>
 		<action path="/component_tres" type="com.airfrance.squaleweb.applicationlayer.action.results.project.TopAction" name="ComponentResultListForm" scope="session" >
 			<forward name="success" path="/jsp/results/project/componentsWithTres.jsp">
+			</forward>
+		</action>
+		<action path="/homepage_management" type="com.airfrance.squaleweb.applicationlayer.action.homepagemanagement.HomepageManagementAction" name="HomepageManagementForm" scope="session" >
+			<forward name="success" path="/jsp/admin/homepage/homepageManagement.jsp">
 			</forward>
 		</action>
 	</action-mappings>

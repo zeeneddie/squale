@@ -1,8 +1,5 @@
 package com.airfrance.squaleweb.applicationlayer.action;
 
-import java.util.Collection;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,12 +14,10 @@ import org.apache.struts.action.ActionMessages;
 
 import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
 import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.helper.PersistenceHelper;
 import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.config.AdminParamsDAOImpl;
+
 import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
+
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
 import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.UserForm;
@@ -34,6 +29,7 @@ import com.airfrance.squaleweb.servlet.UserSqualeSessionContext;
 import com.airfrance.squaleweb.transformer.LogonBeanTransformer;
 import com.airfrance.squaleweb.transformer.UserTransformer;
 import com.airfrance.squaleweb.util.ExceptionWrapper;
+
 import com.airfrance.welcom.struts.transformer.WTransformerException;
 import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 import com.airfrance.welcom.struts.util.WConstants;

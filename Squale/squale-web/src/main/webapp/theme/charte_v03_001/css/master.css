@@ -120,7 +120,7 @@ h2 {font-size:130%; font-weight:bold; margin:10px 0 0; padding:0 0 2px 0;line-he
 h3 {font-size:110%; font-weight:bold;margin:0;padding:0;line-height: 1.1em;color:#2e5880; background-color:inherit;} 
 .auteur_date {font-size:90%; font-weight:bold;text-align:right;margin: -10px 0px 0px 0px;}
 /* liens */
-a {font-weight:bold;text-decoration:none; color:#434343; border-bottom:1px solid #808080;background-color:inherit;}/* lien hypertexte*/
+a {font-weight:bold;text-decoration:none; color:#434343; border-bottom:1px solid #808080; background-color:inherit;}/* lien hypertexte*/
 a:visited{font-weight:bold; text-decoration:none; color:#808080;background-color:inherit;}/*lien hypertexte visite*/
 a.picto, a.ancre, a.picto_metiers, a.picto_parcours, a.picto_entrenous, a.picto_pratique, a.picto_environnement, a.picto_cie {border-bottom:0px ;background-repeat:no-repeat; padding-left:15px;} /*lien interne ou externe et ancre */
 a.picto, a.ancre, a.picto_metiers, a.picto_parcours, a.picto_entrenous, a.picto_pratique, a.picto_environnement, a.picto_cie,a.ancre:visited,a.ico {color:#2e5880;background-color:inherit;} /* lien interne ou externe et ancre en bleu AF */
@@ -393,3 +393,12 @@ div#conteneur div.contenuModulable div.c1, div#conteneur div.contenuModulable di
 div#conteneur div.contenuModulable div.c1 {width:230px;}
 div#conteneur div.contenuModulable div.c2 {width:479px;}
 div#conteneur div.contenuModulable div.c3 {width:729px;}
+/*-- element for the homepageManagement.jsp --*/
+table.formulaire td.check_col {width:20px; height:25px }
+table.formulaire th.check_col {width:20px; height:25px; text-align:center;}
+table.formulaire th.height_col{height:25px; }
+/*-- element for the homepage.jsp --*/
+div.homepage {border: 4px double #F3BA5D; padding:10px;  -moz-border-radius:0px 20px 20px 20px}
+div.homepage > table.formulaire {visibility:hidden}
+div.homepage div.onglet_contenu{background-color:#FFFFFF;} 
+div.ongKiviat {float:left; margin-top:5px }

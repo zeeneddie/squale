@@ -130,6 +130,8 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 			action="display_account.do?action=detail" />
 		<af:menuItem key="menu.administration.applications" color="2"
 			action="utilLink.do?action=adminApplication" />
+		<af:menuItem key="menu.administration.homepagemanagement" color="2"
+			action="homepage_management.do?action=state" />
 		<af:menuItem key="menu.administration.newapplications" color="2"
 			action="ack_newapplication.do?action=list" accessKey="admin" />
 		<af:menuItem key="menu.administration.audits" color="2">
