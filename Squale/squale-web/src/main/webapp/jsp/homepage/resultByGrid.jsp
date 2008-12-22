@@ -12,14 +12,13 @@
 
 <script type="text/javascript" src="theme/charte_v03_001/js/format_page.js"></script>
 	
-	<af:tabbedPane name="result">
-	
-		<af:form action="index.do">
-				<logic:iterate id="gridResult" name="homepageForm" property="list"
-					indexId="index">
-					<logic:notEqual name="gridResult" property="gridName" value="">
-						<bean:define name="gridResult" property="gridName" id="grid"/>
-						<af:tab name="<%="resultByGrid"+index %>" key="<%="ref."+grid %>">
+<af:tabbedPane name="result">
+	<af:form action="index.do">
+			<logic:iterate id="gridResult" name="homepageForm" property="list"
+				indexId="index">
+				<logic:notEqual name="gridResult" property="gridName" value="">
+					<bean:define name="gridResult" property="gridName" id="grid"/>
+					<af:tab name='<%="resultByGrid"+index %>' key='<%="ref."+grid %>'>
 						<af:table name="homepageForm"
 							property='<%="list[" + index + "].results"%>'
 							totalLabelPos="none" emptyKey="table.results.none"
@@ -53,11 +52,9 @@
 								</logic:iterate>
 							</af:cols>
 						</af:table>
-						
-						</af:tab>
-					</logic:notEqual>
-				</logic:iterate>
-			</af:form>	
-			
-			</af:tabbedPane>
+					</af:tab>
+				</logic:notEqual>
+			</logic:iterate>
+		</af:form>		
+	</af:tabbedPane>
 			
