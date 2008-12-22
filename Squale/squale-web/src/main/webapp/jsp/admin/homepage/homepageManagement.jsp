@@ -56,8 +56,8 @@
 				<div onclick="maskMsg()">
 					<div id="hp_mngt">
 						<logic:iterate id="jspToDisplay" indexId="indexValue" property="jspOrder" name="HomepageManagementForm" offset="1">
-							<jsp:include  page='<%=jspToDisplay.toString()%>'>
-								<jsp:param name="index" value='<%=indexValue.toString()%>'/>
+							<jsp:include  page="<%=jspToDisplay.toString()%>">
+								<jsp:param name="index" value="<%=indexValue.toString()%>"/>
 							</jsp:include>
 							<br>
 							<br>
@@ -70,7 +70,7 @@
 			</af:form>
 		</af:canvasCenter>
 	</af:body>
-	<script type="text/javascript">
-		display();
-	</script>
+	<script type="text/javascript" >
+	display();
+</script>
 </af:page>
