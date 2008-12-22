@@ -31,6 +31,8 @@
 
     drop table GridFactor_Rule cascade constraints;
 
+    drop table HomepageComponent cascade constraints;
+
     drop table Mark cascade constraints;
 
     drop table Measure cascade constraints;
@@ -98,6 +100,8 @@
     drop table adminParams cascade constraints;
 
     drop table displayConf cascade constraints;
+
+    drop sequence HomepageComponent_sequence;
 
     drop sequence Module_sequence;
 
@@ -308,6 +312,15 @@
         QualityGridId number(19,0) not null,
         FactorRuleId number(19,0) not null,
         primary key (QualityGridId, FactorRuleId)
+    );
+
+    create table HomepageComponent (
+        HomepageComponentId number(19,0) not null,
+        ComponentName varchar2(255) not null,
+        UserBO number(19,0) not null,
+        ComponentPosition number(10,0) not null,
+        ComponentValue varchar2(255),
+        primary key (HomepageComponentId)
     );
 
     create table Mark (
@@ -777,6 +790,11 @@
         foreign key (QualityGridId) 
         references QualityGrid;
 
+    alter table HomepageComponent 
+        add constraint FK8D93B88FFDF902BC 
+        foreign key (UserBO) 
+        references UserBO;
+
     alter table Mark 
         add constraint FK247AED4B98962 
         foreign key (PracticeResultId) 
@@ -988,6 +1006,8 @@
         foreign key (VolumetryId) 
         references displayConf
 		on delete cascade;
+
+    create sequence HomepageComponent_sequence;
 
     create sequence Module_sequence;
 

@@ -27,3 +27,27 @@ create table adminParams (
 
 -- Create the adminParams sequence
 create sequence adminparams_sequence;
+
+-- #####################################################
+-- For save the mail configuration in the database
+
+-- Create the HomepageComponent table
+create table HomepageComponent (
+        HomepageComponentId number(19,0) not null,
+        ComponentName varchar2(255) not null,
+        UserBO number(19,0) not null,
+        ComponentPosition number(10,0) not null,
+        ComponentValue varchar2(255),
+        primary key (HomepageComponentId)
+    );
+	
+-- Create the constrain 
+alter table HomepageComponent 
+        add constraint FK8D93B88FFDF902BC 
+        foreign key (UserBO) 
+        references UserBO;
+		
+-- Create the sequence
+create sequence HomepageComponent_sequence;
+
+

@@ -115,6 +115,10 @@
         drop 
         foreign key FKBC5A70C6D2B0987;
 
+    alter table HomepageComponent 
+        drop 
+        foreign key FK8D93B88FFDF902BC;
+
     alter table Mark 
         drop 
         foreign key FK247AED4B98962;
@@ -302,6 +306,8 @@
     drop table if exists Formula_Measures;
 
     drop table if exists GridFactor_Rule;
+
+    drop table if exists HomepageComponent;
 
     drop table if exists Mark;
 
@@ -512,6 +518,15 @@
         QualityGridId bigint not null,
         FactorRuleId bigint not null,
         primary key (QualityGridId, FactorRuleId)
+    ) type=InnoDB;
+
+    create table HomepageComponent (
+        HomepageComponentId bigint not null auto_increment,
+        ComponentName varchar(255) not null,
+        UserBO bigint not null,
+        ComponentPosition integer not null,
+        ComponentValue varchar(255),
+        primary key (HomepageComponentId)
     ) type=InnoDB;
 
     create table Mark (
@@ -1016,6 +1031,12 @@
         foreign key (PracticeResultId) 
         references QualityResult (QualityResultId)
 		on delete cascade;
+
+    alter table HomepageComponent 
+        add index FK8D93B88FFDF902BC (UserBO), 
+        add constraint FK8D93B88FFDF902BC 
+        foreign key (UserBO) 
+        references UserBO (UserId);
 
     alter table Mark 
         add index FK247AED63D3E5E8 (ComponentId), 
