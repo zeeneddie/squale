@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.squale.app</groupId>
 	<artifactId>squale</artifactId>
-	<version>4.2-SNAPSHOT</version>
+	<version>5.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Squale Project</name>
 	<description>Software QUALity Enhancement</description>
@@ -32,8 +32,8 @@
 		<!--module>../squale-ear</module-->
 	</modules>
 	<properties>
-		<squale.props.jraf.version>2.6</squale.props.jraf.version>
-		<squale.props.welcom.version>2.5.1</squale.props.welcom.version>
+		<squale.props.jraf.version>2.6.1</squale.props.jraf.version>
+		<squale.props.welcom.version>2.5.2</squale.props.welcom.version>
 	</properties>
 	<build>
 		<resources>
