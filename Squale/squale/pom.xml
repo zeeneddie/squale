@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.squale</groupId>
 		<artifactId>project-root</artifactId>
-		<version>1.0</version>
+		<version>1.1</version>
 	</parent>
 	<groupId>org.squale.app</groupId>
 	<artifactId>squale</artifactId>
@@ -34,8 +34,6 @@
 	<properties>
 		<squale.props.jraf.version>2.6</squale.props.jraf.version>
 		<squale.props.welcom.version>2.5.1</squale.props.welcom.version>
-		<!-- TODO : to remove when tests have been reworked -->
-		<!--maven.test.skip>true</maven.test.skip-->
 	</properties>
 	<build>
 		<resources>

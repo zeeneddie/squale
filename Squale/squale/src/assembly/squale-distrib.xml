@@ -5,12 +5,47 @@
 		<format>zip</format>
 	</formats>
 	<includeBaseDirectory>false</includeBaseDirectory>
+	
+	<!-- ********* LICENSE FILES & Co ********* -->
+	<files>
+		<file>
+			<source>../squale-core/target/classes/META-INF/DEPENDENCIES
+			</source>
+			<outputDirectory>/</outputDirectory>
+			<destName>DEPENDENCIES_squale-core</destName>
+		</file>
+		<file>
+			<source>../squale-web/target/classes/META-INF/DEPENDENCIES
+			</source>
+			<outputDirectory>/</outputDirectory>
+			<destName>DEPENDENCIES_squale-web</destName>
+		</file>
+		<file>
+			<source>../squalix/target/classes/META-INF/DEPENDENCIES
+			</source>
+			<outputDirectory>/</outputDirectory>
+			<destName>DEPENDENCIES_squalix</destName>
+		</file>
+	</files>
 	<fileSets>
+		<!-- ********* LICENSE FILES & Co ********* -->
+		<fileSet>
+			<outputDirectory>/</outputDirectory>
+			<directory>/target/maven-shared-archive-resources/META-INF
+			</directory>
+			<includes>
+				<include>LICENSE</include>
+				<include>NOTICE</include>
+			</includes>
+		</fileSet>
 		<!-- ********* DATABASE FILES ********* -->
 		<fileSet>
 			<outputDirectory>/01-database-files
 			</outputDirectory>
 			<directory>../squale-database</directory>
+			<excludes>
+				<exclude>.project</exclude>
+			</excludes>
 		</fileSet>
 		<!-- ********* WEBAPP FILES ********* -->
 		<fileSet>
@@ -45,6 +80,9 @@
 		<fileSet>
 			<outputDirectory>/04-config-files</outputDirectory>
 			<directory>../squale-config</directory>
-		</fileSet>		
+			<excludes>
+				<exclude>.project</exclude>
+			</excludes>
+		</fileSet>
 	</fileSets>
 </assembly>
