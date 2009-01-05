@@ -1,10 +1,20 @@
-/*
- * Copyright 2003 Jayson Falkner (jayson@jspinsider.com)
- * This code is from "Servlets and JavaServer pages; the J2EE Web Tier",
- * http://www.jspbook.com. You may freely use the code both commercially
- * and non-commercially. If you like the code, please pick up a copy of
- * the book and help support the authors, development of more free code,
- * and the JSP/Servlet/J2EE community.
+/**
+ * Copyright (C) 2008-2010, Squale Project - http://www.squale.org
+ *
+ * This file is part of Squale.
+ *
+ * Squale is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or any later version.
+ *
+ * Squale is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.airfrance.welcom.struts.filter;
 
