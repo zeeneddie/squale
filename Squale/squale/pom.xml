@@ -453,7 +453,7 @@
 					oracle.jdbc.driver.OracleDriver
 				</squale.db.connection.driver_class>
 				<squale.db.dialect>
-					org.hibernate.dialect.OracleDialect
+					org.hibernate.dialect.Oracle9Dialect
 				</squale.db.dialect>
 			</properties>
 		</profile>
