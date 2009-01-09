@@ -1,6 +1,6 @@
 -- #####################################################
--- For the MySQL support
--- Need at least Oracle 9
+-- For MySQL support
+-- Needs at least Oracle 9
 
 -- table ProjectParameter
 alter table ProjectParameter rename column key to IndexKey;
@@ -12,10 +12,12 @@ alter table News rename column key to NewsKey;
 alter table Message drop primary key;
 alter table Message rename column key to MessageKey;
 alter table Message add constraint pk_messages primary key(MessageKey,lang);
+-- #####################################################
+
 
 
 -- #####################################################
--- For save the mail configuration in the database
+-- For mail configuration in the database
 
 -- Create the table adminParamsBO
 create table adminParams (
@@ -27,9 +29,12 @@ create table adminParams (
 
 -- Create the adminParams sequence
 create sequence adminparams_sequence;
+-- #####################################################
+
+
 
 -- #####################################################
--- For save the mail configuration in the database
+-- For homepage customisation
 
 -- Create the HomepageComponent table
 create table HomepageComponent (
@@ -49,5 +54,5 @@ alter table HomepageComponent
 		
 -- Create the sequence
 create sequence HomepageComponent_sequence;
-
+-- #####################################################
 
