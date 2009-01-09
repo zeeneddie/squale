@@ -116,7 +116,7 @@ public class SourceCodeAnalyserTask
         // we create the directory
         File dest = new File( mConfiguration.getRootDirectory() );
         // we associate this destination directory to the VIEW_PATH variable
-        getData().putData( TaskData.VIEW_PATH, dest.getAbsolutePath() + "/" );
+        getData().putData( TaskData.VIEW_PATH, dest.getAbsolutePath() + File.separator );
 
         // Does this source code already recovered ?
         if ( !SourcesRecoveringOptimisation.pathAlreadyRecovered( path.getValue(), mApplication ) )

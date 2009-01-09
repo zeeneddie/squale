@@ -48,8 +48,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.print.attribute.standard.OutputDeviceAssigned;
-
 import javancss.Javancss;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -317,7 +315,7 @@ public class JavancssTask
         // Add of all the file to analyze
         for ( int i = 0; i < includedFileNames.size(); i++ )
         {
-            argumentList.add( includedFileNames.get( i ) );
+            argumentList.add( new File((String)includedFileNames.get( i )).getPath());
         }
 
         return (String[]) argumentList.toArray( new String[argumentList.size()] );

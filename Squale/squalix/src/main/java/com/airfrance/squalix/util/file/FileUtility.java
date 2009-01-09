@@ -20,8 +20,6 @@ package com.airfrance.squalix.util.file;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +39,7 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Chmod;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
+import org.codehaus.plexus.util.PathTool;
 
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
@@ -555,44 +554,51 @@ public class FileUtility
 
     /**
      * Copy pSrc into pDest
-     * <li>If pSrc is a <b>directory</b>, the directory is copied into pDest (to copy the content of the directory, use
-     * use copyContentIntoDir instead)
+     * <li>If pSrc is a <b>directory</b>, the directory is copied into pDest (to copy the content of the directory,
+     * use use copyContentIntoDir instead)
      * <li>If pSrc is a <b>file</b>, the file is copied info pDest.
+     * 
      * @param pSrc source file (compressed or not) or source directory
      * @param pDest target directory
      * @throws IOException si erreur de flux
      */
-    public static void copyIntoDir( File pSrc, File pDest ) /* ex copyInto */
+    public static void copyIntoDir( File pSrc, File pDest )
+        /* ex copyInto */
         throws IOException
     {
         // On crée les répertoires
         pDest.mkdirs();
-    	// Copy is done using ant task
-    	Copy copyFile = new Copy();
-    	copyFile.setProject( new Project() );
-    	copyFile.init();
-    	if ( pSrc.isFile() ) {
-        	copyFile.setFile( pSrc );
-    	} else {
-    		// This is a directory, fileset is requested by ant task
-    		FileSet files = new FileSet();
-    		files.setDir(pSrc.getAbsoluteFile().getParentFile()); // il faut appeler .getAbsoluteFile car sinon ça peut rendre null
-    		files.setIncludes(pSrc.getAbsoluteFile().getName() + "/**"); // idem
-    		copyFile.addFileset(files);
-    	}
-    	copyFile.setTodir( pDest );
-    	copyFile.execute();
+        // Copy is done using ant task
+        Copy copyFile = new Copy();
+        copyFile.setProject( new Project() );
+        copyFile.init();
+        if ( pSrc.isFile() )
+        {
+            copyFile.setFile( pSrc );
+        }
+        else
+        {
+            // This is a directory, fileset is requested by ant task
+            FileSet files = new FileSet();
+            files.setDir( pSrc.getAbsoluteFile().getParentFile() ); // il faut appeler .getAbsoluteFile car sinon ça
+                                                                    // peut rendre null
+            files.setIncludes( pSrc.getAbsoluteFile().getName() + "/**" ); // idem
+            copyFile.addFileset( files );
+        }
+        copyFile.setTodir( pDest );
+        copyFile.execute();
     }
 
     /**
      * Copy pSrcDir content into pDest
-     * <li>If pSrcDir is a <b>directory</b>, the directory is copied into pDest (to copy the content of the directory, use
-     * use copyContentIntoDir instead)
+     * <li>If pSrcDir is a <b>directory</b>, the directory is copied into pDest (to copy the content of the directory,
+     * use use copyContentIntoDir instead)
+     * 
      * @param pSrcDir source directory
      * @param pDest target directory
      * @throws IOException si erreur de flux
      */
-    public static void copyDirContentIntoDir( File pSrcDir, File pDest ) 
+    public static void copyDirContentIntoDir( File pSrcDir, File pDest )
         throws IOException
     {
         // On crée les répertoires
@@ -608,7 +614,7 @@ public class FileUtility
             copyIntoDir( file, pDest );
         }
     }
-    
+
     /**
      * Copie le répertoire dans le répertoire source ou extrait l'archive dans le répertoire source.
      * 
@@ -640,19 +646,20 @@ public class FileUtility
             }
             ZipFileUtility.extractArchiveFile( pSrc, pDest );
         }
-        
-        if ( pDest.exists() && pDest.isDirectory() ) {
-        	// Chmod sur les scripts executable pour la target UNIX
-        	Chmod chmod = new Chmod();
-        	chmod.setProject(new Project());
-        	chmod.setDir(pDest);
-        	chmod.setIncludes(FileMessages.getString("file.pattern.executablefile"));
-        	chmod.setPerm("ugo+rx");
-        	chmod.execute();
+
+        if ( pDest.exists() && pDest.isDirectory() )
+        {
+            // Chmod sur les scripts executable pour la target UNIX
+            Chmod chmod = new Chmod();
+            chmod.setProject( new Project() );
+            chmod.setDir( pDest );
+            chmod.setIncludes( FileMessages.getString( "file.pattern.executablefile" ) );
+            chmod.setPerm( "ugo+rx" );
+            chmod.execute();
         }
     }
 
-   /**
+    /**
      * Copie le fichier pSrc dans le fichier pDest
      * 
      * @param pSrc le fichier source
@@ -662,13 +669,13 @@ public class FileUtility
     public static void copyFile( File pSrc, File pDest )
         throws IOException
     {
-    	// Copy is done using ant task
-    	Copy copyFile = new Copy();
-    	copyFile.setProject( new Project() );
-    	copyFile.init();
-    	copyFile.setFile( pSrc );
-    	copyFile.setTofile( pDest );
-    	copyFile.execute();
+        // Copy is done using ant task
+        Copy copyFile = new Copy();
+        copyFile.setProject( new Project() );
+        copyFile.init();
+        copyFile.setFile( pSrc );
+        copyFile.setTofile( pDest );
+        copyFile.execute();
     }
 
     /**
@@ -713,7 +720,6 @@ public class FileUtility
                 result.add( compare );
             }
         }
-
         return result;
     }
 
@@ -729,11 +735,12 @@ public class FileUtility
     public static List cutPath( List includedFile, String viewPathName )
     {
         List cutIncludedFile = new ArrayList();
+        String ini;
         for ( int i = 0; i < includedFile.size(); i++ )
         {
-            String ini = (String) includedFile.get( i );
-            String[] cut = ini.split( viewPathName, 2 );
-            cutIncludedFile.add( cut[1] );
+            ini = (String) includedFile.get( i );
+            String cut = PathTool.getRelativeFilePath( viewPathName, ini );
+            cutIncludedFile.add( cut );
         }
         return cutIncludedFile;
     }

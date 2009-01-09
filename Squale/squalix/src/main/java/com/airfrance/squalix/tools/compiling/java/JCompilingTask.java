@@ -467,7 +467,7 @@ public class JCompilingTask
             if ( !pIsRSA )
             {
                 StringParameterBO stringBO = (StringParameterBO) pProjectsIt.next();
-                dirName = stringBO.getValue();
+                dirName = new File(stringBO.getValue()).getPath();
                 // On récupère le manifest (dans le cas par exemple des plugins RCP)
                 MapParameterBO projectsParams =
                     (MapParameterBO) pMap.getParameters().get( ParametersConstants.WSAD_PROJECT_PARAM );
@@ -624,7 +624,7 @@ public class JCompilingTask
         /* on affecte les attributs */
         pProject.setName( ( new JWSADDotProjectParser( ( (String) mData.getData( TaskData.VIEW_PATH ) ) + pDirName ) ).retrieveName() );
         pProject.setJavaVersion( ( (StringParameterBO) pParams.getParameters().get( ParametersConstants.DIALECT ) ).getValue() );
-        String viewPath = (String) mData.getData( TaskData.VIEW_PATH ) + "/";
+        String viewPath = (String) mData.getData( TaskData.VIEW_PATH ) + File.separator;
         String destDir = viewPath.replaceAll( "//", "/" );
         pProject.setPath( ( destDir + pDirName + "/" ).replaceAll( "//", "/" ) );
 

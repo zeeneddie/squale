@@ -119,7 +119,7 @@ public class ScmTask
         // The directory is created
         File dest = new File( mConfiguration.getRootDirectory() );
         // Append "/" to the path
-        getData().putData( TaskData.VIEW_PATH, dest.getAbsolutePath() + "/" );
+        getData().putData( TaskData.VIEW_PATH, dest.getAbsolutePath() + File.separator );
 
         // Retrieve settings of the current project
         StringParameterBO login = (StringParameterBO) pTaskParam.getParameters().get( ParametersConstants.SCMLOGIN );

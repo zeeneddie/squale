@@ -92,8 +92,7 @@ public class JXMLCompiler
          * Création d'un descripteur de fichier avec un chemin UNIX.
          */
         File buildFile =
-            new File( ( mProject.getPath() ).replaceAll( JCompilingConfiguration.WINDOWS_SEPARATOR
-                + JCompilingConfiguration.WINDOWS_SEPARATOR, JCompilingConfiguration.UNIX_SEPARATOR ) );
+            new File ( mProject.getPath() );
 
         /*
          * La procédure n'est lancée que si le fichier XML est trouvé.
