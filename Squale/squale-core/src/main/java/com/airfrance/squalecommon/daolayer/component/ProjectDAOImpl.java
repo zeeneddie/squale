@@ -210,6 +210,19 @@ public class ProjectDAOImpl
     {
         super.remove( pSession, pObj );
     }
+    
+    /**
+     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#remove(com.airfrance.jraf.spi.persistence.ISession,
+     *      java.lang.Object)
+     */
+    public void setStatusDelete( ISession pSession, ProjectBO pProject)
+        throws JrafDaoException
+    {
+        // Supprime "logiquement" le projet lui-même
+        pProject.setStatus( ProjectBO.DELETED );
+        super.save( pSession, pProject );
+        // il faut faire (en batch) la suppresion physique !
+    }
 
     /**
      * Mise à jour des grilles qualité
