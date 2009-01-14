@@ -40,6 +40,7 @@ import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
 import com.airfrance.jraf.spi.persistence.ISession;
 import com.airfrance.squalecommon.daolayer.component.ApplicationDAOImpl;
 import com.airfrance.squalecommon.daolayer.component.AuditDAOImpl;
+import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
 import com.airfrance.squalecommon.daolayer.profile.ProfileDAOImpl;
 import com.airfrance.squalecommon.daolayer.profile.UserDAOImpl;
 import com.airfrance.squalecommon.daolayer.result.SqualeReferenceDAOImpl;
@@ -51,6 +52,7 @@ import com.airfrance.squalecommon.datatransfertobject.transform.component.Applic
 import com.airfrance.squalecommon.datatransfertobject.transform.component.ComponentTransform;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
@@ -900,6 +902,18 @@ public class ApplicationFacade
 
             ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
 
+            
+            // on accède au projectBO pour purger les projets liés à cette application
+            ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
+            
+            Iterator it = projectDAO.findAllProjects( pSession, applicationID ).iterator();
+            
+            while ( it.hasNext() )
+            {
+                ProjectBO pBO = (ProjectBO) it.next();
+                projectDAO.setStatusDelete( pSession, pBO );
+            }
+            
             // Chargement de l'application associée à l'identifiant application
             // Suppression du ApplicationBO associé et toutes ses relations
             applicationBO = (ApplicationBO) applicationDAO.get( pSession, applicationID );
