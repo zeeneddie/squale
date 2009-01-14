@@ -110,9 +110,27 @@ public class Purge
             session.beginTransaction();
             AbstractDisplayConfDAOImpl.getInstance().removeUnusedConf( session );
             session.commitTransactionWithoutClose();
+            
+            // Après les audits, on va supprimer les projets...
+            session.beginTransaction();
+            Collection projects =
+                ProjectDAOImpl.getInstance().findWhereStatusAndSite( session, ProjectBO.DELETED, mSiteId );
+            Iterator it = projects.iterator();
+            LOGGER.info( CoreMessages.getString( "projects.todelete", new Object[] { new Integer( projects.size() ) } ) );
+            session.commitTransactionWithoutClose();
+            while ( it.hasNext() )
+            {
+                ProjectBO p = (ProjectBO) it.next();
+                // supresion physique comme pour les audits
+                // Commit un par un pour des raisons de perf
+                session.beginTransaction();
+                ProjectDAOImpl.getInstance().remove( session, (Object) p );
+                session.commitTransactionWithoutClose();
+            }
+            
             // maintenant que tous les audits sont supprimés, on peut supprimer les applis...
             session.beginTransaction();
-            Iterator it = ApplicationDAOImpl.getInstance().findWhereStatus( session, ApplicationBO.DELETED ).iterator();
+            it = ApplicationDAOImpl.getInstance().findWhereStatus( session, ApplicationBO.DELETED ).iterator();
             session.commitTransactionWithoutClose();
             while ( it.hasNext() )
             {
@@ -126,22 +144,6 @@ public class Purge
                     ApplicationDAOImpl.getInstance().remove( session, (Object) a );
                     session.commitTransactionWithoutClose();
                 }
-            }
-            // maintenant que toutes les applis sont supprimées, on peut supprimer les projets...
-            session.beginTransaction();
-            Collection projects =
-                ProjectDAOImpl.getInstance().findWhereStatusAndSite( session, ProjectBO.DELETED, mSiteId );
-            it = projects.iterator();
-            LOGGER.info( CoreMessages.getString( "projects.todelete", new Object[] { new Integer( projects.size() ) } ) );
-            session.commitTransactionWithoutClose();
-            while ( it.hasNext() )
-            {
-                ProjectBO p = (ProjectBO) it.next();
-                // supresion physique comme pour les audits
-                // Commit un par un pour des raisons de perf
-                session.beginTransaction();
-                ProjectDAOImpl.getInstance().remove( session, (Object) p );
-                session.commitTransactionWithoutClose();
             }
             // ferme la session
             session.closeSession();
