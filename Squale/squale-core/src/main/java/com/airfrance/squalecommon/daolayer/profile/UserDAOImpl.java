@@ -92,7 +92,7 @@ public class UserDAOImpl
     {
         UserBO user = null;
         String whereClause = "where ";
-        whereClause += getAlias() + ".matricule = '" + pMatricule + "'";
+        whereClause += "lower(" + getAlias() + ".matricule) like '" + pMatricule + "'";
         Collection col = findWhere( pSession, whereClause );
         if ( col.size() != 1 )
         {
@@ -125,7 +125,7 @@ public class UserDAOImpl
         UserBO user = null;
         String whereClause = "where ";
         whereClause +=
-            getAlias() + ".matricule = '" + pMatricule + "' AND " + getAlias() + ".password = '" + pPassword + "'";
+            "lower(" + getAlias() + ".matricule) like '" + pMatricule + "' AND " + getAlias() + ".password = '" + pPassword + "'";
         Collection col = findWhere( pSession, whereClause );
         if ( col.size() != 1 )
         {
