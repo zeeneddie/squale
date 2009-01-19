@@ -106,7 +106,7 @@ public class ErrorsAction
                     {
                         // Conversion du formulaire
                         String errorLevelMax = getMaxLevel( errors );
-                        Object[] params = { taskName, errors, errorLevelMax };
+                        Object[] params = { taskName, errors, errorLevelMax, pRequest.getLocale() };
                         // ajout dans la liste
                         list.add( WTransformerFactory.objToForm( ErrorListTransformer.class, params ) );
                     }
