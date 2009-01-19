@@ -18,6 +18,8 @@
  */
 package com.airfrance.squaleweb.transformer;
 
+import java.util.Locale;
+
 import com.airfrance.squalecommon.datatransfertobject.result.ErrorDTO;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.ErrorForm;
 import com.airfrance.squaleweb.resources.WebMessages;
@@ -66,7 +68,11 @@ public class ErrorTransformer
         form.setMessage( dto.getMessageKey().replaceAll( "<", "&lt;" ).replaceAll( "\n", "<br/>" ) );
         form.setErrorProjectId( dto.getProjectId() );
         form.setAuditId( dto.getAuditId() );
-        form.setTaskName( WebMessages.getString( dto.getTaskName() + ".name" ) );
+        if (pObject.length == 2){
+            form.setTaskName( WebMessages.getString( (Locale) pObject[1], dto.getTaskName() + ".name" ) );
+        } else {
+            form.setTaskName( WebMessages.getString( dto.getTaskName() + ".name" ) );
+        }
     }
 
     /**
