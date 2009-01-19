@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 
 import com.airfrance.squalecommon.datatransfertobject.result.ErrorDTO;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.ErrorForm;
@@ -70,8 +71,13 @@ public class ErrorListTransformer
             Iterator it = dto.iterator();
             while ( it.hasNext() )
             {
-                ErrorForm error =
-                    (ErrorForm) WTransformerFactory.objToForm( ErrorTransformer.class, (ErrorDTO) it.next() );
+                ErrorForm error = null;
+                if (pObject.length == 4){
+                    Object[] objects = new Object[]{ (ErrorDTO) it.next(), (Locale) pObject[3] };
+                    error = (ErrorForm) WTransformerFactory.objToForm( ErrorTransformer.class, objects );
+                } else {
+                    error = (ErrorForm) WTransformerFactory.objToForm( ErrorTransformer.class, (ErrorDTO) it.next() );
+                }
                 // On insère dans la map avec le message en clé
                 if ( map.get( error.getMessage() ) != null )
                 {
@@ -82,7 +88,11 @@ public class ErrorListTransformer
             }
         }
         form.setList( new ArrayList( map.values() ) );
-        form.setTaskName( WebMessages.getString( (String) pObject[0] + ".name" ) );
+        if (pObject.length == 4){
+            form.setTaskName( WebMessages.getString( (Locale) pObject[3], (String) pObject[0] + ".name" ) );
+        } else {
+            form.setTaskName( WebMessages.getString( (String) pObject[0] + ".name" ) );
+        }
         form.setMaxErrorLevel( (String) pObject[2] );
     }
 
