@@ -153,6 +153,8 @@
 
     drop sequence rigth_sequence;
 
+    drop sequence serveur_sequence;
+
     drop sequence stats_annexe_sequence;
 
     drop sequence stats_sequence;
@@ -1058,6 +1060,8 @@
     create sequence reference_sequence;
 
     create sequence rigth_sequence;
+
+    create sequence serveur_sequence;
 
     create sequence stats_annexe_sequence;
 

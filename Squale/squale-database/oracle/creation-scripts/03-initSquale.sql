@@ -2,27 +2,27 @@
 Insert into AtomicRights
    (ATOMICRIGHTSID, NAME)
  Values
-   (1, 'atomicright.type.project_creation');
+   (rigth_sequence.NextVal, 'atomicright.type.project_creation');
 Insert into AtomicRights
    (ATOMICRIGHTSID, NAME)
  Values
-   (2, 'atomicright.type.project_administration');
+   (rigth_sequence.NextVal, 'atomicright.type.project_administration');
 Insert into AtomicRights
    (ATOMICRIGHTSID, NAME)
  Values
-   (3, 'atomicright.type.project_quality_result');
+   (rigth_sequence.NextVal, 'atomicright.type.project_quality_result');
 Insert into AtomicRights
    (ATOMICRIGHTSID, NAME)
  Values
-   (4, 'atomicright.type.project_component_result');
+   (rigth_sequence.NextVal, 'atomicright.type.project_component_result');
 Insert into AtomicRights
    (ATOMICRIGHTSID, NAME)
  Values
-   (5, 'atomicright.type.portal_administration');
+   (rigth_sequence.NextVal, 'atomicright.type.portal_administration');
 Insert into AtomicRights
    (ATOMICRIGHTSID, NAME)
  Values
-   (6, 'atomicright.type.documentation');
+   (rigth_sequence.NextVal, 'atomicright.type.documentation');
 COMMIT;
 
 
@@ -31,19 +31,19 @@ COMMIT;
 Insert into ProfileBO
    (PROFILEID, NAME)
  Values
-   (1, 'bo.profile.name.admin');
+   (profile_sequence.NextVal, 'bo.profile.name.admin');
 Insert into ProfileBO
    (PROFILEID, NAME)
  Values
-   (2, 'bo.profile.name.manager');
+   (profile_sequence.NextVal, 'bo.profile.name.manager');
 Insert into ProfileBO
    (PROFILEID, NAME)
  Values
-   (3, 'bo.profile.name.reader');
+   (profile_sequence.NextVal, 'bo.profile.name.reader');
 Insert into ProfileBO
    (PROFILEID, NAME)
  Values
-   (4, 'bo.profile.name.default');
+   (profile_sequence.NextVal, 'bo.profile.name.default');
 COMMIT;
 
 
@@ -52,124 +52,126 @@ COMMIT;
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (1, 'bo.profile.action.readwrite', 5);
+   ((select PROFILEID from ProfileBO where NAME = 'bo.profile.name.admin'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.portal_administration' ));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (1, 'bo.profile.action.readwrite', 3);
+   ((select PROFILEID from ProfileBO where NAME = 'bo.profile.name.admin'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_quality_result'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (1, 'bo.profile.action.readwrite', 2);
+   ((select PROFILEID from ProfileBO where NAME = 'bo.profile.name.admin'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_administration'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (1, 'bo.profile.action.readwrite', 4);
+   ((select PROFILEID from ProfileBO where NAME = 'bo.profile.name.admin'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_component_result'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (1, 'bo.profile.action.readwrite', 1);
+   ((select PROFILEID from ProfileBO where NAME = 'bo.profile.name.admin'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_creation'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (1, 'bo.profile.action.readwrite', 6);
+   ((select PROFILEID from ProfileBO where NAME = 'bo.profile.name.admin'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.documentation'));
+      
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (2, 'bo.profile.action.readwrite', 5);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.manager'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.portal_administration'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (2, 'bo.profile.action.readwrite', 3);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.manager'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_quality_result'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (2, 'bo.profile.action.readonly', 2);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.manager'), 'bo.profile.action.readonly', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_administration'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (2, 'bo.profile.action.readwrite', 4);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.manager'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_component_result'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (2, 'bo.profile.action.readwrite', 1);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.manager'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_creation'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (2, 'bo.profile.action.readwrite', 6);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.manager'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.documentation'));
+
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (3, 'bo.profile.action.readonly', 5);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.reader'), 'bo.profile.action.readonly', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.portal_administration'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (3, 'bo.profile.action.readwrite', 3);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.reader'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_quality_result'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (3, 'bo.profile.action.none', 2);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.reader'), 'bo.profile.action.none', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_administration'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (3, 'bo.profile.action.readwrite', 4);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.reader'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_component_result'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (3, 'bo.profile.action.readonly', 1);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.reader'), 'bo.profile.action.readonly', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_creation'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (3, 'bo.profile.action.readwrite', 6);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.reader'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.documentation'));
+
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (4, 'bo.profile.action.none', 5);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'), 'bo.profile.action.none', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.portal_administration'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (4, 'bo.profile.action.none', 3);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'), 'bo.profile.action.none', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_quality_result'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (4, 'bo.profile.action.none', 2);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'), 'bo.profile.action.none', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_administration'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (4, 'bo.profile.action.none', 4);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'), 'bo.profile.action.none', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_component_result'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (4, 'bo.profile.action.none', 1);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'), 'bo.profile.action.none', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_creation'));
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
-   (4, 'bo.profile.action.readwrite', 6);
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.documentation'));
 COMMIT;
 
 
 
 -- Table Serveur
-Insert into Serveur VALUES(1, 'squaleSrv'); 
+Insert into Serveur VALUES(serveur_sequence.NextVal, 'squaleSrv'); 
 COMMIT;
--- Dépend de l'environnement...
--- Ces valeurs servent lors de la configuration d'une application car le serveur est un champs obligatoire!
+-- The number of insert to do  depends on the number of server where Squalix run.
+-- The name of the server should be enough clear in order to the user knows which server it represents.
 
 
 -- Table USERBO
 Insert into UserBO
    (USERID, MATRICULE, PASSWORD,PROFILEID )
  Values
-   (1, 'squaleadmin','admin',1);
+   (user_sequence.NextVal, 'squaleadmin','admin',(select PROFILEID from ProfileBO where NAME = 'bo.profile.name.admin'));
 
 Insert into UserBO
    (USERID, MATRICULE, PASSWORD,PROFILEID )
 Values
-   (2, 'user1','user1',4);
+   (user_sequence.NextVal, 'user1','user1',(select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'));
 
 Insert into UserBO
    (USERID, MATRICULE, PASSWORD,PROFILEID)
  Values
-   (3, 'user2','user2',4);
-
-commit;
+   (user_sequence.NextVal, 'user2','user2',(select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'));
+COMMIT;

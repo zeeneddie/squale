@@ -691,7 +691,7 @@
     ) type=InnoDB;
 
     create table Serveur (
-        ServeurId bigint not null,
+        ServeurId bigint not null auto_increment,
         Name varchar(255) not null unique,
         primary key (ServeurId)
     ) type=InnoDB;
