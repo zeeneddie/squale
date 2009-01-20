@@ -38,7 +38,8 @@ public class ServeurBO
 
     /**
      * @return l'id du serveur
-     * @hibernate.id generator-class="assigned" name="id" column="ServeurId" type="long" length="19" unsaved-value="-1"
+     * @hibernate.id generator-class="native" name="id" column="ServeurId" type="long" length="19" unsaved-value="-1"
+     * @hibernate.generator-param name="sequence" value="serveur_sequence"
      */
     public long getServeurId()
     {

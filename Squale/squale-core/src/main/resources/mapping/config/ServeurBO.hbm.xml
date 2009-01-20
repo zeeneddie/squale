@@ -4,7 +4,9 @@
 <hibernate-mapping>
   <class lazy="true" table="Serveur" name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO">
     <id unsaved-value="-1" name="serveurId" type="long" column="ServeurId" length="19">
-      <generator class="assigned"/>
+      <generator class="native">
+        <param name="sequence">serveur_sequence</param>
+      </generator>
     </id>
     <property name="name" column="Name" update="true" unique="true" not-null="true" type="string" insert="true"/>
   </class>
