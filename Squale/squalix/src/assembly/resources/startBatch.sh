@@ -23,14 +23,38 @@ case "`hostname`" in
 esac
 
 # Definition of JAVA_HOME
-#JAVA_HOME=${START-BATCH-JAVA-HOME}
+#JAVA_HOME=/usr/java/jdk1.5.0_14
 #export JAVA_HOME
 
 LANG=fr
 export LANG
 
-# Definition of the debug launch
-if [ "$1" = "-debug" ]; then
+# Definition of the debug launch if -debug in first position
+if [ "-debug" = "$1" ]; then
+ DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044"
+ echo "Lancement un mode debug sur le port 1044"
+fi
+
+# Definition of the debug launch if -debug in second position
+if [ "-debug" = "$2" ]; then
+ DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044"
+ echo "Lancement un mode debug sur le port 1044"
+fi
+
+# Definition of the debug launch if -debug in third position
+if [ "-debug" = "$3" ]; then
+ DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044"
+ echo "Lancement un mode debug sur le port 1044"
+fi
+
+# Definition of the debug launch if -debug in forth position
+if [ "-debug" = "$4" ]; then
+ DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044"
+ echo "Lancement un mode debug sur le port 1044"
+fi
+
+# Definition of the debug launch if -debug in fifth position
+if [ "-debug" = "$5" ]; then
  DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044"
  echo "Lancement un mode debug sur le port 1044"
 fi
@@ -40,4 +64,4 @@ cd ${SQUALIX_HOME}
 # The -Xms512M has been remove for prevent the "java.io.IOException: Not enough space" during the fork on dev8ts
 # which is probably due to an empty /tmp ...
 # The java command line
-${JAVA_HOME}/bin/java -Dsquale.home=$SQUALE_HOME -DentityExpansionLimit=500000 -Djava.awt.headless=true $DEBUG -Xmx512M -Xss7M -jar  ${SQUALIX_HOME}/${project.build.finalName}.jar ${SQUALIX_HOME} -s $hostId
+${JAVA_HOME}/bin/java -Dsquale.home=$SQUALE_HOME -DentityExpansionLimit=500000 -Djava.awt.headless=true $DEBUG -Xmx512M -Xss7M -jar  ${SQUALIX_HOME}/squalix-5.0-SNAPSHOT.jar ${SQUALIX_HOME} -s $hostId "$1" "$2" "$3" "$4" "$5"

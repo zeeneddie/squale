@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE quartz-timer-configuration PUBLIC "-//Quartz Configuration DTD //EN" "file:../src/config/quartz-timer-config.dtd">
+
+<quartz-timer-configuration>
+	<!-- démarrage de la tâche toutes les 5 minutes -->
+	<quartzKey>0 0/5 * * * ?</quartzKey>
+</quartz-timer-configuration>

@@ -17,14 +17,28 @@
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
 //Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\core\\Squalix.java
-
 package com.airfrance.squalix.core;
 
+import java.io.File;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.Parser;
+import org.apache.commons.cli.PosixParser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.quartz.impl.StdSchedulerFactory;
 
 import com.airfrance.jraf.bootstrap.initializer.Initializer;
+import com.airfrance.squalix.core.exception.ConfigurationException;
 import com.airfrance.squalix.messages.Messages;
+import com.airfrance.squalix.tools.quartz.QuartzSqualixScheduler;
 
 /**
  * Lance l'application Squalix. <br />
@@ -45,7 +59,15 @@ import com.airfrance.squalix.messages.Messages;
  * @version 1.0
  */
 public class Squalix
+    implements Job
 {
+
+    /**
+     * Contructeur vide pour l'utilisation de quartz avec Squalix
+     */
+    public Squalix()
+    {
+    }
 
     /**
      * Logger
@@ -61,6 +83,78 @@ public class Squalix
      * Chemin du fichier de configuration
      */
     private static String mConfigFile = null;
+
+    /**
+     * Clé de périodicité pour le lancement de l'application Squalix
+     */
+    private static String mCron = "";
+
+    /**
+     * Boolean permettant de savoir la manière de lancer le batch Squalix
+     */
+    private static boolean mQuartzActive = false;
+
+    /**
+     * Options de lancement de la tache Squalix
+     */
+    private static Options optionsDemarage = new Options();
+
+    /**
+     * Option -s passée en paramètre
+     */
+    private static Option optionSite =
+        new Option( Messages.getString( "main.site_option" ), "site", true,
+                    "site principale sur lequel tourne l'application squalix" );
+
+    /**
+     * Option -f passée en paramètre
+     */
+    private static Option optionFichierConf =
+        new Option( Messages.getString( "main.configFile_option" ), "fichierConf", false,
+                    "Fichier de paramétrage de la configuration de Squalix" );
+
+    /**
+     * Option -cron passée en paramètre
+     */
+    private static Option optionCron =
+        new Option( Messages.getString( "main.configCron_option" ), "chronologique", true,
+                    "Si la tâche doit être lancée de manière asynchrone" );
+
+    /**
+     * Option -debug passée en paramètre ne sert à rien pour le lancement en mode Debug, mais
+     * doit figurer dans la liste des options
+     */
+    private static Option optionDebug =
+        new Option( "debug", "debogage", false, "Indique si on a lancé la tâche en mode DEBUG" );
+
+    /**
+     * parser de la ligne de commande
+     */
+    private static CommandLineParser parser = new PosixParser();
+
+    static
+    {
+        // Spécification du nom du paramètre de l'argument qui sera affiché dans l'aide
+        optionSite.setArgName( Messages.getString( "main.site_option" ) );
+        optionFichierConf.setArgName( Messages.getString( "main.configFile_option" ) );
+        optionCron.setArgName( Messages.getString( "main.configCron_option" ) );
+        optionDebug.setArgName( "debug" );
+        // Spécification du type d'object que retournera getValue
+        optionSite.setType( String.class );
+        optionFichierConf.setType( String.class );
+        optionCron.setType( String.class );
+        // Oblige le paramètre d'être présent lors de l'exécution
+        optionSite.setRequired( true );
+        optionFichierConf.setRequired( false );
+        optionCron.setRequired( false );
+        optionDebug.setRequired( false );
+
+        // On ajout ensuite les "Option" dans la collection
+        optionsDemarage.addOption( optionSite );
+        optionsDemarage.addOption( optionFichierConf );
+        optionsDemarage.addOption( optionCron );
+        optionsDemarage.addOption( optionDebug );
+    }
 
     /**
      * Méthode main.
@@ -89,6 +183,12 @@ public class Squalix
                     // Si aucun site n'est spécifié, on quitte l'application
                     mLOGGER.fatal( Messages.getString( "main.missing_parameters" ) );
                 }
+                else if ( mQuartzActive )
+                {
+                    QuartzSqualixScheduler qss = new QuartzSqualixScheduler();
+                    QuartzSqualixScheduler.setCron( mCron );
+                    qss.scheduleSqualix( new StdSchedulerFactory() );
+                }
                 else
                 {
                     scheduler = new Scheduler( new Long( mSite ).longValue() );
@@ -113,20 +213,67 @@ public class Squalix
      * Récupère les paramètres de la ligne de commande
      * 
      * @param pArgs liste des paramètres.
+     * @throws ParseException
      * @roseuid 42CE4F340204
+     * @throws ParseException si la liste des arguments est mal interprétée
      */
     private static void getParameters( final String pArgs[] )
+        throws ParseException
     {
-        for ( int i = 0; i < pArgs.length; i++ )
+        CommandLine cmd = parser.parse( optionsDemarage, pArgs, false );
+
+        mSite = (String) cmd.getOptionObject( Messages.getString( "main.site_option" ) );
+
+        if ( cmd.hasOption( Messages.getString( "main.configFile_option" ) ) )
         {
-            if ( pArgs[i].equals( Messages.getString( "main.site_parameter" ) ) )
+            mConfigFile = (String) cmd.getOptionObject( Messages.getString( "main.configFile_option" ) );
+        }
+        
+        if ( cmd.hasOption( Messages.getString( "main.configCron_option" ) ) )
+        {
+            mCron = (String) cmd.getOptionObject( Messages.getString( "main.configCron_option" ) );
+            if ( mCron == null )
             {
-                mSite = pArgs[++i];
+                mCron = "";
             }
-            else if ( pArgs[i].equals( Messages.getString( "main.configFile_parameter" ) ) )
-            {
-                mConfigFile = pArgs[++i];
-            }
+            mQuartzActive = true;
+        }
+
+        /*
+         * for ( int i = 0; i < pArgs.length; i++ ) { if ( pArgs[i].equals( Messages.getString( "main.site_parameter" ) ) ) {
+         * mSite = pArgs[++i]; } else if ( pArgs[i].equals( Messages.getString( "main.configFile_parameter" ) ) ) {
+         * mConfigFile = pArgs[++i]; } else if ( pArgs[i].equals( Messages.getString( "main.configCron_parameter" ) ) ) {
+         * mQuartzActive = true; if ( pArgs.length >= i + 2 && !pArgs[i + 1].equals( Messages.getString(
+         * "main.site_parameter" ) ) && !pArgs[i + 1].equals( Messages.getString( "main.configFile_parameter" ) ) ) {
+         * mCron = pArgs[++i]; } } }
+         */
+    }
+
+    /**
+     * Permet de lancer la tache Squalix par l'intermédiaire de quartz
+     * 
+     * @param pContext Le contexte d'exécution du "Job" Quartz
+     * @throws JobExecutionException renvoyée si une exception apparait dans le traitement du job Quartz
+     */
+    public void execute( JobExecutionContext pContext )
+        throws JobExecutionException
+    {
+        Scheduler scheduler = null;
+        mLOGGER = LogFactory.getLog( Squalix.class );
+        mLOGGER.info( "lancement Squalix en Cron" );
+        try
+        {
+            scheduler = new Scheduler( new Long( mSite ).longValue() );
+            // on lance le scheduleur
+            scheduler.start();
+        }
+        catch ( NumberFormatException e )
+        {
+            throw new JobExecutionException( e );
+        }
+        catch ( ConfigurationException e )
+        {
+            throw new JobExecutionException( e );
         }
     }
 }
