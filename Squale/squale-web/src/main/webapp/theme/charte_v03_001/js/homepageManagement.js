@@ -27,7 +27,7 @@ function displayAudit()
 		cbAuditShowSeparately.disabled=false;
 		//If the checkox auditDoneCheck is checked then the checkbox under auditDoneCheck should be enabled 
 		if (cbAuditDone.checked)
-		{
+		{	
 			cbAuditSuccessfull.disabled=false;
 			cbAuditPartial.disabled=false;
 			cbAuditFailed.disabled=false;
@@ -68,15 +68,21 @@ function displayDone()
 	if(cbAuditDone.checked)
 	{
 		cbAuditSuccessfull.disabled=false;
+		cbAuditSuccessfull.checked=cbAuditDone.checked;
 		cbAuditPartial.disabled=false;
+		cbAuditPartial.checked=cbAuditDone.checked;
 		cbAuditFailed.disabled=false;
+		cbAuditFailed.checked=cbAuditDone.checked;
 		fieldAuditNbJours.disabled=false;
 	}
 	else
 	{
 		cbAuditSuccessfull.disabled=true;
+		cbAuditSuccessfull.checked=cbAuditDone.checked;
 		cbAuditPartial.disabled=true;
+		cbAuditPartial.checked=cbAuditDone.checked;
 		cbAuditFailed.disabled=true;
+		cbAuditFailed.checked=cbAuditDone.checked;
 		fieldAuditNbJours.disabled=true;
 	}
 	uncheckedShowSeparately();
