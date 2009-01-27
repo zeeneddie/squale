@@ -10,12 +10,22 @@
 <%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
 <%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
 <%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm"%>
+<%@ page import="com.airfrance.squaleweb.tagslib.HistoryTag"%>
 
 <%
 // Récupération de l'utilisateur en session pour savoir si celui-ci est administrateur
 // SQUALE
 LogonBean sessionUser = (LogonBean) request.getSession().getAttribute(WConstants.USER_KEY);
 boolean isAdmin = sessionUser.isAdmin();
+%>
+
+<%
+//Parameter indicates which tab must be selected
+String selectedTab = request.getParameter(HistoryTag.SELECTED_TAB_KEY);
+if(selectedTab == null) {
+    // First tab by default
+    selectedTab = "factors";
+}
 %>
 
 <%
@@ -57,7 +67,7 @@ boolean isAdmin = sessionUser.isAdmin();
 			<af:tabbedPane name="applicationsummary">
 				<%-- Factors --%>
 				<af:tab key="application.results.factors.tab" name="factors"
-					lazyLoading="false">
+					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("factors")%>'>
 					<af:dropDownPanel titleKey="buttonTag.menu.aide">
 						<bean:message key="application.results.factors" />
 						<br />
@@ -112,7 +122,8 @@ boolean isAdmin = sessionUser.isAdmin();
 					</logic:iterate>
 				</af:tab>
 				<%-- Kiviat --%>
-				<af:tab key="application.results.kiviat.tab" name="kiviat">
+				<af:tab key="application.results.kiviat.tab" name="kiviat" 
+					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("kiviat")%>'>
 					<bean:define id="srcKiviat" name="resultListForm"
 						property="kiviat.srcName" type="String" />
 					<bean:define id="imgMapKiviat" name="resultListForm"
@@ -127,10 +138,35 @@ boolean isAdmin = sessionUser.isAdmin();
 					<b><bean:message key="image.legend" /></b>
 					<br />
 					<bean:message key="application.results.kiviat" />
+					<af:form action="application.do?action=select" scope="session"
+						method="POST">
+						<%-- on passe le paramètre applicationId en caché --%>
+						<input name="applicationId" value="<%=applicationId%>" type="hidden">
+						<input name="currentAuditId" value="<%=currentAuditId%>"
+							type="hidden">
+						<input name="previousAuditId" value="<%=previousAuditId%>"
+							type="hidden">
+						<logic:equal name="resultListForm"
+							property="displayCheckBoxFactors" scope="session" value="true">
+							<table class="formulaire" cellpadding="0" cellspacing="0"
+								border="0" width="100px">
+								<tr>
+									<%-- nom du tab à afficher (kiviat) après soumission de la requête --%>
+									<input type="hidden" name="<%=HistoryTag.SELECTED_TAB_KEY%>" value="kiviat" />
+									<af:field key="application.results.allFactors"
+										name="resultListForm" property="allFactors"
+										type="CHECKBOX" styleClassLabel="td1" styleClass="normal" />
+								</tr>
+							</table>
+							<af:buttonBar>
+								<af:button type="form" name="valider" />
+							</af:buttonBar>
+						</logic:equal>
+					</af:form>
 				</af:tab>
 				<%-- Piechart --%>
 				<af:tab key="application.results.volumetry.tab" name="piechart"
-					lazyLoading="false">
+					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("piechart")%>'>>
 					<br />
 					<bean:define id="srcPieChart" name="resultListForm"
 						property="pieChart.srcName" type="String" />

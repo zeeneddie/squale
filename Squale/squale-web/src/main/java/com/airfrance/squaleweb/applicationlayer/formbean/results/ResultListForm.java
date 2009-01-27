@@ -21,6 +21,10 @@ package com.airfrance.squaleweb.applicationlayer.formbean.results;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionMapping;
+
 import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
 import com.airfrance.squaleweb.util.graph.GraphMaker;
 
@@ -44,6 +48,16 @@ public class ResultListForm
     /** le pieChart de niveau application */
     private GraphMaker pieChart;
 
+    /**
+     * booléen conditionnant l'affichage de la case à cocher "tous les facteurs"
+     */
+    private Boolean mDisplayCheckBoxFactors = new Boolean( true );
+
+    /**
+     * Affichage de tous les facteurs
+     */
+    private boolean mAllFactors = true;
+    
     /**
      * @return la liste des résultats
      */
@@ -92,4 +106,46 @@ public class ResultListForm
         pieChart = pPieChart;
     }
 
+    /**
+     * @return la valeur du display check box factors
+     */
+    public Boolean getDisplayCheckBoxFactors()
+    {
+        return mDisplayCheckBoxFactors;
+    }
+
+    /**
+     * @param pDisplayCheckBoxFactors La valeur pour savoir si on doit afficher la checkbox
+     */
+    public void setDisplayCheckBoxFactors( Boolean pDisplayCheckBoxFactors )
+    {
+        mDisplayCheckBoxFactors = pDisplayCheckBoxFactors;
+    }
+    
+    /**
+     * @return si on veut faire apparaitre tous les facteurs du kiviat ou juste les non nuls
+     */
+    public boolean isAllFactors()
+    {
+        return mAllFactors;
+    }
+
+    /**
+     * @param pAllFactors indique si le kiviat doit faire apparaitre tous les facteurs ou juste les non nuls
+     */
+    public void setAllFactors( boolean pAllFactors )
+    {
+        mAllFactors = pAllFactors;
+    }
+    
+    /**
+     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping,
+     *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
+     */
+    public void reset( ActionMapping mapping, HttpServletRequest request )
+    {
+        super.reset( mapping, request );
+        // Reinitialisation du checkbox
+        mAllFactors = false;
+    }
 }

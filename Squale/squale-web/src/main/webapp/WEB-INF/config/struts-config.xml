@@ -158,6 +158,7 @@
 			</forward>
 		</action>
 		<action path="/application" type="com.airfrance.squaleweb.applicationlayer.action.results.application.ApplicationResultsAction" name="resultListForm" scope="session" parameter="action">
+			<forward name="summaryAction" path="/application.do?action=summary"/>
 			<forward name="project" path="/project.do?action=select"/>
 			<forward name="summary" path="/jsp/results/application/summary.jsp"/>
 		</action>

@@ -42,6 +42,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.servlet.ServletUtilities;
 
+import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
 import com.airfrance.jraf.helper.AccessDelegateHelper;
 import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
@@ -53,6 +54,7 @@ import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationFo
 import com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectListForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm;
+import com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm;
 import com.airfrance.squaleweb.transformer.ApplicationTransformer;
 import com.airfrance.squaleweb.transformer.FactorsResultListTransformer;
@@ -63,6 +65,7 @@ import com.airfrance.squaleweb.util.graph.PieChartMaker;
 import com.airfrance.welcom.outils.pdf.PDFDataJasperReports;
 import com.airfrance.welcom.outils.pdf.PDFEngine;
 import com.airfrance.welcom.outils.pdf.PDFFactory;
+import com.airfrance.welcom.struts.transformer.WTransformerException;
 import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 import com.airfrance.welcom.struts.util.WConstants;
 import com.airfrance.welcom.taglib.table.TableUtil;
@@ -75,6 +78,11 @@ public class ApplicationResultsAction
     extends ReaderAction
 {
 
+    /**
+     * Le nom désignant l'attribut en session pour indiquer si on veut tous les facteurs ou non pour le kiviat.
+     */
+    private static final String ALL_FACTORS = "allFactors";
+    
     /**
      * Synthèse d'une application Si l'application comporte un seul projet, la synthèse du projet est alors affichée.
      * Dans le cas contraire, trois onglets sont présentés : un qui donne la répartition, l'autre donnant les facteurs
@@ -104,6 +112,12 @@ public class ApplicationResultsAction
             if ( null == forward )
             {
                 // Récupération des informations concernant les facteurs
+                // Récupération du paramètre : tous les facteurs ou seuls les facteurs ayant une note ?
+                ResultListForm resultListForm = (ResultListForm) pForm;
+                boolean pAllFactors = resultListForm.isAllFactors();
+                // On met cette valeur en session
+                pRequest.getSession().setAttribute( ALL_FACTORS, new Boolean( pAllFactors ) );
+                
                 ApplicationForm application = ActionUtils.getCurrentApplication( pRequest );
                 // On remet à jour les form en session permettant d'accéder aux différents types d'audits
                 SplitAuditsListForm auditsForm =
@@ -151,11 +165,11 @@ public class ApplicationResultsAction
                     // Préparation de l'appel à la couche métier
                     ac = AccessDelegateHelper.getInstance( "Graph" );
                     Long pCurrentAuditId = new Long( ( (AuditDTO) auditsDTO.get( 0 ) ).getID() );
-                    Object[] paramAuditId = { pCurrentAuditId };
+                    Object[] paramAuditIdKiviat = { pCurrentAuditId , String.valueOf( pAllFactors )};
 
                     // Recherche des données Kiviat
                     KiviatMaker maker = new KiviatMaker();
-                    Map projectsValues = (Map) ac.execute( "getApplicationKiviatGraph", paramAuditId );
+                    Map projectsValues = (Map) ac.execute( "getApplicationKiviatGraph", paramAuditIdKiviat );
                     Set keysSet = projectsValues.keySet();
                     Iterator it = keysSet.iterator();
                     while ( it.hasNext() )
@@ -179,8 +193,9 @@ public class ApplicationResultsAction
                                                                                          KiviatMaker.DEFAULT_HEIGHT ) );
 
                     // Recherche des données PieChart
+                    Object[] paramAuditIdPieChart = { pCurrentAuditId };
                     JFreeChart pieChart;
-                    Object[] maps = (Object[]) ac.execute( "getApplicationPieChartGraph", paramAuditId );
+                    Object[] maps = (Object[]) ac.execute( "getApplicationPieChartGraph", paramAuditIdPieChart );
                     String pPreviousAuditId = null;
                     // on peut ne pas avoir d'audit précédent
                     if ( auditsDTO.size() > 1 )
@@ -231,6 +246,50 @@ public class ApplicationResultsAction
         resetTracker( pRequest );
         // Indique que l'on vient d'une vue synthèse et pas d'une vue composant
         changeWay( pRequest, "false" );
+        return forward;
+    }
+    
+    /**
+     * Selectionne à nouveau l'application courante à visualiser.
+     * 
+     * @param pMapping le mapping.
+     * @param pForm le formulaire à lire.
+     * @param pRequest la requête HTTP.
+     * @param pResponse la réponse de la servlet.
+     * @return l'action à réaliser.
+     */
+    public ActionForward select( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                 HttpServletResponse pResponse )
+    {
+
+        ActionForward forward = null;
+        ActionErrors errors = new ActionErrors();
+
+        try
+        {
+            // Add an user access for this application
+            addUserAccess( pRequest, ActionUtils.getCurrentApplication( pRequest ).getId() );
+            // On supprime l'attribut en session
+            pRequest.getSession().removeAttribute( ALL_FACTORS );
+            if ( null == forward )
+            {
+                forward = pMapping.findForward( "summaryAction" );
+            }
+        }
+        catch ( Exception e )
+        {
+            // Traitement factorisé des exceptions
+            handleException( e, errors, pRequest );
+        }
+        if ( !errors.isEmpty() )
+        {
+            // Sauvegarde des messages
+            saveMessages( pRequest, errors );
+            // Routage vers la page d'erreur
+            forward = pMapping.findForward( "total_failure" );
+        }
+        // On est passé par un menu donc on réinitialise le traceur
+        resetTracker( pRequest );
         return forward;
     }
 

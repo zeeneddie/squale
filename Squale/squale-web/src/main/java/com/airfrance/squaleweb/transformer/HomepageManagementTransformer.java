@@ -337,6 +337,16 @@ public class HomepageManagementTransformer
         {
             currentForm.setKiviatWidth( HomepageComponentDTO.DEFAULT_KIVIAT_WIDTH );
         }
+        
+        component = element.get( HomepageComponentDTO.KIVIAT_ALL_FACTORS );
+        if ( component != null && component.getComponentValue().equals( "true" ) )
+        {
+            currentForm.setResultKiviatAllFactorsCheck( true );
+        }
+        else
+        {
+            currentForm.setResultKiviatAllFactorsCheck( false );
+        }
     }
 
     /**
@@ -610,7 +620,12 @@ public class HomepageManagementTransformer
         }
         list.add( component );
 
-        
+        component = new HomepageComponentDTO( HomepageComponentDTO.KIVIAT_ALL_FACTORS, "false" );
+        if ( currentForm.isResultKiviatAllFactorsCheck() )
+        {
+            component.setComponentValue( "true" );
+        }
+        list.add( component );
     }
 
     /**

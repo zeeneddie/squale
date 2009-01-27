@@ -32,7 +32,7 @@
 					<html:checkbox property="resultCheck" styleId="resultId" onclick="checkResult()"/>
 					<html:hidden property="positionResult" styleId="position_resultId" value="<%=indexValue%>" ></html:hidden>
 				</td>
-				<td colspan="2">
+				<td colspan="3">
 					<bean:message key="homepage_management.results.results" />
 				</td>
 			</tr>
@@ -43,7 +43,7 @@
 				<td class="check_col">
 					<html:checkbox property="resultByGridCheck" styleId="resultByGridId"/>
 				</td>
-				<td>
+				<td colspan="2">
 					<bean:message key="homepage_management.results.byGrid" />
 				</td>
 			</tr>
@@ -52,15 +52,25 @@
 				<td class="check_col">
 					<html:checkbox property="resultKiviatCheck" styleId="resultKiviatId" onclick="displayKiviat()"/>
 				</td>
-				<td>
+				<td colspan="2">
 					<bean:message key="homepage_management.results.kiviat" />
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2"/>
-				<td>
+				<td colspan="2">
 					<bean:message key="homepage_management.results.kiviatWidth" />
 					<html:text property="kiviatWidth" styleId="kiviatWidthId" size="4" maxlength="4"></html:text>
+				</td>
+			</tr>
+			<tr>
+				<td class="check_col"/>
+				<td class="check_col"/>
+				<td class="check_col">
+					<html:checkbox property="resultKiviatAllFactorsCheck" styleId="resultKiviatAllFactorsId"/>
+				</td>
+				<td>
+					<bean:message key="homepage_management.results.kiviat.allFactors" />
 				</td>
 			</tr>
 		</tbody>

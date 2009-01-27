@@ -107,6 +107,11 @@ public class HomepageManagementForm
 
     /** The width of one Kiviat */
     private String kiviatWidth;
+    
+    /**
+     * State of the checkBox result Kiviat All Factors
+     */
+    private boolean resultKiviatAllFactorsCheck;
 
     // The stats part
     /**
@@ -387,6 +392,26 @@ public class HomepageManagementForm
     public void setResultKiviatCheck( boolean mResultKiviatCheck )
     {
         resultKiviatCheck = mResultKiviatCheck;
+    }
+    
+    /**
+     * Getter method for resultKiviatAllFactorsCheck
+     * 
+     * @return true if the linked checkbox is checked
+     */
+    public boolean isResultKiviatAllFactorsCheck()
+    {
+        return resultKiviatAllFactorsCheck;
+    }
+
+    /**
+     * Setter method for resultKiviatAllFactorsCheck
+     * 
+     * @param mResultKiviatAllFactorsCheck The new state of the related checkox
+     */
+    public void setResultKiviatAllFactorsCheck( boolean mResultKiviatAllFactorsCheck )
+    {
+        resultKiviatAllFactorsCheck = mResultKiviatAllFactorsCheck;
     }
 
     /**

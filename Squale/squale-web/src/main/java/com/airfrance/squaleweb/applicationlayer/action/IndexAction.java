@@ -125,6 +125,9 @@ public class IndexAction
 
     /** The widtg of one kiviat */
     private int kiviatWidth;
+    
+    /** Display Kiviat With All Factors ? */
+    private boolean isDisplayResultKiviatAllFactors;
 
     /**
      * Action to execute before reach the homepage.jsp
@@ -306,6 +309,12 @@ public class IndexAction
             compoList.get( HomepageComponentDTO.KIVIAT_WIDTH ) != null ? Integer.parseInt( compoList.get(
                                                                                                           HomepageComponentDTO.KIVIAT_WIDTH ).getComponentValue() )
                             : Integer.parseInt( HomepageComponentDTO.DEFAULT_KIVIAT_WIDTH );
+            
+        isDisplayResultKiviatAllFactors =
+            compoList.get( HomepageComponentDTO.KIVIAT_ALL_FACTORS ) != null ? Boolean.parseBoolean( compoList.get(
+                                                                                                               HomepageComponentDTO.KIVIAT_ALL_FACTORS ).getComponentValue() )
+                            : false;
+
     }
 
     /**
@@ -710,7 +719,9 @@ public class IndexAction
 
                 // Recovering the list of values needed for built the graph
                 Long pCurrentAuditId = new Long( auditsDTO.get( 0 ).getID() );
-                Object[] paramAuditId = { pCurrentAuditId };
+                
+                Boolean allFactors = new Boolean (isDisplayResultKiviatAllFactors);
+                Object[] paramAuditId = { pCurrentAuditId , String.valueOf( allFactors )};
                 Map projectsValues = (Map) ac2.execute( "getApplicationKiviatGraph", paramAuditId );
                 Set keysSet = projectsValues.keySet();
                 Iterator it = keysSet.iterator();

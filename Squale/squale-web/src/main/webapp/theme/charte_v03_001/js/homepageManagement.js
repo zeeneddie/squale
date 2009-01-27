@@ -89,6 +89,7 @@ function displayResult()
 	var cbResult = document.getElementById("resultId");
 	var cbResultByGrid = document.getElementById("resultByGridId");
 	var cbResultKiviatId = document.getElementById("resultKiviatId");
+	var cbResultKiviatAllFactorsId = document.getElementById("resultKiviatAllFactorsId");
 	var fieldKiviatWidth = document.getElementById("kiviatWidthId");
 	
 	/*If the checkbox resultCheck is checked then the other checkbox under resultCheck should be enabled.
@@ -97,12 +98,14 @@ function displayResult()
 	{
 		cbResultByGrid.disabled=false;
 		cbResultKiviatId.disabled=false;
+		cbResultKiviatAllFactorsId.disabled=false;
 		displayKiviat();
 	}
 	else
 	{
 		cbResultByGrid.disabled=true;
 		cbResultKiviatId.disabled=true;
+		cbResultKiviatAllFactorsId.disabled=true;
 		fieldKiviatWidth.disabled=true;
 	}	
 }
@@ -375,9 +378,11 @@ function displayKiviat()
 	if(document.getElementById("resultKiviatId").checked)
 	{
 		document.getElementById("kiviatWidthId").disabled=false;
+		document.getElementById("resultKiviatAllFactorsId").disabled=false;
 	}	
 	else
 	{
 		document.getElementById("kiviatWidthId").disabled=true;
+		document.getElementById("resultKiviatAllFactorsId").disabled=true;
 	}
 }
