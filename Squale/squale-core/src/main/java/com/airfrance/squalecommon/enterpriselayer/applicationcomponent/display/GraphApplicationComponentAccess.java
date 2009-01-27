@@ -70,7 +70,7 @@ public class GraphApplicationComponentAccess
                                       Long pRuleId )
         throws JrafEnterpriseException
     {
-        
+
         Date newAuditTime = pAuditTime;
 
         if ( !( pAuditTime instanceof Date ) )
@@ -115,7 +115,21 @@ public class GraphApplicationComponentAccess
     public Map getApplicationKiviatGraph( Long pAuditId )
         throws JrafEnterpriseException
     {
-        return MeasureFacade.getApplicationKiviat( pAuditId );
+        return MeasureFacade.getApplicationKiviat( pAuditId, "false" );
+    }
+
+    /**
+     * Récupère le Kiviat d'une application
+     * 
+     * @param pAuditId l'audit
+     * @param pAllFactors tous les facteurs (= "true") ou bien seulement ceux ayant une note
+     * @throws JrafEnterpriseException Exception JRAF
+     * @return graphe de type Kiviat de l'application auditée
+     */
+    public Map getApplicationKiviatGraph( Long pAuditId, String pAllFactors )
+        throws JrafEnterpriseException
+    {
+        return MeasureFacade.getApplicationKiviat( pAuditId, pAllFactors );
     }
 
     /**

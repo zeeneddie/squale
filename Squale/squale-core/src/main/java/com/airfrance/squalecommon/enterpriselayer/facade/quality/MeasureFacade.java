@@ -276,8 +276,8 @@ public class MeasureFacade
      * @return list of components
      * @throws JrafEnterpriseException if error
      */
-    public static List<ComponentDTO> getComponentsWhereTres( Long pProjectId, Long pAuditId, String[] pTreKeys, String[] pTreValues,
-                                               Integer pMax )
+    public static List<ComponentDTO> getComponentsWhereTres( Long pProjectId, Long pAuditId, String[] pTreKeys,
+                                                             String[] pTreValues, Integer pMax )
         throws JrafEnterpriseException
     {
         List<ComponentDTO> components = new ArrayList<ComponentDTO>();
@@ -287,7 +287,8 @@ public class MeasureFacade
         try
         {
             session = PERSISTENTPROVIDER.getSession();
-            List<AbstractComponentBO> componentsBO = dao.findWhereTres( session, pProjectId, pAuditId, pTreKeys, pTreValues, pMax );
+            List<AbstractComponentBO> componentsBO =
+                dao.findWhereTres( session, pProjectId, pAuditId, pTreKeys, pTreValues, pMax );
             // bo -> dto
             for ( int i = 0; i < componentsBO.size(); i++ )
             {
@@ -408,11 +409,12 @@ public class MeasureFacade
      * Creation d'une mesure de type Kiviat pour une application
      * 
      * @param pAuditId Id de l'audit
+     * @param pAllFactors tous les facteurs (= "true") ou seulement ceux ayant une note ?
      * @throws JrafEnterpriseException en cas de pb Hibernate
      * @return les données nécessaires à la conception du Kiviat via une Applet soit : Map dont la clé contient les
      *         projets et la valeur contient une map (facteurs, notes)
      */
-    public static Map getApplicationKiviat( Long pAuditId )
+    public static Map getApplicationKiviat( Long pAuditId, String pAllFactors )
         throws JrafEnterpriseException
     {
         MeasureDAOImpl measureDAO = MeasureDAOImpl.getInstance();
@@ -426,6 +428,7 @@ public class MeasureFacade
             ApplicationBO application =
                 (ApplicationBO) ApplicationDAOImpl.getInstance().loadByAuditId( session, pAuditId );
             Iterator itp = application.getChildren().iterator();
+            ArrayList nullValuesList = new ArrayList();
             while ( itp.hasNext() )
             {
                 // On ajoute les notes de chaque projets sur le kiviat
@@ -444,7 +447,15 @@ public class MeasureFacade
                     // le nom internationalisé est géré dans le kiviatMaker
                     String name = factor.getRule().getName();
                     values.put( name, value );
+                    if ( factor.getMeanMark() < 0 )
+                    {
+                        nullValuesList.add( name );
+                    }
                 }
+                // affichage seulement des facteurs qui ont des valeurs
+                final int FACTORS_MIN = 3;
+                values = deleteFactors( values, nullValuesList, pAllFactors, FACTORS_MIN );
+                // et on envoie les valeurs
                 result.put( project.getName(), values );
             }
 

@@ -111,6 +111,9 @@ public class HomepageComponentDTO implements IDTO
     /** Default width of one kiviat */
     public static final String DEFAULT_KIVIAT_WIDTH = "240";
     
+    /** The width of one kiviat */
+    public static final String KIVIAT_ALL_FACTORS = "kiviatAllFactors";
+    
     // ELEMENT 5 The statistics part
     /**
      * The name in base of the statistics element
