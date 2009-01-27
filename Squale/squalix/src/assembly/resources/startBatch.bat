@@ -33,5 +33,5 @@ if -debug == %5 echo "Lancement un mode debug sur le port 1044"
 		
 rem the -s option is set to 1 because we are in a one server environment (first server in database)
 
-%JAVA_HOME%/bin/java %DEBUG% -Dsquale.home=%SQUALE_HOME% -DentityExpansionLimit=500000 -Djava.awt.headless=true -Xmx512M -Xss7M -jar  "%SQUALIX_HOME%\squalix-5.0-SNAPSHOT.jar" "%SQUALIX_HOME%" -s 1 %*
+%JAVA_HOME%/bin/java %DEBUG% -Dsquale.home=%SQUALE_HOME% -DentityExpansionLimit=500000 -Djava.awt.headless=true -Xmx512M -Xss7M -jar  "%SQUALIX_HOME%\${project.build.finalName}.jar" "%SQUALIX_HOME%" -s 1 %*
 
