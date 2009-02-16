@@ -50,10 +50,10 @@ import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.ApplicationConfTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.ComponentTransform;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.SqualeReferenceBO;
@@ -388,6 +388,11 @@ public class ApplicationFacade
     static private boolean purgeUsers( ISession pSession, ApplicationBO pApplicationBO, Collection pUserDefined )
         throws JrafDaoException
     {
+        ArrayList<String> userIDs = new ArrayList<String>( pUserDefined.size() );
+        for ( Iterator<String> iterator = pUserDefined.iterator(); iterator.hasNext(); )
+        {
+            userIDs.add( iterator.next().toLowerCase() );
+        }
         boolean deleted = false;
         UserDAOImpl userDAO = UserDAOImpl.getInstance();
         Collection userBOs = userDAO.findWhereApplication( pSession, pApplicationBO );
@@ -395,7 +400,7 @@ public class ApplicationFacade
         while ( existingUsers.hasNext() )
         {
             UserBO userBO = (UserBO) existingUsers.next();
-            if ( !pUserDefined.contains( userBO.getMatricule() ) )
+            if ( !userIDs.contains( userBO.getMatricule().toLowerCase() ) )
             {
                 userBO.getRights().remove( pApplicationBO );
                 userDAO.save( pSession, userBO );
@@ -902,18 +907,17 @@ public class ApplicationFacade
 
             ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
 
-            
             // on accède au projectBO pour purger les projets liés à cette application
             ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
-            
+
             Iterator it = projectDAO.findAllProjects( pSession, applicationID ).iterator();
-            
+
             while ( it.hasNext() )
             {
                 ProjectBO pBO = (ProjectBO) it.next();
                 projectDAO.setStatusDelete( pSession, pBO );
             }
-            
+
             // Chargement de l'application associée à l'identifiant application
             // Suppression du ApplicationBO associé et toutes ses relations
             applicationBO = (ApplicationBO) applicationDAO.get( pSession, applicationID );
