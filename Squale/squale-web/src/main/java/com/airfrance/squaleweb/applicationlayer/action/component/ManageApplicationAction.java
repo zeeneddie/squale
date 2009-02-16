@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -47,6 +48,7 @@ import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
 import com.airfrance.squalecommon.datatransfertobject.component.ApplicationConfDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ProjectConfDTO;
+import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
@@ -62,6 +64,7 @@ import com.airfrance.squaleweb.applicationlayer.formbean.config.ServeurListForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.creation.ApplicationRightsForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateApplicationForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
+import com.airfrance.squaleweb.connection.UserBeanAccessorHelper;
 import com.airfrance.squaleweb.resources.WebMessages;
 import com.airfrance.squaleweb.transformer.ApplicationConfTransformer;
 import com.airfrance.squaleweb.transformer.AuditTransformer;
@@ -74,6 +77,8 @@ import com.airfrance.welcom.struts.easycomplete.WEasyCompleteUtil;
 import com.airfrance.welcom.struts.transformer.WTransformerException;
 import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 import com.airfrance.welcom.struts.util.WConstants;
+import com.inetpsa.clp.LDAPUser;
+import com.inetpsa.clp.exception.LDAPException;
 
 /**
  */
@@ -285,7 +290,7 @@ public class ManageApplicationAction
                 (CreateApplicationForm) pRequest.getSession().getAttribute( "createApplicationForm" );
             // Récupération de la liste des utilisateurs dans le formulaire
             HashMap users = new HashMap();
-            boolean hasManager = Arrays.asList( form.getRightProfile() ).contains( ProfileBO.MANAGER_PROFILE_NAME );
+            boolean hasManager = false;
             for ( int i = 0; null != form.getMatricule() && i < form.getMatricule().length; i++ )
             {
                 // On vérifie que l'utilisateur à ajouter possède un matricule valide
@@ -293,6 +298,10 @@ public class ManageApplicationAction
                 if ( matricule.length() > 0 )
                 {
                     String right = form.getRightProfile()[i];
+                    if ( ProfileBO.MANAGER_PROFILE_NAME.equals( right ) )
+                    {
+                        hasManager = true;
+                    }
                     // On vérifie que l'utilisateur n'existe pas déjà avec des droits différents
                     String userRight = (String) users.get( matricule );
                     if ( userRight != null && !userRight.equals( right ) )
@@ -1238,55 +1247,19 @@ public class ManageApplicationAction
     public ActionForward findUserForAutocomplete( final ActionMapping mapping, final ActionForm form,
                                                   final HttpServletRequest request, final HttpServletResponse response )
     {
-        // TODO: finish this up
-
         // retrieves the string that the user has just typed in
         String stringFirstChars = request.getParameter( "ch" );
         stringFirstChars = WEasyCompleteUtil.filter( stringFirstChars );
 
         // create the response object
         WHttpEasyCompleteResponse easyComplete = new WHttpEasyCompleteResponse( response );
-
-        // and fill it with the users' information
-
-        /* -------------------------------------------------------------- */
-        // This is a example code snippet used to test the suggest field
-        // This must be encapsulated in a wider generic security API
-        /* -------------------------------------------------------------- */
-        // searching LDAP user is available only when the string is 3 characters long
         /*
-        if ( stringFirstChars.length() > 2 )
-        {
-            try
-            {
-                LDAPUser user = new LDAPUser();
-                Enumeration users = user.findUserByUid( stringFirstChars );
-                while ( users.hasMoreElements() )
-                {
-                    LDAPUser ldapUser = (LDAPUser) users.nextElement();
-                    String value = ldapUser.getUid();
-                    String label = ldapUser.getFirstName() + " " + ldapUser.getLastName();
-                    easyComplete.addValueLabel( value, label );
-                }
-            }
-            catch ( LDAPException e )
-            {
-                e.printStackTrace();
-            }
-        }
-        */
-        // TODO : need to see why only the 10 first results are displayed...
-        /* ------------------------------------------------------ */
-
-        try
-        {
-            easyComplete.close();
-        }
-        catch ( IOException e )
-        {
-            // there's nothing we can do about it, forget it
-        }
-
+         * // and fill it with the users' information if ( stringFirstChars.length() > 1 ) { Collection<UserDTO>
+         * foundUers = UserBeanAccessorHelper.getUserBeanAccessor().getUsers( stringFirstChars ); for ( UserDTO user :
+         * foundUers ) { String value = user.getMatricule(); String label = user.getFullName();
+         * easyComplete.addValueLabel( value, label ); } } // now return the response try { easyComplete.close(); }
+         * catch ( IOException e ) { // there's nothing we can do about it, forget it }
+         */
         return null;
     }
 
