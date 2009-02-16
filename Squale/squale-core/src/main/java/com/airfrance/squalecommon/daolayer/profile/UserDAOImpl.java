@@ -27,10 +27,12 @@ package com.airfrance.squalecommon.daolayer.profile;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.airfrance.jraf.commons.exception.JrafDaoException;
+import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
 import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import com.airfrance.jraf.spi.persistence.ISession;
 import com.airfrance.squalecommon.daolayer.DAOMessages;
@@ -92,7 +94,7 @@ public class UserDAOImpl
     {
         UserBO user = null;
         String whereClause = "where ";
-        whereClause += "lower(" + getAlias() + ".matricule) like '" + pMatricule + "'";
+        whereClause += "lower(" + getAlias() + ".matricule) like lower('" + pMatricule + "')";
         Collection col = findWhere( pSession, whereClause );
         if ( col.size() != 1 )
         {
@@ -125,7 +127,8 @@ public class UserDAOImpl
         UserBO user = null;
         String whereClause = "where ";
         whereClause +=
-            "lower(" + getAlias() + ".matricule) like '" + pMatricule + "' AND " + getAlias() + ".password = '" + pPassword + "'";
+            "lower(" + getAlias() + ".matricule) like lower('" + pMatricule + "') AND " + getAlias() + ".password = '"
+                + pPassword + "'";
         Collection col = findWhere( pSession, whereClause );
         if ( col.size() != 1 )
         {
@@ -299,6 +302,31 @@ public class UserDAOImpl
         throws JrafDaoException
     {
         return findWhereApplicationAndProfile( pSession, pId, pProfile, true, pUnsubscribed );
+    }
+
+    /**
+     * This method returns a list of UserBO whose IDs start by the given "idStart" parameter.
+     * 
+     * @param session session Hibernate
+     * @param idStart the beginning of the user id
+     * @return a collection of users whose IDs start by the given paramater
+     * @throws JrafDaoException exception Dao
+     */
+    public Collection<UserBO> findWhereMatriculeStartsWith( ISession session, String idStart )
+        throws JrafDaoException
+    {
+        Collection<UserBO> retUsers = null;
+        if ( StringUtils.isNotEmpty( idStart ) )
+        {
+            String whereClause = "where ";
+            whereClause += getAlias() + ".matricule like '" + idStart + "%'";
+            retUsers = findWhere( session, whereClause );
+        }
+        else
+        {
+            retUsers = new ArrayList<UserBO>();
+        }
+        return retUsers;
     }
 
 }
