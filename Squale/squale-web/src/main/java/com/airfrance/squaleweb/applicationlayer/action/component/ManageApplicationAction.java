@@ -18,14 +18,11 @@
  */
 package com.airfrance.squaleweb.applicationlayer.action.component;
 
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -48,7 +45,6 @@ import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
 import com.airfrance.squalecommon.datatransfertobject.component.ApplicationConfDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ProjectConfDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
@@ -64,7 +60,6 @@ import com.airfrance.squaleweb.applicationlayer.formbean.config.ServeurListForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.creation.ApplicationRightsForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateApplicationForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
-import com.airfrance.squaleweb.connection.UserBeanAccessorHelper;
 import com.airfrance.squaleweb.resources.WebMessages;
 import com.airfrance.squaleweb.transformer.ApplicationConfTransformer;
 import com.airfrance.squaleweb.transformer.AuditTransformer;
@@ -77,8 +72,6 @@ import com.airfrance.welcom.struts.easycomplete.WEasyCompleteUtil;
 import com.airfrance.welcom.struts.transformer.WTransformerException;
 import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 import com.airfrance.welcom.struts.util.WConstants;
-import com.inetpsa.clp.LDAPUser;
-import com.inetpsa.clp.exception.LDAPException;
 
 /**
  */
