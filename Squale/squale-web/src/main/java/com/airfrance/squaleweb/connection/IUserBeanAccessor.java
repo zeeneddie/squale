@@ -18,7 +18,10 @@
  */
 package com.airfrance.squaleweb.connection;
 
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
+
 import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
 import com.airfrance.squaleweb.connection.exception.ConnectionException;
 
@@ -38,7 +41,6 @@ public interface IUserBeanAccessor
     IUserBean getUserBean( HttpServletRequest pRequest )
         throws ConnectionException;
 
-
     /**
      * This method do the authentication of the user.
      * 
@@ -47,6 +49,12 @@ public interface IUserBeanAccessor
      */
     AuthenticationBean isUser( UserDTO user );
 
-    
+    /**
+     * This method returns a list of UserDTO whose IDs start by the given "idStart" parameter.
+     * 
+     * @param idStart the beginning of the user id
+     * @return a collection of users whose IDs start by the given paramater
+     */
+    Collection<UserDTO> getUsers( String idStart );
 
 }

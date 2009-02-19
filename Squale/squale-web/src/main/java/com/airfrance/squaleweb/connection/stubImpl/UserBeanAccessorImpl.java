@@ -18,7 +18,11 @@
  */
 package com.airfrance.squaleweb.connection.stubImpl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
+
 import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
 import com.airfrance.squaleweb.connection.AuthenticationBean;
 import com.airfrance.squaleweb.connection.IUserBean;
@@ -26,7 +30,7 @@ import com.airfrance.squaleweb.connection.IUserBeanAccessor;
 import com.airfrance.squaleweb.connection.exception.ConnectionException;
 
 /**
- * This class is a stub implementation of the accessor for authentication 
+ * This class is a stub implementation of the accessor for authentication
  */
 public class UserBeanAccessorImpl
     implements IUserBeanAccessor
@@ -57,6 +61,7 @@ public class UserBeanAccessorImpl
 
     /**
      * This method return a userBean
+     * 
      * @param request : the request
      * @return a userBean
      * @throws ConnectionException : not use in this implementation
@@ -70,6 +75,7 @@ public class UserBeanAccessorImpl
 
     /**
      * Getter method for the userBean of this accessor
+     * 
      * @return l'utilisateur
      */
     public IUserBean getUserBean()
@@ -79,6 +85,7 @@ public class UserBeanAccessorImpl
 
     /**
      * Setter method for the userBean of this accessor
+     * 
      * @param pBean : The userBean of the user
      */
     public void setUserBean( IUserBean pBean )
@@ -86,19 +93,25 @@ public class UserBeanAccessorImpl
         userBean = pBean;
     }
 
-   
-
     /**
      * This method return an authenticationBean with the user authenticated inside.
+     * 
      * @param user : the userDto with the identifier and the password write in the login.jsp page by the user.
      * @return the AuthenticationBean of the authenticated user
      */
     public AuthenticationBean isUser( UserDTO user )
     {
-        AuthenticationBean authent = new AuthenticationBean ("squaleuser",null);
-        
+        AuthenticationBean authent = new AuthenticationBean( "squaleuser", null );
+
         return authent;
     }
 
-    
+    /**
+     * {@inheritDoc}
+     */
+    public Collection<UserDTO> getUsers( String idStart )
+    {
+        return new ArrayList<UserDTO>();
+    }
+
 }

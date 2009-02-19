@@ -21,6 +21,8 @@
 		
 		<component name="getReadersEmails" />
 		
+		<component name="getUsersWithIdStartingBy" />
+		
 	</applicationComponent>
 	
 	<applicationComponent name="ApplicationAdmin" description="Administration et Enregistrement d'applications" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.ApplicationAdminApplicationComponentAccess">

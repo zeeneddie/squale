@@ -18,6 +18,7 @@
  */
 package com.airfrance.squaleweb.applicationlayer.action.component;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
 import com.airfrance.squalecommon.datatransfertobject.component.ApplicationConfDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ProjectConfDTO;
+import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
@@ -60,6 +62,7 @@ import com.airfrance.squaleweb.applicationlayer.formbean.config.ServeurListForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.creation.ApplicationRightsForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateApplicationForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
+import com.airfrance.squaleweb.connection.UserBeanAccessorHelper;
 import com.airfrance.squaleweb.resources.WebMessages;
 import com.airfrance.squaleweb.transformer.ApplicationConfTransformer;
 import com.airfrance.squaleweb.transformer.AuditTransformer;
@@ -1246,13 +1249,29 @@ public class ManageApplicationAction
 
         // create the response object
         WHttpEasyCompleteResponse easyComplete = new WHttpEasyCompleteResponse( response );
-        /*
-         * // and fill it with the users' information if ( stringFirstChars.length() > 1 ) { Collection<UserDTO>
-         * foundUers = UserBeanAccessorHelper.getUserBeanAccessor().getUsers( stringFirstChars ); for ( UserDTO user :
-         * foundUers ) { String value = user.getMatricule(); String label = user.getFullName();
-         * easyComplete.addValueLabel( value, label ); } } // now return the response try { easyComplete.close(); }
-         * catch ( IOException e ) { // there's nothing we can do about it, forget it }
-         */
+
+        // and fill it with the users' information
+        if ( stringFirstChars.length() > 1 )
+        {
+            Collection<UserDTO> foundUsers = UserBeanAccessorHelper.getUserBeanAccessor().getUsers( stringFirstChars );
+            for ( UserDTO user : foundUsers )
+            {
+                String value = user.getMatricule();
+                String label = user.getFullName();
+                easyComplete.addValueLabel( value, label );
+            }
+        }
+
+        // now return the response
+        try
+        {
+            easyComplete.close();
+        }
+        catch ( IOException e )
+        {
+            // there's nothing we can do about it, forget it
+        }
+
         return null;
     }
 
