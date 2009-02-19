@@ -1245,7 +1245,7 @@ public class ManageApplicationAction
     {
         // retrieves the string that the user has just typed in
         String stringFirstChars = request.getParameter( "ch" );
-        stringFirstChars = WEasyCompleteUtil.filter( stringFirstChars );
+        stringFirstChars = WEasyCompleteUtil.filter( stringFirstChars ).toLowerCase();
 
         // create the response object
         WHttpEasyCompleteResponse easyComplete = new WHttpEasyCompleteResponse( response );
