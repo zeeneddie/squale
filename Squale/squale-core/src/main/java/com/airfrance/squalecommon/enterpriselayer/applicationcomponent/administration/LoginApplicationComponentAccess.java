@@ -17,7 +17,6 @@
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
 //Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\applicationcomponent\\LoginApplicationComponentAccess.java
-
 package com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration;
 
 import java.util.ArrayList;
@@ -66,14 +65,13 @@ public class LoginApplicationComponentAccess
         return userDTO;
     }
 
-    
     /**
-     * This method authenticate a user
-     * if the user is authenticate this method return the user with all his information in the userDTO
-     * if the user is not authenticate, the method return a null userDTO 
+     * This method authenticate a user if the user is authenticate this method return the user with all his information
+     * in the userDTO if the user is not authenticate, the method return a null userDTO
      * 
      * @param pUser : userDTO containing only identifier and password
-     * @return userDTO return a user with all his information if he is authenticated, otherwise the method return a null userDTO  
+     * @return userDTO return a user with all his information if he is authenticated, otherwise the method return a null
+     *         userDTO
      * @throws JrafEnterpriseException exception happened during the search in the data base
      */
     public UserDTO userAuthentication( UserDTO pUser )
@@ -200,6 +198,19 @@ public class LoginApplicationComponentAccess
             result.add( ( (UserDTO) it.next() ).getEmail() );
         }
         return result;
+    }
+
+    /**
+     * This method returns a list of UserDTO whose IDs start by the given "idStart" parameter.
+     * 
+     * @param idStart the beginning of the user id
+     * @return a collection of users whose IDs start by the given paramater
+     * @throws JrafEnterpriseException en cas de pb JRAF
+     */
+    public Collection<UserDTO> getUsersWithIdStartingBy( String idStart )
+        throws JrafEnterpriseException
+    {
+        return UserFacade.getUsersWithIdStartingBy( idStart );
     }
 
     /**

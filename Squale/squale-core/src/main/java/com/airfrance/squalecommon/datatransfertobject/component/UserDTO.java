@@ -110,7 +110,6 @@ public class UserDTO
      */
     public void setMatricule( String pMatricule )
     {
-        // TODO : pas transformé en minuscule dans le BO??
         if ( pMatricule != null )
         {
             mMatricule = pMatricule.toLowerCase();

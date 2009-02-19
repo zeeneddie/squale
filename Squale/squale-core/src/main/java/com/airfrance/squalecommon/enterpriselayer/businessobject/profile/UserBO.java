@@ -17,7 +17,6 @@
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
 //Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\profile\\UserBO.java
-
 package com.airfrance.squalecommon.enterpriselayer.businessobject.profile;
 
 import java.io.Serializable;
@@ -118,7 +117,10 @@ public class UserBO
      */
     public void setMatricule( String pMatricule )
     {
-        mMatricule = pMatricule;
+        if ( pMatricule != null )
+        {
+            mMatricule = pMatricule.toLowerCase();
+        }
     }
 
     /**

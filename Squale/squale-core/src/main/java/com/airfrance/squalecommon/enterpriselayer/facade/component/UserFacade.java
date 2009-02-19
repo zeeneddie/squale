@@ -17,7 +17,6 @@
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
 //Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\facade\\UserFacade.java
-
 package com.airfrance.squalecommon.enterpriselayer.facade.component;
 
 import java.util.ArrayList;
@@ -549,6 +548,43 @@ public class UserFacade
             // Fermeture de la session
             FacadeHelper.closeSession( session, UserFacade.class.getName() + ".getAdminUsers" );
         }
+        return result;
+    }
+
+    /**
+     * This method returns a list of UserDTO whose IDs start by the given "idStart" parameter.
+     * 
+     * @param idStart the beginning of the user id
+     * @return a collection of users whose IDs start by the given paramater
+     * @throws JrafEnterpriseException en cas d'échecs
+     */
+    public static Collection<UserDTO> getUsersWithIdStartingBy( String idStart )
+        throws JrafEnterpriseException
+    {
+        ArrayList<UserDTO> result = new ArrayList<UserDTO>();
+        ISession session = null;
+        try
+        {
+            // récupération d'une session
+            session = PERSISTENTPROVIDER.getSession();
+            UserDAOImpl userDAO = UserDAOImpl.getInstance();
+            Collection<UserBO> foundUsers = userDAO.findWhereMatriculeStartsWith( session, idStart );
+            for ( UserBO userBO : foundUsers )
+            {
+                result.add( UserTransform.bo2Dto( userBO ) );
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            // Renvoi d'une exception
+            FacadeHelper.convertException( e, UserFacade.class.getName() + ".getUsersWithIdStartingBy" );
+        }
+        finally
+        {
+            // Fermeture de la session
+            FacadeHelper.closeSession( session, UserFacade.class.getName() + ".getUsersWithIdStartingBy" );
+        }
+
         return result;
     }
 }

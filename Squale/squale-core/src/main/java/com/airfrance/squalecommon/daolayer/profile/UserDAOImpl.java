@@ -32,7 +32,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
 import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import com.airfrance.jraf.spi.persistence.ISession;
 import com.airfrance.squalecommon.daolayer.DAOMessages;
