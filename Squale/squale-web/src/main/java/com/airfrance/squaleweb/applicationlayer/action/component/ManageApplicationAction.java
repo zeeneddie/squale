@@ -77,12 +77,16 @@ import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 import com.airfrance.welcom.struts.util.WConstants;
 
 /**
+ * Struts Action used to handle applications.
+ * 
  */
 public class ManageApplicationAction
     extends ReaderAction
 {
 
     /**
+     * Action called to configure the application.
+     * 
      * @param pMapping le mapping.
      * @param pForm le formulaire à lire.
      * @param pRequest la requête HTTP.
@@ -1251,7 +1255,7 @@ public class ManageApplicationAction
         WHttpEasyCompleteResponse easyComplete = new WHttpEasyCompleteResponse( response );
 
         // and fill it with the users' information
-        if ( stringFirstChars.length() > 1 )
+        if ( stringFirstChars.length() > 0 )
         {
             Collection<UserDTO> foundUsers = UserBeanAccessorHelper.getUserBeanAccessor().getUsers( stringFirstChars );
             for ( UserDTO user : foundUsers )

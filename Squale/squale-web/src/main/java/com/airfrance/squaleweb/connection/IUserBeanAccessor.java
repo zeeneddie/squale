@@ -51,6 +51,10 @@ public interface IUserBeanAccessor
 
     /**
      * This method returns a list of UserDTO whose IDs start by the given "idStart" parameter.
+     * <br>
+     * <u>Note:</u> depending on the implementation (database, LDAP, xml file, ...) and its amount of
+     * stored data, it can be useful to limit the search of users when you implement this method (for
+     * instance, if idStart is less than 2 characters, then you may want to return an empty collection). 
      * 
      * @param idStart the beginning of the user id
      * @return a collection of users whose IDs start by the given paramater
