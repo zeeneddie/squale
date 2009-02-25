@@ -78,6 +78,8 @@ Collections.sort(list, new ComponentComparator());%>
 			</af:menuItem>
 		</logic:present>
 		</logic:notEqual>
+		<%-- Entry for the manual mark page --%>
+		<af:menuItem key="menu.administration.manualMark" color="2" action="<%=\"manual_mark_management.do?action=list&projectId=\"+projectId%>" />
 		
 		<%-- 
 			On propose la comparaison des audits seulement si elle est disponible

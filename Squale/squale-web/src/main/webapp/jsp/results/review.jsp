@@ -100,9 +100,12 @@ if (null == histoGraph) {
 				<input name="previousAuditId" value="<%=previousAuditId%>"
 					type="hidden">
 				<input name="oldAction" value="<%=oldAction%>" type="hidden" />
+				<br/>
+				<br/>
 				<af:field key="review.field.nbdays" property="nbDays" type="NUMBER"
 					size="5" maxlength="4" />
-				<br />
+				<br/>
+				<br/>
 				<af:buttonBar>
 					<af:button type="form" name="retour" toolTipKey="toolTip.retour"
 						onclick="<%=\"location.href='\"+oldAction +\"'\"%>"

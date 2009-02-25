@@ -20,6 +20,7 @@ package com.airfrance.squaleweb.transformer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.SortedMap;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
@@ -62,6 +63,7 @@ public class CriteriumTransformer
     public void objToForm( Object[] pObject, WActionForm pForm )
         throws WTransformerException
     {
+        Locale local = (Locale)pObject[1];
         CriteriumRuleDTO criteriumDTO = (CriteriumRuleDTO) pObject[0];
         CriteriumRuleForm form = (CriteriumRuleForm) pForm;
         form.setId( criteriumDTO.getId() );
@@ -73,7 +75,7 @@ public class CriteriumTransformer
         while ( practicesIt.hasNext() )
         {
             PracticeRuleDTO currentDTO = (PracticeRuleDTO) practicesIt.next();
-            form.addPractice( (PracticeRuleForm) WTransformerFactory.objToForm( PracticeTransformer.class, currentDTO ) );
+            form.addPractice( (PracticeRuleForm) WTransformerFactory.objToForm( PracticeTransformer.class, new Object[] {currentDTO,local} ) );
             ponderation +=
                 QualityRuleForm.SEPARATOR + ( (Float) criteriumDTO.getPractices().get( currentDTO ) ).toString();
         }

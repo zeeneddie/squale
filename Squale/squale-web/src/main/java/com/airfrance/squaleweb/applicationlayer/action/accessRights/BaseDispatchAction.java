@@ -79,33 +79,33 @@ public abstract class BaseDispatchAction
      * Contient la clé de référence de l'attribut de session contenant la liste des projets du projet actuellement
      * sélectionné.
      */
-    public final static String PROJECTS_KEY = "projects.list";
+    public static final String PROJECTS_KEY = "projects.list";
 
     /** Constantes */
 
     /** défini la constante pour le dto */
-    public final static String REQUEST_DTO = "requestDTO";
+    public static final String REQUEST_DTO = "requestDTO";
 
     /** constante pour l'application */
-    public final static String APPLI_DTO = "applicationDTO";
+    public static final String APPLI_DTO = "applicationDTO";
 
     /** constante pour l'application */
-    public final static String PROJECT_DTO = "projectDTO";
+    public static final String PROJECT_DTO = "projectDTO";
 
     /** constante pour l'application */
-    public final static String CURRENT_AUDIT_DTO = "currentAuditDTO";
+    public static final String CURRENT_AUDIT_DTO = "currentAuditDTO";
 
     /** constante pour l'application */
-    public final static String PREVIOUS_AUDIT_DTO = "previousAuditDTO";
+    public static final String PREVIOUS_AUDIT_DTO = "previousAuditDTO";
 
     /** constante pour l'application */
-    public final static String DO_NOT_UPDATE_PROJECT_NAME = "doNotUpdateProjectName";
+    public static final String DO_NOT_UPDATE_PROJECT_NAME = "doNotUpdateProjectName";
 
     /**
      * Paramètre de la requête pour indiquer qu'il ne faut pas modifier le formulaire en session. C'est le cas par
      * exemple pour la création d'un projet ou d'une application
      */
-    public final static String DO_NOT_RESET_FORM = "doNotResetForm";
+    public static final String DO_NOT_RESET_FORM = "doNotResetForm";
 
     /**
      * Traitement d'une exception Une exception interceptée dans une action est traitée par l'appel de cette méthode qui

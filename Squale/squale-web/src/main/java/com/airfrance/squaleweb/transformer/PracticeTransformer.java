@@ -18,10 +18,13 @@
  */
 package com.airfrance.squaleweb.transformer;
 
+import java.util.Locale;
+
 import com.airfrance.squalecommon.datatransfertobject.rule.AbstractFormulaDTO;
 import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.FormulaForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.PracticeRuleForm;
+import com.airfrance.squaleweb.util.TimelimitationUtil;
 import com.airfrance.welcom.struts.bean.WActionForm;
 import com.airfrance.welcom.struts.transformer.WITransformer;
 import com.airfrance.welcom.struts.transformer.WTransformerException;
@@ -35,9 +38,7 @@ public class PracticeTransformer
 {
 
     /**
-     * @param pObject l'objet à transformer
-     * @throws WTransformerException si un pb apparait.
-     * @return le formulaire.
+     * {@inheritDoc}
      */
     public WActionForm objToForm( Object[] pObject )
         throws WTransformerException
@@ -48,33 +49,43 @@ public class PracticeTransformer
     }
 
     /**
-     * @param pObject l'objet à transformer
-     * @param pForm le formulaire à remplir.
-     * @throws WTransformerException si un pb apparait.
+     * {@inheritDoc}
      */
     public void objToForm( Object[] pObject, WActionForm pForm )
         throws WTransformerException
     {
         PracticeRuleDTO practiceDTO = (PracticeRuleDTO) pObject[0];
+        Locale local = (Locale) pObject[1];
+
         PracticeRuleForm form = (PracticeRuleForm) pForm;
         form.setId( practiceDTO.getId() );
         form.setName( practiceDTO.getName() );
         form.setEffort( practiceDTO.getEffort() );
+        // If it's not a manual practice
         if ( practiceDTO.getFormula() != null )
         {
             form.setFormula( (FormulaForm) WTransformerFactory.objToForm( FormulaTransformer.class,
                                                                           practiceDTO.getFormula() ) );
         }
+        // If it's a manual practice
+        else
+        {
+            String[] periodUnit = TimelimitationUtil.parseString( practiceDTO.getTimeLimitation(), local );
+            if ( periodUnit.length == 2 )
+            {
+                form.setPeriod( periodUnit[0] );
+                form.setUnit( periodUnit[1] );
+            }
+        }
         if ( practiceDTO.getWeightingFunction() != null )
         {
             form.setWeightingFunction( practiceDTO.getWeightingFunction() );
         }
+
     }
 
     /**
-     * @param pForm le formulaire à lire.
-     * @throws WTransformerException si un pb apparait.
-     * @return le tableaux des objets.
+     * {@inheritDoc}
      */
     public Object[] formToObj( WActionForm pForm )
         throws WTransformerException
@@ -85,9 +96,7 @@ public class PracticeTransformer
     }
 
     /**
-     * @param pObject l'objet à remplir
-     * @param pForm le formulaire à lire.
-     * @throws WTransformerException si un pb apparait.
+     * {@inheritDoc}
      */
     public void formToObj( WActionForm pForm, Object[] pObject )
         throws WTransformerException

@@ -21,6 +21,7 @@ package com.airfrance.squaleweb.applicationlayer.action.results.project;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -50,6 +51,7 @@ import com.airfrance.jraf.helper.AccessDelegateHelper;
 import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import com.airfrance.squalecommon.datatransfertobject.result.QualityResultDTO;
 import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
 import com.airfrance.squalecommon.datatransfertobject.rule.CriteriumRuleDTO;
 import com.airfrance.squalecommon.datatransfertobject.rule.FactorRuleDTO;
@@ -57,6 +59,7 @@ import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
+import com.airfrance.squalecommon.util.manualmark.TimeLimitationParser;
 import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
@@ -646,15 +649,16 @@ public class ProjectResultsAction
             }
             else
             {
-                forward = pMapping.findForward( "practice" );
                 ResultForm resForm = (ResultForm) form;
                 // rempli les champs à passer de requete en requete
                 resForm.copyValues( (RootForm) pForm );
-                // le graph
-                double[] tab;
-                // Si la formule est nulle (ne devrait pas arriver si on arrive ici), pas de graphe
+                // if practice is not a manual practice
                 if ( resForm.getFormulaType() != null )
                 {
+                    forward = pMapping.findForward( "practice" );
+                    // le graph
+                    double[] tab;
+                    
                     // Dans les 2 cas on affiche le graph en barre
                     RepartitionBarMaker barMaker =
                         new RepartitionBarMaker( pRequest, resForm.getProjectId(), resForm.getCurrentAuditId(),
@@ -688,6 +692,11 @@ public class ProjectResultsAction
                     { // on remet l'histogramme à null pour le réinitialiser et ne pas l'afficher
                         ( (ProjectSummaryForm) pForm ).setHistoBarGraph( null );
                     }
+                }
+                //if the practice is a manual practice
+                else
+                {
+                    forward = pMapping.findForward( "manualpractice" );
                 }
             }
             ( (ProjectSummaryForm) pForm ).setResults( form );
@@ -815,6 +824,24 @@ public class ProjectResultsAction
             result =
                 WTransformerFactory.objToForm( transformerClass, new Object[] { resultDTO, factor, practice, project,
                     audits, infoForm, pRequest.getLocale() } );
+            //If the practice is a manual practice
+            if( practice.getFormula()== null || practice.getFormulaType()==null)
+            {
+                ResultForm curForm = (ResultForm) result;
+                QualityResultDTO lastMark = (QualityResultDTO)ac.execute( "lastManualMark", new Object[]{project.getID(),practiceId} );
+                Date creationDate = lastMark.getCreationDate();
+                AuditDTO curAudit = (AuditDTO)auditsDTO.get( 0 );
+                if (creationDate.before( curAudit.getRealDate()))
+                {
+                    curForm.setLast( true );
+                    PracticeRuleDTO rule = (PracticeRuleDTO)lastMark.getRule();
+                    boolean markValid = TimeLimitationParser.isMarkValid( rule.getTimeLimitation(), creationDate );
+                    if (!markValid)
+                    {
+                        curForm.setOutOfDate( true );
+                    }
+                }
+            }
             manageTrackerFromPractice( pRequest, paramParent, practiceName, practiceId );
         }
         return result;

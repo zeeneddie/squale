@@ -7,18 +7,12 @@
 <%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm" %>
 <%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
 
-<bean:define id="projectId" name="projectSummaryForm"
-	property="projectId" type="String" />
-<bean:define id="currentAuditId" name="projectSummaryForm"
-	property="currentAuditId" type="String" />
-<bean:define id="previousAuditId" name="projectSummaryForm"
-	property="previousAuditId" type="String" />
-
-
+<bean:define id="projectId" name="projectSummaryForm" property="projectId" type="String" />
+<bean:define id="currentAuditId" name="projectSummaryForm"	property="currentAuditId" type="String" />
+<bean:define id="previousAuditId" name="projectSummaryForm"	property="previousAuditId" type="String" />
 <bean:define id="form" name="projectSummaryForm" property="results" />
 <bean:define id="practiceName" name="form" property="name" type="String" />
-<bean:define id="repartition" name="form" property="intRepartition"
-	type="double[]" />
+<bean:define id="repartition" name="form" property="intRepartition"	type="double[]" />
 <bean:define id="treId" name="form" property="id" type="String" />
 <bean:define id="infoForm" name="form" property="infoForm" />
 <%

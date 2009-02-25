@@ -21,6 +21,7 @@ package com.airfrance.squaleweb.transformer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Locale;
 
 import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridConfDTO;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.FactorListForm;
@@ -59,6 +60,7 @@ public class GridConfTransformer
     public void objToForm( Object[] pObject, WActionForm pForm )
         throws WTransformerException
     {
+        Locale local = (Locale) pObject[1];
         QualityGridConfDTO gridDTO = (QualityGridConfDTO) pObject[0];
         GridConfigForm form = (GridConfigForm) pForm;
         form.setId( gridDTO.getId() );
@@ -70,7 +72,8 @@ public class GridConfTransformer
         while ( factorsIt.hasNext() )
         {
             // Conversion de chacun des facteurs
-            factors.add( WTransformerFactory.objToForm( FactorTransformer.class, factorsIt.next() ) );
+            factors.add( WTransformerFactory.objToForm( FactorTransformer.class,
+                                                        new Object[] { factorsIt.next(), local } ) );
         }
         FactorListForm factorForms = new FactorListForm();
         factorForms.setList( factors );

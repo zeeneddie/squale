@@ -38,7 +38,7 @@ import org.jfree.data.time.TimeSeriesCollection;
 import com.airfrance.squaleweb.resources.WebMessages;
 
 /**
- * @author M400843
+ * Help class for create historic graph
  */
 public class HistoMaker
     extends AbstractGraphMaker
@@ -120,9 +120,22 @@ public class HistoMaker
     }
 
     /**
-     * @return le diagramme JFreeChart
+     * This method create the JFreechart chart. By default The date axis is limited by the series of information insert
+     * 
+     * @return A JFreeChart graph
      */
     public JFreeChart getChart()
+    {
+        return getChart( false );
+    }
+
+    /**
+     * This method create the JFreechart chart
+     * 
+     * @param maxAxisToday Does the max for the date axis should be set to today ?
+     * @return A JFreeChart chart
+     */
+    public JFreeChart getChart( boolean maxAxisToday )
     {
         JFreeChart retChart = super.getChart();
         if ( null == retChart )
@@ -135,6 +148,10 @@ public class HistoMaker
             plot.setRenderer( xylineandshaperenderer );
             SimpleDateFormat sdf = new SimpleDateFormat( mDateFormat );
             DateAxis axis = (DateAxis) plot.getDomainAxis();
+            if ( maxAxisToday )
+            {
+                axis.setMaximumDate( new Date() );
+            }
             axis.setDateFormatOverride( sdf );
             ValueAxis yAxis = plot.getRangeAxis();
             yAxis.setStandardTickUnits( NumberAxis.createIntegerTickUnits() );

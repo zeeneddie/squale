@@ -45,8 +45,11 @@ public class ParamReviewForm
     /** type du composant */
     private String mComponentType;
 
-    /** Identificateur de la règle qualité * */
+    /** Identificateur de la règle qualité */
     private String mRuleId;
+
+    /** Does the rule is a manual practice ?*/
+    private boolean isManualMark;
 
     /**
      * nombre de jours pour le graph d'évolution
@@ -202,4 +205,23 @@ public class ParamReviewForm
         }
     }
 
+    /**
+     * Getter for the attribute isManualMark
+     * 
+     * @return true if the rule is a manual practice
+     */
+    public boolean isManualMark()
+    {
+        return isManualMark;
+    }
+
+    /**
+     * Setter for the attribute isManualMark
+     * 
+     * @param pIsManualMark The new kind of manual practice
+     */
+    public void setIsManualMark( boolean pIsManualMark )
+    {
+        isManualMark = pIsManualMark;
+    }
 }

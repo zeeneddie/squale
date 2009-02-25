@@ -393,7 +393,7 @@ div#conteneur div.contenuModulable div.c1, div#conteneur div.contenuModulable di
 div#conteneur div.contenuModulable div.c1 {width:230px;}
 div#conteneur div.contenuModulable div.c2 {width:479px;}
 div#conteneur div.contenuModulable div.c3 {width:729px;}
-/*-- element for the homepageManagement.jsp --*/
+/*-- element for the homepageManagement.jsp, manaualMark.jsp--*/
 table.formulaire td.check_col {width:20px; height:25px }
 table.formulaire th.check_col {width:20px; height:25px; text-align:center;}
 table.formulaire th.height_col{height:25px; }

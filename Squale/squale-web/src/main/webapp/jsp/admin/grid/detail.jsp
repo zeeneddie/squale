@@ -110,6 +110,29 @@
 																		</tr>
 																	</table>
 																</logic:notEmpty>
+																<logic:empty name="practice" property="formula">
+																	<table>
+																		<tr>
+																			<af:field key="grid_detail.practice.effort"
+																				property='<%="factors.list[" + factorId + "].criteria.list[" + criteriumId + "].practices.list[" + practiceId + "].effort"%>' />
+																		</tr>
+																		<tr>
+																			
+																			<af:field key="grid_detail.period"
+																				property='<%="factors.list[" + factorId + "].criteria.list[" + criteriumId + "].practices.list[" + practiceId + "].period"%>' />
+																			<%--<af:field key="grid_detail.unit"
+																				property='<%="factors.list[" + factorId + "].criteria.list[" + criteriumId + "].practices.list[" + practiceId + "].unit"%>' />--%>
+																			<td><bean:message key="grid_detail.unit"/>&nbsp
+																			<af:select property='<%="factors.list[" + factorId + "].criteria.list[" + criteriumId + "].practices.list[" + practiceId + "].unit"%>' >
+																				<af:option value="" key="timelimitation.unit.always"/>
+																				<af:option value="D" key="timelimitation.unit.day"/>
+																				<af:option value="M" key="timelimitation.unit.month"/>
+																				<af:option value="Y" key="timelimitation.unit.year"/>
+																			</af:select>
+																			</td>
+																		</tr>
+																	</table>
+																</logic:empty>
 															</af:dropDownPanel>
 														</tr>
 													</table>

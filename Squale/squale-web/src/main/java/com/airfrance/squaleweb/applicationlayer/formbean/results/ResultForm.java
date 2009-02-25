@@ -58,12 +58,12 @@ public class ResultForm
     /**
      * Clé du tre parent
      */
-    private String mTreParent = null;
+    private String mTreParent;
 
     /**
      * Id du parent
      */
-    private String mParentId = null;
+    private String mParentId;
 
     /**
      * La répartition, utilisée uniquement dans le cas d'une pratique Ce sont des valeurs entières, mais on définit un
@@ -77,6 +77,19 @@ public class ResultForm
      */
     private double[] mFloatRepartition = new double[QualityRuleBO.NUMBER_OF_FLOAT_INTERVALS];
 
+    
+    //Element for the manual mark
+    /** Is it the last mark record ? */
+    private boolean last;
+    
+    /** Does the mark is out of date ? */
+    private boolean outOfDate;
+
+    
+    
+    
+    
+    
     /**
      * Constructeur par défaut
      */
@@ -335,6 +348,46 @@ public class ResultForm
     public void setInfoForm( PracticeInformationForm pInfoForm )
     {
         mInfoForm = pInfoForm;
+    }
+    
+    /**
+     * Getter for the attribute isLast
+     * 
+     * @return true if the mark used by the audit is the last mark record for the manual practice 
+     */
+    public boolean isLast()
+    {
+        return last;
+    }
+
+    /**
+     * Setter for the attribute isLast
+     * 
+     * @param isLast The new state
+     */
+    public void setLast( boolean isLast )
+    {
+        last = isLast;
+    }
+
+    /**
+     * Getter for the attribute isOutOfDate
+     * 
+     * @return true if the mark used by the audit is the last mark record and this mark out of date
+     */
+    public boolean isOutOfDate()
+    {
+        return outOfDate;
+    }
+
+    /**
+     * Setter for the attribute outOfDate
+     * 
+     * @param isoutOfDate The new state of the mark
+     */
+    public void setOutOfDate( boolean isoutOfDate )
+    {
+        outOfDate = isoutOfDate;
     }
 
 }

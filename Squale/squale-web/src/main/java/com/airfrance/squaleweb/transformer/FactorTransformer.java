@@ -20,6 +20,7 @@ package com.airfrance.squaleweb.transformer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 import com.airfrance.squalecommon.datatransfertobject.rule.CriteriumRuleDTO;
@@ -60,6 +61,7 @@ public class FactorTransformer
     public void objToForm( Object[] pObject, WActionForm pForm )
         throws WTransformerException
     {
+        Locale local = (Locale) pObject[1];
         FactorRuleDTO factorDTO = (FactorRuleDTO) pObject[0];
         FactorRuleForm form = (FactorRuleForm) pForm;
         form.setId( factorDTO.getId() );
@@ -71,7 +73,7 @@ public class FactorTransformer
         {
             CriteriumRuleDTO currentDTO = (CriteriumRuleDTO) criteriaIt.next();
             form.addCriterium( (CriteriumRuleForm) WTransformerFactory.objToForm( CriteriumTransformer.class,
-                                                                                  currentDTO ) );
+                                                                                  new Object[] { currentDTO, local } ) );
             ponderation += QualityRuleForm.SEPARATOR + ( (Float) factorDTO.getCriteria().get( currentDTO ) ).toString();
         }
         if ( ponderation.length() > 2 )

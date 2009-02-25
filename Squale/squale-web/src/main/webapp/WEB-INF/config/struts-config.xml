@@ -124,6 +124,8 @@
         </form-bean>
         <form-bean name="homepageForm" type="com.airfrance.squaleweb.applicationlayer.formbean.HomepageForm">
         </form-bean>
+        <form-bean name="manualMarkForm" type="com.airfrance.squaleweb.applicationlayer.formbean.manualmark.ManualMarkForm">
+        </form-bean>
 	</form-beans>
 
 
@@ -166,18 +168,16 @@
 			<forward name="summaryAction" path="/project.do?action=summary"/>
 			<forward name="factor" path="/jsp/results/project/factor.jsp"/>
 			<forward name="practice" path="/jsp/results/project/practice.jsp"/>
+			<forward name="manualpractice" path="/jsp/results/project/manualPractice.jsp"/>
 			<forward name="summary" path="/jsp/results/project/summary.jsp"/>
 			<forward name="practiceruleschecking" path="/jsp/results/project/practiceRuleChecking.jsp"/>
-			<forward name="component_root" path="/project_component.do?action=root">
-			</forward>
-			<forward name="practicerulescheckingitem" path="/jsp/results/project/practiceRuleCheckingItem.jsp">
-			</forward>
-			<forward name="errorsAction" path="/project_errors.do?action=errors">
-			</forward>
-			<forward name="noAudits" path="/jsp/results/audits/none.jsp">
-			</forward>
-			<forward name="export_failure" path="/jsp/results/project/summary.jsp">
-			</forward>
+			<forward name="manualmark" path="/manual_mark.do?action=element"/>
+			<forward name="component_root" path="/project_component.do?action=root"/>			
+			<forward name="practicerulescheckingitem" path="/jsp/results/project/practiceRuleCheckingItem.jsp"/>			
+			<forward name="errorsAction" path="/project_errors.do?action=errors"/>			
+			<forward name="noAudits" path="/jsp/results/audits/none.jsp"/>			
+			<forward name="export_failure" path="/jsp/results/project/summary.jsp"/>
+
 		</action>
 		<action path="/audits" parameter="action" type="com.airfrance.squaleweb.applicationlayer.action.results.audit.AuditAction" name="splitAuditsListForm" scope="session" input="/jsp/admin/audit/terminated.jsp">
 			<forward name="list" path="/jsp/results/audits/all.jsp"/>
@@ -206,6 +206,7 @@
 		</action>
 		<action path="/review" type="com.airfrance.squaleweb.applicationlayer.action.results.ReviewAction" name="paramReviewForm" parameter="action" scope="session" input="/jsp/results/review.jsp">
 			<forward name="review" path="/jsp/results/review.jsp"/>
+			<forward name="reviewManualMark" path="/jsp/results/reviewManualMark.jsp"/>
 			<forward name="validate" path="/jsp/results/review.jsp"/>
 		</action>
 		<action path="/mark" type="com.airfrance.squaleweb.applicationlayer.action.results.project.ProjectResultsAction" name="markForm" scope="session" parameter="action">
@@ -668,6 +669,12 @@
 		<action path="/homepage_management" type="com.airfrance.squaleweb.applicationlayer.action.homepagemanagement.HomepageManagementAction" name="HomepageManagementForm" scope="session" >
 			<forward name="success" path="/jsp/admin/homepage/homepageManagement.jsp">
 			</forward>
+		</action>
+		<action path="/manual_mark_management" type="com.airfrance.squaleweb.applicationlayer.action.manualmark.ManualMarkAction" name="manualMarkForm" scope="session" parameter="action">
+			<forward name="success" path="/jsp/results/project/manualMarkManagement.jsp"/>
+		</action>
+		<action path="/manual_mark" type="com.airfrance.squaleweb.applicationlayer.action.manualmark.ManualMarkAction" name="manualMarkForm" scope="session" parameter="action">
+			<forward name="success" path="/jsp/results/project/manualMark.jsp"/>
 		</action>
 	</action-mappings>
 	

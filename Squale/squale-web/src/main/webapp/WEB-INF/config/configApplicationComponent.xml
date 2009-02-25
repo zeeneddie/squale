@@ -232,6 +232,15 @@
 		
 		<component name="getProjectReports" />
 		
+		<component name="listOfManualMark" />
+		
+		<component name="saveManualResult"/>
+		
+		<component name="lastManualMark"/>
+		
+		<component name="auditManualMark"/>
+		
+		
 	</applicationComponent>
 
 	<applicationComponent name="QualityGrid" description="Manipulation des grilles qualite et objets connexes" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.QualityGridApplicationComponentAccess">

@@ -18,8 +18,7 @@
 			<bean:message key="administration.not_attempted_audit.details" />
 			<br />
 			<br />
-			<af:form action="adminNotAttemptedAudit.do" scope="session"
-				method="POST">
+			<af:form action="adminNotAttemptedAudit.do" scope="session" method="POST">
 				<af:table name="splitAuditsListForm" property="notAttemptedAudits"
 					totalLabelPos="none" emptyKey="table.results.none">
 					<af:cols id="audit" idIndex="index">

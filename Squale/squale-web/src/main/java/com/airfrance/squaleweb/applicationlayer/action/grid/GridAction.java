@@ -20,6 +20,7 @@ package com.airfrance.squaleweb.applicationlayer.action.grid;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -102,6 +103,7 @@ public class GridAction
 
         ActionErrors errors = new ActionErrors();
         ActionForward forward = pMapping.findForward( "total_failure" );
+        Locale local= pRequest.getLocale();
         try
         {
             IApplicationComponent ac = AccessDelegateHelper.getInstance( "QualityGrid" );
@@ -109,7 +111,7 @@ public class GridAction
             QualityGridDTO dto = new QualityGridDTO();
             dto.setId( Long.parseLong( param ) );
             QualityGridConfDTO conf = (QualityGridConfDTO) ac.execute( "getGrid", new Object[] { dto } );
-            WActionForm form = WTransformerFactory.objToForm( GridConfTransformer.class, conf );
+            WActionForm form = WTransformerFactory.objToForm( GridConfTransformer.class, new Object[] {conf,local} );
             pRequest.getSession().setAttribute( "gridConfigForm", form );
             forward = pMapping.findForward( "detail" );
         }

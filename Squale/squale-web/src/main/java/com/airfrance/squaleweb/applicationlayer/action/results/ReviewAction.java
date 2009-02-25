@@ -41,6 +41,7 @@ import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
 import com.airfrance.jraf.helper.AccessDelegateHelper;
 import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
 import com.airfrance.squalecommon.datatransfertobject.rule.QualityRuleDTO;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
 import com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm;
@@ -82,6 +83,7 @@ public class ReviewAction
             forward = pMapping.findForward( "review" );
             String tre;
             String ruleId;
+            boolean isManualMark=false;
             // Détermination du type de paramètre
             boolean isMetric =
                 ( pRequest.getParameter( "kind" ) == null ) || ( pRequest.getParameter( "kind" ).equals( "metric" ) );
@@ -95,10 +97,19 @@ public class ReviewAction
                 // Récupération du véritable nom de la règle
                 IApplicationComponent ac = AccessDelegateHelper.getInstance( "QualityGrid" );
                 QualityRuleDTO dto = new QualityRuleDTO();
-                dto.setId( Integer.valueOf( pRequest.getParameter( "which" ) ).longValue() );
+                ruleId = pRequest.getParameter( "which" );
+                dto.setId( Integer.valueOf( ruleId ).longValue() );
                 dto = (QualityRuleDTO) ac.execute( "getQualityRule", new Object[] { dto, new Boolean( false ) } );
                 tre = dto.getName();
-                ruleId = pRequest.getParameter( "which" );
+                if ( dto instanceof PracticeRuleDTO )
+                {
+                    //If the practice is a manual practice 
+                    if(((PracticeRuleDTO)dto).getFormulaType()==null)
+                    {
+                        isManualMark=true;
+                        forward = pMapping.findForward( "reviewManualMark" );
+                    }
+                }
             }
             // si un composant est précisé, on le prend sinon on prend le projet
             String componentId = pRequest.getParameter( "component" );
@@ -107,7 +118,7 @@ public class ReviewAction
                 componentId = pRequest.getParameter( "projectId" );
             }
             WTransformerFactory.objToForm( ParamReviewTransformer.class, (WActionForm) pForm, new Object[] { tre,
-                ruleId, componentId } );
+                ruleId, componentId,isManualMark } );
             IApplicationComponent ac = AccessDelegateHelper.getInstance( "Component" );
             ComponentDTO dto = new ComponentDTO();
             dto.setID( new Long( componentId ).longValue() );
@@ -169,7 +180,17 @@ public class ReviewAction
                                      HttpServletResponse pResponse )
     {
         ActionErrors errors = new ActionErrors();
-        ActionForward forward = pMapping.findForward( "review" );
+        ParamReviewForm currentForm = (ParamReviewForm)pForm;
+        ActionForward forward =null;
+        // If we work on manual practice
+        if (currentForm.isManualMark())
+        {
+            forward = pMapping.findForward( "reviewManualMark" );
+        }
+        else
+        {
+            forward = pMapping.findForward( "review" );
+        }
         // Met à jour le champ graph du form
         try
         {
@@ -186,6 +207,7 @@ public class ReviewAction
     }
 
     /**
+     * 
      * @param pForm le formulaire
      * @param pRequest la requête
      * @return les paramètres
@@ -194,38 +216,31 @@ public class ReviewAction
     {
         ActionErrors errors = new ActionErrors();
         Object[] paramIn = null;
-        try
+        ParamReviewForm currentForm = (ParamReviewForm)pForm;
+        int index = 0;
+        int nbDays = currentForm.getNbDays();
+        String tre = currentForm.getTre();
+        String ruleId =currentForm.getRuleId();
+        String componentId = currentForm.getComponentId();
+        
+        ComponentDTO comp = new ComponentDTO();
+        comp.setID( Long.decode( componentId ).longValue() );
+        Date date = null;
+        // Conversion en une date
+        if ( nbDays> 0 )
         {
-            Object[] vals = WTransformerFactory.formToObj( ParamReviewTransformer.class, (WActionForm) pForm );
-            int index = 0;
-            Integer nbDays = (Integer) vals[index++];
-            String tre = (String) vals[index++];
-            String ruleId = (String) vals[index++];
-            String componentId = (String) vals[index++];
-            ComponentDTO comp = new ComponentDTO();
-            comp.setID( Long.decode( componentId ).longValue() );
-            Date date = null;
-            // Conversion en une date
-            if ( nbDays.intValue() > 0 )
-            {
-                GregorianCalendar gc = new GregorianCalendar();
-                gc.add( Calendar.DATE, -nbDays.intValue() );
-                date = gc.getTime();
-            }
-            String treLabel = WebMessages.getString( pRequest, tre );
-            if ( ruleId.length() > 0 )
-            {
-                paramIn = new Object[] { comp, tre, treLabel, date, Long.decode( ruleId ) };
-            }
-            else
-            {
-                paramIn = new Object[] { comp, tre, treLabel, date, null };
-            }
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.add( Calendar.DATE, -nbDays );
+            date = gc.getTime();
         }
-        catch ( Exception e )
+        String treLabel = WebMessages.getString( pRequest, tre );
+        if ( ruleId.length() > 0 )
         {
-            // Factorisation du traitement des erreurs
-            handleException( e, errors, pRequest );
+            paramIn = new Object[] { comp, tre, treLabel, date, Long.decode( ruleId ) };
+        }
+        else
+        {
+            paramIn = new Object[] { comp, tre, treLabel, date, null };
         }
         return paramIn;
     }
@@ -264,13 +279,41 @@ public class ReviewAction
 
         // Obtention de la couche métier
         IApplicationComponent ac2 = AccessDelegateHelper.getInstance( "Graph" );
-
+        
         // Appel de la couche métier
         Object[] result = (Object[]) ac2.execute( "getHistoricGraph", paramIn );
+        
         // On n'affiche le graphe que si on a des résultats
+        if(((ParamReviewForm)pForm).isManualMark())
+        {
+            histoChart = manualMarkGraph(pRequest,result);
+        }
+        else
+        {
+            histoChart = componentGraph(pRequest,result);
+        }
+        
+        // Met à jour l'attribut graph dans le form
+        ( (ParamReviewForm) pForm ).setReviewGraph( histoChart );
+        pRequest.getSession().removeAttribute( SqualeWebConstants.VALIDATED );
+        return histoChart;
+    }
+
+    /**
+     * Create the GraphMaker
+     * 
+     * @param pRequest The http request
+     * @param result The list of results to display
+     * @return an object GraphMaker
+     * @throws IOException exception happen
+     */
+    private GraphMaker componentGraph(HttpServletRequest pRequest,Object[] result) throws IOException
+    {
+        GraphMaker histoChart = null;
         if ( ( (Map) result[1] ).size() > 0 )
         {
             HistoMaker histoMaker = new HistoMaker();
+            //Add the curve for the list of result
             histoMaker.addCurve( (String) result[0], (Map) result[1] );
             JFreeChart chartKiviat = histoMaker.getChart();
             ChartRenderingInfo infoHisto = new ChartRenderingInfo( new StandardEntityCollection() );
@@ -280,10 +323,36 @@ public class ReviewAction
                                                  infoHisto, pRequest.getSession() );
             histoChart = new GraphMaker( pRequest, fileNameHisto, infoHisto );
         }
-        // Met à jour l'attribut graph dans le form
-        ( (ParamReviewForm) pForm ).setReviewGraph( histoChart );
-        pRequest.getSession().removeAttribute( SqualeWebConstants.VALIDATED );
         return histoChart;
     }
-
+    
+    /**
+     * Create the GraphMaker for a manual practice
+     * 
+     * @param pRequest The http request
+     * @param result The list of results to display
+     * @return an object GraphMaker
+     * @throws IOException exception happen
+     */
+    private GraphMaker manualMarkGraph(HttpServletRequest pRequest,Object[] result) throws IOException
+    {
+        GraphMaker histoChart = null;
+        if ( ( (Map) result[1] ).size() > 0 || ((Map) result[3]).size()>0)
+        {
+            HistoMaker histoMaker = new HistoMaker();
+            //Add the curve for the historic of mark
+            histoMaker.addCurve( (String) result[0], (Map) result[1] );
+            //Add the curve for the validity period
+            histoMaker.addCurve(WebMessages.getString( pRequest, "reviewManualMark.validity" ), (Map) result[3] );
+            JFreeChart chartKiviat = histoMaker.getChart(true);
+            ChartRenderingInfo infoHisto = new ChartRenderingInfo( new StandardEntityCollection() );
+            // save the graph as png in a temporary space
+            String fileNameHisto =
+                ServletUtilities.saveChartAsPNG( chartKiviat, HistoMaker.DEFAULT_WIDTH, HistoMaker.DEFAULT_HEIGHT,
+                                                 infoHisto, pRequest.getSession() );
+            histoChart = new GraphMaker( pRequest, fileNameHisto, infoHisto );
+        }
+        return histoChart;
+    }
+    
 }

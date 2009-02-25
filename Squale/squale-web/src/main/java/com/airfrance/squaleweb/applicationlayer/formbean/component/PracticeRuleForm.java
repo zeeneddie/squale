@@ -19,26 +19,34 @@
 package com.airfrance.squaleweb.applicationlayer.formbean.component;
 
 /**
- * Données synthétiques d'une formule
+ * Information on the rule
  */
 public class PracticeRuleForm
     extends QualityRuleForm
 {
 
-    /** L'id de l'objet */
+    /** Id of the object */
     private long mId;
 
-    /** Formule */
+    /** Formula of the rule */
     private FormulaForm mFormula;
 
-    /** La fonction de pondération associée */
+    /** The weighting function link to the formula */
     private String mWeightingFunction;
 
-    /** L'effort nécessaire à la correction */
+    /** The effort link to the rule */
     private int mEffort = 1;
+    
+    /** Unit for the time limitation*/
+    private String unit;
+    
+    /** Period for the time limitation */
+    private String period;
 
     /**
-     * @return id
+     * Getter method for the attribute id
+     * 
+     * @return id 
      */
     public long getId()
     {
@@ -46,7 +54,9 @@ public class PracticeRuleForm
     }
 
     /**
-     * @param pId id
+     * Setter method for the attribute id
+     * 
+     * @param pId The new id 
      */
     public void setId( long pId )
     {
@@ -54,7 +64,9 @@ public class PracticeRuleForm
     }
 
     /**
-     * @return formule
+     * Getter for the attribute formula  
+     * 
+     * @return The formula
      */
     public FormulaForm getFormula()
     {
@@ -62,7 +74,9 @@ public class PracticeRuleForm
     }
 
     /**
-     * @param pForm formule
+     * Setter for the attribute formula
+     * 
+     * @param pForm The new formula
      */
     public void setFormula( FormulaForm pForm )
     {
@@ -70,7 +84,9 @@ public class PracticeRuleForm
     }
 
     /**
-     * @return la fonction de pondération associée
+     * Getter method for the attribute mWeightingFunction
+     * 
+     * @return The weighting function mWeightingFunction
      */
     public String getWeightingFunction()
     {
@@ -78,6 +94,8 @@ public class PracticeRuleForm
     }
 
     /**
+     * Setter method for the attribute  
+     * 
      * @param pWeightingFunction la fonction de pondération associée
      */
     public void setWeightingFunction( String pWeightingFunction )
@@ -86,7 +104,9 @@ public class PracticeRuleForm
     }
 
     /**
-     * @return l'effort
+     * The getter for the attribute effort
+     * 
+     * @return The effort
      */
     public int getEffort()
     {
@@ -94,11 +114,53 @@ public class PracticeRuleForm
     }
 
     /**
-     * @param pEffort l'effort
+     * Setter for attribute effort
+     * 
+     * @param pEffort The new effort
      */
     public void setEffort( int pEffort )
     {
         mEffort = pEffort;
+    }
+
+    /**
+     * Getter for the attribute unit
+     * 
+     * @return The unit
+     */
+    public String getUnit()
+    {
+        return unit;
+    }
+
+    /**
+     * Setter for the attribute unit
+     * 
+     * @param pUnit The new unit
+     */
+    public void setUnit( String pUnit )
+    {
+        unit = pUnit;
+    }
+
+    /**
+     * Getter for the attribute  period
+     * 
+     * @return The period
+     */
+    public String getPeriod()
+    {
+        return period;
+    }
+
+    /**
+     * Setter method for the attribute 
+     * 
+     * @param pPeriod The new period
+     */
+    public void setPeriod( String pPeriod )
+    {
+        period = pPeriod;
     }
 
 }

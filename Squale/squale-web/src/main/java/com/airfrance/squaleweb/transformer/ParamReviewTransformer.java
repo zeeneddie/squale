@@ -52,6 +52,7 @@ public class ParamReviewTransformer
         form.setTre( (String) pObject[0] );
         form.setRuleId( (String) pObject[1] );
         form.setComponentId( (String) pObject[2] );
+        form.setIsManualMark( (Boolean) pObject[3] );
     }
 
     /**
@@ -80,6 +81,7 @@ public class ParamReviewTransformer
         pObject[index++] = form.getTre();
         pObject[index++] = form.getRuleId();
         pObject[index++] = form.getComponentId();
+        pObject[index++] = form.isManualMark();
     }
 
 }
