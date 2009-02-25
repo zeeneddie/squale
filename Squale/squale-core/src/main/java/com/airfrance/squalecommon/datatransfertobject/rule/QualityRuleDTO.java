@@ -24,19 +24,21 @@ package com.airfrance.squalecommon.datatransfertobject.rule;
 public class QualityRuleDTO
     implements Comparable
 {
-    /** Identificateur */
+    /** Technical Id */
     private long mId;
 
-    /** Nom du facteur */
+    /** Rule name */
     private String mName;
 
     /**
-     * la clé permettant de récupérer l'aide associée à la pratique
+     * The help key (Permit to recover the help associate to the practice)
      */
     private String helpKey;
 
     /**
-     * @return name
+     * The getter method for the attribute name
+     * 
+     * @return name The name of rule
      */
     public String getName()
     {
@@ -44,7 +46,9 @@ public class QualityRuleDTO
     }
 
     /**
-     * @param pString name
+     * The setter method for the attribute name
+     * 
+     * @param pString name The new name of the rule
      */
     public void setName( String pString )
     {
@@ -52,23 +56,29 @@ public class QualityRuleDTO
     }
 
     /**
-     * @return id
+     * Getter method for the attribute id
+     * 
+     * @return id The id of the rule
      */
     public long getId()
     {
         return mId;
     }
-
+    
     /**
-     * @param pL id
+     * Setter method for the attribute id
+     * 
+     * @param id The new id of the rule
      */
-    public void setId( long pL )
+    public void setId( long id )
     {
-        mId = pL;
+        mId = id;
     }
 
     /**
-     * @return la clé de l'aide
+     * Getter method for the attribute helpKey
+     * 
+     * @return The help key
      */
     public String getHelpKey()
     {
@@ -76,7 +86,9 @@ public class QualityRuleDTO
     }
 
     /**
-     * @param newKey la nouvelle clé
+     * Setter method for the attribute helpKey
+     * 
+     * @param newKey The new help key
      */
     public void setHelpKey( String newKey )
     {
@@ -99,5 +111,7 @@ public class QualityRuleDTO
         }
         return result;
     }
+
+   
 
 }

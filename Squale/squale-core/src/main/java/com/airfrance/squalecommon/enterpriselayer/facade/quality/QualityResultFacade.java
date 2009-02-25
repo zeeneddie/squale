@@ -31,6 +31,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
+import com.airfrance.jraf.commons.exception.JrafPersistenceException;
 import com.airfrance.jraf.helper.PersistenceHelper;
 import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
 import com.airfrance.jraf.spi.enterpriselayer.IFacade;
@@ -49,6 +50,7 @@ import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditGridDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
 import com.airfrance.squalecommon.datatransfertobject.export.ActionPlanDTO;
+import com.airfrance.squalecommon.datatransfertobject.result.MarkDTO;
 import com.airfrance.squalecommon.datatransfertobject.result.PracticeEvolutionDTO;
 import com.airfrance.squalecommon.datatransfertobject.result.QualityResultDTO;
 import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
@@ -59,6 +61,7 @@ import com.airfrance.squalecommon.datatransfertobject.rule.QualityRuleDTO;
 import com.airfrance.squalecommon.datatransfertobject.rulechecking.RuleCheckingDTO;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.AuditGridTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.ComponentTransform;
+import com.airfrance.squalecommon.datatransfertobject.transform.result.MarkTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.result.PracticeEvolutionTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.result.QualityResultTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.result.ResultsTransform;
@@ -87,7 +90,7 @@ import com.airfrance.squalecommon.util.mapping.Mapping;
 /**
  * By m400841
  */
-public class QualityResultFacade
+public final class QualityResultFacade
     implements IFacade
 {
 
@@ -726,9 +729,9 @@ public class QualityResultFacade
         Long projectId = new Long( pProject.getID() );
         ResultsDTO results = null; // retour de la methode
         Map intRepartitionMap = new HashMap(); // Map de la repartition de composants sur une pratique pour des
-                                                // intervalles de pas = 1
+        // intervalles de pas = 1
         Map floatRepartitionMap = new HashMap(); // Map de la repartition de composants sur une pratique pour des
-                                                    // intervalles de pas = 0.1
+        // intervalles de pas = 0.1
         List practiceBOs = null;
 
         // Initialisation des Daos
@@ -1376,4 +1379,115 @@ public class QualityResultFacade
         }
         return components;
     }
+
+    /**
+     * This method get back the last manual mark linked to the project and the practice rule give in argument
+     * 
+     * @param projectId Id of the project
+     * @param practiceId Id of the practice rule
+     * @return a QualityResultDTO which contains the manual mark
+     * @throws JrafEnterpriseException Exception happened during the process
+     */
+    public static QualityResultDTO findManualQualityResult( long projectId, long practiceId )
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+
+        QualityResultBO manualPraticeResult = null;
+        QualityResultDTO resultDto = null;
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            QualityResultDAOImpl dao = QualityResultDAOImpl.getInstance();
+            //Search of the last mark for the practice
+            manualPraticeResult = dao.findLastManualMark( session, projectId, practiceId );
+            if ( manualPraticeResult != null )
+            {
+                //Transform the BO into DTO
+                resultDto = QualityResultTransform.bo2Dto( manualPraticeResult );
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, QualityResultFacade.class.getName() + ".findManualQualityResult" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, QualityResultFacade.class.getName() + ".findManualQualityResult" );
+        }
+        return resultDto;
+
+    }
+
+    /**
+     * This method record in DB mark for a manual practice
+     * 
+     * @param resultDto The result to record
+     * @throws JrafEnterpriseException exception happen during the record
+     */
+    public static void createManualResult( QualityResultDTO resultDto )
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+        QualityResultDAOImpl dao = QualityResultDAOImpl.getInstance();
+        //
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            session.beginTransaction();
+            //Transform the DTO into BO
+            QualityResultBO resultToSave = QualityResultTransform.simplifyDto2Bo( resultDto );
+            //Save of the result 
+            dao.create( session, resultToSave );
+            session.commitTransaction();
+        }
+        catch ( JrafPersistenceException e )
+        {
+            FacadeHelper.convertException( e, QualityResultFacade.class.getName() + ".createManualResult" );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, QualityResultFacade.class.getName() + ".createManualResult" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, QualityResultFacade.class.getName() + ".createManualResult" );
+        }
+
+    }
+
+    /**
+     * This method return the markDTO link to the audit, rule and project give in argument
+     * 
+     * @param projectId The id of the project
+     * @param auditId The id of the audit
+     * @param ruleId the id of the rule
+     * @return a markDto
+     * @throws JrafEnterpriseException Exception happen during the serach
+     */
+    public static MarkDTO getPracticeByAuditRuleProject( long projectId, long auditId, long ruleId )
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+        MarkDAOImpl dao = MarkDAOImpl.getInstance();
+        MarkDTO dto=null;
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            // Search of the markBO
+            MarkBO bo = dao.load( session, projectId, auditId, ruleId );
+            // Transform the markBO into markDTO
+            dto = MarkTransform.bo2Dto( bo );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, QualityResultFacade.class.getName() + ".updateManualResult" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, QualityResultFacade.class.getName() + ".updateManualResult" );
+        }
+        return dto;
+    }
+
 }

@@ -41,10 +41,10 @@ public class GridImport
     private static Log LOG = LogFactory.getLog( GridImport.class );
 
     /** Nom publique de la DTD */
-    final static String PUBLIC_DTD = "-//Squale//DTD Grid Configuration 1.1//EN";
+    static final String PUBLIC_DTD = "-//Squale//DTD Grid Configuration 1.2//EN";
 
     /** Localisation de la DTD */
-    final static String DTD_LOCATION = "/com/airfrance/squalecommon/dtd/grid-1.1.dtd";
+    static final String DTD_LOCATION = "/com/airfrance/squalecommon/dtd/grid-1.2.dtd";
 
     /**
      * Constructeur
@@ -84,7 +84,12 @@ public class GridImport
         configDigester.addFactoryCreate( "squale/practiceset/practice", practiceFactory );
         configDigester.addSetProperties( "squale/practiceset/practice" );
         configDigester.addBeanPropertySetter( "squale/practiceset/practice/weight/", "weightFunction" );
-
+        
+        // Processing of the time limitation
+        configDigester.addCallMethod( "squale/practiceset/practice/timeLimitation", "setTimeLimitationFromXmlParse", 2, new Class[]{String.class, String.class} );
+        configDigester.addCallParam( "squale/practiceset/practice/timeLimitation", 0 );
+        configDigester.addCallParam( "squale/practiceset/practice/timeLimitation", 1, "unit" );
+        
         // Traitement des formules
         // Formule avec condition
         configDigester.addObjectCreate( "squale/practiceset/practice/conditionformula", ConditionFormulaBO.class );

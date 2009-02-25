@@ -26,7 +26,7 @@ public class PracticeRuleDTO
 {
 
     /** Indication d'une pratique de type violation de règle */
-    private boolean mRuleChecking = false;
+    private boolean mRuleChecking;
 
     /** Formule */
     private AbstractFormulaDTO mFormula;
@@ -39,6 +39,9 @@ public class PracticeRuleDTO
 
     /** l'effort à fournie pour la correction */
     private int mEffort;
+
+    /** Period of validity for a mark */
+    private String timeLimitation;
 
     /**
      * @return formule
@@ -118,6 +121,52 @@ public class PracticeRuleDTO
     public void setEffort( int pEffort )
     {
         mEffort = pEffort;
+    }
+
+    /**
+     * Getter methods for the timeLimitation attribute. This attribute is compose of 2 parts : The last character of the
+     * String represent the unit of the period : 'D' for DAY, 'M' for MONTH, 'Y' for YEAR, 'A' like always for marks
+     * which have no time limitation (In this case this 'A' is the only element of the String). The beginning of the
+     * String is a number which represent the period of validity.
+     * 
+     * @return The timeLimitation value
+     */
+    public String getTimeLimitation()
+    {
+        return timeLimitation;
+    }
+
+    /**
+     * Setter method for the attribute timeLimitation. This attribute is compose of 2 parts : The last character of the
+     * String represent the unit of the period : 'D' for DAY, 'M' for MONTH, 'Y' for YEAR, 'A' like always for marks
+     * which have no time limitation (In this case this 'A' is the only element of the String). The beginning of the
+     * String is a number which represent the duration of the validity.
+     * 
+     * @param mTimeLimitation The new timeLimitation attribute
+     */
+    public void setTimeLimitation( String mTimeLimitation )
+    {
+        timeLimitation = mTimeLimitation;
+    }
+
+    @Override
+    public boolean equals( Object obj )
+    {
+        boolean equal = false;
+        if ( obj instanceof PracticeRuleDTO )
+        {
+            if(getName().equals( ((PracticeRuleDTO)obj).getName()))
+            {
+                equal=true;
+            }
+        }
+        return equal;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return getName().hashCode();
     }
 
 }

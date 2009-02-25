@@ -20,6 +20,7 @@ package com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -32,6 +33,8 @@ import com.airfrance.jraf.provider.accessdelegate.DefaultExecuteComponent;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditGridDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import com.airfrance.squalecommon.datatransfertobject.result.MarkDTO;
+import com.airfrance.squalecommon.datatransfertobject.result.QualityResultDTO;
 import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
 import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
 import com.airfrance.squalecommon.enterpriselayer.applicationcomponent.ACMessages;
@@ -43,6 +46,7 @@ import com.airfrance.squalecommon.enterpriselayer.facade.quality.ErrorFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.quality.MeasureFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.quality.QualityResultFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.quality.SqualeReferenceFacade;
+import com.airfrance.squalecommon.enterpriselayer.facade.rule.QualityGridFacade;
 import com.airfrance.squalecommon.util.messages.CommonMessages;
 
 /**
@@ -838,8 +842,8 @@ public class ResultsApplicationComponentAccess
      * @return list of components
      * @throws JrafEnterpriseException if error
      */
-    public List<ComponentDTO> getComponentsWhereTres( Long pProjectId, Long pAuditId, String[] pTreKeys, String[] pTreValues,
-                                               Integer pMax )
+    public List<ComponentDTO> getComponentsWhereTres( Long pProjectId, Long pAuditId, String[] pTreKeys,
+                                                      String[] pTreValues, Integer pMax )
         throws JrafEnterpriseException
     {
         return MeasureFacade.getComponentsWhereTres( pProjectId, pAuditId, pTreKeys, pTreValues, pMax );
@@ -1010,7 +1014,7 @@ public class ResultsApplicationComponentAccess
     {
         return QualityResultFacade.getWorstPractices( pAuditId, pProjectId, pHasLimit.booleanValue() );
     }
-    
+
     /**
      * Build list of projects for audit report
      * 
@@ -1022,8 +1026,85 @@ public class ResultsApplicationComponentAccess
      * @return list of project for audit report
      * @throws JrafEnterpriseException if error
      */
-    public List getProjectReports(Long pAppliId, Long pCurAuditId, Long pPrevAuditId, Integer nbTop, Float maxScore) throws JrafEnterpriseException {
+    public List getProjectReports( Long pAppliId, Long pCurAuditId, Long pPrevAuditId, Integer nbTop, Float maxScore )
+        throws JrafEnterpriseException
+    {
         return AuditReportFacade.getProjectReports( pAppliId, pCurAuditId, pPrevAuditId, nbTop, maxScore );
     }
 
+    /**
+     * Get back the list of manual practices for a project
+     * 
+     * @param projectId Id of the project
+     * @return a list of QualityResultDTO
+     * @throws JrafEnterpriseException exception happened during the process
+     */
+    public List<QualityResultDTO> listOfManualMark( Long projectId )
+        throws JrafEnterpriseException
+
+    {
+        // Recover the practices link to the project
+        HashSet<PracticeRuleDTO> practicesRuleList = QualityGridFacade.loadManualPracticesRulesByProjectId( projectId );
+        ArrayList<QualityResultDTO> manualResult = new ArrayList<QualityResultDTO>();
+        // For each practices
+        for ( PracticeRuleDTO ruleDTO : practicesRuleList )
+        {
+            // We search the last manual mark linked to the rule
+            QualityResultDTO result = QualityResultFacade.findManualQualityResult( projectId, ruleDTO.getId() );
+            if ( result == null )
+            {
+                result = new QualityResultDTO();
+                ComponentDTO compoDto = new ComponentDTO();
+                compoDto.setID( projectId );
+                result.setProject( compoDto );
+                result.setRule( ruleDTO );
+            }
+            // We add the result to the map
+            manualResult.add( result );
+        }
+        return manualResult;
+    }
+
+    /**
+     * This method save a result for a manual practice
+     * 
+     * @param dto The QualityresultDTO to save
+     * @throws JrafEnterpriseException Exception happen during the record
+     */
+    public void saveManualResult( QualityResultDTO dto )
+        throws JrafEnterpriseException
+    {
+        QualityResultFacade.createManualResult( dto );
+    }
+
+    /**
+     * This method get back the last result record for a manual practice
+     * 
+     * @param projectId The id of the project
+     * @param ruleId The id of the rule
+     * @return The last mark
+     * @throws JrafEnterpriseException exception happen during the serach in the db
+     */
+    public QualityResultDTO lastManualMark( Long projectId, Long ruleId )
+        throws JrafEnterpriseException
+    {
+        QualityResultDTO result = QualityResultFacade.findManualQualityResult( projectId, ruleId );
+        return result;
+    }
+
+    /**
+     * Get back the result link to the project , audit and rule guive in argument
+     * 
+     * @param projectId The id of the project
+     * @param auditId The id of the audit
+     * @param ruleId the id of the rule
+     * @return the result link to the three argument
+     * @throws JrafEnterpriseException Exception happen during the search in the db
+     */
+    public MarkDTO auditManualMark( Long projectId, Long auditId, Long ruleId )
+        throws JrafEnterpriseException
+    {
+        MarkDTO dto = QualityResultFacade.getPracticeByAuditRuleProject( projectId, auditId, ruleId );
+        return dto;
+    }
 }

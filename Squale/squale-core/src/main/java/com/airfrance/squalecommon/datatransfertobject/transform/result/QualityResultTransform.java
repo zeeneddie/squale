@@ -22,26 +22,68 @@ import com.airfrance.squalecommon.datatransfertobject.result.QualityResultDTO;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.AuditTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.ComponentTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.rule.QualityRuleTransform;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
 
 /**
- * bo <--> dto pour les résultats qualités
+ * Transformer QualityresultBO <--> QualityresultDTO
  */
-public class QualityResultTransform
+public final class QualityResultTransform
+
 {
 
     /**
-     * @param pQualityResultBO le bo
-     * @return le dto
+     * Private constructor
+     */
+    private QualityResultTransform()
+    {
+
+    }
+
+    /**
+     * Transform a QualityresultBO in a QualityresultDTO
+     * 
+     * @param pQualityResultBO The BO to transform
+     * @return a QualityresultDTO
      */
     public static QualityResultDTO bo2Dto( QualityResultBO pQualityResultBO )
     {
         QualityResultDTO qualityResultDTO = new QualityResultDTO();
+        qualityResultDTO.setId( pQualityResultBO.getId() );
         qualityResultDTO.setMeanMark( pQualityResultBO.getMeanMark() );
-        qualityResultDTO.setAudit( AuditTransform.bo2Dto( pQualityResultBO.getAudit() ) );
+        if ( pQualityResultBO.getAudit() != null )
+        {
+            qualityResultDTO.setAudit( AuditTransform.bo2Dto( pQualityResultBO.getAudit() ) );
+        }
         qualityResultDTO.setProject( ComponentTransform.bo2Dto( pQualityResultBO.getProject() ) );
         qualityResultDTO.setRule( QualityRuleTransform.bo2Dto( pQualityResultBO.getRule(), true ) );
+        qualityResultDTO.setCreationDate( pQualityResultBO.getCreationDate() );
         return qualityResultDTO;
+    }
+
+    /**
+     * Transform a QualityresultDTO in a QualityresultBO
+     * 
+     * @param resultDto The dto to transform
+     * @return a QualityresultBO
+     */
+    public static QualityResultBO simplifyDto2Bo( QualityResultDTO resultDto )
+    {
+        PracticeResultBO bo = new PracticeResultBO();
+        bo.setId( resultDto.getId() );
+        bo.setMeanMark( resultDto.getMeanMark() );
+        bo.setCreationDate( resultDto.getCreationDate() );
+
+        ProjectBO project = new ProjectBO();
+        project.setId( resultDto.getProject().getID() );
+        bo.setProject( project );
+
+        PracticeRuleBO rule = new PracticeRuleBO();
+        rule.setId( resultDto.getRule().getId() );
+        bo.setRule( rule );
+        return bo;
     }
 
 }

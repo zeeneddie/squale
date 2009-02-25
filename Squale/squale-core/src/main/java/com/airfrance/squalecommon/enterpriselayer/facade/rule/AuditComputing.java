@@ -20,6 +20,7 @@ package com.airfrance.squalecommon.enterpriselayer.facade.rule;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
@@ -55,6 +56,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFo
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
+import com.airfrance.squalecommon.util.manualmark.TimeLimitationParser;
 import com.airfrance.squalecommon.util.mapping.Mapping;
 
 /**
@@ -73,7 +75,7 @@ public final class AuditComputing
     private AuditComputing()
     {
     }
-    
+
     /**
      * Calcul d'un audit Le calcul d'un audit se fait à partir des pratiques pour remonter vers les facteurs
      * 
@@ -334,6 +336,8 @@ public final class AuditComputing
         Map kindPractices = splitPracticesByKind( pPractices );
         // On traite séparement les pratiques de niveau projet
         computeProjectPractices( pSession, pProject, pAudit, (Collection) kindPractices.remove( "project" ), pPractices );
+        // Processing of the manual practices
+        computeManualPractices( pSession, pProject, (Collection) kindPractices.remove( "" ), pPractices );
         Iterator kinds = kindPractices.keySet().iterator();
         while ( kinds.hasNext() )
         {
@@ -771,5 +775,84 @@ public final class AuditComputing
         // Enregistrement de la note
         MarkDAOImpl.getInstance().save( pSession, mark );
         return mark;
+    }
+
+    /**
+     * This method push into the base, for the current audit, the manual mark which are filled and still valid
+     * 
+     * @param session Hibernate session
+     * @param project The project
+     * @param manualPractices collection of practice without level (manual practice)
+     * @param practicesMap map of all the practice.
+     * @throws JrafDaoException Exception happened during hibernate work
+     */
+    private static void computeManualPractices( ISession session, ProjectBO project, Collection manualPractices,
+                                                Map practicesMap )
+        throws JrafDaoException
+    {
+        if ( manualPractices != null )
+        {
+            try
+            {
+                QualityResultDAOImpl dao = QualityResultDAOImpl.getInstance();
+
+                // For each manual practicewe try to set a mark for the audit
+                Iterator<PracticeRuleBO> practicesIt = manualPractices.iterator();
+                while ( practicesIt.hasNext() )
+                {
+                    PracticeRuleBO practice = practicesIt.next();
+                    LOG.info( RuleMessages.getString( "computation.practice", new Object[] { practice.getName() } ) );
+
+                    // search of the last manual mark inserted
+                    PracticeResultBO manualPraticeResult =
+                        dao.findLastManualMark( session, project.getId(), practice.getId() );
+
+                    // If there is one manual mark inserted
+                    if ( manualPraticeResult != null )
+                    {
+                        // recovering of the PracticeResultBO which will recorded
+                        PracticeResultBO practiceResult = (PracticeResultBO) practicesMap.get( practice );
+
+                        /*
+                         * If the current date is before the date of creation of the manual mark plus the period of
+                         * validity then we put the mark for the current audit.
+                         */
+                        if ( isMarkValid( practice, manualPraticeResult ) )
+                        {
+                            practiceResult.setMeanMark( manualPraticeResult.getMeanMark() );
+                            dao.save( session, practiceResult );
+                        }
+                    }
+                }
+            }
+            catch ( HibernateException e )
+            {
+                throw new JrafDaoException( e );
+            }
+        }
+    }
+
+    /**
+     * This method determine whether the mark is valid (according to the period validity)
+     * 
+     * @param practice The practice for the current audit
+     * @param manualPraticeResult The last manualPratice inserted
+     * @return true if the the mark is valid
+     */
+    private static boolean isMarkValid( PracticeRuleBO practice, PracticeResultBO manualPraticeResult )
+    {
+
+        boolean valid = true;
+
+        // Date of creation of the manual mark
+        Date creationDate = manualPraticeResult.getCreationDate();
+
+        // The validity period
+        String validityPeriod = practice.getTimeLimitation();
+
+        // Test the validity of the mark
+        valid = TimeLimitationParser.isMarkValid( validityPeriod, creationDate );
+
+        return valid;
     }
 }

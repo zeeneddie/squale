@@ -141,6 +141,8 @@ public class QualityRuleTransform
                 result.setWeightingFunction( pPracticeRule.getWeightFunction() );
             }
         }
+        // time limitation
+        result.setTimeLimitation( pPracticeRule.getTimeLimitation() );
         // l'effort
         result.setEffort( pPracticeRule.getEffort() );
         return result;

@@ -20,6 +20,7 @@ package com.airfrance.squalecommon.daolayer.result;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,10 +31,12 @@ import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import com.airfrance.jraf.spi.persistence.ISession;
 import com.airfrance.squalecommon.daolayer.DAOMessages;
+import com.airfrance.squalecommon.daolayer.DAOUtils;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.FactorResultBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
 
 /**
@@ -45,7 +48,7 @@ public class QualityResultDAOImpl
     /**
      * Instance singleton
      */
-    private static QualityResultDAOImpl instance = null;
+    private static QualityResultDAOImpl instance;
 
     /** log */
     private static Log LOG;
@@ -397,4 +400,69 @@ public class QualityResultDAOImpl
         }
         return result;
     }
+
+    /**
+     * This method recover the last mark inserted (if there is one) for a manual practice
+     * 
+     * @param pSession hibernate session
+     * @param pProjectID Id of the project
+     * @param pRuleId Id of the practice rule
+     * @return The PraticeresultBO linked to the last manual mark inserted for the rule id and the project id give in
+     *         argument. This method return null if it finds nothing.
+     * @throws JrafDaoException exception happen during the hibernate search
+     */
+    public PracticeResultBO findLastManualMark( ISession pSession, Long pProjectID, Long pRuleId )
+        throws JrafDaoException
+    {
+        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
+        StringBuffer whereClause = new StringBuffer( "where " );
+        whereClause.append( getAlias() + ".rule.id = " + pRuleId );
+        whereClause.append( " and " + getAlias() + ".project.id = " + pProjectID );
+        whereClause.append( " and " + getAlias() + ".meanMark!= -1.0" );
+        // This mark is not linked to an audit
+        whereClause.append( " and " + getAlias() + ".audit.id is null" );
+        whereClause.append( " order by  " + getAlias() + ".creationDate desc" );
+        whereClause.append( " , " + getAlias() + ".id desc" );
+
+        List col = findWhere( pSession, whereClause.toString() );
+
+        PracticeResultBO result = null;
+        if ( col.size() > 0 )
+        {
+            // Recovery the last inserted mark
+            result = (PracticeResultBO) col.get( 0 );
+        }
+        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
+
+        return result;
+    }
+
+    /**
+     * This method return the list of all the mark inserted for manual practice between the date give in argument and
+     * today
+     * 
+     * @param pSession The hibernate session
+     * @param pProjectID The ID of the project
+     * @param pRuleId The rule ID
+     * @param date The limit date
+     * @return The list of mark
+     * @throws JrafDaoException Exception happen during the search in the DB
+     */
+    public Collection<PracticeResultBO> findManualMarkSince( ISession pSession, Long pProjectID, Long pRuleId, Date date )
+        throws JrafDaoException
+    {
+        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
+        StringBuffer whereClause = new StringBuffer( "where " );
+        whereClause.append( getAlias() + ".rule.id = " + pRuleId );
+        whereClause.append( " and " + getAlias() + ".project.id = " + pProjectID );
+        whereClause.append( " and " + getAlias() + ".meanMark!= -1.0" );
+        whereClause.append( " and " + getAlias() + ".audit.id is null" );
+        whereClause.append( " and " + getAlias() + ".creationDate > " + DAOUtils.makeQueryDate( date ) );
+        whereClause.append( " order by  " + getAlias() + ".creationDate desc" );
+        whereClause.append( " , " + getAlias() + ".id desc" );
+
+        Collection<PracticeResultBO> col = findWhere( pSession, whereClause.toString() );
+        return col;
+    }
+
 }

@@ -9,10 +9,11 @@
       </generator>
     </id>
     <discriminator column="subclass"/>
+    <property name="creationDate" column="CreationDate" update="true" unique="false" not-null="false" type="timestamp" insert="true"/>
     <many-to-one insert="true" column="QualityRuleId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO" not-null="true" name="rule"/>
     <property name="meanMark" column="MeanMark" update="true" unique="false" not-null="true" type="float" insert="true"/>
     <many-to-one insert="true" column="ProjectId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO" not-null="true" name="project"/>
-    <many-to-one insert="true" column="AuditId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO" not-null="true" name="audit"/>
+    <many-to-one insert="true" column="AuditId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO" not-null="false" name="audit"/>
     <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.CriteriumResultBO" discriminator-value="CriteriumResult"/>
     <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.FactorResultBO" discriminator-value="FactorResult"/>
     <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO" discriminator-value="PracticeResult">

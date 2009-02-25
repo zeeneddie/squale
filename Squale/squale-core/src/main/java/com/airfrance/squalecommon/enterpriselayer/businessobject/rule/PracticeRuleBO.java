@@ -18,8 +18,10 @@
  */
 package com.airfrance.squalecommon.enterpriselayer.businessobject.rule;
 
+import com.airfrance.squalecommon.util.manualmark.TimeLimitationParser;
+
 /**
- * Règle de calcul d'une pratique
+ * Calculation rule of a practice
  * 
  * @author m400842
  * @hibernate.subclass discriminator-value="PracticeRule" lazy="false"
@@ -28,27 +30,28 @@ public class PracticeRuleBO
     extends QualityRuleBO
 {
 
-    /** Fonction de pondération par défaut */
+    /** Default weighting function */
     public static final String WEIGHTING_FUNCTION = "lambda x:x";
 
-    /** Effort de correction de la pratique par défaut */
+    /** Default correction effort to do for improve the practice */
     public static final int EFFORT = 1;
 
     /**
-     * Fonction de pondération à appliquer aux notes des composants pour le calcul de la note globale.
+     * Weighting function to use on the componeenty mark for the calculation of the global mark.
      */
     private String mWeightFunction = WEIGHTING_FUNCTION;
 
-    /** Formule de calcul associée */
+    /** Calculation formula */
     private AbstractFormulaBO mFormula;
 
-    /** Effort de correction de la pratique */
+    /** Correction effort to do for improve the practice */
     private int mEffort = EFFORT;
 
+    /** Period of validity for a mark */
+    private String timeLimitation; // = TIME_LIMITATION;
+
     /**
-     * Constructeur par défaut
-     * 
-     * @roseuid 42C5220A0066
+     * Default constructor
      */
     public PracticeRuleBO()
     {
@@ -56,7 +59,9 @@ public class PracticeRuleBO
     }
 
     /**
-     * @return formula
+     * Getter method for the property formula
+     * 
+     * @return The formula
      * @hibernate.many-to-one column="Formula" cascade="all"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO"
      *                        outer-join="auto" update="true" insert="true"
@@ -67,7 +72,9 @@ public class PracticeRuleBO
     }
 
     /**
-     * @param pFormula formula
+     * Setter method for the property formula
+     * 
+     * @param pFormula The new formula
      */
     public void setFormula( AbstractFormulaBO pFormula )
     {
@@ -75,7 +82,9 @@ public class PracticeRuleBO
     }
 
     /**
-     * @return la fonction de pondération
+     * Getter method for the weighting function
+     * 
+     * @return The weighting function
      * @hibernate.property name="weightFunction" column="WeightFunction" type="string" unique="false" update="true"
      *                     insert="true"
      */
@@ -85,7 +94,9 @@ public class PracticeRuleBO
     }
 
     /**
-     * @return l'effort de correction de la pratique
+     * Getter method for the property effort
+     * 
+     * @return The correction effort to do for improve the practice
      * @hibernate.property name="effort" column="effort" type="integer" length="10" unique="false" update="true"
      *                     insert="true"
      */
@@ -95,7 +106,9 @@ public class PracticeRuleBO
     }
 
     /**
-     * @param pFunction la nouvelle fonction de pondération
+     * Setter method for the weighting function
+     * 
+     * @param pFunction The new weighting function
      */
     public void setWeightFunction( String pFunction )
     {
@@ -103,7 +116,9 @@ public class PracticeRuleBO
     }
 
     /**
-     * @param pEffort l'effort de correction de la pratique
+     * Setter method for the property effort
+     * 
+     * @param pEffort The new correction effort to do for improve the practice
      */
     public void setEffort( int pEffort )
     {
@@ -111,10 +126,7 @@ public class PracticeRuleBO
     }
 
     /**
-     * (non-Javadoc)
-     * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor,
-     *      java.lang.Object)
+     * {@inheritDoc}
      */
     public Object accept( QualityRuleBOVisitor pVisitor, Object pArgument )
     {
@@ -122,16 +134,55 @@ public class PracticeRuleBO
     }
 
     /**
-     * Extracteur de mesure
+     * Measure extractor
      */
     public interface MeasureExtractor
     {
         /**
-         * Extraction des mesures d'une formule
+         * Extraction of the measure of formula
          * 
-         * @param pFormula formule
-         * @return mesures impliquées dans la formule
+         * @param pFormula the formula
+         * @return The measures used in the formula
          */
         public String[] getUsedMeasures( AbstractFormulaBO pFormula );
+    }
+
+    /**
+     * Getter methods for the timeLimitation attribute. This attribute is compose of 2 parts : The last character of the
+     * String represent the unit of the period : 'D' for DAY, 'M' for MONTH, 'Y' for YEAR, 'A' like always for marks
+     * which have no time limitation (In this case this 'A' is the only element of the String). The beginning of the
+     * String is a number which represent the period of validity.
+     * 
+     * @hibernate.property name="timeLimitation" length="6" column="TimeLimitation" type="string" unique="false" update="true"
+     *                     insert="true" 
+     * @return The timeLimitation value
+     */
+    public String getTimeLimitation()
+    {
+        return timeLimitation;
+    }
+
+    /**
+     * Setter method for the attribute timeLimitation. This attribute is compose of 2 parts : The last character of the
+     * String represent the unit of the period : 'D' for DAY, 'M' for MONTH, 'Y' for YEAR, 'A' like always for marks
+     * which have no time limitation (In this case this 'A' is the only element of the String). The beginning of the
+     * String is a number which represent the period of validity.
+     * 
+     * @param mTimeLimitation The new timeLimitation attribute
+     */
+    public void setTimeLimitation( String mTimeLimitation )
+    {
+        timeLimitation = mTimeLimitation;
+    }
+
+    /**
+     * This method take the period and the unit and set them in the good format in the timeLimitation property
+     * 
+     * @param period The duration of the validity
+     * @param unit The unit of the period
+     */
+    public void setTimeLimitationFromXmlParse( String period, String unit )
+    {
+        timeLimitation = TimeLimitationParser.periodUnitToString( period, unit );
     }
 }

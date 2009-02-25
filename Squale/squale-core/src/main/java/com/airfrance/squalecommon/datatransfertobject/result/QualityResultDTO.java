@@ -18,6 +18,8 @@
  */
 package com.airfrance.squalecommon.datatransfertobject.result;
 
+import java.util.Date;
+
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
 import com.airfrance.squalecommon.datatransfertobject.rule.QualityRuleDTO;
@@ -54,6 +56,35 @@ public class QualityResultDTO
     protected QualityRuleDTO mRule;
 
     /**
+     * The date of creation of the manual mark
+     */
+    private Date creationDate;
+
+    /**
+     * Getter method for the property creationDate
+     * 
+     * @hibernate.property name="creationDate" column="CreationDate" type="timestamp" not-null="false" unique="false"
+     *                     update="true" insert="true"
+     * @return the date of creation of the mark (for manual mark)
+     */
+    public Date getCreationDate()
+    {
+        return creationDate;
+    }
+
+    /**
+     * Setter method for the property creationDate
+     * 
+     * @param mCreationDate The new date of creation
+     */
+    public void setCreationDate( Date mCreationDate )
+    {
+        creationDate = mCreationDate;
+    }
+
+    /**
+     * Access method for the mRule property
+     * 
      * @return la règle
      */
     public QualityRuleDTO getRule()
@@ -137,5 +168,25 @@ public class QualityResultDTO
     public QualityResultDTO()
     {
         mMeanMark = -1;
+    }
+
+    /**
+     * Getter method for the id
+     *  
+     * @return The technical id of the object
+     */
+    public long getId()
+    {
+        return mId;
+    }
+
+    /**
+     * Setter method for the property id
+     * 
+     * @param id The new Id
+     */
+    public void setId( long id )
+    {
+        mId = id;
     }
 }

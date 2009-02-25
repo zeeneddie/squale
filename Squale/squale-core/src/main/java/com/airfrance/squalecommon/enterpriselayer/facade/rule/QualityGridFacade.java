@@ -21,6 +21,7 @@ package com.airfrance.squalecommon.enterpriselayer.facade.rule;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedMap;
@@ -48,6 +49,7 @@ import com.airfrance.squalecommon.datatransfertobject.transform.rule.GridMetrics
 import com.airfrance.squalecommon.datatransfertobject.transform.rule.QualityGridTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.rule.QualityRuleTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.rule.RuleMetricsTransform;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
@@ -57,8 +59,15 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRul
 /**
  * Facade pour la grille qualité
  */
-public class QualityGridFacade
+public final class QualityGridFacade
 {
+    /**
+     * Private constructor
+     */
+    private QualityGridFacade()
+    {
+
+    }
 
     /**
      * provider de persistence
@@ -346,14 +355,15 @@ public class QualityGridFacade
             AuditGridDAOImpl auditGridDAO = AuditGridDAOImpl.getInstance();
             ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
             QualityGridDAOImpl qualityGridDAO = QualityGridDAOImpl.getInstance();
-            
+
             while ( gridsIt.hasNext() )
             {
                 QualityGridDTO gridDTO = (QualityGridDTO) gridsIt.next();
                 Long gridId = new Long( gridDTO.getId() );
                 // On vérifie que la grille n'est pas utilisée
                 // au niveau d''un projet ou au niveau d'un audit réalisé
-                if ( projectDAO.isGridUsed( session, gridId ) || auditGridDAO.isGridUsed( session, gridId ) || qualityGridDAO.hasProfile( session, gridId ))
+                if ( projectDAO.isGridUsed( session, gridId ) || auditGridDAO.isGridUsed( session, gridId )
+                    || qualityGridDAO.hasProfile( session, gridId ) )
                 {
                     result.add( gridDTO );
                 }
@@ -550,6 +560,63 @@ public class QualityGridFacade
         // Transformation
         QualityRuleTransform.dto2Bo( bo, practiceDTO );
         return bo;
+    }
+
+    /**
+     * This method return the list of manual practices rules of the grid linked to the project
+     * 
+     * @param projectId Id of the project
+     * @return A list of manual practices rules
+     * @throws JrafEnterpriseException exception happen during the search in the database
+     */
+    public static HashSet<PracticeRuleDTO> loadManualPracticesRulesByProjectId( long projectId )
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+        QualityGridDTO dto = null;
+        HashSet<PracticeRuleDTO> practicesRuleList = new HashSet<PracticeRuleDTO>();
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
+            ProjectBO project = (ProjectBO) projectDAO.get( session, projectId );
+            Iterator<FactorRuleBO> factorsIt = project.getQualityGrid().getFactors().iterator();
+            // For each factor 
+            while ( factorsIt.hasNext() )
+            {
+                FactorRuleBO factor = factorsIt.next();
+                Iterator<CriteriumRuleBO> criteriumIt = factor.getCriteria().keySet().iterator();
+                //For each criterium
+                while ( criteriumIt.hasNext() )
+                {
+                    CriteriumRuleBO criterium = criteriumIt.next();
+                    Iterator<PracticeRuleBO> practiceIt = criterium.getPractices().keySet().iterator();
+                    // For each practice
+                    while ( practiceIt.hasNext() )
+                    {
+                        PracticeRuleBO practiceBO = practiceIt.next();
+
+                        // If the practices is a manual practices
+                        if ( practiceBO.getFormula() == null )
+                        {
+                            PracticeRuleDTO practiceDTO = new PracticeRuleDTO();
+                            //We add the practice to the list
+                            practicesRuleList.add( (PracticeRuleDTO) QualityRuleTransform.bo2Dto( practiceBO, true ) );
+                        }
+                    }
+                }
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, QualityGridFacade.class.getName() + ".loadPracticeByProjectId" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, QualityGridFacade.class.getName() + ".loadPracticeByProjectId" );
+        }
+
+        return practicesRuleList;
     }
 
 }

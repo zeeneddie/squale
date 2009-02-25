@@ -40,83 +40,91 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGri
 import com.airfrance.squalecommon.enterpriselayer.facade.rule.xml.GridImport;
 
 /**
- * Importation de grille qualité
+ * Quality grid import
  */
-public class QualityGridImport
+public final class QualityGridImport
 {
+
     /**
-     * provider de persistence
+     * Private default constructor
+     */
+    private QualityGridImport()
+    {
+
+    }
+
+    /**
+     * Persistence provider
      */
     private static final IPersistenceProvider PERSISTENTPROVIDER = PersistenceHelper.getPersistenceProvider();
 
     /**
-     * Importation d'une grille sans création dans la base
+     * Import of a grid without database saving. Test if a grid with the same name already exist in the database
      * 
-     * @param pStream flux de grille
-     * @param pErrors erreurs de traitement ou vide si aucune erreur n'est rencontrée
-     * @return collection de grilles importées sous la forme de QualityGridDTO
-     * @throws JrafEnterpriseException si erreur
+     * @param pStream Grid stream
+     * @param pErrors Buffer for recover the error which could happen
+     * @return A collection grids import as object of type QualityGridDTO
+     * @throws JrafEnterpriseException Error during the parse of the quality grid file
      */
     public static Collection importGrid( InputStream pStream, StringBuffer pErrors )
         throws JrafEnterpriseException
     {
         GridImport gridImport = new GridImport();
-        // Importation des grilles
+        // Import of the grid
         Collection grids = gridImport.importGrid( pStream, pErrors );
-        // Conversion de chacune des grilles
-        // et vérification de leur existence
+
+        // Conversion of the gris from bo to dto and test the existence of the grid in the database
         ArrayList result = new ArrayList();
         Iterator gridsIt = grids.iterator();
         ISession session = null;
         try
         {
-            // récupération d'une session
+            // Recover the hibernate session
             session = PERSISTENTPROVIDER.getSession();
-            // Vérification de la grille
+            // Instanciation of the grid checker
             QualityGridChecker gridChecker = new QualityGridChecker();
-            // Parcours des grilles
+            // Browse of the grid
             while ( gridsIt.hasNext() )
             {
                 QualityGridBO gridBO = (QualityGridBO) gridsIt.next();
-                // Vérification de la grille
+                // Check the grid
                 gridChecker.checkGrid( gridBO, pErrors );
                 QualityGridDTO gridDTO = QualityGridTransform.bo2Dto( gridBO );
-                // Affectation de l'ID dans le cas d'une grille déjà présente dans
-                // la base de données
+                // Assignment of the id if the grid already exist in the database
                 QualityGridBO existingGrid = QualityGridDAOImpl.getInstance().findWhereName( session, gridBO.getName() );
                 if ( existingGrid != null )
                 {
-                    gridDTO.setId( existingGrid.getId() ); // Cette information sera exploitée par la partie WEB
+                    gridDTO.setId( existingGrid.getId() ); // Information used in the web portal
                 }
                 result.add( gridDTO );
             }
         }
         catch ( JrafDaoException e )
         {
-            // Renvoi d'une exception
+            // return an exception
             FacadeHelper.convertException( e, QualityGridFacade.class.getName() + ".get" );
         }
         finally
         {
-            // Fermeture de la session
+            // close thesession
             FacadeHelper.closeSession( session, QualityGridFacade.class.getName() + ".get" );
         }
         return result;
     }
 
     /**
-     * Importation d'une grille et création dans la base
+     * Import of a gris and save it in the database
      * 
-     * @param pStream flux de grille
-     * @param pErrors erreurs de traitement ou vide si aucune erreur n'est rencontrée
+     * @param pStream grid stream
+     * @param pErrors buffer for recover the error which could happen during the parse
      * @return collection de grilles importées sous la forme de QualityGridDTO
-     * @throws JrafEnterpriseException si erreur
+     * @throws JrafEnterpriseException Error happen during the parse of the grid file or the record in the database
      */
     public static Collection createGrid( InputStream pStream, StringBuffer pErrors )
         throws JrafEnterpriseException
     {
         GridImport gridImport = new GridImport();
-        // Import grids
+        // Import of the grids
         Collection grids = gridImport.importGrid( pStream, pErrors );
         // Transformation of grids
         // and existing verification
@@ -158,9 +166,8 @@ public class QualityGridImport
                 }
 
                 // Update projects which used the same quality grid
-                projectDAO.updateQualityGrid( session, gridBO );
-                // Mise à jour des profils utilisant la même grille qualité
-                // Transformation en DTO
+                projectDAO.updateQualityGrid( session, gridBO );               
+                // Transformation in DTO
                 QualityGridDTO gridDTO = QualityGridTransform.bo2Dto( gridBO );
                 result.add( gridDTO );
             }

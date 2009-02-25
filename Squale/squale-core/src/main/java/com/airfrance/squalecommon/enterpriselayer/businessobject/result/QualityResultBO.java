@@ -17,10 +17,10 @@
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
 //Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\result\\QualityResultBO.java
-
 package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
@@ -39,13 +39,13 @@ public abstract class QualityResultBO
 {
 
     /** Constante pour indiquer que la note appartient [2,3] */
-    public final static String ACCEPTED = "accepted";
+    public static final String ACCEPTED = "accepted";
 
     /** Constante pour indiquer que la note appartient [1,2[ */
-    public final static String RESERVED = "reserved";
+    public static final String RESERVED = "reserved";
 
     /** Constante pour indiquer que la note appartient [0,1[ */
-    public final static String REFUSED = "refused";
+    public static final String REFUSED = "refused";
 
     /**
      * Note moyenne du résultat qualité
@@ -71,6 +71,33 @@ public abstract class QualityResultBO
      * Règle de calcul du facteur
      */
     protected QualityRuleBO mRule;
+
+    /**
+     * The date of creation of the manual mark
+     */
+    private Date creationDate;
+
+    /**
+     * Getter method for the property creationDate
+     * 
+     * @hibernate.property name="creationDate" column="CreationDate" type="timestamp" not-null="false" unique="false"
+     *                     update="true" insert="true"
+     * @return the date of creation of the mark (for manual mark)
+     */
+    public Date getCreationDate()
+    {
+        return creationDate;
+    }
+
+    /**
+     * Setter method for the property creationDate
+     * 
+     * @param mCreationDate The new date of creation
+     */
+    public void setCreationDate( Date mCreationDate )
+    {
+        creationDate = mCreationDate;
+    }
 
     /**
      * Access method for the mRule property.
@@ -152,7 +179,7 @@ public abstract class QualityResultBO
      * @return the current value of the mAudit property
      * @hibernate.many-to-one column="AuditId"
      *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
-     *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
+     *                        cascade="none" not-null="false" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE40019
      */
     public AuditBO getAudit()

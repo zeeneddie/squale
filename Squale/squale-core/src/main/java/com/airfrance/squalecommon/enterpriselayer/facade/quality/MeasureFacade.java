@@ -21,6 +21,7 @@ package com.airfrance.squalecommon.enterpriselayer.facade.quality;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,6 +39,7 @@ import org.jfree.chart.JFreeChart;
 
 import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
+import com.airfrance.jraf.commons.exception.JrafPersistenceException;
 import com.airfrance.jraf.helper.PersistenceHelper;
 import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
 import com.airfrance.jraf.spi.enterpriselayer.IFacade;
@@ -53,6 +55,7 @@ import com.airfrance.squalecommon.daolayer.result.MarkDAOImpl;
 import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
 import com.airfrance.squalecommon.daolayer.result.MetricDAOImpl;
 import com.airfrance.squalecommon.daolayer.result.QualityResultDAOImpl;
+import com.airfrance.squalecommon.daolayer.rule.PracticeRuleAPDAOImpl;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
 import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
@@ -72,11 +75,16 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.result.FactorRe
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MarkBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
+import com.airfrance.squalecommon.util.TimeUtil;
+import com.airfrance.squalecommon.util.manualmark.TimeLimitationParser;
 import com.airfrance.squalecommon.util.mapping.Mapping;
 
 /**
+ * The facade for the result information shown in the web portal
  */
-public class MeasureFacade
+public final class MeasureFacade
     implements IFacade
 {
 
@@ -935,16 +943,43 @@ public class MeasureFacade
                                              Date pAuditDate, Long pRuleId )
         throws JrafEnterpriseException
     {
-        Object[] result = new Object[2];
-        // Session Hibernate
         ISession session = null;
-        // Initialisation des differentes Daos
-        AuditDAOImpl auditDao = AuditDAOImpl.getInstance();
-        List currentAudits = null; // liste des audits relatifs au composant
-        Map values = MeasureFacade.getHistoricResults( pComponent, pTreKey, pTreLabel, pAuditDate, pRuleId );
-        result = new Object[] { pTreLabel, values, HISTORIC_TYPE };
-        return result;
+        PracticeRuleBO ruleBO = null;
+        Object[] result = null;
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            // Recovery of the rule
+            ruleBO = (PracticeRuleBO) PracticeRuleAPDAOImpl.getInstance().get( session, pRuleId );
+            // If it's a manual practice
+            if ( ruleBO.getFormula() == null )
+            {
+                String timeLimitation = ruleBO.getTimeLimitation();
+                Object[] objectReturn =
+                    MeasureFacade.getHistoricManualMark( pComponent, pAuditDate, pRuleId, timeLimitation );
+                result = new Object[] { pTreLabel, objectReturn[0], HISTORIC_TYPE, objectReturn[1] };
+            }
+            // If it's not a manual practice
+            else
+            {
+                Map values = MeasureFacade.getHistoricResults( pComponent, pTreKey, pTreLabel, pAuditDate, pRuleId );
+                result = new Object[] { pTreLabel, values, HISTORIC_TYPE, new HashMap<Date, Float>() };
+            }
+        }
+        catch ( JrafPersistenceException e )
+        {
+            FacadeHelper.convertException( e, MeasureFacade.class.getName() + ".getHistoricGraph" );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, MeasureFacade.class.getName() + ".getHistoricGraph" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, MeasureFacade.class.getName() + ".getHistoricGraph" );
+        }
 
+        return result;
     }
 
     /**
@@ -1011,5 +1046,102 @@ public class MeasureFacade
             FacadeHelper.closeSession( session, MeasureFacade.class.getName() + ".getMeasuresByTRE" );
         }
         return results;
+    }
+
+    /**
+     * Recover the list of information needed to fill the historic of a manual practice The first object return
+     * represent the historic of all the mark inserted for the manual practice. The second object represent the validity
+     * of the last mark inserted
+     * 
+     * @param component Component on which we do the search
+     * @param auditDate The limit date for the search
+     * @param ruleId The id of the rule on which we do the historic
+     * @param timeLimitation This String represents the duration of validity of a mark for the manual practice
+     * @return objects
+     * @throws JrafEnterpriseException exception happen during the search
+     */
+    public static Object[] getHistoricManualMark( ComponentDTO component, Date auditDate, Long ruleId,
+                                                  String timeLimitation )
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+        Map values = new HashMap<Date, Float>();
+        Map extension = new HashMap<Date, Float>();
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            QualityResultDAOImpl dao = QualityResultDAOImpl.getInstance();
+            Calendar todayCal = TimeUtil.calDateOnly();
+
+            PracticeResultBO lastResult = dao.findLastManualMark( session, component.getID(), ruleId );
+
+            if ( lastResult != null )
+            {
+                Calendar endValidity =
+                    TimeLimitationParser.endValidityDate( timeLimitation, lastResult.getCreationDate() );
+                if ( endValidity.getTime().compareTo( auditDate ) > 0 )
+                {
+                    ArrayList<PracticeResultBO> resultList =
+                        (ArrayList<PracticeResultBO>) dao.findManualMarkSince( session, component.getID(), ruleId,
+                                                                               auditDate );
+                    if ( resultList != null )
+                    {
+                        for ( PracticeResultBO practice : resultList )
+                        {
+                            values.put( practice.getCreationDate(), practice.getMeanMark() );
+                        }
+                        if ( lastResult.getCreationDate().compareTo( todayCal.getTime() ) < 0 )
+                        {
+                            extension =
+                                MeasureFacade.fillExtensionMap( lastResult.getCreationDate(), lastResult.getMeanMark(),
+                                                                todayCal, endValidity );
+                        }
+                    }
+                    else
+                    {
+                        extension =
+                            MeasureFacade.fillExtensionMap( auditDate, lastResult.getMeanMark(), todayCal, endValidity );
+                    }
+                }
+            }
+        }
+        catch ( JrafPersistenceException e )
+        {
+            FacadeHelper.convertException( e, MeasureFacade.class.getName() + ".getHistoricManualMark" );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, MeasureFacade.class.getName() + ".getHistoricManualMark" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, MeasureFacade.class.getName() + ".getHistoricManualMark" );
+        }
+        return new Object[] { values, extension };
+    }
+
+    /**
+     * When we create the historic for a manual practice, this method permit to fill part of the historic corresponding
+     * to the validity of the last mark
+     * 
+     * @param beginDate Date of creation of the mark
+     * @param mark The mark
+     * @param todayCal Calendar set on today
+     * @param endValidity Date of end of validity of the mark
+     * @return a map which contains information to display for the historic 
+     */
+    private static Map fillExtensionMap( Date beginDate, float mark, Calendar todayCal, Calendar endValidity )
+    {
+        Map extension = new HashMap<Date, Float>();
+        extension.put( beginDate, mark );
+        if ( endValidity.after( todayCal ) )
+        {
+            extension.put( todayCal.getTime(), mark );
+        }
+        else
+        {
+            extension.put( endValidity.getTime(), mark );
+        }
+        return extension;
     }
 }
