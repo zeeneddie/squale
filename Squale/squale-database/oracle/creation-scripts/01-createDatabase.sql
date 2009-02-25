@@ -433,10 +433,11 @@
     create table QualityResult (
         QualityResultId number(19,0) not null,
         subclass varchar2(255) not null,
+        CreationDate date,
         QualityRuleId number(19,0) not null,
         MeanMark float not null,
         ProjectId number(19,0) not null,
-        AuditId number(19,0) not null,
+        AuditId number(19,0),
         primary key (QualityResultId)
     );
 
@@ -449,6 +450,7 @@
         Formula number(19,0),
         WeightFunction varchar2(255),
         effort number(10,0),
+        TimeLimitation varchar2(6),
         primary key (QualityRuleId)
     );
 

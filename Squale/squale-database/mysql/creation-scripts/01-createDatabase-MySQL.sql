@@ -637,10 +637,11 @@
     create table QualityResult (
         QualityResultId bigint not null auto_increment,
         subclass varchar(255) not null,
+        CreationDate datetime,
         QualityRuleId bigint not null,
         MeanMark float not null,
         ProjectId bigint not null,
-        AuditId bigint not null,
+        AuditId bigint,
         primary key (QualityResultId)
     ) type=InnoDB;
 
@@ -653,6 +654,7 @@
         Formula bigint,
         WeightFunction varchar(255),
         effort integer,
+        TimeLimitation varchar(6),
         primary key (QualityRuleId)
     ) type=InnoDB;
 
