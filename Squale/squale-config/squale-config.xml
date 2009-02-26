@@ -44,6 +44,7 @@
 		<task name="JavancssTask" class="com.airfrance.squalix.tools.javancss.JavancssTask" configurable="false" mandatory="false"></task>
 		<!-- taches desactivees pour le moment -->
 		<!--task name="UMLQualityTask" class="com.airfrance.squalix.tools.umlquality.UMLQualityTask" mandatory="false"></task-->
+		<!--task name="CoberturaTask" class="com.airfrance.squalix.tools.cobertura.CoberturaTask" configurable="true" mandatory="false"></task-->
 	</tasks>
 	<sourcemanagements>
 		<sourcemanagement name="Local">

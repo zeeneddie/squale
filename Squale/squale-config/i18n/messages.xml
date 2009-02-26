@@ -479,11 +479,17 @@
 	<message lang="en" key="rule.integrationtestcoverage">
 		Integration test coverage
 	</message>
-	<message lang="fr" key="rule.unittestcoverage">
-		Taux de couverture des tests unitaires
+	<message lang="fr" key="rule.unittestlinecoverage">
+		Taux de couverture de lignes des tests unitaires
 	</message>
-	<message lang="en" key="rule.unittestcoverage">
-		Unit test coverage
+	<message lang="en" key="rule.unittestlinecoverage">
+		Unit test line coverage rate
+	</message>
+	<message lang="fr" key="rule.unittestbranchcoverage">
+		Taux de couverture de branches des tests unitaires
+	</message>
+	<message lang="en" key="rule.unittestbranchcoverage">
+		Unit test branch coverage rate
 	</message>
 	<message lang="fr" key="rule.functionalsecurityaspects">
 		Cahier des charges fonctionnel : sécurité
@@ -1563,8 +1569,21 @@
 	<message lang="en" key="javancss.project.numberOfCodeLines">
 		Total number of lines
 	</message>
-
-
+	
+	<!-- Cobertura : Project level metrics labels -->
+	<message lang="fr" key="cobertura.project.lineRate">
+		Taux de couverture de lignes de code sources
+	</message>
+	<message lang="en" key="cobertura.project.lineRate">
+		Source lines code coverage rate 
+	</message>
+	<message lang="fr" key="cobertura.project.branchRate">
+		Taux de couverture de branche
+	</message>
+	<message lang="en" key="cobertura.project.branchRate">
+		Branch coverage rate 
+	</message>
+	
 	<!--  PACKAGES  -->
 	
 	<message lang="fr" key="jdepend.package.distance">
@@ -2529,7 +2548,11 @@
 	<message lang="fr" key="JavancssTask.name">Tâche Javancss</message>
 
 	<message lang="en" key="JavancssTask.name">Javancss task</message>
-
+	
+	<!-- Cobertura Task Name -->
+	<message lang="fr" key="CoberturaTask.name">Tâche Cobertura</message>
+	<message lang="en" key="CoberturaTask.name">Cobertura task</message>
+	
 	<!--  Messages pour les graphes   -->
 	<message lang="fr" key="roi.graph.xTitle">Date des audits</message>
 	<message lang="en" key="roi.graph.xTitle">Audits date</message>
