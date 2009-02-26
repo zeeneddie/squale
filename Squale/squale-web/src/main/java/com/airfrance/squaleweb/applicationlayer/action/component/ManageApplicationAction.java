@@ -68,6 +68,7 @@ import com.airfrance.squaleweb.transformer.ApplicationConfTransformer;
 import com.airfrance.squaleweb.transformer.AuditTransformer;
 import com.airfrance.squaleweb.transformer.ProjectConfTransformer;
 import com.airfrance.squaleweb.transformer.ServeurListTransformer;
+import com.airfrance.squaleweb.util.InputFieldDataChecker;
 import com.airfrance.squaleweb.util.SqualeWebActionUtils;
 import com.airfrance.welcom.struts.ajax.WHttpEasyCompleteResponse;
 import com.airfrance.welcom.struts.bean.WActionForm;
@@ -78,7 +79,6 @@ import com.airfrance.welcom.struts.util.WConstants;
 
 /**
  * Struts Action used to handle applications.
- * 
  */
 public class ManageApplicationAction
     extends ReaderAction
@@ -297,22 +297,33 @@ public class ManageApplicationAction
                 String matricule = form.getMatricule()[i].trim();
                 if ( matricule.length() > 0 )
                 {
-                    String right = form.getRightProfile()[i];
-                    if ( ProfileBO.MANAGER_PROFILE_NAME.equals( right ) )
+                    if ( InputFieldDataChecker.USER_ID.check( matricule ) )
                     {
-                        hasManager = true;
+                        String right = form.getRightProfile()[i];
+                        if ( ProfileBO.MANAGER_PROFILE_NAME.equals( right ) )
+                        {
+                            hasManager = true;
+                        }
+                        // On vérifie que l'utilisateur n'existe pas déjà avec des droits différents
+                        String userRight = (String) users.get( matricule );
+                        if ( userRight != null && !userRight.equals( right ) )
+                        {
+                            // Erreur de configuration
+                            ActionMessage error = new ActionMessage( "error.application_more_than_one_right" );
+                            errors.add( ActionMessages.GLOBAL_MESSAGE, error );
+                            saveMessages( pRequest, errors );
+                            forward = pMapping.findForward( "failure" );
+                        }
+                        users.put( matricule, right );
                     }
-                    // On vérifie que l'utilisateur n'existe pas déjà avec des droits différents
-                    String userRight = (String) users.get( matricule );
-                    if ( userRight != null && !userRight.equals( right ) )
+                    else
                     {
-                        // Erreur de configuration
-                        ActionMessage error = new ActionMessage( "error.application_more_than_one_right" );
+                        // Message d'erreur
+                        ActionMessage error = new ActionMessage( "error.application.not_valid_user", matricule );
                         errors.add( ActionMessages.GLOBAL_MESSAGE, error );
                         saveMessages( pRequest, errors );
                         forward = pMapping.findForward( "failure" );
                     }
-                    users.put( matricule, right );
                 }
             }
             if ( !hasManager )
