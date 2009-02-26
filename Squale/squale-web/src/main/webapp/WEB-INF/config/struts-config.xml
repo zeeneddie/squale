@@ -120,6 +120,12 @@
         </form-bean>
         <form-bean name="ComponentResultListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentResultListForm">
         </form-bean>
+        <!-- ================================ Adding here the genericTask form-bean ================================ -->		    
+        <form-bean name="genericTaskForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.GenericTaskForm">
+        </form-bean>
+        <!-- ================================ Adding here the coberturaTask form-bean ================================ -->
+		<form-bean name="coberturaTaskForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.CoberturaForm">
+        </form-bean>
         <form-bean name="HomepageManagementForm" type="com.airfrance.squaleweb.applicationlayer.formbean.homepagemanagement.HomepageManagementForm">
         </form-bean>
         <form-bean name="homepageForm" type="com.airfrance.squaleweb.applicationlayer.formbean.HomepageForm">
@@ -127,7 +133,6 @@
         <form-bean name="manualMarkForm" type="com.airfrance.squaleweb.applicationlayer.formbean.manualmark.ManualMarkForm">
         </form-bean>
 	</form-beans>
-
 
 	<!-- ========== Global Forward Definitions ============================== -->
 	<global-forwards>
@@ -298,6 +303,41 @@
 			<forward name="list" path="/jsp/admin/config/config_portail.jsp">
 			</forward>
 		</action>
+
+		<!-- ======================== Starting generic task action definitions ======================== -->
+		
+		<!-- Main configuration action of the generic task called while an admin wishes to configure an existing project or a new project (whithin an application)-->
+		<action path="/add_project_generictask_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateGenericTaskParametersAction" parameter="action" name="genericTaskForm" scope="session" input="/jsp/admin/project/config_project.jsp">
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>
+		
+		<!-- Action called while transforming object to form and vis versa-->
+		<action path="/GenericTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateGenericTaskParametersAction" parameter="action" name="genericTaskForm" input="/jsp/admin/project/add_project_generictask_conf.jsp" validate="false" scope="session">
+			<forward name="config" path="/jsp/admin/project/add_project_generictask_conf.jsp">
+			</forward>
+		</action>
+		<!-- ========================= Ending generic task action definitions ========================= -->
+		
+		<!-- ======================== Starting cobertura task action definitions ======================== -->
+		
+		<!-- Main configuration action of CoberturaTask called while an admin wishes to configure an existing project or a new project (whithin an application)-->
+		<action path="/add_project_coberturaTask_config" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateCoberturaParametersAction" parameter="action" name="coberturaTaskForm" scope="session" input="/jsp/admin/project/config_project.jsp">
+			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+			<forward name="configure" path="/jsp/admin/project/config_project.jsp">
+			</forward>
+		</action>		
+		
+		<!-- Action called while transforming object to form and vis versa-->
+		<action path="/CoberturaTask" type="com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateCoberturaParametersAction" parameter="action" name="coberturaTaskForm" input="/jsp/admin/project/add_project_coberturatask_conf.jsp" validate="false" scope="session">
+			<forward name="config" path="/jsp/admin/project/add_project_coberturatask_conf.jsp" redirect="true">
+			</forward>
+		</action>
+		
+		<!-- ======================== Ending cobertura task action definitions ======================== -->
 		<action path="/loadConfig" forward="/jsp/admin/config/new.jsp">
 		</action>
 		<action path="/createConfig" type="com.airfrance.squaleweb.applicationlayer.action.config.ConfigCreationAction" name="createConfigForm" scope="request">

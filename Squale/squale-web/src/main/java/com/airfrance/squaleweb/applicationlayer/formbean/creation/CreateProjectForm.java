@@ -214,6 +214,7 @@ public class CreateProjectForm
         for ( Iterator it = pTasks.iterator(); it.hasNext(); )
         {
             task = (TaskDTO) it.next();
+            //task.setAbstractGenericInherited();
             if ( task.isStandard() )
             {
                 mStandardTasks.add( task );
