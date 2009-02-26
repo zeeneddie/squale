@@ -22,6 +22,10 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.TreeSet;
 
+import org.apache.bcel.classfile.Utility;
+import org.apache.commons.lang.ClassUtils;
+import org.apache.commons.lang.StringUtils;
+
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO;
@@ -457,5 +461,103 @@ public class JavaParser
             first = pAbsoluteClassName.substring( 0, firstDot );
         }
         return first;
+    }
+
+    /* =========================================================================================================================================== */
+    /**
+     * <p>
+     * This method is used to convert method signature from bytecode back to source code e.g
+     * <ul>
+     * <b>from</b>
+     * <li>loadProperties(Ljava/util/Properties;Ljava/util/List;Ljava/util/Properties;)</li>
+     * <br />
+     * <b>to</b>
+     * <li>loadProperties(Properties,List,Properties)</li>
+     * </ul>
+     * </p>
+     * <p>
+     * It is particulary usefull as the aggregation of metrics in Squale could only be achieved if the comparison
+     * between component is efficient.<br />
+     * Please refer to the comments in the method core for more information.
+     * </p>
+     * @param pSignature the signature that has to be converted
+     * @return a String representation of the signature in the "Squale format"
+     * 
+     */
+    public String getSignatureFromBytecode( String pSignature )
+    {
+        /*
+         * Using Apache BCEL API to get an array of arguments that are not chopped as a generic method is needed. In
+         * BCEL Utility only java.lang.* classes are chopped.
+         */
+        String[] returnedSignature = Utility.methodSignatureArgumentTypes( pSignature, false );
+        String finalSignature = "";
+        /* Iterating over the array or arguments */
+        for ( int i = 0; i < returnedSignature.length; i++ )
+        {
+            /* first testing if the method is a representation of a static class method call */
+            String singleArgument = chopStaticSignature( returnedSignature[i] );
+            /* while the last element is not reached */
+            if ( i < returnedSignature.length - 1 )
+            {
+                finalSignature += ClassUtils.getShortClassName( singleArgument ) + ',';
+            }
+            else
+            {
+                finalSignature += ClassUtils.getShortClassName( singleArgument );
+            }
+        }
+        return finalSignature;
+    }
+
+    /**
+     * <p>
+     * In Cobertura signature of method are given in byte-code format. When calling a method from a static class the
+     * argument contains the long class name and at the end the final "/" is replaced by a "$". In those cases the
+     * method signature in Squale has to be chopped to the last part of the returned String e.g
+     * <b>"(Lorg/codehaus/plexus/util/FileUtils$FilterWrapper;)V"</b> to <b>FilterWrapper</b> 
+     * </p>
+     * @param pSignature the method's signature that has to be chopped
+     * @return a String representation of the short class name
+     */
+    public String chopStaticSignature( String pSignature )
+    {
+        String returnedSignature = pSignature;
+        /* checking if the signature contains a $ */
+        if ( StringUtils.contains(returnedSignature, "$" ) )
+        {
+            /* Substringing after the last "$" */
+            returnedSignature = StringUtils.substringAfterLast( pSignature, "$" );
+        }
+        return returnedSignature;
+    }
+
+    /**
+     * <p>
+     * This method is used to decode constructor name in results containing bytecode so as to aggregate the metrics.
+     * </p>
+     * <p>
+     * As constructors, at the JVM level, are regular methods that are identified by the well-known name "'<'init'>'",
+     * one must check if the audited method matches the pattern <b>&lt;init&gt;</b>.
+     * </p>
+     * @param pJvmMethodName the name of the method in a byte-code format
+     * @param pClassName the classname of the tested methos comes from
+     * @return a String representation of the constructor
+     */
+    public String getConstructorFromByte( String pJvmMethodName, String pClassName )
+    {
+        String constructorName = "";
+        /* if the method extracted from the result file contains '<init>' */
+        if ( StringUtils.contains( pJvmMethodName, "<init>" ) )
+        {
+            /* replace it as it is a constructor */
+            constructorName = ClassUtils.getShortClassName( pClassName );
+        }
+        else
+        {
+            /* else it is identical to the source code method name */
+            constructorName = pJvmMethodName;
+        }
+        return constructorName;
     }
 }
