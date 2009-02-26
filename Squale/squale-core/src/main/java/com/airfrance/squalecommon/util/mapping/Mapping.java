@@ -187,6 +187,20 @@ public class Mapping
         measures.put(
                       "javancss.method",
                       com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssMethodMetricsBO.class );
+        
+        // Cobertura Code Coverage
+        measures.put(
+                     "cobertura.project",
+                     com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaProjectMetricsBO.class );
+        measures.put(
+                     "cobertura.package",
+                     com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaPackageMetricsBO.class );
+        measures.put(
+                     "cobertura.class",
+                     com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaClassMetricsBO.class );
+        measures.put(
+                     "cobertura.method",
+                     com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaMethodMetricsBO.class );
     }
 
     /**

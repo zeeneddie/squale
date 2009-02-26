@@ -143,6 +143,26 @@ public class ParametersConstants
     /** Location **/
     public static final String SCMLOCATION = "scmlocation";
 
+    
+    //********************************** Generic Task **********************************
+    
+    /** Static final String : name of the task to retrieve the values */
+    public static final String GENERICTASK = "genericTask";
+    
+    // The constants are "gt" prefixed
+    
+    /** Tool Directory */
+    public static final String GENERICTASK_TOOLDIR = "gtToolLocation";
+
+    /** Working Directory */
+    public static final String GENERICTASK_WORKDIR = "gtWorkingDirectory";
+    
+    /** Results Directory */
+    public static final String GENERICTASK_RESULTSDIR = "gtResultsLocation";
+    
+    /** Commands */
+    public static final String GENERICTASK_COMMANDS = "gtCommands";
+    
     // *************** Projet C++ ******************************************
 
     /** Les informations C++ */
@@ -181,6 +201,7 @@ public class ParametersConstants
     /** Nom du set de règles Checkstyle */
     public static final String CHECKSTYLE_RULESET_NAME = "rulesetname";
 
+    
     // ********************* Tâche PMD ************************************
     /** Informations PMD */
     public static final String PMD = "pmd";

@@ -18,20 +18,19 @@
  */
 package com.airfrance.squalecommon.enterpriselayer.businessobject.config;
 
+
 /**
- * Tâche squalix
+ * A {@link TaskBO} type object represents a task in Squalix.
  * 
  * @hibernate.class table="Task" lazy="true"
  */
 public class TaskBO
 {
 
-    /**
-     * Identifiant (au sens technique) de l'objet
-     */
+    /** Identifier of the instance */
     private long mId;
 
-    /** Le nom de la tâche */
+    /** The name of the task */
     private String mName;
 
     /** La classe correspondante à la tâche */
@@ -149,8 +148,8 @@ public class TaskBO
 
     /**
      * @return true si la tâche fait partie de la configuration minimum d'un projet
-     * @hibernate.property name="standard" column="Standard" type="boolean" not-null="false" unique="false" update="true"
-     *                     insert="true"
+     * @hibernate.property name="standard" column="Standard" type="boolean" not-null="false" unique="false"
+     *                     update="true" insert="true"
      */
     public boolean isStandard()
     {
@@ -182,5 +181,4 @@ public class TaskBO
     {
         mMandatory = pMandatory;
     }
-
 }

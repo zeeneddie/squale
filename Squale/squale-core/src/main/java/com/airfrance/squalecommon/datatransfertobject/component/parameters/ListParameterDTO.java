@@ -22,17 +22,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class represents the model of all instances of ListParameterDTO. All parameters contained in an object of type
+ * ListParameterDTO are manipulated in the application layer.
  */
 public class ListParameterDTO
 {
 
     /**
-     * La liste de paramètres
+     * A collection (a List) of the parameters
      */
     private List mParameters = new ArrayList();
 
     /**
-     * Identifiant de l'objet
+     * An identifier for any instance of this class
      */
     private long mId = -1;
 
@@ -57,7 +59,9 @@ public class ListParameterDTO
     }
 
     /**
-     * @return la liste de paramètres
+     * Getter of the list
+     * 
+     * @return The list containing the parameters
      */
     public List getParameters()
     {
@@ -65,7 +69,9 @@ public class ListParameterDTO
     }
 
     /**
-     * @param pList la nouvelle liste de paramètres
+     * Setter of the List
+     * 
+     * @param pList The list containing the new parameters
      */
     public void setParameters( List pList )
     {

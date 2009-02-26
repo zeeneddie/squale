@@ -22,6 +22,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The <code><b>MapParameterBO</b></code> class represents a Map type object. All parameters related to user inputs in
+ * the presentation layer (JSP) are stored in instance(s) of this class.
+ * 
+ * <p>If you need to recover some parameters :</p>
+ * <ol>
+ * <li>recover the map related to the task of which you wish to recover the parameters using the constant name related to the task</li>
+ * <blockquote><pre>e.g : MapParameterBO myTaskParams = (MapParameterBO) mProject.getParameter( ParametersConstants.myTask );</pre></blockquote>
+ * <li>recover parameters one by one by getting the value using the related constant as key</li>
+ * <blockquote><pre>e.g StringParameterBO myParameter = (StringParameterBO) myTaskParams.getParameters().get( ParametersConstants.myParameter );</pre></blockquote>
+ * </ol>
  * @hibernate.subclass discriminator-value="Map"
  */
 public class MapParameterBO
@@ -29,16 +39,18 @@ public class MapParameterBO
 {
 
     /**
-     * La map de paramètres
+     * The parameter(s) map related to a task in the project
      */
     private Map mParameters = new HashMap();
 
     /**
+     * Getter of the parameter(s) map
+     * 
      * @hibernate.map table="ProjectParameters" lazy="false" cascade="all" sort="unsorted"
      * @hibernate.index column="IndexKey" type="string"
      * @hibernate.key column="MapId"
      * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"
-     * @return la map de paramètres
+     * @return The parameter(s) map
      */
     public Map getParameters()
     {
@@ -46,7 +58,9 @@ public class MapParameterBO
     }
 
     /**
-     * @param pMap la nouvelle map de parametres
+     * Setter of the parameter(s) map
+     * 
+     * @param pMap the new map of parameter(s)
      */
     public void setParameters( Map pMap )
     {
