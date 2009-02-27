@@ -45,12 +45,6 @@ import com.airfrance.squalecommon.util.messages.CommonMessages;
  * <p>
  * Description : Application component error
  * </p>
- * <p>
- * Copyright : Copyright (c) 2005
- * </p>
- * <p>
- * Company : AIRFRANCE
- * </p>
  * Classe permettant de récupérer les erreurs en fonction des paramètres d'audits et de taches qui ont généré les
  * erreurs
  */

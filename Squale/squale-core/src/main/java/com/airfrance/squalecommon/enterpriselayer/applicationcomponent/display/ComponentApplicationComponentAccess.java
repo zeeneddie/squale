@@ -30,11 +30,15 @@ import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
 import com.airfrance.jraf.provider.accessdelegate.DefaultExecuteComponent;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import com.airfrance.squalecommon.datatransfertobject.component.ProjectConfDTO;
+import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.squalecommon.enterpriselayer.facade.component.AuditFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.component.ComponentFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.component.ProjectFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.quality.MeasureFacade;
+import com.airfrance.squalecommon.enterpriselayer.facade.tag.TagFacade;
 
 /**
  * @author m400841 (by Rose) Classe permettant de récupérer les composants (fils, parent) et les audits (dernier ou
@@ -444,22 +448,73 @@ public class ComponentApplicationComponentAccess
     }
 
     /**
-     * Retourne le liste des projets dont le nom commence par <code>mProjectName</code>, dont l'application commence
-     * par <code>mAppliName</code> et qui appartient à la liste <code>pUserAppli</code> associé à son dernier audits
-     * (peut-être nul)
+     * Returns the list of projects with the name beginning with <code>pProjectName</code>, with their application's name
+     * beginning with <code>pAppliName</code>, posessing the tags wanted in <code>pTagNames</code> and included in the
+     * list <code>pUserAppli</code> associated with their last audit (may be null)
      * 
-     * @param pUserAppli la liste des applications de l'utilisateur courant
-     * @param mAppliName le début du nom de l'application associée au projet
-     * @param mProjectName le début du nom du projet à chercher
-     * @throws JrafEnterpriseException si erreurs
-     * @return les projets trouvés avec leur dernier audit si il existe
+     * @param pUserAppli the list of application of the current user
+     * @param pAppliName the beginning of the name of the associated application
+     * @param pProjectName the beginning of the name of the project
+     * @param pTagNames The tags wanted on the project
+     * @throws JrafEnterpriseException if an error occurs
+     * @return the found projects with their last audit if it exists
      */
-    public Map getProjectsWithLastAudit( Collection pUserAppli, String mAppliName, String mProjectName )
+    public Map getProjectsWithLastAudit( Collection pUserAppli, String pAppliName, String pProjectName, String[] pTagNames)
         throws JrafEnterpriseException
     {
-        return ComponentFacade.getProjectsWithLastAudit( pUserAppli, mAppliName, mProjectName );
+        return ComponentFacade.getProjectsWithLastAudit( pUserAppli, pAppliName, pProjectName, pTagNames );
     }
 
+    /**
+     * Permet de récupérer des valeurs pour une liste de types de résultat, un type de composant et une liste d'audits
+     * donnés
+     * 
+     * @param pTags tableau de TagDTO renseignant le ou les tags selon lequel on doit chercher
+     * @return applications Les applications possédant le tag demandé
+     * @throws JrafEnterpriseException Exception JRAF
+     * @roseuid 42CBFBFD030B
+     */
+    public List<ComponentDTO> getTaggedApplications( TagDTO[] pTags )
+        throws JrafEnterpriseException
+    {
+
+        // Initialisation
+        List<ComponentDTO> applications = null; // retour de l'AC
+
+        if ( pTags != null && pTags.length > 0 )
+        {
+            // Envoi un tag aux façades et récupère des résultats
+            applications = ComponentFacade.getTaggedApplications( pTags );
+        }
+
+        return applications;
+    }
+
+    /**
+     * Permet de récupérer des valeurs pour une liste de types de résultat, un type de composant et une liste d'audits
+     * donnés
+     * 
+     * @param pTags tableau de TagDTO renseignant le ou les tags selon lequel on doit chercher
+     * @return projects Les projets possédant le tag demandé
+     * @throws JrafEnterpriseException Exception JRAF
+     * @roseuid 42CBFBFD030B
+     */
+    public List<ComponentDTO> getTaggedProjects( TagDTO[] pTags )
+        throws JrafEnterpriseException
+    {
+
+        // Initialisation
+        List<ComponentDTO> projects = null; // retour de l'AC
+
+        if ( pTags != null && pTags.length > 0 )
+        {
+            // Envoi un tag aux façades et récupère des résultats
+            projects = ComponentFacade.getTaggedProjects( pTags );
+        }
+
+        return projects;
+    }
+    
     /**
      * @param pType le type d'audit
      * @param pStatus le status de l'audit
@@ -527,5 +582,4 @@ public class ComponentApplicationComponentAccess
     {
         return ProjectFacade.getProjectWorkspace( pProjectId );
     }
-
 }

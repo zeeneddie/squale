@@ -19,6 +19,7 @@
 package com.airfrance.squalecommon.enterpriselayer.businessobject.component;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -27,6 +28,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 import com.airfrance.squalecommon.util.mapping.Mapping;
 
 /**
@@ -64,6 +66,11 @@ public abstract class AbstractComponentBO
      * Collection des audits liés à ce composant
      */
     protected Collection mAudits;
+    
+    /**
+     * Collection des Tags associés à ce composant
+     */
+    protected Collection<TagBO> mTags;
 
     /** l'éventuelle justification associée au composant */
     private String justification;
@@ -414,5 +421,57 @@ public abstract class AbstractComponentBO
      * @return objet
      */
     public abstract Object accept( ComponentVisitor pVisitor, Object pArgument );
+    
+    /**
+     * Access method for the mTags property.
+     * 
+     * @return the current value of the mTags property
+     * @hibernate.set table="Tag_Component" lazy="false" cascade="none" inverse="false" sort="unsorted"
+     * @hibernate.key column="ComponentId"
+     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO"
+     *                         column="TagId" outer-join="auto"
+     */
+    public Collection<TagBO> getTags()
+    {
+        return mTags;
+    }
+
+    /**
+     * Sets the value of the mTags property.
+     * 
+     * @param pTags the new value of the mTags property
+     */
+    public void setTags( Collection<TagBO> pTags )
+    {
+        mTags = pTags;
+    }
+    
+    /**
+     * adds the value of pTag to the mTags list.
+     * 
+     * @param pTag the new value to add
+     */
+    public void addTag( TagBO pTag )
+    {
+        if ( mTags == null )
+        {
+            mTags = new ArrayList<TagBO>();
+        }
+        mTags.add( pTag );
+    }
+
+    /**
+     * removes the value of pTag to the mTags list.
+     * 
+     * @param pTag the new value to add
+     */
+    public void removeTag( TagBO pTag )
+    {
+        if ( mTags == null )
+        {
+            mTags = new ArrayList<TagBO>();
+        }
+        mTags.remove( pTag );
+    }
 
 }

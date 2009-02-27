@@ -39,8 +39,11 @@ import com.airfrance.squalecommon.daolayer.component.ProjectParameterDAOImpl;
 import com.airfrance.squalecommon.daolayer.config.ProjectProfileDAOImpl;
 import com.airfrance.squalecommon.daolayer.config.SourceManagementDAOImpl;
 import com.airfrance.squalecommon.daolayer.rule.QualityGridDAOImpl;
+import com.airfrance.squalecommon.daolayer.tag.TagDAOImpl;
 import com.airfrance.squalecommon.datatransfertobject.component.ApplicationConfDTO;
+import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ProjectConfDTO;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.ComponentTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.ProjectConfTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.parameters.MapParameterTransform;
@@ -53,6 +56,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.param
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 import com.airfrance.squalecommon.enterpriselayer.facade.FacadeMessages;
 
 /**
@@ -70,28 +74,28 @@ public class ProjectFacade
     private static Log LOG = LogFactory.getLog( ProjectFacade.class );
 
     /**
-     * Permet de modifier le projet donné à partir d'un objet DTO
+     * Modifies a given project with a DTO object
      * 
-     * @param pProjectConf le projet à modifier
-     * @param pApplicationConf application associée
-     * @param pSession session JRAF
-     * @return pProjectConfDTO si l'update s'est correctement deroulé, sinon <code>null</code>
-     * @throws JrafEnterpriseException exception JRAF
+     * @param pProjectConf the project to modify
+     * @param pApplicationConf the associated application
+     * @param pSession JRAF session
+     * @return pProjectConfDTO if the update was correctly made, <code>null</code> otherwise
+     * @throws JrafEnterpriseException JRAF exception
      */
     public static ProjectConfDTO update( ProjectConfDTO pProjectConf, ApplicationConfDTO pApplicationConf,
                                          ISession pSession )
         throws JrafEnterpriseException
     {
-        // Initialisation du BO associé et identifiant de l'application
+        // Initialization of the BO associated and application Id
         ProjectBO projectBO = null;
-        ApplicationBO applicationBO = null; // ProjectBO chargé
-        ProjectBO newProject = null; // ProjectBO apres modification
-        List qualityRules = new ArrayList(); // Liste des qualityRules a calculer
+        ApplicationBO applicationBO = null; // loaded ProjectBO
+        ProjectBO newProject = null; // ProjectBO after modification
+        List qualityRules = new ArrayList(); // List of the qualityRules to calculate
         Long projectID = new Long( pProjectConf.getId() );
         Long applicationID = new Long( pApplicationConf.getId() );
-        // indique si l'on doit sauvegarder le projet ou pas
+        // indicates if the project needs to be saved or not
         boolean toUpdate = false;
-        // Retour de la méthode
+        // value that will be returned by the method
         ProjectConfDTO result = null;
 
         try
@@ -103,13 +107,13 @@ public class ProjectFacade
                 //CHECKSTYLE:ON
             }
 
-            // Initialisation des DAO
+            // Initialization of the DAOs
             ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
             ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
 
-            // Chargement du projet associé
+            // the associated projects are loaded
             projectBO = (ProjectBO) projectDAO.get( pSession, projectID );
-            // Si l'objet n'existe pas en base, il faut le créer
+            // If the object does not exist in the database, it needs to be created
             if ( projectBO == null )
             {
                 projectBO = new ProjectBO();
@@ -117,61 +121,61 @@ public class ProjectFacade
             }
             else
             {
-                // Si il existe déjà on regarde si il faut l'updater
+                // If it already exists we check if it must be updated
                 toUpdate = projectChanged( pProjectConf, projectBO );
             }
-            // Si le projet a changé, on effectue la transformation et on le sauvegarde :
+            // If the project has changed, it is transformed and saved
             if ( toUpdate )
             {
-                // Transformation de DTO a BO si le projet n'existe pas en base
+                // Transformation of the DTO to a BO if the project doesn't exist in the database
                 ProjectConfTransform.dto2Bo( pProjectConf, projectBO );
 
-                // Chargement de la grille qualité associée
+                // Loading of the associated quality grid
                 String gridName = pProjectConf.getQualityGrid().getName();
                 QualityGridBO gridBO =
                     (QualityGridBO) QualityGridDAOImpl.getInstance().findWhereName( pSession, gridName );
                 projectBO.setQualityGrid( gridBO );
 
-                // Chargement du profil associé
+                // Loading of the associated profil
                 String profileName = pProjectConf.getProfile().getName();
                 ProjectProfileBO profileBO =
                     (ProjectProfileBO) ProjectProfileDAOImpl.getInstance().findWhereName( pSession, profileName );
                 projectBO.setProfile( profileBO );
 
-                // Chargement du source manager associé
+                // Loading of the associated source manager
                 String managerName = pProjectConf.getSourceManager().getName();
                 SourceManagementBO managerBO =
                     (SourceManagementBO) SourceManagementDAOImpl.getInstance().findWhereName( pSession, managerName );
                 projectBO.setSourceManager( managerBO );
 
-                // On charge les paramètres
+                // The parameters are loaded
                 ProjectParameterDAOImpl paramDAO = ProjectParameterDAOImpl.getInstance();
                 MapParameterBO parameters = MapParameterTransform.dto2Bo( pProjectConf.getParameters() );
                 Long paramId = new Long( projectBO.getParameters().getId() );
                 paramDAO.removeAndCreateNew( pSession, paramId, parameters );
                 projectBO.setParameters( parameters );
 
-                // Chargement de l'application associée
+                // Loading of the associated application
                 applicationBO = (ApplicationBO) applicationDAO.get( pSession, applicationID );
 
-                // Si l'application est renseignée et que le projet a été modifié, on modifie
-                // la relation et on sauvegarde
+                // If the application exists and the project has been modified, the relation
+                // is modified and saved
                 if ( applicationBO != null )
                 {
                     if ( projectBO.getParent() == null || projectBO.getParent().getId() == -1 )
                     {
-                        // Un projet ne doit jamais changer d'application
+                        // A project must never be linked to another application
                         projectBO.setParent( applicationBO );
                     }
                     newProject = projectDAO.save( pSession, projectBO );
-                    // On sauvegarde l'application associée pour updater les informations
-                    // sur les dernières modifications
+                    // The associated application is saved to update the latest modifications
+                    // on the informations
                     applicationBO.setLastUpdate( pApplicationConf.getLastUpdate() );
                     applicationBO.setLastUser( pApplicationConf.getLastUser() );
                     applicationDAO.save( pSession, applicationBO );
                 }
 
-                // initialisation du retour
+                // the return is initialized
                 if ( newProject != null )
                 {
                     result = ProjectConfTransform.bo2Dto( projectBO );
@@ -193,50 +197,52 @@ public class ProjectFacade
     }
 
     /**
-     * @param pProjectConf le projet modifié
-     * @param projectBO le projet en base
-     * @return true si le projet en base doit être updaté
+     * Verifies if the project in the database needs to be updated
+     * 
+     * @param pProjectConf the modified project
+     * @param projectBO the project from the database
+     * @return true if the projects needs to be updated
      */
     private static boolean projectChanged( ProjectConfDTO pProjectConf, ProjectBO projectBO )
     {
         boolean toUpdate = false;
         toUpdate |= !pProjectConf.getName().equals( projectBO.getName() );
-        // Si on a modifié la grille, on devra sauvegarder le projet
+        // If the grid has been modified, the project needs to be saved
         toUpdate |= !projectBO.getQualityGrid().getName().equals( pProjectConf.getQualityGrid().getName() );
-        // Si on a modifié le profil, on devra sauvegarder le projet
+        // If the profil has been modified, the project needs to be saved
         toUpdate |= !projectBO.getProfile().getName().equals( pProjectConf.getProfile().getName() );
-        // Si on a modifié le source manager, on devra sauvegarder le projet
+        // If the source manager has been changed, the project needs to be saved
         toUpdate |= !projectBO.getSourceManager().getName().equals( pProjectConf.getSourceManager().getName() );
-        // On tranforme les paramètres pour la comparaison
+        // The parameters are transformed for comparison
         MapParameterBO parameters = MapParameterTransform.dto2Bo( pProjectConf.getParameters() );
         toUpdate |= !projectBO.getParameters().equals( parameters );
         return toUpdate;
     }
 
     /**
-     * Permet de supprimer un projet sélectionné
+     * deletes a selected project
      * 
-     * @param pProjectId l'ID du projet
-     * @param pSession session JRAF
-     * @return le projet modifié, null si erreur
+     * @param pProjectId the ID of the project
+     * @param pSession JRAF session
+     * @return the modified project, null if an error occurs
      * @throws JrafEnterpriseException exception JRAF
      */
     public static ProjectConfDTO delete( Long pProjectId, ISession pSession )
         throws JrafEnterpriseException
     {
-        // Initialisation
+        // Initialization
         ProjectConfDTO result = null;
         try
         {
-            // Initailisation du DAO
+            // Initailization of the DAO
             ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
-            // On récupère le projet grâce à l'id passé en paramètre
+            // The project is retrieved from the given Id
             ProjectBO projectBO = (ProjectBO) projectDAO.get( pSession, pProjectId );
-            // On change son statut
+            // Status is changed
             projectBO.setStatus( ProjectBO.DELETED );
-            // On update
+            // update
             projectDAO.save( pSession, projectBO );
-            // On transforme
+            // transformation
             result = ProjectConfTransform.bo2Dto( projectBO );
         }
         catch ( JrafDaoException e )
@@ -251,38 +257,38 @@ public class ProjectFacade
     }
 
     /**
-     * Permet de supprimer un projet sélectionné
+     * Deletes a selected project
      * 
-     * @param pProjectId l'ID du projet
+     * @param pProjectId the Id of the project
      * @param pSession session JRAF
-     * @return le projet modifié, null si erreur
+     * @return the modified project, null if an error occurs
      * @throws JrafEnterpriseException exception JRAF
      */
     public static ProjectConfDTO disactiveOrReactiveProject( Long pProjectId, ISession pSession )
         throws JrafEnterpriseException
     {
-        // Initialisation
+        // Initialization
         ProjectConfDTO result = null;
         try
         {
-            // Initailisation du DAO
+            // Initailization of the DAO
             ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
-            // On récupère le projet grâce à l'id passé en paramètre
+            // the project is retrievd from the given id
             ProjectBO projectBO = (ProjectBO) projectDAO.get( pSession, pProjectId );
-            // On change son statut
+            // the status is changed
             if ( projectBO.getStatus() == ProjectBO.ACTIVATED )
             {
-                // On désactive
+                // deactivation of the project
                 projectBO.setStatus( ProjectBO.DISACTIVATED );
             }
             else
             {
-                // On active
+                // activation of the project
                 projectBO.setStatus( ProjectBO.ACTIVATED );
             }
-            // On update
+            // update
             projectDAO.save( pSession, projectBO );
-            // On transforme
+            // transformation
             result = ProjectConfTransform.bo2Dto( projectBO );
         }
         catch ( JrafDaoException e )
@@ -297,19 +303,19 @@ public class ProjectFacade
     }
 
     /**
-     * permet de récupérer l'objet ProjectDTO par un ID
+     * retrieves the object ProjectDTO from a given ID
      * 
-     * @param pProjectConf ProjectDTO renseignant l'id du projet concerné
-     * @return ProjectDTO
-     * @throws JrafEnterpriseException exception JRAF
+     * @param pProjectConf ProjectDTO containing the id of the wanted projectDTO
+     * @return ProjectDTO retrieved from the database
+     * @throws JrafEnterpriseException JRAF exception
      * @roseuid 42CBFFB103E1
      */
     public static ProjectConfDTO get( ProjectConfDTO pProjectConf )
         throws JrafEnterpriseException
     {
-        // Initialisation du BO associé et de l'ID
-        ProjectBO projectBO = null; // projet DTO
-        List resultsCalculated = new ArrayList(); // liste des resultats calculés
+        // Initialization of the BO associated and the Id
+        ProjectBO projectBO = null; // project DTO
+        List resultsCalculated = new ArrayList(); // list of the calculated results
         Long projectID = null; // identifiant du projet
         ProjectConfDTO newProjectConf = pProjectConf;
         ISession session = null;
@@ -318,9 +324,9 @@ public class ProjectFacade
             projectID = new Long( newProjectConf.getId() );
             session = PERSISTENTPROVIDER.getSession();
             ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
-            // Chargement du BO associé
+            // loading of the associated BO
             projectBO = (ProjectBO) projectDAO.get( session, projectID );
-            // Transformation du BO en DTO
+            // Transformation of the BO to DTO
             if ( null != projectBO )
             {
                 newProjectConf = ProjectConfTransform.bo2Dto( projectBO );
@@ -340,22 +346,22 @@ public class ProjectFacade
     }
 
     /**
-     * Permet de créer le projet relatif a une application
+     * Creates a project relatively to the application
      * 
-     * @param pProjectConf le projet à modifier
-     * @param pApplicationConf application auquel il est rattaché
-     * @param pSession session JRAF
-     * @throws JrafEnterpriseException exception JRAF
+     * @param pProjectConf the project to modify
+     * @param pApplicationConf application to which it must be linked
+     * @param pSession JRAF session
+     * @throws JrafEnterpriseException JRAF exception
      */
     public static void insert( ProjectConfDTO pProjectConf, ApplicationConfDTO pApplicationConf, ISession pSession )
         throws JrafEnterpriseException
     {
 
         // Initialisation
-        ProjectBO projectBO = null; // retour de la ProjectDAO
+        ProjectBO projectBO = null;
         ApplicationBO ApplicationBO = null; // retour de la ApplicationDAO
         Long projectID = new Long( pProjectConf.getId() );
-        // identifiant du projet
+        // id of the projet
         Long ApplicationID = new Long( pApplicationConf.getId() );
 
         try
@@ -367,21 +373,21 @@ public class ProjectFacade
                 //CHECKSTYLE:ON
             }
 
-            // Initialisation des DAOs
+            // Initialization of the DAOs
             ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
             ApplicationDAOImpl ApplicationDAO = ApplicationDAOImpl.getInstance();
 
-            // chargement de ApplicationBO et ProjectBO
+            // loading of ApplicationBO and ProjectBO
             ApplicationBO = (ApplicationBO) ApplicationDAO.get( pSession, ApplicationID );
             projectBO = (ProjectBO) projectDAO.get( pSession, projectID );
 
-            // transformation du DTO au BO
+            // transformation from the DTO to the BO
             ProjectConfTransform.dto2Bo( pProjectConf, projectBO );
 
-            // association du projet à l'application
+            // association of the project with the application
             projectBO.setParent( ApplicationBO );
 
-            // creation du projet en base
+            // creation of the project in the database
             projectBO = projectDAO.create( pSession, projectBO );
 
         }
@@ -404,11 +410,11 @@ public class ProjectFacade
     }
 
     /**
-     * Renvoie la liste des projets attachés à la grille qualité avec le nom en paramètre
+     * Returns the list of attached projects to the quality grid with the name given in parameter
      * 
-     * @param pQualityGridName le nom de la grille qualité
-     * @return la liste
-     * @throws JrafEnterpriseException en cas d'échec
+     * @param pQualityGridName the name of the quality grid
+     * @return the list of attached projects
+     * @throws JrafEnterpriseException if an error occurs
      */
     public static Collection findWhereQualityGrid( String pQualityGridName )
         throws JrafEnterpriseException
@@ -419,7 +425,7 @@ public class ProjectFacade
         {
             session = PERSISTENTPROVIDER.getSession();
             Collection resultAux = ProjectDAOImpl.getInstance().findWhereQualityGrid( session, pQualityGridName );
-            // Transformation de chaque projectBO en componentDTO
+            // Transformation of every projectBO into a componentDTO
             Iterator it = resultAux.iterator();
             while ( it.hasNext() )
             {
@@ -438,7 +444,7 @@ public class ProjectFacade
     }
 
     /**
-     * Constructeur vide
+     * Empty constructor
      * 
      * @roseuid 42CBFFB103E3
      */
@@ -447,44 +453,48 @@ public class ProjectFacade
     }
 
     /**
-     * @param pProjectId l'id du projet
-     * @return le workspace du projet si il existe, null sinon
-     * @throws JrafEnterpriseException si erreur
+     * Retrieves the project workspaces
+     * 
+     * @param pProjectId the Id of the project
+     * @return The workspace of the project if it exists, null otherwise
+     * @throws JrafEnterpriseException if an error occurs
      */
     public static String getProjectWorkspace( Long pProjectId )
         throws JrafEnterpriseException
     {
         // Initialisation
-        String projectWorkspace = ""; // Si il n'y a pas de workspace, on renvoit le champ vide
+        String projectWorkspace = ""; // If there is no workspace, it is returned empty
         List workspaces = null;
         ISession session = null;
         ProjectDAOImpl projectDao = ProjectDAOImpl.getInstance();
         try
         {
             session = PERSISTENTPROVIDER.getSession();
-            // On récupère la liste des workspaces
+            // The list of workspaces is retrieved
             ListParameterBO workspacesParams =
                 (ListParameterBO) projectDao.getParameterWhere( session, pProjectId, ParametersConstants.WSAD );
             if ( null != workspacesParams )
-            { // On a trouvé des workspaces
+            { 
+                // The workspaces were found
                 workspaces = workspacesParams.getParameters();
-                // Si il n'y en a qu'un, on prend celui-là
+                // If there is only one, it will be chosen
                 if ( 1 == workspaces.size() )
                 {
                     projectWorkspace = ( (StringParameterBO) workspaces.get( 0 ) ).getValue();
                 }
                 else
                 {
-                    // On récupère la liste des chemins vers les sources
+                    // The paths to the sources is retrieved
                     ListParameterBO sources =
                         (ListParameterBO) projectDao.getParameterWhere( session, pProjectId,
                                                                         ParametersConstants.SOURCES );
                     if ( null != sources )
-                    { // On a trouvé des sources
-                        // on fait un get(0) sans vérification de taille, car si un paramètre est vide
-                        // il fau lever une exception car c'est une erreur en base.
+                    { 
+                        // The sources were found
+                        // a get(0) is made without size verification because if it is empty an exception
+                        // must be raised since it means that there is an error in the database
                         String source = ( (StringParameterBO) sources.getParameters().get( 0 ) ).getValue();
-                        // Le workspace du projet sera celui qui contient les sources
+                        // The workspace of the project will be the one containing the sources
                         for ( int i = 0; i < workspaces.size() && projectWorkspace.length() == 0; i++ )
                         {
                             String curWsp = ( (StringParameterBO) workspaces.get( i ) ).getValue();
@@ -509,9 +519,11 @@ public class ProjectFacade
     }
 
     /**
-     * @param pProjectId l'id du projet
-     * @return true si l'export IDE est possible pour ce projet
-     * @throws JrafEnterpriseException si erreur
+     * Verifies if the project can be exported to an IDE
+     * 
+     * @param pProjectId the projets ID
+     * @return true if the export to an IDE is possible for the given projet
+     * @throws JrafEnterpriseException if an error occurs
      */
     public static Boolean canBeExportedToIDE( Long pProjectId )
         throws JrafEnterpriseException
@@ -523,10 +535,11 @@ public class ProjectFacade
         try
         {
             session = PERSISTENTPROVIDER.getSession();
-            // On récupère le profil du projet
+            // the project profile is retrieved
             ProjectBO project = (ProjectBO) projectDao.load( session, pProjectId );
             if ( null != project )
-            { // On a trouvé le projet (code défensif)
+            { 
+                // The project was found (defensive code)
                 canExport = new Boolean( project.getProfile().getExportIDE() );
             }
         }
@@ -539,5 +552,63 @@ public class ProjectFacade
             FacadeHelper.closeSession( session, ProjectFacade.class.getName() + ".canBeExportedToIDE" );
         }
         return canExport;
+    }
+
+    /**
+     * Adds a Tag to the project
+     * 
+     * @param pSession the session
+     * @param pProjectId the accessed project
+     * @param pTag The tag that will be added
+     * @throws JrafDaoException if an error occurs
+     */
+    public static void addTag( ISession pSession, Long pProjectId, TagDTO pTag )
+        throws JrafDaoException
+    {
+        // the DAO is initialized
+        ProjectDAOImpl projDAO = ProjectDAOImpl.getInstance();
+        ProjectBO projBO = null;
+        TagDAOImpl tagDAO = TagDAOImpl.getInstance();
+        TagBO tagBO = null;
+        // the project is retrieved
+        projBO = (ProjectBO) projDAO.get( pSession, pProjectId );
+        // the tag is retrieved
+        tagBO = (TagBO) tagDAO.get( pSession, pTag.getId() );
+        if ( null != projBO && null != tagBO )
+        { 
+            // defensive code
+            projBO.addTag( tagBO );
+            // The modified project is saved
+            projDAO.save( pSession, projBO );
+        }
+    }
+
+    /**
+     * removes a tag from a project
+     * 
+     * @param pSession the current session
+     * @param pProjectId project accessed
+     * @param pTag The tag that will be removed from the project
+     * @throws JrafDaoException if an error occurs
+     */
+    public static void removeTag( ISession pSession, Long pProjectId, TagDTO pTag )
+        throws JrafDaoException
+    {
+        // The DAO is initialized
+        ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
+        ProjectBO projectBO = null;
+        TagDAOImpl tagDAO = TagDAOImpl.getInstance();
+        TagBO tagBO = null;
+        // The project is retrieved
+        projectBO = (ProjectBO) projectDAO.get( pSession, pProjectId );
+        // The tag is retrieved
+        tagBO = (TagBO) tagDAO.get( pSession, pTag.getId() );
+        if ( null != projectBO && null != tagBO )
+        {
+            // defensive code
+            projectBO.removeTag( tagBO );
+            // The modified project is saved
+            projectDAO.save( pSession, projectBO );
+        }
     }
 }

@@ -19,8 +19,10 @@
 package com.airfrance.squalecommon.datatransfertobject.transform.component;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import com.airfrance.squalecommon.datatransfertobject.transform.tag.TagTransform;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
@@ -34,6 +36,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlCl
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlModelBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 
 /**
  * Transforme les composants en bo<->ComponentDTO
@@ -242,6 +245,17 @@ public class ComponentTransform
         componentDTO.setHasResults( pComponentBO.hasResults() );
         componentDTO.setType( pComponentBO.getType() );
         componentDTO.setNumberOfChildren( 0 );
+        if ( pComponentBO.getTags() != null && pComponentBO.getTags().size() > 0 )
+        {
+            for ( TagBO tagBO : pComponentBO.getTags() )
+            {
+                componentDTO.addTag( TagTransform.bo2Dto( tagBO ) );
+            }
+        }
+        else
+        {
+            componentDTO.setTags( new ArrayList() );
+        }
         if ( null != pComponentBO.getParent() )
         {
             componentDTO.setIDParent( pComponentBO.getParent().getId() );

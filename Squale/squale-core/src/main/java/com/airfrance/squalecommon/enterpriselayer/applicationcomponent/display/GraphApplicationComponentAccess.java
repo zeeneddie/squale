@@ -37,12 +37,6 @@ import com.airfrance.squalecommon.util.messages.CommonMessages;
  * <p>
  * Description : Application component graph
  * </p>
- * <p>
- * Copyright : Copyright (c) 2005
- * </p>
- * <p>
- * Company : AIRFRANCE
- * </p>
  * Classe permettant de recuperer des objets de type GraphDTO stockés en base ou encore généré à la volée
  */
 public class GraphApplicationComponentAccess

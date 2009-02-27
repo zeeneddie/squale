@@ -43,12 +43,6 @@ import com.airfrance.squalecommon.enterpriselayer.facade.quality.SqualeReference
  * <p>
  * Description : Application component pour la purge projet et audit
  * </p>
- * <p>
- * Copyright : Copyright (c) 2005
- * </p>
- * <p>
- * Company : AIRFRANCE
- * </p>
  */
 public class PurgeApplicationComponentAccess
     extends DefaultExecuteComponent

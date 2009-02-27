@@ -19,10 +19,15 @@
 package com.airfrance.squalecommon.datatransfertobject.transform.component;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
+import com.airfrance.squalecommon.datatransfertobject.transform.tag.TagTransform;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentType;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 
 /**
  * @author M400841
@@ -54,6 +59,17 @@ public class ApplicationTransform
         applicationBO.setName( pApplicationDTO.getName() );
         applicationBO.setExcludedFromActionPlan( pApplicationDTO.getExcludedFromActionPlan() );
         applicationBO.setJustification( pApplicationDTO.getJustification() );
+        if ( pApplicationDTO.getTags() != null && pApplicationDTO.getTags().size() > 0 )
+        {
+            for ( TagDTO tagDTO : pApplicationDTO.getTags() )
+            {
+                applicationBO.addTag( TagTransform.dto2Bo( tagDTO ) );
+            }
+        }
+        else
+        {
+            applicationBO.setTags( new ArrayList<TagBO>() );
+        }
 
         return applicationBO;
     }
@@ -72,8 +88,24 @@ public class ApplicationTransform
         applicationDTO.setID( pApplicationBO.getId() );
         applicationDTO.setName( pApplicationBO.getName() );
         applicationDTO.setType( ComponentType.APPLICATION );
-        pApplicationBO.setExcludedFromActionPlan( applicationDTO.getExcludedFromActionPlan() );
-        pApplicationBO.setJustification( applicationDTO.getJustification() );
+        if ( pApplicationBO.getTags() != null && pApplicationBO.getTags().size() > 0 )
+        {
+            for ( TagBO tagBO : pApplicationBO.getTags() )
+            {
+                applicationDTO.addTag( TagTransform.bo2Dto( tagBO ) );
+            }
+        }
+        else
+        {
+            applicationDTO.setTags( new ArrayList() );
+        }
+        // TODO corrigé par FGAILLARD 03/02/2009
+        // anciennement
+        // pApplicationBO.setExcludedFromActionPlan( applicationDTO.getExcludedFromActionPlan() );
+        // pApplicationBO.setJustification( applicationDTO.getJustification() );
+        // remplacé par
+        applicationDTO.setExcludedFromActionPlan( pApplicationBO.getExcludedFromActionPlan() );
+        applicationDTO.setJustification( pApplicationBO.getJustification() );
 
         return applicationDTO;
     }

@@ -110,11 +110,11 @@ public class ProjectDAOImplTest
         ProjectBO project = getComponentFactory().createProject( getSession(), application, grid );
         ComponentDTO appliDTO = ComponentTransform.bo2Dto( application );
         long[] userAppli = new long[] { appliDTO.getID() };
-        Collection projects = dao.findProjects( getSession(), userAppli, "", "proj" );
+        Collection projects = dao.findProjects( getSession(), userAppli, "", "proj", null );
         assertEquals( 1, projects.size() );
-        projects = dao.findProjects( getSession(), userAppli, "test", "proj" );
+        projects = dao.findProjects( getSession(), userAppli, "test", "proj", null );
         assertEquals( 0, projects.size() );
-        projects = dao.findProjects( getSession(), userAppli, "", "test" );
+        projects = dao.findProjects( getSession(), userAppli, "", "test", null );
         assertEquals( 0, projects.size() );
 
     }

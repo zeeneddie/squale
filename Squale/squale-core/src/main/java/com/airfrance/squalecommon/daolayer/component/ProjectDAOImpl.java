@@ -131,6 +131,35 @@ public class ProjectDAOImpl
         LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return newProject;
     }
+    
+    /**
+     * Retourne les projets taggés par un tag donné
+     * 
+     * @param pSession une session hibernate
+     * @param ptagIds tableau d'ids des Tags demandés
+     * @return une collection de projets
+     * @throws JrafDaoException si une erreur à lieu
+     */
+    public Collection findtagged( ISession pSession, Long[] ptagIds )
+        throws JrafDaoException
+    {
+        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
+        String whereClause = "where ";
+        if (ptagIds.length>1){
+            whereClause += ptagIds[0] + " in elements(" + getAlias() + ".tags)";
+            for ( int i = 1; i < ptagIds.length; i++ )
+            {
+                whereClause += " and " + ptagIds[i] + " in elements(" + getAlias() + ".tags)";
+            }
+        } else {
+            whereClause += ptagIds[0] + " in elements(" + getAlias() + ".tags)";
+        }
+        
+
+        Collection ret = findWhere( pSession, whereClause );
+        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
+        return ret;
+    }
 
     /**
      * Création de l'objet métier persistent, <b>Attention : </b> la relation avec le projet doit être à jour
@@ -320,17 +349,19 @@ public class ProjectDAOImpl
     }
 
     /**
-     * Retourne le liste des projets dont le nom commence par <code>mProjectName</code>, dont l'application commence
-     * par <code>mAppliName</code> et qui appartient à la liste <code>pUserAppli</code>
+     * Returns the list of projects with the name beginning with <code>pProjectName</code>, with their application's name
+     * beginning with <code>pAppliName</code>, posessing the tags wanted in <code>pTagNames</code> and included in the
+     * list <code>pUserAppli</code> associated with their last audit (may be null)
      * 
-     * @param pSession session
-     * @param pAppliIds les ids des applications de l'utilisateur
-     * @param pAppliName le début du nom de l'application
-     * @param pProjectName le début du nom du projet
-     * @throws JrafDaoException si erreur
-     * @return la liste des projets trouvés
+     * @param pSession the session
+     * @param pAppliIds the ids of the current users's applications
+     * @param pAppliName the beginning of the name of the associated application
+     * @param pProjectName the beginning of the name of the project
+     * @param pTagIds The ids from the tags wanted on the project
+     * @throws JrafDaoException if an error occurs
+     * @return the list of retrieved projects
      */
-    public Collection findProjects( ISession pSession, long[] pAppliIds, String pAppliName, String pProjectName )
+    public Collection findProjects( ISession pSession, long[] pAppliIds, String pAppliName, String pProjectName, long[] pTagIds )
         throws JrafDaoException
     {
         Collection projects = null;
@@ -359,6 +390,18 @@ public class ProjectDAOImpl
                 whereClause += ", " + pAppliIds[i];
             }
             whereClause += ")";
+            if (pTagIds!=null){
+                whereClause += " and ";
+                if (pTagIds.length>1){
+                    whereClause += pTagIds[0] + " in elements(" + getAlias() + ".tags)";
+                    for ( int i = 1; i < pTagIds.length; i++ )
+                    {
+                        whereClause += " and " + pTagIds[i] + " in elements(" + getAlias() + ".tags)";
+                    }
+                } else {
+                    whereClause += pTagIds[0] + " in elements(" + getAlias() + ".tags)";
+                }
+            }
             projects = findWhere( pSession, whereClause );
         }
         return projects;

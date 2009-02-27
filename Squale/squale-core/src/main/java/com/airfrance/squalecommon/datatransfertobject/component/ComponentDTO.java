@@ -19,9 +19,14 @@
 package com.airfrance.squalecommon.datatransfertobject.component;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
+
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 
 /**
  * Composant
@@ -93,6 +98,11 @@ public class ComponentDTO
      * Nom du dernier utilisateur ayant modifié l'application
      */
     private String mLastUser;
+
+    /**
+     * Tags concernant ce composant
+     */
+    private Collection<TagDTO> mTags;
 
     /**
      * @return true si le composant est exclu du plan d'action
@@ -434,4 +444,67 @@ public class ComponentDTO
         mStartLine = pLine;
     }
 
+    /**
+     * Récupère la valeur de l'attribut mTags
+     * 
+     * @return les tags attribués à ce composant
+     */
+    public Collection<TagDTO> getTags()
+    {
+        return mTags;
+    }
+
+    /**
+     * Set la valeur de l'attribut mTags
+     * 
+     * @param pTags la collection de tags attribués à ce composant
+     */
+    public void setTags( Collection<TagDTO> pTags )
+    {
+        mTags = pTags;
+    }
+
+    /**
+     * adds the value of pTag to the mTags list.
+     * 
+     * @param pTag the new value to add
+     */
+    public void addTag( TagDTO pTag )
+    {
+        if ( mTags == null )
+        {
+            mTags = new ArrayList<TagDTO>();
+        }
+        mTags.add( pTag );
+    }
+
+    /**
+     * removes the value of pTag to the mTags list.
+     * 
+     * @param pTag the new value to add
+     */
+    public void removeTag( TagDTO pTag )
+    {
+        if ( mTags == null )
+        {
+            mTags = new ArrayList<TagDTO>();
+        }
+        mTags.remove( pTag );
+    }
+    
+    /**
+     * Verifies if the component already posesses the tag 
+     * @param pTag The given Tag that is compared with the components tag list
+     * @return whether the comonent already posesses the Tag or not
+     */
+    public boolean posessTag(TagDTO pTag)
+    {
+        for ( TagDTO tagDTO : mTags )
+        {
+            if (tagDTO.getName().equals( pTag.getName() )){
+                return true;
+            }
+        }
+        return false;
+    }
 }

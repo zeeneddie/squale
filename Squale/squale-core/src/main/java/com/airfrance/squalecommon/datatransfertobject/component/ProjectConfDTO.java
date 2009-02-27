@@ -19,11 +19,14 @@
 package com.airfrance.squalecommon.datatransfertobject.component;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import com.airfrance.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
 import com.airfrance.squalecommon.datatransfertobject.config.ProjectProfileDTO;
 import com.airfrance.squalecommon.datatransfertobject.config.SourceManagementDTO;
 import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 
 /**
  */
@@ -74,6 +77,11 @@ public class ProjectConfDTO
 
     /** Grille qualité */
     private QualityGridDTO mQualityGrid;
+    
+    /**
+     * Tags concernant ce composant
+     */
+    private Collection<TagDTO> mTags;
 
     /**
      * Constructeur par defaut
@@ -241,4 +249,51 @@ public class ProjectConfDTO
         mStatus = pStatus;
     }
 
+    /**
+     * Récupère la valeur de l'attribut mTags
+     * 
+     * @return les tags attribués à ce composant
+     */
+    public Collection<TagDTO> getTags()
+    {
+        return mTags;
+    }
+
+    /**
+     * Set la valeur de l'attribut mTags
+     * 
+     * @param pTags la collection de tags attribués à ce composant
+     */
+    public void setTags( Collection<TagDTO> pTags )
+    {
+        mTags = pTags;
+    }
+
+    /**
+     * adds the value of pTag to the mTags list.
+     * 
+     * @param pTag the new value to add
+     */
+    public void addTag( TagDTO pTag )
+    {
+        if ( mTags == null )
+        {
+            mTags = new ArrayList<TagDTO>();
+        }
+        mTags.add( pTag );
+    }
+
+    /**
+     * removes the value of pTag to the mTags list.
+     * 
+     * @param pTag the new value to add
+     */
+    public void removeTag( TagDTO pTag )
+    {
+        if ( mTags == null )
+        {
+            mTags = new ArrayList<TagDTO>();
+        }
+        mTags.remove( pTag );
+    }
 }

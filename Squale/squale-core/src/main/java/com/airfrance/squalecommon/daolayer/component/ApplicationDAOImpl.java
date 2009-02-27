@@ -189,6 +189,36 @@ public class ApplicationDAOImpl
         return coll.size();
     }
 
+
+    /**
+     * Retourne les projets taggés par un tag donné
+     * 
+     * @param pSession une session hibernate
+     * @param ptagIds tableau d'ids des Tags demandés
+     * @return une collection de projets
+     * @throws JrafDaoException si une erreur à lieu
+     */
+    public Collection findtagged( ISession pSession, Long[] ptagIds )
+        throws JrafDaoException
+    {
+        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
+        String whereClause = "where ";
+        if (ptagIds.length>1){
+            whereClause += ptagIds[0] + " in elements(" + getAlias() + ".tags)";
+            for ( int i = 1; i < ptagIds.length; i++ )
+            {
+                whereClause += " and " + ptagIds[i] + " in elements(" + getAlias() + ".tags)";
+            }
+        } else {
+            whereClause += ptagIds[0] + " in elements(" + getAlias() + ".tags)";
+        }
+        
+
+        Collection ret = findWhere( pSession, whereClause );
+        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
+        return ret;
+    }
+    
     /**
      * Permet de connaitre les applications pour un site
      * 

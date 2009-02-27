@@ -19,13 +19,17 @@
 package com.airfrance.squalecommon.datatransfertobject.transform.component;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import com.airfrance.squalecommon.datatransfertobject.component.ProjectConfDTO;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.parameters.MapParameterTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.config.ProjectProfileTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.config.SourceManagementTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.rule.QualityGridTransform;
+import com.airfrance.squalecommon.datatransfertobject.transform.tag.TagTransform;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :
@@ -51,7 +55,18 @@ public class ProjectConfTransform
         projectBO.setParameters( MapParameterTransform.dto2Bo( pProjectConfDTO.getParameters() ) );
         projectBO.setProfile( ProjectProfileTransform.dto2bo( pProjectConfDTO.getProfile() ) );
         projectBO.setSourceManager( SourceManagementTransform.dto2bo( pProjectConfDTO.getSourceManager() ) );
-
+        if ( pProjectConfDTO.getTags() != null && pProjectConfDTO.getTags().size() > 0 )
+        {
+            for ( TagDTO tagDTO : pProjectConfDTO.getTags() )
+            {
+                projectBO.addTag( TagTransform.dto2Bo( tagDTO ) );
+            }
+        }
+        else
+        {
+            projectBO.setTags( new ArrayList() );
+        }
+        
         return projectBO;
     }
 
@@ -75,6 +90,18 @@ public class ProjectConfTransform
         projectConfDTO.setQualityGrid( QualityGridTransform.bo2Dto( pProjectBO.getQualityGrid() ) );
         projectConfDTO.setParameters( MapParameterTransform.bo2Dto( pProjectBO.getParameters() ) );
         projectConfDTO.setStatus( pProjectBO.getStatus() );
+        if ( pProjectBO.getTags() != null && pProjectBO.getTags().size() > 0 )
+        {
+            for ( TagBO tagBO : pProjectBO.getTags() )
+            {
+                projectConfDTO.addTag( TagTransform.bo2Dto( tagBO ) );
+            }
+        }
+        else
+        {
+            projectConfDTO.setTags( new ArrayList() );
+        }
+        
         return projectConfDTO;
     }
 

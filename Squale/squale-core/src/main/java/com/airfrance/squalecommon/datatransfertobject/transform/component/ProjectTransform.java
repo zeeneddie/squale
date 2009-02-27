@@ -19,10 +19,14 @@
 package com.airfrance.squalecommon.datatransfertobject.transform.component;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
+import com.airfrance.squalecommon.datatransfertobject.transform.tag.TagTransform;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentType;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 
 /**
  * @author M400841
@@ -55,6 +59,17 @@ public class ProjectTransform
 
         projectBO.setExcludedFromActionPlan( pProjectDTO.getExcludedFromActionPlan() );
         projectBO.setJustification( pProjectDTO.getJustification() );
+        if ( pProjectDTO.getTags() != null && pProjectDTO.getTags().size() > 0 )
+        {
+            for ( TagDTO tagDTO : pProjectDTO.getTags() )
+            {
+                projectBO.addTag( TagTransform.dto2Bo( tagDTO ) );
+            }
+        }
+        else
+        {
+            projectBO.setTags( new ArrayList() );
+        }
         return projectBO;
     }
 
@@ -75,6 +90,17 @@ public class ProjectTransform
         projectDTO.setTechnology( pProjectBO.getProfile().getName() );
         projectDTO.setExcludedFromActionPlan( pProjectBO.getExcludedFromActionPlan() );
         projectDTO.setJustification( pProjectBO.getJustification() );
+        if ( pProjectBO.getTags() != null && pProjectBO.getTags().size() > 0 )
+        {
+            for ( TagBO tagBO : pProjectBO.getTags() )
+            {
+                projectDTO.addTag( TagTransform.bo2Dto( tagBO ) );
+            }
+        }
+        else
+        {
+            projectDTO.setTags( new ArrayList() );
+        }
 
         return projectDTO;
     }

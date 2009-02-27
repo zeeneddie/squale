@@ -18,6 +18,10 @@
       <many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO" column="AuditId" outer-join="auto"/>
     </set>
     <many-to-one insert="true" column="ProjectId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO" name="project"/>
+    <set inverse="false" cascade="none" lazy="false" table="Tag_Component" sort="unsorted" name="tags">
+      <key column="ComponentId"/>
+      <many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO" column="TagId" outer-join="auto"/>
+    </set>
     <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO" lazy="true" discriminator-value="AbstractComplexComponent">
       <bag cascade="none" lazy="true" table="AbstractComplexComponent_children" name="children">
         <key column="Parent"/>

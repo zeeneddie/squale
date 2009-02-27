@@ -57,12 +57,6 @@ import com.airfrance.squalecommon.util.messages.CommonMessages;
  * <p>
  * Description : Application component d'affichage de resultats
  * </p>
- * <p>
- * Copyright : Copyright (c) 2005
- * </p>
- * <p>
- * Company : AIRFRANCE
- * </p>
  * 
  * @author m400841
  */

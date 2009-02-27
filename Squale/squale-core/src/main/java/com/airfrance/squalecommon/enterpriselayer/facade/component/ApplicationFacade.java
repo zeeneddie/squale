@@ -44,10 +44,12 @@ import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
 import com.airfrance.squalecommon.daolayer.profile.ProfileDAOImpl;
 import com.airfrance.squalecommon.daolayer.profile.UserDAOImpl;
 import com.airfrance.squalecommon.daolayer.result.SqualeReferenceDAOImpl;
+import com.airfrance.squalecommon.daolayer.tag.TagDAOImpl;
 import com.airfrance.squalecommon.datatransfertobject.component.ApplicationConfDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.ApplicationConfTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.ComponentTransform;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
@@ -57,6 +59,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Proje
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.SqualeReferenceBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 import com.airfrance.squalecommon.enterpriselayer.facade.FacadeMessages;
 import com.airfrance.squalecommon.util.messages.CommonMessages;
 
@@ -1093,6 +1096,62 @@ public class ApplicationFacade
             // On ajoute l'accès utilisateur
             UserAccessBO userAccess = new UserAccessBO( pMatricule, Calendar.getInstance().getTime() );
             appliBO.addUserAccess( userAccess, maxSize.intValue() );
+            // On sauvegarde l'application
+            appliDAO.save( pSession, appliBO );
+        }
+    }
+    
+    /**
+     * adds a tag to an application
+     * 
+     * @param pSession the current session
+     * @param pApplicationId application accessed
+     * @param pTag The tag that will be added to the application
+     * @throws JrafDaoException if an error occurs
+     */
+    public static void addTag( ISession pSession, Long pApplicationId, TagDTO pTag )
+        throws JrafDaoException
+    {
+        // Initialisation du DAO
+        ApplicationDAOImpl appliDAO = ApplicationDAOImpl.getInstance();
+        ApplicationBO appliBO = null;
+        TagDAOImpl tagDAO = TagDAOImpl.getInstance();
+        TagBO tagBO = null;
+        // On récupère l'application
+        appliBO = (ApplicationBO) appliDAO.get( pSession, pApplicationId );
+        //On récupère le TAG
+        tagBO = (TagBO) tagDAO.get(pSession, pTag.getId());
+        if ( null != appliBO && null != tagBO )
+        { // code défensif
+            appliBO.addTag( tagBO );
+            // On sauvegarde l'application
+            appliDAO.save( pSession, appliBO );
+        }
+    }
+    
+    /**
+     * removes a tag from an application
+     * 
+     * @param pSession the current session
+     * @param pApplicationId application accessed
+     * @param pTag The tag that will be removed from the application
+     * @throws JrafDaoException if an error occurs
+     */
+    public static void removeTag( ISession pSession, Long pApplicationId, TagDTO pTag )
+        throws JrafDaoException
+    {
+        // Initialisation du DAO
+        ApplicationDAOImpl appliDAO = ApplicationDAOImpl.getInstance();
+        ApplicationBO appliBO = null;
+        TagDAOImpl tagDAO = TagDAOImpl.getInstance();
+        TagBO tagBO = null;
+        // On récupère l'application
+        appliBO = (ApplicationBO) appliDAO.get( pSession, pApplicationId );
+        //On récupère le TAG
+        tagBO = (TagBO) tagDAO.get(pSession, pTag.getId());
+        if ( null != appliBO && null != tagBO )
+        { // code défensif
+            appliBO.removeTag( tagBO );
             // On sauvegarde l'application
             appliDAO.save( pSession, appliBO );
         }

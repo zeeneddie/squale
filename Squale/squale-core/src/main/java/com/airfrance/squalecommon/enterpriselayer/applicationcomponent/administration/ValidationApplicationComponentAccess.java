@@ -44,12 +44,6 @@ import com.airfrance.squalecommon.enterpriselayer.facade.quality.SqualeReference
  * <p>
  * Description : Application component de validation de creation d'applications
  * </p>
- * <p>
- * Copyright : Copyright (c) 2005
- * </p>
- * <p>
- * Company : AIRFRANCE
- * </p>
  */
 public class ValidationApplicationComponentAccess
     extends DefaultExecuteComponent

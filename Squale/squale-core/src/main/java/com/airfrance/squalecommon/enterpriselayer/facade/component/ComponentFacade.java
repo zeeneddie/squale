@@ -37,22 +37,28 @@ import com.airfrance.jraf.spi.enterpriselayer.IFacade;
 import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
 import com.airfrance.jraf.spi.persistence.ISession;
 import com.airfrance.squalecommon.daolayer.component.AbstractComponentDAOImpl;
+import com.airfrance.squalecommon.daolayer.component.ApplicationDAOImpl;
 import com.airfrance.squalecommon.daolayer.component.AuditDAOImpl;
 import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
 import com.airfrance.squalecommon.daolayer.result.MarkDAOImpl;
 import com.airfrance.squalecommon.daolayer.rule.QualityRuleDAOImpl;
+import com.airfrance.squalecommon.daolayer.tag.TagDAOImpl;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import com.airfrance.squalecommon.datatransfertobject.component.ProjectConfDTO;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.AuditTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.ComponentTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.rule.RuleMetricsTransform;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentType;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MarkBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 import com.airfrance.squalecommon.enterpriselayer.facade.FacadeMessages;
 import com.airfrance.squalecommon.enterpriselayer.facade.rule.FormulaMeasureExtractor;
 import com.airfrance.squalecommon.util.mapping.Mapping;
@@ -660,37 +666,45 @@ public class ComponentFacade
     }
 
     /**
-     * Retourne le liste des projets dont le nom commence par <code>mProjectName</code>, dont l'application commence
-     * par <code>mAppliName</code> et qui appartient à la liste <code>pUserAppli</code> associé à son dernier audits
-     * (peut-être nul)
+     * Returns the list of projects with the name beginning with <code>pProjectName</code>, with their application's
+     * name beginning with <code>pAppliName</code>, posessing the tags wanted in <code>pTagNames</code> and
+     * included in the list <code>pUserAppli</code> associated with their last audit (may be null)
      * 
-     * @param pUserAppli la liste des applications de l'utilisateur courant
-     * @param mAppliName le début du nom de l'application associée au projet
-     * @param mProjectName le début du nom du projet à chercher
-     * @throws JrafEnterpriseException si erreurs
-     * @return les projets trouvés avec leur dernier audit si il existe
+     * @param pUserAppli the list of application of the current user
+     * @param pAppliName the beginning of the name of the associated application
+     * @param pProjectName the beginning of the name of the project
+     * @param pTagNames The tags wanted on the project
+     * @throws JrafEnterpriseException if an error occurs
+     * @return the found projects with their last audit if it exists
      */
-    public static Map getProjectsWithLastAudit( Collection pUserAppli, String mAppliName, String mProjectName )
+    public static Map getProjectsWithLastAudit( Collection pUserAppli, String pAppliName, String pProjectName,
+                                                String[] pTagNames )
         throws JrafEnterpriseException
     {
         ProjectDAOImpl dao = ProjectDAOImpl.getInstance(); // dao pour les composants
         AuditDAOImpl auditDao = AuditDAOImpl.getInstance();
+        TagDAOImpl tagDao = TagDAOImpl.getInstance(); // dao for the tags
         ISession session = null; // session Hibernate
         Collection projects = null; // retour du dao
         Map projectsDTO = new HashMap();
+        boolean hasTags = false;
         try
         {
             // récupération d'une session
             session = PERSISTENTPROVIDER.getSession();
             // On récupére les ids des applications de l'utilisateur
-            long[] ids = new long[pUserAppli.size()];
-            int index = 0;
-            for ( Iterator it = pUserAppli.iterator(); it.hasNext(); index++ )
-            {
-                ComponentDTO appli = (ComponentDTO) it.next();
-                ids[index] = appli.getID();
+            long[] ids = getAppliIds(pUserAppli);
+            if (pTagNames!=null && pTagNames.length>0 && !"".equals(pTagNames[0])){
+                hasTags = true;
             }
-            projects = dao.findProjects( session, ids, mAppliName, mProjectName );
+            Collection<TagBO> tags = tagDao.findExactNamedTags( session, pTagNames );
+            long[] tagIds = getTagIds(tags);
+            
+            if ((hasTags && tagIds != null && pTagNames.length == tags.size()) || !hasTags){
+                projects = dao.findProjects( session, ids, pAppliName, pProjectName, tagIds );
+            } else {
+                projects = new ArrayList();
+            }
             // On transforme la liste des projectBO en projectDTO
             List audits;
             AuditDTO auditDTO;
@@ -720,6 +734,138 @@ public class ComponentFacade
             FacadeHelper.closeSession( session, ComponentFacade.class.getName() + ".getProjects" );
         }
         return projectsDTO;
+    }
+    
+    /**
+     * private method that will return the ids of the list of application given in parameter
+     * @param pAppli a list of applications
+     * @return appliIds an array of the applications ids
+     */
+    private static long[] getAppliIds(Collection pAppli){
+        long[] ids = new long[pAppli.size()];
+        int index = 0;
+        for ( Iterator it = pAppli.iterator(); it.hasNext(); index++ )
+        {
+            ids[index] = ( (ComponentDTO) it.next() ).getID();
+        }
+        return ids;
+    }
+    
+    /**
+     * private method that will return the ids of the list of tags given in parameter
+     * @param pTags a list of tags
+     * @return tagIds an array of the tag ids
+     */
+    private static long[] getTagIds(Collection pTags){
+        if (pTags!=null && pTags.size() > 0){
+            long[] ids = new long[pTags.size()];
+            int index = 0;
+            for ( Iterator it = pTags.iterator(); it.hasNext(); index++ )
+            {
+                ids[index] = ( (TagBO) it.next() ).getId();
+            }
+            return ids;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * permet de récupérer une liste de ComponentDTO correspondant à des applications à partir d'un Tag
+     * 
+     * @param pTags tableau de TagDTO correspondant au applications que l'on veut récupérer
+     * @return List une liste de ProjectConfDTO qui portent le tag passé en paramètre
+     * @throws JrafEnterpriseException exception JRAF
+     * @roseuid 42CBFFB103E1
+     */
+    public static List<ComponentDTO> getTaggedApplications( TagDTO[] pTags )
+        throws JrafEnterpriseException
+    {
+        // Initialisation du BO associé et de l'ID
+        Long[] tagIDs = null; // identifiant du tag
+        List<ComponentDTO> applications = new ArrayList<ComponentDTO>();
+        TagDTO[] tags = pTags;
+        ISession session = null;
+        try
+        {
+            tagIDs = new Long[tags.length];
+            for ( int i = 0; i < tags.length; i++ )
+            {
+                tagIDs[i] = tags[i].getId();
+            }
+            session = PERSISTENTPROVIDER.getSession();
+            ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
+            // Chargement du BO associé
+            List<ApplicationBO> applicationsBOs = (List<ApplicationBO>) applicationDAO.findtagged( session, tagIDs );
+            // Transformation du BO en DTO
+            if ( null != applicationsBOs && applicationsBOs.size() > 0 )
+            {
+                for ( ApplicationBO applicationBO : applicationsBOs )
+                {
+                    applications.add( ComponentTransform.bo2Dto( applicationBO ) );
+                }
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, ProjectFacade.class.getName() + ".get" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, ProjectFacade.class.getName() + ".get" );
+        }
+
+        return applications;
+
+    }
+
+    /**
+     * permet de récupérer une liste de ComponentDTO correspondant à des projets à partir d'un Tag
+     * 
+     * @param pTags tableau de TagDTO correspondant au projets que l'on veut récupérer
+     * @return List une liste de ProjectConfDTO qui portent le tag passé en paramètre
+     * @throws JrafEnterpriseException exception JRAF
+     * @roseuid 42CBFFB103E1
+     */
+    public static List<ComponentDTO> getTaggedProjects( TagDTO[] pTags )
+        throws JrafEnterpriseException
+    {
+        // Initialisation du BO associé et de l'ID
+        Long[] tagIDs = null; // identifiant du ou des tags voulus
+        List<ComponentDTO> projects = new ArrayList<ComponentDTO>();
+        TagDTO[] tags = pTags;
+        ISession session = null;
+        try
+        {
+            tagIDs = new Long[tags.length];
+            for ( int i = 0; i < tags.length; i++ )
+            {
+                tagIDs[i] = tags[i].getId();
+            }
+            session = PERSISTENTPROVIDER.getSession();
+            ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
+            // Chargement du BO associé
+            List<ProjectBO> projectBOs = (List<ProjectBO>) projectDAO.findtagged( session, tagIDs );
+            // Transformation du BO en DTO
+            if ( null != projectBOs && projectBOs.size() > 0 )
+            {
+                for ( ProjectBO projectBO : projectBOs )
+                {
+                    projects.add( ComponentTransform.bo2Dto( projectBO ) );
+                }
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, ProjectFacade.class.getName() + ".get" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, ProjectFacade.class.getName() + ".get" );
+        }
+
+        return projects;
+
     }
 
     /**

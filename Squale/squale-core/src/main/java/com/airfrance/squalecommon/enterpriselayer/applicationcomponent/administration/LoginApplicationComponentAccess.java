@@ -36,12 +36,6 @@ import com.airfrance.squalecommon.enterpriselayer.facade.component.UserFacade;
  * <p>
  * Description : Application component login
  * </p>
- * <p>
- * Copyright : Copyright (c) 2005
- * </p>
- * <p>
- * Company : AIRFRANCE
- * </p>
  */
 public class LoginApplicationComponentAccess
     extends DefaultExecuteComponent

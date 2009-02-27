@@ -39,6 +39,7 @@ import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ProjectConfDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 import com.airfrance.squalecommon.enterpriselayer.applicationcomponent.ACMessages;
 import com.airfrance.squalecommon.enterpriselayer.facade.component.ApplicationFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.component.AuditFacade;
@@ -50,12 +51,6 @@ import com.airfrance.squalecommon.enterpriselayer.facade.component.ProjectFacade
  * </p>
  * <p>
  * Description : Application component de configuration du projet
- * </p>
- * <p>
- * Copyright : Copyright (c) 2005
- * </p>
- * <p>
- * Company : AIRFRANCE
  * </p>
  */
 public class ApplicationAdminApplicationComponentAccess
@@ -529,6 +524,52 @@ public class ApplicationAdminApplicationComponentAccess
             ISession session = PERSISTENTPROVIDER.getSession();
             session.beginTransaction();
             ApplicationFacade.addUserAccess( session, pApplicationId, pMatricule, maxSize );
+            session.commitTransaction();
+        }
+        catch ( JrafDaoException e )
+        {
+            LOG.fatal( e, e );
+        }
+    }
+    
+    /**
+     * adds a tag to an application
+     * 
+     * @param pApplicationId application accessed
+     * @param pTag The tag that will be added to the application
+     * @throws JrafEnterpriseException if an error occurs
+     */
+    public void addTag ( Long pApplicationId, TagDTO pTag )
+        throws JrafEnterpriseException
+    {
+        try
+        {
+            ISession session = PERSISTENTPROVIDER.getSession();
+            session.beginTransaction();
+            ApplicationFacade.addTag( session, pApplicationId, pTag );
+            session.commitTransaction();
+        }
+        catch ( JrafDaoException e )
+        {
+            LOG.fatal( e, e );
+        }
+    }
+    
+    /**
+     * removes a tag from an application
+     * 
+     * @param pApplicationId application accessed
+     * @param pTag The tag that will be removed from the application
+     * @throws JrafEnterpriseException if an error occurs
+     */
+    public void removeTag ( Long pApplicationId, TagDTO pTag )
+        throws JrafEnterpriseException
+    {
+        try
+        {
+            ISession session = PERSISTENTPROVIDER.getSession();
+            session.beginTransaction();
+            ApplicationFacade.removeTag( session, pApplicationId, pTag );
             session.commitTransaction();
         }
         catch ( JrafDaoException e )
