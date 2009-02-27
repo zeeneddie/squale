@@ -61,7 +61,46 @@
 		
 		<component name="addUserAccess" />
 		
+		<component name="addTag" />
+		
+		<component name="removeTag" />
+		
+	</applicationComponent>
+	
+	<applicationComponent name="ProjectAdmin" description="Administration des tags sur un projet" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.ProjectAdminProjectComponentAccess">
 
+		<component name="addTag" />
+		
+		<component name="removeTag" />
+		
+	</applicationComponent>
+	
+	<applicationComponent name="TagAdmin" description="Administration des tags" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.TagAdminTagComponentAccess">
+
+		<component name="getTag" />
+		
+		<component name="getTagsByName" />
+		
+		<component name="addTag" />
+		
+		<component name="getTags" />
+		
+		<component name="getTagCategories" />
+		
+		<component name="getTagCategoriesByName" />
+		
+		<component name="createTag" />
+		
+		<component name="modifyTag" />
+		
+		<component name="createTagCategory" />
+		
+		<component name="modifyTagCategory" />
+		
+		<component name="deleteTags" />
+		
+		<component name="deleteTagCategories" />
+		
 	</applicationComponent>
 	
 	<applicationComponent name="Purge" description="supprimer des audits et applications" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.PurgeApplicationComponentAccess">
@@ -143,6 +182,10 @@
 		<component name="canBeExportedToIDE" />
 		
 		<component name="getLastTerminatedAudits" />
+		
+		<component name="getTaggedApplications" />
+		
+		<component name="getTaggedProjects" />
 		
 	</applicationComponent>
 	

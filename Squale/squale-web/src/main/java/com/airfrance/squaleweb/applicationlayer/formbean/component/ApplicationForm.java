@@ -18,12 +18,15 @@
  */
 package com.airfrance.squaleweb.applicationlayer.formbean.component;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 import com.airfrance.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
 
 /**
@@ -95,19 +98,16 @@ public class ApplicationForm
         justification = pJustification;
     }
 
-    
-    
     /**
      * Redefinition of the hashCode method
      * {@inheritDoc} 
      * @return return the hash number of the object
      */
-    public int hashCode(){
+    public int hashCode()
+    {
         return super.hashCode();
     }
 
-    
-    
     /**
      * @see java.lang.Object#equals(java.lang.Object)
      * @param obj l'objet à comparer
@@ -126,10 +126,9 @@ public class ApplicationForm
         }
         return result;
     }
-    
-    
 
     /**
+     * Access method for the mHasResults property.
      * @return true si le composant a des résultats
      */
     public boolean getHasResults()
@@ -138,6 +137,7 @@ public class ApplicationForm
     }
 
     /**
+     * Sets the value of the mHasResults property.
      * @param pHasResults indique si le composant a des résultats
      */
     public void setHasResults( boolean pHasResults )
@@ -146,6 +146,7 @@ public class ApplicationForm
     }
 
     /**
+     * Access method for the mLastUpdate property.
      * @return la date de la dernière modification
      */
     public Date getLastUpdate()
@@ -154,6 +155,7 @@ public class ApplicationForm
     }
 
     /**
+     * Sets the value of the mLastUpdate property.
      * @param pDate la date de la dernière modification
      */
     public void setLastUpdate( Date pDate )
@@ -162,6 +164,7 @@ public class ApplicationForm
     }
 
     /**
+     * Access method for the mLastUser property.
      * @return l'utilisateur ayant fait la dernière modification
      */
     public String getLastUser()
@@ -170,11 +173,11 @@ public class ApplicationForm
     }
 
     /**
+     * Sets the value of the mLastUser property.
      * @param pMatricule l'utilisateur ayant fait la dernière modification
      */
     public void setLastUser( String pMatricule )
     {
         mLastUser = pMatricule;
     }
-
 }

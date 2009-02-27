@@ -134,6 +134,8 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 			action="homepage_management.do?action=state" />
 		<af:menuItem key="menu.administration.newapplications" color="2"
 			action="ack_newapplication.do?action=list" accessKey="admin" />
+		<af:menuItem key="menu.administration.tagsandcategories" color="2"
+			action="manageTags.do?action=showTags" accessKey="admin" />
 		<af:menuItem key="menu.administration.audits" color="2">
 			<af:menuItem key="menu.administration.not_attempted_audit" color="2"
 				action="adminNotAttemptedAudit.do?action=displayNotAttemptedAndRunning"

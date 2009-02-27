@@ -32,6 +32,9 @@
 					<tr class="fondClair">
 						<af:field key="search.project_beginning_name"
 							property="projectBeginningName" />
+					<tr class="fondClair">
+						<af:field key="search.project_tags"
+							property="tagList" />
 					</tr>
 				</table>
 				<af:buttonBar>

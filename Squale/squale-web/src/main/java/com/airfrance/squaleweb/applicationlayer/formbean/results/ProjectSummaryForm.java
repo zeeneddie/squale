@@ -18,6 +18,8 @@
  */
 package com.airfrance.squaleweb.applicationlayer.formbean.results;
 
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
@@ -74,6 +76,21 @@ public class ProjectSummaryForm
 
     /** Les résultats du projet */
     private WActionForm results;
+
+    /** La liste de Tags */
+    private Collection mTags;
+
+    /** La liste de Tags de l'application parente*/
+    private Collection mTagsAppli;
+
+    /** The tag that will be added */
+    private String mTagSupp;
+    
+    /** The tag that will be removed */
+    private String mTagDel;
+    
+    /** The tag that will be removed from the application*/
+    private String mTagDelAppli;
 
     /**
      * @return le kiviat
@@ -247,4 +264,93 @@ public class ProjectSummaryForm
         mExportIDE = pExportIDE;
     }
 
+    /**
+     * Assigner la valeur de l'attribut mTags
+     * @param pTags la liste de tags à assigner
+     */
+    public void setTags( Collection pTags )
+    {
+        mTags = pTags;
+    }
+
+    /**
+     * Récupère la valeur de l'attribut mTags
+     * @return La collection de Tags liés au composant en cours
+     */
+    public Collection getTags()
+    {
+        return mTags;
+    }
+
+    /**
+     * Assigner la valeur de l'attribut mTagsAppli
+     * @param pTagsAppli la liste de tags à assigner
+     */
+    public void setTagsAppli( Collection pTagsAppli )
+    {
+        mTagsAppli = pTagsAppli;
+    }
+
+    /**
+     * Récupère la valeur de l'attribut mTagsAppli
+     * @return La collection de Tags liés au composant en cours
+     */
+    public Collection getTagsAppli()
+    {
+        return mTagsAppli;
+    }
+
+    /**
+     * Assign the value for the mTagSupp property
+     * @param pTagSupp the tag to add
+     */
+    public void setTagSupp( String pTagSupp )
+    {
+        mTagSupp = pTagSupp;
+    }
+
+    /**
+     * Retrieves the value of the mTagSupp property
+     * @return The tag added to the current component
+     */
+    public String getTagSupp()
+    {
+        return mTagSupp;
+    }
+    
+    /**
+     * Assign the value for the mTagDel property
+     * @param pTagDel the tag to remove
+     */
+    public void setTagDel( String pTagDel )
+    {
+        mTagDel = pTagDel;
+    }
+
+    /**
+     * Retrieves the value of the mTagDel property
+     * @return The tag removed from the current component
+     */
+    public String getTagDel()
+    {
+        return mTagDel;
+    }
+    
+    /**
+     * Assign the value for the mTagDelAppli property
+     * @param pTagDelAppli the tag to remove from the current application
+     */
+    public void setTagDelAppli( String pTagDelAppli )
+    {
+        mTagDelAppli = pTagDelAppli;
+    }
+
+    /**
+     * Retrieves the value of the mTagDelAppli property
+     * @return The tag removed from the current application
+     */
+    public String getTagDelAppli()
+    {
+        return mTagDelAppli;
+    }
 }

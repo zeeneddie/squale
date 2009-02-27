@@ -1,31 +1,35 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
+	prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.welcom.struts.util.WConstants" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.LogonBean" %>
+<%@ page import="com.airfrance.welcom.struts.util.WConstants"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.LogonBean"%>
 <%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
 <%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm"%>
 <%@ page import="com.airfrance.squaleweb.tagslib.HistoryTag"%>
 
 <%
-// Récupération de l'utilisateur en session pour savoir si celui-ci est administrateur
-// SQUALE
-LogonBean sessionUser = (LogonBean) request.getSession().getAttribute(WConstants.USER_KEY);
-boolean isAdmin = sessionUser.isAdmin();
+            // Récupération de l'utilisateur en session pour savoir si celui-ci est administrateur
+            // SQUALE
+            LogonBean sessionUser = (LogonBean) request.getSession().getAttribute( WConstants.USER_KEY );
+            boolean isAdmin = sessionUser.isAdmin();
 %>
 
 <%
-//Parameter indicates which tab must be selected
-String selectedTab = request.getParameter(HistoryTag.SELECTED_TAB_KEY);
-if(selectedTab == null) {
-    // First tab by default
-    selectedTab = "factors";
-}
+            //Parameter indicates which tab must be selected
+            String selectedTab = request.getParameter( HistoryTag.SELECTED_TAB_KEY );
+            if ( selectedTab == null )
+            {
+                // First tab by default
+                selectedTab = "factors";
+            }
 %>
 
 <%
@@ -44,8 +48,15 @@ if(selectedTab == null) {
 <bean:define id="comparable" name="resultListForm"
 	property="comparableAudits" type="Boolean" />
 
+<bean:define id="callbackUrlApp">
+	<html:rewrite
+		page="//add_applicationTag.do?action=findTagForAutocomplete" />
+</bean:define>
 
-<af:page titleKey="application.results.title" titleKeyArg0="<%=applicationName%>">
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<af:page titleKey="application.results.title"
+	titleKeyArg0="<%=applicationName%>">
 	<af:head>
 		<%-- inclusion pour le marquage XITI --%>
 		<jsp:include page="/jsp/xiti/xiti_header_common.jsp" />
@@ -60,14 +71,54 @@ if(selectedTab == null) {
 
 			<br />
 			<br />
-			<squale:resultsHeader name="resultListForm" displayComparable="true" />
+			<squale:resultsHeader name="resultListForm" displayComparable="true">
+				<div id="appTagRemoval" style="visibility:hidden;">
+					<af:form action="application.do">
+						<div id="hidden" style="display:none;">
+							<af:field key="empty" property="applicationId" value='<%= applicationId%>'/>
+						</div>
+						<table>
+							<tr>
+								<td>
+									<!--<bean:message key="tag.message.application.delete" />-->
+									<bean:define id="listtag" name="resultListForm" property="tags"></bean:define>
+									<af:select property="tagDel">
+										<af:options collection="listtag" property="name"/>
+									</af:select>
+								</td>
+								<td>
+									<%
+										// On construit le lien pour le bouton retour
+										String action = "application.do?action=removeTag&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId ;
+										String href = "location.href='" + action + "'";
+										//onclick="<%=href% >"
+									%>
+									<af:button callMethod="removeTag" name="supprimer"/>
+								</td>
+							</tr>
+						</table>
+					</af:form>
+				</div>
+				<div id="appTagAddition" style="display:none;">
+					<af:form action='<%="application.do?action=addTag&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId%>'>
+						<!--<bean:message key="tag.message.application.new" />-->
+						<af:field key="empty" name="resultListForm" property="tagSupp"
+							value="" easyCompleteCallBackUrl="<%=callbackUrlApp%>"/>
+					</af:form>
+				</div>
+				<script type="text/javascript">
+					showButton( 'tagPlusApp' );
+					showButton( 'tagMinusApp' );
+				</script>
+			</squale:resultsHeader>
 			<br />
 			<h2><bean:message key="application.results.summary.subtitle" /></h2>
 			<br />
 			<af:tabbedPane name="applicationsummary">
 				<%-- Factors --%>
 				<af:tab key="application.results.factors.tab" name="factors"
-					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("factors")%>'>
+					lazyLoading="false"
+					isTabSelected='<%=""+selectedTab.equals("factors")%>'>
 					<af:dropDownPanel titleKey="buttonTag.menu.aide">
 						<bean:message key="application.results.factors" />
 						<br />
@@ -122,8 +173,9 @@ if(selectedTab == null) {
 					</logic:iterate>
 				</af:tab>
 				<%-- Kiviat --%>
-				<af:tab key="application.results.kiviat.tab" name="kiviat" 
-					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("kiviat")%>'>
+				<af:tab key="application.results.kiviat.tab" name="kiviat"
+					lazyLoading="false"
+					isTabSelected='<%=""+selectedTab.equals("kiviat")%>'>
 					<bean:define id="srcKiviat" name="resultListForm"
 						property="kiviat.srcName" type="String" />
 					<bean:define id="imgMapKiviat" name="resultListForm"
@@ -141,7 +193,8 @@ if(selectedTab == null) {
 					<af:form action="application.do?action=select" scope="session"
 						method="POST">
 						<%-- on passe le paramètre applicationId en caché --%>
-						<input name="applicationId" value="<%=applicationId%>" type="hidden">
+						<input name="applicationId" value="<%=applicationId%>"
+							type="hidden">
 						<input name="currentAuditId" value="<%=currentAuditId%>"
 							type="hidden">
 						<input name="previousAuditId" value="<%=previousAuditId%>"
@@ -152,10 +205,11 @@ if(selectedTab == null) {
 								border="0" width="100px">
 								<tr>
 									<%-- nom du tab à afficher (kiviat) après soumission de la requête --%>
-									<input type="hidden" name="<%=HistoryTag.SELECTED_TAB_KEY%>" value="kiviat" />
+									<input type="hidden" name="<%=HistoryTag.SELECTED_TAB_KEY%>"
+										value="kiviat" />
 									<af:field key="application.results.allFactors"
-										name="resultListForm" property="allFactors"
-										type="CHECKBOX" styleClassLabel="td1" styleClass="normal" />
+										name="resultListForm" property="allFactors" type="CHECKBOX"
+										styleClassLabel="td1" styleClass="normal" />
 								</tr>
 							</table>
 							<af:buttonBar>
@@ -166,7 +220,8 @@ if(selectedTab == null) {
 				</af:tab>
 				<%-- Piechart --%>
 				<af:tab key="application.results.volumetry.tab" name="piechart"
-					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("piechart")%>'>>
+					lazyLoading="false"
+					isTabSelected='<%=""+selectedTab.equals("piechart")%>'>>
 					<br />
 					<bean:define id="srcPieChart" name="resultListForm"
 						property="pieChart.srcName" type="String" />
@@ -195,11 +250,16 @@ if(selectedTab == null) {
 					<af:button type="form" name="export.pdf"
 						onclick='<%="application.do?action=exportPDF&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
 						toolTipKey="toolTip.export.pdf.application.result" />
-				<%if (isAdmin) {%>
+					<%
+					            if ( isAdmin )
+					            {
+					%>
 					<af:button type="form" name="export.audit_report"
 						onclick='<%="param_audit_report.do?action=param&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&comparable="+comparable.toString()%>'
-						toolTipKey="toolTip.export.audit_report" accessKey="admin"/>
-				<%} //isAdmin %>
+						toolTipKey="toolTip.export.audit_report" accessKey="admin" />
+					<%
+					} //isAdmin
+					%>
 				</af:buttonBar>
 			</logic:greaterThan>
 		</af:canvasCenter>

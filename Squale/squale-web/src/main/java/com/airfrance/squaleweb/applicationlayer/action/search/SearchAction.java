@@ -19,6 +19,7 @@
 package com.airfrance.squaleweb.applicationlayer.action.search;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,7 @@ import org.apache.struts.action.ActionMessages;
 
 import com.airfrance.jraf.helper.AccessDelegateHelper;
 import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
 import com.airfrance.squaleweb.transformer.SearchProjectTransformer;
 import com.airfrance.welcom.struts.bean.WActionForm;
@@ -46,13 +48,13 @@ public class SearchAction
 {
 
     /**
-     * Recherche un projet
+     * Searches for a project in the database
      * 
-     * @param pMapping le mapping.
-     * @param pForm le formulaire à lire.
-     * @param pRequest la requête HTTP.
-     * @param pResponse la réponse de la servlet.
-     * @return l'action à réaliser.
+     * @param pMapping the mapping.
+     * @param pForm the form to be used and read.
+     * @param pRequest the HTTP request.
+     * @param pResponse the servlet response.
+     * @return the action to return.
      */
     public ActionForward searchProject( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
                                         HttpServletResponse pResponse )
@@ -64,19 +66,20 @@ public class SearchAction
         try
         {
             String firstCallParam = pRequest.getParameter( "firstCall" );
-            // On ne fait le traitement si on a pas cliqué sur le bouton "rechercher".
-            // Le paramétre "firstCall" l'indique
+            // The research is done only if the research button has been clicked
+            // That is indicated by the "firstCall" parameter
             if ( null == firstCallParam )
             {
-                // On récupère les données du formulaire de recherche d'un projet
+                // Retrieval of the research form data
                 Object[] data = WTransformerFactory.formToObj( SearchProjectTransformer.class, (WActionForm) pForm );
                 String appli = (String) data[0];
                 String project = (String) data[1];
-                // Récupération de la liste des applications
+                String[] tagNames = ( (String) data[2] ).split( " " );
+                // Retrieval of the list of applications
                 List applications = getUserApplicationListAsDTO( pRequest );
-                // Obtention de la couche métier
+                // retrieval of the business layer
                 IApplicationComponent ac = AccessDelegateHelper.getInstance( "Component" );
-                Object[] paramIn = { applications, appli, project };
+                Object[] paramIn = { applications, appli, project, tagNames };
                 // Appel de la couche métier pour obtenir les projets correspondants aux critères
                 Map projectsDto = (Map) ac.execute( "getProjectsWithLastAudit", paramIn );
                 // Transformation en formulaire
@@ -101,5 +104,25 @@ public class SearchAction
             forward = pMapping.findForward( "total_failure" );
         }
         return forward;
+    }
+
+    /**
+     * Private method that will separate a String with spaces into a collection of Strings
+     * 
+     * @param a String of tag names separated by spaces
+     * @return tagNames a collection of names
+     */
+    private Collection<String> separateTagNames( String names )
+    {
+        Collection<String> tagNames = new ArrayList<String>();
+
+        String[] namesTab = names.split( " " );
+
+        for ( int i = 0; i < namesTab.length; ++i )
+        {
+            tagNames.add( namesTab[i] );
+        }
+
+        return tagNames;
     }
 }

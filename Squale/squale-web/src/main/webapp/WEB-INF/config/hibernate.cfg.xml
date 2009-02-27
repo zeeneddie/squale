@@ -76,6 +76,9 @@
 		
 		<mapping resource="mapping/stats/SiteStatsDICTBO.hbm.xml" />
 		<mapping resource="mapping/stats/SiteAndProfilStatsDICTBO.hbm.xml" />
+		
+		<mapping resource="mapping/tag/TagBO.hbm.xml" />
+		<mapping resource="mapping/tag/TagCategoryBO.hbm.xml" />
 		<!-- end mapping files   -->
 
 	</session-factory>

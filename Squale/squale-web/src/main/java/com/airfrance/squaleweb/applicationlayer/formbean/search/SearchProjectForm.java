@@ -35,14 +35,18 @@ public class SearchProjectForm
     extends RootForm
 {
 
-    /** Commencement du nom de l'application associée au projet */
+    /** Beginning of the Name of the application associated with the project */
     private String mApplicationBeginningName;
 
-    /** Commencement du nom du projet */
+    /** Beginning of the Name of the project */
     private String mProjectBeginningName;
 
-    /** Liste des projets trouvés associés à leur dernier audit */
+    /** List of the found projects associated with their last audit */
     private Map mProjectForms; // De type ProjectForm -> auditForm
+    
+    /** List of tags separated by spaces that the project must have */
+    private String mTagList;
+    
 
     /**
      * Constructeur par défaut
@@ -51,11 +55,13 @@ public class SearchProjectForm
     {
         mApplicationBeginningName = "";
         mProjectBeginningName = "";
+        mTagList = "";
         mProjectForms = null;
     }
 
     /**
-     * @return le début du nom de l'application associée au projet
+     * retrieves the value of the mApplicationBeginningName property
+     * @return the beginning of the name of the application associated with the project
      */
     public String getApplicationBeginningName()
     {
@@ -63,7 +69,8 @@ public class SearchProjectForm
     }
 
     /**
-     * @return le début du nom du projet
+     * Retrieves the value of the mProjectBeginningName property
+     * @return the beginning of the project name
      */
     public String getProjectBeginningName()
     {
@@ -71,7 +78,8 @@ public class SearchProjectForm
     }
 
     /**
-     * @param pApplicationBeginningName le début du nom de l'application associée au projet
+     * sets the value of the mApplicationBeginningName property
+     * @param pApplicationBeginningName the beginning of the name of the application associated with the project
      */
     public void setApplicationBeginningName( String pApplicationBeginningName )
     {
@@ -79,7 +87,8 @@ public class SearchProjectForm
     }
 
     /**
-     * @param pProjectBeginningName le début du nom du projet
+     * sets the value of the mProjectBeginningName property
+     * @param pProjectBeginningName the beginning of the project name
      */
     public void setProjectBeginningName( String pProjectBeginningName )
     {
@@ -87,7 +96,8 @@ public class SearchProjectForm
     }
 
     /**
-     * @return la liste des projets trouvés associés à leur dernier audit
+     * Retrieves the value of the mProjectForms property
+     * @return the list of the found projects associated with their last audit
      */
     public Map getProjectForms()
     {
@@ -95,7 +105,8 @@ public class SearchProjectForm
     }
 
     /**
-     * @param pProjectForms la liste des projets trouvés associés à leur dernier audit
+     * sets the value of the mProjectForms property
+     * @param pProjectForms the list of the found projects associated with their last audit
      */
     public void setProjectForms( Map pProjectForms )
     {
@@ -103,7 +114,8 @@ public class SearchProjectForm
     }
 
     /**
-     * @return les projets
+     * retrives the keys of the project map
+     * @return the projects
      */
     public Set getKeys()
     {
@@ -111,18 +123,37 @@ public class SearchProjectForm
     }
 
     /**
+     * Retrieves the value of the mTagList property
+     * @return List of tags separated by spaces that the project must have
+     */
+    public String getTagList()
+    {
+        return mTagList;
+    }
+
+    /**
+     * sets the value of the mTagList property
+     * @param pTagList List of tags separated by spaces that the project must have
+     */
+    public void setTagList( String pTagList )
+    {
+        mTagList = pTagList;
+    }
+    
+    /**
+     * Validation method
      * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
      *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
     public void wValidate( ActionMapping mapping, HttpServletRequest request )
     {
-        // Suppression des espaces sur le nom de l'appli
+        // Take away spaces from the application name
         setApplicationBeginningName( getApplicationBeginningName().trim() );
         if ( !isAValidName( getApplicationBeginningName() ) && getApplicationBeginningName().length() > 0 )
         {
             addError( "applicationBeginningName", new ActionError( "error.name.containsInvalidCharacter" ) );
         }
-        // Vérification du nom du projet
+        // Project name verification
         setProjectBeginningName( getProjectBeginningName().trim() );
         if ( !isAValidName( getProjectBeginningName() ) && getProjectBeginningName().length() > 0 )
         {

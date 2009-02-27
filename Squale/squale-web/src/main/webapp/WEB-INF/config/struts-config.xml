@@ -130,9 +130,14 @@
         </form-bean>
         <form-bean name="homepageForm" type="com.airfrance.squaleweb.applicationlayer.formbean.HomepageForm">
         </form-bean>
+        <form-bean name="projectListForm" type="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectListForm">
+        </form-bean>
+        <form-bean name="createTagForm" type="com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateTagForm">
+        </form-bean>
         <form-bean name="manualMarkForm" type="com.airfrance.squaleweb.applicationlayer.formbean.manualmark.ManualMarkForm">
         </form-bean>
 	</form-beans>
+
 
 	<!-- ========== Global Forward Definitions ============================== -->
 	<global-forwards>
@@ -169,6 +174,11 @@
 			<forward name="project" path="/project.do?action=select"/>
 			<forward name="summary" path="/jsp/results/application/summary.jsp"/>
 		</action>
+		<action path="/all_tagged_applications" type="com.airfrance.squaleweb.applicationlayer.action.tag.AllTaggedApplicationsAction" name="resultListForm" scope="session" parameter="action">
+			<forward name="list" path="/jsp/results/taggedComponents/taggedApplications.jsp"/>
+			<forward name="empty" path="/jsp/results/all_applications/empty.jsp"/>
+			<forward name="failure" path="/jsp/results/all_applications/empty.jsp"/>
+		</action>
 		<action path="/project" type="com.airfrance.squaleweb.applicationlayer.action.results.project.ProjectResultsAction" parameter="action" name="projectSummaryForm" scope="session">
 			<forward name="summaryAction" path="/project.do?action=summary"/>
 			<forward name="factor" path="/jsp/results/project/factor.jsp"/>
@@ -182,7 +192,10 @@
 			<forward name="errorsAction" path="/project_errors.do?action=errors"/>			
 			<forward name="noAudits" path="/jsp/results/audits/none.jsp"/>			
 			<forward name="export_failure" path="/jsp/results/project/summary.jsp"/>
-
+		</action>
+		<action path="/all_tagged_projects" type="com.airfrance.squaleweb.applicationlayer.action.tag.AllTaggedProjectsAction" name="projectListForm" scope="session" parameter="action">
+			<forward name="list" path="/jsp/results/taggedComponents/taggedProjects.jsp"/>
+			<forward name="empty" path="/jsp/results/all_applications/empty.jsp"/>
 		</action>
 		<action path="/audits" parameter="action" type="com.airfrance.squaleweb.applicationlayer.action.results.audit.AuditAction" name="splitAuditsListForm" scope="session" input="/jsp/admin/audit/terminated.jsp">
 			<forward name="list" path="/jsp/results/audits/all.jsp"/>
@@ -231,6 +244,12 @@
 		<action path="/add_user" type="com.airfrance.squaleweb.applicationlayer.action.component.ManageApplicationAction" name="applicationRightsForm" scope="request" parameter="action" validate="false">
 			<forward name="failure" path="/jsp/admin/application/application_rights.jsp" />
 			<forward name="success" path="/jsp/admin/application/application_summary.jsp" />
+		</action>
+		<action path="/add_applicationTag" type="com.airfrance.squaleweb.applicationlayer.action.component.ManageApplicationTagsAction" name="resultListForm" scope="request" parameter="action" validate="false">
+			<forward name="success" path="/application.do?action=summary"/>
+		</action>
+		<action path="/add_projectTag" type="com.airfrance.squaleweb.applicationlayer.action.component.ManageProjectAction" name="applicationRightsForm" scope="request" parameter="action" validate="false">
+			<forward name="success" path="/project.do?action=summary"/>
 		</action>
 		<action path="/add_project" type="com.airfrance.squaleweb.applicationlayer.action.component.ManageApplicationAction" input="/jsp/admin/application/add_project.jsp" name="createProjectForm" scope="session" parameter="action" validate="true">
 			<forward name="failure" path="/config_project.do?action=newProject" />
@@ -520,6 +539,12 @@
 			<forward name="add_rights" path="/jsp/admin/application/application_rights.jsp" />
 			<forward name="ack_application_end_purge" path="/ack_newapplication.do?action=list">
 			</forward>
+		</action>
+		<action path="/manageTags" type="com.airfrance.squaleweb.applicationlayer.action.tag.ManageTagsAction" name="createTagForm" scope="session" parameter="action" input="/jsp/admin/application/application_summary.jsp" validate="false">
+			<forward name="total_failure" path="/jsp/admin/application/new_tag.jsp" />
+			<forward name="tag_list" path="/jsp/admin/tag/tag_list.jsp" />
+			<forward name="failure" path="/jsp/admin/tag/tag_list.jsp"/>
+			<forward name="reload" path="/manageTags.do?action=showTags"/>
 		</action>
 		<action path="/adminNews" type="com.airfrance.squaleweb.applicationlayer.action.message.AdminNewsAction" name="newsListForm" scope="session" parameter="action">
 			<forward name="success_news" path="/jsp/admin/message/news.jsp">

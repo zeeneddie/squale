@@ -39,6 +39,7 @@ public class SearchProjectTransformer
 {
 
     /**
+     * Obj --> form
      * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[]) {@inheritDoc}
      */
     public WActionForm objToForm( Object[] pObject )
@@ -50,6 +51,7 @@ public class SearchProjectTransformer
     }
 
     /**
+     * Obj --> form
      * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
      *      com.airfrance.welcom.struts.bean.WActionForm) {@inheritDoc}
      */
@@ -80,18 +82,20 @@ public class SearchProjectTransformer
     }
 
     /**
+     * form --> Obj
      * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
      *      {@inheritDoc}
      */
     public Object[] formToObj( WActionForm pForm )
         throws WTransformerException
     {
-        Object[] obj = new Object[2];
+        Object[] obj = new Object[3];
         formToObj( pForm, obj );
         return obj;
     }
 
     /**
+     * form --> Obj
      * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm,
      *      java.lang.Object[]) {@inheritDoc}
      */
@@ -101,6 +105,7 @@ public class SearchProjectTransformer
         SearchProjectForm form = (SearchProjectForm) pForm;
         pObject[0] = form.getApplicationBeginningName();
         pObject[1] = form.getProjectBeginningName();
+        pObject[2] = form.getTagList();
     }
 
 }

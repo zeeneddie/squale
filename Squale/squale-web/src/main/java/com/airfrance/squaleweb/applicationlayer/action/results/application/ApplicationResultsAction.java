@@ -46,6 +46,8 @@ import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
 import com.airfrance.jraf.helper.AccessDelegateHelper;
 import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
+import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
@@ -82,7 +84,7 @@ public class ApplicationResultsAction
      * Le nom désignant l'attribut en session pour indiquer si on veut tous les facteurs ou non pour le kiviat.
      */
     private static final String ALL_FACTORS = "allFactors";
-    
+
     /**
      * Synthèse d'une application Si l'application comporte un seul projet, la synthèse du projet est alors affichée.
      * Dans le cas contraire, trois onglets sont présentés : un qui donne la répartition, l'autre donnant les facteurs
@@ -117,7 +119,7 @@ public class ApplicationResultsAction
                 boolean pAllFactors = resultListForm.isAllFactors();
                 // On met cette valeur en session
                 pRequest.getSession().setAttribute( ALL_FACTORS, new Boolean( pAllFactors ) );
-                
+
                 ApplicationForm application = ActionUtils.getCurrentApplication( pRequest );
                 // On remet à jour les form en session permettant d'accéder aux différents types d'audits
                 SplitAuditsListForm auditsForm =
@@ -165,7 +167,7 @@ public class ApplicationResultsAction
                     // Préparation de l'appel à la couche métier
                     ac = AccessDelegateHelper.getInstance( "Graph" );
                     Long pCurrentAuditId = new Long( ( (AuditDTO) auditsDTO.get( 0 ) ).getID() );
-                    Object[] paramAuditIdKiviat = { pCurrentAuditId , String.valueOf( pAllFactors )};
+                    Object[] paramAuditIdKiviat = { pCurrentAuditId, String.valueOf( pAllFactors ) };
 
                     // Recherche des données Kiviat
                     KiviatMaker maker = new KiviatMaker();
@@ -248,7 +250,7 @@ public class ApplicationResultsAction
         changeWay( pRequest, "false" );
         return forward;
     }
-    
+
     /**
      * Selectionne à nouveau l'application courante à visualiser.
      * 
@@ -397,4 +399,180 @@ public class ApplicationResultsAction
         return null;
     }
 
+    /**
+     * Action addTag adds a tag to the current application
+     * 
+     * @param pMapping the actionMapping
+     * @param pForm the form
+     * @param pRequest the request
+     * @param pResponse the response
+     * @return the actionForward
+     * @throws ServletException exception that can be thrown
+     */
+    public ActionForward addTag( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                 HttpServletResponse pResponse )
+        throws ServletException
+    {
+        ActionForward forward = null;
+        ActionErrors errors = new ActionErrors();
+        IApplicationComponent ac;
+
+        try
+        {
+            String tagToAdd = ( (ResultListForm) pForm ).getTagSupp();
+            TagDTO tagDTO = null;
+            if ( tagToAdd != null )
+            {
+                ac = AccessDelegateHelper.getInstance( "TagAdmin" );
+                Object[] paramIn = { new String[] { tagToAdd } };
+                Collection<TagDTO> tags = ( (Collection<TagDTO>) ac.execute( "getTagsByName", paramIn ) );
+                if ( tags != null && tags.size() == 1 )
+                {
+                    for ( TagDTO tagDTOtemp : tags )
+                    {
+                        tagDTO = tagDTOtemp;
+                    }
+                }
+                ComponentDTO application =
+                    (ComponentDTO) pRequest.getSession().getAttribute( BaseDispatchAction.APPLI_DTO );
+
+                // On rajoute le tag sur le formulaire
+                Collection<TagDTO> applicationTags = application.getTags();
+                boolean possedeTag = application.posessTag( tagDTO );
+                if ( !possedeTag )
+                {
+                    applicationTags.add( tagDTO );
+                    application.setTags( applicationTags );
+                    ( (ResultListForm) pForm ).setTags( applicationTags );
+                }
+
+                // On a pu le rajouter sur le formulaire, on va le rajouter en base
+                if ( !possedeTag )
+                {
+                    ac = AccessDelegateHelper.getInstance( "ApplicationAdmin" );
+                    paramIn = new Object[] { application.getID(), tagDTO };
+                    ac.execute( "addTag", paramIn );
+                }
+
+            }
+            forward = pMapping.findForward( "summary" );
+        }
+        catch ( Exception e )
+        {
+            // Traitement factorisé des exceptions
+            handleException( e, errors, pRequest );
+        }
+        if ( !errors.isEmpty() )
+        {
+            // Sauvegarde des messages
+            saveMessages( pRequest, errors );
+            // Routage vers la page d'erreur
+            forward = pMapping.findForward( "total_failure" );
+        }
+        return forward;
+    }
+
+    /**
+     * Action delTag removes a tag from the current application
+     * 
+     * @param pMapping the actionMapping
+     * @param pForm the form
+     * @param pRequest the request
+     * @param pResponse the response
+     * @return the actionForward
+     * @throws ServletException exception that can be thrown
+     */
+    public ActionForward removeTag( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                                    HttpServletResponse pResponse )
+        throws ServletException
+    {
+        ActionForward forward = null;
+        ActionErrors errors = new ActionErrors();
+        IApplicationComponent ac;
+
+        try
+        {
+            String tagTodelete = ( (ResultListForm) pForm ).getTagDel();
+            long idApplication = Long.parseLong( ( (ResultListForm) pForm ).getApplicationId() );
+            TagDTO tagDTOToDelete = null;
+            if ( tagTodelete != null )
+            {
+                ac = AccessDelegateHelper.getInstance( "TagAdmin" );
+                Object[] paramIn = { new String[] { tagTodelete } };
+                Collection<TagDTO> tags = ( (Collection<TagDTO>) ac.execute( "getTagsByName", paramIn ) );
+                if ( tags != null && tags.size() == 1 )
+                {
+                    for ( TagDTO tagDTOtemp : tags )
+                    {
+                        tagDTOToDelete = tagDTOtemp;
+                    }
+                }
+                ComponentDTO application = getApplication( pRequest, idApplication );
+
+                // On retire le tag du formulaire
+                Collection<TagDTO> applicationTags = application.getTags();
+                boolean possedeTag = application.posessTag( tagDTOToDelete );
+                if ( possedeTag )
+                {
+                    Collection<TagDTO> newApplicationTags = new ArrayList<TagDTO>();
+                    for ( TagDTO tagApplication : applicationTags )
+                    {
+                        if ( !tagApplication.getName().equals( tagDTOToDelete.getName() ) )
+                        {
+                            newApplicationTags.add( tagApplication );
+                        }
+                    }
+                    application.setTags( newApplicationTags );
+                    ( (ResultListForm) pForm ).setTags( newApplicationTags );
+                    ( (ResultListForm) pForm ).setTagDel( "" );
+
+                    // On a pu le retirer du formulaire, on va le retirer de la base
+
+                    ac = AccessDelegateHelper.getInstance( "ApplicationAdmin" );
+                    paramIn = new Object[] { application.getID(), tagDTOToDelete };
+                    ac.execute( "removeTag", paramIn );
+                }
+
+            }
+            forward = pMapping.findForward( "summary" );
+        }
+        catch ( Exception e )
+        {
+            // Traitement factorisé des exceptions
+            handleException( e, errors, pRequest );
+        }
+        if ( !errors.isEmpty() )
+        {
+            // Sauvegarde des messages
+            saveMessages( pRequest, errors );
+            // Routage vers la page d'erreur
+            forward = pMapping.findForward( "total_failure" );
+        }
+        return forward;
+    }
+
+    /**
+     * Méthode that will retrieve an application from the context or from the data base
+     * 
+     * @param pRequest the HTTP Request
+     * @param pIdApplication idApplication in case it has to be retrieved from the database
+     * @return the retrieved application
+     * @throws JrafEnterpriseException if an exception occurs
+     */
+    private ComponentDTO getApplication( HttpServletRequest pRequest, long pIdApplication )
+        throws JrafEnterpriseException
+    {
+        // The application is retrieved from the context
+        ComponentDTO application = (ComponentDTO) pRequest.getSession().getAttribute( BaseDispatchAction.APPLI_DTO );
+
+        // if it is not there, it will be retrieved from the database
+        if ( application == null )
+        {
+            ComponentDTO componentTemp = new ComponentDTO();
+            componentTemp.setID( pIdApplication );
+            IApplicationComponent ac2 = AccessDelegateHelper.getInstance( "Component" );
+            application = (ComponentDTO) ac2.execute( "get", new Object[] { componentTemp } );
+        }
+        return application;
+    }
 }

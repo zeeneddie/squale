@@ -204,7 +204,7 @@
 	<tag>
 		<name>resultsHeader</name>
 		<tag-class>com.airfrance.squaleweb.tagslib.ResultsHeaderTag</tag-class>
-		<body-content>empty</body-content>
+		<body-content>JSP</body-content>
 		<description>
 			Affiche les informations liées aux résultats de l'audit 
 			(nom de l'application, nom de l'audit,...)

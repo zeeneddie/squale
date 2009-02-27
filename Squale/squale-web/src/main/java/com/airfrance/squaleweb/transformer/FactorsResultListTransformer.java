@@ -32,6 +32,7 @@ import com.airfrance.squalecommon.datatransfertobject.component.AuditGridDTO;
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
 import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
 import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
+import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.results.FactorsResultListForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectFactorsForm;
 import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm;
@@ -90,6 +91,23 @@ public class FactorsResultListTransformer
         }
         form.setList( new ArrayList( gridsForm.values() ) );
 
+        // On met les tags de l'application sur le formulaire de la liste de résultats si on n'a qu'une seule
+        // application
+        if ( applications.size() == 1 )
+        {
+            for ( Object object : applications )
+            {
+                if ( object instanceof ComponentDTO )
+                {
+                    form.setTags( ( (ComponentDTO) object ).getTags() );
+                }
+            }
+        }
+        else
+        {
+            form.setTags( new ArrayList() );
+        }
+
         // On parcourt maintenant chaque résultat et en fonction du type de grille
         // on ajoute des données dans le form correspondant
 
@@ -134,6 +152,7 @@ public class FactorsResultListTransformer
                 bean.setCurrentAuditId( "" + auditGrid.getAudit().getID() );
                 bean.setApplicationId( "" + component.getIDParent() );
                 bean.setApplicationName( TransformerUtils.getApplicationName( component.getIDParent(), applications ) );
+                // bean.setTags( pTags )
                 ArrayList params = new ArrayList();
                 params.add( entry );
                 // Ajout des tendances à passer en paramètre

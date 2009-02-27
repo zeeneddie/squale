@@ -19,6 +19,7 @@
 package com.airfrance.squaleweb.applicationlayer.formbean.results;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,7 +58,16 @@ public class ResultListForm
      * Affichage de tous les facteurs
      */
     private boolean mAllFactors = true;
+
+    /** The list of the associated tags */
+    private Collection mTags;
+
+    /** The Tag that will be added */
+    private String mTagSupp;
     
+    /** The Tag that will be deleted */
+    private String mTagDel;
+
     /**
      * @return la liste des résultats
      */
@@ -121,7 +131,7 @@ public class ResultListForm
     {
         mDisplayCheckBoxFactors = pDisplayCheckBoxFactors;
     }
-    
+
     /**
      * @return si on veut faire apparaitre tous les facteurs du kiviat ou juste les non nuls
      */
@@ -137,7 +147,7 @@ public class ResultListForm
     {
         mAllFactors = pAllFactors;
     }
-    
+
     /**
      * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping,
      *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
@@ -147,5 +157,59 @@ public class ResultListForm
         super.reset( mapping, request );
         // Reinitialisation du checkbox
         mAllFactors = false;
+    }
+
+    /**
+     * Assigner la valeur de l'attribut mTags
+     * @param pTags la liste de tags à assigner
+     */
+    public void setTags( Collection pTags )
+    {
+        mTags = pTags;
+    }
+
+    /**
+     * Récupère la valeur de l'attribut mTags
+     * @return La collection de Tags liés au composant en cours
+     */
+    public Collection getTags()
+    {
+        return mTags;
+    }
+
+    /**
+     * sets the value of the mTagSupp property
+     * @param pTagSupp the Tag to add
+     */
+    public void setTagSupp( String pTagSupp )
+    {
+        mTagSupp = pTagSupp;
+    }
+
+    /**
+     * Retrieves the value of the mTagSupp property
+     * @return The tag that will be added to the current component
+     */
+    public String getTagSupp()
+    {
+        return mTagSupp;
+    }
+    
+    /**
+     * sets the value of the mTagDel property
+     * @param pTagDel the Tag to delete
+     */
+    public void setTagDel( String pTagDel )
+    {
+        mTagDel = pTagDel;
+    }
+
+    /**
+     * Retrieves the value of the mTagDel property
+     * @return The tag that will be deleted from the current component
+     */
+    public String getTagDel()
+    {
+        return mTagDel;
     }
 }

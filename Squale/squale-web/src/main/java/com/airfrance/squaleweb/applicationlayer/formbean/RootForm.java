@@ -18,10 +18,12 @@
  */
 package com.airfrance.squaleweb.applicationlayer.formbean;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import com.airfrance.welcom.struts.bean.WActionFormSelectable;
 
@@ -69,6 +71,9 @@ public class RootForm
 
     /** Version de squale pour l'audit courant */
     protected String mAuditSqualeVersion = "";
+    
+    /** Liste des tags éventuels associés à l'application */
+    protected Collection<TagDTO> mTags;
 
     /**
      * @return l'id de l'application
@@ -377,7 +382,25 @@ public class RootForm
     {
         mAuditSqualeVersion = pVersion;
     }
+    
+    /**
+     * Access method for the mTags property.
+     * @return l'utilisateur ayant fait la dernière modification
+     */
+    public Collection<TagDTO> getTags()
+    {
+        return mTags;
+    }
 
+    /**
+     * Sets the value of the mTags property.
+     * @param pTags l'utilisateur ayant fait la dernière modification
+     */
+    public void setTags( Collection<TagDTO> pTags )
+    {
+        mTags = pTags;
+    }
+    
     /**
      * @return true si les audits sont comparables
      */

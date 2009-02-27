@@ -1,16 +1,20 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
+	prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.welcom.struts.util.WConstants" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.LogonBean" %>
+<%@ page import="com.airfrance.welcom.struts.util.WConstants"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.LogonBean"%>
 <%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants"%>
 <%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm"%>
+<%@ page
+	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm"%>
 <%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
 <%@ page import="com.airfrance.squaleweb.tagslib.HistoryTag"%>
 
@@ -39,13 +43,29 @@ if(selectedTab == null) {
 
 
 <script type="text/javascript" src="jslib/information.js"></script>
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
 
-<bean:define id="applicationId" name="projectSummaryForm" property="applicationId" type="String" />
-<bean:define id="projectId" name="projectSummaryForm" property="projectId" type="String" />
-<bean:define id="currentAuditId" name="projectSummaryForm" property="currentAuditId" type="String" />
-<bean:define id="previousAuditId" name="projectSummaryForm"	property="previousAuditId" type="String" />
-<bean:define id="auditSqualeVersion" name="projectSummaryForm" property="auditSqualeVersion" type="String" />
-<bean:define id="comparable" name="projectSummaryForm" property="comparableAudits" type="Boolean" />
+<bean:define id="applicationId" name="projectSummaryForm"
+	property="applicationId" type="String" />
+<bean:define id="projectId" name="projectSummaryForm"
+	property="projectId" type="String" />
+<bean:define id="currentAuditId" name="projectSummaryForm"
+	property="currentAuditId" type="String" />
+<bean:define id="previousAuditId" name="projectSummaryForm"
+	property="previousAuditId" type="String" />
+<bean:define id="auditSqualeVersion" name="projectSummaryForm"
+	property="auditSqualeVersion" type="String" />
+<bean:define id="comparable" name="projectSummaryForm"
+	property="comparableAudits" type="Boolean" />
+
+<bean:define id="callbackUrlApp">
+	<html:rewrite
+		page="/add_applicationTag.do?action=findTagForAutocomplete" />
+</bean:define>
+<bean:define id="callbackUrlProj">
+	<html:rewrite page="/add_projectTag.do?action=findTagForAutocomplete" />
+</bean:define>
 
 <af:page titleKey="project.results.title">
 	<af:head>
@@ -53,7 +73,6 @@ if(selectedTab == null) {
 		<jsp:include page="/jsp/xiti/xiti_header_common.jsp" />
 	</af:head>
 	<af:body canvasLeftPageInclude="/jsp/canvas/project_menu.jsp">
-
 		<%-- une autre valeur que "true" indique qu'on est passé par une autre vue 
 			que celle composant directement --%>
 		<%-- TODO FAB : gérer la suppression du traceur... --%>
@@ -71,15 +90,94 @@ if(selectedTab == null) {
 			</jsp:include>
 
 			<br />
-			<squale:resultsHeader name="projectSummaryForm" displayComparable="true" />
+			<squale:resultsHeader name="projectSummaryForm" displayComparable="true">
+				<af:form action="project.do">
+					<div id="appTagRemoval" style="visibility:hidden;">
+						<div id="hidden" style="display:none;">
+							<af:field key="empty" property="applicationId" value='<%= applicationId%>'/>
+							<af:field key="empty" property="projectId" value='<%= projectId%>'/>
+						</div>
+						<table>
+							<tr>
+								<td>
+									<!--<bean:message key="tag.message.application.delete" />-->
+									<bean:define id="listtagApp" name="projectSummaryForm" property="tagsAppli"></bean:define>
+									<af:select property="tagDelAppli">
+										<af:options collection="listtagApp" property="name"/>
+									</af:select>
+								</td>
+								<td>
+									<%
+										// On construit le lien pour le bouton retour
+										String action = "project.do?action=delTagApplication&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId + "&projectId=" + projectId ;
+										String href = "location.href='" + action + "'";
+										//onclick="<%=href% >"
+									%>
+									<af:button callMethod="removeTagApplication" name="supprimer"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="projTagRemoval" style="display:none;">
+						<div id="hidden" style="display:none;">
+							<af:field key="empty" property="applicationId" value='<%= applicationId%>'/>
+							<af:field key="empty" property="projectId" value='<%= projectId%>'/>
+						</div>
+						<table>
+							<tr>
+								<td>
+									<!--<bean:message key="tag.message.application.delete" />-->
+									<bean:define id="listtagProj" name="projectSummaryForm" property="tags"></bean:define>
+									<af:select property="tagDel">
+										<af:options collection="listtagProj" property="name"/>
+									</af:select>
+								</td>
+								<td>
+									<%
+										// On construit le lien pour le bouton retour
+										String action2 = "project.do?action=removeTag&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId ;
+										String href2 = "location.href='" + action2 + "'";
+										// onclick="<%=href2% >" 
+									%>
+									<af:button callMethod="removeTag" name="supprimer"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</af:form>
+				<div id="appTagAddition" style="display:none;">
+					<af:form action='<%="project.do?action=addTagApplication&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId + "&projectId=" + projectId%>'>
+						<!--<bean:message key="tag.message.application.new" />-->
+						<af:field key="empty" name="projectSummaryForm" property="tagSupp"
+							value="" easyCompleteCallBackUrl="<%=callbackUrlApp%>" />
+					</af:form>
+				</div>
+				<script type="text/javascript">
+					showButton( 'tagPlusApp' );
+					showButton( 'tagMinusApp' );
+				</script>
+				<div id="projTagAddition" style="display:none;">
+					<af:form action='<%="project.do?action=addTag&projectId=" + projectId + "&currentAuditId=" + currentAuditId%>'>
+						<!--<bean:message key="tag.message.project.new" />-->
+						<af:field key="empty" name="projectSummaryForm" property="tagSupp"
+							value="" easyCompleteCallBackUrl="<%=callbackUrlProj%>" />
+					</af:form>
+				</div>
+				<script type="text/javascript">
+					showButton( 'tagPlusPro' );
+					showButton( 'tagMinusPro' );
+				</script>
+			</squale:resultsHeader>
 			<br />
 			<div style="color: #f00"><html:errors property="exportIDE" />
 			<br />
 			<br />
 			</div>
-			<logic:equal name="projectSummaryForm" property="haveErrors" scope="session" value="true">
+			<logic:equal name="projectSummaryForm" property="haveErrors"
+				scope="session" value="true">
 				<img src="images/pictos/warning.png" alt="warning_image" />
-				<a href='<%="project_errors.do?action=errors&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'>
+				<a
+					href='<%="project_errors.do?action=errors&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'>
 				<B><U><%=errorLink%></U></B> </a>
 				<br />
 				<br />
@@ -89,7 +187,8 @@ if(selectedTab == null) {
 			<af:tabbedPane name="projectsummary">
 				<%-- Facteurs et tendances --%>
 				<af:tab key="project.results.factors.tab" name="factors"
-					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("factors")%>'>
+					lazyLoading="false"
+					isTabSelected='<%=""+selectedTab.equals("factors")%>'>
 					<af:dropDownPanel titleKey="buttonTag.menu.aide">
 						<bean:message key="project.results.factors.details" />
 					</af:dropDownPanel>
@@ -124,8 +223,9 @@ if(selectedTab == null) {
 					</af:form>
 				</af:tab>
 				<%-- Kiviat --%>
-				<af:tab key="project.results.kiviat.tab" name="kiviat" 
-					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("kiviat")%>'>
+				<af:tab key="project.results.kiviat.tab" name="kiviat"
+					lazyLoading="false"
+					isTabSelected='<%=""+selectedTab.equals("kiviat")%>'>
 					<%String imageDetails1 = WebMessages.getString(request, "image.project.factors");%>
 					<bean:define id="srcKiviat" name="projectSummaryForm"
 						property="kiviat.srcName" type="String" />
@@ -154,7 +254,8 @@ if(selectedTab == null) {
 								border="0" width="100px">
 								<tr>
 									<%-- nom du tab à afficher (kiviat) après soumission de la requête --%>
-									<input type="hidden" name="<%=HistoryTag.SELECTED_TAB_KEY%>" value="kiviat" />
+									<input type="hidden" name="<%=HistoryTag.SELECTED_TAB_KEY%>"
+										value="kiviat" />
 									<af:field key="project.results.allFactors"
 										name="projectSummaryForm" property="allFactors"
 										type="CHECKBOX" styleClassLabel="td1" styleClass="normal" />
@@ -168,7 +269,8 @@ if(selectedTab == null) {
 				</af:tab>
 				<%-- Volumétrie --%>
 				<af:tab key="project.results.volumetry.tab" name="volumetry"
-					lazyLoading="false" isTabSelected='<%=""+selectedTab.equals("volumetry")%>'>
+					lazyLoading="false"
+					isTabSelected='<%=""+selectedTab.equals("volumetry")%>'>
 					<af:dropDownPanel titleKey="buttonTag.menu.aide">
 						<bean:message key="project.results.volumetry.details" />
 					</af:dropDownPanel>
@@ -186,7 +288,7 @@ if(selectedTab == null) {
 								<squale:history projectId="<%=projectId%>"
 									auditId="<%=currentAuditId%>" ruleId="<%=name%>" kind="metric"
 									previousAuditId="<%=previousAuditId%>"
-									toolTip="tooltips.history.metric" selectedTab="volumetry"/>
+									toolTip="tooltips.history.metric" selectedTab="volumetry" />
 							</af:col>
 						</af:cols>
 					</af:table>
@@ -213,7 +315,7 @@ if(selectedTab == null) {
 				<%if (isAdmin) {%>
 				<af:button type="form" name="export.audit_report"
 					onclick="<%=urlExportPpt%>"
-					toolTipKey="toolTip.export.audit_report" accessKey="admin"/>
+					toolTipKey="toolTip.export.audit_report" accessKey="admin" />
 				<%} //isAdmin %>
 				<%-- 
 					L'export IDE n'est disponible que pour les versions >= 3.2 et pour les profils

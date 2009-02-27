@@ -18,7 +18,10 @@
  */
 package com.airfrance.squaleweb.transformer;
 
+import java.util.ArrayList;
+
 import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm;
 import com.airfrance.welcom.struts.bean.WActionForm;
 import com.airfrance.welcom.struts.transformer.WITransformer;
@@ -67,6 +70,14 @@ public class ApplicationTransformer
         form.setHasResults( dto.getHasResults() );
         form.setLastUpdate( dto.getLastUpdate() );
         form.setLastUser( dto.getLastUser() );
+        if ( dto.getTags() != null && dto.getTags().size() > 0 )
+        {
+            form.setTags( dto.getTags() );
+        }
+        else
+        {
+            form.setTags( new ArrayList<TagDTO>() );
+        }
     }
 
     /**
@@ -94,5 +105,13 @@ public class ApplicationTransformer
         ComponentDTO dto = (ComponentDTO) pObject[0];
         dto.setID( form.getId() );
         dto.setName( form.getApplicationName() );
+        if ( form.getTags() != null && form.getTags().size() > 0 )
+        {
+            dto.setTags( form.getTags() );
+        }
+        else
+        {
+            dto.setTags( new ArrayList<TagDTO>() );
+        }
     }
 }
