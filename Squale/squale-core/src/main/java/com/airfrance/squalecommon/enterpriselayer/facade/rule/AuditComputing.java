@@ -82,11 +82,13 @@ public final class AuditComputing
      * @param pSession session
      * @param pProject projet
      * @param pAudit audit
+     * @return true If the last mark for a manual practice is out of date
      * @throws JrafDaoException si erreur
      */
-    public static void computeAuditResult( ISession pSession, ProjectBO pProject, AuditBO pAudit )
+    public static boolean computeAuditResult( ISession pSession, ProjectBO pProject, AuditBO pAudit )
         throws JrafDaoException
     {
+        boolean warning=false;
         try
         {
             LOG.info( RuleMessages.getString( "computation.start" ) );
@@ -94,6 +96,7 @@ public final class AuditComputing
             Map factors = new Hashtable();
             Map criteria = new Hashtable();
             Map practices = new Hashtable();
+            
             // Les maps contiennent en clef la règle et en valeur le résultat calculé
             flattenQualitfyGrid( pSession, pProject, pAudit, factors, criteria, practices );
 
@@ -102,7 +105,7 @@ public final class AuditComputing
             // ou des critères plusieurs fois présents
 
             // Traitement des pratiques
-            computePracticesResults( pSession, pProject, pAudit, practices );
+            warning = computePracticesResults( pSession, pProject, pAudit, practices );
             // Traitement des criteres
             computeCriteriaResults( pSession, criteria, practices );
             // Traitement des facteurs
@@ -133,6 +136,7 @@ public final class AuditComputing
         {
             LOG.info( RuleMessages.getString( "computation.end" ) );
         }
+        return warning;
     }
 
     /**
@@ -325,11 +329,13 @@ public final class AuditComputing
      * @param pProject projet
      * @param pAudit audit
      * @param pPractices pratiques
+     * @return true If the last mark for a manual practice is out of date
      * @throws JrafDaoException si erreur
      */
-    private static void computePracticesResults( ISession pSession, ProjectBO pProject, AuditBO pAudit, Map pPractices )
+    private static boolean computePracticesResults( ISession pSession, ProjectBO pProject, AuditBO pAudit, Map pPractices )
         throws JrafDaoException
     {
+        boolean warning = false;
         // Les pratiques sont triées par par type
         // de composant pour eviter les appels multiples de recuperation des
         // composants du projet
@@ -337,7 +343,7 @@ public final class AuditComputing
         // On traite séparement les pratiques de niveau projet
         computeProjectPractices( pSession, pProject, pAudit, (Collection) kindPractices.remove( "project" ), pPractices );
         // Processing of the manual practices
-        computeManualPractices( pSession, pProject, (Collection) kindPractices.remove( "" ), pPractices );
+        warning=computeManualPractices( pSession, pProject, (Collection) kindPractices.remove( "" ), pPractices );
         Iterator kinds = kindPractices.keySet().iterator();
         while ( kinds.hasNext() )
         {
@@ -417,6 +423,7 @@ public final class AuditComputing
                 }
             }
         }
+        return warning;
     }
 
     /**
@@ -784,12 +791,14 @@ public final class AuditComputing
      * @param project The project
      * @param manualPractices collection of practice without level (manual practice)
      * @param practicesMap map of all the practice.
+     * @return true If the last mark for a manual practice is out of date
      * @throws JrafDaoException Exception happened during hibernate work
      */
-    private static void computeManualPractices( ISession session, ProjectBO project, Collection manualPractices,
+    private static boolean computeManualPractices( ISession session, ProjectBO project, Collection manualPractices,
                                                 Map practicesMap )
         throws JrafDaoException
     {
+        boolean warning = false;
         if ( manualPractices != null )
         {
             try
@@ -822,6 +831,10 @@ public final class AuditComputing
                             practiceResult.setMeanMark( manualPraticeResult.getMeanMark() );
                             dao.save( session, practiceResult );
                         }
+                        else
+                        {
+                            warning=true;
+                        }
                     }
                 }
             }
@@ -830,6 +843,7 @@ public final class AuditComputing
                 throw new JrafDaoException( e );
             }
         }
+        return warning;
     }
 
     /**

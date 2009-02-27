@@ -24,6 +24,8 @@
  */
 package com.airfrance.squalix.tools.computing.project;
 
+import java.util.ArrayList;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -77,7 +79,11 @@ public class ComputeResultTask
     {
         try
         {
-            AuditComputing.computeAuditResult( getSession(), mProject, mAudit );
+            boolean warning = AuditComputing.computeAuditResult( getSession(), mProject, mAudit );
+            if (warning)
+            {    
+                initError( ComputingMessages.getString("logs.compute.mark_out_of_date") );
+            }
         }
         catch ( Exception e )
         {
