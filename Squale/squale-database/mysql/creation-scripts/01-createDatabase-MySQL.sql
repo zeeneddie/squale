@@ -235,6 +235,18 @@
         drop 
         foreign key FKBC8FB71EF53F33A0;
 
+    alter table Tag 
+        drop 
+        foreign key FK1477A5C258AC2;
+
+    alter table Tag_Component 
+        drop 
+        foreign key FKE093EE5863D3E5E8;
+
+    alter table Tag_Component 
+        drop 
+        foreign key FKE093EE5828B1F3C1;
+
     alter table TaskParameter 
         drop 
         foreign key FK16AD3384A096529F;
@@ -354,7 +366,13 @@
     drop table if exists Stats_squale_dict_annexe;
 
     drop table if exists StopTimeBO;
+    
+    drop table if exists Tag;
 
+    drop table if exists TagCategory;
+
+    drop table if exists Tag_Component;
+    
     drop table if exists Task;
 
     drop table if exists TaskParameter;
@@ -749,6 +767,27 @@
         DayOfWeek varchar(9) not null,
         TimeOfDay varchar(5) not null,
         primary key (StopTimeId)
+    ) type=InnoDB;
+
+    create table Tag (
+        TagId bigint not null auto_increment,
+        Name text not null unique,
+        Description text not null unique,
+        TagCategory bigint,
+        primary key (TagId)
+    ) type=InnoDB;
+
+    create table TagCategory (
+        TagCategoryId bigint not null auto_increment,
+        Name text not null unique,
+        Description text not null unique,
+        primary key (TagCategoryId)
+    ) type=InnoDB;
+
+    create table Tag_Component (
+        ComponentId bigint not null,
+        TagId bigint not null,
+        primary key (ComponentId, TagId)
     ) type=InnoDB;
 
     create table Task (
@@ -1218,6 +1257,24 @@
         add constraint FKBC8FB71EF53F33A0 
         foreign key (Serveur) 
         references Serveur (ServeurId);
+
+    alter table Tag 
+        add index FK1477A5C258AC2 (TagCategory), 
+        add constraint FK1477A5C258AC2 
+        foreign key (TagCategory) 
+        references TagCategory (TagCategoryId);
+
+    alter table Tag_Component 
+        add index FKE093EE5863D3E5E8 (ComponentId), 
+        add constraint FKE093EE5863D3E5E8 
+        foreign key (ComponentId) 
+        references Component (ComponentId);
+
+    alter table Tag_Component 
+        add index FKE093EE5828B1F3C1 (TagId), 
+        add constraint FKE093EE5828B1F3C1 
+        foreign key (TagId) 
+        references Tag (TagId);
 
     alter table TaskParameter 
         add index FK16AD3384A096529F (TaskRefId), 

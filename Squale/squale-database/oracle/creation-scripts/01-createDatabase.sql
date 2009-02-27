@@ -79,6 +79,12 @@
 
     drop table StopTimeBO cascade constraints;
 
+    drop table Tag cascade constraints;
+
+    drop table TagCategory cascade constraints;
+
+    drop table Tag_Component cascade constraints;
+
     drop table Task cascade constraints;
 
     drop table TaskParameter cascade constraints;
@@ -160,6 +166,10 @@
     drop sequence stats_sequence;
 
     drop sequence stoptime_sequence;
+
+    drop sequence tagCategory_sequence;
+
+    drop sequence tag_sequence;
 
     drop sequence taskParameter_sequence;
 
@@ -545,6 +555,27 @@
         DayOfWeek varchar2(9) not null,
         TimeOfDay varchar2(5) not null,
         primary key (StopTimeId)
+    );
+
+    create table Tag (
+        TagId number(19,0) not null,
+        Name varchar2(1024) not null unique,
+        Description varchar2(1024),
+        TagCategory number(19,0),
+        primary key (TagId)
+    );
+
+    create table TagCategory (
+        TagCategoryId number(19,0) not null,
+        Name varchar2(1024) not null unique,
+        Description varchar2(1024),
+        primary key (TagCategoryId)
+    );
+
+    create table Tag_Component (
+        ComponentId number(19,0) not null,
+        TagId number(19,0) not null,
+        primary key (ComponentId, TagId)
     );
 
     create table Task (
@@ -956,6 +987,23 @@
         foreign key (Serveur) 
         references Serveur;
 
+   alter table Tag 
+        add constraint FK1477A5C258AC2 
+        foreign key (TagCategory) 
+        references TagCategory
+
+    alter table Tag_Component 
+        add constraint FKE093EE5863D3E5E8 
+        foreign key (ComponentId) 
+        references Component
+        on delete cascade;
+
+    alter table Tag_Component 
+        add constraint FKE093EE5828B1F3C1 
+        foreign key (TagId) 
+        references Tag
+        on delete cascade;
+
     alter table TaskParameter 
         add constraint FK16AD3384A096529F 
         foreign key (TaskRefId) 
@@ -1070,6 +1118,10 @@
     create sequence stats_sequence;
 
     create sequence stoptime_sequence;
+
+    create sequence tagCategory_sequence;
+
+    create sequence tag_sequence;
 
     create sequence taskParameter_sequence;
 
