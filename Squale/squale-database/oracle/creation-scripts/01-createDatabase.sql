@@ -990,7 +990,7 @@
    alter table Tag 
         add constraint FK1477A5C258AC2 
         foreign key (TagCategory) 
-        references TagCategory
+        references TagCategory;
 
     alter table Tag_Component 
         add constraint FKE093EE5863D3E5E8 
