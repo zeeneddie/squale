@@ -22,29 +22,29 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.tag;
 import java.util.Collection;
 
 /**
- * Représente un Tag applicable à une application ou à un Projet
+ * Represent a Category of tags
  * 
  * @hibernate.class table="TagCategory" mutable="true" lazy="true"
  */
 public class TagCategoryBO
 {
     /**
-     * Identifiant (au sens technique) de l'objet
+     * Technical Id
      */
     protected long mId = -1;
-    
+
     /**
-     * Nom du tag
+     * Category name
      */
     private String mName;
 
     /**
-     * Description rapide de la catégorie
+     * Category description
      */
     private String mDescription;
 
     /**
-     * Catégorie du Tag
+     * List of the tags linked to this category
      */
     private Collection<TagBO> mTags;
 
@@ -62,17 +62,18 @@ public class TagCategoryBO
 
     /**
      * Sets the value of the mId property
+     * 
      * @param pId l'id de l'objet
      */
     public void setId( long pId )
     {
         mId = pId;
     }
-    
+
     /**
-     * Instancie un nouveau composant.
+     * Constructor
      * 
-     * @param pName Nom du composant.
+     * @param pName Category name.
      */
     public TagCategoryBO( final String pName )
     {
@@ -80,13 +81,12 @@ public class TagCategoryBO
     }
 
     /**
-     * Instancie un nouveau composant vide.
-     * 
+     * Default constructor.
      */
-    public TagCategoryBO( )
+    public TagCategoryBO()
     {
     }
-    
+
     /**
      * Sets the value of the mName property.
      * 
@@ -101,8 +101,8 @@ public class TagCategoryBO
      * Access method for the mDescription property.
      * 
      * @return the current value of the mDescription property
-     * @hibernate.property name="description" update="true" insert="true" column="Description" type="string" length="1024"
-     *                     not-null="true" unique="true"
+     * @hibernate.property name="description" update="true" insert="true" column="Description" type="string"
+     *                     length="1024" not-null="true" unique="false"
      */
     public String getDescription()
     {
@@ -123,8 +123,8 @@ public class TagCategoryBO
      * Access method for the mName property.
      * 
      * @return the current value of the mName property
-     * @hibernate.property name="name" update="true" insert="true" column="Name" type="string" length="1024"
-     *                     not-null="true" unique="true"
+     * @hibernate.property name="name" update="true" insert="true" column="Name" type="string" not-null="true"
+     *                     unique="true"
      */
     public String getName()
     {

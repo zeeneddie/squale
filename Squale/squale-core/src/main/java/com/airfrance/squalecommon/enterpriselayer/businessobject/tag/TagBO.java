@@ -22,34 +22,34 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.tag;
 import java.util.Collection;
 
 /**
- * Représente un Tag applicable à une Application ou à un Projet
+ * Represent a Tag. this tag could be linked to an application or a project
  * 
  * @hibernate.class table="Tag" mutable="true" lazy="false"
  */
 public class TagBO
 {
     /**
-     * Identifiant (au sens technique) de l'objet
+     * Technical id
      */
     protected long mId = -1;
     
     /**
-     * Nom du tag
+     * Tag name
      */
     private String mName;
 
     /**
-     * Description rapide du Tag
+     * Tag description
      */
     private String mDescription;
 
     /**
-     * Catégorie du Tag
+     * Category of the tag
      */
     private TagCategoryBO mTagCategoryBO;
 
     /**
-     * Liste des Components qui associent ce tag
+     * List of components linked to this tag
      */
     protected Collection mComponents;
     
@@ -75,16 +75,16 @@ public class TagBO
     }
     
     /**
-     * Instancie un nouveau composant vide.
+     * Default constructor
      */
     public TagBO()
     {
     }
     
     /**
-     * Instancie un nouveau composant.
+     * Constructor
      * 
-     * @param pName Nom du composant.
+     * @param pName tag name.
      */
     public TagBO( final String pName )
     {
@@ -106,7 +106,7 @@ public class TagBO
      * 
      * @return the current value of the mShortName property
      * @hibernate.property name="description" update="true" insert="true" column="Description" type="string" length="1024"
-     *                     not-null="true" unique="true"
+     *                     not-null="true" unique="false"
      */
     public String getDescription()
     {
@@ -127,7 +127,7 @@ public class TagBO
      * Access method for the mName property.
      * 
      * @return the current value of the mName property
-     * @hibernate.property name="name" update="true" insert="true" column="Name" type="string" length="1024"
+     * @hibernate.property name="name" update="true" insert="true" column="Name" type="string"
      *                     not-null="true" unique="true"
      */
     public String getName()

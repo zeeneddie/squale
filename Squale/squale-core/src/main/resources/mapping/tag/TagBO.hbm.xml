@@ -8,8 +8,8 @@
         <param name="sequence">tag_sequence</param>
       </generator>
     </id>
-    <property name="name" length="1024" column="Name" update="true" unique="true" not-null="true" type="string" insert="true"/>
-    <property name="description" length="1024" column="Description" update="true" unique="true" not-null="true" type="string" insert="true"/>
+    <property name="name" column="Name" update="true" unique="true" not-null="true" type="string" insert="true"/>
+    <property name="description" length="1024" column="Description" update="true" unique="false" not-null="true" type="string" insert="true"/>
     <many-to-one insert="true" unique="false" column="TagCategory" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagCategoryBO" not-null="false" name="tagCategoryBO"/>
     <set inverse="true" cascade="none" lazy="true" table="Tag_Component" sort="unsorted" name="components">
       <key column="TagId"/>

@@ -559,16 +559,16 @@
 
     create table Tag (
         TagId number(19,0) not null,
-        Name varchar2(1024) not null unique,
-        Description varchar2(1024),
+        Name varchar2(255) not null unique,
+        Description varchar2(1024) not null,
         TagCategory number(19,0),
         primary key (TagId)
     );
 
     create table TagCategory (
         TagCategoryId number(19,0) not null,
-        Name varchar2(1024) not null unique,
-        Description varchar2(1024),
+        Name varchar2(255) not null unique,
+        Description varchar2(1024) not null,
         primary key (TagCategoryId)
     );
 

@@ -12,16 +12,16 @@ ALTER TABLE qualityresult MODIFY AuditId bigint null;
 -- Modifications for the Tags implementation
 create table Tag (
     TagId bigint not null auto_increment,
-    Name text not null unique,
-    Description text not null unique,
+    Name varchar(255) not null unique,
+    Description text not null,
     TagCategory bigint,
     primary key (TagId)
 ) type=InnoDB;
 
 create table TagCategory (
     TagCategoryId bigint not null auto_increment,
-    Name text not null unique,
-    Description text not null unique,
+    Name varchar(255) not null unique,
+    Description text not null,
     primary key (TagCategoryId)
 ) type=InnoDB;
 
