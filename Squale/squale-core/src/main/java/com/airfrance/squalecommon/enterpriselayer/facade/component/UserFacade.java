@@ -249,23 +249,19 @@ public class UserFacade
     public static UserDTO getUserByMatricule( UserDTO pUser )
         throws JrafEnterpriseException
     {
-
         UserBO userBO = null;
         UserDTO userDTO = null;
-
         ISession session = null;
 
         try
         {
-
             session = PERSISTENTPROVIDER.getSession();
-
             UserDAOImpl userDAO = UserDAOImpl.getInstance();
-
             userBO = (UserBO) userDAO.loadWithMatricule( session, pUser.getMatricule() );
-
-            userDTO = UserTransform.bo2Dto( userBO );
-
+            if ( userBO != null )
+            {
+                userDTO = UserTransform.bo2Dto( userBO );
+            }
         }
         catch ( JrafDaoException e )
         {
@@ -457,6 +453,18 @@ public class UserFacade
             userBO.setEmail( pUser.getEmail() );
             userBO.setFullName( pUser.getFullName() );
             userBO.setUnsubscribed( pUser.isUnsubscribed() );
+            // Update the defauilt profile value
+            ProfileDAOImpl profileDAO = ProfileDAOImpl.getInstance();
+            ProfileBO profileBO = null;
+            if ( pAdmin.booleanValue() )
+            {
+                profileBO = (ProfileBO) profileDAO.loadByKey( session, ProfileBO.ADMIN_PROFILE_NAME );
+            }
+            else
+            {
+                profileBO = (ProfileBO) profileDAO.loadByKey( session, ProfileBO.DEFAULT_PROFILE_NAME );
+            }
+            userBO.setDefaultProfile( profileBO );
             // Sauvegarde dans la base
             userDAO.save( session, userBO );
             // transformation du UserBO en UserDTO
