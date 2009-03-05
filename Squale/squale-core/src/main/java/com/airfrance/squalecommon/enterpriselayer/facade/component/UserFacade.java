@@ -587,4 +587,37 @@ public class UserFacade
 
         return result;
     }
+
+    /**
+     * Création ou mise à jour de l'utilisateur La création se fait avec un profil minimal, la mise à jour ne concerne
+     * que l'adresse email ou le nom
+     * 
+     * @param pUser utilisateur donné
+     * @throws JrafEnterpriseException exception JRAF
+     */
+    public static void removeUser( UserDTO pUser )
+        throws JrafEnterpriseException
+    {
+        // Initialisation
+        UserBO userBO = null; // retour de la DAO
+
+        ISession session = null;
+        try
+        {
+            // récupération d'une session
+            session = PERSISTENTPROVIDER.getSession();
+            UserDAOImpl userDAO = UserDAOImpl.getInstance();
+            userBO = (UserBO) userDAO.loadWithMatricule( session, pUser.getMatricule() );
+            userDAO.remove( session, userBO );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, UserFacade.class.getName() + ".removeUser" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, UserFacade.class.getName() + ".removeUser" );
+        }
+
+    }
 }
