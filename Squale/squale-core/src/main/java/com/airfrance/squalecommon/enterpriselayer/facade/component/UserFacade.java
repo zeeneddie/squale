@@ -238,6 +238,48 @@ public class UserFacade
     }
 
     /**
+     * This method do the search of a user by his identifier This method return in a userDTO all information concerning
+     * the user who corresponding to the identifier . if there is no user corresponding, the method return a null
+     * userDTO.
+     * 
+     * @param pUser The userDTO with the identifier
+     * @return UserDTO the user found or null if he is not found
+     * @throws JrafEnterpriseException exception intervened during the search of the user in the data base
+     */
+    public static UserDTO getUserByMatricule( UserDTO pUser )
+        throws JrafEnterpriseException
+    {
+
+        UserBO userBO = null;
+        UserDTO userDTO = null;
+
+        ISession session = null;
+
+        try
+        {
+
+            session = PERSISTENTPROVIDER.getSession();
+
+            UserDAOImpl userDAO = UserDAOImpl.getInstance();
+
+            userBO = (UserBO) userDAO.loadWithMatricule( session, pUser.getMatricule() );
+
+            userDTO = UserTransform.bo2Dto( userBO );
+
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, UserFacade.class.getName() );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, UserFacade.class.getName() );
+        }
+
+        return userDTO;
+    }
+
+    /**
      * Permet d'ajouter des droits au UserDTO Dans le cas d'un utilisateur avec un privilège admin, tous les
      * applications validés sont ajoutés à l'utilisateur
      * 
@@ -609,6 +651,7 @@ public class UserFacade
             UserDAOImpl userDAO = UserDAOImpl.getInstance();
             userBO = (UserBO) userDAO.loadWithMatricule( session, pUser.getMatricule() );
             userDAO.remove( session, userBO );
+
         }
         catch ( JrafDaoException e )
         {
