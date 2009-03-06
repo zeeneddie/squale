@@ -86,11 +86,13 @@
 		
 		<%-- This one is not displayed --%>
 		<tr style="display:none">
-			<af:field key="genericTask.conf.resultsLocation" name="coberturaTaskForm" property="resultsLocation"
-			 styleClassLabel="td1" value="" size="60" disabled="<%=disabled%>" />
+			<af:field key="genericTask.conf.resultsLocation" name="coberturaTaskForm" property="resultsLocation" 
+			styleClassLabel="td1" value="" size="60" disabled="<%=disabled%>" />
 		</tr>
 		
-		<squale:iteratePaths name="coberturaTaskForm" property="resultsLocation"
+		
+		<%-- Whereas this one is displayed --%>
+		<squale:iteratePaths name="coberturaTaskForm" property="resultsLocation" isRequired="true" 
 			key="genericTask.conf.resultsLocation" disabled="<%=disabled%>" />
 	</table>
 	
@@ -98,7 +100,7 @@
 	<logic:notEqual name="userProfile" value="<%=ProfileBO.READER_PROFILE_NAME%>">
 	<%-- Including a validation button bar --%>
 		<af:buttonBar>
-			<!-- Specific button that add a field for other potential result locations -->
+			<!-- Specific button that add a field for another potential result locations -->
 			<af:button onclick="addField('genericTaskTable',4);" name="add_resultLocation" singleSend="true" />
 		</af:buttonBar>
 		<!-- Including the standard button bar -->

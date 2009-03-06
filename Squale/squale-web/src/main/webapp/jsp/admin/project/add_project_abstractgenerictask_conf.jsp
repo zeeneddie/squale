@@ -6,7 +6,7 @@
 <%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
 
 <%-- 
-	This JSP configures the generic task. A task configuration JSP is called if
+	This JSP configures task extending the abstract generic task. A task configuration JSP is called if
 	the task is present in the squalix_config.xml
 --%>
 
@@ -61,7 +61,7 @@
 			<tr><th><bean:message key="genericTask.conf.table.title" /></th><th></th></tr>
 		</thead>
 
-		<%-- Field for command that has to be executed --%>
+		<%-- Field for the tool location --%>
 		<tr>
 			<af:field key="genericTask.conf.toolLocation" name="genericTaskForm"
 				property="toolLocation" isRequired="true" styleClassLabel="td1" size="60"
