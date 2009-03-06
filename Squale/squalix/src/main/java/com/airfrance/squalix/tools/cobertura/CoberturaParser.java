@@ -68,10 +68,8 @@ public class CoberturaParser
         CoberturaProjectMetricsBO result = null;
         /* Object to store errors */
         StringBuffer errors = new StringBuffer();
-        /* The XML configuration file which sets the parsing rules */
-        File configurationFile = new File( "config/coberturaParserXmlRules.xml" );
         /* Preparing processing of the Xml result file */
-        Digester digesterXMLconfigured = getConfiguredParser( configurationFile );
+        Digester digesterXMLconfigured = getConfiguredParser();
         /* Calling the main parsing method */
         result = (CoberturaProjectMetricsBO) executeParsing( digesterXMLconfigured, pFile, errors );
         return result;
@@ -86,29 +84,20 @@ public class CoberturaParser
      * information regarding Digester.
      * </p>
      * 
-     * @param pFile the XML configuration input file
      * @return an instance of Digester configured with the specified XML configuration file. Could return null if an
      *         error occurs with the configuration file
      */
-    private Digester getConfiguredParser( File pFile )
+    private Digester getConfiguredParser()
     {
         /* Instance of digester which will be returned */
         Digester digester = null;
+        /* Creating a configured digester thanks to the xml configuration file */
+        digester = DigesterLoader.createDigester( getClass().getResource( "coberturaParserXmlRules.xml" ) );
+        /* Setting the validation to false */
+        digester.setValidating( false );
+        /* EntityResolver which sends an empty String to skip DTD validation of the Digester API */
+        digester.setEntityResolver( this.new CoberturaResolver() );
 
-        try
-        {
-            /* Creating a configured digester thanks to the xml configuration file */
-            digester = DigesterLoader.createDigester( pFile.toURL() );
-            /* Setting the validation to false */
-            digester.setValidating( false );
-            /* EntityResolver which sends an empty String to skip DTD validation of the Digester API */
-            digester.setEntityResolver( this.new CoberturaResolver() );
-        }
-        catch ( MalformedURLException urlException )
-        {
-            /* Logging an error message and sending the absolute path of the configuration file*/
-            LOGGER.error( new String (CoberturaMessages.getMessage( "cobertura.parser.urlError", pFile.getAbsolutePath() )) );
-        }
         return digester;
     }
 
@@ -173,15 +162,15 @@ public class CoberturaParser
                 /* Executes the parsing of the result file */
                 obj = pConfigDigester.parse( pFile );
             }
-            catch ( IOException e )
+            catch ( IOException ioExcep )
             {
                 /* Uses the handleException method of the superClass to append error to the StringBuffer and log it */
-                handleException( e, pErrors );
+                handleException( ioExcep, pErrors );
             }
-            catch ( SAXException e )
+            catch ( SAXException saxExcep )
             {
                 /* Uses the handleException method of the superClass to append error to the StringBuffer and log it */
-                handleException( e, pErrors );
+                handleException( saxExcep, pErrors );
             }
         }
         /* Returning the parsing result */

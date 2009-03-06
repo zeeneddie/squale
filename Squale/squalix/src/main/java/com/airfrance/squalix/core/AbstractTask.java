@@ -524,9 +524,10 @@ public abstract class AbstractTask
      * Méthode qui effectue le traitement propre à chaque tache
      * 
      * @throws TaskException car il y a plusieurs types d'exception suivant les tâches
+     * @throws JrafDaoException 
      */
     public abstract void execute()
-        throws TaskException;
+        throws TaskException, JrafDaoException;
 
     /**
      * Crée une erreur avec un niveau de criticité par défaut

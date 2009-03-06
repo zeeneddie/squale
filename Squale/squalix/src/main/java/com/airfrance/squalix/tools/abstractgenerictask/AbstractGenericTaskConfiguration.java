@@ -18,6 +18,7 @@
  */
 package com.airfrance.squalix.tools.abstractgenerictask;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,7 +34,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Proje
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalix.core.TaskException;
+import com.airfrance.squalix.core.exception.ConfigurationException;
 
 /**
  * <p>
@@ -125,8 +126,11 @@ public class AbstractGenericTaskConfiguration
      * @param pList an array containing the resultFiles the audit has to compute
      * @param pViewPath the viewPath of the project
      * @return a {@link DirectoryScanner} enriched with files/pattern to include and a base directory
+     * @throws ConfigurationException could be thrown if no result files are sent to the method or if an error occurs
+     *             while verifying existence of the files
      */
     public DirectoryScanner prepareResultProcessing( ListParameterBO pList, String pViewPath )
+        throws ConfigurationException
     {
         /* A list to store resultFiles location */
         List<StringParameterBO> list;
@@ -142,12 +146,10 @@ public class AbstractGenericTaskConfiguration
         /* If the passed in parameter is null */
         if ( null == pList )
         {
-            /* Creating the error message */
-            String errorMessage = AbstractGenericTaskMessages.getMessage( "agtc.error.noResultFilesLocation" );
-            LOGGER.error( errorMessage );
-
+            /* Creating the error message and cancelling the task */
+            LOGGER.error( AbstractGenericTaskMessages.getMessage( "logs.agt.error.noResultLoc" ) );
             /* Throwing an exception, the task must be cancelled in the related result processing method */
-            new TaskException( errorMessage );
+            new ConfigurationException( AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.project.notConfigured" ) );
         }
         else
         {
@@ -168,9 +170,25 @@ public class AbstractGenericTaskConfiguration
                 /* Including the name part of the entry in the included files */
                 includes[i] = resultFilesNamePart;
             }
-            /* Setting the base directory (resolved path = path part of the entry + viewPath of the project */
-            ds.setBasedir( FileUtils.catPath( pViewPath, resultFilesPathPart ) );
-            ds.setIncludes( includes );
+            /*
+             * Setting the base directory (resolved path = path part of the entry + viewPath of the project) and setting
+             * the included files or directory
+             */
+            File baseDir = new File( FileUtils.catPath( pViewPath, resultFilesPathPart ) );
+            /* Verifying if the baseDir exists and is a Directory */
+            if ( baseDir.exists() && baseDir.isDirectory() )
+            {
+                /* Setting it to the directoryScanner */
+                ds.setBasedir( baseDir );
+                /* Setting the include patterns */
+                ds.setIncludes( includes );
+            }
+            else
+            {
+                /* Logging the error and throwing a configuration exception */
+                LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.error.fileSpecification" ) );
+                new ConfigurationException( AbstractGenericTaskMessages.getMessage( "logs.agt.error.fileSpecification" ) );
+            }
         }
         return ds;
     }
@@ -209,20 +227,19 @@ public class AbstractGenericTaskConfiguration
     {
         /* This commandLine object is going to be returned */
         Commandline cmdLine = null;
-        
+
         if ( null == pToolLocation )
         {
             /*
              * If the toolLocation is null it could be possible that a task has been launched or is to launch with Ant
              * or Maven. Thus the task is not cancelled but a warn message is logged so as to inform the user.
              */
-            String warnMessage = AbstractGenericTaskMessages.getMessage( "agtc.warn.noTool" );
-            LOGGER.warn( warnMessage );
+            LOGGER.warn( AbstractGenericTaskMessages.getMessage( "logs.agtc.warn.noToolLoc" ) );
         }
-        
+
         /* Instance of the commandLine tool */
         cmdLine = new Commandline();
- 
+
         /* The commands / arguments to be executed */
         Argument args = new Argument();
         args.setLine( pParameters );

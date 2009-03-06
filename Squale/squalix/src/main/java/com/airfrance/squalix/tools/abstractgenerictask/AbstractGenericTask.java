@@ -31,6 +31,7 @@ import org.codehaus.plexus.util.cli.CommandLineUtils;
 import org.codehaus.plexus.util.cli.Commandline;
 import org.codehaus.plexus.util.cli.StreamConsumer;
 
+import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
@@ -38,6 +39,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.param
 import com.airfrance.squalix.core.AbstractTask;
 import com.airfrance.squalix.core.TaskData;
 import com.airfrance.squalix.core.TaskException;
+import com.airfrance.squalix.core.exception.ConfigurationException;
 
 /**
  * <p>
@@ -57,7 +59,7 @@ public abstract class AbstractGenericTask
 {
     /** SeparatorChar from java.io.File (system-dependent) */
     public static final char SEPARATOR_CHAR = java.io.File.separatorChar;
-    
+
     /** Initiating the logger */
     private static final Log LOGGER = LogFactory.getLog( AbstractGenericTask.class );
 
@@ -101,57 +103,87 @@ public abstract class AbstractGenericTask
         configurator = new AbstractGenericTaskConfiguration();
     }
 
-    /** This method initiate the GenericTask by calling a configurator and getting all the needed parameters ready */
+    /**
+     * This method initiate the GenericTask by calling a configurator and getting all the needed parameters ready
+     * 
+     * @throws ConfigurationException is thrown if the user has not entered some configuration informations
+     * @throws TaskException is thrown as the exception has to be cancelled
+     */
     public void init()
+        throws ConfigurationException, TaskException
     {
-        // Getting the parameters of the GenericTask by recovering the map of parameters for it
+        /* Getting the parameters of the GenericTask by recovering the map of parameters for it */
         this.genericTaskParam = (MapParameterBO) mProject.getParameter( ParametersConstants.GENERICTASK );
 
-        // Checking if the MapParameterBO has been retrieved (if the map is null)
+        /* If all values mapped in the map are null */
         if ( null == genericTaskParam )
         {
-            // if no parameters have been recovered , preparing an error message and logging it
-            String errorMessage = AbstractGenericTaskMessages.getMessage( "exception.project.notConfigured" );
-            LOGGER.error( errorMessage );
+            /* if no parameters have been recovered , preparing an error message and logging it */
+            LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.project.notConfigured" ) );
+            /* Cancelling the task as no parameters have been entered by the user and logging the info */
+            mStatus = CANCELLED;
+            /* throws an exception if no parameters are found */
+            throw new ConfigurationException( AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.task.aborded" ) );
         }
         else
         {
-            // Logging the beginning of the init sequence
-            LOGGER.info( AbstractGenericTaskMessages.getMessage( "logs.genericTask.init.start", mProject.getName() ) );
-
-            // Setting one by one the required parameters
+            /* Logging the beginning of the init sequence [! in debug mode only !] */
+            LOGGER.debug( AbstractGenericTaskMessages.getMessage( "logs.agt.init.start", mProject.getName() ) );
+            /* Setting one by one the required parameters */
             setToolLocation();
             setCommands();
             setResultLocations();
             setWorkingDirectory();
             setViewPath();
-
-            // Will log the main parameters values of the task if Squalix is launched in debug mode
+            /* Will log the main parameters values of the task if Squalix is launched in debug mode */
             printParameters();
-
-            // Logging the end of the init sequence
-            LOGGER.info( AbstractGenericTaskMessages.getMessage( "logs.genericTask.init.end", mProject.getName() ) );
+            /* Logging the end of the init sequence */
+            LOGGER.info( AbstractGenericTaskMessages.getMessage( "logs.agt.init.end", mProject.getName() ) );
         }
-
-        // FINALIZE : Handle exceptions here !!!!
     }
 
     /**
-     * This method executes the tool. It is final so as to prevent overriding of this method by classes which inherit
-     * it.
+     * <p>
+     * This method executes the tool. It is final so as to prevent overriding of this method by classes which extends
+     * this class.
+     * </p>
      * 
      * @throws TaskException exception during execution of the Task. Please consider having a look at
      *             {@link AbstractTask} for more information.
+     * @throws JrafDaoException 
      */
     public final void execute()
-        throws TaskException
+        throws TaskException, JrafDaoException
     {
         /* Initiating the task */
-        init();
+        try
+        {
+            init();
+        }
+        catch ( ConfigurationException configException )
+        {
+            /* As ConfigurationException is not compatible with throws clause in AbstractTask.execute() catching it */
+            LOGGER.info( configException );
+            throw new TaskException( configException );
+        }
         /* Getting the result files from the execution of the task */
         List<File> scannedResultFiles = this.perform();
-        /* Calling the method implemented by tasks inheriting from the AbstractGenericTask */
-        parseResults( scannedResultFiles );
+        /* The perform method never returns null as it instantiates an empty list with an initial capacity of zero */
+        if ( scannedResultFiles.size() > 0 )
+        {
+            /* Calling the method implemented by tasks extending the AbstractGenericTask */
+            parseResults( scannedResultFiles );
+        }
+        else
+        {
+            /* Logging an error as there are no result locations */
+            LOGGER.error( AbstractGenericTaskMessages.getMessage( "logs.agt.error.noResultFile", mProject.getName() ) );
+            mStatus = CANCELLED;
+            /*
+             * Please keep in mind that if there are any problem encountered while executing the commandline they have
+             * been handled up stream here we are handling only exception if there are no file in the list.
+             */
+        }
     }
 
     /**
@@ -167,7 +199,7 @@ public abstract class AbstractGenericTask
      * 
      * @return {@link List} : the java.io.file object(s)
      */
-    private final List<File> perform()
+    private List<File> perform()
     {
         /* The returned array of result files */
         String[] scannedResultFiles = null;
@@ -201,36 +233,49 @@ public abstract class AbstractGenericTask
                 /* Preparing the result files processing */
                 DirectoryScanner ds =
                     configurator.prepareResultProcessing( this.getResultLocations(), this.getViewPath() );
-                /* Scanning the given directories */
-                ds.scan();
-                /* Getting the result files names */
-                scannedResultFiles = ds.getIncludedFiles();
-                /*  */
-                for ( String resultTmpPath : scannedResultFiles )
+                /* Checking if a basedir is effectively set */
+                if ( null != ds.getBasedir() )
                 {
-                    /* Rebuilding the complete String value of the File that has to be created */
-                    String fileTocreate = ds.getBasedir().toString() + SEPARATOR_CHAR + resultTmpPath;
-                    File file = new File( fileTocreate );
-                    results.add( file );
+                    /* Scanning the directories */
+                    ds.scan();
+                    /* Getting the result files names */
+                    scannedResultFiles = ds.getIncludedFiles();
+                    for ( String resultTmpPath : scannedResultFiles )
+                    {
+                        /* Rebuilding the complete String value of the File that has to be created */
+                        String fileTocreate = ds.getBasedir().toString() + SEPARATOR_CHAR + resultTmpPath;
+                        File file = new File( fileTocreate );
+                        results.add( file );
+                    }
+                    /*
+                     * No else block as the exception has been handled in the configurator. If the baseDir is null it
+                     * means that the result processing has failed up stream.
+                     */
                 }
             }
             else
             {
                 /*
-                 * Indicating to the user that the exitValue of the process is different from zero and thus that the
-                 * subprocess did not terminated normally.
+                 * the exitValue of the process is different from zero indicating an abnormal termination. Informing the
+                 * user and aborting the task
                  */
-                LOGGER.error( new String( AbstractGenericTaskMessages.getMessage( "agtc.error.exitValue", exitValue ) ) );
-
+                LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.exitValue", exitValue ) );
+                mStatus = CANCELLED;
             }
         }
         catch ( CommandLineException cmdLineExcep )
         {
-            /*
-             * This exception could be generated by the executeCommandLine method call. If this exception occurs the
-             * task has to be cancelled.
-             */
-            cmdLineExcep.printStackTrace();
+            /* Exception is generated by the executeCommandLine method call the task has to be cancelled */
+            mStatus = CANCELLED;
+            LOGGER.fatal( "CommandLineException : " + cmdLineExcep );
+            LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.task.aborded" ) );
+        }
+        catch ( ConfigurationException confExcep )
+        {
+            /* Catching the configuration exception thrown by the prepareResultProcessing method */
+            mStatus = CANCELLED;
+            LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.error.fileSpecification" ) );
+            LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.task.aborded" ) );
         }
         return results;
     }
@@ -240,24 +285,27 @@ public abstract class AbstractGenericTask
      * This abstract method has to be implemented by each Task inheriting form the {@link AbstractGenericTask}.<br />
      * </p>
      * 
-     * @throws TaskException Any exception resulting from the parsing of the result files has to be thrown.
+     * @throws TaskException Any exception occurring in the extending task have to be properly handled. If a
+     *             {@link TaskException} occurs it could be thrown to the parseResults method
+     * @param pResults the results provided by the execution of the task
+     * @throws JrafDaoException 
      */
-    public abstract void parseResults( List<File> results )
-        throws TaskException;
+    public abstract void parseResults( List<File> pResults )
+        throws TaskException, JrafDaoException;
 
     /**
      * When launched in debug mode one could use this method to log the values listed bellow
      */
     public void printParameters()
     {
-        LOGGER.debug( AbstractGenericTaskMessages.getMessage( "logs.genericTask.info.project.name", mProject.getName() ) );
-        LOGGER.debug( AbstractGenericTaskMessages.getMessage( "logs.genericTask.info.task.toolLocation",
+        LOGGER.debug( AbstractGenericTaskMessages.getMessage( "logs.agt.info.project.name", mProject.getName() ) );
+        LOGGER.debug( AbstractGenericTaskMessages.getMessage( "logs.agt.info.task.toolLocation",
                                                               getToolLocation().getValue() ) );
-        LOGGER.debug( AbstractGenericTaskMessages.getMessage( "logs.genericTask.info.task.workingDir",
+        LOGGER.debug( AbstractGenericTaskMessages.getMessage( "logs.agt.info.task.workingDir",
                                                               getWorkingDirectory().getValue() ) );
     }
 
-    /* ------------------------------- ACCESSORS ------------------------------- */
+    /* -------------------------------------------- ACCESSORS -------------------------------------------- */
 
     /**
      * Getter for the mToolLocation
