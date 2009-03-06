@@ -43,13 +43,7 @@ public class AbstractCoberturaMetricsBO
     private static final String BRANCH_RATE = "branchRate";
 
     /**
-     * The "item name key" whatever the level of the metric (i.e Project, Package, Class, Method) This property is not
-     * intended to be pushed in DB
-     */
-    private static final String ITEM_NAME = "name";
-
-    /**
-     * The "item name key" whatever the level of the metric (i.e Project, Package, Class, Method). This property is not
+     * The "name " whatever the level of the metric (i.e Project, Package, Class, Method). This property is not
      * persisted in DB
      */
     private String name;
@@ -63,7 +57,6 @@ public class AbstractCoberturaMetricsBO
         /* Putting key and mapped value into the map called mMetrics in MeasureBO */
         getMetrics().put( LINE_RATE, new FloatMetricBO() );
         getMetrics().put( BRANCH_RATE, new FloatMetricBO() );
-        // getMetrics().put( ITEM_NAME, new StringMetricBO() );
     }
 
     /*----------------------------------------------- Getters -----------------------------------------------*/
@@ -96,7 +89,6 @@ public class AbstractCoberturaMetricsBO
      */
     public String getName()
     {
-        // return (String) ( (StringMetricBO) getMetrics().get( ITEM_NAME ) ).getValue();
         return name;
     }
 
