@@ -230,8 +230,8 @@ public final class MeasureFacade
     }
 
     /**
-     * Permet de récupérer une liste des "tops" composant / measure pour un audit et un tre donnés Format de ResultsDTO :
-     * 2 lignes : -- null en clé et liste des ComponentDTOs -- AuditDTO en clé et liste des résultats associées en
+     * Permet de récupérer une liste des "tops" composant / measure pour un audit et un tre donnés Format de ResultsDTO
+     * : 2 lignes : -- null en clé et liste des ComponentDTOs -- AuditDTO en clé et liste des résultats associées en
      * valeur
      * 
      * @param pProject projet
@@ -949,10 +949,14 @@ public final class MeasureFacade
         try
         {
             session = PERSISTENTPROVIDER.getSession();
-            // Recovery of the rule
-            ruleBO = (PracticeRuleBO) PracticeRuleAPDAOImpl.getInstance().get( session, pRuleId );
+            // if pRuleId is not null, let's try to find the rule
+            if ( pRuleId != null )
+            {
+                // Recovery of the rule
+                ruleBO = (PracticeRuleBO) PracticeRuleAPDAOImpl.getInstance().get( session, pRuleId );
+            }
             // If it's a manual practice
-            if ( ruleBO.getFormula() == null )
+            if ( ruleBO != null && ruleBO.getFormula() == null )
             {
                 String timeLimitation = ruleBO.getTimeLimitation();
                 Object[] objectReturn =
@@ -1128,7 +1132,7 @@ public final class MeasureFacade
      * @param mark The mark
      * @param todayCal Calendar set on today
      * @param endValidity Date of end of validity of the mark
-     * @return a map which contains information to display for the historic 
+     * @return a map which contains information to display for the historic
      */
     private static Map fillExtensionMap( Date beginDate, float mark, Calendar todayCal, Calendar endValidity )
     {

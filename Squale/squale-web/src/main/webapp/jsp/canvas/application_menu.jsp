@@ -28,7 +28,9 @@
 <logic:present name="applicationErrorForm">
 	<%formName = "applicationErrorForm";%>
 </logic:present>
-
+<logic:present name="paramReviewForm">
+	<%formName = "paramReviewForm";%>
+</logic:present>
 
 
 <bean:define id="children" name="<%=formName%>"
