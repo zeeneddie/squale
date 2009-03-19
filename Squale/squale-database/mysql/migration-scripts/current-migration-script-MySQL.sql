@@ -52,4 +52,4 @@ alter table Tag_Component
 -- #####################################################
 --Modifications for [#152]
 
-ALTER TABLE auditbo MODIFY squale_version VARCHAR(100) DEFAULT '5.0';
+ALTER TABLE auditbo MODIFY squale_version VARCHAR(100) DEFAULT '5.1';

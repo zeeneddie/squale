@@ -56,6 +56,6 @@ create sequence tag_sequence;
 ALTER TABLE auditbo ADD ver VARCHAR2(100);
 UPDATE auditbo SET ver = squale_version;
 UPDATE auditbo SET squale_version = null;
-ALTER TABLE auditbo MODIFY squale_version VARCHAR2(100) DEFAULT '5.0';
+ALTER TABLE auditbo MODIFY squale_version VARCHAR2(100) DEFAULT '5.1';
 UPDATE auditbo SET squale_version = ver;
 ALTER TABLE auditbo DROP COLUMN ver;
