@@ -121,7 +121,7 @@ public class AuditBO
     private String mType;
 
     /** La version de Squale ayant généré l'audit */
-    private double mSqualeVersion;
+    private String mSqualeVersion;
 
     /**
      * Résultats qualité générés durant l'audit
@@ -683,10 +683,10 @@ public class AuditBO
     }
 
     /**
-     * @hibernate.property name="squaleVersion" column="squale_version" type="double" update="true" insert="true"
+     * @hibernate.property name="squaleVersion" column="squale_version" type="string" update="true" insert="true"
      * @return la version de SQUALE
      */
-    public double getSqualeVersion()
+    public String getSqualeVersion()
     {
         return mSqualeVersion;
     }
@@ -694,7 +694,7 @@ public class AuditBO
     /**
      * @param pVersion la version de SQUALE
      */
-    public void setSqualeVersion( double pVersion )
+    public void setSqualeVersion( String pVersion )
     {
         mSqualeVersion = pVersion;
     }
@@ -702,9 +702,9 @@ public class AuditBO
     /**
      * @return la version courante de SQUALE
      */
-    public static double getCurrentSqualeVersion()
+    public static String getCurrentSqualeVersion()
     {
-        return Double.parseDouble( CommonMessages.getString( "audit.squale.version" ) );
+        return CommonMessages.getString( "audit.squale.version" ) ;
     }
 
     /**

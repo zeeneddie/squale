@@ -520,7 +520,7 @@ public abstract class BaseDispatchAction
             pForm.setCurrentAuditId( "" + curAudit.getID() );
             pForm.setAuditDate( SqualeWebActionUtils.getFormattedDate( pRequest.getLocale(), curAudit.getRealDate(),
                                                                        "date.format" ) );
-            pForm.setAuditSqualeVersion( "" + curAudit.getSqualeVersion() );
+            pForm.setAuditSqualeVersion( curAudit.getSqualeVersion() );
             pForm.setAuditName( pForm.getAuditDate() );
             if ( curAudit.getType().equals( AuditBO.MILESTONE ) )
             {

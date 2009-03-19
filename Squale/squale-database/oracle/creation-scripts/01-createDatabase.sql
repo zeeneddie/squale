@@ -208,7 +208,7 @@
         END_DATE date,
         MAX_FILE_SYSTEM_SIZE number(19,0),
         BEGINNING_DATE date,
-        squale_version double precision,
+        squale_version varchar2(100),
         primary key (AuditId)
     );
 

@@ -30,7 +30,7 @@
     <property name="endDate" column="END_DATE" update="true" type="timestamp" insert="true"/>
     <property name="maxFileSystemSize" column="MAX_FILE_SYSTEM_SIZE" update="true" type="long" insert="true"/>
     <property name="realBeginningDate" column="BEGINNING_DATE" update="true" type="timestamp" insert="true"/>
-    <property name="squaleVersion" column="squale_version" update="true" type="double" insert="true"/>
+    <property name="squaleVersion" column="squale_version" update="true" type="string" insert="true"/>
     <bag inverse="true" cascade="none" lazy="true" name="auditDisplayConfs">
       <key column="AuditId"/>
       <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO"/>

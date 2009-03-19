@@ -48,4 +48,8 @@ alter table Tag_Component
     add constraint FKE093EE5828B1F3C1 
     foreign key (TagId) 
     references Tag (TagId);
+
 -- #####################################################
+--Modifications for [#152]
+
+ALTER TABLE auditbo MODIFY squale_version VARCHAR(100) DEFAULT '5.0';

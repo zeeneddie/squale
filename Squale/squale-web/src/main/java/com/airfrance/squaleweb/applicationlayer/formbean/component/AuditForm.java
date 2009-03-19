@@ -75,7 +75,7 @@ public class AuditForm
     private boolean mEdited;
 
     /** La version de SQUALE */
-    private double mSqualeVersion = AuditDTO.getCurrentSqualeVersion();
+    private String mSqualeVersion = AuditDTO.getCurrentSqualeVersion();
 
     /** Le nom du serveur */
     private String mServerName;
@@ -416,7 +416,7 @@ public class AuditForm
     /**
      * @return la version de SQUALE
      */
-    public double getSqualeVersion()
+    public String getSqualeVersion()
     {
         return mSqualeVersion;
     }
@@ -424,7 +424,7 @@ public class AuditForm
     /**
      * @param pVersion la version de SQUALE
      */
-    public void setSqualeVersion( double pVersion )
+    public void setSqualeVersion( String pVersion )
     {
         mSqualeVersion = pVersion;
     }

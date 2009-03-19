@@ -50,4 +50,12 @@ alter table Tag_Component
 
 create sequence tagCategory_sequence;
 create sequence tag_sequence;
+
 -- #####################################################
+-- Modifications for [#152]
+ALTER TABLE auditbo ADD ver VARCHAR2(100);
+UPDATE auditbo SET ver = squale_version;
+UPDATE auditbo SET squale_version = null;
+ALTER TABLE auditbo MODIFY squale_version VARCHAR2(100) DEFAULT '5.0';
+UPDATE auditbo SET squale_version = ver;
+ALTER TABLE auditbo DROP COLUMN ver;

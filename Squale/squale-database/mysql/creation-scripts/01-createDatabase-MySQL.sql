@@ -420,7 +420,7 @@
         END_DATE datetime,
         MAX_FILE_SYSTEM_SIZE bigint,
         BEGINNING_DATE datetime,
-        squale_version double precision,
+        squale_version varchar(100),
         primary key (AuditId)
     ) type=InnoDB;
 

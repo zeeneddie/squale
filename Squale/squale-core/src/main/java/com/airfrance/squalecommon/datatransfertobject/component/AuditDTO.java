@@ -67,7 +67,7 @@ public class AuditDTO
     private String mType;
 
     /** La version de squale */
-    private double mSqualeVersion;
+    private String mSqualeVersion;
 
     /** Le nom du serveur de l'application */
     private String mServerName;
@@ -375,7 +375,7 @@ public class AuditDTO
     /**
      * @return la version de squale
      */
-    public double getSqualeVersion()
+    public String getSqualeVersion()
     {
         return mSqualeVersion;
     }
@@ -383,7 +383,7 @@ public class AuditDTO
     /**
      * @param pVersion la verision de squale
      */
-    public void setSqualeVersion( double pVersion )
+    public void setSqualeVersion( String pVersion )
     {
         mSqualeVersion = pVersion;
     }
@@ -391,9 +391,9 @@ public class AuditDTO
     /**
      * @return la version courante de SQUALE
      */
-    public static double getCurrentSqualeVersion()
+    public static String getCurrentSqualeVersion()
     {
-        return Double.parseDouble( CommonMessages.getString( "audit.squale.version" ) );
+        return CommonMessages.getString( "audit.squale.version" );
     }
 
     /**
