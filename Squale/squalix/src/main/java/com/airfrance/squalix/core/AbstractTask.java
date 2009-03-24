@@ -55,6 +55,7 @@ import com.airfrance.squalecommon.util.SqualeCommonUtils;
 import com.airfrance.squalecommon.util.mail.IMailerProvider;
 import com.airfrance.squalecommon.util.mail.MailerHelper;
 import com.airfrance.squalix.messages.Messages;
+import com.airfrance.squalix.messages.MessageMailManager;
 
 /**
  * Représente une façade permettant d'exécuter une tâche.<br>
@@ -410,11 +411,15 @@ public abstract class AbstractTask
                     String[] infos =
                         new String[] { mName, mApplication.getName(), mApplication.getServeurBO().getName(),
                             mProject.getName(), "" + mAudit.getId(), hour };
+                    
                     String object =
                         Messages.getString( "mail.sender.squalix.task", new String[] { mApplication.getName() } )
                             + Messages.getString( "mail.task.failed.object", infos );
-                    String content =
-                        Messages.getString( "mail.header" ) + Messages.getString( "mail.task.failed.content", infos );
+                    
+                    MessageMailManager mail = new MessageMailManager();
+                    mail.addContent( "mail.header", null );
+                    mail.addContent( "mail.task.failed.content", infos );
+                    String content=mail.getContent();
                     String dest = SqualeCommonConstants.ONLY_ADMINS;
                     IMailerProvider mailer = MailerHelper.getMailerProvider();
                     SqualeCommonUtils.notifyByEmail( mailer, null, dest, null, object, content, false );

@@ -5,7 +5,7 @@
 
 <!-- Configuration générale -->
 <!ELEMENT general
-	(commands,workspace,reportspath,reports)
+	(commands,workspace,reposdir,reportspath,reports)
 >
 
 <!-- Liste des commandes utilisées -->
@@ -26,6 +26,10 @@
 <!ELEMENT workspace
 	(#PCDATA)
 >
+<!-- Repository de McCabe (added for COBOL) -->
+<!ELEMENT reposdir
+	(#PCDATA)
+>
 <!-- Chemin absolu du fichier contenant les modèles de rapport -->
 <!ELEMENT reportspath
 	(#PCDATA)
@@ -44,7 +48,7 @@
 	(profile+)
 >
 <!ELEMENT profile
-	(parser,extensions,entetes?,parameters)
+	(parser,extensions,metrics_level?,entetes?,parameters)
 >
 <!ATTLIST profile
 name CDATA #REQUIRED
@@ -55,6 +59,10 @@ name CDATA #REQUIRED
 >
 <!-- Liste des extensions associées au profil, séparées par des virgules -->
 <!ELEMENT extensions
+	(#PCDATA)
+>
+<!-- Valeur du niveau de métrique à générer (entier de 1 à 5) -->
+<!ELEMENT metrics_level
 	(#PCDATA)
 >
 <!-- Liste des extensions des entetes à inclure dans le filtre -->

@@ -148,79 +148,77 @@ public class EclipseCompiler
     }
 
     /**
-     * Lance la compilation avec le plugin eclipse
+     * Launch Java Compiling with Eclipse bundle
      * 
-     * @throws Exception si erreur
-     * @return 0 si la compilation s'est bien effectuée
+     * @throws Exception in case of error
+     * @return 0 if the compilation has been successfully done
      */
     public int runCompilation()
         throws Exception
     {
-        // On crée la commande permettant de lancer le plugin de compilation d'eclipse
+        // Creation of the Eclipse compiling command
         String curPath;
-        // Valuer pour l'option -projects
+        File currentPath;
+        // Values for -projects option of Eclipse command
         String projectsOption = "";
 
-        // On parse le fichier de configuration de la compilation eclipse
+        // Parsing Eclipse compiling configuration file
         EclipseCompilingConfiguration conf = new EclipseCompilingConfiguration();
         conf.parse( new FileInputStream( new File( "config/eclipsecompiling-config.xml" ) ) );
 
-        // On supprime les dossiers dans le cas où l'audit se serait arrêté brutalement.
+        // Full clean of directories to prevent interaction with the previous tasks
+        File workspaceDir = new File( conf.getWorkspace() );
         FileUtility.deleteRecursively( new File( conf.getWorkspace() ) );
         FileUtility.deleteRecursively( conf.getEclipseHome() );
 
-        // On crée le workspace si il n'existe pas
-        File workspaceDir = new File( conf.getWorkspace() );
+        // Workspace directory creation
         workspaceDir.mkdirs();
 
-        // On Ajoute les droits en écriture sur les projets
-        // On construit en même temps la liste des chemins vers les projets
-        String[] rightCommmand = new String[2];
-        rightCommmand[0] = conf.getRightScript();
+        // Adding write rights on the project folders
+        // Collecting projects paths for the compiling command
         for ( int i = 0; i < projectList.size(); i++ )
         {
             curPath = ( (JWSADProject) projectList.get( i ) ).getPath();
-            rightCommmand[1] = curPath;
-            ProcessManager rightProcess = new ProcessManager( rightCommmand, null, workspaceDir );
-            rightProcess.setOutputHandler( this );
-            rightProcess.startProcess( this );
-            projectsOption += ( (JWSADProject) projectList.get( i ) ).getPath();
+            currentPath = new File( curPath );
+            FileUtility.setWriteRights( currentPath, "both" );
+            // Adding project path for the compiling command
+            projectsOption += curPath;
             projectsOption += ECLIPSE_PATH_SEP;
         }
 
-        // On construit le répertoire d'execution d'eclipse en copiant le répertoire
-        // d'installation d'eclipse minimal pour SQUALE (contenant l'exécutable et les plugins nécessaires
-        // à l'exécution du plugin)
+        // Creating Eclipse Base directory
         conf.getEclipseHome().mkdirs();
-        String[] copyCommand =
-            new String[] { conf.getCopyScript(), conf.getSqualeEclipsePlugins().getAbsolutePath(),
-                conf.getEclipseHome().getAbsolutePath() };
-        ProcessManager copyProcess = new ProcessManager( copyCommand, null, workspaceDir );
-        copyProcess.setOutputHandler( this );
-        copyProcess.startProcess( this );
-        // Et le répertoire des plugins sélectionné par l'utilisateur si différent
-        copyCommand[1] = ( (JWSADProject) projectList.get( 0 ) ).getBundleDir().getAbsolutePath();
-        copyCommand[2] = new File( conf.getEclipseHome(), "plugins" ).getAbsolutePath();
-        if ( !copyCommand[1].equals( copyCommand[2] ) )
-        {
-            copyProcess = new ProcessManager( copyCommand, null, workspaceDir );
-            copyProcess.setOutputHandler( this );
-            copyProcess.startProcess( this );
-        }
+        // Getting the path of the minimal Eclipse environment and the destination path
+        File squaleEclipsePluginsPath = new File( conf.getSqualeEclipsePlugins().getAbsolutePath() );
+        File eclipseHomePath = new File( conf.getEclipseHome().getAbsolutePath() );
+        // Copying the minimal Eclipse environment
+        LOGGER.info( "Minimal Eclipse environment install from : "
+            + conf.getSqualeEclipsePlugins().getAbsolutePath() );
+        FileUtility.copyDirContentIntoDir( squaleEclipsePluginsPath, eclipseHomePath );
 
-        // on récupère la version de java
+        // Getting the reference (archive file or directory) to the choosen Eclipse bundle
+        File userPluginsPath = new File( ( (JWSADProject) projectList.get( 0 ) ).getBundleDir().getAbsolutePath() );
+        // Getting the path to the plugins directory of the minimal Eclipse environment
+        File bundlePluginsPath = new File( new File( conf.getEclipseHome(), "plugins" ).getAbsolutePath() );
+
+        // Copying the given bundle into the Eclipse Environment
+        LOGGER.info( "Choosen Eclipse bundle install from : " + userPluginsPath );
+        FileUtility.copyDirContentIntoDir( userPluginsPath, bundlePluginsPath );
+
+        // Collecting Java version for compiling command
         String dialect = ( (JWSADProject) projectList.get( 0 ) ).getJavaVersion().replaceAll( "_", "." );
-        // On construit la liste des patterns à exclure
+        // Building Exclude patterns
         String excludedPatterns = buildExcludedPatterns();
-        // On construit la liste des jars de sun
+        // Building Sun JAR list
         String sunLibs =
             buildSunLibs( ( (JWSADProject) projectList.get( 0 ) ).getBootClasspath(),
                           ( (JWSADProject) projectList.get( 0 ) ).getJavaVersion() );
 
-        // On affecte les paramètres obligatoires
+        // Setting mandatory arguments
         List command = new ArrayList();
         command.add( conf.getCommand() );
-        // On ajoute la liste des options obligatoires en remplaçant les paramétres de substitution
+        // On ajoute la liste des options obligatoires en remplaçant les
+        // paramétres de substitution
         // (sous la forme [valeur])
         for ( int i = 0; i < conf.getOptions().size(); i++ )
         {
@@ -233,7 +231,8 @@ public class EclipseCompiler
             curOption = curOption.replaceAll( "\\[user_libs\\]", userLibsOption );
             curOption = curOption.replaceAll( "\\[workspace\\]", conf.getWorkspace() );
             curOption = curOption.replaceAll( "\\[excluded_patterns\\]", excludedPatterns );
-            // Particular case of advanced options which may contain more than one option
+            // Particular case of advanced options which may contain more than
+            // one option
             if ( curOption.matches( "\\[advanced_options\\]" ) )
             {
                 String[] advancedOptionsTab = advancedOptions.split( " " );
@@ -255,7 +254,8 @@ public class EclipseCompiler
 
         LOGGER.info( "On lance la compilation avec eclipse : " + printCommand( command ) );
 
-        // On demarre le processus et on retoune 0 si l'execution s'est bien déroulée
+        // On demarre le processus et on retourne 0 si l'execution s'est bien
+        // déroulée
         return compileProcess.startProcess( this );
     }
 
@@ -428,7 +428,8 @@ public class EclipseCompiler
             addCompilingRessources( new File( bootClasspathSplitting[i].trim() ), libs );
         }
 
-        // On crée le descripteur vers le dossier contenant les jars à ajouter pour la compilation
+        // On crée le descripteur vers le dossier contenant les jars à ajouter
+        // pour la compilation
         StringBuffer path = new StringBuffer( CompilingMessages.getString( "dir.root.java" ) );
         path.append( "/" );
         path.append( dialect );
@@ -568,13 +569,16 @@ public class EclipseCompiler
         String[] outputDirsSplitting = pOutputLog.split( ECLIPSE_PATH_SEP );
         for ( int i = 0; i < outputDirsSplitting.length; i++ )
         {
-            // If path name has spaces, we move all classes in an another directory
-            // without spaces (see CkjmTask) and we replace classes directory in tempory classpath
+            // If path name has spaces, we move all classes in an another
+            // directory
+            // without spaces (see CkjmTask) and we replace classes directory in
+            // tempory classpath
             if ( outputDirsSplitting[i].indexOf( ' ' ) != -1 )
             {
                 // List classes
                 File[] classesToMove = new File( outputDirsSplitting[i] ).listFiles();
-                // Change outputdir (unique name to be sure the classes are renamming)
+                // Change outputdir (unique name to be sure the classes are
+                // renamming)
                 String curDir = outputDirsSplitting[i];
                 outputDirsSplitting[i] = ( (JWSADProject) projectList.get( 0 ) ).getDestPath() + i;
                 // Replace it in classpath

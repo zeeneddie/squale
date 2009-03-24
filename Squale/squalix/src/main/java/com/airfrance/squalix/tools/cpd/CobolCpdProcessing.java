@@ -18,7 +18,6 @@
  */
 package com.airfrance.squalix.tools.cpd;
 
-
 /**
  * Classe réalisant la détection du copier-coller en Cobol.
  */
@@ -26,7 +25,7 @@ public class CobolCpdProcessing
     extends AbstractCpdProcessing
 {
     /** Seuil de détection de copier-coller */
-    private static final int COBOL_THRESHOLD = 100;
+    private static final int COBOL_THRESHOLD = 750;
 
     /**
      * {@inheritDoc}
@@ -47,7 +46,7 @@ public class CobolCpdProcessing
     @Override
     protected String[] getExtensions()
     {
-        return new String[] { ".cob", ".txt" };
+        return new String[] { ".cob", ".COB", ".txt", ".TXT" };
     }
 
 }

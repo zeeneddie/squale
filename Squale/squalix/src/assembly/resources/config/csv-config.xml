@@ -67,6 +67,7 @@
 			<field name="ivg" type="java.lang.Integer" column="6"></field>
 			<field name="filename" type="java.lang.String" column="7"></field>
 			<field name="startLine" type="java.lang.Integer" column="8"></field>
+			<field name="deadCode" type="java.lang.Integer" column="9"></field>
 		</fields>
 	</template>
 	

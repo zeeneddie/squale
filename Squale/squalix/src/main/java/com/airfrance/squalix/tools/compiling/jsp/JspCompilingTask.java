@@ -311,6 +311,10 @@ public class JspCompilingTask
                 throw new TaskException( new ConfigurationException( message ) );
             }
             j2eeProject.addJarDirToClasspath( dir );
+            // On supprime tous les fichiers nommées "log4j.properties" dans le projet
+            // pour éviter de générer des conflits avec le log4j de Squalix
+            FileUtility.deleteFilesinPath( new File ( viewPath ) , "log4j.properties" );
+            
             // On copie notre log4j.properties dans le WEB-INF/classes pour avoir une bonne configuration
             // des logs
             File log4j = new File( "config/log4j.properties" );

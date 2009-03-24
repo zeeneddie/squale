@@ -9,6 +9,7 @@
     </commands>
 <!-- ENV-MCCABE-WORKSPACE -->
     <workspace>${ENV-MCCABE-WORKSPACE}</workspace>
+    <reposdir>${ENV-MCCABE-REPOSDIR}</reposdir>
 <!-- ENV-MCCABE-LOG -->
     <logger>${ENV-MCCABE-LOG}</logger>
 <!-- ENV-MCCABE-LOG-ERROR -->
@@ -374,10 +375,35 @@
     </profile>
     <profile name="cobolIbm_341">
       <parser>cw_COBOL_inst</parser>
-      <extensions>cob, txt</extensions>
+      <extensions>cob, COB, txt, TXT</extensions>
+	  <metrics_level>4</metrics_level>
      <parameters>
         <parameter>-MODE</parameter>
         <parameter>VS3</parameter>
+        <parameter>-HALSTEAD</parameter>
+        <parameter>-APPEND</parameter>
+        <parameter>-KEEPCOMMENTS</parameter>
+        <parameter>-LITERALCALLS</parameter>
+        <parameter>-MAINFRAME</parameter>
+        <parameter>-MC</parameter>
+        <parameter>-PARSE_REPORT</parameter>
+        <parameter>-PATHVEC</parameter>
+        <parameter>-PROGSCOPE</parameter>
+        <parameter>-SRCREF</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-NONINST</parameter>
+      </parameters>
+      <reports>
+        <report>COBOL</report>
+      </reports>
+    </profile>
+    <profile name="cobolIbm_4">
+      <parser>cw_COBOL_inst</parser>
+      <extensions>cob, COB, txt, TXT</extensions>
+	  <metrics_level>4</metrics_level>
+     <parameters>
+        <parameter>-MODE</parameter>
+        <parameter>VS4</parameter>
         <parameter>-HALSTEAD</parameter>
         <parameter>-APPEND</parameter>
         <parameter>-KEEPCOMMENTS</parameter>

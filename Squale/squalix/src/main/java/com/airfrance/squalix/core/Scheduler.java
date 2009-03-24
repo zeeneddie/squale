@@ -44,6 +44,7 @@ import com.airfrance.squalecommon.daolayer.result.MarkDAOImpl;
 import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
 import com.airfrance.squalecommon.daolayer.result.rulechecking.RuleCheckingTransgressionDAOImpl;
 import com.airfrance.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
+import com.airfrance.squalecommon.datatransfertobject.config.ServeurDTO;
 import com.airfrance.squalecommon.datatransfertobject.result.SqualeReferenceDTO;
 import com.airfrance.squalecommon.datatransfertobject.transform.component.AuditTransform;
 import com.airfrance.squalecommon.datatransfertobject.transform.config.AuditFrequencyTransform;
@@ -52,7 +53,9 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Audit
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.roi.RoiMetricsBO;
 import com.airfrance.squalecommon.enterpriselayer.facade.config.SqualixConfigFacade;
+import com.airfrance.squalecommon.enterpriselayer.facade.config.ServeurFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.quality.SqualeReferenceFacade;
+
 import com.airfrance.squalecommon.util.SqualeCommonConstants;
 import com.airfrance.squalecommon.util.SqualeCommonUtils;
 import com.airfrance.squalecommon.util.mail.IMailerProvider;
@@ -60,6 +63,7 @@ import com.airfrance.squalecommon.util.mail.MailerHelper;
 import com.airfrance.squalix.core.exception.ConfigurationException;
 import com.airfrance.squalix.core.purge.Purge;
 import com.airfrance.squalix.messages.Messages;
+import com.airfrance.squalix.messages.MessageMailManager;
 import com.airfrance.squalix.stats.ComputeStats;
 import com.airfrance.squalix.util.sourcesrecovering.SourcesRecoveringOptimisation;
 import com.airfrance.squalix.util.stoptime.StopTimeHelper;
@@ -276,12 +280,16 @@ public class Scheduler
             {
                 // On envoie un mail pour signaler qu'un audit est en cours sur l'application
                 String sender = Messages.getString( "mail.sender.squalix" );
-                String header = Messages.getString( "mail.header" );
                 String object = sender + Messages.getString( "mail.running_audit.exists.object" );
-                String content = header + Messages.getString( "mail.running_audit.exists.content" );
+                
+                MessageMailManager mail = new MessageMailManager();
+                mail.addContent( "mail.header", null );
+                mail.addContent( "mail.running_audit.exists.content" , null );
+                String content = mail.getContent();
+                
                 String dest = SqualeCommonConstants.ONLY_ADMINS;
                 // On envoir le mail qu'aux abonnés
-                SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object,
+                SqualeCommonUtils.notifyByEmail( mMailer, null, dest, null, object,
                                                  content, false );
             }
             // Exécuter les audits
@@ -310,9 +318,12 @@ public class Scheduler
             // On n'a pas pu effectuer la purge correctement
             // On prévient les admins
             String sender = Messages.getString( "mail.sender.squalix" );
-            String header = Messages.getString( "mail.header" );
             String object = sender + Messages.getString( "mail.rotation.audit.shutDown.object" );
-            String content = header + Messages.getString( "mail.rotation.audit.shutDown.content" );
+            
+            MessageMailManager mail = new MessageMailManager();
+            mail.addContent( "mail.header", null );
+            mail.addContent( "mail.rotation.audit.shutDown.content", null );
+            String content = mail.getContent();
             SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content,
                                              false );
         }
@@ -352,13 +363,15 @@ public class Scheduler
                 ApplicationDAOImpl.getInstance().save( mSession, appli );
                 // On envoit un mail d'information aux managers de l'application et aux admins SQUALE
                 String sender = Messages.getString( "mail.sender.squalix" );
-                String header = Messages.getString( "mail.header" );
                 String object = sender + Messages.getString( "mail.application_frequency.changed.object" );
-                String content =
-                    header
-                        + Messages.getString( "mail.application_frequency.changed.content", new String[] {
-                            appli.getName(), "" + oldFreq, "" + appli.getAuditFrequency() } );
-                String dest = SqualeCommonConstants.ONLY_ADMINS;
+                
+                MessageMailManager mail = new MessageMailManager();
+                mail.addContent( "mail.header", null );
+                mail.addContent( "mail.application_frequency.changed.content"
+                                            , new String[] { appli.getName(), 
+                                                            "" + oldFreq,
+                                                            "" + appli.getAuditFrequency() } );
+                String content = mail.getContent();
                 SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.MANAGERS_AND_ADMINS, null,
                                                  object, content, false );
             }
@@ -407,10 +420,16 @@ public class Scheduler
         {
             // On a pas pu trouver l'audit de rotation des partitions,
             // On en informe les admins
-            String header = Messages.getString( "mail.header" );
+            ServeurDTO serveur = new ServeurDTO();
+            serveur = ServeurFacade.getServeur( mSiteId );
             String sender = Messages.getString( "mail.sender.squalix" );
-            String object = sender + Messages.getString( "mail.rotation.audit.unknown.object" );
-            String content = header + Messages.getString( "mail.rotation.audit.unknown.content" );
+            String object = sender + Messages.getString( "mail.rotation.audit.unknown.object" , new String[] { serveur.getName() } );
+            
+            MessageMailManager mail = new MessageMailManager();
+            mail.addContent( "mail.header", null );
+            mail.addContent( "mail.rotation.audit.unknown.content", null );
+            String content = mail.getContent();
+          
             SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content,
                                              false );
         }
@@ -545,11 +564,13 @@ public class Scheduler
         String content = "";
         boolean sendMail = false;
         String sender = Messages.getString( "mail.sender.squalix" );
-        String header = Messages.getString( "mail.header" );
+        MessageMailManager mail = new MessageMailManager();
         if ( pStatus == AuditBO.TERMINATED )
         {
             object = sender + Messages.getString( "mail.audit.terminated.object", pInfos );
-            content = header + Messages.getString( "mail.audit.terminated.content", pInfos );
+            mail.addContent( "mail.header", null );
+            mail.addContent( "mail.audit.terminated.content", pInfos );
+            content = mail.getContent();
             dest = SqualeCommonConstants.MANAGERS_AND_READERS;
             sendMail = true;
         }
@@ -560,7 +581,9 @@ public class Scheduler
             if ( pStatus == AuditBO.FAILED )
             {
                 object = sender + Messages.getString( "mail.audit.failed.object", pInfos );
-                content = header + Messages.getString( "mail.audit.failed.content", pInfos );
+                mail.addContent( "mail.header", null );
+                mail.addContent( "mail.audit.failed.content", pInfos );
+                content = mail.getContent();
                 dest = SqualeCommonConstants.MANAGERS_AND_ADMINS;
                 sendMail = true;
             }
@@ -571,7 +594,9 @@ public class Scheduler
                 if ( pStatus == AuditBO.PARTIAL )
                 {
                     object = sender + Messages.getString( "mail.audit.partial.object", pInfos );
-                    content = header + Messages.getString( "mail.audit.partial.content", pInfos );
+                    mail.addContent( "mail.header", null );
+                    mail.addContent( "mail.audit.partial.content", pInfos );
+                    content = mail.getContent();
                     dest = SqualeCommonConstants.MANAGERS_AND_ADMINS;
                     sendMail = true;
                 }
@@ -847,7 +872,7 @@ public class Scheduler
         String object = "";
         String content = "";
         String sender = Messages.getString( "mail.sender.squalix" );
-        String header = Messages.getString( "mail.header" );
+        MessageMailManager mail = new MessageMailManager();
         // sur le site maitre
         if ( Messages.getString( "admin.mastersite" ).equalsIgnoreCase( mSiteId + "" ) )
         {
@@ -889,7 +914,9 @@ public class Scheduler
             {
                 result = false;
                 object = sender + Messages.getString( "mail.audits.notDone.object" );
-                content = header + Messages.getString( "mail.audits.notDone.content" );
+                mail.addContent( "mail.header", null );
+                mail.addContent( "mail.audits.notDone.content", null);
+                content = mail.getContent();
                 SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object,
                                                  content, false );
             } // sinon le script de rotation a été exécutée, on peut continuer normalement
@@ -899,7 +926,9 @@ public class Scheduler
         if ( result )
         {
             object = sender + Messages.getString( "mail.rotation.done.object" );
-            content = header + Messages.getString( "mail.rotation.one.content" );
+            mail.addContent( "mail.header", null );
+            mail.addContent( "mail.rotation.one.content", null );
+            content = mail.getContent();
             SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content,
                                              false );
             AuditDAOImpl.getInstance().reportRotationAudit( mSession );

@@ -242,7 +242,14 @@ public class McCabePCFFile
         writer.newLine();
         writer.write( McCabeMessages.getString( "pcf.header.misc2" ) );
         writer.newLine();
-        writer.newLine();
+        //Récupération du niveau de métrique et insertion s'il existe
+        String lMetrics_level = mConfig.getMetrics_level();
+        if ( lMetrics_level != null )
+        {
+            writer.write( "METRICS_LEVEL " + lMetrics_level );
+            writer.newLine();
+        }
+       
         // Ecriture de la liste des fichiers avec les paramètres
         Iterator it = mFilesList.iterator();
         while ( it.hasNext() )

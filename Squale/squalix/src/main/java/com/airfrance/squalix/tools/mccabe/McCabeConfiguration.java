@@ -74,6 +74,11 @@ public class McCabeConfiguration
      * Espace de travail autorisé (voire réservé) à McCabe : il permet d'accueillir tous les fichiers générés par McCabe
      */
     private File mWorkspace = null;
+    
+    /**
+     * Repository commun de McCabe : il permet de spécifier des métriques spécifiques (added for COBOL)
+     */
+    private File mReposDir = null;
 
     /**
      * Le fichier permettant de logger les traces de McCabe
@@ -111,6 +116,11 @@ public class McCabeConfiguration
      */
     private String mExtensions[] = null;
 
+    /**
+     * Niveau de métrique pour l'analyse
+     */
+    private String mMetricsLevel = null;
+    
     /**
      * Extensions des entêtes à include dans le filtre 'myheader.dat' (C++ uniquement)
      */
@@ -258,6 +268,17 @@ public class McCabeConfiguration
     {
         return mWorkspace;
     }
+    
+    /**
+     * Access method for the mReposdir property.
+     * 
+     * @return the current value of the mReposdir property
+     * 
+     */
+    public File getReposDir()
+    {
+        return mReposDir;
+    }
 
     /**
      * Access method for the mReportsPath property.
@@ -314,6 +335,16 @@ public class McCabeConfiguration
         return mExtensions;
     }
 
+    /**
+     * Retourne la valeur du niveau de métrique pour l'analyse
+     * 
+     * @return la valeur sous forme de String
+     */
+    public String getMetrics_level()
+    {
+        return mMetricsLevel;
+    }
+    
     /**
      * Retourne la liste des extensions des entêtes à inclure dans le filtre.
      * 
@@ -375,6 +406,13 @@ public class McCabeConfiguration
                                                                                                  McCabeMessages.getString( "configuration.general.workspace" ) ).getFirstChild().getNodeValue().trim() ) );
         // On effectue le nettoyage dans le cas où la tâche s'est arrêtée brusquement:
         deleteOldSubWorkspace( pConfiguration.mWorkspace );
+        
+        // Repository McCabe pour les metrics customs (added for COBOL)
+        pConfiguration.mReposDir =
+            new File(
+                      ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
+                                                                                                 pNode,
+                                                                                                 McCabeMessages.getString( "configuration.general.reposdir" ) ).getFirstChild().getNodeValue().trim() ) );
         // Chemin du fichier contenant les rapports
         pConfiguration.mReportsPath =
             new File(
@@ -518,6 +556,14 @@ public class McCabeConfiguration
         // On convertit la liste des extensions en tableau de String
         pConfiguration.mExtensions = (String[]) extensions.toArray( type );
 
+        // Récupération du niveau de métrique
+        Node metricslevelNode = 
+            ConfigUtility.getNodeByTagName( pNode, McCabeMessages.getString( "configuration.profile.metrics_level" ) );
+        if (metricslevelNode != null)
+        {
+            pConfiguration.mMetricsLevel = (String) metricslevelNode.getFirstChild().getNodeValue().trim();
+        }
+        
         // Liste des extensions des entêtes
         Node entetesNode =
             ConfigUtility.getNodeByTagName( pNode, McCabeMessages.getString( "configuration.profile.entetes" ) );

@@ -27,6 +27,7 @@ import org.apache.commons.logging.LogFactory;
 import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO;
 import com.airfrance.squalix.util.parser.CobolParser;
 import com.airfrance.squalix.util.repository.ComponentRepository;
@@ -81,17 +82,23 @@ public class CobolMcCabeAdaptator
 
         // enregistrement du programme si non présent en base
         ClassBO lPrgBO = mParser.getProgram( lPrgAndModuleNames.get( 0 ), lFileName );
+        // récupération du parent
+        PackageBO lPkgBO = (PackageBO) lPrgBO.getParent();
+        // enregistrement en base du package parent si non présent en base
+        PackageBO persistlPkgBO = (PackageBO) mRepository.persisteComponent( lPkgBO );
+        // Mise en place de la relation
+        lPrgBO.setParent( persistlPkgBO );
         // enregistrement en base
-        mRepository.persisteComponent( lPrgBO );
+        ClassBO persistlPrgBO = (ClassBO) mRepository.persisteComponent( lPrgBO );
 
         // enregistrement du module si non présent en base
-        MethodBO lModuleBO = mParser.getModule( lPrgAndModuleNames.get( 1 ), lFileName, lPrgBO );
+        MethodBO lModuleBO = mParser.getModule( lPrgAndModuleNames.get( 1 ), lFileName, persistlPrgBO );
         lModuleBO.setStartLine( Integer.valueOf( pModuleResult.getStartLine() ).intValue() );
         // enregistrement en base
-        mRepository.persisteComponent( lModuleBO );
+        MethodBO persistlModuleBO = (MethodBO) mRepository.persisteComponent( lModuleBO );
 
         // association des résultats au module avant enregistrement
-        pModuleResult.setComponent( lModuleBO );
+        pModuleResult.setComponent( persistlModuleBO );
 
         return lPrgAndModuleNames.get( 0 );
     }

@@ -37,12 +37,14 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Chmod;
+import org.apache.tools.ant.taskdefs.ExecuteOn;
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
 import org.codehaus.plexus.util.PathTool;
 
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+
 
 /**
  * Manipule les fichiers et répertoires d'analyse
@@ -554,8 +556,8 @@ public class FileUtility
 
     /**
      * Copy pSrc into pDest
-     * <li>If pSrc is a <b>directory</b>, the directory is copied into pDest (to copy the content of the directory,
-     * use use copyContentIntoDir instead)
+     * <li>If pSrc is a <b>directory</b>, the directory is copied into pDest (to copy the content of the directory, use
+     * use copyDirContentIntoDir instead)
      * <li>If pSrc is a <b>file</b>, the file is copied info pDest.
      * 
      * @param pSrc source file (compressed or not) or source directory
@@ -591,9 +593,7 @@ public class FileUtility
 
     /**
      * Copy pSrcDir content into pDest
-     * <li>If pSrcDir is a <b>directory</b>, the directory is copied into pDest (to copy the content of the directory,
-     * use use copyContentIntoDir instead)
-     * 
+     * The content of pSrcDir is copied into the pDest directory
      * @param pSrcDir source directory
      * @param pDest target directory
      * @throws IOException si erreur de flux
@@ -743,6 +743,85 @@ public class FileUtility
             cutIncludedFile.add( cut );
         }
         return cutIncludedFile;
+    }
+
+    /**
+     * Add write rights to files,subdirectories or both according to the pMode from the pBaseDir
+     * (pBaseDir rights are not modified)
+     * @param pBaseDir Base Directory in which the write rights will be added
+     * @param pMode -> file,dir,both
+     */
+    public static void setWriteRights(File pBaseDir, String pMode)
+    	throws Exception
+    {
+    	Chmod mchmod = new Chmod();
+    	mchmod.setProject(new Project());
+    	mchmod.setDir(pBaseDir);
+    	ExecuteOn.FileDirBoth mMode = new ExecuteOn.FileDirBoth();
+    	mMode.setValue(pMode);
+    	mchmod.setType(mMode);
+    	mchmod.setIncludes("**/*");
+    	mchmod.setPerm("u+rw");
+    	mchmod.execute();
+}
+    
+    /**
+     * Supprime tous les fichiers nommé pFileName dans le répertoire pBaseDir et ses sous-répertoires
+     * @param pBaseDir le répertoire de recherche
+     * @param pFileName le nom de fichier à supprimer
+     * @return true si tous les occurences du fichier ont été supprimés, false sinon
+     * @throws Exception
+     */
+    public static Boolean deleteFilesinPath(File pBaseDir, String pFileName)
+        throws Exception
+    {
+        Collection listFilesToRemove = findFiles( pBaseDir, pFileName);
+        Integer objectif = listFilesToRemove.size();
+        Integer resultat = 0;
+        Iterator it = listFilesToRemove.iterator();
+        while ( it.hasNext() )
+        {
+            File current = (File) it.next();
+            Boolean result = current.delete();
+            if ( result.booleanValue() )
+            {
+                resultat++;
+            }
+        }
+        Boolean out = false;
+        if (objectif.equals( resultat ))
+        {
+            out=true;
+        }
+        return out;      
+    }
+    
+    /**
+     * recherche tous les fichiers nommés pFileName dans le répertoire pBasedir et ses sous-répertoires
+     * @param pDirectory le répertoire de recherche
+     * @param pFileName le nomde fichier à rechercher
+     * @return la liste des fichiers recherchés
+     */
+    public static Collection findFiles( File pDirectory, String pFileName )
+    {
+        Collection result = new ArrayList();
+        File[] files = pDirectory.listFiles();
+        if ( files != null )
+        {
+            for ( int i = 0; i < files.length; i++ )
+            {
+                File file = files[i];
+                if ( file.isDirectory() )
+                {
+                    result.addAll( findFiles( file, pFileName ) );
+                }
+                else if ( file.getName().equalsIgnoreCase( pFileName ) )
+                {
+                    result.add( file );
+                }
+            }
+        }
+        return result;
     }
 
 }

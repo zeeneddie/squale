@@ -31,6 +31,15 @@
 			<lineEnding>unix</lineEnding>
 			<fileMode>755</fileMode>
 		</fileSet>
+		<!--  log4j configuration file needed by tools (JSP compiling, etc.) -->
+		<fileSet>
+			<directory>${basedir}/src/main/resources</directory>
+			<includes>
+				<include>log4j.properties</include>
+			</includes>
+			<outputDirectory>/config</outputDirectory>
+			<filtered>true</filtered>
+		</fileSet>
 	</fileSets>
 	<dependencySets>
 		<dependencySet>

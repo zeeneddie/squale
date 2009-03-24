@@ -184,7 +184,7 @@ public abstract class AbstractMcCabeTask
         setParser();
         setPersistor();
         LOGGER.info( McCabeMessages.getString( "logs.initialized" ) + mProject.getParent().getName() + " - "
-                     + mProject.getName() );
+            + mProject.getName() );
     }
 
     /**
@@ -276,16 +276,13 @@ public abstract class AbstractMcCabeTask
         bw.write( McCabeMessages.getString( "spc.header" ) );
         bw.write( pConfiguration.getReportsPath().getAbsolutePath() );
         bw.close();
-        File repository =
-            new File( pConfiguration.getSubWorkspace().getAbsolutePath() + File.separator
-                + McCabeMessages.getString( "file.user.def.header" ) );
-        repository.mkdir();
+
         String userFileName =
             pConfiguration.getSubWorkspace().getAbsolutePath() + File.separator
                 + McCabeMessages.getString( "user_def.name" );
         bw = new BufferedWriter( new FileWriter( userFileName ) );
         bw.write( McCabeMessages.getString( "file.user.def.header" ) );
-        bw.write( repository.getAbsolutePath() );
+        bw.write( pConfiguration.getReposDir().getAbsolutePath() );
         bw.newLine();
         bw.close();
     }
@@ -368,7 +365,7 @@ public abstract class AbstractMcCabeTask
      * @throws Exception si erreur
      */
     protected abstract void parseReport( final String pReport )
-    throws Exception ;
+        throws Exception;
 
     /**
      * Détermination du fichier de rapport
@@ -466,17 +463,17 @@ public abstract class AbstractMcCabeTask
      */
     public abstract void setParser();
 
-
     /**
      * Positionne la classe de persistance.
      */
-    protected abstract void setPersistor() throws Exception ;
+    protected abstract void setPersistor()
+        throws Exception;
 
     /**
      * Calcule et enregistre les métriques McCabe de niveau projet.
      */
-    public abstract void persistProjectResult() ;
-    
+    public abstract void persistProjectResult();
+
     /**
      * @see com.airfrance.squalix.util.process.ProcessOutputHandler#processOutput(java.lang.String)
      */
