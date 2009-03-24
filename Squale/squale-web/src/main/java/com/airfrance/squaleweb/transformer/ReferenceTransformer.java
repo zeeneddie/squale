@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.Set;
 
 import com.airfrance.squalecommon.datatransfertobject.component.AuditGridDTO;
 import com.airfrance.squalecommon.datatransfertobject.result.ReferenceFactorDTO;
@@ -32,6 +34,7 @@ import com.airfrance.welcom.struts.bean.WActionForm;
 import com.airfrance.welcom.struts.transformer.WITransformer;
 import com.airfrance.welcom.struts.transformer.WTransformerException;
 import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import com.airfrance.squaleweb.resources.WebMessages;
 
 /**
  * Transformation d'une référence
@@ -102,9 +105,33 @@ public class ReferenceTransformer
             ReferenceFactorDTO dto = (ReferenceFactorDTO) values.next();
             pForm.addFactor( objToForm( dto, dto.getValue() ) );
         }
-        pForm.setNumberOfClasses( Integer.toString( pReference.getClassNumber() ) );
-        pForm.setNumberOfCodeLines( Integer.toString( pReference.getCodeLineNumber() ) );
-        pForm.setNumberOfMethods( Integer.toString( pReference.getMethodNumber() ) );
+        
+        //Traitement des données de volumétrie avec modification du libellé suivant le langage de programmation
+        String programmingLanguage = pReference.getProgrammingLanguage();
+        TreeMap<String,Integer> volumeData = new TreeMap<String,Integer>();
+        TreeMap<String,Integer> languageVolumeData = new TreeMap<String,Integer>();
+        volumeData.put("mccabe.project.sloc", pReference.getCodeLineNumber() );
+        volumeData.put("mccabe.project.numberOfClasses", pReference.getClassNumber() );
+        volumeData.put("mccabe.project.numberOfMethods", pReference.getMethodNumber() );
+        // Modification des valeurs de la HashMap suivant le langage
+        Set keys = volumeData.keySet();
+        Iterator it = keys.iterator();
+        //Parcours des clés et modification
+        while (it.hasNext())
+        {
+        	Object key = it.next();
+        	String skey = key.toString();
+        	boolean verif = WebMessages.existString(skey + "." + programmingLanguage);
+        	if ( (programmingLanguage!=null) & (verif) )
+        	{
+        		languageVolumeData.put(skey + "." + programmingLanguage, volumeData.get(key) );
+        	}
+        	else
+        	{
+        		languageVolumeData.put(skey, volumeData.get(key));
+        	}
+        }
+        pForm.setVolumetry(languageVolumeData);
     }
 
     /**
@@ -142,25 +169,32 @@ public class ReferenceTransformer
         // Traitement de chacune des mesures
         if ( projectMeasures != null )
         {
+        	TreeMap<String,String> volumeData = new TreeMap<String,String>();
             // On protège le code dans le cas où tous les calculs n'auraient pas été fait
-            int index = measuresKeys.indexOf( "mccabe.project.numberOfClasses" );
+        	int index = measuresKeys.indexOf( "rsm.project.sloc" );
+        	if ( index != -1 )
+        	{
+        		Integer nbLOC = (Integer) projectMeasures.get( index );
+        		volumeData.put("mccabe.project.sloc", Integer.toString(nbLOC));
+        	}
+        	else if ( (index = measuresKeys.indexOf( "mccabe.project.projectnl" ) )!= -1 )
+        	{
+        		Integer nbLOC = (Integer) projectMeasures.get( index );
+        		volumeData.put("mccabe.project.sloc", Integer.toString(nbLOC));
+        	}    
+            index = measuresKeys.indexOf( "mccabe.project.numberOfClasses" );
             if ( index != -1 )
             {
                 Integer nbClasses = (Integer) projectMeasures.get( index );
-                pForm.setNumberOfClasses( nbClasses + "" );
-            }
-            index = measuresKeys.indexOf( "rsm.project.sloc" );
-            if ( index != -1 )
-            {
-                Integer nbLOC = (Integer) projectMeasures.get( index );
-                pForm.setNumberOfCodeLines( nbLOC + "" );
+                volumeData.put("mccabe.project.sloc", Integer.toString(nbClasses));
             }
             index = measuresKeys.indexOf( "mccabe.project.numberOfMethods" );
             if ( index != -1 )
             {
                 Integer nbMethods = (Integer) projectMeasures.get( index );
-                pForm.setNumberOfMethods( nbMethods + "" );
+                volumeData.put("mccabe.project.sloc", Integer.toString(nbMethods));
             }
+            pForm.setVolumetry(volumeData);
         }
     }
 

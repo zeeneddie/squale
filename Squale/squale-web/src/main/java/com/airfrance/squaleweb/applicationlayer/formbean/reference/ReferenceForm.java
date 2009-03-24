@@ -20,6 +20,7 @@ package com.airfrance.squaleweb.applicationlayer.formbean.reference;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.TreeMap;
 
 import com.airfrance.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
 
@@ -58,24 +59,14 @@ public class ReferenceForm
     private Collection mFactors = new ArrayList();
 
     /**
+     * Liste des données de volumétrie du référentiel
+     */
+    private TreeMap<String,Integer> mVolumetry = new TreeMap<String,Integer>();
+    
+    /**
      * Technologie de la référence
      */
     private String mTechnology;
-
-    /**
-     * Nombre de classes de la référence
-     */
-    private String mNumberOfClasses;
-
-    /**
-     * Nombre de méthodes de la référence
-     */
-    private String mNumberOfMethods;
-
-    /**
-     * Nombre de lignes de codes
-     */
-    private String mNumberOfCodeLines;
 
     /**
      * Nom du la référence
@@ -86,6 +77,17 @@ public class ReferenceForm
      * Spécifie si la référence est cachée
      */
     private boolean mHidden = false;
+    
+    /** Attribut inutilisé pour éviter des erreurs **/
+    private String mValue="";
+    
+    /**
+     * @return une valeur vide
+     */
+    public String getValue()
+    {
+    	return mValue;
+    }
 
     /**
      * @return le nom
@@ -93,14 +95,6 @@ public class ReferenceForm
     public String getName()
     {
         return mName;
-    }
-
-    /**
-     * @return le nombre de classes
-     */
-    public String getNumberOfClasses()
-    {
-        return mNumberOfClasses;
     }
 
     /**
@@ -112,22 +106,6 @@ public class ReferenceForm
     }
 
     /**
-     * @return le nombre de méthodes
-     */
-    public String getNumberOfMethods()
-    {
-        return mNumberOfMethods;
-    }
-
-    /**
-     * @return le nombre de lignes de codes
-     */
-    public String getNumberOfCodeLines()
-    {
-        return mNumberOfCodeLines;
-    }
-
-    /**
      * @param pName le nom
      */
     public void setName( String pName )
@@ -136,35 +114,11 @@ public class ReferenceForm
     }
 
     /**
-     * @param pNumberOfClasses le nombre de classes
-     */
-    public void setNumberOfClasses( String pNumberOfClasses )
-    {
-        mNumberOfClasses = pNumberOfClasses;
-    }
-
-    /**
      * @param pTechnology la technologie
      */
     public void setTechnology( String pTechnology )
     {
         mTechnology = pTechnology;
-    }
-
-    /**
-     * @param pNumberOfMethods le nombre de méthodes
-     */
-    public void setNumberOfMethods( String pNumberOfMethods )
-    {
-        mNumberOfMethods = pNumberOfMethods;
-    }
-
-    /**
-     * @param pNumberOfCodeLines le nombre de lignes de code
-     */
-    public void setNumberOfCodeLines( String pNumberOfCodeLines )
-    {
-        mNumberOfCodeLines = pNumberOfCodeLines;
     }
 
     /**
@@ -254,5 +208,25 @@ public class ReferenceForm
     {
         return mState;
     }
-
+    
+    /**
+     * Méthode renvoyant les données de volumétrie
+     * @return les données (Nb Classes,Méthodes,etc...)
+     */
+    public TreeMap getVolumetry()
+    {
+    	return mVolumetry;
+    }
+    
+    public void setVolumetry(TreeMap pVolumetry)
+    {
+    	mVolumetry = pVolumetry;
+    }
+    
+    public Integer getVolume(String pKey)
+    {
+    	Integer volume = mVolumetry.get(pKey);
+    	return volume;
+    }
+    
 }

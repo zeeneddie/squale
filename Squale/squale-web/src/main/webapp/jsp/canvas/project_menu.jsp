@@ -9,6 +9,7 @@
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectListForm" %>
 <%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm" %>
 
@@ -28,6 +29,7 @@
 <bean:define id="currentAuditId" name="formForThisPage" property="currentAuditId" type="String" />
 <bean:define id="previousAuditId" name="formForThisPage" property="previousAuditId" />
 <bean:define id="comparisonAvailable" name="formForThisPage" property="comparableAudits" />
+<bean:define id="topMenu" name="formForThisPage" property="topMenu" type="java.util.HashMap" />
 	
 <% String paramsLink = "&currentAuditId=" + currentAuditId +"&previousAuditId=" + previousAuditId ; %>	
 	
@@ -51,11 +53,12 @@
 		<af:menuItem key="menu.histo" color="2" />
 
 		<af:menuItem key="menu.project.top" color="2">
-			<logic:iterate name="<%=SqualeWebConstants.TOP_KEY%>" scope="session" id="kind" >
+			<% String language = (String) request.getAttribute("language"); %>
+			<logic:iterate name="topMenu" id="kind" >
 			   <bean:define id="kindKey" name="kind" property="key" type="String"/>
 		       <af:menuItem key="<%=kindKey%>" color="2">
 		       		<logic:iterate id="kindValue" name="kind" property="value" type="String">
-						<af:menuItem key="<%=kindValue%>" color="2" action="<%=\"top.do?action=display&componenttype=\"+kindKey+\"&tre=\"+kindValue+\"&projectId=\"+projectId+paramsLink%>"/>
+						<af:menuItem key="<%=kindValue%>" color="2" action="<%=\"top.do?action=display&componenttype=\"+kindKey+\"&tre=\"+kindValue+\"&language=\"+language+\"&projectId=\"+projectId+paramsLink%>"/>
 		       		</logic:iterate>
 		       </af:menuItem>
 			</logic:iterate>

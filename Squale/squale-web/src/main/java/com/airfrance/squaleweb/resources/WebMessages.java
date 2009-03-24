@@ -112,7 +112,41 @@ public class WebMessages
         }
         return value;
     }
-
+    
+    /**
+     * Retourne True si la clé demandée est présente et si elle contient bien un message
+     * 
+     * @param pKey nom de la clé
+     * @return true si un message est présent
+     */
+    public static Boolean existString( String pKey )
+    {
+    	Boolean valid = false;
+    	String value=null;
+    	Locale defaut = new Locale ("");
+    	Locale.setDefault( defaut );
+    	ResourceBundle bundle = ResourceBundle.getBundle( BUNDLE_NAME, defaut );
+    	try
+    	{
+    		value = bundle.getString(pKey);
+    		if ( value==null )
+        	{
+        		value = DataBaseMessages.getMessage( defaut , pKey);
+        	}
+    	}
+    	catch ( MissingResourceException e )
+    	{
+    		valid=false;
+    	}
+    	if (value!=null)
+    	{
+    		valid=true;
+    	}
+    	
+    	return valid;
+    }
+    
+    
     /**
      * Retourne la chaîne de caractère identifiée par la clé.
      * 

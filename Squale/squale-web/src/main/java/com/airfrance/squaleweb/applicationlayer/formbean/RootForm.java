@@ -20,6 +20,7 @@ package com.airfrance.squaleweb.applicationlayer.formbean;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
@@ -75,6 +76,9 @@ public class RootForm
     /** Liste des tags éventuels associés à l'application */
     protected Collection<TagDTO> mTags;
 
+    /** Map du TopMenu pour le projet courant*/
+    protected HashMap mTopMenu = null;
+    
     /**
      * @return l'id de l'application
      */
@@ -271,6 +275,7 @@ public class RootForm
         mNumberOfChildren = pForm.getNumberOfChildren();
         mAuditSqualeVersion = pForm.getAuditSqualeVersion();
         mComparableAudits = pForm.getComparableAudits();
+        mTopMenu = pForm.getTopMenu();
     }
 
     /**
@@ -363,6 +368,8 @@ public class RootForm
         // L'id du projet
         setProjectId( "" );
         setProjectName( "" );
+        // Le menu Top du projet
+        setTopMenu ( null );
         // Les audits
         resetAudits();
     }
@@ -399,6 +406,22 @@ public class RootForm
     public void setTags( Collection<TagDTO> pTags )
     {
         mTags = pTags;
+    }
+	
+	/**
+     * @return le TopMenu du projet
+     */
+    public HashMap getTopMenu()
+    {
+        return mTopMenu;
+    }
+
+    /**
+     * @param pTopMenu le TopMenu du projet
+     */
+    public void setTopMenu( HashMap pTopMenu )
+    {
+        mTopMenu = pTopMenu;
     }
     
     /**

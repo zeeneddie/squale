@@ -28,6 +28,8 @@ import com.airfrance.welcom.struts.bean.WActionForm;
 import com.airfrance.welcom.struts.transformer.WITransformer;
 import com.airfrance.welcom.struts.transformer.WTransformerException;
 import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import com.airfrance.squaleweb.transformer.ResultListTransformer;
 
 /**
  * Conversion de la synthèse d'un projet
@@ -68,8 +70,9 @@ public class ProjectSummaryTransformer
         if ( measureValues != null )
         {
             Object obj[] = { measureKeys, measureValues };
-            ResultListForm volumetry =
-                (ResultListForm) WTransformerFactory.objToForm( ResultListTransformer.class, obj );
+            ComponentDTO project = (ComponentDTO) arg0[0];
+            String programLanguage = project.getLanguage();
+            ResultListForm volumetry = ResultListTransformer.objToFormWithLanguage( obj , programLanguage);
             form.setVolumetry( volumetry );
         }
         final int errors_id = 3;

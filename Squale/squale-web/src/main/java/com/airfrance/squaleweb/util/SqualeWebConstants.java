@@ -135,4 +135,9 @@ public abstract class SqualeWebConstants
      * Clé pour retrouver la précédente action dans le cas de bouton retour.
      */
     public static final String RETURN_ACTION_KEY = "returnAction";
+    
+    /**
+     * Clé contenant le langage associé à un projet
+     */
+    public final static String LANGUAGE = "language";
 }

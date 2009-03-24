@@ -116,15 +116,17 @@ if (!isAdmin && (isPublic.booleanValue() || !applicationName.equals(WebMessages.
 											sortable="true" />
 										<af:col property="name" key="project.name" sortable="true" />
 										<%}%>
-										<%-- ecrit les différentes données référencées  de type volumétrié--%>
-										<af:col property="numberOfMethods"
-											key="mccabe.project.numberOfMethods" sortable="true"
-											type="NUMBER" />
-										<af:col property="numberOfClasses"
-											key="mccabe.project.numberOfClasses" sortable="true"
-											type="NUMBER" />
-										<af:col property="numberOfCodeLines" key="mccabe.project.sloc"
-											sortable="true" type="NUMBER" />
+										<%-- ecrit les différentes données référencées  de type volumétrie--%>
+										<logic:iterate name="element" id="kind" property="volumetry">
+											<bean:define id="kindKey" name="kind" property="key" type="String" />
+											<bean:define id="kindValue" name="kind" property="value" type="Integer" />
+											<%
+											String valueAccess = "volume("+ kindKey +")";
+											%>
+											<af:col property="<%=valueAccess%>" key="<%=kindKey %>" sortable="true" type="NUMBER">
+											<%=kindValue %>
+											</af:col>
+										</logic:iterate>
 										<%-- écrit les données référencées par rapport à la grille qualité --%>
 										<logic:iterate id="factor" name="element" property="factors">
 											<af:col property="value"

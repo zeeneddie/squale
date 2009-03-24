@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -545,6 +546,12 @@ public abstract class BaseDispatchAction
         pRequest.getSession().setAttribute( PROJECT_DTO, projectDTO );
         pRequest.getSession().setAttribute( CURRENT_AUDIT_DTO, curAudit );
         pRequest.getSession().setAttribute( PREVIOUS_AUDIT_DTO, precAudit );
+        
+        // récupère en session le TopMenu, le place dans le FormBean et le retire de la session
+        HashMap TopMenu = (HashMap) pRequest.getSession().getAttribute( SqualeWebConstants.TOP_KEY );
+        pForm.setTopMenu( TopMenu );
+        pRequest.getSession().removeAttribute( SqualeWebConstants.TOP_KEY );
+               
         // Construit la liste des projets de l'application
         // et les met en session
         buildChildrenList( appliDTO, pRequest );
@@ -958,6 +965,26 @@ public abstract class BaseDispatchAction
             // On construit ensuite le menu des grilles
             IApplicationComponent acGrid = AccessDelegateHelper.getInstance( "QualityGrid" );
             topMenu = (HashMap) acGrid.execute( "getGridMetrics", new Object[] { auditGridDto.getGrid() } );
+            
+            // Modification des valeurs de la HashMap TopMenu suivant le langage                    
+           	Set keys = topMenu.keySet();
+           	Iterator it = keys.iterator();
+           	// Rajout du langage dans la requête pour les sous-menus
+           	pRequest.setAttribute(SqualeWebConstants.LANGUAGE, projectDTO.getLanguage());
+           	//Parcours des clés de la HashMap
+           	while ( it.hasNext() )
+            {
+            	Object key = it.next();
+            	String skey = key.toString();
+            	// On va vérifier que la clé débute par component. et qu'elle existe bien avec le langage en plus
+            	if ( skey.startsWith("component.") & 
+            			WebMessages.existString( skey + "." + projectDTO.getLanguage())  )
+            	{
+            		Object pTemp = topMenu.get(key);
+            		topMenu.remove(key);
+            		topMenu.put( key + "." + projectDTO.getLanguage(), pTemp);
+            	}
+            }
         }
         pRequest.getSession().setAttribute( SqualeWebConstants.TOP_KEY, topMenu );
     }

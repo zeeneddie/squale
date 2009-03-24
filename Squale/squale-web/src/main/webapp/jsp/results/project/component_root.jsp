@@ -47,6 +47,15 @@
                 tabbedPaneTitle = "project.components.excluded.tab";
             }
 
+            // Récupération de la valeur du langage associé au profil du projet depuis la requête
+            String language = (String) request.getAttribute("language");
+            String tempkey = tabbedPaneTitle + "." + language;
+            
+            if ( language != null && WebMessages.existString(tempkey).booleanValue() )
+            {
+            	tabbedPaneTitle = tempkey;
+            }
+            
             // Message d'information dans le cas où le nombre de composants est trop important
             String errorMsg =
                 (String) request.getSession().getAttribute(
@@ -132,7 +141,7 @@
 					<af:table name="packages" scope="request">
 						<af:cols id="element">
 							<af:col property="name" sortable="true"
-								href='<%="project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
+								href='<%="project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&language=" + language%>'
 								paramName="element" paramId="component" paramProperty="id"
 								key="project.component.name" />
 							<af:col property="type" sortable="true"

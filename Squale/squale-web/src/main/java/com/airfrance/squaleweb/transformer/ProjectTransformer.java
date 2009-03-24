@@ -61,6 +61,7 @@ public class ProjectTransformer
         form.setProjectName( dto.getName() );
         form.setApplicationId( "" + dto.getIDParent() );
         form.setHasTerminatedAudit( dto.getHasResults() );
+        form.setLanguage( dto.getLanguage() );
         // Si le tableau d'objets passé en paramètre contient 2 objets
         // alors le deuxième est la liste des applications stockées en session.
         // Cela arrive dans les cas où l'on veut récupérer le nom de l'application
@@ -99,5 +100,6 @@ public class ProjectTransformer
         dto.setID( form.getId() );
         dto.setIDParent( form.getParentId() );
         dto.setName( form.getProjectName() );
+        dto.setLanguage( form.getLanguage() );
     }
 }

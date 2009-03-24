@@ -78,6 +78,9 @@ import com.airfrance.welcom.struts.util.WConstants;
 public class IndexAction
     extends DefaultAction
 {
+	/** Default Number of days for displaying in initUserSession for portlet */
+    public static final int NUMBER_OF_DAYS_FOR_NEWS = 15;
+    
     /** Use default page */
     private boolean defaultConfig;
 
@@ -861,5 +864,58 @@ public class IndexAction
          * own homepage will be displayed
          */
         defaultConfig = true;
+    }
+    
+    /**
+     * Enregistre l'utilisateur en session
+     * 
+     * @param pForm le formulaire
+     * @param pRequest la requête
+     * @return true si l'utilisateur a pu être mis en session
+     */
+    public boolean initUserSession( ActionForm pForm, HttpServletRequest pRequest )
+    {
+        boolean sessionOk;
+
+        ActionMessages errors = new ActionMessages();
+
+        try
+        {
+            SplitAuditsListForm auditList = (SplitAuditsListForm) pForm;
+            // On récupère les applications non publiques appartenant à l'utilisateur
+            Collection applications = getUserNotPublicApplicationList( pRequest );
+            // On récupère les publiques
+            Collection publics = getUserPublicApplicationList( pRequest );
+            // Recherche des audits des 15 derniers jours
+            // Calcul de la date d'ancienneté d'audit
+            Calendar cal = Calendar.getInstance();
+            cal.add( Calendar.DATE, -NUMBER_OF_DAYS_FOR_NEWS );
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "Component" );
+            boolean displayAllAudits = auditList.isAllAudits();
+            ApplicationListForm appliForm = new ApplicationListForm();
+            appliForm.setList( (ArrayList) applications );
+            Object[] paramIn =
+                { (ArrayList) WTransformerFactory.formToObj( ApplicationListTransformer.class, appliForm )[0],
+                    cal.getTime(), new Boolean( true ) };
+            if ( displayAllAudits )
+            {
+                paramIn[1] = null;
+            }
+            Collection audits = (Collection) ac.execute( "getAllAuditsAfterDate", paramIn );
+            appliForm.setList( (ArrayList) publics );
+            paramIn[0] = (ArrayList) WTransformerFactory.formToObj( ApplicationListTransformer.class, appliForm )[0];
+            Collection publicAudits = (Collection) ac.execute( "getAllAuditsAfterDate", paramIn );
+            // On transforme les listes en formulaire
+            WTransformerFactory.objToForm( SplitAuditsListTransformer.class, (WActionForm) pForm, publicAudits, audits );
+            sessionOk = true;
+        }
+        catch ( Exception e )
+        {
+            // Traitement factorisé des exceptions et transfert vers la page d'erreur
+            handleException( e, errors, pRequest );
+            saveMessages( pRequest, errors );
+            sessionOk = false;
+        }
+        return sessionOk;
     }
 }

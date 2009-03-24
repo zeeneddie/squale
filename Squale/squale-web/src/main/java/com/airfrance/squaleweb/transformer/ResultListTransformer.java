@@ -32,6 +32,7 @@ import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm;
 import com.airfrance.squaleweb.util.SqualeWebActionUtils;
 import com.airfrance.welcom.struts.bean.WActionForm;
 import com.airfrance.welcom.struts.transformer.WTransformerException;
+import com.airfrance.squaleweb.resources.WebMessages;
 
 /**
  * Transforme des listes de résultats en un formulaiire adéquat.
@@ -133,6 +134,88 @@ public class ResultListTransformer
             dto = new ResultsDTO();
             listObject.add( dto );
         }
+    }
+    
+    /**
+     * @param pObject le tableau de ProjectDTO à transformer en formulaires.
+     * @param pLanguage le langage associé au projet
+     * @throws WTransformerException si un pb apparaît.
+     * @return le formulaire associé
+     */
+    public static ResultListForm objToFormWithLanguage( Object[] pObject, String pLanguage )
+        throws WTransformerException
+    {
+        ResultListForm form = new ResultListForm();
+        objToFormWithLanguage( pObject, form , pLanguage);
+        return form;
+    }
+    
+    /**
+     * @param pObject le tableau de ProjectDTO à transformer en formulaires.
+     * @param pForm le formulaire à remplir.
+     * @param pLanguage le langage de programmation du projet
+     * @throws WTransformerException si un pb apparaît.
+     */
+    public static void objToFormWithLanguage( Object[] pObject, WActionForm pForm, String pLanguage )
+        throws WTransformerException
+    {
+        List tre = (List) pObject[0];
+        // On supprime les objets nuls
+        tre.remove( null );
+        // Concersion en liste de String
+        List values = SqualeWebActionUtils.getAsStringsList( (List) pObject[1] );
+        ArrayList result = new ArrayList();
+        ResultListForm form = (ResultListForm) pForm;
+        ListIterator it = tre.listIterator();
+        ResultForm resultForm = null;
+        // On récupère les règles
+        while ( it.hasNext() )
+        {
+            resultForm = new ResultForm();
+            Object currentTre = it.next();
+            // sous forme de TRE ou sous forme de QualityResultDTO
+            if ( currentTre instanceof String )
+            {
+            	String name = (String) currentTre;
+            	if ( WebMessages.existString(currentTre + "." + pLanguage))
+            	{
+            		name = name + "." + pLanguage;
+            	}
+                resultForm.setName( (String) name );
+            }
+            else
+            {
+                QualityRuleDTO rule = (QualityRuleDTO) currentTre;
+                String ruleName = rule.getName();
+                if ( WebMessages.existString(ruleName + "." + pLanguage) )
+                {
+                	ruleName = ruleName + "." + pLanguage;
+                }
+                resultForm.setName( ruleName );
+                // Dans ce cas on renseigne aussi l'id de la règle
+                resultForm.setId( "" + rule.getId() );
+            }
+            try
+            {
+                String value = (String) values.get( it.previousIndex() );
+                // Cas où la règle n'a pa de note
+                if ( value == null || value.startsWith( "-" ) )
+                {
+                    value = "-";
+                }
+                // formatage HTML
+                value = value.replaceAll( " ", "&nbsp;" );
+                resultForm.setCurrentMark( value.replaceAll( "\n", "<br/>" ) );
+            }
+            catch ( Exception e )
+            {
+                // TODO voir comment ce code est activé
+                // l'accès à it.previousIndex() est étrange
+                LOGGER.debug( e, e );
+            }
+            result.add( resultForm );
+        }
+        form.setList( result );
     }
 
 }

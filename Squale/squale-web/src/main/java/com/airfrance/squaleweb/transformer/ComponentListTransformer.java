@@ -85,4 +85,38 @@ public class ComponentListTransformer
             }
         }
     }
+    
+    
+    /**
+     * Construit la liste des composants en ofrmulaire en modifiant le type suivant le langage
+     * @param pObject le tableau de ComponentDTO à transformer
+     * @param pLanguage le langage associé au projet
+     * @return le formulaire traité
+     */
+    public static ComponentListForm objToFormWithLanguage ( Object[] pObject, String pLanguage)
+    {
+    	ComponentListForm form = new ComponentListForm();
+    	objToFormWithLanguage(pObject, pLanguage, form);
+    	return form;
+    }
+    
+    /**
+     * Construit la liste des composants en modifiant les types suivant le langage
+     * @param pObject le tableau de ComponentDTO à transformer en formulaires
+     * @param pLanguage le langage du projet
+     * @param le formulaire à traiter
+     */
+    public static void objToFormWithLanguage ( Object[] pObject, String pLanguage, ComponentListForm pForm)
+    {
+    	ComponentListForm form = pForm;
+    	ArrayList listDTO = (ArrayList) pObject[0];
+    	ArrayList result = new ArrayList();
+    	ListIterator it = listDTO.listIterator();
+    	while ( it.hasNext() )
+        {
+            result.add( ComponentTransformer.objToFormWithLanguage( new Object[] {it.next()}, pLanguage ));
+        }
+        form.setList( result );
+    }
+    
 }

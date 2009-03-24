@@ -38,6 +38,9 @@
 				<af:option key="project.profile.cobol.ibm341"
 					value="<%=ParametersConstants.IBM341%>">
 				</af:option>
+				<af:option key="project.profile.cobol.ibm4"
+					value="<%=ParametersConstants.IBM4%>">
+				</af:option>
 			</af:select></td>
 		</tr>
 	</table>

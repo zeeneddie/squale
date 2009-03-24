@@ -57,9 +57,12 @@ public class ProjectForm
     /** l'éventuelle justification associée au composant */
     private String justification;
 
-    /** un booléen permettant de savoir si le composant est à exclure du plan d'aciton */
+    /** un booléen permettant de savoir si le composant est à exclure du plan d'action */
     private boolean excludedFromActionPlan;
-
+    
+    /** le langage du projet */
+    private String mLanguage;
+    
     /**
      * @return true si le composant est exclu du plan d'action
      */
@@ -176,6 +179,22 @@ public class ProjectForm
     public void setFailedTasks( List pTasks )
     {
         mFailedTasks = pTasks;
+    }
+    
+    /**
+     * @return le language du projet
+     */
+    public String getLanguage()
+    {
+        return mLanguage;
+    }
+
+    /**
+     * @param pLanguage le langage du projet
+     */
+    public void setLanguage( String pLanguage )
+    {
+        mLanguage = pLanguage;
     }
 
 }

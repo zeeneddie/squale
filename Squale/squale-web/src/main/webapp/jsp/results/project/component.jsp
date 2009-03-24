@@ -78,6 +78,15 @@ if (null == expanded) {
     expanded = "false";
 }
 
+// On récupère la valeur du langage
+String language = (String) request.getAttribute("language");
+if ( language==null ) {
+	language = (String) request.getParameter("language");
+}
+else {
+	request.setAttribute("language",language);
+}
+
 // On modifie le nom du composant dans le cas d'une méthode
 // 2 cas :
 // Affichage des classes des paramètres sans les les packages pour le titre
@@ -142,6 +151,7 @@ if (2 == bracketSplit.length) {
 				<input type="hidden" name="previousAuditId"
 					value="<%=previousAuditId%>">
 				<input type="hidden" name="component" value="<%=componentId%>">
+				<input type="hidden" name="language" value="<%=language%>">
 				<input type="hidden" name="<%="filterPanel"%>"
 					id="<%="filterPanel"%>" value="<%=expanded%>" />
 				<%-- On n'affiche le filtre que si le composant peut avoir des enfants --%>
@@ -190,7 +200,7 @@ if (2 == bracketSplit.length) {
 								<af:cols id="element">
 									<af:col property="name" sortable="true"
 										key="project.component.name"
-										href='<%="project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
+										href='<%="project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&language=" + language%>'
 										paramName="element" paramId="component" paramProperty="id" />
 									<af:col property="type" sortable="true"
 										key="project.component.type">
@@ -221,7 +231,7 @@ if (2 == bracketSplit.length) {
 									</af:col>
 									<af:col property="name" key="practice.name">
 										<html:link
-											href='<%="project.do?action=practice&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
+											href='<%="project.do?action=practice&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&language=" + language%>'
 											paramId="which" paramProperty="id" paramName="element">
 											<bean:message name="element" property="name" />
 										</html:link>
@@ -308,7 +318,7 @@ pageContext.setAttribute("isNumber", "" + matchesMark);%>
 							property="list" scope="session" id="componentIt">
 							<bean:define name="componentIt" property="id" id="compId" />
 							<a
-								href='<%="project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&component=" + compId.toString()%>'>
+								href='<%="project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&component=" + compId.toString() + "&language=" + language %>'>
 							<bean:write name="componentIt" property="name" /></a>
         					&gt;
         				</logic:iterate> <%-- Pour afficher en non cliquable le nom du composant courant

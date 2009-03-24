@@ -107,7 +107,17 @@ public class TopAction
         {
             TopListForm topListForm = (TopListForm) pForm;
             // recupere le "type" de top
-            topListForm.setComponentType( pRequest.getParameter( "componenttype" ) );
+            String ComponentType = pRequest.getParameter( "componenttype" );
+            String language = pRequest.getParameter(SqualeWebConstants.LANGUAGE);
+            pRequest.setAttribute(SqualeWebConstants.LANGUAGE, language);
+            // modifie suivant le langage
+            if ( ComponentType.endsWith(language) )
+            {
+            	Integer end = ComponentType.length() - (1 + language.length() );
+            	ComponentType=ComponentType.substring(0, end);
+            }
+            topListForm.setComponentType(ComponentType);
+            
             topListForm.setTre( pRequest.getParameter( "tre" ) );
 
             // et calcule les resultats
