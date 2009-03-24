@@ -59,3 +59,12 @@ UPDATE auditbo SET squale_version = null;
 ALTER TABLE auditbo MODIFY squale_version VARCHAR2(100) DEFAULT '5.1';
 UPDATE auditbo SET squale_version = ver;
 ALTER TABLE auditbo DROP COLUMN ver;
+
+-- ###########################################################
+-- For Language display customization for SQUALE version 4.1.1
+
+-- Table Tasks_User & Ajout de la colonne Language
+ALTER TABLE Tasks_User ADD language varchar2(255) NULL;
+
+-- Table SqualeReference & ajout de la colonne ProgrammingLanguage
+ALTER TABLE squaleReference ADD programminglanguage varchar2(255) NULL;

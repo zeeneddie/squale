@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.0//EN" "file:../com/airfrance/squalecommon/dtd/squalix-config-1.0.dtd">
+<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.1//EN" "file:../com/airfrance/squalecommon/dtd/squalix-config-1.1.dtd">
 <!--  Fichier de configuration de squalix définissant les profiles possibles, les différents types
 	de récupération des sources,...
 	La configuration des types de récupération des sources se fait par l'action dont le nom correspond à
@@ -65,7 +65,7 @@
 		</sourcemanagement>	
 	</sourcemanagements>
 	<profiles>
-		<profile name="appli-jse">
+		<profile name="appli-jse" language="java">
 			<integrityConstraints>
 				<!-- Les grilles disponibles pour ce profil -->
 				<grids>
@@ -113,7 +113,7 @@
 				<task-ref name="ComputeResultTask"></task-ref>
 			</termination>
 		</profile>
-		<profile name="appli-jee">
+		<profile name="appli-jee" language="java">
 			<integrityConstraints>
 				<!-- Les grilles disponibles pour ce profil -->
 				<grids>

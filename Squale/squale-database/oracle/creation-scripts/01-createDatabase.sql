@@ -518,6 +518,7 @@
         ClassNumber number(10,0),
         HIDDEN number(1,0) not null,
         AUDIT_TYPE varchar2(50) not null,
+		programminglanguage varchar2(255) null,
         primary key (ReferencielId)
     );
 
@@ -609,6 +610,7 @@
         export_IDE number(1,0),
         MilestoneAudit number(1,0),
         NormalAudit number(1,0),
+		language varchar2(255) null,
         primary key (AbstractTasksUserId)
     );
 

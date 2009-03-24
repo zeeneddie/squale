@@ -451,6 +451,7 @@ public class ConfigurationImport
                     existingProfileBO.setAnalysisTasks( profileBO.getAnalysisTasks() );
                     existingProfileBO.setTerminationTasks( profileBO.getTerminationTasks() );
                     existingProfileBO.setExportIDE( profileBO.getExportIDE() );
+                    existingProfileBO.setLanguage( profileBO.getLanguage() );
                     existingProfileBO.setGrids( profileBO.getGrids() );
                     profileDAO.save( pSession, existingProfileBO );
                     profileDTO = (ProjectProfileDTO) ProjectProfileTransform.bo2dto( existingProfileBO );

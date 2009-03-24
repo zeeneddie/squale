@@ -79,6 +79,11 @@ public class ComponentDTO
      * Technologie du composant s'il s'agit d'un projet
      */
     private String mTechnology = null;
+    
+    /**
+     * Langage du composant s'il s'agit d'un projet
+     */
+    private String mLanguage = null;
 
     /** l'éventuelle justification associée au composant */
     private String justification;
@@ -342,6 +347,22 @@ public class ComponentDTO
     public void setTechnology( String pTechnology )
     {
         mTechnology = pTechnology;
+    }
+    
+    /**
+     * @return langage du composant s'il s'agit d'un projet
+     */
+    public String getLanguage()
+    {
+        return mLanguage;
+    }
+
+    /**
+     * @param pLanguage du composant s'il s'agit d'un projet
+     */
+    public void setLanguage( String pLanguage )
+    {
+        mLanguage = pLanguage;
     }
 
     /**

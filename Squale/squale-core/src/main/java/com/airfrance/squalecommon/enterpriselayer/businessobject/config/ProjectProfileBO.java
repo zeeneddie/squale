@@ -41,7 +41,10 @@ public class ProjectProfileBO
 
     /** true si l'export IDE est possible avec ce profil */
     private boolean mExportIDE = true;
-
+    
+    /** le langage du profil du projet */
+    private String mLanguage = null;
+    
     /**
      * Récupère les configurations d'affichage liées à ce profil
      * 
@@ -87,6 +90,24 @@ public class ProjectProfileBO
         mExportIDE = pExport;
     }
 
+    /**
+     * @hibernate.property name="language" column="language" type="string" unique="false" update="true"
+     *                     insert="true"
+     * @return le langage du profil du projet
+     */
+    public String getLanguage()
+    {
+        return mLanguage;
+    }
+
+    /**
+     * @param pLanguage le language du profil du projet
+     */
+    public void setLanguage( String pLanguage )
+    {
+        mLanguage = pLanguage;
+    }  
+    
     /**
      * @param pProfileDisplayConfs les configurations d'affichage liées à ce profil
      */

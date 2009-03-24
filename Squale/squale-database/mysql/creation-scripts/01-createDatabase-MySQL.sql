@@ -730,6 +730,7 @@
         ClassNumber integer,
         HIDDEN bit not null,
         AUDIT_TYPE varchar(50) not null,
+		programminglanguage varchar(255) null,
         primary key (ReferencielId)
     ) type=InnoDB;
 
@@ -821,6 +822,7 @@
         export_IDE bit,
         MilestoneAudit bit,
         NormalAudit bit,
+		language varchar(255) null,
         primary key (AbstractTasksUserId)
     ) type=InnoDB;
 

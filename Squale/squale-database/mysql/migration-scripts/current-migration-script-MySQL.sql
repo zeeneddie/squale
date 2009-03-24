@@ -53,3 +53,15 @@ alter table Tag_Component
 --Modifications for [#152]
 
 ALTER TABLE auditbo MODIFY squale_version VARCHAR(100) DEFAULT '5.1';
+
+-- #####################################################
+-- For Language display customization
+-- This migration script HAS NOT BEEN TESTED
+
+-- Table Tasks_User
+ALTER TABLE Tasks_User 
+	ADD language varchar(255) NULL;
+
+-- Table SqualeReference & ajout de la colonne ProgrammingLanguage
+ALTER TABLE squaleReference 
+	ADD programminglanguage varchar(255) NULL;

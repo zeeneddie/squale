@@ -107,9 +107,14 @@ public class SqualeReferenceBO
     private String mProjectName;
 
     /**
-     * Le langage du sous projet.
+     * Le langage du sous projet qui est relatif à la technologie (Java,J2EE)
      */
     private String mLanguage;
+    
+    /**
+     * Le langage de programmation (JAVA,CPP,COBOL)
+     */
+    private String mProgrammingLanguage;
 
     /**
      * La version du sous-projet.
@@ -217,6 +222,25 @@ public class SqualeReferenceBO
     {
         mLanguage = pLanguage;
     }
+    
+    /**
+     * Access method for the mProgrammingLanguage property
+     * @return le langage de programmation
+     */
+    public String getProgrammingLanguage()
+    {
+    	return mProgrammingLanguage;
+    }
+    
+    /**
+     * Sets the value of the pProgrammingLanguage property
+     * @param pProgrammingLanguage the new value for mProgrammingLanguage property
+     */
+    public void setProgrammingLanguage( String pProgrammingLanguage)
+    {
+    	mProgrammingLanguage = pProgrammingLanguage;
+    }
+    
 
     /**
      * Access method for the mVersion property.

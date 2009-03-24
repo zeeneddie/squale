@@ -82,6 +82,7 @@ public class SqualeReferenceTransform
         // Copie des attributs de pSqualeReferenceBO dans squaleReferenceDTO
         squaleReferenceDTO.setId( pSqualeReferenceBO.getId() );
         squaleReferenceDTO.setLanguage( pSqualeReferenceBO.getLanguage() );
+        squaleReferenceDTO.setProgrammingLanguage( pSqualeReferenceBO.getProgrammingLanguage() );
         squaleReferenceDTO.setMethodNumber( pSqualeReferenceBO.getMethodNumber() );
         squaleReferenceDTO.setClassNumber( pSqualeReferenceBO.getClassNumber() );
         squaleReferenceDTO.setApplicationName( pSqualeReferenceBO.getApplicationName() );

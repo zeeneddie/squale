@@ -146,6 +146,10 @@
 	<message lang="fr" key="rule.methodsize">
 		Taille de la méthode
 	</message>
+	<message lang="en" key="rule.modulesize">Module size</message>
+	<message lang="fr" key="rule.modulesize">
+		Taille du module
+	</message>
 	<message lang="en" key="rule.methodsize">Method size</message>
 	<message lang="fr" key="rule.jspsize">Taille de la JSP</message>
 	<message lang="en" key="rule.jspsize">JSP size</message>
@@ -413,6 +417,8 @@
 		"Normes et standards" : Bonnes pratiques JSP
 	</message>
 	<message lang="en" key="rule.jspstandard">JSP standards</message>
+	<message lang="fr" key="rule.deadcode">Module non appellé (code mort)</message>
+	<message lang="en" key="rule.deadcode">Uncalled module (dead code)</message>
 	<message lang="fr" key="rule.antipatternpredetection">
 		Pré-détection d'antipatterns
 	</message>
@@ -638,6 +644,15 @@
 	</message>
 	<message lang="en" key="rule.methodsize.description">
 		Method size
+	</message>
+	<message lang="fr" key="rule.modulesize.description">
+		Qualifie la répartition du code source sur les modules des
+		programmes de l'application : un module ayant un nombre de ligne
+		de code trop important devient trop long pour être
+		compréhensible et maintenable.
+	</message>
+	<message lang="en" key="rule.modulesize.description">
+		Module size
 	</message>
 	<message lang="fr" key="rule.spaghetticode.description">
 		Qualifie du niveau de déstructuration et de complexité du code,
@@ -976,6 +991,12 @@
 	<message lang="en" key="rule.jspstandard.description">
 		practice not available
 	</message>
+	<message lang="fr" key="rule.deadcode.description">
+		Indique si le module/composant est référencé ou appellé par un autre
+		module. Un module qui n'est jamais utilisé est considéré comme du code
+		mort.
+	</message>
+	<message lang="en" key="rule.deadcode.description">Uncalled module (dead code)</message>
 	<message lang="fr" key="rule.jspcomplexity.description">
 		Qualifie le niveau de complexité de la page JSP (complexité
 		cyclomatique).
@@ -1082,6 +1103,13 @@
 	</message>
 	<message lang="en" key="rule.methodsize.correction">
 		Method size
+	</message>
+	<message lang="fr" key="rule.modulesize.correction">
+		Réduisez la taille de votre module en le factorisant ou en
+		créant de nouveaux modules.
+	</message>
+	<message lang="en" key="rule.modulesize.correction">
+		Module size
 	</message>
 	<message lang="fr" key="rule.spaghetticode.correction">
 		Les méthodes trop complexes et trop longues doivent être
@@ -2298,6 +2326,8 @@
 	<message lang="en" key="metric.cpd.jsp">JSP Copy-paste</message>
 	<message lang="fr" key="metric.cpd.cpp">Copier-coller C++</message>
 	<message lang="en" key="metric.cpd.cpp">C++ copy-paste</message>
+	<message lang="fr" key="metric.cpd.cobol">Copier-coller Cobol</message>
+	<message lang="en" key="metric.cpd.cobol">Cobol copy-paste</message>
 
 
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -2332,6 +2362,12 @@
 		Configuration de McCabe
 	</message>
 	<message lang="en" key="task.cppmccabetask.configuration">
+		McCabe's configuration
+	</message>
+	<message lang="fr" key="task.cobolmccabetask.configuration">
+		Configuration de McCabe
+	</message>
+	<message lang="en" key="task.cobolmccabetask.configuration">
 		McCabe's configuration
 	</message>
 	<message lang="fr" key="task.cpptesttask.configuration">
@@ -2453,6 +2489,12 @@
 	<message lang="en" key="CppMcCabeTask.name">
 		McCabe task for Cpp profile
 	</message>
+	<message lang="fr" key="CobolMcCabeTask.name">
+		Tâche McCabe
+	</message>
+	<message lang="en" key="CobolMcCabeTask.name">
+		McCabe task
+	</message>
 	<message lang="fr" key="J2eeMcCabeTask.name">Tâche McCabe</message>
 	<message lang="en" key="J2eeMcCabeTask.name">McCabe task</message>
 	<message lang="fr" key="CppTestTask.name">Tâche CppTest</message>
@@ -2568,6 +2610,8 @@
 	<message lang="en" key="ref.squale-java-ee">JEE project</message>
 	<message lang="fr" key="ref.java-oss">Projet Open-source</message>
 	<message lang="en" key="ref.java-oss">Open-source project</message>
+	<message lang="fr" key="ref.cobol">Cobol</message>
+	<message lang="en" key="ref.cobol">Cobol</message>
 
 
 	<!-- Configuration pour l'ordonnencement des audits -->

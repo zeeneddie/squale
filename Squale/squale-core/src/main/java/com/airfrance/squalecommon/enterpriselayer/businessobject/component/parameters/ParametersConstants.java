@@ -182,11 +182,13 @@ public class ParametersConstants
     /** Les informations C++ */
     public static final String COBOL = "cobol";
 
-    // constantes définissant le dialect pour McCabe
-    /** IBM Enterprise */
+    // constantes définissant les dialectes pour McCabe
+    /** IBM Enterprise Cobol II release 3*/
     public static final String IBM341 = "Ibm_341";
 
-    
+    /** IBM Enterprise Cobol II release 4*/
+    public static final String IBM4 = "Ibm_4";
+
     // ********************* Tâche CppTest **********************************
     /** Informations Cpptest */
     public static final String CPPTEST = "cpptest";

@@ -396,6 +396,8 @@
 		"Normes et standards" : Bonnes pratiques JSP
 	</message>
 	<message lang="en" key="rule.jspstandard">JSP standards</message>
+	<message lang="fr" key="rule.deadcode">Module non appellé (code mort)</message>
+	<message lang="en" key="rule.deadcode">Uncalled module (dead code)</message>
 
 	<!-- Pour les informations -->
 
@@ -403,10 +405,10 @@
 	<!-- Textes descriptifs -->
 	<!--  Pratiques  -->
 	<message lang="fr" key="rule.blob.description">
-		La pieuvre est une méthode dans une classe qui a tendance à
-		agréger à elle seule une grande partie de la complexité de cette
-		dernière, les autres méthodes étant réduites à un traitement
-		minimum.
+		La pieuvre est un composant (ex: module ou méthode dans une
+		classe) qui a tendance à agréger à lui seul une grande partie
+		de la complexité de ce dernier, les autres composants étant
+		réduits à un traitement minimum.
 	</message>
 	<message lang="en" key="rule.blob.description">Blob</message>
 	<message lang="fr" key="rule.inheritancedepth.description">
@@ -464,7 +466,7 @@
 	</message>
 	<message lang="fr" key="rule.documentation.description">
 		Qualifie le niveau de commentaires au sein du code (intra
-		méthode). Un niveau minimum de commentaires par rapport au
+		méthode/module). Un niveau minimum de commentaires par rapport au
 		nombre de lignes de code source est requis, le seuil dépendant
 		principalement de la complexité de la méthode considérée. La
 		qualité des commentaires n'est cependant pas évaluée, mais par
@@ -486,15 +488,24 @@
 	<message lang="en" key="rule.methodsize.description">
 		Method size
 	</message>
+	<message lang="fr" key="rule.modulesize.description">
+		Qualifie la répartition du code source sur les modules des
+		programmes de l'application : un module ayant un nombre de ligne
+		de code trop important devient trop long pour être
+		compréhensible et maintenable.
+	</message>
+	<message lang="en" key="rule.modulesize.description">
+		Module size
+	</message>
 	<message lang="fr" key="rule.spaghetticode.description">
 		Qualifie du niveau de déstructuration et de complexité du code,
 		mettant en évidence les parties de code source à risque, car
 		difficilement compréhensibles et donc difficilement
 		maintenables. Dès que le niveau de complexité essentielle et non
 		essentielle est dépassé, il faut commencer à investiguer les
-		méthodes remontées pour un éventuel remaniement. Un filtre est
+		composants remontés pour un éventuel remaniement. Un filtre est
 		appliqué au niveau du nombre de lignes de code source afin de ne
-		pas remonter des méthodes déstructurées mais courtes et
+		pas remonter des composants déstructurés mais courts et
 		maintenables car correspondant à une pratique de codage connue
 		(exemple : l'implémentation des méthodes equals(Object) en
 		Java).
@@ -527,9 +538,11 @@
 		de dupliquer les efforts de test et de dupliquer les éventuels
 		bugs. Ceci ne devrait pas avoir lieu dans un développement
 		Orienté Objet (utilisation de la factorisation par les
-		mécanismes de l'héritage par exemple). Cette pratique est
-		mesurée en fonction du pourcentage de similitude entre les
-		méthodes de l'application.
+		mécanismes de l'héritage par exemple). Pour les langages
+		procéduraux, on peut factoriser les redondances par des 
+		fonctions. Cette pratique est mesurée en fonction du pourcentage
+		de similitude entre les	composants de l'application (module ou 
+		méthode).
 	</message>
 	<message lang="en" key="rule.copypaste.description">
 		Copy paste
@@ -823,6 +836,12 @@
 	<message lang="en" key="rule.jspstandard.description">
 		practice not available
 	</message>
+	<message lang="fr" key="rule.deadcode.description">
+		Indique si le module/composant est référencé ou appellé par un autre
+		module. Un module qui n'est jamais utilisé est considéré comme du code
+		mort.
+	</message>
+	<message lang="en" key="rule.deadcode.description">Uncalled module (dead code)</message>
 	<message lang="fr" key="rule.jspcomplexity.description">
 		Qualifie le niveau de complexité de la page JSP (complexité
 		cyclomatique).
@@ -861,7 +880,8 @@
 	<!-- Textes pour les corrections -->
 	<!--  Pratiques  -->
 	<message lang="fr" key="rule.blob.correction">
-		Revoir la classe afin de découper la méthode incriminée.
+		Revoir le composant parent (ex: programme ou classe) afin de
+		afin de découper le composant incriminé.
 	</message>
 	<message lang="en" key="rule.blob.correction">Blob</message>
 	<message lang="fr" key="rule.inheritancedepth.correction">
@@ -915,8 +935,8 @@
 		Efferent coupling
 	</message>
 	<message lang="fr" key="rule.documentation.correction">
-		Augmenter le commentaire interne à la méthode en fonction de la
-		complexité de cette dernière. Le commentaire doit expliquer
+		Augmenter le commentaire interne au composant en fonction de la
+		complexité de ce dernier. Le commentaire doit expliquer
 		l'algorithmique mise en oeuvre.
 	</message>
 	<message lang="en" key="rule.documentation.correction">
@@ -928,9 +948,16 @@
 	<message lang="en" key="rule.methodsize.correction">
 		Method size
 	</message>
+	<message lang="fr" key="rule.modulesize.correction">
+		Réduisez la taille de votre module en le factorisant ou en
+		créant de nouveaux modules.
+	</message>
+	<message lang="en" key="rule.modulesize.correction">
+		Module size
+	</message>
 	<message lang="fr" key="rule.spaghetticode.correction">
-		Les méthodes trop complexes et trop longues doivent être
-		découpées pour limiter la complexité de l'algorithme. De plus,
+		Les composants trop complexes et trop longs doivent être
+		découpés pour limiter la complexité de l'algorithme. De plus,
 		pour simplifier la maintenance, il est important d'éviter les
 		points de sorties multiples de chaque bloc. Il faut donc faire
 		la chasse au « return », « break » et autres courts circuits
@@ -962,6 +989,7 @@
 		fonction du contexte, par exemple : &lt;li&gt;dans une méthode
 		privée de la classe&lt;/li&gt; &lt;li&gt;dans une méthode
 		protégée de la classe parente&lt;/li&gt;
+		&lt;li&gt;dans une fonction ou un sous-programme&lt;/li&gt;
 		&lt;li&gt;etc...&lt;/li&gt;
 	</message>
 	<message lang="en" key="rule.copypaste.correction">
@@ -1290,6 +1318,12 @@
 	<message lang="en" key="rule.jspstandard.correction">
 		practice not available
 	</message>
+	<message lang="fr" key="rule.deadcode.correction">
+		Vérifiez si le module/composant est obsolète et s'il n'est pas
+		en cours de développement. Retirer les modules obsolètes rendra
+		plus compréhensible le code et facilitera la maintenance.
+	</message>
+	<message lang="en" key="rule.deadcode.correction">Check if you can remove the dead code.</message>
 
 
 	<!--  Métriques  -->
@@ -1992,6 +2026,8 @@
 		Nombre d'appel à d'autres méthodes
 	</message>
 	<message lang="en" key="mccabe.method.fanout">Fan out</message>
+	<message lang="fr" key="mccabe.method.deadCode">Module non appelé (code mort)</message>
+	<message lang="en" key="mccabe.method.deadCode">non-called Module (Dead Code)</message>
 	<message lang="fr"
 		key="javancss.method.ncss">
 		Nombre de lignes de code source
@@ -3314,6 +3350,8 @@
 	<message lang="en" key="ref.j2ee">J2ee</message>
 	<message lang="fr" key="ref.archinet">Archinet</message>
 	<message lang="en" key="ref.archinet">Archinet</message>
+	<message lang="fr" key="ref.cobol">Cobol</message>
+	<message lang="en" key="ref.cobol">Cobol</message>
 
 
 	<!-- Configuration pour l'ordonnencement des audits -->

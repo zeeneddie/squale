@@ -70,6 +70,11 @@ public final class McCabeQAMethodMetricsBO
      * Nombre de lignes total.
      */
     private final static String NL = "nl";
+    
+    /**
+     * Boolean Indicator for Dead Code (added for COBOL)
+     */
+    private final static String DEADCODE = "deadCode";
 
     /**
      * Nom du fichier
@@ -97,6 +102,7 @@ public final class McCabeQAMethodMetricsBO
         getMetrics().put( IVG, new IntegerMetricBO() );
         getMetrics().put( FANOUT, new IntegerMetricBO() );
         getMetrics().put( NL, new IntegerMetricBO() );
+        getMetrics().put( DEADCODE, new IntegerMetricBO() );
     }
 
     /**
@@ -295,6 +301,26 @@ public final class McCabeQAMethodMetricsBO
         ( (IntegerMetricBO) getMetrics().get( NL ) ).setValue( pNl );
     }
 
+    /**
+     * Access method for the mDeadCode property.
+     * 
+     * @return the current value of the mDeadCode property
+     */
+    public Integer getDeadCode()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( DEADCODE ) ).getValue();
+    }
+
+    /**
+     * Sets the value of the mDeadCode property.
+     * 
+     * @param pNl the new value of the mDeadCode property
+     */
+    public void setDeadCode( Integer pDeadCode )
+    {
+        ( (IntegerMetricBO) getMetrics().get( DEADCODE ) ).setValue( pDeadCode );
+    }
+    
     /**
      * @return le numéro de ligne de la méthode
      */

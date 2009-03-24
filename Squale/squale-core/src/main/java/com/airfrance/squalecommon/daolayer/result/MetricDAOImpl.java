@@ -134,8 +134,10 @@ public class MetricDAOImpl
         // TODO : Il faudrait gérer en configuration les métriques nécessaires au calcul de la volumétrie
         // On sélectionne le nom de la métrique correspondant au nombre de lignes
         String whereClause = " where (" + getAlias() + ".name='sloc'";
-        // ansi que le nombre de lignes JSP
-        whereClause += "or " + getAlias() + ".name='numberOfJSPCodeLines')";
+        // ainsi que le nombre de lignes JSP
+        whereClause += " or " + getAlias() + ".name='numberOfJSPCodeLines'";
+        // ainsi que le nombre de lignes pour du COBOL
+        whereClause += " or " + getAlias() + ".name='projectnl')";
         // critère du site
         whereClause += " AND " + getAlias() + ".measure.component.parent.serveurBO.serveurId='" + pSiteId + "'";
         // on ne prend pas en compte les applications supprimées
@@ -158,14 +160,20 @@ public class MetricDAOImpl
             MetricBO cur = (MetricBO) results.get( i );
             if ( cur.getMeasure().getComponent().getId() != lastProjectId )
             {
-                // Il s'agit d'entiers
-                result += ( (Integer) cur.getValue() ).intValue();
-                lastAuditId = cur.getMeasure().getAudit().getId();
+           		// Il s'agit d'entiers
+           		if ( cur.getValue()!=null)
+           		{
+           			result += ( (Integer) cur.getValue() ).intValue();
+           		}
+           		lastAuditId = cur.getMeasure().getAudit().getId();
             }
             else if ( cur.getMeasure().getAudit().getId() == lastAuditId )
             {
                 // On ajoute la valeur car il s'agit d'une volumétrie différente
-                result += ( (Integer) cur.getValue() ).intValue();
+            	if ( cur.getValue()!=null)
+            	{
+            		result += ( (Integer) cur.getValue() ).intValue();
+            	}
             }
             lastProjectId = cur.getMeasure().getComponent().getId();
         }

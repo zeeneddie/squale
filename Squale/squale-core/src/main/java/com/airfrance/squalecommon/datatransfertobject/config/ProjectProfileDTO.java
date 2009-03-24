@@ -32,6 +32,9 @@ public class ProjectProfileDTO
 
     /** Les grilles disponibles pour ce profil */
     private List mGrids;
+    
+    /** Le langage du profil du projet */
+    private String mLanguage;
 
     /**
      * @return true si l'export IDE est possible
@@ -63,6 +66,22 @@ public class ProjectProfileDTO
     public void setGrids( List pGrids )
     {
         mGrids = pGrids;
+    }
+    
+    /**
+     * @return le langage du profil du projet
+     */
+    public String getLanguage()
+    {
+        return mLanguage;
+    }
+
+    /**
+     * @param pLanguage le langage du profil du projet
+     */
+    public void setLanguage( String pLanguage )
+    {
+        mLanguage = pLanguage;
     }
 
 }

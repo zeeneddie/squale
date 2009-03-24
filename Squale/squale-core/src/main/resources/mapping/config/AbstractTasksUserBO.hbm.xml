@@ -30,6 +30,7 @@
         <many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO" column="GridId" outer-join="auto"/>
       </set>
       <property name="exportIDE" column="export_IDE" update="true" unique="false" type="boolean" insert="true"/>
+	  <property name="language" length="255" column="language" update="true" not-null="true" unique="false" type="string" insert="true"/>
     </subclass>
     <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO" lazy="false" discriminator-value="SourceManagement">
       <property name="milestoneAudit" column="MilestoneAudit" update="true" type="boolean" insert="true"/>

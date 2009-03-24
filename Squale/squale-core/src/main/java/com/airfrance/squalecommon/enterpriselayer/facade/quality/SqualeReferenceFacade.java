@@ -166,6 +166,7 @@ public class SqualeReferenceFacade
                 // set des différent paramètres de la référence
                 currentSqualeReference.setDate( pAudit.getDate() );
                 currentSqualeReference.setLanguage( currentProject.getProfile().getName() );
+                currentSqualeReference.setProgrammingLanguage( currentProject.getProfile().getLanguage() );
                 currentSqualeReference.setApplicationName( currentProject.getParent().getName() );
                 currentSqualeReference.setProjectName( currentProject.getName() );
                 currentSqualeReference.setVersion( pAudit.getName() );
@@ -179,6 +180,7 @@ public class SqualeReferenceFacade
                 currentSqualeReference.setPublic( publicApplication );
 
                 // Volumétrie
+                // TODO : Mettre les valeurs de volumétrie dans les profils et ne plus utiliser de référence en dur
                 RSMProjectMetricsBO projectVol =
                     (RSMProjectMetricsBO) MeasureDAOImpl.getInstance().load( session, projectId, auditId,
                                                                              RSMProjectMetricsBO.class );
@@ -193,6 +195,12 @@ public class SqualeReferenceFacade
                 {
                     currentSqualeReference.setClassNumber( presult.getNumberOfClasses().intValue() );
                     currentSqualeReference.setMethodNumber( presult.getNumberOfMethods().intValue() );
+                    // S'il n'y a pas de données de RSM, alors prendre la donnée depuis McCabe (Cas pour le COBOL)
+                    if ( projectVol == null )
+                    {
+                    	currentSqualeReference.setCodeLineNumber( presult.getProjectsloc().intValue() );
+                    }
+                    
                 }
 
                 // Creation en base

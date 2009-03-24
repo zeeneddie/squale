@@ -79,11 +79,29 @@
 				-->
 			</simpleformula>
 		</practice>
+		
+		<practice name="deadcode" effort="5">
+			<weight>lambda x:9.**-x</weight>
+			<conditionformula>
+				<level>method</level>
+				<measures>
+					<measure>mccabe</measure>
+				</measures>
+				<trigger></trigger>
+				<conditions>
+					<condition>mccabe.deadCode</condition>
+					<condition>0</condition>
+					<condition>0</condition>
+				</conditions>
+			</conditionformula>
+		</practice>
+			
 	</practiceset>
 
 	<criteriumset>
 		<criterium name="comprehension">
 			<practice-ref name="documentation" weight="1" />
+			<practice-ref name="deadcode" weight="1" />
 		</criterium>
 
 		<criterium name="modularity">

@@ -98,9 +98,14 @@ public class SqualeReferenceDTO
     private String mProjectName;
 
     /**
-     * Le langage du projet.
+     * Le langage du projet relatif à sa technologie (Java,J2EE).
      */
     private String mLanguage;
+    
+    /**
+     * Le langage de programmation du projet (JAVA,CPP,COBOL)
+     */
+    private String mProgrammingLanguage;
 
     /**
      * La version du projet.
@@ -292,6 +297,26 @@ public class SqualeReferenceDTO
     public void setLanguage( String pLanguage )
     {
         mLanguage = pLanguage;
+    }
+    
+    /**
+     * Access method for the mProgrammingLanguage property.
+     * 
+     * @return the current value of the mProgrammingLanguage property
+     */
+    public String getProgrammingLanguage()
+    {
+        return mProgrammingLanguage;
+    }
+
+    /**
+     * Sets the value of the mProgrammingLanguage property.
+     * 
+     * @param pLanguage the new value of the mProgrammingLanguage property
+     */
+    public void setProgrammingLanguage( String pProgrammingLanguage )
+    {
+        mProgrammingLanguage = pProgrammingLanguage;
     }
 
     /**

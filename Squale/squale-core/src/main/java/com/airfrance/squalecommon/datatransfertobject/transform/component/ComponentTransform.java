@@ -112,7 +112,8 @@ public class ComponentTransform
     public Object visit( ProjectBO pProject, Object pArgument )
     {
         ComponentDTO componentDTO = setCommonComplexAttributes( pProject );
-        componentDTO.setTechnology( pProject.getName() );
+        componentDTO.setTechnology( pProject.getProfile().getName() );
+        componentDTO.setLanguage(pProject.getProfile().getLanguage());
         return componentDTO;
     }
 

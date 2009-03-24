@@ -25,6 +25,7 @@ import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import com.airfrance.jraf.spi.persistence.ISession;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * DAO du Serveur d'exécution de Squalix
@@ -75,5 +76,30 @@ public class ServeurDAOImpl
         Collection pCollection = super.findAll( pSession );
         return pCollection;
     }
-
+    
+    /**
+     * Retourne le serveur correspondant à l'ID fourni
+     * @param pSession la session Hibernate
+     * @param pServeurId l'ID du serveur à chercher
+     * @return le serveur trouvé
+     * @throws JrafDaoException si une erreur survient
+     */
+    public ServeurBO findWhereId ( ISession pSession, Long pServeurId )
+    	throws JrafDaoException
+    {
+    	ServeurBO result = null;
+    	StringBuffer whereClause = new StringBuffer( "where " );
+		whereClause.append( getAlias() );
+        whereClause.append( ".serveurId = '" );
+        whereClause.append( pServeurId );
+        whereClause.append( "'" );
+        Collection results = this.findWhere( pSession, whereClause.toString() );
+        Iterator it = results.iterator();
+        // Il ne doit y avoir qu'un résultat:
+        if ( it.hasNext() )
+        {
+            result = (ServeurBO) it.next();
+        }
+        return result;
+    }
 }

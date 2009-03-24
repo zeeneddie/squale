@@ -73,6 +73,7 @@ public class ProjectProfileTransform
         result.setTerminationTasks( terminationTasksDTO );
 
         result.setExportIDE( pProfile.getExportIDE() );
+        result.setLanguage( pProfile.getLanguage() );
         return result;
     }
 
@@ -123,6 +124,7 @@ public class ProjectProfileTransform
         }
         profileBO.setTerminationTasks( terminationTasksDTO );
         profileBO.setExportIDE( pProfileDTO.getExportIDE() );
+        profileBO.setLanguage( pProfileDTO.getLanguage() );
         return profileBO;
     }
 }

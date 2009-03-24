@@ -84,5 +84,25 @@ public class BaseMessages
         MessageFormat format = new MessageFormat( getBundleString( pKey ) );
         return format.format( pValues );
     }
+    
+    /**
+     * Indique si la clé demandée existe
+     * @param pKey nom de la clé recherchée
+     * @return le statut de la recherche (True/False)
+     */
+    protected Boolean existBundleString ( String pKey )
+    {
+    	Boolean result;
+    	try
+    	{
+    		String value = mResourceBundle.getString( pKey);
+    		result = true;
+    	}
+    	catch ( MissingResourceException e )
+    	{
+    		result = false;
+    	}
+    	return result;
+    }
 
 }
