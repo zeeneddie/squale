@@ -4,106 +4,227 @@
 	font-variant: small-caps;
 }
 
-div.richbox{
-	position:absolute;
-	background-color:#F5F5FC;
-	border:1px;
-	border-style:solid;
-	border-color:#A8AFD8;
-	padding:2px;
-}
-div.iconClose{
-	position:absolute;
-	right:0;
+div.richbox {
+	position: absolute;
+	background-color: #F5F5FC;
+	border: 1px;
+	border-style: solid;
+	border-color: #A8AFD8;
+	padding: 2px;
 }
 
+div.iconClose {
+	position: absolute;
+	right: 0;
+}
 
-div.notsel{		
-	cursor:pointer;
+div.notsel {
+	cursor: pointer;
 	display: block;
 	text-align: left;
 }
 
-div.sel{		
-	cursor:pointer;
-	background-color:#e9cd9e;	
+div.sel {
+	cursor: pointer;
+	background-color: #e9cd9e;
 	display: block;
 	text-align: left;
 }
 
-div.ddlist{
-	position:absolute;
-	border:1px;
-	background-color:#FFFFFF;
-	border-style:solid;
-	border-color:#3675AE;
-	padding:2px;
+div.ddlist {
+	position: absolute;
+	border: 1px;
+	background-color: #FFFFFF;
+	border-style: solid;
+	border-color: #3675AE;
+	padding: 2px;
 }
 
-span.deco{
+span.deco {
 	font-weight: bold;
 }
 
-.suggest{
-	background-image: url({#easyComplete.img.ok#}) ;
+.suggest {
+	background-image: url({#easyComplete.img.ok#});
 	background-position: top right;
-	background-repeat:no-repeat;
+	background-repeat: no-repeat;
 }
 
-span.upW{
-background-image: url(../theme/charte_v03_001/img/picto/blanc/arTr.gif);
-background-repeat: no-repeat;
-background-position: center;
-padding-left:12px;
-width:12px;
+span.upW {
+	background-image: url(../theme/charte_v03_001/img/picto/blanc/arTr.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-left: 12px;
+	width: 12px;
 }
 
-span.downW{
-background-image: url(../theme/charte_v03_001/img/picto/blanc/arTr_D.gif);
-background-repeat: no-repeat;
-background-position: center;
-padding-left:12px;
-width:12px;
+span.downW {
+	background-image:
+		url(../theme/charte_v03_001/img/picto/blanc/arTr_D.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-left: 12px;
+	width: 12px;
 }
 
-span.upB{
-background-image: url(../theme/charte_v03_001/img/picto/neutre/arTr.gif);
-background-repeat: no-repeat;
-background-position: center;
-padding-left:12px;
-width:12px;
+span.upB {
+	background-image: url(../theme/charte_v03_001/img/picto/neutre/arTr.gif)
+		;
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-left: 12px;
+	width: 12px;
 }
 
-span.downB{
-background-image: url(../theme/charte_v03_001/img/picto/neutre/arTr_D.gif);
-background-repeat: no-repeat;
-background-position: center;
-padding-left:12px;
-width:12px;
+span.downB {
+	background-image:
+		url(../theme/charte_v03_001/img/picto/neutre/arTr_D.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-left: 12px;
+	width: 12px;
 }
 
-.100pc{
-	width:auto !important; width:100%;
+.100pc {
+	width: auto !important;
+	width: 100%;
 }
 
-
-.wIntro {font-size:100%; font-weight:bold; margin:20px 0 20px 0; padding:0; line-height: 1em;}
-
-.wTitreGeneral {font-size:130%; font-weight:bold; margin:0; padding:0;line-height: 1.4em;color:#2e5880; border-bottom:solid #ccc 1px;background-color:inherit;width:100%;}
-.wTitreParagraphe {font-size:110%; font-weight:bold;margin:0;padding:0;line-height: 1.1em;color:#2e5880; background-color:inherit;} 
-
-.exergue {font-style:italic;font-weight:bold;color:#f3ba5d;background-color:inherit;}
-.surtitre{
-	 font-size:90%;
-	 font-weight:bold;
-	 margin:10px 0 0 0;
-	 padding:0;
-	 text-transform:uppercase;
-	 color:#f3ba5d;background-color:inherit;
+.wIntro {
+	font-size: 100%;
+	font-weight: bold;
+	margin: 20px 0 20px 0;
+	padding: 0;
+	line-height: 1em;
 }
 
-p{
-	padding : 0 0 0 0;
-	margin : 0 0 0 0;
+.wTitreGeneral {
+	font-size: 130%;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+	line-height: 1.4em;
+	color: #2e5880;
+	border-bottom: solid #ccc 1px;
+	background-color: inherit;
+	width: 100%;
 }
 
+.wTitreParagraphe {
+	font-size: 110%;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+	line-height: 1.1em;
+	color: #2e5880;
+	background-color: inherit;
+}
+
+.exergue {
+	font-style: italic;
+	font-weight: bold;
+	color: #f3ba5d;
+	background-color: inherit;
+}
+
+.surtitre {
+	font-size: 90%;
+	font-weight: bold;
+	margin: 10px 0 0 0;
+	padding: 0;
+	text-transform: uppercase;
+	color: #f3ba5d;
+	background-color: inherit;
+}
+
+p {
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+}
+
+/* ----------------- CSS for tag management ----------------- */
+.doubleBarre {
+	border: 4px double #F3BA5D;
+	padding: 10px;
+	-moz-border-radius: 0px 20px 20px 20px
+}
+
+div#resultheader {
+	border: 2px solid #BBBBBB;
+	background-color: #F5F5F5;
+	padding: 7px;
+}
+
+div#resultheader form {
+	margin-bottom: 0px;
+}
+
+div#components {
+	float: left;
+}
+
+div.addTag,div.delTag {
+	float: left;
+}
+
+div.addTag *,div.delTag * {
+	border-bottom: none;
+}
+
+div.component {
+	vertical-align: middle;
+	line-height: 22px;
+}
+
+div.component>div {
+	float: left;
+}
+
+div#resultheader div.tags {
+	padding-left: 20px;
+	font-style: italic;
+}
+
+div#resultheader div.tags * {
+	font-weight: lighter;
+}
+
+div#resultheader div.tags a {
+	color: grey;
+}
+
+div#tag-button-app,div#tag-button-proj {
+	padding-left: 4px;
+}
+
+div#tagRemoval,div#tagAddition {
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* Default visibility */
+	visibility: hidden;
+}
+
+div#tagRemoval div,div#tagAddition>div {
+	padding-left: 15px;
+}
+
+div#resultsheader-audits {
+	margin-top: 10px;
+	clear: left;
+}
+
+/* CSS for tag management - Part needed for IE 6 only - */
+div#components {
+	padding: 0px;
+}
+
+div.tags,div.projectName,div.applicationName,div#tag-button-app,div#tag-button-proj
+	{
+	float: left;
+}
+
+div.component {
+	float: left;
+	clear: left;
+}

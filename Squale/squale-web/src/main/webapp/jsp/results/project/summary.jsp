@@ -45,6 +45,8 @@ if(selectedTab == null) {
 <script type="text/javascript" src="jslib/information.js"></script>
 <script type="text/javascript"
 	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
+<script type="text/javascript" src="jslib/jquery-ui.js"></script>
 
 <bean:define id="applicationId" name="projectSummaryForm"
 	property="applicationId" type="String" />
@@ -75,7 +77,6 @@ if(selectedTab == null) {
 	<af:body canvasLeftPageInclude="/jsp/canvas/project_menu.jsp">
 		<%-- une autre valeur que "true" indique qu'on est passé par une autre vue 
 			que celle composant directement --%>
-		<%-- TODO FAB : gérer la suppression du traceur... --%>
 		<%--<bean:define id="compoName" type="String" property="name"
 			value="<%=component%> " />
 		<squale:tracker
@@ -91,82 +92,72 @@ if(selectedTab == null) {
 
 			<br />
 			<squale:resultsHeader name="projectSummaryForm" displayComparable="true">
-				<af:form action="project.do">
-					<div id="appTagRemoval" style="visibility:hidden;">
-						<div id="hidden" style="display:none;">
-							<af:field key="empty" property="applicationId" value='<%= applicationId%>'/>
-							<af:field key="empty" property="projectId" value='<%= projectId%>'/>
+				<div id="tagRemoval">
+					<af:form action="project.do">
+						<div id="appTagRemoval" style="visibility:hidden">
+							<div id="hidden" style="display:none;">
+								<af:field key="empty" property="applicationId" value='<%= applicationId%>'/>
+								<af:field key="empty" property="projectId" value='<%= projectId%>'/>
+							</div>
+							<table>
+								<tr>
+									<td>
+										<bean:define id="listtagApp" name="projectSummaryForm" property="tagsAppli"></bean:define>
+										<af:select property="tagDelAppli">
+											<af:options collection="listtagApp" property="name"/>
+										</af:select>
+									</td>
+									<td>
+										<af:button callMethod="removeTagApplication" name="supprimer"/>
+									</td>
+								</tr>
+							</table>
 						</div>
-						<table>
-							<tr>
-								<td>
-									<!--<bean:message key="tag.message.application.delete" />-->
-									<bean:define id="listtagApp" name="projectSummaryForm" property="tagsAppli"></bean:define>
-									<af:select property="tagDelAppli">
-										<af:options collection="listtagApp" property="name"/>
-									</af:select>
-								</td>
-								<td>
-									<%
-										// On construit le lien pour le bouton retour
-										String action = "project.do?action=delTagApplication&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId + "&projectId=" + projectId ;
-										String href = "location.href='" + action + "'";
-										//onclick="<%=href% >"
-									%>
-									<af:button callMethod="removeTagApplication" name="supprimer"/>
-								</td>
-							</tr>
-						</table>
-					</div>
-					<div id="projTagRemoval" style="display:none;">
-						<div id="hidden" style="display:none;">
-							<af:field key="empty" property="applicationId" value='<%= applicationId%>'/>
-							<af:field key="empty" property="projectId" value='<%= projectId%>'/>
+						<div id="projTagRemoval" style="visibility:hidden">
+							<div id="hidden" style="display:none;">
+								<af:field key="empty" property="applicationId" value='<%= applicationId%>'/>
+								<af:field key="empty" property="projectId" value='<%= projectId%>'/>
+							</div>
+							<table>
+								<tr>
+									<td>
+										<bean:define id="listtagProj" name="projectSummaryForm" property="tags"></bean:define>
+										<af:select property="tagDel">
+											<af:options collection="listtagProj" property="name"/>
+										</af:select>
+									</td>
+									<td>
+										<af:button callMethod="removeTag" name="supprimer"/>
+									</td>
+								</tr>
+							</table>
 						</div>
-						<table>
-							<tr>
-								<td>
-									<!--<bean:message key="tag.message.application.delete" />-->
-									<bean:define id="listtagProj" name="projectSummaryForm" property="tags"></bean:define>
-									<af:select property="tagDel">
-										<af:options collection="listtagProj" property="name"/>
-									</af:select>
-								</td>
-								<td>
-									<%
-										// On construit le lien pour le bouton retour
-										String action2 = "project.do?action=removeTag&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId ;
-										String href2 = "location.href='" + action2 + "'";
-										// onclick="<%=href2% >" 
-									%>
-									<af:button callMethod="removeTag" name="supprimer"/>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</af:form>
-				<div id="appTagAddition" style="display:none;">
-					<af:form action='<%="project.do?action=addTagApplication&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId + "&projectId=" + projectId%>'>
-						<!--<bean:message key="tag.message.application.new" />-->
-						<af:field key="empty" name="projectSummaryForm" property="tagSupp"
-							value="" easyCompleteCallBackUrl="<%=callbackUrlApp%>" />
 					</af:form>
 				</div>
-				<script type="text/javascript">
-					showButton( 'tagPlusApp' );
-					showButton( 'tagMinusApp' );
-				</script>
-				<div id="projTagAddition" style="display:none;">
-					<af:form action='<%="project.do?action=addTag&projectId=" + projectId + "&currentAuditId=" + currentAuditId%>'>
-						<!--<bean:message key="tag.message.project.new" />-->
-						<af:field key="empty" name="projectSummaryForm" property="tagSupp"
-							value="" easyCompleteCallBackUrl="<%=callbackUrlProj%>" />
-					</af:form>
+				<div id="tagAddition">
+					<div id="appTagAddition" style="visibility:hidden">
+						<af:form action='<%="project.do?action=addTagApplication&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId + "&projectId=" + projectId%>'>
+							<af:field key="empty" name="projectSummaryForm" property="tagSupp"
+								value="" easyCompleteCallBackUrl="<%=callbackUrlApp%>" />
+						</af:form>
+					</div>
+					<div id="projTagAddition" style="visibility:hidden">
+						<af:form action='<%="project.do?action=addTag&projectId=" + projectId + "&currentAuditId=" + currentAuditId%>'>
+							<af:field key="empty" name="projectSummaryForm" property="tagSupp"
+								value="" easyCompleteCallBackUrl="<%=callbackUrlProj%>" />
+						</af:form>
+					</div>
 				</div>
-				<script type="text/javascript">
-					showButton( 'tagPlusPro' );
-					showButton( 'tagMinusPro' );
-				</script>
+				<%-- FINISH THIS UP ! https://project.squale.org/ticket/140
+				<logic:present name="unexistingTag" scope="request">
+					<div id="unexistingTagBox" title="Tag does not exist">
+						<bean:write name="unexistingTag"/>
+					</div>
+					<script>
+						showErrorModalBox("unexistingTagBox");
+					</script>
+				</logic:present>
+				--%>
 			</squale:resultsHeader>
 			<br />
 			<div style="color: #f00"><html:errors property="exportIDE" />

@@ -402,17 +402,3 @@ div.homepage {border: 4px double #F3BA5D; padding:10px;  -moz-border-radius:0px 
 div.homepage > table.formulaire {visibility:hidden}
 div.homepage div.onglet_contenu{background-color:#FFFFFF;} 
 div.ongKiviat {float:left; margin-top:5px;}
-/*-- elements for the tag management --*/
-.components {display:block; float:left;}
-.component {display:block}
-.applicationName {display:inline;float:left;}
-.projectname {display:inline;float:left;}
-.tags {display:inline;float:left;}
-.addTag {display:inline;float:left;}
-.delTag {display:inline;float:left;}
-.audits {display:block; float:left;width:1000px;}
-#appTagAddition {display:block;}
-#projTagAddition {display:block;}
-#appTagRemoval {display:block;}
-#projTagRemoval {display:block;}
-.doubleBarre {border: 4px double #F3BA5D; padding:10px;  -moz-border-radius:0px 20px 20px 20px}
