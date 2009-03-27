@@ -177,11 +177,14 @@ public class ReferenceTransformer
         		Integer nbLOC = (Integer) projectMeasures.get( index );
         		volumeData.put("mccabe.project.sloc", Integer.toString(nbLOC));
         	}
-        	else if ( (index = measuresKeys.indexOf( "mccabe.project.projectnl" ) )!= -1 )
-        	{
-        		Integer nbLOC = (Integer) projectMeasures.get( index );
-        		volumeData.put("mccabe.project.sloc", Integer.toString(nbLOC));
-        	}    
+        	else{
+        	    index = measuresKeys.indexOf( "mccabe.project.projectnl" );
+        	    if ( index!= -1 )
+            	{
+            		Integer nbLOC = (Integer) projectMeasures.get( index );
+            		volumeData.put("mccabe.project.sloc", Integer.toString(nbLOC));
+            	}
+        	}
             index = measuresKeys.indexOf( "mccabe.project.numberOfClasses" );
             if ( index != -1 )
             {
