@@ -514,11 +514,11 @@ public class ComponentDTO
     }
     
     /**
-     * Verifies if the component already posesses the tag 
+     * Verifies if the component already possesses the tag 
      * @param pTag The given Tag that is compared with the components tag list
-     * @return whether the comonent already posesses the Tag or not
+     * @return whether the comonent already possesses the Tag or not
      */
-    public boolean posessTag(TagDTO pTag)
+    public boolean possessTag(TagDTO pTag)
     {
         for ( TagDTO tagDTO : mTags )
         {
