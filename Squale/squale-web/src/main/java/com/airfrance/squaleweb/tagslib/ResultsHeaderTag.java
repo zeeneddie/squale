@@ -43,6 +43,11 @@ import com.airfrance.welcom.struts.util.WConstants;
 public class ResultsHeaderTag
     extends TagSupport
 {
+    /** Page attribute to tell if the application has tags or not */
+    static final String APPLICATION_HAS_TAGS = "app_has_tags";
+
+    /** Page attribute to tell if the project has tags or not */
+    static final String PROJECT_HAS_TAGS = "proj_has_tags";
 
     /** Le nom du formulaire */
     private String mName;
@@ -67,14 +72,16 @@ public class ResultsHeaderTag
         // On récupère la requête pour la locale
         Locale locale = pageContext.getRequest().getLocale();
         // Début du blockquote
-        StringBuffer blockquote = new StringBuffer( "<blockquote>" );
+        StringBuffer blockquote = new StringBuffer( "<div id =\"resultheader\">" );
         // On récupère les différents attributs
         String appliId = (String) RequestUtils.lookup( pageContext, mName, "applicationId", null );
         String projectId = (String) RequestUtils.lookup( pageContext, mName, "projectId", null );
         String auditId = (String) RequestUtils.lookup( pageContext, mName, "currentAuditId", null );
         String previousAuditId = (String) RequestUtils.lookup( pageContext, mName, "previousAuditId", null );
         Collection<TagDTO> tagsApplication = getTagsComponent( ComponentType.APPLICATION );
+        pageContext.setAttribute( APPLICATION_HAS_TAGS, !tagsApplication.isEmpty() );
         Collection<TagDTO> tagsProjet = getTagsComponent( ComponentType.PROJECT );
+        pageContext.setAttribute( PROJECT_HAS_TAGS, !tagsProjet.isEmpty() );
 
         String paramsLink = "&currentAuditId=" + auditId + "&previousAuditId=" + previousAuditId;
         String[] param = new String[1];
@@ -85,7 +92,7 @@ public class ResultsHeaderTag
                 + (String) RequestUtils.lookup( pageContext, mName, "applicationName", null ) + "</a>";
         // On affiche le nom de l'application en gras
 
-        blockquote.append( "<div class=\"components\">" );
+        blockquote.append( "<div id=\"components\">" );
         blockquote.append( "<div class=\"component\">" );
         blockquote.append( "<div class=\"applicationName\"><b>" );
         blockquote.append( WebMessages.getString( locale, "description.name.application", param ) );
@@ -122,7 +129,7 @@ public class ResultsHeaderTag
 
         // fin de la div "components"
         blockquote.append( "</div>" );
-        
+
         // On écrit le début du block
         ResponseUtils.write( pageContext, blockquote.toString() );
         return EVAL_BODY_INCLUDE;
@@ -152,10 +159,13 @@ public class ResultsHeaderTag
 
         if ( isTaggingEnabled() )
         {
+            String buttonType = pType.equals( ComponentType.APPLICATION ) ? "app" : "proj";
+            retour.append( "<div id=\"tag-button-" + buttonType + "\">" );
             // The plus button that will show the field to add tags
             retour.append( plusButton( pType ) );
             // The minus button that will show the field to delete tags
             retour.append( minusButton( pType ) );
+            retour.append( "</div>" );
         }
 
         return retour.toString();
@@ -163,186 +173,81 @@ public class ResultsHeaderTag
 
     /**
      * Method that will generate the code to show the "plus" Button
+     * 
      * @param pType the type of the wanted component
      * @return The string with the code to show the "plus" button
      */
-    private String plusButton(String pType)
+    private String plusButton( String pType )
     {
         StringBuffer retour = new StringBuffer();
-        
+
         String idPlus = "tagPlus";
-        if ( pType.compareTo( ComponentType.APPLICATION ) == 0 ){
+        if ( pType.compareTo( ComponentType.APPLICATION ) == 0 )
+        {
             idPlus = idPlus + "App";
         }
-        else if ( pType.compareTo( ComponentType.PROJECT ) == 0 ){
+        else if ( pType.compareTo( ComponentType.PROJECT ) == 0 )
+        {
             idPlus = idPlus + "Pro";
         }
-        //The buttons + that will make the correspondig "addTag" div appear are drawn
-        retour.append( "<div id=\""+idPlus+"\" class=\"addTag\" style=\"display:none;\">" );
+
+        retour.append( "<div id=\"" + idPlus + "\" class=\"addTag\">" );
         if ( pType.compareTo( ComponentType.APPLICATION ) == 0 )
         {
-            //The "+" button on the application line calls the following javascript actions 
-            //shows the div displaying the textField to add a tag
-            retour.append( "<a href=\"javascript:displayOn('appTagAddition');" + 
-            //hides the "-" button of the application line
-                   "javascript:displayOff('tagMinusApp');" +
-            //removes the combobox to delete tags from the application line (it is only hidden)
-                   "javascript:displayOff('appTagRemoval');" +
-            //shows the new "+" button that will be used to return to the original appearance
-                   "javascript:displayOn('tagPlusAppBack');" +
-            //hides the old "+" button of the application line
-                   "javascript:displayOff('tagPlusApp');\"><img src=\"theme/charte_v03_001/img/ico/bleu/icon_sqplus.gif\" alt=\"Ajout d'un tag\"></a>" );
+            // The "+" button on the application line calls the following javascript actions
+            // shows the div displaying the textField to add a tag
+            retour.append( "<a href=\"javascript:addAppTagButtonClicked();\"><img src=\"theme/charte_v03_001/img/ico/enabled/plus.gif\" title=\"Add a tag\"> </a>" );
         }
         else if ( pType.compareTo( ComponentType.PROJECT ) == 0 )
         {
-            //The "+" button on the project line calls the following javascript actions 
-            //shows the div displaying the textField to add a tag
-            retour.append( "<a href=\"javascript:displayOn('projTagAddition');" +
-            //hides the '-' button of the project line
-            		"javascript:displayOff('tagMinusPro');" +
-            //shows the new "+" button that will be used to return to the original appearance
-                    "javascript:displayOn('tagPlusProBack');" +
-            //hides the old "+" button of the project line
-                    "javascript:displayOff('tagPlusPro');\"><img src=\"theme/charte_v03_001/img/ico/bleu/icon_sqplus.gif\" alt=\"Ajout d'un tag\"></a>" );
+            // The "+" button on the project line calls the following javascript actions
+            // shows the div displaying the textField to add a tag
+            retour.append( "<a href=\"javascript:addProjTagButtonClicked();\"><img src=\"theme/charte_v03_001/img/ico/enabled/plus.gif\" title=\"Add a tag\"> </a>" );
         }
         retour.append( "</div>" );
-        
-        //The buttons + that will make the corresponding "addtag" div disapear are drawn
-        retour.append( "<div id=\""+idPlus+"Back\" class=\"addTag\" style=\"display:none;\">" );
-        if ( pType.compareTo( ComponentType.APPLICATION ) == 0 )
-        {
-            //The "+" button (to reset appearance) on the application line calls the following javascript actions 
-            //hides the div displaying the textField to add a tag
-            retour.append( "<a href=\"javascript:displayOff('appTagAddition');" +
-            //shows the "-" button of the application line
-            		"javascript:displayOn('tagMinusApp');" +
-            //restores the combobox to delete tags from the application line (it remains hidden but takes its place)
-                    "javascript:displayOn('appTagRemoval');" +
-            //hides the "back" "+" button of the application line
-            		"javascript:displayOff('tagPlusAppBack');" +
-            //shows the original "+" button of the application line            		
-            		"javascript:displayOn('tagPlusApp');\"><img src=\"theme/charte_v03_001/img/ico/bleu/icon_sqplus.gif\" alt=\"Ajout d'un tag\"></a>" );
-        }
-        else if ( pType.compareTo( ComponentType.PROJECT ) == 0 )
-        {
-            //The "+" button (to reset appearance) on the project line calls the following javascript actions 
-            //hides the div displaying the textField to add a tag
-            retour.append( "<a href=\"javascript:displayOff('projTagAddition');" +
-            //shows the "-" button of the project line          
-            		"javascript:displayOn('tagMinusPro');" +
-            //hides the "back" "+" button of the project line            		
-            		"javascript:displayOff('tagPlusProBack');" +
-            //shows the original "+" button of the project line   
-            		"javascript:displayOn('tagPlusPro');\"><img src=\"theme/charte_v03_001/img/ico/bleu/icon_sqplus.gif\" alt=\"Ajout d'un tag\"></a>" );
-        }
-        retour.append( "</div>" );
-        
+
         return retour.toString();
     }
-    
+
     /**
      * Method that will generate the code to show the "minus" Button
+     * 
      * @param pType the type of the wanted component
      * @return The string with the code to show the "minus" button
      */
-    private String minusButton(String pType)
+    private String minusButton( String pType )
     {
         StringBuffer retour = new StringBuffer();
-        
+
         String idMinus = "tagMinus";
-        if ( pType.compareTo( ComponentType.APPLICATION ) == 0 ){
+        if ( pType.compareTo( ComponentType.APPLICATION ) == 0 )
+        {
             idMinus = idMinus + "App";
         }
-        else if ( pType.compareTo( ComponentType.PROJECT ) == 0 ){
+        else if ( pType.compareTo( ComponentType.PROJECT ) == 0 )
+        {
             idMinus = idMinus + "Pro";
         }
-        
-        //The buttons "-" that will make the correspondig "delTag" combobox appear are drawn
-        retour.append( "<div id=\""+idMinus+"\" class=\"delTag\" style=\"display:none;\">" );
-        if ( pType.compareTo( ComponentType.APPLICATION ) == 0 )
+
+        retour.append( "<div id=\"" + idMinus + "\" class=\"delTag\">" );
+        if ( pType.compareTo( ComponentType.APPLICATION ) == 0
+            && pageContext.getAttribute( APPLICATION_HAS_TAGS ).equals( true ) )
         {
-            //The "-" button on the application line calls the following javascript actions 
-            //shows the div displaying the combobox of tags to delete on the application line
-            retour.append( "<a href=\"javascript:visibilityOn('appTagRemoval');" +
-            //hides the "+" button of the application line
-            		"javascript:displayOff('tagPlusApp');" +
-            //may hide the textfield to add a tag on the application line 
-            		"javascript:displayOff('appTagAddition');" +
-            //shows the new "-" button that will be used to return to the original appearance
-            		"javascript:displayOn('tagMinusAppBack');" +
-            //hides the old "-" button of the project line
-            		"javascript:displayOff('tagMinusApp');\"><img src=\"theme/charte_v03_001/img/ico/bleu/icon_sqless.gif\"></a>" );
+            // The "+" button on the application line calls the following javascript actions
+            // shows the div displaying the textField to add a tag
+            retour.append( "<a href=\"javascript:delAppTagButtonClicked();\"><img src=\"theme/charte_v03_001/img/ico/enabled/minus.gif\" title=\"Delete a tag\"> </a>" );
         }
-        else if ( pType.compareTo( ComponentType.PROJECT ) == 0 )
+        else if ( pType.compareTo( ComponentType.PROJECT ) == 0
+            && pageContext.getAttribute( PROJECT_HAS_TAGS ).equals( true ) )
         {
-            //The "-" button on the project line calls the following javascript actions 
-            //shows the div displaying the combobox of tags to delete on the project line
-            retour.append( "<a href=\"javascript:displayOn('projTagRemoval');" +
-            //hides the "+" button of the project line
-            		"javascript:displayOff('tagPlusPro');" +
-            //may hide the textfield to add a tag on the project line
-            		"javascript:displayOff('projTagAddition');" +
-            //shows the new "-" button that will be used to return to the original appearance
-            		"javascript:displayOn('tagMinusProBack');" +
-            //hides the old "-" button of the project line 
-            		"javascript:displayOff('tagMinusPro');\"><img src=\"theme/charte_v03_001/img/ico/bleu/icon_sqless.gif\"></a>" );
+            // The "+" button on the project line calls the following javascript actions
+            // shows the div displaying the textField to add a tag
+            retour.append( "<a href=\"javascript:delProjTagButtonClicked();\"><img src=\"theme/charte_v03_001/img/ico/enabled/minus.gif\" title=\"Delete a tag\"> </a>" );
         }
         retour.append( "</div>" );
-        
-        //The buttons "-" that will make the corresponding "delTag" combobox disapear are drawn
-        retour.append( "<div id=\""+idMinus+"Back\" class=\"delTag\" style=\"display:none;\">" );
-        if ( pType.compareTo( ComponentType.APPLICATION ) == 0 )
-        {
-            //The "-" button on the application line calls the following javascript actions 
-            //hides the div displaying the combobox of tags to delete on the application line
-            retour.append( "<a href=\"javascript:visibilityOff('appTagRemoval');" +
-            //shows the "+" button of the application line
-                    "javascript:displayOn('tagPlusApp');" +
-            //hides the new "-" button that will be used to return to the original appearance
-                    "javascript:displayOff('tagMinusAppBack');" +
-            //shows the old "-" button of the project line
-                    "javascript:displayOn('tagMinusApp');\"><img src=\"theme/charte_v03_001/img/ico/bleu/icon_sqless.gif\"></a>" );
-        }
-        else if ( pType.compareTo( ComponentType.PROJECT ) == 0 )
-        {
-            //The "-" button on the project line calls the following javascript actions 
-            //hides the div displaying the combobox of tags to delete on the project line
-            retour.append( "<a href=\"javascript:displayOff('projTagRemoval');" +
-            //shows the "+" button of the project line
-                    "javascript:displayOn('tagPlusPro');" +
-            //hides the new "-" button that will be used to return to the original appearance
-                    "javascript:displayOff('tagMinusProBack');" +
-            //shows the old "-" button of the project line 
-                    "javascript:displayOn('tagMinusPro');\"><img src=\"theme/charte_v03_001/img/ico/bleu/icon_sqless.gif\"></a>" );
-        }
-        retour.append( "</div>" );
-        
+
         return retour.toString();
     }
-    
-//    /**
-//     * Méthode qui va générer le code pour créer la div qui apparaitra dans la page et qui permettra l'ajout des tags
-//     * 
-//     * @param pType le type du component voulu
-//     * @return le code de la div généré
-//     */
-//    private String createDivTagAddition( String pType )
-//    {
-//        StringBuffer divCode = new StringBuffer();
-//
-//        if ( pType.compareTo( ComponentType.APPLICATION ) == 0 )
-//        {
-//            divCode.append( "<div id=\"appTagAddition\" style=\"display:none;\">" );
-//            divCode.append( "<af:field key=\"empty\" property=\"matricule\" value=\"\" easyCompleteCallBackUrl=\"<%=callbackUrl%>\"/>" );
-//        }
-//        else if ( pType.compareTo( ComponentType.PROJECT ) == 0 )
-//        {
-//            divCode.append( "<div id=\"projTagAddition\" style=\"display:none;\">" );
-//        }
-//        divCode.append( "</div>" );
-//
-//        return divCode.toString();
-//    }
 
     /**
      * Méthode qui va regarder les droits de l'utilisateur, si ce dernier est gestionnaire ou admin, la méthode renvoie
@@ -377,12 +282,13 @@ public class ResultsHeaderTag
      * @return la collection de tags du component voulu
      * @throws JspException si une erreur est levé pendant la récupération des paramètres de la requete
      */
+    @SuppressWarnings( "unchecked" )
     private Collection<TagDTO> getTagsComponent( String pType )
         throws JspException
     {
 
-        Collection<TagDTO> tagsApplication;
-        Collection<TagDTO> tagsProjet;
+        Collection<TagDTO> tagsApplication = new ArrayList<TagDTO>();
+        Collection<TagDTO> tagsProjet = new ArrayList<TagDTO>();
 
         if ( mName.contains( "application" ) || mName.contains( "resultListForm" ) )
         {
@@ -393,11 +299,6 @@ public class ResultsHeaderTag
         {
             tagsProjet = (Collection<TagDTO>) RequestUtils.lookup( pageContext, mName, "tags", null );
             tagsApplication = (Collection<TagDTO>) RequestUtils.lookup( pageContext, mName, "tagsAppli", null );
-        }
-        else
-        {
-            tagsApplication = new ArrayList<TagDTO>();
-            tagsProjet = new ArrayList<TagDTO>();
         }
 
         if ( pType.compareTo( ComponentType.APPLICATION ) == 0 )
@@ -453,6 +354,7 @@ public class ResultsHeaderTag
 
     /**
      * The final information of the blockquote are added here to allow the evluation of the body included
+     * 
      * @return EVAL_PAGE
      * @see javax.servlet.jsp.tagext.TagSupport#doEndTag() {@inheritDoc} Méthode de terminaison du tag
      * @throws JspException if an error occurs
@@ -462,14 +364,16 @@ public class ResultsHeaderTag
     {
         StringBuffer blockquote = new StringBuffer();
         String[] param = new String[1];
-        
+
         // On récupère la requête pour la locale
         Locale locale = pageContext.getRequest().getLocale();
-        
+
         // On récupère les différents attributs
         String auditId = (String) RequestUtils.lookup( pageContext, mName, "currentAuditId", null );
         String previousAuditId = (String) RequestUtils.lookup( pageContext, mName, "previousAuditId", null );
-        
+
+        // let's start
+        blockquote.append( "<div id=\"resultsheader-audits\">" );
         // Le nom de l'audit courant
         param[0] =
             "<a href='audits.do?action=select&currentAuditId=" + auditId + "'>"
@@ -510,15 +414,19 @@ public class ResultsHeaderTag
                 blockquote.append( WebMessages.getString( locale, "description.audits.no.comparison" ) );
             }
         }
-        // Fin du blockquote
-        blockquote.append( "</blockquote>" );
-        
+        // end the audits part
+        blockquote.append( "</div>" );
+        // Fin du div principal
+        blockquote.append( "</div>" );
+
         // On écrit la fin du block
         ResponseUtils.write( pageContext, blockquote.toString() );
         return EVAL_PAGE;
     }
 
     /**
+     * Returns the name of the form.
+     * 
      * @return le nom du formulaire
      */
     public String getName()
@@ -527,6 +435,8 @@ public class ResultsHeaderTag
     }
 
     /**
+     * Returns true if audit comparison display is neeed.
+     * 
      * @return true si il faut afficher l'information sur la comparaison des audits
      */
     public boolean isDisplayComparable()
@@ -535,6 +445,8 @@ public class ResultsHeaderTag
     }
 
     /**
+     * Set the name of the form.
+     * 
      * @param pName le du formulaire
      */
     public void setName( String pName )
@@ -543,6 +455,8 @@ public class ResultsHeaderTag
     }
 
     /**
+     * Sets if audit comparison display is neeed.
+     * 
      * @param pDisplayComparable true si il faut afficher l'information sur la comparaison des audits
      */
     public void setDisplayComparable( boolean pDisplayComparable )
