@@ -433,29 +433,38 @@ public class ApplicationResultsAction
                         tagDTO = tagDTOtemp;
                     }
                 }
-                ComponentDTO application =
-                    (ComponentDTO) pRequest.getSession().getAttribute( BaseDispatchAction.APPLI_DTO );
 
-                // On rajoute le tag sur le formulaire
-                Collection<TagDTO> applicationTags = application.getTags();
-                boolean possedeTag = application.posessTag( tagDTO );
-                if ( !possedeTag )
+                if ( tagDTO == null )
                 {
-                    applicationTags.add( tagDTO );
-                    application.setTags( applicationTags );
-                    ( (ResultListForm) pForm ).setTags( applicationTags );
+                    pRequest.setAttribute( "unexistingTag", tagToAdd );
                 }
-
-                // On a pu le rajouter sur le formulaire, on va le rajouter en base
-                if ( !possedeTag )
+                else
                 {
-                    ac = AccessDelegateHelper.getInstance( "ApplicationAdmin" );
-                    paramIn = new Object[] { application.getID(), tagDTO };
-                    ac.execute( "addTag", paramIn );
-                }
+                    // the given tag exists in the DB: let's add it to the project
+                    ComponentDTO application =
+                        (ComponentDTO) pRequest.getSession().getAttribute( BaseDispatchAction.APPLI_DTO );
 
+                    // On rajoute le tag sur le formulaire
+                    Collection<TagDTO> applicationTags = application.getTags();
+                    boolean possedeTag = application.possessTag( tagDTO );
+                    if ( !possedeTag )
+                    {
+                        applicationTags.add( tagDTO );
+                        application.setTags( applicationTags );
+                        ( (ResultListForm) pForm ).setTags( applicationTags );
+                    }
+
+                    // On a pu le rajouter sur le formulaire, on va le rajouter en base
+                    if ( !possedeTag )
+                    {
+                        ac = AccessDelegateHelper.getInstance( "ApplicationAdmin" );
+                        paramIn = new Object[] { application.getID(), tagDTO };
+                        ac.execute( "addTag", paramIn );
+                    }
+                    
+                }
+                forward = pMapping.findForward( "summary" );
             }
-            forward = pMapping.findForward( "summary" );
         }
         catch ( Exception e )
         {
@@ -511,7 +520,7 @@ public class ApplicationResultsAction
 
                 // On retire le tag du formulaire
                 Collection<TagDTO> applicationTags = application.getTags();
-                boolean possedeTag = application.posessTag( tagDTOToDelete );
+                boolean possedeTag = application.possessTag( tagDTOToDelete );
                 if ( possedeTag )
                 {
                     Collection<TagDTO> newApplicationTags = new ArrayList<TagDTO>();

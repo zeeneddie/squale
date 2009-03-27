@@ -668,7 +668,7 @@ public class ProjectResultsAction
                     forward = pMapping.findForward( "practice" );
                     // le graph
                     double[] tab;
-                    
+
                     // Dans les 2 cas on affiche le graph en barre
                     RepartitionBarMaker barMaker =
                         new RepartitionBarMaker( pRequest, resForm.getProjectId(), resForm.getCurrentAuditId(),
@@ -703,7 +703,7 @@ public class ProjectResultsAction
                         ( (ProjectSummaryForm) pForm ).setHistoBarGraph( null );
                     }
                 }
-                //if the practice is a manual practice
+                // if the practice is a manual practice
                 else
                 {
                     forward = pMapping.findForward( "manualpractice" );
@@ -834,19 +834,20 @@ public class ProjectResultsAction
             result =
                 WTransformerFactory.objToForm( transformerClass, new Object[] { resultDTO, factor, practice, project,
                     audits, infoForm, pRequest.getLocale() } );
-            //If the practice is a manual practice
-            if( practice.getFormula()== null || practice.getFormulaType()==null)
+            // If the practice is a manual practice
+            if ( practice.getFormula() == null || practice.getFormulaType() == null )
             {
                 ResultForm curForm = (ResultForm) result;
-                QualityResultDTO lastMark = (QualityResultDTO)ac.execute( "lastManualMark", new Object[]{project.getID(),practiceId} );
+                QualityResultDTO lastMark =
+                    (QualityResultDTO) ac.execute( "lastManualMark", new Object[] { project.getID(), practiceId } );
                 Date creationDate = lastMark.getCreationDate();
-                AuditDTO curAudit = (AuditDTO)auditsDTO.get( 0 );
-                if (creationDate.before( curAudit.getRealDate()))
+                AuditDTO curAudit = (AuditDTO) auditsDTO.get( 0 );
+                if ( creationDate.before( curAudit.getRealDate() ) )
                 {
                     curForm.setLast( true );
-                    PracticeRuleDTO rule = (PracticeRuleDTO)lastMark.getRule();
+                    PracticeRuleDTO rule = (PracticeRuleDTO) lastMark.getRule();
                     boolean markValid = TimeLimitationParser.isMarkValid( rule.getTimeLimitation(), creationDate );
-                    if (!markValid)
+                    if ( !markValid )
                     {
                         curForm.setOutOfDate( true );
                     }
@@ -1645,29 +1646,38 @@ public class ProjectResultsAction
                         tagDTO = tagDTOtemp;
                     }
                 }
-                ComponentDTO project =
-                    (ComponentDTO) pRequest.getSession().getAttribute( BaseDispatchAction.PROJECT_DTO );
 
-                // On rajoute le tag sur le formulaire
-                Collection<TagDTO> projectTags = project.getTags();
-                boolean possedeTag = project.posessTag( tagDTO );
-                if ( !possedeTag )
+                if ( tagDTO == null )
                 {
-                    projectTags.add( tagDTO );
-                    project.setTags( projectTags );
-                    ( (ProjectSummaryForm) pForm ).setTags( projectTags );
+                    pRequest.setAttribute( "unexistingTag", tagToAdd );
+                }
+                else
+                {
+                    // the given tag exists in the DB: let's add it to the project
+                    ComponentDTO project =
+                        (ComponentDTO) pRequest.getSession().getAttribute( BaseDispatchAction.PROJECT_DTO );
+
+                    // On rajoute le tag sur le formulaire
+                    Collection<TagDTO> projectTags = project.getTags();
+                    boolean possedeTag = project.possessTag( tagDTO );
+                    if ( !possedeTag )
+                    {
+                        projectTags.add( tagDTO );
+                        project.setTags( projectTags );
+                        ( (ProjectSummaryForm) pForm ).setTags( projectTags );
+                    }
+
+                    // On a pu le rajouter sur le formulaire, on va le rajouter en base
+                    if ( !possedeTag )
+                    {
+                        ac = AccessDelegateHelper.getInstance( "ProjectAdmin" );
+                        paramIn = new Object[] { project.getID(), tagDTO };
+                        ac.execute( "addTag", paramIn );
+                    }
                 }
 
-                // On a pu le rajouter sur le formulaire, on va le rajouter en base
-                if ( !possedeTag )
-                {
-                    ac = AccessDelegateHelper.getInstance( "ProjectAdmin" );
-                    paramIn = new Object[] { project.getID(), tagDTO };
-                    ac.execute( "addTag", paramIn );
-                }
-
+                forward = pMapping.findForward( "summary" );
             }
-            forward = pMapping.findForward( "summary" );
         }
         catch ( Exception e )
         {
@@ -1683,7 +1693,7 @@ public class ProjectResultsAction
         }
         return forward;
     }
-    
+
     /**
      * Action removeTag removes a tag from the current project
      * 
@@ -1738,7 +1748,7 @@ public class ProjectResultsAction
                 }
                 project.setTags( newProjectTags );
                 ( (ProjectSummaryForm) pForm ).setTags( newProjectTags );
-                //The tag to delete is removed from the form
+                // The tag to delete is removed from the form
                 ( (ProjectSummaryForm) pForm ).setTagDel( "" );
                 ( (ProjectSummaryForm) pForm ).setTagDelAppli( "" );
 
@@ -1764,7 +1774,7 @@ public class ProjectResultsAction
         }
         return forward;
     }
-    
+
     /**
      * Action addTagApplication adds a tag to the current application
      * 
@@ -1776,7 +1786,7 @@ public class ProjectResultsAction
      * @throws ServletException exception that can be thrown
      */
     public ActionForward addTagApplication( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
-                                 HttpServletResponse pResponse )
+                                            HttpServletResponse pResponse )
         throws ServletException
     {
         ActionForward forward = null;
@@ -1799,29 +1809,38 @@ public class ProjectResultsAction
                         tagDTO = tagDTOtemp;
                     }
                 }
-                ComponentDTO application =
-                    (ComponentDTO) pRequest.getSession().getAttribute( BaseDispatchAction.APPLI_DTO );
 
-                // On rajoute le tag sur le formulaire
-                Collection<TagDTO> applicationTags = application.getTags();
-                boolean possedeTag = application.posessTag( tagDTO );
-                if ( !possedeTag )
+                if ( tagDTO == null )
                 {
-                    applicationTags.add( tagDTO );
-                    application.setTags( applicationTags );
-                    ( (ProjectSummaryForm) pForm ).setTagsAppli( applicationTags );
+                    pRequest.setAttribute( "unexistingTag", tagToAdd );
                 }
-
-                // On a pu le rajouter sur le formulaire, on va le rajouter en base
-                if ( !possedeTag )
+                else
                 {
-                    ac = AccessDelegateHelper.getInstance( "ApplicationAdmin" );
-                    paramIn = new Object[] { application.getID(), tagDTO };
-                    ac.execute( "addTag", paramIn );
-                }
+                    // the given tag exists in the DB: let's add it to the project
+                    ComponentDTO application =
+                        (ComponentDTO) pRequest.getSession().getAttribute( BaseDispatchAction.APPLI_DTO );
 
+                    // On rajoute le tag sur le formulaire
+                    Collection<TagDTO> applicationTags = application.getTags();
+                    boolean possedeTag = application.possessTag( tagDTO );
+                    if ( !possedeTag )
+                    {
+                        applicationTags.add( tagDTO );
+                        application.setTags( applicationTags );
+                        ( (ProjectSummaryForm) pForm ).setTagsAppli( applicationTags );
+                    }
+
+                    // On a pu le rajouter sur le formulaire, on va le rajouter en base
+                    if ( !possedeTag )
+                    {
+                        ac = AccessDelegateHelper.getInstance( "ApplicationAdmin" );
+                        paramIn = new Object[] { application.getID(), tagDTO };
+                        ac.execute( "addTag", paramIn );
+                    }
+
+                }
+                forward = pMapping.findForward( "summary" );
             }
-            forward = pMapping.findForward( "summary" );
         }
         catch ( Exception e )
         {
@@ -1831,13 +1850,13 @@ public class ProjectResultsAction
         if ( !errors.isEmpty() )
         {
             // Sauvegarde des messages
-            saveMessages( pRequest, errors );
+            saveErrors( pRequest, errors );
             // Routage vers la page d'erreur
             forward = pMapping.findForward( "total_failure" );
         }
         return forward;
     }
-    
+
     /**
      * Action delTag removes a tag from the current application
      * 
@@ -1849,7 +1868,7 @@ public class ProjectResultsAction
      * @throws ServletException exception that can be thrown
      */
     public ActionForward removeTagApplication( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
-                                    HttpServletResponse pResponse )
+                                               HttpServletResponse pResponse )
         throws ServletException
     {
         ActionForward forward = null;
@@ -1877,8 +1896,8 @@ public class ProjectResultsAction
 
                 // On retire le tag du formulaire
                 Collection<TagDTO> applicationTags = application.getTags();
-                
-                //The tag has to be present since it was chosen from a combo box containing
+
+                // The tag has to be present since it was chosen from a combo box containing
                 Collection<TagDTO> newApplicationTags = new ArrayList<TagDTO>();
                 for ( TagDTO tagApplication : applicationTags )
                 {

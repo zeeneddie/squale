@@ -2,6 +2,17 @@ var helpWindow;
 var agt=navigator.userAgent.toLowerCase();
 var isIE	= ((agt.indexOf("msie") != -1) && (agt.indexOf("opera") == -1));
 
+function showErrorModalBox(elementName)
+{
+	// implemented with jQuery and jQuery UI
+	var jQueryBoxName = "#" + elementName;
+	var box = $( jQueryBoxName );
+	box.dialog( { modal: true } );
+	box.dialog( 'option', 'dialogClass', 'onglet_contenu' );
+	//box.dialog( 'option', 'buttons', { "Ok" : function() { $(this).dialog("close"); } } );
+	
+}
+
 function errorMsg(field, property,msg,arg0)
 {
 	//document.images[property + "required"].src="{#optiflux.compression.prefix.img#}{#chartev2.field.ast#}";
