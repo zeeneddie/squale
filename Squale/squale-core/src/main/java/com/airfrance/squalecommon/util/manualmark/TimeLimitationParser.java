@@ -153,9 +153,12 @@ public final class TimeLimitationParser
     public static boolean isMarkValid( String validityPeriod, Date creationDate )
     {
         boolean valid = true;
-        Calendar endValidityCal = endValidityDate( validityPeriod, creationDate );
-        Calendar currentCal = TimeUtil.calDateOnly();
-        valid = isMarkValid( currentCal, endValidityCal );
+        if(validityPeriod!=null)
+        {
+            Calendar endValidityCal = endValidityDate( validityPeriod, creationDate );
+            Calendar currentCal = TimeUtil.calDateOnly();
+            valid = isMarkValid( currentCal, endValidityCal );
+        }
         return valid;
     }
 }
