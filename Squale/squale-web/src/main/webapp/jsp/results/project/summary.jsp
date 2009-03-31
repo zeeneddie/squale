@@ -1,20 +1,16 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
-	prefix="logic"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
 <%@ page import="com.airfrance.welcom.struts.util.WConstants"%>
-<%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.LogonBean"%>
+<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.LogonBean"%>
 <%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants"%>
 <%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
-<%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm"%>
-<%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm"%>
+<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm"%>
+<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm"%>
 <%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
 <%@ page import="com.airfrance.squaleweb.tagslib.HistoryTag"%>
 
@@ -37,33 +33,21 @@ String selectedTab = request.getParameter(HistoryTag.SELECTED_TAB_KEY);
 if(selectedTab == null) {
     // First tab by default
     selectedTab = "factors";
-}
-
-%>
-
+}%>
 
 <script type="text/javascript" src="jslib/information.js"></script>
-<script type="text/javascript"
-	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="theme/charte_v03_001/js/tagManagement.js"></script>
 <script type="text/javascript" src="jslib/jquery.js"></script>
 <script type="text/javascript" src="jslib/jquery-ui.js"></script>
 
-<bean:define id="applicationId" name="projectSummaryForm"
-	property="applicationId" type="String" />
-<bean:define id="projectId" name="projectSummaryForm"
-	property="projectId" type="String" />
-<bean:define id="currentAuditId" name="projectSummaryForm"
-	property="currentAuditId" type="String" />
-<bean:define id="previousAuditId" name="projectSummaryForm"
-	property="previousAuditId" type="String" />
-<bean:define id="auditSqualeVersion" name="projectSummaryForm"
-	property="auditSqualeVersion" type="String" />
-<bean:define id="comparable" name="projectSummaryForm"
-	property="comparableAudits" type="Boolean" />
-
+<bean:define id="applicationId" name="projectSummaryForm" property="applicationId" type="String" />
+<bean:define id="projectId" name="projectSummaryForm" property="projectId" type="String" />
+<bean:define id="currentAuditId" name="projectSummaryForm" property="currentAuditId" type="String" />
+<bean:define id="previousAuditId" name="projectSummaryForm" property="previousAuditId" type="String" />
+<bean:define id="auditSqualeVersion" name="projectSummaryForm" property="auditSqualeVersion" type="String" />
+<bean:define id="comparable" name="projectSummaryForm" property="comparableAudits" type="Boolean" />
 <bean:define id="callbackUrlApp">
-	<html:rewrite
-		page="/add_applicationTag.do?action=findTagForAutocomplete" />
+	<html:rewrite page="/add_applicationTag.do?action=findTagForAutocomplete" />
 </bean:define>
 <bean:define id="callbackUrlProj">
 	<html:rewrite page="/add_projectTag.do?action=findTagForAutocomplete" />
@@ -93,7 +77,7 @@ if(selectedTab == null) {
 			<br />
 			<squale:resultsHeader name="projectSummaryForm" displayComparable="true">
 				<div id="tagRemoval">
-					<af:form action="project.do">
+					<af:form action="project.do" name="tagMngtForm" type="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm">
 						<div id="appTagRemoval" style="visibility:hidden">
 							<div id="hidden" style="display:none;">
 								<af:field key="empty" property="applicationId" value='<%= applicationId%>'/>
@@ -108,7 +92,7 @@ if(selectedTab == null) {
 										</af:select>
 									</td>
 									<td>
-										<af:button callMethod="removeTagApplication" name="supprimer"/>
+										<af:button type="form" onclick="execSubmit('tagMngtForm','removeTagApplication',this)"  name="supprimer" singleSend="true"/>
 									</td>
 								</tr>
 							</table>
@@ -127,7 +111,7 @@ if(selectedTab == null) {
 										</af:select>
 									</td>
 									<td>
-										<af:button callMethod="removeTag" name="supprimer"/>
+										<af:button  type="form" onclick="execSubmit('tagMngtForm','removeTag',this)" name="supprimer" singleSend="true"/>
 									</td>
 								</tr>
 							</table>
