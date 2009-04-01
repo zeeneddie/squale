@@ -18,14 +18,16 @@
  */
 package com.airfrance.squaleweb.servlet;
 
+import java.io.Serializable;
+
 import javax.servlet.http.HttpSession;
 
 /**
  * Utility class for set variable in an http session
  */
-public class UserSqualeSessionContext
+public class UserSqualeSessionContext implements Serializable
 {
-
+    
     /**
      * The name
      */
@@ -73,7 +75,7 @@ public class UserSqualeSessionContext
     /**
      * Getter method for the parameter squaleAdminsMailingList
      * 
-     * @return The
+     * @return The value of the parameter squaleAdminsMailingList
      */
     public String getSqualeAdminsMailingList()
     {
