@@ -66,6 +66,7 @@ public class ResultsHeaderTag
      * @return EVAL_BODY_INCLUDE
      * @throws JspException si une erreur apparait
      */
+    @Override
     public int doStartTag()
         throws JspException
     {
@@ -79,9 +80,15 @@ public class ResultsHeaderTag
         String auditId = (String) RequestUtils.lookup( pageContext, mName, "currentAuditId", null );
         String previousAuditId = (String) RequestUtils.lookup( pageContext, mName, "previousAuditId", null );
         Collection<TagDTO> tagsApplication = getTagsComponent( ComponentType.APPLICATION );
-        pageContext.setAttribute( APPLICATION_HAS_TAGS, !tagsApplication.isEmpty() );
+        if ( tagsApplication != null )
+        {
+            pageContext.setAttribute( APPLICATION_HAS_TAGS, !tagsApplication.isEmpty() );
+        }
         Collection<TagDTO> tagsProjet = getTagsComponent( ComponentType.PROJECT );
-        pageContext.setAttribute( PROJECT_HAS_TAGS, !tagsProjet.isEmpty() );
+        if ( tagsProjet != null )
+        {
+            pageContext.setAttribute( PROJECT_HAS_TAGS, !tagsProjet.isEmpty() );
+        }
 
         String paramsLink = "&currentAuditId=" + auditId + "&previousAuditId=" + previousAuditId;
         String[] param = new String[1];
@@ -231,14 +238,14 @@ public class ResultsHeaderTag
 
         retour.append( "<div id=\"" + idMinus + "\" class=\"delTag\">" );
         if ( pType.compareTo( ComponentType.APPLICATION ) == 0
-            && pageContext.getAttribute( APPLICATION_HAS_TAGS ).equals( true ) )
+            && Boolean.TRUE.equals( pageContext.getAttribute( APPLICATION_HAS_TAGS ) ) )
         {
             // The "+" button on the application line calls the following javascript actions
             // shows the div displaying the textField to add a tag
             retour.append( "<a href=\"javascript:delAppTagButtonClicked();\"><img src=\"theme/charte_v03_001/img/ico/enabled/minus.gif\" title=\"Delete a tag\"> </a>" );
         }
         else if ( pType.compareTo( ComponentType.PROJECT ) == 0
-            && pageContext.getAttribute( PROJECT_HAS_TAGS ).equals( true ) )
+            && Boolean.TRUE.equals( pageContext.getAttribute( PROJECT_HAS_TAGS ) ) )
         {
             // The "+" button on the project line calls the following javascript actions
             // shows the div displaying the textField to add a tag
