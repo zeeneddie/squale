@@ -43,13 +43,12 @@ public class SearchProjectForm
 
     /** List of the found projects associated with their last audit */
     private Map mProjectForms; // De type ProjectForm -> auditForm
-    
+
     /** List of tags separated by spaces that the project must have */
     private String mTagList;
-    
 
     /**
-     * Constructeur par défaut
+     * Default constructor
      */
     public SearchProjectForm()
     {
@@ -61,6 +60,7 @@ public class SearchProjectForm
 
     /**
      * retrieves the value of the mApplicationBeginningName property
+     * 
      * @return the beginning of the name of the application associated with the project
      */
     public String getApplicationBeginningName()
@@ -70,6 +70,7 @@ public class SearchProjectForm
 
     /**
      * Retrieves the value of the mProjectBeginningName property
+     * 
      * @return the beginning of the project name
      */
     public String getProjectBeginningName()
@@ -79,6 +80,7 @@ public class SearchProjectForm
 
     /**
      * sets the value of the mApplicationBeginningName property
+     * 
      * @param pApplicationBeginningName the beginning of the name of the application associated with the project
      */
     public void setApplicationBeginningName( String pApplicationBeginningName )
@@ -88,6 +90,7 @@ public class SearchProjectForm
 
     /**
      * sets the value of the mProjectBeginningName property
+     * 
      * @param pProjectBeginningName the beginning of the project name
      */
     public void setProjectBeginningName( String pProjectBeginningName )
@@ -97,6 +100,7 @@ public class SearchProjectForm
 
     /**
      * Retrieves the value of the mProjectForms property
+     * 
      * @return the list of the found projects associated with their last audit
      */
     public Map getProjectForms()
@@ -106,6 +110,7 @@ public class SearchProjectForm
 
     /**
      * sets the value of the mProjectForms property
+     * 
      * @param pProjectForms the list of the found projects associated with their last audit
      */
     public void setProjectForms( Map pProjectForms )
@@ -114,7 +119,8 @@ public class SearchProjectForm
     }
 
     /**
-     * retrives the keys of the project map
+     * Retrieves the keys of the project map
+     * 
      * @return the projects
      */
     public Set getKeys()
@@ -124,6 +130,7 @@ public class SearchProjectForm
 
     /**
      * Retrieves the value of the mTagList property
+     * 
      * @return List of tags separated by spaces that the project must have
      */
     public String getTagList()
@@ -133,15 +140,17 @@ public class SearchProjectForm
 
     /**
      * sets the value of the mTagList property
+     * 
      * @param pTagList List of tags separated by spaces that the project must have
      */
     public void setTagList( String pTagList )
     {
         mTagList = pTagList;
     }
-    
+
     /**
      * Validation method
+     * 
      * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
      *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */

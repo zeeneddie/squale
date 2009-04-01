@@ -19,7 +19,6 @@
 package com.airfrance.squaleweb.applicationlayer.action.search;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,14 +33,14 @@ import org.apache.struts.action.ActionMessages;
 
 import com.airfrance.jraf.helper.AccessDelegateHelper;
 import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
 import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
+import com.airfrance.squaleweb.applicationlayer.formbean.search.SearchProjectForm;
 import com.airfrance.squaleweb.transformer.SearchProjectTransformer;
 import com.airfrance.welcom.struts.bean.WActionForm;
 import com.airfrance.welcom.struts.transformer.WTransformerFactory;
 
 /**
- * Recherche un projet.
+ * Search a project
  */
 public class SearchAction
     extends DefaultAction
@@ -92,6 +91,7 @@ public class SearchAction
                 ActionForm searchForm =
                     WTransformerFactory.objToForm( SearchProjectTransformer.class, new Object[] { new HashMap(),
                         new ArrayList() } );
+                pRequest.setAttribute( "firstCall", true );
                 pRequest.getSession().setAttribute( "searchProjectForm", searchForm );
             }
             forward = pMapping.findForward( "list" );
@@ -104,25 +104,5 @@ public class SearchAction
             forward = pMapping.findForward( "total_failure" );
         }
         return forward;
-    }
-
-    /**
-     * Private method that will separate a String with spaces into a collection of Strings
-     * 
-     * @param a String of tag names separated by spaces
-     * @return tagNames a collection of names
-     */
-    private Collection<String> separateTagNames( String names )
-    {
-        Collection<String> tagNames = new ArrayList<String>();
-
-        String[] namesTab = names.split( " " );
-
-        for ( int i = 0; i < namesTab.length; ++i )
-        {
-            tagNames.add( namesTab[i] );
-        }
-
-        return tagNames;
     }
 }

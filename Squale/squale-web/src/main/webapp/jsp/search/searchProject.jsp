@@ -3,13 +3,10 @@
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
 
-<%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm"%>
-<%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm"%>
+<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm"%>
+<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm"%>
 <%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils"%>
-<%@page
-	import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"%>
+<%@page import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"%>
 
 <%--
 	Permet de rechercher un projet parmis les applications visibles par l'utilisateur.
@@ -23,34 +20,33 @@
 			<br />
 			<br />
 			<af:form action="list_projects.do" method="post">
-				<table width="100%" class="formulaire" cellpadding="0"
-					cellspacing="0" border="0">
+				<table width="100%" class="formulaire" cellpadding="0" cellspacing="0" border="0">
 					<tr class="fondClair">
-						<af:field key="search.application_beginning_name"
-							property="applicationBeginningName" />
+						<af:field key="search.application_beginning_name" property="applicationBeginningName" />
 					</tr>
 					<tr class="fondClair">
-						<af:field key="search.project_beginning_name"
-							property="projectBeginningName" />
+						<af:field key="search.project_beginning_name" property="projectBeginningName" />
 					<tr class="fondClair">
-						<af:field key="search.project_tags"
-							property="tagList" />
+						<af:field key="search.project_tags" property="tagList" />
 					</tr>
 				</table>
 				<af:buttonBar>
 					<af:button name="rechercher" toolTipKey="toolTip.search_project"
 						callMethod="searchProject" singleSend="true" />
 				</af:buttonBar>
+		<%-- Results display --%>
+				<logic:notPresent name="firstCall">
+					<br/>
+					<br/>
+					<h2><bean:message key="search.resultTitle" /></h2>
 				<logic:notEmpty name="searchProjectForm" property="projectForms">
-					<br />
-					<br />
+					<br/>
 					<bean:message key="search.projects_found" />
 					<br />
 					<bean:define name="searchProjectForm" property="projectForms"
 						id="projectForms" type="java.util.Map" />
 					<bean:define id="nbProjects"
 						value='<%=""+projectForms.keySet().size()%>' />
-					<br />
 					<logic:equal name="nbProjects" value="0">
 						<bean:message key="table.results.none" />
 					</logic:equal>
@@ -110,8 +106,7 @@
 								<%-- permettant un lien direct vers l'administration du projet --%>
 								<af:col key="projects.manage" property="hasTerminatedAudit">
 									<%-- On met une propriété bidon juste pour pas avoir d'erreur --%>
-									<a 
-										href='<%="config_project.do?action=selectProjectToModify&applicationId="+applicationId 
+									<a href='<%="config_project.do?action=selectProjectToModify&applicationId="+applicationId 
 											 	+"&projectId="+projectId %>'>
 									<bean:message key="project.manage" /> </a>
 								</af:col>
@@ -119,6 +114,11 @@
 						</af:table>
 					</logic:greaterThan>
 				</logic:notEmpty>
+					<logic:empty name="searchProjectForm" property="projectForms">
+						<br/>
+						<bean:message key="search.no_results_found" />
+					</logic:empty>
+				</logic:notPresent>
 			</af:form>
 		</af:canvasCenter>
 	</af:body>
