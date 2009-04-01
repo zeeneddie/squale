@@ -2,11 +2,11 @@
 -- Modification for the manual practice (#126)
 
 -- Add the column timelimitation to the table qualityrule
-ALTER TABLE qualityrule ADD timelimitation varchar2(6);
+alter table QualityRule add TimeLimitation varchar2(6);
 -- Add the column timelimitation to the table qualityresult
-ALTER TABLE qualityresult ADD CreationDate date;
+alter table QualityResult add CreationDate date;
 -- Authorize to put a null value in the column auditId of the table qualityresult
-ALTER TABLE qualityresult MODIFY AuditId null;
+alter table QualityResult modify AuditId null;
 
 -- #####################################################
 -- Modifications for the Tags implementation
@@ -53,18 +53,18 @@ create sequence tag_sequence;
 
 -- #####################################################
 -- Modifications for [#152]
-ALTER TABLE auditbo ADD ver VARCHAR2(100);
-UPDATE auditbo SET ver = squale_version;
-UPDATE auditbo SET squale_version = null;
-ALTER TABLE auditbo MODIFY squale_version VARCHAR2(100) DEFAULT '5.1';
-UPDATE auditbo SET squale_version = ver;
-ALTER TABLE auditbo DROP COLUMN ver;
+alter table AuditBO add ver varchar2(100);
+update AuditBO set ver = squale_version;
+update AuditBO set squale_version = null;
+alter table AuditBO modify squale_version varchar2(100) default '5.1';
+update AuditBO set squale_version = ver;
+alter table AuditBO drop column ver;
 
 -- ###########################################################
 -- For Language display customization for SQUALE version 4.1.1
 
 -- Table Tasks_User & Ajout de la colonne Language
-ALTER TABLE Tasks_User ADD language varchar2(255) NULL;
+alter table Tasks_User add language varchar2(255) NULL;
 
 -- Table SqualeReference & ajout de la colonne ProgrammingLanguage
-ALTER TABLE squaleReference ADD programminglanguage varchar2(255) NULL;
+alter table SqualeReference add programminglanguage varchar2(255) NULL;

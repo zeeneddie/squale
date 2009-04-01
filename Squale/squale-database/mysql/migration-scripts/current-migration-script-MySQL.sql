@@ -2,11 +2,11 @@
 -- Modification for the manual practice (#126)
 
 -- Add the column timelimitation to the table qualityrule
-ALTER TABLE qualityrule ADD timelimitation varchar(6);
+alter table QualityRule add TimeLimitation varchar(6);
 -- Add the column timelimitation to the table qualityresult
-ALTER TABLE qualityresult ADD CreationDate datetime;
+alter table QualityResult add CreationDate datetime;
 -- Authorize to put a null value in the column auditId of the table qualityresult
-ALTER TABLE qualityresult MODIFY AuditId bigint null;
+alter table QualityResult modify AuditId bigint null;
 
 -- #####################################################
 -- Modifications for the Tags implementation
@@ -51,17 +51,14 @@ alter table Tag_Component
 
 -- #####################################################
 --Modifications for [#152]
-
-ALTER TABLE auditbo MODIFY squale_version VARCHAR(100) DEFAULT '5.1';
+alter table AuditBO modify squale_version varchar(100) default '5.1';
 
 -- #####################################################
 -- For Language display customization
 -- This migration script HAS NOT BEEN TESTED
 
 -- Table Tasks_User
-ALTER TABLE Tasks_User 
-	ADD language varchar(255) NULL;
+alter table Tasks_User add language varchar(255) NULL;
 
 -- Table SqualeReference & ajout de la colonne ProgrammingLanguage
-ALTER TABLE squaleReference 
-	ADD programminglanguage varchar(255) NULL;
+alter table SqualeReference add programminglanguage varchar(255) NULL;
