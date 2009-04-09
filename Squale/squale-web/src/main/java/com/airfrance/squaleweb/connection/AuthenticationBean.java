@@ -19,6 +19,7 @@
 package com.airfrance.squaleweb.connection;
 
 import java.util.List;
+import java.io.Serializable;
 
 /**
  * This class is the bean of the authenticated user.
@@ -26,7 +27,7 @@ import java.util.List;
  * (see UserLoginAction)
  */
 
-public class AuthenticationBean
+public class AuthenticationBean implements Serializable
 {
     /**
      * The identifier of the authenticated user

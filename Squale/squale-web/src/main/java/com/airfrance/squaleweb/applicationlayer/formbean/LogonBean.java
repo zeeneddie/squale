@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.io.Serializable;
 
 import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
 import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm;
@@ -34,7 +35,7 @@ import com.airfrance.welcom.struts.bean.WResultAction;
  */
 public class LogonBean
     extends WResultAction
-    implements WILogonBeanSecurity
+    implements WILogonBeanSecurity, Serializable
 {
     /**
      * Résultat d'action utilisé lors de la validation des formulaires

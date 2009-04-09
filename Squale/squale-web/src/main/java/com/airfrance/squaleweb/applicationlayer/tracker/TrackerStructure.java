@@ -18,12 +18,14 @@
  */
 package com.airfrance.squaleweb.applicationlayer.tracker;
 
+import java.io.Serializable;
+
 /**
  * Classe qui définit un objet utile seulement pour le traceur
  * 
  * @author M403988
  */
-public class TrackerStructure
+public class TrackerStructure implements Serializable
 {
 
     /**
