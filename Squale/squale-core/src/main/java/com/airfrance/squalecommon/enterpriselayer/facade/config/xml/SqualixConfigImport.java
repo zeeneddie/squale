@@ -44,10 +44,10 @@ public class SqualixConfigImport
     private static Log LOG = LogFactory.getLog( SqualixConfigImport.class );
 
     /** Nom publique de la DTD */
-    final static String PUBLIC_DTD = "-//Squale//DTD Squalix Configuration 1.0//EN";
+    final static String PUBLIC_DTD = "-//Squale//DTD Squalix Configuration 1.1//EN";
 
     /** Localisation de la DTD */
-    final static String DTD_LOCATION = "/com/airfrance/squalecommon/dtd/squalix-config-1.0.dtd";
+    final static String DTD_LOCATION = "/com/airfrance/squalecommon/dtd/squalix-config-1.1.dtd";
 
     /** Nom du fichier xml contenant les règles */
     final static String RULES_FILE_NAME =
