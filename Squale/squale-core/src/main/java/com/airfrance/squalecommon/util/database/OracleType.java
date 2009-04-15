@@ -52,4 +52,16 @@ public class OracleType
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public String dateAddDay( String date, String day )
+    {
+        StringBuffer query = new StringBuffer( "(" );
+        query.append( date );
+        query.append( " + " );
+        query.append( day );
+        query.append( " ) " );
+        return query.toString();
+    }
 }

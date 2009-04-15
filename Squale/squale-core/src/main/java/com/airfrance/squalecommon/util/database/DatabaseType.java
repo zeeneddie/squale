@@ -42,4 +42,13 @@ public interface DatabaseType
      */
     String resNumberLimit( int numberOfResults );
 
+    /**
+     * Give the correct syntax for add days to a date in a query according to the database used
+     * 
+     * @param date The date to which we want add days
+     * @param day The number of days we want add
+     * @return The modified date
+     */
+    String dateAddDay( String date, String day );
+
 }

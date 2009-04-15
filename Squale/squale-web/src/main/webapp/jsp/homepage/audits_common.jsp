@@ -16,7 +16,7 @@
 		<af:table name="homepageForm" property="<%=audits_param%>"
 			totalLabelPos="none" scope="session" emptyKey="table.results.none" displayFooter="false">
 			<af:cols id="element">
-				<%-- la première colonne:la date --%>
+				<%-- 1st column : the date --%>
 				<logic:equal name="element" property="status" value="0">
 					<af:col property="date" key="audit.date" sortable="true"
 						paramName="element" paramId="currentAuditId" paramProperty="id"
@@ -44,7 +44,7 @@
 					<af:col property="realDate" key="audit.date" sortable="true"
 						dateFormatKey="date.format" type="DATE" width="250px" />
 				</logic:equal>
-				<%-- la deuxième colonne: le status de l'audit --%>
+				<%-- 2nd column: the application name --%>
 				<logic:equal name="element" property="status" value="0">
 					<af:col property="applicationName" key="audit.application_name"
 						sortable="true" paramName="element" paramId="applicationId"
@@ -73,12 +73,13 @@
 					<af:col property="applicationName" key="audit.application_name"
 						sortable="true" width="250px" />
 				</logic:equal>
-				<%-- la troisième colonne: le type de l'audit qui n'est pas cliquable--%>
+				<%-- 3rd column : audit type--%>
 				<af:col property="type" key="audit.type" sortable="true"
 					paramName="element" paramId="currentAuditId" paramProperty="id"
 					width="250px">
 					<bean:message name="element" property="type" />
 				</af:col>
+				<%-- 4th column : label --%>
 				<af:col property="name" key="audit.label" sortable="true"
 					paramName="element" paramId="currentAuditId" paramProperty="id"
 					width="250px">
@@ -91,7 +92,7 @@
 										-
 									</logic:notEqual>
 				</af:col>
-				<%-- la quatrième colonne: le type de l'audit--%>
+				<%-- 5th column : the status--%>
 				<af:col property="stringStatus" key="audit.status" sortable="true"
 					paramName="element" paramId="currentAuditId" paramProperty="id"
 					width="250px">

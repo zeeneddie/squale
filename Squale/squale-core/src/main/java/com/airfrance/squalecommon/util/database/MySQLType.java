@@ -51,4 +51,17 @@ public class MySQLType
         return query.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public String dateAddDay( String date, String day )
+    {
+        StringBuffer query = new StringBuffer( " ADDDATE(" );
+        query.append( date );
+        query.append( " ," );
+        query.append( day );
+        query.append( " ) " );
+        return query.toString();
+    }
+
 }

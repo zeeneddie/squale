@@ -37,11 +37,13 @@ import org.apache.commons.logging.LogFactory;
 
 import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import com.airfrance.jraf.provider.persistence.hibernate.SessionImpl;
 import com.airfrance.jraf.spi.persistence.ISession;
 import com.airfrance.squalecommon.daolayer.DAOMessages;
 import com.airfrance.squalecommon.daolayer.DAOUtils;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import com.airfrance.squalecommon.util.database.DatabaseTypeFactory;
 
 /**
  * Cette classe est responsable de toutes les manipulations d'audits présents (ou a insérer) en base
@@ -146,8 +148,8 @@ public class AuditDAOImpl
      * @param pType le type des audits
      * @param pStatus le status des audits
      * @return une liste de tableau d'objets à 3 éléments représentants les derniers audits des composants de type
-     *         <pComponentType</code> de type <code>pType</code> dont le status est <code>pStatus</code> Le tableau
-     *         est de la forme {auditApplicationId, auditApplicationName, auditBO}
+     *         <pComponentType</code> de type <code>pType</code> dont le status est <code>pStatus</code> Le tableau est
+     *         de la forme {auditApplicationId, auditApplicationName, auditBO}
      * @throws JrafDaoException si erreur
      */
     public List findAllLastAudits( ISession pSession, Class pComponentClass, String pType, int pStatus )
@@ -303,8 +305,8 @@ public class AuditDAOImpl
     }
 
     /**
-     * Permet de récupérer un nombre d'audits définis à partir de l'identifiant du composant. <br />
-     * Les Audits sont triés du plus récents au plus anciens
+     * Permet de récupérer un nombre d'audits définis à partir de l'identifiant du composant. <br /> Les Audits sont
+     * triés du plus récents au plus anciens
      * 
      * @param pSession session Hibernate
      * @param pIDComponent identifiant du composant
@@ -370,8 +372,7 @@ public class AuditDAOImpl
 
     /**
      * Permet de récupérer un nombre d'audits exécutés (ie. ni supprimé, ni en attente d'exécution) définis à partir de
-     * l'identifiant du composant. <br />
-     * Les Audits sont triés du plus récents au plus anciens
+     * l'identifiant du composant. <br /> Les Audits sont triés du plus récents au plus anciens
      * 
      * @param pSession session Hibernate
      * @param pIDComponent identifiant du composant
@@ -493,8 +494,8 @@ public class AuditDAOImpl
     }
 
     /**
-     * Permet de récupérer un nombre d'audits définis à partir de l'identifiant de l'application. <br />
-     * Les Audits sont triés du plus récents au plus anciens
+     * Permet de récupérer un nombre d'audits définis à partir de l'identifiant de l'application. <br /> Les Audits sont
+     * triés du plus récents au plus anciens
      * 
      * @param pSession session Hibernate
      * @param pIDApplication identifiant de l'application
@@ -908,11 +909,10 @@ public class AuditDAOImpl
     }
 
     /**
-     * Recherche les audits obsolètes au regard de la fréquence de purge de l'application. <br />
-     * Pour les audits de jalon, seuls les audits obsolètes en échec sont pris en compte. <br />
-     * Pour les audits de suivi, les derniers audits obsolètes ne sont pas pris en compte, pour conservation d'un
-     * historique (selon configuration). <br />
-     * Les audits supprimés, en cours ou programmés ne sont pas pris en compte.
+     * Recherche les audits obsolètes au regard de la fréquence de purge de l'application. <br /> Pour les audits de
+     * jalon, seuls les audits obsolètes en échec sont pris en compte. <br /> Pour les audits de suivi, les derniers
+     * audits obsolètes ne sont pas pris en compte, pour conservation d'un historique (selon configuration). <br /> Les
+     * audits supprimés, en cours ou programmés ne sont pas pris en compte.
      * 
      * @param pSession session de persistence.
      * @param pSiteId id du serveur du batch.
@@ -955,8 +955,10 @@ public class AuditDAOImpl
         // selection du serveur
         whereClause.append( " and " + lApplicationAlias + ".serveurBO.serveurId = '" + pSiteId + "'" );
         // selection des audits obsolètes
-        whereClause.append( " and " + getAlias() + ".realBeginningDate + " + lApplicationAlias
-            + ".resultsStorageOptions" + " < " + DAOUtils.makeQueryDate( new Date() ) );
+        whereClause.append( " and " );
+        whereClause.append( DatabaseTypeFactory.getInstance().dateAddDay( getAlias() + ".realBeginningDate",
+                                                                          lApplicationAlias + ".resultsStorageOptions" ) );
+        whereClause.append( " < " + DAOUtils.makeQueryDate( new Date() ) );
         // selection suivant le type d'audit
         whereClause.append( " and ((" );
         whereClause.append( getAlias() + ".type = '" + AuditBO.MILESTONE + "'" );
@@ -969,6 +971,8 @@ public class AuditDAOImpl
 
         // clause order
         String orderClause = " order by " + getAlias() + ".realBeginningDate desc";
+
+        SessionImpl sessionHibernate = (SessionImpl) pSession;
 
         return find( pSession, selectClause + whereClause.toString() + orderClause );
     }
