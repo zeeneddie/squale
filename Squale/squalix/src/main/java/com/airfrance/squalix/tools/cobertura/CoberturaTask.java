@@ -121,7 +121,7 @@ public class CoberturaTask
             {
                 /* Logging a "no file found" error and cancelling the task */
                 LOGGER.error( new String( CoberturaMessages.getMessage( "cobertura.task.noFileFound", file.getName() ) ) );
-                mStatus = CANCELLED;
+                mStatus = FAILED;
             }
         }
         /* Persisting the values resulting from the parsing */
