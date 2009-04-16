@@ -147,9 +147,7 @@
 		Taille de la méthode
 	</message>
 	<message lang="en" key="rule.modulesize">Module size</message>
-	<message lang="fr" key="rule.modulesize">
-		Taille du module
-	</message>
+	<message lang="fr" key="rule.modulesize">Taille du module</message>
 	<message lang="en" key="rule.methodsize">Method size</message>
 	<message lang="fr" key="rule.jspsize">Taille de la JSP</message>
 	<message lang="en" key="rule.jspsize">JSP size</message>
@@ -417,8 +415,12 @@
 		"Normes et standards" : Bonnes pratiques JSP
 	</message>
 	<message lang="en" key="rule.jspstandard">JSP standards</message>
-	<message lang="fr" key="rule.deadcode">Module non appellé (code mort)</message>
-	<message lang="en" key="rule.deadcode">Uncalled module (dead code)</message>
+	<message lang="fr" key="rule.deadcode">
+		Module non appellé (code mort)
+	</message>
+	<message lang="en" key="rule.deadcode">
+		Uncalled module (dead code)
+	</message>
 	<message lang="fr" key="rule.antipatternpredetection">
 		Pré-détection d'antipatterns
 	</message>
@@ -497,6 +499,12 @@
 	<message lang="en" key="rule.unittestbranchcoverage">
 		Unit test branch coverage rate
 	</message>
+	<message lang="fr" key="rule.unittestcoverage">
+		Taux de couverture de code
+	</message>
+	<message lang="en" key="rule.unittestcoverage">
+		Code coverage rate
+	</message>
 	<message lang="fr" key="rule.functionalsecurityaspects">
 		Cahier des charges fonctionnel : sécurité
 	</message>
@@ -539,19 +547,19 @@
 		Découpage en couche
 	</message>
 	<message lang="en" key="rule.layeredarchitecture">
-		Layered architecture 
+		Layered architecture
 	</message>
 	<message lang="fr" key="rule.packagingcompliance">
 		"Normes et standard" : packaging conforme
 	</message>
 	<message lang="en" key="rule.packagingcompliance">
-		 Packaging standards
+		Packaging standards
 	</message>
 	<message lang="fr" key="rule.portability">
 		"Normes et standard" : portabilité
 	</message>
 	<message lang="en" key="rule.portability">
-		 Portability standards
+		Portability standards
 	</message>
 
 
@@ -560,7 +568,7 @@
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 	<!-- Textes descriptifs pour les PRATIQUES  -->
-	
+
 	<message lang="fr" key="rule.blob.description">
 		La pieuvre est une méthode dans une classe qui a tendance à
 		agréger à elle seule une grande partie de la complexité de cette
@@ -992,11 +1000,13 @@
 		practice not available
 	</message>
 	<message lang="fr" key="rule.deadcode.description">
-		Indique si le module/composant est référencé ou appellé par un autre
-		module. Un module qui n'est jamais utilisé est considéré comme du code
-		mort.
+		Indique si le module/composant est référencé ou appellé par un
+		autre module. Un module qui n'est jamais utilisé est considéré
+		comme du code mort.
 	</message>
-	<message lang="en" key="rule.deadcode.description">Uncalled module (dead code)</message>
+	<message lang="en" key="rule.deadcode.description">
+		Uncalled module (dead code)
+	</message>
 	<message lang="fr" key="rule.jspcomplexity.description">
 		Qualifie le niveau de complexité de la page JSP (complexité
 		cyclomatique).
@@ -1030,12 +1040,22 @@
 	<message lang="en" key="rule.jspspaghetticode.description">
 		practice not available
 	</message>
-
+	<message lang="fr" key="rule.unittestcoverage.description">
+		La couverture de code qualifie le niveau de couverture du code
+		source par les tests unitaires. Afin de déterminer cette
+		pratique Squale prend en compte la couverture de ligne et la
+		couverure de branche.
+	</message>
+	<message lang="en" key="rule.unittestcoverage.description">
+		Code coverage measures the level to which an application has
+		been tested. Squale uses both line-rate and branch-rate to
+		define the mark
+	</message>
 
 	<!-- Textes pour les corrections -->
-	
+
 	<!--  PRATIQUES  -->
-	
+
 	<message lang="fr" key="rule.blob.correction">
 		Revoir la classe afin de découper la méthode incriminée.
 	</message>
@@ -1473,14 +1493,26 @@
 	<message lang="en" key="rule.jspstandard.correction">
 		practice not available
 	</message>
-
+	<message lang="fr" key="rule.unittestcoverage.correction">
+		La notation dans Squale prend en compte à la fois la couverture
+		de code (ligne et branche) mais également la complexité
+		cyclomatique. Afin d'améliorer la couverure de code vous devez
+		ajouter des tests unitaires et les cibler en fonction de la
+		complexité cyclomatique.
+	</message>
+	<message lang="en" key="rule.unittestcoverage.correction">
+		The scoring in Squale takes into account both line and
+		branchrate. Thus so as to improve your marks one must write some
+		unit tests keeping in mind that they have to be written
+		according to the cycomatic complexity.
+	</message>
 
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<!--  Métriques  -->
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	
+
 	<!--  Projets  -->
-	
+
 	<message lang="fr" key="copypaste.project.duplicateLinesNumber">
 		Nombre de lignes dupliquées
 	</message>
@@ -1597,23 +1629,23 @@
 	<message lang="en" key="javancss.project.numberOfCodeLines">
 		Total number of lines
 	</message>
-	
+
 	<!-- Cobertura : Project level metrics labels -->
 	<message lang="fr" key="cobertura.project.lineRate">
 		Taux de couverture de lignes de code sources
 	</message>
 	<message lang="en" key="cobertura.project.lineRate">
-		Source lines code coverage rate 
+		Line coverage rate
 	</message>
 	<message lang="fr" key="cobertura.project.branchRate">
 		Taux de couverture de branche
 	</message>
 	<message lang="en" key="cobertura.project.branchRate">
-		Branch coverage rate 
+		Branch coverage rate
 	</message>
-	
+
 	<!--  PACKAGES  -->
-	
+
 	<message lang="fr" key="jdepend.package.distance">
 		Distance d'instabilité et d'abstraction (%)
 	</message>
@@ -1717,7 +1749,7 @@
 
 
 	<!--  CLASSES  -->
-	
+
 	<message lang="fr" key="ckjm.class.wmc">
 		Nombre pondéré de méthodes par classes
 	</message>
@@ -1760,7 +1792,7 @@
 	<message lang="en" key="ckjm.class.npm">
 		Number of Public Methods
 	</message>
-	
+
 	<message lang="fr" key="javancss.class.ncss">
 		Nombre de lignes de code source
 	</message>
@@ -1835,7 +1867,8 @@
 		Dependencies as supplier
 	</message>
 	<message lang="fr" key="umlquality.umlclass.NVM">
-		Nombre d'opérations de la classe qui redéfinissent une opération héritée
+		Nombre d'opérations de la classe qui redéfinissent une opération
+		héritée
 	</message>
 	<message lang="en" key="umlquality.umlclass.NVM">
 		Number of overriding methods
@@ -1879,7 +1912,7 @@
 
 
 	<!-- INTERFACES -->
-	
+
 	<message lang="fr" key="umlquality.umlinterface.numAnc">
 		Nombre d'ancêtres de l'Interface
 	</message>
@@ -1892,10 +1925,10 @@
 	<message lang="en" key="umlquality.umlinterface.numClients">
 		Number of clients
 	</message>
-	
-	
+
+
 	<!-- MODELE -->
-	
+
 	<message lang="fr" key="umlquality.umlmodel.ADI">
 		Profondeur moyenne de l'arbre d'héritage des classes
 	</message>
@@ -1914,10 +1947,10 @@
 	<message lang="en" key="umlquality.umlmodel.MCC">
 		Maximum Class Coupling
 	</message>
-	
-	
+
+
 	<!--  METHODE  -->
-	
+
 	<message lang="fr" key="javancss.method.ncss">
 		Nombre de lignes de code source
 	</message>
@@ -1936,6 +1969,18 @@
 	<message lang="en" key="javancss.method.javadocs">
 		Number of javadoc
 	</message>
+	<message lang="fr" key="cobertura.method.lineRate">
+		Taux de couverture de lignes de code sources
+	</message>
+	<message lang="en" key="cobertura.method.lineRate">
+		Line coverage rate
+	</message>
+	<message lang="fr" key="cobertura.method.branchRate">
+		Taux de couverture de branche
+	</message>
+	<message lang="en" key="cobertura.method.branchRate">
+		Branch coverage rate
+	</message>
 
 
 	<!-- ATTENTION : NE PAS METTRE DE CARACTERES SPECIAUX (' ou ") -->
@@ -1946,9 +1991,7 @@
 	<message lang="en" key="metric.TRA01">
 		System.out.print not allowed
 	</message>
-	<message lang="fr" key="metric.COD00">
-		Import illégal
-	</message>
+	<message lang="fr" key="metric.COD00">Import illégal</message>
 	<message lang="en" key="metric.COD00">
 		Detected illegal import
 	</message>
@@ -1961,9 +2004,7 @@
 	<message lang="fr" key="metric.COD02">
 		Eviter d utiliser l étoile au niveau des imports
 	</message>
-	<message lang="en" key="metric.COD02">
-		Avoid star import
-	</message>
+	<message lang="en" key="metric.COD02">Avoid star import</message>
 	<message lang="fr" key="metric.COD03">
 		Ne pas utiliser de valeurs magiques mais des constantes nommées
 	</message>
@@ -1986,7 +2027,7 @@
 		L initialisation de la boucle for est vide
 	</message>
 	<message lang="en" key="metric.COD06">
-		"For" initializer pad is empty 
+		"For" initializer pad is empty
 	</message>
 	<message lang="fr" key="metric.COD07">
 		Mettez toujours un cas par défaut dans les switch
@@ -2014,7 +2055,8 @@
 		Avoid inline conditionals
 	</message>
 	<message lang="fr" key="metric.COD11">
-		Il est nécessaire de définir aussi la méthode equals(java.lang.Object). 
+		Il est nécessaire de définir aussi la méthode
+		equals(java.lang.Object).
 	</message>
 	<message lang="en" key="metric.COD11">
 		equals(java.lang.Object) should be defined as well
@@ -2026,7 +2068,8 @@
 		Explicit initialization is not necessary
 	</message>
 	<message lang="fr" key="metric.COD13">
-		Il est conseillé d avoir un cas par défaut pour toute clause switch
+		Il est conseillé d avoir un cas par défaut pour toute clause
+		switch
 	</message>
 	<message lang="en" key="metric.COD13">
 		Switch clause should always have a default case
@@ -2055,8 +2098,12 @@
 	<message lang="en" key="metric.COD17">
 		Number of paramèters in a method is exceeded
 	</message>
-	<message lang="fr" key="metric.COD18">Bloc ou instruction vide</message>
-	<message lang="en" key="metric.COD18">Empty block or statement</message>
+	<message lang="fr" key="metric.COD18">
+		Bloc ou instruction vide
+	</message>
+	<message lang="en" key="metric.COD18">
+		Empty block or statement
+	</message>
 	<message lang="fr" key="metric.COD19">
 		Les classes qui surchargent equals() doivent aussi surcharger
 		hashCode()
@@ -2129,7 +2176,8 @@
 		This class should be declared as final
 	</message>
 	<message lang="fr" key="metric.COD30">
-		Déclarer privé le constructeur par défaut de cette classe utilitaire
+		Déclarer privé le constructeur par défaut de cette classe
+		utilitaire
 	</message>
 	<message lang="en" key="metric.COD30">
 		The default constructor of this utility class should be private
@@ -2141,10 +2189,12 @@
 		An interface should not declare only constants
 	</message>
 	<message lang="fr" key="metric.COD32">
-		Une exception doit être immuable, et donc ne contenir que des attributs finaux
+		Une exception doit être immuable, et donc ne contenir que des
+		attributs finaux
 	</message>
 	<message lang="en" key="metric.COD32">
-		Exceptions should be immutable, and therefore have only final fields 
+		Exceptions should be immutable, and therefore have only final
+		fields
 	</message>
 	<message lang="fr" key="metric.COD33">
 		Le nombre maximal autorisé de clause throws est dépassé
@@ -2159,16 +2209,19 @@
 		Arrays must be declared in the Java style way
 	</message>
 	<message lang="fr" key="metric.COD35">
-		Il est fortement déconseillé d utiliser le System.exit ailleurs que dans un batch
+		Il est fortement déconseillé d utiliser le System.exit ailleurs
+		que dans un batch
 	</message>
 	<message lang="en" key="metric.COD35">
 		System.exit should not be used, except in batch programs
 	</message>
 	<message lang="fr" key="metric.COD36">
-		L utilisation de CHECKSTYLE:OFF doit être justifiée par un commentaire sur la même ligne
+		L utilisation de CHECKSTYLE:OFF doit être justifiée par un
+		commentaire sur la même ligne
 	</message>
 	<message lang="en" key="metric.COD36">
-		You must justify the use of CHECKSTYLE:OFF by adding a comment at the end of the line
+		You must justify the use of CHECKSTYLE:OFF by adding a comment
+		at the end of the line
 	</message>
 	<message lang="fr" key="metric.COM01">
 		Commentaire Javadoc manquant pour une classe, interface, méthode
@@ -2182,7 +2235,7 @@
 		Commentaire Javadoc incomplet ou non valide.
 	</message>
 	<message lang="en" key="metric.COM02">
-		Javadoc comment is incomplete or invalid. 
+		Javadoc comment is incomplete or invalid.
 	</message>
 	<message lang="fr" key="metric.FOR01">
 		Positionnement de l accolade fermante ou ouvrante incorrect
@@ -2203,7 +2256,7 @@
 		Java element does not follow naming convention
 	</message>
 	<message lang="fr" key="metric.NOM02">
-		Les modicateurs ne sont pas déclarés dans le bon ordre 
+		Les modicateurs ne sont pas déclarés dans le bon ordre
 	</message>
 	<message lang="en" key="metric.NOM02">
 		Modifier declaration does not follow the standard order
@@ -2217,7 +2270,7 @@
 
 
 	<!--  Messages pour PMD  -->
-	
+
 	<message lang="fr" key="metric.CyclomaticComplexity">
 		Depassement du seuil de la complexite cyclomatique
 	</message>
@@ -2326,14 +2379,16 @@
 	<message lang="en" key="metric.cpd.jsp">JSP Copy-paste</message>
 	<message lang="fr" key="metric.cpd.cpp">Copier-coller C++</message>
 	<message lang="en" key="metric.cpd.cpp">C++ copy-paste</message>
-	<message lang="fr" key="metric.cpd.cobol">Copier-coller Cobol</message>
+	<message lang="fr" key="metric.cpd.cobol">
+		Copier-coller Cobol
+	</message>
 	<message lang="en" key="metric.cpd.cobol">Cobol copy-paste</message>
 
 
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<!--  Messages pour la configuration des tâches Squalix  -->
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	
+
 	<message lang="fr" key="task.clearcasetask.configuration">
 		Configuration de ClearCase
 	</message>
@@ -2489,12 +2544,8 @@
 	<message lang="en" key="CppMcCabeTask.name">
 		McCabe task for Cpp profile
 	</message>
-	<message lang="fr" key="CobolMcCabeTask.name">
-		Tâche McCabe
-	</message>
-	<message lang="en" key="CobolMcCabeTask.name">
-		McCabe task
-	</message>
+	<message lang="fr" key="CobolMcCabeTask.name">Tâche McCabe</message>
+	<message lang="en" key="CobolMcCabeTask.name">McCabe task</message>
 	<message lang="fr" key="J2eeMcCabeTask.name">Tâche McCabe</message>
 	<message lang="en" key="J2eeMcCabeTask.name">McCabe task</message>
 	<message lang="fr" key="CppTestTask.name">Tâche CppTest</message>
@@ -2590,11 +2641,13 @@
 	<message lang="fr" key="JavancssTask.name">Tâche Javancss</message>
 
 	<message lang="en" key="JavancssTask.name">Javancss task</message>
-	
+
 	<!-- Cobertura Task Name -->
-	<message lang="fr" key="CoberturaTask.name">Tâche Cobertura</message>
+	<message lang="fr" key="CoberturaTask.name">
+		Tâche Cobertura
+	</message>
 	<message lang="en" key="CoberturaTask.name">Cobertura task</message>
-	
+
 	<!--  Messages pour les graphes   -->
 	<message lang="fr" key="roi.graph.xTitle">Date des audits</message>
 	<message lang="en" key="roi.graph.xTitle">Audits date</message>
@@ -2644,5 +2697,5 @@
 	<message lang="en" key="eclipse.compilation.advanced.options">
 		-os win32 -arch x86 -ws win32
 	</message>
-	
+
 </messages>
