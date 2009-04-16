@@ -20,7 +20,6 @@ package com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertu
 
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.FloatMetricBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.StringMetricBO;
 
 /**
  * <p>
@@ -33,7 +32,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.result.StringMe
  * 
  * @hibernate.subclass discriminator-value="CoberturaMetrics"
  */
-public class AbstractCoberturaMetricsBO
+public abstract class AbstractCoberturaMetricsBO
     extends MeasureBO
 {
     /** The "line-rate key" whatever the level of the metric (i.e Project, Package, Class, Method) */
@@ -44,7 +43,7 @@ public class AbstractCoberturaMetricsBO
 
     /**
      * The "name " whatever the level of the metric (i.e Project, Package, Class, Method). This property is not
-     * persisted in DB
+     * pushed in DB
      */
     private String name;
 
