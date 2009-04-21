@@ -149,12 +149,15 @@ public class ErrorDAOImpl
                 String taskName = (String) it.next();
                 String newWhereClause = whereClause + "'" + taskName + "'";
                 // On tri par id --> ordre d'enregistrement
-                whereClause += " order by " + getAlias() + ".id";
+                newWhereClause += " order by " + getAlias() + ".id";
                 if ( null != pNbLignes )
                 {
-                    col = (List) findWhereScrollable( pSession, newWhereClause, pNbLignes.intValue(), startId, false );
+                    col = (List) findWhereScrollable( pSession, newWhereClause, pNbLignes, startId, false );
                 }
-                col = (List) findWhere( pSession, newWhereClause );
+                else
+                {
+                    col = (List) findWhere( pSession, newWhereClause );
+                }
                 if ( null != col && col.size() != 0 )
                 {
                     // on ajoute les erreurs qui viennent d'etre récupérées à la collection
