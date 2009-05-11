@@ -563,7 +563,7 @@ public class Scheduler
         String object = "";
         String content = "";
         boolean sendMail = false;
-        String sender = Messages.getString( "mail.sender.squalix" );
+        String sender = Messages.getString( "mail.sender.squalix.task", pInfos );
         MessageMailManager mail = new MessageMailManager();
         if ( pStatus == AuditBO.TERMINATED )
         {
