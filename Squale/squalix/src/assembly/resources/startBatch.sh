@@ -64,4 +64,4 @@ cd ${SQUALIX_HOME}
 # The -Xms512M has been remove for prevent the "java.io.IOException: Not enough space" during the fork on dev8ts
 # which is probably due to an empty /tmp ...
 # The java command line
-${JAVA_HOME}/bin/java -Dsquale.home=$SQUALE_HOME -DentityExpansionLimit=500000 -Djava.awt.headless=true $DEBUG -Xmx512M -Xss7M -jar  ${SQUALIX_HOME}/${project.build.finalName}.jar ${SQUALIX_HOME} -s $hostId "$1" "$2" "$3" "$4" "$5"
+${JAVA_HOME}/bin/java -Djava.ext.dirs=lib-ext -Dsquale.home=$SQUALE_HOME -DentityExpansionLimit=500000 -Djava.awt.headless=true $DEBUG -Xmx512M -Xss7M -jar  ${SQUALIX_HOME}/${project.build.finalName}.jar ${SQUALIX_HOME} -s $hostId "$1" "$2" "$3" "$4" "$5"
