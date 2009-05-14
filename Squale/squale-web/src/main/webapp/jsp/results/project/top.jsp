@@ -22,6 +22,26 @@
 <bean:define id="current_comptype" name="topListForm"
 	property="componentType" type="String" />
 
+<%
+//On récupère la valeur du langage
+String language = (String) request.getAttribute("language");
+if ( language==null ) {
+	language = (String) request.getParameter("language");
+}
+else {
+	request.setAttribute("language",language);
+}
+
+String customizedCompType = new String();
+if ( WebMessages.existString(current_comptype + "." + language ).booleanValue() )
+{
+	customizedCompType = current_comptype + "." + language;
+}
+else
+{
+	customizedCompType = current_comptype;
+}
+%>
 <af:page titleKey="project.top.title" titleKeyArg0="<%=projectName%>">
 	<af:head>
 		<%-- inclusion pour le marquage XITI --%>
@@ -42,7 +62,7 @@
 			<squale:resultsHeader name="topListForm" />
 			<br />
 			<h2><bean:message key="project.top.subtitle"
-				arg0="<%=WebMessages.getString(request, current_comptype)%>"
+				arg0="<%=WebMessages.getString(request, customizedCompType)%>"
 				arg1="<%=WebMessages.getString(request, currentTre)%>" /></h2>
 			<br />
 
@@ -58,7 +78,7 @@
 					emptyKey="table.results.none">
 					<af:cols id="element">
 						<af:col property="name" contentTruncate="80" key="component.name"
-							href='<%="project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId%>'
+							href='<%="project_component.do?action=component&projectId=" + projectId + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId + "&language=" + language%>'
 							paramName="element" paramId="component" paramProperty="id"
 							sortable="true" />
 						<af:col property="metrics[0]" type="NUMBER" key="<%=currentTre%>"

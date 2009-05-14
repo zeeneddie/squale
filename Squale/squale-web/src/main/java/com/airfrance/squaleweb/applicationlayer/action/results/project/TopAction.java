@@ -107,17 +107,11 @@ public class TopAction
         {
             TopListForm topListForm = (TopListForm) pForm;
             // recupere le "type" de top
-            String ComponentType = pRequest.getParameter( "componenttype" );
-            String language = pRequest.getParameter(SqualeWebConstants.LANGUAGE);
-            pRequest.setAttribute(SqualeWebConstants.LANGUAGE, language);
-            // modifie suivant le langage
-            if ( ComponentType.endsWith(language) )
-            {
-            	Integer end = ComponentType.length() - (1 + language.length() );
-            	ComponentType=ComponentType.substring(0, end);
-            }
+            String ComponentType = getNonCustomizedComponentType(pRequest);
+            //On place le langage dans la requête pour les pages suivantes
+            pRequest.setAttribute(SqualeWebConstants.LANGUAGE,
+            		              pRequest.getParameter(SqualeWebConstants.LANGUAGE));
             topListForm.setComponentType(ComponentType);
-            
             topListForm.setTre( pRequest.getParameter( "tre" ) );
 
             // et calcule les resultats
@@ -139,12 +133,14 @@ public class TopAction
         }
         // Mise en place du traceur historique
         String name = WebMessages.getString( pRequest.getLocale(), pRequest.getParameter( "tre" ) );
+        
         String way = pRequest.getParameter( "componenttype" );
 
         // On récupère la clé pour le traceur en fonction du type du composant
         if ( null != way )
         { // code défensif
-            int index = way.lastIndexOf( "." );
+            //int index = way.lastIndexOf( "." );
+            int index = getNonCustomizedComponentType(pRequest).lastIndexOf(".");
             if ( index > 0 )
             {
                 String tracker = way.substring( index, way.length() );
@@ -159,6 +155,20 @@ public class TopAction
         return forward;
     }
 
+    private String getNonCustomizedComponentType (HttpServletRequest pRequest)
+    {
+    	String ComponentType = pRequest.getParameter( "componenttype" );
+    	String language = pRequest.getParameter(SqualeWebConstants.LANGUAGE);
+    	// modifie suivant le langage
+        if ( ComponentType.endsWith(language) )
+        {
+        	Integer end = ComponentType.length() - (1 + language.length() );
+        	ComponentType=ComponentType.substring(0, end);
+        }
+        return ComponentType;
+    }
+    
+    
     /**
      * Redirige vers une jsp affichant le scatterplott
      * 

@@ -954,6 +954,7 @@ public abstract class BaseDispatchAction
         throws JrafEnterpriseException
     {
         HashMap topMenu = new HashMap();
+        HashMap languageCustomizedTopMenu = new HashMap();
         // Si le currentAudit n'est pas renseigné, pas de menu tops
         // Code protecteur car suivant d'ou on vient il peut parfois etre nul
         if ( currentAudit != null )
@@ -976,17 +977,20 @@ public abstract class BaseDispatchAction
             {
             	Object key = it.next();
             	String skey = key.toString();
+            	Object pTemp = topMenu.get(key);
             	// On va vérifier que la clé débute par component. et qu'elle existe bien avec le langage en plus
             	if ( skey.startsWith("component.") & 
             			WebMessages.existString( skey + "." + projectDTO.getLanguage())  )
             	{
-            		Object pTemp = topMenu.get(key);
-            		topMenu.remove(key);
-            		topMenu.put( key + "." + projectDTO.getLanguage(), pTemp);
+            		languageCustomizedTopMenu.put( key + "." + projectDTO.getLanguage(), pTemp);
+            	}
+            	else
+            	{
+            		languageCustomizedTopMenu.put( key, pTemp);
             	}
             }
         }
-        pRequest.getSession().setAttribute( SqualeWebConstants.TOP_KEY, topMenu );
+        pRequest.getSession().setAttribute( SqualeWebConstants.TOP_KEY, languageCustomizedTopMenu );
     }
 
     /**
