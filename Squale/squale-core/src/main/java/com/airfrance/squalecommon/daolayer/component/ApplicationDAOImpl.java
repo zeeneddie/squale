@@ -25,9 +25,14 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.type.Type;
 
 import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import com.airfrance.jraf.provider.persistence.hibernate.SessionImpl;
 import com.airfrance.jraf.spi.persistence.ISession;
 import com.airfrance.squalecommon.daolayer.DAOMessages;
 import com.airfrance.squalecommon.daolayer.DAOUtils;
@@ -431,24 +436,43 @@ public class ApplicationDAOImpl
      * @throws JrafDaoException si une erreur à lieu
      */
     public ApplicationBO loadByAuditId( ISession pSession, Long pAuditId )
-        throws JrafDaoException
-    {
-        ApplicationBO app = null;
-        String whereClause = "where ";
-        whereClause += pAuditId + " in elements(" + getAlias() + ".audits)";
-        Collection col = findWhere( pSession, whereClause );
-        if ( col.size() == 1 )
+	    throws JrafDaoException
+	{
+    	ApplicationBO app = null;
+	    SessionImpl sessionHibernate = (SessionImpl) pSession;
+    	try
+    	{
+    		String fullquery = "SELECT app_comp.ComponentId" +
+    				", app_comp.Excluded" +
+    				", app_comp.Justification" +
+    				", app_comp.Name" +
+    				", app_comp.Parent" +
+    				", app_comp.ProjectId" +
+    				", app_comp.AuditFrequency" +
+    				", app_comp.ResultsStorageOptions" +
+    				", app_comp.Status" +
+    				", app_comp.PublicApplication" +
+    				", app_comp.LastUpdate" +
+    				", app_comp.EXTERNAL_DEV" +
+    				", app_comp.IN_PRODUCTION" +
+    				", app_comp.lastUser" +
+    				", app_comp.Serveur" +
+    				" FROM Component app_comp";
+    		fullquery += " WHERE app_comp.subclass = 'Application'" +
+    				" AND EXISTS " +
+    				"( SELECT 'X' FROM Components_Audits compaudits" +
+    				" WHERE app_comp.ComponentId = compaudits.ComponentId AND compaudits.AuditId = ?)";
+    	    Query q = sessionHibernate.getSession().createSQLQuery(fullquery).addEntity(ApplicationBO.class);
+    	    q.setLong(0, pAuditId);
+    	    app = (ApplicationBO) q.uniqueResult();
+    	}
+	    catch ( HibernateException e )
         {
-            app = (ApplicationBO) col.iterator().next();
+            throw new JrafDaoException( e );
         }
-        else if ( col.size() > 1 )
-        {
-            // trop d'application => pb de base de données on leve une exception
-            String tab[] = { pAuditId.toString() };
-            throw new JrafDaoException( DAOMessages.getString( "application.many.name", tab ) );
-        }
-        return app;
-    }
+	    return app;
+	}
+    
 
     /**
      * @param pSession la session hibernate
