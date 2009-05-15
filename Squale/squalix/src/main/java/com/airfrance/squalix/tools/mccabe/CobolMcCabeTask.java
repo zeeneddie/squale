@@ -97,6 +97,8 @@ public class CobolMcCabeTask
         mStatus = TERMINATED;
         // conversion de toutes les erreurs 'fatales' en avertissements
         convertFatalToWarningErrors();
+        // calcul des métriques au niveau Programme
+        mPersistor.calculateCobolProgramMetrics();
     }
 
     /**

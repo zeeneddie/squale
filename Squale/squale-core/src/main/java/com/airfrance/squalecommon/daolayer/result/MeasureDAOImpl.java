@@ -26,8 +26,10 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.type.Type;
 
 import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
@@ -406,6 +408,31 @@ public class MeasureDAOImpl
 
         Collection col = findWhere( pSession, whereClause );
 
+        return col;
+    }
+
+    /**
+     * Retourne toutes les mesures des composants dérivant du parent et dont le type est spécifié
+     * 
+     * @param pSession session hibernate
+     * @param pParentComponentID identifiant du composant parent
+     * @param pAuditID identifiant de l'audit
+     * @return ensemble des mesures des composants dérivant du parent sauf les transgressions
+     * @throws JrafDaoException exception DAO
+     */
+    public Collection findWhereParent( ISession pSession, Long pParentComponentID, Long pAuditID, String pType )
+        throws JrafDaoException
+    {
+        String whereClause = "where ";
+        whereClause += getAlias() + ".component.parent.id=?";
+        whereClause += " and " + getAlias() + ".audit.id =?";
+        whereClause += " and " + getAlias() + ".class = '" + pType + "'";
+
+        Object[] values = { pParentComponentID, pAuditID };
+        Type[] types = { Hibernate.LONG, Hibernate.LONG };
+
+        LOG.trace( "findWhereParent: " + whereClause );
+        Collection col = findWhere( pSession, whereClause, values, types );
         return col;
     }
 

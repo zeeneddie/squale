@@ -219,6 +219,34 @@ public class AbstractComponentDAOImpl
      * @param pSession la session
      * @param pParentId l'id du parent
      * @param pAuditId l'id de l'audit, peut être <code>null</code>
+     * @param pSubClassName le type de composants, peut être <code>null</code>
+     * @return tous les enfants dont le parent a l'id <code>pParentId</code> de type <code>pSubClassName</code>
+     *         rattachés à l'audit d'id <code>pAuditId</code>
+     * @throws JrafDaoException si erreur
+     */
+    public Collection findAllChildrenWhere( ISession pSession, Long pParentId, Long pAuditId, String pSubClassName )
+        throws JrafDaoException
+    {
+        StringBuffer whereClause = new StringBuffer( "where " );
+        whereClause.append( getAlias() + ".parent.id=" + pParentId );
+        if ( null != pAuditId )
+        {
+            whereClause.append( " and " );
+            whereClause.append( pAuditId + " in elements (" + getAlias() + ".audits)" );
+        }
+        if ( null != pSubClassName )
+        {
+            whereClause.append( " and " );
+            whereClause.append( getAlias() + ".class='" + pSubClassName + "'" );
+        }
+        LOG.warn( "findAllChildrenWhere: " + whereClause );
+        return (Collection) findWhere( pSession, whereClause.toString() );
+    }
+
+    /**
+     * @param pSession la session
+     * @param pParentId l'id du parent
+     * @param pAuditId l'id de l'audit, peut être <code>null</code>
      * @param pType le type de composants, peut être <code>null</code>
      * @param pFilter le filtre sur le nom, peut être <code>null</code>
      * @return le nombre d'enfants dont le parent a l'id <code>pParentId</code> de type <code>pType</code> rattachés

@@ -30,13 +30,20 @@ import org.apache.commons.logging.LogFactory;
 import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.jraf.spi.persistence.ISession;
 import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
+import com.airfrance.squalecommon.daolayer.component.AbstractComponentDAOImpl;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentType;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO;
+import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAProjectMetricsBO;
 import com.airfrance.squalix.core.TaskData;
 import com.airfrance.squalix.util.csv.CSVParser;
 import com.airfrance.squalix.util.parser.CobolParser;
 import com.airfrance.squalix.util.repository.ComponentRepository;
+import com.airfrance.squalecommon.util.mapping.Mapping;
 
 /**
  * Objet chargé de faire persister les métriques McCabe pour les projets Cobol.
@@ -137,6 +144,100 @@ public class CobolMcCabePersistor
         mSession.commitTransactionWithoutClose();
         mSession.beginTransaction();
         LOGGER.info( McCabeMessages.getString( "logs.debug.report_parsing_end" ) );
+    }
+
+    /**
+     * Calcule les métriques au niveau Programme à partir de l'arbre des composants
+     */
+    public void calculateCobolProgramMetrics()
+        throws Exception
+    {
+        LOGGER.info( McCabeMessages.getString( "logs.debug.program_processing" ) );
+        // Récupération du Package Root du projet COBOL
+        ProjectBO lProject = mParser.getProject();
+        Collection lListRootPackage =
+            AbstractComponentDAOImpl.getInstance().findAllChildrenWhere( mSession, lProject.getId(), mAudit.getId(),
+                                                                         "Package" );
+
+        if ( lListRootPackage.size() != 1 )
+        {
+            // Erreur car un projet COBOL ne peut contenir qu'un root package SOURCE par audit
+            LOGGER.error( "Zero or more than one Root Package detected. Impossible to calculate COBOL Program Metric." );
+        }
+        else
+        {
+            PackageBO lRootPackage = (PackageBO) lListRootPackage.toArray()[0];
+            Collection lListProgram =
+                AbstractComponentDAOImpl.getInstance().findAllChildrenWhere( mSession, lRootPackage.getId(),
+                                                                             mAudit.getId(), "Class" );
+            generateProgramMetrics( lListProgram );
+        }
+    }
+
+    /**
+     * Génération des métriques au niveau Programme
+     * 
+     * @param listProgram liste des programmes
+     * @return true si les métriques ont été générés
+     */
+    private void generateProgramMetrics( Collection listProgram )
+        throws Exception
+    {
+        LOGGER.info( McCabeMessages.getString( "logs.debug.program_calculating" ) );
+        Collection<McCabeQAClassMetricsBO> programResults = new ArrayList<McCabeQAClassMetricsBO>();
+        Iterator itProgram = listProgram.iterator();
+        while ( itProgram.hasNext() )
+        {
+            ClassBO program = (ClassBO) itProgram.next();
+            // Récupération des métriques des modules du programme
+            Collection<McCabeQAMethodMetricsBO> programMeasureList =
+                MeasureDAOImpl.getInstance().findWhereParent( mSession, program.getId(), mAudit.getId(),
+                                                              "MethodMetrics" );
+            // Si ce programme n'existe plus pour cet audit, pas de mesures retournées
+            if ( programMeasureList.size() > 0 )
+            {
+                // Init des métriques Programmes qu'on va calculer
+                McCabeQAClassMetricsBO programMetric = new McCabeQAClassMetricsBO();
+                programMetric.setTaskName( mTaskName );
+                programMetric.setAudit( mAudit );
+                programMetric.setComponent( program );
+                programMetric.setComponentName( program.getName() );
+                // en COBOL, on a 1 mesure / composant
+                programMetric.setWmc( programMeasureList.size() );
+                int sumNbLoc = 0;
+                int sumNbLoCom = 0;
+                boolean deadM = false;
+                int sumVg = 0;
+                int maxVg = 0;
+                // Itération sur les mesures des modules
+                Iterator itMesure = programMeasureList.iterator();
+                while ( itMesure.hasNext() )
+                {
+                    McCabeQAMethodMetricsBO mesure = (McCabeQAMethodMetricsBO) itMesure.next();
+                    sumNbLoc += mesure.getNsloc();
+                    sumNbLoCom += mesure.getNcloc();
+                    sumVg += mesure.getVg();
+                    maxVg = Math.max( maxVg, mesure.getVg() );
+                    if ( deadM == false && mesure.getDeadCode() == 1 )
+                    {
+                        deadM = true;
+                    }
+                }
+                // Calcul pour le programme puis ajout dans la collection
+                programMetric.setSloc( sumNbLoc );
+                programMetric.setCloc( sumNbLoCom );
+                programMetric.setSumvg( sumVg );
+                programMetric.setDeadModule( deadM );
+                programMetric.setMaxvg( maxVg );
+                programResults.add( programMetric );
+            }
+        }
+        // Persistance de la collection obtenue
+        LOGGER.info( McCabeMessages.getString( "logs.debug.program_processing_database" ) );
+        MeasureDAOImpl.getInstance().saveAll( mSession, programResults );
+        mSession.commitTransactionWithoutClose();
+        mSession.beginTransaction();
+        LOGGER.info( McCabeMessages.getString( "logs.debug.program_processing_end" ) );
     }
 
     /**

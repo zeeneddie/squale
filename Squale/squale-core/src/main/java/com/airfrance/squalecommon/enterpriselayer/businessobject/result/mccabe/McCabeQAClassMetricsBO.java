@@ -17,7 +17,6 @@
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
 //Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\result\\mccabe\\McCabeClassMetricsBO.java
-
 package com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe;
 
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.BooleanMetricBO;
@@ -90,6 +89,11 @@ public final class McCabeQAClassMetricsBO
      * Définit si la classe dépend de ses enfants.
      */
     private final static String DEPENDSUPONCHILD = "dependsUponChild";
+
+    /**
+     * Définit si le programme contient des modules non appellés (Added for COBOL)
+     */
+    private final static String DEADMODULE = "deadModule";
 
     /**
      * Access method for the mMaxvg property.
@@ -284,6 +288,26 @@ public final class McCabeQAClassMetricsBO
     }
 
     /**
+     * Access method for the mDeadModule property.
+     * 
+     * @return the current value of the mDeadModule property
+     */
+    public Boolean getDeadModule()
+    {
+        return (Boolean) ( (BooleanMetricBO) getMetrics().get( DEADMODULE ) ).getValue();
+    }
+
+    /**
+     * Sets the value of the mDeadModule property.
+     * 
+     * @param pSumivg the new value of the mDeadModule property
+     */
+    public void setDeadModule( Boolean pDeadModule )
+    {
+        ( (BooleanMetricBO) getMetrics().get( DEADMODULE ) ).setValue( pDeadModule );
+    }
+
+    /**
      * Constructeur par défaut.
      * 
      * @roseuid 42CA76660217
@@ -303,7 +327,7 @@ public final class McCabeQAClassMetricsBO
         getMetrics().put( SUMVG, new IntegerMetricBO() );
         getMetrics().put( SUMIVG, new IntegerMetricBO() );
         getMetrics().put( DEPENDSUPONCHILD, new BooleanMetricBO() );
-        ;
+        getMetrics().put( DEADMODULE, new BooleanMetricBO() );
     }
 
     /**
@@ -326,6 +350,46 @@ public final class McCabeQAClassMetricsBO
     public void setDependsUponChild( Boolean pDependsUponChild )
     {
         ( (BooleanMetricBO) getMetrics().get( DEPENDSUPONCHILD ) ).setValue( pDependsUponChild );
+    }
+
+    /**
+     * Access method for the mCloc property.
+     * 
+     * @return the current value of the mCloc property
+     */
+    public Integer getCloc()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( CLOC ) ).getValue();
+    }
+
+    /**
+     * Sets the value of the mCloc property.
+     * 
+     * @param pCloc the new value of the mCloc property
+     */
+    public void setCloc( Integer pCloc )
+    {
+        ( (IntegerMetricBO) getMetrics().get( CLOC ) ).setValue( pCloc );
+    }
+
+    /**
+     * Access method for the mSloc property.
+     * 
+     * @return the current value of the mSloc property
+     */
+    public Integer getSloc()
+    {
+        return (Integer) ( (IntegerMetricBO) getMetrics().get( SLOC ) ).getValue();
+    }
+
+    /**
+     * Sets the value of the mSloc property.
+     * 
+     * @param pSloc the new value of the mSloc property
+     */
+    public void setSloc( Integer pSloc )
+    {
+        ( (IntegerMetricBO) getMetrics().get( SLOC ) ).setValue( pSloc );
     }
 
 }
