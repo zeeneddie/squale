@@ -87,7 +87,7 @@ if(selectedTab == null) {
 								<tr>
 									<td>
 										<bean:define id="listtagApp" name="projectSummaryForm" property="tagsAppli"></bean:define>
-										<af:select property="tagDelAppli">
+										<af:select property="tagDelAppli" name="projectSummaryForm">
 											<af:options collection="listtagApp" property="name"/>
 										</af:select>
 									</td>
@@ -106,7 +106,7 @@ if(selectedTab == null) {
 								<tr>
 									<td>
 										<bean:define id="listtagProj" name="projectSummaryForm" property="tags"></bean:define>
-										<af:select property="tagDel">
+										<af:select property="tagDel" name="projectSummaryForm">
 											<af:options collection="listtagProj" property="name"/>
 										</af:select>
 									</td>
