@@ -45,7 +45,8 @@
 			<directory>../squale-database</directory>
 			<excludes>
 				<exclude>.project</exclude>
-				<exclude>derby/lib/*</exclude>
+				<exclude>derby/lib/derbyclient*</exclude>
+				<exclude>derby/lib/derbynet*</exclude>
 			</excludes>
 		</fileSet>
 		<!-- ********* WEBAPP FILES ********* -->
