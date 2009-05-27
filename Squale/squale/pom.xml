@@ -430,8 +430,8 @@
 	</dependencyManagement>
 	<profiles>
 		<profile>
-			<!-- Configuration for test environment -->
-			<id>env-test</id>
+			<!-- Configuration for building the Derby/Jetty based distribution -->
+			<id>env-distrib</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -442,6 +442,33 @@
 					</filter>
 				</filters>
 			</build>
+			<properties>
+				<squale.db.jdbc.maven.groupId>
+					org.apache.derby
+				</squale.db.jdbc.maven.groupId>
+				<squale.db.jdbc.maven.artifactId>
+					derby
+				</squale.db.jdbc.maven.artifactId>
+				<squale.db.jdbc.maven.version>
+					10.4.2.0
+				</squale.db.jdbc.maven.version>
+				<squale.db.connection.url>
+					jdbc:derby:squale-db;create=true
+				</squale.db.connection.url>
+				<squale.db.connection.username>
+				</squale.db.connection.username>
+				<squale.db.connection.password>
+				</squale.db.connection.password>
+				<squale.db.connection.driver_class>
+					org.apache.derby.jdbc.EmbeddedDriver
+				</squale.db.connection.driver_class>
+				<squale.db.dialect>
+					org.hibernate.derby.DerbyDialect
+				</squale.db.dialect>
+			</properties>
+		</profile>
+		<!--profile>
+			<id>env-test-oracle</id>
 			<properties>
 				<squale.db.jdbc.maven.groupId>
 					com.oracle
@@ -468,7 +495,7 @@
 					org.hibernate.dialect.Oracle9Dialect
 				</squale.db.dialect>
 			</properties>
-		</profile>
+		</profile-->
 		<!-- Adding a profile here allows to override the above properties for a specific environment
 		<profile>
 			<id>env-XXX</id>

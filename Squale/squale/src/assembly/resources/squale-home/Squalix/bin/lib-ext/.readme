@@ -1,1 +1,2 @@
-This is the folder where you will typically put the JDBC driver JAR.
+This is the folder where you will put external libs needed by Squalix. 
+For instance, this is the right place to put the JDBC driver to connect to your database.

@@ -11,26 +11,26 @@
 		<file>
 			<source>../squale-core/target/classes/META-INF/DEPENDENCIES
 			</source>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>/META-INF</outputDirectory>
 			<destName>DEPENDENCIES_squale-core</destName>
 		</file>
 		<file>
 			<source>../squale-web/target/classes/META-INF/DEPENDENCIES
 			</source>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>/META-INF</outputDirectory>
 			<destName>DEPENDENCIES_squale-web</destName>
 		</file>
 		<file>
 			<source>../squalix/target/classes/META-INF/DEPENDENCIES
 			</source>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>/META-INF</outputDirectory>
 			<destName>DEPENDENCIES_squalix</destName>
 		</file>
 	</files>
 	<fileSets>
 		<!-- ********* LICENSE FILES & Co ********* -->
 		<fileSet>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>/META-INF</outputDirectory>
 			<directory>/target/maven-shared-archive-resources/META-INF
 			</directory>
 			<includes>
@@ -45,6 +45,7 @@
 			<directory>../squale-database</directory>
 			<excludes>
 				<exclude>.project</exclude>
+				<exclude>derby/lib/*</exclude>
 			</excludes>
 		</fileSet>
 		<!-- ********* WEBAPP FILES ********* -->
@@ -55,6 +56,16 @@
 			<includes>
 				<include>squale-web-${pom.version}.war
 				</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<outputDirectory>/02-squaleweb-files/derby-jars
+			</outputDirectory>
+			<directory>../squale-database/derby/lib
+			</directory>
+			<includes>
+				<include>derby-*.jar</include>
+				<include>derbynet-*.jar</include>
 			</includes>
 		</fileSet>
 		<!-- ********* SQUALIX FILES ********* -->
@@ -68,12 +79,12 @@
 			<directory>../squalix/server-files</directory>
 		</fileSet>
 		<fileSet>
-			<outputDirectory>/03-squalix-files/squale-home/Squalix/bin
+			<outputDirectory>/03-squalix-files/squale-home/Squalix/bin/lib-ext
 			</outputDirectory>
-			<directory>../squalix/target</directory>
+			<directory>../squale-database/derby/lib
+			</directory>
 			<includes>
-				<include>squalix-${pom.version}-batch-package.zip
-				</include>
+				<include>derbyclient-*.jar</include>
 			</includes>
 		</fileSet>
 		<!-- ********* CONFIG FILES ********* -->
@@ -85,4 +96,22 @@
 			</excludes>
 		</fileSet>
 	</fileSets>
+	
+	<!-- ********* SQUALIX BATCH FILES TO EXTRACT ********* -->
+	<moduleSets>
+		<moduleSet>
+			<includes>
+				<include>org.squale.app:squalix</include>
+			</includes>
+			<binaries>
+				<attachmentClassifier>batch-package
+				</attachmentClassifier>
+				<includes>
+					<include>*.zip</include>
+				</includes>
+				<outputDirectory> /03-squalix-files/squale-home/Squalix/bin
+				</outputDirectory>
+			</binaries>
+		</moduleSet>
+	</moduleSets>
 </assembly>

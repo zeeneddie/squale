@@ -29,6 +29,7 @@
 
 		<!-- <property name="dialect">org.hibernate.dialect.OracleDialect</property> -->
 		<!-- <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property> -->
+		<!-- <property name="dialect">org.hibernate.dialect.DerbyDialect</property> -->
 
 		<!-- begin mapping files -->
 		<mapping resource="mapping/access/UserAccessBO.hbm.xml" />

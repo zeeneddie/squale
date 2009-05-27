@@ -225,16 +225,6 @@
 		</dependency>
 
 		<!-- On est hors container, donc il faut ces dépendances en runtime -->
-		<!--dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jsp-api</artifactId>
-			<scope>runtime</scope>
-		</dependency-->
 		<dependency>
 			<groupId>com.ibm</groupId>
 			<artifactId>j2ee</artifactId>
@@ -251,4 +241,27 @@
 			<!--scope>provided</scope-->
 		</dependency>
 	</dependencies>
+	<profiles>
+		<profile>
+			<!-- Configuration for building the Derby/Jetty based distribution -->
+			<id>env-distrib</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<squale.db.jdbc.maven.artifactId>
+					derbynet 
+				</squale.db.jdbc.maven.artifactId>
+				<squale.db.connection.url> 
+					jdbc:derby://localhost:1527/squale-db
+				</squale.db.connection.url>
+				<squale.db.connection.driver_class>
+					org.apache.derby.jdbc.ClientDriver 
+				</squale.db.connection.driver_class>
+				<squale.db.dialect> 
+					org.hibernate.derby.DerbyDialect 
+				</squale.db.dialect>
+			</properties>
+		</profile>
+	</profiles>
 </project>
