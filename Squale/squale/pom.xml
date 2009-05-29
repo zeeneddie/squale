@@ -463,7 +463,7 @@
 					org.apache.derby.jdbc.EmbeddedDriver
 				</squale.db.connection.driver_class>
 				<squale.db.dialect>
-					org.hibernate.derby.DerbyDialect
+					org.hibernate.dialect.DerbyDialect
 				</squale.db.dialect>
 			</properties>
 		</profile>
