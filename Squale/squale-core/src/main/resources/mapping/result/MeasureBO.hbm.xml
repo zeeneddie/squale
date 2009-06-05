@@ -19,6 +19,12 @@
     <many-to-one insert="true" column="ComponentId" cascade="save-update" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO" not-null="true" name="component"/>
     <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.GraphBO" discriminator-value="Graph"/>
     <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.ckjm.CkjmClassMetricsBO" discriminator-value="CkjmClassMetrics"/>
+    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.AbstractCoberturaMetricsBO" discriminator-value="CoberturaMetrics">
+      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaClassMetricsBO" discriminator-value="CoberturaClassMetrics"/>
+      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaMethodMetricsBO" discriminator-value="CoberturaMethodMetrics"/>
+      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaPackageMetricsBO" discriminator-value="CoberturaPackageMetrics"/>
+      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaProjectMetricsBO" discriminator-value="CoberturaProjectMetrics"/>
+    </subclass>
     <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.ExtBugTrackingMetricsBO" discriminator-value="ExtBugTrackingMetrics">
       <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.qc.ExtTestManagerQCMetricsBO" discriminator-value="TestManagerQCMetrics"/>
     </subclass>
