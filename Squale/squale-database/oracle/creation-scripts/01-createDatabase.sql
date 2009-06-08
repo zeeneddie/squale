@@ -610,7 +610,7 @@
         export_IDE number(1,0),
         MilestoneAudit number(1,0),
         NormalAudit number(1,0),
-		language varchar2(255) null,
+		language varchar2(255),
         primary key (AbstractTasksUserId)
     );
 

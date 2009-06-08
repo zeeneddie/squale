@@ -18,11 +18,17 @@
  */
 package com.airfrance.squalecommon.util.database;
 
+import java.util.Date;
+
 /**
  * Interface which give access to the correct implementation according to the database used.
  */
 public interface DatabaseType
 {
+    /**
+     * The date pattern
+     */
+    String JAVADATEPATTERN = "dd/MM/yyyy HH:mm:ss";
 
     /**
      * Give the correct string for use the date in a query according to the database used.
@@ -30,17 +36,7 @@ public interface DatabaseType
      * @param date the date we want use in the query
      * @return the String to insert in the query
      */
-    String toDate( String date );
-
-    /**
-     * Give the correct sequence for the query according to the database used. Method specific for the query write in
-     * the method findChangedComponentWhere from MarkDAOImpl. The aim is limit the result to numberOfResult and order
-     * the result by type and by name
-     * 
-     * @param numberOfResults maximum number of results
-     * @return the String to insert in the query
-     */
-    String resNumberLimit( int numberOfResults );
+    String toDate( Date date );
 
     /**
      * Give the correct syntax for add days to a date in a query according to the database used

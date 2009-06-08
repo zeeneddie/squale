@@ -61,9 +61,7 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SqualixC
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.StopTimeBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.config.adminParams.MailConfigFacade;
 import com.airfrance.squalecommon.enterpriselayer.facade.config.xml.SqualixConfigImport;
-import com.airfrance.squalecommon.util.mail.IMailerProvider;
 
 /**
  * Importation de la configuration Squalix
@@ -435,6 +433,10 @@ public class ConfigurationImport
         ProjectProfileDAOImpl profileDAO = ProjectProfileDAOImpl.getInstance();
         // On supprime les liens profils-configuration
         Profile_DisplayConfDAOImpl.getInstance().removeAll( pSession );
+
+        AbstractDisplayConfDAOImpl dao = AbstractDisplayConfDAOImpl.getInstance();
+        List confBOInDb = dao.findAll( pSession );
+
         Iterator profilesIterator = pProfiles.iterator();
         while ( profilesIterator.hasNext() )
         {
@@ -465,7 +467,7 @@ public class ConfigurationImport
                 }
                 // On fait un traitement particulier pour les configurations car on ne supprime
                 // pas les configurations lors d'un update
-                checkDisplayConfiguration( pSession, existingProfileBO );
+                checkDisplayConfiguration( pSession, existingProfileBO, confBOInDb );
                 profileDAO.save( pSession, existingProfileBO );
                 profilesDTO.add( profileDTO );
             }
@@ -518,36 +520,34 @@ public class ConfigurationImport
      * @throws JrafDaoException si erreur
      * @throws JrafEnterpriseException si erreur
      */
-    private static void checkDisplayConfiguration( ISession session, ProjectProfileBO profileBO )
+    private static void checkDisplayConfiguration( ISession session, ProjectProfileBO profileBO, List confBOInDb )
         throws JrafDaoException, JrafEnterpriseException
     {
         // Initialisation
-        ISession session2 = null;
         Profile_DisplayConfDAOImpl profilConfDAO = Profile_DisplayConfDAOImpl.getInstance();
         // On récupère les configurations liées au profil
         Set confs = profileBO.getProfileDisplayConfs();
         // Initialisation du retour
         Set persistentConfs = new HashSet( confs.size() );
-        // Pour chaque configuration, on vérifie qu'elle n'existe pas déjà.
+
         AbstractDisplayConfDAOImpl dao = AbstractDisplayConfDAOImpl.getInstance();
+
+        // Pour chaque configuration, on vérifie qu'elle n'existe pas déjà.
         // Si elle existe, on la rècupère et on l'affecte au profil
         // Sinon on la crée
         // Ce traitement permet de ne jamais supprimer une configuration tout en mettant
         // à jour les liens avec le profil.
         Profile_DisplayConfBO profile_conf;
         AbstractDisplayConfBO confBO = null;
-        List confBOInDb;
+
         try
         {
-            session2 = PERSISTENTPROVIDER.getSession();
-            confBOInDb = dao.findAll( session2 );
 
             for ( Iterator it = confs.iterator(); it.hasNext(); )
             {
                 profile_conf = (Profile_DisplayConfBO) it.next();
                 profile_conf.setProfile( profileBO );
                 confBO = profile_conf.getDisplayConf();
-                // confBOInDb = dao.findAllSubclass( session, confBO.getClass() );
                 if ( confBOInDb.contains( confBO ) )
                 {
                     // La configuration existe en base, on l'ajoute directement
@@ -569,10 +569,6 @@ public class ConfigurationImport
         catch ( Exception e )
         {
             FacadeHelper.convertException( e, ConfigurationImport.class.getName() + ".checkDisplayConfiguration" );
-        }
-        finally
-        {
-            FacadeHelper.closeSession( session2, ConfigurationImport.class.getName() + ".checkDisplayConfiguration" );
         }
     }
 

@@ -723,14 +723,14 @@
         ApplicationName varchar(255),
         ProjectName varchar(255),
         ProjectLanguage varchar(255),
+        ProgrammingLanguage varchar(255) not null,
         Version varchar(255),
         AuditDate datetime,
         CodeLineNumber integer,
         MethodNumber integer,
         ClassNumber integer,
         HIDDEN bit not null,
-        AUDIT_TYPE varchar(50) not null,
-		programminglanguage varchar(255) null,
+        AUDIT_TYPE varchar(50) not null,		
         primary key (ReferencielId)
     ) type=InnoDB;
 
@@ -820,9 +820,9 @@
         subclass varchar(255) not null,
         Name varchar(255) not null unique,
         export_IDE bit,
+        language varchar(255),
         MilestoneAudit bit,
         NormalAudit bit,
-		language varchar(255) null,
         primary key (AbstractTasksUserId)
     ) type=InnoDB;
 

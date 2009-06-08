@@ -18,6 +18,9 @@
  */
 package com.airfrance.squalecommon.util.database;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Implementation of DatabaseType for MySQL
  */
@@ -28,26 +31,13 @@ public class MySQLType
     /**
      * {@inheritDoc}
      */
-    public String toDate( String date )
+    public String toDate( Date date )
     {
+        SimpleDateFormat sdf = new SimpleDateFormat( JAVADATEPATTERN );
+        String dateString = sdf.format( date );
         StringBuffer query = new StringBuffer( " str_to_date( '" );
-        query.append( date );
+        query.append( dateString );
         query.append( "' , '%d/%m/%Y %T') " );
-        return query.toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String resNumberLimit( int numberOfResults )
-    {
-        // we sort by type by name
-        StringBuffer query = new StringBuffer( " order by  m1.component.class,  m1.component.name asc " );
-
-        // we restrict the number of results
-        query.append( " LIMIT = '" );
-        query.append( numberOfResults );
-        query.append( "'" );
         return query.toString();
     }
 
@@ -61,6 +51,9 @@ public class MySQLType
         query.append( " ," );
         query.append( day );
         query.append( " ) " );
+        query.append( " < " );
+        query.append( toDate( new Date() ) );
+        query.append( " " );
         return query.toString();
     }
 

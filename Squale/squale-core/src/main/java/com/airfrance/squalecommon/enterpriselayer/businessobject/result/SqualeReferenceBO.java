@@ -110,7 +110,7 @@ public class SqualeReferenceBO
      * Le langage du sous projet qui est relatif à la technologie (Java,J2EE)
      */
     private String mLanguage;
-    
+
     /**
      * Le langage de programmation (JAVA,CPP,COBOL)
      */
@@ -222,25 +222,28 @@ public class SqualeReferenceBO
     {
         mLanguage = pLanguage;
     }
-    
+
     /**
      * Access method for the mProgrammingLanguage property
+     * 
+     * @hibernate.property name="programmingLanguage" column="ProgrammingLanguage" type="string" update="true"
+     *                     insert="true" not-null="true"
      * @return le langage de programmation
      */
     public String getProgrammingLanguage()
     {
-    	return mProgrammingLanguage;
+        return mProgrammingLanguage;
     }
-    
+
     /**
      * Sets the value of the pProgrammingLanguage property
+     * 
      * @param pProgrammingLanguage the new value for mProgrammingLanguage property
      */
-    public void setProgrammingLanguage( String pProgrammingLanguage)
+    public void setProgrammingLanguage( String pProgrammingLanguage )
     {
-    	mProgrammingLanguage = pProgrammingLanguage;
+        mProgrammingLanguage = pProgrammingLanguage;
     }
-    
 
     /**
      * Access method for the mVersion property.
@@ -416,9 +419,8 @@ public class SqualeReferenceBO
      * Determines if the mValidated property is true.
      * 
      * @return <code>true<code> if the mValidated property is true
-     * 
-     * @hibernate.property name="hidden" column="HIDDEN" type="boolean" not-null="true" unique="false" update="true" insert="true"
-     * 
+     * @hibernate.property name="hidden" column="HIDDEN" type="boolean" not-null="true" unique="false" update="true"
+     *                     insert="true"
      * @roseuid 42CA3F8901C8
      */
     public boolean getHidden()

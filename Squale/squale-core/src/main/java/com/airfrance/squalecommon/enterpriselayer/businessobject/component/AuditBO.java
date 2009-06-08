@@ -683,7 +683,7 @@ public class AuditBO
     }
 
     /**
-     * @hibernate.property name="squaleVersion" column="squale_version" type="string" update="true" insert="true"
+     * @hibernate.property name="squaleVersion" column="squale_version" type="string" update="true" insert="true" length="100"
      * @return la version de SQUALE
      */
     public String getSqualeVersion()

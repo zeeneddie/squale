@@ -18,6 +18,9 @@
  */
 package com.airfrance.squalecommon.util.database;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Implementation of DatabaseType for Oracle
  */
@@ -28,28 +31,14 @@ public class OracleType
     /**
      * {@inheritDoc}
      */
-    public String toDate( String date )
+    public String toDate( Date date )
     {
+        SimpleDateFormat sdf = new SimpleDateFormat( JAVADATEPATTERN );
+        String dateString = sdf.format( date );
         StringBuffer query = new StringBuffer( "to_date('" );
-        query.append( date );
+        query.append( dateString );
         query.append( "' , 'DD/MM/YYYY HH24:mi:ss') " );
         return query.toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String resNumberLimit( int numberOfResults )
-    {
-
-        // we restrict the number of results
-        StringBuffer query = new StringBuffer( " and rownum < " );
-        query.append( numberOfResults );
-
-        // we sort by type by name
-        query.append( " order by  m1.component.class,  m1.component.name asc " );
-        return query.toString();
-
     }
 
     /**
@@ -62,6 +51,9 @@ public class OracleType
         query.append( " + " );
         query.append( day );
         query.append( " ) " );
+        query.append( " < " );
+        query.append( toDate( new Date() ) );
+        query.append( " " );
         return query.toString();
     }
 }

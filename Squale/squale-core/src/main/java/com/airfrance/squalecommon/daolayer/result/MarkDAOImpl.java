@@ -35,12 +35,11 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Abstr
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MarkBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
-import com.airfrance.squalecommon.util.database.DatabaseTypeFactory;
 
 /**
  * @author M400843
  */
-public class MarkDAOImpl
+public final class MarkDAOImpl
     extends AbstractDAOImpl
 {
     /**
@@ -397,8 +396,8 @@ public class MarkDAOImpl
      * @param pSession la session
      * @param pProjectId l'id du projet
      * @param pAuditId l'id de l'audit
-     * @return la requête récupérant les ids des composants du projet d'id <code>pProjectId</code> notés lors de
-     *         l'audit d'id <code>pAuditId</code>
+     * @return la requête récupérant les ids des composants du projet d'id <code>pProjectId</code> notés lors de l'audit
+     *         d'id <code>pAuditId</code>
      * @throws JrafDaoException si erreur
      */
     private String getComponentIdsWhere( ISession pSession, Long pProjectId, Long pAuditId )
@@ -534,14 +533,13 @@ public class MarkDAOImpl
                 query += getPracticesInClause( practices );
             }
         }
-        
+
         // On ordonne par type et nom de composant; on limite le nombre de résultat
         // On récupére la bonne string en fonction de la base de donnée utilisée
-        query += DatabaseTypeFactory.getInstance().resNumberLimit(pLimit);
-        
-        
+        query += " order by  m1.component.class,  m1.component.name asc ";
+
         LOG.debug( query );
-        return find( pSession, query );
+        return (List) findScrollable( pSession, query, pLimit, 0 );
     }
 
     /**
@@ -567,9 +565,9 @@ public class MarkDAOImpl
     }
 
     /**
-     * Retrouve les <code>pMax</code> plus mauvaises notes (inférieur à <code>pMark</code>+1)qui ont pour id
-     * d'audit <code>pAuditId</code> pour la pratique d'id <code>pPracticeId</code> et dont le composant n'est pas
-     * exclu du plan d'action.
+     * Retrouve les <code>pMax</code> plus mauvaises notes (inférieur à <code>pMark</code>+1)qui ont pour id d'audit
+     * <code>pAuditId</code> pour la pratique d'id <code>pPracticeId</code> et dont le composant n'est pas exclu du plan
+     * d'action.
      * 
      * @param pSession session Hibernate
      * @param pPracticeId l'id de la pratique
@@ -589,9 +587,8 @@ public class MarkDAOImpl
     }
 
     /**
-     * Compte les plus mauvaises notes (inférieur à <code>pMark</code>+1)qui ont pour id d'audit
-     * <code>pAuditId</code> pour la pratique d'id <code>pPracticeId</code> et dont le composant n'est pas exclu du
-     * plan d'action.
+     * Compte les plus mauvaises notes (inférieur à <code>pMark</code>+1)qui ont pour id d'audit <code>pAuditId</code>
+     * pour la pratique d'id <code>pPracticeId</code> et dont le composant n'est pas exclu du plan d'action.
      * 
      * @param pSession session Hibernate
      * @param pPracticeId l'id de la pratique

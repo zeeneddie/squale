@@ -13,7 +13,7 @@
     <property name="applicationName" column="ApplicationName" update="true" type="string" insert="true"/>
     <property name="projectName" column="ProjectName" update="true" type="string" insert="true"/>
     <property name="language" column="ProjectLanguage" update="true" type="string" insert="true"/>
-	<property name="programmingLanguage" column="ProgrammingLanguage" update="true" type="string" insert="true" />
+	<property name="programmingLanguage" column="ProgrammingLanguage" update="true" type="string" insert="true" not-null="true"/>
     <property name="version" column="Version" update="true" type="string" insert="true"/>
     <property name="date" column="AuditDate" update="true" type="timestamp" insert="true"/>
     <map cascade="all" lazy="false" table="FactorRef" sort="natural" name="factors">

@@ -50,7 +50,7 @@ import com.airfrance.squalecommon.util.database.DatabaseTypeFactory;
  * 
  * @author M400843
  */
-public class AuditDAOImpl
+public final class AuditDAOImpl
     extends AbstractDAOImpl
 {
     /**
@@ -958,7 +958,6 @@ public class AuditDAOImpl
         whereClause.append( " and " );
         whereClause.append( DatabaseTypeFactory.getInstance().dateAddDay( getAlias() + ".realBeginningDate",
                                                                           lApplicationAlias + ".resultsStorageOptions" ) );
-        whereClause.append( " < " + DAOUtils.makeQueryDate( new Date() ) );
         // selection suivant le type d'audit
         whereClause.append( " and ((" );
         whereClause.append( getAlias() + ".type = '" + AuditBO.MILESTONE + "'" );

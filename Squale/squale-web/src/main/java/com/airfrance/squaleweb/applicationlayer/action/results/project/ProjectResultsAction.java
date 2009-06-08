@@ -1326,10 +1326,9 @@ public class ProjectResultsAction
                                               HttpServletResponse response )
         throws ServletException
     {
-        /*
-         * 1. On récupère les plus mauvaises pratiques triées par l'effort à fournir pour progresser 2. Pour chaque
-         * pratique, on remonte le nombre des pires composants (ou transgressions)
-         */
+       
+        //1. On récupère les plus mauvaises pratiques triées par l'effort à fournir pour progresser 
+        //2. Pour chaque pratique, on remonte le nombre des pires composants (ou transgressions)
         Collection badPractices;
         // On récupère l'id du projet et de l'audit
         ProjectSummaryForm theForm = (ProjectSummaryForm) form;

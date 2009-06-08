@@ -44,7 +44,7 @@ import com.airfrance.squalecommon.util.mapping.Mapping;
 /**
  * @author M400843
  */
-public class PracticeResultDAOImpl
+public final class PracticeResultDAOImpl
     extends AbstractDAOImpl
 {
 
@@ -181,6 +181,10 @@ public class PracticeResultDAOImpl
                     else
                     {
                         // On récupère les plus mauvais composants pour cette pratiques
+                        /*
+                         * We retrieve, for a given practice, the number of technical component which have a worst
+                         * practice mark than the mark of the same practice at the project level
+                         */
                         nbcorrections = markDAO.countWorstWhere( pSession, new Long( p.getId() ), p.getMeanMark() );
                     }
                     mCache.put( p, new Integer( nbcorrections * rule.getEffort() ) );

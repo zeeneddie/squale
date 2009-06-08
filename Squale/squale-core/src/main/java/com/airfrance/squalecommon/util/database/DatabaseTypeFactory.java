@@ -83,10 +83,13 @@ public final class DatabaseTypeFactory
         {
             databaseInstance = new OracleType();
         }
+        else if (dialectUsed.equals( "org.hibernate.dialect.HSQLDialect" ))
+        {
+            databaseInstance = new HsqldbType();
+        }
         else
         {
             throw new JrafDaoException( "hibernate dialect unknown, contact the Squale administrator" );
-
         }
     }
 

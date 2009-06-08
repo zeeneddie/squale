@@ -24,32 +24,36 @@
  */
 package com.airfrance.squalecommon.daolayer;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.squalecommon.util.database.DatabaseTypeFactory;
 
 /**
- * @author M400843
+ * Utility class for the sql request
  */
-public class DAOUtils
+public final class DAOUtils
 {
-    /**
-     * le pattern de date utilisé
-     */
-    private final static String JAVADATEPATTERN = "dd/MM/yyyy HH:mm:ss";
 
     /**
-     * @param pDate la date à convertir en chaine
-     * @return la chaine de caractère permettant d'utiliser la date dans une requete
+     * Private constructor
+     */
+    private DAOUtils()
+    {
+
+    }
+
+    /**
+     * Utility method for transform date into a well formated string for a sql request
+     * 
+     * @param pDate The date to convert in string
+     * @return The well formated string
+     * @throws JrafDaoException Exception happened during the format
      */
     public static String makeQueryDate( final Date pDate )
-    throws JrafDaoException
+        throws JrafDaoException
     {
-        SimpleDateFormat sdf = new SimpleDateFormat( JAVADATEPATTERN );
-        String dateString = sdf.format( pDate );
-        String queryDate = DatabaseTypeFactory.getInstance().toDate(dateString);
+        String queryDate = DatabaseTypeFactory.getInstance().toDate( pDate );
         return queryDate;
     }
 }

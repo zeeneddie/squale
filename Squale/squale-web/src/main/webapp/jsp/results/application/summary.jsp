@@ -161,11 +161,11 @@
 											<%
 											String link = factorLink + "&projectId=" + projectId.toString() + "&which=" + factorId.toString();
 											%>
-											<a href="<%=link%>" class="nobottom"> <squale:mark
-												name="factor" mark="currentMark" /> <squale:trend
-												name="factor" current="currentMark"
-												predecessor="predecessorMark" /> <squale:picto
-												name="factor" property="currentMark" /> </a>
+											<a href="<%=link%>" class="nobottom"> 
+												<squale:mark name="factor" mark="currentMark" />
+												<squale:trend name="factor" current="currentMark" predecessor="predecessorMark" />
+												<squale:picto name="factor" property="currentMark" /> 
+											</a>	
 										</af:col>
 									</logic:iterate>
 								</af:cols>
