@@ -668,7 +668,8 @@
     alter table Measure 
         add constraint FK9B263D3E7E8A4226 
         foreign key (AuditId) 
-        references AuditBO;
+        references AuditBO
+		on delete cascade;
 
     alter table Measure 
         add constraint FK9B263D3EE5BC5FE3 
@@ -817,12 +818,14 @@
     alter table Tag_Component 
         add constraint FKE093EE5863D3E5E8 
         foreign key (ComponentId) 
-        references Component;
+        references Component
+		on delete cascade;
 
     alter table Tag_Component 
         add constraint FKE093EE5828B1F3C1 
         foreign key (TagId) 
-        references Tag;
+        references Tag
+		on delete cascade;
 
     alter table TaskParameter 
         add constraint FK16AD3384A096529F 
@@ -833,7 +836,8 @@
     alter table TaskRef 
         add constraint FK797F8AE1ADBED57 
         foreign key (TaskId) 
-        references Task;
+        references Task
+		on delete cascade;
 
     alter table Termination_Task 
         add constraint FKC739A220A096529F 

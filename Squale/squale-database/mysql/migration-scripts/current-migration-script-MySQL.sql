@@ -41,13 +41,15 @@ alter table Tag_Component
     add index FKE093EE5863D3E5E8 (ComponentId), 
     add constraint FKE093EE5863D3E5E8 
     foreign key (ComponentId) 
-    references Component (ComponentId);
+    references Component (ComponentId)
+	on delete cascade;
 
 alter table Tag_Component 
     add index FKE093EE5828B1F3C1 (TagId), 
     add constraint FKE093EE5828B1F3C1 
     foreign key (TagId) 
-    references Tag (TagId);
+    references Tag (TagId)
+	on delete cascade;
 
 -- #####################################################
 --Modifications for [#152]
