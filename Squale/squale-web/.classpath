@@ -33,15 +33,15 @@
   <classpathentry kind="var" path="M2_REPO/javax/sql/jdbc-stdext/2.0/jdbc-stdext-2.0.jar" sourcepath="M2_REPO/javax/sql/jdbc-stdext/2.0/jdbc-stdext-2.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/eclipse/jdtcore/3.1.0/jdtcore-3.1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/jfree/jfreechart/1.0.2/jfreechart-1.0.2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-bootstrap/2.6.1/jraf-bootstrap-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-bootstrap/2.6.1/jraf-bootstrap-2.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-commons/2.6.1/jraf-commons-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-commons/2.6.1/jraf-commons-2.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-helper/2.6.1/jraf-helper-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-helper/2.6.1/jraf-helper-2.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-accessdelegate/2.6.1/jraf-provider-accessdelegate-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-provider-accessdelegate/2.6.1/jraf-provider-accessdelegate-2.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6.1/jraf-provider-hibernate-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6.1/jraf-provider-hibernate-2.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-logging/2.6.1/jraf-provider-logging-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-provider-logging/2.6.1/jraf-provider-logging-2.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-spi/2.6.1/jraf-spi-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-spi/2.6.1/jraf-spi-2.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-struts-initializer/2.6.1/jraf-struts-initializer-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-struts-initializer/2.6.1/jraf-struts-initializer-2.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-web-initializer/2.6.1/jraf-web-initializer-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-web-initializer/2.6.1/jraf-web-initializer-2.6.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-bootstrap/2.6.2/jraf-bootstrap-2.6.2.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-bootstrap/2.6.2/jraf-bootstrap-2.6.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-commons/2.6.2/jraf-commons-2.6.2.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-commons/2.6.2/jraf-commons-2.6.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-helper/2.6.2/jraf-helper-2.6.2.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-helper/2.6.2/jraf-helper-2.6.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-accessdelegate/2.6.2/jraf-provider-accessdelegate-2.6.2.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-provider-accessdelegate/2.6.2/jraf-provider-accessdelegate-2.6.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6.2/jraf-provider-hibernate-2.6.2.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6.2/jraf-provider-hibernate-2.6.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-logging/2.6.2/jraf-provider-logging-2.6.2.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-provider-logging/2.6.2/jraf-provider-logging-2.6.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-spi/2.6.2/jraf-spi-2.6.2.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-spi/2.6.2/jraf-spi-2.6.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-struts-initializer/2.6.2/jraf-struts-initializer-2.6.2.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-struts-initializer/2.6.2/jraf-struts-initializer-2.6.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-web-initializer/2.6.2/jraf-web-initializer-2.6.2.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-web-initializer/2.6.2/jraf-web-initializer-2.6.2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/servlet/jsp-api/2.0/jsp-api-2.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/servlet/jstl/1.1.2/jstl-1.1.2.jar" sourcepath="M2_REPO/javax/servlet/jstl/1.1.2/jstl-1.1.2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.0.1B/jta-1.0.1B.jar"/>

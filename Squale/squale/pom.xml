@@ -32,7 +32,7 @@
 		<!--module>../squale-ear</module-->
 	</modules>
 	<properties>
-		<squale.props.jraf.version>2.6.1</squale.props.jraf.version>
+		<squale.props.jraf.version>2.6.2</squale.props.jraf.version>
 		<squale.props.welcom.version>2.5.2</squale.props.welcom.version>
 	</properties>
 	<build>
