@@ -10,7 +10,7 @@
 	<property name="database.driver" value="org.hsqldb.jdbcDriver" />
 	<path id="cp.driver">
 		<fileset dir="${basedir}/lib">
-			<include name="hsqldb.jar" />
+			<include name="hsqldb-*.jar" />
 		</fileset>
 	</path>
 
@@ -18,7 +18,7 @@
 	<!-- Executes the 3 SQL scripts to init the database 	-->
 	<!-- =================================================	-->
 	<target name="executeSQLscripts">
-		<echo>Initializing Derby database...</echo>
+		<echo>Initializing database...</echo>
 		<sql driver="${database.driver}" url="${database.url}" userid="sa" password="" 
 			src="${basedir}/creation-scripts/01-createDatabase-hsqldb.sql" classpathref="cp.driver" />
 		<echo>1rst script OK...</echo>
