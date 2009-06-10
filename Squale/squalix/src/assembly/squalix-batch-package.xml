@@ -49,5 +49,12 @@
 				<exclude>org.squale.app:squalix</exclude>
 			</excludes>
 		</dependencySet>
+		<dependencySet>
+			<scope>provided</scope>
+			<outputDirectory>lib-ext</outputDirectory>
+			<includes>
+				<include>${squale.db.jdbc.maven.groupId}:${squale.db.jdbc.maven.artifactId}</include>
+			</includes>
+		</dependencySet>
 	</dependencySets>
 </assembly>
