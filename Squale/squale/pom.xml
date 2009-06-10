@@ -444,26 +444,27 @@
 			</build>
 			<properties>
 				<squale.db.jdbc.maven.groupId>
-					org.apache.derby
+					hsqldb
 				</squale.db.jdbc.maven.groupId>
 				<squale.db.jdbc.maven.artifactId>
-					derby
+					hsqldb
 				</squale.db.jdbc.maven.artifactId>
 				<squale.db.jdbc.maven.version>
-					10.4.2.0
+					1.8.0.10
 				</squale.db.jdbc.maven.version>
 				<squale.db.connection.url>
-					jdbc:derby:squale-db;create=true
+					jdbc:hsqldb:hsql://localhost/squale-db
 				</squale.db.connection.url>
 				<squale.db.connection.username>
+					sa
 				</squale.db.connection.username>
 				<squale.db.connection.password>
 				</squale.db.connection.password>
 				<squale.db.connection.driver_class>
-					org.apache.derby.jdbc.EmbeddedDriver
+					org.hsqldb.jdbcDriver
 				</squale.db.connection.driver_class>
 				<squale.db.dialect>
-					org.hibernate.dialect.DerbyDialect
+					org.hibernate.dialect.HSQLDialect
 				</squale.db.dialect>
 			</properties>
 		</profile>

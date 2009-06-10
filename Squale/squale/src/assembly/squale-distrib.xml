@@ -27,6 +27,7 @@
 			<destName>DEPENDENCIES_squalix</destName>
 		</file>
 	</files>
+	
 	<fileSets>
 		<!-- ********* LICENSE FILES & Co ********* -->
 		<fileSet>
@@ -43,11 +44,9 @@
 			<outputDirectory>/01-database-files
 			</outputDirectory>
 			<directory>../squale-database</directory>
-			<excludes>
-				<exclude>.project</exclude>
-				<exclude>derby/lib/derbyclient*</exclude>
-				<exclude>derby/lib/derbynet*</exclude>
-			</excludes>
+			<includes>
+				<include>**/*.sql</include>
+			</includes>
 		</fileSet>
 		<!-- ********* WEBAPP FILES ********* -->
 		<fileSet>
@@ -60,14 +59,10 @@
 			</includes>
 		</fileSet>
 		<fileSet>
-			<outputDirectory>/02-squaleweb-files/derby-jars
+			<outputDirectory>/02-squaleweb-files/driver-jar
 			</outputDirectory>
-			<directory>../squale-database/derby/lib
+			<directory>../squale-database/hsql/lib
 			</directory>
-			<includes>
-				<include>derby-*.jar</include>
-				<include>derbynet-*.jar</include>
-			</includes>
 		</fileSet>
 		<!-- ********* SQUALIX FILES ********* -->
 		<fileSet>
@@ -78,15 +73,6 @@
 			<outputDirectory>/03-squalix-files/squale-home/Squalix/bin
 			</outputDirectory>
 			<directory>../squalix/server-files</directory>
-		</fileSet>
-		<fileSet>
-			<outputDirectory>/03-squalix-files/squale-home/Squalix/bin/lib-ext
-			</outputDirectory>
-			<directory>../squale-database/derby/lib
-			</directory>
-			<includes>
-				<include>derbyclient-*.jar</include>
-			</includes>
 		</fileSet>
 		<!-- ********* CONFIG FILES ********* -->
 		<fileSet>
