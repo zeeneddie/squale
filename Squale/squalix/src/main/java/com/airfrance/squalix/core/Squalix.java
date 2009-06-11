@@ -19,38 +19,29 @@
 //Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\core\\Squalix.java
 package com.airfrance.squalix.core;
 
-import java.io.File;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.Parser;
 import org.apache.commons.cli.PosixParser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.quartz.impl.StdSchedulerFactory;
 
 import com.airfrance.jraf.bootstrap.initializer.Initializer;
-import com.airfrance.squalix.core.exception.ConfigurationException;
 import com.airfrance.squalix.messages.Messages;
-import com.airfrance.squalix.tools.quartz.QuartzSqualixScheduler;
+import com.airfrance.squalix.core.quartz.QuartzSqualixScheduler;
 
 /**
- * Lance l'application Squalix. <br />
- * Ceci consiste en quelques opérations simples :
+ * Lance l'application Squalix. <br /> Ceci consiste en quelques opérations simples :
  * <ul>
  * <li>initialisation du socle JRAF,</li>
  * <li>lecture des paramètres de lancement,</li>
  * <li>instanciation d'un scheduler si l'exécution peut-être lancée.</li>
  * </ul>
- * <br />
- * Le lancement du scheduler est synchrone, ce qui bloque l'application tant que le scheduler tourne. <br />
- * Pour plus de renseignements sur le fonctionnement du moteur de tâches, reportez-vous à la javadoc des classes
+ * <br /> Le lancement du scheduler est synchrone, ce qui bloque l'application tant que le scheduler tourne. <br /> Pour
+ * plus de renseignements sur le fonctionnement du moteur de tâches, reportez-vous à la javadoc des classes
  * <code>Scheduler</code> et <code>ResourcesManager</code>.
  * 
  * @see com.airfrance.squalix.core.Scheduler
@@ -59,30 +50,22 @@ import com.airfrance.squalix.tools.quartz.QuartzSqualixScheduler;
  * @version 1.0
  */
 public class Squalix
-    implements Job
 {
-
-    /**
-     * Contructeur vide pour l'utilisation de quartz avec Squalix
-     */
-    public Squalix()
-    {
-    }
 
     /**
      * Logger
      */
-    private static Log mLOGGER = null;
+    private static Log mLOGGER;
 
     /**
      * Clé du site hébergeant l'application
      */
-    private static String mSite = null;
+    private static String mSite;
 
     /**
      * Chemin du fichier de configuration
      */
-    private static String mConfigFile = null;
+    private static String mConfigFile;
 
     /**
      * Clé de périodicité pour le lancement de l'application Squalix
@@ -92,7 +75,7 @@ public class Squalix
     /**
      * Boolean permettant de savoir la manière de lancer le batch Squalix
      */
-    private static boolean mQuartzActive = false;
+    private static boolean mQuartzActive;
 
     /**
      * Options de lancement de la tache Squalix
@@ -121,8 +104,8 @@ public class Squalix
                     "Si la tâche doit être lancée de manière asynchrone" );
 
     /**
-     * Option -debug passée en paramètre ne sert à rien pour le lancement en mode Debug, mais
-     * doit figurer dans la liste des options
+     * Option -debug passée en paramètre ne sert à rien pour le lancement en mode Debug, mais doit figurer dans la liste
+     * des options
      */
     private static Option optionDebug =
         new Option( "debug", "debogage", false, "Indique si on a lancé la tâche en mode DEBUG" );
@@ -162,7 +145,7 @@ public class Squalix
      * @param pArgs arguments de lancement.
      * @roseuid 42918D3702A5
      */
-    public static void main( final String pArgs[] )
+    public static void main( final String[] pArgs )
     {
         // lancement de l’initialisation JRAF
         String rootPath = pArgs[0];
@@ -185,15 +168,15 @@ public class Squalix
                 }
                 else if ( mQuartzActive )
                 {
-                    QuartzSqualixScheduler qss = new QuartzSqualixScheduler();
-                    QuartzSqualixScheduler.setCron( mCron );
+                    QuartzSqualixScheduler qss = new QuartzSqualixScheduler( mSite, mCron );
                     qss.scheduleSqualix( new StdSchedulerFactory() );
                 }
                 else
                 {
+                    //Launch of the scheduler in a new thread
                     scheduler = new Scheduler( new Long( mSite ).longValue() );
-                    // on lance le scheduleur
-                    scheduler.start();
+                    Thread schedulerThread = new Thread(scheduler);
+                    schedulerThread.start();
                 }
             }
             catch ( Exception e )
@@ -217,7 +200,7 @@ public class Squalix
      * @roseuid 42CE4F340204
      * @throws ParseException si la liste des arguments est mal interprétée
      */
-    private static void getParameters( final String pArgs[] )
+    private static void getParameters( final String[] pArgs )
         throws ParseException
     {
         CommandLine cmd = parser.parse( optionsDemarage, pArgs, false );
@@ -228,7 +211,7 @@ public class Squalix
         {
             mConfigFile = (String) cmd.getOptionObject( Messages.getString( "main.configFile_option" ) );
         }
-        
+
         if ( cmd.hasOption( Messages.getString( "main.configCron_option" ) ) )
         {
             mCron = (String) cmd.getOptionObject( Messages.getString( "main.configCron_option" ) );
@@ -239,41 +222,33 @@ public class Squalix
             mQuartzActive = true;
         }
 
-        /*
-         * for ( int i = 0; i < pArgs.length; i++ ) { if ( pArgs[i].equals( Messages.getString( "main.site_parameter" ) ) ) {
-         * mSite = pArgs[++i]; } else if ( pArgs[i].equals( Messages.getString( "main.configFile_parameter" ) ) ) {
-         * mConfigFile = pArgs[++i]; } else if ( pArgs[i].equals( Messages.getString( "main.configCron_parameter" ) ) ) {
-         * mQuartzActive = true; if ( pArgs.length >= i + 2 && !pArgs[i + 1].equals( Messages.getString(
-         * "main.site_parameter" ) ) && !pArgs[i + 1].equals( Messages.getString( "main.configFile_parameter" ) ) ) {
-         * mCron = pArgs[++i]; } } }
-         */
     }
 
     /**
-     * Permet de lancer la tache Squalix par l'intermédiaire de quartz
+     * Getter method for the attribuet mSite (id of the Squalix server)
      * 
-     * @param pContext Le contexte d'exécution du "Job" Quartz
-     * @throws JobExecutionException renvoyée si une exception apparait dans le traitement du job Quartz
+     * @return The id of the Squalix server
      */
-    public void execute( JobExecutionContext pContext )
-        throws JobExecutionException
-    {
-        Scheduler scheduler = null;
-        mLOGGER = LogFactory.getLog( Squalix.class );
-        mLOGGER.info( "lancement Squalix en Cron" );
-        try
-        {
-            scheduler = new Scheduler( new Long( mSite ).longValue() );
-            // on lance le scheduleur
-            scheduler.start();
-        }
-        catch ( NumberFormatException e )
-        {
-            throw new JobExecutionException( e );
-        }
-        catch ( ConfigurationException e )
-        {
-            throw new JobExecutionException( e );
-        }
-    }
+    /*
+     * public static String getMSite() { return mSite; }
+     */
+
+    /**
+     * Getter for the attribute isQuartzExecuteRunning
+     * 
+     * @return true if the squalix job already running
+     */
+    /*
+     * public static boolean isQuartzExecuteRunning() { return isQuartzExecuteRunning; }
+     */
+
+    /**
+     * Setter for the attribute isQuartzExecuteRunning This attribute indicate if a squalix job already running
+     * 
+     * @param pIsQuartzExecuteRunning The new value fior the attribute
+     */
+    /*
+     * public static void setQuartzExecuteRunning( boolean pIsQuartzExecuteRunning ) { isQuartzExecuteRunning =
+     * pIsQuartzExecuteRunning; }
+     */
 }

@@ -101,7 +101,7 @@ import com.airfrance.squalix.util.stoptime.StopTimeHelper;
  * @version 1.0
  */
 public class Scheduler
-    extends Thread
+implements Runnable
 {
 
     /**
@@ -906,7 +906,7 @@ public class Scheduler
             // avant de pouvoir lancer les audits
             while ( isRotationDay() && !pStopTime.isTimeToStop() )
             {
-                sleep( waitDelay );
+                Thread.sleep( waitDelay );
             }
             // Si on est sortis parce que on a dépassé le stopTime, on arrete pour de bon
             // on envoie un mail aux administrateurs
@@ -935,5 +935,4 @@ public class Scheduler
         }
         return result;
     }
-
 }

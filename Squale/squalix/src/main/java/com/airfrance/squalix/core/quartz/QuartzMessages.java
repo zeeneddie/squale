@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.quartz;
+package com.airfrance.squalix.core.quartz;
 
 import com.airfrance.squalecommon.util.messages.BaseMessages;
 
@@ -36,7 +36,7 @@ public final class QuartzMessages
      */
     private QuartzMessages()
     {
-        super( "com.airfrance.squalix.tools.quartz.quartzMessages" );
+        super( "com.airfrance.squalix.core.quartz.quartzMessages" );
     }
 
     /**
