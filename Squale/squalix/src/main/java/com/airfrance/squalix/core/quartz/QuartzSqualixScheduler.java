@@ -85,7 +85,7 @@ public class QuartzSqualixScheduler
     {
 
         mLOGGER = LogFactory.getLog( QuartzSqualixScheduler.class );
-        mLOGGER.info( QuartzMessages.getString( "quartz.initializing.begin" ) );
+        mLOGGER.debug( QuartzMessages.getString( "quartz.initializing.begin" ) );
         Scheduler sched = sf.getScheduler();
 
         // Groups reset
@@ -110,8 +110,8 @@ public class QuartzSqualixScheduler
             }
         }
 
-        mLOGGER.info( QuartzMessages.getString( "quartz.initializing.end" ) );
-        mLOGGER.info( QuartzMessages.getString( "quartz.scheduling.begin" ) );
+        mLOGGER.debug( QuartzMessages.getString( "quartz.initializing.end" ) );
+        mLOGGER.debug( QuartzMessages.getString( "quartz.scheduling.begin" ) );
 
         // Creation of the squalix job
         JobDetail job =
@@ -129,8 +129,8 @@ public class QuartzSqualixScheduler
 
         // Launch of the quartz scheduler
         sched.start();
-        mLOGGER.info( QuartzMessages.getString( "quartz.scheduler.start" ) );
-        mLOGGER.info( QuartzMessages.getString( "quartz.waiting" ) );
+        mLOGGER.debug( QuartzMessages.getString( "quartz.scheduler.start" ) );
+        mLOGGER.debug( QuartzMessages.getString( "quartz.waiting" ) );
 
     }
 

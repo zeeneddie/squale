@@ -4,5 +4,5 @@
 
 <quartz-timer-configuration>
 	<!-- démarrage de la tâche toutes les 5 minutes -->
-	<quartzKey>0 0/5 * * * ?</quartzKey>
+	<quartzKey>0/30 * * * * ?</quartzKey>
 </quartz-timer-configuration>
