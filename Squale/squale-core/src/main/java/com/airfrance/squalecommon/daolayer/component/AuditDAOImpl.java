@@ -148,8 +148,8 @@ public final class AuditDAOImpl
      * @param pType le type des audits
      * @param pStatus le status des audits
      * @return une liste de tableau d'objets à 3 éléments représentants les derniers audits des composants de type
-     *         <pComponentType</code> de type <code>pType</code> dont le status est <code>pStatus</code> Le tableau est
-     *         de la forme {auditApplicationId, auditApplicationName, auditBO}
+     *         <pComponentType</code> de type <code>pType</code> dont le status est <code>pStatus</code> Le tableau
+     *         est de la forme {auditApplicationId, auditApplicationName, auditBO}
      * @throws JrafDaoException si erreur
      */
     public List findAllLastAudits( ISession pSession, Class pComponentClass, String pType, int pStatus )
@@ -296,17 +296,17 @@ public final class AuditDAOImpl
         whereClause += " AND ";
         whereClause += "lower(" + appAlias + ".serveurBO.serveurId) = '" + pSite + "'";
 
-        LOG.info( "requete = " + requete + whereClause );
+        LOG.debug( "requete = " + requete + whereClause );
         List result = find( pSession, requete + whereClause );
-        LOG.info( "find " + result.size() + " audits to delete" );
+        LOG.debug( "Found " + result.size() + " audit()s to delete." );
 
         LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return result;
     }
 
     /**
-     * Permet de récupérer un nombre d'audits définis à partir de l'identifiant du composant. <br /> Les Audits sont
-     * triés du plus récents au plus anciens
+     * Permet de récupérer un nombre d'audits définis à partir de l'identifiant du composant. <br />
+     * Les Audits sont triés du plus récents au plus anciens
      * 
      * @param pSession session Hibernate
      * @param pIDComponent identifiant du composant
@@ -372,7 +372,8 @@ public final class AuditDAOImpl
 
     /**
      * Permet de récupérer un nombre d'audits exécutés (ie. ni supprimé, ni en attente d'exécution) définis à partir de
-     * l'identifiant du composant. <br /> Les Audits sont triés du plus récents au plus anciens
+     * l'identifiant du composant. <br />
+     * Les Audits sont triés du plus récents au plus anciens
      * 
      * @param pSession session Hibernate
      * @param pIDComponent identifiant du composant
@@ -494,8 +495,8 @@ public final class AuditDAOImpl
     }
 
     /**
-     * Permet de récupérer un nombre d'audits définis à partir de l'identifiant de l'application. <br /> Les Audits sont
-     * triés du plus récents au plus anciens
+     * Permet de récupérer un nombre d'audits définis à partir de l'identifiant de l'application. <br />
+     * Les Audits sont triés du plus récents au plus anciens
      * 
      * @param pSession session Hibernate
      * @param pIDApplication identifiant de l'application
@@ -589,14 +590,14 @@ public final class AuditDAOImpl
         String orderClause =
             " order by " + appAlias + ".userAccesses[minindex(" + appAlias + ".userAccesses)].date desc";
 
-        LOG.info( "requete = " + requete + whereClause + orderClause );
+        LOG.debug( "requete = " + requete + whereClause + orderClause );
         result = find( pSession, requete + whereClause + orderClause );
 
         orderClause = " and size(" + appAlias + ".userAccesses)=0 order by " + getAlias() + ".date";
-        LOG.info( "requete = " + requete + whereClause + orderClause );
+        LOG.debug( "requete = " + requete + whereClause + orderClause );
         result.addAll( find( pSession, requete + whereClause + orderClause ) );
 
-        LOG.info( "find " + result.size() + " audits" );
+        LOG.debug( "Found " + result.size() + " audit(s) to launch now." );
 
         LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return result;
@@ -909,10 +910,11 @@ public final class AuditDAOImpl
     }
 
     /**
-     * Recherche les audits obsolètes au regard de la fréquence de purge de l'application. <br /> Pour les audits de
-     * jalon, seuls les audits obsolètes en échec sont pris en compte. <br /> Pour les audits de suivi, les derniers
-     * audits obsolètes ne sont pas pris en compte, pour conservation d'un historique (selon configuration). <br /> Les
-     * audits supprimés, en cours ou programmés ne sont pas pris en compte.
+     * Recherche les audits obsolètes au regard de la fréquence de purge de l'application. <br />
+     * Pour les audits de jalon, seuls les audits obsolètes en échec sont pris en compte. <br />
+     * Pour les audits de suivi, les derniers audits obsolètes ne sont pas pris en compte, pour conservation d'un
+     * historique (selon configuration). <br />
+     * Les audits supprimés, en cours ou programmés ne sont pas pris en compte.
      * 
      * @param pSession session de persistence.
      * @param pSiteId id du serveur du batch.

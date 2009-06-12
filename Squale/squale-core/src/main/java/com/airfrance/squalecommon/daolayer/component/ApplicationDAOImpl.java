@@ -274,7 +274,7 @@ public class ApplicationDAOImpl
         String whereClause = "where ";
         whereClause += getAlias() + ".status = " + pStatus;
         whereClause += " order by lower(" + getAlias() + ".name)";
-        LOG.info( "query(findWhereStatus) = " + whereClause );
+        LOG.debug( "query(findWhereStatus) = " + whereClause );
         List ret = (List) findWhere( pSession, whereClause );
         return ret;
     }
