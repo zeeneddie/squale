@@ -76,7 +76,7 @@ public class SqualixJob
         try
         {
             //Launch of the Squalix scheduler
-            scheduler = new Scheduler( new Long( site ).longValue() );
+            scheduler = new Scheduler( new Long( site ).longValue(),false );
             scheduler.run();
         }
         catch ( NumberFormatException e )

@@ -18,7 +18,6 @@
  */
 package com.airfrance.squalix.core;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -28,13 +27,11 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.HibernateException;
 
 import com.airfrance.jraf.commons.exception.JrafDaoException;
 import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
 import com.airfrance.jraf.commons.exception.JrafPersistenceException;
 import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.SessionImpl;
 import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
 import com.airfrance.jraf.spi.persistence.ISession;
 import com.airfrance.squalecommon.daolayer.component.ApplicationDAOImpl;
@@ -70,8 +67,7 @@ import com.airfrance.squalix.util.stoptime.StopTimeHelper;
 
 /**
  * A partir du fichier de configuration globale, il détermine la séquence des actions pour le projet associé et les
- * exécute.<br />
- * Le scheduler assure :
+ * exécute.<br /> Le scheduler assure :
  * <ul>
  * <li>la récupération de la configuration du moteur de tâches,</li>
  * <li>la récupération des audits à lancer,</li>
@@ -82,18 +78,13 @@ import com.airfrance.squalix.util.stoptime.StopTimeHelper;
  * <li>la modification du statut de l'audit lorsque celui-ci est terminé, et la création éventuelle du prochain audit
  * dans le cas d'un audit de suivi.</li>
  * </ul>
- * <br />
- * Tous les audits et tâches sont exécutés via des pools de threads, gérés par le gestionnaire de ressources.<br />
- * Voir la documentation de la classe <code>ResourcesManager</code> pour plus de renseignements sur son
- * fonctionnement. <br />
- * <br />
- * Lorsque tous les audits ont été lancés, les scheduler est bloqué tant que les pools sont ouverts.<br />
- * Pour s'assurer que ceux-ci sont ouverts, on utilise un <code>CountDownLatch</code> décrémenté par le gestionnaire
- * de ressources lorsqu'il ferme ses pools. <br />
- * <br />
- * Les tâches non liées à un projet et les exécuteurs d'analyse sont associés au scheduler par un pattern
- * Observateur-Observable, dans lequel le scheduler est l'observateur. Sa méthode <code>update()</code> est appelée
- * lorsque l'exécuteur ou la tâche est terminé.
+ * <br /> Tous les audits et tâches sont exécutés via des pools de threads, gérés par le gestionnaire de ressources.<br
+ * /> Voir la documentation de la classe <code>ResourcesManager</code> pour plus de renseignements sur son
+ * fonctionnement. <br /> <br /> Lorsque tous les audits ont été lancés, les scheduler est bloqué tant que les pools
+ * sont ouverts.<br /> Pour s'assurer que ceux-ci sont ouverts, on utilise un <code>CountDownLatch</code> décrémenté par
+ * le gestionnaire de ressources lorsqu'il ferme ses pools. <br /> <br /> Les tâches non liées à un projet et les
+ * exécuteurs d'analyse sont associés au scheduler par un pattern Observateur-Observable, dans lequel le scheduler est
+ * l'observateur. Sa méthode <code>update()</code> est appelée lorsque l'exécuteur ou la tâche est terminé.
  * 
  * @see com.airfrance.squalix.core.ResourcesManager
  * @see com.airfrance.squalix.core.AuditExecutor
@@ -146,13 +137,14 @@ public class Scheduler
     private IMailerProvider mMailer = MailerHelper.getMailerProvider();
 
     /**
-     * Instancie un scheduler.
+     * Instantiate a scheduler.
      * 
-     * @param pSiteId clé du site hébergeant l'application.
+     * @param pSiteId Technical id of the Squalix server.
+     * @param launchMail boolean which indicate if we want launch a mail
      * @throws ConfigurationException Si un problème de configuration apparaît.
      * @roseuid 42935241035F
      */
-    public Scheduler( long pSiteId )
+    public Scheduler( long pSiteId, boolean launchMail )
         throws ConfigurationException
     {
         try
@@ -160,6 +152,19 @@ public class Scheduler
             mSession = PERSISTANT_PROVIDER.getSession();
             mConf = SqualixConfigFacade.getConfig();
             mLaunchingCal = Calendar.getInstance();
+
+            // If launchMail is true then we launch a mail fro indicat to the admins that squalix has been launched
+            if ( launchMail )
+            {
+                String sender = Messages.getString( "mail.sender.squalix" );
+                MessageMailManager mail = new MessageMailManager();
+                String object = sender + Messages.getString( "mail.squalix.launch.object" );
+                mail.addContent( "mail.header", null );
+                mail.addContent( "mail.squalix.launch.content", null );
+                String content = mail.getContent();
+                SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object,
+                                                 content, false );
+            }
 
         }
         catch ( JrafEnterpriseException e )
@@ -259,14 +264,7 @@ public class Scheduler
             StopTimeHelper stop = new StopTimeHelper( mConf, mLaunchingCal );
             LOGGER.info( CoreMessages.getString( "time.limit", stop.getLimitCal().getTime() ) );
             boolean canContinue = true;
-            // Si on est le jour de la rotation des partitions
-            if ( isRotationDay() )
-            {
-                // tache de purge et d'administration avec notamment la rotation des partitions
-                admindb( stop );
-            }
-            // TODO voir comment récupérer les audits un par un dans la base
-            // pour possible multi-threading ultérieur
+
             List audits = getAudits( stop );
 
             // purge dans un thread parallele
@@ -333,11 +331,6 @@ public class Scheduler
             String content = mail.getContent();
             SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content,
                                              false );
-        }
-        finally
-        {
-            // On arrête le monitoring de la mémoire
-            // MemoryMonitor.stopMonitoring();
         }
     }
 
@@ -861,84 +854,5 @@ public class Scheduler
         {
             SqualeReferenceFacade.insertAudit( AuditTransform.bo2Dto( pAudit, pAppliId ), mSession );
         }
-    }
-
-    /**
-     * Administration de la base de donnée pour Oracle gestion des tables partitionnées...
-     * 
-     * @param pStopTime la limite de temps pour l'exécution des audits
-     * @return un booléen indiquant si on peut continuer l'exécution normale
-     * @throws JrafDaoException en cas de problème lors de la récupération ou de la sauvegarde des données
-     * @throws InterruptedException en cas d'interruption inopiné du thread
-     */
-    private boolean admindb( StopTimeHelper pStopTime )
-        throws InterruptedException, JrafDaoException
-    {
-        boolean result = true;
-        String object = "";
-        String content = "";
-        String sender = Messages.getString( "mail.sender.squalix" );
-        MessageMailManager mail = new MessageMailManager();
-        // sur le site maitre
-        if ( Messages.getString( "admin.mastersite" ).equalsIgnoreCase( mSiteId + "" ) )
-        {
-            // verifie qu'il y a une requete d'admin
-            String sql = Messages.getString( "admin.sql.query" );
-            if ( !sql.startsWith( "?" ) )
-            {
-                // et la lance
-                try
-                {
-                    // execute la commande sql d'admin de la base
-                    ( (SessionImpl) mSession ).getSession().connection().prepareCall( sql ).execute();
-                }
-                catch ( HibernateException e )
-                {
-                    // en cas d'exception, log juste les erreurs
-                    LOGGER.error( CoreMessages.getString( "exception" ), e );
-                }
-                catch ( SQLException e )
-                {
-                    LOGGER.error( CoreMessages.getString( "exception" ), e );
-                }
-            }
-        }
-        else
-        {
-            // le délai d'attente entre 2 tests
-            // une demi-heure
-            final int waitDelay = 1800000;
-            // on n'est pas le site maitre, on doit attendre que le script de rotation soit exécutée
-            // avant de pouvoir lancer les audits
-            while ( isRotationDay() && !pStopTime.isTimeToStop() )
-            {
-                Thread.sleep( waitDelay );
-            }
-            // Si on est sortis parce que on a dépassé le stopTime, on arrete pour de bon
-            // on envoie un mail aux administrateurs
-            if ( pStopTime.isTimeToStop() )
-            {
-                result = false;
-                object = sender + Messages.getString( "mail.audits.notDone.object" );
-                mail.addContent( "mail.header", null );
-                mail.addContent( "mail.audits.notDone.content", null );
-                content = mail.getContent();
-                SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object,
-                                                 content, false );
-            } // sinon le script de rotation a été exécutée, on peut continuer normalement
-        }
-        // le script de rotation a été bien lancée, on avertit juste les administrateurs
-        // et on change la date de l'audit avec un délai de 12 semaines.
-        if ( result )
-        {
-            object = sender + Messages.getString( "mail.rotation.done.object" );
-            mail.addContent( "mail.header", null );
-            mail.addContent( "mail.rotation.one.content", null );
-            content = mail.getContent();
-            SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content,
-                                             false );
-            AuditDAOImpl.getInstance().reportRotationAudit( mSession );
-        }
-        return result;
     }
 }

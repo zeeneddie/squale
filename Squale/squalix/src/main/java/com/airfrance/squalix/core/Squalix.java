@@ -66,7 +66,7 @@ public class Squalix
      * Chemin du fichier de configuration
      */
     private static String mConfigFile;
-
+    
     /**
      * Clé de périodicité pour le lancement de l'application Squalix
      */
@@ -174,7 +174,7 @@ public class Squalix
                 else
                 {
                     //Launch of the scheduler in a new thread
-                    scheduler = new Scheduler( new Long( mSite ).longValue() );
+                    scheduler = new Scheduler( new Long( mSite ).longValue(),true );
                     Thread schedulerThread = new Thread(scheduler);
                     schedulerThread.start();
                 }
@@ -223,32 +223,4 @@ public class Squalix
         }
 
     }
-
-    /**
-     * Getter method for the attribuet mSite (id of the Squalix server)
-     * 
-     * @return The id of the Squalix server
-     */
-    /*
-     * public static String getMSite() { return mSite; }
-     */
-
-    /**
-     * Getter for the attribute isQuartzExecuteRunning
-     * 
-     * @return true if the squalix job already running
-     */
-    /*
-     * public static boolean isQuartzExecuteRunning() { return isQuartzExecuteRunning; }
-     */
-
-    /**
-     * Setter for the attribute isQuartzExecuteRunning This attribute indicate if a squalix job already running
-     * 
-     * @param pIsQuartzExecuteRunning The new value fior the attribute
-     */
-    /*
-     * public static void setQuartzExecuteRunning( boolean pIsQuartzExecuteRunning ) { isQuartzExecuteRunning =
-     * pIsQuartzExecuteRunning; }
-     */
 }
