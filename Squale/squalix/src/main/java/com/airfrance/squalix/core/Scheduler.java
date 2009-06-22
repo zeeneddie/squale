@@ -270,7 +270,8 @@ public class Scheduler
             List audits = getAudits( stop );
 
             // purge dans un thread parallele
-            new Purge( mSiteId, audits ).start();
+            Purge prg = new Purge( mSiteId, audits );
+            prg.start();
 
             // Test si il y a des audits avec le status en cours pour le site concerné
             // Si oui, c'est anormal, on prévient les administrateurs mais on continue quand meme
@@ -303,6 +304,10 @@ public class Scheduler
             {
                 manageAuditFrequency();
             }
+
+            // Wait the end of the purge thread
+            prg.join();
+
             LOGGER.info( CoreMessages.getString( "endofexec" ) );
             // Fermeture de la session
             mSession.closeSession();
