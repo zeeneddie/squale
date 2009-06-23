@@ -67,7 +67,8 @@ import com.airfrance.squalix.util.stoptime.StopTimeHelper;
 
 /**
  * A partir du fichier de configuration globale, il détermine la séquence des actions pour le projet associé et les
- * exécute.<br /> Le scheduler assure :
+ * exécute.<br />
+ * Le scheduler assure :
  * <ul>
  * <li>la récupération de la configuration du moteur de tâches,</li>
  * <li>la récupération des audits à lancer,</li>
@@ -78,13 +79,18 @@ import com.airfrance.squalix.util.stoptime.StopTimeHelper;
  * <li>la modification du statut de l'audit lorsque celui-ci est terminé, et la création éventuelle du prochain audit
  * dans le cas d'un audit de suivi.</li>
  * </ul>
- * <br /> Tous les audits et tâches sont exécutés via des pools de threads, gérés par le gestionnaire de ressources.<br
- * /> Voir la documentation de la classe <code>ResourcesManager</code> pour plus de renseignements sur son
- * fonctionnement. <br /> <br /> Lorsque tous les audits ont été lancés, les scheduler est bloqué tant que les pools
- * sont ouverts.<br /> Pour s'assurer que ceux-ci sont ouverts, on utilise un <code>CountDownLatch</code> décrémenté par
- * le gestionnaire de ressources lorsqu'il ferme ses pools. <br /> <br /> Les tâches non liées à un projet et les
- * exécuteurs d'analyse sont associés au scheduler par un pattern Observateur-Observable, dans lequel le scheduler est
- * l'observateur. Sa méthode <code>update()</code> est appelée lorsque l'exécuteur ou la tâche est terminé.
+ * <br />
+ * Tous les audits et tâches sont exécutés via des pools de threads, gérés par le gestionnaire de ressources.<br />
+ * Voir la documentation de la classe <code>ResourcesManager</code> pour plus de renseignements sur son
+ * fonctionnement. <br />
+ * <br />
+ * Lorsque tous les audits ont été lancés, les scheduler est bloqué tant que les pools sont ouverts.<br />
+ * Pour s'assurer que ceux-ci sont ouverts, on utilise un <code>CountDownLatch</code> décrémenté par le gestionnaire
+ * de ressources lorsqu'il ferme ses pools. <br />
+ * <br />
+ * Les tâches non liées à un projet et les exécuteurs d'analyse sont associés au scheduler par un pattern
+ * Observateur-Observable, dans lequel le scheduler est l'observateur. Sa méthode <code>update()</code> est appelée
+ * lorsque l'exécuteur ou la tâche est terminé.
  * 
  * @see com.airfrance.squalix.core.ResourcesManager
  * @see com.airfrance.squalix.core.AuditExecutor
@@ -262,7 +268,10 @@ public class Scheduler
             // On lance le monitoring de la mémoire
             // MemoryMonitor.startMonitoring(new MemoryMonitorConfiguration());
             StopTimeHelper stop = new StopTimeHelper( mConf, mLaunchingCal );
-            LOGGER.info( CoreMessages.getString( "time.limit", stop.getLimitCal().getTime() ) );
+            if ( LOGGER.isDebugEnabled() )
+            {
+                LOGGER.debug( CoreMessages.getString( "time.limit", stop.getLimitCal().getTime() ) );
+            }
             boolean canContinue = true;
 
             List audits = getAudits( stop );

@@ -39,18 +39,17 @@ public class SqualixJob
      * Logger
      */
     private static Log mLOGGER;
-    
+
     /**
      * Key used in the jobDataMap
      */
     public static final String SITE_KEY = "site";
-    
+
     /**
      * The technical id of the Squalix server
      */
     private String site;
 
-    
     /**
      * Public constructor
      */
@@ -69,14 +68,14 @@ public class SqualixJob
         throws JobExecutionException
     {
         Scheduler scheduler = null;
-        mLOGGER = LogFactory.getLog( Squalix.class );
-        mLOGGER.info( QuartzMessages.getString( "quartz.squalixJob.launch" ) );
+        mLOGGER = LogFactory.getLog( SqualixJob.class );
+        mLOGGER.debug( QuartzMessages.getString( "quartz.squalixJob.launch" ) );
         site = context.getJobDetail().getJobDataMap().getString( SITE_KEY );
-    
+
         try
         {
-            //Launch of the Squalix scheduler
-            scheduler = new Scheduler( new Long( site ).longValue(),false );
+            // Launch of the Squalix scheduler
+            scheduler = new Scheduler( new Long( site ).longValue(), false );
             scheduler.run();
         }
         catch ( NumberFormatException e )
@@ -88,7 +87,7 @@ public class SqualixJob
             throw new JobExecutionException( e );
         }
 
-        mLOGGER.info( QuartzMessages.getString( "quartz.squalixJob.finish" ) );
+        mLOGGER.debug( QuartzMessages.getString( "quartz.squalixJob.finish" ) );
     }
 
 }
