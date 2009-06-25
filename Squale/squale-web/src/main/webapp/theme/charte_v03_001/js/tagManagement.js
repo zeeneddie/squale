@@ -24,6 +24,7 @@ function addAppTagButtonClicked()
 	}
 	showEnabledPlus( document.getElementById( 'tagPlusApp' ) );
 	switchVisibility( element );
+	$(":text[name='tagSupp']")[0].focus();
 }
 function addProjTagButtonClicked() 
 {
@@ -42,6 +43,7 @@ function addProjTagButtonClicked()
 	}
 	showEnabledPlus( document.getElementById( 'tagPlusPro' ) );
 	switchVisibility( element );
+	$(":text[name='tagSupp']")[1].focus();
 }
 function delAppTagButtonClicked() 
 {
@@ -60,6 +62,7 @@ function delAppTagButtonClicked()
 	}
 	showEnabledMinus( document.getElementById( 'tagMinusApp' ) );
 	switchVisibility( element );
+	$(":input[name='tagDelAppli']").focus();
 }
 function delProjTagButtonClicked() 
 {
@@ -78,6 +81,7 @@ function delProjTagButtonClicked()
 	}
 	showEnabledMinus( document.getElementById( 'tagMinusPro' ) );
 	switchVisibility( element );
+	$(":input[name='tagDel']").focus();
 }
 
 /* Aligns the field right next to the buttons */
