@@ -144,7 +144,7 @@ public class TagFacade
             }
             else
             {
-                LOG.error( FacadeMessages.getString( "facade.exception.tagfacade.get.tagnull" ) );
+                LOG.debug( FacadeMessages.getString( "facade.exception.tagfacade.get.tagnull" ) );
             }
 
         }
