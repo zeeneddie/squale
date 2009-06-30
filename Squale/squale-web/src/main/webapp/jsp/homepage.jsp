@@ -19,16 +19,24 @@
 		<%-- element --%>
 			<div>
 				<logic:match name="homepageForm" property="default" value="true">
-					<bean:message key="homepage.defaultConfig" />
-					<a href="homepage_management.do?action=state">
-						<bean:message key="homepage.defaultConfigPage"/>
-					</a>
-					<br/>
+					<SCRIPT type="text/javascript">
+							displayDivForIe();
+					</SCRIPT>
+						<bean:message key="homepage.defaultConfig" />
+						<a href="homepage_management.do?action=state">
+							<bean:message key="homepage.defaultConfigPage"/>
+						</a>
+						<br/>
+					</div>
 				</logic:match>
 				<br>
 				<logic:iterate id="compo" name="homepageForm" property="elementToDisplay">
 					<logic:present name="compo">
-						<jsp:include page="<%= compo.toString() %>"></jsp:include>
+						<SCRIPT type="text/javascript">
+							displayDivForIe();
+						</SCRIPT>						
+							<jsp:include page="<%= compo.toString() %>"></jsp:include>
+						</div>
 					</logic:present>
 				</logic:iterate>
 			</div>

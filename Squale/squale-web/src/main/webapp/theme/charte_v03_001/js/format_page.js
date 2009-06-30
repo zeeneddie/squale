@@ -1,3 +1,5 @@
+var is_IE = (agt.indexOf("msie") != -1);
+
 function eraseCanvasLeft(){
 	var content = document.getElementById('contenu');
 	content.style.left='10px';
@@ -19,15 +21,26 @@ function hideField(checkbox,fieldName){
 	if(checkbox.checked){
 		obj.style.display='none';
 	}else{
-		obj.style.display='block';
+		obj.style.display='';
 	}
 }
 
 function displayField(checkbox,fieldName){
 	var obj = document.getElementById(fieldName);
 	if(checkbox.checked){
-		obj.style.display='block';
+		obj.style.display='';
 	}else{
 		obj.style.display='none';
 	}
+}
+function displayDivForIe(){
+	if(is_IE)
+	{
+		document.write('<div style="display:table; width:98%">')
+	}
+	else
+	{
+		document.write('<div>')
+	}
+		
 }
