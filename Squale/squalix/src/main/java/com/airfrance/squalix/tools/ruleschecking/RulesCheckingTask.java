@@ -184,7 +184,7 @@ public class RulesCheckingTask
             {
                 File fileToCopy = new File( fl.toString() );
                 File vPath = new File( (String) mData.getData( TaskData.VIEW_PATH ) );
-                String path = fileToCopy.getAbsolutePath().replace( vPath.getAbsolutePath(), tempDir.getAbsolutePath() );
+                String path = fileToCopy.getCanonicalPath().replace( vPath.getCanonicalPath(), tempDir.getCanonicalPath() );
                 File destFile = new File( path );
                 FileUtils.copyFile( fileToCopy, destFile );
             }
