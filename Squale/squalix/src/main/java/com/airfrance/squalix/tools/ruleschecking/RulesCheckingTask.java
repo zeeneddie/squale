@@ -22,9 +22,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -46,7 +48,7 @@ import com.airfrance.squalix.util.buildpath.BuildProjectPath;
 /**
  * Exécute le rulesChecking sur un sous-projet grace au connecteur rulesChecking<code>rulesCheckingFacade<code>.<br>
  * Si aucun fichier de configuration rulesChecking n'est spécifier dans les paramètres du sous projet,<br>
- * elle prend celui par défaut(stocké sur le serveur)   
+ * elle prend celui par défaut(stocké sur le serveur)
  * 
  * @author sportorico
  */
@@ -69,12 +71,8 @@ public class RulesCheckingTask
     }
 
     /**
-     * L'analyse complète consiste en :
-     * <ul>
-     * <li>lancement du connecteur rulesChecking</li>
-     * <li>recupération des resultats génerés par rulesChecking</li>
-     * <li>Persistance des beans</li>
-     * </ul>
+     * L'analyse complète consiste en : <ul> <li>lancement du connecteur rulesChecking</li> <li>recupération des
+     * resultats génerés par rulesChecking</li> <li>Persistance des beans</li> </ul>
      * 
      * @throws RulesCheckingException Si un problème d'exécution apparaît.
      * @throws JrafDaoException Si un problème d'exécution apparaît.
@@ -178,23 +176,40 @@ public class RulesCheckingTask
                                                                               (ListParameterBO) mProject.getParameter( ParametersConstants.INCLUDED_PATTERNS ),
                                                                               (ListParameterBO) mProject.getParameter( ParametersConstants.EXCLUDED_PATTERNS ),
                                                                               null, new String[] { ".java" } );
+
+            File tempDir = new File( config.getTempSourceDir() );
+            tempDir.mkdir();
+
+            for ( Object fl : includedFileNames )
+            {
+                File fileToCopy = new File( fl.toString() );
+                File vPath = new File( (String) mData.getData( TaskData.VIEW_PATH ) );
+                String path = fileToCopy.getAbsolutePath().replace( vPath.getAbsolutePath(), tempDir.getAbsolutePath() );
+                File destFile = new File( path );
+                FileUtils.copyFile( fileToCopy, destFile );
+            }
+
             CheckStyleProcess process =
                 new CheckStyleProcess( new File( config.getJarDirectory() ), new File( config.getReportDirectory() ),
                                        pJavaVersion );
-            File report =
-                process.analyseSources( file, (String[]) includedFileNames.toArray( new String[] {} ),
-                                        "checkstyle-report" + getProject().getId() );
-            CheckstyleReportParser parser = new CheckstyleReportParser( (String) mData.getData( TaskData.VIEW_PATH ) );
+            File report = process.analyseSources( file, tempDir, "checkstyle-report" + getProject().getId() );
+            CheckstyleReportParser parser = new CheckstyleReportParser( tempDir.getAbsolutePath() );
             CheckStylePersistor persistor = new CheckStylePersistor( pVersion );
             parser.parse( new FileInputStream( report ), persistor );
             // On récupère le transgression
             CheckstyleTransgressionBO transgression = persistor.computeTransgression();
 
             // positionne les données sur la taille du file System
-            affectFileSystemSize( config.getReportDirectory(), false );
+            ArrayList<Object[]> listDirectory = new ArrayList<Object[]>();
+            Object[] obj1 = { config.getReportDirectory(), Boolean.FALSE };
+            Object[] obj2 = { tempDir, Boolean.FALSE };
+            listDirectory.add( obj1 );
+            listDirectory.add( obj2 );
+            affectFileSystemSize( listDirectory );
 
             // Destruction du rapport
             report.delete();
+            FileUtils.deleteDirectory( tempDir );
             return transgression;
         }
         finally

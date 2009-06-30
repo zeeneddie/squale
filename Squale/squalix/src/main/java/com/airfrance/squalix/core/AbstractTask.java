@@ -17,7 +17,6 @@
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
 //Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\core\\Task.java
-
 package com.airfrance.squalix.core;
 
 import java.io.File;
@@ -54,31 +53,27 @@ import com.airfrance.squalecommon.util.SqualeCommonConstants;
 import com.airfrance.squalecommon.util.SqualeCommonUtils;
 import com.airfrance.squalecommon.util.mail.IMailerProvider;
 import com.airfrance.squalecommon.util.mail.MailerHelper;
-import com.airfrance.squalix.messages.Messages;
 import com.airfrance.squalix.messages.MessageMailManager;
+import com.airfrance.squalix.messages.Messages;
 
 /**
  * Représente une façade permettant d'exécuter une tâche.<br>
  * Une tâche est responsable de la création et de la persistance de ses objets de résultats (implémentant l'interface
- * <code>MeasureBO</code>) ainsi que de ses erreurs (classe <code>ErrorBO</code>). <br />
- * <br />
- * Une tâche peut posséder :
+ * <code>MeasureBO</code>) ainsi que de ses erreurs (classe <code>ErrorBO</code>). <br /> <br /> Une tâche peut posséder
+ * :
  * <ul>
  * <li>une tâche parent : tant que la tâche parent n'est pas terminée avec succès, celle-ci ne peut être lancée,</li>
  * <li>et/ou des tâches enfants : lancées dès la complétude avec succès de la tâche courante.
  * <li>
  * </ul>
- * <br />
- * Les attributs nécessaires à une classe lui sont attribués via un pattern IOC. Une fois que la tâche a été instanciée,
- * c'est son observateur (le Scheduler ou l'exécuteur d'analyse) qui lui transmet l'instance d'audit, de projet, son
- * statut, et ses tâches enfants. Elle n'est responsable que de se nommer lors de son instanciation. Le constructeur ne
- * doit prendre aucun paramètre. <br />
- * <br />
- * Si la tâche échoue, elle doit passer en statut FAILED, et générer des erreurs dans la base. Il est plus que vivement
- * conseillé de ne pas utiliser les instance de projet et d'audit lorsque les résultats sont persistés, il faut utiliser
- * des nouvelles instances directement à partir des DAO, avec les id des instances offertes par l'observateur. <br />
- * <br />
- * Pour plus de détails sur la création d'une nouvelle tâche, reportez-vous au P720U associé.
+ * <br /> Les attributs nécessaires à une classe lui sont attribués via un pattern IOC. Une fois que la tâche a été
+ * instanciée, c'est son observateur (le Scheduler ou l'exécuteur d'analyse) qui lui transmet l'instance d'audit, de
+ * projet, son statut, et ses tâches enfants. Elle n'est responsable que de se nommer lors de son instanciation. Le
+ * constructeur ne doit prendre aucun paramètre. <br /> <br /> Si la tâche échoue, elle doit passer en statut FAILED, et
+ * générer des erreurs dans la base. Il est plus que vivement conseillé de ne pas utiliser les instance de projet et
+ * d'audit lorsque les résultats sont persistés, il faut utiliser des nouvelles instances directement à partir des DAO,
+ * avec les id des instances offertes par l'observateur. <br /> <br /> Pour plus de détails sur la création d'une
+ * nouvelle tâche, reportez-vous au P720U associé.
  * 
  * @author m400842
  * @version 1.0
@@ -399,7 +394,8 @@ public abstract class AbstractTask
                 {
                     // If task has failed, we set the last error in fatal criticity
                     // if task doesn't already contain one.
-                    if(!hasFatalError) {
+                    if ( !hasFatalError )
+                    {
                         error.setLevel( ErrorBO.CRITICITY_FATAL );
                     }
                     // Dans le cas d'une erreur fatale, on prévient les admins
@@ -411,15 +407,15 @@ public abstract class AbstractTask
                     String[] infos =
                         new String[] { mName, mApplication.getName(), mApplication.getServeurBO().getName(),
                             mProject.getName(), "" + mAudit.getId(), hour };
-                    
+
                     String object =
                         Messages.getString( "mail.sender.squalix.task", new String[] { mApplication.getName() } )
                             + Messages.getString( "mail.task.failed.object", infos );
-                    
+
                     MessageMailManager mail = new MessageMailManager();
                     mail.addContent( "mail.header", null );
                     mail.addContent( "mail.task.failed.content", infos );
-                    String content=mail.getContent();
+                    String content = mail.getContent();
                     String dest = SqualeCommonConstants.ONLY_ADMINS;
                     IMailerProvider mailer = MailerHelper.getMailerProvider();
                     SqualeCommonUtils.notifyByEmail( mailer, null, dest, null, object, content, false );
@@ -529,7 +525,7 @@ public abstract class AbstractTask
      * Méthode qui effectue le traitement propre à chaque tache
      * 
      * @throws TaskException car il y a plusieurs types d'exception suivant les tâches
-     * @throws JrafDaoException 
+     * @throws JrafDaoException
      */
     public abstract void execute()
         throws TaskException, JrafDaoException;
@@ -643,8 +639,36 @@ public abstract class AbstractTask
         // Si c'est une tache qui conserve la place occupée à la fin, on positionne la valeur
         if ( pPersistent )
         {
+            
             mPersistentFileSystemSize = mMaxFileSystemSize;
         } // sinon c'est 0 par défaut
+    }
+
+    /**
+     * Set the size of temporary and persistent data when there many file/directory
+     * each element of pParam is an Array. Each array conatins two information.
+     * In first position the file/directory location. 
+     * In second position a Boolean which indicate if this elementy is persistent.    
+     * 
+     * @param pParam List of Array which contains the directory place and 
+     */
+    protected void affectFileSystemSize( List<Object[]> pParam )
+    {
+        long size=0;
+        long sizePersistent=0;
+        for (int index = 0; index<pParam.size(); index++)
+        {
+            Object[] elt =  pParam.get( index );
+            boolean persistent = ((Boolean)elt[1]).booleanValue();
+            affectFileSystemSize( elt[0], persistent );
+            size=size+mMaxFileSystemSize;
+            if(persistent)
+            {
+                sizePersistent=sizePersistent+mPersistentFileSystemSize;
+            }
+        }
+        mMaxFileSystemSize=size;
+        mPersistentFileSystemSize = sizePersistent;
     }
 
     /**

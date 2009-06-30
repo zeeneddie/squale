@@ -44,7 +44,7 @@ public class CheckStyleProcessTest
             long time = System.currentTimeMillis();
             CheckStyleProcess proc = new CheckStyleProcess( jarDirectory, reportDirectory, ParametersConstants.JAVA1_4 );
             File xmlFile = new File( "data/checkstyle/checkstyle_parsing.xml" );
-            String[] sources = { "data/samples/testBatch/", "data/samples/testCommon/" };
+            File sources = new File("data/samples");
             File resultFile = proc.analyseSources( xmlFile, sources, "checkstyle-report.xml" );
             assertNotNull( "Fichier existant", resultFile );
             assertTrue( "Fichier existant", resultFile.exists() );
@@ -71,7 +71,7 @@ public class CheckStyleProcessTest
             CheckStyleProcess proc = new CheckStyleProcess( jarDirectory, reportDirectory, ParametersConstants.JAVA1_4 );
             // mais il y a erreur car pas de jars
             File xmlFile = new File( "data/checkstyle/checkstyle_parsing.xml" );
-            String[] sources = { "data/samples/testBatch/", "data/samples/testCommon/" };
+            File sources = new File( "data/samples/testBatch/");
             File resultFile = proc.analyseSources( xmlFile, sources, "checkstyle-report.xml" );
             assertTrue( "Erreur de traitement car jars inexistants", proc.hasErrorOccurred() );
         }

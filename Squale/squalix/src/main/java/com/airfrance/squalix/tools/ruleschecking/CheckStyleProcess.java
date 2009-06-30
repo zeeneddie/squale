@@ -100,16 +100,18 @@ public class CheckStyleProcess
      * Analyse des sources avec Checkstyle
      * 
      * @param pRuleFile fichier de règles
-     * @param pSources répertoires source
+     * @param sourceDir répertoires contenant les sources
      * @param pReportName nom du rapport généré
      * @return fichier généré
      */
-    public File analyseSources( File pRuleFile, String[] pSources, String pReportName )
+    public File analyseSources( File pRuleFile, File sourceDir, String pReportName )
     {
         File result = new File( mReportDirectory, pReportName );
-        Java task = createAntTask( pRuleFile, pSources, result );
+        Java task = createAntTask( pRuleFile, sourceDir, result );
         mErrorOccurred = false;
+        task.getCommandLine();
         task.execute();
+
         // mErrorOccured peut passer à true
         return result;
     }
@@ -125,86 +127,94 @@ public class CheckStyleProcess
     }
 
     /**
-     * Création de la tâche ANT
+     * Create a ajava ant task for launch checkstyle
      * 
-     * @param pRuleFile fichier de règles
-     * @param pSources sources à analyser
-     * @param pResultFile fichier donnant le résultat de l'analyse
-     * @return tâche ANT
+     * @param pRuleFile The rule file
+     * @param sourceDir The directory in which there is the sources to analyze
+     * @param pResultFile The result file
+     * @return a configured ANT task
      */
-    private Java createAntTask( File pRuleFile, String[] pSources, File pResultFile )
+    private Java createAntTask( File pRuleFile, File sourceDir, File pResultFile )
     {
+        // We create a java ant task
         Java task = new Java();
+
+        // We create the project
         Project antProject = new Project();
         antProject.addBuildListener( this );
         task.setProject( antProject );
-        // On fork pour éviter les problèmes de classpath
-        // liés à la version 2.5 de checkstyle qui utilise une version
-        // non compatible de ANTLR dans le contexte hibernate
+
+        // We fork to avoid classpath problems
         task.setFork( true );
+
+        // The class to call
         task.setClassname( "com.puppycrawl.tools.checkstyle.Main" );
-        // Création du classpath
+
+        // Classpath creation
         Path path = createClassPath( antProject );
         task.setClasspath( path );
-        Argument arg = task.createArg();
-        // Augmentation de la mémoire allouée à la JVM
+
+        // Jvm argument. We increase the memory allocate to the JVM
         Argument jvmArg = task.createJvmarg();
         jvmArg.setValue( "-Xmx128M" );
         jvmArg = task.createJvmarg();
         jvmArg.setValue( "-Xss1M" );
+
+        // We create the task argument
+        Argument arg = task.createArg();
+
+        // The result format : xml
         arg = task.createArg();
         arg.setValue( "-f" );
         arg = task.createArg();
         arg.setValue( "xml" );
+
+        // Location for the result file
         arg = task.createArg();
         arg.setValue( "-o" );
         arg = task.createArg();
         arg.setValue( pResultFile.getAbsolutePath() );
+
+        // Location of the result file
         arg = task.createArg();
         arg.setValue( "-c" );
         arg = task.createArg();
         arg.setValue( pRuleFile.getAbsolutePath() );
-        // Passage en revue des différents répertoires source
-        for ( int i = 0; i < pSources.length; i++ )
-        {
-            arg = task.createArg();
-            arg.setValue( "-r" );
-            arg = task.createArg();
-            arg.setValue( pSources[i] );
-        }
+
+        // Location of the directori in which there ise the file to analyze
+        arg = task.createArg();
+        arg.setValue( "-r" );
+        arg = task.createArg();
+        arg.setValue( sourceDir.getAbsolutePath() );
+
         return task;
     }
 
     /**
-     * @param pAntProject projet ANT
-     * @return classpath créé
+     * This method create the classpath for the java ant task that will launch checkstyle.
+     * 
+     * @param pAntProject The ANT project for which we create the classpath
+     * @return The correct classpath for the ant task
      */
     private Path createClassPath( Project pAntProject )
     {
         Path path = new Path( pAntProject );
-        // On cherche tous les fichiers jar présents dans le répertoire adéquat
+        // We create a list of all the jar of squalix and we keep only those needed for run checkstyle
         File[] jarFiles = mJarDirectory.listFiles( new FilenameFilter()
         {
             public boolean accept( File dir, String name )
             {
-                return name.endsWith( ".jar" );
+                return name.endsWith( ".jar" )
+                    && ( name.startsWith( "checkstyle" ) || name.startsWith( "antlr" )
+                        || name.startsWith( "commons-beanutils" ) || name.startsWith( "commons-collections" )
+                        || name.startsWith( "commons-logging" ) || name.startsWith( "commons-cli" ) );
             }
         } );
+        // We add the list of jar to the path
         for ( int i = 0; i < jarFiles.length; i++ )
         {
             path.setPath( jarFiles[i].getAbsolutePath() );
         }
-        // On ajoute le j2ee.jar en fonction de la version de java
-        /*
-         * on crée un buffer pour définir le chemin du dossier contenant les ressources nécessaires à la compilation
-         */
-        StringBuffer j2ee = new StringBuffer( RulesCheckingMessages.getString( "dir.root.java" ) );
-        j2ee.append( "/" );
-        j2ee.append( mJavaVersion );
-        j2ee.append( "/" );
-        /* on crée le descripteur de fichier et on ajoute au path */
-        File f = new File( j2ee.toString().replace( '.', '_' ) + "j2ee.jar" );
-        path.setPath( f.getAbsolutePath() );
         return path;
     }
 

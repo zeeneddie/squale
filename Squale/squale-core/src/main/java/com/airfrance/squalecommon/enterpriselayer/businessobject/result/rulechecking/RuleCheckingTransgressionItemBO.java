@@ -105,12 +105,14 @@ public class RuleCheckingTransgressionItemBO
      */
     public String getMessage()
     {
-        return mMessage.replaceAll( PATH_KEY, getComponentFile() ).replaceAll( LINE_KEY, "" + getLine() );
+        String filePath = getComponentFile().replace( "\\", "\\\\" );
+        return mMessage.replaceAll( PATH_KEY, filePath ).replaceAll( LINE_KEY, "" + getLine() );
     }
 
     /**
      * @return le composant concerné par la transgression
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     * @hibernate.many-to-one 
+     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
      *                        column="ComponentId" cascade="all" outer-join="auto" update="true" insert="true"
      */
     public AbstractComponentBO getComponent()
@@ -131,7 +133,8 @@ public class RuleCheckingTransgressionItemBO
 
     /**
      * @return le composant en relation avec la transgression
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     * @hibernate.many-to-one 
+     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
      *                        column="ComponentInvolvedId" cascade="all" outer-join="auto" update="true" insert="true"
      */
     public AbstractComponentBO getComponentInvolved()

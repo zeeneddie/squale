@@ -46,6 +46,9 @@ public class CheckstyleConfiguration
     /** Répertoire contenant les jars */
     private String mJarDirectory;
 
+    /** Temporary directory which contains the source to analyze */
+    private String mTempSourceDir;
+
     /**
      * Constructeur
      */
@@ -65,8 +68,8 @@ public class CheckstyleConfiguration
     {
         StringBuffer errors = new StringBuffer();
         Digester digester =
-            preSetupDigester( "-//Checkstyle Configuration DTD 1.0//EN",
-                              "/com/airfrance/squalix/tools/ruleschecking/checkstyle-config-1.0.dtd", errors );
+            preSetupDigester( "-//Squale //DTD Checkstyle Configuration 1.1//EN",
+                              "/com/airfrance/squalix/tools/ruleschecking/checkstyle-config-1.1.dtd", errors );
         // Traitement du répertoire de génération des reports
         digester.addCallMethod( "checkstyle-configuration/reportDirectory", "setReportDirectory", 1,
                                 new Class[] { String.class } );
@@ -75,6 +78,10 @@ public class CheckstyleConfiguration
         digester.addCallMethod( "checkstyle-configuration/jarDirectory", "setJarDirectory", 1,
                                 new Class[] { String.class } );
         digester.addCallParam( "checkstyle-configuration/jarDirectory", 0 );
+        //
+        digester.addCallMethod( "checkstyle-configuration/tempSourceDir", "setTempSourceDir", 1,
+                                new Class[] { String.class } );
+        digester.addCallParam( "checkstyle-configuration/tempSourceDir", 0 );
         digester.push( this );
         // Appel du parser
         parse( digester, pStream, errors );
@@ -116,4 +123,25 @@ public class CheckstyleConfiguration
     {
         mJarDirectory = ConfigUtility.filterStringWithSystemProps( pJarDirectory );
     }
+
+    /**
+     * Getter method for the attribute mTempSourceDir
+     * 
+     * @return The location of the temporary source directory
+     */
+    public String getTempSourceDir()
+    {
+        return mTempSourceDir;
+    }
+
+    /**
+     * Setter method for the attribute mTempSourceDir
+     * 
+     * @param tempSourceDir The new location of the temporary source directory
+     */
+    public void setTempSourceDir( String tempSourceDir )
+    {
+        mTempSourceDir = ConfigUtility.filterStringWithSystemProps( tempSourceDir );
+    }
+
 }
