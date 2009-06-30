@@ -1,0 +1,1 @@
+Here goes HSQL files for Squale DB.

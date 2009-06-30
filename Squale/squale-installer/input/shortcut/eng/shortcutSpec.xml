@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<shortcuts>
+    <skipIfNotSupported/>
+    <programGroup defaultName="@app-name@ @app-version@" location="applications"/>
+    <shortcut
+            name="Start @app-name@"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target="$INSTALL_PATH\start-Squale.bat"
+            commandLine=""
+            description="Launch the database, the web server and the squalix batch"
+            workingDirectory="$INSTALL_PATH"
+            iconFile="%SystemRoot%\system32\SHELL32.dll"
+            iconIndex="137">
+		<createForPack name="core"/>
+    </shortcut>
+    <shortcut
+            name="Stop @app-name@"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target="$INSTALL_PATH\stop-Squale.bat"
+            commandLine=""
+            description="Stop the database, the web server and the squalix batch"
+            workingDirectory="$INSTALL_PATH"
+            iconFile="%SystemRoot%\system32\SHELL32.dll"
+            iconIndex="131">
+		<createForPack name="core"/>
+    </shortcut>
+	<shortcut
+            name="Squale-Web"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target="http://localhost:8080/squale-web"
+            commandLine=""
+            description="">
+		<createForPack name="core"/>
+    </shortcut>
+    <shortcut
+            name="Squale site"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target="http://www.squale.org"
+            commandLine=""
+            description="Squale web site">
+		<createForPack name="core"/>
+    </shortcut>    
+    <shortcut
+            name="User Documentation"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target="http://www.squale.org/squale-user-site/index.html"
+            commandLine="">
+		<createForPack name="core"/>
+    </shortcut>
+    <shortcut
+            name="Config files"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target="$INSTALL_PATH\config_files"
+            commandLine="">
+		<createForPack name="core"/>
+    </shortcut>
+    <shortcut
+            name="@app-name@ uninstall"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target="$INSTALL_PATH\Uninstaller\uninstaller.jar"
+            commandLine=""
+            iconFile="%SystemRoot%\system32\SHELL32.dll"
+            iconIndex="31"
+            description="This uninstalls Squale">
+		<createForPack name="core"/>
+    </shortcut>
+
+</shortcuts>

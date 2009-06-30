@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+
+<shortcuts>
+
+    <programGroup defaultName="@app-name@ @app-version@" location="applications"/>
+
+
+    <shortcut
+            name="User Documentation"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target=""
+            workingDirectory=""
+            commandLine=""
+            iconFile="help"
+            iconIndex="0"
+            url="http://www.squale.org/squale-user-site/index.html"
+            type="Link"
+            encoding="UTF-8"
+            createForAll="false"
+            Categories="Application;Development;"
+            description="Online user documentation">
+        <createForPack name="core"/>
+    </shortcut>
+	<shortcut
+            name="Start @app-name@"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target="$INSTALL_PATH\start-Squale.sh"
+            workingDirectory=""
+            commandLine=""
+            type="Application"
+            encoding="UTF-8"
+            createForAll="false"
+            Categories="Application;Development;"
+            description="Launch the database, the web server and tha Squalix batch">
+        <createForPack name="core"/>
+    </shortcut>
+    <shortcut
+            name="Stop @app-name@"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target="$INSTALL_PATH\stop-Squale.sh"
+            workingDirectory=""
+            commandLine=""
+            type="Application"
+            encoding="UTF-8"
+            createForAll="false"
+            Categories="Application;Development;"
+            description="Stop the database, the web server and tha Squalix batch">
+        <createForPack name="core"/>
+    </shortcut>
+
+	<shortcut
+            name="Squale site"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target=""
+            workingDirectory=""
+            commandLine=""
+            iconFile="help"
+            iconIndex="0"
+            url="http://www.squale.org"
+            type="Link"
+            encoding="UTF-8"
+            createForAll="false"
+            Categories="Application;Development;"
+            description="Squale web site">
+        <createForPack name="core"/>
+    </shortcut>
+
+	<shortcut
+            name="Config files"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target=""
+            workingDirectory="$INSTALL_PATH_config_files"
+            commandLine=""
+            iconFile="help"
+            iconIndex="0"
+            url="file:$INSTALL_PATH/config_files"
+            type="Link"
+            encoding="UTF-8"
+            createForAll="false"
+            Categories="Application;Development;"
+            description="Squale web site">
+        <createForPack name="core"/>
+    </shortcut>
+
+    <shortcut
+            name="@app-name@ uninstall"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target="/usr/java/jdk1.5.0_14/jre/bin/java"
+            commandLine="-jar &quot;$INSTALL_PATH/Uninstaller/uninstaller.jar&quot;"
+
+            initialState="noShow"
+            iconFile="trashcan_full"
+            iconIndex="0"
+            workingDirectory=""
+            type="Application"
+            encoding="UTF-8"
+            KdeSubstUID="true"
+            KdeUsername="root"
+            createForAll="false"
+            Categories="Application;Development;"
+            TryExec="java -jar &quot;$INSTALL_PATH/Uninstaller/uninstaller.jar&quot;"
+            description="This uninstalls Squale">
+
+        <createForPack name="Core"/>
+    </shortcut>
+
+
+</shortcuts>

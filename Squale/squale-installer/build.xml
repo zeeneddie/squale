@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+
+<!-- This ant file needs a ant 1.7.1 to run -->
+<project name="Squale installer" default="create-installer" basedir=".">
+
+	<!-- Version of the product -->
+	<property name="product-version" value="5.1-SNAPSHOT" />
+	<!-- Name of the product -->
+	<property name="product-name" value="Squale" />
+	<!-- Install directory -->
+	<property name="product-name-short" value="squale-standalone" />
+
+	<property name="izPack-input.dir" value="${basedir}/input" />
+	<property name="target.dir" value="${basedir}/target" />
+	<property name="squale-bundle.folder"
+	          value="${izPack-input.dir}/squale-bundle" />
+	<property name="temp.dir" value="${target.dir}/install_tmp" />
+
+	<!-- Definition of the izpack task -->
+	<target name="taskdef-izpack">
+		<taskdef name="izpack"
+		         classpath="${basedir}/lib/standalone-compiler-4.3.0.jar"
+		         classname="com.izforge.izpack.ant.IzPackTask" />
+	</target>
+
+	<!-- Target to create the Squale distrib -->
+	<target name="build-distrib">
+		<exec executable="mvn.bat"
+		      dir="${basedir}/../squale"
+		      failonerror="true">
+			<arg value="clean" />
+			<arg value="package" />
+			<arg value="assembly:attached" />
+		</exec>
+	</target>
+
+	<!-- Target to create the Squale installer -->
+	<target name="create-installer" depends="taskdef-izpack"> <!-- , build-distrib -->
+		<!-- Clean the target folder -->
+		<delete dir="${target.dir}"/>
+		<!-- Copy the distrib zip file -->
+		<copy todir="${temp.dir}/bundle">
+			<fileset dir="${squale-bundle.folder}"/>
+		</copy>
+		<!-- Uncompress the bundle zip file -->
+		<unzip src="${basedir}/../squale/target/squale-${product-version}-distrib.zip"
+		       dest="${temp.dir}" />
+		<!-- Uncompress the squaleweb war which comes from the distrib -->
+		<unwar src="${temp.dir}/02-squaleweb-files/squale-web-${product-version}.war"
+		       dest="${temp.dir}/uncompressWar" />
+
+		<!-- Create the new intaller -->
+		<izpack input="${izPack-input.dir}/create-installer.xml"
+		        output="${target.dir}/${product-name-short}-${product-version}-install.jar"
+		        installerType="standard"
+		        inheritAll="true"
+		        basedir="${basedir}" />
+
+		<!-- Delete the temporary files-->
+		<delete dir="${temp.dir}" />
+	</target>
+</project>

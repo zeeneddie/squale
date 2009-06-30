@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<installation version="1.0">
+
+
+    <!-- 
+        The info section.
+    -->
+    <info>
+        <appname>@{product-name}</appname>
+        <appversion>@{product-version}</appversion>
+        <appsubpath>@{product-name-short}</appsubpath>
+		<url>http://www.squale.org/</url>
+		<run-privileged condition="izpack.windowsinstall.vista|izpack.macinstall"/>
+		<javaversion>1.5</javaversion>
+		<summarylogfilepath>$INSTALL_PATH/installinfo/Summary.htm</summarylogfilepath>
+    </info>
+
+
+    <!-- 
+        The gui preferences indication.
+    -->
+    <guiprefs width="640" height="480" resizable="no">
+		<modifier key="useHeadingPanel" value="yes"/>
+		<modifier key="headingLineCount" value="1"/>
+		<modifier key="headingFontSize" value="1.5"/>
+		<modifier key="headingBackgroundColor" value="0x00ffffff"/>
+		<modifier key="headingPanelCounter" value="text"/>
+  		<modifier key="headingPanelCounterPos" value="inHeading"/>
+	</guiprefs>
+	
+
+    <!-- 
+        Langpacks.
+    -->
+    <locale>
+        <langpack iso3="eng"/>
+        <langpack iso3="fra"/>
+    </locale>
+
+
+	<!-- Variables -->
+	<variables>
+		<variable name="app-name" value="@{product-name}" />
+		<variable name="app-version" value="@{product-version}" />
+		<variable name="ApplicationShortcutPath" value="ApplicationShortcuts"/>
+	</variables> 
+	
+
+    <!-- 
+        The resources section.
+        The ids must be these ones if you want to use the LicencePanel and/or the InfoPanel.
+    -->
+	<resources>
+		<res id="installer.langsel.images" src="@{izPack-input.dir}/images/squale.png" />
+		<res id="Heading.image" src="@{izPack-input.dir}/images/logo_squale.png"/>
+		<res id="HTMLLicencePanel.licence" src="@{izPack-input.dir}/license/lgpl-3.0-standalone.html"/>
+		<res id="HTMLHelloPanel.info" src="@{izPack-input.dir}/info/hello.html"/>
+		<res id="HTMLHelloPanel.info_fra" src="@{izPack-input.dir}/info/hello_fra.html"/>
+	    <res src="@{izPack-input.dir}/shortcut/eng/shortcutSpec.xml" id="shortcutSpec.xml_eng" 
+	    parse="yes" type="ant"/>
+	    <res src="@{izPack-input.dir}/shortcut/fr/shortcutSpec.xml" id="shortcutSpec.xml_fra" 
+	    parse="yes" type="ant"/>
+	    <res src="@{izPack-input.dir}/shortcut/eng/Unix_shortcutSpec.xml" id="Unix_shortcutSpec.xml_eng" 
+	    parse="yes" type="ant"/>
+	    <res src="@{izPack-input.dir}/shortcut/fr/Unix_shortcutSpec.xml" id="Unix_shortcutSpec.xml_fra" 
+	    parse="yes" type="ant"/>
+	</resources>
+
+	
+    <!-- 
+        The panels section. -> indicate which panel that will be display in the installer. 
+    -->
+    <panels>
+        <panel classname="HTMLHelloPanel"/>
+        <panel classname="HTMLLicencePanel"/>
+        <panel classname="TargetPanel"/>
+        <panel classname="InstallPanel"/>
+        <panel classname="ShortcutPanel" condition="izpack.windowsinstall"/>
+        <panel classname="SimpleFinishPanel"/>
+    </panels>
+
+
+    <!-- 
+        The packs section. ->indicate the task execute by the install panel
+    -->
+    <packs>
+		<pack name="core" required="yes">
+			<description>core</description>
+			<file src="@{temp.dir}/bundle/." targetdir="$INSTALL_PATH"/>
+		</pack>
+		<pack name="database" required="yes">
+			<description>database</description>
+			<file src="@{izPack-input.dir}/database/." targetdir="$INSTALL_PATH/database/squale-db"/>
+		</pack>
+        <pack name="SqualeWeb" required="yes">
+            <description>SqualeWeb</description>
+			<file src="@{temp.dir}/uncompressWar/." targetdir="$INSTALL_PATH/squale.home/SqualeWeb/webapp"/>
+        </pack>
+        <pack name="Squalix" required="yes">
+            <description>Squalix</description>
+            <file src="@{temp.dir}/03-squalix-files/squale-home/Squalix" targetdir="$INSTALL_PATH/squale.home/"/>
+        </pack>  
+		<pack name="Documenation" required="yes">
+            <description>The documentation</description>
+            <file src="@{temp.dir}/04-config-files/." targetdir="$INSTALL_PATH/config_files"/>
+        </pack>
+    </packs>
+    
+    <!-- Native library needed for windows shortcuts -->
+    <native type="izpack" name="ShellLink.dll"/> 
+	<native type="izpack" name="ShellLink_x64.dll"/>
+
+
+</installation>

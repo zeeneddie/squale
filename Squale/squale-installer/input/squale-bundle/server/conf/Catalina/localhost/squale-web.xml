@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context docBase="${catalina.home}/../squale.home/SqualeWeb/webapp">
+
+	<Resource auth="Container" driverClassName="org.hsqldb.jdbcDriver"
+		maxActive="5" maxIdle="1" maxWait="-1" name="jdbc/squale" username="sa"
+		type="javax.sql.DataSource" url="jdbc:hsqldb:hsql://localhost/squale-db"/>
+
+</Context>

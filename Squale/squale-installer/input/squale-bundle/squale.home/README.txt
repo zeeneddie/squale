@@ -1,0 +1,1 @@
+This is the Squale Home folder where Squalix files must be extracted.
