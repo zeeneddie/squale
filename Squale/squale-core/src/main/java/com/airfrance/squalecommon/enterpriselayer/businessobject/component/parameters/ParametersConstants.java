@@ -43,6 +43,9 @@ public class ParametersConstants
     /** Le dialecte du language */
     public static final String DIALECT = "dialect";
 
+    /** Aucune régle de compilation définie*/
+    public static final String NOT_DEFINED = "not_defined";
+    
     // Un projet java doit avoir le paramètre ant OU le paramètre WSAD
 
     // Cas d'un projet ant

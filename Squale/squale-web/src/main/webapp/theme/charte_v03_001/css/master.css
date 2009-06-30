@@ -398,7 +398,8 @@ table.formulaire td.check_col {width:20px; height:25px }
 table.formulaire th.check_col {width:20px; height:25px; text-align:center;}
 table.formulaire th.height_col{height:25px; }
 /*-- element for the homepage.jsp --*/
-div.homepage {border: 4px double #F3BA5D; padding:10px;  -moz-border-radius:0px 20px 20px 20px}
+div.homepage {border: 4px double #F3BA5D; padding:10px; -moz-border-radius:0px 20px 20px 20px}
 div.homepage > table.formulaire {visibility:hidden}
 div.homepage div.onglet_contenu{background-color:#FFFFFF;} 
 div.ongKiviat {float:left; margin-top:5px;}
+div.frame_border {border: 4px double #F3BA5D; padding:10px; -moz-border-radius:0px 20px 20px 20px}

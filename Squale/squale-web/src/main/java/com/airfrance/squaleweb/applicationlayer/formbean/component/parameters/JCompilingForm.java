@@ -374,4 +374,19 @@ public class JCompilingForm
         mAdvancedOptions = pAdvancedOptions;
     }
 
+    /**
+     * This method return the kind of compilation already saved in base for the project
+     * 
+     * @return the kind of compilation already saved
+     */
+    public String getKindOfCompil()
+    {
+        String kind = ParametersConstants.NOT_DEFINED;
+        if ( mCompilationRules.size() > 0 )
+        {
+            kind = ( (JavaCompilationForm) mCompilationRules.get( 0 ) ).getKindOfTask();
+        }
+        return kind;
+    }
+
 }

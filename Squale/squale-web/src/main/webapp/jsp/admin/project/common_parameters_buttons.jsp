@@ -3,6 +3,6 @@
 <af:buttonBar>
 	<af:button type="form" name="valider" toolTipKey="toolTip.valider"
 		callMethod="addParameters" singleSend="true" />
-	<af:button type="form" name="remove.configuration" toolTipKey="toolTip.remove.task.configuration"
+	<af:button type="form" name="delete" toolTipKey="toolTip.remove.task.configuration"
 		callMethod="removeParameters" singleSend="true" messageConfirmationKey="remove.task.configuration.confirm" />
 </af:buttonBar>

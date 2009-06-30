@@ -121,7 +121,11 @@ property="<%=\"profile(\"+applicationId+\")\"%>" />
 					lazyLoading="true" expanded="<%=expanded%>">
 		
 					<c:import url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true" />
-					<div id="conteneur"><jsp:include page="<%=pageTask%>" /></div>
+					<div id="conteneur">
+						<div class="frame_border">
+							<jsp:include page="<%=pageTask%>" />
+						</div>
+					</div>
 				</af:dropDownPanel>
 				<br />
 			</logic:iterate>
@@ -142,8 +146,10 @@ property="<%=\"profile(\"+applicationId+\")\"%>" />
 				<c:import url='/generalConfiguration.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true' />
 				
 				<%-- Including the task configuration page (JSP) --%>
-				<div id="conteneur">
-					<jsp:include page="add_project_general_parameters.jsp" />
+				<div id="conteneur" >
+					<div class="frame_border">
+						<jsp:include page="add_project_general_parameters.jsp" />
+					</div>
 				</div>
 				
 			</af:dropDownPanel>
@@ -192,8 +198,11 @@ property="<%=\"profile(\"+applicationId+\")\"%>" />
 						<c:import url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true" />
 						
 						<%-- Including the task configuration page (JSP) --%>
-						<div id="conteneur"><jsp:include page="<%=pageTask%>" /></div>
-					
+						<div id="conteneur">
+							<div class="frame_border">
+								<jsp:include page="<%=pageTask%>" />
+							</div>
+						</div>
 					</af:dropDownPanel>
 					<br />
 				</logic:iterate>
