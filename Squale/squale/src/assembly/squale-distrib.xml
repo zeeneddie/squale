@@ -61,7 +61,7 @@
 		<fileSet>
 			<outputDirectory>/02-squaleweb-files/driver-jar
 			</outputDirectory>
-			<directory>../squale-database/hsql/lib
+			<directory>../squale-database/hsqldb/lib
 			</directory>
 		</fileSet>
 		<!-- ********* SQUALIX FILES ********* -->
