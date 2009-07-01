@@ -73,12 +73,13 @@ boolean disabled = false;
 			<bean:message key="project_creation.compiling.java.details" />
 			<br/>
 			<input name="kindOfTask" id="kOT" type="hidden" value="" />
+			<input name="projectId" value="<%=projectId%>" type="hidden">
 			<af:buttonBar>
-					<%-- Button for do an ant compilation --%>
+					<%-- Button to do an ant compilation --%>
 					<af:button name="compiling.java.ant" singleSend="true"
 							toolTipKey="buttonTag.form.compiling.java.ant"
 							onclick="<%=\"submitWithAction('jCompilingForm', 'addParameters', '\"+ParametersConstants.ANT+\"');\"%>" />
-					<%-- Button for fdo an eclipse compilation --%>
+					<%-- Button to do an eclipse compilation --%>
 					<af:button name="compiling.java.eclipse" singleSend="true"
 							toolTipKey="buttonTag.form.compiling.java.eclipse"
 							onclick="<%=\"submitWithAction('jCompilingForm', 'addParameters', '\"+rsa_wsad+\"');\"%>" />
