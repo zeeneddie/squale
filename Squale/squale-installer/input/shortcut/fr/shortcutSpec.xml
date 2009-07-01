@@ -13,12 +13,11 @@
             applications="no"
             startMenu="no"
             startup="no"
-            target="$INSTALL_PATH\start-Squale.bat"
+            target="$INSTALL_PATH/start-Squale.bat"
             commandLine=""
-            description="Lance la base de donnee, le serveur web et le batch Squalix"
+            description="Lance la version standalone de Squale"
             workingDirectory="$INSTALL_PATH"
-            iconFile="%SystemRoot%\system32\SHELL32.dll"
-            iconIndex="137">
+            iconFile="$INSTALL_PATH/icons/win/start.ico">
 		<createForPack name="core"/>
     </shortcut>
 
@@ -29,17 +28,16 @@
             applications="no"
             startMenu="no"
             startup="no"
-            target="$INSTALL_PATH\stop-Squale.bat"
+            target="$INSTALL_PATH/stop-Squale.bat"
             commandLine=""
-            description="Stop la base de donnee, le serveur web et le batch Squalix"
+            description="Stoppe tous les processus de la version standalone de Squale"
             workingDirectory="$INSTALL_PATH"
-            iconFile="%SystemRoot%\system32\SHELL32.dll"
-            iconIndex="131">
+            iconFile="$INSTALL_PATH/icons/win/stop.ico">
 		<createForPack name="core"/>
     </shortcut>
 
     <shortcut
-            name="Squale-Web"
+            name="Ouvrir le portail Squale"
             programGroup="yes"
             desktop="no"
             applications="no"
@@ -47,12 +45,13 @@
             startup="no"
             target="http://localhost:8080/squale-web"
             commandLine=""
-			description="Ouvre l'interface de Squale">
+			description="Ouvre l'interface Web de Squale dans un navigateur"
+            iconFile="$INSTALL_PATH/icons/win/squale-web.ico">
 		<createForPack name="core"/>
     </shortcut>
     
     <shortcut
-            name="Site de Squale "
+            name="Site officiel"
             programGroup="yes"
             desktop="no"
             applications="no"
@@ -60,7 +59,8 @@
             startup="no"
             target="http://www.squale.org"
             commandLine=""
-            description="Site web de Squale">
+            description="Aller sur le site web officiel de Squale"
+            iconFile="$INSTALL_PATH/icons/win/site-squale.ico">
 		<createForPack name="core"/>
     </shortcut>
     
@@ -73,9 +73,11 @@
             startup="no"
             target="http://www.squale.org/squale-user-site/index.html"
             commandLine=""
-            description="Documentation utilisateur en ligne">
+            description="Documentation utilisateur en ligne"
+            iconFile="$INSTALL_PATH/icons/win/documentation.ico">
 		<createForPack name="core"/>
     </shortcut>
+    
     <shortcut
             name="Fichiers de configuration"
             programGroup="yes"
@@ -83,20 +85,22 @@
             applications="no"
             startMenu="no"
             startup="no"
-            target="$INSTALL_PATH\config_files"
-            commandLine="">
+            target="$INSTALL_PATH/config_files"
+            commandLine=""
+            iconFile="$INSTALL_PATH/icons/win/configuration.ico">
+		<createForPack name="core"/>
     </shortcut>
+    
     <shortcut
-            name="Desintalle @app-name@"
+            name="Desintallation"
             programGroup="yes"
             desktop="no"
             applications="no"
             startMenu="no"
             startup="no"
-            target="$INSTALL_PATH\Uninstaller\uninstaller.jar"
+            target="$INSTALL_PATH/Uninstaller/uninstaller.jar"
             commandLine=""
-            iconFile="%SystemRoot%\system32\SHELL32.dll"
-            iconIndex="31"
+            iconFile="$INSTALL_PATH/icons/win/uninstall.ico"
             description="">
 		<createForPack name="core"/>
     </shortcut>

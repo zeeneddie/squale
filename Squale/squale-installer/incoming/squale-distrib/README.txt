@@ -1,0 +1,1 @@
+Place to put the Squale distrib file that will be used to generate the installer.

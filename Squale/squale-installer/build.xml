@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 
-<!-- This ant file needs a ant 1.7.1 to run -->
+<!-- Script used to create the installer for Squale 									-->
+<!-- 																					-->
+<!-- Requirements :																		-->
+<!-- 	* Copy the Squale Distrib ZIP into "incoming/squale-distrib 					-->
+<!-- 	* Regenerate (or just verify) the HSQL DB file located in "incoming/database" 	-->
+<!-- 																					-->
+<!-- NOTE: this script needs a ant 1.7.1 to run 										-->
+
 <project name="Squale installer" default="create-installer" basedir=".">
 
 	<!-- Version of the product -->
@@ -11,6 +18,9 @@
 	<property name="product-name-short" value="squale-standalone" />
 
 	<property name="izPack-input.dir" value="${basedir}/input" />
+	<property name="incoming.dir" value="${basedir}/incoming" />
+	<property name="squale-distrib.file" value="${incoming.dir}/squale-distrib/squale-${product-version}-distrib.zip" />
+	<property name="database-file.file" value="${incoming.dir}/database/squale-db.script" />
 	<property name="target.dir" value="${basedir}/target" />
 	<property name="squale-bundle.folder"
 	          value="${izPack-input.dir}/squale-bundle" />
@@ -23,40 +33,41 @@
 		         classname="com.izforge.izpack.ant.IzPackTask" />
 	</target>
 
-	<!-- Target to create the Squale distrib -->
-	<target name="build-distrib">
-		<exec executable="mvn.bat"
-		      dir="${basedir}/../squale"
-		      failonerror="true">
-			<arg value="clean" />
-			<arg value="package" />
-			<arg value="assembly:attached" />
-		</exec>
+	<!-- Checks the requirements -->
+	<target name="check-requirements">
+		<echo>Checking requirements...</echo>
+		<fail message="The files required for the installer creation do not exist in the incoming folder.">
+			<condition>
+				<not>
+					<and>
+						<available file="${squale-distrib.file}" property="squale-distrib.exists"/>
+						<available file="${database-file.file}" property="database-file.exists"/>
+					</and>
+				</not>
+			</condition>
+		</fail>
+		<echo>Requirements OK</echo>		
 	</target>
 
 	<!-- Target to create the Squale installer -->
-	<target name="create-installer" depends="taskdef-izpack"> <!-- , build-distrib -->
+	<target name="create-installer" depends="taskdef-izpack, check-requirements">
+		<echo>Preparing resources...</echo>
 		<!-- Clean the target folder -->
 		<delete dir="${target.dir}"/>
-		<!-- Copy the distrib zip file -->
-		<copy todir="${temp.dir}/bundle">
-			<fileset dir="${squale-bundle.folder}"/>
-		</copy>
 		<!-- Uncompress the bundle zip file -->
-		<unzip src="${basedir}/../squale/target/squale-${product-version}-distrib.zip"
+		<unzip src="${squale-distrib.file}"
 		       dest="${temp.dir}" />
 		<!-- Uncompress the squaleweb war which comes from the distrib -->
 		<unwar src="${temp.dir}/02-squaleweb-files/squale-web-${product-version}.war"
-		       dest="${temp.dir}/uncompressWar" />
+		       dest="${temp.dir}/uncompressedWar" />
 
 		<!-- Create the new intaller -->
+		<echo>Creating the installer...</echo>
 		<izpack input="${izPack-input.dir}/create-installer.xml"
-		        output="${target.dir}/${product-name-short}-${product-version}-install.jar"
+		        output="${target.dir}/${product-name-short}-${product-version}.jar"
 		        installerType="standard"
 		        inheritAll="true"
 		        basedir="${basedir}" />
-
-		<!-- Delete the temporary files-->
-		<delete dir="${temp.dir}" />
+		<echo>Installer created succesfully!</echo>
 	</target>
 </project>
