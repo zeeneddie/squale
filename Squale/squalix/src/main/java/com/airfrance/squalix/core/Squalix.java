@@ -19,6 +19,10 @@
 //Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\core\\Squalix.java
 package com.airfrance.squalix.core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Option;
@@ -97,10 +101,18 @@ public class Squalix
                     "Fichier de paramétrage de la configuration de Squalix" );
 
     /**
-     * Option -cron passée en paramètre
+     * Option -cron passée en paramètre (utilisation de l'expression par défaut)
      */
     private static Option optionCron =
-        new Option( Messages.getString( "main.configCron_option" ), "chronologique", true,
+        new Option( Messages.getString( "main.configCron_option" ), "chronologique", false,
+                    "Si la tâche doit être lancée de manière asynchrone" );
+    
+    
+    /**
+     * Option -cron passée en paramètre avec une expression
+     */
+    private static Option optionCronExpression =
+        new Option( Messages.getString( "main.configCronExpression_option" ), "chronologique", true,
                     "Si la tâche doit être lancée de manière asynchrone" );
 
     /**
@@ -121,21 +133,27 @@ public class Squalix
         optionSite.setArgName( Messages.getString( "main.site_option" ) );
         optionFichierConf.setArgName( Messages.getString( "main.configFile_option" ) );
         optionCron.setArgName( Messages.getString( "main.configCron_option" ) );
+        optionCronExpression.setArgName( Messages.getString( "main.configCron_option" ) );
         optionDebug.setArgName( "debug" );
+        
         // Spécification du type d'object que retournera getValue
         optionSite.setType( String.class );
         optionFichierConf.setType( String.class );
         optionCron.setType( String.class );
+        optionCronExpression.setType( String.class );
+        
         // Oblige le paramètre d'être présent lors de l'exécution
         optionSite.setRequired( true );
         optionFichierConf.setRequired( false );
         optionCron.setRequired( false );
+        optionCronExpression.setRequired( false );
         optionDebug.setRequired( false );
 
         // On ajout ensuite les "Option" dans la collection
         optionsDemarage.addOption( optionSite );
         optionsDemarage.addOption( optionFichierConf );
         optionsDemarage.addOption( optionCron );
+        optionsDemarage.addOption( optionCronExpression );
         optionsDemarage.addOption( optionDebug );
     }
 
@@ -212,15 +230,21 @@ public class Squalix
             mConfigFile = (String) cmd.getOptionObject( Messages.getString( "main.configFile_option" ) );
         }
 
-        if ( cmd.hasOption( Messages.getString( "main.configCron_option" ) ) )
+        if ( cmd.hasOption( Messages.getString( "main.configCronExpression_option" ) ) )
         {
-            mCron = (String) cmd.getOptionObject( Messages.getString( "main.configCron_option" ) );
+            mCron = (String) cmd.getOptionObject( Messages.getString( "main.configCronExpression_option" ) );
             if ( mCron == null )
             {
                 mCron = "";
             }
             mQuartzActive = true;
         }
+        if ( cmd.hasOption( Messages.getString( "main.configCron_option" ) ) )
+        {
+            mCron = "";
+            mQuartzActive = true;
+        }
 
     }
+    
 }
