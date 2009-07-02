@@ -7,9 +7,9 @@
         The info section.
     -->
     <info>
-        <appname>@{product-name}</appname>
+        <appname>Squale</appname>
         <appversion>@{product-version}</appversion>
-        <appsubpath>@{product-name-short}</appsubpath>
+        <appsubpath>Squale-@{product-version}</appsubpath>
 		<url>http://www.squale.org/</url>
 		<run-privileged condition="izpack.windowsinstall.vista|izpack.macinstall"/>
 		<javaversion>1.5</javaversion>
@@ -27,6 +27,7 @@
 		<modifier key="headingBackgroundColor" value="0x00ffffff"/>
 		<modifier key="headingPanelCounter" value="text"/>
   		<modifier key="headingPanelCounterPos" value="inHeading"/>
+  		<modifier key="layoutAnchor" value="NORTHWEST"/>
 	</guiprefs>
 	
 
@@ -41,7 +42,7 @@
 
 	<!-- Variables -->
 	<variables>
-		<variable name="app-name" value="@{product-name}" />
+		<variable name="app-name" value="Squale" />
 		<variable name="app-version" value="@{product-version}" />
 		<variable name="ApplicationShortcutPath" value="ApplicationShortcuts"/>
 	</variables> 
@@ -49,14 +50,15 @@
 
     <!-- 
         The resources section.
-        The ids must be these ones if you want to use the LicencePanel and/or the InfoPanel.
     -->
 	<resources>
-		<res id="installer.langsel.images" src="@{izPack-input.dir}/images/squale.png" />
+		<res id="Installer.image" src="@{izPack-input.dir}/images/left-banner.png" />
+		<res id="installer.langsel.img" src="@{izPack-input.dir}/images/squale.png" />
 		<res id="Heading.image" src="@{izPack-input.dir}/images/logo_squale.png" />
-		<res id="HTMLLicencePanel.licence" src="@{izPack-input.dir}/license/lgpl-3.0-standalone.html" />
 		<res id="HTMLHelloPanel.info" src="@{izPack-input.dir}/info/hello.html" />
 		<res id="HTMLHelloPanel.info_fra" src="@{izPack-input.dir}/info/hello_fra.html" />
+		<res id="HTMLLicencePanel.licence" src="@{izPack-input.dir}/license/lgpl-3.0-standalone.html" />
+		<res id="TargetPanel.dir.windows" src="@{izPack-input.dir}/config/target-dir_win.txt"/>
 		<res id="shortcutSpec.xml_eng" src="@{izPack-input.dir}/shortcut/eng/shortcutSpec.xml"
 			parse="yes" type="ant" />
 		<res id="shortcutSpec.xml_fra" src="@{izPack-input.dir}/shortcut/fr/shortcutSpec.xml"
@@ -69,7 +71,7 @@
 
 	
     <!-- 
-        The panels section. -> indicate which panel that will be display in the installer. 
+        The panels section 
     -->
     <panels>
         <panel classname="HTMLHelloPanel"/>
@@ -82,23 +84,23 @@
 
 
     <!-- 
-        The packs section. ->indicate the task execute by the install panel
+        The packs section
     -->
     <packs>
 		<pack name="core" required="yes">
-			<description>core</description>
+			<description>Core</description>
 			<fileset dir="@{izPack-input.dir}/squale-bundle" targetdir="$INSTALL_PATH">
 				<exclude name="**/.svn"/>
 			</fileset>
 		</pack>
 		<pack name="database" required="yes">
-			<description>database</description>
+			<description>Database</description>
 			<fileset dir="@{incoming.dir}/database/." targetdir="$INSTALL_PATH/database/squale-db">
 				<exclude name="**/.svn"/>
 			</fileset>
 		</pack>
         <pack name="SqualeWeb" required="yes">
-            <description>SqualeWeb</description>
+            <description>Squale Web</description>
 			<file src="@{temp.dir}/uncompressedWar/." targetdir="$INSTALL_PATH/squale.home/SqualeWeb/webapp"/>
         </pack>
         <pack name="Squalix" required="yes">
@@ -106,7 +108,7 @@
             <file src="@{temp.dir}/03-squalix-files/squale-home/Squalix/." targetdir="$INSTALL_PATH/squale.home/Squalix"/>
         </pack>
 		<pack name="Documentation" required="yes">
-            <description>The documentation</description>
+            <description>Documentation</description>
             <file src="@{temp.dir}/04-config-files/." targetdir="$INSTALL_PATH/config_files"/>
         </pack>
 		<pack name="Resources" required="yes">

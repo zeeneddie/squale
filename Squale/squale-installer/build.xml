@@ -10,13 +10,10 @@
 
 <project name="Squale installer" default="create-installer" basedir=".">
 
-	<!-- Version of the product -->
+	<!-- Version of Squale : needs to be updated -->
 	<property name="product-version" value="5.1-SNAPSHOT" />
-	<!-- Name of the product -->
-	<property name="product-name" value="Squale" />
-	<!-- Install directory -->
-	<property name="product-name-short" value="squale-standalone" />
 
+	<!-- Description of the different resources -->
 	<property name="izPack-input.dir" value="${basedir}/input" />
 	<property name="incoming.dir" value="${basedir}/incoming" />
 	<property name="squale-distrib.file" value="${incoming.dir}/squale-distrib/squale-${product-version}-distrib.zip" />
@@ -64,10 +61,12 @@
 		<!-- Create the new intaller -->
 		<echo>Creating the installer...</echo>
 		<izpack input="${izPack-input.dir}/create-installer.xml"
-		        output="${target.dir}/${product-name-short}-${product-version}.jar"
+		        output="${target.dir}/Squale-standalone-${product-version}-installer.jar"
 		        installerType="standard"
 		        inheritAll="true"
 		        basedir="${basedir}" />
+		<echo>******************************</echo>
 		<echo>Installer created succesfully!</echo>
+		<echo>******************************</echo>
 	</target>
 </project>
