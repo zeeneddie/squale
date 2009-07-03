@@ -1,33 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
-
 <shortcuts>
+
+    <skipIfNotSupported/>
 
     <programGroup defaultName="@app-name@ @app-version@" location="applications"/>
 
-
     <shortcut
-            name="User Documentation"
-            programGroup="yes"
-            desktop="no"
-            applications="no"
-            startMenu="no"
-            startup="no"
-            target=""
-            workingDirectory=""
-            commandLine=""
-            iconFile="help"
-            iconIndex="0"
-            url="http://www.squale.org/squale-user-site/index.html"
-            type="Link"
-            encoding="UTF-8"
-            createForAll="false"
-            Categories="Application;Development;"
-            description="Online user documentation">
-        <createForPack name="core"/>
-    </shortcut>
-	<shortcut
-            name="Start @app-name@"
+            name="Demarrer @app-name@"
             programGroup="yes"
             desktop="no"
             applications="no"
@@ -43,8 +23,9 @@
             description="Launch the database, the web server and tha Squalix batch">
         <createForPack name="core"/>
     </shortcut>
+    
     <shortcut
-            name="Stop @app-name@"
+            name="Arreter @app-name@"
             programGroup="yes"
             desktop="no"
             applications="no"
@@ -61,8 +42,22 @@
         <createForPack name="core"/>
     </shortcut>
 
-	<shortcut
-            name="Squale site"
+    <shortcut
+            name="Ouvrir le portail Squale"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target="http://localhost:8080/squale-web"
+            commandLine=""
+			description="Ouvre l'interface Web de Squale dans un navigateur"
+            iconFile="$INSTALL_PATH/icons/win/squale-web.ico">
+		<createForPack name="core"/>
+    </shortcut>
+    
+    <shortcut
+            name="Site officiel"
             programGroup="yes"
             desktop="no"
             applications="no"
@@ -81,9 +76,30 @@
             description="Squale web site">
         <createForPack name="core"/>
     </shortcut>
-
-	<shortcut
-            name="Config files"
+    
+    <shortcut
+            name="Documentation utilisateur"
+            programGroup="yes"
+            desktop="no"
+            applications="no"
+            startMenu="no"
+            startup="no"
+            target=""
+            workingDirectory=""
+            commandLine=""
+            iconFile="help"
+            iconIndex="0"
+            url="http://www.squale.org/squale-user-site/index.html"
+            type="Link"
+            encoding="UTF-8"
+            createForAll="false"
+            Categories="Application;Development;"
+            description="Online user documentation">
+        <createForPack name="core"/>
+    </shortcut>
+    
+    <shortcut
+            name="Fichiers de configuration"
             programGroup="yes"
             desktop="no"
             applications="no"
@@ -102,9 +118,9 @@
             description="Squale web site">
         <createForPack name="core"/>
     </shortcut>
-
+    
     <shortcut
-            name="@app-name@ uninstall"
+            name="Desintallation"
             programGroup="yes"
             desktop="no"
             applications="no"
@@ -125,9 +141,6 @@
             Categories="Application;Development;"
             TryExec="java -jar &quot;$INSTALL_PATH/Uninstaller/uninstaller.jar&quot;"
             description="This uninstalls Squale">
-
-        <createForPack name="Core"/>
+        <createForPack name="core"/>
     </shortcut>
-
-
 </shortcuts>
