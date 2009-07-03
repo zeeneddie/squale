@@ -78,7 +78,7 @@
         <panel classname="HTMLLicencePanel"/>
         <panel classname="TargetPanel"/>
         <panel classname="InstallPanel"/>
-        <panel classname="ShortcutPanel" condition="izpack.windowsinstall"/>
+        <panel classname="ShortcutPanel"/><!--  condition="izpack.windowsinstall" -->
         <panel classname="SimpleFinishPanel"/>
     </panels>
 
@@ -116,6 +116,15 @@
             <fileset dir="@{izPack-input.dir}/icons/." targetdir="$INSTALL_PATH/icons">
 				<exclude name="**/.svn"/>
 			</fileset>
+        </pack>
+		<pack name="Finalizing" required="yes">
+            <description>Finalizing</description>
+            <executable targetfile="$INSTALL_PATH/finalize_unix.sh" os="unix"
+            	stage="postinstall">
+            	<args>
+	            	<arg value="$INSTALL_PATH"/>
+            	</args>
+            </executable>
         </pack>
     </packs>
     

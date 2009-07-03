@@ -8,72 +8,67 @@
 
     <shortcut
             name="Start @app-name@"
+            description="Launches the standalone version of Squale"
             programGroup="yes"
             desktop="no"
             applications="no"
             startMenu="no"
             startup="no"
-            target="$INSTALL_PATH/start-Squale.bat"
-            commandLine=""
-            description="Launches the standalone version of Squale"
             workingDirectory="$INSTALL_PATH"
+            target="$INSTALL_PATH/start-Squale.bat"
             iconFile="$INSTALL_PATH/icons/win/start.ico">
 		<createForPack name="core"/>
     </shortcut>
 
     <shortcut
             name="Stop @app-name@"
+            description="Stops all processes of the standalone version of Squale"
             programGroup="yes"
             desktop="no"
             applications="no"
             startMenu="no"
             startup="no"
-            target="$INSTALL_PATH/stop-Squale.bat"
-            commandLine=""
-            description="Stops all processes of the standalone version of Squale"
             workingDirectory="$INSTALL_PATH"
+            target="$INSTALL_PATH/stop-Squale.bat"
             iconFile="$INSTALL_PATH/icons/win/stop.ico">
 		<createForPack name="core"/>
     </shortcut>
 
     <shortcut
             name="Open Squale Web Portal"
+            description="Opens the web interface of Squale in a browser"
             programGroup="yes"
             desktop="no"
             applications="no"
             startMenu="no"
             startup="no"
             target="http://localhost:8080/squale-web"
-            commandLine=""
-            description="Opens the web interface of Squale in a browser"
             iconFile="$INSTALL_PATH/icons/win/squale-web.ico">
 		<createForPack name="core"/>
     </shortcut>
     
     <shortcut
             name="Official Squale site"
+            description="Go to Squale web official site"
             programGroup="yes"
             desktop="no"
             applications="no"
             startMenu="no"
             startup="no"
             target="http://www.squale.org"
-            commandLine=""
-            description="Go to Squale web official site"
             iconFile="$INSTALL_PATH/icons/win/site-squale.ico">
 		<createForPack name="core"/>
     </shortcut>
     
     <shortcut
             name="User Documentation"
+            description="Online user documentation"
             programGroup="yes"
             desktop="no"
             applications="no"
             startMenu="no"
             startup="no"
             target="http://www.squale.org/squale-user-site/index.html"
-            commandLine=""
-            description="Online user documentation"
             iconFile="$INSTALL_PATH/icons/win/documentation.ico">
 		<createForPack name="core"/>
     </shortcut>
@@ -86,22 +81,19 @@
             startMenu="no"
             startup="no"
             target="$INSTALL_PATH/config_files"
-            commandLine=""
             iconFile="$INSTALL_PATH/icons/win/configuration.ico">
 		<createForPack name="core"/>
     </shortcut>
     
     <shortcut
-            name="@app-name@ uninstall"
+            name="Uninstall"
             programGroup="yes"
             desktop="no"
             applications="no"
             startMenu="no"
             startup="no"
             target="$INSTALL_PATH/Uninstaller/uninstaller.jar"
-            commandLine=""
-            iconFile="$INSTALL_PATH/icons/win/uninstall.ico"
-            description="">
+            iconFile="$INSTALL_PATH/icons/win/uninstall.ico">
 		<createForPack name="core"/>
     </shortcut>
 </shortcuts>
