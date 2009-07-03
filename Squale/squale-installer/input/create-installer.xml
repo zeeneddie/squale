@@ -125,6 +125,12 @@
 	            	<arg value="$INSTALL_PATH"/>
             	</args>
             </executable>
+            <executable targetfile="$INSTALL_PATH/finalize_win.bat" os="windows"
+            	stage="postinstall">
+            	<args>
+	            	<arg value="$INSTALL_PATH"/>
+            	</args>
+            </executable>
         </pack>
     </packs>
     

@@ -9,7 +9,7 @@ chmod u+x $INSTALL_DIR/server/bin/*.sh
 chmod u+x $INSTALL_DIR/squale.home/Squalix/bin/*.sh
 chmod u+x $INSTALL_DIR/squale.home/Squalix/bin/resources/*.sh
 
-# remove windows file
+# remove windows files
 rm $INSTALL_DIR/*.bat
 rm $INSTALL_DIR/database/*.bat
 rm $INSTALL_DIR/server/bin/*.bat
