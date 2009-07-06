@@ -225,6 +225,12 @@
 				<groupId>org.squale.tools</groupId>
 				<artifactId>ckjm</artifactId>
 				<version>1.8-squale</version>
+				<exclusions>
+					<exclusion>
+						<groupId>ant</groupId>
+						<artifactId>ant</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>com.henix</groupId>
@@ -284,14 +290,14 @@
 				<version>0.4.2</version>
 			</dependency>
 			<dependency>
-				<groupId>ant</groupId>
+				<groupId>org.apache.ant</groupId>
 				<artifactId>ant</artifactId>
-				<version>1.6.4</version>
+				<version>1.7.1</version>
 			</dependency>
 			<dependency>
-				<groupId>ant</groupId>
+				<groupId>org.apache.ant</groupId>
 				<artifactId>ant-launcher</artifactId>
-				<version>1.6.4</version>
+				<version>1.7.1</version>
 			</dependency>
 			<dependency>
 				<groupId>ant</groupId>
