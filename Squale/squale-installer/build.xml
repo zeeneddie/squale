@@ -11,7 +11,7 @@
 <project name="Squale installer" default="create-installer" basedir=".">
 
 	<!-- Version of Squale : needs to be updated -->
-	<property name="product-version" value="5.1-SNAPSHOT" />
+	<property name="product-version" value="5.1" />
 
 	<!-- Description of the different resources -->
 	<property name="izPack-input.dir" value="${basedir}/input" />
@@ -61,7 +61,7 @@
 		<!-- Create the new intaller -->
 		<echo>Creating the installer...</echo>
 		<izpack input="${izPack-input.dir}/create-installer.xml"
-		        output="${target.dir}/Squale-standalone-${product-version}-installer.jar"
+		        output="${target.dir}/squale-standalone-${product-version}-installer.jar"
 		        installerType="standard"
 		        inheritAll="true"
 		        basedir="${basedir}" />
