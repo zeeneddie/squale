@@ -16,10 +16,21 @@
  			h3 {
  				padding-top: 10px;
  			}
+ 			.note {
+ 				border: solid #F3BA5D 2px; 
+ 				padding: 5px; 
+ 				font-weight: bold; 
+ 				background-color: #FFECCF; 
+ 				color: #3366AA;
+ 			}
  		</style>
 	</head>
 	<body>
 		<h2>Warnings</h2>
+		<p class="note">
+			NOTE: This standalone packaging of Squale is not supposed to be used in production. You should use it
+			only for testing purposes (due to embedded database limitations).
+		</p>
 		<p>
 			Before installing Squale on your system, you must make sure that your configuration meets the following
 			requirements :
@@ -33,7 +44,7 @@
 			</ul>
 		</p>
 		<p>
-			Please also be careful to install Squale in a location which path does not contain spaces. 
+			Please also be careful to install Squale in a <b>location which path does not contain spaces</b>. 
 		<p>
 	</body>
 </html>

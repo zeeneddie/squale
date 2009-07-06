@@ -16,10 +16,21 @@
  			h3 {
  				padding-top: 10px;
  			}
+ 			.note {
+ 				border: solid #F3BA5D 2px; 
+ 				padding: 5px; 
+ 				font-weight: bold; 
+ 				background-color: #FFECCF; 
+ 				color: #3366AA;
+ 			}
  		</style>
 	</head>
 	<body>
 		<h2>Avertissement</h2>
+		<p class="note">
+			NOTE: Il n'est pas recommandé d'utiliser cette version standalone de Squale en mode production, mais
+			seulement pour faire des tests (à cause des limitations de la base de données embarquée).
+		</p>
 		<p>
 			Avant de procéder à l'installation de Squale, vérifiez que votre système possède bien la 
 			configuration minimale suivante :
@@ -34,7 +45,7 @@
 			</ul>
 		</p>
 		<p>
-			Merci aussi de ne pas installer Squale dans un répertoire dont le chemin contient des espaces. 
+			Merci aussi de ne pas installer Squale dans un <b>répertoire dont le chemin contient des espaces</b>. 
 		<p>
 	</body>
 </html>
