@@ -40,7 +40,7 @@ import com.airfrance.welcom.struts.transformer.WTransformerException;
  * to the javadoc of each method.
  */
 public class AbstractGenericTaskConfTransformer
-    implements WITransformer
+    implements WITransformer  
 {
 
     /** The separator */
@@ -84,6 +84,8 @@ public class AbstractGenericTaskConfTransformer
         /* Casting the form received as parameter into a genericTaskForm */
         AbstractGenericTaskForm genericTaskForm = (AbstractGenericTaskForm) pFrom;
 
+        String taskName = genericTaskForm.getTaskName();
+        
         /* Declaring a Map which will contain all the parameters required for the generic task */
         Map<String, Object> genericTaskParams = new HashMap<String, Object>();
 
@@ -119,7 +121,7 @@ public class AbstractGenericTaskConfTransformer
         // Finalising the map for the task
         MapParameterDTO genericTaskMap = new MapParameterDTO();
         genericTaskMap.setParameters( genericTaskParams );
-        projectParams.getParameters().put( ParametersConstants.GENERICTASK, genericTaskMap );
+        projectParams.getParameters().put( taskName, genericTaskMap );
 
     }
 
@@ -153,16 +155,20 @@ public class AbstractGenericTaskConfTransformer
     {
 
         MapParameterDTO projectParams = (MapParameterDTO) pObject[0];
-
+        String taskName = (String)pObject[1];
+        
         // Retrieves params of the task
-        MapParameterDTO params = (MapParameterDTO) projectParams.getParameters().get( ParametersConstants.GENERICTASK );
+        MapParameterDTO params = (MapParameterDTO) projectParams.getParameters().get( taskName );
 
+        // Filling the form and casting it into GenericTaskForm type
+        AbstractGenericTaskForm genericTaskForm = (AbstractGenericTaskForm) pForm;
+     
+        genericTaskForm.setTaskName( taskName );
+        
         // Checking if there are some parameters
         if ( null != params )
         {
-            // Filling the form and casting it into GenericTaskForm type
-            AbstractGenericTaskForm genericTaskForm = (AbstractGenericTaskForm) pForm;
-
+     
             // Creating a map to retrieve the constants
             Map constantsMap = params.getParameters();
 
@@ -245,6 +251,7 @@ public class AbstractGenericTaskConfTransformer
             {
                 /* Getting the value of it */
                 String tmp = result.getValue();
+                tmp=(tmp!=null?tmp:"");
                 /* Instance of Matcher that will be used */
                 Matcher inputMatcher = cariageReturn.matcher( tmp );
                 /* If there are any carriage return or line feed */
@@ -264,4 +271,5 @@ public class AbstractGenericTaskConfTransformer
         }
         return resultsArray;
     }
+    
 }

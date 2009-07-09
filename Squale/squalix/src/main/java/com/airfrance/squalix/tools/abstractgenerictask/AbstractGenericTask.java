@@ -113,7 +113,7 @@ public abstract class AbstractGenericTask
         throws ConfigurationException, TaskException
     {
         /* Getting the parameters of the GenericTask by recovering the map of parameters for it */
-        this.genericTaskParam = (MapParameterBO) mProject.getParameter( ParametersConstants.GENERICTASK );
+        this.genericTaskParam = (MapParameterBO) mProject.getParameter( mName );
 
         /* If all values mapped in the map are null */
         if ( null == genericTaskParam )
@@ -198,8 +198,9 @@ public abstract class AbstractGenericTask
      * </p>
      * 
      * @return {@link List} : the java.io.file object(s)
+     * @throws TaskException  Exception occur
      */
-    private List<File> perform()
+    private List<File> perform() throws TaskException
     {
         /* The returned array of result files */
         String[] scannedResultFiles = null;

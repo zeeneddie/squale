@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 import com.airfrance.squaleweb.transformer.component.parameters.AbstractGenericTaskConfTransformer;
 
 /**
@@ -59,6 +58,11 @@ public class AbstractGenericTaskForm
     private String selectedGenericTask;
 
     /**
+     * The task name (name of the task which implements the generic task)
+     */
+    private String taskName;
+    
+    /**
      * Public default constructor
      */
     public AbstractGenericTaskForm()
@@ -88,18 +92,7 @@ public class AbstractGenericTaskForm
     @Override
     public String[] getParametersConstants()
     {
-        return new String[] { ParametersConstants.GENERICTASK };
-    }
-
-    /**
-     * Getter for the name of the task {@inheritDoc}
-     * 
-     * @return the name of the task
-     */
-    @Override
-    public String getTaskName()
-    {
-        return "GenericTask";
+        return new String[] { taskName };
     }
 
     /**
@@ -238,6 +231,27 @@ public class AbstractGenericTaskForm
     public void setSelectedGenericTask( String pSelectedGenericTask )
     {
         this.selectedGenericTask = pSelectedGenericTask;
+    }
+
+    /**
+     * Getter for the name of the task {@inheritDoc}
+     * 
+     * @return the name of the task
+     */
+    @Override
+    public String getTaskName()
+    {
+        return taskName;
+    }
+
+    /**
+     * Setter for the name of the task 
+     * 
+     * @param pTaskName The name of the task
+     */
+    public void setTaskName( String pTaskName )
+    {
+        taskName = pTaskName;
     }
 
 }

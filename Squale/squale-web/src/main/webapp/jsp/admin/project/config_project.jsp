@@ -115,12 +115,12 @@ property="<%=\"profile(\"+applicationId+\")\"%>" />
 				<% String keyTask = "task." + taskName.toLowerCase() + ".configuration"; %>
 				<%-- Creating the name of the task configuration JSP which will be included --%>
 				<% String pageTask = "add_project_" + taskName.toLowerCase() + "_conf.jsp"; %>
-
+				<% String taskNameLower = taskName.toLowerCase(); %>
 				<af:dropDownPanel titleKey="<%=keyTask%>"
 					headerStyle="padding-left:20px;" contentStyle="padding:5px;"
 					lazyLoading="true" expanded="<%=expanded%>">
 		
-					<c:import url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true" />
+					<c:import url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true&taskName=${taskName}" />
 					<div id="conteneur">
 						<div class="frame_border">
 							<jsp:include page="<%=pageTask%>" />
@@ -143,7 +143,7 @@ property="<%=\"profile(\"+applicationId+\")\"%>" />
 					Retrieves content of this URL (created with the "taskName" and a constant) and displays it
 					e.g : /scmTask.do?action=fill&doNotResetForm=true 
 				--%>
-				<c:import url='/generalConfiguration.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true' />
+				<c:import url='/generalConfiguration.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true&taskName=generalConfiguration' />
 				
 				<%-- Including the task configuration page (JSP) --%>
 				<div id="conteneur" >
@@ -186,7 +186,7 @@ property="<%=\"profile(\"+applicationId+\")\"%>" />
 
 					<%-- Creating the name of the task configuration jsp which will be included --%> 
 					<% String pageTask = "add_project_" + taskName.toLowerCase() + "_conf.jsp"; %>
-					
+					<% String taskNameLower = taskName.toLowerCase(); %>
 					<%-- Displays a Drop Down Panel and open it if expanded == true --%>
 					<af:dropDownPanel titleKey="<%=keyTask%>" headerStyle="padding-left:20px;" contentStyle="padding:5px;"
 						lazyLoading="false" expanded="<%=expanded%>">
@@ -195,7 +195,7 @@ property="<%=\"profile(\"+applicationId+\")\"%>" />
 							Retrieves content of this URL (created with the "taskName" and a constant) and displays it
 							e.g : /scmTask.do?action=fill&doNotResetForm=true 
 						--%>
-						<c:import url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true" />
+						<c:import url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true&taskName=${taskName}" />
 						
 						<%-- Including the task configuration page (JSP) --%>
 						<div id="conteneur">

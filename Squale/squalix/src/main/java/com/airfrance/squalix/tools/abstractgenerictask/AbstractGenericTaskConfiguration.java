@@ -19,6 +19,7 @@
 package com.airfrance.squalix.tools.abstractgenerictask;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,7 +35,9 @@ import com.airfrance.squalecommon.enterpriselayer.businessobject.component.Proje
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import com.airfrance.squalix.core.TaskException;
 import com.airfrance.squalix.core.exception.ConfigurationException;
+import com.airfrance.squalix.util.file.FileUtility;
 
 /**
  * <p>
@@ -174,7 +177,18 @@ public class AbstractGenericTaskConfiguration
              * Setting the base directory (resolved path = path part of the entry + viewPath of the project) and setting
              * the included files or directory
              */
-            File baseDir = new File( FileUtils.catPath( pViewPath, resultFilesPathPart ) );
+            File baseDir =null;
+            try
+            {
+                baseDir = new File( FileUtility.catPath( pViewPath, resultFilesPathPart ) );
+            }
+            catch ( IOException e )
+            {
+                /* Logging the error and throwing a configuration exception */
+                LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.error.concatPath" ) );
+                throw new ConfigurationException( AbstractGenericTaskMessages.getMessage( "logs.agt.error.concatPath" ) );
+            }
+            
             /* Verifying if the baseDir exists and is a Directory */
             if ( baseDir.exists() && baseDir.isDirectory() )
             {
@@ -187,7 +201,7 @@ public class AbstractGenericTaskConfiguration
             {
                 /* Logging the error and throwing a configuration exception */
                 LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.error.fileSpecification" ) );
-                new ConfigurationException( AbstractGenericTaskMessages.getMessage( "logs.agt.error.fileSpecification" ) );
+                throw new ConfigurationException( AbstractGenericTaskMessages.getMessage( "logs.agt.error.fileSpecification" ) );
             }
         }
         return ds;
@@ -220,10 +234,11 @@ public class AbstractGenericTaskConfiguration
      * @param pWorkingDir the {@link StringParameterBO} storing the working directory could be null
      * @param pParameters the parameters inputed by the user could be null
      * @param pViewPath the path to the view could be null
-     * @return instance of <b>{@link Commandline}</b> enriched with the command that will be executed
+     * @return instance of <b>{@link Commandline}</b> enriched with the command that will be executed 
+     * @throws TaskException Exception occur
      */
     public Commandline prepareToolExecution( StringParameterBO pToolLocation, StringParameterBO pWorkingDir,
-                                             String pParameters, String pViewPath )
+                                             String pParameters, String pViewPath ) throws TaskException
     {
         /* This commandLine object is going to be returned */
         Commandline cmdLine = null;
@@ -253,7 +268,17 @@ public class AbstractGenericTaskConfiguration
         if ( !StringUtils.isBlank( pWorkingDir.getValue() ) )
         {
             /* Getting the working directory if not blank i.e inputed by the user */
-            String resolvedWorkingDir = FileUtils.catPath( pViewPath, pWorkingDir.getValue() );
+            String resolvedWorkingDir=null;
+            try
+            {
+                resolvedWorkingDir = FileUtility.catPath( pViewPath, pWorkingDir.getValue() );
+            }
+            catch(IOException e)
+            {
+                LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.error.concatPath" ) );
+                throw new TaskException(AbstractGenericTaskMessages.getMessage( "logs.agt.error.concatPath" ));
+            }
+            
             /* Setting the execution directory */
             cmdLine.setWorkingDirectory( resolvedWorkingDir );
         }

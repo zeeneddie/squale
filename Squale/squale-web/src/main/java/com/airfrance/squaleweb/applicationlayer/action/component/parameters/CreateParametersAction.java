@@ -128,15 +128,17 @@ public class CreateParametersAction
     }
 
     /**
-     * @param pProject le formulaire représentant le projet
-     * @param pRequest la requête
-     * @return les paramètres nécessaires au transformer
-     * @throws Exception si erreur
+     * This method return the parameters of the task necessary for the transformer
+     * 
+     * @param pProject The project form
+     * @param pRequest The servlet request
+     * @return The task parameters necessary for the transformer
+     * @throws Exception Exception occured
      */
-    public Object[] getTransformerParameters( CreateProjectForm pProject, HttpServletRequest pRequest )
-        throws Exception
+    public Object[] getTransformerParameters( CreateProjectForm pProject, HttpServletRequest pRequest ) throws Exception    
     {
-        return new Object[] { pProject.getParameters() };
+        String taskName=  pRequest.getParameter( "taskName" );
+        return new Object[] { pProject.getParameters(),taskName };
     }
 
     /**

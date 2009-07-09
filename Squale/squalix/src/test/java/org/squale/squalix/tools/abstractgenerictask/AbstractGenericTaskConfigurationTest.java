@@ -32,6 +32,7 @@ import org.junit.Test;
 
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import com.airfrance.squalix.core.TaskException;
 import com.airfrance.squalix.tools.abstractgenerictask.AbstractGenericTaskConfiguration;
 
 /**
@@ -111,6 +112,7 @@ public class AbstractGenericTaskConfigurationTest
 
     /**
      * Testing the preparetoolExecution method which enriched an instance of {@link Commandline}.<br />
+     * @throws TaskException Exception occured
      */
     @Ignore( "Not Ready to Run" )
     @Test
@@ -118,7 +120,7 @@ public class AbstractGenericTaskConfigurationTest
      * Please note that as the @Ignore annotation is not interpreted by JUnit3 or the JUnit4TestAdapter an underscore is
      * added here to avoid execution
      */
-    public void _testNoWorkingDir()
+    public void _testNoWorkingDir() throws TaskException
     {
         /* Testing the workingDirectory resolving */
         cmd = conf.prepareToolExecution( pToolLocation, pWorkingDir, pParameters, pViewPath );

@@ -45,11 +45,10 @@ import org.codehaus.plexus.util.PathTool;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
 
-
 /**
  * Manipule les fichiers et répertoires d'analyse
  */
-public class FileUtility
+public final class FileUtility
 {
 
     /**
@@ -60,6 +59,14 @@ public class FileUtility
     /** L'extension d'un fichier java */
     public static final String COMPILED_FILE_EXTENSION = ".class";
 
+    /**
+     * Private constructor
+     */
+    private FileUtility()
+    {
+        
+    }
+    
     /**
      * Vérifie le contenu du dossier passé en paramètre et retourne la liste des fichiers filtrés
      * 
@@ -555,10 +562,10 @@ public class FileUtility
     }
 
     /**
-     * Copy pSrc into pDest
-     * <li>If pSrc is a <b>directory</b>, the directory is copied into pDest (to copy the content of the directory, use
-     * use copyDirContentIntoDir instead)
-     * <li>If pSrc is a <b>file</b>, the file is copied info pDest.
+     * Copy pSrc into pDest 
+	 * <li>If pSrc is a <b>directory</b>, the directory is copied into pDest (to copy the content of the directory, 
+	 * use use copyDirContentIntoDir instead) 
+	 * <li>If pSrc is a <b>file</b>, the file is copied info pDest.
      * 
      * @param pSrc source file (compressed or not) or source directory
      * @param pDest target directory
@@ -583,7 +590,7 @@ public class FileUtility
             // This is a directory, fileset is requested by ant task
             FileSet files = new FileSet();
             files.setDir( pSrc.getAbsoluteFile().getParentFile() ); // il faut appeler .getAbsoluteFile car sinon ça
-                                                                    // peut rendre null
+            														// peut rendre null
             files.setIncludes( pSrc.getAbsoluteFile().getName() + "/**" ); // idem
             copyFile.addFileset( files );
         }
@@ -592,8 +599,9 @@ public class FileUtility
     }
 
     /**
-     * Copy pSrcDir content into pDest
-     * The content of pSrcDir is copied into the pDest directory
+     * Copy pSrcDir content into pDest 
+	 * The content of pSrcDir is copied into the pDest directory
+     * 
      * @param pSrcDir source directory
      * @param pDest target directory
      * @throws IOException si erreur de flux
@@ -746,36 +754,39 @@ public class FileUtility
     }
 
     /**
-     * Add write rights to files,subdirectories or both according to the pMode from the pBaseDir
+     * Add write rights to files,subdirectories or both according to the pMode from the pBaseDir 
      * (pBaseDir rights are not modified)
+     * 
      * @param pBaseDir Base Directory in which the write rights will be added
      * @param pMode -> file,dir,both
+     * @throws Exception Exception occured
      */
-    public static void setWriteRights(File pBaseDir, String pMode)
-    	throws Exception
+    public static void setWriteRights( File pBaseDir, String pMode )
+        throws Exception
     {
-    	Chmod mchmod = new Chmod();
-    	mchmod.setProject(new Project());
-    	mchmod.setDir(pBaseDir);
-    	ExecuteOn.FileDirBoth mMode = new ExecuteOn.FileDirBoth();
-    	mMode.setValue(pMode);
-    	mchmod.setType(mMode);
-    	mchmod.setIncludes("**/*");
-    	mchmod.setPerm("u+rw");
-    	mchmod.execute();
-}
-    
+        Chmod mchmod = new Chmod();
+        mchmod.setProject( new Project() );
+        mchmod.setDir( pBaseDir );
+        ExecuteOn.FileDirBoth mMode = new ExecuteOn.FileDirBoth();
+        mMode.setValue( pMode );
+        mchmod.setType( mMode );
+        mchmod.setIncludes( "**/*" );
+        mchmod.setPerm( "u+rw" );
+        mchmod.execute();
+    }
+
     /**
      * Supprime tous les fichiers nommé pFileName dans le répertoire pBaseDir et ses sous-répertoires
+     * 
      * @param pBaseDir le répertoire de recherche
      * @param pFileName le nom de fichier à supprimer
      * @return true si tous les occurences du fichier ont été supprimés, false sinon
-     * @throws Exception
+     * @throws Exception exception occured
      */
-    public static Boolean deleteFilesinPath(File pBaseDir, String pFileName)
+    public static Boolean deleteFilesinPath( File pBaseDir, String pFileName )
         throws Exception
     {
-        Collection listFilesToRemove = findFiles( pBaseDir, pFileName);
+        Collection listFilesToRemove = findFiles( pBaseDir, pFileName );
         Integer objectif = listFilesToRemove.size();
         Integer resultat = 0;
         Iterator it = listFilesToRemove.iterator();
@@ -789,15 +800,16 @@ public class FileUtility
             }
         }
         Boolean out = false;
-        if (objectif.equals( resultat ))
+        if ( objectif.equals( resultat ) )
         {
-            out=true;
+            out = true;
         }
-        return out;      
+        return out;
     }
-    
+
     /**
      * recherche tous les fichiers nommés pFileName dans le répertoire pBasedir et ses sous-répertoires
+     * 
      * @param pDirectory le répertoire de recherche
      * @param pFileName le nomde fichier à rechercher
      * @return la liste des fichiers recherchés
@@ -822,6 +834,24 @@ public class FileUtility
             }
         }
         return result;
+    }
+
+    /**
+     * Will concatenate 2 paths and give the new canonicalPath
+     * 
+     * @param lookupPath a path
+     * @param path the path to concatenate
+     * @return The concatenated paths
+     * @throws IOException If an I/O error occurs, which is possible because the construction of the canonical pathname
+     *             may require filesystem queries
+     */
+    public static String catPath( final String lookupPath, final String path )
+        throws IOException
+    {
+        File beginPath = new File( lookupPath );
+        File endPath = new File( path );
+        File finalPath = new File( beginPath.getPath().concat( File.separator.concat( endPath.getPath() ) ) );
+        return finalPath.getCanonicalPath();
     }
 
 }
