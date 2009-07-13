@@ -6,7 +6,7 @@ top:45px;
 	height: 16px;
 	margin: 0;
 	clear: both;
-	background: #ccc url(http://cmsintranet.airfrance.fr/charte_v02_002/img/baya/bayadere_novib.gif) left top no-repeat;
+	background-color: #ccc;
 }
 
 #menuH ul, #menuH li {
@@ -68,13 +68,8 @@ top:45px;
 	background-color: #D4D4D4;
 }
 #smenuH ul li a span{
-	background:url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_white.gif) center no-repeat ;
 	padding: 0px 7px 0px 7px;
 }
-#smenuH ul li a:hover span {
-	background:url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_red.gif) center no-repeat ;
-}
-/* !!! les sous sous menus pour un menu H ne sont normalement pas autorisés par la charte */
 #ssmenuH ul {
 	margin: -14 0 0 141px;
 	display: none;
@@ -138,11 +133,7 @@ top:45px;
 	padding: 2px 8px 2px 8px;
 }
 #smenuV li a div{
-	background:url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_grey.gif) center no-repeat ;
 	position: absolute;
 	left:125px;
 	width:11px;
-}
-#smenuV li a:hover div {
-	background:url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_red.gif) center no-repeat ;
 }

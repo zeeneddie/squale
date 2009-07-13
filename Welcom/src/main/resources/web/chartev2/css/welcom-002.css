@@ -43,8 +43,6 @@ th a:visited{
 }
 
 th.sort-none a{
-	background-position: right;
-	background-repeat:no-repeat;
 	text-decoration: none;
 	display: block;
 	width: 100%;
@@ -53,26 +51,9 @@ th.sort-none a{
 	font-size: 11px;
 	color: #FFFFFF;
 	text-align :left;
-	background-image: url(http://cmsintranet.airfrance.fr/charte_v02_001/img/picto/arTr_white_UD_sort.gif);
 }
 
 th.sort-asc a {
-	background-position: right;
-	background-repeat:no-repeat;
-	text-decoration: none;
-	display: block;
-	width: 100%;
-	font-family: verdana, arial, helvetica;
-	font-weight:bold;
-	font-size: 11px;
-	color: #FFFFFF;
-	text-align :left;  
-  	background-image: url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_white_blueafD_UD_sort.gif);
-}
-
-th.sort-desc a {
-	background-position: right;
-	background-repeat:no-repeat;
 	text-decoration: none;
 	display: block;
 	width: 100%;
@@ -81,7 +62,17 @@ th.sort-desc a {
 	font-size: 11px;
 	color: #FFFFFF;
 	text-align :left;
-	background-image: url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_white_blueafU_UD_sort.gif);
+}
+
+th.sort-desc a {
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	font-family: verdana, arial, helvetica;
+	font-weight:bold;
+	font-size: 11px;
+	color: #FFFFFF;
+	text-align :left;
 }
 
 img.page{
@@ -94,33 +85,21 @@ img.page{
 }
 	
 span.upW{
-background-image: url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_white.gif);
-background-repeat: no-repeat;
-background-position: center;
 padding-left:12px;
 width:12px;
 }
 
 span.downW{
-background-image: url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_white_D.gif);
-background-repeat: no-repeat;
-background-position: center;
 padding-left:12px;
 width:12px;
 }
 
 span.upB{
-background-image: url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_blueAF.gif);
-background-repeat: no-repeat;
-background-position: center;
 padding-left:12px;
 width:12px;
 }
 
 span.downB{
-background-image: url(http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/arTr_blueAF_D.gif);
-background-repeat: no-repeat;
-background-position: center;
 padding-left:12px;
 width:12px;
 }

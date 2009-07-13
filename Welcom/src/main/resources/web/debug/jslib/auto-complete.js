@@ -188,9 +188,6 @@ function doCompletion(event,field,name,property,value,label,decoration,url) {
 }
 
 function sendRequest(){
-		if(true) {
-			target.style.backgroundImage="url('http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/lesMetiers/arTr_UR.gif')";
-		}
 		req=initRequest();		
 	    req.onreadystatechange = processRequest;
 	    req.open("GET", theURL, true);
@@ -279,11 +276,7 @@ function processRequest() {
 	    if (req.readyState == 4) {
 	        if (req.status == 200) {
 	          createPopup();          
-	          parseMessages();
-  	          if(true) {
-		  	    target.style.backgroundImage="url('http://cmsintranet.airfrance.fr/charte_v02_002/img/picto/infoCompagnie/arTr_UR.gif')";
-		  	  }
-	          
+	          parseMessages();	          
 	        } else if (req.status == 204){           
 	            clearList();
 	            hideList();

@@ -620,7 +620,7 @@ DocumentEditor._pluginInfo = {
 	version       : "0.1",
 	developer     : "Rémy Bouquet",
 	developer_url : "pfff",
-	c_owner       : "Air France",
+	c_owner       : "Squale",
 	sponsor       : "pfff",
 	sponsor_url   : "pfffff",
 	license       : "pfffffffff"
