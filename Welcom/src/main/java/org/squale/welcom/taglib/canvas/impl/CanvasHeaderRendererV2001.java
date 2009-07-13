@@ -1,0 +1,56 @@
+/**
+ * Copyright (C) 2008-2010, Squale Project - http://www.squale.org
+ *
+ * This file is part of Squale.
+ *
+ * Squale is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or any later version.
+ *
+ * Squale is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package org.squale.welcom.taglib.canvas.impl;
+
+import org.squale.welcom.outils.WelcomConfigurator;
+import org.squale.welcom.taglib.canvas.ICanvasHeaderRenderer;
+
+/**
+ * @author M327837 Pour changer le modèle de ce commentaire de type généré, allez à :
+ *         Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
+ */
+public class CanvasHeaderRendererV2001
+    implements ICanvasHeaderRenderer
+{
+
+    /**
+     * Initilise le header
+     * 
+     * @see org.squale.welcom.taglib.canvas.ICanvasHeaderRenderer#drawHeader(java.lang.String)
+     */
+    public StringBuffer drawHeader( String headerImageURL )
+    {
+        StringBuffer sb = new StringBuffer();
+        sb.append( "<a name=\"top\"></a>" );
+        sb.append( "<TABLE width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">" );
+        sb.append( "<TR>" );
+        sb.append( "<TD align=\"left\"><IMG src=\"" + headerImageURL + "\"></TD>" );
+        sb.append( "<TD align=\"right\"><IMG src=\""
+            + WelcomConfigurator.getMessage( WelcomConfigurator.HEADER_LOGOAF_KEY ) + "\"></TD>" );
+        sb.append( " </TR>" );
+        sb.append( "</TABLE>" );
+        sb.append( "<TABLE width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">" );
+        sb.append( " <TR><TD bgcolor=\"#CDD2D5\" height=15>" );
+        sb.append( "<IMG src=\"" + WelcomConfigurator.getMessage( WelcomConfigurator.HEADER_BAYADERE_KEY )
+            + "\" height=\"16\" border=\"0\"></TD></TR>" );
+        sb.append( "</TABLE>" );
+        return sb;
+    }
+
+}

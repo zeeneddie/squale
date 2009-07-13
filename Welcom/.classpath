@@ -27,11 +27,11 @@
   <classpathentry kind="var" path="M2_REPO/javax/sql/jdbc-stdext/2.0/jdbc-stdext-2.0.jar" sourcepath="M2_REPO/javax/sql/jdbc-stdext/2.0/jdbc-stdext-2.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/eclipse/jdtcore/3.1.0/jdtcore-3.1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/jfree/jfreechart/1.0.2/jfreechart-1.0.2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-bootstrap/2.6.1/jraf-bootstrap-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-bootstrap/2.6.1/jraf-bootstrap-2.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-commons/2.6.1/jraf-commons-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-commons/2.6.1/jraf-commons-2.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-helper/2.6.1/jraf-helper-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-helper/2.6.1/jraf-helper-2.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6.1/jraf-provider-hibernate-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.6.1/jraf-provider-hibernate-2.6.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-spi/2.6.1/jraf-spi-2.6.1.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-spi/2.6.1/jraf-spi-2.6.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-bootstrap/2.7.0/jraf-bootstrap-2.7.0.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-bootstrap/2.7.0/jraf-bootstrap-2.7.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-commons/2.7.0/jraf-commons-2.7.0.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-commons/2.7.0/jraf-commons-2.7.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-helper/2.7.0/jraf-helper-2.7.0.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-helper/2.7.0/jraf-helper-2.7.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.7.0/jraf-provider-hibernate-2.7.0.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-provider-hibernate/2.7.0/jraf-provider-hibernate-2.7.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/squale/jraf/jraf-spi/2.7.0/jraf-spi-2.7.0.jar" sourcepath="M2_REPO/org/squale/jraf/jraf-spi/2.7.0/jraf-spi-2.7.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/servlet/jsp-api/2.0/jsp-api-2.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.0.1B/jta-1.0.1B.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar" sourcepath="M2_REPO/junit/junit/3.8.1/junit-3.8.1-sources.jar"/>
