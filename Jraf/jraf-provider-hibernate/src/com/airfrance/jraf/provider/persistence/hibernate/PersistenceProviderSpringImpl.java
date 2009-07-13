@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.jraf.provider.persistence.hibernate;
+package org.squale.jraf.provider.persistence.hibernate;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,17 +34,17 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com
-	.airfrance
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org
+	.squale
 	.jraf
 	.provider
 	.persistence
 	.hibernate
 	.config
 	.FileSystemXmlHibernateConfigReader;
-import com
-	.airfrance
+import org
+	.squale
 	.jraf
 	.provider
 	.persistence

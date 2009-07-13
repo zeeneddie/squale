@@ -19,7 +19,7 @@
 /*
  * Created on Apr 9, 2004
  */
-package com.airfrance.jraf.bootstrap.test;
+package org.squale.jraf.bootstrap.test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,13 +27,13 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.bootstrap.initializer.InitializableHelper;
-import com.airfrance.jraf.bootstrap.initializer.Initializer;
-import com.airfrance.jraf.bootstrap.locator.ProviderLocator;
-import com.airfrance.jraf.bootstrap.test.log.LoggingMockProvider;
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.spi.bootstrap.IBootstrapConstants;
-import com.airfrance.jraf.spi.provider.IProvider;
+import org.squale.jraf.bootstrap.initializer.InitializableHelper;
+import org.squale.jraf.bootstrap.initializer.Initializer;
+import org.squale.jraf.bootstrap.locator.ProviderLocator;
+import org.squale.jraf.bootstrap.test.log.LoggingMockProvider;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.spi.bootstrap.IBootstrapConstants;
+import org.squale.jraf.spi.provider.IProvider;
 
 /**
  * <p>Title : TestInitializerHelper.java</p>

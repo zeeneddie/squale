@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.spi.logging;
+package org.squale.jraf.spi.logging;
 
 /**
  * <p>Project: JRAF 

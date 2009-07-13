@@ -19,11 +19,11 @@
 /*
  * Created on Dec 28, 2004
  */
-package com.airfrance.jraf.provider.accessdelegate.config;
+package org.squale.jraf.provider.accessdelegate.config;
 
 import java.util.Map;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafConfigException;
 
 /**
  * <p>Title : IApplicationComponentConfigReader.java</p>

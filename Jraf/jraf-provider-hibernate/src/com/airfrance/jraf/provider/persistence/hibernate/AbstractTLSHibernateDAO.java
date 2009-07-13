@@ -19,7 +19,7 @@
 /*
  * Cree le 31 janv. 05
  */
-package com.airfrance.jraf.provider.persistence.hibernate;
+package org.squale.jraf.provider.persistence.hibernate;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -38,14 +38,14 @@ import org.hibernate.type.Type;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.spi.initializer.IInitializableBean;
-import com.airfrance.jraf.spi.persistence.IMetaData;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.jraf.spi.persistence.ITLSHibernateDAO;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.spi.initializer.IInitializableBean;
+import org.squale.jraf.spi.persistence.IMetaData;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.jraf.spi.persistence.ITLSHibernateDAO;
 
 /**
  * <p>Project: JRAF 
@@ -107,21 +107,21 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#count()
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#count()
 	 */
 	public Integer count() throws JrafDaoException {
 		return count(getPersistenceProvider().getSession());
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#countWhere(java.lang.String)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#countWhere(java.lang.String)
 	 */
 	public Integer countWhere(String whereClause) throws JrafDaoException {
 		return countWhere(getPersistenceProvider().getSession(), whereClause);
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ITLSHibernateDAO#countWhere(java.lang.String, java.lang.Object)
+	 * @see org.squale.jraf.spi.persistence.ITLSHibernateDAO#countWhere(java.lang.String, java.lang.Object)
 	 */
 	public Integer countWhere(String whereClause, Object bean)
 		throws JrafDaoException {
@@ -157,7 +157,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#create(java.lang.Object)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#create(java.lang.Object)
 	 */
 	public void create(Object objMetier) throws JrafDaoException {
 		create(getPersistenceProvider().getSession(), objMetier);
@@ -165,21 +165,21 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#find(java.lang.String)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#find(java.lang.String)
 	 */
 	public List find(String req) throws JrafDaoException {
 		return find(getPersistenceProvider().getSession(), req);
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findAll()
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findAll()
 	 */
 	public List findAll() throws JrafDaoException {
 		return findAll(getPersistenceProvider().getSession());
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findByExample(java.lang.Object, boolean, boolean)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findByExample(java.lang.Object, boolean, boolean)
 	 */
 	public List findByExample(Object bo, boolean ignoreCase, boolean likeMode)
 		throws JrafDaoException {
@@ -187,7 +187,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findByExample(java.lang.Object, int, int, boolean, boolean)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findByExample(java.lang.Object, int, int, boolean, boolean)
 	 */
 	public List findByExample(
 		Object bo,
@@ -206,7 +206,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findByExample(java.lang.Object, int, int)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findByExample(java.lang.Object, int, int)
 	 */
 	public List findByExample(Object bo, int nbLignes, int indexDepart)
 		throws JrafDaoException {
@@ -214,7 +214,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findByExample(java.lang.Object)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findByExample(java.lang.Object)
 	 */
 	public List findByExample(Object bo) throws JrafDaoException {
 
@@ -222,7 +222,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findWhere(java.lang.String)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findWhere(java.lang.String)
 	 */
 	public List findWhere(String whereClause) throws JrafDaoException {
 		return findWhere(getPersistenceProvider().getSession(), whereClause);
@@ -249,7 +249,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ITLSHibernateDAO#findWhere(java.lang.String, java.lang.Object)
+	 * @see org.squale.jraf.spi.persistence.ITLSHibernateDAO#findWhere(java.lang.String, java.lang.Object)
 	 */
 	public java.util.List findWhere(String whereClause, Object bean)
 		throws JrafDaoException {
@@ -260,7 +260,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findWhereScrollable(java.lang.String, int, int, boolean)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#findWhereScrollable(java.lang.String, int, int, boolean)
 	 */
 	public Object findWhereScrollable(
 		String whereClause,
@@ -312,7 +312,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ITLSHibernateDAO#findWhereScrollable(java.lang.String, java.lang.Object, int, int, boolean)
+	 * @see org.squale.jraf.spi.persistence.ITLSHibernateDAO#findWhereScrollable(java.lang.String, java.lang.Object, int, int, boolean)
 	 */
 	public Object findWhereScrollable(
 		String whereClause,
@@ -332,7 +332,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#get(java.io.Serializable)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#get(java.io.Serializable)
 	 */
 	public Object get(Serializable id) throws JrafDaoException {
 		ISession session = getPersistenceProvider().getSession();
@@ -416,7 +416,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#load(java.io.Serializable)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#load(java.io.Serializable)
 	 */
 	public Object load(Serializable oid) throws JrafDaoException {
 		Object obj = load(getPersistenceProvider().getSession(), oid);
@@ -424,7 +424,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#loadFromSession(java.io.Serializable)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#loadFromSession(java.io.Serializable)
 	 */
 	public Object loadFromSession(Serializable oid) throws JrafDaoException {
 		Object loaded =
@@ -433,7 +433,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#refresh(java.lang.Object)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#refresh(java.lang.Object)
 	 */
 	public void refresh(Object obj) throws JrafDaoException {
 		refresh(getPersistenceProvider().getSession(), obj);
@@ -441,7 +441,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#remove(java.lang.Object)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#remove(java.lang.Object)
 	 */
 	public void remove(Object objMetier) throws JrafDaoException {
 		remove(getPersistenceProvider().getSession(), objMetier);
@@ -449,7 +449,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#removeAll()
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#removeAll()
 	 */
 	public void removeAll() throws JrafDaoException {
 		removeAll(getPersistenceProvider().getSession());
@@ -457,7 +457,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#removeWhere(java.lang.String)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#removeWhere(java.lang.String)
 	 */
 	public int removeWhere(String whereClause) throws JrafDaoException {
 		return removeWhere(getPersistenceProvider().getSession(), whereClause);
@@ -489,7 +489,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ITLSHibernateDAO#removeWhere(java.lang.String, java.lang.Object)
+	 * @see org.squale.jraf.spi.persistence.ITLSHibernateDAO#removeWhere(java.lang.String, java.lang.Object)
 	 */
 	public int removeWhere(String whereClause, Object bean)
 		throws JrafDaoException {
@@ -500,7 +500,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#save(java.lang.Object)
+	 * @see org.squale.jraf.provider.persistence.hibernate.tls.spi.IPersistenceDAOTLS#save(java.lang.Object)
 	 */
 	public void save(Object objMetier) throws JrafDaoException {
 		save(getPersistenceProvider().getSession(), objMetier);
@@ -508,7 +508,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
+	 * @see org.squale.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() {
 		if (getBusinessClass() == null) {
@@ -629,7 +629,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ITLSHibernateDAO#findByExample(java.lang.Object, int, int, boolean, boolean, boolean)
+	 * @see org.squale.jraf.spi.persistence.ITLSHibernateDAO#findByExample(java.lang.Object, int, int, boolean, boolean, boolean)
 	 */
 	public List findByExample(
 		Object bo,
@@ -653,7 +653,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ITLSHibernateDAO#findByExample(java.lang.Object, int, int, boolean)
+	 * @see org.squale.jraf.spi.persistence.ITLSHibernateDAO#findByExample(java.lang.Object, int, int, boolean)
 	 */
 	public List findByExample(
 		Object bo,
@@ -665,7 +665,7 @@ public abstract class AbstractTLSHibernateDAO
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ITLSHibernateDAO#findWhereScrollable(java.lang.String, int, int)
+	 * @see org.squale.jraf.spi.persistence.ITLSHibernateDAO#findWhereScrollable(java.lang.String, int, int)
 	 */
 	public List findWhereScrollable(
 		String whereClause,

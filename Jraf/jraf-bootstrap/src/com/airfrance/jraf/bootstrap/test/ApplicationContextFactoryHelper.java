@@ -22,7 +22,7 @@
  *Cette classe est utilisée dans le cadre des tests en mode 
  *Standalone. 
  */
-package com.airfrance.jraf.bootstrap.test;
+package org.squale.jraf.bootstrap.test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,15 +33,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
 
-import com.airfrance.jraf.bootstrap.ApplicationContextFactoryInitializer;
-import com.airfrance.jraf.bootstrap.initializer.InitializableHelper;
-import com.airfrance.jraf.bootstrap.initializer.Initializer;
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.commons.exception.JrafFilePropertiesReadException;
-import com.airfrance.jraf.commons.exception.JrafSpringApplicationContextInitException;
-import com.airfrance.jraf.spi.bootstrap.IBootstrapConstants;
-import com.airfrance.jraf.spi.bootstrap.IBootstrapProvider;
-import com.airfrance.jraf.spi.initializer.IInitializable;
+import org.squale.jraf.bootstrap.ApplicationContextFactoryInitializer;
+import org.squale.jraf.bootstrap.initializer.InitializableHelper;
+import org.squale.jraf.bootstrap.initializer.Initializer;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafFilePropertiesReadException;
+import org.squale.jraf.commons.exception.JrafSpringApplicationContextInitException;
+import org.squale.jraf.spi.bootstrap.IBootstrapConstants;
+import org.squale.jraf.spi.bootstrap.IBootstrapProvider;
+import org.squale.jraf.spi.initializer.IInitializable;
 
 /**
  * @author 6391988

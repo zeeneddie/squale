@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.jraf.commons.exception;
+package org.squale.jraf.commons.exception;
 
 /**
  * @author M312645

@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.jraf.bootstrap;
+package org.squale.jraf.bootstrap;
 
 import javax.servlet.ServletContext;
 
@@ -33,7 +33,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.airfrance.jraf.commons.exception.JrafIllegalStateException;
+import org.squale.jraf.commons.exception.JrafIllegalStateException;
 
 /**
  * @author DIKITE Tidiani

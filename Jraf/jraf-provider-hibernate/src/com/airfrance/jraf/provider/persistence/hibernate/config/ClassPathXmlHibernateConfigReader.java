@@ -19,7 +19,7 @@
 /*
  * Created on Dec 29, 2004
  */
-package com.airfrance.jraf.provider.persistence.hibernate.config;
+package org.squale.jraf.provider.persistence.hibernate.config;
 
 import java.net.URL;
 
@@ -29,7 +29,7 @@ import org.hibernate.cfg.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafConfigException;
 
 /**
  * <p>Title : ClassPathXmlHibernateConfigReader.java</p>
@@ -59,7 +59,7 @@ public class ClassPathXmlHibernateConfigReader
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.config.IHibernateConfigReader#readConfig()
+	 * @see org.squale.jraf.provider.persistence.hibernate.config.IHibernateConfigReader#readConfig()
 	 */
 	public SessionFactory readConfig(Configuration configuration) throws JrafConfigException {
 		URL lc_url = null;
@@ -82,7 +82,7 @@ public class ClassPathXmlHibernateConfigReader
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.config.AbstractHibernateConfigReader#setConfigFileName(java.lang.String)
+	 * @see org.squale.jraf.provider.persistence.hibernate.config.AbstractHibernateConfigReader#setConfigFileName(java.lang.String)
 	 */
 	public void setConfigFileName(String string) {
 		String path = string;

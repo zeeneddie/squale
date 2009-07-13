@@ -19,15 +19,15 @@
 /*
  * Created on Mar 5, 2004
  */
-package com.airfrance.jraf.bootstrap;
+package org.squale.jraf.bootstrap;
 
 import java.util.Map;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.spi.bootstrap.IBootstrapProvider;
-import com.airfrance.jraf.spi.initializer.IInitializable;
-import com.airfrance.jraf.spi.initializer.IInitializableBean;
-import com.airfrance.jraf.spi.provider.IProvider;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.spi.bootstrap.IBootstrapProvider;
+import org.squale.jraf.spi.initializer.IInitializable;
+import org.squale.jraf.spi.initializer.IInitializableBean;
+import org.squale.jraf.spi.provider.IProvider;
 
 /**
  * <p>Title : BootstrapInitializer.java</p>
@@ -59,7 +59,7 @@ public class BootstrapInitializer
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializable#initialize(java.util.Map)
+	 * @see org.squale.jraf.spi.initializer.IInitializable#initialize(java.util.Map)
 	 */
 	public IProvider initialize(Map initParams) throws JrafConfigException {
 		setInitParams(initParams);
@@ -68,7 +68,7 @@ public class BootstrapInitializer
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializable#initialize()
+	 * @see org.squale.jraf.spi.initializer.IInitializable#initialize()
 	 */
 	public IProvider initialize() {
 		// creation du bootstrap 
@@ -94,7 +94,7 @@ public class BootstrapInitializer
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
+	 * @see org.squale.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() {
 		// rien a verifier

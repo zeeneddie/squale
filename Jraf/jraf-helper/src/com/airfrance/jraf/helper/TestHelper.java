@@ -19,14 +19,14 @@
 /*
  * Created on Apr 6, 2004
  */
-package com.airfrance.jraf.helper;
+package org.squale.jraf.helper;
 
-import com.airfrance.jraf.bootstrap.initializer.Initializer;
-import com.airfrance.jraf.bootstrap.test.TestInitializerHelper;
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.jraf.spi.logging.ILogger;
+import org.squale.jraf.bootstrap.initializer.Initializer;
+import org.squale.jraf.bootstrap.test.TestInitializerHelper;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.jraf.spi.logging.ILogger;
 
 /**
  * <p>Title : TestHelper.java</p>

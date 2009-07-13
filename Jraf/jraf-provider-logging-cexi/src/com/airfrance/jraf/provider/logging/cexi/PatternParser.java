@@ -19,16 +19,16 @@
 /*
  * Créé le 28 oct. 04
  */
-package com.airfrance.jraf.provider.logging.cexi;
+package org.squale.jraf.provider.logging.cexi;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.helpers.FormattingInfo;
 import org.apache.log4j.helpers.PatternConverter;
 import org.apache.log4j.spi.LoggingEvent;
 
-import com.airfrance.jraf.spi.logging.IGroup;
-import com.airfrance.jraf.spi.logging.ILogger;
-import com.airfrance.jraf.spi.logging.ISeverity;
+import org.squale.jraf.spi.logging.IGroup;
+import org.squale.jraf.spi.logging.ILogger;
+import org.squale.jraf.spi.logging.ISeverity;
 
 /**
  * <p>Title : PatternParser.java</p>
@@ -42,14 +42,14 @@ import com.airfrance.jraf.spi.logging.ISeverity;
 public class PatternParser extends org.apache.log4j.helpers.PatternParser {
 
 	/** initialisation JRAF -> CONFIGURATION CEXI*/
-	private final static String JRAF_CFG = "com.airfrance.jraf.bootstrap";
+	private final static String JRAF_CFG = "org.squale.jraf.bootstrap";
 	/** initialisation JRAF -> CONFIGURATION CEXI*/
-	private final static String JRAF_INIT = "com.airfrance.jraf.initializer";
+	private final static String JRAF_INIT = "org.squale.jraf.initializer";
 	/** persistance JRAF -> DB CEXI*/
 	private final static String JRAF_DB =
-		"com.airfrance.jraf.provider.persistence";
+		"org.squale.jraf.provider.persistence";
 	/** JRAF -> APPLICATION CEXI*/
-	private final static String JRAF_ALL = "com.airfrance.jraf";
+	private final static String JRAF_ALL = "org.squale.jraf";
 
 	/**
 	 * Constructeur

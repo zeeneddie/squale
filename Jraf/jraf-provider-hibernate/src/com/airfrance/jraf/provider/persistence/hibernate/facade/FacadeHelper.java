@@ -19,14 +19,14 @@
 /*
  * Created on Sep 15, 2004
  */
-package com.airfrance.jraf.provider.persistence.hibernate.facade;
+package org.squale.jraf.provider.persistence.hibernate.facade;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.spi.persistence.ISession;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.spi.persistence.ISession;
 
 /**
  * <p>Title : FacadeHelper.java</p>

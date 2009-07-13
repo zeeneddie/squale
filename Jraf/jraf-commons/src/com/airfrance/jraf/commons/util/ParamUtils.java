@@ -19,7 +19,7 @@
 /*
  * Created on Dec 27, 2004
  */
-package com.airfrance.jraf.commons.util;
+package org.squale.jraf.commons.util;
 
 /**
  * <p>Title : ParamUtils.java</p>

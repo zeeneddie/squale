@@ -19,9 +19,9 @@
 /*
  * Created on Apr 2, 2004
  */
-package com.airfrance.jraf.bootstrap.test.log;
+package org.squale.jraf.bootstrap.test.log;
 
-import com.airfrance.jraf.spi.logging.ILogger;
+import org.squale.jraf.spi.logging.ILogger;
 
 /**
  * <p>Title : LogMock.java</p>
@@ -158,7 +158,7 @@ public class LogMock implements ILogger {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.logging.ILogger#logCexi(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 * @see org.squale.jraf.spi.logging.ILogger#logCexi(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	public void logCexi(
 		int code,

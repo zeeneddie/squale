@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.logging.cexi;
+package org.squale.jraf.provider.logging.cexi;
 
 import java.lang.reflect.Field;
 
-import com.airfrance.jraf.spi.logging.IGroup;
+import org.squale.jraf.spi.logging.IGroup;
 
 /**
  * <p>Project: JRAF 

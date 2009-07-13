@@ -19,7 +19,7 @@
 /*
  * Created on Mar 12, 2004
  */
-package com.airfrance.jraf.spi.bootstrap;
+package org.squale.jraf.spi.bootstrap;
 
 /**
  * <p>Title : IBootstrapConstants.java</p>

@@ -19,13 +19,13 @@
 /*
  * Created on Mar 11, 2004
  */
-package com.airfrance.jraf.helper;
+package org.squale.jraf.helper;
 
-import com.airfrance.jraf.bootstrap.locator.ProviderLocator;
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.spi.logging.ILogger;
-import com.airfrance.jraf.spi.logging.ILoggingProvider;
-import com.airfrance.jraf.spi.provider.IProviderConstants;
+import org.squale.jraf.bootstrap.locator.ProviderLocator;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.spi.logging.ILogger;
+import org.squale.jraf.spi.logging.ILoggingProvider;
+import org.squale.jraf.spi.provider.IProviderConstants;
 
 /**
  * <p>Title : LoggingHelper.java</p>

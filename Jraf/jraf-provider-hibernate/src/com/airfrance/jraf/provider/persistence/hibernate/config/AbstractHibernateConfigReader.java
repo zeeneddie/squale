@@ -19,7 +19,7 @@
 /*
  * Created on Dec 29, 2004
  */
-package com.airfrance.jraf.provider.persistence.hibernate.config;
+package org.squale.jraf.provider.persistence.hibernate.config;
 
 import java.io.File;
 import java.net.URL;
@@ -31,8 +31,8 @@ import org.hibernate.HibernateException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.commons.exception.JrafRuntimeException;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafRuntimeException;
 
 /**
  * <p>Title : AbstractHibernateConfigReader.java</p>

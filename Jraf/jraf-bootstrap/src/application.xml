@@ -6,7 +6,7 @@
 -->
 <beans>
 	
-	<bean id="initialize" class="com.airfrance.jraf.bootstrap.initializer.Initializer">
+	<bean id="initialize" class="org.squale.jraf.bootstrap.initializer.Initializer">
 	 	<property name="configFile">
 		 <value>config/providers-config.xml</value>		 
 	 	</property>	
@@ -15,7 +15,7 @@
 	 	</property-->
 	</bean>
 	
-	<!--bean id="otherService" class="com.airfrance.comor.daolayer.test.OtherServiceSpringTest">
+	<!--bean id="otherService" class="org.squale.comor.daolayer.test.OtherServiceSpringTest">
 	</bean-->
 	
 	

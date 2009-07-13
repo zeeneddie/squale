@@ -19,7 +19,7 @@
 /*
  * Created on Mar 30, 2004
  */
-package com.airfrance.jraf.provider.accessdelegate;
+package org.squale.jraf.provider.accessdelegate;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -28,9 +28,9 @@ import java.lang.reflect.Modifier;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.spi.accessdelegate.IAccessDelegateProvider;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.spi.accessdelegate.IAccessDelegateProvider;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
 
 /**
  * <p>Title : ExecuteHelper.java</p>

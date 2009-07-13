@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.persistence.hibernate.facade;
+package org.squale.jraf.provider.persistence.hibernate.facade;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.helper.LoggingHelper;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.spi.enterpriselayer.IFacade;
-import com.airfrance.jraf.spi.logging.ILogger;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.helper.LoggingHelper;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.spi.enterpriselayer.IFacade;
+import org.squale.jraf.spi.logging.ILogger;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
 
 /**
  * <p>Project: JRAF 

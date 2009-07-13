@@ -19,7 +19,7 @@
 /*
  * Created on Jan 6, 2005
  */
-package com.airfrance.jraf.spi.initializer;
+package org.squale.jraf.spi.initializer;
 
 /**
  * <p>Title : IInitializableBean.java</p>

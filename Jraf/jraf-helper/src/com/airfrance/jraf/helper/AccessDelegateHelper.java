@@ -19,13 +19,13 @@
 /*
  * Créé le 10 mars 04
  */
-package com.airfrance.jraf.helper;
+package org.squale.jraf.helper;
 
-import com.airfrance.jraf.bootstrap.locator.ProviderLocator;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.spi.accessdelegate.IAccessDelegateProvider;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.jraf.spi.provider.IProviderConstants;
+import org.squale.jraf.bootstrap.locator.ProviderLocator;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.spi.accessdelegate.IAccessDelegateProvider;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.jraf.spi.provider.IProviderConstants;
 
 /**
  * <p>Project: JRAF 

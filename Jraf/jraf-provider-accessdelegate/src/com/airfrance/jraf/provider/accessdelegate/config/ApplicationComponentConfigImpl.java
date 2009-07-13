@@ -19,7 +19,7 @@
 /*
  * Created on Mar 3, 2004
  */
-package com.airfrance.jraf.provider.accessdelegate.config;
+package org.squale.jraf.provider.accessdelegate.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -66,35 +66,35 @@ public class ApplicationComponentConfigImpl
 		getComponents().remove(component);
 	}
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.config.IApplicationComponentConfig#getName()
+	 * @see org.squale.jraf.config.IApplicationComponentConfig#getName()
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.config.IApplicationComponentConfig#getDescription()
+	 * @see org.squale.jraf.config.IApplicationComponentConfig#getDescription()
 	 */
 	public String getDescription() {
 		return description;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.config.IApplicationComponentConfig#getImpl()
+	 * @see org.squale.jraf.config.IApplicationComponentConfig#getImpl()
 	 */
 	public String getImpl() {
 		return impl;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.config.IApplicationComponentConfig#getJNDIname()
+	 * @see org.squale.jraf.config.IApplicationComponentConfig#getJNDIname()
 	 */
 	public String getJndiName() {
 		return jndiName;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.config.IApplicationComponentConfig#getProperties()
+	 * @see org.squale.jraf.config.IApplicationComponentConfig#getProperties()
 	 */
 	public Map getComponents() {
 		if (components == null) {
@@ -136,7 +136,7 @@ public class ApplicationComponentConfigImpl
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.config.IApplicationComponentConfig#isComponent(java.lang.String)
+	 * @see org.squale.jraf.config.IApplicationComponentConfig#isComponent(java.lang.String)
 	 */
 	public boolean isComponent(String name) {
 

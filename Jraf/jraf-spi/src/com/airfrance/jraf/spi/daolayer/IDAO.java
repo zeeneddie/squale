@@ -19,7 +19,7 @@
 /*
  * Created on Sep 15, 2004
  */
-package com.airfrance.jraf.spi.daolayer;
+package org.squale.jraf.spi.daolayer;
 
 /**
  * <p>Title : IDAO.java</p>

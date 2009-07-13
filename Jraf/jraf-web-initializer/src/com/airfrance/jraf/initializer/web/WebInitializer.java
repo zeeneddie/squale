@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.initializer.web;
+package org.squale.jraf.initializer.web;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,11 +25,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.airfrance.jraf.bootstrap.initializer.InitializableHelper;
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.spi.bootstrap.IBootstrapConstants;
-import com.airfrance.jraf.spi.bootstrap.IBootstrapProvider;
-import com.airfrance.jraf.spi.initializer.IInitializable;
+import org.squale.jraf.bootstrap.initializer.InitializableHelper;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.spi.bootstrap.IBootstrapConstants;
+import org.squale.jraf.spi.bootstrap.IBootstrapProvider;
+import org.squale.jraf.spi.initializer.IInitializable;
 
 /**
  * <p>Title : WebInitializer.java</p>

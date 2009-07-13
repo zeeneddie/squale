@@ -19,14 +19,14 @@
 /*
  * Created on Mar 5, 2004
  */
-package com.airfrance.jraf.bootstrap.config;
+package org.squale.jraf.bootstrap.config;
 
 import java.util.Comparator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.spi.provider.IProviderConstants;
+import org.squale.jraf.spi.provider.IProviderConstants;
 
 /**
  * <p>Title : ProviderConfigComparator.java</p>

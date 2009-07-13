@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.testenv.servlet;
+package org.squale.jraf.testenv.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,8 +30,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.testenv.integrationlayer.ITestLauncher;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.testenv.integrationlayer.ITestLauncher;
 
 /**
  * <p>Title : TestLauncherServlet.java</p>

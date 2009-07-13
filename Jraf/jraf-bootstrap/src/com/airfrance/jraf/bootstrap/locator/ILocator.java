@@ -19,11 +19,11 @@
 /*
  * Cree le 21 janv. 05
  */
-package com.airfrance.jraf.bootstrap.locator;
+package org.squale.jraf.bootstrap.locator;
 
 import java.io.Serializable;
 
-import com.airfrance.jraf.spi.provider.IProvider;
+import org.squale.jraf.spi.provider.IProvider;
 
 /**
  * <p>Project: JRAF 

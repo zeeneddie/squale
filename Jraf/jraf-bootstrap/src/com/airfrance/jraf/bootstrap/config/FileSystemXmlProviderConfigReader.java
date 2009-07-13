@@ -19,7 +19,7 @@
 /*
  * Created on Dec 29, 2004
  */
-package com.airfrance.jraf.bootstrap.config;
+package org.squale.jraf.bootstrap.config;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,7 +31,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafConfigException;
 
 /**
  * <p>Title : FileSystemXmlProviderConfigReader.java</p>
@@ -61,7 +61,7 @@ public class FileSystemXmlProviderConfigReader
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.bootstrap.config.IProviderConfigReader#readConfig()
+	 * @see org.squale.jraf.bootstrap.config.IProviderConfigReader#readConfig()
 	 */
 	public List readConfig() throws JrafConfigException {
 

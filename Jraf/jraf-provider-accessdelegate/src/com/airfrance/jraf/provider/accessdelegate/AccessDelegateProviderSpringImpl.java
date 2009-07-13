@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.jraf.provider.accessdelegate;
+package org.squale.jraf.provider.accessdelegate;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,9 +32,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.provider.accessdelegate.config.FileSystemXmlApplicationComponentConfigReader;
-import com.airfrance.jraf.provider.accessdelegate.config.IApplicationComponentConfigReader;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.provider.accessdelegate.config.FileSystemXmlApplicationComponentConfigReader;
+import org.squale.jraf.provider.accessdelegate.config.IApplicationComponentConfigReader;
 
 /**
  * <p>Project: JRAF 
@@ -154,7 +154,7 @@ public class AccessDelegateProviderSpringImpl
 		}
 		
 		/* (non-Javadoc)
-		 * @see com.airfrance.jraf.provider.accessdelegate.AbstractInitializer#buildLookupComponent(com.airfrance.jraf.provider.accessdelegate.config.IApplicationComponentConfigReader)
+		 * @see org.squale.jraf.provider.accessdelegate.AbstractInitializer#buildLookupComponent(org.squale.jraf.provider.accessdelegate.config.IApplicationComponentConfigReader)
 		 */
 		protected ILookupComponent buildLookupComponent(IApplicationComponentConfigReader reader) {
 			// lookup

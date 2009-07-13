@@ -19,7 +19,7 @@
 /*
  * Cree le 24 janv. 05
  */
-package com.airfrance.jraf.bootstrap.naming;
+package org.squale.jraf.bootstrap.naming;
 
 /**
  * <p>Project: JRAF 

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.accessdelegate;
+package org.squale.jraf.provider.accessdelegate;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,9 +26,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.provider.accessdelegate.config.IApplicationComponentConfigReader;
-import com.airfrance.jraf.provider.accessdelegate.config.UrlSystemXmlApplicationComponentConfigReader;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.provider.accessdelegate.config.IApplicationComponentConfigReader;
+import org.squale.jraf.provider.accessdelegate.config.UrlSystemXmlApplicationComponentConfigReader;
 
 
 public class AccessDelegateProviderSpringUrlImpl 
@@ -149,7 +149,7 @@ extends AccessDelegateProviderImpl implements ApplicationContextAware {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.accessdelegate.AbstractInitializer#buildLookupComponent(com.airfrance.jraf.provider.accessdelegate.config.IApplicationComponentConfigReader)
+	 * @see org.squale.jraf.provider.accessdelegate.AbstractInitializer#buildLookupComponent(org.squale.jraf.provider.accessdelegate.config.IApplicationComponentConfigReader)
 	 */
 	protected ILookupComponent buildLookupComponent(IApplicationComponentConfigReader reader) {
 		// lookup

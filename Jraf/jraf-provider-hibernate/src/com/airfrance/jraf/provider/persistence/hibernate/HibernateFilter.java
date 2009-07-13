@@ -19,7 +19,7 @@
 /*
  * Cree le 31 janv. 05
  */
-package com.airfrance.jraf.provider.persistence.hibernate;
+package org.squale.jraf.provider.persistence.hibernate;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -41,10 +41,10 @@ import org.hibernate.HibernateException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.bootstrap.locator.ProviderLocator;
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.commons.exception.JrafRuntimeException;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.bootstrap.locator.ProviderLocator;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.commons.exception.JrafRuntimeException;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
 
 /**
  * <p>Project: JRAF 

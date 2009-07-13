@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.jraf.provider.persistence.hibernate;
+package org.squale.jraf.provider.persistence.hibernate;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -33,10 +33,10 @@ import org.hibernate.mapping.Column;
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.Table;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.spi.initializer.IInitializableBean;
-import com.airfrance.jraf.spi.persistence.IMetaData;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.spi.initializer.IInitializableBean;
+import org.squale.jraf.spi.persistence.IMetaData;
 
 /**
  *  Classe d'accès au modèle de mapping. 
@@ -71,7 +71,7 @@ public class MetaDataImpl
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.daolayer.itface.IMetaData#getIdentifierName(java.lang.Class)
+	 * @see org.squale.jraf.daolayer.itface.IMetaData#getIdentifierName(java.lang.Class)
 	 */
 	public String getIdentifierName(Class clazz) throws JrafDaoException {
 		String id = null;
@@ -87,7 +87,7 @@ public class MetaDataImpl
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
+	 * @see org.squale.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() {
 		if (getSessions() == null) {

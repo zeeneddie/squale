@@ -19,7 +19,7 @@
 /*
  * Created on Mar 3, 2004
  */
-package com.airfrance.jraf.provider.accessdelegate.config;
+package org.squale.jraf.provider.accessdelegate.config;
 
 import java.io.Serializable;
 import java.util.Map;

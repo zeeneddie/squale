@@ -19,7 +19,7 @@
 /*
  * Created on Dec 28, 2004
  */
-package com.airfrance.jraf.provider.accessdelegate.config;
+package org.squale.jraf.provider.accessdelegate.config;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,7 +31,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafConfigException;
 
 /**
  * <p>Title : FileSystemXmlApplicationComponentConfigReader.java</p>
@@ -60,7 +60,7 @@ public class FileSystemXmlApplicationComponentConfigReader
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.accessdelegate.config.AbstractApplicationComponentConfigReader#readConfig()
+	 * @see org.squale.jraf.provider.accessdelegate.config.AbstractApplicationComponentConfigReader#readConfig()
 	 */
 	/**
 	 * Lis le fichier de configuration d'un plugin

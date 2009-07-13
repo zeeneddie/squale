@@ -19,12 +19,12 @@
 /*
  * Created on Mar 5, 2004
  */
-package com.airfrance.jraf.bootstrap;
+package org.squale.jraf.bootstrap;
 
 import java.util.List;
 import java.util.Map;
 
-import com.airfrance.jraf.spi.bootstrap.IBootstrapProvider;
+import org.squale.jraf.spi.bootstrap.IBootstrapProvider;
 
 /**
  * <p>Title : BootstrapProviderImpl.java</p>

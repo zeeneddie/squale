@@ -19,12 +19,12 @@
 /*
  * Created on Apr 2, 2004
  */
-package com.airfrance.jraf.bootstrap.test;
+package org.squale.jraf.bootstrap.test;
 
 import java.util.List;
 import java.util.Map;
 
-import com.airfrance.jraf.spi.bootstrap.IBootstrapProvider;
+import org.squale.jraf.spi.bootstrap.IBootstrapProvider;
 
 /**
  * <p>Title : BootstrapProviderMock.java</p>
@@ -35,28 +35,28 @@ import com.airfrance.jraf.spi.bootstrap.IBootstrapProvider;
 public class BootstrapMockProvider implements IBootstrapProvider {
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.bootstrap.IBootstrapProvider#getParameters()
+	 * @see org.squale.jraf.bootstrap.IBootstrapProvider#getParameters()
 	 */
 	public Map getParameters() {
 		return null;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.bootstrap.IBootstrapProvider#getProviders()
+	 * @see org.squale.jraf.bootstrap.IBootstrapProvider#getProviders()
 	 */
 	public List getProviders() {
 		return null;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.bootstrap.IBootstrapProvider#setProviders(java.util.List)
+	 * @see org.squale.jraf.bootstrap.IBootstrapProvider#setProviders(java.util.List)
 	 */
 	public void setProviders(List in_providers) {
 
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.bootstrap.IBootstrapProvider#setParameters(java.util.Map)
+	 * @see org.squale.jraf.spi.bootstrap.IBootstrapProvider#setParameters(java.util.Map)
 	 */
 	public void setParameters(Map in_parameters) {
 

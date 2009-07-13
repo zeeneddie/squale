@@ -2,44 +2,44 @@
 <com.rational.xtools.umlvisualizer.emfnotation:Pack xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.rational.xtools.umlvisualizer.emfnotation="http:///com/rational/xtools/umlvisualizer/emfnotation.ecore" Id="94e117f3-0101-f0ab-6a52-0a46a05aaa77" version="8">
   <Diagram DiagramId="963382da-0101-e64e-13ac-0a46a05aaa77">
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:PositionalGeneralView" LineColor="4009615" FillColor="13565951" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="94e16548-0101-e7b0-3a6c-0a46a05aaa77" sourceConnectors="94e18557-0101-f451-0b42-0a46a05aaa77 a91e66e5-0101-ff1a-5018-0a46a05aaa77" PositionX="5075" PositionY="1850" ExtentX="150" ExtentY="150" Autosize="true" VisibilityStyle="2" ShowCompartmentTitle="false" CompartmentStereotypeStyle="2" ShowParentName="false">
-      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})" Name="Initializer" Kind="29"/>
+      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})" Name="Initializer" Kind="29"/>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="94e16549-0101-e8c3-4855-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})" Name="Initializer" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})" Name="Initializer" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="94e1654a-0101-e589-51c1-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})" Name="Initializer" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})" Name="Initializer" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Attribute" ShapeStereotypeStyle="2" Id="94e1654b-0101-e69c-5985-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})" Name="Initializer" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})" Name="Initializer" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Operation" ShapeStereotypeStyle="2" Id="94e1654c-0101-ebfc-6328-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})" Name="Initializer" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})" Name="Initializer" Kind="29"/>
       </children>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:PositionalGeneralView" LineColor="4009615" FillColor="13565951" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="94e18515-0101-f1b1-4137-0a46a05aaa77" targetConnectors="94e18557-0101-f451-0b42-0a46a05aaa77" PositionX="1025" PositionY="13850" ExtentX="150" ExtentY="150" Autosize="true" VisibilityStyle="2" ShowCompartmentTitle="false" CompartmentStereotypeStyle="2" ShowParentName="false">
-      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.InitializableHelper})" Name="InitializableHelper" Kind="29"/>
+      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.InitializableHelper})" Name="InitializableHelper" Kind="29"/>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="94e18516-0101-ee77-4e27-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.InitializableHelper})" Name="InitializableHelper" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.InitializableHelper})" Name="InitializableHelper" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="94e18517-0101-ef8a-5741-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.InitializableHelper})" Name="InitializableHelper" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.InitializableHelper})" Name="InitializableHelper" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Attribute" ShapeStereotypeStyle="2" Id="94e18518-0101-f4ea-5f08-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.InitializableHelper})" Name="InitializableHelper" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.InitializableHelper})" Name="InitializableHelper" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Operation" ShapeStereotypeStyle="2" Id="94e18519-0101-f5fd-68af-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.InitializableHelper})" Name="InitializableHelper" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.InitializableHelper})" Name="InitializableHelper" Kind="29"/>
       </children>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ConnectorView" LineColor="4009615" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="94e18557-0101-f451-0b42-0a46a05aaa77" Routing="0" Smoothness="0" AvoidObstructions="false" ClosestDistance="false" SourceAnchor="anchor" TargetAnchor="anchor" JumpLinksStatus="0" JumpLinksType="1" JumpLinksReverse="false" ShowCompartmentTitle="false" source="94e16548-0101-e7b0-3a6c-0a46a05aaa77" target="94e18515-0101-f1b1-4137-0a46a05aaa77">
-      <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.InitializableHelper}))" Name="" Kind="49"/>
+      <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.InitializableHelper}))" Name="" Kind="49"/>
       <Labels Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="94e18558-0101-f9b0-1717-0a46a05aaa77" FromLine="-18" FromEnd="50" IsPercentage="true">
-        <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.InitializableHelper}))" Name="" Kind="49"/>
+        <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.InitializableHelper}))" Name="" Kind="49"/>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="94e18559-0101-fac3-222e-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.InitializableHelper}))" Name="" Kind="49"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.InitializableHelper}))" Name="" Kind="49"/>
         </children>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="94e1855a-0101-f78a-2c03-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.InitializableHelper}))" Name="" Kind="49"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.InitializableHelper}))" Name="" Kind="49"/>
         </children>
       </Labels>
       <BendPoints x="4" y="228"/>
@@ -48,93 +48,93 @@
       <BendPoints x="4" y="-58"/>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:PositionalGeneralView" LineColor="4009615" FillColor="13565951" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a557f186-0101-fcca-7900-0a46a05aaa77" targetConnectors="a91e66f5-0101-ede9-1273-0a46a05aaa77" PositionX="13175" PositionY="1850" ExtentX="150" ExtentY="150" Autosize="true" VisibilityStyle="2" ShowCompartmentTitle="false" CompartmentStereotypeStyle="2" ShowParentName="false">
-      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ILocator})" Name="ILocator" Kind="29"/>
+      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ILocator})" Name="ILocator" Kind="29"/>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a557f187-0101-fddd-0605-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ILocator})" Name="ILocator" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ILocator})" Name="ILocator" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a557f188-0101-e33c-0f14-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ILocator})" Name="ILocator" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ILocator})" Name="ILocator" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Attribute" ShapeStereotypeStyle="2" Id="a557f189-0101-e450-16cd-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ILocator})" Name="ILocator" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ILocator})" Name="ILocator" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Operation" ShapeStereotypeStyle="2" Id="a557f18a-0101-e116-2066-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ILocator})" Name="ILocator" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ILocator})" Name="ILocator" Kind="29"/>
       </children>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:PositionalGeneralView" LineColor="4009615" FillColor="13565951" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a557f18b-0101-e229-2ef5-0a46a05aaa77" targetConnectors="a91e66fa-0101-eefc-5c66-0a46a05aaa77" PositionX="625" PositionY="25375" ExtentX="150" ExtentY="150" Autosize="true" VisibilityStyle="2" ShowCompartmentTitle="false" CompartmentStereotypeStyle="2" ShowParentName="false">
-      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.IProviderLocatorConstants})" Name="IProviderLocatorConstants" Kind="29"/>
+      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.IProviderLocatorConstants})" Name="IProviderLocatorConstants" Kind="29"/>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a557f18c-0101-e789-3be3-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.IProviderLocatorConstants})" Name="IProviderLocatorConstants" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.IProviderLocatorConstants})" Name="IProviderLocatorConstants" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a557f18d-0101-e89c-4550-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.IProviderLocatorConstants})" Name="IProviderLocatorConstants" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.IProviderLocatorConstants})" Name="IProviderLocatorConstants" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Attribute" ShapeStereotypeStyle="2" Id="a557f18e-0101-e563-4d1e-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.IProviderLocatorConstants})" Name="IProviderLocatorConstants" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.IProviderLocatorConstants})" Name="IProviderLocatorConstants" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Operation" ShapeStereotypeStyle="2" Id="a557f18f-0101-e676-56ee-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.IProviderLocatorConstants})" Name="IProviderLocatorConstants" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.IProviderLocatorConstants})" Name="IProviderLocatorConstants" Kind="29"/>
       </children>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:PositionalGeneralView" LineColor="4009615" FillColor="13565951" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a56e9eb3-0101-ffcc-5b16-0a46a05aaa77" targetConnectors="a56e9ed3-0101-e230-6478-0a46a05aaa77 a91e66fe-0101-f348-1e4b-0a46a05aaa77" PositionX="13175" PositionY="25375" ExtentX="150" ExtentY="150" Autosize="true" VisibilityStyle="2" ShowCompartmentTitle="false" CompartmentStereotypeStyle="2" ShowParentName="false">
-      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder})" Name="IJndiBinder" Kind="29"/>
+      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder})" Name="IJndiBinder" Kind="29"/>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a56e9eb4-0101-e52c-6941-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder})" Name="IJndiBinder" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder})" Name="IJndiBinder" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a56e9eb5-0101-e63f-7264-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder})" Name="IJndiBinder" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder})" Name="IJndiBinder" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Attribute" ShapeStereotypeStyle="2" Id="a56e9eb6-0101-e306-7a1a-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder})" Name="IJndiBinder" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder})" Name="IJndiBinder" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Operation" ShapeStereotypeStyle="2" Id="a56e9eb7-0101-e419-03cb-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder})" Name="IJndiBinder" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder})" Name="IJndiBinder" Kind="29"/>
       </children>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:PositionalGeneralView" LineColor="4009615" FillColor="13565951" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a56e9ebd-0101-eed8-4ae6-0a46a05aaa77" sourceConnectors="a56e9ed3-0101-e230-6478-0a46a05aaa77 a56e9edd-0101-f13b-02f2-0a46a05aaa77" targetConnectors="a91e6702-0101-e6de-6082-0a46a05aaa77" PositionX="14475" PositionY="29375" ExtentX="150" ExtentY="150" Autosize="true" VisibilityStyle="2" ShowCompartmentTitle="false" CompartmentStereotypeStyle="2" ShowParentName="false">
-      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})" Name="JndiBinder" Kind="29"/>
+      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})" Name="JndiBinder" Kind="29"/>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a56e9ebe-0101-eb9f-57d7-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})" Name="JndiBinder" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})" Name="JndiBinder" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a56e9ebf-0101-ecb2-60f1-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})" Name="JndiBinder" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})" Name="JndiBinder" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Attribute" ShapeStereotypeStyle="2" Id="a56e9ec0-0101-f474-68b3-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})" Name="JndiBinder" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})" Name="JndiBinder" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Operation" ShapeStereotypeStyle="2" Id="a56e9ec1-0101-f587-7282-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})" Name="JndiBinder" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})" Name="JndiBinder" Kind="29"/>
       </children>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:PositionalGeneralView" LineColor="4009615" FillColor="13565951" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a56e9ec2-0101-f24e-02b2-0a46a05aaa77" targetConnectors="a56e9edd-0101-f13b-02f2-0a46a05aaa77" PositionX="9625" PositionY="39000" ExtentX="150" ExtentY="150" Autosize="true" VisibilityStyle="2" ShowCompartmentTitle="false" CompartmentStereotypeStyle="2" ShowParentName="false">
-      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.NamingHelper})" Name="NamingHelper" Kind="29"/>
+      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.NamingHelper})" Name="NamingHelper" Kind="29"/>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a56e9ec3-0101-f361-0f90-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.NamingHelper})" Name="NamingHelper" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.NamingHelper})" Name="NamingHelper" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a56e9ec4-0101-f8c1-18b4-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.NamingHelper})" Name="NamingHelper" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.NamingHelper})" Name="NamingHelper" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Attribute" ShapeStereotypeStyle="2" Id="a56e9ec5-0101-f9d4-206f-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.NamingHelper})" Name="NamingHelper" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.NamingHelper})" Name="NamingHelper" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Operation" ShapeStereotypeStyle="2" Id="a56e9ec6-0101-f69b-2a0f-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.NamingHelper})" Name="NamingHelper" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.NamingHelper})" Name="NamingHelper" Kind="29"/>
       </children>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ConnectorView" LineColor="4009615" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a56e9ed3-0101-e230-6478-0a46a05aaa77" Routing="0" Smoothness="0" AvoidObstructions="false" ClosestDistance="false" SourceAnchor="anchor" TargetAnchor="anchor" JumpLinksStatus="0" JumpLinksType="1" JumpLinksReverse="false" ShowCompartmentTitle="false" source="a56e9ebd-0101-eed8-4ae6-0a46a05aaa77" target="a56e9eb3-0101-ffcc-5b16-0a46a05aaa77">
-      <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="125"/>
+      <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="125"/>
       <Labels Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a56e9ed4-0101-e78f-6ffa-0a46a05aaa77" FromLine="-18" FromEnd="50" IsPercentage="true">
-        <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="125"/>
+        <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="125"/>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a56e9ed5-0101-e8a2-7a64-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="125"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="125"/>
         </children>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a56e9ed6-0101-e569-042e-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="125"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="125"/>
         </children>
       </Labels>
       <Labels Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a56e9ed7-0101-e67c-0fd2-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="125"/>
+        <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="125"/>
       </Labels>
       <BendPoints x="4" y="-172"/>
       <BendPoints x="79" y="110"/>
@@ -142,14 +142,14 @@
       <BendPoints x="4" y="78"/>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ConnectorView" LineColor="4009615" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a56e9edd-0101-f13b-02f2-0a46a05aaa77" Routing="0" Smoothness="0" AvoidObstructions="false" ClosestDistance="false" SourceAnchor="anchor" TargetAnchor="anchor" JumpLinksStatus="0" JumpLinksType="1" JumpLinksReverse="false" ShowCompartmentTitle="false" source="a56e9ebd-0101-eed8-4ae6-0a46a05aaa77" target="a56e9ec2-0101-f24e-02b2-0a46a05aaa77">
-      <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.NamingHelper}))" Name="" Kind="49"/>
+      <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.NamingHelper}))" Name="" Kind="49"/>
       <Labels Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a56e9ede-0101-ee02-0e57-0a46a05aaa77" FromLine="-18" FromEnd="50" IsPercentage="true">
-        <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.NamingHelper}))" Name="" Kind="49"/>
+        <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.NamingHelper}))" Name="" Kind="49"/>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a56e9edf-0101-ef15-18c0-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.NamingHelper}))" Name="" Kind="49"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.NamingHelper}))" Name="" Kind="49"/>
         </children>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a56e9ee0-0101-f6d8-2311-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.NamingHelper}))" Name="" Kind="49"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.NamingHelper}))" Name="" Kind="49"/>
         </children>
       </Labels>
       <BendPoints x="4" y="181"/>
@@ -158,29 +158,29 @@
       <BendPoints x="4" y="-96"/>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:PositionalGeneralView" LineColor="4009615" FillColor="13565951" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a91e5f83-0101-f0cc-2668-0a46a05aaa77" sourceConnectors="a91e66f5-0101-ede9-1273-0a46a05aaa77 a91e66fa-0101-eefc-5c66-0a46a05aaa77 a91e66fe-0101-f348-1e4b-0a46a05aaa77 a91e6702-0101-e6de-6082-0a46a05aaa77" targetConnectors="a91e66e5-0101-ff1a-5018-0a46a05aaa77" PositionX="10350" PositionY="13850" ExtentX="150" ExtentY="150" Autosize="true" VisibilityStyle="2" ShowCompartmentTitle="false" CompartmentStereotypeStyle="2" ShowParentName="false">
-      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})" Name="ProviderLocator" Kind="29"/>
+      <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})" Name="ProviderLocator" Kind="29"/>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a91e5f92-0101-fe88-37c7-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})" Name="ProviderLocator" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})" Name="ProviderLocator" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a91e5f93-0101-ff9b-3049-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})" Name="ProviderLocator" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})" Name="ProviderLocator" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Attribute" ShapeStereotypeStyle="2" Id="a91e5f94-0101-e4fa-3807-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})" Name="ProviderLocator" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})" Name="ProviderLocator" Kind="29"/>
       </children>
       <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ListCompartmentView" Visible="true" FactoryHint="Operation" ShapeStereotypeStyle="2" Id="a91e5fa2-0101-f21d-41ab-0a46a05aaa77" Ratio="-1.0" Collapsed="false">
-        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})" Name="ProviderLocator" Kind="29"/>
+        <SemanticReference Id="emfsemantic:(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})" Name="ProviderLocator" Kind="29"/>
       </children>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ConnectorView" LineColor="4009615" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a91e66e5-0101-ff1a-5018-0a46a05aaa77" Routing="0" Smoothness="0" AvoidObstructions="false" ClosestDistance="false" SourceAnchor="anchor" TargetAnchor="anchor" JumpLinksStatus="0" JumpLinksType="1" JumpLinksReverse="false" ShowCompartmentTitle="false" source="94e16548-0101-e7b0-3a6c-0a46a05aaa77" target="a91e5f83-0101-f0cc-2668-0a46a05aaa77">
-      <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator}))" Name="" Kind="49"/>
+      <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator}))" Name="" Kind="49"/>
       <Labels Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a91e66e6-0101-fbe1-5b7e-0a46a05aaa77" FromLine="-18" FromEnd="50" IsPercentage="true">
-        <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator}))" Name="" Kind="49"/>
+        <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator}))" Name="" Kind="49"/>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a91e66e7-0101-fcf4-6a3f-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator}))" Name="" Kind="49"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator}))" Name="" Kind="49"/>
         </children>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a91e66e8-0101-e254-741d-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator}))" Name="" Kind="49"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.initializer.Initializer})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator}))" Name="" Kind="49"/>
         </children>
       </Labels>
       <BendPoints x="4" y="228"/>
@@ -189,18 +189,18 @@
       <BendPoints x="4" y="-210"/>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ConnectorView" LineColor="4009615" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a91e66f5-0101-ede9-1273-0a46a05aaa77" Routing="0" Smoothness="0" AvoidObstructions="false" ClosestDistance="false" SourceAnchor="anchor" TargetAnchor="anchor" JumpLinksStatus="0" JumpLinksType="1" JumpLinksReverse="false" ShowCompartmentTitle="false" source="a91e5f83-0101-f0cc-2668-0a46a05aaa77" target="a557f186-0101-fcca-7900-0a46a05aaa77">
-      <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ILocator}))" Name="" Kind="125"/>
+      <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ILocator}))" Name="" Kind="125"/>
       <Labels Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a91e66f6-0101-eab0-1dd9-0a46a05aaa77" FromLine="-18" FromEnd="50" IsPercentage="true">
-        <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ILocator}))" Name="" Kind="125"/>
+        <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ILocator}))" Name="" Kind="125"/>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a91e66f7-0101-ebc3-28b2-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ILocator}))" Name="" Kind="125"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ILocator}))" Name="" Kind="125"/>
         </children>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a91e66f8-0101-f122-3289-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ILocator}))" Name="" Kind="125"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ILocator}))" Name="" Kind="125"/>
         </children>
       </Labels>
       <Labels Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a91e66f9-0101-f235-3df5-0a46a05aaa77">
-        <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ILocator}))" Name="" Kind="125"/>
+        <SemanticReference Id="emfsemantic:(~sc{%UMLRealization}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ILocator}))" Name="" Kind="125"/>
       </Labels>
       <BendPoints x="4" y="-210"/>
       <BendPoints x="4" y="420"/>
@@ -208,14 +208,14 @@
       <BendPoints x="4" y="388"/>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ConnectorView" LineColor="4009615" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a91e66fa-0101-eefc-5c66-0a46a05aaa77" Routing="0" Smoothness="0" AvoidObstructions="false" ClosestDistance="false" SourceAnchor="anchor" TargetAnchor="anchor" JumpLinksStatus="0" JumpLinksType="1" JumpLinksReverse="false" ShowCompartmentTitle="false" source="a91e5f83-0101-f0cc-2668-0a46a05aaa77" target="a557f18b-0101-e229-2ef5-0a46a05aaa77">
-      <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.IProviderLocatorConstants}))" Name="" Kind="49"/>
+      <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.IProviderLocatorConstants}))" Name="" Kind="49"/>
       <Labels Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a91e66fb-0101-f00f-6862-0a46a05aaa77" FromLine="-18" FromEnd="50" IsPercentage="true">
-        <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.IProviderLocatorConstants}))" Name="" Kind="49"/>
+        <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.IProviderLocatorConstants}))" Name="" Kind="49"/>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a91e66fc-0101-f56f-7339-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.IProviderLocatorConstants}))" Name="" Kind="49"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.IProviderLocatorConstants}))" Name="" Kind="49"/>
         </children>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a91e66fd-0101-f682-7d1a-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.IProviderLocatorConstants}))" Name="" Kind="49"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.IProviderLocatorConstants}))" Name="" Kind="49"/>
         </children>
       </Labels>
       <BendPoints x="4" y="219"/>
@@ -224,14 +224,14 @@
       <BendPoints x="4" y="-60"/>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ConnectorView" LineColor="4009615" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a91e66fe-0101-f348-1e4b-0a46a05aaa77" Routing="0" Smoothness="0" AvoidObstructions="false" ClosestDistance="false" SourceAnchor="anchor" TargetAnchor="anchor" JumpLinksStatus="0" JumpLinksType="1" JumpLinksReverse="false" ShowCompartmentTitle="false" source="a91e5f83-0101-f0cc-2668-0a46a05aaa77" target="a56e9eb3-0101-ffcc-5b16-0a46a05aaa77">
-      <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="49"/>
+      <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="49"/>
       <Labels Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a91e66ff-0101-f45b-29b7-0a46a05aaa77" FromLine="-18" FromEnd="50" IsPercentage="true">
-        <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="49"/>
+        <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="49"/>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a91e6700-0101-e905-34b2-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="49"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="49"/>
         </children>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a91e6701-0101-ea18-3e89-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="49"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.IJndiBinder}))" Name="" Kind="49"/>
         </children>
       </Labels>
       <BendPoints x="4" y="219"/>
@@ -240,14 +240,14 @@
       <BendPoints x="4" y="-50"/>
     </children>
     <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:ConnectorView" LineColor="4009615" Font="Tahoma|10|0|" Visible="true" FactoryHint="" ShapeStereotypeStyle="2" Id="a91e6702-0101-e6de-6082-0a46a05aaa77" Routing="0" Smoothness="0" AvoidObstructions="false" ClosestDistance="false" SourceAnchor="anchor" TargetAnchor="anchor" JumpLinksStatus="0" JumpLinksType="1" JumpLinksReverse="false" ShowCompartmentTitle="false" source="a91e5f83-0101-f0cc-2668-0a46a05aaa77" target="a56e9ebd-0101-eed8-4ae6-0a46a05aaa77">
-      <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder}))" Name="" Kind="49"/>
+      <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder}))" Name="" Kind="49"/>
       <Labels Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a91e6704-0101-ed51-6c4e-0a46a05aaa77" FromLine="-18" FromEnd="50" IsPercentage="true">
-        <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder}))" Name="" Kind="49"/>
+        <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder}))" Name="" Kind="49"/>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Stereotype" ShapeStereotypeStyle="2" Id="a91e6705-0101-ee64-76c8-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder}))" Name="" Kind="49"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder}))" Name="" Kind="49"/>
         </children>
         <children xsi:type="com.rational.xtools.umlvisualizer.emfnotation:NameCompartmentView" Visible="true" FactoryHint="Name" ShapeStereotypeStyle="2" Id="a91e6706-0101-eb2b-0097-0a46a05aaa77">
-          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%com.airfrance.jraf.bootstrap.naming.JndiBinder}))" Name="" Kind="49"/>
+          <SemanticReference Id="emfsemantic:(~sc{%UMLDependency}(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.locator.ProviderLocator})(~jclass{!pid%jraf-bootstrap}{%org.squale.jraf.bootstrap.naming.JndiBinder}))" Name="" Kind="49"/>
         </children>
       </Labels>
       <BendPoints x="4" y="219"/>

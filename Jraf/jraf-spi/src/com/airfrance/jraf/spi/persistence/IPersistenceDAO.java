@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.spi.persistence;
+package org.squale.jraf.spi.persistence;
 
 import java.io.Serializable;
 import java.util.List;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.spi.daolayer.IDAO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.spi.daolayer.IDAO;
 
 /**
  * 
@@ -353,7 +353,7 @@ public interface IPersistenceDAO extends IDAO {
 	 * @param whereClause whereClause: clause avec le mot clef "where" en premier
 	 * @param bean bean contenant les parametre de la requete
 	 * @return liste d'objets trouves
-	 * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#findWhere(com.airfrance.jraf.spi.persistence.ISession, java.lang.String)
+	 * @see org.squale.jraf.spi.persistence.IPersistenceDAO#findWhere(org.squale.jraf.spi.persistence.ISession, java.lang.String)
 	 */
 	 java.util.List findWhere(
 		ISession session,

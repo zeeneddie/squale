@@ -19,9 +19,9 @@
 /*
  * Created on Jul 23, 2004
  */
-package com.airfrance.jraf.testenv.integrationlayer;
+package org.squale.jraf.testenv.integrationlayer;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
 
 /**
  * <p>Title : ITestLauncher.java</p>

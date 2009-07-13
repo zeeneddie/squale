@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.persistence.hibernate;
+package org.squale.jraf.provider.persistence.hibernate;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -30,12 +30,12 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.commons.exception.JrafRuntimeException;
-import com.airfrance.jraf.spi.initializer.IInitializableBean;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.commons.exception.JrafRuntimeException;
+import org.squale.jraf.spi.initializer.IInitializableBean;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
 
 /**
  * Objet qui sert à cacher l'implémentation d'une session propre au produit de persistence utilisé
@@ -89,7 +89,7 @@ public class SessionImpl implements ISession, IInitializableBean {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ISession#closeSession()
+	 * @see org.squale.jraf.spi.persistence.ISession#closeSession()
 	 */
 	public void closeSession() throws JrafPersistenceException {
 		if (session != null) {
@@ -132,7 +132,7 @@ public class SessionImpl implements ISession, IInitializableBean {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ISession#beginTransaction()
+	 * @see org.squale.jraf.spi.persistence.ISession#beginTransaction()
 	 */
 	public void beginTransaction() throws JrafPersistenceException {
 		try {
@@ -158,7 +158,7 @@ public class SessionImpl implements ISession, IInitializableBean {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ISession#commitTransaction()
+	 * @see org.squale.jraf.spi.persistence.ISession#commitTransaction()
 	 */
 	public void commitTransaction() throws JrafPersistenceException {
 		if (tx != null) {
@@ -244,7 +244,7 @@ public class SessionImpl implements ISession, IInitializableBean {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ISession#rollbackTransaction()
+	 * @see org.squale.jraf.spi.persistence.ISession#rollbackTransaction()
 	 */
 	public void rollbackTransaction() {
 		if (tx != null) {
@@ -345,7 +345,7 @@ public class SessionImpl implements ISession, IInitializableBean {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ISession#evict(java.lang.Object)
+	 * @see org.squale.jraf.spi.persistence.ISession#evict(java.lang.Object)
 	 */
 	public void evict(Object object) throws JrafPersistenceException {
 		try {
@@ -367,14 +367,14 @@ public class SessionImpl implements ISession, IInitializableBean {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ISession#contains(java.lang.Object)
+	 * @see org.squale.jraf.spi.persistence.ISession#contains(java.lang.Object)
 	 */
 	public boolean contains(Object object) {
 		return session.contains(object);
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ISession#clear()
+	 * @see org.squale.jraf.spi.persistence.ISession#clear()
 	 */
 	public void clear() {
 		session.clear();
@@ -402,7 +402,7 @@ public class SessionImpl implements ISession, IInitializableBean {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ISession#isOpen()
+	 * @see org.squale.jraf.spi.persistence.ISession#isOpen()
 	 */
 	public boolean isOpen() {
 
@@ -438,7 +438,7 @@ public class SessionImpl implements ISession, IInitializableBean {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
+	 * @see org.squale.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() {
 		if (getSession() == null) {
@@ -477,14 +477,14 @@ public class SessionImpl implements ISession, IInitializableBean {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ISession#invalidate()
+	 * @see org.squale.jraf.spi.persistence.ISession#invalidate()
 	 */
 	public void invalidate() {
 		isValid=false;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.ISession#isValid()
+	 * @see org.squale.jraf.spi.persistence.ISession#isValid()
 	 */
 	public boolean isValid() {
 		return isValid;

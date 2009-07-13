@@ -19,7 +19,7 @@
 /*
  * Created on Feb 20, 2004
  */
-package com.airfrance.jraf.bootstrap.initializer;
+package org.squale.jraf.bootstrap.initializer;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,21 +36,21 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.airfrance.jraf.bootstrap.ApplicationContextFactoryInitializer;
-import com.airfrance.jraf.bootstrap.config.ClassPathXmlProviderConfigReader;
-import com.airfrance.jraf.bootstrap.config.FileSystemXmlProviderConfigReader;
-import com.airfrance.jraf.bootstrap.config.ProviderConfig;
-import com.airfrance.jraf.bootstrap.config.ProviderConfigComparator;
-import com.airfrance.jraf.bootstrap.initializer.InitializableHelper;
-import com.airfrance.jraf.bootstrap.locator.ProviderLocator;
-import com.airfrance.jraf.bootstrap.test.ApplicationContextFactoryHelper;
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.spi.bootstrap.IBootstrapConstants;
-import com.airfrance.jraf.spi.bootstrap.IBootstrapProvider;
-import com.airfrance.jraf.spi.initializer.IInitializable;
-import com.airfrance.jraf.spi.initializer.IInitializableBean;
-import com.airfrance.jraf.spi.provider.IProvider;
-import com.airfrance.jraf.spi.provider.IProviderConstants;
+import org.squale.jraf.bootstrap.ApplicationContextFactoryInitializer;
+import org.squale.jraf.bootstrap.config.ClassPathXmlProviderConfigReader;
+import org.squale.jraf.bootstrap.config.FileSystemXmlProviderConfigReader;
+import org.squale.jraf.bootstrap.config.ProviderConfig;
+import org.squale.jraf.bootstrap.config.ProviderConfigComparator;
+import org.squale.jraf.bootstrap.initializer.InitializableHelper;
+import org.squale.jraf.bootstrap.locator.ProviderLocator;
+import org.squale.jraf.bootstrap.test.ApplicationContextFactoryHelper;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.spi.bootstrap.IBootstrapConstants;
+import org.squale.jraf.spi.bootstrap.IBootstrapProvider;
+import org.squale.jraf.spi.initializer.IInitializable;
+import org.squale.jraf.spi.initializer.IInitializableBean;
+import org.squale.jraf.spi.provider.IProvider;
+import org.squale.jraf.spi.provider.IProviderConstants;
 
 /**
  * <p>Title : Initializer.java</p>
@@ -101,7 +101,7 @@ public class SpringInitializer
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializable#initialize()
+	 * @see org.squale.jraf.spi.initializer.IInitializable#initialize()
 	 */
 	public IProvider initialize() throws JrafConfigException {
 
@@ -246,7 +246,7 @@ public class SpringInitializer
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
+	 * @see org.squale.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() {
 

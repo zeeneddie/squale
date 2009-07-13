@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.testenv.bd.task;
+package org.squale.jraf.testenv.bd.task;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

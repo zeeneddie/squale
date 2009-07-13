@@ -19,11 +19,11 @@
 /*
  * Created on Dec 24, 2004
  */
-package com.airfrance.jraf.spi.accessdelegate;
+package org.squale.jraf.spi.accessdelegate;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
 
 /**
  * <p>Title : ICMTApplicationComponent.java</p>

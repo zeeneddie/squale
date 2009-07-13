@@ -22,10 +22,10 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.jraf.spi.accessdelegate;
+package org.squale.jraf.spi.accessdelegate;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.spi.provider.IProvider;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.spi.provider.IProvider;
 
 /**
  * <p>Project: JRAF 

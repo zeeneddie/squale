@@ -19,7 +19,7 @@
 /*
  * Created on Mar 9, 2004
  */
-package com.airfrance.jraf.spi.provider;
+package org.squale.jraf.spi.provider;
 
 /**
  * <p>Title : IProviderConstants.java</p>

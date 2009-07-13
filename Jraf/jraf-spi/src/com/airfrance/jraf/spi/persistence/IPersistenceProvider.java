@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.spi.persistence;
+package org.squale.jraf.spi.persistence;
 
 import java.io.Serializable;
 
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.spi.provider.IProvider;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.spi.provider.IProvider;
 
 /**
  * <p>Project: JRAF 

@@ -19,7 +19,7 @@
 /*
  * Créé le 5 mars 04
  */
-package com.airfrance.jraf.spi.provider;
+package org.squale.jraf.spi.provider;
 
 import java.io.Serializable;
 

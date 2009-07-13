@@ -19,7 +19,7 @@
 /*
  * Created on Mar 5, 2004
  */
-package com.airfrance.jraf.bootstrap.locator;
+package org.squale.jraf.bootstrap.locator;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -31,11 +31,11 @@ import javax.swing.SpringLayout;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.bootstrap.naming.IJndiBinder;
-import com.airfrance.jraf.bootstrap.naming.JndiBinder;
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.spi.initializer.IInitializableBean;
-import com.airfrance.jraf.spi.provider.IProvider;
+import org.squale.jraf.bootstrap.naming.IJndiBinder;
+import org.squale.jraf.bootstrap.naming.JndiBinder;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.spi.initializer.IInitializableBean;
+import org.squale.jraf.spi.provider.IProvider;
 
 /**
  * <p>Title : ProviderLocator.java</p>
@@ -203,21 +203,21 @@ public class ProviderLocator
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.bootstrap.locator.IProviderLocator#get(java.lang.String)
+	 * @see org.squale.jraf.bootstrap.locator.IProviderLocator#get(java.lang.String)
 	 */
 	public IProvider get(String name) {
 		return (IProvider) getProviders().get(name);
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.bootstrap.locator.IProviderLocator#put(java.lang.String, com.airfrance.jraf.spi.provider.IProvider)
+	 * @see org.squale.jraf.bootstrap.locator.IProviderLocator#put(java.lang.String, org.squale.jraf.spi.provider.IProvider)
 	 */
 	public void put(String name, IProvider provider) {
 		getProviders().put(name, provider);
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.bootstrap.locator.IProviderLocator#remove(java.lang.String)
+	 * @see org.squale.jraf.bootstrap.locator.IProviderLocator#remove(java.lang.String)
 	 */
 	public void remove(String name) {
 		providers.remove(name);
@@ -233,7 +233,7 @@ public class ProviderLocator
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
+	 * @see org.squale.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() {
 		// initilize la map de providers au besoin

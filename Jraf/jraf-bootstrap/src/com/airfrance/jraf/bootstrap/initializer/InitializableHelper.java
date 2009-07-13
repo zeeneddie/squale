@@ -19,14 +19,14 @@
 /*
  * Created on Mar 5, 2004
  */
-package com.airfrance.jraf.bootstrap.initializer;
+package org.squale.jraf.bootstrap.initializer;
 
 import java.lang.reflect.InvocationTargetException;
 import org.apache.commons.beanutils.ConstructorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.spi.initializer.IInitializable;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.spi.initializer.IInitializable;
 
 /**
  * <p>Title : InitializableHelper.java</p>

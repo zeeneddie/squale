@@ -19,7 +19,7 @@
 /*
  * Cree le 21 janv. 05
  */
-package com.airfrance.jraf.bootstrap.locator;
+package org.squale.jraf.bootstrap.locator;
 
 /**
  * <p>Project: JRAF 

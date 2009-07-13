@@ -19,7 +19,7 @@
 /*
  * Created on Mar 5, 2004
  */
-package com.airfrance.jraf.bootstrap.naming;
+package org.squale.jraf.bootstrap.naming;
 
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -35,8 +35,8 @@ import javax.naming.NoInitialContextException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.bootstrap.locator.ProviderLocator;
-import com.airfrance.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.bootstrap.locator.ProviderLocator;
+import org.squale.jraf.commons.exception.JrafConfigException;
 
 /**
  * <p>Title : NamingHelper.java</p>

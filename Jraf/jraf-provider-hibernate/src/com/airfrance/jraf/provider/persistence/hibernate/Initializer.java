@@ -19,7 +19,7 @@
 /*
  * Créé le 5 mars 04
  */
-package com.airfrance.jraf.provider.persistence.hibernate;
+package org.squale.jraf.provider.persistence.hibernate;
 
 import java.util.Map;
 
@@ -30,13 +30,13 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.provider.persistence.hibernate.config.FileSystemXmlHibernateConfigReader;
-import com.airfrance.jraf.provider.persistence.hibernate.config.IHibernateConfigReader;
-import com.airfrance.jraf.spi.bootstrap.IBootstrapConstants;
-import com.airfrance.jraf.spi.initializer.IInitializable;
-import com.airfrance.jraf.spi.initializer.IInitializableBean;
-import com.airfrance.jraf.spi.provider.IProvider;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.provider.persistence.hibernate.config.FileSystemXmlHibernateConfigReader;
+import org.squale.jraf.provider.persistence.hibernate.config.IHibernateConfigReader;
+import org.squale.jraf.spi.bootstrap.IBootstrapConstants;
+import org.squale.jraf.spi.initializer.IInitializable;
+import org.squale.jraf.spi.initializer.IInitializableBean;
+import org.squale.jraf.spi.provider.IProvider;
 
 /**
  * <p>Project: JRAF 
@@ -154,7 +154,7 @@ public class Initializer implements IInitializable, IInitializableBean {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializable#initialize(java.util.Map)
+	 * @see org.squale.jraf.spi.initializer.IInitializable#initialize(java.util.Map)
 	 */
 	public IProvider initialize(Map in_configProperties) {
 
@@ -280,7 +280,7 @@ public class Initializer implements IInitializable, IInitializableBean {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializable#initialize()
+	 * @see org.squale.jraf.spi.initializer.IInitializable#initialize()
 	 */
 	public IProvider initialize() {
 
@@ -381,7 +381,7 @@ public class Initializer implements IInitializable, IInitializableBean {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
+	 * @see org.squale.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() {
 

@@ -19,7 +19,7 @@
 /*
  * Created on Sep 16, 2004
  */
-package com.airfrance.jraf.initializer.struts;
+package org.squale.jraf.initializer.struts;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,13 +34,13 @@ import org.apache.struts.action.ActionServlet;
 import org.apache.struts.action.PlugIn;
 import org.apache.struts.config.ModuleConfig;
 
-import com.airfrance.jraf.bootstrap.ApplicationContextFactoryInitializer;
-import com.airfrance.jraf.bootstrap.initializer.InitializableHelper;
-import com.airfrance.jraf.bootstrap.initializer.Initializer;
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.spi.bootstrap.IBootstrapConstants;
-import com.airfrance.jraf.spi.bootstrap.IBootstrapProvider;
-import com.airfrance.jraf.spi.initializer.IInitializable;
+import org.squale.jraf.bootstrap.ApplicationContextFactoryInitializer;
+import org.squale.jraf.bootstrap.initializer.InitializableHelper;
+import org.squale.jraf.bootstrap.initializer.Initializer;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.spi.bootstrap.IBootstrapConstants;
+import org.squale.jraf.spi.bootstrap.IBootstrapProvider;
+import org.squale.jraf.spi.initializer.IInitializable;
 import org.springframework.context.ApplicationContext;
 
 
@@ -51,7 +51,7 @@ import org.springframework.context.ApplicationContext;
  * Cette classe est utile pour initialiser JRAF dans des applications
  * deployees sur des plate-formes WAS4 (J2EE 1.2).
  * Si le niveau J2EE est >= 1.3 il est preconise d'utiliser la classe 
- * com.airfrance.jraf.initializer.web.WebInitializer.</p>
+ * org.squale.jraf.initializer.web.WebInitializer.</p>
  * <p>Copyright : Copyright (c) 2004</p>
  * <p>Company : AIRFRANCE</p>
  * MODIFICATION : Mai 2006

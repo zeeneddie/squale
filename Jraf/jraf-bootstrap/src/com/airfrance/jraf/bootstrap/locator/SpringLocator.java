@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.jraf.bootstrap.locator;
+package org.squale.jraf.bootstrap.locator;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

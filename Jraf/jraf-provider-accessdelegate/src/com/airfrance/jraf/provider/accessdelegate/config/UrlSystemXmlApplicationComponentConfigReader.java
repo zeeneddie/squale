@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.accessdelegate.config;
+package org.squale.jraf.provider.accessdelegate.config;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +27,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafConfigException;
 
 public class UrlSystemXmlApplicationComponentConfigReader 
 	extends AbstractApplicationComponentConfigReader {
@@ -50,7 +50,7 @@ public class UrlSystemXmlApplicationComponentConfigReader
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.accessdelegate.config.AbstractApplicationComponentConfigReader#readConfig()
+	 * @see org.squale.jraf.provider.accessdelegate.config.AbstractApplicationComponentConfigReader#readConfig()
 	 */
 	/**
 	 * Lis le fichier de configuration d'un plugin

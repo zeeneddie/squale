@@ -19,17 +19,17 @@
 /*
  * Created on Mar 12, 2004
  */
-package com.airfrance.jraf.helper;
+package org.squale.jraf.helper;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.context.ApplicationContext;
 
-import com.airfrance.jraf.bootstrap.locator.*;
-import com.airfrance.jraf.bootstrap.locator.ProviderLocator;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.provider.IProvider;
-import com.airfrance.jraf.spi.provider.IProviderConstants;
+import org.squale.jraf.bootstrap.locator.*;
+import org.squale.jraf.bootstrap.locator.ProviderLocator;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.provider.IProvider;
+import org.squale.jraf.spi.provider.IProviderConstants;
 
 /**
  * <p>Title : PersistenceHelper.java</p>

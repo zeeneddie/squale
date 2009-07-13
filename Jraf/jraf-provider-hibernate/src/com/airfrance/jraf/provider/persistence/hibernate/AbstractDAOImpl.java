@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.persistence.hibernate;
+package org.squale.jraf.provider.persistence.hibernate;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -38,12 +38,12 @@ import org.hibernate.type.Type;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.spi.persistence.IMetaData;
-import com.airfrance.jraf.spi.persistence.IPersistenceDAO;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.spi.persistence.IMetaData;
+import org.squale.jraf.spi.persistence.IPersistenceDAO;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
 
 /**
  * <p>
@@ -133,7 +133,7 @@ public abstract class AbstractDAOImpl
 
     /*
      * (non-Javadoc)
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#refresh(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#refresh(org.squale.jraf.spi.persistence.ISession,
      * java.lang.Object)
      */
     public void refresh( ISession session, Object obj )
@@ -274,7 +274,7 @@ public abstract class AbstractDAOImpl
 
     /*
      * (non-Javadoc)
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#find(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#find(org.squale.jraf.spi.persistence.ISession,
      * java.lang.String)
      */
     public java.util.List find( ISession session, String lRequete )
@@ -354,7 +354,7 @@ public abstract class AbstractDAOImpl
 
     /*
      * (non-Javadoc)
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#find(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#find(org.squale.jraf.spi.persistence.ISession,
      * java.lang.String, java.lang.Object)
      */
     public java.util.List find( ISession session, String lRequete, Object bean )
@@ -376,7 +376,7 @@ public abstract class AbstractDAOImpl
     }
 
     /*
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#findAll(ISession)
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#findAll(ISession)
      */
     public List findAll( ISession session )
         throws JrafDaoException
@@ -447,7 +447,7 @@ public abstract class AbstractDAOImpl
 
     /*
      * (non-Javadoc)
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#findWhere(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#findWhere(org.squale.jraf.spi.persistence.ISession,
      * java.lang.String, java.lang.Object)
      */
     public java.util.List findWhere( ISession session, String whereClause, Object bean )
@@ -471,7 +471,7 @@ public abstract class AbstractDAOImpl
     /*
      * (non-Javadoc)
      * @see
-     * com.airfrance.jraf.spi.persistence.IPersistenceDAO#findWhereScrollable(com.airfrance.jraf.spi.persistence.ISession
+     * org.squale.jraf.spi.persistence.IPersistenceDAO#findWhereScrollable(org.squale.jraf.spi.persistence.ISession
      * , java.lang.String, int, int, boolean)
      */
     public Object findWhereScrollable( ISession session, String whereClause, int nbLignes, int indexDepart,
@@ -552,7 +552,7 @@ public abstract class AbstractDAOImpl
     /*
      * (non-Javadoc)
      * @see
-     * com.airfrance.jraf.spi.persistence.IPersistenceDAO#findWhereScrollable(com.airfrance.jraf.spi.persistence.ISession
+     * org.squale.jraf.spi.persistence.IPersistenceDAO#findWhereScrollable(org.squale.jraf.spi.persistence.ISession
      * , java.lang.String, int, int, boolean)
      */
     public Object findWhereScrollable( ISession session, String whereClause, Object bean, int nbLignes,
@@ -587,7 +587,7 @@ public abstract class AbstractDAOImpl
 
     /*
      * (non-Javadoc)
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#create(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#create(org.squale.jraf.spi.persistence.ISession,
      * java.lang.Object)
      */
     public void create( ISession session, Object obj )
@@ -606,7 +606,7 @@ public abstract class AbstractDAOImpl
 
     /*
      * (non-Javadoc)
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#save(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#save(org.squale.jraf.spi.persistence.ISession,
      * java.lang.Object)
      */
     public void save( ISession session, Object obj )
@@ -625,7 +625,7 @@ public abstract class AbstractDAOImpl
 
     /*
      * (non-Javadoc)
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#remove(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#remove(org.squale.jraf.spi.persistence.ISession,
      * java.lang.Object)
      */
     public void remove( ISession session, Object obj )
@@ -644,7 +644,7 @@ public abstract class AbstractDAOImpl
 
     /*
      * (non-Javadoc)
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#removeAll(com.airfrance.jraf.spi.persistence.ISession)
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#removeAll(org.squale.jraf.spi.persistence.ISession)
      */
     public void removeAll( ISession session )
         throws JrafDaoException
@@ -716,7 +716,7 @@ public abstract class AbstractDAOImpl
 
     /*
      * (non-Javadoc)
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#removeWhere(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#removeWhere(org.squale.jraf.spi.persistence.ISession,
      * java.lang.String, java.lang.Object)
      */
     public int removeWhere( ISession session, String whereClause, Object bean )
@@ -977,7 +977,7 @@ public abstract class AbstractDAOImpl
 
     /*
      * (non-Javadoc)
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#count(com.airfrance.jraf.spi.persistence.ISession)
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#count(org.squale.jraf.spi.persistence.ISession)
      */
     public Integer count( ISession session )
         throws JrafDaoException
@@ -995,7 +995,7 @@ public abstract class AbstractDAOImpl
 
     /*
      * (non-Javadoc)
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#countWhere(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#countWhere(org.squale.jraf.spi.persistence.ISession,
      * java.lang.String)
      */
     public Integer countWhere( ISession session, String whereClause )
@@ -1045,7 +1045,7 @@ public abstract class AbstractDAOImpl
 
     /*
      * (non-Javadoc)
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#countWhere(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#countWhere(org.squale.jraf.spi.persistence.ISession,
      * java.lang.String, java.lang.Object)
      */
     public Integer countWhere( ISession session, String whereClause, Object bean )
@@ -1188,7 +1188,7 @@ public abstract class AbstractDAOImpl
     /*
      * (non-Javadoc)
      * @see
-     * com.airfrance.jraf.spi.persistence.IPersistenceDAO#findByExample(com.airfrance.jraf.spi.persistence.ISession,
+     * org.squale.jraf.spi.persistence.IPersistenceDAO#findByExample(org.squale.jraf.spi.persistence.ISession,
      * java.lang.Object, int, int, boolean, boolean)
      */
     public List findByExample( ISession session, Object bo, int nbLignes, int indexDepart, boolean ignoreCase,
@@ -1203,7 +1203,7 @@ public abstract class AbstractDAOImpl
     /*
      * (non-Javadoc)
      * @see
-     * com.airfrance.jraf.spi.persistence.IPersistenceDAO#findByExample(com.airfrance.jraf.spi.persistence.ISession,
+     * org.squale.jraf.spi.persistence.IPersistenceDAO#findByExample(org.squale.jraf.spi.persistence.ISession,
      * java.lang.Object, int, int, boolean, boolean, boolean)
      */
     public List findByExample( ISession session, Object bo, int nbLignes, int indexDepart, boolean ignoreCase,
@@ -1292,7 +1292,7 @@ public abstract class AbstractDAOImpl
     /*
      * (non-Javadoc)
      * @see
-     * com.airfrance.jraf.spi.persistence.IPersistenceDAO#findByExample(com.airfrance.jraf.spi.persistence.ISession,
+     * org.squale.jraf.spi.persistence.IPersistenceDAO#findByExample(org.squale.jraf.spi.persistence.ISession,
      * java.lang.Object)
      */
     public List findByExample( ISession session, Object bo )
@@ -1305,7 +1305,7 @@ public abstract class AbstractDAOImpl
     /*
      * (non-Javadoc)
      * @see
-     * com.airfrance.jraf.spi.persistence.IPersistenceDAO#findByExample(com.airfrance.jraf.spi.persistence.ISession,
+     * org.squale.jraf.spi.persistence.IPersistenceDAO#findByExample(org.squale.jraf.spi.persistence.ISession,
      * java.lang.Object, boolean, boolean)
      */
     public List findByExample( ISession session, Object bo, boolean ignoreCase, boolean likeMode )
@@ -1318,7 +1318,7 @@ public abstract class AbstractDAOImpl
     /*
      * (non-Javadoc)
      * @see
-     * com.airfrance.jraf.spi.persistence.IPersistenceDAO#findByExample(com.airfrance.jraf.spi.persistence.ISession,
+     * org.squale.jraf.spi.persistence.IPersistenceDAO#findByExample(org.squale.jraf.spi.persistence.ISession,
      * java.lang.Object, int, int)
      */
     public List findByExample( ISession session, Object bo, int nbLignes, int indexDepart )
@@ -1331,7 +1331,7 @@ public abstract class AbstractDAOImpl
     /*
      * (non-Javadoc)
      * @see
-     * com.airfrance.jraf.spi.persistence.IPersistenceDAO#findByExample(com.airfrance.jraf.spi.persistence.ISession,
+     * org.squale.jraf.spi.persistence.IPersistenceDAO#findByExample(org.squale.jraf.spi.persistence.ISession,
      * java.lang.Object, int, int, boolean)
      */
     public List findByExample( ISession session, Object bo, int nbLignes, int indexDepart, boolean cache )
@@ -1395,7 +1395,7 @@ public abstract class AbstractDAOImpl
     /*
      * (non-Javadoc)
      * @see
-     * com.airfrance.jraf.spi.persistence.IPersistenceDAO#loadFromSession(com.airfrance.jraf.spi.persistence.ISession,
+     * org.squale.jraf.spi.persistence.IPersistenceDAO#loadFromSession(org.squale.jraf.spi.persistence.ISession,
      * java.io.Serializable)
      */
     public Object loadFromSession( ISession session, Serializable oid )

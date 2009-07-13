@@ -22,14 +22,14 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.jraf.bootstrap.test;
+package org.squale.jraf.bootstrap.test;
 
 import java.sql.Savepoint;
 
 import org.springframework.context.ApplicationContext;
 
-import com.airfrance.jraf.bootstrap.ApplicationContextFactoryInitializer;
-import com.airfrance.jraf.bootstrap.initializer.Initializer;
+import org.squale.jraf.bootstrap.ApplicationContextFactoryInitializer;
+import org.squale.jraf.bootstrap.initializer.Initializer;
 
 
 /**

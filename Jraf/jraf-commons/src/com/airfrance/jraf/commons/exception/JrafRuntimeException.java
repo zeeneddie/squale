@@ -19,7 +19,7 @@
 /*
  * Créé le 10 mars 04
  */
-package com.airfrance.jraf.commons.exception;
+package org.squale.jraf.commons.exception;
 
 import org.apache.commons.lang.exception.NestableRuntimeException;
 

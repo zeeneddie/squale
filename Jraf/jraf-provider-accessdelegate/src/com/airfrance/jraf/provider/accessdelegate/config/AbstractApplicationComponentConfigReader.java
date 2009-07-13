@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.accessdelegate.config;
+package org.squale.jraf.provider.accessdelegate.config;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,8 +33,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.commons.util.DTDEntityResolver;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.util.DTDEntityResolver;
 
 /**
  * <p>Title : AbstractApplicationComponentConfigReader.java</p>
@@ -55,8 +55,8 @@ public abstract class AbstractApplicationComponentConfigReader
 	/** dtd location */
 	private final static String _dtdRegistration[] =
 		{
-			"-//Air France Software,Inc.//DTD Jraf Configuration 2.0//EN",
-			"com/airfrance/jraf/commons/resources/configApplicationComponent.dtd" };
+			"-//Squale Software,Inc.//DTD Jraf Configuration 2.0//EN",
+			"org/squale/jraf/commons/resources/configApplicationComponent.dtd" };
 
 	protected String configFileName;
 

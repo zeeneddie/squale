@@ -19,7 +19,7 @@
 /*
  * Created on Dec 28, 2004
  */
-package com.airfrance.jraf.provider.accessdelegate.config;
+package org.squale.jraf.provider.accessdelegate.config;
 
 import java.io.InputStream;
 import java.util.Map;
@@ -27,7 +27,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafConfigException;
 
 /**
  * <p>Title : ClassPathXmlApplicationComponentConfigReader.java</p>
@@ -92,7 +92,7 @@ public class ClassPathXmlApplicationComponentConfigReader
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.accessdelegate.config.AbstractApplicationComponentConfigReader#setConfigFileName(java.lang.String)
+	 * @see org.squale.jraf.provider.accessdelegate.config.AbstractApplicationComponentConfigReader#setConfigFileName(java.lang.String)
 	 */
 	public void setConfigFileName(String string) {
 		String path = string;

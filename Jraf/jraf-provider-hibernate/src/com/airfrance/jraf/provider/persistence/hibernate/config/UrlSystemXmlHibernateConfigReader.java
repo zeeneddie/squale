@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.persistence.hibernate.config;
+package org.squale.jraf.provider.persistence.hibernate.config;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -29,7 +29,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafConfigException;
 
 public class UrlSystemXmlHibernateConfigReader extends
 		AbstractHibernateConfigReader {
@@ -55,7 +55,7 @@ public class UrlSystemXmlHibernateConfigReader extends
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.config.IHibernateConfigReader#readConfig()
+	 * @see org.squale.jraf.provider.persistence.hibernate.config.IHibernateConfigReader#readConfig()
 	 */
 	public SessionFactory readConfig(Configuration configuration) throws JrafConfigException {
 		URL lc_file = null;

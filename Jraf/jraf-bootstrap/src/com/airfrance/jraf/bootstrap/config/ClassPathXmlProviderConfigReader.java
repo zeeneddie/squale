@@ -19,7 +19,7 @@
 /*
  * Created on Dec 29, 2004
  */
-package com.airfrance.jraf.bootstrap.config;
+package org.squale.jraf.bootstrap.config;
 
 import java.io.InputStream;
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafConfigException;
 
 /**
  * <p>Title : ClassPathXmlProviderConfigReader.java</p>
@@ -57,7 +57,7 @@ public class ClassPathXmlProviderConfigReader
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.bootstrap.config.IProviderConfigReader#readConfig()
+	 * @see org.squale.jraf.bootstrap.config.IProviderConfigReader#readConfig()
 	 */
 	public List readConfig() throws JrafConfigException {
 
@@ -92,7 +92,7 @@ public class ClassPathXmlProviderConfigReader
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.bootstrap.config.AbstractProviderConfigReader#setConfigFileName(java.lang.String)
+	 * @see org.squale.jraf.bootstrap.config.AbstractProviderConfigReader#setConfigFileName(java.lang.String)
 	 */
 	public void setConfigFileName(String string) {
 		String path = string;

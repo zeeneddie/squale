@@ -19,11 +19,11 @@
 /*
  * Created on Dec 29, 2004
  */
-package com.airfrance.jraf.bootstrap.config;
+package org.squale.jraf.bootstrap.config;
 
 import java.util.List;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafConfigException;
 
 /**
  * <p>Title : IProviderConfigReader.java</p>

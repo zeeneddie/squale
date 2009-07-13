@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.persistence.hibernate;
+package org.squale.jraf.provider.persistence.hibernate;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,10 +30,10 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.provider.persistence.hibernate.config.FileSystemXmlHibernateConfigReader;
-import com.airfrance.jraf.provider.persistence.hibernate.config.IHibernateConfigReader;
-import com.airfrance.jraf.provider.persistence.hibernate.config.UrlSystemXmlHibernateConfigReader;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.provider.persistence.hibernate.config.FileSystemXmlHibernateConfigReader;
+import org.squale.jraf.provider.persistence.hibernate.config.IHibernateConfigReader;
+import org.squale.jraf.provider.persistence.hibernate.config.UrlSystemXmlHibernateConfigReader;
 
 public class PersistenceProviderSpringUrlImpl
 	extends PersistenceProviderImpl

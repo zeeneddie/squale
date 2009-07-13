@@ -19,11 +19,11 @@
 /*
  * Cree le 24 janv. 05
  */
-package com.airfrance.jraf.bootstrap.naming;
+package org.squale.jraf.bootstrap.naming;
 
 import javax.naming.Context;
 
-import com.airfrance.jraf.spi.initializer.IInitializableBean;
+import org.squale.jraf.spi.initializer.IInitializableBean;
 
 /**
  * <p>Project: JRAF 
@@ -106,7 +106,7 @@ public class JndiBinder implements IInitializableBean, IJndiBinder {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
+	 * @see org.squale.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() {
 

@@ -19,10 +19,10 @@
 /*
  * Created on Jan 7, 2005
  */
-package com.airfrance.jraf.provider.accessdelegate;
+package org.squale.jraf.provider.accessdelegate;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
 
 /**
  * <p>Title : ILookupComponent.java</p>

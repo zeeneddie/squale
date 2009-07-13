@@ -19,10 +19,10 @@
 /*
  * Created on Apr 6, 2004
  */
-package com.airfrance.jraf.bootstrap.test.log;
+package org.squale.jraf.bootstrap.test.log;
 
-import com.airfrance.jraf.spi.logging.ILogger;
-import com.airfrance.jraf.spi.logging.ILoggingProvider;
+import org.squale.jraf.spi.logging.ILogger;
+import org.squale.jraf.spi.logging.ILoggingProvider;
 
 /**
  * <p>Title : LoggingMockProvider.java</p>
@@ -33,14 +33,14 @@ import com.airfrance.jraf.spi.logging.ILoggingProvider;
 public class LoggingMockProvider implements ILoggingProvider {
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.logging.ILoggingProvider#getInstance(java.lang.Class)
+	 * @see org.squale.jraf.spi.logging.ILoggingProvider#getInstance(java.lang.Class)
 	 */
 	public ILogger getInstance(Class clazz) {
 		return new LogMock();
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.logging.ILoggingProvider#getInstance(java.lang.String)
+	 * @see org.squale.jraf.spi.logging.ILoggingProvider#getInstance(java.lang.String)
 	 */
 	public ILogger getInstance(String clazz) {
 		return new LogMock();

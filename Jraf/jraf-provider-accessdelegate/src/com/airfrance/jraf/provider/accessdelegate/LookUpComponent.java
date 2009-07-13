@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.accessdelegate;
+package org.squale.jraf.provider.accessdelegate;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -24,24 +24,24 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com
-	.airfrance
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org
+	.squale
 	.jraf
 	.provider
 	.accessdelegate
 	.config
 	.IApplicationComponentConfig;
-import com
-	.airfrance
+import org
+	.squale
 	.jraf
 	.provider
 	.accessdelegate
 	.config
 	.IApplicationComponentConfigReader;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.jraf.spi.initializer.IInitializableBean;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.jraf.spi.initializer.IInitializableBean;
 
 /**
  * <p>Title : LookUpComponent.java</p>

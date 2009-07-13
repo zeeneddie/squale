@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.bootstrap.config;
+package org.squale.jraf.bootstrap.config;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,8 +31,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.commons.util.DTDEntityResolver;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.util.DTDEntityResolver;
 
 /**
  * <p>Title : AbstractProviderConfigReader</p>
@@ -52,8 +52,8 @@ public abstract class AbstractProviderConfigReader
 	/** dtd location */
 	private static final String[] _dtdRegistration =
 		{
-			"-//Air France Software,Inc.//DTD Jraf Provider Configuration 2.0//EN",
-			"com/airfrance/jraf/commons/resources/providers-config.dtd" };
+			"-//Squale Software,Inc.//DTD Jraf Provider Configuration 2.0//EN",
+			"org/squale/jraf/commons/resources/providers-config.dtd" };
 
 	private String configFileName;
 
@@ -135,7 +135,7 @@ public abstract class AbstractProviderConfigReader
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.bootstrap.config.IProviderConfigReader#readConfig()
+	 * @see org.squale.jraf.bootstrap.config.IProviderConfigReader#readConfig()
 	 */
 	public abstract List readConfig() throws JrafConfigException;
 

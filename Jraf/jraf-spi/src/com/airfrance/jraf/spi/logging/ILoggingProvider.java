@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.spi.logging;
+package org.squale.jraf.spi.logging;
 
 import org.apache.commons.logging.Log;
 
-import com.airfrance.jraf.spi.provider.IProvider;
+import org.squale.jraf.spi.provider.IProvider;
 
  
 /**

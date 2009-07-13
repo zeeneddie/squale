@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.logging;
+package org.squale.jraf.provider.logging;
 
 import java.util.Map;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.spi.initializer.IInitializable;
-import com.airfrance.jraf.spi.provider.IProvider;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.spi.initializer.IInitializable;
+import org.squale.jraf.spi.provider.IProvider;
 
 /**
  * <p>Project: JRAF 
@@ -42,7 +42,7 @@ public class Initializer implements IInitializable {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializable#initialize(java.util.Map)
+	 * @see org.squale.jraf.spi.initializer.IInitializable#initialize(java.util.Map)
 	 */
 	public IProvider initialize(Map objectInitialize)
 		throws JrafConfigException {
@@ -50,7 +50,7 @@ public class Initializer implements IInitializable {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializable#initialize()
+	 * @see org.squale.jraf.spi.initializer.IInitializable#initialize()
 	 */
 	public IProvider initialize() {
 		return new LoggingProviderImpl();

@@ -19,7 +19,7 @@
 /*
  * Created on Oct 15, 2004
  */
-package com.airfrance.jraf.provider.persistence.hibernate;
+package org.squale.jraf.provider.persistence.hibernate;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,9 +37,9 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.spi.persistence.ISession;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.spi.persistence.ISession;
 
 /**
  * <p>Title : BlobHelper.java</p>

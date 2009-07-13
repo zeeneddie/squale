@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.accessdelegate;
+package org.squale.jraf.provider.accessdelegate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.spi.accessdelegate.IAccessDelegateProvider;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.jraf.spi.initializer.IInitializableBean;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.spi.accessdelegate.IAccessDelegateProvider;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.jraf.spi.initializer.IInitializableBean;
 
 /**
  * <p>Project: JRAF 
@@ -74,14 +74,14 @@ public class DefaultExecuteComponent
 	}
 
 	/**
-	 * @see com.airfrance.jraf.enterpriselayer.itface.IApplicationComponent#execute(java.lang.String)
+	 * @see org.squale.jraf.enterpriselayer.itface.IApplicationComponent#execute(java.lang.String)
 	 */
 	public Object execute(String method) throws JrafEnterpriseException {
 		return execute(method, null);
 	}
 
 	/** 
-	 * @see com.airfrance.jraf.enterpriselayer.itface.IApplicationComponent#execute(java.lang.String, java.lang.Object[])
+	 * @see org.squale.jraf.enterpriselayer.itface.IApplicationComponent#execute(java.lang.String, java.lang.Object[])
 	 * */
 	public Object execute(String method, Object[] parameter)
 		throws JrafEnterpriseException {
@@ -98,14 +98,14 @@ public class DefaultExecuteComponent
 	}
 
 	/**
-	 * @see com.airfrance.jraf.enterpriselayer.itface.IApplicationComponent#getApplicationComponent()
+	 * @see org.squale.jraf.enterpriselayer.itface.IApplicationComponent#getApplicationComponent()
 	 */
 	public String getApplicationComponent() {
 		return applicationComponent;
 	}
 
 	/**
-	 * @see com.airfrance.jraf.enterpriselayer.itface.IApplicationComponent#setApplicationComponent(String)
+	 * @see org.squale.jraf.enterpriselayer.itface.IApplicationComponent#setApplicationComponent(String)
 	 */
 	public void setApplicationComponent(String applicationComponent) {
 		this.applicationComponent = applicationComponent;
@@ -125,7 +125,7 @@ public class DefaultExecuteComponent
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
+	 * @see org.squale.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() {
 		if (getAccessDelegateProvider() == null) {

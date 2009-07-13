@@ -22,10 +22,10 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.jraf.provider.accessdelegate;
+package org.squale.jraf.provider.accessdelegate;
 
-import com.airfrance.jraf.provider.accessdelegate.config.IApplicationComponentConfigReader;
-import com.airfrance.jraf.spi.accessdelegate.IAccessDelegateProvider;
+import org.squale.jraf.provider.accessdelegate.config.IApplicationComponentConfigReader;
+import org.squale.jraf.spi.accessdelegate.IAccessDelegateProvider;
 
 /**
  * <p>Project: JRAF 
@@ -54,14 +54,14 @@ public class Initializer extends AbstractInitializer {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.accessdelegate.AbstractInitializer#getAccessDelegateProvider(com.airfrance.jraf.provider.accessdelegate.ILookupComponent)
+	 * @see org.squale.jraf.provider.accessdelegate.AbstractInitializer#getAccessDelegateProvider(org.squale.jraf.provider.accessdelegate.ILookupComponent)
 	 */
 	public IAccessDelegateProvider getAccessDelegateProvider(ILookupComponent lookupComponent) {
 		return new AccessDelegateProviderImpl(lookupComponent);
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.accessdelegate.AbstractInitializer#buildLookupComponent(com.airfrance.jraf.provider.accessdelegate.config.IApplicationComponentConfigReader)
+	 * @see org.squale.jraf.provider.accessdelegate.AbstractInitializer#buildLookupComponent(org.squale.jraf.provider.accessdelegate.config.IApplicationComponentConfigReader)
 	 */
 	protected ILookupComponent buildLookupComponent(IApplicationComponentConfigReader reader) {
 		// lookup

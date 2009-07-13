@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.persistence.hibernate;
+package org.squale.jraf.provider.persistence.hibernate;
 
 
 import org.hibernate.SessionFactory;
@@ -25,13 +25,13 @@ import org.hibernate.cfg.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.provider.persistence.hibernate.config.IHibernateConfigReader;
-import com.airfrance.jraf.spi.initializer.IInitializableBean;
-import com.airfrance.jraf.spi.persistence.IMetaData;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.provider.persistence.hibernate.config.IHibernateConfigReader;
+import org.squale.jraf.spi.initializer.IInitializableBean;
+import org.squale.jraf.spi.persistence.IMetaData;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
 
 /**
  * <p>Project: JRAF 
@@ -235,7 +235,7 @@ public class PersistenceProviderImpl
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.persistence.IPersistenceProvider#getSession()
+	 * @see org.squale.jraf.spi.persistence.IPersistenceProvider#getSession()
 	 */
 	public ISession getSession() throws JrafPersistenceException {
 
@@ -338,14 +338,14 @@ public class PersistenceProviderImpl
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.daolayer.itface.ISessionManager#getMetaData()
+	 * @see org.squale.jraf.daolayer.itface.ISessionManager#getMetaData()
 	 */
 	public IMetaData getMetaData() {
 		return metaData;
 	}
 
 	/**
-	 * @see com.airfrance.jraf.daolayer.itface.ISessionManager#closeSession(ISession, Long)
+	 * @see org.squale.jraf.daolayer.itface.ISessionManager#closeSession(ISession, Long)
 	 * suppression de la session hibernate passée en paramètre
 	 */
 	public void closeSession(ISession session)
@@ -382,7 +382,7 @@ public class PersistenceProviderImpl
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
+	 * @see org.squale.jraf.spi.initializer.IInitializableBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() {
 

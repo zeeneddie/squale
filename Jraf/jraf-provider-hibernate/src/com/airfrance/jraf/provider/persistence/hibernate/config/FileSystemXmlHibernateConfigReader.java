@@ -19,7 +19,7 @@
 /*
  * Created on Dec 29, 2004
  */
-package com.airfrance.jraf.provider.persistence.hibernate.config;
+package org.squale.jraf.provider.persistence.hibernate.config;
 
 import java.io.File;
 
@@ -29,7 +29,7 @@ import org.hibernate.cfg.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.commons.exception.JrafConfigException;
 
 /**
  * <p>Title : FileSystemXmlHibernateConfigReader.java</p>
@@ -60,7 +60,7 @@ public class FileSystemXmlHibernateConfigReader
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.provider.persistence.hibernate.config.IHibernateConfigReader#readConfig()
+	 * @see org.squale.jraf.provider.persistence.hibernate.config.IHibernateConfigReader#readConfig()
 	 */
 	public SessionFactory readConfig(Configuration configuration) throws JrafConfigException {
 		File lc_file = null;

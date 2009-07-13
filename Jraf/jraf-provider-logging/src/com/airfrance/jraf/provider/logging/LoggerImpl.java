@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.jraf.provider.logging;
+package org.squale.jraf.provider.logging;
 
 import java.io.Serializable;
 import java.util.Hashtable;
@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
 import org.apache.log4j.Priority;
 
-import com.airfrance.jraf.spi.logging.ILogger;
+import org.squale.jraf.spi.logging.ILogger;
 
 /**
  * <p>Project: JRAF 
@@ -166,7 +166,7 @@ public class LoggerImpl implements ILogger {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.airfrance.jraf.spi.logging.ILogger#logCexi(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 * @see org.squale.jraf.spi.logging.ILogger#logCexi(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	public void logCexi(
 		int code,

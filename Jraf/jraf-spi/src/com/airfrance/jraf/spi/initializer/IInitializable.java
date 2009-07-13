@@ -19,12 +19,12 @@
 /*
  * Créé le 5 mars 04
  */
-package com.airfrance.jraf.spi.initializer;
+package org.squale.jraf.spi.initializer;
 
 import java.util.Map;
 
-import com.airfrance.jraf.commons.exception.JrafConfigException;
-import com.airfrance.jraf.spi.provider.IProvider;
+import org.squale.jraf.commons.exception.JrafConfigException;
+import org.squale.jraf.spi.provider.IProvider;
 
 /**
  * <p>Title : IInitializable.java</p>
