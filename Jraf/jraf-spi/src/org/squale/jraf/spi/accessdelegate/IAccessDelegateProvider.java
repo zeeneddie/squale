@@ -33,7 +33,7 @@ import org.squale.jraf.spi.provider.IProvider;
  * <p>Title : IAccessDelegateProvider.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public interface IAccessDelegateProvider extends IProvider {
 

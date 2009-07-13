@@ -29,7 +29,7 @@ import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
  * <p>Description : Definition du comportement du lookup component.
  * Définit le comportement de recherche de composant et de validation de l'existance d'un composant.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public interface ILookupComponent {
 	/**

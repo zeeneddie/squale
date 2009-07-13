@@ -53,7 +53,7 @@ import org.springframework.context.ApplicationContext;
  * Si le niveau J2EE est >= 1.3 il est preconise d'utiliser la classe 
  * org.squale.jraf.initializer.web.WebInitializer.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * MODIFICATION : Mai 2006
  * @author DIAKITE Tidiani
  * <p>Copyright : Copyright (c) 2006</p>

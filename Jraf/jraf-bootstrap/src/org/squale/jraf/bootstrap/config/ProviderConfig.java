@@ -26,7 +26,7 @@ import java.util.Map;
  * <p>Title : ProviderConfig</p>
  * <p>Description : Configuration d'un provider</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 

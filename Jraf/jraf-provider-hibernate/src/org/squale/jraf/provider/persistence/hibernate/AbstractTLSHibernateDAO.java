@@ -52,7 +52,7 @@ import org.squale.jraf.spi.persistence.ITLSHibernateDAO;
  * <p>Title : AbstractTLSHibernateDAO</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2005</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public abstract class AbstractTLSHibernateDAO
 	extends AbstractDAOImpl

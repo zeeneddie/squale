@@ -29,7 +29,7 @@ import org.squale.jraf.commons.exception.JrafConfigException;
  * <p>Title : IApplicationComponentConfigReader.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public interface IApplicationComponentConfigReader {
 	/**

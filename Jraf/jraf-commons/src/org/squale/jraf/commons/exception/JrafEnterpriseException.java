@@ -23,7 +23,7 @@ package org.squale.jraf.commons.exception;
  * <p>Title : JrafEnterpriseException.java</p>
  * <p>Description : Exception de la couche enterprise</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class JrafEnterpriseException extends JrafException {
 

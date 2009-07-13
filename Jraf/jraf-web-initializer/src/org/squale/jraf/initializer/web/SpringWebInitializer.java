@@ -37,7 +37,7 @@ import org.squale.jraf.bootstrap.initializer.Initializer;
  * <p>Description : Listener pour l'initialisation 
  * d'une application JRAF WEB et/ou EJB</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  * Modficiation : Mars - 2006 
  * 				: Avril - 2006

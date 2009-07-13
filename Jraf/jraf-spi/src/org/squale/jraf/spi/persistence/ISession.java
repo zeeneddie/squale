@@ -26,7 +26,7 @@ import org.squale.jraf.commons.exception.JrafPersistenceException;
  * <p>Title : ISession.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 /**
  * Cette interface définie l'unité de travail dans laquelle sont effectués tous les

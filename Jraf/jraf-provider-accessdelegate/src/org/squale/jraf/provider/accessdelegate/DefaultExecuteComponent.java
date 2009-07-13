@@ -33,7 +33,7 @@ import org.squale.jraf.spi.initializer.IInitializableBean;
  * <p>Title : DefaultExecuteComponent.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  * implémentation standard d'appel d'un component contenu dans un 
  * applicationComponent. 
  * <br>exemple:<br>

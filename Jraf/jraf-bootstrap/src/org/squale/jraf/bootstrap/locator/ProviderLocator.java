@@ -41,7 +41,7 @@ import org.squale.jraf.spi.provider.IProvider;
  * <p>Title : ProviderLocator.java</p>
  * <p>Description : permet de retrouver les provider d'une application</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 public class ProviderLocator

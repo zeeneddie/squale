@@ -30,7 +30,7 @@ import org.squale.jraf.spi.provider.IProvider;
  * <p>Title : Initializer.java</p>
  * <p>Description : Initializer du provider de logging</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class Initializer implements IInitializable {
 

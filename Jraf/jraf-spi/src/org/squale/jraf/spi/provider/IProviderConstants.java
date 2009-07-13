@@ -25,7 +25,7 @@ package org.squale.jraf.spi.provider;
  * <p>Title : IProviderConstants.java</p>
  * <p>Description : Constantes communes aux providers</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public interface IProviderConstants {
 

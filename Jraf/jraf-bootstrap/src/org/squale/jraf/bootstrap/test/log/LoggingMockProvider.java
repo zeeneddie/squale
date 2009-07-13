@@ -28,7 +28,7 @@ import org.squale.jraf.spi.logging.ILoggingProvider;
  * <p>Title : LoggingMockProvider.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class LoggingMockProvider implements ILoggingProvider {
 

@@ -36,7 +36,7 @@ import org.squale.jraf.spi.logging.ISeverity;
  * L'ecriture des traces est configuree dans le fichier log4j.properties.
  * </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class LoggerImpl implements ILogger {
 

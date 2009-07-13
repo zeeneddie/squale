@@ -43,7 +43,7 @@ import org.squale.jraf.spi.provider.IProvider;
  * adequat pour leur contexte. (design pattern 'template method')
  * </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public abstract class AbstractInitializer
 	implements IInitializable, IInitializableBean {

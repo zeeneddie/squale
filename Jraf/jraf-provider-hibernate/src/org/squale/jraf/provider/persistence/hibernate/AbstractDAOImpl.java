@@ -59,9 +59,6 @@ import org.squale.jraf.spi.persistence.ISession;
  * <p>
  * Copyright : Copyright (c) 2004
  * </p>
- * <p>
- * Company : AIRFRANCE
- * </p>
  * <br>
  * Classe de la couche DAO: propose une implémentation de l'interface d'accès à l'ORM pour le produit Hibernate Il faut
  * <b>impérativement</b> utiliser la méthode setBusinessClass dans le constructeur du DAO pour établir la valeur de la

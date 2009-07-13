@@ -41,7 +41,7 @@ import org.squale.jraf.commons.util.DTDEntityResolver;
  * <p>Description : Classe permettant de lire le fichier de configuration 
  * des application component</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 public abstract class AbstractApplicationComponentConfigReader

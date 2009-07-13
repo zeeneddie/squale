@@ -35,7 +35,7 @@ import org.hibernate.util.ReflectHelper;
  * <p>Title : JrafBdTask.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  * @deprecated Ne pas utiliser cette classe.
  * Elle presente des disfonctionnements. 
  * Elle est conservee a titre d'exemple pour le futur.

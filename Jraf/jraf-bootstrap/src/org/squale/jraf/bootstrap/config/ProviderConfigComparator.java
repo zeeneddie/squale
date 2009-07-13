@@ -32,7 +32,7 @@ import org.squale.jraf.spi.provider.IProviderConstants;
  * <p>Title : ProviderConfigComparator.java</p>
  * <p>Description : Objet permettant de trier des configurations de provider</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 public class ProviderConfigComparator implements Comparator {

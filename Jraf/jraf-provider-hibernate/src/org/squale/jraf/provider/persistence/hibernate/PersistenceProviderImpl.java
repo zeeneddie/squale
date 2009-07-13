@@ -39,7 +39,7 @@ import org.squale.jraf.spi.persistence.ISession;
  * <p>Title : PersistenceProviderImpl.java</p>
  * <p>Description : Provider de persistance.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class PersistenceProviderImpl
 	implements IPersistenceProvider, IInitializableBean {

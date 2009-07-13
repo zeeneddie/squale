@@ -37,7 +37,7 @@ import org.squale.jraf.commons.exception.JrafConfigException;
  * <p>Title : FileSystemXmlApplicationComponentConfigReader.java</p>
  * <p>Description : Lecteur de fichier de configuration XML a partir du systeme de fichier.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class FileSystemXmlApplicationComponentConfigReader
 	extends AbstractApplicationComponentConfigReader {

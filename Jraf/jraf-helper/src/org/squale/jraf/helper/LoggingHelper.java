@@ -31,7 +31,7 @@ import org.squale.jraf.spi.provider.IProviderConstants;
  * <p>Title : LoggingHelper.java</p>
  * <p>Description : Helper pour recuperer un logger.
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class LoggingHelper {
 

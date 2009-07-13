@@ -49,7 +49,7 @@ import org.squale.jraf.spi.provider.IProviderConstants;
  * Initialise tous les providers declarees dans le fichier de configuration 
  * des providers.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 public class Initializer implements IInitializable, IInitializableBean {

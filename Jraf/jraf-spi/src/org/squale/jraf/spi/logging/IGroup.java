@@ -24,7 +24,7 @@ package org.squale.jraf.spi.logging;
  * <p>Title : IGroup.java</p>
  * <p>Description : Groupes connus pour les log cexi</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 
 public interface IGroup {

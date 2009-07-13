@@ -33,7 +33,7 @@ import org.squale.jraf.commons.exception.JrafConfigException;
  * <p>Title : ClassPathXmlApplicationComponentConfigReader.java</p>
  * <p>Description : Lecteur de fichier de configuration XML a partir du classpath.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class ClassPathXmlApplicationComponentConfigReader
 	extends AbstractApplicationComponentConfigReader {

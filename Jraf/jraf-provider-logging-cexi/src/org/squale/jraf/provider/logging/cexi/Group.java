@@ -28,7 +28,7 @@ import org.squale.jraf.spi.logging.IGroup;
  * <p>Title : Group.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  * Cette classe assure que le groupe données est un groupe connu 
  * de type Message.
  */

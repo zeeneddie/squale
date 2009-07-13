@@ -47,7 +47,7 @@ import org.squale.jraf.spi.initializer.IInitializableBean;
  * <p>Title : LookUpComponent.java</p>
  * <p>Description : Composant permettant de retrouver des application component</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * Cette classe met à disposition du applicationComponentDelegate les méthodes qui permettent de
  * créer ou retrouver les instances des businesses de component. Ces méthodes permettent de cacher l'implémentation des
  * components, la technologie utilisée, le fait qu'on utilise ou non des objets distribués, et

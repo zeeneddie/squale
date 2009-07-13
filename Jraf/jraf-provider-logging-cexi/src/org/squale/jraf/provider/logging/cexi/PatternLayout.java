@@ -24,7 +24,7 @@ package org.squale.jraf.provider.logging.cexi;
  * <p>Title : PatternLayout.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  * Cette classe surcharge celle de log4j, afin de proposer des
  * caracteres/mots de conversion supplementaires:
  *       %a ou %appli pour le code de l'application

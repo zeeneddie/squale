@@ -35,7 +35,7 @@ import org.squale.jraf.spi.provider.IProviderConstants;
  * <p>Title : PersistenceHelper.java</p>
  * <p>Description : Helper pour acceder un provider de persistance</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class PersistenceHelper {
 

@@ -39,7 +39,7 @@ import org.squale.jraf.spi.provider.IProvider;
  * <p>Title : TestInitializerHelper.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class TestInitializerHelper {
 	private static final Log log =

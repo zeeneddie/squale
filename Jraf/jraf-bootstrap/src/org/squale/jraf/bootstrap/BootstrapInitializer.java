@@ -33,7 +33,7 @@ import org.squale.jraf.spi.provider.IProvider;
  * <p>Title : BootstrapInitializer.java</p>
  * <p>Description : Initializer du bootstrap</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 public class BootstrapInitializer

@@ -38,7 +38,7 @@ import org.squale.jraf.spi.persistence.IPersistenceProvider;
  * <p>Title : AccessDelegateProviderImpl.java</p>
  * <p>Description : Access delegate provider</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class AccessDelegateProviderImpl
 	implements IAccessDelegateProvider, IInitializableBean {

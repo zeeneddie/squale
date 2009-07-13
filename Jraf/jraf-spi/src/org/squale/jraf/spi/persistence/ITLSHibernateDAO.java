@@ -31,7 +31,7 @@ import org.squale.jraf.spi.persistence.ISession;
  * <p>Description : Interface décrivant le comportement 
  * d'un DAO de persistance.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public interface ITLSHibernateDAO extends IDAO {
 

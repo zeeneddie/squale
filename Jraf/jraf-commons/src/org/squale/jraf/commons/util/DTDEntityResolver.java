@@ -29,7 +29,7 @@ import org.xml.sax.InputSource;
  * <p>Title : DTDEntityResolver.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class DTDEntityResolver implements EntityResolver {
 

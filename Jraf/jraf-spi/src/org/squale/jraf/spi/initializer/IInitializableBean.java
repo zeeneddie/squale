@@ -27,7 +27,7 @@ package org.squale.jraf.spi.initializer;
  * Lorsque les proprietes du bean ont ete renseignes, la methode afterPropertiesSet() est appelee.
  * Cette methode verifie la bonne initialisation du bean.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public interface IInitializableBean {
 	

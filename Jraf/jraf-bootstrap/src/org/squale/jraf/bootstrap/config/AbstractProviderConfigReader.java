@@ -38,7 +38,7 @@ import org.squale.jraf.commons.util.DTDEntityResolver;
  * <p>Title : AbstractProviderConfigReader</p>
  * <p>Description : Classe permettant de lire le fichier de configuration des providers</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 public abstract class AbstractProviderConfigReader

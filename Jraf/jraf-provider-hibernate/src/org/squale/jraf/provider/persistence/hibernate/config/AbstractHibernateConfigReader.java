@@ -38,7 +38,7 @@ import org.squale.jraf.commons.exception.JrafRuntimeException;
  * <p>Title : AbstractHibernateConfigReader.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public abstract class AbstractHibernateConfigReader
 	implements IHibernateConfigReader {

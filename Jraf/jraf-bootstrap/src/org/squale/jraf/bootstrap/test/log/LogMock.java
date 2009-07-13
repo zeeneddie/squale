@@ -27,7 +27,7 @@ import org.squale.jraf.spi.logging.ILogger;
  * <p>Title : LogMock.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class LogMock implements ILogger {
 

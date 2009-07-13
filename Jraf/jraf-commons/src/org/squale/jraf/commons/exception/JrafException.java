@@ -24,7 +24,7 @@ import org.apache.commons.lang.exception.NestableException;
  * <p>Title : JrafException.java</p>
  * <p>Description : Exception JRAF mere</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class JrafException extends NestableException {
 	/**

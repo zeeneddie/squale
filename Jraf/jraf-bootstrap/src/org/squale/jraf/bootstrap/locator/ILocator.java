@@ -30,7 +30,7 @@ import org.squale.jraf.spi.provider.IProvider;
  * <p>Title : ILocator</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2005</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public interface ILocator extends Serializable {
 

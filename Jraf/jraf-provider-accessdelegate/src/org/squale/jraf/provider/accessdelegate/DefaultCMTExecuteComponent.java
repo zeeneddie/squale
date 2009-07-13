@@ -40,7 +40,7 @@ import org.squale.jraf.spi.persistence.ISession;
  * Il inclus un autre CMTApplicationComponent dans son contexte transactionnel.
  * Les classes utilisateurs de type 'CMTApplicationComponent' heritent de cette classe.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  * implémentation standard d'appel d'un component contenu dans un 
  * applicationComponent. 
  * <br>exemple:<br>

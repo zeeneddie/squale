@@ -29,7 +29,7 @@ import org.squale.jraf.spi.logging.ISeverity;
  * <p>Title : Message.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  * Cette classe definit un message qui pourra etre logge au format Cexi
  * dans un appender defini dans le fichier log4j.properties
  * Ce message contient les informations necessaires a Cexi pour la supervision,

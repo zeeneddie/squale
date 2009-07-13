@@ -33,7 +33,7 @@ import org.squale.jraf.spi.logging.ILogger;
  * <p>Description : Helper pour les tests. 
  * Permet d'initialiser le provider locator.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class TestHelper {
 

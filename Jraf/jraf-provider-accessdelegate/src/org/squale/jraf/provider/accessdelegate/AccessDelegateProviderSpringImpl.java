@@ -42,7 +42,7 @@ import org.squale.jraf.provider.accessdelegate.config.IApplicationComponentConfi
  * <p>Title : AccessDelegateProviderSpringImpl</p>
  * <p>Description : Access delegate provider initializable à partir de Spring</p>
  * <p>Copyright : Copyright (c) 2007</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class AccessDelegateProviderSpringImpl
 	extends AccessDelegateProviderImpl implements ApplicationContextAware {

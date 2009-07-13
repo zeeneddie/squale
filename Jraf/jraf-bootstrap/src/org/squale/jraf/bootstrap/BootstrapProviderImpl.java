@@ -31,7 +31,7 @@ import org.squale.jraf.spi.bootstrap.IBootstrapProvider;
  * <p>Description : Implementation du provider de bootstrap.
  * Provider responsable de l'initialisation de tous les providers d'une application.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 public class BootstrapProviderImpl implements IBootstrapProvider {

@@ -29,7 +29,7 @@ import org.squale.jraf.spi.provider.IProvider;
  * <p>Title : IPersistenceProvider.java</p>
  * <p>Description : Comportement d'un provider de persistence</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 
 public interface IPersistenceProvider extends IProvider {

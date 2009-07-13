@@ -58,7 +58,7 @@ import org
  * <p>Title : PersistenceProviderSpringImpl</p>
  * <p>Description :Hibenate provider initializable à partir de Spring</p>
  * <p>Copyright : Copyright (c) 2007</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class PersistenceProviderSpringImpl
 	extends PersistenceProviderImpl

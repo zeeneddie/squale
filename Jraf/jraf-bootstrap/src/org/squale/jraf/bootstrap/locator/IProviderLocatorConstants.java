@@ -26,7 +26,7 @@ package org.squale.jraf.bootstrap.locator;
  * <p>Title : IProviderLocatorConstants</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2005</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public interface IProviderLocatorConstants {
 	

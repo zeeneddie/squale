@@ -33,7 +33,7 @@ import org.squale.jraf.spi.provider.IProviderConstants;
  * <p>Title : AccessDelegateHelper.java</p>
  * <p>Description : Helper pour faciliter la recuperation d'un application comopnent.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class AccessDelegateHelper {
 

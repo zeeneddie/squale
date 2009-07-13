@@ -25,7 +25,7 @@ package org.squale.jraf.commons.util;
  * <p>Title : ParamUtils.java</p>
  * <p>Description : Permet la création de tableaux de parametres</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class ParamUtils {
 

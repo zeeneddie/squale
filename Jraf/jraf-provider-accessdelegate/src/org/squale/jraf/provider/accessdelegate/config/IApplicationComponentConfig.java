@@ -28,7 +28,7 @@ import java.util.Map;
  * <p>Title : IApplicationComponentConfig.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 public interface IApplicationComponentConfig extends Serializable {

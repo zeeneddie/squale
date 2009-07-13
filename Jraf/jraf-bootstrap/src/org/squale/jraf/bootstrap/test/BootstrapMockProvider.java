@@ -30,7 +30,7 @@ import org.squale.jraf.spi.bootstrap.IBootstrapProvider;
  * <p>Title : BootstrapProviderMock.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class BootstrapMockProvider implements IBootstrapProvider {
 

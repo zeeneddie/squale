@@ -42,7 +42,7 @@ import org.squale.jraf.commons.exception.JrafConfigException;
  * <p>Title : NamingHelper.java</p>
  * <p>Description : Helper pour la communication avec JNDI</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 public class NamingHelper {

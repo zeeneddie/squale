@@ -26,7 +26,7 @@ package org.squale.jraf.spi.bootstrap;
  * <p>Description : Constantes necessaires 
  * pour l'intialisation des providers</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public interface IBootstrapConstants {
 

@@ -26,7 +26,7 @@ import org.apache.commons.logging.Log;
  * <p>Title : ILogger.java</p>
  * <p>Description : Logger JRAF</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 
 public interface ILogger extends Log {

@@ -32,7 +32,7 @@ import org.squale.jraf.spi.initializer.IInitializable;
  * <p>Title : InitializableHelper.java</p>
  * <p>Description : Helper pour le bootstrap</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 public class InitializableHelper {

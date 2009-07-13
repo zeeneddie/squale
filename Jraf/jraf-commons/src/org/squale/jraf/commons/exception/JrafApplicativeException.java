@@ -22,7 +22,7 @@ package org.squale.jraf.commons.exception;
  * <p>Title : JrafApplicativeException.java</p>
  * <p>Description : Exception de la couche applicative</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class JrafApplicativeException extends JrafException {
 

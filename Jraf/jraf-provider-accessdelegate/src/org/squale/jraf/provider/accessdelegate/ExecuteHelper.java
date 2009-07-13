@@ -37,7 +37,7 @@ import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
  * <p>Description : Helper pour aider la delegation des appels de methodes
  * dans les application component</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class ExecuteHelper {
 

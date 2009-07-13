@@ -34,7 +34,7 @@ import org.squale.jraf.spi.persistence.ISession;
  * <p>Description : Fourni les fonctions de bases pour l'ouverture, le logging et la fermeture
  * des business components.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  * @deprecated depuis JRAF v2.0
  * Cette classe est depréciee. Elle n'est pas remplacee.
  * Pour les methodes logFacade : utiliser directement le provider de logging 

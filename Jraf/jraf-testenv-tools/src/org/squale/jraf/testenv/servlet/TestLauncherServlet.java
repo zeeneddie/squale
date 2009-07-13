@@ -38,7 +38,7 @@ import org.squale.jraf.testenv.integrationlayer.ITestLauncher;
  * <p>Description : Servlet générique permettant de lancer des tests 
  * au fil de l'eau dans un contexte Web/JRAF.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class TestLauncherServlet extends HttpServlet implements Servlet {
 

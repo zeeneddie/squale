@@ -30,7 +30,7 @@ import org.squale.jraf.spi.provider.IProvider;
  * <p>Title : LoggingProviderImpl.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  *  Mécanisme de trace en attendant la version améliorée du MessageManager
  *  Cette version est implémentée sous forme de singleton. Elle utilise le commons-logging qui propose
  *  une sur couche indépendante du module de trace utilisé. Si le jar de log4j est

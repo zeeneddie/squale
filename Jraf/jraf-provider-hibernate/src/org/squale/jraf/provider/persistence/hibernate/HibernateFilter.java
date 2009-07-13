@@ -51,7 +51,7 @@ import org.squale.jraf.spi.persistence.IPersistenceProvider;
  * <p>Title : HibernateFilter</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2005</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class HibernateFilter implements Filter {
 

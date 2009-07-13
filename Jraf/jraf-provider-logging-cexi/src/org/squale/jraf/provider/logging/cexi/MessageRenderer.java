@@ -26,7 +26,7 @@ import org.apache.log4j.or.ObjectRenderer;
  * <p>Title : StringRenderer.java</p>
  * <p>Description : String renderer</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  * Cette classe implemente l'interface ObjectRenderer de log4j.
  * Elle permet de formater un message de type String, en vue de le 
  * logger pour Cexi.

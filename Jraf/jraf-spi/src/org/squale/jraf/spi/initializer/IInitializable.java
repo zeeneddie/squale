@@ -30,7 +30,7 @@ import org.squale.jraf.spi.provider.IProvider;
  * <p>Title : IInitializable.java</p>
  * <p>Description : Interface definissant le comportement d'initialisation</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public interface IInitializable {
 

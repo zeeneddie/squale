@@ -32,7 +32,7 @@ import org.squale.jraf.spi.persistence.ISession;
  * <p>Title : FacadeHelper.java</p>
  * <p>Description : Classe d'assistance pour les Facade.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class FacadeHelper {
 

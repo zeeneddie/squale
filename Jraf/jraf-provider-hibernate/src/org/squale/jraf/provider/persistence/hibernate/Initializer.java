@@ -44,7 +44,7 @@ import org.squale.jraf.spi.provider.IProvider;
  * <p>Title : Initializer.java</p>
  * <p>Description : Initialisateur du provider de persistance.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class Initializer implements IInitializable, IInitializableBean {
 

@@ -37,7 +37,7 @@ import org.squale.jraf.commons.exception.JrafConfigException;
  * <p>Title : FileSystemXmlProviderConfigReader.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class FileSystemXmlProviderConfigReader
 	extends AbstractProviderConfigReader {

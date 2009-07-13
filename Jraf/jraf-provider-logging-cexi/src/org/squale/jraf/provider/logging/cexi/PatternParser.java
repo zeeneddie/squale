@@ -37,7 +37,7 @@ import org.squale.jraf.spi.logging.ISeverity;
  * Cette classe permet d'adapter les logs JRAF au formalisme CEXI.
  * </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class PatternParser extends org.apache.log4j.helpers.PatternParser {
 
@@ -81,7 +81,7 @@ public class PatternParser extends org.apache.log4j.helpers.PatternParser {
 	 * <p>Description : Definition a partir d'une classe JRAF 
 	 * de son groupe CEXI: APPLICATION, CONFIGURATION ou DATABASE.</p>
 	 * <p>Copyright : Copyright (c) 2004</p>
-	 * <p>Company : AIRFRANCE</p>
+	 * 
 	 */
 	private class JRAF2GroupPatternConverter extends PatternConverter {
 		JRAF2GroupPatternConverter(FormattingInfo formattingInfo) {
@@ -115,7 +115,7 @@ public class PatternParser extends org.apache.log4j.helpers.PatternParser {
 	 * Note: la severite minor n'est pas utilisee.
 	 * </p>
 	 * <p>Copyright : Copyright (c) 2004</p>
-	 * <p>Company : AIRFRANCE</p>
+	 * 
 	 */
 	private class Level2SeverityPatternConverter extends PatternConverter {
 		Level2SeverityPatternConverter(FormattingInfo formattingInfo) {

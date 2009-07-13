@@ -33,7 +33,7 @@ import org.squale.jraf.spi.accessdelegate.IAccessDelegateProvider;
  * <p>Title : Initializer.java</p>
  * <p>Description : Initialiseur du provider access delegate</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class Initializer extends AbstractInitializer {
 

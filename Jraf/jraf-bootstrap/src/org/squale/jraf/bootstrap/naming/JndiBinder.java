@@ -30,7 +30,7 @@ import org.squale.jraf.spi.initializer.IInitializableBean;
  * <p>Title : JndiBinder</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2005</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class JndiBinder implements IInitializableBean, IJndiBinder {
 

@@ -29,7 +29,7 @@ import java.util.Map;
  * <p>Description : Implémentation de la configuration 
  * d'un application component</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 public class ApplicationComponentConfigImpl

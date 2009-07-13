@@ -26,7 +26,7 @@ package org.squale.jraf.bootstrap.naming;
  * <p>Title : IJndiBinder</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2005</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public interface IJndiBinder {
 	public abstract void bind(String key, Object o);

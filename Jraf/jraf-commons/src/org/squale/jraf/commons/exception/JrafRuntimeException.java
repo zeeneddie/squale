@@ -29,7 +29,7 @@ import org.apache.commons.lang.exception.NestableRuntimeException;
  * <p>Title : JrafRuntimeException.java</p>
  * <p>Description : Runtime-Exception JRAF</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 public class JrafRuntimeException extends NestableRuntimeException {
 

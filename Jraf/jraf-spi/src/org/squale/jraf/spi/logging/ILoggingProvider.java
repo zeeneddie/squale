@@ -29,7 +29,7 @@ import org.squale.jraf.spi.provider.IProvider;
  * <p>Title : ILoggingProvider.java</p>
  * <p>Description : Interface definissant le comportement du provider de logging</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  */
 
 public interface ILoggingProvider extends IProvider   {

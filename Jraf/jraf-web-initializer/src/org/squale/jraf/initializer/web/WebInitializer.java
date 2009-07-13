@@ -36,7 +36,7 @@ import org.squale.jraf.spi.initializer.IInitializable;
  * <p>Description : Listener pour l'initialisation 
  * d'une application JRAF WEB et/ou EJB</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  * @author Eric BELLARD
  */
 public class WebInitializer implements ServletContextListener {

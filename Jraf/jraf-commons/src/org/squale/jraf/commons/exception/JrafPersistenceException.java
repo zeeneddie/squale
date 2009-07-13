@@ -23,7 +23,7 @@ package org.squale.jraf.commons.exception;
  * <p>Description : Exception de la couche de persistance.
  * La couche de persistance est une sous-couche de la couche de données.</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class JrafPersistenceException extends JrafDaoException{
 

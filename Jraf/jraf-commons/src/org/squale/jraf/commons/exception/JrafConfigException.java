@@ -22,7 +22,7 @@ package org.squale.jraf.commons.exception;
  * <p>Title : JrafConfigException.java</p>
  * <p>Description : Exception runtime de la couche configuration</p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE</p>
+ * 
  */
 public class JrafConfigException extends JrafRuntimeException {
 

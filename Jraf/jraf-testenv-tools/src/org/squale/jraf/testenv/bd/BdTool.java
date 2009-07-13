@@ -38,7 +38,7 @@ import org.apache.commons.logging.LogFactory;
  * <p>Title : BdTool.java</p>
  * <p>Description : </p>
  * <p>Copyright : Copyright (c) 2004</p>
- * <p>Company : AIRFRANCE </p>
+ *  
  *  Création et suppression d'une BD: Utilise le mapping fourni
  *  par le fichier hibernate.cfg.xml
  */
