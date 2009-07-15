@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.project4mccabetest;
+package org.squale.project4mccabetest;
 
 /**
  * Classe de test permettant de tester l'exécution de la tâche McCabe

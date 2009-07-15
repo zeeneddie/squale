@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,31 +28,31 @@ import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.helper.LoggingHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.SessionImpl;
-import com.airfrance.jraf.spi.logging.ILogger;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.component.AbstractComponentDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.AuditDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.AuditGridDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.MarkDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.QualityResultDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditGridBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.CriteriumResultBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.FactorResultBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MarkBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
-import com.airfrance.squalecommon.util.mapping.Mapping;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.helper.LoggingHelper;
+import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
+import org.squale.jraf.spi.logging.ILogger;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.component.AbstractComponentDAOImpl;
+import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
+import org.squale.squalecommon.daolayer.component.AuditGridDAOImpl;
+import org.squale.squalecommon.daolayer.result.MarkDAOImpl;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.daolayer.result.QualityResultDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditGridBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.CriteriumResultBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.FactorResultBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MarkBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
+import org.squale.squalecommon.util.mapping.Mapping;
 
 /**
  * Calcul d'un audit

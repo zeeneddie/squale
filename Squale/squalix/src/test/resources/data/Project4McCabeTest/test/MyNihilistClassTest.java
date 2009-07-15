@@ -17,7 +17,7 @@
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
 package data.Project4McCabeTest.test;
-import com.airfrance.project4mccabetest.MyNihilistInterface;
+import org.squale.project4mccabetest.MyNihilistInterface;
 
 /**
  * Classe de test permettant de tester l'exécution de la tâche McCabe

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
 	<template name="mes_classes">
-		<csvbean>com.airfrance.squalix.util.csv.CSVBeanTest</csvbean>
+		<csvbean>org.squale.squalix.util.csv.CSVBeanTest</csvbean>
 		<header size="2" />
 		<footer size="3" />
 		<fields>
@@ -24,7 +24,7 @@
 	</template>
 	
 	<template name="mccabe.classes">
-		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO</csvbean>
+		<csvbean>org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO</csvbean>
 		<header size="0" />
 		<footer size="0" />
 		<fields>
@@ -42,7 +42,7 @@
 	</template>
 	
 	<template name="mccabe.java.classes">
-		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO</csvbean>
+		<csvbean>org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO</csvbean>
 		<header size="0" />
 		<footer size="0" />
 		<fields>
@@ -59,7 +59,7 @@
 	</template>
 	
 	<template name="mccabe.methodes">
-		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO</csvbean>
+		<csvbean>org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO</csvbean>
 		<header size="0" />
 		<footer size="0" />
 		<fields>
@@ -75,7 +75,7 @@
 		</fields>
 	</template>
 	<template name="umlquality.interface">
-		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityInterfaceMetricsBO</csvbean>
+		<csvbean>org.squale.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityInterfaceMetricsBO</csvbean>
 		<header size="1" />
 		<footer size="0" />
 		<fields>
@@ -87,7 +87,7 @@
 	</template>		
 	
 	<template name="umlquality.model">
-		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityModelMetricsBO</csvbean>
+		<csvbean>org.squale.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityModelMetricsBO</csvbean>
 		<header size="1" />
 		<footer size="0" />
 		<fields>
@@ -99,7 +99,7 @@
 	</template>		
 	
 	<template name="umlquality.package">
-		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityPackageMetricsBO</csvbean>
+		<csvbean>org.squale.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityPackageMetricsBO</csvbean>
 		<header size="1" />
 		<footer size="0" />
 		<fields>
@@ -108,7 +108,7 @@
 		</fields>
 	</template>
 	<template name="umlquality.class">
-		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityClassMetricsBO</csvbean>
+		<csvbean>org.squale.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityClassMetricsBO</csvbean>
 		<header size="1" />
 		<footer size="0" />
 		<fields>
@@ -133,7 +133,7 @@
 	
 	<!-- pour RSM , les profils java et cpp ont les memes mesures remontées-->
 	<template name="rsm.classes">
-		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMClassMetricsBO</csvbean>
+		<csvbean>org.squale.squalecommon.enterpriselayer.businessobject.result.rsm.RSMClassMetricsBO</csvbean>
 		<header size="0" />
 		<footer size="0" />
 		<fields>
@@ -146,7 +146,7 @@
 		</fields>
 	</template>	
 	<template name="rsm.methods">
-		<csvbean>com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMMethodMetricsBO</csvbean>
+		<csvbean>org.squale.squalecommon.enterpriselayer.businessobject.result.rsm.RSMMethodMetricsBO</csvbean>
 		<header size="0" />
 		<footer size="0" />
 		<fields>

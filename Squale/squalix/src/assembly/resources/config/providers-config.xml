@@ -3,14 +3,14 @@
 
 	<!-- Provider bootstrap -->
 	<provider id="bootstrap"
-		class="com.airfrance.jraf.bootstrap.BootstrapInitializer"
+		class="org.squale.jraf.bootstrap.BootstrapInitializer"
 		description="Initializer du bootstrap">
 	</provider>
 
 
 	<!-- Provider hibernate -->
 	<provider id="persistence"
-		class="com.airfrance.jraf.provider.persistence.hibernate.Initializer"
+		class="org.squale.jraf.provider.persistence.hibernate.Initializer"
 		description="">
 		<init-param>
 			<param-name>configFile</param-name>
@@ -25,7 +25,7 @@
 	</provider>
 
 	<!-- Provider d'envoi de mail -->
-	<provider id="mailer" class="com.airfrance.squalecommon.util.mail.javamail.Initializer" description="Envoi de mail">
+	<provider id="mailer" class="org.squale.squalecommon.util.mail.javamail.Initializer" description="Envoi de mail">
 	</provider>
 
 </providers>

@@ -1,4 +1,4 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
 <%@ page import="testweb.TestServlet" %>
 <%@ page import="testweb.TestServlet" %>

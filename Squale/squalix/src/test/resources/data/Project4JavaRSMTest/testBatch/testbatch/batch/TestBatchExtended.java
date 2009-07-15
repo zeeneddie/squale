@@ -18,8 +18,8 @@
  */
 package testbatch.batch;
 
-import com.airfrance.squalix.util.process.ProcessManager;
-import com.airfrance.squalix.util.process.ProcessOutputHandler;
+import org.squale.squalix.util.process.ProcessManager;
+import org.squale.squalix.util.process.ProcessOutputHandler;
 import java.io.File;
 
 import testbatch.batch2.TestCycle;

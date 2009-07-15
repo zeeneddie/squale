@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE checkstyle-configuration PUBLIC "-//Squale //DTD Checkstyle Configuration 1.1//EN" "file:/com/airfrance/squalix/tools/ruleschecking/checkstyle-config-1.1.dtd">
+<!DOCTYPE checkstyle-configuration PUBLIC "-//Squale //DTD Checkstyle Configuration 1.1//EN" "file:/org/squale/squalix/tools/ruleschecking/checkstyle-config-1.1.dtd">
 
 <checkstyle-configuration>
 	<jarDirectory>${ENV-CHECKSTYLE-JAR}</jarDirectory>

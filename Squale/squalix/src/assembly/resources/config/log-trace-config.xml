@@ -2,8 +2,6 @@
 
 <!-- Configuration du Servlet IPN -->
 
-<!-- AIR FRANCE -->
-
 <!-- <!DOCTYPE LogTraceConfiguration SYSTEM "log-trace-config.dtd"> -->
 
 <LogTraceConfiguration id="squalix" desc="Batch de Squale" version="1"

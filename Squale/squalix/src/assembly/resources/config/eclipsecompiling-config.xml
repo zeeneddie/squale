@@ -17,7 +17,7 @@
 			<option>-data [workspace]</option>
 			<option>
 				-application
-				com.airfrance.squale.builder.eclipse32.workspaceId1
+				org.squale.squale.builder.eclipse32.workspaceId1
 			</option>
 			<option>-dialect [dialect]</option>
 			<option>-sunLibs [sun_libs]</option>

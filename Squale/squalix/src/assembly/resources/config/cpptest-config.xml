@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE cpptest-configuration PUBLIC "-//CppTest Configuration DTD 1.0//EN" "file:../src/com/airfrance/squalix/tools/cpptest/cpptest-config-1.0.dtd">
+<!DOCTYPE cpptest-configuration PUBLIC "-//CppTest Configuration DTD 1.0//EN" "file:../src/org/squale/squalix/tools/cpptest/cpptest-config-1.0.dtd">
 
 <cpptest-configuration>
 	<reportDirectory>${ENV-CPPTEST-REPORT}</reportDirectory>
