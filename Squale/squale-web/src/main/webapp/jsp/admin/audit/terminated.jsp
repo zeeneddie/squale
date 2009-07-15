@@ -2,12 +2,12 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants" %>
-<%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.config.ServeurForm" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.action.results.audit.AuditAction" %>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
+<%@ page import="org.squale.squaleweb.util.SqualeWebConstants" %>
+<%@ page import="org.squale.squaleweb.util.graph.GraphMaker"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.config.ServeurForm" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.action.results.audit.AuditAction" %>
 
 <af:page titleKey="administration.terminated_audit.title"
 	accessKey="default">
@@ -27,7 +27,7 @@
 			<br />
 			<af:form action="purgeAuditAction.do" scope="session" method="POST"
 				name="selectForm"
-				type="com.airfrance.squaleweb.applicationlayer.formbean.component.AuditListForm">
+				type="org.squale.squaleweb.applicationlayer.formbean.component.AuditListForm">
 				<input type="hidden" name="<%=AuditAction.SERVER_NAME_KEY%>"
 					value="<%=request%>" />
 				<af:table name="splitAuditsListForm" property="terminatedAudits"

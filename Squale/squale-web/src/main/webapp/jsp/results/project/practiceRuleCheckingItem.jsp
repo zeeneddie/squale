@@ -1,11 +1,11 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants" %>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
+<%@ page import="org.squale.squaleweb.util.SqualeWebConstants" %>
+<%@ page import="org.squale.squaleweb.resources.WebMessages" %>
 
 <%-- Affiche les détails d'une transgression --%>
 

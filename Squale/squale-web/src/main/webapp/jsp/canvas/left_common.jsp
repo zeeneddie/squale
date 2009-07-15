@@ -1,6 +1,6 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
-<%@page import="com.airfrance.squaleweb.servlet.UserSqualeSessionContext"%>
+<%@page import="org.squale.squaleweb.servlet.UserSqualeSessionContext"%>
 <bean:define id="SQUALE_ADMIN_DIFFUSION_LIST" name="<%=UserSqualeSessionContext.USER_SQUALE_SESSION_CONTEXT%>" property="squaleAdminsMailingList" type="String"></bean:define>
 
 <div class="menu_action">

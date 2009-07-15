@@ -1,10 +1,10 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 
 <%@ page import="java.util.Arrays" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants" %>
+<%@ page import="org.squale.squaleweb.util.SqualeWebConstants" %>
 <%@ page import="org.apache.struts.action.ActionMessages" %>
 
 <script type="text/javascript" src="theme/charte_v03_001/js/format_page.js" ></script>
@@ -49,7 +49,7 @@ if (modification != null) {
 
 			<af:form action="add_user.do">
 				<input type="hidden"
-					name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM%>"
+					name="<%=org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM%>"
 					value="true">
 				<table id="rights" width="100%" class="formulaire" cellpadding="0"
 					cellspacing="0" border="0">

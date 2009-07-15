@@ -1,14 +1,14 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectFactorForm" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.LogonBean" %>
-<%@ page import="com.airfrance.welcom.struts.util.WConstants" %>
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.results.ProjectFactorForm" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.LogonBean" %>
+<%@ page import="org.squale.welcom.struts.util.WConstants" %>
+<%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
+<%@ page import="org.squale.squaleweb.resources.WebMessages" %>
 
 <%
 // Récupération de l'utilisateur en session pour savoir si celui-ci est administrateur

@@ -1,12 +1,12 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 
 
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants" %>
+<%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants" %>
 
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
+<%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
 
 <bean:define id="projectId" name="createProjectForm"
 	property="projectId" type="String" />
@@ -15,7 +15,7 @@
 
 <%-- On va interdire l'ecriture pour les lecteurs --%>
 <bean:define id="userProfile"
-	name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+	name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 	property="<%=\"profile(\"+applicationId+\")\"%>" />
 <%-- Pour les champs --%>
 <%boolean disabled = false;%>

@@ -2,17 +2,17 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.welcom.struts.util.WConstants"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.LogonBean"%>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants"%>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm"%>
-<%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
-<%@ page import="com.airfrance.squaleweb.tagslib.HistoryTag"%>
+<%@ page import="org.squale.welcom.struts.util.WConstants"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.LogonBean"%>
+<%@ page import="org.squale.squaleweb.util.SqualeWebConstants"%>
+<%@ page import="org.squale.squaleweb.resources.WebMessages"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.results.ComponentForm"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm"%>
+<%@ page import="org.squale.squaleweb.util.graph.GraphMaker"%>
+<%@ page import="org.squale.squaleweb.tagslib.HistoryTag"%>
 
 <%
 // Récupération de l'utilisateur en session pour savoir si celui-ci est administrateur
@@ -77,7 +77,7 @@ if(selectedTab == null) {
 			<br />
 			<squale:resultsHeader name="projectSummaryForm" displayComparable="true">
 				<div id="tagRemoval">
-					<af:form action="project.do" name="tagMngtForm" type="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm">
+					<af:form action="project.do" name="tagMngtForm" type="org.squale.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm">
 						<div id="appTagRemoval" style="visibility:hidden">
 							<div id="hidden" style="display:none;">
 								<af:field key="empty" property="applicationId" value='<%= applicationId%>'/>

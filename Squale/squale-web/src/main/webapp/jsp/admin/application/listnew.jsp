@@ -1,4 +1,4 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic" %>
@@ -36,7 +36,7 @@ Affiche la liste des nouvelles applications en attente de confirmation
 							<logic:notEmpty name="appli" property="lastUpdate">
 								<bean:define id="lastUpdate" name="appli" property="lastUpdate"
 									type="java.util.Date" />
-								<%=com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(lastUpdate, request.getLocale())%>
+								<%=org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(lastUpdate, request.getLocale())%>
 							</logic:notEmpty>
 						</af:col>
 						<af:col property="lastUser" key="application.last_user"

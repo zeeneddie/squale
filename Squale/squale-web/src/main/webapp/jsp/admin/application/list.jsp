@@ -1,7 +1,7 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 
 <%--
 Affiche la liste des applications sur lesquelles l'utilisateur est
@@ -24,7 +24,7 @@ administrateur
 			</html:messages></div>
 			<!-- Parcours de la liste des applications et affichage de celles-ci -->
 			<af:table
-				name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+				name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 				scope="session" property="adminList" totalLabelPos="none"
 				emptyKey="table.results.none" pageLength="30">
 				<af:cols id="appli">
@@ -37,7 +37,7 @@ administrateur
 						<logic:notEmpty name="appli" property="lastUpdate">
 							<bean:define id="lastUpdate" name="appli" property="lastUpdate"
 								type="java.util.Date" />
-							<%=com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(lastUpdate, request.getLocale())%>
+							<%=org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(lastUpdate, request.getLocale())%>
 						</logic:notEmpty>
 					</af:col>
 					<af:col property="lastUser" key="application.last_user"
@@ -55,7 +55,7 @@ administrateur
 			<br />
 			<!-- Parcours de la liste des applications en lecture seule et affichage de celles-ci -->
 			<af:table
-				name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+				name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 				scope="session" property="readOnlyList" totalLabelPos="none"
 				emptyKey="table.results.none" pageLength="30">
 				<af:cols id="appli">

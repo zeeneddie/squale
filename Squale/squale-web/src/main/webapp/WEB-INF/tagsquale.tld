@@ -6,13 +6,13 @@
   <tlib-version>0.0</tlib-version>
   <jsp-version>1.2</jsp-version>
   <short-name>squale</short-name>
-  <uri>http://www.airfrance.fr/squale/tags-picto</uri>
-  <display-name>Air France, Squale Tag Library</display-name>
+  <uri>http://www.squale.org/squale/tags-picto</uri>
+  <display-name>Squale Tag Library</display-name>
   <description><![CDATA[Cette Taglib contient des tags spécifiques à squale. ]]></description>
   
 	<tag>
 		<name>picto</name>
-		<tag-class>com.airfrance.squaleweb.tagslib.PictoTag</tag-class>
+		<tag-class>org.squale.squaleweb.tagslib.PictoTag</tag-class>
 		<body-content>empty</body-content>
 		<description>.</description>
 		<attribute>
@@ -31,7 +31,7 @@
 	</tag>
 	<tag>
 		<name>trend</name>
-		<tag-class>com.airfrance.squaleweb.tagslib.TrendTag</tag-class>
+		<tag-class>org.squale.squaleweb.tagslib.TrendTag</tag-class>
 		<body-content>empty</body-content>
 		<description>.</description>
 		<attribute>
@@ -49,7 +49,7 @@
 	</tag>
 	<tag>
 		<name>mark</name>
-		<tag-class>com.airfrance.squaleweb.tagslib.MarkTag</tag-class>
+		<tag-class>org.squale.squaleweb.tagslib.MarkTag</tag-class>
 		<body-content>empty</body-content>
 		<description>.</description>
 		<attribute>
@@ -63,7 +63,7 @@
 	</tag>
 	<tag>
 		<name>info</name>
-		<tag-class>com.airfrance.squaleweb.tagslib.InformationTag</tag-class>
+		<tag-class>org.squale.squaleweb.tagslib.InformationTag</tag-class>
 		<body-content>empty</body-content>
 		<description>.</description>
 		<attribute>
@@ -81,7 +81,7 @@
 	</tag>
 	<tag>
 		<name>history</name>
-		<tag-class>com.airfrance.squaleweb.tagslib.HistoryTag</tag-class>
+		<tag-class>org.squale.squaleweb.tagslib.HistoryTag</tag-class>
 		<body-content>empty</body-content>
 		<description>.</description>
 		<attribute>
@@ -125,7 +125,7 @@
 	</tag>
 	<tag>
 		<name>tracker</name>
-		<tag-class>com.airfrance.squaleweb.tagslib.TrackerTag</tag-class>
+		<tag-class>org.squale.squaleweb.tagslib.TrackerTag</tag-class>
 		<body-content>empty</body-content>
 		<description>.</description>
 		<attribute>
@@ -176,7 +176,7 @@
 	</tag>
 	<tag>
 		<name>iteratePaths</name>
-		<tag-class>com.airfrance.squaleweb.tagslib.IteratePathsTag</tag-class>
+		<tag-class>org.squale.squaleweb.tagslib.IteratePathsTag</tag-class>
 		<body-content>empty</body-content>
 		<description>.</description>
 		<attribute>
@@ -203,7 +203,7 @@
 	</tag>
 	<tag>
 		<name>resultsHeader</name>
-		<tag-class>com.airfrance.squaleweb.tagslib.ResultsHeaderTag</tag-class>
+		<tag-class>org.squale.squaleweb.tagslib.ResultsHeaderTag</tag-class>
 		<body-content>JSP</body-content>
 		<description>
 			Affiche les informations liées aux résultats de l'audit 

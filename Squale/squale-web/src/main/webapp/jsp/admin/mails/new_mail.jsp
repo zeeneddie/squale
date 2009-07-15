@@ -1,10 +1,10 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic" %>
 <%@ page import="java.util.Collection" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.mails.MailForm" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.mails.MailForm" %>
 <%@ page import="org.apache.struts.Globals" %>
 
 <script type="text/javascript" src="theme/charte_v03_001/js/format_page.js">

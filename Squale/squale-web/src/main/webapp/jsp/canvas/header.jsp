@@ -1,15 +1,15 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.LogonBean" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.LogonBean" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.airfrance.squaleweb.comparator.ComponentComparator" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils" %>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
+<%@ page import="org.squale.squaleweb.comparator.ComponentComparator" %>
+<%@ page import="org.squale.squaleweb.util.SqualeWebActionUtils" %>
+<%@ page import="org.squale.squaleweb.resources.WebMessages" %>
 
-<%List list = ((LogonBean) session.getAttribute(com.airfrance.welcom.struts.util.WConstants.USER_KEY)).getApplicationsList();
+<%List list = ((LogonBean) session.getAttribute(org.squale.welcom.struts.util.WConstants.USER_KEY)).getApplicationsList();
 Collections.sort(list, new ComponentComparator());
 // On récupère Le nombre min d'appli pour réaliser le menu groupé
 int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
@@ -30,10 +30,10 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 			action="all_applications.do?action=listNotPublic"></af:menuItem>
 		<!-- Parcours de la liste des applications et affichage de celles-ci -->
 		<logic:present
-			name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+			name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 			scope="session">
 			<bean:define id="notPublicList"
-				name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+				name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 				property="notPublicList" type="List" />
 			<%
 				// On récupère les clés de configurations pour construire le menu
@@ -50,9 +50,9 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 			%>
 			<logic:empty name="notPublicMap">
 				<logic:iterate id="appli"
-					name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+					name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 					property="notPublicList"
-					type="com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm"
+					type="org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm"
 					scope="session">
 					<logic:equal name="appli" property="hasResults" value="true">
 						<af:menuItem key="<%=appli.getApplicationName()%>" color="2"
@@ -65,7 +65,7 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 					<bean:define id="group" name="mapId" property="key" type="String" />
 					<af:menuItem key="<%=group%>" color="2">
 						<logic:iterate id="appli" name="mapId" property="value"
-							type="com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm">
+							type="org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm">
 							<af:menuItem key="<%=appli.getApplicationName()%>" color="2"
 								action="<%=\"application.do?action=summary&applicationId=\"+appli.getId()%>"></af:menuItem>
 						</logic:iterate>
@@ -79,10 +79,10 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 				action="all_applications.do?action=listPublic" />
 			<!-- Parcours de la liste des applications publiques et affichage de celles-ci -->
 			<logic:present
-				name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+				name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 				scope="session">
 				<bean:define id="publicList"
-					name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+					name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 					property="publicList" type="List" />
 				<%
 					// On récupére la liste des groupes pour les applications PUBLIQUES
@@ -96,9 +96,9 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 				%>
 				<logic:empty name="publicMap">
 					<logic:iterate id="appli"
-						name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+						name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 						property="publicList"
-						type="com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm"
+						type="org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm"
 						scope="session">
 						<logic:equal name="appli" property="hasResults" value="true">
 							<af:menuItem key="<%=appli.getApplicationName()%>" color="2"
@@ -111,7 +111,7 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 						<bean:define id="group" name="mapId" property="key" type="String" />
 						<af:menuItem key="<%=group%>" color="2">
 							<logic:iterate id="appli" name="mapId" property="value"
-								type="com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm">
+								type="org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm">
 								<af:menuItem key="<%=appli.getApplicationName()%>" color="2"
 									action="<%=\"application.do?action=summary&applicationId=\"+appli.getId()%>"></af:menuItem>
 							</logic:iterate>

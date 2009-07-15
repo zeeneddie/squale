@@ -1,20 +1,20 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
 <%@ page
-	import="com.airfrance.squalecommon.datatransfertobject.result.PracticeEvolutionDTO"%>
+	import="org.squale.squalecommon.datatransfertobject.result.PracticeEvolutionDTO"%>
 <%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.results.EvolutionForm"%>
+	import="org.squale.squaleweb.applicationlayer.formbean.results.EvolutionForm"%>
 <%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm"%>
+	import="org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm"%>
 <%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentListForm"%>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
+	import="org.squale.squaleweb.applicationlayer.formbean.results.ComponentListForm"%>
+<%@ page import="org.squale.squaleweb.resources.WebMessages"%>
 <%@ page
-	import="com.airfrance.squaleweb.applicationlayer.action.results.project.EvolutionAction"%>
+	import="org.squale.squaleweb.applicationlayer.action.results.project.EvolutionAction"%>
 
 <bean:define id="projectId" name="evolutionForm" property="projectId"
 	type="String" />
@@ -178,7 +178,7 @@ if (null == expandedFilter) {
 							emptyKey="table.results.none" pageLength="30">
 							<af:cols id="component" idIndex="componentId">
 								<bean:define id="compForm" name="component"
-									type="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm" />
+									type="org.squale.squaleweb.applicationlayer.formbean.results.ComponentForm" />
 								<bean:define id="currentName" name="component" property="name"
 									type="String" />
 								<bean:define id="type" name="component" property="type"
@@ -249,7 +249,7 @@ if (null == expandedFilter) {
 							emptyKey="table.results.none" pageLength="30">
 							<af:cols id="practice" idIndex="idPractice">
 								<bean:define id="resultForm" name="practice"
-									type="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultForm" />
+									type="org.squale.squaleweb.applicationlayer.formbean.results.ResultForm" />
 								<bean:define id="currentName" name="practice" property="name"
 									type="String" />
 								<af:col property="name" sortable="true" key="practice.name">

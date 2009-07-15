@@ -1,11 +1,11 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm" %>
-<%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
+<%@ page import="org.squale.squaleweb.resources.WebMessages" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm" %>
+<%@ page import="org.squale.squaleweb.util.graph.GraphMaker"%>
 
 <bean:define id="projectId" name="projectSummaryForm" property="projectId" type="String" />
 <bean:define id="currentAuditId" name="projectSummaryForm"	property="currentAuditId" type="String" />

@@ -1,22 +1,22 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants"%>
+<%@ page import="org.squale.squaleweb.util.SqualeWebConstants"%>
 <%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm"%>
+	import="org.squale.squaleweb.applicationlayer.formbean.component.ProjectForm"%>
 <%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm"%>
+	import="org.squale.squaleweb.applicationlayer.formbean.component.AuditForm"%>
 <%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.component.AuditListForm"%>
+	import="org.squale.squaleweb.applicationlayer.formbean.component.AuditListForm"%>
 <%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentListForm"%>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
+	import="org.squale.squaleweb.applicationlayer.formbean.results.ComponentListForm"%>
+<%@ page import="org.squale.squaleweb.resources.WebMessages"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Collections"%>
-<%@ page import="com.airfrance.squaleweb.comparator.ComponentComparator"%>
+<%@ page import="org.squale.squaleweb.comparator.ComponentComparator"%>
 
 <%
             // On récupère les composants
@@ -59,7 +59,7 @@
             // Message d'information dans le cas où le nombre de composants est trop important
             String errorMsg =
                 (String) request.getSession().getAttribute(
-                                                            com.airfrance.squaleweb.applicationlayer.action.results.project.ProjectComponentsAction.TOO_MUCH_COMPONENTS_MSG );
+                                                            org.squale.squaleweb.applicationlayer.action.results.project.ProjectComponentsAction.TOO_MUCH_COMPONENTS_MSG );
             // On le place dans le contexte si on est dans ce cas
             if ( null != errorMsg )
             {

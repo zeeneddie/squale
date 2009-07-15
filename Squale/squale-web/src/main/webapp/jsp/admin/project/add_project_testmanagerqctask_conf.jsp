@@ -3,8 +3,8 @@
 
 
 
-<%@ page import="com.airfrance.squaleweb.taskconfig.AbstractConfigTask"%>
-<%@ page import="com.airfrance.squaleweb.taskconfig.qc.TestManagerQCTaskConfig"%>
+<%@ page import="org.squale.squaleweb.taskconfig.AbstractConfigTask"%>
+<%@ page import="org.squale.squaleweb.taskconfig.qc.TestManagerQCTaskConfig"%>
 
 <script type="text/javascript" src="/squale/jslib/format_page.js"></script>
 

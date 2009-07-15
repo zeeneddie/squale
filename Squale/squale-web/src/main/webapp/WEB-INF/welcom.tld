@@ -6,15 +6,15 @@
   <tlib-version>2.4</tlib-version>
   <jsp-version>1.2</jsp-version>
   <short-name>af</short-name>
-  <uri>http://www.airfrance.fr/welcom/tags-welcom</uri>
-  <display-name>Air France, Welcom Tag Library</display-name>
+  <uri>http://www.squale.org/welcom/tags-welcom</uri>
+  <display-name>Welcom Tag Library</display-name>
   <description><![CDATA[Cette Taglib contient des tags conformes à la charte AirFrance V2. 
 Elle contient des tags susceptible de faciliter le développement de pages Web à la charte V2 (001 ou 002). 
 Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]></description>
   
 	<tag>
 		<name>styleSheet</name>
-		<tag-class>com.airfrance.welcom.taglib.optimization.StyleSheetTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.optimization.StyleSheetTag</tag-class>
 		<body-content>empty</body-content>
 		<description>Permet l'inclusion d'une css (remplace style). Ces inclusions passeront par le filtre Welcom, qui supprimera les espaces et les commentaires.</description>
 		<attribute>
@@ -26,7 +26,7 @@ Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]
 	</tag>
 	<tag>
 		<name>script</name>
-		<tag-class>com.airfrance.welcom.taglib.optimization.ScriptTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.optimization.ScriptTag</tag-class>
 		<body-content>empty</body-content>
 		<description>Permet l'inclusion d'un js ou vbs (remplace link). Ces inclusions parsseront par le filtre Welcom, qui supprimera les espaces et les commentaires.</description>
 		<attribute>
@@ -39,7 +39,7 @@ Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]
 
 	<tag>
 		<name>cleanSpaces</name>
-		<tag-class>com.airfrance.welcom.taglib.optimization.CleanSpacesTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.optimization.CleanSpacesTag</tag-class>
 		<body-content>JSP</body-content>
 		<description> <![CDATA[<p>Suppresion des caractères blancs inutiles dans la page.</p>
     <p>la syntaxe est la suivante : </p>
@@ -57,7 +57,7 @@ Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]
 	
 	<tag>
 		<name>htmlarea</name>
-		<tag-class>com.airfrance.welcom.taglib.htmlarea.HtmlAreaTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.htmlarea.HtmlAreaTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[ <p>Ce tag permet de créer un éditeur permettant de saisir du 
       texte et de le mettre en forme. il repose sur le fonctionnement de l'éditeur 
@@ -69,7 +69,7 @@ Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]
 </DIV>
 <ul>
   <li>le mode HTML qui permet d'écrire un contenu de page web 
-        à la charte V2 Air France</li>
+        à la charte</li>
   <li>le mode CUSTOM qui permet au développeur d'adapter l'éditeur 
     au besoin.</li>
 </ul>
@@ -108,7 +108,7 @@ Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]
 			<rtexprvalue>true</rtexprvalue>
 			<description><![CDATA[<p>Le seul plugin disponible actuellement est le plugin &quot;CSS&quot;. 
             Il permet d'appliquer une feuille de style au contenu de l'éditeur. 
-            La css par défaut est celle de la charte V2_001 d'Air France. 
+            La css par défaut est celle de la charte V2_001. 
             le plugin propose un combo dans la barre d'outils contenant les styles 
             de la css les plus utiles dans les applications. </p>
           <p>Le développeur a la possibilité de changer la css par 
@@ -191,7 +191,7 @@ Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]
 
 	<tag>
 		<name>customtool</name>
-		<tag-class>com.airfrance.welcom.taglib.htmlarea.CustomToolTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.htmlarea.CustomToolTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce tag ne s'utilise que dans un tag <a href="htmlarea.html">htmlarea</a>.Il 
           ya 2 types de cont&ocirc;les disponible : </p>
@@ -425,7 +425,7 @@ Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]
                 la session.Il sera utilisé pour valoriser les entrées 
                 de la liste déroulante. cet attribut n'est pris en compte 
                 que si le contr&ocirc;le est de type DROPDOWN.</p>
-              <p>cette Collection doit contenir des objets de type com.airfrance.welcom.struts.bean.WCouple.</p>
+              <p>cette Collection doit contenir des objets de type org.squale.welcom.struts.bean.WCouple.</p>
               <p>WCouple est une classe comprenant un libellé 
                 et une valeur.</p>]]></description>
 		</attribute>
@@ -434,7 +434,7 @@ Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]
 	<!-- Tag Menu en charte V2 -->
 	<tag>
 		<name>menu</name>
-		<tag-class>com.airfrance.welcom.taglib.menu.JSMenuTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.menu.JSMenuTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce tag s'utilise avec les tags menuItem et menuDroitItem</p>
     <p>la syntaxe est la suivante : </p>
@@ -454,7 +454,7 @@ Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]
 
 	<tag>
 		<name>menuItem</name>
-		<tag-class>com.airfrance.welcom.taglib.menu.JSMenuItemTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.menu.JSMenuItemTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce tag doit être inclu dans un tag menu.</p>
     <p>la syntaxe est la suivante : </p>
@@ -502,7 +502,7 @@ Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]
 
 	<tag>
 		<name>field</name>
-		<tag-class>com.airfrance.welcom.taglib.field.FieldTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.field.FieldTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[ <p>Ce Tag permet de créer un champs de saisie dans un formulaire, que 
       ce soit un champs texte, un type checkbox, ou un radiobutton.Il comporte 
@@ -1016,7 +1016,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>tabbedPane</name>
-		<tag-class>com.airfrance.welcom.taglib.onglet.JSOngletTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.onglet.JSOngletTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce tag s'utilise avec le tag tab</p>
     <p>la syntaxe est la suivante : </p>
@@ -1041,7 +1041,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>tab</name>
-		<tag-class>com.airfrance.welcom.taglib.onglet.JSOngletItemTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.onglet.JSOngletItemTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[ <p>Ce tag doit être inclu dans un tag tabbedPane.</p>
     <p>la syntaxe est la suivante : </p>
@@ -1101,7 +1101,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>canvasHeader</name>
-		<tag-class>com.airfrance.welcom.taglib.canvas.CanvasHeaderTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.canvas.CanvasHeaderTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce Tag définit le canevas de l'entête AirFrance (spécifié 
       dans le menu.jsp).</p>
@@ -1123,7 +1123,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>page</name>
-		<tag-class>com.airfrance.welcom.taglib.canvas.PageTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.canvas.PageTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce tag est équivalent au tag &lt;HTML&gt; ... &lt;/HTML&gt;<br>
       Ce tag vérifie et définit le droit d'accès à la page et permet 
@@ -1219,7 +1219,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>head</name>
-		<tag-class>com.airfrance.welcom.taglib.canvas.HeadTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.canvas.HeadTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce Tag définit le Head HTML. Il n'est nécessaire que si le developpeur 
       veut ajouter des inclusions spécifiques. Les inclusions nécessaires 
@@ -1266,7 +1266,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>body</name>
-		<tag-class>com.airfrance.welcom.taglib.canvas.CanvasTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.canvas.CanvasTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce Tag définit le body de la page: Inclusion des pages Zone de haut 
       ou Zone de Gauche . Il permet aux objects de changer leurs comportements d'affichage 
@@ -1625,7 +1625,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>canvasLeft</name>
-		<tag-class>com.airfrance.welcom.taglib.canvas.CanvasLeftMenuTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.canvas.CanvasLeftMenuTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce Tag définit la zone de menu latérale gauche. Elle sert 
       à la navigation et permet d'ajouter des boutons de type menu ou le bouton 
@@ -1650,7 +1650,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>canvasCenter</name>
-		<tag-class>com.airfrance.welcom.taglib.canvas.CanvasCenterTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.canvas.CanvasCenterTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[ <p>Ce Tag définit la zone centrale de la page, et propose la mise 
       en place du titre de la page</p>
@@ -1728,7 +1728,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>canvasPopup</name>
-		<tag-class>com.airfrance.welcom.taglib.canvas.CanvasPopupTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.canvas.CanvasPopupTag</tag-class>
 		<body-content>JSP</body-content>
 		<description>Definit le canvas d'une popup, la clé à renseigner pour "fermer" est popup.fermer</description>
 		<attribute>
@@ -2075,7 +2075,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>button</name>
-		<tag-class>com.airfrance.welcom.taglib.button.ButtonTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.button.ButtonTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce Tag permet de créer un bouton de soumission du formulaire.</p>
     <p>la syntaxe est la suivante : </p>
@@ -2087,10 +2087,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 			<rtexprvalue>true</rtexprvalue>
 			<description><![CDATA[<p>définit le nom du bouton. le nom détermine 
               le chemin vers l'image du bouton qui est déclarée dans  
-              WelcomResources.properties.</p>
-            <p>exemple en charte V2.001: chartev2.bouton.path.menu.annuler=http://cmsintranet.airfrance.fr/charte_v02_001/img/but/menu/{0}/annuler.gif</p>
-            <p>Dans ce cas là le nom du bouton sera &quot;annuler&quot;. 
-              le {0} représente la Locale.</p>]]></description>
+              WelcomResources.properties.</p>]]></description>
 		</attribute>
 		<attribute>
 			<name>type</name>
@@ -2099,14 +2096,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 			<description><![CDATA[<p>détermine le type du bouton : 
               &quot;form&quot; ou &quot;menu&quot;. Le tag détermine normalement 
               automatiquement dans quel mode le bouton doit se trouver en fonction 
-              du contexte</p>
-            <p>Il existe dans le fichier WelcomResources.properties une clé 
-              qui détermine le chemin par défaut des images pour 
-              ces types en charte V2.001: </p>
-            <p>-chartev2.bouton.path.form=http://cmsintranet.airfrance.fr/charte_v02_001/img/but/form/{0} 
-              -chartev2.bouton.path.menu=http://cmsintranet.airfrance.fr/charte_v02_001/img/but/menu/{0}</p>
-            <p>si le chemin pour un bouton particulier n'est pas renseigné 
-              dans ce fichier, l'image sera recherchée dans ce chemin.</p>]]></description>
+              du contexte</p>]]></description>
 		</attribute>
 		<attribute>
 			<name>target</name>
@@ -2213,7 +2203,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 	
 	<tag>
 		<name>buttonBar</name>
-		<tag-class>com.airfrance.welcom.taglib.button.ButtonBarTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.button.ButtonBarTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce Tag permet d'insérer des boutons d'action dans le pied de la table ou 
       onglet ou formulaire. </p>
@@ -2228,7 +2218,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>form</name>
-		<tag-class>com.airfrance.welcom.taglib.html.FormTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.html.FormTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Son Fonctionnement est le même que le tag Struts <a href="http://jakarta.apache.org/struts/userGuide/struts-html.html#form">html:form</a></p>
     <p>ce tag déclare automatiquement un champs hidden nommé action 
@@ -2317,7 +2307,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>table</name>
-		<tag-class>com.airfrance.welcom.taglib.table.TableTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.table.TableTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<P>Ce Tag permet l'affichage d'une liste d'éléments contenus 
       dans un objet de type Collection.</P>
@@ -2498,8 +2488,8 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>cols</name>
-		<tag-class>com.airfrance.welcom.taglib.table.ColsTag</tag-class>
-		<tei-class>com.airfrance.welcom.taglib.table.ColsTei</tei-class>
+		<tag-class>org.squale.welcom.taglib.table.ColsTag</tag-class>
+		<tei-class>org.squale.welcom.taglib.table.ColsTei</tei-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce Tag encadre les élements de type col. il doit être impérativement 
       dans un tag Table.</p>
@@ -2585,7 +2575,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>col</name>
-		<tag-class>com.airfrance.welcom.taglib.table.ColTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.table.ColTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce Tag définit l'attribut de l'élément à afficher 
       dans la colonne.il doit être impérativement dans un tag Table.</p>
@@ -2750,7 +2740,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>dropDownPanel</name>
-		<tag-class>com.airfrance.welcom.taglib.dropdownpanel.DropDownPanelTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.dropdownpanel.DropDownPanelTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce Tag permet d'afficher et de faire disparaitre une zone. Via les css, 
       il est très facilement paramètrable.</p>
@@ -2858,7 +2848,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>isNotEmpty</name>
-		<tag-class>com.airfrance.welcom.taglib.logic.IsNotEmptyTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.logic.IsNotEmptyTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[Tag logic permettant d'afficher ce qui est contenu dans le tag si la valeur specifiée n'est pas nulle ou vide]]></description>
 		<attribute>
@@ -2895,7 +2885,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>isEmpty</name>
-		<tag-class>com.airfrance.welcom.taglib.logic.IsEmptyTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.logic.IsEmptyTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[Tag logic permettant d'afficher ce qui est contenu dans le tag si la valeur spécifiée est  nulle ou vide]]></description>
 		<attribute>
@@ -2933,7 +2923,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 	<!-- tag select -->
 	<tag>
 		<name>option</name>
-		<tag-class>com.airfrance.welcom.taglib.html.OptionTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.html.OptionTag</tag-class>
 		<description><![CDATA[<p>Ce tag doit être inclus dans un tag <a href="select.html">select</a></p>
     <p>Son Fonctionnement est le même que le tag Struts <a href="http://jakarta.apache.org/struts/userGuide/struts-html.html#option">html:option</a>.</p>]]></description>
 		<attribute>
@@ -2981,7 +2971,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 	</tag>
 	<tag>
 		<name>options</name>
-		<tag-class>com.airfrance.welcom.taglib.html.OptionsTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.html.OptionsTag</tag-class>
 		<body-content>empty</body-content>
 		<description><![CDATA[ <p>Ce tag doit être inclus dans un tag <a href="#select">select</a></p>
     <p>Son Fonctionnement est le même que le tag Struts <a href="http://jakarta.apache.org/struts/userGuide/struts-html.html#options">html:options</a>.</p>
@@ -3031,7 +3021,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 	</tag>
 	<tag>
 		<name>select</name>
-		<tag-class>com.airfrance.welcom.taglib.html.SelectTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.html.SelectTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce tag s'utilise avec les tags <a href="option.html">option</a> ou <a href="options.html">options</a></p>
     <p>Son Fonctionnement est le même que le tag Struts <a href="http://jakarta.apache.org/struts/userGuide/struts-html.html#select">html:select</a> 
@@ -3221,7 +3211,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>checkPage</name>
-		<tag-class>com.airfrance.welcom.taglib.security.CheckPageTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.security.CheckPageTag</tag-class>
 		<body-content>JSP</body-content>
 		<description>Vérifie les droits d'accès sur la page</description>
 		<attribute>
@@ -3242,7 +3232,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>isPageReadOnly</name>
-		<tag-class>com.airfrance.welcom.taglib.security.IsPageReadOnlyTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.security.IsPageReadOnlyTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce tag permet d'afficher le code compris entre le tag qui si la page est 
       en lecture seule. Cette valeur est définie par le tag checkPage ou bien 
@@ -3256,7 +3246,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>isPageReadWrite</name>
-		<tag-class>com.airfrance.welcom.taglib.security.IsPageReadWriteTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.security.IsPageReadWriteTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[ <p>Ce tag permet d'afficher le code compris entre le tag qui si la page est 
       en lecture/ecriture. Cette valeur est définie par le tag checkPage ou bien 
@@ -3272,7 +3262,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>hasAccess</name>
-		<tag-class>com.airfrance.welcom.taglib.security.HasAccessTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.security.HasAccessTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce tag vérifie que la personne connectée posséde le droit 
       demandé. Si oui affiche ce qui est contenu entre le tag.</p>
@@ -3301,7 +3291,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 
 	<tag>
 		<name>link</name>
-		<tag-class>com.airfrance.welcom.taglib.html.LinkTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.html.LinkTag</tag-class>
 		<description><![CDATA[<p>ce tag fonctionne comme le tag struts <a href="http://struts.apache.org/userGuide/struts-html.html#link">html:link</a></p>]]></description>
 		<attribute>
 			<name>accesskey</name>
@@ -3528,7 +3518,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 	</tag>
 	<tag>
 		<name>colOrder</name>
-		<tag-class>com.airfrance.welcom.taglib.table.ColOrderTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.table.ColOrderTag</tag-class>
 		<body-content>none</body-content>
 		<description><![CDATA[<p>Ce Tag définit une colonne afin de gérer l'ordre des lignes.il doit 
       être impérativement dans un tag Table.</p>
@@ -3624,7 +3614,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 	</tag>
 	<tag>
 		<name>colEdit</name>
-		<tag-class>com.airfrance.welcom.taglib.table.ColEditTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.table.ColEditTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce Tag définit une colonne afin de gérer l'édition de la ligne.</p>
     <p>la syntaxe est la suivante : </p>
@@ -3704,7 +3694,7 @@ ou
 
 	<tag>
 		<name>colSelect</name>
-		<tag-class>com.airfrance.welcom.taglib.table.ColSelectTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.table.ColSelectTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce Tag définit une colonne afin de gérer la sélection de la ligne.</p>
     <p>la syntaxe est la suivante : </p>
@@ -3788,7 +3778,7 @@ ou
 	</tag>
 	<tag>
 	<name>colSingleSelect</name>
-		<tag-class>com.airfrance.welcom.taglib.table.ColSingleSelectTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.table.ColSingleSelectTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Ce Tag définit une colonne afin de gérer la sélection de la ligne de manière unique.</p>
     <p>la syntaxe est la suivante : </p>
@@ -3877,7 +3867,7 @@ ou
 	</tag>	
 	<tag>
 		<name>write</name>
-		<tag-class>com.airfrance.welcom.taglib.write.WWriteTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.write.WWriteTag</tag-class>
 		<body-content>empty</body-content>
 		<description><![CDATA[<p>Voir la documentation de <a href="http://struts.apache.org//struts-doc-1.1/userGuide/struts-bean.html#write">struts</a></p>
 		<p>2 attributs ont été rajoutés : dateFormat et dateFormatKey pour la gestion des dates</p>]]></description>
@@ -3950,7 +3940,7 @@ ou
 	</tag>
 	<tag>
 		<name>zone</name>
-		<tag-class>com.airfrance.welcom.taglib.zone.ZoneTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.zone.ZoneTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[<p>Le tag zone permet de définir une zone qui ne sera chargée que lors de l'appel de l'utilisateur sans rechargement de la page (pour diminuer les flux), le chargement se fait par la fonction javascript loadzone, qui prend 2 parametres : 
 		<ul>
@@ -3990,7 +3980,7 @@ contenu de la zone 2
 	</tag>	
  	<tag>
 		<name>multilingueField</name>
-		<tag-class>com.airfrance.welcom.taglib.multilingue.MultilingueFieldTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.multilingue.MultilingueFieldTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>disabled</name>
@@ -4285,7 +4275,7 @@ contenu de la zone 2
 	</tag>	
 	<tag>
 		<name>changeAccess</name>
-		<tag-class>com.airfrance.welcom.taglib.access.ChangeAccessTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.access.ChangeAccessTag</tag-class>
 		<body-content>JSP</body-content>
 		<description>Permet de changer le droit des tags contenu dans changeAccess (à la place du droit de la page)</description>
 		<attribute>
@@ -4317,7 +4307,7 @@ contenu de la zone 2
 	</tag>	
 	<tag>
 		<name>debugConsole</name>
-		<tag-class>com.airfrance.welcom.taglib.util.WDebugConsoleTag</tag-class>
+		<tag-class>org.squale.welcom.taglib.util.WDebugConsoleTag</tag-class>
 		<body-content>empty</body-content>
 		<description><![CDATA[Console d'erreur affichant les messages envoyés via la méthode wJSDebug(message)]]></description>
 	</tag>

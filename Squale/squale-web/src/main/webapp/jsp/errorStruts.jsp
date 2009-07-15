@@ -31,7 +31,7 @@
 				<br />
 			</div>
   			<code>
-				<%=com.airfrance.squaleweb.util.ExceptionWrapper.getExceptionDetail(request)%>
+				<%=org.squale.squaleweb.util.ExceptionWrapper.getExceptionDetail(request)%>
   			</code>
 		</div>
 	<div id="footer" class="bg_c12"></div>

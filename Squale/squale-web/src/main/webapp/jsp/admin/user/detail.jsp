@@ -1,12 +1,12 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 
 <%@ page import="org.apache.struts.action.ActionMessages" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.action.ManageAccountAction"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProfileForm"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.action.ManageAccountAction"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.ProfileForm"%>
 
 <%--
 Permet de modifier un compte

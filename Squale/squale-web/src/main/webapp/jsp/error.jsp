@@ -16,7 +16,7 @@
 		  	<h1><bean:message key="error.page.title"/></h1>
 		 	<p class="intro"><bean:message key="error.page.details"/><br></p>
 			<code>
-				<%=com.airfrance.squaleweb.util.ExceptionWrapper.getExceptionDetail(request, exception)%>
+				<%=org.squale.squaleweb.util.ExceptionWrapper.getExceptionDetail(request, exception)%>
 			</code>
 		</div>
 	</div>

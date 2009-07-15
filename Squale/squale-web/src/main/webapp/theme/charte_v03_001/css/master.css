@@ -332,7 +332,7 @@ div.onglet a:hover  {color:#fff;background-color:#2e5880;}
 .pratique .txt_theme,.txt_pratique {color:#0094d5;background-color:inherit;}
 .environnement .txt_theme,.txt_environnement {color:#822f8e;background-color:inherit;}
 .cie .txt_theme,.txt_cie {color:#0d3f96;background-color:inherit;}
-.txt_bleuaf {color:#2e5880;background-color:inherit;}/*bleu air france*/
+.txt_bleuaf {color:#2e5880;background-color:inherit;}/*bleu*/
 .txt_error {color:#f3ba5d;background-color:inherit;}/*erreur de saisie*/
 /* background couleurs institutionnelles */
 .bg_institutionnel_1 {color:inherit;background-color:#2e5880;} .bg_institutionnel_2 {color:inherit;background-color:#d2c9b4;} .bg_institutionnel_3 {color:inherit;background-color:#ffffff;} .bg_institutionnel_4 {color:inherit;background-color:#ff0000;}

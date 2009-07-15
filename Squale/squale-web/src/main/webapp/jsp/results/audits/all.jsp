@@ -3,7 +3,7 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
 	prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
 
@@ -49,7 +49,7 @@ String link = "audits.do?action=select&kind=" + kind + "&oldAudit=" + currentAud
 			<br />
 			<af:form action="purgeAuditAction.do" scope="session" method="POST"
 				name="selectForm"
-				type="com.airfrance.squaleweb.applicationlayer.formbean.component.AuditListForm">
+				type="org.squale.squaleweb.applicationlayer.formbean.component.AuditListForm">
 				<input type="hidden" name="applicationId" value="<%=applicationId%>" />
 				<input type="hidden" name="kind" value="<%=kind%>" />
 				<af:table name="splitAuditsListForm" property="audits"

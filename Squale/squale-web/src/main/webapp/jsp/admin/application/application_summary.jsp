@@ -1,13 +1,13 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm"%>
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"%>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils"%>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm"%>
+<%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
+<%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO"%>
+<%@ page import="org.squale.squaleweb.util.SqualeWebActionUtils"%>
+<%@ page import="org.squale.squaleweb.resources.WebMessages"%>
 
 <bean:define id="applicationId" name="createApplicationForm"
 	property="applicationId" type="String" />
@@ -15,7 +15,7 @@
 
 <%-- On va interdire l'ecriture pour les lecteurs --%>
 <bean:define id="profile"
-	name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+	name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 	property="<%=\"profile(\"+applicationId+\")\"%>" />
 
 <%
@@ -129,7 +129,7 @@ session.removeAttribute("modification");
 			<%-- affichage des sections de programmation d'audits --%>
 			<bean:define id="status" name="createApplicationForm"
 				property="status" scope="session" />
-			<%Integer statusValidated = new Integer(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO.VALIDATED);%>
+			<%Integer statusValidated = new Integer(org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO.VALIDATED);%>
 			<%-- affichage de la section de programmation d'un audit de jalon --%>
 			<%-- cette section est disponible aux administrateurs et aux gestionnaires de l'application si celle-ci est validée --%>
 			<%if (profile.equals(ProfileBO.ADMIN_PROFILE_NAME) || (profile.equals(ProfileBO.MANAGER_PROFILE_NAME) && status.equals(statusValidated))) {%>
@@ -237,7 +237,7 @@ session.removeAttribute("modification");
 				property="invalid.selection" /></div>
 			<af:form action="manageApplication.do">
 				<input type="hidden"
-					name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM%>"
+					name="<%=org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM%>"
 					value="true" />
 				<af:table name="createApplicationForm"
 					emptyKey="application_creation.list.project.empty" pageLength="30"

@@ -1,12 +1,12 @@
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="/WEB-INF/tlds/c-1_0.tld" prefix="c"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.GeneralParametersForm"%>
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.parameters.GeneralParametersForm"%>
+<%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
+<%@ page import="org.squale.squaleweb.resources.WebMessages"%>
 
 <%--
 	The project configuration page allows the global configuration of a project :
@@ -37,9 +37,9 @@ it into a scripting variable called "projectId" --%>
 
 <%-- 
 	Defining a new 'page scope attribute' called "profile" by accessing the "profile+applicationId" value stored in
-	the "logonBean" (see com.airfrance.welcom.struts.util.WConstants.USER_KEY  for more info)
+	the "logonBean" (see org.squale.welcom.struts.util.WConstants.USER_KEY  for more info)
 --%>
-<bean:define id="profile" name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>" 
+<bean:define id="profile" name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>" 
 property="<%=\"profile(\"+applicationId+\")\"%>" />
 
 <%-- Starting here the page --%>
@@ -120,7 +120,7 @@ property="<%=\"profile(\"+applicationId+\")\"%>" />
 					headerStyle="padding-left:20px;" contentStyle="padding:5px;"
 					lazyLoading="true" expanded="<%=expanded%>">
 		
-					<c:import url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true&taskName=${taskName}" />
+					<c:import url="/${taskName}.do?action=fill&${org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true&taskName=${taskName}" />
 					<div id="conteneur">
 						<div class="frame_border">
 							<jsp:include page="<%=pageTask%>" />
@@ -143,7 +143,7 @@ property="<%=\"profile(\"+applicationId+\")\"%>" />
 					Retrieves content of this URL (created with the "taskName" and a constant) and displays it
 					e.g : /scmTask.do?action=fill&doNotResetForm=true 
 				--%>
-				<c:import url='/generalConfiguration.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true&taskName=generalConfiguration' />
+				<c:import url='/generalConfiguration.do?action=fill&${org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true&taskName=generalConfiguration' />
 				
 				<%-- Including the task configuration page (JSP) --%>
 				<div id="conteneur" >
@@ -195,7 +195,7 @@ property="<%=\"profile(\"+applicationId+\")\"%>" />
 							Retrieves content of this URL (created with the "taskName" and a constant) and displays it
 							e.g : /scmTask.do?action=fill&doNotResetForm=true 
 						--%>
-						<c:import url="/${taskName}.do?action=fill&${com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true&taskName=${taskName}" />
+						<c:import url="/${taskName}.do?action=fill&${org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM}=true&taskName=${taskName}" />
 						
 						<%-- Including the task configuration page (JSP) --%>
 						<div id="conteneur">

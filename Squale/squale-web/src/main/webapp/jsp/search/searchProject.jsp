@@ -1,12 +1,12 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
 
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm"%>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils"%>
-<%@page import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.AuditForm"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.ProjectForm"%>
+<%@ page import="org.squale.squaleweb.util.SqualeWebActionUtils"%>
+<%@page import="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO"%>
 
 <%--
 	Permet de rechercher un projet parmis les applications visibles par l'utilisateur.

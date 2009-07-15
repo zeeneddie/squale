@@ -1,4 +1,4 @@
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
+<%@ page import="org.squale.squaleweb.resources.WebMessages" %>
 <%-- Le marquage XITI de la page (à placer dans le body de la page) --%>
 <%
 	// Cette page sera vide pour le dev et la recette afin de ne pas avoir de marqueur dans ses environnements

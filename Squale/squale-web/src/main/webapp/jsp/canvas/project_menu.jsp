@@ -2,16 +2,16 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
-<%@ page import="com.airfrance.squaleweb.comparator.ComponentComparator" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils" %>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
+<%@ page import="org.squale.squaleweb.comparator.ComponentComparator" %>
+<%@ page import="org.squale.squaleweb.util.SqualeWebConstants" %>
+<%@ page import="org.squale.squaleweb.util.SqualeWebActionUtils" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.HashMap" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectListForm" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.ProjectListForm" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.ProjectForm" %>
 
 <%-- 
 	On peut venir de plusieurs actions dont les formulaires sont soit de type projectSummaryForm ou errorListForm
@@ -68,12 +68,12 @@
 		
 		
 		<logic:notEqual name="<%=children.toString()%>" value="1" scope="session">
-		<logic:present name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY%>" scope="session">
+		<logic:present name="<%=org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY%>" scope="session">
 			<%
-List list = ((ProjectListForm)session.getAttribute(com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY)).getList();
+List list = ((ProjectListForm)session.getAttribute(org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY)).getList();
 Collections.sort(list, new ComponentComparator());%>
 			<af:menuItem key="menu.application.projects" color="2">
-				<logic:iterate name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY%>" scope="session" id="element"
+				<logic:iterate name="<%=org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY%>" scope="session" id="element"
 					type="ProjectForm" property="list">
 					<af:menuItem key="<%=SqualeWebActionUtils.formatStringForMenuItem(element.getProjectName())%>" color="2"
 						action="<%=\"project.do?action=select&projectId=\"+element.getId()+paramsLink%>" />

@@ -1,11 +1,11 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@ page import="org.apache.struts.action.ActionMessages" %>
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils" %>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
+<%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
+<%@ page import="org.squale.squaleweb.util.SqualeWebActionUtils" %>
+<%@ page import="org.squale.squaleweb.resources.WebMessages" %>
 
 <bean:define id="applicationId" name="createProjectForm"
 	property="applicationId" type="String" />
@@ -17,7 +17,7 @@
 
 <%-- On va interdire l'ecriture pour les lecteurs --%>
 <bean:define id="userProfile"
-	name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+	name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 	property="<%=\"profile(\"+applicationId+\")\"%>" />
 <%-- Pour les champs --%>
 <%boolean disabled = false;%>
@@ -101,7 +101,7 @@ if (modification != null) {
 			<bean:message key="<%=details%>" />
 			<af:form action="add_project.do">
 				<input type="hidden"
-					name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM%>"
+					name="<%=org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM%>"
 					value="true">
 				<input name="projectId" value="<%=projectId%>" type="hidden">
 				<input name="applicationId" value="<%=applicationId%>" type="hidden">
@@ -185,7 +185,7 @@ String href = "location.href='" + action + "'";%>
 							value="<%=applicationId%>" />
 					</logic:empty>
 					<input type="hidden"
-						name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_UPDATE_PROJECT_NAME%>"
+						name="<%=org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_UPDATE_PROJECT_NAME%>"
 						value="true">
 					<logic:notEqual name="userProfile"
 						value="<%=ProfileBO.READER_PROFILE_NAME%>">

@@ -1,9 +1,9 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
 
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
+<%@ page import="org.squale.squaleweb.resources.WebMessages"%>
 
 <%
             // Le tooltip de l'image
@@ -74,12 +74,12 @@
 						<td valign="middle"><af:select property="roiApplicationId">
 							<af:option key="roi.all_applications" value="-1" />
 							<logic:present
-								name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+								name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 								scope="session">
 								<logic:iterate id="appli"
-									name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+									name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 									property="applicationsList"
-									type="com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm"
+									type="org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm"
 									scope="session">
 									<%
 									String id = "" + appli.getId();

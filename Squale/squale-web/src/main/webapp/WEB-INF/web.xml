@@ -13,7 +13,7 @@
  	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<display-name>LoginFilter</display-name>
-		<filter-class>com.airfrance.squaleweb.applicationlayer.action.LoginFilter</filter-class>
+		<filter-class>org.squale.squaleweb.applicationlayer.action.LoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
@@ -32,7 +32,7 @@
 	<!-- Action Servlet Configuration -->
 	<servlet>
 		<servlet-name>squale</servlet-name>
-		<servlet-class>com.airfrance.squaleweb.servlet.SqualeServlet</servlet-class>
+		<servlet-class>org.squale.squaleweb.servlet.SqualeServlet</servlet-class>
 		
 		<init-param>
 			<param-name>config</param-name>
@@ -89,7 +89,7 @@
 		<taglib-location>/WEB-INF/tagsquale.tld</taglib-location>
 	</taglib>
 	<taglib>
-		<taglib-uri>http://www.airfrance.fr/welcom/tags-welcom</taglib-uri>
+		<taglib-uri>http://www.squale.org/welcom/tags-welcom</taglib-uri>
 		<taglib-location>/WEB-INF/welcom.tld</taglib-location>
 	</taglib>
 

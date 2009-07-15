@@ -1,8 +1,8 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
 <%@ page import="org.apache.struts.action.ActionMessages" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateApplicationForm" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.creation.CreateApplicationForm" %>
 <%--
 Permet la création d'un nouveau projet
  --%>
@@ -39,7 +39,7 @@ Permet la création d'un nouveau projet
 
 			<af:form action="new_application.do">
 				<input type="hidden"
-					name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM%>"
+					name="<%=org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM%>"
 					value="true">
 				<af:field key="application_creation.field.application_name" property="applicationName"
 					isRequired="true"></af:field>

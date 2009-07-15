@@ -1,4 +1,4 @@
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 
 <af:buttonBar>
 	<af:button type="form" name="valider" toolTipKey="toolTip.valider"

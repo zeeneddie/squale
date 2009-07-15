@@ -1,11 +1,11 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic" %>
-<%@ page import="com.airfrance.squalecommon.util.messages.CommonMessages" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants" %>
+<%@ page import="org.squale.squalecommon.util.messages.CommonMessages" %>
+<%@ page import="org.squale.squaleweb.util.SqualeWebConstants" %>
 <%@ page import="java.util.Arrays" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.config.ServeurForm" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.config.ServeurForm" %>
 
 <%--  
 Assure la configuration de l'application
@@ -42,7 +42,7 @@ if (modification != null) {
 
 			<af:form action="manageApplication.do">
 				<input type="hidden"
-					name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM%>"
+					name="<%=org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM%>"
 					value="true">
 				<table width="100%" class="formulaire" cellpadding="0"
 					cellspacing="0" border="0">

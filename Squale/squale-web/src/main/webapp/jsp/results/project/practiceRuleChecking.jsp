@@ -2,17 +2,17 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
 	prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
+<%@ page import="org.squale.squaleweb.resources.WebMessages"%>
 <%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultRulesCheckingForm"%>
+	import="org.squale.squaleweb.applicationlayer.formbean.results.ResultRulesCheckingForm"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.lang.String"%>
 <%@ page import="java.util.ListIterator"%>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils"%>
+<%@ page import="org.squale.squaleweb.util.SqualeWebActionUtils"%>
 
 <bean:define id="projectId" name="projectSummaryForm"
 	property="projectId" type="String" />

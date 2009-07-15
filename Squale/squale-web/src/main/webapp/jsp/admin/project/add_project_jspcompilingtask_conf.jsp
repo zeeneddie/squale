@@ -1,9 +1,9 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
+<%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
 
 <script type="text/javascript" src="theme/charte_v03_001/js/format_page.js"></script>
 <%-- Configuration de la compilation des JSP --%>
@@ -14,7 +14,7 @@
 
 <%-- On va interdire l'ecriture pour les lecteurs --%>
 <bean:define id="user"
-	name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>" />
+	name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>" />
 <bean:define id="userProfile" name="user"
 	property="<%=\"profile(\"+applicationId+\")\"%>" />
 <%-- Pour les champs --%>

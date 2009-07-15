@@ -1,9 +1,9 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic"	prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
+<%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
 
 <%-- 
 	This JSP configures the generic task. A task configuration JSP is called if
@@ -18,7 +18,7 @@
 
 <%-- Getting the property of userProfile variable so as to define the authorisation --%>
 <bean:define id="userProfile"
-	name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>"
+	name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
 	property="<%=\"profile(\"+applicationId+\")\"%>" />
 
 <%-- Default value of the boolean for the fields : RW when set to false --%>

@@ -1,13 +1,13 @@
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af" %>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic" %>
-<%@ page import="com.airfrance.squaleweb.comparator.ComponentComparator" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebActionUtils" %>
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants" %>
+<%@ page import="org.squale.squaleweb.comparator.ComponentComparator" %>
+<%@ page import="org.squale.squaleweb.util.SqualeWebActionUtils" %>
+<%@ page import="org.squale.squaleweb.util.SqualeWebConstants" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectListForm" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.ProjectListForm" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.ProjectForm" %>
 
 <%--
 
@@ -51,14 +51,14 @@
 		<logic:notEqual name="<%=children.toString()%>" value="1"
 			scope="session">
 			<logic:present
-				name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY%>"
+				name="<%=org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY%>"
 				scope="session">
-				<%List list = ((ProjectListForm) session.getAttribute(com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY)).getList();
+				<%List list = ((ProjectListForm) session.getAttribute(org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY)).getList();
 Collections.sort(list, new ComponentComparator());
 %>
 				<af:menuItem key="menu.application.projects" color="2">
 					<logic:iterate
-						name="<%=com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY%>"
+						name="<%=org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.PROJECTS_KEY%>"
 						scope="session" id="element" type="ProjectForm" property="list">
 						<af:menuItem key="<%=SqualeWebActionUtils.formatStringForMenuItem(element.getProjectName())%>" color="2" 
 							action="<%=\"project.do?action=select&projectId=\"+element.getId() + paramsLink%>" />

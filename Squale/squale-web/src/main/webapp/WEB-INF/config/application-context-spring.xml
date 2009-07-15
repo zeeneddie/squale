@@ -5,9 +5,9 @@
 <beans>
 
 	<!-- Bean pour retrouver un provider de façon statique, comme le permet le ProviderLocator de JRAF -->
-	<bean id="springLocator" class="com.airfrance.jraf.bootstrap.locator.SpringLocator" ></bean>
+	<bean id="springLocator" class="org.squale.jraf.bootstrap.locator.SpringLocator" ></bean>
 	
-	<bean id="persistence" class="com.airfrance.jraf.provider.persistence.hibernate.PersistenceProviderSpringUrlImpl" 
+	<bean id="persistence" class="org.squale.jraf.provider.persistence.hibernate.PersistenceProviderSpringUrlImpl" 
 		init-method="initialize">
 		<property name="configFile">
 			<value>/WEB-INF/config/hibernate.cfg.xml</value>
@@ -17,10 +17,10 @@
 		</property-->
 	</bean>
 	
-	<bean id="logging" class="com.airfrance.jraf.provider.logging.LoggingProviderImpl"></bean>
+	<bean id="logging" class="org.squale.jraf.provider.logging.LoggingProviderImpl"></bean>
 	
 	<!-- Provider d'acces aux applicationComponent POJO -->
-	<bean id="accessdelegate" class="com.airfrance.jraf.provider.accessdelegate.AccessDelegateProviderSpringUrlImpl" 
+	<bean id="accessdelegate" class="org.squale.jraf.provider.accessdelegate.AccessDelegateProviderSpringUrlImpl" 
 		init-method="initialize">
 		<property name="configFile">
 			<value>/WEB-INF/config/configApplicationComponent.xml</value>
@@ -28,21 +28,21 @@
 	</bean>
 	
 	<!-- Provider d'envoi de mail -->
-	<bean id="mailer" class="com.airfrance.squalecommon.util.mail.javamail.JavaMailProviderSpringImpl">
+	<bean id="mailer" class="org.squale.squalecommon.util.mail.javamail.JavaMailProviderSpringImpl">
 	</bean>
 	
 	<!-- Enterprise layer's dependencies -->
 	<!--<import resource="classpath:config/spring/0-entrepriselayer-dependencies.xml"/>-->
 	
 	<!-- Accesseur bean utilisateur authentifié  -->
-	<bean id="userBeanAccessor" class="com.airfrance.squaleweb.connection.basic.BasicUserBeanAccessorImpl">
+	<bean id="userBeanAccessor" class="org.squale.squaleweb.connection.basic.BasicUserBeanAccessorImpl">
 		<property name="userBean">
 			<ref bean="userBean"/>
 		</property>
 	</bean>
 	
 	<!-- bean utilisateur authentifié  -->
-	<bean id="userBean" class="com.airfrance.squaleweb.connection.basic.BasicUserBeanImpl" >
+	<bean id="userBean" class="org.squale.squaleweb.connection.basic.BasicUserBeanImpl" >
 	</bean>
 	
 	

@@ -1,20 +1,20 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.LogonBean"%>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.JCompilingForm"%>
-<%@ page import="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
+<%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.LogonBean"%>
+<%@ page import="org.squale.squaleweb.resources.WebMessages"%>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.parameters.JCompilingForm"%>
+<%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
 
 <bean:define id="projectId" name="createProjectForm" property="projectId" type="String" />
 <bean:define id="applicationId" name="createProjectForm" property="applicationId" type="String" />
 
 <%-- On va interdire l'ecriture pour les lecteurs --%>
-<bean:define id="user" name="<%=com.airfrance.welcom.struts.util.WConstants.USER_KEY%>" />
+<bean:define id="user" name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>" />
 <bean:define id="userProfile" name="user" property="<%=\"profile(\"+applicationId+\")\"%>" />
 
 <%-- Pour les champs --%>

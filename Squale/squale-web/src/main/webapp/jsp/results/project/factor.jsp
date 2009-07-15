@@ -2,16 +2,16 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic"
 	prefix="logic"%>
-<%@taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants"%>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages"%>
+<%@ page import="org.squale.squaleweb.util.SqualeWebConstants"%>
+<%@ page import="org.squale.squaleweb.resources.WebMessages"%>
 <%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultForm"%>
+	import="org.squale.squaleweb.applicationlayer.formbean.results.ResultForm"%>
 <%@ page
-	import="com.airfrance.squaleweb.applicationlayer.formbean.results.CriteriumForm"%>
-<%@ page import="com.airfrance.squaleweb.tagslib.HistoryTag"%>	
+	import="org.squale.squaleweb.applicationlayer.formbean.results.CriteriumForm"%>
+<%@ page import="org.squale.squaleweb.tagslib.HistoryTag"%>	
 
 <%-- Page de presentation des criteres / pratiques d'un facteur
 		Attribut en entree :

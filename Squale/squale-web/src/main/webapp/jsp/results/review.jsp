@@ -1,15 +1,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
-<%@ taglib uri="http://www.airfrance.fr/welcom/tags-welcom" prefix="af" %>
+<%@ taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic" %>
 <%@taglib uri="/squale" prefix="squale"%>
 
-<%@ page import="com.airfrance.squaleweb.util.SqualeWebConstants" %>
-<%@ page import="com.airfrance.squaleweb.resources.WebMessages" %>
-<%@ page import="com.airfrance.squaleweb.applicationlayer.formbean.results.ParamReviewForm" %>
-<%@ page import="com.airfrance.squaleweb.util.graph.GraphMaker"%>
+<%@ page import="org.squale.squaleweb.util.SqualeWebConstants" %>
+<%@ page import="org.squale.squaleweb.resources.WebMessages" %>
+<%@ page import="org.squale.squaleweb.applicationlayer.formbean.results.ParamReviewForm" %>
+<%@ page import="org.squale.squaleweb.util.graph.GraphMaker"%>
 
 <%String imageDetails = WebMessages.getString(request, "image.review");
 String evolution = WebMessages.getString(request, "tracker.mark.history");
