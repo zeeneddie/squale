@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.mccabe;
+package org.squale.squalix.tools.mccabe;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,14 +30,14 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.util.file.FileUtility;
-import com.airfrance.squalix.util.process.ProcessErrorHandler;
-import com.airfrance.squalix.util.process.ProcessManager;
-import com.airfrance.squalix.util.process.ProcessOutputHandler;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.util.file.FileUtility;
+import org.squale.squalix.util.process.ProcessErrorHandler;
+import org.squale.squalix.util.process.ProcessManager;
+import org.squale.squalix.util.process.ProcessOutputHandler;
 
 /**
  * Exécute l'analyse McCabe. L'environnement McCabe doit être correctement initialisé avant le lancement de la tâche, ou
@@ -383,7 +383,7 @@ public abstract class AbstractMcCabeTask
     }
 
     /**
-     * @see com.airfrance.squalix.util.process.ProcessErrorHandler#processError(java.lang.String)
+     * @see org.squale.squalix.util.process.ProcessErrorHandler#processError(java.lang.String)
      */
     public void processError( String pErrorMessage )
     {
@@ -475,7 +475,7 @@ public abstract class AbstractMcCabeTask
     public abstract void persistProjectResult();
 
     /**
-     * @see com.airfrance.squalix.util.process.ProcessOutputHandler#processOutput(java.lang.String)
+     * @see org.squale.squalix.util.process.ProcessOutputHandler#processOutput(java.lang.String)
      */
     public void processOutput( String pOutputLine )
     {

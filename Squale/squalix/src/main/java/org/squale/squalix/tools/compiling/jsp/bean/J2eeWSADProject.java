@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.jsp.bean;
+package org.squale.squalix.tools.compiling.jsp.bean;
 
 import java.io.File;
 import java.util.HashMap;
@@ -26,9 +26,9 @@ import java.util.Map;
 
 import org.apache.tools.ant.BuildListener;
 
-import com.airfrance.squalix.tools.compiling.java.beans.JWSADProject;
-import com.airfrance.squalix.util.file.ExtensionFileFilter;
-import com.airfrance.squalix.util.file.FileUtility;
+import org.squale.squalix.tools.compiling.java.beans.JWSADProject;
+import org.squale.squalix.util.file.ExtensionFileFilter;
+import org.squale.squalix.util.file.FileUtility;
 
 /**
  * Projet J2EE sous WSAD

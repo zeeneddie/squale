@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.jsp.wsad;
+package org.squale.squalix.tools.compiling.jsp.wsad;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,10 +27,10 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Java;
 import org.apache.tools.ant.types.Path;
 
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
-import com.airfrance.squalix.tools.compiling.jsp.bean.J2eeWSADProject;
-import com.airfrance.squalix.tools.compiling.jsp.configuration.JspCompilingConfiguration;
-import com.airfrance.squalix.util.file.JspFileUtility;
+import org.squale.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalix.tools.compiling.jsp.bean.J2eeWSADProject;
+import org.squale.squalix.tools.compiling.jsp.configuration.JspCompilingConfiguration;
+import org.squale.squalix.util.file.JspFileUtility;
 
 /**
  * Classe abstraite du compilateur Jsp

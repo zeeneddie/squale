@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\tools\\compiling\\java\\compiler\\CompilerAdapterXMLImpl.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\tools\\compiling\\java\\compiler\\CompilerAdapterXMLImpl.java
 
-package com.airfrance.squalix.tools.compiling.java.compiler.impl;
+package org.squale.squalix.tools.compiling.java.compiler.impl;
 
-import com.airfrance.squalix.tools.compiling.java.adapter.JComponentAdapter;
-import com.airfrance.squalix.tools.compiling.java.beans.JXMLProject;
-import com.airfrance.squalix.tools.compiling.java.compiler.xml.JXMLCompiler;
+import org.squale.squalix.tools.compiling.java.adapter.JComponentAdapter;
+import org.squale.squalix.tools.compiling.java.beans.JXMLProject;
+import org.squale.squalix.tools.compiling.java.compiler.xml.JXMLCompiler;
 
 /**
  * Implémentation de l'adapteur pour le compilateur de fichiers type <code>build.xml</code>.

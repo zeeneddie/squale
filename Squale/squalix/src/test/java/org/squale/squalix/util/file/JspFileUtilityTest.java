@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.file;
+package org.squale.squalix.util.file;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.airfrance.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.SqualeTestCase;
 
 /**
  * Test pour la manipulation des fichiers jsps Le test sur la compilation des jsps doit avoir été lancé avant.

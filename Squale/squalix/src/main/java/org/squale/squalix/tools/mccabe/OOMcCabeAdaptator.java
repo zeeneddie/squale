@@ -16,23 +16,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.mccabe;
+package org.squale.squalix.tools.mccabe;
 
 import java.util.HashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.JspBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAJspMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO;
-import com.airfrance.squalix.util.parser.J2EEParser;
-import com.airfrance.squalix.util.parser.LanguageParser;
-import com.airfrance.squalix.util.repository.ComponentRepository;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.JspBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.MethodBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAJspMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO;
+import org.squale.squalix.util.parser.J2EEParser;
+import org.squale.squalix.util.parser.LanguageParser;
+import org.squale.squalix.util.repository.ComponentRepository;
 
 /**
  * Est en charge de remplacer tous les noms des méthodes par les objets correspondant.<br>

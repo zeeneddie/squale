@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java.configuration;
+package org.squale.squalix.tools.compiling.java.configuration;
 
-import com.airfrance.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.SqualeTestCase;
 
 /**
  *

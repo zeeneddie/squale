@@ -16,22 +16,22 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.macker;
+package org.squale.squalix.tools.macker;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.JspBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalix.util.file.FileUtility;
-import com.airfrance.squalix.util.file.JspFileUtility;
-import com.airfrance.squalix.util.parser.J2EEParser;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.JspBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalix.util.file.FileUtility;
+import org.squale.squalix.util.file.JspFileUtility;
+import org.squale.squalix.util.parser.J2EEParser;
 
 /**
  *

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.umlquality;
+package org.squale.squalix.tools.umlquality;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,15 +25,15 @@ import java.util.Vector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityMetricsBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityMetricsBO;
 
-import com.airfrance.squalix.util.csv.CSVParser;
-import com.airfrance.squalix.util.repository.ComponentRepository;
+import org.squale.squalix.util.csv.CSVParser;
+import org.squale.squalix.util.repository.ComponentRepository;
 
 /**
  * Objet chargé de faire persister les composants identifiés par UMLQuality (les composants)

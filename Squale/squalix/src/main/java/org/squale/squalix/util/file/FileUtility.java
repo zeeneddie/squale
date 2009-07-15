@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.file;
+package org.squale.squalix.util.file;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -42,8 +42,9 @@ import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
 import org.codehaus.plexus.util.PathTool;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+
 
 /**
  * Manipule les fichiers et répertoires d'analyse

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.stats;
+package org.squale.squalix.stats;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,34 +29,34 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.component.ApplicationDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.AuditDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.ProjectProfileDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.MetricDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.QualityResultDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.SimpleFormulaDAOImpl;
-import com.airfrance.squalecommon.daolayer.stats.SiteAndProfilStatsDICTDAOImpl;
-import com.airfrance.squalecommon.daolayer.stats.SiteStatsDICTDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.config.ServeurDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.stats.SiteAndProfilStatsDICTBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.stats.SiteStatsDICTBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.roi.RoiFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.rule.FormulaException;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.ServeurFacade;
-import com.airfrance.squalix.core.CoreMessages;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.component.ApplicationDAOImpl;
+import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.config.ProjectProfileDAOImpl;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.daolayer.result.MetricDAOImpl;
+import org.squale.squalecommon.daolayer.result.QualityResultDAOImpl;
+import org.squale.squalecommon.daolayer.result.SimpleFormulaDAOImpl;
+import org.squale.squalecommon.daolayer.stats.SiteAndProfilStatsDICTDAOImpl;
+import org.squale.squalecommon.daolayer.stats.SiteStatsDICTDAOImpl;
+import org.squale.squalecommon.datatransfertobject.config.ServeurDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.stats.SiteAndProfilStatsDICTBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.stats.SiteStatsDICTBO;
+import org.squale.squalecommon.enterpriselayer.facade.roi.RoiFacade;
+import org.squale.squalecommon.enterpriselayer.facade.rule.FormulaException;
+import org.squale.squalecommon.enterpriselayer.facade.component.ServeurFacade;
+import org.squale.squalix.core.CoreMessages;
 
 /**
  */

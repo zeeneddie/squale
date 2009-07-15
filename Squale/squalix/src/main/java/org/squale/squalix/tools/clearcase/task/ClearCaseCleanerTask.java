@@ -16,19 +16,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\tools\\clearcase\\ClearCaseCleanerTask.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\tools\\clearcase\\ClearCaseCleanerTask.java
 
-package com.airfrance.squalix.tools.clearcase.task;
+package org.squale.squalix.tools.clearcase.task;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalix.core.AbstractSourceTerminationTask;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.tools.clearcase.configuration.ClearCaseConfiguration;
-import com.airfrance.squalix.tools.clearcase.configuration.ClearCaseMessages;
-import com.airfrance.squalix.util.process.ProcessErrorHandler;
-import com.airfrance.squalix.util.process.ProcessManager;
+import org.squale.squalix.core.AbstractSourceTerminationTask;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.tools.clearcase.configuration.ClearCaseConfiguration;
+import org.squale.squalix.tools.clearcase.configuration.ClearCaseMessages;
+import org.squale.squalix.util.process.ProcessErrorHandler;
+import org.squale.squalix.util.process.ProcessManager;
 
 /**
  * Nettoie l'environnement de travail après avoir l'analyse complète d'un projet.<br>
@@ -130,7 +130,7 @@ public class ClearCaseCleanerTask
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalix.util.process.ProcessErrorHandler#processError(java.lang.String)
+     * @see org.squale.squalix.util.process.ProcessErrorHandler#processError(java.lang.String)
      */
     public void processError( String pErrorMessage )
     {

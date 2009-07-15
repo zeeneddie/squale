@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.macker;
+package org.squale.squalix.tools.macker;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,17 +25,17 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.macker.RuleFactory;
-import com.airfrance.squalix.util.file.FileUtility;
-import com.airfrance.squalix.util.parser.JavaParser;
-import com.airfrance.squalix.util.repository.ComponentRepository;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
+import org.squale.squalecommon.enterpriselayer.facade.macker.RuleFactory;
+import org.squale.squalix.util.file.FileUtility;
+import org.squale.squalix.util.parser.JavaParser;
+import org.squale.squalix.util.repository.ComponentRepository;
 
 import net.innig.macker.event.AccessRuleViolation;
 import net.innig.macker.event.ListenerException;

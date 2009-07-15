@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.jsp;
+package org.squale.squalix.tools.compiling.jsp;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,23 +29,23 @@ import org.apache.tools.ant.BuildEvent;
 import org.apache.tools.ant.BuildListener;
 import org.apache.tools.ant.Project;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
-import com.airfrance.squalix.tools.compiling.java.beans.JWSADProject;
-import com.airfrance.squalix.tools.compiling.java.compiler.wsad.JWSADAntCompiler;
-import com.airfrance.squalix.tools.compiling.jsp.bean.J2eeWSADProject;
-import com.airfrance.squalix.tools.compiling.jsp.configuration.JspCompilingConfiguration;
-import com.airfrance.squalix.tools.compiling.jsp.wsad.AbstractTomcatCompiler;
-import com.airfrance.squalix.tools.compiling.jsp.wsad.TomcatCompilerFactory;
-import com.airfrance.squalix.util.buildpath.BuildProjectPath;
-import com.airfrance.squalix.util.file.FileUtility;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalix.tools.compiling.java.beans.JWSADProject;
+import org.squale.squalix.tools.compiling.java.compiler.wsad.JWSADAntCompiler;
+import org.squale.squalix.tools.compiling.jsp.bean.J2eeWSADProject;
+import org.squale.squalix.tools.compiling.jsp.configuration.JspCompilingConfiguration;
+import org.squale.squalix.tools.compiling.jsp.wsad.AbstractTomcatCompiler;
+import org.squale.squalix.tools.compiling.jsp.wsad.TomcatCompilerFactory;
+import org.squale.squalix.util.buildpath.BuildProjectPath;
+import org.squale.squalix.util.file.FileUtility;
 
 /**
  * Tâche de compilation des JSPs. La tâche de compilation Java doit avoir été effectuée au préalable afin d'avoir le
@@ -80,7 +80,7 @@ public class JspCompilingTask
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.core.AbstractTask#execute()
+     * @see org.squale.squalix.core.AbstractTask#execute()
      */
     public void execute()
         throws TaskException

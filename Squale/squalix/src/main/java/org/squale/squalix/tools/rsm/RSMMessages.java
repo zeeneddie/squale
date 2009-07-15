@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.rsm;
+package org.squale.squalix.tools.rsm;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * Messages pour la tache RSM
@@ -35,7 +35,7 @@ public class RSMMessages
      */
     private RSMMessages()
     {
-        super( "com.airfrance.squalix.tools.rsm.rsm" );
+        super( "org.squale.squalix.tools.rsm.rsm" );
     }
 
     /**

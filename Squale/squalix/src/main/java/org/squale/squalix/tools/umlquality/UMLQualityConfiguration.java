@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.umlquality;
+package org.squale.squalix.tools.umlquality;
 
 import java.io.InputStream;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.util.xml.XmlImport;
-import com.airfrance.squalix.configurationmanager.ConfigUtility;
-import com.airfrance.squalix.core.exception.ConfigurationException;
+import org.squale.squalecommon.util.xml.XmlImport;
+import org.squale.squalix.configurationmanager.ConfigUtility;
+import org.squale.squalix.core.exception.ConfigurationException;
 
 /**
  * Configuration UMLQuality. La configuration UMLQuality est définie dans un fichier XML, celui-ci est lu par cette

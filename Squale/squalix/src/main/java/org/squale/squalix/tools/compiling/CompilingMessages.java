@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling;
+package org.squale.squalix.tools.compiling;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * Classe gérant le RessourceBundle pour la tâche de compilation.
@@ -70,6 +70,6 @@ public class CompilingMessages
      */
     private CompilingMessages()
     {
-        super( "com.airfrance.squalix.tools.compiling.compiling" );
+        super( "org.squale.squalix.tools.compiling.compiling" );
     }
 }

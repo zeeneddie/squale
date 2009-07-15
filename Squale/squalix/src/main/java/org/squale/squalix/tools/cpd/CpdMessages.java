@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cpd;
+package org.squale.squalix.tools.cpd;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * Messages pour la tâche CopyPasteDetection
@@ -34,7 +34,7 @@ public class CpdMessages
      */
     private CpdMessages()
     {
-        super( "com.airfrance.squalix.tools.cpd.cpd" );
+        super( "org.squale.squalix.tools.cpd.cpd" );
     }
 
     /**

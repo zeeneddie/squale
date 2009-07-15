@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cpptest;
+package org.squale.squalix.tools.cpptest;
 
 import java.io.InputStream;
 
@@ -24,9 +24,9 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.util.xml.XmlImport;
-import com.airfrance.squalix.configurationmanager.ConfigUtility;
-import com.airfrance.squalix.core.exception.ConfigurationException;
+import org.squale.squalecommon.util.xml.XmlImport;
+import org.squale.squalix.configurationmanager.ConfigUtility;
+import org.squale.squalix.core.exception.ConfigurationException;
 
 /**
  * Configuration CppTest La configuration CppTest est définie dans un fichier XML, celui-ci est lu par cette classe.
@@ -68,7 +68,7 @@ public class CppTestConfiguration
         StringBuffer errors = new StringBuffer();
         Digester digester =
             preSetupDigester( "-//CppTest Configuration DTD 1.0//EN",
-                              "/com/airfrance/squalix/tools/cpptest/cpptest-config-1.0.dtd", errors );
+                              "/org/squale/squalix/tools/cpptest/cpptest-config-1.0.dtd", errors );
         // traitement du fichier de log
         digester.addCallMethod( "cpptest-configuration/logger", "setLogger", 1, new Class[] { String.class } );
         digester.addCallParam( "cpptest-configuration/logger", 0 );

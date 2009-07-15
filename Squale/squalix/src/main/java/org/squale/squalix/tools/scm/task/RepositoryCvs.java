@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.scm.task;
+package org.squale.squalix.tools.scm.task;
 
 import org.apache.maven.scm.manager.BasicScmManager;
 import org.apache.maven.scm.provider.cvslib.cvsjava.CvsJavaScmProvider;

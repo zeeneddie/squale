@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.macker;
+package org.squale.squalix.tools.macker;
 
 import java.net.URLClassLoader;
 import java.util.List;
@@ -27,12 +27,12 @@ import org.apache.commons.logging.LogFactory;
 
 import net.innig.macker.Macker;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.util.buildpath.BuildProjectPath;
-import com.airfrance.squalix.util.file.FileUtility;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.util.buildpath.BuildProjectPath;
+import org.squale.squalix.util.file.FileUtility;
 
 /**
  * Tâche Macker pour un projet J2EE

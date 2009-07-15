@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.mccabe;
+package org.squale.squalix.tools.mccabe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +24,13 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO;
-import com.airfrance.squalix.util.parser.CobolParser;
-import com.airfrance.squalix.util.repository.ComponentRepository;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.MethodBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.PackageBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO;
+import org.squale.squalix.util.parser.CobolParser;
+import org.squale.squalix.util.repository.ComponentRepository;
 
 /**
  * Adaptateur des composants du Cobol.

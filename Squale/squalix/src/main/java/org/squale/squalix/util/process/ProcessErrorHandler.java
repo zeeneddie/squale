@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.process;
+package org.squale.squalix.util.process;
 
 /**
  * Interface de traitement des erreurs de processus externe Un processus externe écrit des données sur le flux standard

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.scm.task;
+package org.squale.squalix.tools.scm.task;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +35,7 @@ import org.apache.maven.scm.repository.ScmRepository;
 import org.apache.maven.scm.repository.ScmRepositoryException;
 import org.codehaus.plexus.util.StringUtils;
 
-import com.airfrance.squalix.util.file.FileUtility;
+import org.squale.squalix.util.file.FileUtility;
 
 /**
  * abstract class to connect to a repository (Cvs, Svn or local by example)

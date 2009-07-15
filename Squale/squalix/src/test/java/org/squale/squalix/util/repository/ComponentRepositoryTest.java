@@ -16,22 +16,22 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.repository;
+package org.squale.squalix.util.repository;
 
 import junit.framework.TestCase;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.ProjectParameterDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
-import com.airfrance.squalix.util.parser.JavaParser;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectParameterDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.MethodBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.PackageBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalix.util.parser.JavaParser;
 
 /**
  * Teste ComponentRepository.
@@ -166,7 +166,7 @@ public class ComponentRepositoryTest
      */
     private ClassBO createClassBO()
     {
-        String absoluteClassName = "com.airfrance.projetTest.ClassTest";
+        String absoluteClassName = "org.squale.projetTest.ClassTest";
         return createClassBO( absoluteClassName );
     }
 

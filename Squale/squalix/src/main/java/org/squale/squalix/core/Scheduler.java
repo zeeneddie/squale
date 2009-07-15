@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.core;
+package org.squale.squalix.core;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,42 +28,42 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.component.ApplicationDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.AuditDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.MarkDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.rulechecking.RuleCheckingTransgressionDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.ServeurDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.SqualeReferenceDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.component.AuditTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.AuditFrequencyTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.roi.RoiMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.config.SqualixConfigFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.config.ServeurFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.SqualeReferenceFacade;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.component.ApplicationDAOImpl;
+import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.result.MarkDAOImpl;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.daolayer.result.rulechecking.RuleCheckingTransgressionDAOImpl;
+import org.squale.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
+import org.squale.squalecommon.datatransfertobject.config.ServeurDTO;
+import org.squale.squalecommon.datatransfertobject.result.SqualeReferenceDTO;
+import org.squale.squalecommon.datatransfertobject.transform.component.AuditTransform;
+import org.squale.squalecommon.datatransfertobject.transform.config.AuditFrequencyTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.roi.RoiMetricsBO;
+import org.squale.squalecommon.enterpriselayer.facade.config.SqualixConfigFacade;
+import org.squale.squalecommon.enterpriselayer.facade.config.ServeurFacade;
+import org.squale.squalecommon.enterpriselayer.facade.quality.SqualeReferenceFacade;
 
-import com.airfrance.squalecommon.util.SqualeCommonConstants;
-import com.airfrance.squalecommon.util.SqualeCommonUtils;
-import com.airfrance.squalecommon.util.mail.IMailerProvider;
-import com.airfrance.squalecommon.util.mail.MailerHelper;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.core.purge.Purge;
-import com.airfrance.squalix.messages.Messages;
-import com.airfrance.squalix.messages.MessageMailManager;
-import com.airfrance.squalix.stats.ComputeStats;
-import com.airfrance.squalix.util.sourcesrecovering.SourcesRecoveringOptimisation;
-import com.airfrance.squalix.util.stoptime.StopTimeHelper;
+import org.squale.squalecommon.util.SqualeCommonConstants;
+import org.squale.squalecommon.util.SqualeCommonUtils;
+import org.squale.squalecommon.util.mail.IMailerProvider;
+import org.squale.squalecommon.util.mail.MailerHelper;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.core.purge.Purge;
+import org.squale.squalix.messages.Messages;
+import org.squale.squalix.messages.MessageMailManager;
+import org.squale.squalix.stats.ComputeStats;
+import org.squale.squalix.util.sourcesrecovering.SourcesRecoveringOptimisation;
+import org.squale.squalix.util.stoptime.StopTimeHelper;
 
 /**
  * A partir du fichier de configuration globale, il détermine la séquence des actions pour le projet associé et les
@@ -92,8 +92,8 @@ import com.airfrance.squalix.util.stoptime.StopTimeHelper;
  * Observateur-Observable, dans lequel le scheduler est l'observateur. Sa méthode <code>update()</code> est appelée
  * lorsque l'exécuteur ou la tâche est terminé.
  * 
- * @see com.airfrance.squalix.core.ResourcesManager
- * @see com.airfrance.squalix.core.AuditExecutor
+ * @see org.squale.squalix.core.ResourcesManager
+ * @see org.squale.squalix.core.AuditExecutor
  * @author m400842
  * @version 1.0
  */

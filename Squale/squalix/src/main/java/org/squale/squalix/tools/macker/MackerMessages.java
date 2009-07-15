@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.macker;
+package org.squale.squalix.tools.macker;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * Messages pour la tâche Macker
@@ -34,7 +34,7 @@ public class MackerMessages
      */
     private MackerMessages()
     {
-        super( "com.airfrance.squalix.tools.macker.macker" );
+        super( "org.squale.squalix.tools.macker.macker" );
     }
 
     /**

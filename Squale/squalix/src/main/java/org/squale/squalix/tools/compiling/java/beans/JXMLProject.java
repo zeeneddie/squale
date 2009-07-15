@@ -19,7 +19,7 @@
 /*
  * Créé le 29 juil. 05, par m400832.
  */
-package com.airfrance.squalix.tools.compiling.java.beans;
+package org.squale.squalix.tools.compiling.java.beans;
 
 /**
  * @author m400832

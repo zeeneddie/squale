@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.rsm;
+package org.squale.squalix.tools.rsm;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,9 +24,9 @@ import java.util.StringTokenizer;
 
 import org.w3c.dom.Node;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalix.configurationmanager.ConfigUtility;
-import com.airfrance.squalix.core.TaskData;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalix.configurationmanager.ConfigUtility;
+import org.squale.squalix.core.TaskData;
 
 /**
  */

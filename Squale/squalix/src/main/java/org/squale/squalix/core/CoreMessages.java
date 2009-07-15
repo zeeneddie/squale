@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.core;
+package org.squale.squalix.core;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * 
@@ -34,7 +34,7 @@ public class CoreMessages
      */
     private CoreMessages()
     {
-        super( "com.airfrance.squalix.core.core" );
+        super( "org.squale.squalix.core.core" );
     }
 
     /**

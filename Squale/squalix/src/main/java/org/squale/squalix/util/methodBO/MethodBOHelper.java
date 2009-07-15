@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.methodBO;
+package org.squale.squalix.util.methodBO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO;
-import com.airfrance.squalix.util.repository.ComponentRepository;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.MethodBO;
+import org.squale.squalix.util.repository.ComponentRepository;
 
 /**
  * This class contains methods useful for handling methodBO

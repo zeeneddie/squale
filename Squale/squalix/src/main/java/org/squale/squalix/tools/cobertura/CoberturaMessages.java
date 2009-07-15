@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cobertura;
+package org.squale.squalix.tools.cobertura;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * Messages class for CoberturaTask/CoberturaParser
@@ -36,7 +36,7 @@ public final class CoberturaMessages
     private CoberturaMessages()
     {
         /* Passing in the message.properties file which stores the messages */
-        super( "com.airfrance.squalix.tools.cobertura.coberturaMessages" );
+        super( "org.squale.squalix.tools.cobertura.coberturaMessages" );
     }
 
     /**

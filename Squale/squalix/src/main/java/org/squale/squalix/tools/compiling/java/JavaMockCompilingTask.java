@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java;
+package org.squale.squalix.tools.compiling.java;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -27,15 +27,15 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.tools.compiling.MockCompilingTask;
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
-import com.airfrance.squalix.tools.compiling.configuration.MockCompilingConf;
-import com.airfrance.squalix.util.file.FileUtility;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.tools.compiling.MockCompilingTask;
+import org.squale.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalix.tools.compiling.configuration.MockCompilingConf;
+import org.squale.squalix.util.file.FileUtility;
 
 /**
  * Met à jour les paramètres temporaires liés à la tâche de compilation Java : <br/>
@@ -71,7 +71,7 @@ public class JavaMockCompilingTask
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.core.AbstractTask#execute()
+     * @see org.squale.squalix.core.AbstractTask#execute()
      */
     public void execute()
         throws TaskException
@@ -163,7 +163,7 @@ public class JavaMockCompilingTask
     /**
      * {@inheritDoc} Place le paramétre temporaire <code>CLASSES_DIR</code>
      * 
-     * @see com.airfrance.squalix.tools.compiling.MockCompilingTask#setCompiledDirInTempMap(java.util.List)
+     * @see org.squale.squalix.tools.compiling.MockCompilingTask#setCompiledDirInTempMap(java.util.List)
      */
     protected void setCompiledDirInTempMap( List pDirs )
         throws TaskException

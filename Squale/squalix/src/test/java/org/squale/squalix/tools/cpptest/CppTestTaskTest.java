@@ -16,18 +16,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cpptest;
+package org.squale.squalix.tools.cpptest;
 
 import java.io.File;
 import java.io.IOException;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.CppTestRuleSetDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.util.file.FileUtility;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.datatransfertobject.rulechecking.CppTestRuleSetDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.util.file.FileUtility;
 
 /**
  * Test de la tâche CppTest
@@ -114,7 +114,7 @@ public class CppTestTaskTest
          * @param pLogger
          * @throws IOException
          * @throws InterruptedException {@inheritDoc}
-         * @see com.airfrance.squalix.tools.cpptest.CppTestTask#executeCommand(java.lang.String[], java.lang.String)
+         * @see org.squale.squalix.tools.cpptest.CppTestTask#executeCommand(java.lang.String[], java.lang.String)
          */
         protected void executeCommand( String[] pCommand, String pLogger )
             throws IOException, InterruptedException

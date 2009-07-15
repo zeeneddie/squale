@@ -16,20 +16,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.external.bugtracking.qc;
+package org.squale.squalix.tools.external.bugtracking.qc;
 
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.ExtBugTrackingMetricsBO;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.ExtBugTrackingMetricsBO;
 
-import com.airfrance.squalix.core.TaskException;
+import org.squale.squalix.core.TaskException;
 
 /**
  * Classe de test pour la classe ExtBugTrackingQCTaskStub

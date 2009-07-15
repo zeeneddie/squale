@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.ruleschecking;
+package org.squale.squalix.tools.ruleschecking;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -30,7 +30,7 @@ import org.apache.tools.ant.taskdefs.Java;
 import org.apache.tools.ant.types.Path;
 import org.apache.tools.ant.types.Commandline.Argument;
 
-import com.airfrance.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.core.exception.ConfigurationException;
 
 /**
  * Processus checkstyle L'exécution de l'outil Checkstyle se fait par l'intermédiaire de cette classe. Elle exécute

@@ -19,7 +19,7 @@
 /*
  * Créé le 27 juil. 05, par M400832.
  */
-package com.airfrance.squalix.tools.compiling.java.beans;
+package org.squale.squalix.tools.compiling.java.beans;
 
 import java.io.File;
 import java.util.ArrayList;

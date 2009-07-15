@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.repository;
+package org.squale.squalix.util.repository;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,21 +25,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.component.AbstractComponentDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.MethodDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.JspBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlModelBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.component.AbstractComponentDAOImpl;
+import org.squale.squalecommon.daolayer.component.MethodDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.JspBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.MethodBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.PackageBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.UmlClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.UmlModelBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO;
 
 /**
  * Charger de faire persister les composants.

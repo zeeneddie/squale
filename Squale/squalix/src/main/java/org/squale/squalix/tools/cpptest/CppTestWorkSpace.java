@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cpptest;
+package org.squale.squalix.tools.cpptest;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import java.util.Collection;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalix.util.file.FileUtility;
+import org.squale.squalix.util.file.FileUtility;
 
 /**
  * Espace de travail utilisé pour la génération CppTest CppTest utilise des répertoires pendant son exécution, un

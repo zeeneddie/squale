@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.pmd;
+package org.squale.squalix.tools.pmd;
 
 import java.util.Iterator;
 
@@ -25,17 +25,17 @@ import org.apache.commons.logging.LogFactory;
 
 import net.sourceforge.pmd.Report;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.daolayer.rulechecking.PmdRuleSetDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.pmd.PmdRuleSetBO;
-import com.airfrance.squalecommon.util.file.FileUtility;
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.core.exception.ConfigurationException;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.daolayer.rulechecking.PmdRuleSetDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.pmd.PmdRuleSetBO;
+import org.squale.squalecommon.util.file.FileUtility;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.core.exception.ConfigurationException;
 
 /**
  * Tâche de détection de copier/coller La tâche est configurée par un ou plusieurs paramètres nommés 'language', chaque
@@ -60,7 +60,7 @@ public class PmdTask
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.core.Task#execute()
+     * @see org.squale.squalix.core.Task#execute()
      */
     public void execute()
         throws TaskException

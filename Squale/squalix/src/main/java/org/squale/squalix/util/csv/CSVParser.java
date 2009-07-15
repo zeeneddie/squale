@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\util\\csv\\CSVParser.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\util\\csv\\CSVParser.java
 
-package com.airfrance.squalix.util.csv;
+package org.squale.squalix.util.csv;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -37,7 +37,7 @@ import org.apache.commons.logging.impl.LogFactoryImpl;
  * Permet de parser un fichier CSV (comma separated values) et de le mapper avec un Bean selon un configuration.<br>
  * Les beans à mapper doivent implémenter l'interface <code>CSVBean</code> et posséder les setters publics adéquats.<br>
  * <br>
- * Les dépendances avec le logger JRAF et la classe com.airfrance.squalix.configurationmanager.ConfigUtility doivent
+ * Les dépendances avec le logger JRAF et la classe org.squale.squalix.configurationmanager.ConfigUtility doivent
  * être résolues. <br>
  * Le fichier de mapping (ici csv-mapping.xml) :<br>
  * <code>
@@ -215,7 +215,7 @@ public class CSVParser
         /**
          * {@inheritDoc}
          * 
-         * @see com.airfrance.squalix.util.csv.CSVParser.CSVHandler#processLine(java.util.ArrayList)
+         * @see org.squale.squalix.util.csv.CSVParser.CSVHandler#processLine(java.util.ArrayList)
          */
         public void processLine( List pLine )
         {

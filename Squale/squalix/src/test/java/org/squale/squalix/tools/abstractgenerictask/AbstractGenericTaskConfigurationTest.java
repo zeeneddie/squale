@@ -30,10 +30,10 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.tools.abstractgenerictask.AbstractGenericTaskConfiguration;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.tools.abstractgenerictask.AbstractGenericTaskConfiguration;
 
 /**
  * Test Class of the {@link AbstractGenericTaskConfiguration}

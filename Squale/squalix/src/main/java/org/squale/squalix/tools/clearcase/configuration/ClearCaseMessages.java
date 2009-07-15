@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.clearcase.configuration;
+package org.squale.squalix.tools.clearcase.configuration;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * @author m400832 (by rose)
@@ -35,7 +35,7 @@ public class ClearCaseMessages
      */
     private ClearCaseMessages()
     {
-        super( "com.airfrance.squalix.tools.clearcase.clearcase" );
+        super( "org.squale.squalix.tools.clearcase.clearcase" );
     }
 
     /**

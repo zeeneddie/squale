@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cpptest;
+package org.squale.squalix.tools.cpptest;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,20 +30,20 @@ import java.util.Map.Entry;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.CppTestRuleSetDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.cpptest.CppTestFacade;
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.util.file.FileUtility;
-import com.airfrance.squalix.util.process.ProcessErrorHandler;
-import com.airfrance.squalix.util.process.ProcessManager;
-import com.airfrance.squalix.util.process.ProcessOutputHandler;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.squalecommon.datatransfertobject.rulechecking.CppTestRuleSetDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.enterpriselayer.facade.cpptest.CppTestFacade;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.util.file.FileUtility;
+import org.squale.squalix.util.process.ProcessErrorHandler;
+import org.squale.squalix.util.process.ProcessManager;
+import org.squale.squalix.util.process.ProcessOutputHandler;
 
 /**
  * Tâche CppTest Cette tâche réalise l'interface avec l'outil CppTest pour collecter les données concernant les règles
@@ -323,7 +323,7 @@ public class CppTestTask
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalix.util.process.ProcessErrorHandler#processError(java.lang.String)
+     * @see org.squale.squalix.util.process.ProcessErrorHandler#processError(java.lang.String)
      */
     public void processError( String pErrorMessage )
     {
@@ -333,7 +333,7 @@ public class CppTestTask
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalix.util.process.ProcessOutputHandler#processOutput(java.lang.String)
+     * @see org.squale.squalix.util.process.ProcessOutputHandler#processOutput(java.lang.String)
      */
     public void processOutput( String pOutputLine )
     {

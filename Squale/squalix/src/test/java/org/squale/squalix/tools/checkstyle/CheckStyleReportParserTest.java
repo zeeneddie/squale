@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.checkstyle;
+package org.squale.squalix.tools.checkstyle;
 
 import java.io.File;
 import java.io.FileInputStream;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalix.tools.ruleschecking.CheckstyleReportParser;
-import com.airfrance.squalix.tools.ruleschecking.ReportHandler;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalix.tools.ruleschecking.CheckstyleReportParser;
+import org.squale.squalix.tools.ruleschecking.ReportHandler;
 
 /**
  * Test du parser de rapport checkstyle
@@ -62,7 +62,7 @@ public class CheckStyleReportParserTest
         /**
          * (non-Javadoc)
          * 
-         * @see com.airfrance.squalix.tools.ruleschecking.ReportHandler#processError(java.lang.String, java.lang.String,
+         * @see org.squale.squalix.tools.ruleschecking.ReportHandler#processError(java.lang.String, java.lang.String,
          *      java.lang.String, java.lang.String, java.lang.String, java.lang.String)
          */
         public void processError( String pFileName, String pLine, String pColumn, String pSeverity, String pMessage,

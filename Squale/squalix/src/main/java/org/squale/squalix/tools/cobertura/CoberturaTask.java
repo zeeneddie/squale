@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cobertura;
+package org.squale.squalix.tools.cobertura;
 
 import java.io.File;
 import java.util.Iterator;
@@ -25,19 +25,19 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.AbstractCoberturaMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaClassMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaMethodMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaPackageMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaProjectMetricsBO;
-import com.airfrance.squalix.tools.abstractgenerictask.AbstractGenericTask;
-import com.airfrance.squalix.util.parser.JavaParser;
-import com.airfrance.squalix.util.repository.ComponentRepository;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.MethodBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.PackageBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.AbstractCoberturaMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaClassMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaMethodMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaPackageMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaProjectMetricsBO;
+import org.squale.squalix.tools.abstractgenerictask.AbstractGenericTask;
+import org.squale.squalix.util.parser.JavaParser;
+import org.squale.squalix.util.repository.ComponentRepository;
 
 /**
  * <p>

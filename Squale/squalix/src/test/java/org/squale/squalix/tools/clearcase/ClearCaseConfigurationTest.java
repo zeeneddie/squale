@@ -16,21 +16,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.clearcase;
+package org.squale.squalix.tools.clearcase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalix.tools.clearcase.configuration.ClearCaseConfiguration;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalix.tools.clearcase.configuration.ClearCaseConfiguration;
 
 /**
  * Cette classe teste la configuration de la tâche ClearCase.

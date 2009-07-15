@@ -19,7 +19,7 @@
 /*
  * Créé le 1 août 05, par m400832.
  */
-package com.airfrance.squalix.tools.compiling.java.adapter;
+package org.squale.squalix.tools.compiling.java.adapter;
 
 /**
  * Cette classe représente un "composant" de compilation JAVA, i.e. un parseur ou un compilateur. <br />

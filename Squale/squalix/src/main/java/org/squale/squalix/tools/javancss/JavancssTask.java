@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.javancss;
+package org.squale.squalix.tools.javancss;
 
 /*
  * Some parts of the code are inspired by the MOJO javancss plug-in : 
@@ -51,28 +51,28 @@ import java.util.Set;
 import javancss.Javancss;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssClassMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssMethodMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssPackageMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssProjectMetricsBO;
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.util.buildpath.BuildProjectPath;
-import com.airfrance.squalix.util.file.FileUtility;
-import com.airfrance.squalix.util.methodBO.MethodBOHelper;
-import com.airfrance.squalix.util.parser.JavaParser;
-import com.airfrance.squalix.util.repository.ComponentRepository;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.MethodBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.PackageBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssClassMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssMethodMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssPackageMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssProjectMetricsBO;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.util.buildpath.BuildProjectPath;
+import org.squale.squalix.util.file.FileUtility;
+import org.squale.squalix.util.methodBO.MethodBOHelper;
+import org.squale.squalix.util.parser.JavaParser;
+import org.squale.squalix.util.repository.ComponentRepository;
 
 /**
  * This Class is the task for the javancss tool.

@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\core\\Task.java
-package com.airfrance.squalix.core;
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\core\\Task.java
+package org.squale.squalix.core;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -34,27 +34,27 @@ import java.util.TimeZone;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.component.ApplicationDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.AuditDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.ErrorDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
-import com.airfrance.squalecommon.util.SqualeCommonConstants;
-import com.airfrance.squalecommon.util.SqualeCommonUtils;
-import com.airfrance.squalecommon.util.mail.IMailerProvider;
-import com.airfrance.squalecommon.util.mail.MailerHelper;
-import com.airfrance.squalix.messages.MessageMailManager;
-import com.airfrance.squalix.messages.Messages;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.component.ApplicationDAOImpl;
+import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.result.ErrorDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import org.squale.squalecommon.util.SqualeCommonConstants;
+import org.squale.squalecommon.util.SqualeCommonUtils;
+import org.squale.squalecommon.util.mail.IMailerProvider;
+import org.squale.squalecommon.util.mail.MailerHelper;
+import org.squale.squalix.messages.MessageMailManager;
+import org.squale.squalix.messages.Messages;
 
 /**
  * Représente une façade permettant d'exécuter une tâche.<br>

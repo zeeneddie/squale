@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java.compiler.eclipse;
+package org.squale.squalix.tools.compiling.java.compiler.eclipse;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,21 +27,21 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.squalecommon.datatransfertobject.message.MessagesDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.message.MessageFacade;
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
-import com.airfrance.squalix.tools.compiling.java.beans.JWSADProject;
-import com.airfrance.squalix.tools.compiling.java.configuration.EclipseCompilingConfiguration;
-import com.airfrance.squalix.util.file.FileUtility;
-import com.airfrance.squalix.util.process.ProcessErrorHandler;
-import com.airfrance.squalix.util.process.ProcessManager;
-import com.airfrance.squalix.util.process.ProcessOutputHandler;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.squalecommon.datatransfertobject.message.MessagesDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import org.squale.squalecommon.enterpriselayer.facade.message.MessageFacade;
+import org.squale.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalix.tools.compiling.java.beans.JWSADProject;
+import org.squale.squalix.tools.compiling.java.configuration.EclipseCompilingConfiguration;
+import org.squale.squalix.util.file.FileUtility;
+import org.squale.squalix.util.process.ProcessErrorHandler;
+import org.squale.squalix.util.process.ProcessManager;
+import org.squale.squalix.util.process.ProcessOutputHandler;
 
 /**
  * Compilation avec le plugin eclipse 3.2 (testé sous Eclipse 3.2.1 et 3.3.0)
@@ -505,7 +505,7 @@ public class EclipseCompiler
     /**
      * {@inheritdoc}
      * 
-     * @see com.airfrance.squalix.util.process.ProcessErrorHandler#processError(java.lang.String)
+     * @see org.squale.squalix.util.process.ProcessErrorHandler#processError(java.lang.String)
      */
     public void processError( String pErrorMessage )
     {
@@ -515,7 +515,7 @@ public class EclipseCompiler
     /**
      * {@inheritdoc}
      * 
-     * @see com.airfrance.squalix.util.process.ProcessOutputHandler#processOutput(java.lang.String)
+     * @see org.squale.squalix.util.process.ProcessOutputHandler#processOutput(java.lang.String)
      */
     public void processOutput( String pOutputLine )
     {

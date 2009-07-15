@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.mccabe;
+package org.squale.squalix.tools.mccabe;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalix.util.parser.LanguageParser;
+import org.squale.squalix.util.parser.LanguageParser;
 
 /**
  * Tâche McCabe pour les projet de langage par objet (Java, C++, etc.).

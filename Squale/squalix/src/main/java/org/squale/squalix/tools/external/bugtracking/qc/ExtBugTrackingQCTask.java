@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.external.bugtracking.qc;
+package org.squale.squalix.tools.external.bugtracking.qc;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.ExtBugTrackingMetricsBO;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.tools.external.bugtracking.AbstractExtBugTrackingTask;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.ExtBugTrackingMetricsBO;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.tools.external.bugtracking.AbstractExtBugTrackingTask;
 
 /**
  *

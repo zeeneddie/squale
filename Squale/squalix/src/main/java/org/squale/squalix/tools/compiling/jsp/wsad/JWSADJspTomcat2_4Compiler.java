@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.jsp.wsad;
+package org.squale.squalix.tools.compiling.jsp.wsad;
 
 import java.io.File;
 
 import org.apache.tools.ant.taskdefs.Java;
 
-import com.airfrance.squalix.tools.compiling.jsp.bean.J2eeWSADProject;
+import org.squale.squalix.tools.compiling.jsp.bean.J2eeWSADProject;
 
 /**
  * Compilation des JSPs avec Tomcat 5 pour les spécifications servlet 2.4 (Testé avec tomcat 5.5.25) Testé avec tomcat
@@ -43,7 +43,7 @@ public class JWSADJspTomcat2_4Compiler
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.compiling.jsp.wsad.AbstractTomcatCompiler#setJavaArgs(org.apache.tools.ant.taskdefs.Java,
+     * @see org.squale.squalix.tools.compiling.jsp.wsad.AbstractTomcatCompiler#setJavaArgs(org.apache.tools.ant.taskdefs.Java,
      *      java.lang.String, java.lang.String, java.io.File)
      */
     protected void setJavaArgs( Java java, String packageName, File jspFile )

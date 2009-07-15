@@ -22,7 +22,7 @@
  * To change the template for this generated file go to
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
-package com.airfrance.squalix.tools.mccabe;
+package org.squale.squalix.tools.mccabe;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -40,7 +40,7 @@ public class AllTests
      */
     public static Test suite()
     {
-        TestSuite suite = new TestSuite( "Test for com.airfrance.squalix.tools.mccabe" );
+        TestSuite suite = new TestSuite( "Test for org.squale.squalix.tools.mccabe" );
         // $JUnit-BEGIN$
         suite.addTest( new TestSuite( McCabeConfigurationTest.class ) );
         suite.addTest( new TestSuite( McCabePCFFileTest.class ) );

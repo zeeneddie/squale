@@ -22,17 +22,17 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalix.tools.computing.project;
+package org.squale.squalix.tools.computing.project;
 
 import java.util.ArrayList;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.rule.AuditComputing;
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.tools.computing.ComputingMessages;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import org.squale.squalecommon.enterpriselayer.facade.rule.AuditComputing;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.tools.computing.ComputingMessages;
 
 /**
  * @author M400843

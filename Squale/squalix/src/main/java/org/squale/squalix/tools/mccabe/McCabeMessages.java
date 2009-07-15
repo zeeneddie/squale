@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.mccabe;
+package org.squale.squalix.tools.mccabe;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * @author m400842 (by rose)
@@ -37,7 +37,7 @@ public class McCabeMessages
      */
     private McCabeMessages()
     {
-        super( "com.airfrance.squalix.tools.mccabe.mccabe" );
+        super( "org.squale.squalix.tools.mccabe.mccabe" );
     }
 
     /**

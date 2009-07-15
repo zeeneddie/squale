@@ -19,25 +19,25 @@
 /*
  * Créé le 2 août 05, par M400832.
  */
-package com.airfrance.squalix.tools.compiling.java;
+package org.squale.squalix.tools.compiling.java;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.ProjectParameterDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.tools.compiling.utility.FileManager;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectParameterDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.tools.compiling.utility.FileManager;
 
 /**
  * Il faut penser à modifier les clés javac.executable.1_5 et java.executable.1_5 dans le fichier compiling.properties

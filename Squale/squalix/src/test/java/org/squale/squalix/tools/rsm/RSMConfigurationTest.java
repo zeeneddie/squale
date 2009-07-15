@@ -16,24 +16,24 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.rsm;
+package org.squale.squalix.tools.rsm;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.ProjectParameterDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.ProjectProfileDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
-import com.airfrance.squalix.core.TaskData;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectParameterDAOImpl;
+import org.squale.squalecommon.daolayer.config.ProjectProfileDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
+import org.squale.squalix.core.TaskData;
 
 /**
  */

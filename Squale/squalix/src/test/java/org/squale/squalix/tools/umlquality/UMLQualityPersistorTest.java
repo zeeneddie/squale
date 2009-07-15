@@ -22,24 +22,24 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalix.tools.umlquality;
+package org.squale.squalix.tools.umlquality;
 
 import java.util.Collection;
 
 import junit.framework.TestCase;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.daolayer.component.AbstractComponentDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.ProjectParameterDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlModelBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.daolayer.component.AbstractComponentDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectParameterDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.UmlClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.UmlModelBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
 
 /**
  * Teste la peristance des résultats issus de UMLQuality.

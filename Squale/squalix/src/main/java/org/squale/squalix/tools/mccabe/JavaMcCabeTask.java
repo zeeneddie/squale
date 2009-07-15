@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.mccabe;
+package org.squale.squalix.tools.mccabe;
 
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalix.util.csv.CSVParser;
-import com.airfrance.squalix.util.parser.J2EEParser;
+import org.squale.squalix.util.csv.CSVParser;
+import org.squale.squalix.util.parser.J2EEParser;
 
 /**
  * Exécute l'analyse McCabe sur un projet java. L'environnement McCabe doit être correctement initialisé avant le
@@ -55,7 +55,7 @@ public class JavaMcCabeTask
     /**
      * {@inheritDoc} On doit utiliser un parser java
      * 
-     * @see com.airfrance.squalix.tools.mccabe.AbstractMcCabeTask#setParser()
+     * @see org.squale.squalix.tools.mccabe.AbstractMcCabeTask#setParser()
      */
     public void setParser()
     {
@@ -65,7 +65,7 @@ public class JavaMcCabeTask
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.mccabe.AbstractMcCabeTask#setClassTemplate()
+     * @see org.squale.squalix.tools.mccabe.AbstractMcCabeTask#setClassTemplate()
      */
     public void setClassTemplate()
     {
@@ -75,7 +75,7 @@ public class JavaMcCabeTask
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.mccabe.AbstractMcCabeTask#createReport(java.lang.String)
+     * @see org.squale.squalix.tools.mccabe.AbstractMcCabeTask#createReport(java.lang.String)
      */
     protected void createReport( String pReport )
         throws Exception
@@ -98,7 +98,7 @@ public class JavaMcCabeTask
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.util.csv.CSVParser.CSVHandler#processLine(java.util.ArrayList)
+     * @see org.squale.squalix.util.csv.CSVParser.CSVHandler#processLine(java.util.ArrayList)
      */
     public void processLine( List pLine )
     {

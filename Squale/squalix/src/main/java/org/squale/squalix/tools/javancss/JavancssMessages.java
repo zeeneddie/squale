@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.javancss;
+package org.squale.squalix.tools.javancss;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * This class permit to get back a message associate to a key. So there is only the key in the code and all real
@@ -36,7 +36,7 @@ public final class JavancssMessages
      */
     private JavancssMessages()
     {
-        super( "com.airfrance.squalix.tools.javancss.javancssMessages" );
+        super( "org.squale.squalix.tools.javancss.javancssMessages" );
     }
 
     /**

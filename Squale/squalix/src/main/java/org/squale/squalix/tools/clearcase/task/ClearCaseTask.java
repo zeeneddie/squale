@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\tools\\clearcase\\ClearCaseTask.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\tools\\clearcase\\ClearCaseTask.java
 
-package com.airfrance.squalix.tools.clearcase.task;
+package org.squale.squalix.tools.clearcase.task;
 
 import java.io.File;
 import java.util.Iterator;
@@ -29,19 +29,19 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.tools.clearcase.configuration.ClearCaseConfiguration;
-import com.airfrance.squalix.tools.clearcase.configuration.ClearCaseMessages;
-import com.airfrance.squalix.util.process.ProcessErrorHandler;
-import com.airfrance.squalix.util.process.ProcessManager;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.tools.clearcase.configuration.ClearCaseConfiguration;
+import org.squale.squalix.tools.clearcase.configuration.ClearCaseMessages;
+import org.squale.squalix.util.process.ProcessErrorHandler;
+import org.squale.squalix.util.process.ProcessManager;
 
 /**
  * Cette classe permet de monter une vue ClearCase snapshot.<br />
@@ -49,7 +49,7 @@ import com.airfrance.squalix.util.process.ProcessManager;
  * 
  * @author m400832 (by rose)
  * @version 2.0
- * @see com.airfrance.squalix.core.Task
+ * @see org.squale.squalix.core.Task
  */
 public class ClearCaseTask
     extends AbstractTask
@@ -161,7 +161,7 @@ public class ClearCaseTask
     /**
      * {@inheritDoc} Créé la configuration clearcase et charge l'application et le projet en base
      * 
-     * @see com.airfrance.squalix.core.Task#execute()
+     * @see org.squale.squalix.core.Task#execute()
      */
     public void execute()
         throws TaskException
@@ -349,7 +349,7 @@ public class ClearCaseTask
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.util.process.ProcessErrorHandler#processError(java.lang.String)
+     * @see org.squale.squalix.util.process.ProcessErrorHandler#processError(java.lang.String)
      */
     public void processError( String pErrorMessage )
     {

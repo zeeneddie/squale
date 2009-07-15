@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.process;
+package org.squale.squalix.util.process;
 
 import java.io.File;
 
-import com.airfrance.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.SqualeTestCase;
 
 /**
  * Test de lancement de processus
@@ -84,7 +84,7 @@ public class ProcessManagerTest
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalix.util.process.ProcessErrorHandler#processError(java.lang.String)
+     * @see org.squale.squalix.util.process.ProcessErrorHandler#processError(java.lang.String)
      */
     public void processError( String pErrorMessage )
     {
@@ -94,7 +94,7 @@ public class ProcessManagerTest
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalix.util.process.ProcessOutputHandler#processOutput(java.lang.String)
+     * @see org.squale.squalix.util.process.ProcessOutputHandler#processOutput(java.lang.String)
      */
     public void processOutput( String pOutputLine )
     {

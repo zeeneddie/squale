@@ -19,9 +19,9 @@
 /*
  * Créé le 6 sept. 05, par m400832.
  */
-package com.airfrance.squalix.tools.clearcase.utility;
+package org.squale.squalix.tools.clearcase.utility;
 
-import com.airfrance.squalix.tools.clearcase.configuration.ClearCaseConfiguration;
+import org.squale.squalix.tools.clearcase.configuration.ClearCaseConfiguration;
 
 /**
  * @author m400832

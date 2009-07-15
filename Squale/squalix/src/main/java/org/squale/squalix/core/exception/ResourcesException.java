@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\core\\exception\\ResourcesException.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\core\\exception\\ResourcesException.java
 
-package com.airfrance.squalix.core.exception;
+package org.squale.squalix.core.exception;
 
 /**
  * Exception du gestionnaire de ressources

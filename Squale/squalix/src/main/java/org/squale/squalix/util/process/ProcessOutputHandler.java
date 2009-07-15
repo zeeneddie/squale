@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.process;
+package org.squale.squalix.util.process;
 
 /**
  * Traitement de la sortie d'un processus Le traitement de la sortie d'un processus externe se fait au travers d'un

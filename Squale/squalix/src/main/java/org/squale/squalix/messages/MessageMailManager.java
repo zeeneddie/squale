@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.messages;
+package org.squale.squalix.messages;
 
 import java.util.TreeMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import com.airfrance.squalix.messages.Messages;
+import org.squale.squalix.messages.Messages;
 
 public class MessageMailManager
 {

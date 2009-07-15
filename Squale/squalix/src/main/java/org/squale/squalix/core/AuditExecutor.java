@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\core\\AuditExecutor.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\core\\AuditExecutor.java
 
-package com.airfrance.squalix.core;
+package org.squale.squalix.core;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,11 +27,11 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
-import com.airfrance.squalix.messages.Messages;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
+import org.squale.squalix.messages.Messages;
 
 /**
  * Exécute un audit entier sur un projet. <br />
@@ -49,7 +49,7 @@ import com.airfrance.squalix.messages.Messages;
  * graphiques...).</li>
  * </ul>
  * 
- * @see com.airfrance.squalix.configurationmanager.Configuration
+ * @see org.squale.squalix.configurationmanager.Configuration
  * @author m400842
  * @version 1.0
  */

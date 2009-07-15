@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.core.quartz;
+package org.squale.squalix.core.quartz;
 
 import java.io.InputStream;
 
 import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.airfrance.squalecommon.util.xml.XmlImport;
-import com.airfrance.squalix.configurationmanager.ConfigUtility;
-import com.airfrance.squalix.core.exception.ConfigurationException;
+import org.squale.squalecommon.util.xml.XmlImport;
+import org.squale.squalix.configurationmanager.ConfigUtility;
+import org.squale.squalix.core.exception.ConfigurationException;
 
 /**
  * This class get back the configuration for the Javancss task. This task is done by reading an xml file :

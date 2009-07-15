@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.process;
+package org.squale.squalix.util.process;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,7 +28,7 @@ import java.util.StringTokenizer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalix.messages.Messages;
+import org.squale.squalix.messages.Messages;
 
 /**
  * Manager de lancement de processus externe Une processus permet le lancement d'une commande externe et son suivi en

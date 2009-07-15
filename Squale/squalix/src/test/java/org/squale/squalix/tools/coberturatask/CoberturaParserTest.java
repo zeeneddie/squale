@@ -24,7 +24,7 @@ import org.apache.commons.digester.Digester;
 import org.junit.After;
 import org.junit.Before;
 
-import com.airfrance.squalix.tools.cobertura.CoberturaParser;
+import org.squale.squalix.tools.cobertura.CoberturaParser;
 
 import junit.framework.TestCase;
 

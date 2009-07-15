@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.pmd;
+package org.squale.squalix.tools.pmd;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * Messages pour la tâche PMD
@@ -34,7 +34,7 @@ public class PmdMessages
      */
     private PmdMessages()
     {
-        super( "com.airfrance.squalix.tools.pmd.pmd" );
+        super( "org.squale.squalix.tools.pmd.pmd" );
     }
 
     /**

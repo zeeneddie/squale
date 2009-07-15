@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\core\\Squalix.java
-package com.airfrance.squalix.core;
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\core\\Squalix.java
+package org.squale.squalix.core;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,9 +33,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.impl.StdSchedulerFactory;
 
-import com.airfrance.jraf.bootstrap.initializer.Initializer;
-import com.airfrance.squalix.messages.Messages;
-import com.airfrance.squalix.core.quartz.QuartzSqualixScheduler;
+import org.squale.jraf.bootstrap.initializer.Initializer;
+import org.squale.squalix.messages.Messages;
+import org.squale.squalix.core.quartz.QuartzSqualixScheduler;
 
 /**
  * Lance l'application Squalix. <br /> Ceci consiste en quelques opérations simples :
@@ -48,8 +48,8 @@ import com.airfrance.squalix.core.quartz.QuartzSqualixScheduler;
  * plus de renseignements sur le fonctionnement du moteur de tâches, reportez-vous à la javadoc des classes
  * <code>Scheduler</code> et <code>ResourcesManager</code>.
  * 
- * @see com.airfrance.squalix.core.Scheduler
- * @see com.airfrance.squalix.core.ResourcesManager
+ * @see org.squale.squalix.core.Scheduler
+ * @see org.squale.squalix.core.ResourcesManager
  * @author m400842
  * @version 1.0
  */

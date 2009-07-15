@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\core\\TaskUtility.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\core\\TaskUtility.java
 
-package com.airfrance.squalix.core;
+package org.squale.squalix.core;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
-import com.airfrance.squalix.messages.Messages;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
+import org.squale.squalix.messages.Messages;
 
 /**
  * Cette classe fournit un certin nombre de méthodes "utilitaires" utilisables par les toutes les tâches et le moteur.

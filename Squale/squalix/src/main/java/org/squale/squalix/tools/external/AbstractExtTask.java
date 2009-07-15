@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.external;
+package org.squale.squalix.tools.external;
 
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskException;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskException;
 
 /**
  * classe abstraite de base des taches externes

@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\tools\\clearcase\\ClearCaseConfiguration.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\tools\\clearcase\\ClearCaseConfiguration.java
 
-package com.airfrance.squalix.tools.clearcase.configuration;
+package org.squale.squalix.tools.clearcase.configuration;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -30,18 +30,18 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalix.configurationmanager.ConfigUtility;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.tools.clearcase.utility.ClearCaseStringCleaner;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalix.configurationmanager.ConfigUtility;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.tools.clearcase.utility.ClearCaseStringCleaner;
 
 /**
  * Cette classe gère la configuration pour les tâches de montage et démontage des vues ClearCase snapshot.
@@ -443,7 +443,7 @@ public class ClearCaseConfiguration
      *            des méthodes prenant elles-même 2 <code>java.lang.String</code> en paramètres.
      * @throws Exception génère une exception si le nom du noeud ne correspond pas à une des valeurs définies dans le
      *             fichier de configuration <code>
-     * com.airfrance.squalix.tools.clearcase.clearcase.properties</code>.
+     * org.squale.squalix.tools.clearcase.clearcase.properties</code>.
      * @see ConfigUtility
      */
     private void processFromXML( final Node pNode, final String pRootAnchor, final String pChildAnchor,

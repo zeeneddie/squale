@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.checkstyle;
+package org.squale.squalix.tools.checkstyle;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -33,7 +33,7 @@ public class AllTests
      */
     public static Test suite()
     {
-        TestSuite suite = new TestSuite( "Test for com.airfrance.squalix.tools.checkstyle" );
+        TestSuite suite = new TestSuite( "Test for org.squale.squalix.tools.checkstyle" );
         // $JUnit-BEGIN$
         suite.addTest( new TestSuite( CheckStyleConfigurationTest.class ) );
         suite.addTest( new TestSuite( CheckStyleProcessTest.class ) );

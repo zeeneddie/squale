@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\util\\csv\\CSVConfigurationGetter.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\util\\csv\\CSVConfigurationGetter.java
 
-package com.airfrance.squalix.util.csv;
+package org.squale.squalix.util.csv;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -29,7 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Node;
 
-import com.airfrance.squalix.configurationmanager.ConfigUtility;
+import org.squale.squalix.configurationmanager.ConfigUtility;
 
 /**
  * Cette classe pourra utiliser jakarta.commons.configuration pour récupérer la configuration du framework.

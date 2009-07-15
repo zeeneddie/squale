@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.sourcesrecovering;
+package org.squale.squalix.util.sourcesrecovering;
 
 import java.util.HashSet;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 
 /**
  * This class is used for doing the optimization of the source code recovering. Its aim is to verify if the sources have

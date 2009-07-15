@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.ruleschecking;
+package org.squale.squalix.tools.ruleschecking;
 
 import java.io.InputStream;
 
@@ -24,9 +24,9 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.util.xml.XmlImport;
-import com.airfrance.squalix.configurationmanager.ConfigUtility;
-import com.airfrance.squalix.core.exception.ConfigurationException;
+import org.squale.squalecommon.util.xml.XmlImport;
+import org.squale.squalix.configurationmanager.ConfigUtility;
+import org.squale.squalix.core.exception.ConfigurationException;
 
 /**
  * Configuration Checkstyle La configuration Checkstyle est définie dans un fichier XML, celui-ci est lu par cette
@@ -69,7 +69,7 @@ public class CheckstyleConfiguration
         StringBuffer errors = new StringBuffer();
         Digester digester =
             preSetupDigester( "-//Squale //DTD Checkstyle Configuration 1.1//EN",
-                              "/com/airfrance/squalix/tools/ruleschecking/checkstyle-config-1.1.dtd", errors );
+                              "/org/squale/squalix/tools/ruleschecking/checkstyle-config-1.1.dtd", errors );
         // Traitement du répertoire de génération des reports
         digester.addCallMethod( "checkstyle-configuration/reportDirectory", "setReportDirectory", 1,
                                 new Class[] { String.class } );

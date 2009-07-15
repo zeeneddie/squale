@@ -19,7 +19,7 @@
 /*
  * Créé le 27 juil. 05, par M400832.
  */
-package com.airfrance.squalix.tools.compiling.java.parser.configuration;
+package org.squale.squalix.tools.compiling.java.parser.configuration;
 
 import java.io.File;
 
@@ -32,19 +32,19 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.airfrance.squalix.configurationmanager.ConfigUtility;
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalix.configurationmanager.ConfigUtility;
+import org.squale.squalix.tools.compiling.CompilingMessages;
 
 /**
  * Cette classe utilise les méthodes de la classe <code>
- * com.airfrance.squalix.configurationmanager.ConfigUtility</code>.
+ * org.squale.squalix.configurationmanager.ConfigUtility</code>.
  * <br/> La seule modification apportée se situe dans la méthode <code>
  * getRootNode(String, String)</code>. La méthode
  * <code>
  * db.parse()</code> ne prend plus un <code>InputStream</code> issu d'un <code>RessourceBundle</code> en
  * paramètre, mais une <code>String</code> qui est un chemin absolu.
  * 
- * @see com.airfrance.squalix.configurationmanager.ConfigUtility
+ * @see org.squale.squalix.configurationmanager.ConfigUtility
  * @author m400832
  * @version 1.0
  */

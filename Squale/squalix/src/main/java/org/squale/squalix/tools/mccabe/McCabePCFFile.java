@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\tools\\mccabe\\McCabePCFFile.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\tools\\mccabe\\McCabePCFFile.java
 
-package com.airfrance.squalix.tools.mccabe;
+package org.squale.squalix.tools.mccabe;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,12 +31,12 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.util.buildpath.BuildProjectPath;
-import com.airfrance.squalix.util.file.FileUtility;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.util.buildpath.BuildProjectPath;
+import org.squale.squalix.util.file.FileUtility;
 
 /**
  * Crée un fichier config.pcf à partir de la configuration de l'application, et le place dans l'espace de travail

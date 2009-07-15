@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\configurationmanager\\ConfigUtility.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\configurationmanager\\ConfigUtility.java
 
-package com.airfrance.squalix.configurationmanager;
+package org.squale.squalix.configurationmanager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,7 +38,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.airfrance.squalix.messages.Messages;
+import org.squale.squalix.messages.Messages;
 
 /**
  * Cette classe fournit des méthodes "utilitaires" utilisables par les tâches pour manipuler des fichiers XML de

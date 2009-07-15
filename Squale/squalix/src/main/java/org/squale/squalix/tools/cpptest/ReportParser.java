@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cpptest;
+package org.squale.squalix.tools.cpptest;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -27,9 +27,9 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
-import com.airfrance.squalecommon.util.xml.XmlImport;
-import com.airfrance.squalix.core.exception.ConfigurationException;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
+import org.squale.squalecommon.util.xml.XmlImport;
+import org.squale.squalix.core.exception.ConfigurationException;
 
 /**
  * Parseur de résultat cppTest CppTest génère ses résultats sous la forme de fichier XML, cette classe permet de lire le

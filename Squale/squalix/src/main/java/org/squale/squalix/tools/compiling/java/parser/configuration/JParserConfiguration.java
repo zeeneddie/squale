@@ -19,9 +19,9 @@
 /*
  * Créé le 27 juil. 05, par M400832.
  */
-package com.airfrance.squalix.tools.compiling.java.parser.configuration;
+package org.squale.squalix.tools.compiling.java.parser.configuration;
 
-import com.airfrance.squalix.tools.compiling.java.configuration.JCompilingConfiguration;
+import org.squale.squalix.tools.compiling.java.configuration.JCompilingConfiguration;
 
 /**
  * Configuration générique des parseurs.

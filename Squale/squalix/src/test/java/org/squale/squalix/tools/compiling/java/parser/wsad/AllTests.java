@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java.parser.wsad;
+package org.squale.squalix.tools.compiling.java.parser.wsad;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -34,7 +34,7 @@ public class AllTests
      */
     public static Test suite()
     {
-        TestSuite suite = new TestSuite( "Test for com.airfrance.squalix.tools.compiling.java.parser.wsad" );
+        TestSuite suite = new TestSuite( "Test for org.squale.squalix.tools.compiling.java.parser.wsad" );
         // $JUnit-BEGIN$
         suite.addTest( new TestSuite( JWSADParserTest.class ) );
         suite.addTest( new TestSuite( JWSADParserConfigurationTest.class ) );

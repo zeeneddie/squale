@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.csv;
+package org.squale.squalix.util.csv;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * @author m400842 (by rose)
@@ -49,6 +49,6 @@ public class CSVMessages
      */
     private CSVMessages()
     {
-        super( "com.airfrance.squalix.util.csv.csv" );
+        super( "org.squale.squalix.util.csv.csv" );
     }
 }

@@ -19,7 +19,7 @@
 /*
  * Créé le 26 sept. 05, par M400832.
  */
-package com.airfrance.squalix.tools.compiling.utility;
+package org.squale.squalix.tools.compiling.utility;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

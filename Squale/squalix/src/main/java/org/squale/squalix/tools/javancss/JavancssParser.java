@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.javancss;
+package org.squale.squalix.tools.javancss;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,8 +24,8 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
-import com.airfrance.squalecommon.util.xml.XmlImport;
-import com.airfrance.squalix.core.TaskException;
+import org.squale.squalecommon.util.xml.XmlImport;
+import org.squale.squalix.core.TaskException;
 
 /**
  * This class contains all the methods needed for doing the parse of the javancss xml result file

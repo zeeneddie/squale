@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.jdepend;
+package org.squale.squalix.tools.jdepend;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * Messages pour la tâche ckjm
@@ -34,7 +34,7 @@ public class JDependMessages
      */
     private JDependMessages()
     {
-        super( "com.airfrance.squalix.tools.jdepend.jdepend" );
+        super( "org.squale.squalix.tools.jdepend.jdepend" );
     }
 
     /**

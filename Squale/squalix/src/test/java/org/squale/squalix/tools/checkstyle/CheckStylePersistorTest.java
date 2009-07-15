@@ -16,17 +16,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.checkstyle;
+package org.squale.squalix.tools.checkstyle;
 
 import java.io.File;
 import java.io.FileInputStream;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.CheckstyleTransgressionBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.checkstyle.xml.CheckstyleImport;
-import com.airfrance.squalix.tools.ruleschecking.CheckStylePersistor;
-import com.airfrance.squalix.tools.ruleschecking.CheckstyleReportParser;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.CheckstyleTransgressionBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO;
+import org.squale.squalecommon.enterpriselayer.facade.checkstyle.xml.CheckstyleImport;
+import org.squale.squalix.tools.ruleschecking.CheckStylePersistor;
+import org.squale.squalix.tools.ruleschecking.CheckstyleReportParser;
 
 /**
  * Test de la persistance checkstyle

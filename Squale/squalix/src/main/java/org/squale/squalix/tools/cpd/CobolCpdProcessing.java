@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cpd;
+package org.squale.squalix.tools.cpd;
 
 /**
  * Classe réalisant la détection du copier-coller en Cobol.
@@ -30,7 +30,7 @@ public class CobolCpdProcessing
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.cpd.AbstractCpdTask#getTokenThreshold()
+     * @see org.squale.squalix.tools.cpd.AbstractCpdTask#getTokenThreshold()
      */
     @Override
     protected int getTokenThreshold()
@@ -41,7 +41,7 @@ public class CobolCpdProcessing
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.cpd.AbstractCpdProcessing#getExtension()
+     * @see org.squale.squalix.tools.cpd.AbstractCpdProcessing#getExtension()
      */
     @Override
     protected String[] getExtensions()

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java.parser.rsa;
+package org.squale.squalix.tools.compiling.java.parser.rsa;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,11 +28,11 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
-import com.airfrance.squalix.tools.compiling.java.beans.JRSAProject;
-import com.airfrance.squalix.tools.compiling.java.beans.JWSADProject;
-import com.airfrance.squalix.tools.compiling.java.parser.wsad.JWSADParser;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalix.tools.compiling.java.beans.JRSAProject;
+import org.squale.squalix.tools.compiling.java.beans.JWSADProject;
+import org.squale.squalix.tools.compiling.java.parser.wsad.JWSADParser;
 
 /**
  * Parser de fichier <code>.classpath</code> pour RSA7
@@ -75,7 +75,7 @@ public class JRSAParser
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.compiling.java.parser.wsad.JWSADParser#mapKeyValues(com.airfrance.squalix.tools.compiling.java.beans.JWSADProject,
+     * @see org.squale.squalix.tools.compiling.java.parser.wsad.JWSADParser#mapKeyValues(org.squale.squalix.tools.compiling.java.beans.JWSADProject,
      *      java.lang.String, java.lang.String, boolean)
      */
     protected void mapKeyValues( JWSADProject pProject, String pKeyName, String pKeyValue, boolean pExported )

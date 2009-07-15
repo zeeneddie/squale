@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.file;
+package org.squale.squalix.util.file;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.apache.tools.ant.DirectoryScanner;
 
-import com.airfrance.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.SqualeTestCase;
 
 /**
  * Test du filtre avec répertoires exclus
@@ -57,17 +57,17 @@ public class ExtensionIncludedFileFilterTest
         filter.setBaseDir( src );
 
         // Test de fichier autorisés
-        File f = new File( "src/com\\airfrance/squalix\\core", "PurgeTest.java" ); // Mélange de / et \ volontaire
+        File f = new File( "src/org\\squale/squalix\\core", "PurgeTest.java" ); // Mélange de / et \ volontaire
         assertTrue( "File ok", filter.accept( f ) );
-        f = new File( "src/com/airfrance/squalix/tools/checkstyle", "AllTests.java" ); // Mélange de / et \ volontaire
+        f = new File( "src/org/squale/squalix/tools/checkstyle", "AllTests.java" ); // Mélange de / et \ volontaire
         assertTrue( "File ok", filter.accept( f ) );
 
         // Test de fichiers exclus
-        f = new File( "src/com/airfrance/squalix/tools/compiling/java/compiler/impl", "AllTests.jsp" ); // Mélange de /
+        f = new File( "src/org/squale/squalix/tools/compiling/java/compiler/impl", "AllTests.jsp" ); // Mélange de /
                                                                                                         // et \
                                                                                                         // volontaire
         assertFalse( "File rejected", filter.accept( f ) );
-        f = new File( "src\\com/airfrance/squalix\\tools/compiling/java/compiler/impl", "AllTests.java" ); // Mélange
+        f = new File( "src\\org/squale/squalix\\tools/compiling/java/compiler/impl", "AllTests.java" ); // Mélange
                                                                                                             // de / et \
                                                                                                             // volontaire
         assertFalse( "File rejected", filter.accept( f ) );

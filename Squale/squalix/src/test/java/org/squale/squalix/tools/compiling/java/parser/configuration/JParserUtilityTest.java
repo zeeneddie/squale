@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java.parser.configuration;
+package org.squale.squalix.tools.compiling.java.parser.configuration;
 
 import java.io.FileNotFoundException;
 
 import org.w3c.dom.Node;
 
-import com.airfrance.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.SqualeTestCase;
 
 /**
  *

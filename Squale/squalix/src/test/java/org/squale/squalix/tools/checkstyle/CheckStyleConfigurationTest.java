@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.checkstyle;
+package org.squale.squalix.tools.checkstyle;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.tools.ruleschecking.CheckstyleConfiguration;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.tools.ruleschecking.CheckstyleConfiguration;
 
 /**
  * Test de configuration

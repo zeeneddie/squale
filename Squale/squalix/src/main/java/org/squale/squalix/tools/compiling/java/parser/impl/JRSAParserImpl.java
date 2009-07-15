@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java.parser.impl;
+package org.squale.squalix.tools.compiling.java.parser.impl;
 
 import java.util.List;
 
-import com.airfrance.squalix.tools.compiling.java.adapter.JComponentAdapter;
-import com.airfrance.squalix.tools.compiling.java.parser.rsa.JRSAParser;
+import org.squale.squalix.tools.compiling.java.adapter.JComponentAdapter;
+import org.squale.squalix.tools.compiling.java.parser.rsa.JRSAParser;
 
 /**
  * Implémentation de l'adapteur du parser pour RSA7

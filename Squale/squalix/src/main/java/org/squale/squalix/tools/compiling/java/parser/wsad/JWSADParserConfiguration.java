@@ -19,7 +19,7 @@
 /*
  * Créé le 26 juil. 05, par M400832.
  */
-package com.airfrance.squalix.tools.compiling.java.parser.wsad;
+package org.squale.squalix.tools.compiling.java.parser.wsad;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -29,9 +29,9 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.airfrance.squalix.configurationmanager.ConfigUtility;
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
-import com.airfrance.squalix.tools.compiling.java.parser.configuration.JParserConfiguration;
+import org.squale.squalix.configurationmanager.ConfigUtility;
+import org.squale.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalix.tools.compiling.java.parser.configuration.JParserConfiguration;
 
 /**
  * Cette classe permet de récupérer la configuration relative au parser de fichiers de classpath pour les projets WSAD
@@ -325,7 +325,7 @@ public class JWSADParserConfiguration
      * @param pKeyName nom de la clé.
      * @param pKeyValue valeur de la clé.
      * @throws Exception exception si le nom de la clé ne fait pas parti des clés préalablement définies dans le fichier
-     *             de configuration <code>com.airfrance.squalix.tools.compiling.compiling.properties</code>.
+     *             de configuration <code>org.squale.squalix.tools.compiling.compiling.properties</code>.
      * @see #createReflectionMap()
      */
     private void mapKeyValues( String pKeyName, String pKeyValue )

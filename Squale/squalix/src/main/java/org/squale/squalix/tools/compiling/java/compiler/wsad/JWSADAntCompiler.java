@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java.compiler.wsad;
+package org.squale.squalix.tools.compiling.java.compiler.wsad;
 
 import java.io.File;
 
@@ -27,8 +27,8 @@ import org.apache.tools.ant.taskdefs.Javac;
 import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.types.Path;
 
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
-import com.airfrance.squalix.tools.compiling.java.beans.JWSADProject;
+import org.squale.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalix.tools.compiling.java.beans.JWSADProject;
 
 /**
  * Compilation par une tâche ant d'un projet WSAD La compilation se fait en lançant une tâche ANT dédiée à un projet

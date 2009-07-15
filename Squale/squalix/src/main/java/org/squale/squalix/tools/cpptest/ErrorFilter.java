@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cpptest;
+package org.squale.squalix.tools.cpptest;
 
 /**
  * Buffer d'erreur Les erreurs provenant de l'exécution de CppTest sont remontées sous la forme de lignes noyées dans

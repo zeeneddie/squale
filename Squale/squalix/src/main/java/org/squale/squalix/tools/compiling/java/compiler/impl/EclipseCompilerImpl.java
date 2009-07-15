@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java.compiler.impl;
+package org.squale.squalix.tools.compiling.java.compiler.impl;
 
 import java.util.List;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalix.tools.compiling.java.adapter.JComponentAdapter;
-import com.airfrance.squalix.tools.compiling.java.compiler.eclipse.EclipseCompiler;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalix.tools.compiling.java.adapter.JComponentAdapter;
+import org.squale.squalix.tools.compiling.java.compiler.eclipse.EclipseCompiler;
 
 /**
  * Classe d'implémentation pour le compilater Eclipse

@@ -16,17 +16,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.stoptime;
+package org.squale.squalix.util.stoptime;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.StopTimeDTO;
-import com.airfrance.squalix.core.exception.ConfigurationException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
+import org.squale.squalecommon.datatransfertobject.config.StopTimeDTO;
+import org.squale.squalix.core.exception.ConfigurationException;
 
 /**
  */

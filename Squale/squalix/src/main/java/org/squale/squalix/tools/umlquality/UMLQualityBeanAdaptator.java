@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.umlquality;
+package org.squale.squalix.tools.umlquality;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,13 +24,13 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityModelMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityPackageMetricsBO;
-import com.airfrance.squalix.util.repository.ComponentRepository;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityModelMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityPackageMetricsBO;
+import org.squale.squalix.util.repository.ComponentRepository;
 
 /**
  * Prend en charge de remplacer tous les noms des composants par les objets

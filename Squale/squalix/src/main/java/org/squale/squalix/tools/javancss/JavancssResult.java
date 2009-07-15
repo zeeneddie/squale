@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.javancss;
+package org.squale.squalix.tools.javancss;
 
 import java.util.ArrayList;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssClassMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssMethodMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssPackageMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssProjectMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssClassMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssMethodMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssPackageMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssProjectMetricsBO;
 
 /**
  * Class use in the xml result file parsing for get back the result.

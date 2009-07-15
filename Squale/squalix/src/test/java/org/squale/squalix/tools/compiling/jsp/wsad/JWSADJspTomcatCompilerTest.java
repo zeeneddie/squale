@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.jsp.wsad;
+package org.squale.squalix.tools.compiling.jsp.wsad;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,9 +28,9 @@ import org.apache.tools.ant.BuildEvent;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.BuildListener;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalix.tools.compiling.jsp.bean.J2eeWSADProject;
-import com.airfrance.squalix.tools.compiling.utility.FileManager;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalix.tools.compiling.jsp.bean.J2eeWSADProject;
+import org.squale.squalix.tools.compiling.utility.FileManager;
 
 /**
  * 

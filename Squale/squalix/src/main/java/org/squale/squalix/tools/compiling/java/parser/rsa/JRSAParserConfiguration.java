@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java.parser.rsa;
+package org.squale.squalix.tools.compiling.java.parser.rsa;
 
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
-import com.airfrance.squalix.tools.compiling.java.parser.wsad.JWSADParserConfiguration;
+import org.squale.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalix.tools.compiling.java.parser.wsad.JWSADParserConfiguration;
 
 /**
  * Cette classe permet de récupérer la configuration relative au parser de fichiers de classpath pour les projets RSA7
@@ -62,7 +62,7 @@ public class JRSAParserConfiguration
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.compiling.java.parser.wsad.JWSADParserConfiguration#createReflectionMap()
+     * @see org.squale.squalix.tools.compiling.java.parser.wsad.JWSADParserConfiguration#createReflectionMap()
      */
     protected void createReflectionMap()
         throws Exception

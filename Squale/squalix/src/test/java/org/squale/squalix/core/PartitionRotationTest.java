@@ -16,17 +16,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.core;
+package org.squale.squalix.core;
 
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.daolayer.component.AuditDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 
 /**
  */

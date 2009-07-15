@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\tools\\compiling\\java\\parser\\ParserAdapterWSADImpl.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\tools\\compiling\\java\\parser\\ParserAdapterWSADImpl.java
 
-package com.airfrance.squalix.tools.compiling.java.parser.impl;
+package org.squale.squalix.tools.compiling.java.parser.impl;
 
 import java.util.List;
 
-import com.airfrance.squalix.tools.compiling.java.adapter.JComponentAdapter;
-import com.airfrance.squalix.tools.compiling.java.parser.wsad.JWSADParser;
+import org.squale.squalix.tools.compiling.java.adapter.JComponentAdapter;
+import org.squale.squalix.tools.compiling.java.parser.wsad.JWSADParser;
 
 /**
  * Implémentation de l'adapteur du parser pour WSAD 5.x.

@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cpd;
+package org.squale.squalix.tools.cpd;
 
 import java.util.Properties;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
 
 import net.sourceforge.pmd.cpd.Language;
 import net.sourceforge.pmd.cpd.LanguageFactory;
@@ -38,7 +38,7 @@ public class CppCpdProcessing
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.cpd.AbstractCpdTask#getLanguage()
+     * @see org.squale.squalix.tools.cpd.AbstractCpdTask#getLanguage()
      */
     protected Language getLanguage()
     {
@@ -51,7 +51,7 @@ public class CppCpdProcessing
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.cpd.AbstractCpdTask#getTokenThreshold()
+     * @see org.squale.squalix.tools.cpd.AbstractCpdTask#getTokenThreshold()
      */
     protected int getTokenThreshold()
     {
@@ -61,7 +61,7 @@ public class CppCpdProcessing
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.cpd.AbstractCpdProcessing#getExtension()
+     * @see org.squale.squalix.tools.cpd.AbstractCpdProcessing#getExtension()
      */
     protected String[] getExtensions()
     {

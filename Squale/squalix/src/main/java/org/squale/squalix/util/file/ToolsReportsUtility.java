@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\tools\\mccabe\\McCabeUtility.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\tools\\mccabe\\McCabeUtility.java
 
-package com.airfrance.squalix.util.file;
+package org.squale.squalix.util.file;
 
 import java.util.Iterator;
 import java.util.List;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
 
 /**
  * Classe contenant les méthodes outils utilisées par les différents outils générant des rapports.<br>

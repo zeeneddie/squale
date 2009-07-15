@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\tools\\compiling\\java\\parser\\wsad\\WSADParser.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\tools\\compiling\\java\\parser\\wsad\\WSADParser.java
 
-package com.airfrance.squalix.tools.compiling.java.parser.wsad;
+package org.squale.squalix.tools.compiling.java.parser.wsad;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,14 +37,14 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
-import com.airfrance.squalix.tools.compiling.java.beans.JWSADProject;
-import com.airfrance.squalix.tools.compiling.java.configuration.JCompilingConfiguration;
-import com.airfrance.squalix.tools.compiling.java.parser.configuration.JParserConfiguration;
-import com.airfrance.squalix.tools.compiling.java.parser.configuration.JParserUtility;
-import com.airfrance.squalix.util.file.FileUtility;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalix.tools.compiling.java.beans.JWSADProject;
+import org.squale.squalix.tools.compiling.java.configuration.JCompilingConfiguration;
+import org.squale.squalix.tools.compiling.java.parser.configuration.JParserConfiguration;
+import org.squale.squalix.tools.compiling.java.parser.configuration.JParserUtility;
+import org.squale.squalix.util.file.FileUtility;
 
 /**
  * Parser de fichier <code>.classpath</code> pour WSAD 5.x.
@@ -1088,11 +1088,11 @@ public class JWSADParser
         for ( int i = 0; i < pPlugin.getExportedPackages().size(); i++ )
         {
             // On crée le répertoire à partir du nom du package
-            // Ex : com.airfrance.jraf --> chemin_pRoot/com/airfrance/jraf
+            // Ex : org.squale.jraf --> chemin_pRoot/org/squale/jraf
             packageDir =
                 new File( pRoot, ( (String) pPlugin.getExportedPackages().get( i ) ).replaceAll( "\\.", File.separator ) );
             // On crée le répertoire de destination des .class
-            // Ex : chemin_pRoot/nomProjet/com/airfrance/jraf
+            // Ex : chemin_pRoot/nomProjet/org/squale/jraf
             copyDest =
                 new File( copyRoot, ( (String) pPlugin.getExportedPackages().get( i ) ).replaceAll( "\\.",
                                                                                                     File.separator ) );

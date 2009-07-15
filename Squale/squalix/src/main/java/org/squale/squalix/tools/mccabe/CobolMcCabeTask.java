@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.mccabe;
+package org.squale.squalix.tools.mccabe;
 
 import java.util.Iterator;
 import java.util.List;
@@ -24,9 +24,9 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
-import com.airfrance.squalix.util.csv.CSVParser;
-import com.airfrance.squalix.util.parser.CobolParser;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import org.squale.squalix.util.csv.CSVParser;
+import org.squale.squalix.util.parser.CobolParser;
 
 /**
  * Tâche McCabe pour les projets Cobol.

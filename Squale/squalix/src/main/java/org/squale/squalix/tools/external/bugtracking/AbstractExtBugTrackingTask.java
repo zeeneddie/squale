@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.external.bugtracking;
+package org.squale.squalix.tools.external.bugtracking;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.ExtBugTrackingMetricsBO;
-import com.airfrance.squalix.tools.external.AbstractExtTask;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.ExtBugTrackingMetricsBO;
+import org.squale.squalix.tools.external.AbstractExtTask;
 
 /**
  * Classe générique pour les tache externes relatives au Bug Tracking

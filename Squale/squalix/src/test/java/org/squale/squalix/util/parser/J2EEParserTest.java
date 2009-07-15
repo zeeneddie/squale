@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.parser;
+package org.squale.squalix.util.parser;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.JspBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalix.tools.compiling.jsp.configuration.JspCompilingConfiguration;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.JspBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalix.tools.compiling.jsp.configuration.JspCompilingConfiguration;
 
 /**
  * Test pour le parser J2EE

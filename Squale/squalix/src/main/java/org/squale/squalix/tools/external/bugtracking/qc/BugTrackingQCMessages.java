@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.external.bugtracking.qc;
+package org.squale.squalix.tools.external.bugtracking.qc;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 public class BugTrackingQCMessages
     extends BaseMessages
@@ -31,7 +31,7 @@ public class BugTrackingQCMessages
      */
     private BugTrackingQCMessages()
     {
-        super( "com.airfrance.squalix.tools.external.bugtracking.bugtrackingqc" );
+        super( "org.squale.squalix.tools.external.bugtracking.bugtrackingqc" );
     }
 
     /**

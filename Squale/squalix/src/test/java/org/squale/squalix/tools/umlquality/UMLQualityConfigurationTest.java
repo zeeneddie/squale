@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.umlquality;
+package org.squale.squalix.tools.umlquality;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalix.core.exception.ConfigurationException;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalix.core.exception.ConfigurationException;
 
 /**
  * Test de la configuration UMLQuality

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.ruleschecking;
+package org.squale.squalix.tools.ruleschecking;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -28,13 +28,13 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.CheckstyleTransgressionBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleModuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.CheckstyleTransgressionBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleModuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO;
 import com.puppycrawl.tools.checkstyle.api.SeverityLevel;
 
 /**
@@ -116,7 +116,7 @@ public class CheckStylePersistor
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.ruleschecking.ReportHandler#processError(java.lang.String, java.lang.String,
+     * @see org.squale.squalix.tools.ruleschecking.ReportHandler#processError(java.lang.String, java.lang.String,
      *      java.lang.String, java.lang.String, java.lang.String, java.lang.String)
      */
     public void processError( String pFileName, String pLine, String pColumn, String pSeverity, String pMessage,

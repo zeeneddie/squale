@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.scm.task;
+package org.squale.squalix.tools.scm.task;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import com.airfrance.squalix.core.AbstractSourceTerminationTask;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.util.file.FileUtility;
+import org.squale.squalix.core.AbstractSourceTerminationTask;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.util.file.FileUtility;
 
 /**
  * Suppress the directory create by the source code recovering task 
@@ -45,7 +45,7 @@ public class ScmCleanerTask
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.core.AbstractTask#execute()
+     * @see org.squale.squalix.core.AbstractTask#execute()
      */
     public void execute()
         throws TaskException

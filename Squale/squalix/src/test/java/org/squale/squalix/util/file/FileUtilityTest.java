@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.file;
+package org.squale.squalix.util.file;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,9 +24,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
 
 /**
  * Test pour FileUtility
@@ -36,14 +36,14 @@ public class FileUtilityTest
 {
 
     /** chemin du répertoire contenant les fichiers compilés */
-    public static final String CLASSES_DIR_PATH = "bin/com/airfrance/squalix/tools/computing";
+    public static final String CLASSES_DIR_PATH = "bin/org/squale/squalix/tools/computing";
 
     /** Le nombre de .class dans le répertoire CLASSES_DIR_PATH */
     public static final int NUMBER_OF_CLASSES = 1;
 
     /** Nom absolu d'un fichier compilé */
     public static final String ABSOLUTE_CLASS_PATH =
-        "bin/com/airfrance/squalix/tools/computing/project/ComputeResultTaskTest.class";
+        "bin/org/squale/squalix/tools/computing/project/ComputeResultTaskTest.class";
 
     /**
      * Test pour createRecursiveListOfFiles
@@ -78,9 +78,9 @@ public class FileUtilityTest
         throws IOException
     {
         File directory = new File( "src" );
-        String suffix = "com\\airfrance\\squalix\\tools\\ckjm\\CkjmtaskTest.java";
+        String suffix = "org\\squale\\squalix\\tools\\ckjm\\CkjmtaskTest.java";
         File file = FileUtility.findFileWithPathSuffix( directory, suffix );
-        assertEquals( "src\\com\\airfrance\\squalix\\tools\\ckjm\\CkjmtaskTest.java", file.getAbsolutePath() );
+        assertEquals( "src\\org\\squale\\squalix\\tools\\ckjm\\CkjmtaskTest.java", file.getAbsolutePath() );
     }
 
     /**

@@ -3,7 +3,7 @@
 <digester-rules>
 
 	<!-- Creates an instance of ProjectBo -->
-	<object-create-rule pattern="coverage" classname="com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaProjectMetricsBO" />
+	<object-create-rule pattern="coverage" classname="org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaProjectMetricsBO" />
 
 	<!-- Setting the attributes / properties  mapping. The <alias> element is used with the <set-properties-rule> to map an XML attribute to a property. -->
 	<set-properties-rule pattern="coverage">
@@ -14,7 +14,7 @@
 
 		<!-- Creates an instance of PackageBo  -->
 		<pattern value="coverage/packages/package" >
-		<object-create-rule classname="com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaPackageMetricsBO" />
+		<object-create-rule classname="org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaPackageMetricsBO" />
 			<set-properties-rule>
 				<!-- the mapping between the attribut name and the property name is done introspectively -->
 				<alias attr-name="line-rate" prop-name="line" />
@@ -25,7 +25,7 @@
 		
 		<!-- Creates an instance of ClassBo -->
 		<pattern value="coverage/packages/package/classes/class" >
-		<object-create-rule classname="com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaClassMetricsBO" />
+		<object-create-rule classname="org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaClassMetricsBO" />
 			<set-properties-rule>
 				<!-- the mapping between the attribut name and the property name is done introspectively -->
 				<alias attr-name="line-rate" prop-name="line" />
@@ -36,7 +36,7 @@
 		
 		<!-- Creates an instance of MethodBO -->
 		<pattern value="coverage/packages/package/classes/class/methods/method" >
-		<object-create-rule classname="com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaMethodMetricsBO" />
+		<object-create-rule classname="org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaMethodMetricsBO" />
 			<set-properties-rule>				
 				<!-- the mapping between the attribut name and the property name is done introspectively -->
 				<!-- the mapping between the attribut signature and the property signature is done introspectively -->

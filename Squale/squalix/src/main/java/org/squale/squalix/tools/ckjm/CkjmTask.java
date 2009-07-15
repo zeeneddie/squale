@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.ckjm;
+package org.squale.squalix.tools.ckjm;
 
 import gr.spinellis.ckjm.ClassMetrics;
 import gr.spinellis.ckjm.ClassMetricsContainer;
@@ -34,21 +34,21 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ckjm.CkjmClassMetricsBO;
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.util.buildpath.BuildProjectPath;
-import com.airfrance.squalix.util.file.ExtensionFileFilter;
-import com.airfrance.squalix.util.file.FileUtility;
-import com.airfrance.squalix.util.parser.JavaParser;
-import com.airfrance.squalix.util.repository.ComponentRepository;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ckjm.CkjmClassMetricsBO;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.util.buildpath.BuildProjectPath;
+import org.squale.squalix.util.file.ExtensionFileFilter;
+import org.squale.squalix.util.file.FileUtility;
+import org.squale.squalix.util.parser.JavaParser;
+import org.squale.squalix.util.repository.ComponentRepository;
 
 /**
  * Tâche Ckjm.<br/> Calcule le CBO (couplage entre les classes) des classes du projet à auditer.<br/> La tâche de

@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.abstractgenerictask;
+package org.squale.squalix.tools.abstractgenerictask;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * This class retrieves messages from the *.properties file in which are stored the key and values related to the
@@ -35,7 +35,7 @@ public final class AbstractGenericTaskMessages
      */
     private AbstractGenericTaskMessages()
     {
-        super( "com.airfrance.squalix.tools.abstractgenerictask.AbstractGenericTaskMessages" );
+        super( "org.squale.squalix.tools.abstractgenerictask.AbstractGenericTaskMessages" );
     }
 
     /**

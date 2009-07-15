@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.core.quartz;
+package org.squale.squalix.core.quartz;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,7 +29,7 @@ import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerFactory;
 
-import com.airfrance.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.core.exception.ConfigurationException;
 
 /**
  * This class instantiate a quartz scheduler. It will schedule Squalix jobs
@@ -115,7 +115,7 @@ public class QuartzSqualixScheduler
 
         // Creation of the squalix job
         JobDetail job =
-            new JobDetail( "jobSqualix", "groupSqualix", com.airfrance.squalix.core.quartz.SqualixJob.class );
+            new JobDetail( "jobSqualix", "groupSqualix", org.squale.squalix.core.quartz.SqualixJob.class );
         job.getJobDataMap().put( SqualixJob.SITE_KEY, site );
 
         // Creation of the trigger

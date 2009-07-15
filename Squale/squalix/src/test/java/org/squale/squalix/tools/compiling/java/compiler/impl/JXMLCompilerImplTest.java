@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java.compiler.impl;
+package org.squale.squalix.tools.compiling.java.compiler.impl;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalix.tools.compiling.java.beans.JXMLProject;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalix.tools.compiling.java.beans.JXMLProject;
 
 /**
  * UNIT_KO : Pas eu le temps de le traiter

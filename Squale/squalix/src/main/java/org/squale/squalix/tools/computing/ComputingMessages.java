@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.computing;
+package org.squale.squalix.tools.computing;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * @author M400843
@@ -34,7 +34,7 @@ public class ComputingMessages
      */
     private ComputingMessages()
     {
-        super( "com.airfrance.squalix.tools.computing.computing_messages" );
+        super( "org.squale.squalix.tools.computing.computing_messages" );
     }
 
     /**

@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java.compiler;
+package org.squale.squalix.tools.compiling.java.compiler;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests du package com.airfrance.squalix.tools.compiling.java.compiler
+ * Tests du package org.squale.squalix.tools.compiling.java.compiler
  */
 public class AllTests
 {
@@ -34,11 +34,11 @@ public class AllTests
      */
     public static Test suite()
     {
-        TestSuite suite = new TestSuite( "Test for com.airfrance.squalix.tools.compiling.java.compiler" );
+        TestSuite suite = new TestSuite( "Test for org.squale.squalix.tools.compiling.java.compiler" );
         // $JUnit-BEGIN$
-        suite.addTest( com.airfrance.squalix.tools.compiling.java.compiler.impl.AllTests.suite() );
-        suite.addTest( com.airfrance.squalix.tools.compiling.java.compiler.wsad.AllTests.suite() );
-        suite.addTest( com.airfrance.squalix.tools.compiling.java.compiler.xml.AllTests.suite() );
+        suite.addTest( org.squale.squalix.tools.compiling.java.compiler.impl.AllTests.suite() );
+        suite.addTest( org.squale.squalix.tools.compiling.java.compiler.wsad.AllTests.suite() );
+        suite.addTest( org.squale.squalix.tools.compiling.java.compiler.xml.AllTests.suite() );
         // $JUnit-END$
         return suite;
     }

@@ -19,14 +19,14 @@
 /**
  * 
  */
-package com.airfrance.squalix.configurationmanager.test;
+package org.squale.squalix.configurationmanager.test;
 
 import junit.framework.TestCase;
 
-import com.airfrance.squalix.configurationmanager.ConfigUtility;
+import org.squale.squalix.configurationmanager.ConfigUtility;
 
 /**
- * Test method for com.airfrance.squalix.configurationmanager.ConfigUtility
+ * Test method for org.squale.squalix.configurationmanager.ConfigUtility
  * 
  * @see ConfigUtility
  * @author Fabrice
@@ -37,7 +37,7 @@ public class ConfigUtilityTest
 
     /**
      * Test method for
-     * {@link com.airfrance.squalix.configurationmanager.ConfigUtility#filterStringWithSystemProps(java.lang.String)}.
+     * {@link org.squale.squalix.configurationmanager.ConfigUtility#filterStringWithSystemProps(java.lang.String)}.
      */
     public void testFilterStringWithSystemProps()
     {
@@ -49,7 +49,7 @@ public class ConfigUtilityTest
 
     /**
      * Test method for
-     * {@link com.airfrance.squalix.configurationmanager.ConfigUtility#filterStringWithSystemProps(java.lang.String)}.
+     * {@link org.squale.squalix.configurationmanager.ConfigUtility#filterStringWithSystemProps(java.lang.String)}.
      */
     public void testFilterStringWithMultipleSystemProps()
     {
@@ -65,7 +65,7 @@ public class ConfigUtilityTest
 
     /**
      * Test method for
-     * {@link com.airfrance.squalix.configurationmanager.ConfigUtility#filterStringWithSystemProps(java.lang.String)}.
+     * {@link org.squale.squalix.configurationmanager.ConfigUtility#filterStringWithSystemProps(java.lang.String)}.
      */
     public void testFilterStringWithNoSystemProps()
     {
@@ -77,7 +77,7 @@ public class ConfigUtilityTest
 
     /**
      * Test method for
-     * {@link com.airfrance.squalix.configurationmanager.ConfigUtility#filterStringWithSystemProps(java.lang.String)}.
+     * {@link org.squale.squalix.configurationmanager.ConfigUtility#filterStringWithSystemProps(java.lang.String)}.
      */
     public void testFilterStringWithNoVariable()
     {

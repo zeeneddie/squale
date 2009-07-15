@@ -16,23 +16,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.core;
+package org.squale.squalix.core;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.daolayer.component.AuditDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.AuditDisplayConfDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.BubbleConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.DisplayConfConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.jspvolumetry.JSPVolumetryProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMProjectMetricsBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
+import org.squale.squalecommon.daolayer.component.AuditDisplayConfDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.BubbleConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.DisplayConfConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.jspvolumetry.JSPVolumetryProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rsm.RSMProjectMetricsBO;
 
 /**
  * Pour exécuter ce test, il faut changer le statut privé des méthodes en public

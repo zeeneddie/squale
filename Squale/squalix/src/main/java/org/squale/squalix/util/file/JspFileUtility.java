@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.file;
+package org.squale.squalix.util.file;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -27,7 +27,7 @@ import java.util.Set;
 
 import org.apache.tools.ant.taskdefs.optional.jsp.JspNameMangler;
 
-import com.airfrance.squalix.tools.compiling.jsp.configuration.JspCompilingConfiguration;
+import org.squale.squalix.tools.compiling.jsp.configuration.JspCompilingConfiguration;
 
 /**
  * Utilitaire pour la manipulation des fichiers JSP

@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.macker;
+package org.squale.squalix.tools.macker;
 
 import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.ProjectRuleSetBO;
-import com.airfrance.squalix.util.file.ExtensionFileFilter;
-import com.airfrance.squalix.util.file.FileUtility;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.ProjectRuleSetBO;
+import org.squale.squalix.util.file.ExtensionFileFilter;
+import org.squale.squalix.util.file.FileUtility;
 
 /**
  * Configuration de la tâche Macker

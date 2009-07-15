@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.core.quartz;
+package org.squale.squalix.core.quartz;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,9 +24,9 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.StatefulJob;
 
-import com.airfrance.squalix.core.Scheduler;
-import com.airfrance.squalix.core.Squalix;
-import com.airfrance.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.core.Scheduler;
+import org.squale.squalix.core.Squalix;
+import org.squale.squalix.core.exception.ConfigurationException;
 
 /**
  * Implementation of quartz job for Squalix

@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\tools\\compiling\\java\\JavaCompilingConfiguration.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\tools\\compiling\\java\\JavaCompilingConfiguration.java
 
-package com.airfrance.squalix.tools.compiling.java.configuration;
+package org.squale.squalix.tools.compiling.java.configuration;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -32,8 +32,8 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.airfrance.squalix.configurationmanager.ConfigUtility;
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalix.configurationmanager.ConfigUtility;
+import org.squale.squalix.tools.compiling.CompilingMessages;
 
 /**
  * Classe de configuration pour la compilation des projets JAVA.<br />

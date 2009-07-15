@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\com\\airfrance\\squalix\\tools\\compiling\\java\\compiler\\wsad\\WSADCompiler.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\tools\\compiling\\java\\compiler\\wsad\\WSADCompiler.java
 
-package com.airfrance.squalix.tools.compiling.java.compiler.wsad;
+package org.squale.squalix.tools.compiling.java.compiler.wsad;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,9 +28,9 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
-import com.airfrance.squalix.tools.compiling.java.beans.JWSADProject;
-import com.airfrance.squalix.tools.compiling.java.parser.wsad.JWSADParser;
+import org.squale.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalix.tools.compiling.java.beans.JWSADProject;
+import org.squale.squalix.tools.compiling.java.parser.wsad.JWSADParser;
 
 /**
  * Compilation d'une série de projets WSAD Cette classe permet de lancer la compilation en fonction des dépendances
@@ -120,7 +120,7 @@ public class JWSADCompiler
      * Otherwise, the comiling method is only called for the current projet.
      * 
      * @param pProject projet to compile
-     * @see com.airfrance.squalix.tools.compiling.java.parser.wsad.JWSADParser#processSrc(String)
+     * @see org.squale.squalix.tools.compiling.java.parser.wsad.JWSADParser#processSrc(String)
      * @see JWSADProject
      * @see #doCompilation()
      * @since 1.0

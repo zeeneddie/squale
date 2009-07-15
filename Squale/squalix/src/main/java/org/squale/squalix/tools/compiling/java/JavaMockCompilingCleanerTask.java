@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.java;
+package org.squale.squalix.tools.compiling.java;
 
 import java.io.File;
 import java.io.FileInputStream;
 
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.tools.compiling.configuration.MockCompilingConf;
-import com.airfrance.squalix.util.file.FileUtility;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.tools.compiling.configuration.MockCompilingConf;
+import org.squale.squalix.util.file.FileUtility;
 
 /**
  * Supprime le répertoire de compilation des sources
@@ -44,7 +44,7 @@ public class JavaMockCompilingCleanerTask
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.core.AbstractTask#execute()
+     * @see org.squale.squalix.core.AbstractTask#execute()
      */
     public void execute()
         throws TaskException

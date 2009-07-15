@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cobertura;
+package org.squale.squalix.tools.cobertura;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,8 +31,8 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaProjectMetricsBO;
-import com.airfrance.squalecommon.util.xml.XmlImport;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaProjectMetricsBO;
+import org.squale.squalecommon.util.xml.XmlImport;
 
 /**
  * This class allows instantiation of objects which parse result files form Cobertura coverage analysis

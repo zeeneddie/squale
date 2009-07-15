@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.mccabe;
+package org.squale.squalix.tools.mccabe;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,23 +29,23 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAJspMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAProjectMetricsBO;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.util.buildpath.BuildProjectPath;
-import com.airfrance.squalix.util.csv.CSVParser;
-import com.airfrance.squalix.util.file.FileUtility;
-import com.airfrance.squalix.util.file.ToolsReportsUtility;
-import com.airfrance.squalix.util.parser.LanguageParser;
-import com.airfrance.squalix.util.repository.ComponentRepository;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAJspMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAProjectMetricsBO;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.util.buildpath.BuildProjectPath;
+import org.squale.squalix.util.csv.CSVParser;
+import org.squale.squalix.util.file.FileUtility;
+import org.squale.squalix.util.file.ToolsReportsUtility;
+import org.squale.squalix.util.parser.LanguageParser;
+import org.squale.squalix.util.repository.ComponentRepository;
 
 /**
  * Objet de persistence des métriques McCabe pour les langages par objet (Java, C++, etc.).

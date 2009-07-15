@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.ruleschecking;
+package org.squale.squalix.tools.ruleschecking;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,20 +30,20 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.daolayer.rulechecking.CheckstyleRuleSetDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.CheckstyleTransgressionBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO;
-import com.airfrance.squalecommon.util.file.FileUtility;
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.util.buildpath.BuildProjectPath;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.daolayer.rulechecking.CheckstyleRuleSetDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.CheckstyleTransgressionBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO;
+import org.squale.squalecommon.util.file.FileUtility;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.util.buildpath.BuildProjectPath;
 
 /**
  * Exécute le rulesChecking sur un sous-projet grace au connecteur rulesChecking<code>rulesCheckingFacade<code>.<br>
@@ -170,7 +170,7 @@ public class RulesCheckingTask
             List paths = BuildProjectPath.buildProjectPath( (String) mData.getData( TaskData.VIEW_PATH ), srcs );
             // On récupère les sources qui peuvent être analysées
             List includedFileNames =
-                com.airfrance.squalix.util.file.FileUtility.getIncludedFiles(
+                org.squale.squalix.util.file.FileUtility.getIncludedFiles(
                                                                               (String) mData.getData( TaskData.VIEW_PATH ),
                                                                               paths,
                                                                               (ListParameterBO) mProject.getParameter( ParametersConstants.INCLUDED_PATTERNS ),

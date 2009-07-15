@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.rsm;
+package org.squale.squalix.tools.rsm;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -33,18 +33,18 @@ import java.util.StringTokenizer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMClassMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMMethodMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMProjectMetricsBO;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.util.csv.CSVParser;
-import com.airfrance.squalix.util.parser.LanguageParser;
-import com.airfrance.squalix.util.repository.ComponentRepository;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rsm.RSMClassMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rsm.RSMMethodMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rsm.RSMProjectMetricsBO;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.util.csv.CSVParser;
+import org.squale.squalix.util.parser.LanguageParser;
+import org.squale.squalix.util.repository.ComponentRepository;
 
 /**
  * Objet chargé de faire persister les résultats RSM

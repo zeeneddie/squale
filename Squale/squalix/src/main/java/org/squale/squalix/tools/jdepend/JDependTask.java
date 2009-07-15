@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.jdepend;
+package org.squale.squalix.tools.jdepend;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,18 +30,18 @@ import jdepend.framework.JDepend;
 import jdepend.framework.JavaPackage;
 import jdepend.framework.PackageFilter;
 
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.jdepend.JDependPackageMetricsBO;
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskData;
-import com.airfrance.squalix.core.TaskException;
-import com.airfrance.squalix.util.buildpath.BuildProjectPath;
-import com.airfrance.squalix.util.file.FileUtility;
-import com.airfrance.squalix.util.parser.JavaParser;
-import com.airfrance.squalix.util.repository.ComponentRepository;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.PackageBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.jdepend.JDependPackageMetricsBO;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskData;
+import org.squale.squalix.core.TaskException;
+import org.squale.squalix.util.buildpath.BuildProjectPath;
+import org.squale.squalix.util.file.FileUtility;
+import org.squale.squalix.util.parser.JavaParser;
+import org.squale.squalix.util.repository.ComponentRepository;
 
 /**
  * Tâche JDepend pour l'analyse des packages java
@@ -83,7 +83,7 @@ public class JDependTask
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.core.Task#execute()
+     * @see org.squale.squalix.core.Task#execute()
      */
     public void execute()
         throws TaskException

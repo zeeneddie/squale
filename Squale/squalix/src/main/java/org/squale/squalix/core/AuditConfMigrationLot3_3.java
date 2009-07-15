@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.core;
+package org.squale.squalix.core;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,25 +25,25 @@ import java.util.Iterator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.bootstrap.initializer.Initializer;
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.component.AuditDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.AuditDisplayConfDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.web.AbstractDisplayConfDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.BubbleConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.DisplayConfConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.jspvolumetry.JSPVolumetryProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.misc.CommentsBO;
+import org.squale.jraf.bootstrap.initializer.Initializer;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
+import org.squale.squalecommon.daolayer.component.AuditDisplayConfDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.config.web.AbstractDisplayConfDAOImpl;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.BubbleConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.DisplayConfConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.jspvolumetry.JSPVolumetryProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.misc.CommentsBO;
 
 /**
  * Main servant à affecter des configurations d'affichage aux audits exécutés avant la livraison de SQUALE 3.3 Cette

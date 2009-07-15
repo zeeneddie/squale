@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.mccabe;
+package org.squale.squalix.tools.mccabe;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,24 +25,24 @@ import java.util.Collection;
 
 import junit.framework.TestCase;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.daolayer.component.AbstractComponentDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.ProjectParameterDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.ProjectProfileDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.JspBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
-import com.airfrance.squalix.core.AbstractTask;
-import com.airfrance.squalix.core.TaskData;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.daolayer.component.AbstractComponentDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectParameterDAOImpl;
+import org.squale.squalecommon.daolayer.config.ProjectProfileDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.JspBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalix.core.AbstractTask;
+import org.squale.squalix.core.TaskData;
 
 /**
  * Test pour la tâche McCabe sur un projet java UNIT_KO : Le fichier CVS ne correspond pas à l'environnement de test. Il
@@ -175,7 +175,7 @@ public class JavaMcCabeTaskTest
         /**
          * (non-Javadoc)
          * 
-         * @see com.airfrance.squalix.tools.mccabe.AbstractMcCabeTask#createProjectConfigurationFile(com.airfrance.squalix.tools.mccabe.McCabePCFFile)
+         * @see org.squale.squalix.tools.mccabe.AbstractMcCabeTask#createProjectConfigurationFile(org.squale.squalix.tools.mccabe.McCabePCFFile)
          */
         protected void createProjectConfigurationFile( McCabePCFFile pFile )
             throws Exception
@@ -185,7 +185,7 @@ public class JavaMcCabeTaskTest
         /**
          * (non-Javadoc)
          * 
-         * @see com.airfrance.squalix.tools.mccabe.AbstractMcCabeTask#createReport(java.lang.String)
+         * @see org.squale.squalix.tools.mccabe.AbstractMcCabeTask#createReport(java.lang.String)
          */
         protected void createReport( String pReport )
             throws Exception
@@ -195,7 +195,7 @@ public class JavaMcCabeTaskTest
         /**
          * (non-Javadoc)
          * 
-         * @see com.airfrance.squalix.tools.mccabe.AbstractMcCabeTask#parseSource()
+         * @see org.squale.squalix.tools.mccabe.AbstractMcCabeTask#parseSource()
          */
         protected int parseSource()
             throws Exception
@@ -206,7 +206,7 @@ public class JavaMcCabeTaskTest
         /**
          * (non-Javadoc)
          * 
-         * @see com.airfrance.squalix.tools.mccabe.AbstractMcCabeTask#computeReportFileName(java.lang.String)
+         * @see org.squale.squalix.tools.mccabe.AbstractMcCabeTask#computeReportFileName(java.lang.String)
          */
         protected String computeReportFileName( String pReport )
             throws IOException

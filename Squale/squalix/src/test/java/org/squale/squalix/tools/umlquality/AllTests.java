@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalix.tools.umlquality;
+package org.squale.squalix.tools.umlquality;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -39,7 +39,7 @@ public class AllTests
      */
     public static Test suite()
     {
-        TestSuite suite = new TestSuite( "Test for com.airfrance.squalix.tools.umlquality" );
+        TestSuite suite = new TestSuite( "Test for org.squale.squalix.tools.umlquality" );
         // $JUnit-BEGIN$
         suite.addTest( new TestSuite( UMLQualityConfigurationTest.class ) );
         suite.addTest( new TestSuite( UMLQualityPersistorTest.class ) );

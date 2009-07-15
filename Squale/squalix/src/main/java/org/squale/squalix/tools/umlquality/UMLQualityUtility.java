@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.umlquality;
+package org.squale.squalix.tools.umlquality;
 
 import java.lang.reflect.Constructor;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
 
 /**
  * Classe contenant les méthodes outils utilisées par UMLQuality.<br>

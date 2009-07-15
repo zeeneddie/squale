@@ -19,9 +19,9 @@
 /*
  * Créé le 3 août 05, par M400832.
  */
-package com.airfrance.squalix.tools.compiling.java.parser.wsad;
+package org.squale.squalix.tools.compiling.java.parser.wsad;
 
-import com.airfrance.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.SqualeTestCase;
 
 /**
  * Cette classe teste la validité de la configuration de la tâche de compilation JAVA.

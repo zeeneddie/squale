@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.scm.task;
+package org.squale.squalix.tools.scm.task;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * Récupérateur des messages pour l'analyseur de source
@@ -34,7 +34,7 @@ public class ScmMessages
      */
     private ScmMessages()
     {
-        super( "com.airfrance.squalix.tools.scm.task.scm" );
+        super( "org.squale.squalix.tools.scm.task.scm" );
     }
 
     /**

@@ -16,25 +16,25 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.cpd;
+package org.squale.squalix.tools.cpd;
 
 import java.util.Iterator;
 
 import net.sourceforge.pmd.cpd.Match;
 import net.sourceforge.pmd.cpd.TokenEntry;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.daolayer.rulechecking.ProjectRuleSetDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.CpdTransgressionBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.ProjectRuleSetBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.daolayer.rulechecking.ProjectRuleSetDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.CpdTransgressionBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.ProjectRuleSetBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
 
 /**
  * Persistance des données de Cpd Les données sont stockées dans une ruleset dynamique, ce ruleset contient une règle

@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalix.util.csv;
+package org.squale.squalix.util.csv;
 
 import java.lang.reflect.Field;
 

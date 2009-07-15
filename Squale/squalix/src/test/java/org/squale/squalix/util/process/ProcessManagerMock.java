@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.util.process;
+package org.squale.squalix.util.process;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,7 +46,7 @@ public class ProcessManagerMock
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalix.util.process.ProcessManager#startProcess(com.airfrance.squalix.util.process.ProcessErrorHandler)
+     * @see org.squale.squalix.util.process.ProcessManager#startProcess(org.squale.squalix.util.process.ProcessErrorHandler)
      */
     public int startProcess( ProcessErrorHandler pHandler )
         throws IOException, InterruptedException

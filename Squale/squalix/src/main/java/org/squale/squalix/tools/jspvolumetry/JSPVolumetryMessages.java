@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.jspvolumetry;
+package org.squale.squalix.tools.jspvolumetry;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  */
@@ -34,7 +34,7 @@ public class JSPVolumetryMessages
      */
     private JSPVolumetryMessages()
     {
-        super( "com.airfrance.squalix.tools.jspvolumetry.jspvolumetry" );
+        super( "org.squale.squalix.tools.jspvolumetry.jspvolumetry" );
     }
 
     /**

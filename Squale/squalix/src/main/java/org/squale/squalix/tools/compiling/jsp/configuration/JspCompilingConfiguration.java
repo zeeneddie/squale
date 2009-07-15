@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.compiling.jsp.configuration;
+package org.squale.squalix.tools.compiling.jsp.configuration;
 
 import java.io.InputStream;
 
@@ -24,10 +24,10 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.util.xml.XmlImport;
-import com.airfrance.squalix.configurationmanager.ConfigUtility;
-import com.airfrance.squalix.core.exception.ConfigurationException;
-import com.airfrance.squalix.tools.compiling.CompilingMessages;
+import org.squale.squalecommon.util.xml.XmlImport;
+import org.squale.squalix.configurationmanager.ConfigUtility;
+import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.tools.compiling.CompilingMessages;
 
 /**
  * Configuration pour la compilation des JSPs. La configuration de la compilation des JSPs est définie dans un fichier

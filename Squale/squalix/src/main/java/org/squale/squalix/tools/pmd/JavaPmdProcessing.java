@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix.tools.pmd;
+package org.squale.squalix.tools.pmd;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 
 import net.sourceforge.pmd.SourceType;
 
@@ -42,7 +42,7 @@ public class JavaPmdProcessing
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.pmd.AbstractPmdProcessing#getLanguage()
+     * @see org.squale.squalix.tools.pmd.AbstractPmdProcessing#getLanguage()
      */
     protected String getLanguage()
     {
@@ -52,7 +52,7 @@ public class JavaPmdProcessing
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.pmd.AbstractPmdProcessing#getSourceType()
+     * @see org.squale.squalix.tools.pmd.AbstractPmdProcessing#getSourceType()
      */
     protected SourceType getSourceType()
     {
@@ -62,7 +62,7 @@ public class JavaPmdProcessing
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalix.tools.pmd.AbstractPmdProcessing#getExtensions()
+     * @see org.squale.squalix.tools.pmd.AbstractPmdProcessing#getExtensions()
      */
     protected String[] getExtensions()
     {
