@@ -16,26 +16,26 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalix;
+package org.squale.squalix;
 
-import com.airfrance.squalix.core.PartitionRotationTest;
-import com.airfrance.squalix.tools.ckjm.CkjmTaskTest;
-import com.airfrance.squalix.tools.clearcase.ClearCaseConfigurationTest;
-import com.airfrance.squalix.tools.compiling.java.JavaMockCompilingTaskTest;
-import com.airfrance.squalix.tools.compiling.java.configuration.JCompilingConfigurationTest;
-import com.airfrance.squalix.tools.compiling.java.parser.rsa.JRSAWebSettingsParserTest;
-import com.airfrance.squalix.tools.computing.project.ComputeResultTaskTest;
-import com.airfrance.squalix.tools.cpptest.CppTestAllTests;
-import com.airfrance.squalix.tools.jdepend.JDependTaskTest;
-import com.airfrance.squalix.tools.jspvolumetry.JSPVolumetryConfigurationTest;
-import com.airfrance.squalix.tools.macker.MackerAllTests;
-import com.airfrance.squalix.tools.pmd.PmdTaskTest;
-import com.airfrance.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserTaskTest;
-import com.airfrance.squalix.util.file.FileUtilAllTests;
-import com.airfrance.squalix.util.parser.ParserAllTests;
-import com.airfrance.squalix.util.process.ProcessManagerTest;
-import com.airfrance.squalix.util.repository.ComponentRepositoryTest;
-import com.airfrance.squalix.util.stoptime.StopTimeHelperTest;
+import org.squale.squalix.core.PartitionRotationTest;
+import org.squale.squalix.tools.ckjm.CkjmTaskTest;
+import org.squale.squalix.tools.clearcase.ClearCaseConfigurationTest;
+import org.squale.squalix.tools.compiling.java.JavaMockCompilingTaskTest;
+import org.squale.squalix.tools.compiling.java.configuration.JCompilingConfigurationTest;
+import org.squale.squalix.tools.compiling.java.parser.rsa.JRSAWebSettingsParserTest;
+import org.squale.squalix.tools.computing.project.ComputeResultTaskTest;
+import org.squale.squalix.tools.cpptest.CppTestAllTests;
+import org.squale.squalix.tools.jdepend.JDependTaskTest;
+import org.squale.squalix.tools.jspvolumetry.JSPVolumetryConfigurationTest;
+import org.squale.squalix.tools.macker.MackerAllTests;
+import org.squale.squalix.tools.pmd.PmdTaskTest;
+import org.squale.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserTaskTest;
+import org.squale.squalix.util.file.FileUtilAllTests;
+import org.squale.squalix.util.parser.ParserAllTests;
+import org.squale.squalix.util.process.ProcessManagerTest;
+import org.squale.squalix.util.repository.ComponentRepositoryTest;
+import org.squale.squalix.util.stoptime.StopTimeHelperTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -56,15 +56,15 @@ public class AllSqualixTests
         /* script de partition */
         suite.addTest( new TestSuite( PartitionRotationTest.class ) );
         /* checkstyle */
-        suite.addTest( com.airfrance.squalix.tools.checkstyle.AllTests.suite() );
+        suite.addTest( org.squale.squalix.tools.checkstyle.AllTests.suite() );
         /* ckjm */
         suite.addTest( new TestSuite( CkjmTaskTest.class ) );
         /* clearcase (il manque un test) */
         suite.addTest( new TestSuite( ClearCaseConfigurationTest.class ) );
         /* Compilation java --> à compléter lorsque DINB aura installé le 1.5 */
         suite.addTest( new TestSuite( JCompilingConfigurationTest.class ) );
-        suite.addTest( com.airfrance.squalix.tools.compiling.java.parser.configuration.AllTests.suite() );
-        suite.addTest( com.airfrance.squalix.tools.compiling.java.parser.impl.AllTests.suite() );
+        suite.addTest( org.squale.squalix.tools.compiling.java.parser.configuration.AllTests.suite() );
+        suite.addTest( org.squale.squalix.tools.compiling.java.parser.impl.AllTests.suite() );
         // RSA
         suite.addTest( new TestSuite( JRSAWebSettingsParserTest.class ) );
         // Mock
@@ -82,16 +82,16 @@ public class AllSqualixTests
         /* macker */
         suite.addTest( MackerAllTests.suite() );
         /* mccabe */
-        suite.addTest( com.airfrance.squalix.tools.mccabe.AllTests.suite() );
+        suite.addTest( org.squale.squalix.tools.mccabe.AllTests.suite() );
         /* pmd */
         suite.addTest( new TestSuite( PmdTaskTest.class ) );
         /* récupérateur de source en local */
         suite.addTest( new TestSuite( SourceCodeAnalyserTaskTest.class ) );
         /* UMLQuality */
-        suite.addTest( com.airfrance.squalix.tools.umlquality.AllTests.suite() );
+        suite.addTest( org.squale.squalix.tools.umlquality.AllTests.suite() );
         /* Utilitaires */
         // CSV
-        suite.addTest( com.airfrance.squalix.util.csv.AllTests.suite() );
+        suite.addTest( org.squale.squalix.util.csv.AllTests.suite() );
         // manipulation des fichiers
         suite.addTest( FileUtilAllTests.suite() );
         // parser
