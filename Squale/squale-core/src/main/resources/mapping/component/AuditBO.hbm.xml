@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" table="AuditBO" name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO">
+  <class mutable="true" table="AuditBO" name="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO">
     <id unsaved-value="-1" name="id" type="long" column="AuditId" length="19">
       <generator class="native">
         <param name="sequence">audit_sequence</param>
@@ -14,16 +14,16 @@
     <property name="status" length="10" column="Status" update="true" unique="false" not-null="true" type="integer" insert="true"/>
     <bag inverse="true" cascade="none" lazy="true" name="qualityResults">
       <key column="AuditId"/>
-      <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"/>
+      <one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"/>
     </bag>
     <property name="comments" column="Comments" update="true" type="string" insert="true"/>
     <bag inverse="true" cascade="none" lazy="true" table="Components_Audits" name="components">
       <key column="AuditId"/>
-      <many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO" column="ComponentId" outer-join="auto"/>
+      <many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO" column="ComponentId" outer-join="auto"/>
     </bag>
     <bag inverse="true" cascade="none" lazy="true" name="auditGrids">
       <key column="AuditId"/>
-      <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditGridBO"/>
+      <one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditGridBO"/>
     </bag>
     <property name="historicalDate" column="historicalDate" update="true" type="timestamp" insert="true"/>
     <property name="duration" length="10" column="Duration" update="true" type="string" insert="true"/>
@@ -33,7 +33,7 @@
     <property name="squaleVersion" length="100" column="squale_version" update="true" type="string" insert="true"/>
     <bag inverse="true" cascade="none" lazy="true" name="auditDisplayConfs">
       <key column="AuditId"/>
-      <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO"/>
+      <one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO"/>
     </bag>
   </class>
 </hibernate-mapping>

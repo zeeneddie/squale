@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.1//EN" "file:../com/airfrance/squalecommon/dtd/squalix-config-1.1.dtd">
+<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.1//EN" "file:../org/squale/squalecommon/dtd/squalix-config-1.1.dtd">
 <!--  Fichier de configuration de squalix définissant les profiles possibles, les différents types
 	de récupération des sources,...
 	La configuration des types de récupération des sources se fait par l'action dont le nom correspond à
@@ -22,36 +22,36 @@
 	</frequencies>
 	<tasks>
 		<!-- taches obligatoires -->
-		<task name="ClearCaseTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseTask" standard="true"></task>
-		<task name="ClearCaseCleanerTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseCleanerTask" configurable="false"></task>
-		<task name="JCompilingTask" class="com.airfrance.squalix.tools.compiling.java.JCompilingTask" standard="true"></task>
-		<task name="JCompilingCleanerTask" class="com.airfrance.squalix.tools.compiling.java.JCompilingCleanerTask" configurable="false"></task>
-		<task name="JspCompilingTask" class="com.airfrance.squalix.tools.compiling.jsp.JspCompilingTask" standard="true"></task>
-		<task name="SourceCodeAnalyserTask" class="com.airfrance.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserTask" standard="true"></task>
-		<task name="SourceCodeAnalyserCleanerTask" class="com.airfrance.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserCleanerTask" configurable="false"></task>
-		<task name="JavaMockCompilingTask" class="com.airfrance.squalix.tools.compiling.java.JavaMockCompilingTask" standard="true"></task>
-		<task name="JavaMockCompilingCleanerTask" class="com.airfrance.squalix.tools.compiling.java.JavaMockCompilingCleanerTask" configurable="false"></task>
-		<task name="CppMcCabeTask" class="com.airfrance.squalix.tools.mccabe.CppMcCabeTask" standard="true"></task>
-		<task name="JavaMcCabeTask" class="com.airfrance.squalix.tools.mccabe.JavaMcCabeTask" configurable="false"></task>
+		<task name="ClearCaseTask" class="org.squale.squalix.tools.clearcase.task.ClearCaseTask" standard="true"></task>
+		<task name="ClearCaseCleanerTask" class="org.squale.squalix.tools.clearcase.task.ClearCaseCleanerTask" configurable="false"></task>
+		<task name="JCompilingTask" class="org.squale.squalix.tools.compiling.java.JCompilingTask" standard="true"></task>
+		<task name="JCompilingCleanerTask" class="org.squale.squalix.tools.compiling.java.JCompilingCleanerTask" configurable="false"></task>
+		<task name="JspCompilingTask" class="org.squale.squalix.tools.compiling.jsp.JspCompilingTask" standard="true"></task>
+		<task name="SourceCodeAnalyserTask" class="org.squale.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserTask" standard="true"></task>
+		<task name="SourceCodeAnalyserCleanerTask" class="org.squale.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserCleanerTask" configurable="false"></task>
+		<task name="JavaMockCompilingTask" class="org.squale.squalix.tools.compiling.java.JavaMockCompilingTask" standard="true"></task>
+		<task name="JavaMockCompilingCleanerTask" class="org.squale.squalix.tools.compiling.java.JavaMockCompilingCleanerTask" configurable="false"></task>
+		<task name="CppMcCabeTask" class="org.squale.squalix.tools.mccabe.CppMcCabeTask" standard="true"></task>
+		<task name="JavaMcCabeTask" class="org.squale.squalix.tools.mccabe.JavaMcCabeTask" configurable="false"></task>
 		<!-- taches facultatives -->
-		<task name="CppTestTask" class="com.airfrance.squalix.tools.cpptest.CppTestTask" standard="true" mandatory="false"></task>
-		<task name="ComputeResultTask" class="com.airfrance.squalix.tools.computing.project.ComputeResultTask" configurable="false" mandatory="false"></task>
-		<task name="RulesCheckingTask" class="com.airfrance.squalix.tools.ruleschecking.RulesCheckingTask" mandatory="false"></task>
-		<task name="CkjmTask" class="com.airfrance.squalix.tools.ckjm.CkjmTask" configurable="false" mandatory="false"></task>
-		<task name="JDependTask" class="com.airfrance.squalix.tools.jdepend.JDependTask" configurable="false" mandatory="false"></task>
-		<task name="MackerTask" class="com.airfrance.squalix.tools.macker.MackerTask" mandatory="false"></task>
-		<task name="J2eeMackerTask" class="com.airfrance.squalix.tools.macker.J2eeMackerTask" mandatory="false"></task>
-		<task name="UMLQualityTask" class="com.airfrance.squalix.tools.umlquality.UMLQualityTask" mandatory="false"></task>
-		<task name="CpdTask" class="com.airfrance.squalix.tools.cpd.CpdTask" configurable="false" mandatory="false"></task>
-		<task name="PmdTask" class="com.airfrance.squalix.tools.pmd.PmdTask" mandatory="false"></task>
-		<task name="JSPVolumetryTask" class="com.airfrance.squalix.tools.jspvolumetry.JSPVolumetryTask" configurable="false"></task>
+		<task name="CppTestTask" class="org.squale.squalix.tools.cpptest.CppTestTask" standard="true" mandatory="false"></task>
+		<task name="ComputeResultTask" class="org.squale.squalix.tools.computing.project.ComputeResultTask" configurable="false" mandatory="false"></task>
+		<task name="RulesCheckingTask" class="org.squale.squalix.tools.ruleschecking.RulesCheckingTask" mandatory="false"></task>
+		<task name="CkjmTask" class="org.squale.squalix.tools.ckjm.CkjmTask" configurable="false" mandatory="false"></task>
+		<task name="JDependTask" class="org.squale.squalix.tools.jdepend.JDependTask" configurable="false" mandatory="false"></task>
+		<task name="MackerTask" class="org.squale.squalix.tools.macker.MackerTask" mandatory="false"></task>
+		<task name="J2eeMackerTask" class="org.squale.squalix.tools.macker.J2eeMackerTask" mandatory="false"></task>
+		<task name="UMLQualityTask" class="org.squale.squalix.tools.umlquality.UMLQualityTask" mandatory="false"></task>
+		<task name="CpdTask" class="org.squale.squalix.tools.cpd.CpdTask" configurable="false" mandatory="false"></task>
+		<task name="PmdTask" class="org.squale.squalix.tools.pmd.PmdTask" mandatory="false"></task>
+		<task name="JSPVolumetryTask" class="org.squale.squalix.tools.jspvolumetry.JSPVolumetryTask" configurable="false"></task>
 		
-		<task name="JavancssTask" class="com.airfrance.squalix.tools.javancss.JavancssTask" configurable="false" mandatory="false"></task>
+		<task name="JavancssTask" class="org.squale.squalix.tools.javancss.JavancssTask" configurable="false" mandatory="false"></task>
 		
 		<!-- a lancer impérativement après McCabe ou un autre outil car on a besoin que les données existent déjà
 			RSM ne peut pas créer correctement les méthodBO -->
-		<task name="JavaRSMTask" class="com.airfrance.squalix.tools.rsm.JavaRSMTask" configurable="false"></task>
-		<task name="CppRSMTask" class="com.airfrance.squalix.tools.rsm.CppRSMTask" configurable="false"></task>
+		<task name="JavaRSMTask" class="org.squale.squalix.tools.rsm.JavaRSMTask" configurable="false"></task>
+		<task name="CppRSMTask" class="org.squale.squalix.tools.rsm.CppRSMTask" configurable="false"></task>
 	</tasks>
 	<sourcemanagements>
 		<sourcemanagement name="clearcase">

@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" lazy="true" table="TagCategory" name="com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagCategoryBO">
+  <class mutable="true" lazy="true" table="TagCategory" name="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagCategoryBO">
     <id unsaved-value="-1" name="id" type="long" column="TagCategoryId" length="19">
       <generator class="native">
         <param name="sequence">tagCategory_sequence</param>
@@ -12,7 +12,7 @@
     <property name="description" length="1024" column="Description" update="true" unique="false" not-null="true" type="string" insert="true"/>
     <bag cascade="none" lazy="true" table="Concerned_tags" name="tags">
       <key column="TagCategory"/>
-      <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO"/>
+      <one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO"/>
     </bag>
   </class>
 </hibernate-mapping>

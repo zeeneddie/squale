@@ -1,7 +1,7 @@
 #    
 #
 #
-#     JNDI FSContext Air france MQSERIES.
+#     JNDI FSContext MQSERIES.
 #
 #  se subsitue au config JNDI via WAS 3.5 pour les
 #  nouvelles applications en WAS 5.++
@@ -3870,8 +3870,8 @@ TOPCALLTC2H/RefAddr/8/Type=QMGR
 # QCFInterne
 ###########################################
 
-QCFInterne/ClassName=com.airfrance.jms.JmsQueueConnectionFactory
-QCFInterne/FactoryName=com.airfrance.jms.JmsQueueConnectionFactoryFactory
+QCFInterne/ClassName=org.squale.jms.JmsQueueConnectionFactory
+QCFInterne/FactoryName=org.squale.jms.JmsQueueConnectionFactoryFactory
 QCFInterne/RefAddr/0/Encoding=String
 QCFInterne/RefAddr/0/Type=FACT
 

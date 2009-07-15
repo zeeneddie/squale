@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class discriminator-value="QualityRule" table="QualityRule" name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO">
+  <class discriminator-value="QualityRule" table="QualityRule" name="org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO">
     <id unsaved-value="-1" name="id" type="long" column="QualityRuleId" length="19">
       <generator class="native">
         <param name="sequence">qualityrule_sequence</param>
@@ -12,22 +12,22 @@
     <property name="helpKey" column="Help_Key" update="true" unique="false" type="string" insert="true"/>
     <property name="name" column="Name" update="true" unique="false" not-null="true" type="string" insert="true"/>
     <property name="dateOfCreation" column="DateOfCreation" update="true" unique="false" not-null="true" type="timestamp" insert="true"/>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO" lazy="false" discriminator-value="CriteriumRule">
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO" lazy="false" discriminator-value="CriteriumRule">
       <map cascade="all" lazy="true" table="CriteriumPractice_Rule" sort="natural" name="practices">
         <key column="CriteriumRuleId"/>
-        <index-many-to-many column="PracticeRuleId" class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO"/>
+        <index-many-to-many column="PracticeRuleId" class="org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO"/>
         <element not-null="true" type="float" column="Weight" unique="false"/>
       </map>
     </subclass>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO" lazy="false" discriminator-value="FactorRule">
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO" lazy="false" discriminator-value="FactorRule">
       <map cascade="all" lazy="true" table="FactorCriterium_Rule" sort="natural" name="criteria">
         <key column="FactorRuleId"/>
-        <index-many-to-many column="CriteriumRuleId" class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO"/>
+        <index-many-to-many column="CriteriumRuleId" class="org.squale.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO"/>
         <element not-null="true" type="float" column="Weight" unique="false"/>
       </map>
     </subclass>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO" lazy="false" discriminator-value="PracticeRule">
-      <many-to-one insert="true" column="Formula" cascade="all" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO" name="formula"/>
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO" lazy="false" discriminator-value="PracticeRule">
+      <many-to-one insert="true" column="Formula" cascade="all" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO" name="formula"/>
       <property name="weightFunction" column="WeightFunction" update="true" unique="false" type="string" insert="true"/>
       <property name="effort" length="10" column="effort" update="true" unique="false" type="integer" insert="true"/>
       <property name="timeLimitation" length="6" column="TimeLimitation" update="true" unique="false" type="string" insert="true"/>

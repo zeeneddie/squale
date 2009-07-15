@@ -2,13 +2,13 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" lazy="true" table="UserAccess" name="com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO">
+  <class mutable="true" lazy="true" table="UserAccess" name="org.squale.squalecommon.enterpriselayer.businessobject.access.UserAccessBO">
     <id unsaved-value="-1" name="id" type="long" column="UserAccessId" length="19">
       <generator class="native">
         <param name="sequence">userAccess_sequence</param>
       </generator>
     </id>
-    <many-to-one insert="true" column="ApplicationId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO" not-null="true" name="application"/>
+    <many-to-one insert="true" column="ApplicationId" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO" not-null="true" name="application"/>
     <property name="date" column="accessDate" update="true" not-null="true" type="timestamp" insert="true"/>
     <property name="matricule" length="1024" column="matricule" update="true" not-null="true" type="string" insert="true"/>
   </class>

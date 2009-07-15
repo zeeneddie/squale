@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class lazy="true" table="TaskParameter" name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskParameterBO">
+  <class lazy="true" table="TaskParameter" name="org.squale.squalecommon.enterpriselayer.businessobject.config.TaskParameterBO">
     <id unsaved-value="-1" name="id" type="long" column="TaskParameterId" length="19">
       <generator class="native">
         <param name="sequence">taskParameter_sequence</param>

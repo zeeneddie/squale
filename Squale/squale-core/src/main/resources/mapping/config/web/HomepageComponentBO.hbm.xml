@@ -2,14 +2,14 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" table="HomepageComponent" name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.HomepageComponentBO">
+  <class mutable="true" table="HomepageComponent" name="org.squale.squalecommon.enterpriselayer.businessobject.config.web.HomepageComponentBO">
     <id unsaved-value="-1" name="id" type="long" column="HomepageComponentId" length="19">
       <generator class="native">
         <param name="sequence">HomepageComponent_sequence</param>
       </generator>
     </id>
     <property name="componentName" column="ComponentName" update="true" not-null="true" type="string" insert="true"/>
-    <many-to-one insert="true" column="UserBO" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO" not-null="true" name="user"/>
+    <many-to-one insert="true" column="UserBO" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.profile.UserBO" not-null="true" name="user"/>
     <property name="componentPosition" column="ComponentPosition" update="true" not-null="true" type="int" insert="true"/>
     <property name="componentValue" column="ComponentValue" update="true" type="string" insert="true"/>
   </class>

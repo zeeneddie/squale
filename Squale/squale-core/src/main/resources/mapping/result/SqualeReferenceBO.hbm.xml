@@ -2,13 +2,13 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" table="SqualeReference" name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.SqualeReferenceBO">
+  <class mutable="true" table="SqualeReference" name="org.squale.squalecommon.enterpriselayer.businessobject.result.SqualeReferenceBO">
     <id unsaved-value="-1" name="id" type="long" column="ReferencielId" length="19">
       <generator class="native">
         <param name="sequence">reference_sequence</param>
       </generator>
     </id>
-    <many-to-one insert="true" column="QualityGrid" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO" not-null="false" name="qualityGrid"/>
+    <many-to-one insert="true" column="QualityGrid" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO" not-null="false" name="qualityGrid"/>
     <property name="public" column="PublicApplication" update="true" unique="false" type="boolean" insert="true"/>
     <property name="applicationName" column="ApplicationName" update="true" type="string" insert="true"/>
     <property name="projectName" column="ProjectName" update="true" type="string" insert="true"/>
@@ -18,7 +18,7 @@
     <property name="date" column="AuditDate" update="true" type="timestamp" insert="true"/>
     <map cascade="all" lazy="false" table="FactorRef" sort="natural" name="factors">
       <key column="ReferencielId"/>
-      <index-many-to-many column="Rule" class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"/>
+      <index-many-to-many column="Rule" class="org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"/>
       <element not-null="false" type="float" column="Factor_Value" unique="false"/>
     </map>
     <property name="codeLineNumber" length="10" column="CodeLineNumber" update="true" unique="false" not-null="false" type="integer" insert="true"/>

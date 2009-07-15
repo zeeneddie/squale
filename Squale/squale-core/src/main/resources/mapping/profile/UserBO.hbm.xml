@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" table="UserBO" name="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO">
+  <class mutable="true" table="UserBO" name="org.squale.squalecommon.enterpriselayer.businessobject.profile.UserBO">
     <id unsaved-value="-1" name="id" type="long" column="UserId" length="19">
       <generator class="native">
         <param name="sequence">user_sequence</param>
@@ -14,10 +14,10 @@
     <property name="email" column="Email" update="true" type="string" insert="true"/>
     <map cascade="none" lazy="true" table="User_Rights" sort="unsorted" name="rights">
       <key column="UserId"/>
-      <index-many-to-many column="ApplicationId" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO"/>
-      <many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" column="ProfileId" outer-join="auto"/>
+      <index-many-to-many column="ApplicationId" class="org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO"/>
+      <many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" column="ProfileId" outer-join="auto"/>
     </map>
-    <many-to-one insert="true" column="ProfileId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" not-null="true" name="defaultProfile"/>
+    <many-to-one insert="true" column="ProfileId" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" not-null="true" name="defaultProfile"/>
     <property name="unsubscribed" column="unsubscribed" update="true" unique="false" type="boolean" insert="true"/>
   </class>
 </hibernate-mapping>

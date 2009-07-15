@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" table="Stats_squale_dict" name="com.airfrance.squalecommon.enterpriselayer.businessobject.stats.SiteStatsDICTBO">
+  <class mutable="true" table="Stats_squale_dict" name="org.squale.squalecommon.enterpriselayer.businessobject.stats.SiteStatsDICTBO">
     <id unsaved-value="-1" name="id" type="long" column="Id" length="19">
       <generator class="native">
         <param name="sequence">stats_sequence</param>
@@ -22,6 +22,6 @@
     <property name="nbPartialAudits" column="NB_AUDITS_PARTIELS" update="true" type="integer" insert="true"/>
     <property name="nbSuccessfulAudits" column="NB_AUDITS_REUSSIS" update="true" type="integer" insert="true"/>
     <property name="nbTotalAppliWithoutAudit" column="NB_APPLI_AVEC_AUCUN_AUDIT" update="true" type="integer" insert="true"/>
-    <many-to-one insert="true" column="Serveur" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO" not-null="false" name="serveurBO"/>
+    <many-to-one insert="true" column="Serveur" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.config.ServeurBO" not-null="false" name="serveurBO"/>
   </class>
 </hibernate-mapping>

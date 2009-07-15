@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" lazy="false" table="Tag" name="com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO">
+  <class mutable="true" lazy="false" table="Tag" name="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO">
     <id unsaved-value="-1" name="id" type="long" column="TagId" length="19">
       <generator class="native">
         <param name="sequence">tag_sequence</param>
@@ -10,10 +10,10 @@
     </id>
     <property name="name" column="Name" update="true" unique="true" not-null="true" type="string" insert="true"/>
     <property name="description" length="1024" column="Description" update="true" unique="false" not-null="true" type="string" insert="true"/>
-    <many-to-one insert="true" unique="false" column="TagCategory" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagCategoryBO" not-null="false" name="tagCategoryBO"/>
+    <many-to-one insert="true" unique="false" column="TagCategory" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagCategoryBO" not-null="false" name="tagCategoryBO"/>
     <set inverse="true" cascade="none" lazy="true" table="Tag_Component" sort="unsorted" name="components">
       <key column="TagId"/>
-      <many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO" column="ComponentId" outer-join="auto"/>
+      <many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO" column="ComponentId" outer-join="auto"/>
     </set>
   </class>
 </hibernate-mapping>

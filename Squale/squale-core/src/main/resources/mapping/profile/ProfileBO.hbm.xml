@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" table="ProfileBO" name="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO">
+  <class mutable="true" table="ProfileBO" name="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO">
     <id unsaved-value="-1" name="id" type="long" column="ProfileId" length="19">
       <generator class="native">
         <param name="sequence">profile_sequence</param>
@@ -11,7 +11,7 @@
     <property name="name" column="Name" update="true" type="string" insert="true"/>
     <map cascade="none" lazy="true" table="Profile_Rights" sort="unsorted" name="rights">
       <key column="ProfileId"/>
-      <index-many-to-many column="AtomicRightsId" class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.AtomicRightsBO"/>
+      <index-many-to-many column="AtomicRightsId" class="org.squale.squalecommon.enterpriselayer.businessobject.profile.AtomicRightsBO"/>
       <element not-null="false" type="string" column="Rights_Value" unique="false"/>
     </map>
   </class>

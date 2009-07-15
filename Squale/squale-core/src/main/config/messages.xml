@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE messages PUBLIC "-//Squale//DTD Message Configuration 1.0//EN" "file:../com/airfrance/squalecommon/dtd/message-1.0.dtd">
+<!DOCTYPE messages PUBLIC "-//Squale//DTD Message Configuration 1.0//EN" "file:../org/squale/squalecommon/dtd/message-1.0.dtd">
 
 <messages>
 	<!--  Messages de la grille qualité  -->

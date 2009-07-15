@@ -5,7 +5,7 @@
 	<ruleset name="architecture JRAF">
 		<!-- definition des variables -->
 		<!-- racines des variables -->
-		<var name="air-france" value="com.airfrance" />
+		<var name="air-france" value="org.squale" />
 		<var name="nom_projet" value="${air-france}.squal*" />
 
 	<!-- JSP -->

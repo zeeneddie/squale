@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.0//EN" "file:../../../../squaleCommon/src/com/airfrance/squalecommon/dtd/squalix-config-1.0.dtd">
+<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.0//EN" "file:../../../../squaleCommon/src/org/squale/squalecommon/dtd/squalix-config-1.0.dtd">
 
 <configuration>
 	<stoptimes>
@@ -10,9 +10,9 @@
 		<stoptime day="friday" time="4:00" />
 	</stoptimes>
 	<tasks>
-		<task name="ClearCaseTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseTask" />
-		<task name="JCompilingTask" class="com.airfrance.squalix.tools.compiling.java.JCompilingTask" />
-		<task name="ClearCaseCleanerTask" class="com.airfrance.squalix.tools.clearcase.task.ClearCaseCleanerTask" />
+		<task name="ClearCaseTask" class="org.squale.squalix.tools.clearcase.task.ClearCaseTask" />
+		<task name="JCompilingTask" class="org.squale.squalix.tools.compiling.java.JCompilingTask" />
+		<task name="ClearCaseCleanerTask" class="org.squale.squalix.tools.clearcase.task.ClearCaseCleanerTask" />
 	</tasks>
 	<sourcemanagements>
 		<sourcemanagement name="clearcase">

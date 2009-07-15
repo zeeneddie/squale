@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- <!DOCTYPE listApplicationComponent PUBLIC "-//Air France Software,Inc.//DTD squalecommon Configuration 1.0//EN" "configApplicationComponent.dtd" > -->
+<!-- <!DOCTYPE listApplicationComponent PUBLIC "-//Squale Software,Inc.//DTD squalecommon Configuration 1.0//EN" "configApplicationComponent.dtd" > -->
 
 <listApplicationComponent> 
   
-	<applicationComponent name="Login" description="Phase de login" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.LoginApplicationComponentAccess">
+	<applicationComponent name="Login" description="Phase de login" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.LoginApplicationComponentAccess">
 		
 		<component name="verifyUser" />
 		
@@ -21,7 +21,7 @@
 		
 	</applicationComponent>
 	
-	<applicationComponent name="ApplicationAdmin" description="Administration et Enregistrement d'applications" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.ApplicationAdminApplicationComponentAccess">
+	<applicationComponent name="ApplicationAdmin" description="Administration et Enregistrement d'applications" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.ApplicationAdminApplicationComponentAccess">
 
 		<component name="addMilestone" />
 		
@@ -43,7 +43,7 @@
 
 	</applicationComponent>
 	
-	<applicationComponent name="Purge" description="supprimer des audits et applications" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.PurgeApplicationComponentAccess">
+	<applicationComponent name="Purge" description="supprimer des audits et applications" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.PurgeApplicationComponentAccess">
 
 		<component name="purgeAudit" />
 		
@@ -51,7 +51,7 @@
 
 	</applicationComponent>
 	
-	<applicationComponent name="Validation" description="valider des applications en creation et dans le referentiel" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.ValidationApplicationComponentAccess">
+	<applicationComponent name="Validation" description="valider des applications en creation et dans le referentiel" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.ValidationApplicationComponentAccess">
 
 		<component name="getApplicationsCreated" />
 		
@@ -65,7 +65,7 @@
 
 	</applicationComponent>
 	
-	<applicationComponent name="Component" description="Acceder aux derniers audits / aux fils d'un composant" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display.ComponentApplicationComponentAccess">
+	<applicationComponent name="Component" description="Acceder aux derniers audits / aux fils d'un composant" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.display.ComponentApplicationComponentAccess">
 
 		<component name="get" />
 		
@@ -95,7 +95,7 @@
 
 	</applicationComponent>
 	
-	<applicationComponent name="Error" description="Gestion des erreurs" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display.ErrorApplicationComponentAccess">
+	<applicationComponent name="Error" description="Gestion des erreurs" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.display.ErrorApplicationComponentAccess">
 
 		<component name="getErrors" />
 		
@@ -107,7 +107,7 @@
 
 	</applicationComponent>
 	
-	<applicationComponent name="Graph" description="Gestion des graphiques" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display.GraphApplicationComponentAccess">
+	<applicationComponent name="Graph" description="Gestion des graphiques" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.display.GraphApplicationComponentAccess">
 
 		<component name="getHistoricGraph" />
 		
@@ -117,7 +117,7 @@
 	
 	</applicationComponent>
 	
-	<applicationComponent name="Results" description="Recuperation des resultats" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display.ResultsApplicationComponentAccess">
+	<applicationComponent name="Results" description="Recuperation des resultats" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.display.ResultsApplicationComponentAccess">
 		
 		<component name="getByAudit" />
 		
@@ -152,7 +152,7 @@
 		<component name="getProjectAuditGrid" />
 	</applicationComponent>
 
-	<applicationComponent name="QualityGrid" description="Manipulation des grilles qualite et objets connexes" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.QualityGridApplicationComponentAccess">
+	<applicationComponent name="QualityGrid" description="Manipulation des grilles qualite et objets connexes" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.QualityGridApplicationComponentAccess">
 
 		<component name="getGrid" />
 		
@@ -171,7 +171,7 @@
 		<component name="getGridMetrics" />
 	</applicationComponent>
 	
-	<applicationComponent name="Messages" description="" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.MessageApplicationComponentAccess">
+	<applicationComponent name="Messages" description="" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.MessageApplicationComponentAccess">
 		
 		<component name="importMessages" />
 		
@@ -191,7 +191,7 @@
 		
 	</applicationComponent>
 	
-	<applicationComponent name="CheckstyleAdmin" description="Parsing du fichier de configuration checkstyle" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.CheckstyleAdminComponentAccess">
+	<applicationComponent name="CheckstyleAdmin" description="Parsing du fichier de configuration checkstyle" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.CheckstyleAdminComponentAccess">
 
 		<component name="getAllConfigurations" />
 		
@@ -201,7 +201,7 @@
 
 	</applicationComponent>
 	
-	<applicationComponent name="SqualixConfig" description="Configuration du portail" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.ConfigurationApplicationComponentAccess">
+	<applicationComponent name="SqualixConfig" description="Configuration du portail" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.ConfigurationApplicationComponentAccess">
 		
 		<component name="getProfiles" />
 		
@@ -215,7 +215,7 @@
 		
 	</applicationComponent>
 	
-	<applicationComponent name="CppTestAdmin" description="Administration de CppTest" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.CppTestAdminComponentAccess">
+	<applicationComponent name="CppTestAdmin" description="Administration de CppTest" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.CppTestAdminComponentAccess">
 
 		<component name="getAllConfigurations" />
 		
@@ -225,7 +225,7 @@
 
 	</applicationComponent>
 	
-	<applicationComponent name="PmdAdmin" description="Administration de Pmd" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.PmdAdminComponentAccess">
+	<applicationComponent name="PmdAdmin" description="Administration de Pmd" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.PmdAdminComponentAccess">
 
 		<component name="getAllConfigurations" />
 		
@@ -235,7 +235,7 @@
 
 	</applicationComponent>
 
-	<applicationComponent name="Task" description="gestion des taches" impl="com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.TaskAdministrationComponentAccess">
+	<applicationComponent name="Task" description="gestion des taches" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.TaskAdministrationComponentAccess">
 	
 		<component name="getAllTasks" />
 	

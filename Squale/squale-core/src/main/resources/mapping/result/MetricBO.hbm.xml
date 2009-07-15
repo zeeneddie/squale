@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class discriminator-value="Metric" mutable="true" table="Metric" name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO">
+  <class discriminator-value="Metric" mutable="true" table="Metric" name="org.squale.squalecommon.enterpriselayer.businessobject.result.MetricBO">
     <id unsaved-value="-1" name="id" type="long" column="MetricId" length="19">
       <generator class="native">
         <param name="sequence">metric_sequence</param>
@@ -10,22 +10,22 @@
     </id>
     <discriminator column="subclass"/>
     <property name="name" column="Name" update="true" unique="false" not-null="false" type="string" insert="true"/>
-    <many-to-one insert="true" column="MeasureId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO" name="measure"/>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.BinaryMetricBO" discriminator-value="Bin">
-      <property name="value" column="Blob_val" update="true" unique="false" not-null="false" type="com.airfrance.jraf.provider.persistence.hibernate.BinaryBlobType" insert="true"/>
+    <many-to-one insert="true" column="MeasureId" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.result.MeasureBO" name="measure"/>
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.result.BinaryMetricBO" discriminator-value="Bin">
+      <property name="value" column="Blob_val" update="true" unique="false" not-null="false" type="org.squale.jraf.provider.persistence.hibernate.BinaryBlobType" insert="true"/>
     </subclass>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.BooleanMetricBO" discriminator-value="Bool">
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.result.BooleanMetricBO" discriminator-value="Bool">
       <property name="value" column="Boolean_val" update="true" unique="false" not-null="false" type="boolean" insert="true"/>
     </subclass>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.NumberMetricBO" discriminator-value="Number">
-      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.FloatMetricBO" discriminator-value="Float">
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.result.NumberMetricBO" discriminator-value="Number">
+      <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.result.FloatMetricBO" discriminator-value="Float">
         <property name="value" column="Number_val" update="true" unique="false" not-null="false" type="float" insert="true"/>
       </subclass>
-      <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO" discriminator-value="Int">
+      <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO" discriminator-value="Int">
         <property name="value" column="Number_val" update="true" unique="false" not-null="false" type="integer" insert="true"/>
       </subclass>
     </subclass>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.StringMetricBO" discriminator-value="Str">
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.result.StringMetricBO" discriminator-value="Str">
       <property name="value" length="4000" column="String_val" update="true" type="string" insert="true"/>
     </subclass>
   </class>

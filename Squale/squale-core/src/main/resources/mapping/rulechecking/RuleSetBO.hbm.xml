@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" table="RuleSet" name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO">
+  <class mutable="true" table="RuleSet" name="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO">
     <id unsaved-value="-1" name="id" type="long" column="RuleSetId" length="19">
       <generator class="native">
         <param name="sequence">RuleSet_sequence</param>
@@ -12,21 +12,21 @@
     <map cascade="all" lazy="true" sort="unsorted" name="rules">
       <key column="RuleSetId"/>
       <index type="string" column="Code"/>
-      <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"/>
+      <one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"/>
     </map>
     <property name="name" column="Name" update="true" unique="false" not-null="false" type="string" insert="true"/>
     <property name="dateOfUpdate" column="DateOfUpdate" update="true" unique="false" not-null="true" type="timestamp" insert="true"/>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.ProjectRuleSetBO" discriminator-value="ProjectRuleSet">
-      <many-to-one insert="true" column="ProjectId" cascade="all" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO" name="project"/>
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.ProjectRuleSetBO" discriminator-value="ProjectRuleSet">
+      <many-to-one insert="true" column="ProjectId" cascade="all" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO" name="project"/>
     </subclass>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO" discriminator-value="Checkstyle">
-      <property name="value" column="FileContent" update="true" unique="false" not-null="false" type="com.airfrance.jraf.provider.persistence.hibernate.BinaryBlobType" insert="true"/>
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO" discriminator-value="Checkstyle">
+      <property name="value" column="FileContent" update="true" unique="false" not-null="false" type="org.squale.jraf.provider.persistence.hibernate.BinaryBlobType" insert="true"/>
     </subclass>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.cpptest.CppTestRuleSetBO" discriminator-value="CppTest">
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.cpptest.CppTestRuleSetBO" discriminator-value="CppTest">
       <property name="cppTestName" column="CppTestName" update="true" unique="true" not-null="false" type="string" insert="true"/>
     </subclass>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.pmd.PmdRuleSetBO" discriminator-value="Pmd">
-      <property name="value" column="FileContent" update="true" unique="false" not-null="false" type="com.airfrance.jraf.provider.persistence.hibernate.BinaryBlobType" insert="true"/>
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.pmd.PmdRuleSetBO" discriminator-value="Pmd">
+      <property name="value" column="FileContent" update="true" unique="false" not-null="false" type="org.squale.jraf.provider.persistence.hibernate.BinaryBlobType" insert="true"/>
       <property name="language" column="Language" update="true" unique="false" not-null="false" type="string" insert="true"/>
     </subclass>
   </class>

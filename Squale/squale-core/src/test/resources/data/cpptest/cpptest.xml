@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE ruleset PUBLIC "-//Squale//DTD CppTest Configuration 1.0//EN" "file:../../../..//SqualeCommon/src/com/airfrance/squalecommon/dtd/cpptest-1.0.dtd">
+<!DOCTYPE ruleset PUBLIC "-//Squale//DTD CppTest Configuration 1.0//EN" "file:../../../..//SqualeCommon/src/org/squale/squalecommon/dtd/cpptest-1.0.dtd">
 
 <ruleset name="default" version="0" cppTestName="builtin://MustHaveRules" >
 <rule code="DeleteNonPointer.rule" category="coding" severity="error"/>

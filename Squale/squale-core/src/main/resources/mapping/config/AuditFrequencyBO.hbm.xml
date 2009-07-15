@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class lazy="true" table="AuditFrequency" name="com.airfrance.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO">
+  <class lazy="true" table="AuditFrequency" name="org.squale.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO">
     <id unsaved-value="-1" name="id" type="long" column="AuditFrequencyId" length="19">
       <generator class="native">
         <param name="sequence">auditFrequency_sequence</param>

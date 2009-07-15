@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" table="News" name="com.airfrance.squalecommon.enterpriselayer.businessobject.message.NewsBO">
+  <class mutable="true" table="News" name="org.squale.squalecommon.enterpriselayer.businessobject.message.NewsBO">
     <id unsaved-value="-1" name="id" type="long" column="Id" length="19">
       <generator class="native">
         <param name="sequence">news_sequence</param>

@@ -2,14 +2,14 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" table="AuditDisplayConfBO" name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO">
+  <class mutable="true" table="AuditDisplayConfBO" name="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO">
     <id unsaved-value="-1" name="id" type="long" column="AuditConfId" length="19">
       <generator class="native">
         <param name="sequence">auditconf_sequence</param>
       </generator>
     </id>
-    <many-to-one insert="true" column="ConfId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO" lazy="false" not-null="false" name="displayConf"/>
-    <many-to-one insert="true" column="ProjectId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO" not-null="false" name="project"/>
-    <many-to-one insert="true" column="AuditId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO" name="audit"/>
+    <many-to-one insert="true" column="ConfId" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO" lazy="false" not-null="false" name="displayConf"/>
+    <many-to-one insert="true" column="ProjectId" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO" not-null="false" name="project"/>
+    <many-to-one insert="true" column="AuditId" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO" name="audit"/>
   </class>
 </hibernate-mapping>

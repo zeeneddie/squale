@@ -2,14 +2,14 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class mutable="true" table="Mark" name="com.airfrance.squalecommon.enterpriselayer.businessobject.result.MarkBO">
+  <class mutable="true" table="Mark" name="org.squale.squalecommon.enterpriselayer.businessobject.result.MarkBO">
     <id unsaved-value="-1" name="id" type="long" column="MarkId" length="19">
       <generator class="native">
         <param name="sequence">mark_sequence</param>
       </generator>
     </id>
     <property name="value" column="Value" update="true" unique="false" not-null="true" type="float" insert="true"/>
-    <many-to-one insert="true" column="ComponentId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO" not-null="true" name="component"/>
-    <many-to-one insert="true" column="PracticeResultId" cascade="none" update="true" outer-join="auto" class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO" not-null="true" name="practice"/>
+    <many-to-one insert="true" column="ComponentId" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO" not-null="true" name="component"/>
+    <many-to-one insert="true" column="PracticeResultId" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO" not-null="true" name="practice"/>
   </class>
 </hibernate-mapping>

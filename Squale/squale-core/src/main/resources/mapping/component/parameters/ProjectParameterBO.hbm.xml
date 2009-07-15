@@ -2,28 +2,28 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class discriminator-value="ProjectParameter" mutable="true" table="ProjectParameter" name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO">
+  <class discriminator-value="ProjectParameter" mutable="true" table="ProjectParameter" name="org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO">
     <id unsaved-value="-1" name="id" type="long" column="ParameterId" length="19">
       <generator class="native">
         <param name="sequence">project_parameter_sequence</param>
       </generator>
     </id>
     <discriminator column="subclass"/>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO" discriminator-value="List">
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO" discriminator-value="List">
       <list cascade="all" lazy="false" table="ProjectParameter" name="parameters">
         <key column="ListId"/>
         <index type="long" column="Rank" length="19"/>
-        <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"/>
+        <one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"/>
       </list>
     </subclass>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO" discriminator-value="Map">
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO" discriminator-value="Map">
       <map cascade="all" lazy="false" table="ProjectParameters" sort="unsorted" name="parameters">
         <key column="MapId"/>
         <index type="string" column="IndexKey"/>
-        <one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"/>
+        <one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"/>
       </map>
     </subclass>
-    <subclass name="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO" discriminator-value="String">
+    <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO" discriminator-value="String">
       <property name="value" length="1024" column="Value" update="true" unique="false" not-null="false" type="string" insert="true"/>
     </subclass>
   </class>
