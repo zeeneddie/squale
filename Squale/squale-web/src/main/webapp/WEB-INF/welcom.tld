@@ -8,7 +8,7 @@
   <short-name>af</short-name>
   <uri>http://www.squale.org/welcom/tags-welcom</uri>
   <display-name>Welcom Tag Library</display-name>
-  <description><![CDATA[Cette Taglib contient des tags conformes à la charte AirFrance V2. 
+  <description><![CDATA[Cette Taglib contient des tags conformes à la charte V2. 
 Elle contient des tags susceptible de faciliter le développement de pages Web à la charte V2 (001 ou 002). 
 Charte Tag est compatible avec Struts v1.1, et repose sur son fonctionnement. ]]></description>
   
@@ -1103,7 +1103,7 @@ ce tag génère deux ballises de type &lt;td&gt;&lt;/td&gt; une pour le label du c
 		<name>canvasHeader</name>
 		<tag-class>org.squale.welcom.taglib.canvas.CanvasHeaderTag</tag-class>
 		<body-content>JSP</body-content>
-		<description><![CDATA[<p>Ce Tag définit le canevas de l'entête AirFrance (spécifié 
+		<description><![CDATA[<p>Ce Tag définit le canevas de l'entête (spécifié 
       dans le menu.jsp).</p>
     <p>Définit le bayadère, l'image de tétière, les 
       differents javascripts et feuilles de style nécessaires à welcom</p>

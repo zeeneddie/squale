@@ -10,7 +10,7 @@
 	<short-name>sd</short-name>
 	<uri>http://www.squale.org/sdistant/tags-sdistant</uri>
 	<display-name>Squale SDistant Tag Library</display-name>
-  <description><![CDATA[Cette Taglib contient des tags conformes à la charte AirFrance V2. 
+  <description><![CDATA[Cette Taglib contient des tags conformes à la charte V2. 
 Elle contient des tags susceptibles de faciliter le développement de services distants du portail à la charte V2 (001 ou 002). ]]></description>
 
 	<tag>
