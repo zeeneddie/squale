@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,17 +28,17 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Map.Entry;
 
-import com.airfrance.squalecommon.datatransfertobject.component.AuditGridDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.FactorsResultListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectFactorsForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squalecommon.datatransfertobject.component.AuditGridDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridDTO;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.FactorsResultListForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ProjectFactorsForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Transformation d'une liste de résultats en fonction de facteurs

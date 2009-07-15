@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squaleweb.applicationlayer.action.results.project;
+package org.squale.squaleweb.applicationlayer.action.results.project;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,37 +42,37 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.servlet.ServletUtilities;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
-import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
-import com.airfrance.squaleweb.applicationlayer.action.export.xls.ExcelDataComponentsResultsList;
-import com.airfrance.squaleweb.applicationlayer.action.export.xls.ExcelDataTopList;
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentResultListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.TopListForm;
-import com.airfrance.squaleweb.applicationlayer.tracker.TrackerStructure;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.transformer.ComponentResultListTransformer;
-import com.airfrance.squaleweb.util.SqualeWebConstants;
-import com.airfrance.squaleweb.util.graph.BubbleMaker;
-import com.airfrance.squaleweb.util.graph.GraphMaker;
-import com.airfrance.welcom.outils.excel.ExcelFactory;
-import com.airfrance.welcom.outils.excel.ExcelGenerateurException;
-import com.airfrance.welcom.outils.pdf.PDFDataJasperReports;
-import com.airfrance.welcom.outils.pdf.PDFEngine;
-import com.airfrance.welcom.outils.pdf.PDFFactory;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
-import com.airfrance.welcom.struts.util.WConstants;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squaleweb.applicationlayer.action.ActionUtils;
+import org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
+import org.squale.squaleweb.applicationlayer.action.accessRights.ReaderAction;
+import org.squale.squaleweb.applicationlayer.action.export.xls.ExcelDataComponentsResultsList;
+import org.squale.squaleweb.applicationlayer.action.export.xls.ExcelDataTopList;
+import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ComponentForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ComponentResultListForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.TopListForm;
+import org.squale.squaleweb.applicationlayer.tracker.TrackerStructure;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.transformer.ComponentResultListTransformer;
+import org.squale.squaleweb.util.SqualeWebConstants;
+import org.squale.squaleweb.util.graph.BubbleMaker;
+import org.squale.squaleweb.util.graph.GraphMaker;
+import org.squale.welcom.outils.excel.ExcelFactory;
+import org.squale.welcom.outils.excel.ExcelGenerateurException;
+import org.squale.welcom.outils.pdf.PDFDataJasperReports;
+import org.squale.welcom.outils.pdf.PDFEngine;
+import org.squale.welcom.outils.pdf.PDFFactory;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
+import org.squale.welcom.struts.util.WConstants;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :
@@ -492,7 +492,7 @@ public class TopAction
             HashMap parameters = new HashMap();
             PDFDataJasperReports pdfData =
                 new PDFDataJasperReports( request.getLocale(), getResources( request ), data,
-                                          "/com/airfrance/squaleweb/resources/jasperreport/tops.jasper", false,
+                                          "/org/squale/squaleweb/resources/jasperreport/tops.jasper", false,
                                           parameters );
 
             // Le nom de la métrique

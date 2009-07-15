@@ -21,12 +21,12 @@
  *
  * Personnalisation des liens URL du graphe de type Bubble
  */
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.data.xy.XYDataset;
 
-import com.airfrance.squaleweb.applicationlayer.action.results.project.TopAction;
+import org.squale.squaleweb.applicationlayer.action.results.project.TopAction;
 
 /**
  * @author 6370258 Classe de génération de liens spécifiques à chaque point du graphe de type Bubble

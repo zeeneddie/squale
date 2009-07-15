@@ -16,17 +16,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean;
+package org.squale.squaleweb.applicationlayer.formbean;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.welcom.struts.bean.WActionFormSelectable;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.welcom.struts.bean.WActionFormSelectable;
 
 /**
  */

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.externalTask.qc;
+package org.squale.squaleweb.applicationlayer.formbean.component.parameters.externalTask.qc;
 
 import java.util.Date;
 
@@ -25,9 +25,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm;
-import com.airfrance.squaleweb.transformer.component.parameters.external.qc.TestManagerQCTransformer;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm;
+import org.squale.squaleweb.transformer.component.parameters.external.qc.TestManagerQCTransformer;
 
 /**
  * Bean for TestManagerQCTask
@@ -109,7 +109,7 @@ public class TestManagerQCForm
     /**
      * {@inheritdoc}
      * 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTransformer()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTransformer()
      */
     public Class getTransformer()
     {
@@ -119,7 +119,7 @@ public class TestManagerQCForm
     /**
      * {@inheritdoc}
      * 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getParametersConstants()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getParametersConstants()
      */
     public String[] getParametersConstants()
     {
@@ -129,7 +129,7 @@ public class TestManagerQCForm
     /**
      * {@inheritdoc}
      * 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
      */
     public String getNameInSession()
     {
@@ -139,7 +139,7 @@ public class TestManagerQCForm
     /**
      * {@inheritdoc}
      * 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
      */
     public String getTaskName()
     {
@@ -149,7 +149,7 @@ public class TestManagerQCForm
     /**
      * {@inheritdoc}
      * 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping,
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping,
      *      javax.servlet.http.HttpServletRequest)
      */
     protected void validateConf( ActionMapping pMapping, HttpServletRequest pRequest )

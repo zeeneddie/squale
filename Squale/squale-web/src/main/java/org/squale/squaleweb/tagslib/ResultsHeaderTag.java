@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.tagslib;
+package org.squale.squaleweb.tagslib;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,12 +30,12 @@ import javax.servlet.jsp.tagext.TagSupport;
 import org.apache.struts.util.RequestUtils;
 import org.apache.struts.util.ResponseUtils;
 
-import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentType;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.welcom.struts.util.WConstants;
+import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentType;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
+import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.welcom.struts.util.WConstants;
 
 /**
  * Construit le début de la page de résultat d'une/un application/projet

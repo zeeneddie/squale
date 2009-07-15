@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,7 +35,7 @@ import org.jfree.data.time.Day;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * Help class for create historic graph
@@ -162,7 +162,7 @@ public class HistoMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() {@inheritDoc}
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() {@inheritDoc}
      */
     protected int getDefaultHeight()
     {
@@ -170,7 +170,7 @@ public class HistoMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() {@inheritDoc}
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() {@inheritDoc}
      */
     protected int getDefaultWidth()
     {

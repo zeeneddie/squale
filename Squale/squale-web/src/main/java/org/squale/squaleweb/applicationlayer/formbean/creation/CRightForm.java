@@ -19,9 +19,9 @@
 /*
  * Créé le 11 août 05, par M400832.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.creation;
+package org.squale.squaleweb.applicationlayer.formbean.creation;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
  * @author M400832

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util;
+package org.squale.squaleweb.util;
 
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -44,7 +44,7 @@ public enum InputFieldDataChecker
     /**
      * The property file that actually stores the regexp.
      */
-    private static final String PROPERTY_FILENAME = "com.airfrance.squaleweb.util.input-field-data-checker";
+    private static final String PROPERTY_FILENAME = "org.squale.squaleweb.util.input-field-data-checker";
 
     /**
      * Private constructor with the property used to retrieve the regexp needed to construct the pattern. The property

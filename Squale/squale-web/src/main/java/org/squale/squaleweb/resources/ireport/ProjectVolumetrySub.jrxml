@@ -109,7 +109,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
 						<font fontName="Verdana" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[com.airfrance.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), $F{name})]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[org.squale.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), $F{name})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

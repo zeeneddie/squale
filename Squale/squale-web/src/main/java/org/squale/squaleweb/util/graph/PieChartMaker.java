@@ -23,7 +23,7 @@
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
 
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
 import java.text.NumberFormat;
 import java.util.Iterator;
@@ -38,7 +38,7 @@ import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.util.Rotation;
 
-import com.airfrance.squaleweb.util.SqualeWebActionUtils;
+import org.squale.squaleweb.util.SqualeWebActionUtils;
 
 /**
  * @author M400843
@@ -85,7 +85,7 @@ public class PieChartMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() {@inheritDoc}
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() {@inheritDoc}
      */
     protected int getDefaultHeight()
     {
@@ -93,7 +93,7 @@ public class PieChartMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() {@inheritDoc}
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() {@inheritDoc}
      */
     protected int getDefaultWidth()
     {

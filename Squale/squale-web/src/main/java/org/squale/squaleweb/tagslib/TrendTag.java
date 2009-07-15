@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.tagslib;
+package org.squale.squaleweb.tagslib;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -24,7 +24,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import org.apache.struts.util.RequestUtils;
 import org.apache.struts.util.ResponseUtils;
 
-import com.airfrance.squaleweb.util.SqualeWebActionUtils;
+import org.squale.squaleweb.util.SqualeWebActionUtils;
 
 /**
  */

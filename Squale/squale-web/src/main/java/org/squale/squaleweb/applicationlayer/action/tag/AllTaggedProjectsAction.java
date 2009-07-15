@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.tag;
+package org.squale.squaleweb.applicationlayer.action.tag;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,29 +34,29 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.daolayer.tag.TagDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
-import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm;
-import com.airfrance.squaleweb.comparator.AuditGridComparator;
-import com.airfrance.squaleweb.transformer.ApplicationListTransformer;
-import com.airfrance.squaleweb.transformer.FactorsResultListTransformer;
-import com.airfrance.squaleweb.transformer.ProjectSummaryTransformer;
-import com.airfrance.squaleweb.transformer.stats.FactorsStatsTransformer;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.daolayer.tag.TagDAOImpl;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squaleweb.applicationlayer.action.ActionUtils;
+import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationListForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.ProjectListForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm;
+import org.squale.squaleweb.comparator.AuditGridComparator;
+import org.squale.squaleweb.transformer.ApplicationListTransformer;
+import org.squale.squaleweb.transformer.FactorsResultListTransformer;
+import org.squale.squaleweb.transformer.ProjectSummaryTransformer;
+import org.squale.squaleweb.transformer.stats.FactorsStatsTransformer;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Affichage de la liste des applications Cette action permet d'extraire la liste des applications disponibles pour

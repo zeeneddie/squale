@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.grid;
+package org.squale.squaleweb.applicationlayer.action.grid;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,19 +32,19 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
-import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm;
-import com.airfrance.squaleweb.applicationlayer.tracker.TrackerStructure;
-import com.airfrance.squaleweb.comparator.ResultFormComparator;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.transformer.ProjectTransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
+import org.squale.squaleweb.applicationlayer.action.ActionUtils;
+import org.squale.squaleweb.applicationlayer.action.accessRights.ReaderAction;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm;
+import org.squale.squaleweb.applicationlayer.tracker.TrackerStructure;
+import org.squale.squaleweb.comparator.ResultFormComparator;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.transformer.ProjectTransformer;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * 

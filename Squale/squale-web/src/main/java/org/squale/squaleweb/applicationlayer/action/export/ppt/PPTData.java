@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.export.ppt;
+package org.squale.squaleweb.applicationlayer.action.export.ppt;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -59,9 +59,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.airfrance.squalecommon.util.xml.ParsingHandler;
-import com.airfrance.squalecommon.util.xml.XmlResolver;
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squalecommon.util.xml.ParsingHandler;
+import org.squale.squalecommon.util.xml.XmlResolver;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * General data to create ppt documents
@@ -70,7 +70,7 @@ public class PPTData
 {
 
     /** DTD location */
-    public static final String DTD_LOCATION = "/com/airfrance/squaleweb/resources/ppt/dtd/ppt_mapping-1.0.dtd";
+    public static final String DTD_LOCATION = "/org/squale/squaleweb/resources/ppt/dtd/ppt_mapping-1.0.dtd";
 
     /** Public id of mapping file */
     public static final String PUBLIC_ID = "-//Squale//DTD PPT Mapping 1.0//EN";

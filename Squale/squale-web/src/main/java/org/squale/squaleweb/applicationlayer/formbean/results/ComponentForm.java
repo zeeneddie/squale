@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.results;
+package org.squale.squaleweb.applicationlayer.formbean.results;
 
 import java.util.LinkedList;
 
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.ActionIdForm;
+import org.squale.squaleweb.applicationlayer.formbean.ActionIdForm;
 
 /**
  * Représente un composant (package, classe, fichier, méthode)
@@ -330,7 +330,7 @@ public class ComponentForm
     }
 
     /**
-     * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
+     * @see org.squale.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
      *      javax.servlet.http.HttpServletRequest)
      * @param mapping le mapping
      * @param request la requête

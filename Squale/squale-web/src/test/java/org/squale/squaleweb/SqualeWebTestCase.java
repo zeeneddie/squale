@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb;
+package org.squale.squaleweb;
 
 import java.io.File;
 import java.sql.Connection;
@@ -26,23 +26,23 @@ import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.operation.DatabaseOperation;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.SessionImpl;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.ComponentFactory;
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
-import com.airfrance.squalecommon.util.initialisor.JRafConfigurator;
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.UserForm;
-import com.airfrance.squaleweb.transformer.LogonBeanTransformer;
-import com.airfrance.squaleweb.transformer.UserTransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
-import com.airfrance.welcom.struts.util.WConstants;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.ComponentFactory;
+import org.squale.squalecommon.datatransfertobject.component.UserDTO;
+import org.squale.squalecommon.util.initialisor.JRafConfigurator;
+import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.component.UserForm;
+import org.squale.squaleweb.transformer.LogonBeanTransformer;
+import org.squale.squaleweb.transformer.UserTransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
+import org.squale.welcom.struts.util.WConstants;
 
 import servletunit.struts.MockStrutsTestCase;
 

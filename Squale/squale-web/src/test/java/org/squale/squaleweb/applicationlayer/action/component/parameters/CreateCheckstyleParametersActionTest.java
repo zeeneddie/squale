@@ -16,20 +16,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.component.parameters;
+package org.squale.squaleweb.applicationlayer.action.component.parameters;
 
 import java.io.InputStream;
 
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.CheckstyleDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.checkstyle.CheckstyleFacade;
-import com.airfrance.squaleweb.SqualeWebTestCase;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.CheckstyleForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
+import org.squale.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
+import org.squale.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
+import org.squale.squalecommon.datatransfertobject.rulechecking.CheckstyleDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.UserBO;
+import org.squale.squalecommon.enterpriselayer.facade.checkstyle.CheckstyleFacade;
+import org.squale.squaleweb.SqualeWebTestCase;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.CheckstyleForm;
+import org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
 
 /**
  * Test de l'action de paramétrage checkstyle d'un projet

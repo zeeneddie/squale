@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.comparator;
+package org.squale.squaleweb.comparator;
 
 import java.util.Comparator;
 
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squaleweb.applicationlayer.formbean.component.AuditForm;
 
 /**
  * Compare les audits par rapport à leurs dates.

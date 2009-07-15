@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.results;
+package org.squale.squaleweb.applicationlayer.formbean.results;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
-import com.airfrance.squaleweb.util.graph.GraphMaker;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.util.graph.GraphMaker;
 
 /**
  * @author M400843
@@ -194,7 +194,7 @@ public class ParamReviewForm
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
+     * @see org.squale.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
      *      javax.servlet.http.HttpServletRequest)
      */
     public void wValidate( ActionMapping mapping, HttpServletRequest request )

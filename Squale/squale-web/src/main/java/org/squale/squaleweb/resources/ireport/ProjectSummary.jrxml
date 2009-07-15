@@ -33,15 +33,15 @@
 
 	<field name="applicationName" class="java.lang.String"/>
 	<field name="auditName" class="java.lang.String"/>
-	<field name="factors" class="com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectFactorsForm"/>
+	<field name="factors" class="org.squale.squaleweb.applicationlayer.formbean.results.ProjectFactorsForm"/>
 	<field name="previousAuditName" class="java.lang.String"/>
 	<field name="projectName" class="java.lang.String"/>
 	<field name="userName" class="java.lang.String"/>
-	<field name="volumetry" class="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm"/>
+	<field name="volumetry" class="org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm"/>
 
 	<variable name="date" class="java.lang.String" resetType="None" calculation="Nothing">
-		<variableExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></variableExpression>
-		<initialValueExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
+		<variableExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></variableExpression>
+		<initialValueExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
 	</variable>
 
 		<group  name="graph" isStartNewPage="true" >
@@ -145,7 +145,7 @@
 						<subreportParameterExpression><![CDATA[$P{REPORT_RESOURCE_BUNDLE}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{volumetry}.getList())]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/ProjectVolumetrySub.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/ProjectVolumetrySub.jasper"]]></subreportExpression>
 				</subreport>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -182,7 +182,7 @@
 						<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{factors}.getFactors())]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/factorsResult.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/factorsResult.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
 			</groupHeader>
@@ -216,7 +216,7 @@
 						<subreportParameterExpression><![CDATA[$P{factorsResults}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{factors}.getFactors())]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/ProjectFactorsSub.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/ProjectFactorsSub.jasper"]]></subreportExpression>
 				</subreport>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -274,7 +274,7 @@
 						key="image-1"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<graphicElement stretchType="NoStretch" pen="None" fill="Solid" />
-					<imageExpression class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

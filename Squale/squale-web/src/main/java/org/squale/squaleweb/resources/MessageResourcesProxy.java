@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.resources;
+package org.squale.squaleweb.resources;
 
 import java.util.Locale;
 import java.util.Observable;
@@ -27,11 +27,11 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts.util.MessageResources;
 import org.apache.struts.util.MessageResourcesFactory;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squaleweb.messages.MessageProvider;
-import com.airfrance.squaleweb.transformer.message.MessagesDTOTransformer;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squaleweb.messages.MessageProvider;
+import org.squale.squaleweb.transformer.message.MessagesDTOTransformer;
 
 /**
  * Proxy des ressources struts Les messages affichés sous struts proviennent de deux sources : les messages statiqques

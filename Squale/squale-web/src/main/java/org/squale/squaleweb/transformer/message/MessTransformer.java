@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer.message;
+package org.squale.squaleweb.transformer.message;
 
-import com.airfrance.squalecommon.datatransfertobject.message.MessageDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.messages.MessageForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
+import org.squale.squalecommon.datatransfertobject.message.MessageDTO;
+import org.squale.squaleweb.applicationlayer.formbean.messages.MessageForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
 
 /**
  * 

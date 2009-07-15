@@ -2,7 +2,7 @@
 
     <!DOCTYPE exportPPT PUBLIC "-//Squale//DTD PPT Mapping 1.0//EN" "dtd/ppt_mapping-1.0.dtd" >
     
-    <exportPPT class="com.airfrance.squaleweb.applicationlayer.action.export.ppt.AuditReportPPTData">
+    <exportPPT class="org.squale.squaleweb.applicationlayer.action.export.ppt.AuditReportPPTData">
 		<set methodName="setProfilePieChart" slide="13" where="SQUALE_PIE_CHART"/>
 		<set methodName="setProfileVolTab" slide="13" where="SQUALE_VOl_PROFILE_TAB"/>
 		<set methodName="setApplicationQualityResults" slide="13" where="SQUALE_global_results"/>

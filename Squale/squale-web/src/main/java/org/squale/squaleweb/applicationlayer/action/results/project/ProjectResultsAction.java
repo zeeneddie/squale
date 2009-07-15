@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.results.project;
+package org.squale.squaleweb.applicationlayer.action.results.project;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,70 +46,70 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.servlet.ServletUtilities;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.QualityResultDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.CriteriumRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.FactorRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
-import com.airfrance.squalecommon.util.manualmark.TimeLimitationParser;
-import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
-import com.airfrance.squaleweb.applicationlayer.action.export.xls.ExcelDataMarkList;
-import com.airfrance.squaleweb.applicationlayer.action.export.xml.IDELinkXMLData;
-import com.airfrance.squaleweb.applicationlayer.action.export.xml.XMLData;
-import com.airfrance.squaleweb.applicationlayer.action.export.xml.XMLFactory;
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.information.PracticeInformationForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.CriteriumForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.MarkForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectFactorForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultRulesCheckingForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.RuleCheckingItemsListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.RuleCheckingPDFForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.RulesCheckingForm;
-import com.airfrance.squaleweb.applicationlayer.tracker.TrackerStructure;
-import com.airfrance.squaleweb.comparator.AuditComparator;
-import com.airfrance.squaleweb.comparator.AuditGridComparator;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.transformer.ComponentTransformer;
-import com.airfrance.squaleweb.transformer.MarkTransformer;
-import com.airfrance.squaleweb.transformer.PracticeResultTransformer;
-import com.airfrance.squaleweb.transformer.ProjectSummaryTransformer;
-import com.airfrance.squaleweb.transformer.ProjectTransformer;
-import com.airfrance.squaleweb.transformer.RuleCheckingItemsListTransformer;
-import com.airfrance.squaleweb.transformer.RulesCheckingResultTransformer;
-import com.airfrance.squaleweb.util.SqualeWebActionUtils;
-import com.airfrance.squaleweb.util.SqualeWebConstants;
-import com.airfrance.squaleweb.util.graph.BubbleMaker;
-import com.airfrance.squaleweb.util.graph.GraphMaker;
-import com.airfrance.squaleweb.util.graph.KiviatMaker;
-import com.airfrance.squaleweb.util.graph.RepartitionBarMaker;
-import com.airfrance.squaleweb.util.graph.RepartitionMaker;
-import com.airfrance.welcom.outils.excel.ExcelFactory;
-import com.airfrance.welcom.outils.pdf.PDFDataJasperReports;
-import com.airfrance.welcom.outils.pdf.PDFEngine;
-import com.airfrance.welcom.outils.pdf.PDFFactory;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
-import com.airfrance.welcom.struts.util.WConstants;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squalecommon.datatransfertobject.rule.CriteriumRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.FactorRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
+import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
+import org.squale.squalecommon.util.manualmark.TimeLimitationParser;
+import org.squale.squaleweb.applicationlayer.action.ActionUtils;
+import org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
+import org.squale.squaleweb.applicationlayer.action.accessRights.ReaderAction;
+import org.squale.squaleweb.applicationlayer.action.export.xls.ExcelDataMarkList;
+import org.squale.squaleweb.applicationlayer.action.export.xml.IDELinkXMLData;
+import org.squale.squaleweb.applicationlayer.action.export.xml.XMLData;
+import org.squale.squaleweb.applicationlayer.action.export.xml.XMLFactory;
+import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.ProjectForm;
+import org.squale.squaleweb.applicationlayer.formbean.information.PracticeInformationForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ComponentForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.CriteriumForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.MarkForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ProjectFactorForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultRulesCheckingForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.RuleCheckingItemsListForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.RuleCheckingPDFForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.RulesCheckingForm;
+import org.squale.squaleweb.applicationlayer.tracker.TrackerStructure;
+import org.squale.squaleweb.comparator.AuditComparator;
+import org.squale.squaleweb.comparator.AuditGridComparator;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.transformer.ComponentTransformer;
+import org.squale.squaleweb.transformer.MarkTransformer;
+import org.squale.squaleweb.transformer.PracticeResultTransformer;
+import org.squale.squaleweb.transformer.ProjectSummaryTransformer;
+import org.squale.squaleweb.transformer.ProjectTransformer;
+import org.squale.squaleweb.transformer.RuleCheckingItemsListTransformer;
+import org.squale.squaleweb.transformer.RulesCheckingResultTransformer;
+import org.squale.squaleweb.util.SqualeWebActionUtils;
+import org.squale.squaleweb.util.SqualeWebConstants;
+import org.squale.squaleweb.util.graph.BubbleMaker;
+import org.squale.squaleweb.util.graph.GraphMaker;
+import org.squale.squaleweb.util.graph.KiviatMaker;
+import org.squale.squaleweb.util.graph.RepartitionBarMaker;
+import org.squale.squaleweb.util.graph.RepartitionMaker;
+import org.squale.welcom.outils.excel.ExcelFactory;
+import org.squale.welcom.outils.pdf.PDFDataJasperReports;
+import org.squale.welcom.outils.pdf.PDFEngine;
+import org.squale.welcom.outils.pdf.PDFFactory;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
+import org.squale.welcom.struts.util.WConstants;
 
 /**
  * @version 1.0
@@ -1253,7 +1253,7 @@ public class ProjectResultsAction
             parameters.put( "auditDate", rootForm.getAuditName() );
             PDFDataJasperReports data =
                 new PDFDataJasperReports( request.getLocale(), getResources( request ), badPractices,
-                                          "/com/airfrance/squaleweb/resources/jasperreport/ActionPlan.jasper", false,
+                                          "/org/squale/squaleweb/resources/jasperreport/ActionPlan.jasper", false,
                                           parameters );
             PDFFactory.generatePDFToHTTPResponse( data, response, "", PDFEngine.JASPERREPORTS );
         }
@@ -1355,7 +1355,7 @@ public class ProjectResultsAction
             parameters.put( "userName", logon.getMatricule() );
             PDFDataJasperReports data =
                 new PDFDataJasperReports( request.getLocale(), getResources( request ), badPractices,
-                                          "/com/airfrance/squaleweb/resources/jasperreport/ActionPlan.jasper", false,
+                                          "/org/squale/squaleweb/resources/jasperreport/ActionPlan.jasper", false,
                                           parameters );
             PDFFactory.generatePDFToHTTPResponse( data, response, "", PDFEngine.JASPERREPORTS );
         }
@@ -1416,7 +1416,7 @@ public class ProjectResultsAction
             parameters.put( "practicesResults", practicesResults.values() );
             PDFDataJasperReports pdfData =
                 new PDFDataJasperReports( request.getLocale(), getResources( request ), data,
-                                          "/com/airfrance/squaleweb/resources/jasperreport/ProjectSummary.jasper",
+                                          "/org/squale/squaleweb/resources/jasperreport/ProjectSummary.jasper",
                                           false, parameters );
             PDFFactory.generatePDFToHTTPResponse( pdfData, response, "", PDFEngine.JASPERREPORTS );
         }
@@ -1478,7 +1478,7 @@ public class ProjectResultsAction
             HashMap parameters = new HashMap();
             PDFDataJasperReports pdfData =
                 new PDFDataJasperReports( request.getLocale(), getResources( request ), data,
-                                          "/com/airfrance/squaleweb/resources/jasperreport/metricsResults.jasper",
+                                          "/org/squale/squaleweb/resources/jasperreport/metricsResults.jasper",
                                           false, parameters );
 
             // Le nom des métriques
@@ -1561,7 +1561,7 @@ public class ProjectResultsAction
 
             PDFDataJasperReports pdfData =
                 new PDFDataJasperReports( request.getLocale(), getResources( request ), data,
-                                          "/com/airfrance/squaleweb/resources/jasperreport/transgressions.jasper",
+                                          "/org/squale/squaleweb/resources/jasperreport/transgressions.jasper",
                                           false, parameters );
             PDFFactory.generatePDFToHTTPResponse( pdfData, response, "", PDFEngine.JASPERREPORTS );
         }

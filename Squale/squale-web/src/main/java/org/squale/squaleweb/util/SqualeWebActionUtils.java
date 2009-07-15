@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util;
+package org.squale.squaleweb.util;
 
 import java.lang.reflect.Method;
 import java.text.DateFormat;
@@ -37,11 +37,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MarkBO;
-import com.airfrance.squalecommon.util.ConstantRulesChecking;
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MarkBO;
+import org.squale.squalecommon.util.ConstantRulesChecking;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * Fournit des fonctionnalités utiles à plusieurs actions.
@@ -563,7 +563,7 @@ public class SqualeWebActionUtils
 
     /**
      * Permet d'aller à la ligne dans un menu pour pouvoir afficher le nom en entier au lieu qu'il soit tronqué car la
-     * charte graphique d'Air France impose une taille fixe
+     * charte graphique impose une taille fixe
      * 
      * @param pItem l'item a couper
      * @return l'item avec des '\n' tous les n caractères

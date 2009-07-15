@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.results;
+package org.squale.squaleweb.applicationlayer.action.results;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,16 +30,16 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.result.SqualeReferenceDTO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.AdminAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.reference.ReferenceForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.reference.ReferenceGridForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.reference.ReferenceListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.reference.SetOfReferencesListForm;
-import com.airfrance.squaleweb.transformer.ReferenceTransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.result.SqualeReferenceDTO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.AdminAction;
+import org.squale.squaleweb.applicationlayer.formbean.reference.ReferenceForm;
+import org.squale.squaleweb.applicationlayer.formbean.reference.ReferenceGridForm;
+import org.squale.squaleweb.applicationlayer.formbean.reference.ReferenceListForm;
+import org.squale.squaleweb.applicationlayer.formbean.reference.SetOfReferencesListForm;
+import org.squale.squaleweb.transformer.ReferenceTransformer;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Actions sur le référentiel Les actions sur le référentiel permettent de consulter les facteurs et les métriques de

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -25,16 +25,16 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Set;
 
-import com.airfrance.squalecommon.datatransfertobject.component.AuditGridDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ReferenceFactorDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.SqualeReferenceDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.FactorRuleDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.reference.ReferenceForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squalecommon.datatransfertobject.component.AuditGridDTO;
+import org.squale.squalecommon.datatransfertobject.result.ReferenceFactorDTO;
+import org.squale.squalecommon.datatransfertobject.result.SqualeReferenceDTO;
+import org.squale.squalecommon.datatransfertobject.rule.FactorRuleDTO;
+import org.squale.squaleweb.applicationlayer.formbean.reference.ReferenceForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * Transformation d'une référence

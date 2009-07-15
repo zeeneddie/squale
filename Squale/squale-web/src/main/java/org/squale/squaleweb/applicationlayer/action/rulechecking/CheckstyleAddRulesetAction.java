@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.rulechecking;
+package org.squale.squaleweb.applicationlayer.action.rulechecking;
 
 /**
  * Action pour permettre à squale de parser le fichier de configuration checkstyle
@@ -28,7 +28,7 @@ public class CheckstyleAddRulesetAction
 {
 
     /**
-     * @see com.airfrance.squaleweb.applicationlayer.action.rulechecking.AbstractAddRuleSetAction#getAccessComponentName()
+     * @see org.squale.squaleweb.applicationlayer.action.rulechecking.AbstractAddRuleSetAction#getAccessComponentName()
      * @return le nom utilisé
      */
     protected String getAccessComponentName()

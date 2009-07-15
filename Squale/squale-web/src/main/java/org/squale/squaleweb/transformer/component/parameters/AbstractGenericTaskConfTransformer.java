@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer.component.parameters;
+package org.squale.squaleweb.transformer.component.parameters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,14 +25,14 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.ListParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractGenericTaskForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
+import org.squale.squalecommon.datatransfertobject.component.parameters.ListParameterDTO;
+import org.squale.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
+import org.squale.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractGenericTaskForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
 
 /**
  * This class is a model for instance of a transformer methods of which convert object to form and vis versa.<br />
@@ -52,7 +52,7 @@ public class AbstractGenericTaskConfTransformer
     /**
      * Method which transforms an object from the presentation layer into an object of the application layer
      * 
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm)
      * @param pFrom an object from the presentation layer
      * @return object (or collection of) for the application layer (BusinessObject or DataTransferObject)
      * @throws WTransformerException if an error occurs while transforming
@@ -69,7 +69,7 @@ public class AbstractGenericTaskConfTransformer
      * Method which transforms an object from the presentation layer into an object of the application layer.<br />
      * Objects could then transit between layers.
      * 
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm)
      * @param pFrom an object from the presentation layer (PL)
      * @param pObject object (or collection of) for the application layer (BusinessObject or DataTransferObject)
      * @throws WTransformerException if an error occurs while transforming
@@ -128,7 +128,7 @@ public class AbstractGenericTaskConfTransformer
     /**
      * Method which transforms an object from the application layer into an object of the presentation layer
      * 
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
      * @param pObject object (or collection of) from the application layer (BusinessObject or DataTransferObject)
      * @return a form containing all informations of the object (presentation layer)
      * @throws WTransformerException if any error occurs while transforming
@@ -144,8 +144,8 @@ public class AbstractGenericTaskConfTransformer
     /**
      * Method which transforms an object from the application layer into an object of the presentation layer
      * 
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
-     *      com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      org.squale.welcom.struts.bean.WActionForm)
      * @param pObject object (or collection of) from the application layer (BusinessObject or DataTransferObject)
      * @param pForm a form containing all informations of the object (presentation layer)
      * @throws WTransformerException if any error occurs while transforming

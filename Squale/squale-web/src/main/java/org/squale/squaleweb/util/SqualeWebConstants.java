@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util;
+package org.squale.squaleweb.util;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
 
 /**
  * Contient les constantes nécessaires à la vue et au controlleur

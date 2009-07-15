@@ -16,19 +16,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.Locale;
 
-import com.airfrance.squalecommon.datatransfertobject.rule.AbstractFormulaDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.FormulaForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.PracticeRuleForm;
-import com.airfrance.squaleweb.util.TimelimitationUtil;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squalecommon.datatransfertobject.rule.AbstractFormulaDTO;
+import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
+import org.squale.squaleweb.applicationlayer.formbean.component.FormulaForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.PracticeRuleForm;
+import org.squale.squaleweb.util.TimelimitationUtil;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Transformation d'une pratique

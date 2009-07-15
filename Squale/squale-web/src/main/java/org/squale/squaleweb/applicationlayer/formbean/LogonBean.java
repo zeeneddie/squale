@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean;
+package org.squale.squaleweb.applicationlayer.formbean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +24,11 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.io.Serializable;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm;
-import com.airfrance.welcom.outils.Access;
-import com.airfrance.welcom.struts.bean.WILogonBeanSecurity;
-import com.airfrance.welcom.struts.bean.WResultAction;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
+import org.squale.welcom.outils.Access;
+import org.squale.welcom.struts.bean.WILogonBeanSecurity;
+import org.squale.welcom.struts.bean.WResultAction;
 
 /**
  * Bean de l'utilisateur connecté
@@ -252,7 +252,7 @@ public class LogonBean
     }
 
     /**
-     * @see com.airfrance.welcom.struts.bean.WIResultAction#setResultAction(java.lang.String) {@inheritDoc}
+     * @see org.squale.welcom.struts.bean.WIResultAction#setResultAction(java.lang.String) {@inheritDoc}
      */
     public void setResultAction( String pResultAction )
     {
@@ -261,7 +261,7 @@ public class LogonBean
     }
 
     /**
-     * @see com.airfrance.welcom.struts.bean.WIResultAction#getResultAction() {@inheritDoc}
+     * @see org.squale.welcom.struts.bean.WIResultAction#getResultAction() {@inheritDoc}
      */
     public String getResultAction()
     {

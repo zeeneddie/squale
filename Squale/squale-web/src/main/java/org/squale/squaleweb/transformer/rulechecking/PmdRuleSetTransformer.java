@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer.rulechecking;
+package org.squale.squaleweb.transformer.rulechecking;
 
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.PmdRuleSetDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.rulechecking.PmdRuleSetForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
+import org.squale.squalecommon.datatransfertobject.rulechecking.PmdRuleSetDTO;
+import org.squale.squaleweb.applicationlayer.formbean.rulechecking.PmdRuleSetForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
 
 /**
  * Transformation d'un ruleset Pmd
@@ -44,8 +44,8 @@ public class PmdRuleSetTransformer
     }
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
-     *      com.airfrance.welcom.struts.bean.WActionForm) {@inheritDoc}
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      org.squale.welcom.struts.bean.WActionForm) {@inheritDoc}
      */
     public void objToForm( Object[] pObject, WActionForm pForm )
         throws WTransformerException

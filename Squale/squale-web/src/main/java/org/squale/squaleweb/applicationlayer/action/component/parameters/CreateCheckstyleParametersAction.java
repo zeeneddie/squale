@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.component.parameters;
+package org.squale.squaleweb.applicationlayer.action.component.parameters;
 
 import java.util.Collection;
 
@@ -28,13 +28,13 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squaleweb.applicationlayer.action.component.CreateProjectAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squaleweb.applicationlayer.action.component.CreateProjectAction;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm;
+import org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Configuration des paramètres de la tâche Checkstyle
@@ -46,7 +46,7 @@ public class CreateCheckstyleParametersAction
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction#getTransformerParameters(com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm,
+     * @see org.squale.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction#getTransformerParameters(org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm,
      *      javax.servlet.http.HttpServletRequest)
      */
     public Object[] getTransformerParameters( CreateProjectForm pProject, HttpServletRequest pRequest )
@@ -63,7 +63,7 @@ public class CreateCheckstyleParametersAction
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction#fill(org.apache.struts.action.ActionMapping,
+     * @see org.squale.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction#fill(org.apache.struts.action.ActionMapping,
      *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */

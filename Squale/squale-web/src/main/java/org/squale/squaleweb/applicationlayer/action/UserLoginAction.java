@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action;
+package org.squale.squaleweb.applicationlayer.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,11 +29,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.UserLoginForm;
-import com.airfrance.squaleweb.connection.AuthenticationBean;
-import com.airfrance.squaleweb.connection.UserBeanAccessorHelper;
+import org.squale.squalecommon.datatransfertobject.component.UserDTO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
+import org.squale.squaleweb.applicationlayer.formbean.UserLoginForm;
+import org.squale.squaleweb.connection.AuthenticationBean;
+import org.squale.squaleweb.connection.UserBeanAccessorHelper;
 
 /**
  * Action class for the login. This action is call by the login.jsp when a user send his login and password for

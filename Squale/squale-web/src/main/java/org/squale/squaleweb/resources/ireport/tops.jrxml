@@ -38,8 +38,8 @@
 	<field name="metrics" class="java.util.LinkedList"/>
 
 	<variable name="date" class="java.lang.String" resetType="Report" calculation="Nothing">
-		<variableExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></variableExpression>
-		<initialValueExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
+		<variableExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></variableExpression>
+		<initialValueExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
 	</variable>
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -89,7 +89,7 @@
 						key="image-1"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<graphicElement stretchType="NoStretch" pen="None" fill="Solid" />
-					<imageExpression class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

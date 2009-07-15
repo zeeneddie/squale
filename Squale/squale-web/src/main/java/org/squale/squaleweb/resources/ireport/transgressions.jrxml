@@ -30,18 +30,18 @@
 	<parameter name="userName" isForPrompting="false" class="java.lang.String"/>
 	<parameter name="currentMark" isForPrompting="false" class="java.lang.String"/>
 
-	<field name="details" class="com.airfrance.squaleweb.applicationlayer.formbean.results.RuleCheckingItemsListForm"/>
+	<field name="details" class="org.squale.squaleweb.applicationlayer.formbean.results.RuleCheckingItemsListForm"/>
 	<field name="nameRule" class="java.lang.String"/>
 	<field name="severity" class="java.lang.String"/>
 	<field name="transgressionsNumber" class="java.lang.Integer"/>
 
 	<variable name="date" class="java.lang.String" resetType="Report" calculation="Nothing">
-		<variableExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())	]]></variableExpression>
-		<initialValueExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
+		<variableExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())	]]></variableExpression>
+		<initialValueExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
 	</variable>
 	<variable name="keyRuleName" class="java.lang.String" resetType="Report" calculation="Nothing">
-		<variableExpression><![CDATA[com.airfrance.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "metric."+$F{nameRule})]]></variableExpression>
-		<initialValueExpression><![CDATA[com.airfrance.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "metric."+$F{nameRule})]]></initialValueExpression>
+		<variableExpression><![CDATA[org.squale.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "metric."+$F{nameRule})]]></variableExpression>
+		<initialValueExpression><![CDATA[org.squale.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "metric."+$F{nameRule})]]></initialValueExpression>
 	</variable>
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -74,7 +74,7 @@
 						key="image-1"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<graphicElement stretchType="NoStretch" pen="None" fill="Solid" />
-					<imageExpression class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -126,7 +126,7 @@
 						<font fontName="Verdana" pdfFontName="Helvetica-Bold" size="12" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[msg($R{project.result.practice.value.named}, $P{practiceName})
-+ com.airfrance.squaleweb.util.SqualeWebActionUtils.formatFloat($P{currentMark})]]></textFieldExpression>
++ org.squale.squaleweb.util.SqualeWebActionUtils.formatFloat($P{currentMark})]]></textFieldExpression>
 				</textField>
 			</band>
 		</title>
@@ -153,7 +153,7 @@
 						positionType="Float"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<graphicElement stretchType="NoStretch" pen="None" fill="Solid" />
-					<imageExpression class="java.lang.String"><![CDATA[com.airfrance.squaleweb.util.JasperReportUtil.generateRulePicto($F{severity})]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA[org.squale.squaleweb.util.JasperReportUtil.generateRulePicto($F{severity})]]></imageExpression>
 				</image>
 				<subreport  isUsingCache="true">
 					<reportElement
@@ -167,7 +167,7 @@
 						key="subreport-1"
 						positionType="Float"/>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{details}.getDetails())]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/transgressionItems.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/transgressionItems.jasper"]]></subreportExpression>
 				</subreport>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

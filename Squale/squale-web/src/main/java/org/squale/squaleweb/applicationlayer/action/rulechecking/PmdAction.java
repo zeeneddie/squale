@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.rulechecking;
+package org.squale.squaleweb.applicationlayer.action.rulechecking;
 
-import com.airfrance.squaleweb.transformer.rulechecking.PmdRuleSetListTransformer;
+import org.squale.squaleweb.transformer.rulechecking.PmdRuleSetListTransformer;
 
 /**
  * Actions de configuration PMD
@@ -28,7 +28,7 @@ public class PmdAction
 {
 
     /**
-     * @see com.airfrance.squaleweb.applicationlayer.action.rulechecking.AbstractRuleSetAction#getRuleSetListTransformer()
+     * @see org.squale.squaleweb.applicationlayer.action.rulechecking.AbstractRuleSetAction#getRuleSetListTransformer()
      *      {@inheritDoc}
      */
     protected Class getRuleSetListTransformer()
@@ -37,7 +37,7 @@ public class PmdAction
     }
 
     /**
-     * @see com.airfrance.squaleweb.applicationlayer.action.rulechecking.AbstractRuleSetAction#getAccessComponentName()
+     * @see org.squale.squaleweb.applicationlayer.action.rulechecking.AbstractRuleSetAction#getAccessComponentName()
      *      {@inheritDoc}
      */
     protected String getAccessComponentName()

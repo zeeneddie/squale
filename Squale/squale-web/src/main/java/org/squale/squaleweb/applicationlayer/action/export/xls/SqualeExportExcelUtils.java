@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.export.xls;
+package org.squale.squaleweb.applicationlayer.action.export.xls;
 
 import java.util.Calendar;
 import java.util.Locale;
 
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.util.SqualeWebActionUtils;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.util.SqualeWebActionUtils;
 
 import jxl.HeaderFooter;
 

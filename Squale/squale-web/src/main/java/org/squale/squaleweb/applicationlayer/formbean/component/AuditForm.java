@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.component;
+package org.squale.squaleweb.applicationlayer.formbean.component;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -28,12 +28,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.util.SqualeWebActionUtils;
-import com.airfrance.welcom.struts.bean.WIEditable;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.util.SqualeWebActionUtils;
+import org.squale.welcom.struts.bean.WIEditable;
 
 /**
  * Contient les données d'une application.
@@ -218,7 +218,7 @@ public class AuditForm
     }
 
     /**
-     * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
+     * @see org.squale.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
      *      javax.servlet.http.HttpServletRequest)
      * @param mapping le mapping
      * @param request la requête
@@ -276,7 +276,7 @@ public class AuditForm
     }
 
     /**
-     * @see com.airfrance.welcom.struts.bean.WIEditable#isEdited()
+     * @see org.squale.welcom.struts.bean.WIEditable#isEdited()
      * @return true si le form est édité
      */
     public boolean isEdited()
@@ -285,7 +285,7 @@ public class AuditForm
     }
 
     /**
-     * @see com.airfrance.welcom.struts.bean.WIEditable#setEdited(boolean)
+     * @see org.squale.welcom.struts.bean.WIEditable#setEdited(boolean)
      * @param pEdited indique si le form est édité
      */
     public void setEdited( boolean pEdited )

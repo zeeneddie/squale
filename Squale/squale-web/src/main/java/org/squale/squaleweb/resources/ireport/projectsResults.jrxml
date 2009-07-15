@@ -90,7 +90,7 @@
 						<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{factors})]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/factorsResult.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/factorsResult.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
 		</detail>

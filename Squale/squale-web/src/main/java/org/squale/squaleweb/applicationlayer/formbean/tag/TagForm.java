@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.tag;
+package org.squale.squaleweb.applicationlayer.formbean.tag;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
-import com.airfrance.welcom.struts.bean.WISelectable;
+import org.squale.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
+import org.squale.welcom.struts.bean.WISelectable;
 
 /**
  * Contient les données indispensables relatives à une application

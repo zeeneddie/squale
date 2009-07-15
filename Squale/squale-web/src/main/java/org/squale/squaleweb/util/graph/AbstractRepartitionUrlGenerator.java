@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
 
 /**
  */

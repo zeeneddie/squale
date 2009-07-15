@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util;
+package org.squale.squaleweb.util;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import com.airfrance.squalecommon.util.TimeUtil;
-import com.airfrance.squalecommon.util.manualmark.TimeLimitationParser;
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squalecommon.util.TimeUtil;
+import org.squale.squalecommon.util.manualmark.TimeLimitationParser;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * Utility method for the time limitation

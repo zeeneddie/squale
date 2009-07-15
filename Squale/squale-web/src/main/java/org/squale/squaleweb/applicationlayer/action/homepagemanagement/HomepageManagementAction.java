@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.homepagemanagement;
+package org.squale.squaleweb.applicationlayer.action.homepagemanagement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,18 +34,18 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.web.HomepageComponentDTO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
-import com.airfrance.squaleweb.applicationlayer.formbean.homepagemanagement.HomepageManagementForm;
-import com.airfrance.squaleweb.transformer.HomepageManagementTransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
-import com.airfrance.welcom.struts.util.WConstants;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.UserDTO;
+import org.squale.squalecommon.datatransfertobject.config.web.HomepageComponentDTO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
+import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.homepagemanagement.HomepageManagementForm;
+import org.squale.squaleweb.transformer.HomepageManagementTransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
+import org.squale.welcom.struts.util.WConstants;
 
 /**
  * Action for the homepage management

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.grid;
+package org.squale.squaleweb.applicationlayer.action.grid;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,21 +37,21 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
-import com.airfrance.squalecommon.util.SqualeCommonConstants;
-import com.airfrance.squalecommon.util.SqualeCommonUtils;
-import com.airfrance.squalecommon.util.mail.MailerHelper;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.AdminAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.UploadFileForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.GridForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.GridListForm;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.transformer.GridListTransformer;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridDTO;
+import org.squale.squalecommon.util.SqualeCommonConstants;
+import org.squale.squalecommon.util.SqualeCommonUtils;
+import org.squale.squalecommon.util.mail.MailerHelper;
+import org.squale.squaleweb.applicationlayer.action.accessRights.AdminAction;
+import org.squale.squaleweb.applicationlayer.formbean.UploadFileForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.GridForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.GridListForm;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.transformer.GridListTransformer;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Importation des grilles qualité

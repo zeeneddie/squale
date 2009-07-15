@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.config;
+package org.squale.squaleweb.applicationlayer.formbean.config;
 
-import com.airfrance.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.bean.WActionForm;
 
 /**
  * Formulaire d'un serveur

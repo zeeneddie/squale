@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.component;
+package org.squale.squaleweb.applicationlayer.action.component;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -31,23 +31,23 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.ApplicationConfDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
-import com.airfrance.squalecommon.util.SqualeCommonConstants;
-import com.airfrance.squalecommon.util.SqualeCommonUtils;
-import com.airfrance.squalecommon.util.mail.MailerHelper;
-import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
-import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateApplicationForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.config.ServeurListForm;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.transformer.ApplicationConfTransformer;
-import com.airfrance.squaleweb.transformer.ServeurListTransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
-import com.airfrance.welcom.struts.util.WConstants;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.ApplicationConfDTO;
+import org.squale.squalecommon.datatransfertobject.component.UserDTO;
+import org.squale.squalecommon.util.SqualeCommonConstants;
+import org.squale.squalecommon.util.SqualeCommonUtils;
+import org.squale.squalecommon.util.mail.MailerHelper;
+import org.squale.squaleweb.applicationlayer.action.ActionUtils;
+import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
+import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.creation.CreateApplicationForm;
+import org.squale.squaleweb.applicationlayer.formbean.config.ServeurListForm;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.transformer.ApplicationConfTransformer;
+import org.squale.squaleweb.transformer.ServeurListTransformer;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
+import org.squale.welcom.struts.util.WConstants;
 
 import java.util.Collection;
 

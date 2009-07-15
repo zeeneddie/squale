@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.homepage;
+package org.squale.squaleweb.homepage;
 
 /**
  * This class represent a line of statistics

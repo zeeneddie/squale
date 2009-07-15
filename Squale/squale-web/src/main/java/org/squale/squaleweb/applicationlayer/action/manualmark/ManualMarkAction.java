@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.manualmark;
+package org.squale.squaleweb.applicationlayer.action.manualmark;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,26 +33,26 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.QualityResultDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
-import com.airfrance.squalecommon.util.TimeUtil;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
+import org.squale.squalecommon.util.TimeUtil;
 
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
+import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
-import com.airfrance.squaleweb.applicationlayer.formbean.manualmark.ManualMarkElementForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.manualmark.ManualMarkForm;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.transformer.manualmark.ManualMarkElementTransform;
-import com.airfrance.squaleweb.transformer.manualmark.ManualMarkTransform;
-import com.airfrance.squaleweb.util.TimelimitationUtil;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
-import com.airfrance.welcom.struts.util.WConstants;
+import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.manualmark.ManualMarkElementForm;
+import org.squale.squaleweb.applicationlayer.formbean.manualmark.ManualMarkForm;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.transformer.manualmark.ManualMarkElementTransform;
+import org.squale.squaleweb.transformer.manualmark.ManualMarkTransform;
+import org.squale.squaleweb.util.TimelimitationUtil;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
+import org.squale.welcom.struts.util.WConstants;
 
 /**
  * Action linked to the manual mark management jsp

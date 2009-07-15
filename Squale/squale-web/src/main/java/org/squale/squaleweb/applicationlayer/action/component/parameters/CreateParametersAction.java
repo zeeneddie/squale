@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.component.parameters;
+package org.squale.squaleweb.applicationlayer.action.component.parameters;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,12 +26,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
-import com.airfrance.squaleweb.applicationlayer.action.component.CreateProjectAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squaleweb.applicationlayer.action.accessRights.ReaderAction;
+import org.squale.squaleweb.applicationlayer.action.component.CreateProjectAction;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm;
+import org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Interface pour les actions associées à la configuration d'une tâche

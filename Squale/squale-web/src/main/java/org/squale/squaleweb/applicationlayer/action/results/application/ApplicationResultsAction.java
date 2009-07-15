@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.results.application;
+package org.squale.squaleweb.applicationlayer.action.results.application;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,35 +42,35 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.servlet.ServletUtilities;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
-import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm;
-import com.airfrance.squaleweb.transformer.ApplicationTransformer;
-import com.airfrance.squaleweb.transformer.FactorsResultListTransformer;
-import com.airfrance.squaleweb.util.SqualeWebConstants;
-import com.airfrance.squaleweb.util.graph.GraphMaker;
-import com.airfrance.squaleweb.util.graph.KiviatMaker;
-import com.airfrance.squaleweb.util.graph.PieChartMaker;
-import com.airfrance.welcom.outils.pdf.PDFDataJasperReports;
-import com.airfrance.welcom.outils.pdf.PDFEngine;
-import com.airfrance.welcom.outils.pdf.PDFFactory;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
-import com.airfrance.welcom.struts.util.WConstants;
-import com.airfrance.welcom.taglib.table.TableUtil;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
+import org.squale.squaleweb.applicationlayer.action.ActionUtils;
+import org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
+import org.squale.squaleweb.applicationlayer.action.accessRights.ReaderAction;
+import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.ProjectForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.ProjectListForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm;
+import org.squale.squaleweb.transformer.ApplicationTransformer;
+import org.squale.squaleweb.transformer.FactorsResultListTransformer;
+import org.squale.squaleweb.util.SqualeWebConstants;
+import org.squale.squaleweb.util.graph.GraphMaker;
+import org.squale.squaleweb.util.graph.KiviatMaker;
+import org.squale.squaleweb.util.graph.PieChartMaker;
+import org.squale.welcom.outils.pdf.PDFDataJasperReports;
+import org.squale.welcom.outils.pdf.PDFEngine;
+import org.squale.welcom.outils.pdf.PDFFactory;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
+import org.squale.welcom.struts.util.WConstants;
+import org.squale.welcom.taglib.table.TableUtil;
 
 /**
  * Affichage des résultats de niveau application Les résultats disponibles au niveau de l'application sont affichés par
@@ -358,7 +358,7 @@ public class ApplicationResultsAction
             HashMap parameters = new HashMap();
             PDFDataJasperReports data =
                 new PDFDataJasperReports( request.getLocale(), getResources( request ), results,
-                                          "/com/airfrance/squaleweb/resources/jasperreport/ApplicationResults.jasper",
+                                          "/org/squale/squaleweb/resources/jasperreport/ApplicationResults.jasper",
                                           false, parameters );
             // Pour récupérer les paramètres root
             parameters.put( "applicationName", ( (ResultListForm) form ).getApplicationName() );

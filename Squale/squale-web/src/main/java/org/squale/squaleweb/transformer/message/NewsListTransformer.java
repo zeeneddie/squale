@@ -16,20 +16,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer.message;
+package org.squale.squaleweb.transformer.message;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.datatransfertobject.message.NewsDTO;
-import com.airfrance.squalecommon.datatransfertobject.message.NewsListDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.messages.NewsForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.messages.NewsListForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squalecommon.datatransfertobject.message.NewsDTO;
+import org.squale.squalecommon.datatransfertobject.message.NewsListDTO;
+import org.squale.squaleweb.applicationlayer.formbean.messages.NewsForm;
+import org.squale.squaleweb.applicationlayer.formbean.messages.NewsListForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * 

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.component;
+package org.squale.squaleweb.applicationlayer.action.component;
 
 import java.util.Calendar;
 import java.util.Iterator;
@@ -32,29 +32,29 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.ApplicationConfDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ProjectConfDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.ListParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.util.SqualeCommonConstants;
-import com.airfrance.squalecommon.util.SqualeCommonUtils;
-import com.airfrance.squalecommon.util.mail.MailerHelper;
-import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
-import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateApplicationForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.transformer.ProjectConfTransformer;
-import com.airfrance.squaleweb.util.SqualeWebConstants;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
-import com.airfrance.welcom.struts.util.WConstants;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.ApplicationConfDTO;
+import org.squale.squalecommon.datatransfertobject.component.ProjectConfDTO;
+import org.squale.squalecommon.datatransfertobject.component.parameters.ListParameterDTO;
+import org.squale.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
+import org.squale.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.util.SqualeCommonConstants;
+import org.squale.squalecommon.util.SqualeCommonUtils;
+import org.squale.squalecommon.util.mail.MailerHelper;
+import org.squale.squaleweb.applicationlayer.action.ActionUtils;
+import org.squale.squaleweb.applicationlayer.action.accessRights.ReaderAction;
+import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.creation.CreateApplicationForm;
+import org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.transformer.ProjectConfTransformer;
+import org.squale.squaleweb.util.SqualeWebConstants;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
+import org.squale.welcom.struts.util.WConstants;
 
 /**
  * @version 1.0

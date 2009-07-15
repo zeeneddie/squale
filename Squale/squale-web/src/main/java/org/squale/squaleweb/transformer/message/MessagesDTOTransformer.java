@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer.message;
+package org.squale.squaleweb.transformer.message;
 
-import com.airfrance.squalecommon.datatransfertobject.message.MessagesDTO;
-import com.airfrance.squaleweb.messages.MessageProvider;
+import org.squale.squalecommon.datatransfertobject.message.MessagesDTO;
+import org.squale.squaleweb.messages.MessageProvider;
 
 /**
  * Transformation des messages DTO

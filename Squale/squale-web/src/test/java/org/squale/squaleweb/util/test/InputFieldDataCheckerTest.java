@@ -23,16 +23,16 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.airfrance.squaleweb.util.InputFieldDataChecker;
+import org.squale.squaleweb.util.InputFieldDataChecker;
 
 /**
- * Test class for com.airfrance.squaleweb.util.InputFieldDataChecker.
+ * Test class for org.squale.squaleweb.util.InputFieldDataChecker.
  */
 public class InputFieldDataCheckerTest
 {
 
     /**
-     * Test method for {@link com.airfrance.squaleweb.util.InputFieldDataChecker#check(java.lang.String)}.
+     * Test method for {@link org.squale.squaleweb.util.InputFieldDataChecker#check(java.lang.String)}.
      */
     @Test
     public void testCheckCorrectUserIDs()
@@ -50,7 +50,7 @@ public class InputFieldDataCheckerTest
     }
 
     /**
-     * Test method for {@link com.airfrance.squaleweb.util.InputFieldDataChecker#check(java.lang.String)}.
+     * Test method for {@link org.squale.squaleweb.util.InputFieldDataChecker#check(java.lang.String)}.
      */
     @Test
     public void testCheckWrongUserIDs()
@@ -65,7 +65,7 @@ public class InputFieldDataCheckerTest
     }
 
     /**
-     * Test method for {@link com.airfrance.squaleweb.util.InputFieldDataChecker#check(java.lang.String)}.
+     * Test method for {@link org.squale.squaleweb.util.InputFieldDataChecker#check(java.lang.String)}.
      */
     @Test
     public void testCheckCorrectTagNames()
@@ -83,7 +83,7 @@ public class InputFieldDataCheckerTest
     }
 
     /**
-     * Test method for {@link com.airfrance.squaleweb.util.InputFieldDataChecker#check(java.lang.String)}.
+     * Test method for {@link org.squale.squaleweb.util.InputFieldDataChecker#check(java.lang.String)}.
      */
     @Test
     public void testCheckWrongUserTagNames()

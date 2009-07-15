@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.results.audit;
+package org.squale.squaleweb.applicationlayer.action.results.audit;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,20 +33,20 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.ManagerAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationErrorForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm;
-import com.airfrance.squaleweb.transformer.AuditTransformer;
-import com.airfrance.squaleweb.util.SqualeWebActionUtils;
-import com.airfrance.squaleweb.util.SqualeWebConstants;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.ManagerAction;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationErrorForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.AuditForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm;
+import org.squale.squaleweb.transformer.AuditTransformer;
+import org.squale.squaleweb.util.SqualeWebActionUtils;
+import org.squale.squaleweb.util.SqualeWebConstants;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  */

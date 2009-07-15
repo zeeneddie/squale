@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action;
+package org.squale.squaleweb.applicationlayer.action;
 
 import java.io.IOException;
 
@@ -28,7 +28,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import com.airfrance.squaleweb.connection.AuthenticationBean;
+import org.squale.squaleweb.connection.AuthenticationBean;
 
 /**
  * This class defined a filter This filter intercept the call to all file *.jsp and *.do It verifies if the user is

@@ -53,8 +53,8 @@
 		<variableExpression><![CDATA[new String[]{ "images/pictos/na.gif", "images/pictos/bad.png", "images/pictos/good.png", "images/pictos/best.png" }]]></variableExpression>
 	</variable>
 	<variable name="date" class="java.lang.String" resetType="Report" calculation="Nothing">
-		<variableExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></variableExpression>
-		<initialValueExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
+		<variableExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></variableExpression>
+		<initialValueExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
 	</variable>
 
 		<group  name="GroupHeader" >
@@ -236,7 +236,7 @@
 						key="image-1"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<graphicElement stretchType="NoStretch" pen="None" fill="Solid" />
-					<imageExpression class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -304,7 +304,7 @@
 						<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{results})]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/projectsResults.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/projectsResults.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
 		</detail>

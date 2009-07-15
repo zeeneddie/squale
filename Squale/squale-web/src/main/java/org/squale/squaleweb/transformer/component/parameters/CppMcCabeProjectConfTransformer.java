@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer.component.parameters;
+package org.squale.squaleweb.transformer.component.parameters;
 
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.CppMcCabeForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
+import org.squale.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
+import org.squale.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.CppMcCabeForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
 
 /**
  * Transformation des paramètres McCabe pour le C++
@@ -38,7 +38,7 @@ public class CppMcCabeProjectConfTransformer
      * 
      * @param arg0 {@inheritDoc}
      * @return le formulaire transformé
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
      */
     public WActionForm objToForm( Object[] arg0 )
         throws WTransformerException
@@ -53,7 +53,7 @@ public class CppMcCabeProjectConfTransformer
      * 
      * @param arg0 {@inheritDoc}
      * @return le tableau d'objets
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm)
      */
     public Object[] formToObj( WActionForm arg0 )
         throws WTransformerException
@@ -67,8 +67,8 @@ public class CppMcCabeProjectConfTransformer
      * 
      * @param pObject {@inheritDoc}
      * @param pForm {@inheritDoc}
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
-     *      com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      org.squale.welcom.struts.bean.WActionForm)
      */
     public void objToForm( Object[] pObject, WActionForm pForm )
         throws WTransformerException
@@ -97,7 +97,7 @@ public class CppMcCabeProjectConfTransformer
      * 
      * @param pForm {@inheritDoc}
      * @param pObject {@inheritDoc}
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm,
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm,
      *      java.lang.Object[])
      */
     public void formToObj( WActionForm pForm, Object[] pObject )

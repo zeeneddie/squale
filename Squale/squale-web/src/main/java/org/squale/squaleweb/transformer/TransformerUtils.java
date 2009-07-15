@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 
 /**
  * Fonctions utilitaires pour les transformer

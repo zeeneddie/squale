@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.export.xls;
+package org.squale.squaleweb.applicationlayer.action.export.xls;
 
 import java.util.List;
 import java.util.Locale;
@@ -28,12 +28,12 @@ import jxl.write.WritableWorkbook;
 
 import org.apache.struts.util.MessageResources;
 
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.welcom.outils.excel.ExcelData;
-import com.airfrance.welcom.outils.excel.ExcelGenerateur;
-import com.airfrance.welcom.outils.excel.ExcelGenerateurException;
-import com.airfrance.welcom.outils.excel.ExcelTable;
-import com.airfrance.welcom.outils.excel.ExcelWrapper;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.welcom.outils.excel.ExcelData;
+import org.squale.welcom.outils.excel.ExcelGenerateur;
+import org.squale.welcom.outils.excel.ExcelGenerateurException;
+import org.squale.welcom.outils.excel.ExcelTable;
+import org.squale.welcom.outils.excel.ExcelWrapper;
 
 /**
  * Gestion de l'export des statistiques par application
@@ -68,7 +68,7 @@ public class ExcelDataApplicationsStatsList
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.welcom.outils.excel.ExcelData#fill(com.airfrance.welcom.outils.excel.ExcelGenerateur)
+     * @see org.squale.welcom.outils.excel.ExcelData#fill(org.squale.welcom.outils.excel.ExcelGenerateur)
      */
     public void fill( ExcelGenerateur xlGenerateur )
         throws ExcelGenerateurException

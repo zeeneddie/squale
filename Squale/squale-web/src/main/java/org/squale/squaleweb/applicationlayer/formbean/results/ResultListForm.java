@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.results;
+package org.squale.squaleweb.applicationlayer.formbean.results;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
-import com.airfrance.squaleweb.util.graph.GraphMaker;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.util.graph.GraphMaker;
 
 /**
  * Contient une liste de résultats

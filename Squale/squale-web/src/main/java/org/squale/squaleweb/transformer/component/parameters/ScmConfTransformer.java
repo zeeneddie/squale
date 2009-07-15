@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer.component.parameters;
+package org.squale.squaleweb.transformer.component.parameters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,14 +24,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.ListParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.ScmForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
+import org.squale.squalecommon.datatransfertobject.component.parameters.ListParameterDTO;
+import org.squale.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
+import org.squale.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.ScmForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
 
 /**
  * Transformation of Scm parameters
@@ -43,7 +43,7 @@ public class ScmConfTransformer
     /**
      * Transformer from an object to a form
      * 
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
      * @param pObject array of objects
      * @return form transformed
      * @throws WTransformerException if an error occurs
@@ -59,8 +59,8 @@ public class ScmConfTransformer
     /**
      * Transformer from an object to the form
      * 
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
-     *      com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      org.squale.welcom.struts.bean.WActionForm)
      * @param pObject array of objects
      * @param pForm the form
      * @throws WTransformerException if an error occurs
@@ -106,7 +106,7 @@ public class ScmConfTransformer
     /**
      * Transformer from the form to an object
      * 
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm)
      * @param pForm the form
      * @return array of objects that are transformed
      * @throws WTransformerException if an error occurs
@@ -122,7 +122,7 @@ public class ScmConfTransformer
     /**
      * Transformer from the form to an object
      * 
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm,
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm,
      *      java.lang.Object[])
      * @param pForm the form
      * @param pObject array of objects

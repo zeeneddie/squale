@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.component.parameters;
+package org.squale.squaleweb.applicationlayer.formbean.component.parameters;
 
 /**
  * Formulaire pour Macker avec le profil J2EE Cette class sert juste à récupèrer le bon nom de la tâche
@@ -26,7 +26,7 @@ public class J2EEMackerForm
 {
 
     /**
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
      *      {@inheritDoc}
      */
     public String getNameInSession()
@@ -35,7 +35,7 @@ public class J2EEMackerForm
     }
 
     /**
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
      *      {@inheritDoc}
      */
     public String getTaskName()

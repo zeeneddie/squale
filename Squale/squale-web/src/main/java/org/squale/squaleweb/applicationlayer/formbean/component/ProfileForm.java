@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.component;
+package org.squale.squaleweb.applicationlayer.formbean.component;
 
 import java.util.Map;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
  * Représente un profil d'utilisateur sur une application.

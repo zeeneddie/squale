@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.export.xml;
+package org.squale.squaleweb.applicationlayer.action.export.xml;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -28,11 +28,11 @@ import org.w3c.dom.Element;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.export.ActionPlanDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.RuleCheckingItemDTO;
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.export.ActionPlanDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rulechecking.RuleCheckingItemDTO;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * XML data pour l'export IDE
@@ -83,7 +83,7 @@ public class IDELinkXMLData
      * {@inheritDoc}
      * 
      * @param xmlGenerator
-     * @see com.airfrance.squaleweb.util.xml.XMLData#fill(com.airfrance.squaleweb.util.xml.XMLGenerator)
+     * @see org.squale.squaleweb.util.xml.XMLData#fill(org.squale.squaleweb.util.xml.XMLGenerator)
      */
     public void fill()
     {

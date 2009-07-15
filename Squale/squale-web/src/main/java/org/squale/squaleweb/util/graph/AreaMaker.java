@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -174,7 +174,7 @@ public class AreaMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight()
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight()
      * @return la hauteur par défaut
      */
     protected int getDefaultHeight()
@@ -183,7 +183,7 @@ public class AreaMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth()
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth()
      * @return la largeur par défaut
      */
     protected int getDefaultWidth()

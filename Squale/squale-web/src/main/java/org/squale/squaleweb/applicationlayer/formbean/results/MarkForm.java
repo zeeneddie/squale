@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.results;
+package org.squale.squaleweb.applicationlayer.formbean.results;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
  * Formulaire de réprésentation d'une note de pratique, avec la liste des composants ayant cette note.

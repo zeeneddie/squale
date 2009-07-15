@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.comparator;
+package org.squale.squaleweb.comparator;
 
 import java.text.NumberFormat;
 import java.util.Comparator;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultForm;
 
 /**
  * 

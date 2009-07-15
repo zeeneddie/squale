@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.component.parameters;
+package org.squale.squaleweb.applicationlayer.action.component.parameters;
 
 import java.util.Iterator;
 
@@ -29,14 +29,14 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.squaleweb.applicationlayer.action.component.CreateProjectAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.EclipseUserLibForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.EclipseVarForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.JCompilingForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.JavaCompilationForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
-import com.airfrance.squaleweb.transformer.component.parameters.JCompilingConfTransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squaleweb.applicationlayer.action.component.CreateProjectAction;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.EclipseUserLibForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.EclipseVarForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.JCompilingForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.JavaCompilationForm;
+import org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
+import org.squale.squaleweb.transformer.component.parameters.JCompilingConfTransformer;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Configuration des paramètres de la tâche JCompiling

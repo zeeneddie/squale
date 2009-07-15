@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,19 +31,19 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.FactorRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.RuleCheckingDTO;
-import com.airfrance.squalecommon.util.ConstantRulesChecking;
-import com.airfrance.squaleweb.applicationlayer.formbean.information.PracticeInformationForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultRulesCheckingForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.RulesCheckingForm;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squalecommon.datatransfertobject.rule.FactorRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rulechecking.RuleCheckingDTO;
+import org.squale.squalecommon.util.ConstantRulesChecking;
+import org.squale.squaleweb.applicationlayer.formbean.information.PracticeInformationForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultRulesCheckingForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.RulesCheckingForm;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
 
 /**
  * Transformation des résultats de RulesChecking

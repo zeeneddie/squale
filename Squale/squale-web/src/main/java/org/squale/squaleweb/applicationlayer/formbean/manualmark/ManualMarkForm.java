@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.manualmark;
+package org.squale.squaleweb.applicationlayer.formbean.manualmark;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
  * This class is the form linked to the jsp manaualMark

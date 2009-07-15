@@ -37,7 +37,7 @@
 		<variableExpression><![CDATA[(List) $P{resultsMap}.get(null)]]></variableExpression>
 	</variable>
 	<variable name="currentComponent" class="java.lang.Object" resetType="Report" calculation="Nothing">
-		<variableExpression><![CDATA[new com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO($F{ID}.longValue(), $F{IDParent}.longValue(), $F{name}, $F{type})]]></variableExpression>
+		<variableExpression><![CDATA[new org.squale.squalecommon.datatransfertobject.component.ComponentDTO($F{ID}.longValue(), $F{IDParent}.longValue(), $F{name}, $F{type})]]></variableExpression>
 	</variable>
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -102,7 +102,7 @@
 						<font fontName="Verdana" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{name} + "\n" +
-(($F{justification} != null)?com.airfrance.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "components.justification") + " : " + $F{justification}:"")]]></textFieldExpression>
+(($F{justification} != null)?org.squale.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "components.justification") + " : " + $F{justification}:"")]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -126,7 +126,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[($F{name} != null)?com.airfrance.squaleweb.util.JasperReportUtil.getMetrics($P{REPORT_RESOURCE_BUNDLE}.getLocale(), $V{treNames}, (List)$P{resultsMap}.get($V{currentComponent})):""]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[($F{name} != null)?org.squale.squaleweb.util.JasperReportUtil.getMetrics($P{REPORT_RESOURCE_BUNDLE}.getLocale(), $V{treNames}, (List)$P{resultsMap}.get($V{currentComponent})):""]]></textFieldExpression>
 				</textField>
 			</band>
 		</detail>

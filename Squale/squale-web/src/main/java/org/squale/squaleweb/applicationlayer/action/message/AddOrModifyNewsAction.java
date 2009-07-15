@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.message;
+package org.squale.squaleweb.applicationlayer.action.message;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,13 +28,13 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.message.NewsDTO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.AdminAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.messages.NewsForm;
-import com.airfrance.squaleweb.transformer.message.NewsTranformer;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.message.NewsDTO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.AdminAction;
+import org.squale.squaleweb.applicationlayer.formbean.messages.NewsForm;
+import org.squale.squaleweb.transformer.message.NewsTranformer;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * 

@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util;
+package org.squale.squaleweb.util;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import com.airfrance.squalecommon.util.ConstantRulesChecking;
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squalecommon.util.ConstantRulesChecking;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * Utilitaire pour l'export PDF avec jasperReport

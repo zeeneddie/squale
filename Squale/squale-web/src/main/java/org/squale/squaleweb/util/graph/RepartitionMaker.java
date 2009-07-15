@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
 import java.awt.Color;
 import java.text.NumberFormat;
@@ -34,8 +34,8 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  */
@@ -54,7 +54,7 @@ public class RepartitionMaker
     public static final int DEFAULT_WIDTH = 900;
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() {@inheritDoc}
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() {@inheritDoc}
      */
     protected int getDefaultHeight()
     {
@@ -62,7 +62,7 @@ public class RepartitionMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() {@inheritDoc}
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() {@inheritDoc}
      */
     protected int getDefaultWidth()
     {
@@ -231,7 +231,7 @@ public class RepartitionMaker
     }
 
     /**
-     * @see com.airfrance.squaleweb.util.graph.AbstractRepartitionMaker#applyColor(int, java.awt.Color) {@inheritDoc}
+     * @see org.squale.squaleweb.util.graph.AbstractRepartitionMaker#applyColor(int, java.awt.Color) {@inheritDoc}
      */
     protected void applyColor( int pIndex, Color pColor )
     {

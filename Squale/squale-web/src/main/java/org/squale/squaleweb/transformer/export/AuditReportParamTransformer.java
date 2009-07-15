@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer.export;
+package org.squale.squaleweb.transformer.export;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,16 +24,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.airfrance.squalecommon.datatransfertobject.result.ErrorDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ErrorForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ErrorListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.SetOfErrorsListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.export.AuditReportParamForm;
-import com.airfrance.squaleweb.transformer.ErrorTransformer;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squalecommon.datatransfertobject.result.ErrorDTO;
+import org.squale.squaleweb.applicationlayer.formbean.component.ErrorForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.ErrorListForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.SetOfErrorsListForm;
+import org.squale.squaleweb.applicationlayer.formbean.export.AuditReportParamForm;
+import org.squale.squaleweb.transformer.ErrorTransformer;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Transformer for AuditReportParamForm
@@ -48,7 +48,7 @@ public class AuditReportParamTransformer
      * @param pObject {@inheritDoc}
      * @return {@inheritDoc}
      * @throws WTransformerException {@inheritDoc}
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
      */
     public WActionForm objToForm( Object[] pObject )
         throws WTransformerException
@@ -65,8 +65,8 @@ public class AuditReportParamTransformer
      * @param pObject {@inheritDoc}
      * @param pForm {@inheritDoc}
      * @throws WTransformerException {@inheritDoc}
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
-     *      com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      org.squale.welcom.struts.bean.WActionForm)
      */
     public void objToForm( Object[] pObject, WActionForm pForm )
         throws WTransformerException
@@ -142,7 +142,7 @@ public class AuditReportParamTransformer
      * @param pForm {@inheritDoc}
      * @return {@inheritDoc}
      * @throws WTransformerException {@inheritDoc}
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm)
      */
     public Object[] formToObj( WActionForm pForm )
         throws WTransformerException
@@ -156,7 +156,7 @@ public class AuditReportParamTransformer
      * @param pForm {@inheritDoc}
      * @param pObject {@inheritDoc}
      * @throws WTransformerException {@inheritDoc}
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm,
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm,
      *      java.lang.Object[])
      */
     public void formToObj( WActionForm pForm, Object[] pObject )

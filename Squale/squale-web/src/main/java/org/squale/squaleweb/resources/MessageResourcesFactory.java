@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.resources;
+package org.squale.squaleweb.resources;
 
 import org.apache.struts.util.MessageResources;
 import org.apache.struts.util.PropertyMessageResourcesFactory;

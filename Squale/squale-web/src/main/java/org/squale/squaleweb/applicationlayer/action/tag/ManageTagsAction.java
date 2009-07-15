@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.tag;
+package org.squale.squaleweb.applicationlayer.action.tag;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -34,25 +34,25 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.tag.TagCategoryDTO;
-import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.config.ServeurListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateTagForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.tag.TagCategoryForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.tag.TagForm;
-import com.airfrance.squaleweb.transformer.ServeurListTransformer;
-import com.airfrance.squaleweb.transformer.TagCategoryTransformer;
-import com.airfrance.squaleweb.transformer.TagTransformer;
-import com.airfrance.squaleweb.transformer.TagsListTransformer;
-import com.airfrance.squaleweb.util.InputFieldDataChecker;
-import com.airfrance.welcom.struts.ajax.WHttpEasyCompleteResponse;
-import com.airfrance.welcom.struts.easycomplete.WEasyCompleteUtil;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.tag.TagCategoryDTO;
+import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.ReaderAction;
+import org.squale.squaleweb.applicationlayer.formbean.config.ServeurListForm;
+import org.squale.squaleweb.applicationlayer.formbean.creation.CreateTagForm;
+import org.squale.squaleweb.applicationlayer.formbean.tag.TagCategoryForm;
+import org.squale.squaleweb.applicationlayer.formbean.tag.TagForm;
+import org.squale.squaleweb.transformer.ServeurListTransformer;
+import org.squale.squaleweb.transformer.TagCategoryTransformer;
+import org.squale.squaleweb.transformer.TagTransformer;
+import org.squale.squaleweb.transformer.TagsListTransformer;
+import org.squale.squaleweb.util.InputFieldDataChecker;
+import org.squale.welcom.struts.ajax.WHttpEasyCompleteResponse;
+import org.squale.welcom.struts.easycomplete.WEasyCompleteUtil;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  */

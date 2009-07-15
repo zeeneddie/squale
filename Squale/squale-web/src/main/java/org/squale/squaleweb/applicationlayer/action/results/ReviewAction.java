@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.results;
+package org.squale.squaleweb.applicationlayer.action.results;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -37,24 +37,24 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.servlet.ServletUtilities;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityRuleDTO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ParamReviewForm;
-import com.airfrance.squaleweb.applicationlayer.tracker.TrackerStructure;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.transformer.ComponentTransformer;
-import com.airfrance.squaleweb.transformer.ParamReviewTransformer;
-import com.airfrance.squaleweb.util.SqualeWebConstants;
-import com.airfrance.squaleweb.util.graph.GraphMaker;
-import com.airfrance.squaleweb.util.graph.HistoMaker;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityRuleDTO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.ReaderAction;
+import org.squale.squaleweb.applicationlayer.formbean.results.ComponentForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ParamReviewForm;
+import org.squale.squaleweb.applicationlayer.tracker.TrackerStructure;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.transformer.ComponentTransformer;
+import org.squale.squaleweb.transformer.ParamReviewTransformer;
+import org.squale.squaleweb.util.SqualeWebConstants;
+import org.squale.squaleweb.util.graph.GraphMaker;
+import org.squale.squaleweb.util.graph.HistoMaker;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Affichage de l'historique Cette action permet l'affichage de l'historique de métriques ou de règles qualité (facteur,

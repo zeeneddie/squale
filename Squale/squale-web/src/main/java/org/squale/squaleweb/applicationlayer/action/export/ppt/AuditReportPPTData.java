@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.export.ppt;
+package org.squale.squaleweb.applicationlayer.action.export.ppt;
 
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
@@ -44,18 +44,18 @@ import org.apache.poi.hslf.model.Table;
 import org.apache.poi.hslf.model.TableCell;
 import org.jfree.chart.JFreeChart;
 
-import com.airfrance.squalecommon.datatransfertobject.export.audit.PracticeReportDTO;
-import com.airfrance.squalecommon.datatransfertobject.export.audit.PracticeReportDetailedDTO;
-import com.airfrance.squalecommon.datatransfertobject.export.audit.ProjectReportDTO;
-import com.airfrance.squalecommon.datatransfertobject.export.audit.QualityReportDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.export.AuditReportParamForm;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.util.SqualeWebActionUtils;
-import com.airfrance.squaleweb.util.graph.BubbleMaker;
-import com.airfrance.squaleweb.util.graph.KiviatMaker;
-import com.airfrance.squaleweb.util.graph.PieChartMaker;
+import org.squale.squalecommon.datatransfertobject.export.audit.PracticeReportDTO;
+import org.squale.squalecommon.datatransfertobject.export.audit.PracticeReportDetailedDTO;
+import org.squale.squalecommon.datatransfertobject.export.audit.ProjectReportDTO;
+import org.squale.squalecommon.datatransfertobject.export.audit.QualityReportDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
+import org.squale.squaleweb.applicationlayer.formbean.export.AuditReportParamForm;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.util.SqualeWebActionUtils;
+import org.squale.squaleweb.util.graph.BubbleMaker;
+import org.squale.squaleweb.util.graph.KiviatMaker;
+import org.squale.squaleweb.util.graph.PieChartMaker;
 
 /**
  * Data needed to create a return audit report

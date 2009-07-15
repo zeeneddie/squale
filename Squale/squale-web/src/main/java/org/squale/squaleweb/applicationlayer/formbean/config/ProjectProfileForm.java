@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.config;
+package org.squale.squaleweb.applicationlayer.formbean.config;
 
-import com.airfrance.squalecommon.datatransfertobject.config.ProjectProfileDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squalecommon.datatransfertobject.config.ProjectProfileDTO;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
  * Contient les données d'un profile Squalix

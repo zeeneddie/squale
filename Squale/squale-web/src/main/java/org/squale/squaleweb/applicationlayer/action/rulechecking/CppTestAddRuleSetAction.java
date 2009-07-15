@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.rulechecking;
+package org.squale.squaleweb.applicationlayer.action.rulechecking;
 
 /**
  * Action d'ajout de ruleset dans CppTest
@@ -26,7 +26,7 @@ public class CppTestAddRuleSetAction
 {
 
     /**
-     * @see com.airfrance.squaleweb.applicationlayer.action.rulechecking.AbstractAddRuleSetAction#getAccessComponentName()
+     * @see org.squale.squaleweb.applicationlayer.action.rulechecking.AbstractAddRuleSetAction#getAccessComponentName()
      *      {@inheritDoc}
      */
     protected String getAccessComponentName()

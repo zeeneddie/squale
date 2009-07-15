@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.tagslib;
+package org.squale.squaleweb.tagslib;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +29,9 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.struts.util.ResponseUtils;
 
-import com.airfrance.squaleweb.applicationlayer.tracker.TrackerStructure;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.util.SqualeWebConstants;
+import org.squale.squaleweb.applicationlayer.tracker.TrackerStructure;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.util.SqualeWebConstants;
 
 /**
  */

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,13 +24,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import com.airfrance.squalecommon.datatransfertobject.rule.AbstractFormulaDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.ConditionFormulaDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.SimpleFormulaDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.FormulaForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
+import org.squale.squalecommon.datatransfertobject.rule.AbstractFormulaDTO;
+import org.squale.squalecommon.datatransfertobject.rule.ConditionFormulaDTO;
+import org.squale.squalecommon.datatransfertobject.rule.SimpleFormulaDTO;
+import org.squale.squaleweb.applicationlayer.formbean.component.FormulaForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
 
 /**
  * Transformation d'une formule

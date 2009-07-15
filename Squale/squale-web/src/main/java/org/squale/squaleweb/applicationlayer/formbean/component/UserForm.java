@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.component;
+package org.squale.squaleweb.applicationlayer.formbean.component;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.airfrance.squalecommon.datatransfertobject.component.ProfileDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
+import org.squale.squalecommon.datatransfertobject.component.ProfileDTO;
+import org.squale.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
 
 /**
  * Représente un utilisateur de l'application

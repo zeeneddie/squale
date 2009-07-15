@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.config;
+package org.squale.squaleweb.applicationlayer.formbean.config;
 
-import com.airfrance.squalecommon.datatransfertobject.config.SourceManagementDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squalecommon.datatransfertobject.config.SourceManagementDTO;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
  * Contient les données des récupérateurs de sources

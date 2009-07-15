@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.tagslib;
+package org.squale.squaleweb.tagslib;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -30,7 +30,7 @@ import org.apache.struts.Globals;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.util.ResponseUtils;
 
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  */

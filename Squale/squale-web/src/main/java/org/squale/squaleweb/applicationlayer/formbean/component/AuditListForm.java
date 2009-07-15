@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.component;
+package org.squale.squaleweb.applicationlayer.formbean.component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +31,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * Liste les audits à afficher

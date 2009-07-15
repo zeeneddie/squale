@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action;
+package org.squale.squaleweb.applicationlayer.action;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,24 +25,24 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm;
-import com.airfrance.squaleweb.transformer.ApplicationTransformer;
-import com.airfrance.squaleweb.transformer.LogonBeanTransformer;
-import com.airfrance.squaleweb.transformer.ProjectTransformer;
-import com.airfrance.squaleweb.transformer.UserTransformer;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
-import com.airfrance.welcom.struts.util.WConstants;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.component.UserDTO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
+import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.ProjectForm;
+import org.squale.squaleweb.transformer.ApplicationTransformer;
+import org.squale.squaleweb.transformer.LogonBeanTransformer;
+import org.squale.squaleweb.transformer.ProjectTransformer;
+import org.squale.squaleweb.transformer.UserTransformer;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
+import org.squale.welcom.struts.util.WConstants;
 
 /**
  * Utilitaire pour les actions

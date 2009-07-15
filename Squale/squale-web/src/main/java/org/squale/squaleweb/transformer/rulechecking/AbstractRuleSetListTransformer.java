@@ -16,19 +16,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer.rulechecking;
+package org.squale.squaleweb.transformer.rulechecking;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.ListIterator;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.rulechecking.AbstractRuleSetForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.rulechecking.AbstractRuleSetListForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squaleweb.applicationlayer.formbean.rulechecking.AbstractRuleSetForm;
+import org.squale.squaleweb.applicationlayer.formbean.rulechecking.AbstractRuleSetListForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Transformation d'une liste de ruleset
@@ -95,7 +95,7 @@ public abstract class AbstractRuleSetListTransformer
      * @param pForm le formulaire
      * @return le formulaire transformé
      * @throws WTransformerException si erreur
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm)
      */
     public Object[] formToObj( WActionForm pForm )
         throws WTransformerException

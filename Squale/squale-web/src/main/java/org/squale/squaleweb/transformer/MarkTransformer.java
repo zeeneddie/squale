@@ -16,23 +16,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.FactorRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.MarkForm;
-import com.airfrance.squaleweb.util.SqualeWebActionUtils;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squalecommon.datatransfertobject.rule.FactorRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
+import org.squale.squaleweb.applicationlayer.formbean.results.ComponentForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.MarkForm;
+import org.squale.squaleweb.util.SqualeWebActionUtils;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
 
 /**
  * Transformation des notes
@@ -42,7 +42,7 @@ public class MarkTransformer
 {
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[]) {@inheritDoc}
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[]) {@inheritDoc}
      */
     public WActionForm objToForm( Object[] object )
         throws WTransformerException
@@ -53,8 +53,8 @@ public class MarkTransformer
     }
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
-     *      com.airfrance.welcom.struts.bean.WActionForm) {@inheritDoc}
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      org.squale.welcom.struts.bean.WActionForm) {@inheritDoc}
      */
     public void objToForm( Object[] object, WActionForm pForm )
         throws WTransformerException
@@ -114,7 +114,7 @@ public class MarkTransformer
     }
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm)
      *      {@inheritDoc}
      */
     public Object[] formToObj( WActionForm form )
@@ -124,7 +124,7 @@ public class MarkTransformer
     }
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm,
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm,
      *      java.lang.Object[]) {@inheritDoc}
      */
     public void formToObj( WActionForm form, Object[] object )

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.rulechecking;
+package org.squale.squaleweb.applicationlayer.action.rulechecking;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,10 +28,10 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.AdminAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.UploadFileForm;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squaleweb.applicationlayer.action.accessRights.AdminAction;
+import org.squale.squaleweb.applicationlayer.formbean.UploadFileForm;
 
 /**
  * Importation de ruleset

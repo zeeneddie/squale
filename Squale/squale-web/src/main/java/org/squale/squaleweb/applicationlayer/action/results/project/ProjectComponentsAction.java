@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.results.project;
+package org.squale.squaleweb.applicationlayer.action.results.project;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,28 +34,28 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentType;
-import com.airfrance.squalecommon.util.SqualeCommonConstants;
-import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm;
-import com.airfrance.squaleweb.applicationlayer.tracker.TrackerStructure;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.transformer.ComponentListTransformer;
-import com.airfrance.squaleweb.transformer.ComponentTransformer;
-import com.airfrance.squaleweb.transformer.ProjectTransformer;
-import com.airfrance.squaleweb.transformer.ResultListTransformer;
-import com.airfrance.squaleweb.util.SqualeWebConstants;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentType;
+import org.squale.squalecommon.util.SqualeCommonConstants;
+import org.squale.squaleweb.applicationlayer.action.ActionUtils;
+import org.squale.squaleweb.applicationlayer.action.accessRights.ReaderAction;
+import org.squale.squaleweb.applicationlayer.formbean.results.ComponentForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ComponentListForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm;
+import org.squale.squaleweb.applicationlayer.tracker.TrackerStructure;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.transformer.ComponentListTransformer;
+import org.squale.squaleweb.transformer.ComponentTransformer;
+import org.squale.squaleweb.transformer.ProjectTransformer;
+import org.squale.squaleweb.transformer.ResultListTransformer;
+import org.squale.squaleweb.util.SqualeWebConstants;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Action chargée de gérer la récupération des résultats des composants d'un projet.

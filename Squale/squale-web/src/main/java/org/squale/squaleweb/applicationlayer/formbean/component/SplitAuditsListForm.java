@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.component;
+package org.squale.squaleweb.applicationlayer.formbean.component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +26,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.util.graph.GraphMaker;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.util.graph.GraphMaker;
 
 /**
  * Sépare les audits des applications publiques par rapport à celles qui appartiennent à l'utilisateur
@@ -110,7 +110,7 @@ public class SplitAuditsListForm
     }
 
     /**
-     * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
+     * @see org.squale.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
      *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
     public void wValidate( ActionMapping pMapping, HttpServletRequest pRequest )

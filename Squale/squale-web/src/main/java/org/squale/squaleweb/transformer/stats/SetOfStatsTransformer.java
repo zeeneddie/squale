@@ -16,20 +16,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer.stats;
+package org.squale.squaleweb.transformer.stats;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.airfrance.squalecommon.datatransfertobject.stats.SetOfStatsDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.stats.AuditsStatsForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.stats.FactorsStatsForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.stats.SetOfStatsForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squalecommon.datatransfertobject.stats.SetOfStatsDTO;
+import org.squale.squaleweb.applicationlayer.formbean.stats.AuditsStatsForm;
+import org.squale.squaleweb.applicationlayer.formbean.stats.FactorsStatsForm;
+import org.squale.squaleweb.applicationlayer.formbean.stats.SetOfStatsForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  */

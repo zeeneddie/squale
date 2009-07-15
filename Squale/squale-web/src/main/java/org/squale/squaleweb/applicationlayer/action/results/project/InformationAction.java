@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.results.project;
+package org.squale.squaleweb.applicationlayer.action.results.project;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,16 +30,16 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.rule.AbstractFormulaDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.ConditionFormulaDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.SimpleFormulaDTO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.information.PracticeInformationForm;
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.rule.AbstractFormulaDTO;
+import org.squale.squalecommon.datatransfertobject.rule.ConditionFormulaDTO;
+import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.SimpleFormulaDTO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
+import org.squale.squaleweb.applicationlayer.formbean.information.PracticeInformationForm;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  */

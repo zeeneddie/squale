@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.search;
+package org.squale.squaleweb.applicationlayer.formbean.search;
 
 import java.util.Map;
 import java.util.Set;
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
  * Bean pour la recherche d'un projet
@@ -151,7 +151,7 @@ public class SearchProjectForm
     /**
      * Validation method
      * 
-     * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
+     * @see org.squale.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
      *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
     public void wValidate( ActionMapping mapping, HttpServletRequest request )

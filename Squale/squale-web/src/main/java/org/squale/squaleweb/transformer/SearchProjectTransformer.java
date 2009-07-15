@@ -16,20 +16,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.search.SearchProjectForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squaleweb.applicationlayer.formbean.search.SearchProjectForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * transformer pour la recherche d'un projet
@@ -40,7 +40,7 @@ public class SearchProjectTransformer
 
     /**
      * Obj --> form
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[]) {@inheritDoc}
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[]) {@inheritDoc}
      */
     public WActionForm objToForm( Object[] pObject )
         throws WTransformerException
@@ -52,8 +52,8 @@ public class SearchProjectTransformer
 
     /**
      * Obj --> form
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
-     *      com.airfrance.welcom.struts.bean.WActionForm) {@inheritDoc}
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      org.squale.welcom.struts.bean.WActionForm) {@inheritDoc}
      */
     public void objToForm( Object[] pObject, WActionForm pForm )
         throws WTransformerException
@@ -83,7 +83,7 @@ public class SearchProjectTransformer
 
     /**
      * form --> Obj
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm)
      *      {@inheritDoc}
      */
     public Object[] formToObj( WActionForm pForm )
@@ -96,7 +96,7 @@ public class SearchProjectTransformer
 
     /**
      * form --> Obj
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm,
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm,
      *      java.lang.Object[]) {@inheritDoc}
      */
     public void formToObj( WActionForm pForm, Object[] pObject )

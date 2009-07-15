@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.taskconfig.qc;
+package org.squale.squaleweb.taskconfig.qc;
 
 import java.util.ArrayList;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.externalTask.qc.TestManagerQCForm;
-import com.airfrance.squaleweb.taskconfig.AbstractConfigTask;
-import com.airfrance.squaleweb.taskconfig.FieldInfoConfig;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.externalTask.qc.TestManagerQCForm;
+import org.squale.squaleweb.taskconfig.AbstractConfigTask;
+import org.squale.squaleweb.taskconfig.FieldInfoConfig;
 
 /**
  * Configuration in order to build TestManagerQCTask's JASP page.
@@ -34,7 +34,7 @@ public class TestManagerQCTaskConfig
     /**
      * {@inheritdoc}
      * 
-     * @see com.airfrance.squaleweb.taskconfig.AbstractConfigTask#init()
+     * @see org.squale.squaleweb.taskconfig.AbstractConfigTask#init()
      */
     public void init()
     {

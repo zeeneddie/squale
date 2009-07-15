@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.component.parameters;
+package org.squale.squaleweb.applicationlayer.formbean.component.parameters;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squaleweb.transformer.component.parameters.JavaMockCompilingTransformer;
-import com.airfrance.squaleweb.util.SqualeWebActionUtils;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squaleweb.transformer.component.parameters.JavaMockCompilingTransformer;
+import org.squale.squaleweb.util.SqualeWebActionUtils;
 
 /**
  * Bean pour la tâche de compilation dans les cas où le projet est déjà compilé
@@ -106,7 +106,7 @@ public class JavaMockCompilingForm
     }
 
     /**
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTransformer()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTransformer()
      *      {@inheritDoc}
      */
     public Class getTransformer()
@@ -115,7 +115,7 @@ public class JavaMockCompilingForm
     }
 
     /**
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
      *      {@inheritDoc}
      */
     public String getNameInSession()
@@ -124,7 +124,7 @@ public class JavaMockCompilingForm
     }
 
     /**
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getParametersConstants()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getParametersConstants()
      *      {@inheritDoc}
      */
     public String[] getParametersConstants()
@@ -143,7 +143,7 @@ public class JavaMockCompilingForm
     }
 
     /**
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
      *      {@inheritDoc}
      */
     public String getTaskName()
@@ -152,7 +152,7 @@ public class JavaMockCompilingForm
     }
 
     /**
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping,
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping,
      *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
     protected void validateConf( ActionMapping pMapping, HttpServletRequest pRequest )

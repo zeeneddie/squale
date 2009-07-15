@@ -16,23 +16,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.component.parameters;
+package org.squale.squaleweb.applicationlayer.action.component.parameters;
 
 import java.io.InputStream;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.TaskDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.TaskParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.PmdRuleSetDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.pmd.PmdFacade;
-import com.airfrance.squaleweb.SqualeWebTestCase;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.PmdForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
+import org.squale.squalecommon.datatransfertobject.component.parameters.StringParameterDTO;
+import org.squale.squalecommon.datatransfertobject.config.TaskDTO;
+import org.squale.squalecommon.datatransfertobject.config.TaskParameterDTO;
+import org.squale.squalecommon.datatransfertobject.rulechecking.PmdRuleSetDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.UserBO;
+import org.squale.squalecommon.enterpriselayer.facade.pmd.PmdFacade;
+import org.squale.squaleweb.SqualeWebTestCase;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.PmdForm;
+import org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
 
 /**
  * Test de l'action de paramétrage pmd d'un projet

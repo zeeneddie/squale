@@ -22,11 +22,11 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.results;
+package org.squale.squaleweb.applicationlayer.formbean.results;
 
 import java.util.List;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :

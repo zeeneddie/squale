@@ -16,17 +16,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.externalTask;
+package org.squale.squaleweb.applicationlayer.formbean.component.parameters.externalTask;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm;
 
-import com.airfrance.squaleweb.taskconfig.qc.ExtBugTrackingQCTaskConfig;
-import com.airfrance.squaleweb.transformer.component.parameters.external.BugTrackingQCConfTransformer;
+import org.squale.squaleweb.taskconfig.qc.ExtBugTrackingQCTaskConfig;
+import org.squale.squaleweb.transformer.component.parameters.external.BugTrackingQCConfTransformer;
 
 /**
  * 
@@ -62,7 +62,7 @@ public class BugTrackingQCForm
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTransformer()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTransformer()
      */
     public Class getTransformer()
     {
@@ -72,7 +72,7 @@ public class BugTrackingQCForm
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getParametersConstants()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getParametersConstants()
      */
     public String[] getParametersConstants()
     {
@@ -82,7 +82,7 @@ public class BugTrackingQCForm
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getNameInSession()
      */
     public String getNameInSession()
     {
@@ -92,7 +92,7 @@ public class BugTrackingQCForm
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#getTaskName()
      */
     public String getTaskName()
     {
@@ -102,7 +102,7 @@ public class BugTrackingQCForm
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping,
+     * @see org.squale.squaleweb.applicationlayer.formbean.component.parameters.AbstractParameterForm#validateConf(org.apache.struts.action.ActionMapping,
      *      javax.servlet.http.HttpServletRequest)
      */
     protected void validateConf( ActionMapping pMapping, HttpServletRequest pRequest )

@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.component.parameters;
+package org.squale.squaleweb.applicationlayer.action.component.parameters;
 
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm;
 
 /**
  * Configuration des paramètres de la tâche CppTest
@@ -34,7 +34,7 @@ public class CreateCppTestParametersAction
 {
 
     /**
-     * @see com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction#getTransformerParameters(com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateProjectForm,
+     * @see org.squale.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction#getTransformerParameters(org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm,
      *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
     public Object[] getTransformerParameters( CreateProjectForm pProject, HttpServletRequest pRequest )

@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.resources;
+package org.squale.squaleweb.resources;
 
 import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 
-import com.airfrance.squaleweb.messages.MessageProvider;
+import org.squale.squaleweb.messages.MessageProvider;
 
 /**
  * Messages enregistrés dans la base de données Cette classe permet de stocker sous la forme d'un cache les messages

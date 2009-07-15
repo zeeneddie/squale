@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.message;
+package org.squale.squaleweb.applicationlayer.action.message;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,14 +30,14 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.message.NewsDTO;
-import com.airfrance.squalecommon.datatransfertobject.message.NewsListDTO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.messages.NewsListForm;
-import com.airfrance.squaleweb.transformer.message.NewsListTransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.message.NewsDTO;
+import org.squale.squalecommon.datatransfertobject.message.NewsListDTO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
+import org.squale.squaleweb.applicationlayer.formbean.messages.NewsListForm;
+import org.squale.squaleweb.transformer.message.NewsListTransformer;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  */

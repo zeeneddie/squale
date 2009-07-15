@@ -16,19 +16,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.airfrance.squalecommon.datatransfertobject.tag.TagCategoryDTO;
-import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.creation.CreateTagForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.tag.TagCategoryForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.tag.TagForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squalecommon.datatransfertobject.tag.TagCategoryDTO;
+import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
+import org.squale.squaleweb.applicationlayer.formbean.creation.CreateTagForm;
+import org.squale.squaleweb.applicationlayer.formbean.tag.TagCategoryForm;
+import org.squale.squaleweb.applicationlayer.formbean.tag.TagForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Transformation d'une liste de résultats en fonction de facteurs

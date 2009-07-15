@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
-import com.airfrance.squalecommon.datatransfertobject.config.ServeurDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.config.ServeurListForm;
+import org.squale.squalecommon.datatransfertobject.config.ServeurDTO;
+import org.squale.squaleweb.applicationlayer.formbean.config.ServeurListForm;
 
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -40,7 +40,7 @@ public class ServeurListTransformer
      * 
      * @param object le tableau des objets nécessaires à la transformation
      * @return le formulaire transformé
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[])
      */
     public WActionForm objToForm( Object[] object )
         throws WTransformerException
@@ -55,8 +55,8 @@ public class ServeurListTransformer
      * 
      * @param object {@inheritDoc} - la liste des serveurs sous forme DTO
      * @param form le formulaire de liste de serveur
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
-     *      com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      org.squale.welcom.struts.bean.WActionForm)
      */
     public void objToForm( Object[] object, WActionForm form )
         throws WTransformerException
@@ -78,7 +78,7 @@ public class ServeurListTransformer
      * 
      * @param form {@inheritDoc}
      * @param object {@inheritDoc}
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm,
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm,
      *      java.lang.Object[])
      */
     public void formToObj( WActionForm form, Object[] object )

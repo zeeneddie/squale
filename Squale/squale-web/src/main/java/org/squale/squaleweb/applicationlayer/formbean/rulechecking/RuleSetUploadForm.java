@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.rulechecking;
+package org.squale.squaleweb.applicationlayer.formbean.rulechecking;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.AbstractUploadForm;
+import org.squale.squaleweb.applicationlayer.formbean.AbstractUploadForm;
 
 /**
  * Formulaire de chargement d'un ruleset Un ruleset est chargé à partir d'un formulaire donnant un fichier pour lequel

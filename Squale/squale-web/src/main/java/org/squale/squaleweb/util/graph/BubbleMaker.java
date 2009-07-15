@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -31,7 +31,7 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.ui.RectangleEdge;
 
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * @author 6370258 Génération du graphe de type Bubble, stocké dans un form et appelé depuis une page Jsp
@@ -259,7 +259,7 @@ public class BubbleMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight()
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight()
      * @return la hauteur par défaut
      */
     protected int getDefaultHeight()
@@ -268,7 +268,7 @@ public class BubbleMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth()
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth()
      * @return la largeur par défaut
      */
     protected int getDefaultWidth()

@@ -22,9 +22,9 @@
 	<import value="java.util.*" />
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
-	<import value="com.airfrance.squaleweb.resources.WebMessages" />
-	<import value="com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm" />
-	<import value="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm" />
+	<import value="org.squale.squaleweb.resources.WebMessages" />
+	<import value="org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm" />
+	<import value="org.squale.squaleweb.applicationlayer.formbean.results.ComponentForm" />
 
 	<parameter name="results" isForPrompting="false" class="java.util.Map"/>
 
@@ -32,7 +32,7 @@
 	<field name="id" class="java.lang.Long"/>
 	<field name="name" class="java.lang.String"/>
 
-	<variable name="currentComponent" class="com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm" resetType="Report" calculation="Nothing">
+	<variable name="currentComponent" class="org.squale.squaleweb.applicationlayer.formbean.results.ComponentForm" resetType="Report" calculation="Nothing">
 		<variableExpression><![CDATA[new ComponentForm($F{id}.longValue(), $F{name})]]></variableExpression>
 		<initialValueExpression><![CDATA[new ComponentForm($F{id}.longValue(), $F{name})]]></initialValueExpression>
 	</variable>
@@ -98,8 +98,8 @@
 					<subreportParameter  name="REPORT_LOCALE">
 						<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
 					</subreportParameter>
-					<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource(((com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm)$P{results}.get($V{currentComponent})).getList())]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/ComparisonByComponentSub.jasper"]]></subreportExpression>
+					<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource(((org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm)$P{results}.get($V{currentComponent})).getList())]]></dataSourceExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/ComparisonByComponentSub.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
 		</detail>

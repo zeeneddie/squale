@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.reference;
+package org.squale.squaleweb.applicationlayer.formbean.reference;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeMap;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
+import org.squale.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
 
 /**
  * Contient une référence du portail Squale.

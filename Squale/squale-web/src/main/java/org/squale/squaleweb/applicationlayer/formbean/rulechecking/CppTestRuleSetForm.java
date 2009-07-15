@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.rulechecking;
+package org.squale.squaleweb.applicationlayer.formbean.rulechecking;
 
 /**
  * Formulaire d'un ruleset CppTest

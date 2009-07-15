@@ -21,7 +21,7 @@
  *
  * Personnalisation des liens URL du Pie Chart
  */
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
 import java.util.HashMap;
 import java.util.Map;

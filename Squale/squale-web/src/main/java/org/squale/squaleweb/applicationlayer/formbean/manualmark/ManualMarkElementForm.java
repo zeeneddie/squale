@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.manualmark;
+package org.squale.squaleweb.applicationlayer.formbean.manualmark;
 
 import java.util.Date;
 import java.util.Locale;
 
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.welcom.struts.bean.WActionForm;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.welcom.struts.bean.WActionForm;
 
 /**
  * This class represent one manual mark with the element needed for add / modify manual mark

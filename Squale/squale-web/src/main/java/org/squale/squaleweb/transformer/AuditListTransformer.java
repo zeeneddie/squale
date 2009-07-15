@@ -16,20 +16,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.ListIterator;
 
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.AuditListForm;
-import com.airfrance.squaleweb.comparator.AuditComparator;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squaleweb.applicationlayer.formbean.component.AuditForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.AuditListForm;
+import org.squale.squaleweb.comparator.AuditComparator;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Transformer des listes d'audits.

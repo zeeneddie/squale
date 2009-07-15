@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -27,7 +27,7 @@ import org.jfree.chart.encoders.ImageEncoder;
 import org.jfree.chart.encoders.ImageEncoderFactory;
 import org.jfree.chart.encoders.ImageFormat;
 
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * @author M400843

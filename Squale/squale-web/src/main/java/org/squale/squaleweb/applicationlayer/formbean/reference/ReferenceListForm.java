@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.reference;
+package org.squale.squaleweb.applicationlayer.formbean.reference;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
  * Formulaire contenant la liste des formulaires du référentiel

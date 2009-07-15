@@ -16,18 +16,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import com.airfrance.squalecommon.datatransfertobject.config.web.HomepageComponentDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.homepagemanagement.HomepageManagementForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
+import org.squale.squalecommon.datatransfertobject.config.web.HomepageComponentDTO;
+import org.squale.squaleweb.applicationlayer.formbean.homepagemanagement.HomepageManagementForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
 
 /**
  * This class do the transformation between the HomepageManagementForm and the list of HomepageComponentDTO

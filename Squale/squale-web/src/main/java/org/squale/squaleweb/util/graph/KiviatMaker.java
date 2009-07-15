@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -34,7 +34,7 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RectangleEdge;
 
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * Classe responsable de la création d'un kiviat
@@ -97,7 +97,7 @@ public class KiviatMaker
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() 
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() 
      */
     protected int getDefaultHeight()
     {
@@ -107,7 +107,7 @@ public class KiviatMaker
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() 
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() 
      */
     protected int getDefaultWidth()
     {

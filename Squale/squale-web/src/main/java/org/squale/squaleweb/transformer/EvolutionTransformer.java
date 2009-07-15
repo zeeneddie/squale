@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,17 +29,17 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import com.airfrance.squalecommon.datatransfertobject.result.PracticeEvolutionDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ComponentListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.EvolutionForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm;
-import com.airfrance.squaleweb.comparator.RuleNameComparator;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WITransformer;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squalecommon.datatransfertobject.result.PracticeEvolutionDTO;
+import org.squale.squaleweb.applicationlayer.formbean.results.ComponentForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ComponentListForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.EvolutionForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm;
+import org.squale.squaleweb.comparator.RuleNameComparator;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WITransformer;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Transforme Collection PracticeEvolutionDto <-> Map
@@ -49,7 +49,7 @@ public class EvolutionTransformer
 {
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[]) {@inheritDoc}
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[]) {@inheritDoc}
      */
     public WActionForm objToForm( Object[] pObject )
         throws WTransformerException
@@ -60,8 +60,8 @@ public class EvolutionTransformer
     }
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
-     *      com.airfrance.welcom.struts.bean.WActionForm) {@inheritDoc}
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      org.squale.welcom.struts.bean.WActionForm) {@inheritDoc}
      */
     public void objToForm( Object[] pObject, WActionForm pForm )
         throws WTransformerException
@@ -255,7 +255,7 @@ public class EvolutionTransformer
     }
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm)
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm)
      *      {@inheritDoc}
      */
     public Object[] formToObj( WActionForm pForm )
@@ -268,7 +268,7 @@ public class EvolutionTransformer
     }
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#formToObj(com.airfrance.welcom.struts.bean.WActionForm,
+     * @see org.squale.welcom.struts.transformer.WITransformer#formToObj(org.squale.welcom.struts.bean.WActionForm,
      *      java.lang.Object[]) {@inheritDoc}
      */
     public void formToObj( WActionForm form, Object[] object )

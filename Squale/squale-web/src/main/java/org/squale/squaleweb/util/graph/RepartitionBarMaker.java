@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
 import java.awt.Color;
 
@@ -32,7 +32,7 @@ import org.jfree.chart.renderer.category.StackedBarRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  */
@@ -191,7 +191,7 @@ public class RepartitionBarMaker
     }
 
     /**
-     * @see com.airfrance.squaleweb.util.graph.AbstractGraphMaker#getDefaultHeight() {@inheritDoc}
+     * @see org.squale.squaleweb.util.graph.AbstractGraphMaker#getDefaultHeight() {@inheritDoc}
      */
     protected int getDefaultHeight()
     {
@@ -199,7 +199,7 @@ public class RepartitionBarMaker
     }
 
     /**
-     * @see com.airfrance.squaleweb.util.graph.AbstractGraphMaker#getDefaultWidth() {@inheritDoc}
+     * @see org.squale.squaleweb.util.graph.AbstractGraphMaker#getDefaultWidth() {@inheritDoc}
      */
     protected int getDefaultWidth()
     {
@@ -207,7 +207,7 @@ public class RepartitionBarMaker
     }
 
     /**
-     * @see com.airfrance.squaleweb.util.graph.AbstractRepartitionMaker#applyColor(int, java.awt.Color) {@inheritDoc}
+     * @see org.squale.squaleweb.util.graph.AbstractRepartitionMaker#applyColor(int, java.awt.Color) {@inheritDoc}
      */
     protected void applyColor( int pIndex, Color pColor )
     {

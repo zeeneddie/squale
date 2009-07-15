@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.resources;
+package org.squale.squaleweb.resources;
 
 import java.text.MessageFormat;
 import java.util.Locale;
@@ -29,7 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * @author m400832
@@ -55,7 +55,7 @@ public class WebMessages
     /**
      * Chemin du fichier de propriétés.
      */
-    private static final String BUNDLE_NAME = "com.airfrance.squaleweb.resources.ApplicationResources";
+    private static final String BUNDLE_NAME = "org.squale.squaleweb.resources.ApplicationResources";
 
     /**
      * Instance de ResourceBudle utilisée par defaut

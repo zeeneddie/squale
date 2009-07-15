@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.grid;
+package org.squale.squaleweb.applicationlayer.action.grid;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,15 +33,15 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridConfDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.AdminAction;
-import com.airfrance.squaleweb.transformer.GridConfTransformer;
-import com.airfrance.squaleweb.transformer.GridListTransformer;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridConfDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridDTO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.AdminAction;
+import org.squale.squaleweb.transformer.GridConfTransformer;
+import org.squale.squaleweb.transformer.GridListTransformer;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Manipulation des grilles qualité

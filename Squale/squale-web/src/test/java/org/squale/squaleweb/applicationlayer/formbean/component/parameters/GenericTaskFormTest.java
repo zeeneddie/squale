@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.component.parameters;
+package org.squale.squaleweb.applicationlayer.formbean.component.parameters;
 
-import com.airfrance.squaleweb.SqualeWebTestCase;
+import org.squale.squaleweb.SqualeWebTestCase;
 
 /**
  * Testing class of the genericTask form

@@ -22,8 +22,8 @@
 	<import value="java.util.*" />
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
-	<import value="com.airfrance.squaleweb.applicationlayer.formbean.results.EvolutionForm" />
-	<import value="com.airfrance.squaleweb.resources.WebMessages" />
+	<import value="org.squale.squaleweb.applicationlayer.formbean.results.EvolutionForm" />
+	<import value="org.squale.squaleweb.resources.WebMessages" />
 
 	<parameter name="userName" isForPrompting="false" class="java.lang.String"/>
 
@@ -36,8 +36,8 @@
 	<field name="sortType" class="java.lang.String"/>
 
 	<variable name="date" class="java.lang.String" resetType="Report" calculation="Nothing">
-		<variableExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></variableExpression>
-		<initialValueExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
+		<variableExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></variableExpression>
+		<initialValueExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
 	</variable>
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -70,7 +70,7 @@
 						key="image-1"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<graphicElement stretchType="NoStretch" pen="None" fill="Solid" />
-					<imageExpression class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -144,7 +144,7 @@
 						<subreportParameterExpression><![CDATA[$F{results}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource($F{results}.keySet())]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/ComparisonByPractice.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/ComparisonByPractice.jasper"]]></subreportExpression>
 				</subreport>
 				<subreport  isUsingCache="true">
 					<reportElement
@@ -168,7 +168,7 @@
 						<subreportParameterExpression><![CDATA[$F{results}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource($F{results}.keySet())]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/ComparisonByComponent.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/ComparisonByComponent.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
 		</detail>

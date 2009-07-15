@@ -16,13 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.component.parameters;
+package org.squale.squaleweb.applicationlayer.formbean.component.parameters;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squaleweb.transformer.component.parameters.AbstractGenericTaskConfTransformer;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
+import org.squale.squaleweb.transformer.component.parameters.AbstractGenericTaskConfTransformer;
 
 /**
  * This class instantiate a form-bean which stores data from a submitted client request. This form-bean is directly

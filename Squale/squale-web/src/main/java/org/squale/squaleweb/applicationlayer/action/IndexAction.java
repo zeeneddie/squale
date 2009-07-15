@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action;
+package org.squale.squaleweb.applicationlayer.action;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,34 +43,34 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.servlet.ServletUtilities;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.web.HomepageComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
-import com.airfrance.squaleweb.applicationlayer.action.message.AdminNewsAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.HomepageForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm;
-import com.airfrance.squaleweb.comparator.ComponentComparator;
-import com.airfrance.squaleweb.homepage.Stat;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.transformer.ApplicationListTransformer;
-import com.airfrance.squaleweb.transformer.FactorsResultListTransformer;
-import com.airfrance.squaleweb.transformer.SplitAuditsListTransformer;
-import com.airfrance.squaleweb.util.graph.GraphMaker;
-import com.airfrance.squaleweb.util.graph.KiviatMaker;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
-import com.airfrance.welcom.struts.util.WConstants;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.component.UserDTO;
+import org.squale.squalecommon.datatransfertobject.config.web.HomepageComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
+import org.squale.squaleweb.applicationlayer.action.message.AdminNewsAction;
+import org.squale.squaleweb.applicationlayer.formbean.HomepageForm;
+import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationListForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm;
+import org.squale.squaleweb.comparator.ComponentComparator;
+import org.squale.squaleweb.homepage.Stat;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.transformer.ApplicationListTransformer;
+import org.squale.squaleweb.transformer.FactorsResultListTransformer;
+import org.squale.squaleweb.transformer.SplitAuditsListTransformer;
+import org.squale.squaleweb.util.graph.GraphMaker;
+import org.squale.squaleweb.util.graph.KiviatMaker;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
+import org.squale.welcom.struts.util.WConstants;
 
 /**
  * Action class for the homepage.jsp

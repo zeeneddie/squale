@@ -22,10 +22,10 @@
 	<import value="java.util.*" />
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
-	<import value="com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO" />
-	<import value="com.airfrance.squaleweb.resources.WebMessages" />
-	<import value="com.airfrance.squaleweb.util.JasperReportUtil" />
-	<import value="com.airfrance.squaleweb.util.SqualeWebActionUtils" />
+	<import value="org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO" />
+	<import value="org.squale.squaleweb.resources.WebMessages" />
+	<import value="org.squale.squaleweb.util.JasperReportUtil" />
+	<import value="org.squale.squaleweb.util.SqualeWebActionUtils" />
 
 	<parameter name="ResultsIterator" isForPrompting="false" class="java.lang.Object">
 		<parameterDescription><![CDATA[les résultats]]></parameterDescription>
@@ -41,16 +41,16 @@
 	</parameter>
 
 	<field name="nbCorrections" class="java.lang.Integer"/>
-	<field name="qualityResultDTO" class="com.airfrance.squalecommon.datatransfertobject.result.QualityResultDTO"/>
-	<field name="resultsDTO" class="com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO"/>
+	<field name="qualityResultDTO" class="org.squale.squalecommon.datatransfertobject.result.QualityResultDTO"/>
+	<field name="resultsDTO" class="org.squale.squalecommon.datatransfertobject.result.ResultsDTO"/>
 	<field name="transgressions" class="java.util.Collection"/>
 
 	<variable name="date" class="java.lang.String" resetType="Report" calculation="Nothing">
-		<variableExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></variableExpression>
-		<initialValueExpression><![CDATA[com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
+		<variableExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></variableExpression>
+		<initialValueExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
 	</variable>
 	<variable name="nbSquale" class="java.lang.Integer" resetType="Report" calculation="Nothing">
-		<variableExpression><![CDATA[new Integer((int)(Math.log(((com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO)$F{qualityResultDTO}.getRule()).getEffort())/Math.log(10)+1))]]></variableExpression>
+		<variableExpression><![CDATA[new Integer((int)(Math.log(((org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO)$F{qualityResultDTO}.getRule()).getEffort())/Math.log(10)+1))]]></variableExpression>
 	</variable>
 	<variable name="currentValue" class="java.lang.Object" resetType="None" incrementType="Report" calculation="Nothing">
 		<variableExpression><![CDATA[(((Iterator)$P{ResultsIterator}).hasNext())?((Iterator)$P{ResultsIterator}).next():null]]></variableExpression>
@@ -86,7 +86,7 @@
 						key="image-1"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<graphicElement stretchType="NoStretch" pen="None" fill="Solid" />
-					<imageExpression class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -194,9 +194,9 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$V{REPORT_COUNT}
 + ". "
-+ com.airfrance.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "practice") 
++ org.squale.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "practice") 
 + " "
-+ com.airfrance.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), $F{qualityResultDTO}.getRule().getName())]]></textFieldExpression>
++ org.squale.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), $F{qualityResultDTO}.getRule().getName())]]></textFieldExpression>
 				</textField>
 				<subreport  isUsingCache="true">
 					<reportElement
@@ -221,7 +221,7 @@
 						<subreportParameterExpression><![CDATA[$F{resultsDTO}.getResultMap()]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[($F{resultsDTO}!=null)?new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(new LinkedList($F{resultsDTO}.getResultMap().keySet())):new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(new ArrayList())]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/ComponentMarks.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/ComponentMarks.jasper"]]></subreportExpression>
 				</subreport>
 				<subreport  isUsingCache="true">
 					<reportElement
@@ -243,7 +243,7 @@
 						<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[($F{transgressions}!=null)?new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{transgressions}):new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(new ArrayList())]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/RuleCheckingItem.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/RuleCheckingItem.jasper"]]></subreportExpression>
 				</subreport>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -277,7 +277,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="12" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[com.airfrance.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "export.pdf.mark") + " : " 
+				<textFieldExpression   class="java.lang.String"><![CDATA[org.squale.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "export.pdf.mark") + " : " 
 + SqualeWebActionUtils.formatFloat(""+$F{qualityResultDTO}.getMeanMark())]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
@@ -295,7 +295,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="12" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[($F{qualityResultDTO}.getRule().getHelpKey() != null && !$F{qualityResultDTO}.getRule().getHelpKey().equals(""))?com.airfrance.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "qualimetric_element.correction"):""]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[($F{qualityResultDTO}.getRule().getHelpKey() != null && !$F{qualityResultDTO}.getRule().getHelpKey().equals(""))?org.squale.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "qualimetric_element.correction"):""]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -329,7 +329,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="12" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[com.airfrance.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "export.pdf.action.plan.effort") + " : "]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[org.squale.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), "export.pdf.action.plan.effort") + " : "]]></textFieldExpression>
 				</textField>
 				<image  scaleImage="FillFrame" vAlign="Top" hAlign="Left" isUsingCache="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -488,7 +488,7 @@
 						<subreportParameterExpression><![CDATA[$P{REPORT_RESOURCE_BUNDLE}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{volumetry})]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/ProjectVolumetrySub.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/ProjectVolumetrySub.jasper"]]></subreportExpression>
 				</subreport>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -529,7 +529,7 @@
 						<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{factors})]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["/com/airfrance/squaleweb/resources/jasperreport/factorsResult.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/factorsResult.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
 		</detail>
@@ -631,7 +631,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
 						<font fontName="Verdana" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[msg($R{description.name.audit}, com.airfrance.squaleweb.util.SqualeWebActionUtils.getFormattedDate($F{qualityResultDTO}.getAudit().getDate(), $P{REPORT_RESOURCE_BUNDLE}.getLocale()))]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[msg($R{description.name.audit}, org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate($F{qualityResultDTO}.getAudit().getDate(), $P{REPORT_RESOURCE_BUNDLE}.getLocale()))]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

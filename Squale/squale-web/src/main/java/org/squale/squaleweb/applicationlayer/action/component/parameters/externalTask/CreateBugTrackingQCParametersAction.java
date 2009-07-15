@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.component.parameters.externalTask;
+package org.squale.squaleweb.applicationlayer.action.component.parameters.externalTask;
 
-import com.airfrance.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction;
+import org.squale.squaleweb.applicationlayer.action.component.parameters.CreateParametersAction;
 
 /**
  * configuration des paramètres de la tache de Bug Tracking de QC

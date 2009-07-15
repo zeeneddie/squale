@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.results.project;
+package org.squale.squaleweb.applicationlayer.action.results.project;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,22 +33,22 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.ReaderAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.LogonBean;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.EvolutionForm;
-import com.airfrance.squaleweb.transformer.EvolutionTransformer;
-import com.airfrance.welcom.outils.pdf.PDFDataJasperReports;
-import com.airfrance.welcom.outils.pdf.PDFEngine;
-import com.airfrance.welcom.outils.pdf.PDFFactory;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
-import com.airfrance.welcom.struts.util.WConstants;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squaleweb.applicationlayer.action.ActionUtils;
+import org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
+import org.squale.squaleweb.applicationlayer.action.accessRights.ReaderAction;
+import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.results.EvolutionForm;
+import org.squale.squaleweb.transformer.EvolutionTransformer;
+import org.squale.welcom.outils.pdf.PDFDataJasperReports;
+import org.squale.welcom.outils.pdf.PDFEngine;
+import org.squale.welcom.outils.pdf.PDFFactory;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
+import org.squale.welcom.struts.util.WConstants;
 
 /**
  * Action pour la ncomparaison détaillée de deux audits
@@ -150,7 +150,7 @@ public class EvolutionAction
 
             PDFDataJasperReports pdfData =
                 new PDFDataJasperReports( pRequest.getLocale(), getResources( pRequest ), data,
-                                          "/com/airfrance/squaleweb/resources/jasperreport/Comparison.jasper", false,
+                                          "/org/squale/squaleweb/resources/jasperreport/Comparison.jasper", false,
                                           parameters );
             PDFFactory.generatePDFToHTTPResponse( pdfData, pResponse, "", PDFEngine.JASPERREPORTS );
         }

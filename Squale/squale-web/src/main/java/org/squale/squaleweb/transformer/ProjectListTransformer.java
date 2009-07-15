@@ -16,18 +16,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer;
+package org.squale.squaleweb.transformer;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ListIterator;
 
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ProjectListForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squaleweb.applicationlayer.formbean.component.ProjectForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.ProjectListForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Transforme les listes de projets

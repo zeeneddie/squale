@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.connection;
+package org.squale.squaleweb.connection;
 
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
-import com.airfrance.squaleweb.connection.exception.ConnectionException;
+import org.squale.squalecommon.datatransfertobject.component.UserDTO;
+import org.squale.squaleweb.connection.exception.ConnectionException;
 
 /**
  * user Bean Access interface

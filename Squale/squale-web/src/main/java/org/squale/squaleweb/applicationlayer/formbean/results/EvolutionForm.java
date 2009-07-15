@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.results;
+package org.squale.squaleweb.applicationlayer.formbean.results;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squalecommon.datatransfertobject.result.PracticeEvolutionDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squalecommon.datatransfertobject.result.PracticeEvolutionDTO;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
 
 /**
  * Bean pour la comparaion détaillée de deux audits
@@ -94,7 +94,7 @@ public class EvolutionForm
     }
 
     /**
-     * @see com.airfrance.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
+     * @see org.squale.welcom.struts.bean.WActionForm#wValidate(org.apache.struts.action.ActionMapping,
      *      javax.servlet.http.HttpServletRequest) {@inheritDoc}
      */
     public void wValidate( ActionMapping mapping, HttpServletRequest request )

@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.transformer.rulechecking;
+package org.squale.squaleweb.transformer.rulechecking;
 
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.CppTestRuleSetDTO;
-import com.airfrance.squaleweb.applicationlayer.formbean.rulechecking.CppTestRuleSetForm;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
+import org.squale.squalecommon.datatransfertobject.rulechecking.CppTestRuleSetDTO;
+import org.squale.squaleweb.applicationlayer.formbean.rulechecking.CppTestRuleSetForm;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
 
 /**
  * Transformations du formulaire de configuration CppTest
@@ -44,8 +44,8 @@ public class CppTestRuleSetTransformer
     }
 
     /**
-     * @see com.airfrance.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
-     *      com.airfrance.welcom.struts.bean.WActionForm) {@inheritDoc}
+     * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
+     *      org.squale.welcom.struts.bean.WActionForm) {@inheritDoc}
      */
     public void objToForm( Object[] pObject, WActionForm pForm )
         throws WTransformerException

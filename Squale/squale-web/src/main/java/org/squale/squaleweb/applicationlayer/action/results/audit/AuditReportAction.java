@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.results.audit;
+package org.squale.squaleweb.applicationlayer.action.results.audit;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -34,24 +34,24 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
-import com.airfrance.squaleweb.applicationlayer.action.ActionUtils;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.AdminAction;
-import com.airfrance.squaleweb.applicationlayer.action.export.ppt.AuditReportPPTData;
-import com.airfrance.squaleweb.applicationlayer.action.export.ppt.PPTData;
-import com.airfrance.squaleweb.applicationlayer.action.export.ppt.PPTFactory;
-import com.airfrance.squaleweb.applicationlayer.action.export.ppt.PPTGeneratorException;
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.export.AuditReportParamForm;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.transformer.export.AuditReportParamTransformer;
-import com.airfrance.squaleweb.util.SqualeWebActionUtils;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import org.squale.squaleweb.applicationlayer.action.ActionUtils;
+import org.squale.squaleweb.applicationlayer.action.accessRights.AdminAction;
+import org.squale.squaleweb.applicationlayer.action.export.ppt.AuditReportPPTData;
+import org.squale.squaleweb.applicationlayer.action.export.ppt.PPTData;
+import org.squale.squaleweb.applicationlayer.action.export.ppt.PPTFactory;
+import org.squale.squaleweb.applicationlayer.action.export.ppt.PPTGeneratorException;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.applicationlayer.formbean.export.AuditReportParamForm;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.transformer.export.AuditReportParamTransformer;
+import org.squale.squaleweb.util.SqualeWebActionUtils;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Generation and setting of audit report

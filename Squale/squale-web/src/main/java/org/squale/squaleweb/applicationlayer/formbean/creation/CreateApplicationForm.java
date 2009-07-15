@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.creation;
+package org.squale.squaleweb.applicationlayer.formbean.creation;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,12 +29,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squaleweb.applicationlayer.formbean.RootForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.access.AccessListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.config.ServeurForm;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squaleweb.applicationlayer.formbean.RootForm;
+import org.squale.squaleweb.applicationlayer.formbean.access.AccessListForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.AuditForm;
+import org.squale.squaleweb.applicationlayer.formbean.config.ServeurForm;
 
 /**
  * Form bean for a Struts application.

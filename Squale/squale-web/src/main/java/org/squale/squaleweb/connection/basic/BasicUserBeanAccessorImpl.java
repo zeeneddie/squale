@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.connection.basic;
+package org.squale.squaleweb.connection.basic;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,14 +24,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
-import com.airfrance.squaleweb.connection.AuthenticationBean;
-import com.airfrance.squaleweb.connection.IUserBean;
-import com.airfrance.squaleweb.connection.IUserBeanAccessor;
-import com.airfrance.squaleweb.connection.exception.ConnectionException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.UserDTO;
+import org.squale.squaleweb.connection.AuthenticationBean;
+import org.squale.squaleweb.connection.IUserBean;
+import org.squale.squaleweb.connection.IUserBeanAccessor;
+import org.squale.squaleweb.connection.exception.ConnectionException;
 
 /**
  * This class is the basic implementation of the userBean accessor. This class contains methods for authentication. In

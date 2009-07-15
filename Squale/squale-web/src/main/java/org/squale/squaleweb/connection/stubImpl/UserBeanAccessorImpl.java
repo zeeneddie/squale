@@ -16,18 +16,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.connection.stubImpl;
+package org.squale.squaleweb.connection.stubImpl;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
-import com.airfrance.squaleweb.connection.AuthenticationBean;
-import com.airfrance.squaleweb.connection.IUserBean;
-import com.airfrance.squaleweb.connection.IUserBeanAccessor;
-import com.airfrance.squaleweb.connection.exception.ConnectionException;
+import org.squale.squalecommon.datatransfertobject.component.UserDTO;
+import org.squale.squaleweb.connection.AuthenticationBean;
+import org.squale.squaleweb.connection.IUserBean;
+import org.squale.squaleweb.connection.IUserBeanAccessor;
+import org.squale.squaleweb.connection.exception.ConnectionException;
 
 /**
  * This class is a stub implementation of the accessor for authentication

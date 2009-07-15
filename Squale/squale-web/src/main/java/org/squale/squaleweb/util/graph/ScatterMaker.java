@@ -20,7 +20,7 @@
  * Créé le 17 août 05
  */
 
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -36,7 +36,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * @author M400843 Cette classe est responsable de la fabrication d'un scatter.
@@ -130,7 +130,7 @@ public class ScatterMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() {@inheritDoc}
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultHeight() {@inheritDoc}
      */
     protected int getDefaultHeight()
     {
@@ -138,7 +138,7 @@ public class ScatterMaker
     }
 
     /**
-     * @see com.airfrance.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() {@inheritDoc}
+     * @see org.squale.squalecommon.util.graph.AbstractGraphMaker#getDefaultWidth() {@inheritDoc}
      */
     protected int getDefaultWidth()
     {

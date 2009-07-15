@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.mail;
+package org.squale.squaleweb.applicationlayer.action.mail;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,20 +33,20 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.util.SqualeCommonConstants;
-import com.airfrance.squalecommon.util.SqualeCommonUtils;
-import com.airfrance.squalecommon.util.mail.IMailerProvider;
-import com.airfrance.squalecommon.util.mail.MailerHelper;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.AdminAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.mails.MailForm;
-import com.airfrance.squaleweb.comparator.ComponentComparator;
-import com.airfrance.squaleweb.resources.WebMessages;
-import com.airfrance.squaleweb.transformer.mails.MailTransformer;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.util.SqualeCommonConstants;
+import org.squale.squalecommon.util.SqualeCommonUtils;
+import org.squale.squalecommon.util.mail.IMailerProvider;
+import org.squale.squalecommon.util.mail.MailerHelper;
+import org.squale.squaleweb.applicationlayer.action.accessRights.AdminAction;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
+import org.squale.squaleweb.applicationlayer.formbean.mails.MailForm;
+import org.squale.squaleweb.comparator.ComponentComparator;
+import org.squale.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.transformer.mails.MailTransformer;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * 

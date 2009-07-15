@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean.creation;
+package org.squale.squaleweb.applicationlayer.formbean.creation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,10 +30,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.TaskDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
+import org.squale.squalecommon.datatransfertobject.component.parameters.MapParameterDTO;
+import org.squale.squalecommon.datatransfertobject.config.TaskDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
 
 /**
  * Form bean for a Struts application.

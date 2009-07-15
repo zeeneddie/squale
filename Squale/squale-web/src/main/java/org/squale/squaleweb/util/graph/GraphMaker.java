@@ -22,14 +22,14 @@
  * Classe mémorisant les caractéristiques liées à
  * l'affichage d'un graphe JFreeChart comportant des liens HTML
  */
-package com.airfrance.squaleweb.util.graph;
+package org.squale.squaleweb.util.graph;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.ChartUtilities;
 
-import com.airfrance.squaleweb.resources.WebMessages;
+import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * @author 6370258

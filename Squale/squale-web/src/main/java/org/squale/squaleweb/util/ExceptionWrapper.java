@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.util;
+package org.squale.squaleweb.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,7 +32,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 
-import com.airfrance.jraf.commons.exception.JrafException;
+import org.squale.jraf.commons.exception.JrafException;
 
 /**
  * Traitement des exceptions Cette classe permet de remonter des exceptions au niveau de l'utilisateur via une JSP Une
@@ -46,7 +46,7 @@ public class ExceptionWrapper
     private static Log logger = LogFactory.getLog( ExceptionWrapper.class );
 
     /** Nom du bundle pour les exceptions */
-    private static final String EXCEPTION_BUNDLE_NAME = "com.airfrance.squaleweb.util.exception";
+    private static final String EXCEPTION_BUNDLE_NAME = "org.squale.squaleweb.util.exception";
 
     /** Nom de la clef pour l'activation du dump */
     private static final String DUMP_EXCEPTION_KEY = "dumpExceptionInJsp";

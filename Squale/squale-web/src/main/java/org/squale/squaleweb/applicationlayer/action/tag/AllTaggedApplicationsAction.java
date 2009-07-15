@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.action.tag;
+package org.squale.squaleweb.applicationlayer.action.tag;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -30,22 +30,22 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.squalecommon.daolayer.tag.TagDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
-import com.airfrance.squaleweb.applicationlayer.action.accessRights.DefaultAction;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.ApplicationListForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm;
-import com.airfrance.squaleweb.transformer.ApplicationListTransformer;
-import com.airfrance.squaleweb.transformer.ApplicationTransformer;
-import com.airfrance.squaleweb.transformer.FactorsResultListTransformer;
-import com.airfrance.welcom.struts.bean.WActionForm;
-import com.airfrance.welcom.struts.transformer.WTransformerException;
-import com.airfrance.welcom.struts.transformer.WTransformerFactory;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.daolayer.tag.TagDAOImpl;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
+import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationListForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.SplitAuditsListForm;
+import org.squale.squaleweb.transformer.ApplicationListTransformer;
+import org.squale.squaleweb.transformer.ApplicationTransformer;
+import org.squale.squaleweb.transformer.FactorsResultListTransformer;
+import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
+import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
  * Affichage de la liste des applications Cette action permet d'extraire la liste des applications disponibles pour

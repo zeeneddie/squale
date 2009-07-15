@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean;
+package org.squale.squaleweb.applicationlayer.formbean;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -56,7 +56,7 @@ public abstract class AbstractUploadForm
      * @exception FileNotFoundException if the uploaded file is not found.
      * @exception IOException if an error occurred while reading the file.
      * @return stream
-     * @see com.airfrance.squaleweb.applicationlayer.formbean.UploadFileForm#getInputStream()
+     * @see org.squale.squaleweb.applicationlayer.formbean.UploadFileForm#getInputStream()
      */
     public InputStream getInputStream()
         throws FileNotFoundException, IOException

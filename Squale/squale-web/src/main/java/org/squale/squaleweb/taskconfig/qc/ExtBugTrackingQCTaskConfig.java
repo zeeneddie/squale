@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.taskconfig.qc;
+package org.squale.squaleweb.taskconfig.qc;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.airfrance.squaleweb.taskconfig.AbstractConfigTask;
-import com.airfrance.squaleweb.taskconfig.FieldInfoConfig;
+import org.squale.squaleweb.taskconfig.AbstractConfigTask;
+import org.squale.squaleweb.taskconfig.FieldInfoConfig;
 
 /**
  * 

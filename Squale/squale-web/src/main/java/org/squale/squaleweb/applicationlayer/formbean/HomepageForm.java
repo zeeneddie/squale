@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.applicationlayer.formbean;
+package org.squale.squaleweb.applicationlayer.formbean;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.airfrance.squaleweb.applicationlayer.formbean.component.AuditForm;
-import com.airfrance.squaleweb.applicationlayer.formbean.results.ResultListForm;
-import com.airfrance.squaleweb.homepage.Stat;
-import com.airfrance.squaleweb.util.graph.GraphMaker;
+import org.squale.squaleweb.applicationlayer.formbean.component.AuditForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm;
+import org.squale.squaleweb.homepage.Stat;
+import org.squale.squaleweb.util.graph.GraphMaker;
 
 /**
  * Form for the homepage jsp

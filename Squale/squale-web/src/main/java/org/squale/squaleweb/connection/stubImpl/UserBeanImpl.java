@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squaleweb.connection.stubImpl;
+package org.squale.squaleweb.connection.stubImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.airfrance.squaleweb.connection.IUserBean;
+import org.squale.squaleweb.connection.IUserBean;
 
 /**
  * This class is a stub implementation of userBean.
