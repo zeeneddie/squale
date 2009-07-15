@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.config;
+package org.squale.squalecommon.enterpriselayer.businessobject.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -86,7 +86,7 @@ public abstract class AbstractTasksUserBO
      * @hibernate.list table="Analysis_Task" cascade="all" lazy="false"
      * @hibernate.key column="TasksUserId"
      * @hibernate.index column="AnalysisTaskIndex" type="int" length="10"
-     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO"
+     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.config.TaskRefBO"
      *                         column="TaskRefId" outer-join="auto"
      */
     public List getAnalysisTasks()
@@ -113,7 +113,7 @@ public abstract class AbstractTasksUserBO
      * @hibernate.list table="Termination_Task" cascade="all" lazy="false"
      * @hibernate.key column="TasksUserId"
      * @hibernate.index column="TerminationTaskIndex" type="int" length="10"
-     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO"
+     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.config.TaskRefBO"
      *                         column="TaskRefId" outer-join="auto"
      */
     public List getTerminationTasks()

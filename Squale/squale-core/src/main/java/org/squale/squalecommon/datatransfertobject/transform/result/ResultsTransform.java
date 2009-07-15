@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.result;
+package org.squale.squalecommon.datatransfertobject.transform.result;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,10 +30,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MarkBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MarkBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :

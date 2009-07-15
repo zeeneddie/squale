@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon;
+package org.squale.squalecommon;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -27,11 +27,11 @@ import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.operation.DatabaseOperation;
 
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.SessionImpl;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.util.initialisor.JRafConfigurator;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.util.initialisor.JRafConfigurator;
 
 /**
  * Test unitaire de squale Cette classe permet d'initialiser la couche JRAF pour la bonne exécution des tests unitaires

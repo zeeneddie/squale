@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
 
 /**
  * Test de conversion de formules

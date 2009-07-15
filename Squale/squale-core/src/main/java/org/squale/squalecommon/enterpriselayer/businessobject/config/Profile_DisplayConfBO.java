@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.config;
+package org.squale.squalecommon.enterpriselayer.businessobject.config;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
 
 /**
  * @hibernate.class table="Profile_DisplayConfBO" lazy="true"
@@ -37,7 +37,7 @@ public class Profile_DisplayConfBO
 
     /**
      * @return la configuration d'affichage
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO"
      *                        column="Profile_ConfId" not-null="false" cascade="none" outer-join="auto" update="true"
      *                        insert="true"
      */
@@ -58,7 +58,7 @@ public class Profile_DisplayConfBO
 
     /**
      * @return le profil
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
      *                        column="ProfileId" not-null="false" cascade="none" outer-join="auto" update="true"
      *                        insert="true"
      */

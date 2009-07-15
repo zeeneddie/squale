@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\applicationcomponent\\ComponentApplicationComponentAccess.java
+//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\applicationcomponent\\ComponentApplicationComponentAccess.java
 
-package com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display;
+package org.squale.squalecommon.enterpriselayer.applicationcomponent.display;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,19 +26,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.provider.accessdelegate.DefaultExecuteComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ProjectConfDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
-import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.AuditFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.ComponentFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.ProjectFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.MeasureFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.tag.TagFacade;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.component.ProjectConfDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.facade.component.AuditFacade;
+import org.squale.squalecommon.enterpriselayer.facade.component.ComponentFacade;
+import org.squale.squalecommon.enterpriselayer.facade.component.ProjectFacade;
+import org.squale.squalecommon.enterpriselayer.facade.quality.MeasureFacade;
+import org.squale.squalecommon.enterpriselayer.facade.tag.TagFacade;
 
 /**
  * @author m400841 (by Rose) Classe permettant de récupérer les composants (fils, parent) et les audits (dernier ou

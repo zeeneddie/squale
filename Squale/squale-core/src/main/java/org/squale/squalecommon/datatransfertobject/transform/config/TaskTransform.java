@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.config;
+package org.squale.squalecommon.datatransfertobject.transform.config;
 
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.datatransfertobject.config.TaskDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
+import org.squale.squalecommon.datatransfertobject.config.TaskDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
 
 /**
  * Transformation d'une tâche Squalix

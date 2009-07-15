@@ -16,20 +16,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration;
+package org.squale.squalecommon.enterpriselayer.applicationcomponent.administration;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.AccessDelegateHelper;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.accessdelegate.IApplicationComponent;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.datatransfertobject.component.ApplicationConfDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.datatransfertobject.component.ApplicationConfDTO;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :

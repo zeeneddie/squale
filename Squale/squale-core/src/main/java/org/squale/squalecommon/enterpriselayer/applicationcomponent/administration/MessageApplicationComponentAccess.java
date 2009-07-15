@@ -16,17 +16,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration;
+package org.squale.squalecommon.enterpriselayer.applicationcomponent.administration;
 
 import java.io.InputStream;
 import java.util.Collection;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.provider.accessdelegate.DefaultExecuteComponent;
-import com.airfrance.squalecommon.datatransfertobject.message.MessagesDTO;
-import com.airfrance.squalecommon.datatransfertobject.message.NewsDTO;
-import com.airfrance.squalecommon.datatransfertobject.message.NewsListDTO;
-import com.airfrance.squalecommon.enterpriselayer.facade.message.MessageFacade;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
+import org.squale.squalecommon.datatransfertobject.message.MessagesDTO;
+import org.squale.squalecommon.datatransfertobject.message.NewsDTO;
+import org.squale.squalecommon.datatransfertobject.message.NewsListDTO;
+import org.squale.squalecommon.enterpriselayer.facade.message.MessageFacade;
 
 /**
  * Manipulation des messages

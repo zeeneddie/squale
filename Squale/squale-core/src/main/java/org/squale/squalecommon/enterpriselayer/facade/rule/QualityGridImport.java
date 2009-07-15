@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -24,20 +24,20 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.ProjectProfileDAOImpl;
-import com.airfrance.squalecommon.daolayer.rule.QualityGridDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.rule.QualityGridTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.rule.xml.GridImport;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.config.ProjectProfileDAOImpl;
+import org.squale.squalecommon.daolayer.rule.QualityGridDAOImpl;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridDTO;
+import org.squale.squalecommon.datatransfertobject.transform.rule.QualityGridTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.enterpriselayer.facade.rule.xml.GridImport;
 
 /**
  * Quality grid import

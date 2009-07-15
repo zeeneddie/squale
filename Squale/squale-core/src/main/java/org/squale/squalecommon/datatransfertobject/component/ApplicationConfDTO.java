@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\datatransfertobject\\ApplicationConfDTO.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\datatransfertobject\\ApplicationConfDTO.java
 
-package com.airfrance.squalecommon.datatransfertobject.component;
+package org.squale.squalecommon.datatransfertobject.component;
 
-import com.airfrance.squalecommon.datatransfertobject.config.ServeurDTO;
+import org.squale.squalecommon.datatransfertobject.config.ServeurDTO;
 
 import java.io.Serializable;
 import java.util.Collection;

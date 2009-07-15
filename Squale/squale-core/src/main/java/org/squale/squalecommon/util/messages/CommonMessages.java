@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.util.messages;
+package org.squale.squalecommon.util.messages;
 
 import java.text.MessageFormat;
 import java.util.MissingResourceException;
@@ -40,7 +40,7 @@ public abstract class CommonMessages
     /**
      * Chemin du fichier de propriétés.
      */
-    private static final String BUNDLE_NAME = "com.airfrance.squalecommon.util.messages.common_messages";
+    private static final String BUNDLE_NAME = "org.squale.squalecommon.util.messages.common_messages";
 
     /**
      * Instance de ResourceBudle utilisée.

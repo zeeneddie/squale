@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.rule;
+package org.squale.squalecommon.datatransfertobject.rule;
 
 /**
  * Visiteur de formule Ce design pattern permet d'externaliser des traitements sur les formules

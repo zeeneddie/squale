@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.util.database;
+package org.squale.squalecommon.util.database;
 
 import org.hibernate.dialect.Dialect;
 import org.hibernate.impl.SessionFactoryImpl;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.PersistenceProviderImpl;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.PersistenceProviderImpl;
 
 /**
  * This class is the Factory of DatabaseType : According to the database use, the good DatabaseType is create.

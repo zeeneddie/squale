@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
 import java.io.InputStream;
 import java.util.Collection;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridDTO;
 
 /**
  * Test d'importation de grille qualité

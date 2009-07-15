@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.component;
+package org.squale.squalecommon.datatransfertobject.transform.component;
 
-import com.airfrance.squalecommon.datatransfertobject.component.AuditGridDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.rule.QualityGridTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditGridBO;
+import org.squale.squalecommon.datatransfertobject.component.AuditGridDTO;
+import org.squale.squalecommon.datatransfertobject.transform.rule.QualityGridTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditGridBO;
 
 /**
  * Conversion de BO en DTO

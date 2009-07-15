@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.rulechecking;
+package org.squale.squalecommon.datatransfertobject.transform.rulechecking;
 
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.RuleSetDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO;
+import org.squale.squalecommon.datatransfertobject.rulechecking.RuleSetDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO;
 
 /**
  * Transformation DTO-BO de RuleSet

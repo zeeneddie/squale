@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.rulechecking;
+package org.squale.squalecommon.datatransfertobject.transform.rulechecking;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.RuleCheckingItemDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.component.ComponentTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
+import org.squale.squalecommon.datatransfertobject.rulechecking.RuleCheckingItemDTO;
+import org.squale.squalecommon.datatransfertobject.transform.component.ComponentTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO;
 
 /**
  * Transforme un item de transgression en dto <-> bo.

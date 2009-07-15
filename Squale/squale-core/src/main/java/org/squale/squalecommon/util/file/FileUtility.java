@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.util.file;
+package org.squale.squalecommon.util.file;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;

@@ -22,16 +22,16 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.result;
+package org.squale.squalecommon.datatransfertobject.transform.result;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.airfrance.squalecommon.datatransfertobject.result.ErrorDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import org.squale.squalecommon.datatransfertobject.result.ErrorDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :

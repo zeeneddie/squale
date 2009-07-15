@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.component;
+package org.squale.squalecommon.enterpriselayer.businessobject.component;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
 
 /**
  * Grille utilisée dans un audit
@@ -70,7 +70,7 @@ public class AuditGridBO
 
     /**
      * @return grille
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
      *                        column="QualityGridId" not-null="false" cascade="none" outer-join="auto" update="true"
      *                        insert="true" 
      */
@@ -81,7 +81,7 @@ public class AuditGridBO
 
     /**
      * @return grille
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
      *                        column="ProjectId" not-null="false" cascade="none" outer-join="auto" update="true"
      *                        insert="true"
      */
@@ -109,7 +109,7 @@ public class AuditGridBO
     /**
      * @return grilles qualité de l'audit
      * @hibernate.many-to-one column="AuditId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO"
      *                        cascade="none" outer-join="auto" update="true" insert="true"
      */
     public AuditBO getAudit()

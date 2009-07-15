@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.util.mail;
+package org.squale.squalecommon.util.mail;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.util.SqualeCommonUtils;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.util.SqualeCommonUtils;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.util.mail.javamail;
+package org.squale.squalecommon.util.mail.javamail;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -33,14 +33,14 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.config.AdminParamsDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
-import com.airfrance.squalecommon.util.mail.IMailerProvider;
-import com.airfrance.squalecommon.util.mail.MailException;
-import com.airfrance.squalecommon.util.mail.MailMessages;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.config.AdminParamsDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
+import org.squale.squalecommon.util.mail.IMailerProvider;
+import org.squale.squalecommon.util.mail.MailException;
+import org.squale.squalecommon.util.mail.MailMessages;
 
 /**
  * Mail provider, implementation for javaMail

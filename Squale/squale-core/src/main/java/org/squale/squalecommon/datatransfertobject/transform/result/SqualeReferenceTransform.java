@@ -22,17 +22,17 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.result;
+package org.squale.squalecommon.datatransfertobject.transform.result;
 
 import java.io.Serializable;
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.datatransfertobject.result.ReferenceFactorDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.SqualeReferenceDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.rule.FactorRuleTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.rule.QualityGridTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.SqualeReferenceBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
+import org.squale.squalecommon.datatransfertobject.result.ReferenceFactorDTO;
+import org.squale.squalecommon.datatransfertobject.result.SqualeReferenceDTO;
+import org.squale.squalecommon.datatransfertobject.transform.rule.FactorRuleTransform;
+import org.squale.squalecommon.datatransfertobject.transform.rule.QualityGridTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.SqualeReferenceBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :

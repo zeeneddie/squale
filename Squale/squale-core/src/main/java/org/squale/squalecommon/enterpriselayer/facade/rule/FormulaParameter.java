@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
 /**
  * Paramètre d'une formule Une formule utilise des paramètres avec la syntaxe xxx.yyy où xxx représente un type de

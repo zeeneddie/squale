@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.rulechecking;
+package org.squale.squalecommon.datatransfertobject.transform.rulechecking;
 
 import java.io.IOException;
 
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.CheckstyleDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO;
+import org.squale.squalecommon.datatransfertobject.rulechecking.CheckstyleDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO;
 
 /**
  * @author S Porto Rico

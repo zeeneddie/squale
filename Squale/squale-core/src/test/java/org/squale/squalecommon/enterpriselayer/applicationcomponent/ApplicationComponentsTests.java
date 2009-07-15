@@ -16,18 +16,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.applicationcomponent;
+package org.squale.squalecommon.enterpriselayer.applicationcomponent;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.ApplicationAdminApplicationComponentAccessTest;
-import com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.LoginApplicationComponentAccessTest;
-import com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.PurgeApplicationComponentAccessTest;
-import com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration.ValidationApplicationComponentAccessTest;
-import com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display.ComponentApplicationComponentAccessTest;
-import com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display.ErrorApplicationComponentAccessTest;
-import com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display.ResultsApplicationComponentAccessTest;
+import org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.ApplicationAdminApplicationComponentAccessTest;
+import org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.LoginApplicationComponentAccessTest;
+import org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.PurgeApplicationComponentAccessTest;
+import org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.ValidationApplicationComponentAccessTest;
+import org.squale.squalecommon.enterpriselayer.applicationcomponent.display.ComponentApplicationComponentAccessTest;
+import org.squale.squalecommon.enterpriselayer.applicationcomponent.display.ErrorApplicationComponentAccessTest;
+import org.squale.squalecommon.enterpriselayer.applicationcomponent.display.ResultsApplicationComponentAccessTest;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :
@@ -43,7 +43,7 @@ public class ApplicationComponentsTests
      */
     public static Test suite()
     {
-        TestSuite suite = new TestSuite( "Test for com.airfrance.squalecommon.enterpriselayer.applicationcomponent" );
+        TestSuite suite = new TestSuite( "Test for org.squale.squalecommon.enterpriselayer.applicationcomponent" );
         // $JUnit-BEGIN$
         suite.addTest( new TestSuite( LoginApplicationComponentAccessTest.class ) );
         suite.addTest( new TestSuite( ApplicationAdminApplicationComponentAccessTest.class ) );

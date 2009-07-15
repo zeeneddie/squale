@@ -16,18 +16,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\applicationcomponent\\LoginApplicationComponentAccess.java
-package com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration;
+//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\applicationcomponent\\LoginApplicationComponentAccess.java
+package org.squale.squalecommon.enterpriselayer.applicationcomponent.administration;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.provider.accessdelegate.DefaultExecuteComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.UserFacade;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
+import org.squale.squalecommon.datatransfertobject.component.UserDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
+import org.squale.squalecommon.enterpriselayer.facade.component.UserFacade;
 
 /**
  * <p>

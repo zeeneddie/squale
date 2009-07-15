@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.config.web;
+package org.squale.squalecommon.datatransfertobject.config.web;
 
-import com.airfrance.jraf.spi.dto.IDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
+import org.squale.jraf.spi.dto.IDTO;
+import org.squale.squalecommon.datatransfertobject.component.UserDTO;
 
 /**
  *  DTO class for the HomepageComponent

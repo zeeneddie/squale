@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.stats;
+package org.squale.squalecommon.enterpriselayer.businessobject.stats;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -405,7 +405,7 @@ public class SiteStatsDICTBO
     }
 
     /**
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
      *                        column="Serveur" not-null="false" update="true" insert="true" cascade="none"
      *                        outer-join="auto"
      * @return le serveur

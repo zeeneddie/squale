@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\component\\AuditBO.java
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\component\\AuditBO.java
 
-package com.airfrance.squalecommon.enterpriselayer.businessobject.component;
+package org.squale.squalecommon.enterpriselayer.businessobject.component;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.airfrance.squalecommon.util.messages.CommonMessages;
+import org.squale.squalecommon.util.messages.CommonMessages;
 
 /**
  * Représente un audit exécuté ou à venir et ses paramètres
@@ -296,7 +296,7 @@ public class AuditBO
      * @return the current value of the mQualityResults property
      * @hibernate.bag lazy="true" cascade="none" inverse="true"
      * @hibernate.key column="AuditId" 
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
      * @roseuid 42BACEF503B0
      */
     public Collection getQualityResults()
@@ -431,7 +431,7 @@ public class AuditBO
      * @return la liste des composants
      * @hibernate.bag table="Components_Audits" lazy="true" cascade="none" inverse="true"
      * @hibernate.key column="AuditId"
-     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
      *                         column="ComponentId" outer-join="auto"
      */
     public Collection getComponents()
@@ -464,7 +464,7 @@ public class AuditBO
      * @return grilles qualité de l'audit
      * @hibernate.bag lazy="true" inverse="true" cascade="none"
      * @hibernate.key column="AuditId"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditGridBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditGridBO"
      */
     public Collection getAuditGrids()
     {
@@ -711,7 +711,7 @@ public class AuditBO
      * @return les configurations
      * @hibernate.bag lazy="true" inverse="true" cascade="none"
      * @hibernate.key column="AuditId"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO"
      */
     public Collection getAuditDisplayConfs()
     {

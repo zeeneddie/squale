@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.quality;
+package org.squale.squalecommon.enterpriselayer.facade.quality;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import junit.framework.TestCase;
 
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.squalecommon.util.initialisor.JRafConfigurator;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.squalecommon.util.initialisor.JRafConfigurator;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :

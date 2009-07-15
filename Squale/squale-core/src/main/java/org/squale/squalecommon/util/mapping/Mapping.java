@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.util.mapping;
+package org.squale.squalecommon.util.mapping;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -25,16 +25,16 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentType;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentType;
 
 /**
  * Mapping Cette classe permet de faire le lien entre des noms textuels de composant, métrique ou mesures et les classes
  * correspondantes Par exemple, le composant de type classe a le nom component.class et une classe
- * com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO La mesure ckjm sur les classes porte le
+ * org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO La mesure ckjm sur les classes porte le
  * nom ckjm.class et a pour classe
- * com.airfrance.squalecommon.enterpriselayer.businessobject.result.ckjm.CkjmClassMetricsBO La métrique McCabe
+ * org.squale.squalecommon.enterpriselayer.businessobject.result.ckjm.CkjmClassMetricsBO La métrique McCabe
  * profondeur d'héritage pour une classe porte le nom mccabe.class.dit et correspond à la classe
- * com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO
+ * org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO
  */
 public class Mapping
 {
@@ -48,25 +48,25 @@ public class Mapping
     static
     {
         component.put( ComponentType.CLASS,
-                       com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO.class );
+                       org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO.class );
         component.put( ComponentType.PACKAGE,
-                       com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO.class );
+                       org.squale.squalecommon.enterpriselayer.businessobject.component.PackageBO.class );
         component.put( ComponentType.METHOD,
-                       com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO.class );
+                       org.squale.squalecommon.enterpriselayer.businessobject.component.MethodBO.class );
         component.put( ComponentType.PROJECT,
-                       com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO.class );
+                       org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO.class );
         component.put( ComponentType.APPLICATION,
-                       com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO.class );
+                       org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO.class );
         component.put( ComponentType.UML_MODEL,
-                       com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlModelBO.class );
+                       org.squale.squalecommon.enterpriselayer.businessobject.component.UmlModelBO.class );
         component.put( ComponentType.UML_CLASS,
-                       com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlClassBO.class );
+                       org.squale.squalecommon.enterpriselayer.businessobject.component.UmlClassBO.class );
         component.put( ComponentType.UML_INTERFACE,
-                       com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO.class );
+                       org.squale.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO.class );
         component.put( ComponentType.UML_PACKAGE,
-                       com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO.class );
+                       org.squale.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO.class );
         component.put( ComponentType.JSP,
-                       com.airfrance.squalecommon.enterpriselayer.businessobject.component.JspBO.class );
+                       org.squale.squalecommon.enterpriselayer.businessobject.component.JspBO.class );
     }
 
     /** Ensemble des composants mappés avec hibernate */
@@ -94,113 +94,113 @@ public class Mapping
     {
         // Ckjm
         measures.put( "ckjm.class",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.ckjm.CkjmClassMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.ckjm.CkjmClassMetricsBO.class );
         // Jdepend
         measures.put(
                       "jdepend.package",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.jdepend.JDependPackageMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.jdepend.JDependPackageMetricsBO.class );
         // McCabe ################
         measures.put(
                       "mccabe.class",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO.class );
         measures.put(
                       "mccabe.method",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMethodMetricsBO.class );
         measures.put(
                       "mccabe.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAProjectMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAProjectMetricsBO.class );
         measures.put(
                       "mccabe.jsp",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAJspMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAJspMetricsBO.class );
         // RSM
         measures.put( "rsm.class",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMClassMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.rsm.RSMClassMetricsBO.class );
         measures.put( "rsm.method",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMMethodMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.rsm.RSMMethodMetricsBO.class );
         measures.put( "rsm.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm.RSMProjectMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.rsm.RSMProjectMetricsBO.class );
         // JSPVolumetry
         measures.put(
                       "jspvolumetry.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.jspvolumetry.JSPVolumetryProjectBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.jspvolumetry.JSPVolumetryProjectBO.class );
         // Checkstyle
         measures.put(
                       "checkstyle.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.CheckstyleTransgressionBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.CheckstyleTransgressionBO.class );
         // CppTest
         measures.put(
                       "cpptest.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.CppTestTransgressionBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.CppTestTransgressionBO.class );
         // Macker
         measures.put(
                       "macker.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.MackerTransgressionBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.MackerTransgressionBO.class );
         // UMLQuality
         measures.put(
                       "umlquality.umlclass",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityClassMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityClassMetricsBO.class );
         measures.put(
                       "umlquality.umlinterface",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityInterfaceMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityInterfaceMetricsBO.class );
         measures.put(
                       "umlquality.umlpackage",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityPackageMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityPackageMetricsBO.class );
         measures.put(
                       "umlquality.umlmodel",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityModelMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.umlquality.UMLQualityModelMetricsBO.class );
         // Cpd
         measures.put(
                       "copypaste.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.CpdTransgressionBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.CpdTransgressionBO.class );
         // Pmd pour Java
         measures.put(
                       "javapmd.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.JavaPmdTransgressionBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.JavaPmdTransgressionBO.class );
         // Pmd pour Jsp
         measures.put(
                       "jsppmd.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.JspPmdTransgressionBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.JspPmdTransgressionBO.class );
         // Roi
         measures.put( "roi.application",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.roi.RoiMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.roi.RoiMetricsBO.class );
         // PureComments (pour les projets audités avant le lot 3.0)
         measures.put( "purecomments.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.misc.CommentsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.misc.CommentsBO.class );
         // BugTracking QC
         measures.put(
                       "extbugtrackingqc.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.ExtBugTrackingMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.ExtBugTrackingMetricsBO.class );
         // Test manager QC
         measures.put(
                       "testmanagerqc.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.qc.ExtTestManagerQCMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.external.bugtracking.qc.ExtTestManagerQCMetricsBO.class );
         // Javancss
         measures.put(
                       "javancss.project",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssProjectMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssProjectMetricsBO.class );
         measures.put(
                       "javancss.package",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssPackageMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssPackageMetricsBO.class );
         measures.put(
                       "javancss.class",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssClassMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssClassMetricsBO.class );
         measures.put(
                       "javancss.method",
-                      com.airfrance.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssMethodMetricsBO.class );
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssMethodMetricsBO.class );
         
         // Cobertura Code Coverage
         measures.put(
                      "cobertura.project",
-                     com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaProjectMetricsBO.class );
+                     org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaProjectMetricsBO.class );
         measures.put(
                      "cobertura.package",
-                     com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaPackageMetricsBO.class );
+                     org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaPackageMetricsBO.class );
         measures.put(
                      "cobertura.class",
-                     com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaClassMetricsBO.class );
+                     org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaClassMetricsBO.class );
         measures.put(
                      "cobertura.method",
-                     com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaMethodMetricsBO.class );
+                     org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaMethodMetricsBO.class );
     }
 
     /**

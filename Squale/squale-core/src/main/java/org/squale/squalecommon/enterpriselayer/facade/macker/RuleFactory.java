@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.macker;
+package org.squale.squalecommon.enterpriselayer.facade.macker;
 
 import org.xml.sax.Attributes;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
-import com.airfrance.squalecommon.util.xml.FactoryAdapter;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
+import org.squale.squalecommon.util.xml.FactoryAdapter;
 
 /**
  * Factory pour les règles

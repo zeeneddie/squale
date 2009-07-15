@@ -16,17 +16,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.daolayer.profile;
+package org.squale.squalecommon.daolayer.profile;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 
 /**
  * Tests du DAO user

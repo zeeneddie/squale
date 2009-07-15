@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.quality;
+package org.squale.squalecommon.enterpriselayer.facade.quality;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.squalecommon.SqualeTestCase;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.squalecommon.SqualeTestCase;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :

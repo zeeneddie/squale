@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle;
+package org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO;
 
 /**
  * Jeu de règles Checkstyle
@@ -45,7 +45,7 @@ public class CheckstyleRuleSetBO
      * 
      * @return the current value of the FileName property
      * @hibernate.property name="Value" column="FileContent"
-     *                     type="com.airfrance.jraf.provider.persistence.hibernate.BinaryBlobType" not-null="false"
+     *                     type="org.squale.jraf.provider.persistence.hibernate.BinaryBlobType" not-null="false"
      *                     unique="false" update="true" insert="true"
      */
     public byte[] getValue()

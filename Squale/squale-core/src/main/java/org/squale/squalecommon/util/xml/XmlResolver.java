@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.util.xml;
+package org.squale.squalecommon.util.xml;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +25,7 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.airfrance.squalecommon.util.messages.CommonMessages;
+import org.squale.squalecommon.util.messages.CommonMessages;
 
 /**
  * Résolution des DTD Les DTD sont le plus souvent embarquées dans les jars, cette classe mémorise l'association entre

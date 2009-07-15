@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.result;
+package org.squale.squalecommon.datatransfertobject.result;
 
 import java.io.Serializable;
 
-import com.airfrance.squalecommon.datatransfertobject.rule.FactorRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.FactorRuleDTO;
 
 /**
  * Facteur d'une référence

@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\component\\AbstractComplexComponentBO.java
+//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\component\\AbstractComplexComponentBO.java
 
-package com.airfrance.squalecommon.enterpriselayer.businessobject.component;
+package org.squale.squalecommon.enterpriselayer.businessobject.component;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -75,7 +75,7 @@ public abstract class AbstractComplexComponentBO
      * @return les enfants
      * @hibernate.bag table="AbstractComplexComponent_children" lazy="true" cascade="none"
      * @hibernate.key column="Parent"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
      * @roseuid 42CB92FF008C
      */
     public Collection getChildren()

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.pmd;
+package org.squale.squalecommon.enterpriselayer.facade.pmd;
 
 import java.io.InputStream;
 
@@ -24,9 +24,9 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.pmd.PmdRuleSetBO;
-import com.airfrance.squalecommon.util.xml.XmlImport;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.pmd.PmdRuleSetBO;
+import org.squale.squalecommon.util.xml.XmlImport;
 
 /**
  * Parser de la configuration Pmd

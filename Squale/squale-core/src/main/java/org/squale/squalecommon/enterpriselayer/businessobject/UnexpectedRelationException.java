@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject;
+package org.squale.squalecommon.enterpriselayer.businessobject;
 
 /**
  * @author M400843

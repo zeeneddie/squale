@@ -16,25 +16,25 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\applicationcomponent\\ApplicationAdminApplicationComponentAccess.java
+//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\applicationcomponent\\ApplicationAdminApplicationComponentAccess.java
 
-package com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration;
+package org.squale.squalecommon.enterpriselayer.applicationcomponent.administration;
 
 import java.util.Collection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.accessdelegate.DefaultExecuteComponent;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.datatransfertobject.tag.TagCategoryDTO;
-import com.airfrance.squalecommon.datatransfertobject.tag.TagDTO;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.ProjectFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.tag.TagFacade;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.datatransfertobject.tag.TagCategoryDTO;
+import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
+import org.squale.squalecommon.enterpriselayer.facade.component.ProjectFacade;
+import org.squale.squalecommon.enterpriselayer.facade.tag.TagFacade;
 
 /**
  * <p>

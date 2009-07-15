@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters;
+package org.squale.squalecommon.enterpriselayer.businessobject.component.parameters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ public class ListParameterBO
      * @hibernate.list table="ProjectParameter" cascade="all" lazy="false"
      * @hibernate.key column="ListId"
      * @hibernate.index column="Rank" type="long" length="19"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO"
      * @return la liste de paramètres
      */
     public List getParameters()

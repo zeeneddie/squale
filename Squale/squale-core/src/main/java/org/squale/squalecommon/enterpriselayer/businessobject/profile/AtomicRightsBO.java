@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\profile\\AtomicRightsBO.java
+//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\profile\\AtomicRightsBO.java
 
-package com.airfrance.squalecommon.enterpriselayer.businessobject.profile;
+package org.squale.squalecommon.enterpriselayer.businessobject.profile;
 
 import java.io.Serializable;
 

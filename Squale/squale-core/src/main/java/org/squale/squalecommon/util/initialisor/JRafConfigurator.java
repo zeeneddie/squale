@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.util.initialisor;
+package org.squale.squalecommon.util.initialisor;
 
 import java.io.File;
 import java.util.HashMap;
 
-import com.airfrance.jraf.bootstrap.initializer.Initializer;
-import com.airfrance.jraf.bootstrap.locator.ProviderLocator;
-import com.airfrance.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.bootstrap.initializer.Initializer;
+import org.squale.jraf.bootstrap.locator.ProviderLocator;
+import org.squale.jraf.commons.exception.JrafDaoException;
 
 /**
  * @author M400843 Pour changer le modèle de ce commentaire de type généré, allez à :

@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\com\\airfrance\\squalecommon\\datatransfertobject\\AuditDTO.java
+//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\org\\squale\\squalecommon\\datatransfertobject\\AuditDTO.java
 
-package com.airfrance.squalecommon.datatransfertobject.component;
+package org.squale.squalecommon.datatransfertobject.component;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import com.airfrance.squalecommon.util.messages.CommonMessages;
+import org.squale.squalecommon.util.messages.CommonMessages;
 
 /**
  */

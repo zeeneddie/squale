@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.config.xml;
+package org.squale.squalecommon.enterpriselayer.facade.config.xml;
 
 import java.util.Hashtable;
 
 import org.xml.sax.Attributes;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
-import com.airfrance.squalecommon.util.xml.FactoryAdapter;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
+import org.squale.squalecommon.util.xml.FactoryAdapter;
 
 /**
  * Fabrique de référence de pratique

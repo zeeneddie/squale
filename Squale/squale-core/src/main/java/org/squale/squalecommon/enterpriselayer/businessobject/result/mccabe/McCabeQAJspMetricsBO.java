@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe;
+package org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
 
 /**
  * Métriques McCabe pour une JSP. On regroupe les métriques de niveau méthode avec celles de niveau classe car une jsp

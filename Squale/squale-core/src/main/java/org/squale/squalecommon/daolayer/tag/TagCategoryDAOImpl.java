@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.daolayer.tag;
+package org.squale.squalecommon.daolayer.tag;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,12 +31,12 @@ import java.util.Iterator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.DAOMessages;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagCategoryBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.DAOMessages;
+import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagCategoryBO;
 
 /**
  * @author M400843

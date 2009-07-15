@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.daolayer.config;
+package org.squale.squalecommon.daolayer.config;
 
 import java.util.Collection;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.daolayer.config.web.AbstractDisplayConfDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.BubbleConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.DisplayConfConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.daolayer.config.web.AbstractDisplayConfDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.BubbleConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.DisplayConfConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
 
 /**
  * Test du DAO des configurations d'affichage

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule.xml;
+package org.squale.squalecommon.enterpriselayer.facade.rule.xml;
 
 import java.io.InputStream;
 import java.util.Collection;
@@ -25,11 +25,11 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
-import com.airfrance.squalecommon.util.xml.XmlImport;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
+import org.squale.squalecommon.util.xml.XmlImport;
 
 /**
  * Importation de grille qualité à partir d'un fichier XML
@@ -44,7 +44,7 @@ public class GridImport
     static final String PUBLIC_DTD = "-//Squale//DTD Grid Configuration 1.2//EN";
 
     /** Localisation de la DTD */
-    static final String DTD_LOCATION = "/com/airfrance/squalecommon/dtd/grid-1.2.dtd";
+    static final String DTD_LOCATION = "/org/squale/squalecommon/dtd/grid-1.2.dtd";
 
     /**
      * Constructeur

@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.util.manualmark;
+package org.squale.squalecommon.util.manualmark;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import com.airfrance.squalecommon.util.TimeUtil;
+import org.squale.squalecommon.util.TimeUtil;
 
 /**
  * Utility class for the manual mark

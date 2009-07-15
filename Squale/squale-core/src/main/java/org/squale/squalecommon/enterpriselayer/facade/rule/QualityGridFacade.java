@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,32 +29,32 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.component.AuditGridDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.rule.QualityGridDAOImpl;
-import com.airfrance.squalecommon.daolayer.rule.QualityRuleDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.rule.CriteriumRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.FactorRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridConfDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.rule.GridMetricsTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.rule.QualityGridTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.rule.QualityRuleTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.rule.RuleMetricsTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.component.AuditGridDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.rule.QualityGridDAOImpl;
+import org.squale.squalecommon.daolayer.rule.QualityRuleDAOImpl;
+import org.squale.squalecommon.datatransfertobject.rule.CriteriumRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.FactorRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridConfDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityRuleDTO;
+import org.squale.squalecommon.datatransfertobject.transform.rule.GridMetricsTransform;
+import org.squale.squalecommon.datatransfertobject.transform.rule.QualityGridTransform;
+import org.squale.squalecommon.datatransfertobject.transform.rule.QualityRuleTransform;
+import org.squale.squalecommon.datatransfertobject.transform.rule.RuleMetricsTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO;
 
 /**
  * Facade pour la grille qualité

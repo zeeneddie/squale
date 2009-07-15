@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\applicationcomponent\\ErrorApplicationComponentAccess.java
+//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\applicationcomponent\\ErrorApplicationComponentAccess.java
 
-package com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display;
+package org.squale.squalecommon.enterpriselayer.applicationcomponent.display;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,16 +27,16 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.provider.accessdelegate.DefaultExecuteComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ErrorDTO;
-import com.airfrance.squalecommon.enterpriselayer.applicationcomponent.ACMessages;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.AuditFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.ErrorFacade;
-import com.airfrance.squalecommon.util.messages.CommonMessages;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.ErrorDTO;
+import org.squale.squalecommon.enterpriselayer.applicationcomponent.ACMessages;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.facade.component.AuditFacade;
+import org.squale.squalecommon.enterpriselayer.facade.quality.ErrorFacade;
+import org.squale.squalecommon.util.messages.CommonMessages;
 
 /**
  * <p>

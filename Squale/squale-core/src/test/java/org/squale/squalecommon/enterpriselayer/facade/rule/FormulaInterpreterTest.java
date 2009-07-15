@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
-import com.airfrance.squalecommon.util.initialisor.JRafConfigurator;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
+import org.squale.squalecommon.util.initialisor.JRafConfigurator;
 
 /**
  * Test de l'interpréteur de formule L'interpréteur de formule est testé pour la vérification de syntaxe ainsi que pour

@@ -16,20 +16,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.component;
+package org.squale.squalecommon.enterpriselayer.businessobject.component;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.UnexpectedRelationException;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.UnexpectedRelationException;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
 
 /**
- * Représente un projet intégré à une application Air France
+ * Représente un projet intégré à une application
  * 
  * @author m400842
  * @hibernate.subclass lazy="true" discriminator-value="Project"
@@ -141,7 +141,7 @@ public class ProjectBO
      * Access method for the mProfile property.
      * 
      * @return the current value of the mProfile property
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
      *                        column="ProfileBO" not-null="false" cascade="none" outer-join="auto" update="true"
      *                        insert="true"
      */
@@ -162,7 +162,7 @@ public class ProjectBO
     }
 
     /**
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO"
      *                        column="ParametersSet" not-null="false" cascade="none" outer-join="auto" update="true"
      *                        insert="true" 
      * @return la map de parametres
@@ -184,7 +184,7 @@ public class ProjectBO
      * Access method for the mQualityGrid property.
      * 
      * @return the current value of the mQualityRules property
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
      *                        column="QualityGrid" not-null="false" cascade="none" outer-join="auto" update="true"
      *                        insert="true"
      * @roseuid 42BACECC0238
@@ -211,7 +211,7 @@ public class ProjectBO
      * @return the current value of the mQualityResults property
      * @hibernate.bag lazy="true" cascade="none" inverse="true"
      * @hibernate.key column="ProjectId"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
      * @roseuid 42BACECC0248
      */
     public Collection getQualityResults()
@@ -232,7 +232,7 @@ public class ProjectBO
 
     /**
      * @return le nom du source manager
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO"
      *                        column="SourceManager" not-null="false" cascade="none" outer-join="auto" update="true"
      *                        insert="true"
      */
@@ -286,7 +286,7 @@ public class ProjectBO
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor,
      *      java.lang.Object)
      */
     public Object accept( ComponentVisitor pVisitor, Object pArgument )

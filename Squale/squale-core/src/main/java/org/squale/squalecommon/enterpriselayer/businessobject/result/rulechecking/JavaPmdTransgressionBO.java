@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking;
+package org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking;
 
 /**
  * Résultat de transgression de Pmd pour du code Java

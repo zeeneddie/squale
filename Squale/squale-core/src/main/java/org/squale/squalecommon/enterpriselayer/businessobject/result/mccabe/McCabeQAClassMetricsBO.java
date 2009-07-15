@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\result\\mccabe\\McCabeClassMetricsBO.java
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe;
+//Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\result\\mccabe\\McCabeClassMetricsBO.java
+package org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.BooleanMetricBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.BooleanMetricBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
 
 /**
  * @author m400842 (by rose)

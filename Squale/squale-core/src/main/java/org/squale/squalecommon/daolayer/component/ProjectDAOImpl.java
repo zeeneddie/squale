@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.daolayer.component;
+package org.squale.squalecommon.daolayer.component;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,15 +32,15 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.DAOMessages;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.DAOMessages;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
 
 /**
  * @author M400843
@@ -231,7 +231,7 @@ public class ProjectDAOImpl
     }
 
     /**
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#remove(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#remove(org.squale.jraf.spi.persistence.ISession,
      *      java.lang.Object)
      */
     public void remove( ISession pSession, Object pObj )
@@ -241,7 +241,7 @@ public class ProjectDAOImpl
     }
     
     /**
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#remove(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#remove(org.squale.jraf.spi.persistence.ISession,
      *      java.lang.Object)
      */
     public void setStatusDelete( ISession pSession, ProjectBO pProject)

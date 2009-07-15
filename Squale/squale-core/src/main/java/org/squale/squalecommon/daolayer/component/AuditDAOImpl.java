@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.daolayer.component;
+package org.squale.squalecommon.daolayer.component;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,15 +35,15 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
-import com.airfrance.jraf.provider.persistence.hibernate.SessionImpl;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.DAOMessages;
-import com.airfrance.squalecommon.daolayer.DAOUtils;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.util.database.DatabaseTypeFactory;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.DAOMessages;
+import org.squale.squalecommon.daolayer.DAOUtils;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.util.database.DatabaseTypeFactory;
 
 /**
  * Cette classe est responsable de toutes les manipulations d'audits présents (ou a insérer) en base

@@ -22,19 +22,19 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.daolayer.result;
+package org.squale.squalecommon.daolayer.result;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
 
 /**
  * @author M400843
@@ -188,7 +188,7 @@ public class ErrorDAOImpl
     /**
      * Crée l'erreur en vérifiant que son projet est bien relié à un Audit
      * 
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#create(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#create(org.squale.jraf.spi.persistence.ISession,
      *      java.lang.Object)
      */
     public void create( ISession pSession, ErrorBO pError )

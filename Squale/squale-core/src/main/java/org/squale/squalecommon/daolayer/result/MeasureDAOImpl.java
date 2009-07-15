@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.daolayer.result;
+package org.squale.squalecommon.daolayer.result;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,18 +31,18 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.type.Type;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
-import com.airfrance.jraf.provider.persistence.hibernate.SessionImpl;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.DAOMessages;
-import com.airfrance.squalecommon.daolayer.DAOUtils;
-import com.airfrance.squalecommon.daolayer.component.AbstractComponentDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
-import com.airfrance.squalecommon.util.mapping.Mapping;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.DAOMessages;
+import org.squale.squalecommon.daolayer.DAOUtils;
+import org.squale.squalecommon.daolayer.component.AbstractComponentDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
+import org.squale.squalecommon.util.mapping.Mapping;
 
 /**
  * @author M400843
@@ -437,7 +437,7 @@ public class MeasureDAOImpl
     }
 
     /**
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#create(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#create(org.squale.jraf.spi.persistence.ISession,
      *      java.lang.Object)
      * @deprecated utiliser create (cette methode ne fait aucun test d'intégrité)
      */
@@ -450,7 +450,7 @@ public class MeasureDAOImpl
     }
 
     /**
-     * @see com.airfrance.jraf.spi.persistence.IPersistenceDAO#save(com.airfrance.jraf.spi.persistence.ISession,
+     * @see org.squale.jraf.spi.persistence.IPersistenceDAO#save(org.squale.jraf.spi.persistence.ISession,
      *      java.lang.Object)
      * @deprecated utiliser saveAll (cette methode ne fait aucun test d'intégrité)
      */

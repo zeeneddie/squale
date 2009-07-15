@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
+package org.squale.squalecommon.enterpriselayer.businessobject.result;
 
 /**
  * @hibernate.subclass discriminator-value="Float"
@@ -43,7 +43,7 @@ public class FloatMetricBO
     }
 
     /**
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO#setValue(java.lang.Object)
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.result.MetricBO#setValue(java.lang.Object)
      */
     public void setValue( Object pValue )
     {
@@ -63,7 +63,7 @@ public class FloatMetricBO
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO#isPrintable()
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.result.MetricBO#isPrintable()
      */
     public boolean isPrintable()
     {

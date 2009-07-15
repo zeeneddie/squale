@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result.rsm;
+package org.squale.squalecommon.enterpriselayer.businessobject.result.rsm;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MetricBO;
 
 /**
  * @hibernate.subclass discriminator-value="RSMClassMetrics"

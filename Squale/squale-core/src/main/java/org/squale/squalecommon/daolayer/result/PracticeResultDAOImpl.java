@@ -20,7 +20,7 @@
  * Créé le 19 juil. 05
  *
  */
-package com.airfrance.squalecommon.daolayer.result;
+package org.squale.squalecommon.daolayer.result;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -31,15 +31,15 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.rule.PracticeRuleAPDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
-import com.airfrance.squalecommon.util.mapping.Mapping;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.rule.PracticeRuleAPDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
+import org.squale.squalecommon.util.mapping.Mapping;
 
 /**
  * @author M400843

@@ -22,12 +22,12 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.component;
+package org.squale.squalecommon.datatransfertobject.transform.component;
 
 import java.io.Serializable;
 
-import com.airfrance.squalecommon.datatransfertobject.component.UserDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
+import org.squale.squalecommon.datatransfertobject.component.UserDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.message;
+package org.squale.squalecommon.enterpriselayer.facade.message;
 
 import java.io.InputStream;
 import java.util.Collection;
@@ -26,8 +26,8 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.message.MessageBO;
-import com.airfrance.squalecommon.util.xml.XmlImport;
+import org.squale.squalecommon.enterpriselayer.businessobject.message.MessageBO;
+import org.squale.squalecommon.util.xml.XmlImport;
 
 /**
  * Importation des messages
@@ -42,7 +42,7 @@ public class MessageImport
     final static String PUBLIC_DTD = "-//Squale//DTD Message Configuration 1.0//EN";
 
     /** Localisation de la DTD */
-    final static String DTD_LOCATION = "/com/airfrance/squalecommon/dtd/message-1.0.dtd";
+    final static String DTD_LOCATION = "/org/squale/squalecommon/dtd/message-1.0.dtd";
 
     /**
      * Constructeur

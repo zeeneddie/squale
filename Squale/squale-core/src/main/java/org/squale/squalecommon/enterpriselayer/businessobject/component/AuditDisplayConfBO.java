@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.component;
+package org.squale.squalecommon.enterpriselayer.businessobject.component;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
 
 /**
  * Configurations d'affichage à prendre pour un audit donné
@@ -62,7 +62,7 @@ public class AuditDisplayConfBO
 
     /**
      * @return la configuration
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO"
      *                        column="ConfId" not-null="false" lazy="false" cascade="none" outer-join="auto"
      *                        update="true" insert="true" 
      */
@@ -73,7 +73,7 @@ public class AuditDisplayConfBO
 
     /**
      * @return le projet
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
      *                        column="ProjectId" not-null="false" cascade="none" outer-join="auto" update="true"
      *                        insert="true" 
      */
@@ -101,7 +101,7 @@ public class AuditDisplayConfBO
     /**
      * @return l'audit
      * @hibernate.many-to-one column="AuditId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO"
      *                        cascade="none" outer-join="auto" update="true" insert="true"
      */
     public AuditBO getAudit()

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.daolayer.config;
+package org.squale.squalecommon.daolayer.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,15 +24,15 @@ import java.util.Collection;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
-import com.airfrance.squalecommon.util.initialisor.JRafConfigurator;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
+import org.squale.squalecommon.util.initialisor.JRafConfigurator;
 
 import junit.framework.TestCase;
 

@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration;
+package org.squale.squalecommon.enterpriselayer.applicationcomponent.administration;
 
 import java.io.InputStream;
 import java.util.Collection;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.provider.accessdelegate.DefaultExecuteComponent;
-import com.airfrance.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
-import com.airfrance.squalecommon.enterpriselayer.facade.config.ConfigurationImport;
-import com.airfrance.squalecommon.enterpriselayer.facade.config.SqualixConfigFacade;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
+import org.squale.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
+import org.squale.squalecommon.enterpriselayer.facade.config.ConfigurationImport;
+import org.squale.squalecommon.enterpriselayer.facade.config.SqualixConfigFacade;
 
 /**
  * Manipulation de la configuration Squalix

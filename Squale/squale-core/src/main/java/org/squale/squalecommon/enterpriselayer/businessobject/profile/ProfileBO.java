@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\profile\\ProfileBO.java
+//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\profile\\ProfileBO.java
 
-package com.airfrance.squalecommon.enterpriselayer.businessobject.profile;
+package org.squale.squalecommon.enterpriselayer.businessobject.profile;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -107,7 +107,7 @@ public class ProfileBO
      * @return the current value of the mRights property
      * @hibernate.map table="Profile_Rights" lazy="true" cascade="none" sort="unsorted" //name="rights"
      * @hibernate.index-many-to-many column="AtomicRightsId"
-     *                               class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.AtomicRightsBO"
+     *                               class="org.squale.squalecommon.enterpriselayer.businessobject.profile.AtomicRightsBO"
      * @hibernate.key column="ProfileId"
      * @hibernate.element column="Rights_Value" type="string" not-null="false" unique="false"
      * @roseuid 42BACED70355

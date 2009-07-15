@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\result\\MarkBO.java
+//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\result\\MarkBO.java
 
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
+package org.squale.squalecommon.enterpriselayer.businessobject.result;
 
 import java.io.Serializable;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
 
 /**
  * Note du composant
@@ -85,7 +85,7 @@ public class MarkBO
      * 
      * @return the current value of the mComponent property
      * @hibernate.many-to-one column="ComponentId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
      *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE3015E
      */
@@ -110,7 +110,7 @@ public class MarkBO
      * 
      * @return the current value of the mPractice property
      * @hibernate.many-to-one column="PracticeResultId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO"
      *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE30161
      */

@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.export;
+package org.squale.squalecommon.datatransfertobject.export;
 
 import java.util.Collection;
 
-import com.airfrance.squalecommon.datatransfertobject.result.QualityResultDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
 
 /**
  * Représente une pratique à corriger pour le plan d'action

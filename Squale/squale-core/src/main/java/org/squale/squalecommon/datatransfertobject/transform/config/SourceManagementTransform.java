@@ -16,17 +16,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.config;
+package org.squale.squalecommon.datatransfertobject.transform.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import com.airfrance.squalecommon.datatransfertobject.config.SourceManagementDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.TaskDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
+import org.squale.squalecommon.datatransfertobject.config.SourceManagementDTO;
+import org.squale.squalecommon.datatransfertobject.config.TaskDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
 
 /**
  * Transforme un récupérateur de source

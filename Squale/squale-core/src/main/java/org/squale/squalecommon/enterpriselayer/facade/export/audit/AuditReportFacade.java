@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.export.audit;
+package org.squale.squalecommon.enterpriselayer.facade.export.audit;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,43 +25,43 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.component.AbstractComponentDAOImpl;
-import com.airfrance.squalecommon.daolayer.component.AuditDisplayConfDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.MarkDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.MetricDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.QualityResultDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.rulechecking.RuleCheckingTransgressionItemDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.export.audit.CriteriumReportDTO;
-import com.airfrance.squalecommon.datatransfertobject.export.audit.FactorReportDTO;
-import com.airfrance.squalecommon.datatransfertobject.export.audit.PracticeReportDTO;
-import com.airfrance.squalecommon.datatransfertobject.export.audit.PracticeReportDetailedDTO;
-import com.airfrance.squalecommon.datatransfertobject.export.audit.ProjectReportDTO;
-import com.airfrance.squalecommon.datatransfertobject.export.audit.QualityReportDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.QualityResultDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.AbstractFormulaDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.component.ComponentTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.result.MeasureTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.result.QualityResultTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.DisplayConfConstants;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MarkBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.ComponentFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.MeasureFacade;
-import com.airfrance.squalecommon.util.ConstantRulesChecking;
-import com.airfrance.squalecommon.util.mapping.Mapping;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.component.AbstractComponentDAOImpl;
+import org.squale.squalecommon.daolayer.component.AuditDisplayConfDAOImpl;
+import org.squale.squalecommon.daolayer.result.MarkDAOImpl;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.daolayer.result.MetricDAOImpl;
+import org.squale.squalecommon.daolayer.result.QualityResultDAOImpl;
+import org.squale.squalecommon.daolayer.result.rulechecking.RuleCheckingTransgressionItemDAOImpl;
+import org.squale.squalecommon.datatransfertobject.export.audit.CriteriumReportDTO;
+import org.squale.squalecommon.datatransfertobject.export.audit.FactorReportDTO;
+import org.squale.squalecommon.datatransfertobject.export.audit.PracticeReportDTO;
+import org.squale.squalecommon.datatransfertobject.export.audit.PracticeReportDetailedDTO;
+import org.squale.squalecommon.datatransfertobject.export.audit.ProjectReportDTO;
+import org.squale.squalecommon.datatransfertobject.export.audit.QualityReportDTO;
+import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
+import org.squale.squalecommon.datatransfertobject.rule.AbstractFormulaDTO;
+import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityRuleDTO;
+import org.squale.squalecommon.datatransfertobject.transform.component.ComponentTransform;
+import org.squale.squalecommon.datatransfertobject.transform.result.MeasureTransform;
+import org.squale.squalecommon.datatransfertobject.transform.result.QualityResultTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.DisplayConfConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MarkBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
+import org.squale.squalecommon.enterpriselayer.facade.component.ComponentFacade;
+import org.squale.squalecommon.enterpriselayer.facade.quality.MeasureFacade;
+import org.squale.squalecommon.util.ConstantRulesChecking;
+import org.squale.squalecommon.util.mapping.Mapping;
 
 /**
  * Results linked to generation of audit report

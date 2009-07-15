@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.pmd;
+package org.squale.squalecommon.enterpriselayer.facade.pmd;
 
 import java.io.InputStream;
 import java.util.Collection;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.daolayer.rulechecking.PmdRuleSetDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.PmdRuleSetDTO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.daolayer.rulechecking.PmdRuleSetDAOImpl;
+import org.squale.squalecommon.datatransfertobject.rulechecking.PmdRuleSetDTO;
 
 /**
  * Tests de la facade Pmd

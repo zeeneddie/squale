@@ -16,18 +16,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.rule;
+package org.squale.squalecommon.datatransfertobject.transform.rule;
 
 import java.util.List;
 
-import com.airfrance.squalecommon.datatransfertobject.rule.AbstractFormulaDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.ConditionFormulaDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.FormulaDTOVisitor;
-import com.airfrance.squalecommon.datatransfertobject.rule.SimpleFormulaDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FormulaVisitor;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
+import org.squale.squalecommon.datatransfertobject.rule.AbstractFormulaDTO;
+import org.squale.squalecommon.datatransfertobject.rule.ConditionFormulaDTO;
+import org.squale.squalecommon.datatransfertobject.rule.FormulaDTOVisitor;
+import org.squale.squalecommon.datatransfertobject.rule.SimpleFormulaDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.FormulaVisitor;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
 
 /**
  * Transformation d'une règle qualité
@@ -52,7 +52,7 @@ public class AbstractFormulaTransform
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FormulaVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.FormulaVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO,
      *      java.lang.Object)
      */
     public Object visit( ConditionFormulaBO pConditionFormula, Object pArgument )
@@ -66,7 +66,7 @@ public class AbstractFormulaTransform
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FormulaVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.FormulaVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO,
      *      java.lang.Object)
      */
     public Object visit( SimpleFormulaBO pSimpleFormula, Object pArgument )
@@ -100,7 +100,7 @@ public class AbstractFormulaTransform
     }
 
     /**
-     * @see com.airfrance.squalecommon.datatransfertobject.rule.FormulaDTOVisitor#visit(com.airfrance.squalecommon.datatransfertobject.rule.ConditionFormulaDTO)
+     * @see org.squale.squalecommon.datatransfertobject.rule.FormulaDTOVisitor#visit(org.squale.squalecommon.datatransfertobject.rule.ConditionFormulaDTO)
      */
     public Object visit( ConditionFormulaDTO pConditionFormula )
     {
@@ -111,7 +111,7 @@ public class AbstractFormulaTransform
     }
 
     /**
-     * @see com.airfrance.squalecommon.datatransfertobject.rule.FormulaDTOVisitor#visit(com.airfrance.squalecommon.datatransfertobject.rule.SimpleFormulaDTO)
+     * @see org.squale.squalecommon.datatransfertobject.rule.FormulaDTOVisitor#visit(org.squale.squalecommon.datatransfertobject.rule.SimpleFormulaDTO)
      */
     public Object visit( SimpleFormulaDTO pSimpleFormula )
     {

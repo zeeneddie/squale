@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.config.xml;
+package org.squale.squalecommon.enterpriselayer.facade.config.xml;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -24,16 +24,16 @@ import java.util.Set;
 
 import junit.framework.TestCase;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SqualixConfigurationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.StopTimeBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
-import com.airfrance.squalecommon.util.initialisor.JRafConfigurator;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.SqualixConfigurationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.StopTimeBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.util.initialisor.JRafConfigurator;
 
 /**
  * Test d'importation de la configuration de squalix
@@ -100,7 +100,7 @@ public class SqualixConfigurationImportTest
         assertEquals( 1, javaProfile.getAnalysisTasks().size() );
         TaskBO nonConfigurableTask = ( (TaskRefBO) javaProfile.getAnalysisTasks().get( 0 ) ).getTask();
         assertEquals( "JCompilingTask", nonConfigurableTask.getName() );
-        assertEquals( "com.airfrance.squalix.tools.compiling.java.JCompilingTask", nonConfigurableTask.getClassName() );
+        assertEquals( "org.squale.squalix.tools.compiling.java.JCompilingTask", nonConfigurableTask.getClassName() );
 
         // Pas d'erreur
         assertEquals( 0, errors.length() );

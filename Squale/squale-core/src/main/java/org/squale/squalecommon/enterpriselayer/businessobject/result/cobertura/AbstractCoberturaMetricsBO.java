@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result.cobertura;
+package org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.FloatMetricBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.FloatMetricBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
 
 /**
  * <p>

@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.daolayer.config;
+package org.squale.squalecommon.daolayer.config;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.Profile_DisplayConfBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.Profile_DisplayConfBO;
 
 /**
  * DAO pour le lien profil-configuration

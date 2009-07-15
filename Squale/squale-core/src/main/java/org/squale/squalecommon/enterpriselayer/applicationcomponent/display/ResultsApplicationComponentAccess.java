@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.applicationcomponent.display;
+package org.squale.squalecommon.enterpriselayer.applicationcomponent.display;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,26 +28,26 @@ import java.util.ListIterator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.provider.accessdelegate.DefaultExecuteComponent;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.AuditGridDTO;
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.MarkDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.QualityResultDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.ResultsDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
-import com.airfrance.squalecommon.enterpriselayer.applicationcomponent.ACMessages;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.AuditFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.ComponentFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.export.audit.AuditReportFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.ErrorFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.MeasureFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.QualityResultFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.SqualeReferenceFacade;
-import com.airfrance.squalecommon.enterpriselayer.facade.rule.QualityGridFacade;
-import com.airfrance.squalecommon.util.messages.CommonMessages;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
+import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.AuditGridDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.MarkDTO;
+import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
+import org.squale.squalecommon.enterpriselayer.applicationcomponent.ACMessages;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.facade.component.AuditFacade;
+import org.squale.squalecommon.enterpriselayer.facade.component.ComponentFacade;
+import org.squale.squalecommon.enterpriselayer.facade.export.audit.AuditReportFacade;
+import org.squale.squalecommon.enterpriselayer.facade.quality.ErrorFacade;
+import org.squale.squalecommon.enterpriselayer.facade.quality.MeasureFacade;
+import org.squale.squalecommon.enterpriselayer.facade.quality.QualityResultFacade;
+import org.squale.squalecommon.enterpriselayer.facade.quality.SqualeReferenceFacade;
+import org.squale.squalecommon.enterpriselayer.facade.rule.QualityGridFacade;
+import org.squale.squalecommon.util.messages.CommonMessages;
 
 /**
  * Classe permetant d'effectuer la récupération des résultats

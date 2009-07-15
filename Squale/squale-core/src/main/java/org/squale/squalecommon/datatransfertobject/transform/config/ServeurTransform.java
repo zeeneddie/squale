@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.config;
+package org.squale.squalecommon.datatransfertobject.transform.config;
 
-import com.airfrance.squalecommon.datatransfertobject.config.ServeurDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
+import org.squale.squalecommon.datatransfertobject.config.ServeurDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
 
 /**
  * Transform d'un Serveur d'exécution Squalix

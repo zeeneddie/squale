@@ -16,21 +16,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.stats;
+package org.squale.squalecommon.datatransfertobject.transform.stats;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import com.airfrance.squalecommon.datatransfertobject.stats.AuditsStatsDTO;
-import com.airfrance.squalecommon.datatransfertobject.stats.FactorsStatsDTO;
-import com.airfrance.squalecommon.datatransfertobject.stats.ProfilStatsDTO;
-import com.airfrance.squalecommon.datatransfertobject.stats.SetOfStatsDTO;
-import com.airfrance.squalecommon.datatransfertobject.stats.SiteStatsDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.ServeurTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.stats.SiteAndProfilStatsDICTBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.stats.SiteStatsDICTBO;
+import org.squale.squalecommon.datatransfertobject.stats.AuditsStatsDTO;
+import org.squale.squalecommon.datatransfertobject.stats.FactorsStatsDTO;
+import org.squale.squalecommon.datatransfertobject.stats.ProfilStatsDTO;
+import org.squale.squalecommon.datatransfertobject.stats.SetOfStatsDTO;
+import org.squale.squalecommon.datatransfertobject.stats.SiteStatsDTO;
+import org.squale.squalecommon.datatransfertobject.transform.config.ServeurTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.stats.SiteAndProfilStatsDICTBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.stats.SiteStatsDICTBO;
 
 /**
  */

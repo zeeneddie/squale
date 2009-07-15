@@ -16,19 +16,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.config.adminParams;
+package org.squale.squalecommon.enterpriselayer.facade.config.adminParams;
 
 import java.util.List;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.spi.enterpriselayer.IFacade;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.config.AdminParamsDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.FacadeMessages;
-import com.airfrance.squalecommon.util.mail.MailException;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.spi.enterpriselayer.IFacade;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.config.AdminParamsDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
+import org.squale.squalecommon.enterpriselayer.facade.FacadeMessages;
+import org.squale.squalecommon.util.mail.MailException;
 
 /**
  * Facade for the mail configuration

@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * Messages pour les règles qualité
@@ -34,7 +34,7 @@ public class RuleMessages
      */
     private RuleMessages()
     {
-        super( "com.airfrance.squalecommon.enterpriselayer.facade.rule.rule_messages" );
+        super( "org.squale.squalecommon.enterpriselayer.facade.rule.rule_messages" );
     }
 
     /**

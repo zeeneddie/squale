@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.result;
+package org.squale.squalecommon.datatransfertobject.result;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridDTO;
 
 /**
  * @author m400841 (by Rose)

@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.result;
+package org.squale.squalecommon.datatransfertobject.transform.result;
 
-import com.airfrance.squalecommon.datatransfertobject.result.QualityResultDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.component.AuditTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.component.ComponentTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.rule.QualityRuleTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
+import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
+import org.squale.squalecommon.datatransfertobject.transform.component.AuditTransform;
+import org.squale.squalecommon.datatransfertobject.transform.component.ComponentTransform;
+import org.squale.squalecommon.datatransfertobject.transform.rule.QualityRuleTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
 
 /**
  * Transformer QualityresultBO <--> QualityresultDTO

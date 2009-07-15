@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FormulaVisitor;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.FormulaVisitor;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
 
 /**
  * Conversion de formule Une formule qui est composée de paramètres doit être convertie avant de pouvoir être évaluée.
@@ -91,7 +91,7 @@ public class FormulaConverter
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.ConditionFormulaBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.rule.practice.ConditionFormulaBO,
      *      java.lang.Object)
      */
     public Object visit( ConditionFormulaBO pConditionFormula, Object pArgument )
@@ -134,7 +134,7 @@ public class FormulaConverter
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.SimpleFormulaBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.rule.practice.SimpleFormulaBO,
      *      java.lang.Object)
      */
     public Object visit( SimpleFormulaBO pSimpleFormula, Object pArgument )

@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.config.web;
+package org.squale.squalecommon.datatransfertobject.transform.config.web;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.airfrance.squalecommon.datatransfertobject.config.web.HomepageComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.component.UserTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.HomepageComponentBO;
+import org.squale.squalecommon.datatransfertobject.config.web.HomepageComponentDTO;
+import org.squale.squalecommon.datatransfertobject.transform.component.UserTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.HomepageComponentBO;
 
 /**
  * In this class you will found method for transform an HomepageComponent from BO to DTO and vice versa

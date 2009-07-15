@@ -16,18 +16,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.config;
+package org.squale.squalecommon.enterpriselayer.facade.config;
 
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.spi.enterpriselayer.IFacade;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.config.ServeurDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.config.ServeurDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.ServeurTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.spi.enterpriselayer.IFacade;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.config.ServeurDAOImpl;
+import org.squale.squalecommon.datatransfertobject.config.ServeurDTO;
+import org.squale.squalecommon.datatransfertobject.transform.config.ServeurTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
 
 /**
  * Facade pour un serveur Squalix

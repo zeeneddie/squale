@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\component\\ApplicationBO.java
+//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\component\\ApplicationBO.java
 
-package com.airfrance.squalecommon.enterpriselayer.businessobject.component;
+package org.squale.squalecommon.enterpriselayer.businessobject.component;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,13 +31,13 @@ import java.util.List;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.UnexpectedRelationException;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.UnexpectedRelationException;
+import org.squale.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
 
 /**
- * Représente une application Air France
+ * Représente une application
  * 
  * @author m400842
  * @hibernate.subclass lazy="true" discriminator-value="Application"
@@ -388,7 +388,7 @@ public class ApplicationBO
      * 
      * @return le serveur de l'application
      * @hibernate.many-to-one column="Serveur"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.config.ServeurBO"
      *                        not-null="false" insert="true" update="true" cascade="none" outer-join="auto"
      */
     // name="serveurBO"
@@ -412,7 +412,7 @@ public class ApplicationBO
      * @hibernate.list table="UserAccess" cascade="all" lazy="false"
      * @hibernate.key column="ApplicationId"
      * @hibernate.index column="AccessIndex" type="long" length="19"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.access.UserAccessBO"
      */
     public List getUserAccesses()
     {
@@ -529,7 +529,7 @@ public class ApplicationBO
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor,
      *      java.lang.Object)
      */
     public Object accept( ComponentVisitor pVisitor, Object pArgument )

@@ -22,12 +22,12 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.daolayer;
+package org.squale.squalecommon.daolayer;
 
 import java.util.Date;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.squalecommon.util.database.DatabaseTypeFactory;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.squalecommon.util.database.DatabaseTypeFactory;
 
 /**
  * Utility class for the sql request

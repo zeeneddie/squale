@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.util.messages;
+package org.squale.squalecommon.util.messages;
 
 import java.util.MissingResourceException;
 
-import com.airfrance.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.SqualeTestCase;
 
 /**
  * @author M400841 Cette classe test ne permet pas de tester dans de mauvaises conditions les methodes ! ! ! ! ! ! ! ! ! !

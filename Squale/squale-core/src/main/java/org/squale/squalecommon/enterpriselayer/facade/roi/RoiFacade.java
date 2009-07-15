@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.roi;
+package org.squale.squalecommon.enterpriselayer.facade.roi;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,22 +27,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.result.MeasureDAOImpl;
-import com.airfrance.squalecommon.daolayer.result.SimpleFormulaDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.result.RoiDTO;
-import com.airfrance.squalecommon.datatransfertobject.result.RoiMeasureDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.roi.RoiMetricsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.rule.FormulaException;
-import com.airfrance.squalecommon.enterpriselayer.facade.rule.FormulaInterpreter;
-import com.airfrance.squalecommon.enterpriselayer.facade.rule.RuleMessages;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.daolayer.result.SimpleFormulaDAOImpl;
+import org.squale.squalecommon.datatransfertobject.result.RoiDTO;
+import org.squale.squalecommon.datatransfertobject.result.RoiMeasureDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.roi.RoiMetricsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
+import org.squale.squalecommon.enterpriselayer.facade.rule.FormulaException;
+import org.squale.squalecommon.enterpriselayer.facade.rule.FormulaInterpreter;
+import org.squale.squalecommon.enterpriselayer.facade.rule.RuleMessages;
 
 /**
  * Façade responsable de la gestion du ROI

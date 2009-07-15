@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.config;
+package org.squale.squalecommon.datatransfertobject.transform.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.datatransfertobject.config.AuditFrequencyDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
+import org.squale.squalecommon.datatransfertobject.config.AuditFrequencyDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
 
 /**
  * Transforme les fréquences d'audit bo <-> dto

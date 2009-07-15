@@ -16,18 +16,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.component;
+package org.squale.squalecommon.enterpriselayer.facade.component;
 
-import com.airfrance.squalecommon.daolayer.config.ServeurDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.ServeurTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
+import org.squale.squalecommon.daolayer.config.ServeurDAOImpl;
+import org.squale.squalecommon.datatransfertobject.transform.config.ServeurTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
 
 import java.util.Collection;
 import java.util.ArrayList;

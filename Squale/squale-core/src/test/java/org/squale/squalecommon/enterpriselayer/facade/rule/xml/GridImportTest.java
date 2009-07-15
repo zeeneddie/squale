@@ -16,19 +16,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule.xml;
+package org.squale.squalecommon.enterpriselayer.facade.rule.xml;
 
 import java.io.InputStream;
 import java.util.Collection;
 
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.rule.FormulaMeasureExtractor;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
+import org.squale.squalecommon.enterpriselayer.facade.rule.FormulaMeasureExtractor;
 
 /**
  * Test d'importation au format XML de la grille Le test vérifie essentiellement que la mapping est correct au niveau du

@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.rule;
+package org.squale.squalecommon.datatransfertobject.transform.rule;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.SortedSet;
 
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridConfDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridConfDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
 
 /**
  * Transformation d'une grille qualité

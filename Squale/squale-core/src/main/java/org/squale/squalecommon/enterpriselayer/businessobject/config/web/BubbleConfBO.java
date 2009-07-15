@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.config.web;
+package org.squale.squalecommon.enterpriselayer.businessobject.config.web;
 
 /**
  * La configuration pour la création du scatterplot
@@ -145,7 +145,7 @@ public class BubbleConfBO
      * @param pVisitor {@inheritDoc}
      * @param pArgument {@inheritDoc}
      * @return {@inheritDoc}
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.DisplayConfVisitor,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO#accept(org.squale.squalecommon.enterpriselayer.businessobject.config.web.DisplayConfVisitor,
      *      java.lang.Object)
      */
     public Object accept( DisplayConfVisitor pVisitor, Object pArgument )

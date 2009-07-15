@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.access;
+package org.squale.squalecommon.datatransfertobject.transform.access;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.airfrance.squalecommon.datatransfertobject.access.UserAccessDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
+import org.squale.squalecommon.datatransfertobject.access.UserAccessDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
 
 /**
  * Transformeur pour les accès utilisateur

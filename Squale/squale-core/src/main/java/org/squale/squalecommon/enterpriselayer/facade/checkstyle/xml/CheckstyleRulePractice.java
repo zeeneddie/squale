@@ -22,11 +22,11 @@
  * Lors du parcours du fichier de configuration Checkstyle via le Digester,
  * mémorisation sur la balise "metadata" de la pratique associée à la règle
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.checkstyle.xml;
+package org.squale.squalecommon.enterpriselayer.facade.checkstyle.xml;
 
 import org.xml.sax.Attributes;
 
-import com.airfrance.squalecommon.util.xml.FactoryAdapter;
+import org.squale.squalecommon.util.xml.FactoryAdapter;
 
 /**
  * Mémorisation de la catégorie lors de l'instanciation

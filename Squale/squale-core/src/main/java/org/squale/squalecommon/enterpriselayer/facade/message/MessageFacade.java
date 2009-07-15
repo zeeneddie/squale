@@ -16,30 +16,30 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.message;
+package org.squale.squalecommon.enterpriselayer.facade.message;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.message.MessageDAOImpl;
-import com.airfrance.squalecommon.daolayer.message.NewsDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.message.MessageDTO;
-import com.airfrance.squalecommon.datatransfertobject.message.MessagesDTO;
-import com.airfrance.squalecommon.datatransfertobject.message.NewsDTO;
-import com.airfrance.squalecommon.datatransfertobject.message.NewsListDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.messages.MessageTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.messages.NewsTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.message.MessageBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.message.NewsBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.rule.QualityGridFacade;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.message.MessageDAOImpl;
+import org.squale.squalecommon.daolayer.message.NewsDAOImpl;
+import org.squale.squalecommon.datatransfertobject.message.MessageDTO;
+import org.squale.squalecommon.datatransfertobject.message.MessagesDTO;
+import org.squale.squalecommon.datatransfertobject.message.NewsDTO;
+import org.squale.squalecommon.datatransfertobject.message.NewsListDTO;
+import org.squale.squalecommon.datatransfertobject.transform.messages.MessageTransform;
+import org.squale.squalecommon.datatransfertobject.transform.messages.NewsTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.message.MessageBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.message.NewsBO;
+import org.squale.squalecommon.enterpriselayer.facade.rule.QualityGridFacade;
 
 /**
  * Facade pour les messages

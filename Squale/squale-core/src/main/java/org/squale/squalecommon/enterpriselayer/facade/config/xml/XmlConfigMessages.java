@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.config.xml;
+package org.squale.squalecommon.enterpriselayer.facade.config.xml;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * Messages pour la configuration du portail.
@@ -34,7 +34,7 @@ public class XmlConfigMessages
      */
     private XmlConfigMessages()
     {
-        super( "com.airfrance.squalecommon.enterpriselayer.facade.config.xml.xml_config_messages" );
+        super( "org.squale.squalecommon.enterpriselayer.facade.config.xml.xml_config_messages" );
     }
 
     /**

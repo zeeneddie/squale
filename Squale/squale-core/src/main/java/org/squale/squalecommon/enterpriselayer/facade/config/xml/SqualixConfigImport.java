@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.config.xml;
+package org.squale.squalecommon.enterpriselayer.facade.config.xml;
 
 import java.io.InputStream;
 
@@ -24,14 +24,14 @@ import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.BubbleConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SqualixConfigurationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.StopTimeBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
-import com.airfrance.squalecommon.util.xml.XmlImport;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.BubbleConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.SqualixConfigurationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.StopTimeBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.util.xml.XmlImport;
 
 /**
  * Importation de la configuration Squalix à partir de son fichier de configuration
@@ -47,11 +47,11 @@ public class SqualixConfigImport
     final static String PUBLIC_DTD = "-//Squale//DTD Squalix Configuration 1.1//EN";
 
     /** Localisation de la DTD */
-    final static String DTD_LOCATION = "/com/airfrance/squalecommon/dtd/squalix-config-1.1.dtd";
+    final static String DTD_LOCATION = "/org/squale/squalecommon/dtd/squalix-config-1.1.dtd";
 
     /** Nom du fichier xml contenant les règles */
     final static String RULES_FILE_NAME =
-        "/com/airfrance/squalecommon/enterpriselayer/facade/config/xml/configRules.xml";
+        "/org/squale/squalecommon/enterpriselayer/facade/config/xml/configRules.xml";
 
     /**
      * Constructeur

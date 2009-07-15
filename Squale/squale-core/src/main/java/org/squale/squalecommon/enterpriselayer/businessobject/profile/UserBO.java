@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\profile\\UserBO.java
-package com.airfrance.squalecommon.enterpriselayer.businessobject.profile;
+//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\profile\\UserBO.java
+package org.squale.squalecommon.enterpriselayer.businessobject.profile;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -175,9 +175,9 @@ public class UserBO
      * @return the current value of the mRights property
      * @hibernate.map table="User_Rights" lazy="true" cascade="none" sort="unsorted" //name="rights"
      * @hibernate.index-many-to-many column="ApplicationId"
-     *                               class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO"
+     *                               class="org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO"
      * @hibernate.key column="UserId"
-     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"
+     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"
      *                         column="ProfileId" outer-join="auto"
      * @roseuid 42BACED8025A
      */
@@ -260,7 +260,7 @@ public class UserBO
      * 
      * @return le profil par défaut
      * @hibernate.many-to-one column="ProfileId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"
      *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42D268A801AC
      */

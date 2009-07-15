@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.rule;
+package org.squale.squalecommon.enterpriselayer.businessobject.rule;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -44,7 +44,7 @@ public class FactorRuleBO
      * @return the current value of the mCriteria property
      * @hibernate.map table="FactorCriterium_Rule" lazy="true" cascade="all" sort="natural"
      * @hibernate.index-many-to-many column="CriteriumRuleId"
-     *                               class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO"
+     *                               class="org.squale.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO"
      * @hibernate.key column="FactorRuleId"
      * @hibernate.element column="Weight" type="float" not-null="true" unique="false"
      */
@@ -102,7 +102,7 @@ public class FactorRuleBO
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO#accept(org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor,
      *      java.lang.Object)
      */
     public Object accept( QualityRuleBOVisitor pVisitor, Object pArgument )

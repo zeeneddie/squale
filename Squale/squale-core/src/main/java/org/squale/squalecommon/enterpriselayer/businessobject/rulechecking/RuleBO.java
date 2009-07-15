@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking;
+package org.squale.squalecommon.enterpriselayer.businessobject.rulechecking;
 
 import java.io.Serializable;
 
@@ -130,7 +130,7 @@ public class RuleBO
      * Access method for the mVersion property.
      * 
      * @return the current Version
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO"
      *                        column="RuleSetId" cascade="save-update" not-null="true" outer-join="auto" update="true"
      *                        insert="true"
      */

@@ -16,19 +16,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.rule;
+package org.squale.squalecommon.datatransfertobject.transform.rule;
 
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.datatransfertobject.rule.CriteriumRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.FactorRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityRuleDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor;
+import org.squale.squalecommon.datatransfertobject.rule.CriteriumRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.FactorRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityRuleDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor;
 
 /**
  * Transformation d'une règle qualité
@@ -71,7 +71,7 @@ public class QualityRuleTransform
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO,
      *      java.lang.Object)
      */
     public Object visit( FactorRuleBO pFactorRule, Object pArgument )
@@ -94,7 +94,7 @@ public class QualityRuleTransform
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO,
      *      java.lang.Object)
      */
     public Object visit( CriteriumRuleBO pCriteriumRule, Object pArgument )
@@ -117,7 +117,7 @@ public class QualityRuleTransform
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO,
      *      java.lang.Object)
      */
     public Object visit( PracticeRuleBO pPracticeRule, Object pArgument )

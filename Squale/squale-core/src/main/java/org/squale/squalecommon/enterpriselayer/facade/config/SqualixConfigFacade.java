@@ -16,36 +16,36 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.config;
+package org.squale.squalecommon.enterpriselayer.facade.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.enterpriselayer.IFacade;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.config.AdminParamsDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.AuditFrequencyDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.ProjectProfileDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.SourceManagementDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.StopTimeDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.config.AdminParamsDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.AdminParamsTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.AuditFrequencyTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.ProjectProfileTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.SourceManagementTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.StopTimeTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.TaskTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.enterpriselayer.IFacade;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.config.AdminParamsDAOImpl;
+import org.squale.squalecommon.daolayer.config.AuditFrequencyDAOImpl;
+import org.squale.squalecommon.daolayer.config.ProjectProfileDAOImpl;
+import org.squale.squalecommon.daolayer.config.SourceManagementDAOImpl;
+import org.squale.squalecommon.daolayer.config.StopTimeDAOImpl;
+import org.squale.squalecommon.datatransfertobject.config.AdminParamsDTO;
+import org.squale.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
+import org.squale.squalecommon.datatransfertobject.transform.config.AdminParamsTransform;
+import org.squale.squalecommon.datatransfertobject.transform.config.AuditFrequencyTransform;
+import org.squale.squalecommon.datatransfertobject.transform.config.ProjectProfileTransform;
+import org.squale.squalecommon.datatransfertobject.transform.config.SourceManagementTransform;
+import org.squale.squalecommon.datatransfertobject.transform.config.StopTimeTransform;
+import org.squale.squalecommon.datatransfertobject.transform.config.TaskTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.TaskRefBO;
 
 /**
  * Facade pour la configuration Squalix

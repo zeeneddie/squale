@@ -16,18 +16,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking;
+package org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO;
-import com.airfrance.squalecommon.util.ConstantRulesChecking;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MetricBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO;
+import org.squale.squalecommon.util.ConstantRulesChecking;
 
 /**
  * Résultat de transgression de règle
@@ -239,7 +239,7 @@ public class RuleCheckingTransgressionBO
      * Access method for the mVersion property.
      * 
      * @return the current Version
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO"
      *                        column="RuleSetId" cascade="save-update" not-null="false" outer-join="auto" update="true"
      *                        insert="true" 
      */
@@ -262,7 +262,7 @@ public class RuleCheckingTransgressionBO
      * @return les détails des transgressions
      * @hibernate.bag table="RuleCheckingTransgressionItem" lazy="true" cascade="all"
      * @hibernate.key column="MeasureId"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking.RuleCheckingTransgressionItemBO"
      */
     public Collection getDetails()
     {

@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.checkstyle;
+package org.squale.squalecommon.enterpriselayer.facade.checkstyle;
 
-import com.airfrance.squalecommon.util.messages.BaseMessages;
+import org.squale.squalecommon.util.messages.BaseMessages;
 
 /**
  * @author sportorico
@@ -34,7 +34,7 @@ public class CheckstyleParsingMessages
      */
     private CheckstyleParsingMessages()
     {
-        super( "com.airfrance.squalecommon.enterpriselayer.facade.checkstyle.checkstyle_messages" );
+        super( "org.squale.squalecommon.enterpriselayer.facade.checkstyle.checkstyle_messages" );
     }
 
     /**

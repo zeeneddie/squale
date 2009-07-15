@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.config;
+package org.squale.squalecommon.enterpriselayer.businessobject.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -71,7 +71,7 @@ public class TaskRefBO
      * @return les paramètres
      * @hibernate.bag table="TaskParameter" lazy="true" cascade="all"
      * @hibernate.key column="TaskRefId"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskParameterBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.config.TaskParameterBO"
      */
     public Collection getParameters()
     {
@@ -103,7 +103,7 @@ public class TaskRefBO
     /**
      * @return tâche
      * @hibernate.many-to-one column="TaskId" cascade="all"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.TaskBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.config.TaskBO"
      *                        outer-join="auto" update="true" insert="true"
      */
     public TaskBO getTask()

@@ -22,11 +22,11 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.daolayer.profile;
+package org.squale.squalecommon.daolayer.profile;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.AtomicRightsBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.AtomicRightsBO;
 
 /**
  * @author M400843

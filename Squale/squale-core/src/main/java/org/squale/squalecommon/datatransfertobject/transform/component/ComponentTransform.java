@@ -16,27 +16,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.component;
+package org.squale.squalecommon.datatransfertobject.transform.component;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.tag.TagTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.JspBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlClassBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlModelBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.transform.tag.TagTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.JspBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.MethodBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.PackageBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.UmlClassBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.UmlModelBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 
 /**
  * Transforme les composants en bo<->ComponentDTO
@@ -92,7 +92,7 @@ public class ComponentTransform
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO,
      *      java.lang.Object)
      */
     public Object visit( ApplicationBO pApplication, Object pArgument )
@@ -106,7 +106,7 @@ public class ComponentTransform
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO,
      *      java.lang.Object)
      */
     public Object visit( ProjectBO pProject, Object pArgument )
@@ -120,7 +120,7 @@ public class ComponentTransform
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.component.PackageBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.component.PackageBO,
      *      java.lang.Object)
      */
     public Object visit( PackageBO pPackage, Object pArgument )
@@ -132,7 +132,7 @@ public class ComponentTransform
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ClassBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO,
      *      java.lang.Object)
      */
     public Object visit( ClassBO pClass, Object pArgument )
@@ -145,7 +145,7 @@ public class ComponentTransform
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.component.MethodBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.component.MethodBO,
      *      java.lang.Object)
      */
     public Object visit( MethodBO pMethod, Object pArgument )
@@ -159,7 +159,7 @@ public class ComponentTransform
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.component.JspBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.component.JspBO,
      *      java.lang.Object)
      */
     public Object visit( JspBO pJsp, Object pArgument )
@@ -172,7 +172,7 @@ public class ComponentTransform
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlModelBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.component.UmlModelBO,
      *      java.lang.Object)
      */
     public Object visit( UmlModelBO pUMLModel, Object pArgument )
@@ -184,7 +184,7 @@ public class ComponentTransform
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO,
      *      java.lang.Object)
      */
     public Object visit( UmlPackageBO pUMLPackage, Object pArgument )
@@ -196,7 +196,7 @@ public class ComponentTransform
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO,
      *      java.lang.Object)
      */
     public Object visit( UmlInterfaceBO pUMLInterface, Object pArgument )
@@ -208,7 +208,7 @@ public class ComponentTransform
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.component.UmlClassBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.component.UmlClassBO,
      *      java.lang.Object)
      */
     public Object visit( UmlClassBO pUMLClass, Object pArgument )

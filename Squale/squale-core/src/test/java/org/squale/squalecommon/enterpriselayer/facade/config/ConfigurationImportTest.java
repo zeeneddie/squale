@@ -16,22 +16,22 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.config;
+package org.squale.squalecommon.enterpriselayer.facade.config;
 
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.squalecommon.SqualeTestCase;
-import com.airfrance.squalecommon.daolayer.config.web.AbstractDisplayConfDAOImpl;
-import com.airfrance.squalecommon.daolayer.rule.QualityGridDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.config.ProjectProfileDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.BubbleConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.squalecommon.SqualeTestCase;
+import org.squale.squalecommon.daolayer.config.web.AbstractDisplayConfDAOImpl;
+import org.squale.squalecommon.daolayer.rule.QualityGridDAOImpl;
+import org.squale.squalecommon.datatransfertobject.config.ProjectProfileDTO;
+import org.squale.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.BubbleConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
 
 /**
  * Test l'importation d'une configuration en base de données
@@ -78,13 +78,13 @@ public class ConfigurationImportTest
      * assertEquals("clearcase", manager.getName()); // Une tâche d'analyse: assertEquals(1,
      * manager.getAnalysisTasks().size()); TaskDTO analysisManager = (TaskDTO)
      * manager.getAnalysisTasks().iterator().next(); assertEquals("ClearCaseTask", analysisManager.getName());
-     * assertEquals("com.airfrance.squalix.tools.clearcase.task.ClearCaseTask", analysisManager.getClassName()); // Une
+     * assertEquals("org.squale.squalix.tools.clearcase.task.ClearCaseTask", analysisManager.getClassName()); // Une
      * tâche de terminaison assertEquals(1, manager.getTerminationTasks().size()); // Le profil: ProjectProfileDTO
      * profile = (ProjectProfileDTO) conf.getProfiles().iterator().next(); assertEquals("java1.4", profile.getName());
      * assertEquals(true, profile.getExportIDE()); // Une tâche d'analyse: assertEquals(1,
      * profile.getAnalysisTasks().size()); TaskDTO analysisProfile = (TaskDTO)
      * profile.getAnalysisTasks().iterator().next(); assertEquals("JCompilingTask", analysisProfile.getName());
-     * assertEquals("com.airfrance.squalix.tools.clearcase.task.ClearCaseTask", analysisManager.getClassName()); //
+     * assertEquals("org.squale.squalix.tools.clearcase.task.ClearCaseTask", analysisManager.getClassName()); //
      * Aucune tâche de terminaison assertEquals(0, profile.getTerminationTasks().size()); } catch
      * (JrafEnterpriseException e) { e.printStackTrace(); fail("unexpected exception"); } }
      */

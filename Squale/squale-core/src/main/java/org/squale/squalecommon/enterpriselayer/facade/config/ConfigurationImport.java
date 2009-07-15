@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.config;
+package org.squale.squalecommon.enterpriselayer.facade.config;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -26,42 +26,42 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.component.ProjectDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.AdminParamsDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.AuditFrequencyDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.Profile_DisplayConfDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.ProjectProfileDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.SourceManagementDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.StopTimeDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.TaskDAOImpl;
-import com.airfrance.squalecommon.daolayer.config.web.AbstractDisplayConfDAOImpl;
-import com.airfrance.squalecommon.daolayer.rule.QualityGridDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.config.AdminParamsDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.ProjectProfileDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.SourceManagementDTO;
-import com.airfrance.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.AdminParamsTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.AuditFrequencyTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.ProjectProfileTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.SourceManagementTransform;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.StopTimeTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AbstractTasksUserBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.Profile_DisplayConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.SqualixConfigurationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.StopTimeBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.config.xml.SqualixConfigImport;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
+import org.squale.squalecommon.daolayer.config.AdminParamsDAOImpl;
+import org.squale.squalecommon.daolayer.config.AuditFrequencyDAOImpl;
+import org.squale.squalecommon.daolayer.config.Profile_DisplayConfDAOImpl;
+import org.squale.squalecommon.daolayer.config.ProjectProfileDAOImpl;
+import org.squale.squalecommon.daolayer.config.SourceManagementDAOImpl;
+import org.squale.squalecommon.daolayer.config.StopTimeDAOImpl;
+import org.squale.squalecommon.daolayer.config.TaskDAOImpl;
+import org.squale.squalecommon.daolayer.config.web.AbstractDisplayConfDAOImpl;
+import org.squale.squalecommon.daolayer.rule.QualityGridDAOImpl;
+import org.squale.squalecommon.datatransfertobject.config.AdminParamsDTO;
+import org.squale.squalecommon.datatransfertobject.config.ProjectProfileDTO;
+import org.squale.squalecommon.datatransfertobject.config.SourceManagementDTO;
+import org.squale.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
+import org.squale.squalecommon.datatransfertobject.transform.config.AdminParamsTransform;
+import org.squale.squalecommon.datatransfertobject.transform.config.AuditFrequencyTransform;
+import org.squale.squalecommon.datatransfertobject.transform.config.ProjectProfileTransform;
+import org.squale.squalecommon.datatransfertobject.transform.config.SourceManagementTransform;
+import org.squale.squalecommon.datatransfertobject.transform.config.StopTimeTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AbstractTasksUserBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.Profile_DisplayConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.SourceManagementBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.SqualixConfigurationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.StopTimeBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.enterpriselayer.facade.config.xml.SqualixConfigImport;
 
 /**
  * Importation de la configuration Squalix

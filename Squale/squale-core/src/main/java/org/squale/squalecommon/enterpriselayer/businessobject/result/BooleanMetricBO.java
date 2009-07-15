@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
+package org.squale.squalecommon.enterpriselayer.businessobject.result;
 
 /**
  * @author M401540
@@ -61,7 +61,7 @@ public class BooleanMetricBO
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO#isPrintable()
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.result.MetricBO#isPrintable()
      */
     public boolean isPrintable()
     {

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -30,8 +30,8 @@ import org.python.core.PyNone;
 import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
 
 /**
  * Interprète de formule

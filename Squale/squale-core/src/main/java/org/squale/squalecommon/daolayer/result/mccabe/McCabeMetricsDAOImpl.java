@@ -20,11 +20,11 @@
  * Créé le 19 juil. 05
  *
  */
-package com.airfrance.squalecommon.daolayer.result.mccabe;
+package org.squale.squalecommon.daolayer.result.mccabe;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.provider.persistence.hibernate.AbstractDAOImpl;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMetricsBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAMetricsBO;
 
 /**
  * @author M400843

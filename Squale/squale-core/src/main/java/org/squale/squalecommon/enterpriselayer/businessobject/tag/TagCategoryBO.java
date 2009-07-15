@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\tag\\TagCategoryBO.java
-package com.airfrance.squalecommon.enterpriselayer.businessobject.tag;
+//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\tag\\TagCategoryBO.java
+package org.squale.squalecommon.enterpriselayer.businessobject.tag;
 
 import java.util.Collection;
 
@@ -137,7 +137,7 @@ public class TagCategoryBO
      * @return the tags of the same category
      * @hibernate.bag table="Concerned_tags" lazy="true" cascade="none"
      * @hibernate.key column="TagCategory"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO"
      */
     public Collection<TagBO> getTags()
     {

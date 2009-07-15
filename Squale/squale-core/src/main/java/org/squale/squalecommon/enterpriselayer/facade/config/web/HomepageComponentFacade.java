@@ -16,22 +16,22 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.config.web;
+package org.squale.squalecommon.enterpriselayer.facade.config.web;
 
 import java.util.List;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.commons.exception.JrafPersistenceException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.enterpriselayer.IFacade;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.config.web.HomepageComponentDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.config.web.HomepageComponentDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.config.web.HomepageComponentTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.HomepageComponentBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.enterpriselayer.IFacade;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.config.web.HomepageComponentDAOImpl;
+import org.squale.squalecommon.datatransfertobject.config.web.HomepageComponentDTO;
+import org.squale.squalecommon.datatransfertobject.transform.config.web.HomepageComponentTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.HomepageComponentBO;
 
 /**
  * Facade for the HomepageComponent

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
+package org.squale.squalecommon.enterpriselayer.businessobject.result;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -26,8 +26,8 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 
 /**
  * @author m400842 (by rose)
@@ -70,7 +70,7 @@ public abstract class MeasureBO
      * @hibernate.map lazy="true" cascade="save-update" sort="unsorted"
      * @hibernate.index column="Name" type="string"
      * @hibernate.key column="MeasureId"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.result.MetricBO"
      */
     public Map getMetrics()
     {
@@ -105,7 +105,7 @@ public abstract class MeasureBO
      * 
      * @return the current value of the mAudit property
      * @hibernate.many-to-one column="AuditId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO"
      *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE30277
      */
@@ -130,7 +130,7 @@ public abstract class MeasureBO
      * 
      * @return the current value of the mComponent property
      * @hibernate.many-to-one column="ComponentId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
      *                        cascade="save-update" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE3027A
      */

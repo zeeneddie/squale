@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.config.web;
+package org.squale.squalecommon.enterpriselayer.businessobject.config.web;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 
 /**
  * BO class for the HomepageComponent
@@ -109,7 +109,7 @@ public class HomepageComponentBO
      * Getter method for the user parameter
      * 
      * @return the user link to this object
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.profile.UserBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.profile.UserBO"
      *                        column="UserBO" not-null="true" cascade="none" outer-join="auto" update="true"
      *                        insert="true"
      */

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -25,10 +25,10 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FormulaVisitor;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.ConditionFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.FormulaVisitor;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
 
 /**
  * Extraction des paramètres d'une formule Une formule est composée de paramètres avec une syntaxe du type xxx.yyy où
@@ -100,7 +100,7 @@ public class ParameterExtraction
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.ConditionFormulaBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.rule.practice.ConditionFormulaBO,
      *      java.lang.Object)
      */
     public Object visit( ConditionFormulaBO pConditionFormula, Object pArgument )
@@ -117,7 +117,7 @@ public class ParameterExtraction
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.SimpleFormulaBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.rule.practice.SimpleFormulaBO,
      *      java.lang.Object)
      */
     public Object visit( SimpleFormulaBO pSimpleFormula, Object pArgument )

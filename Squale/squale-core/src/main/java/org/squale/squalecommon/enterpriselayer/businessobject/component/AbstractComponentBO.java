@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.component;
+package org.squale.squalecommon.enterpriselayer.businessobject.component;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,8 +28,8 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO;
-import com.airfrance.squalecommon.util.mapping.Mapping;
+import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO;
+import org.squale.squalecommon.util.mapping.Mapping;
 
 /**
  * Représente un composant du projet au sens implémentation.
@@ -191,7 +191,7 @@ public abstract class AbstractComponentBO
      * 
      * @return le composant parent
      * @hibernate.many-to-one outer-join="auto" update="true" insert="true" column="Parent"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
      *                        cascade="save-update"
      * @roseuid 42CB90ED038C
      */
@@ -309,7 +309,7 @@ public abstract class AbstractComponentBO
      * @return les audits
      * @hibernate.set table="Components_Audits" lazy="true" cascade="none" inverse="false" sort="unsorted"
      * @hibernate.key column="ComponentId"
-     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO"
      *                         column="AuditId" outer-join="auto"
      */
     public Collection getAudits()
@@ -397,7 +397,7 @@ public abstract class AbstractComponentBO
      * 
      * @return le Projet auquel appartient
      * @hibernate.many-to-one column="ProjectId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO"
      *                        outer-join="auto" update="true" insert="true" cascade="none"
      */
     public AbstractComplexComponentBO getProject()
@@ -428,7 +428,7 @@ public abstract class AbstractComponentBO
      * @return the current value of the mTags property
      * @hibernate.set table="Tag_Component" lazy="false" cascade="none" inverse="false" sort="unsorted"
      * @hibernate.key column="ComponentId"
-     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagBO"
+     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO"
      *                         column="TagId" outer-join="auto"
      */
     public Collection<TagBO> getTags()

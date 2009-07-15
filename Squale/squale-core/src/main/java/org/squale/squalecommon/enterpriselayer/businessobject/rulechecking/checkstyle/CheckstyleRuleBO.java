@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle;
+package org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
 
 /**
  * Règle checkstyle
@@ -43,7 +43,7 @@ public class CheckstyleRuleBO
      * @return the current value of the mModules property
      * @hibernate.set lazy="true" cascade="all" sort="unsorted"
      * @hibernate.key column="RuleId"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleModuleBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleModuleBO"
      */
 
     public Set getModules()

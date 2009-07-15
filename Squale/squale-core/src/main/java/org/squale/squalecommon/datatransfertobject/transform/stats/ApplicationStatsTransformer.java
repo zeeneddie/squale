@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.transform.stats;
+package org.squale.squalecommon.datatransfertobject.transform.stats;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,11 +24,11 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-import com.airfrance.squalecommon.datatransfertobject.stats.ApplicationStatsDTO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditDateComparator;
+import org.squale.squalecommon.datatransfertobject.stats.ApplicationStatsDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditDateComparator;
 
 /**
  * Transformation d'une application sous forme BO en dto représentatif des statistiques niveau application

@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\result\\ErrorBO.java
+//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\result\\ErrorBO.java
 
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
+package org.squale.squalecommon.enterpriselayer.businessobject.result;
 
 import java.io.Serializable;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 
 /**
  * @author m400842 (by rose)
@@ -185,7 +185,7 @@ public class ErrorBO
      * 
      * @return the current value of the mAudit property
      * @hibernate.many-to-one column="AuditId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO"
      *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE30025
      */
@@ -237,7 +237,7 @@ public class ErrorBO
      * 
      * @return the current value of the mProject property
      * @hibernate.many-to-one column="ProjectId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
      *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BFF47A033C
      */

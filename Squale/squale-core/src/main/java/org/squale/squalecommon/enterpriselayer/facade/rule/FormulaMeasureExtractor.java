@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
 
 /**
  * Extracteur des mesures utilisées par une formule Une formule de règle qualité est exprimée à l'aide de mesures qui
@@ -36,7 +36,7 @@ public class FormulaMeasureExtractor
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO.MeasureExtractor#getUsedMeasures(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO)
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO.MeasureExtractor#getUsedMeasures(org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO)
      */
     public String[] getUsedMeasures( AbstractFormulaBO pFormula )
     {

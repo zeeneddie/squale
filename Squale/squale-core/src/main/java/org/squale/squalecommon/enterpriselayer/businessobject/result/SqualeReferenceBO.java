@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
+package org.squale.squalecommon.enterpriselayer.businessobject.result;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
 
 /**
  * Objet métier contenant les sous-projets sous référentiel
@@ -47,7 +47,7 @@ public class SqualeReferenceBO
      * Access method for the mQualityGrid property.
      * 
      * @return the current value of the mQualityRules property
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
      *                        column="QualityGrid" not-null="false" cascade="none" outer-join="auto" update="true"
      *                        insert="true"
      */
@@ -297,7 +297,7 @@ public class SqualeReferenceBO
      * @return the current value of the mFactors property
      * @hibernate.map table="FactorRef" lazy="false" cascade="all" sort="natural"
      * @hibernate.index-many-to-many column="Rule"
-     *                               class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"
+     *                               class="org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"
      * @hibernate.key column="ReferencielId"
      * @hibernate.element column="Factor_Value" type="float" not-null="false" unique="false"
      */

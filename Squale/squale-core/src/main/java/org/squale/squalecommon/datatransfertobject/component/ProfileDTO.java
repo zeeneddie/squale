@@ -22,7 +22,7 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.datatransfertobject.component;
+package org.squale.squalecommon.datatransfertobject.component;
 
 import java.io.Serializable;
 import java.util.Map;

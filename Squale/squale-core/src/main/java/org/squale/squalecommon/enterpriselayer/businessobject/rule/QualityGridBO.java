@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.rule;
+package org.squale.squalecommon.enterpriselayer.businessobject.rule;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -27,7 +27,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
 
 /**
  * Grille qualité Une grille qualité est composée d'un ensemble de facteurs.
@@ -120,7 +120,7 @@ public class QualityGridBO
      * @return les profils
      * @hibernate.set table="Profiles_Grids" lazy="true" inverse="true" cascade="none" sort="unsorted"
      * @hibernate.key column="GridId"
-     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
+     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO"
      *                         column="ProfileId" outer-join="auto"
      */
     public Set getProfiles()
@@ -156,7 +156,7 @@ public class QualityGridBO
      * @return the current value of the mFactors property
      * @hibernate.set table="GridFactor_Rule" lazy="true" cascade="all" inverse="false" sort="natural"
      * @hibernate.key column="QualityGridId"
-     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"
+     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO"
      *                         column="FactorRuleId" outer-join="auto"
      */
     public SortedSet getFactors()

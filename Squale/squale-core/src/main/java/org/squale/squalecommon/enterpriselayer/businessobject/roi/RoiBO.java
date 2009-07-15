@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.roi;
+package org.squale.squalecommon.enterpriselayer.businessobject.roi;
 
 import java.util.Date;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 
 /**
  * Représente un retour sur investissement

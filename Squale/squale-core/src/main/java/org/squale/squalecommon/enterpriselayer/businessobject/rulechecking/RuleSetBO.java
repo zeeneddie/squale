@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking;
+package org.squale.squalecommon.enterpriselayer.businessobject.rulechecking;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -107,7 +107,7 @@ public abstract class RuleSetBO
      * @hibernate.map lazy="true" cascade="all" sort="unsorted"
      * @hibernate.index column="Code" type="string"
      * @hibernate.key column="RuleSetId"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"
      */
 
     public Map getRules()

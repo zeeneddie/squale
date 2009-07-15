@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\tag\\TagBO.java
-package com.airfrance.squalecommon.enterpriselayer.businessobject.tag;
+//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\tag\\TagBO.java
+package org.squale.squalecommon.enterpriselayer.businessobject.tag;
 
 import java.util.Collection;
 
@@ -140,7 +140,7 @@ public class TagBO
      * 
      * @return the current value of the mTagCategoryBO property
      * @hibernate.many-to-one column="TagCategory"
-     *                     class="com.airfrance.squalecommon.enterpriselayer.businessobject.tag.TagCategoryBO"
+     *                     class="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagCategoryBO"
      *                     update="true" insert="true" not-null="false" unique="false" outer-join="auto"
      */
     public TagCategoryBO getTagCategoryBO()
@@ -164,7 +164,7 @@ public class TagBO
      * @return the current value of the mComponents property
      * @hibernate.set table="Tag_Component" lazy="true" cascade="none" inverse="true" sort="unsorted"
      * @hibernate.key column="TagId"
-     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
      *                         column="ComponentId" outer-join="auto"
      */
     public Collection getComponents()

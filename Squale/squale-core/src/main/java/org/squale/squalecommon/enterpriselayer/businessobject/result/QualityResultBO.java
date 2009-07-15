@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\result\\QualityResultBO.java
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
+//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\result\\QualityResultBO.java
+package org.squale.squalecommon.enterpriselayer.businessobject.result;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO;
 
 /**
  * Représente un résultat "qualité", donc possédant une note.
@@ -104,7 +104,7 @@ public abstract class QualityResultBO
      * 
      * @return the current value of the mRule property
      * @hibernate.many-to-one column="QualityRuleId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO"
      *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE300E1
      */
@@ -153,7 +153,7 @@ public abstract class QualityResultBO
      * 
      * @return the current value of the mProject property
      * @hibernate.many-to-one column="ProjectId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
      *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE40016
      */
@@ -178,7 +178,7 @@ public abstract class QualityResultBO
      * 
      * @return the current value of the mAudit property
      * @hibernate.many-to-one column="AuditId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AuditBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO"
      *                        cascade="none" not-null="false" outer-join="auto" update="true" insert="true"
      * @roseuid 42BACEE40019
      */

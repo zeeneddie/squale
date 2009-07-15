@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking;
+package org.squale.squalecommon.enterpriselayer.businessobject.rulechecking;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 
 /**
  * Ensemble de règles liées à un outil et spécifique à un projet
@@ -34,7 +34,7 @@ public class ProjectRuleSetBO
 
     /**
      * @return le projet sur lequel s'appliquent les règles
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO"
      *                        column="ProjectId" cascade="all" outer-join="auto" update="true" insert="true"
      */
     public ProjectBO getProject()

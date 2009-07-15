@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
 import java.util.Iterator;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor;
 
 /**
  * Vérification d'une grille qualité La vérification se limite au test de compilation des formules et fonctions
@@ -70,7 +70,7 @@ public class QualityGridChecker
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO,
      *      java.lang.Object)
      */
     public Object visit( FactorRuleBO pFactorRule, Object pArgument )
@@ -86,7 +86,7 @@ public class QualityGridChecker
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO,
      *      java.lang.Object)
      */
     public Object visit( CriteriumRuleBO pCriteriumRule, Object pArgument )
@@ -102,7 +102,7 @@ public class QualityGridChecker
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBOVisitor#visit(org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO,
      *      java.lang.Object)
      */
     public Object visit( PracticeRuleBO pPracticeRule, Object pArgument )

@@ -20,7 +20,7 @@
  * Créé le 3 août 05
  *
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
+package org.squale.squalecommon.enterpriselayer.businessobject.result;
 
 /**
  * @author m400841

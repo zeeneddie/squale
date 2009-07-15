@@ -16,27 +16,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.stats;
+package org.squale.squalecommon.enterpriselayer.facade.stats;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.component.ApplicationDAOImpl;
-import com.airfrance.squalecommon.daolayer.profile.UserDAOImpl;
-import com.airfrance.squalecommon.daolayer.stats.SiteAndProfilStatsDICTDAOImpl;
-import com.airfrance.squalecommon.daolayer.stats.SiteStatsDICTDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.stats.ApplicationStatsDTO;
-import com.airfrance.squalecommon.datatransfertobject.stats.SetOfStatsDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.stats.ApplicationStatsTransformer;
-import com.airfrance.squalecommon.datatransfertobject.transform.stats.StatsTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.component.ApplicationDAOImpl;
+import org.squale.squalecommon.daolayer.profile.UserDAOImpl;
+import org.squale.squalecommon.daolayer.stats.SiteAndProfilStatsDICTDAOImpl;
+import org.squale.squalecommon.daolayer.stats.SiteStatsDICTDAOImpl;
+import org.squale.squalecommon.datatransfertobject.stats.ApplicationStatsDTO;
+import org.squale.squalecommon.datatransfertobject.stats.SetOfStatsDTO;
+import org.squale.squalecommon.datatransfertobject.transform.stats.ApplicationStatsTransformer;
+import org.squale.squalecommon.datatransfertobject.transform.stats.StatsTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 
 /**
  */

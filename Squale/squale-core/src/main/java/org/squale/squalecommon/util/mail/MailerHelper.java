@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.util.mail;
+package org.squale.squalecommon.util.mail;
 
-import com.airfrance.jraf.bootstrap.locator.ProviderLocator;
-import com.airfrance.jraf.bootstrap.locator.SpringLocator;
+import org.squale.jraf.bootstrap.locator.ProviderLocator;
+import org.squale.jraf.bootstrap.locator.SpringLocator;
 
 /**
  * Accès au provider de mail

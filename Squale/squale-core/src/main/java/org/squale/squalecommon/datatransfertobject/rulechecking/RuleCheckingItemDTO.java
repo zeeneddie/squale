@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.rulechecking;
+package org.squale.squalecommon.datatransfertobject.rulechecking;
 
-import com.airfrance.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 
 /**
  * DTO pour les items des transgressions

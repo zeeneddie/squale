@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.util.mail.javamail;
+package org.squale.squalecommon.util.mail.javamail;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

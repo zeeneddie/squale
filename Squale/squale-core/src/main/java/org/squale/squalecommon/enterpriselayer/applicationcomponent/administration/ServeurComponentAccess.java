@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration;
+package org.squale.squalecommon.enterpriselayer.applicationcomponent.administration;
 
-import com.airfrance.squalecommon.enterpriselayer.facade.component.ServeurFacade;
+import org.squale.squalecommon.enterpriselayer.facade.component.ServeurFacade;
 
-import com.airfrance.jraf.provider.accessdelegate.DefaultExecuteComponent;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
 
 import java.util.Collection;
 

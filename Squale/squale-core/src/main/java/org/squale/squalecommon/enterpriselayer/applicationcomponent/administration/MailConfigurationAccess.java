@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.applicationcomponent.administration;
+package org.squale.squalecommon.enterpriselayer.applicationcomponent.administration;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.provider.accessdelegate.DefaultExecuteComponent;
-import com.airfrance.squalecommon.enterpriselayer.facade.config.adminParams.MailConfigFacade;
-import com.airfrance.squalecommon.util.mail.MailException;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
+import org.squale.squalecommon.enterpriselayer.facade.config.adminParams.MailConfigFacade;
+import org.squale.squalecommon.util.mail.MailException;
 
 /**
  * Access component for mail configuration information

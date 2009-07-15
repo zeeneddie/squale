@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.rule;
+package org.squale.squalecommon.enterpriselayer.businessobject.rule;
 
-import com.airfrance.squalecommon.util.manualmark.TimeLimitationParser;
+import org.squale.squalecommon.util.manualmark.TimeLimitationParser;
 
 /**
  * Calculation rule of a practice
@@ -63,7 +63,7 @@ public class PracticeRuleBO
      * 
      * @return The formula
      * @hibernate.many-to-one column="Formula" cascade="all"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO"
      *                        outer-join="auto" update="true" insert="true"
      */
     public AbstractFormulaBO getFormula()

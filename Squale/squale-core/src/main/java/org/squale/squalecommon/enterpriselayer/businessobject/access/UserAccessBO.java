@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.access;
+package org.squale.squalecommon.enterpriselayer.businessobject.access;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 
 /**
  * Représente un accès utilisateur
@@ -86,7 +86,7 @@ public class UserAccessBO
     /**
      * @return l'application
      * @hibernate.many-to-one column="ApplicationId"
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.ApplicationBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO"
      *                        cascade="none" not-null="true" outer-join="auto" update="true" insert="true"
      */
     public ApplicationBO getApplication()

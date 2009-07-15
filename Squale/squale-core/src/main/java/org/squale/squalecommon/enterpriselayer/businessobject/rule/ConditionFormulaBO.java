@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.rule;
+package org.squale.squalecommon.enterpriselayer.businessobject.rule;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class ConditionFormulaBO
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.AbstractFormulaBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.practice.AbstractFormulaBO#accept(org.squale.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor,
      *      java.lang.Object)
      */
     public Object accept( FormulaVisitor pVisitor, Object pArgument )

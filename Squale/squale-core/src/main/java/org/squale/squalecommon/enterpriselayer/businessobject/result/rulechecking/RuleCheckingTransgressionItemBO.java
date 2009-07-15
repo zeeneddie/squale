@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result.rulechecking;
+package org.squale.squalecommon.enterpriselayer.businessobject.result.rulechecking;
 
 import java.io.Serializable;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
 
 /**
  * Item de transgression
@@ -112,7 +112,7 @@ public class RuleCheckingTransgressionItemBO
     /**
      * @return le composant concerné par la transgression
      * @hibernate.many-to-one 
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
      *                        column="ComponentId" cascade="all" outer-join="auto" update="true" insert="true"
      */
     public AbstractComponentBO getComponent()
@@ -122,7 +122,7 @@ public class RuleCheckingTransgressionItemBO
 
     /**
      * @return la règle transgressée
-     * @hibernate.many-to-one class="com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"
+     * @hibernate.many-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"
      *                        column="RuleId" cascade="all" not-null="true" outer-join="auto" update="true"
      *                        insert="true"
      */
@@ -134,7 +134,7 @@ public class RuleCheckingTransgressionItemBO
     /**
      * @return le composant en relation avec la transgression
      * @hibernate.many-to-one 
-     *                        class="com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
      *                        column="ComponentInvolvedId" cascade="all" outer-join="auto" update="true" insert="true"
      */
     public AbstractComponentBO getComponentInvolved()

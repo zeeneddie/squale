@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.result;
+package org.squale.squalecommon.enterpriselayer.businessobject.result;
 
 /**
  * @author m401540
@@ -28,12 +28,12 @@ public abstract class NumberMetricBO
 {
 
     /**
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO#getValue()
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.result.MetricBO#getValue()
      */
     public abstract Object getValue();
 
     /**
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.result.MetricBO#setValue(java.lang.Object)
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.result.MetricBO#setValue(java.lang.Object)
      */
     public abstract void setValue( Object value );
 

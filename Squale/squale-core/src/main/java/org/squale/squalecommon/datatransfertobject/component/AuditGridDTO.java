@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.datatransfertobject.component;
+package org.squale.squalecommon.datatransfertobject.component;
 
-import com.airfrance.squalecommon.datatransfertobject.rule.QualityGridDTO;
+import org.squale.squalecommon.datatransfertobject.rule.QualityGridDTO;
 
 /**
  * Grille qualité utilisée dans un audit

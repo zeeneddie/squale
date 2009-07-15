@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.component;
+package org.squale.squalecommon.enterpriselayer.businessobject.component;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.UnexpectedRelationException;
+import org.squale.squalecommon.enterpriselayer.businessobject.UnexpectedRelationException;
 
 /**
  * Représente une méthode au sens Java et C++
@@ -110,7 +110,7 @@ public class MethodBO
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor,
      *      java.lang.Object)
      */
     public Object accept( ComponentVisitor pVisitor, Object pArgument )

@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.config;
+package org.squale.squalecommon.enterpriselayer.businessobject.config;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
 
 /**
  * Profile d'un projet
@@ -51,7 +51,7 @@ public class ProjectProfileBO
      * @return les configurations
      * @hibernate.set table="Profiles_DisplayConfs" lazy="true" cascade="all" inverse="false" sort="unsorted"
      * @hibernate.key column="ProfileId"
-     * @hibernate.one-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.config.Profile_DisplayConfBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.config.Profile_DisplayConfBO"
      */
     public Set getProfileDisplayConfs()
     {
@@ -64,7 +64,7 @@ public class ProjectProfileBO
      * @return les grilles
      * @hibernate.set table="Profiles_Grids" lazy="true" sort="unsorted" cascade="none"
      * @hibernate.key column="ProfileId"
-     * @hibernate.many-to-many class="com.airfrance.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
+     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO"
      *                         column="GridId" outer-join="auto"
      */
     public Set getGrids()

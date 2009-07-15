@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.rule;
+package org.squale.squalecommon.enterpriselayer.facade.rule;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -34,7 +34,7 @@ public class AllTests
      */
     public static Test suite()
     {
-        TestSuite suite = new TestSuite( "Test for com.airfrance.squalecommon.enterpriselayer.facade.rule" );
+        TestSuite suite = new TestSuite( "Test for org.squale.squalecommon.enterpriselayer.facade.rule" );
         // $JUnit-BEGIN$
         // suite.addTest(new TestSuite(AuditComputingTest.class));
         suite.addTest( new TestSuite( FormulaConverterTest.class ) );

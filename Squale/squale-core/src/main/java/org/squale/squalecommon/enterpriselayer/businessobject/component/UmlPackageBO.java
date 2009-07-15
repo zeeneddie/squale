@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\com\\airfrance\\squalecommon\\enterpriselayer\\businessobject\\component\\PackageBO.java
+//Source file: D:\\cc_views\\squale_v0_0_act_M400843\\squale\\src\\squaleCommon\\src\\org\\squale\\squalecommon\\enterpriselayer\\businessobject\\component\\PackageBO.java
 
-package com.airfrance.squalecommon.enterpriselayer.businessobject.component;
+package org.squale.squalecommon.enterpriselayer.businessobject.component;
 
 import java.util.Collection;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.UnexpectedRelationException;
+import org.squale.squalecommon.enterpriselayer.businessobject.UnexpectedRelationException;
 
 /**
  * Représente un package UML
@@ -74,7 +74,7 @@ public class UmlPackageBO
     /**
      * {@inheritDoc}
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO#accept(org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentVisitor,
      *      java.lang.Object)
      */
     public Object accept( ComponentVisitor pVisitor, Object pArgument )

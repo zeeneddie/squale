@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.cpptest;
+package org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.cpptest;
 
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO;
 
 /**
  * RuleSet de CppTest

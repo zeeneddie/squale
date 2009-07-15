@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.checkstyle;
+package org.squale.squalecommon.enterpriselayer.facade.checkstyle;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -25,20 +25,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.enterpriselayer.IFacade;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.result.rulechecking.RuleCheckingTransgressionDAOImpl;
-import com.airfrance.squalecommon.daolayer.rulechecking.CheckstyleRuleSetDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.CheckstyleDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.rulechecking.CheckstyleTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO;
-import com.airfrance.squalecommon.enterpriselayer.facade.checkstyle.xml.CheckstyleImport;
-import com.airfrance.squalecommon.util.file.FileUtility;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.enterpriselayer.IFacade;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.result.rulechecking.RuleCheckingTransgressionDAOImpl;
+import org.squale.squalecommon.daolayer.rulechecking.CheckstyleRuleSetDAOImpl;
+import org.squale.squalecommon.datatransfertobject.rulechecking.CheckstyleDTO;
+import org.squale.squalecommon.datatransfertobject.transform.rulechecking.CheckstyleTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleSetBO;
+import org.squale.squalecommon.enterpriselayer.facade.checkstyle.xml.CheckstyleImport;
+import org.squale.squalecommon.util.file.FileUtility;
 
 /**
  * @author henix

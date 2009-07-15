@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\com\\airfrance\\squalecommon\\datatransfertobject\\PracticeRuleDTO.java
+//Source file: D:\\CC_VIEWS\\SQUALE_V0_0_ACT\\SQUALE\\SRC\\squaleCommon\\src\\org\\squale\\squalecommon\\datatransfertobject\\PracticeRuleDTO.java
 
-package com.airfrance.squalecommon.datatransfertobject.result;
+package org.squale.squalecommon.datatransfertobject.result;
 
 import java.io.Serializable;
 import java.util.Collection;

@@ -22,21 +22,21 @@
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-package com.airfrance.squalecommon.enterpriselayer.facade;
+package org.squale.squalecommon.enterpriselayer.facade;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.airfrance.squalecommon.enterpriselayer.facade.component.ApplicationFacadeTest;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.AuditFacadeTest;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.ComponentFacadeTest;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.ProjectFacadeTest;
-import com.airfrance.squalecommon.enterpriselayer.facade.component.UserFacadeTest;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.ErrorFacadeTest;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.MarkFacadeTest;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.PracticeRuleFacadeTest;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.QualityResultFacadeTest;
-import com.airfrance.squalecommon.enterpriselayer.facade.quality.SqualeReferenceFacadeTest;
+import org.squale.squalecommon.enterpriselayer.facade.component.ApplicationFacadeTest;
+import org.squale.squalecommon.enterpriselayer.facade.component.AuditFacadeTest;
+import org.squale.squalecommon.enterpriselayer.facade.component.ComponentFacadeTest;
+import org.squale.squalecommon.enterpriselayer.facade.component.ProjectFacadeTest;
+import org.squale.squalecommon.enterpriselayer.facade.component.UserFacadeTest;
+import org.squale.squalecommon.enterpriselayer.facade.quality.ErrorFacadeTest;
+import org.squale.squalecommon.enterpriselayer.facade.quality.MarkFacadeTest;
+import org.squale.squalecommon.enterpriselayer.facade.quality.PracticeRuleFacadeTest;
+import org.squale.squalecommon.enterpriselayer.facade.quality.QualityResultFacadeTest;
+import org.squale.squalecommon.enterpriselayer.facade.quality.SqualeReferenceFacadeTest;
 
 /**
  * @author M400841 Pour changer le modèle de ce commentaire de type généré, allez à :
@@ -52,7 +52,7 @@ public class FacadesTests
      */
     public static Test suite()
     {
-        TestSuite suite = new TestSuite( "Test for com.airfrance.squalecommon.enterpriselayer.facade.component" );
+        TestSuite suite = new TestSuite( "Test for org.squale.squalecommon.enterpriselayer.facade.component" );
         // $JUnit-BEGIN$
         suite.addTest( new TestSuite( AuditFacadeTest.class ) );
         suite.addTest( new TestSuite( ComponentFacadeTest.class ) );

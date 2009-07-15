@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.facade.pmd;
+package org.squale.squalecommon.enterpriselayer.facade.pmd;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -29,19 +29,19 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.airfrance.jraf.commons.exception.JrafDaoException;
-import com.airfrance.jraf.commons.exception.JrafEnterpriseException;
-import com.airfrance.jraf.helper.PersistenceHelper;
-import com.airfrance.jraf.provider.persistence.hibernate.facade.FacadeHelper;
-import com.airfrance.jraf.spi.persistence.IPersistenceProvider;
-import com.airfrance.jraf.spi.persistence.ISession;
-import com.airfrance.squalecommon.daolayer.result.rulechecking.RuleCheckingTransgressionDAOImpl;
-import com.airfrance.squalecommon.daolayer.rulechecking.PmdRuleSetDAOImpl;
-import com.airfrance.squalecommon.datatransfertobject.rulechecking.PmdRuleSetDTO;
-import com.airfrance.squalecommon.datatransfertobject.transform.rulechecking.PmdTransform;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
-import com.airfrance.squalecommon.enterpriselayer.businessobject.rulechecking.pmd.PmdRuleSetBO;
-import com.airfrance.squalecommon.util.file.FileUtility;
+import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.result.rulechecking.RuleCheckingTransgressionDAOImpl;
+import org.squale.squalecommon.daolayer.rulechecking.PmdRuleSetDAOImpl;
+import org.squale.squalecommon.datatransfertobject.rulechecking.PmdRuleSetDTO;
+import org.squale.squalecommon.datatransfertobject.transform.rulechecking.PmdTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.pmd.PmdRuleSetBO;
+import org.squale.squalecommon.util.file.FileUtility;
 
 /**
  * Facade pour PMD

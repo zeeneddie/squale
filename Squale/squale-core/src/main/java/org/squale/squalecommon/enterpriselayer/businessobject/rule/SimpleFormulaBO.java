@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.airfrance.squalecommon.enterpriselayer.businessobject.rule;
+package org.squale.squalecommon.enterpriselayer.businessobject.rule;
 
 /**
  * Formule simple Une formule simple s'exprime sous la forme d'une expression qui donne une note sous la forme d'un
@@ -34,7 +34,7 @@ public class SimpleFormulaBO
     /**
      * (non-Javadoc)
      * 
-     * @see com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.AbstractFormulaBO#accept(com.airfrance.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor,
+     * @see org.squale.squalecommon.enterpriselayer.businessobject.rule.practice.AbstractFormulaBO#accept(org.squale.squalecommon.enterpriselayer.businessobject.rule.practice.FormulaVisitor,
      *      java.lang.Object)
      */
     public Object accept( FormulaVisitor pVisitor, Object pArgument )
