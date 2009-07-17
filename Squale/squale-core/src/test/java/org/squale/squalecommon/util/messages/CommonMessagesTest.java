@@ -53,7 +53,7 @@ public class CommonMessagesTest
 
         try
         {
-            assertTrue( CommonMessages.getString( "tr.measure.mccabe.classresult" ) instanceof String );
+            assertTrue( CommonMessages.getString( "exception.messages" ) instanceof String );
         }
         catch ( MissingResourceException e )
         {
@@ -83,7 +83,7 @@ public class CommonMessagesTest
 
         try
         {
-            CommonMessages.getInt( "audit.status.notattempted" );
+            CommonMessages.getInt( "audit.nombre" );
         }
         catch ( NumberFormatException e )
         {

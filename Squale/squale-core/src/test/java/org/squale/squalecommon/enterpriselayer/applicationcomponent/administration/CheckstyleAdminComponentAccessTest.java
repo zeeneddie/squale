@@ -59,7 +59,7 @@ public class CheckstyleAdminComponentAccessTest
     /**
      * Teste l'accès à la méthode GetAllVersions et son resultat
      */
-    public void testGetAllVersions()
+    public void testGetAllConfigurations()
     {
 
         IApplicationComponent appComponent;
@@ -67,40 +67,8 @@ public class CheckstyleAdminComponentAccessTest
         {
             appComponent = AccessDelegateHelper.getInstance( "CheckstyleAdmin" );
             // appel à la methode getAllVersions
-            List version = (List) appComponent.execute( "getAllVersions", null );
+            List version = (List) appComponent.execute( "getAllConfigurations", null );
             assertTrue( "nb version", version.size() == 0 );
-
-        }
-        catch ( Exception e )
-        {
-
-            e.printStackTrace();
-            fail( "unexpected exception" );
-        }
-
-    }
-
-    /**
-     * @throws JrafEnterpriseException
-     */
-
-    public void testParseFile()
-    {
-        IApplicationComponent appComponent;
-        try
-        {
-            appComponent = AccessDelegateHelper.getInstance( "CheckstyleAdmin" );
-
-            StringBuffer errors = new StringBuffer();
-            Object[] paramIn = new Object[2];
-            CheckstyleDTO version = new CheckstyleDTO();
-            version.setBytes( "n'import quoi".getBytes() );
-            paramIn[0] = version;
-            paramIn[1] = errors;
-            // appel à la methode getAllVersions
-            CheckstyleDTO result = (CheckstyleDTO) appComponent.execute( "parseFile", paramIn );
-
-            assertTrue( "Errors", errors.length() > 0 );
 
         }
         catch ( Exception e )

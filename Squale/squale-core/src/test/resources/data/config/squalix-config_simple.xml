@@ -1,52 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.0//EN" "file:../../../../squaleCommon/src/org/squale/squalecommon/dtd/squalix-config-1.0.dtd">
-
+<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.1//EN" "file:../org/squale/squalecommon/dtd/squalix-config-1.1.dtd">
+<!--  Fichier de configuration de squalix définissant les profiles possibles, les différents types
+	de récupération des sources,...
+	La configuration des types de récupération des sources se fait par l'action dont le nom correspond à
+	l'attribut name du tag sourcemanagement.
+	Chaque profile doit commencer la tâche d'analyse de récupération des sources du projet et terminer
+	par sa tâche de terminaison  -->
 <configuration>
 	<stoptimes>
-		<stoptime day="monday" time="4:00" />
+		<stoptime day="monday" time="4:00"></stoptime>
+		<stoptime day="tuesday" time="4:00"></stoptime>
+		<stoptime day="wednesday" time="4:00"></stoptime>
+		<stoptime day="thursday" time="4:00"></stoptime>
+		<stoptime day="friday" time="4:00"></stoptime>
 	</stoptimes>
+	<!-- Paramétrage de la fréquence max des audits en fonction des accès -->
 	<frequencies>
-		<frequency days="1" frequency="1" />
+		<frequency days="5" frequency="5" />
+		<frequency days="20" frequency="15" />
+		<frequency days="45" frequency="30" />
 	</frequencies>
 	<tasks>
-		<task name="ClearCaseTask" class="org.squale.squalix.tools.clearcase.task.ClearCaseTask" standard="true"/>
-		<task name="JCompilingTask" class="org.squale.squalix.tools.compiling.java.JCompilingTask" />
-		<task name="ClearCaseCleanerTask" class="org.squale.squalix.tools.clearcase.task.ClearCaseCleanerTask" />
+		<!-- taches obligatoires -->
+		<task name="ScmTask" class="org.squale.squalix.tools.scm.task.ScmTask" standard="true"></task>
+		<task name="ScmCleanerTask" class="org.squale.squalix.tools.scm.task.ScmCleanerTask" configurable="false"></task>		
+		<task name="JCompilingTask" class="org.squale.squalix.tools.compiling.java.JCompilingTask" standard="true"></task>
+		<task name="JCompilingCleanerTask" class="org.squale.squalix.tools.compiling.java.JCompilingCleanerTask" configurable="false"></task>
+		<task name="JspCompilingTask" class="org.squale.squalix.tools.compiling.jsp.JspCompilingTask" standard="true"></task>
+		<task name="SourceCodeAnalyserTask" class="org.squale.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserTask" standard="true"></task>
+		<task name="SourceCodeAnalyserCleanerTask" class="org.squale.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserCleanerTask" configurable="false"></task>
+		<task name="JavaMockCompilingTask" class="org.squale.squalix.tools.compiling.java.JavaMockCompilingTask" standard="true"></task>
+		<task name="JavaMockCompilingCleanerTask" class="org.squale.squalix.tools.compiling.java.JavaMockCompilingCleanerTask" configurable="false"></task>
+		<!-- taches facultatives -->
+		<task name="ComputeResultTask" class="org.squale.squalix.tools.computing.project.ComputeResultTask" configurable="false" mandatory="false"></task>
+		<task name="RulesCheckingTask" class="org.squale.squalix.tools.ruleschecking.RulesCheckingTask" mandatory="false"></task>
+		<task name="CkjmTask" class="org.squale.squalix.tools.ckjm.CkjmTask" configurable="false" mandatory="false"></task>
+		<task name="JDependTask" class="org.squale.squalix.tools.jdepend.JDependTask" configurable="false" mandatory="false"></task>
+		<task name="MackerTask" class="org.squale.squalix.tools.macker.MackerTask" mandatory="false"></task>
+		<task name="J2eeMackerTask" class="org.squale.squalix.tools.macker.J2eeMackerTask" mandatory="false"></task>
+		<task name="CpdTask" class="org.squale.squalix.tools.cpd.CpdTask" configurable="false" mandatory="false"></task>
+		<task name="PmdTask" class="org.squale.squalix.tools.pmd.PmdTask" mandatory="false"></task>
+		<task name="JSPVolumetryTask" class="org.squale.squalix.tools.jspvolumetry.JSPVolumetryTask" configurable="false"></task>
+		<task name="JavancssTask" class="org.squale.squalix.tools.javancss.JavancssTask" configurable="false" mandatory="false"></task>
+		<!-- taches desactivees pour le moment -->
+		<!--task name="UMLQualityTask" class="org.squale.squalix.tools.umlquality.UMLQualityTask" mandatory="false"></task-->
+		<!--task name="CoberturaTask" class="org.squale.squalix.tools.cobertura.CoberturaTask" configurable="true" mandatory="false"></task-->
 	</tasks>
 	<sourcemanagements>
-		<sourcemanagement name="clearcase">
+		<sourcemanagement name="Local">
 			<analysis>
-				<task-ref name="ClearCaseTask" />
+				<task-ref name="SourceCodeAnalyserTask"></task-ref>
 			</analysis>
 			<termination>
-				<task-ref name="ClearCaseCleanerTask" />
+				<task-ref name="SourceCodeAnalyserCleanerTask"></task-ref>
 			</termination>
 		</sourcemanagement>
+		<sourcemanagement name="Scm">
+			<analysis>
+				<task-ref name="ScmTask"></task-ref>
+			</analysis>
+			<termination>
+				<task-ref name="ScmCleanerTask"></task-ref>
+			</termination>
+		</sourcemanagement>	
 	</sourcemanagements>
 	<profiles>
-		<profile name="java1.4">
+		<profile name="java1.4" language="java">
 			<integrityConstraints>
+				<!-- Les grilles disponibles pour ce profil -->
 				<grids>
-					<grid name="grid" />
+					<grid name="grid"/>
 				</grids>
+				<!-- Les différentes configurations des graphiques -->
 				<displayConfigurations>
-					<bubble xtre="mccabe.method.vg" ytre="mccabe.method.evg" xPos="10" yPos="7" />
+					<!-- La configuration du scatterplot -->
+					<bubble xtre="javancss.method.cnn" ytre="javancss.method.ncss" xPos="20" yPos="50" />
+					<!-- La configuration de la volumétrie -->
 					<volumetries>
+						<!-- configuration du graphe de volumétrie niveau application -->
 						<volumetry component="application">
-							<tre name="rsm.project.sloc" />
+							<tre name="javancss.project.numberOfCodeLines" />
 						</volumetry>
+						<!-- configuration de la volumétrie niveau projet -->
 						<volumetry component="project">
-							<tre name="rsm.project.sloc" />
-							<tre name="rsm.project.comments" />
+							<tre name="javancss.project.numberOfCodeLines" />
+							<tre name="javancss.project.numberOfCommentsLines" />
+							<tre name="javancss.project.numberOfClasses" />
+							<tre name="javancss.project.numberOfMethods" />
 						</volumetry>
 					</volumetries>
 				</displayConfigurations>
 			</integrityConstraints>
 			<analysis>
-				<task-ref name="JCompilingTask" />
+				<task-ref name="JCompilingTask"></task-ref>
+				<task-ref name="JDependTask"></task-ref>
+				<task-ref name="CkjmTask"></task-ref>
+				<task-ref name="RulesCheckingTask">
+					<parameter name="ruleset" value="squale-conventions-1.1.0" />
+				</task-ref>
+				<task-ref name="MackerTask"></task-ref>
+				<task-ref name="PmdTask">
+					<parameter name="language" value="java" />
+					<parameter name="javaruleset" value="squale-pmd-java-1.0.0" />
+				</task-ref>
+				<task-ref name="CpdTask">
+					<parameter name="language" value="java" />
+				</task-ref>
+				<task-ref name="JavancssTask"></task-ref>
 			</analysis>
 			<termination>
+				<task-ref name="JCompilingCleanerTask"></task-ref>
+				<task-ref name="ComputeResultTask"></task-ref>
 			</termination>
 		</profile>
 	</profiles>
+	<admin-params>
+		<mail>
+			<admin-mailing-list>--</admin-mailing-list><!-- mandatory -->
+			<!--<smtp-server></smtp-server>-->
+			<!--<sender-address></sender-address>-->
+			<!--<smtp-authent-needed></smtp-authent-needed>--><!-- true or false. False by default -->
+			<!--<smtp-username></smtp-username>-->
+			<!--<smtp-password></smtp-password>-->
+		</mail>
+	</admin-params>
 </configuration>

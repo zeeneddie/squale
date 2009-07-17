@@ -3,7 +3,7 @@
 	<skin>
 		<groupId>org.squale.sites.skins</groupId>
 		<artifactId>squale-main-skin</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.1</version>
 	</skin>
 	<publishDate position="left" format="dd MMM yyyy" />
 	<bannerLeft>

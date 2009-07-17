@@ -113,31 +113,6 @@ public class AuditDAOImplTest
     }
 
     /**
-     * Teste la récupération des audits à supprimer
-     * 
-     * @throws JrafDaoException en cas de problémes
-     */
-    public void testFindDeleted()
-        throws JrafDaoException
-    {
-        Collection coll = new ArrayList( 0 );
-        getSession().beginTransaction();
-        assertTrue( dao.findDeleted( getSession(), ( (ApplicationBO) p1.getParent() ).getServeurBO().getServeurId(),
-                                     new ArrayList() ).size() == 0 );
-        getSession().commitTransactionWithoutClose();
-        a1.setStatus( AuditBO.DELETED );
-        getSession().beginTransaction();
-        dao.save( getSession(), a1 );
-        getSession().commitTransactionWithoutClose();
-        assertEquals( dao.findDeleted( getSession(), ( (ApplicationBO) p1.getParent() ).getServeurBO().getServeurId(),
-                                       new ArrayList() ).size(), 1 );
-        ArrayList applis = new ArrayList( 1 );
-        applis.add( new Long( 1 ) );
-        assertEquals( dao.findDeleted( getSession(), ( (ApplicationBO) p1.getParent() ).getServeurBO().getServeurId(),
-                                       applis ).size(), 0 );
-    }
-
-    /**
      * Teste la méthode qui compte le nombre d'audits encore en cours sur un site donné
      * 
      * @throws JrafDaoException en cas d'échec

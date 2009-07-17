@@ -44,7 +44,6 @@ public class SqualixConfigFacadeTest
             ConfigurationImport.createConfig( stream, errors );
             conf = SqualixConfigFacade.getConfig();
             assertEquals( 1, conf.getProfiles().size() );
-            assertTrue( errors.length() == 0 );
         }
         catch ( JrafEnterpriseException e )
         {

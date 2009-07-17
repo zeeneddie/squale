@@ -116,47 +116,6 @@ public class ApplicationFacadeTest
     }
 
     /**
-     * Test de update(ApplicationConfDTO, ISession) - test avec modification des données - test avec ajout
-     * d'utilisateurs
-     */
-    public void testUpdateApplicationConfDTOISession()
-    {
-        ApplicationBO application;
-        try
-        {
-            application = getComponentFactory().createApplication( null );
-            ComponentDTO dto = new ComponentDTO();
-
-            // Initialisation
-            ISession session = null; // session Hibernate
-
-            // Insertion de l'objet a modifier en base
-            ApplicationConfDTO applicationConfIn = new ApplicationConfDTO();
-            applicationConfIn.setId( application.getId() );
-            ApplicationConfDTO applicationConf = ApplicationFacade.getApplicationConf( applicationConfIn );
-            ServeurDTO serverDTO = new ServeurDTO();
-            serverDTO.setName( "TLS" );
-            serverDTO.setServeurId( 1 );
-            applicationConf.setServeurDTO( serverDTO );
-            // Methode update
-            ApplicationFacade.update( applicationConf );
-
-            // Chargement de l'objet pour vérifier le changement
-            applicationConf = ApplicationFacade.getApplicationConf( applicationConf );
-        }
-        catch ( JrafDaoException e )
-        {
-            e.printStackTrace();
-            fail( "unexpected exception" );
-        }
-        catch ( JrafEnterpriseException e )
-        {
-            e.printStackTrace();
-            fail( "unexpected exception" );
-        }
-    }
-
-    /**
      * Test pour ApplicationConfDTO insert(ApplicationConfDTO, ISession)
      */
     public void testInsertApplicationConfDTOISession()

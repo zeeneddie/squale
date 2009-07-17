@@ -36,38 +36,6 @@ public class CheckstyleFacadeTest
 {
 
     /**
-     * Parsing nominale d'un fichier de configuration checkstyle
-     */
-    public void testParseFileNew()
-    {
-        try
-        {
-            InputStream stream = getClass().getClassLoader().getResourceAsStream( "config/AFcheckStyle_parsing.xml" );
-            CheckstyleDTO version = new CheckstyleDTO();
-            // parsing du contenue du fichier
-            StringBuffer errors = new StringBuffer();
-            CheckstyleDTO versionRes = CheckstyleFacade.importCheckstyleConfFile( stream, errors );
-            assertTrue( "Erreur pendant le parsing", errors.length() == 0 );
-            assertNotNull( "echec de parsing", versionRes );
-            CheckstyleRuleSetBO versionPer =
-                (CheckstyleRuleSetBO) CheckstyleRuleSetDAOImpl.getInstance().load( getSession(),
-                                                                                   new Long( versionRes.getId() ) );
-            assertNotNull( "echec de load", versionPer );
-            Map regles = versionPer.getRules();
-            CheckstyleRuleBO rule = (CheckstyleRuleBO) regles.get( "COD01" );
-            assertNotNull( "rule null", rule );
-            assertNotNull( "rule null", rule.getSeverity() );
-            assertEquals( "severity", rule.getSeverity(), "warning" );
-
-        }
-        catch ( Exception e )
-        {
-            e.printStackTrace();
-            fail( "Exception inattendue" );
-        }
-    }
-
-    /**
      * Parsing d'un mauvais fichier
      */
     public void testParseBadFileNew()

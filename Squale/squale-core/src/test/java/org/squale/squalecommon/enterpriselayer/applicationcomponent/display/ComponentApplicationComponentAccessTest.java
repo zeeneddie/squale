@@ -81,7 +81,7 @@ public class ComponentApplicationComponentAccessTest
             // Initialisation des parametres sous forme de tableaux d'objets
             ComponentDTO existingProject = new ComponentDTO();
             existingProject.setID( project.getId() );
-            Object[] paramIn = { existingProject, ComponentType.PACKAGE, null };
+            Object[] paramIn = { existingProject, ComponentType.PACKAGE, null, null };
 
             appComponent = AccessDelegateHelper.getInstance( "Component" );
             children = (Collection) appComponent.execute( "getChildren", paramIn );

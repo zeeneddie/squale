@@ -66,20 +66,5 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
-		<!-- TEST DEPENDENCIES -->
-		<!-- To generate test reports: -->
-		<!-- clean test site -Dmaven.test.failure.ignore=true -Preports -->
-		<dependency>
-			<groupId>dbunit</groupId>
-			<artifactId>dbunit</artifactId>
-			<version>2.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>1.8.0.1</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 </project>

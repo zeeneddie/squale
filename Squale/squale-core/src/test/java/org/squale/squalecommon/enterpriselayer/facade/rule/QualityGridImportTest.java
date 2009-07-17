@@ -38,7 +38,7 @@ public class QualityGridImportTest
     public void testImportNominal()
     {
         StringBuffer errors = new StringBuffer();
-        InputStream stream = getClass().getClassLoader().getResourceAsStream( "config/grid.xml" );
+        InputStream stream = getClass().getClassLoader().getResourceAsStream( "data/grid/grid_simple.xml" );
         Collection grids;
         try
         {

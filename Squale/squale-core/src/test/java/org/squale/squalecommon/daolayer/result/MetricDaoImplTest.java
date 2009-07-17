@@ -45,7 +45,6 @@ public class MetricDaoImplTest
     {
         int volumetry = -1;
         int volumetryBySite = -1;
-        int volumetryBySiteAndProfil = -1;
         ISession session = getSession();
         MetricDAOImpl metricDAO = MetricDAOImpl.getInstance();
         session.beginTransaction();
@@ -64,14 +63,11 @@ public class MetricDaoImplTest
         session.beginTransaction();
         volumetry = metricDAO.getVolumetry( session, new Long( proj.getId() ) );
         volumetryBySite = metricDAO.getVolumetryBySite( session, appli.getServeurBO().getServeurId() );
-        volumetryBySiteAndProfil =
-            metricDAO.getVolumetryBySiteAndProfil( session, appli.getServeurBO().getServeurId(), "java" );
         session.commitTransactionWithoutClose();
         // on doit avoir la meme volumétrie que celle qui est crée par
         // cf getComponentFactory().createComments pour la valeur
         assertTrue( volumetry == ComponentFactory.SLOC );
         assertTrue( volumetryBySite == ComponentFactory.SLOC );
-        assertTrue( volumetryBySiteAndProfil == ComponentFactory.SLOC );
     }
 
 }

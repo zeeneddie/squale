@@ -157,44 +157,6 @@ public class ApplicationAdminApplicationComponentAccessTest
     }
 
     /**
-     * Test de suppression d'un projet
-     */
-    public void testRemoveProject()
-    {
-        try
-        {
-            ISession session = getSession();
-            // on crée une transaction juste pour la création des éléments
-            session.beginTransaction();
-            ApplicationBO application = getComponentFactory().createApplication( session );
-            QualityGridBO grid = getComponentFactory().createGrid( session );
-            ProjectBO project = getComponentFactory().createProject( session, application, grid );
-            // on la ferme donc juste apres sans terminer la session
-            session.commitTransactionWithoutClose();
-
-            // Teste si la methode est accessible par AccessDelegateHelper
-            // et si l'objet renvoyé n'est pas nul
-            IApplicationComponent appComponent;
-
-            // Initialisation des parametres de la methode
-            ProjectConfDTO projectConf = new ProjectConfDTO(); // à initialiser
-            projectConf.setId( project.getId() );
-            // Initialisation des parametres sous forme de tableaux d'objets
-            Object[] paramIn = new Object[1];
-            paramIn[0] = projectConf;
-
-            // Execution de la methode
-            appComponent = AccessDelegateHelper.getInstance( "ApplicationAdmin" );
-            appComponent.execute( "removeProject", paramIn );
-        }
-        catch ( Exception e )
-        {
-            e.printStackTrace();
-            fail( "unexpected exception" );
-        }
-    }
-
-    /**
      * Test de sauvegarde d'un projet
      */
     public void testSaveProject()

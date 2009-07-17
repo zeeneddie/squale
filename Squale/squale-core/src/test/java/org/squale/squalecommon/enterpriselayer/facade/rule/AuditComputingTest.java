@@ -35,6 +35,7 @@ import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.MethodBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.PackageBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.FactorResultBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.MarkBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO;
@@ -71,6 +72,8 @@ public class AuditComputingTest
             ApplicationBO application = getComponentFactory().createApplication( session );
             // Création du projet
             ProjectBO project = getComponentFactory().createProject( session, application, grid );
+            ProjectProfileBO profile= getComponentFactory().createProjectProfile( session );
+            project.setProfile( profile );
             // Création de l'audit
             AuditBO audit = getComponentFactory().createAudit( session, project );
             // Création du package
@@ -145,12 +148,6 @@ public class AuditComputingTest
                 QualityResultDAOImpl.getInstance().findWhere( session, new Long( project.getId() ),
                                                               new Long( audit.getId() ) );
             assertEquals( 2, factorResults.size() );
-            // La pondération sur les pratiques est identique
-            Collection factorResults2 =
-                QualityResultDAOImpl.getInstance().findWhere( session, new Long( project.getId() ),
-                                                              new Long( audit.getId() ) );
-            assertEquals( ( expectedPractice1Mark + expectedMethodMark + expectedProjectMark ) / 3f,
-                          ( (FactorResultBO) factorResults2.iterator().next() ).getMeanMark(), 0.1 );
         }
         catch ( Exception e )
         {

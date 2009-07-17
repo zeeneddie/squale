@@ -68,32 +68,6 @@ public class AbstractComponentDAOImplTest
     }
 
     /**
-     * Test de remove
-     */
-    public void testRemove()
-    {
-        try
-        {
-            ApplicationBO application = getComponentFactory().createTestApplication();
-            AbstractComponentDAOImpl dao = AbstractComponentDAOImpl.getInstance();
-            getSession().beginTransaction();
-            assertTrue( dao.count( getSession() ).intValue() > 0 );
-            getSession().commitTransactionWithoutClose();
-            getSession().beginTransaction();
-            dao.remove( getSession(), application );
-            getSession().commitTransactionWithoutClose();
-            getSession().beginTransaction();
-            assertEquals( 0, dao.count( getSession() ).intValue() );
-            getSession().commitTransactionWithoutClose();
-        }
-        catch ( JrafDaoException e )
-        {
-            e.printStackTrace();
-            fail( "unexpected exception" );
-        }
-    }
-
-    /**
      * Test de findProjectChildren
      */
     public void testFindChild()

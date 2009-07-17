@@ -7,6 +7,8 @@
 		
 		<component name="verifyUser" />
 		
+		<component name="userAuthentication" />
+		
 		<component name="getAdminsWithEmails" />
 		
 		<component name="getManagersWithEmails" />
@@ -19,11 +21,15 @@
 		
 		<component name="getReadersEmails" />
 		
+		<component name="getUsersWithIdStartingBy" />
+		
 	</applicationComponent>
 	
 	<applicationComponent name="ApplicationAdmin" description="Administration et Enregistrement d'applications" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.ApplicationAdminApplicationComponentAccess">
 
 		<component name="addMilestone" />
+
+		<component name="addBranch" />
 		
 		<component name="addProject" />
 		
@@ -35,12 +41,66 @@
 		
 		<component name="removeProject" />
 		
+		<component name="disactiveOrReactiveProject" />
+		
 		<component name="saveApplication" />
 		
+		<component name="updateLastModifParams" />
+		
 		<component name="saveProject" />
+
+		<component name="restartAudit" />
+		
+		<component name="getMilestoneAudit" />
+		
+		<component name="removeAudit" />
+		
+		<component name="modifyAudit" />
 		
 		<component name="listAll" />
+		
+		<component name="addUserAccess" />
+		
+		<component name="addTag" />
+		
+		<component name="removeTag" />
+		
+	</applicationComponent>
+	
+	<applicationComponent name="ProjectAdmin" description="Administration des tags sur un projet" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.ProjectAdminProjectComponentAccess">
 
+		<component name="addTag" />
+		
+		<component name="removeTag" />
+		
+	</applicationComponent>
+	
+	<applicationComponent name="TagAdmin" description="Administration des tags" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.TagAdminTagComponentAccess">
+
+		<component name="getTag" />
+		
+		<component name="getTagsByName" />
+		
+		<component name="addTag" />
+		
+		<component name="getTags" />
+		
+		<component name="getTagCategories" />
+		
+		<component name="getTagCategoriesByName" />
+		
+		<component name="createTag" />
+		
+		<component name="modifyTag" />
+		
+		<component name="createTagCategory" />
+		
+		<component name="modifyTagCategory" />
+		
+		<component name="deleteTags" />
+		
+		<component name="deleteTagCategories" />
+		
 	</applicationComponent>
 	
 	<applicationComponent name="Purge" description="supprimer des audits et applications" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.PurgeApplicationComponentAccess">
@@ -48,6 +108,8 @@
 		<component name="purgeAudit" />
 		
 		<component name="purgeApplication" />
+		       
+        <component name="hideApplication" />
 
 	</applicationComponent>
 	
@@ -61,7 +123,9 @@
 		
 		<component name="validateApplicationsCreation" />
 		
-		<component name="validateApplicationsReference" />
+		<component name="updateReferentiel" />
+		
+		<component name="listReferentiel" />
 
 	</applicationComponent>
 	
@@ -71,7 +135,13 @@
 		
 		<component name="getAudits" />
 		
+		<component name="getById" />
+		
 		<component name="getChildren" />
+		
+		<component name="countChildren" />
+		
+		<component name="getExcluded" />
 		
 		<component name="getLastMilestones" />
 		
@@ -79,20 +149,44 @@
 		
 		<component name="getFailedAudits" />
 		
+		<component name="getPartialAudits" />
+		
 		<component name="getLastPeriodicAudits" />
 		
 		<component name="getLastAllAudits" />
+		
+		<component name="getLastNotAttemptedAudit" />
+		
+		<component name="getAllAuditsAfterDate" />
+		
+		<component name="getAuditsForPortlet" />
+		
+		<component name="getLastTwoAuditsByAuditId" />
 		
 		<component name="getParentsComponent" />
 		
 		<component name="getProjectChildren" />
 		
-		<component name="getProjects" />
+		<component name="getProjectsWithLastAudit" />
+		
+		<component name="updateAuditsDateOrStatus" />
+
+		<component name="findWhereQualityGrid" />
 		
 		<component name="updateComponent" />
 		
-		<component name="findWhereQualityGrid" />
-
+		<component name="getHistoricMap" />
+		
+		<component name="getProjectWorkspace" />
+		
+		<component name="canBeExportedToIDE" />
+		
+		<component name="getLastTerminatedAudits" />
+		
+		<component name="getTaggedApplications" />
+		
+		<component name="getTaggedProjects" />
+		
 	</applicationComponent>
 	
 	<applicationComponent name="Error" description="Gestion des erreurs" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.display.ErrorApplicationComponentAccess">
@@ -104,6 +198,10 @@
 		<component name="getErrorsByTask" />
 		
 		<component name="getErrorsByAuditAndTask" />
+		
+		<component name="getAllTasks" />
+		
+		<component name="getAllErrors" />
 
 	</applicationComponent>
 	
@@ -115,6 +213,16 @@
 		
 		<component name="getGraphics" />
 	
+		<component name="getRoiGraph" />
+		
+		<component name="getApplicationKiviatGraph" /> 		
+			
+		<component name="getApplicationPieChartGraph" /> 
+		
+		<component name="getProjectKiviatGraph" />
+		
+		<component name="getProjectBubbleGraph" />			
+	
 	</applicationComponent>
 	
 	<applicationComponent name="Results" description="Recuperation des resultats" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.display.ResultsApplicationComponentAccess">
@@ -125,7 +233,9 @@
 		
 		<component name="getHaveErrors" />
 		
-		<component name="getNumberOfErrors" />
+		<component name="getErrorsRepartition" />
+		
+		<component name="getFailedTasks" />
 		
 		<component name="getProjectResults" />
 		
@@ -144,12 +254,36 @@
 		<component name="getRuleCheckingItemResults" />
 		
 		<component name="getValueResults" />
+		
+		<component name="getValueResultsForInterval" />
 
 		<component name="getPreviousAudit" />
 		
 		<component name="getTopResults" />
 		
+		<component name="getComponentsWhereTres" />
+		
 		<component name="getProjectAuditGrid" />
+		
+		<component name="getAllPractices" />
+		
+		<component name="getAllPracticeNames" />
+		
+		<component name="getChangedComponentResults" />
+		
+		<component name="getWorstPractices" />
+		
+		<component name="getProjectReports" />
+		
+		<component name="listOfManualMark" />
+		
+		<component name="saveManualResult"/>
+		
+		<component name="lastManualMark"/>
+		
+		<component name="auditManualMark"/>
+		
+		
 	</applicationComponent>
 
 	<applicationComponent name="QualityGrid" description="Manipulation des grilles qualite et objets connexes" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.QualityGridApplicationComponentAccess">
@@ -158,17 +292,26 @@
 		
 		<component name="getGrids" />
 		
+		<component name="getUnlinkedGrids" />
+		
 		<component name="createGrid" />
 		
 		<component name="importGrid" />
 
 		<component name="getQualityRule" />
 
+		<component name="getQualityRuleAndUsedTres" />
+
 		<component name="deleteGrids" />
 		
 		<component name="updateGrid" />
 
 		<component name="getGridMetrics" />
+		
+		<component name="updateGrid" />
+		
+		<component name="loadGridById" />
+		
 	</applicationComponent>
 	
 	<applicationComponent name="Messages" description="" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.MessageApplicationComponentAccess">
@@ -234,11 +377,47 @@
 		<component name="deleteRuleSets" />
 
 	</applicationComponent>
-
+	
 	<applicationComponent name="Task" description="gestion des taches" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.TaskAdministrationComponentAccess">
 	
 		<component name="getAllTasks" />
 	
+	</applicationComponent>
+	
+	<applicationComponent name="ROI" description="Gestion du ROI" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.display.RoiComponentAccess">
+	
+		<component name="updateFormula" />
+		
+		<component name="getROI" />
+		
+		<component name="getNbCorrections" />
+	
+	</applicationComponent>
+	
+	<applicationComponent name="Stats" description="Gestion des statistiques SQUALE" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.display.StatsComponentApplicationAccess">
+	
+		<component name="getStats" />
+	
+	</applicationComponent>
+
+	<applicationComponent name="Serveur" description="Gestion des serveurs SQUALE" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.ServeurComponentAccess">
+	
+		<component name="listeServeurs" />
+	
+	</applicationComponent>
+	
+	<applicationComponent name="Mail" description="Mail configuration" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.MailConfigurationAccess">
+		
+		<component name="getAdminMailingList"></component>
+		
+	</applicationComponent>
+	
+	<applicationComponent name="Homepage" description="Homepage configuration" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.homepage.HomepageApplicationComponentAccess">
+		
+		<component name="getHomepageConfig"></component>
+		
+		<component name="saveHomepageConfig"></component>
+		
 	</applicationComponent>
 	
 </listApplicationComponent>

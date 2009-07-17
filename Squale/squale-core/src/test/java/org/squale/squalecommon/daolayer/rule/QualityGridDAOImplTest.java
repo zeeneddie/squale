@@ -113,41 +113,4 @@ public class QualityGridDAOImplTest
             fail( "Exception inattendue" );
         }
     }
-
-    /**
-     * Test du delete en cascade
-     */
-    public void testDeleteCascade()
-    {
-        final IPersistenceProvider PERSISTENTPROVIDER = PersistenceHelper.getPersistenceProvider();
-        ISession session;
-        try
-        {
-            session = PERSISTENTPROVIDER.getSession();
-            // Création du facteur
-            QualityRuleDAOImpl ruleDaoImpl = QualityRuleDAOImpl.getInstance();
-            FactorRuleBO factor = new FactorRuleBO();
-            assertEquals( 0, ruleDaoImpl.count( session ).intValue() );
-            ruleDaoImpl.create( session, factor );
-            assertEquals( 1, ruleDaoImpl.count( session ).intValue() );
-            // Création de la grille
-            QualityGridDAOImpl gridDaoImpl = QualityGridDAOImpl.getInstance();
-            QualityGridBO grid = new QualityGridBO();
-            grid.setName( "grid" );
-            grid.addFactor( factor );
-            gridDaoImpl.createGrid( session, grid );
-            assertEquals( 1, gridDaoImpl.count( session ).intValue() );
-            // Suppression de la grille
-            gridDaoImpl.remove( session, grid );
-            // Vérification de la suppression en cascade
-            assertEquals( 0, gridDaoImpl.count( session ).intValue() );
-            assertEquals( 0, ruleDaoImpl.count( session ).intValue() );
-            FacadeHelper.closeSession( session, "" );
-        }
-        catch ( Exception e )
-        {
-            e.printStackTrace();
-            fail( "Exception inattendue" );
-        }
-    }
 }

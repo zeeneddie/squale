@@ -34,8 +34,6 @@
 	<properties>
 		<squale.props.jraf.version>2.7.0</squale.props.jraf.version>
 		<squale.props.welcom.version>2.6.0</squale.props.welcom.version>
-		<!-- TEMPORARY, till we filtered the old test cases -->
-		<maven.test.skip>true</maven.test.skip>
 	</properties>
 	<build>
 		<resources>
@@ -142,6 +140,18 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<version>2.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>1.8.0.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

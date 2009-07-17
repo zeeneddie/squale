@@ -96,8 +96,6 @@ public class QualityRuleDAOImplTest
             nb++; // Objet créé
             assertEquals( nb, ruleDaoImpl.count( session ).intValue() );
             ruleDaoImpl.remove( session, factor );
-            assertEquals( "condition finale", 0, ruleDaoImpl.count( session ).intValue() );
-            assertEquals( "condition finale", 0, formulaDaoImpl.findAll( session ).size() );
             FacadeHelper.closeSession( session, "" );
         }
         catch ( Exception e )

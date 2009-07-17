@@ -195,40 +195,4 @@ public class MessageDAOImplTest
         }
     }
 
-    /**
-     * Teste la récupération des languages
-     */
-    public void testGetLangs()
-    {
-        JRafConfigurator.initialize();
-        PERSISTENT_PROVIDER = PersistenceHelper.getPersistenceProvider();
-        ISession session;
-        MessageDAOImpl dao = MessageDAOImpl.getInstance();
-
-        try
-        {
-            session = PERSISTENT_PROVIDER.getSession();
-            session.beginTransaction();
-            // on en sauvegarde 1 avec une clé adéquate
-            dao.create( session, bo );
-            session.commitTransactionWithoutClose();
-            session.beginTransaction();
-            MessageDAOImpl messageDAO = MessageDAOImpl.getInstance();
-            Collection coll = messageDAO.findLangs( session );
-            session.commitTransaction();
-            assertTrue( coll.size() == 1 );
-        }
-        catch ( JrafPersistenceException e )
-        {
-            fail( "unexpectedException" );
-            e.printStackTrace();
-        }
-        catch ( JrafDaoException e )
-        {
-            fail( "unexpectedException" );
-            e.printStackTrace();
-        }
-
-    }
-
 }
