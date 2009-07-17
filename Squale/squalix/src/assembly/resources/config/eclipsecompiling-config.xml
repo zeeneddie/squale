@@ -15,10 +15,7 @@
 			-->
 			<option>[advanced_options]</option>
 			<option>-data [workspace]</option>
-			<option>
-				-application
-				org.squale.squale.builder.eclipse32.workspaceId1
-			</option>
+			<option>-application com.airfrance.squale.builder.eclipse32.workspaceId1</option>
 			<option>-dialect [dialect]</option>
 			<option>-sunLibs [sun_libs]</option>
 			<option>-projects [projects_list]</option>

@@ -11,7 +11,7 @@
 			<!--  ENV-ECLIPSE-JAR -->
 			<option>-jar [squale_eclipse_home]/org.eclipse.equinox.launcher_1.0.0.v20070606.jar</option>
 			<option>-data [workspace]</option>
-			<option>-application org.squale.squale.builder.eclipse32.workspaceId1</option>
+			<option>-application com.airfrance.squale.builder.eclipse32.workspaceId1</option>
 			<option>-dialect [dialect]</option>
 			<option>-sunLibs [sun_libs]</option>
 			<option>-projects [projects_list]</option>
