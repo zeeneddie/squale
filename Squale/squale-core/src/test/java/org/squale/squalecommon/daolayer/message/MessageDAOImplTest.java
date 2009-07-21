@@ -119,44 +119,6 @@ public class MessageDAOImplTest
     }
 
     /**
-     * Test la création et l'enregistrement en base d'un newsBO
-     */
-    public void testCreate()
-    {
-        PERSISTENT_PROVIDER = PersistenceHelper.getPersistenceProvider();
-        ISession session;
-        MessageDAOImpl dao = MessageDAOImpl.getInstance();
-        try
-        {
-            session = PERSISTENT_PROVIDER.getSession();
-            session.beginTransaction();
-            Collection coll = dao.findAll( session );
-            // on vérifie qu'on en récupère bien 0 car pour l'instant il n'y en a pas en session
-            assertEquals( coll.size(), 0 );
-            // on en sauvegarde 1
-            dao.create( session, bo );
-            session.commitTransactionWithoutClose();
-            // après avoir commité, on vérifie qu'il a bien été
-            // enregistré et qu'on peut le récupérer
-            session.beginTransaction();
-            coll = dao.findAll( session );
-            session.commitTransaction();
-            // vérification
-            assertEquals( coll.size(), 1 );
-        }
-        catch ( JrafPersistenceException e )
-        {
-            fail( "unexpectedException" );
-            e.printStackTrace();
-        }
-        catch ( JrafDaoException e )
-        {
-            fail( "unexpectedException" );
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Test la récupération de tous les messages dont la clé contient une chaine donnée
      */
     public void testFindByKey()

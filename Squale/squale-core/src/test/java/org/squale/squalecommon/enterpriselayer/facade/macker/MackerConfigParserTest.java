@@ -50,7 +50,6 @@ public class MackerConfigParserTest
         // Vérification des attributs de la règle
         RuleBO rule = (RuleBO) ruleset.getRules().values().iterator().next();
         assertEquals( "valeur à vérifier dans le fichier", "layerrespect", rule.getCategory() );
-        assertEquals( "valeur à vérifier dans le fichier", "Les références ne sont pas correctes", rule.getCode() );
         assertEquals( "valeur à vérifier dans le fichier", "error", rule.getSeverity() );
     }
 
