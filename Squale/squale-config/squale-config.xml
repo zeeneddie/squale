@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.1//EN" "file:../org/squale/squalecommon/dtd/squalix-config-1.1.dtd">
-<!--  Fichier de configuration de squalix définissant les profiles possibles, les différents types
-	de récupération des sources,...
-	La configuration des types de récupération des sources se fait par l'action dont le nom correspond à
-	l'attribut name du tag sourcemanagement.
-	Chaque profile doit commencer la tâche d'analyse de récupération des sources du projet et terminer
-	par sa tâche de terminaison  -->
+<!-- Squale configuration file -->
 <configuration>
 	<stoptimes>
 		<stoptime day="monday" time="4:00"></stoptime>
@@ -26,7 +21,6 @@
 		<task name="ScmCleanerTask" class="org.squale.squalix.tools.scm.task.ScmCleanerTask" configurable="false"></task>		
 		<task name="JCompilingTask" class="org.squale.squalix.tools.compiling.java.JCompilingTask" standard="true"></task>
 		<task name="JCompilingCleanerTask" class="org.squale.squalix.tools.compiling.java.JCompilingCleanerTask" configurable="false"></task>
-		<task name="JspCompilingTask" class="org.squale.squalix.tools.compiling.jsp.JspCompilingTask" standard="true"></task>
 		<task name="SourceCodeAnalyserTask" class="org.squale.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserTask" standard="true"></task>
 		<task name="SourceCodeAnalyserCleanerTask" class="org.squale.squalix.tools.sourcecodeanalyser.SourceCodeAnalyserCleanerTask" configurable="false"></task>
 		<task name="JavaMockCompilingTask" class="org.squale.squalix.tools.compiling.java.JavaMockCompilingTask" standard="true"></task>
@@ -36,25 +30,14 @@
 		<task name="RulesCheckingTask" class="org.squale.squalix.tools.ruleschecking.RulesCheckingTask" mandatory="false"></task>
 		<task name="CkjmTask" class="org.squale.squalix.tools.ckjm.CkjmTask" configurable="false" mandatory="false"></task>
 		<task name="JDependTask" class="org.squale.squalix.tools.jdepend.JDependTask" configurable="false" mandatory="false"></task>
-		<task name="MackerTask" class="org.squale.squalix.tools.macker.MackerTask" mandatory="false"></task>
-		<task name="J2eeMackerTask" class="org.squale.squalix.tools.macker.J2eeMackerTask" mandatory="false"></task>
 		<task name="CpdTask" class="org.squale.squalix.tools.cpd.CpdTask" configurable="false" mandatory="false"></task>
 		<task name="PmdTask" class="org.squale.squalix.tools.pmd.PmdTask" mandatory="false"></task>
 		<task name="JSPVolumetryTask" class="org.squale.squalix.tools.jspvolumetry.JSPVolumetryTask" configurable="false"></task>
 		<task name="JavancssTask" class="org.squale.squalix.tools.javancss.JavancssTask" configurable="false" mandatory="false"></task>
 		<!-- taches desactivees pour le moment -->
-		<!--task name="UMLQualityTask" class="org.squale.squalix.tools.umlquality.UMLQualityTask" mandatory="false"></task-->
 		<!--task name="CoberturaTask" class="org.squale.squalix.tools.cobertura.CoberturaTask" configurable="true" mandatory="false"></task-->
 	</tasks>
 	<sourcemanagements>
-		<sourcemanagement name="Local">
-			<analysis>
-				<task-ref name="SourceCodeAnalyserTask"></task-ref>
-			</analysis>
-			<termination>
-				<task-ref name="SourceCodeAnalyserCleanerTask"></task-ref>
-			</termination>
-		</sourcemanagement>
 		<sourcemanagement name="Scm">
 			<analysis>
 				<task-ref name="ScmTask"></task-ref>
@@ -98,7 +81,6 @@
 				<task-ref name="RulesCheckingTask">
 					<parameter name="ruleset" value="squale-conventions-1.1.0" />
 				</task-ref>
-				<task-ref name="MackerTask"></task-ref>
 				<task-ref name="PmdTask">
 					<parameter name="language" value="java" />
 					<parameter name="javaruleset" value="squale-pmd-java-1.0.0" />
@@ -151,7 +133,6 @@
 					<parameter name="ruleset" value="squale-conventions-1.1.0" />
 				</task-ref>
 				<task-ref name="JavancssTask"></task-ref>
-				<task-ref name="MackerTask"></task-ref>
 				<task-ref name="PmdTask">
 					<parameter name="language" value="java" />
 					<parameter name="javaruleset" value="squale-pmd-java-1.0.0" />
