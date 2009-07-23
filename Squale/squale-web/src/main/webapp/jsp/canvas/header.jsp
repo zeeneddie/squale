@@ -168,12 +168,16 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 				action="loadConfig.do" accessKey="admin" />
 		</af:menuItem>
 		<af:menuItem key="menu.administration.stats" color="2"
+			action="stats.do?action=displayAdmin" accessKey="admin" />
+		<%-- This part is commented out till we have worked on the ROI aspect of Squale
+		<af:menuItem key="menu.administration.stats" color="2"
 			accessKey="admin">
 			<af:menuItem key="menu.administration.roi" color="2"
 				action="roi.do?action=display" accessKey="admin" />
 			<af:menuItem key="menu.administration.stats.general" color="2"
 				action="stats.do?action=displayAdmin" accessKey="admin" />
 		</af:menuItem>
+		--%>
 		<af:menuItem key="menu.administration.messages" color="2"
 			action="utilLink.do?action=message" accessKey="admin" />
 	</af:menuItem>
