@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,6 +37,7 @@ import org.squale.squalecommon.enterpriselayer.businessobject.component.paramete
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
 import org.squale.squalix.core.AbstractTask;
 import org.squale.squalix.core.TaskData;
 import org.squale.squalix.core.TaskException;
@@ -106,26 +108,17 @@ public abstract class AbstractGenericTask
     /**
      * This method initiate the GenericTask by calling a configurator and getting all the needed parameters ready
      * 
-     * @throws ConfigurationException is thrown if the user has not entered some configuration informations
-     * @throws TaskException is thrown as the exception has to be cancelled
+     * @return false if no configuration informations have been set
      */
-    public void init()
-        throws ConfigurationException, TaskException
+    public boolean init()
     {
         /* Getting the parameters of the GenericTask by recovering the map of parameters for it */
         this.genericTaskParam = (MapParameterBO) mProject.getParameter( mName );
 
         /* If all values mapped in the map are null */
-        if ( null == genericTaskParam )
-        {
-            /* if no parameters have been recovered , preparing an error message and logging it */
-            LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.project.notConfigured" ) );
-            /* Cancelling the task as no parameters have been entered by the user and logging the info */
-            mStatus = FAILED;
-            /* throws an exception if no parameters are found */
-            throw new ConfigurationException( AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.task.aborded" ) );
-        }
-        else
+        boolean isConfigured = isTaskConfigured( genericTaskParam.getParameters() );
+
+        if ( isConfigured )
         {
             /* Logging the beginning of the init sequence [! in debug mode only !] */
             LOGGER.debug( AbstractGenericTaskMessages.getMessage( "logs.agt.init.start", mProject.getName() ) );
@@ -140,6 +133,47 @@ public abstract class AbstractGenericTask
             /* Logging the end of the init sequence */
             LOGGER.info( AbstractGenericTaskMessages.getMessage( "logs.agt.init.end", mProject.getName() ) );
         }
+        else
+        {
+            String message = AbstractGenericTaskMessages.getMessage( "logs.agt.warn.project.notConfigured", mName );
+            initError( message );
+            /* if no parameters have been recovered , preparing an error message and logging it */
+            LOGGER.warn( message );
+            /* Cancelling the task as no parameters have been entered by the user and logging the info */
+            mStatus = CANCELLED;
+        }
+        return isConfigured;
+    }
+
+    /**
+     * This method establish if the task has been configured
+     * 
+     * @param paramMap The task map of parameters
+     * @return true if the task has been configured
+     */
+    private boolean isTaskConfigured( Map paramMap )
+    {
+        boolean isToolDir;
+        boolean isWorkDir;
+        boolean isCommands;
+        boolean isResultDir;
+
+        isToolDir = ( (StringParameterBO) paramMap.get( ParametersConstants.GENERICTASK_TOOLDIR ) ).getValue() != null;
+        isWorkDir = ( (StringParameterBO) paramMap.get( ParametersConstants.GENERICTASK_WORKDIR ) ).getValue() != null;
+
+        List commandList =
+            ( (ListParameterBO) genericTaskParam.getParameters().get( ParametersConstants.GENERICTASK_COMMANDS ) ).getParameters();
+
+        isCommands = !( commandList.size() == 1 && ( (StringParameterBO) commandList.get( 0 ) ).getValue() == null );
+
+        List resultDirList =
+            ( (ListParameterBO) genericTaskParam.getParameters().get( ParametersConstants.GENERICTASK_RESULTSDIR ) ).getParameters();
+
+        isResultDir =
+            !( resultDirList.size() == 1 && ( (StringParameterBO) resultDirList.get( 0 ) ).getValue() == null );
+
+        return isToolDir || isWorkDir || isCommands || isResultDir;
+
     }
 
     /**
@@ -150,39 +184,37 @@ public abstract class AbstractGenericTask
      * 
      * @throws TaskException exception during execution of the Task. Please consider having a look at
      *             {@link AbstractTask} for more information.
-     * @throws JrafDaoException 
+     * @throws JrafDaoException
      */
     public final void execute()
         throws TaskException, JrafDaoException
     {
         /* Initiating the task */
-        try
+
+        boolean isConfigured = init();
+
+        if ( isConfigured )
         {
-            init();
-        }
-        catch ( ConfigurationException configException )
-        {
-            /* As ConfigurationException is not compatible with throws clause in AbstractTask.execute() catching it */
-            LOGGER.info( configException );
-            throw new TaskException( configException );
-        }
-        /* Getting the result files from the execution of the task */
-        List<File> scannedResultFiles = this.perform();
-        /* The perform method never returns null as it instantiates an empty list with an initial capacity of zero */
-        if ( scannedResultFiles.size() > 0 )
-        {
-            /* Calling the method implemented by tasks extending the AbstractGenericTask */
-            parseResults( scannedResultFiles );
-        }
-        else
-        {
-            /* Logging an error as there are no result locations */
-            LOGGER.error( AbstractGenericTaskMessages.getMessage( "logs.agt.error.noResultFile", mProject.getName() ) );
-            mStatus = FAILED;
-            /*
-             * Please keep in mind that if there are any problem encountered while executing the commandline they have
-             * been handled up stream here we are handling only exception if there are no file in the list.
-             */
+            /* Getting the result files from the execution of the task */
+            List<File> scannedResultFiles = this.perform();
+            /* The perform method never returns null as it instantiates an empty list with an initial capacity of zero */
+            if ( scannedResultFiles.size() > 0 )
+            {
+                /* Calling the method implemented by tasks extending the AbstractGenericTask */
+                parseResults( scannedResultFiles );
+            }
+            else
+            {
+                /* Logging an error as there are no result locations */
+                String message = AbstractGenericTaskMessages.getMessage( "logs.agt.error.noResultFile", mProject.getName() );
+                LOGGER.error( message );
+                mStatus = FAILED;
+                initError( message, ErrorBO.CRITICITY_FATAL );
+                /*
+                 * Please keep in mind that if there are any problem encountered while executing the commandline they
+                 * have been handled up stream here we are handling only exception if there are no file in the list.
+                 */
+            }
         }
     }
 
@@ -198,9 +230,10 @@ public abstract class AbstractGenericTask
      * </p>
      * 
      * @return {@link List} : the java.io.file object(s)
-     * @throws TaskException  Exception occur
+     * @throws TaskException Exception occur
      */
-    private List<File> perform() throws TaskException
+    private List<File> perform()
+        throws TaskException
     {
         /* The returned array of result files */
         String[] scannedResultFiles = null;
@@ -260,23 +293,29 @@ public abstract class AbstractGenericTask
                  * the exitValue of the process is different from zero indicating an abnormal termination. Informing the
                  * user and aborting the task
                  */
-                LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.exitValue", exitValue ) );
+                String message = AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.exitValue", exitValue ); 
+                LOGGER.fatal( message );
                 mStatus = FAILED;
+                initError( message, ErrorBO.CRITICITY_FATAL );
             }
         }
         catch ( CommandLineException cmdLineExcep )
         {
-            /* Exception is generated by the executeCommandLine method call the task has to be cancelled */
+            /* Exception is generated by the executeCommandLine method call the task has to be cancelled */            
+            String message = "CommandLineException : " + cmdLineExcep;
             mStatus = FAILED;
-            LOGGER.fatal( "CommandLineException : " + cmdLineExcep );
+            LOGGER.fatal( message );
             LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.task.aborded" ) );
+            initError( message, ErrorBO.CRITICITY_FATAL );
         }
         catch ( ConfigurationException confExcep )
         {
             /* Catching the configuration exception thrown by the prepareResultProcessing method */
+            String message = AbstractGenericTaskMessages.getMessage( "logs.agt.error.fileSpecification") ; 
             mStatus = FAILED;
-            LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.error.fileSpecification" ) );
+            LOGGER.fatal(  message );
             LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.task.aborded" ) );
+            initError( message, ErrorBO.CRITICITY_FATAL );
         }
         return results;
     }
