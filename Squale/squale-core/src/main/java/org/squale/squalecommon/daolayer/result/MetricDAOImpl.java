@@ -18,6 +18,7 @@
  */
 package org.squale.squalecommon.daolayer.result;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -128,30 +129,78 @@ public class MetricDAOImpl
      * @return la volumétrie des applis du site
      * @throws JrafDaoException en cas d'échec
      */
-    public int getVolumetryBySiteAndProfil( ISession pSession, long pSiteId, String pProfile )
+    public int getVolumetryBySiteAndProfil( ISession pSession, long pSiteId, String pProfile , ArrayList<String> treKeyList )
         throws JrafDaoException
     {
-        // TODO : Il faudrait gérer en configuration les métriques nécessaires au calcul de la volumétrie
+        
+        StringBuffer whereClause = new StringBuffer(" where (");
         // On sélectionne le nom de la métrique correspondant au nombre de lignes
-        String whereClause = " where (" + getAlias() + ".name='sloc'";
-        // ainsi que le nombre de lignes JSP
-        whereClause += " or " + getAlias() + ".name='numberOfJSPCodeLines'";
-        // ainsi que le nombre de lignes pour du COBOL
-        whereClause += " or " + getAlias() + ".name='projectnl')";
+        Iterator<String> treKeyIt = treKeyList.iterator();
+        while( treKeyIt.hasNext() )
+        {
+            String treKey = treKeyIt.next();
+            whereClause.append( "(" );
+            whereClause.append( getAlias() );
+            whereClause.append( ".measure.class=" );
+            whereClause.append( Mapping.getMetricClass( treKey ).getName() );
+            whereClause.append( " AND " );
+            whereClause.append( getAlias() );
+            whereClause.append( ".name='" );
+            whereClause.append( treKey.substring( treKey.lastIndexOf( '.' ) + 1 ) );
+            whereClause.append( "')" );
+            if(treKeyIt.hasNext())
+            {
+                whereClause.append( " OR " );
+            }
+            else
+            {
+                whereClause.append( ")" );
+            }
+        }
+        
         // critère du site
-        whereClause += " AND " + getAlias() + ".measure.component.parent.serveurBO.serveurId='" + pSiteId + "'";
+        whereClause.append( " AND " );
+        whereClause.append( getAlias() );        
+        whereClause.append( ".measure.component.parent.serveurBO.serveurId='");
+        whereClause.append( pSiteId );
+        whereClause.append( "'");
+        
         // on ne prend pas en compte les applications supprimées
-        whereClause += " AND " + getAlias() + ".measure.component.parent.status!=" + ApplicationBO.DELETED;
+        whereClause.append( " AND ");
+        whereClause.append( getAlias());
+        whereClause.append( ".measure.component.parent.status!=");
+        whereClause.append( ApplicationBO.DELETED);
+        
         // critère du profil
-        whereClause += " AND " + getAlias() + ".measure.component.profile.name='" + pProfile + "'";
+        whereClause.append( " AND " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".measure.component.profile.name='");
+        whereClause.append( pProfile );
+        whereClause.append( "'");
+        
+        
         // Les audits doivent être supprimés ou partiels
-        whereClause += " AND (" + getAlias() + ".measure.audit.status=" + AuditBO.TERMINATED;
-        whereClause += " or " + getAlias() + ".measure.audit.status=" + AuditBO.PARTIAL + ")";
-        whereClause += " order by " + getAlias() + ".measure.component.id, ";
-        whereClause += getAlias() + ".measure.audit.status asc, coalesce(";
-        whereClause += getAlias() + ".measure.audit.historicalDate, ";
-        whereClause += getAlias() + ".measure.audit.date) desc";
-        List results = findWhere( pSession, whereClause );
+        whereClause.append( " AND (" );
+        whereClause.append( getAlias() );
+        whereClause.append(".measure.audit.status=" );
+        whereClause.append( AuditBO.TERMINATED);
+        
+        whereClause.append( " OR " );
+        whereClause.append( getAlias() );
+        whereClause.append(".measure.audit.status=");
+        whereClause.append(AuditBO.PARTIAL);
+        whereClause.append(")");
+        
+        whereClause.append( " order by " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".measure.component.id, ");
+        whereClause.append( getAlias() );
+        whereClause.append( ".measure.audit.status asc, coalesce(");
+        whereClause.append( getAlias() );
+        whereClause.append( ".measure.audit.historicalDate, ");
+        whereClause.append( getAlias() );
+        whereClause.append( ".measure.audit.date) desc");
+        List results = findWhere( pSession, whereClause.toString() );
         int result = 0;
         long lastProjectId = -1;
         long lastAuditId = -1;

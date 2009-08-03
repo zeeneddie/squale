@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,6 +39,7 @@ import org.squale.squalecommon.daolayer.component.ApplicationDAOImpl;
 import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
 import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
 import org.squale.squalecommon.daolayer.config.ProjectProfileDAOImpl;
+import org.squale.squalecommon.daolayer.config.web.AbstractDisplayConfDAOImpl;
 import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
 import org.squale.squalecommon.daolayer.result.MetricDAOImpl;
 import org.squale.squalecommon.daolayer.result.QualityResultDAOImpl;
@@ -47,7 +49,10 @@ import org.squale.squalecommon.daolayer.stats.SiteStatsDICTDAOImpl;
 import org.squale.squalecommon.datatransfertobject.config.ServeurDTO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.Profile_DisplayConfBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.AbstractDisplayConfBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.rule.SimpleFormulaBO;
@@ -56,6 +61,7 @@ import org.squale.squalecommon.enterpriselayer.businessobject.stats.SiteStatsDIC
 import org.squale.squalecommon.enterpriselayer.facade.roi.RoiFacade;
 import org.squale.squalecommon.enterpriselayer.facade.rule.FormulaException;
 import org.squale.squalecommon.enterpriselayer.facade.component.ServeurFacade;
+import org.squale.squalecommon.util.mapping.Mapping;
 import org.squale.squalix.core.CoreMessages;
 
 /**
@@ -161,6 +167,9 @@ public class ComputeStats
             List siteProfilStatsList = new ArrayList( 0 );
             // on récupère la liste des profils disponibles
             Collection profiles = profileDao.findAll( mSession );
+            
+            
+            
             // Pour chaque site, on crée un SiteStatsDICTBO
             // Pour chaque combinaison site/profil, on crée un SiteStatsDICTBO
             Collection lServeurList = new ArrayList();
@@ -204,8 +213,45 @@ public class ComputeStats
                 Iterator it = profiles.iterator();
                 while ( it.hasNext() )
                 {
-                    String profileName = ( (ProjectProfileBO) it.next() ).getName();
-                    int nbLines = metricDao.getVolumetryBySiteAndProfil( mSession, lSiteId, profileName );
+                    ProjectProfileBO profile = (ProjectProfileBO) it.next();
+                    
+                    //The name of the profile
+                    String profileName = ( profile ).getName();
+                    
+                    //The number of code line by profile
+                    Set profileDisplayConfList = profile.getProfileDisplayConfs();
+                    Iterator<Profile_DisplayConfBO> profileDisplayConfIt = profileDisplayConfList.iterator();
+                    boolean found = false;
+                    //Profile_DisplayConfBO porfileDisplayConf = null;
+                    AbstractDisplayConfBO displayConf = null;
+                    AbstractDisplayConfDAOImpl displayConfDAO = AbstractDisplayConfDAOImpl.getInstance();
+                    
+                    while ( profileDisplayConfIt.hasNext() && !found)
+                    {
+                        displayConf = (AbstractDisplayConfBO)displayConfDAO.get( mSession, profileDisplayConfIt.next().getDisplayConf().getId() ); 
+                        if ( displayConf instanceof VolumetryConfBO && ((VolumetryConfBO)displayConf).getComponentType().equals( "project" ))
+                        {
+                            found = true;
+                        }
+                    }
+                    
+                    Set treList = ((VolumetryConfBO)displayConf).getTres();
+                    Iterator<String> treNameIt = treList.iterator();
+                    String volumetryType;
+                    ArrayList<String> metricList = new ArrayList<String>();
+                    while ( treNameIt.hasNext() )
+                    {
+                        String treName = (String) treNameIt.next();
+                        volumetryType = Mapping.getVolumetryType( treName );
+                        if(volumetryType.startsWith( Mapping.VOLUMETRY_NB_CODES_LINES ))
+                        {
+                            metricList.add( treName );
+                        }
+                    }
+                    
+                    int nbLines = metricDao.getVolumetryBySiteAndProfil( mSession, lSiteId, profileName,metricList );
+                    
+                    // Number of projects by profile
                     int nbProjects = projectDao.countBySiteAndProfil( mSession, lSiteId, profileName );
                     siteProfilStatsList.add( new SiteAndProfilStatsDICTBO( lSiteId, profileName, nbLines, nbProjects ) );
                 }
