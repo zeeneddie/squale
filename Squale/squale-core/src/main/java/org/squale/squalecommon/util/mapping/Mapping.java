@@ -18,9 +18,15 @@
  */
 package org.squale.squalecommon.util.mapping;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,10 +36,9 @@ import org.squale.squalecommon.enterpriselayer.businessobject.component.Componen
 /**
  * Mapping Cette classe permet de faire le lien entre des noms textuels de composant, métrique ou mesures et les classes
  * correspondantes Par exemple, le composant de type classe a le nom component.class et une classe
- * org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO La mesure ckjm sur les classes porte le
- * nom ckjm.class et a pour classe
- * org.squale.squalecommon.enterpriselayer.businessobject.result.ckjm.CkjmClassMetricsBO La métrique McCabe
- * profondeur d'héritage pour une classe porte le nom mccabe.class.dit et correspond à la classe
+ * org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO La mesure ckjm sur les classes porte le nom
+ * ckjm.class et a pour classe org.squale.squalecommon.enterpriselayer.businessobject.result.ckjm.CkjmClassMetricsBO La
+ * métrique McCabe profondeur d'héritage pour une classe porte le nom mccabe.class.dit et correspond à la classe
  * org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO
  */
 public class Mapping
@@ -65,8 +70,7 @@ public class Mapping
                        org.squale.squalecommon.enterpriselayer.businessobject.component.UmlInterfaceBO.class );
         component.put( ComponentType.UML_PACKAGE,
                        org.squale.squalecommon.enterpriselayer.businessobject.component.UmlPackageBO.class );
-        component.put( ComponentType.JSP,
-                       org.squale.squalecommon.enterpriselayer.businessobject.component.JspBO.class );
+        component.put( ComponentType.JSP, org.squale.squalecommon.enterpriselayer.businessobject.component.JspBO.class );
     }
 
     /** Ensemble des composants mappés avec hibernate */
@@ -100,8 +104,7 @@ public class Mapping
                       "jdepend.package",
                       org.squale.squalecommon.enterpriselayer.businessobject.result.jdepend.JDependPackageMetricsBO.class );
         // McCabe ################
-        measures.put(
-                      "mccabe.class",
+        measures.put( "mccabe.class",
                       org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAClassMetricsBO.class );
         measures.put(
                       "mccabe.method",
@@ -109,8 +112,7 @@ public class Mapping
         measures.put(
                       "mccabe.project",
                       org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAProjectMetricsBO.class );
-        measures.put(
-                      "mccabe.jsp",
+        measures.put( "mccabe.jsp",
                       org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAJspMetricsBO.class );
         // RSM
         measures.put( "rsm.class",
@@ -187,20 +189,55 @@ public class Mapping
         measures.put(
                       "javancss.method",
                       org.squale.squalecommon.enterpriselayer.businessobject.result.javancss.JavancssMethodMetricsBO.class );
-        
+
         // Cobertura Code Coverage
         measures.put(
-                     "cobertura.project",
-                     org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaProjectMetricsBO.class );
+                      "cobertura.project",
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaProjectMetricsBO.class );
         measures.put(
-                     "cobertura.package",
-                     org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaPackageMetricsBO.class );
+                      "cobertura.package",
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaPackageMetricsBO.class );
         measures.put(
-                     "cobertura.class",
-                     org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaClassMetricsBO.class );
+                      "cobertura.class",
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaClassMetricsBO.class );
         measures.put(
-                     "cobertura.method",
-                     org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaMethodMetricsBO.class );
+                      "cobertura.method",
+                      org.squale.squalecommon.enterpriselayer.businessobject.result.cobertura.CoberturaMethodMetricsBO.class );
+    }
+
+    /** volumetry name for number of code lines */
+    public static final String VOLUMETRY_NB_CODES_LINES = "volumetry_nb_codes_lines";
+    
+    /** volumetry name for number of code lines for JSP*/
+    public static final String VOLUMETRY_NB_CODES_LINES_JSP = "volumetry_nb_codes_lines_JSP";
+
+    /** Volumetry name for methods */
+    public static final String VOLUMETRY_METHODS = "volumetry_methods";
+
+    /** Volumetry name for classes */
+    public static final String VOLUMETRY_CLASSES = "volumetry_classes";
+
+    /**
+     * Map metrics name (key) - volumetry name (value). This map links the metrics name of the tool to a generic metric
+     * name (volumetry name)
+     */
+    private static Properties VOLUMETRY = new Properties();
+
+    /**
+     * Fill the map VOLUMETRY with the information from the file :
+     * org/squale/squalecommon/util/mapping/mapping_volumetry_metrics.properties
+     */
+    static
+    {
+        try
+        {
+            InputStream stream = Mapping.class.getResourceAsStream( "mapping_volumetry_metrics.properties" );
+            VOLUMETRY.load( stream );
+        }
+        catch ( IOException e )
+        {
+            LOG.fatal( MappingMessages.getString( "exception.fatal.loading_file" ) );
+        }
     }
 
     /**
@@ -339,6 +376,19 @@ public class Mapping
     public static String getComponentMappingName( String pType )
     {
         return (String) mappingComponent.get( pType );
+    }
+
+    /**
+     * This method return the generic metric name linked to the tool metric name passed in argument. The method return
+     * null if there is no match.
+     * 
+     * @param treName The tool metric name
+     * @return The generic metric name linked to the tool metric name
+     */
+    public static String getVolumetryType( String treName )
+    {
+        String type = VOLUMETRY.getProperty( treName, "" );
+        return type;
     }
 
 }

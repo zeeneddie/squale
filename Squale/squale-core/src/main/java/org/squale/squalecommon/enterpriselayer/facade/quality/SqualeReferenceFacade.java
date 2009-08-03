@@ -20,6 +20,7 @@ package org.squale.squalecommon.enterpriselayer.facade.quality;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,21 +34,30 @@ import org.squale.jraf.spi.persistence.IPersistenceProvider;
 import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.daolayer.component.ApplicationDAOImpl;
 import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
+import org.squale.squalecommon.daolayer.component.AuditDisplayConfDAOImpl;
 import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
 import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
+import org.squale.squalecommon.daolayer.result.MetricDAOImpl;
 import org.squale.squalecommon.daolayer.result.QualityResultDAOImpl;
 import org.squale.squalecommon.daolayer.result.SqualeReferenceDAOImpl;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
 import org.squale.squalecommon.datatransfertobject.result.SqualeReferenceDTO;
 import org.squale.squalecommon.datatransfertobject.transform.result.SqualeReferenceTransform;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.DisplayConfConstants;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.web.VolumetryConfBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.FactorResultBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.SqualeReferenceBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAProjectMetricsBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.rsm.RSMProjectMetricsBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
+import org.squale.squalecommon.enterpriselayer.facade.export.audit.AuditReportFacade;
+import org.squale.squalecommon.util.mapping.Mapping;
 
 /**
  * 
@@ -180,28 +190,7 @@ public class SqualeReferenceFacade
                 currentSqualeReference.setPublic( publicApplication );
 
                 // Volumétrie
-                // TODO : Mettre les valeurs de volumétrie dans les profils et ne plus utiliser de référence en dur
-                RSMProjectMetricsBO projectVol =
-                    (RSMProjectMetricsBO) MeasureDAOImpl.getInstance().load( session, projectId, auditId,
-                                                                             RSMProjectMetricsBO.class );
-                if ( projectVol != null )
-                {
-                    currentSqualeReference.setCodeLineNumber( projectVol.getSloc().intValue() );
-                }
-                McCabeQAProjectMetricsBO presult =
-                    (McCabeQAProjectMetricsBO) MeasureDAOImpl.getInstance().load( session, projectId, auditId,
-                                                                                  McCabeQAProjectMetricsBO.class );
-                if ( presult != null )
-                {
-                    currentSqualeReference.setClassNumber( presult.getNumberOfClasses().intValue() );
-                    currentSqualeReference.setMethodNumber( presult.getNumberOfMethods().intValue() );
-                    // S'il n'y a pas de données de RSM, alors prendre la donnée depuis McCabe (Cas pour le COBOL)
-                    if ( projectVol == null )
-                    {
-                    	currentSqualeReference.setCodeLineNumber( presult.getProjectsloc().intValue() );
-                    }
-                    
-                }
+                setVolumetry( session, auditId, projectId, currentSqualeReference );
 
                 // Creation en base
                 squaleReferenceDAO.create( session, currentSqualeReference );
@@ -314,9 +303,9 @@ public class SqualeReferenceFacade
             if ( pSession == null )
             {
                 // si aucune session n'a été fournie à la façade, on en récupère une
-                //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
                 pSession = PERSISTENCEPROVIDER.getSession();
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
             }
 
             SqualeReferenceDAOImpl referenceDao = SqualeReferenceDAOImpl.getInstance();
@@ -379,9 +368,9 @@ public class SqualeReferenceFacade
             // Initialisation de la session
             if ( pSession == null )
             {
-                //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
                 pSession = PERSISTENCEPROVIDER.getSession();
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
             }
             // Récupération d'une instance de SqualeReferenceDAOImpl
             SqualeReferenceDAOImpl referenceDao = SqualeReferenceDAOImpl.getInstance();
@@ -433,9 +422,9 @@ public class SqualeReferenceFacade
             // Initialisation de la session
             if ( pSession == null )
             {
-                //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
                 pSession = PERSISTENCEPROVIDER.getSession();
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
             }
             // Récupération d'une instance de SqualeReferenceDAOImpl
             SqualeReferenceDAOImpl referenceDao = SqualeReferenceDAOImpl.getInstance();
@@ -482,5 +471,59 @@ public class SqualeReferenceFacade
             FacadeHelper.closeSession( mSession, SqualeReferenceFacade.class.getName() + ".listReferentiel" );
         }
         return result;
+    }
+
+    /**
+     * Set volumetry values in SqualeReference
+     * 
+     * @param session The hibernate session
+     * @param auditId The id of the current audit
+     * @param projectId The id of the current project
+     * @param currentSqualeReference The squalereference to complete
+     * @throws JrafDaoException Exception happened during the work in the database
+     */
+    private static void setVolumetry( ISession session, Long auditId, Long projectId,
+                                      SqualeReferenceBO currentSqualeReference )
+        throws JrafDaoException
+    {
+
+        MetricDAOImpl metricDAO = MetricDAOImpl.getInstance();
+
+        // Récupération de la configuration de la volumétrie pour ce projet et cet audit
+        AuditDisplayConfBO auditConf =
+            AuditDisplayConfDAOImpl.getInstance().findConfigurationWhere( session, projectId, auditId,
+                                                                          DisplayConfConstants.VOLUMETRY_SUBCLASS,
+                                                                          DisplayConfConstants.VOLUMETRY_PROJECT_TYPE );
+        if ( null != auditConf )
+        {
+            VolumetryConfBO volumConf = (VolumetryConfBO) auditConf.getDisplayConf();
+            // Pour chaque nom de tre, on récupère la valeur de la métrique associée
+            // et on construit ainsi les résultats à retourner
+            List<String> values = new ArrayList<String>();
+            String volumetryType;
+            for ( Iterator<String> it = volumConf.getTres().iterator(); it.hasNext(); )
+            {
+                String treName = it.next();
+                IntegerMetricBO metric =
+                    metricDAO.findIntegerMetricWhere( session, projectId, auditId.longValue(), treName );
+                volumetryType = Mapping.getVolumetryType( treName );
+                if ( null != metric && !volumetryType.equals( "" ) )
+                {
+
+                    if ( volumetryType.equals( Mapping.VOLUMETRY_NB_CODES_LINES ) )
+                    {
+                        currentSqualeReference.setCodeLineNumber( Integer.parseInt( metric.getValue().toString() ) );
+                    }
+                    else if ( volumetryType.equals( Mapping.VOLUMETRY_CLASSES ) )
+                    {
+                        currentSqualeReference.setClassNumber( Integer.parseInt( metric.getValue().toString() ) );
+                    }
+                    else if ( volumetryType.equals( Mapping.VOLUMETRY_METHODS ) )
+                    {
+                        currentSqualeReference.setMethodNumber( Integer.parseInt( metric.getValue().toString() ) );
+                    }
+                }
+            }
+        }
     }
 }
