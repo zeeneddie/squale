@@ -781,7 +781,7 @@
 	<message lang="fr" key="rule.namingstandard.description">
 		Qualifie le niveau de respect des règles de nommage des
 		différents types de données et méthodes du code source,
-		préconisées sur le projet.
+		préconisées sur le module.
 	</message>
 	<message lang="en" key="rule.namingstandard">
 		Naming standard
@@ -950,7 +950,7 @@
 	<message lang="fr" key="rule.layerrespect.description">
 		Qualification du niveau de respect de l'architecture implémentée
 		en regard des préconisations faites dans le dossier
-		d'architecture du projet. L'évaluation se fait via un niveau de
+		d'architecture du module. L'évaluation se fait via un niveau de
 		transgression.
 	</message>
 	<message lang="en" key="rule.layerrespect.description">
@@ -1588,7 +1588,7 @@
 		Number of line of multi lines comments
 	</message>
 	<message lang="fr" key="javancss.project.lines">
-		Nombre de lignes dans le projet (tout compris)
+		Nombre de lignes dans le module (tout compris)
 	</message>
 	<message lang="en" key="javancss.project.lines">
 		Number of line in the project (all include)
