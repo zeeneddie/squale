@@ -8,5 +8,5 @@
 	ATTENTION : Le chemin ne doit pas contenir d'espaces (voir la tâche CKJM)
 -->
 <mockcompiling-configuration>
-	<rootPath>${ENV-COMPILED-SOURCES-ROOT}</rootPath>
+	<rootPath>${squale.home}/Squalix/data/compiledsources</rootPath>
 </mockcompiling-configuration>

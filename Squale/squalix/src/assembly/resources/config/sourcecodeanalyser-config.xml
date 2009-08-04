@@ -3,5 +3,5 @@
 <!DOCTYPE sourcecodeanalyser-configuration PUBLIC "-//SourceCodeAnalyser Configuration DTD //EN" "file:../src/config/sourcecodeanalyser-config-1.0.dtd">
 
 <sourcecodeanalyser-configuration>
-	<rootPath>${ENV-SOURCECODEANALYSER-ROOT}</rootPath>
+	<rootPath>${squale.home}/Squalix/data/source_code_analyser</rootPath>
 </sourcecodeanalyser-configuration>

@@ -3,6 +3,6 @@
 <!DOCTYPE scm-configuration PUBLIC "-//Scm Configuration DTD //EN" "file:../src/config/scm-config.dtd">
 
 <scm-configuration>
-	<rootPath>${ENV-SCM-ROOT}</rootPath>
-	<scmTempPath>${ENV-SCM-TMP}</scmTempPath>
+	<rootPath>${squale.home}/Squalix/data/source_code_analyser</rootPath>
+	<scmTempPath>${squale.home}/Squalix/data/source_code_analyser_tmp</scmTempPath>
 </scm-configuration>

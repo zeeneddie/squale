@@ -3,7 +3,7 @@
 <!DOCTYPE configuration PUBLIC "-//EclipseCompiling Configuration DTD //EN" "file:../src/config/eclipsecompiling-config.dtd">
 
 <configuration>
-	<workspace>${ENV-ECLIPSE-WORKSPACE}</workspace>
+	<workspace>${squale.home}/Squalix/data/jcompiling/workspace/</workspace>
 	<command><!-- TODO : la valeur suivante n'est pas paramétrée ?  -->
 		<executable>${ENV-ECLIPSE-EXECUTABLE}</executable>
 		<options>
@@ -24,8 +24,8 @@
 			<option>-excluded [excluded_patterns]</option>
 		</options>
 	</command><!-- TODO : la valeur suivante n'est pas paramétrée ?  -->
-	<squaleEclipseHome>${ENV-ECLIPSE-SQUALE-HOME}</squaleEclipseHome>
-	<eclipseHome>${ENV-ECLIPSE-HOME}</eclipseHome>
-	<rightScript>${ENV-ECLIPSE-RIGHT_SCRIPT}</rightScript>
-	<copyScript>${ENV-ECLIPSE-COPY-SCRIPT}</copyScript>
+	<squaleEclipseHome>${squale.home}/Squalix/OUTILS/ECLIPSE/SQUALE_ECLIPSE_PLUGINS</squaleEclipseHome>
+	<eclipseHome>${squale.home}/Squalix/data/jcompiling/eclipse</eclipseHome>
+	<rightScript>${squale.home}/Squalix/bin/resources/change_eclipse_classpath_rights.sh</rightScript>
+	<copyScript>${squale.home}/Squalix/bin/resources/copy.sh</copyScript>
 </configuration>

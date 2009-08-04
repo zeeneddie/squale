@@ -3,6 +3,6 @@
 <!DOCTYPE javancss-configuration PUBLIC "-//Javancss Configuration DTD //EN" "file:../src/config/javancss-config.dtd">
 
 <javancss-configuration>
-	<resultFilePath>${ENV-JAVANCSS-RESULTFILE}</resultFilePath>
+	<resultFilePath>${squale.home}/Squalix/data/javancss/JavancssReport.xml</resultFilePath>
 </javancss-configuration>
 

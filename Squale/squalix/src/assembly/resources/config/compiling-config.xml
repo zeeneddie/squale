@@ -26,10 +26,10 @@
 			<dest_dir>bin/</dest_dir>
 			<required_memory>1024m</required_memory>
 			<eclipse_bundle_path>
-				${ENV-JCOMPILING-ECLIPSE-BUNDLE}
+				${squale.home}/Squalix/data/jcompiling/eclipse_bundle
 			</eclipse_bundle_path>
 			<exported_libs_path>
-				${ENV-JCOMPILING-EXPORTED-LIB}
+				${squale.home}/Squalix/data/jcompiling/exported_libs
 			</exported_libs_path>
 		</general>
 

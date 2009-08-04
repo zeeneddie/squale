@@ -3,19 +3,19 @@
   <general>
     <commands>
 <!-- ENV-MCCABE-CLI -->
-      <clicommand>${ENV-MCCABE-CLI}</clicommand>
+      <clicommand>${squale.home}/Squalix/bin/resources/mccabe_cli.sh</clicommand>
       <parsercommand>parse</parsercommand>
       <metricscommand>metrics -report %report_name% -ss -output %report_out%</metricscommand>
     </commands>
 <!-- ENV-MCCABE-WORKSPACE -->
-    <workspace>${ENV-MCCABE-WORKSPACE}</workspace>
+    <workspace>${squale.home}/Squalix/data/mccabe</workspace>
     <reposdir>${ENV-MCCABE-REPOSDIR}</reposdir>
 <!-- ENV-MCCABE-LOG -->
-    <logger>${ENV-MCCABE-LOG}</logger>
+    <logger>${squale.home}/Squalix/data/mccabe/logs/mccabe.log</logger>
 <!-- ENV-MCCABE-LOG-ERROR -->
-    <logger-err>${ENV-MCCABE-LOG-ERROR}</logger-err>
+    <logger-err>${squale.home}/Squalix/data/mccabe/logs/mccabe_err.log</logger-err>
 <!-- ENV-MCCABE-RPT -->
-    <reportspath>${ENV-MCCABE-RPT}</reportspath>
+    <reportspath>${squale.home}/Squalix/bin/config/rapports.RPT</reportspath>
     <filter>
     	<errorToWarningMessages>
     		<message>ERR-gra2sc: 3012\.1: Completed build of class chart with warnings\. See the root/server window for details.*</message>

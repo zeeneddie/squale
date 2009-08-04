@@ -2,12 +2,12 @@
 <!-- <!DOCTYPE configuration SYSTEM "rsm-config.dtd"> -->
 <configuration>
 	<general>
-		<workspace>${ENV-RSM-WORKSPACE}</workspace>
-		<reportpath>${ENV-RSM-RPT}</reportpath>
-		<reportmethodspath>${ENV-RSM-RPT-METHODS}</reportmethodspath>
-		<reportclassespath>${ENV-RSM-RPT-CLASSES}</reportclassespath>
-		<inputfile>${ENV-RSM-INPUT}</inputfile>
-		<auxfile>${ENV-RSM-AUX}</auxfile>
+		<workspace>${squale.home}/Squalix/data/rsm</workspace>
+		<reportpath>${squale.home}/Squalix/data/rsm/rapports_RSM.csv</reportpath>
+		<reportmethodspath>${squale.home}/Squalix/data/rsm/rapports_Methods_RSM.csv</reportmethodspath>
+		<reportclassespath>${squale.home}/Squalix/data/rsm/rapports_Class_RSM.csv</reportclassespath>
+		<inputfile>${squale.home}/Squalix/data/rsm/input.txt</inputfile>
+		<auxfile>${squale.home}/Squalix/data/rsm/rapport_aux.csv</auxfile>
 		<execcommand>${ENV-RSM-EXEC}</execcommand>
 	</general>
 	<profiles>

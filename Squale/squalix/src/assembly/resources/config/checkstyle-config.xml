@@ -3,7 +3,7 @@
 <!DOCTYPE checkstyle-configuration PUBLIC "-//Squale //DTD Checkstyle Configuration 1.1//EN" "file:/org/squale/squalix/tools/ruleschecking/checkstyle-config-1.1.dtd">
 
 <checkstyle-configuration>
-	<jarDirectory>${ENV-CHECKSTYLE-JAR}</jarDirectory>
-	<reportDirectory>${ENV-CHECKSTYLE-REPORT}</reportDirectory>
-	<tempSourceDir>${ENV-CHECKSTYLE-TEMP}</tempSourceDir>
+	<jarDirectory>${squale.home}/Squalix/bin/lib</jarDirectory>
+	<reportDirectory>${squale.home}/Squalix/data/checkstyle</reportDirectory>
+	<tempSourceDir>${squale.home}/Squalix/data/java_source_to_analyze</tempSourceDir>
 </checkstyle-configuration>

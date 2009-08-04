@@ -13,10 +13,10 @@
 		</pattern>
 		<pattern key="\{VOBS_PATH\}"></pattern>
 		<pattern key="\{CC_STORAGE_PATH\}">
-			${ENV-CLEARCASE-STORAGE}
+			${squale.home}/Squalix/clearcase/cc_storage/views/
 		</pattern>
 		<pattern key="\{SNAPSHOT_PATH\}">
-			${ENV-CLEARCASE-SNAPSHOT}
+			${squale.home}/Squalix/data/cc_snapshot/
 		</pattern>
 	</patterns>
 	<commands>

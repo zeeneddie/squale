@@ -3,5 +3,5 @@
 <!DOCTYPE jspcompiling-configuration PUBLIC "-//JspCompiling Configuration DTD //EN" "file:../src/config/jspcompiling-config.dtd">
 
 <jspcompiling-configuration>
-	<jarDirectory>${ENV-JSPCOMPILING-JAR}</jarDirectory>
+	<jarDirectory>${squale.home}/Squalix/bin/lib/jspcompiling</jarDirectory>
 </jspcompiling-configuration>

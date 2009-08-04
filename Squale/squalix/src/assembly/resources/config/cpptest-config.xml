@@ -3,6 +3,6 @@
 <!DOCTYPE cpptest-configuration PUBLIC "-//CppTest Configuration DTD 1.0//EN" "file:../src/org/squale/squalix/tools/cpptest/cpptest-config-1.0.dtd">
 
 <cpptest-configuration>
-	<reportDirectory>${ENV-CPPTEST-REPORT}</reportDirectory>
-	<logger>${ENV-CPPTEST-LOG}</logger>
+	<reportDirectory>${squale.home}/Squalix/data/cpptest/report</reportDirectory>
+	<logger>${squale.home}/Squalix/data/cpptest/logs/cpptest.log</logger>
 </cpptest-configuration>
