@@ -155,13 +155,13 @@ public class ParametersConstants
     // The constants are "gt" prefixed
     
     /** Tool Directory */
-    public static final String GENERICTASK_TOOLDIR = "gtToolLocation";
+    public static final String GENERICTASK_TOOLLOCATION = "gtToolLocation";
 
     /** Working Directory */
     public static final String GENERICTASK_WORKDIR = "gtWorkingDirectory";
     
     /** Results Directory */
-    public static final String GENERICTASK_RESULTSDIR = "gtResultsLocation";
+    public static final String GENERICTASK_RESULTSLOCATIONS = "gtResultsLocation";
     
     /** Commands */
     public static final String GENERICTASK_COMMANDS = "gtCommands";

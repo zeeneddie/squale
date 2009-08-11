@@ -100,7 +100,7 @@ public class AbstractGenericTaskConfTransformer
 
         // Getting the location of the tool which has to be executed
         StringParameterDTO toolLocation = new StringParameterDTO( genericTaskForm.getToolLocation() );
-        genericTaskParams.put( ParametersConstants.GENERICTASK_TOOLDIR, toolLocation );
+        genericTaskParams.put( ParametersConstants.GENERICTASK_TOOLLOCATION, toolLocation );
 
         // Getting the working directory
         StringParameterDTO workingDir = new StringParameterDTO( genericTaskForm.getWorkingDirectory() );
@@ -116,7 +116,7 @@ public class AbstractGenericTaskConfTransformer
         /* Modif temp en attente de résolution */
         resultsLocation.getParameters().add( new StringParameterDTO( genericTaskForm.getResultsLocation()[1] ) );
         // fillListFromArray( resultsLocation, genericTaskForm.getResultsLocation() );
-        genericTaskParams.put( ParametersConstants.GENERICTASK_RESULTSDIR, resultsLocation );
+        genericTaskParams.put( ParametersConstants.GENERICTASK_RESULTSLOCATIONS, resultsLocation );
 
         // Finalising the map for the task
         MapParameterDTO genericTaskMap = new MapParameterDTO();
@@ -174,7 +174,7 @@ public class AbstractGenericTaskConfTransformer
 
             // Getting the location of the tool which has to be executed
             StringParameterDTO toolLocation =
-                (StringParameterDTO) constantsMap.get( ParametersConstants.GENERICTASK_TOOLDIR );
+                (StringParameterDTO) constantsMap.get( ParametersConstants.GENERICTASK_TOOLLOCATION );
             genericTaskForm.setToolLocation( toolLocation.getValue() );
 
             // Getting the working directory
@@ -191,7 +191,7 @@ public class AbstractGenericTaskConfTransformer
 
             // Getting the ResultsLocation
             ListParameterDTO resultsLocationDTO =
-                (ListParameterDTO) constantsMap.get( ParametersConstants.GENERICTASK_RESULTSDIR );
+                (ListParameterDTO) constantsMap.get( ParametersConstants.GENERICTASK_RESULTSLOCATIONS );
             if ( null != resultsLocationDTO )
             {
                 genericTaskForm.setResultsLocation( convertFromListToArray( resultsLocationDTO ) );

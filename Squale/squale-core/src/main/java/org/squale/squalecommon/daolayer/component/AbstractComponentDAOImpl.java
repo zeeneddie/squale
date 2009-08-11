@@ -211,7 +211,7 @@ public class AbstractComponentDAOImpl
         whereClause.append( " order by " );
         whereClause.append( getAlias() );
         whereClause.append( ".name" );
-        LOG.warn( "findChildrenWhere: " + whereClause );
+        LOG.debug( "findChildrenWhere: " + whereClause );
         return (Collection) findWhereScrollable( pSession, whereClause.toString(), nbLines, 0, false );
     }
 

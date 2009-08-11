@@ -27,11 +27,11 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.plexus.util.DirectoryScanner;
+import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.cli.CommandLineException;
 import org.codehaus.plexus.util.cli.CommandLineUtils;
 import org.codehaus.plexus.util.cli.Commandline;
 import org.codehaus.plexus.util.cli.StreamConsumer;
-
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.MapParameterBO;
@@ -116,7 +116,7 @@ public abstract class AbstractGenericTask
         this.genericTaskParam = (MapParameterBO) mProject.getParameter( mName );
 
         /* If all values mapped in the map are null */
-        boolean isConfigured = isTaskConfigured( genericTaskParam.getParameters() );
+        boolean isConfigured = isTaskConfigured();
 
         if ( isConfigured )
         {
@@ -148,31 +148,25 @@ public abstract class AbstractGenericTask
     /**
      * This method establish if the task has been configured
      * 
-     * @param paramMap The task map of parameters
      * @return true if the task has been configured
      */
-    private boolean isTaskConfigured( Map paramMap )
+    private boolean isTaskConfigured()
     {
-        boolean isToolDir;
-        boolean isWorkDir;
-        boolean isCommands;
-        boolean isResultDir;
+        if ( genericTaskParam == null )
+        {
+            return false;
+        }
+        Map paramMap = genericTaskParam.getParameters();
 
-        isToolDir = ( (StringParameterBO) paramMap.get( ParametersConstants.GENERICTASK_TOOLDIR ) ).getValue() != null;
-        isWorkDir = ( (StringParameterBO) paramMap.get( ParametersConstants.GENERICTASK_WORKDIR ) ).getValue() != null;
+        boolean isToolLocation =
+            ( (StringParameterBO) paramMap.get( ParametersConstants.GENERICTASK_TOOLLOCATION ) ).getValue() != null;
 
-        List commandList =
-            ( (ListParameterBO) genericTaskParam.getParameters().get( ParametersConstants.GENERICTASK_COMMANDS ) ).getParameters();
+        List resultLocationList =
+            ( (ListParameterBO) genericTaskParam.getParameters().get( ParametersConstants.GENERICTASK_RESULTSLOCATIONS ) ).getParameters();
+        boolean isResultLocation =
+            !( resultLocationList.size() == 1 && ( (StringParameterBO) resultLocationList.get( 0 ) ).getValue() == null );
 
-        isCommands = !( commandList.size() == 1 && ( (StringParameterBO) commandList.get( 0 ) ).getValue() == null );
-
-        List resultDirList =
-            ( (ListParameterBO) genericTaskParam.getParameters().get( ParametersConstants.GENERICTASK_RESULTSDIR ) ).getParameters();
-
-        isResultDir =
-            !( resultDirList.size() == 1 && ( (StringParameterBO) resultDirList.get( 0 ) ).getValue() == null );
-
-        return isToolDir || isWorkDir || isCommands || isResultDir;
+        return isToolLocation || isResultLocation;
 
     }
 
@@ -184,7 +178,7 @@ public abstract class AbstractGenericTask
      * 
      * @throws TaskException exception during execution of the Task. Please consider having a look at
      *             {@link AbstractTask} for more information.
-     * @throws JrafDaoException
+     * @throws JrafDaoException if there's a problem with the database
      */
     public final void execute()
         throws TaskException, JrafDaoException
@@ -196,7 +190,7 @@ public abstract class AbstractGenericTask
         if ( isConfigured )
         {
             /* Getting the result files from the execution of the task */
-            List<File> scannedResultFiles = this.perform();
+            List<File> scannedResultFiles = perform();
             /* The perform method never returns null as it instantiates an empty list with an initial capacity of zero */
             if ( scannedResultFiles.size() > 0 )
             {
@@ -206,7 +200,8 @@ public abstract class AbstractGenericTask
             else
             {
                 /* Logging an error as there are no result locations */
-                String message = AbstractGenericTaskMessages.getMessage( "logs.agt.error.noResultFile", mProject.getName() );
+                String message =
+                    AbstractGenericTaskMessages.getMessage( "logs.agt.error.noResultFile", mProject.getName() );
                 LOGGER.error( message );
                 mStatus = FAILED;
                 initError( message, ErrorBO.CRITICITY_FATAL );
@@ -235,32 +230,11 @@ public abstract class AbstractGenericTask
     private List<File> perform()
         throws TaskException
     {
-        /* The returned array of result files */
-        String[] scannedResultFiles = null;
-        /* Extracting the parameters */
-        String parameters = configurator.extractParameters( this.getCommands() );
-        /* Preparing the command and the tool */
-        Commandline cmdLine =
-            configurator.prepareToolExecution( this.getToolLocation(), this.getWorkingDirectory(), parameters,
-                                               this.getViewPath() );
         /* Collection of result files */
         List<File> results = new ArrayList<File>( 0 );
-        /* InputStream of bytes -> output of the external tool execution */
-        InputStream systemIn = null;
-        /* InputStream of bytes -> input of the external tool execution */
-        StreamConsumer systemOut = null;
-        /* InputStream of bytes -> error output of the external tool */
-        StreamConsumer systemErr = null;
-
         try
         {
-            /*
-             * CommandLineUtils.executeCommandLine method executes the commandLine and returns the exitValue of the
-             * process. Please keep in mind that the executeCommandLine method uses the waitFor() method of the
-             * java.Lang.Process class to wait for the end of the process. The I/O are redirected so as to avoid process
-             * freeze(s) due to host limited buffer size.
-             */
-            int exitValue = CommandLineUtils.executeCommandLine( cmdLine, systemIn, systemOut, systemErr );
+            int exitValue = runSpecifiedCommand();
             /* Checking if the process was executed successfully */
             if ( 0 == exitValue )
             {
@@ -270,6 +244,8 @@ public abstract class AbstractGenericTask
                 /* Checking if a basedir is effectively set */
                 if ( null != ds.getBasedir() )
                 {
+                    /* The returned array of result files */
+                    String[] scannedResultFiles = null;
                     /* Scanning the directories */
                     ds.scan();
                     /* Getting the result files names */
@@ -293,7 +269,7 @@ public abstract class AbstractGenericTask
                  * the exitValue of the process is different from zero indicating an abnormal termination. Informing the
                  * user and aborting the task
                  */
-                String message = AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.exitValue", exitValue ); 
+                String message = AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.exitValue", exitValue );
                 LOGGER.fatal( message );
                 mStatus = FAILED;
                 initError( message, ErrorBO.CRITICITY_FATAL );
@@ -301,7 +277,7 @@ public abstract class AbstractGenericTask
         }
         catch ( CommandLineException cmdLineExcep )
         {
-            /* Exception is generated by the executeCommandLine method call the task has to be cancelled */            
+            /* Exception is generated by the executeCommandLine method call the task has to be cancelled */
             String message = "CommandLineException : " + cmdLineExcep;
             mStatus = FAILED;
             LOGGER.fatal( message );
@@ -311,13 +287,53 @@ public abstract class AbstractGenericTask
         catch ( ConfigurationException confExcep )
         {
             /* Catching the configuration exception thrown by the prepareResultProcessing method */
-            String message = AbstractGenericTaskMessages.getMessage( "logs.agt.error.fileSpecification") ; 
+            String message = AbstractGenericTaskMessages.getMessage( "logs.agt.error.fileSpecification" );
             mStatus = FAILED;
-            LOGGER.fatal(  message );
+            LOGGER.fatal( message );
             LOGGER.fatal( AbstractGenericTaskMessages.getMessage( "logs.agt.fatal.task.aborded" ) );
             initError( message, ErrorBO.CRITICITY_FATAL );
         }
         return results;
+    }
+
+    /**
+     * Run the command that the user specified.
+     * 
+     * @return the return code of that command
+     * @throws TaskException if there's a problem while configuring the command line to execute
+     * @throws CommandLineException if an error occurs while executing the command
+     */
+    private int runSpecifiedCommand()
+        throws TaskException, CommandLineException
+    {
+        if ( StringUtils.isEmpty( this.getToolLocation().getValue() ) )
+        {
+            // no command to run, let's do as if the process was OK
+            LOGGER.debug( "No command specified for execution." );
+            return 0;
+        }
+
+        /* Extracting the parameters */
+        String parameters = configurator.extractParameters( this.getCommands() );
+        /* Preparing the command and the tool */
+        Commandline cmdLine =
+            configurator.prepareToolExecution( this.getToolLocation(), this.getWorkingDirectory(), parameters,
+                                               this.getViewPath() );
+        LOGGER.debug( "Executing command: " + cmdLine );
+        /* InputStream of bytes -> output of the external tool execution */
+        InputStream systemIn = null;
+        /* InputStream of bytes -> input of the external tool execution */
+        StreamConsumer systemOut = new OutStreamConsumer();
+        /* InputStream of bytes -> error output of the external tool */
+        StreamConsumer systemErr = new ErrorStreamConsumer();
+        /*
+         * CommandLineUtils.executeCommandLine method executes the commandLine and returns the exitValue of the process.
+         * Please keep in mind that the executeCommandLine method uses the waitFor() method of the java.Lang.Process
+         * class to wait for the end of the process. The I/O are redirected so as to avoid process freeze(s) due to host
+         * limited buffer size.
+         */
+        int exitValue = CommandLineUtils.executeCommandLine( cmdLine, systemIn, systemOut, systemErr );
+        return exitValue;
     }
 
     /**
@@ -361,7 +377,7 @@ public abstract class AbstractGenericTask
     public void setToolLocation()
     {
         toolLocation =
-            (StringParameterBO) genericTaskParam.getParameters().get( ParametersConstants.GENERICTASK_TOOLDIR );
+            (StringParameterBO) genericTaskParam.getParameters().get( ParametersConstants.GENERICTASK_TOOLLOCATION );
     }
 
     /**
@@ -412,7 +428,7 @@ public abstract class AbstractGenericTask
     public void setResultLocations()
     {
         resultFiles =
-            (ListParameterBO) genericTaskParam.getParameters().get( ParametersConstants.GENERICTASK_RESULTSDIR );
+            (ListParameterBO) genericTaskParam.getParameters().get( ParametersConstants.GENERICTASK_RESULTSLOCATIONS );
     }
 
     /**
@@ -441,5 +457,29 @@ public abstract class AbstractGenericTask
     public void setViewPath()
     {
         viewPath = mData.getData( TaskData.VIEW_PATH ).toString();
+    }
+
+    /**
+     * Writer that consumes the CommandLine standard output and writes it into the LOGGER
+     */
+    class OutStreamConsumer
+        implements StreamConsumer
+    {
+        public void consumeLine( String line )
+        {
+            LOGGER.info( line );
+        }
+    }
+
+    /**
+     * Writer that consumes the CommandLine error output and writes it into the LOGGER
+     */
+    class ErrorStreamConsumer
+        implements StreamConsumer
+    {
+        public void consumeLine( String line )
+        {
+            LOGGER.error( line );
+        }
     }
 }

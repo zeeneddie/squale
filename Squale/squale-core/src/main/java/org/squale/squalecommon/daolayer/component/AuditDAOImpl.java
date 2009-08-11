@@ -347,7 +347,7 @@ public final class AuditDAOImpl
         }
         // tri par date (date historique prioritaire)
         whereClause += " order by coalesce(" + getAlias() + ".historicalDate, " + getAlias() + ".date) desc";
-        LOG.info( "whereClause = " + whereClause );
+        LOG.debug( "whereClause = " + whereClause );
         int start = 0;
         int nbLines = 0;
         //
@@ -483,7 +483,7 @@ public final class AuditDAOImpl
         // quand la date historique est nulle
         whereClause += " order by coalesce(" + getAlias() + ".historicalDate, " + getAlias() + ".date) desc";
 
-        LOG.info( "whereClause = " + whereClause );
+        LOG.debug( "whereClause = " + whereClause );
         List r = (List) findWhereScrollable( pSession, whereClause, 1, 0, false );
         // ne recupere que le 1er audit
         if ( r.size() > 0 )

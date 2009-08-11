@@ -122,7 +122,7 @@ public class ResultsDTO
             if ( pKey != null )
             {
                 // si la cle null du premier element n'existe pas
-                LOG.warn( DTOMessages.getString( "dto.exception.results.put.nofirstelement" ) );
+                LOG.debug( DTOMessages.getString( "dto.exception.results.put.nofirstelement" ) );
             }
             // on ajoute la liste a la HashMap
             mResultMap.put( pKey, pValue );
