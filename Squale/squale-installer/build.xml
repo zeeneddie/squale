@@ -11,7 +11,7 @@
 <project name="Squale installer" default="create-installer" basedir=".">
 
 	<!-- Version of Squale : needs to be updated -->
-	<property name="product-version" value="5.1.1-SNAPSHOT" />
+	<property name="product-version" value="5.2-SNAPSHOT" />
 
 	<!-- Description of the different resources -->
 	<property name="izPack-input.dir" value="${basedir}/input" />
