@@ -949,8 +949,7 @@
     alter table QualityResult_Comment 
         add constraint FKD36C3ADCCCF6BB41 
         foreign key (QualityResultId) 
-        references QualityResult
-        on delete cascade;
+        references QualityResult;
 
     alter table QualityRule 
         add constraint FK420ADC7BE9F00F7 

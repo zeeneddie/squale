@@ -13,5 +13,4 @@ create table QualityResult_Comment (
 alter table QualityResult_Comment 
     add constraint FKD36C3ADCCCF6BB41 
     foreign key (QualityResultId) 
-    references QualityResult
-    on delete cascade;
+    references QualityResult;
