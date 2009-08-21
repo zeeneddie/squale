@@ -82,7 +82,7 @@ public class QualityResultCommentBO
      * Getter method for the property comments
      * 
      * @return the comment of the manual mark
-     * @hibernate.property name="comments" column="Comments" type="string" not-null="false" unique="false" update="true"
+     * @hibernate.property name="comments" column="Comments" type="string" not-null="false" unique="false" update="true" length="4000"
      *                     insert="true"
      */
     public String getComments()

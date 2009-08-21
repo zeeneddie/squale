@@ -4,7 +4,7 @@
 --Add the comments table
 create table QualityResult_Comment (
         QR_CommentId number(19,0) not null,
-        Comments varchar2(255),
+        Comments varchar2(4000),
         QualityResultId number(19,0) unique,
 	primary key (QR_CommentId)
     );

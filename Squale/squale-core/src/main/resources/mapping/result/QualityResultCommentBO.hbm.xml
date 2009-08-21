@@ -8,7 +8,7 @@
         <param name="sequence">qualityres_comment_sequence</param>
       </generator>
     </id>
-    <property name="comments" column="Comments" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    <property name="comments" length="4000" column="Comments" update="true" unique="false" not-null="false" type="string" insert="true"/>
     <many-to-one unique="true" column="QualityResultId" cascade="none" class="org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO" name="qualityResult"/>
   </class>
 </hibernate-mapping>

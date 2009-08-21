@@ -4,7 +4,7 @@
 --Add the comments table
 create table QualityResult_Comment (
 	QR_CommentId bigint not null auto_increment,
-	Comments varchar(255),
+	Comments varchar(4000),
 	QualityResultId bigint unique,
 	primary key (QR_CommentId)
 ) type=InnoDB;
