@@ -61,6 +61,8 @@
 
     drop table QualityResult cascade constraints;
 
+    drop table QualityResult_Comment cascade constraints;
+
     drop table QualityRule cascade constraints;
 
     drop table Rule cascade constraints;
@@ -150,6 +152,8 @@
     drop sequence project_parameter_sequence;
 
     drop sequence qualitygrid_sequence;
+
+    drop sequence qualityres_comment_sequence;
 
     drop sequence qualityres_sequence;
 
@@ -451,6 +455,13 @@
         primary key (QualityResultId)
     );
 
+    create table QualityResult_Comment (
+        QR_CommentId number(19,0) not null,
+        Comments varchar2(255),
+        QualityResultId number(19,0) unique,
+        primary key (QR_CommentId)
+    );
+
     create table QualityRule (
         QualityRuleId number(19,0) not null,
         subclass varchar2(255) not null,
@@ -511,6 +522,7 @@
         ApplicationName varchar2(255),
         ProjectName varchar2(255),
         ProjectLanguage varchar2(255),
+        ProgrammingLanguage varchar2(255) not null,
         Version varchar2(255),
         AuditDate date,
         CodeLineNumber number(10,0),
@@ -518,7 +530,6 @@
         ClassNumber number(10,0),
         HIDDEN number(1,0) not null,
         AUDIT_TYPE varchar2(50) not null,
-		programminglanguage varchar2(255) not null,
         primary key (ReferencielId)
     );
 
@@ -608,9 +619,9 @@
         subclass varchar2(255) not null,
         Name varchar2(255) not null unique,
         export_IDE number(1,0),
+        language varchar2(255),
         MilestoneAudit number(1,0),
         NormalAudit number(1,0),
-		language varchar2(255),
         primary key (AbstractTasksUserId)
     );
 
@@ -673,393 +684,399 @@
     );
 
     alter table Analysis_Task 
-        add constraint FK91CAC908A096529F 
+        add constraint FK91CAC9089ACA29CA 
         foreign key (TaskRefId) 
         references TaskRef;
 
     alter table Analysis_Task 
-        add constraint FK91CAC908BE3D10F3 
+        add constraint FK91CAC908E93A2E5E 
         foreign key (TasksUserId) 
         references Tasks_User;
 
     alter table AuditDisplayConfBO 
-        add constraint FKBF5515D87E8A4226 
+        add constraint FKBF5515D8CAD1505B 
         foreign key (AuditId) 
         references AuditBO
-		on delete cascade;
+        on delete cascade;
 
     alter table AuditDisplayConfBO 
-        add constraint FKBF5515D883596FA2 
+        add constraint FKBF5515D8DA15C497 
         foreign key (ProjectId) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table AuditDisplayConfBO 
-        add constraint FKBF5515D873586D71 
+        add constraint FKBF5515D8DD868E9C 
         foreign key (ConfId) 
         references displayConf;
 
     alter table AuditGridBO 
-        add constraint FK71AB79AE7E8A4226 
+        add constraint FK71AB79AECAD1505B 
         foreign key (AuditId) 
         references AuditBO
-		on delete cascade;
+        on delete cascade;
 
     alter table AuditGridBO 
-        add constraint FK71AB79AE83596FA2 
+        add constraint FK71AB79AEDA15C497 
         foreign key (ProjectId) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table AuditGridBO 
-        add constraint FK71AB79AED2B0987 
+        add constraint FK71AB79AE49C5C1F2 
         foreign key (QualityGridId) 
         references QualityGrid;
 
     alter table Component 
-        add constraint FK24013CDDF53F33A0 
+        add constraint FK24013CDDEF730ACB 
         foreign key (Serveur) 
         references Serveur;
 
     alter table Component 
-        add constraint FK24013CDD49BB62A2 
+        add constraint FK24013CDDCF3F6BD7 
         foreign key (SourceManager) 
         references Tasks_User;
 
     alter table Component 
-        add constraint FK24013CDD76518568 
+        add constraint FK24013CDDECE51913 
         foreign key (ProjectId) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table Component 
-        add constraint FK24013CDD649B6A3E 
+        add constraint FK24013CDDB2C13533 
         foreign key (ParametersSet) 
         references ProjectParameter;
 
     alter table Component 
-        add constraint FK24013CDD78D3A978 
+        add constraint FK24013CDDBEC27BED 
         foreign key (ProfileBO) 
         references Tasks_User;
 
     alter table Component 
-        add constraint FK24013CDDD0519AC 
+        add constraint FK24013CDD499FD217 
         foreign key (QualityGrid) 
         references QualityGrid;
 
     alter table Component 
-        add constraint FK24013CDD7052981E 
+        add constraint FK24013CDDE6E62BC9 
         foreign key (Parent) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table Components_Audits 
-        add constraint FK5D3B01417E8A4226 
+        add constraint FK5D3B0141CAD1505B 
         foreign key (AuditId) 
         references AuditBO
-		on delete cascade;
+        on delete cascade;
 
     alter table Components_Audits 
-        add constraint FK5D3B014163D3E5E8 
+        add constraint FK5D3B01419164C9D 
         foreign key (ComponentId) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table CriteriumPractice_Rule 
-        add constraint FK8ADDE86E3A648E9 
+        add constraint FK8ADDE8664749294 
         foreign key (CriteriumRuleId) 
         references QualityRule;
 
     alter table CriteriumPractice_Rule 
-        add constraint FK8ADDE86BEFBA921 
+        add constraint FK8ADDE8615B7FE16 
         foreign key (PracticeRuleId) 
         references QualityRule;
 
     alter table Error 
-        add constraint FK401E1E87E8A4226 
+        add constraint FK401E1E8CAD1505B 
         foreign key (AuditId) 
         references AuditBO
-		on delete cascade;
+        on delete cascade;
 
     alter table Error 
-        add constraint FK401E1E883596FA2 
+        add constraint FK401E1E8DA15C497 
         foreign key (ProjectId) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table FactorCriterium_Rule 
-        add constraint FK89734030CFD14A09 
+        add constraint FK897340301C18583E 
         foreign key (FactorRuleId) 
         references QualityRule;
 
     alter table FactorCriterium_Rule 
-        add constraint FK89734030E3A648E9 
+        add constraint FK8973403064749294 
         foreign key (CriteriumRuleId) 
         references QualityRule;
 
     alter table FactorRef 
-        add constraint FK2854B0A42CC32BDC 
+        add constraint FK2854B0A4A4AEA807 
         foreign key (ReferencielId) 
         references SqualeReference;
 
     alter table FactorRef 
-        add constraint FK2854B0A44AD989DF 
+        add constraint FK2854B0A497209814 
         foreign key (Rule) 
         references QualityRule;
 
     alter table Formula_Conditions 
-        add constraint FKB3141771A528EE84 
+        add constraint FKB3141771EB17C0F9 
         foreign key (FormulaId) 
         references Formula;
 
     alter table Formula_Measures 
-        add constraint FK7A19C1CE1DADC1A7 
+        add constraint FK7A19C1CEA4104C92 
         foreign key (FormulaId) 
         references Formula;
 
     alter table GridFactor_Rule 
-        add constraint FKBC5A70C6CFD14A09 
+        add constraint FKBC5A70C61C18583E 
         foreign key (FactorRuleId) 
         references QualityRule;
 
     alter table GridFactor_Rule 
-        add constraint FKBC5A70C6D2B0987 
+        add constraint FKBC5A70C649C5C1F2 
         foreign key (QualityGridId) 
         references QualityGrid;
 
     alter table HomepageComponent 
-        add constraint FK8D93B88FFDF902BC 
+        add constraint FK8D93B88F22FEA8A7 
         foreign key (UserBO) 
         references UserBO;
 
     alter table Mark 
-        add constraint FK247AED4B98962 
+        add constraint FK247AED4AA85BD7 
         foreign key (PracticeResultId) 
         references QualityResult
-		on delete cascade;
+        on delete cascade;
 
     alter table Mark 
-        add constraint FK247AED63D3E5E8 
+        add constraint FK247AED9164C9D 
         foreign key (ComponentId) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table Measure 
-        add constraint FK9B263D3E7E8A4226 
+        add constraint FK9B263D3ECAD1505B 
         foreign key (AuditId) 
         references AuditBO
-		on delete cascade;
+        on delete cascade;
 
     alter table Measure 
-        add constraint FK9B263D3EE5BC5FE3 
+        add constraint FK9B263D3E6C1EEACE 
         foreign key (RuleSetId) 
         references RuleSet;
 
     alter table Measure 
-        add constraint FK9B263D3E63D3E5E8 
+        add constraint FK9B263D3E9164C9D 
         foreign key (ComponentId) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table Metric 
-        add constraint FK892AE1D02FA052BA 
+        add constraint FK892AE1D029D429E5 
         foreign key (MeasureId) 
         references Measure
-		on delete cascade;
+        on delete cascade;
 
     alter table Module 
-        add constraint FK89B0928C612DF65D 
+        add constraint FK89B0928C7729BC88 
         foreign key (RuleId) 
         references Rule;
 
     alter table PracticeResult_Repartition 
-        add constraint FK84B2F9904B98962 
+        add constraint FK84B2F9904AA85BD7 
         foreign key (PracticeResultId) 
         references QualityResult
-		on delete cascade;
+        on delete cascade;
 
     alter table Profile_DisplayConfBO 
-        add constraint FKC122A97D802460C7 
+        add constraint FKC122A97DEA5281F2 
         foreign key (Profile_ConfId) 
         references displayConf;
 
     alter table Profile_DisplayConfBO 
-        add constraint FKC122A97D78D3AA46 
+        add constraint FKC122A97DBEC27CBB 
         foreign key (ProfileId) 
         references Tasks_User;
 
     alter table Profile_Rights 
-        add constraint FK62F82D6D9B681818 
+        add constraint FK62F82D6D21CAA303 
         foreign key (AtomicRightsId) 
         references AtomicRights;
 
     alter table Profile_Rights 
-        add constraint FK62F82D6D75D5ECAE 
+        add constraint FK62F82D6DC21CFAE3 
         foreign key (ProfileId) 
         references ProfileBO;
 
     alter table Profiles_Grids 
-        add constraint FK9949B158E49543C8 
+        add constraint FK9949B158212FFC33 
         foreign key (GridId) 
         references QualityGrid;
 
     alter table Profiles_Grids 
-        add constraint FK9949B15878D3AA46 
+        add constraint FK9949B158BEC27CBB 
         foreign key (ProfileId) 
         references Tasks_User;
 
     alter table ProjectParameter 
-        add constraint FK6D7538B0AA5FCCA5 
+        add constraint FK6D7538B020F36050 
         foreign key (ListId) 
         references ProjectParameter;
 
     alter table ProjectParameter 
-        add constraint FK6D7538B081587B7D 
+        add constraint FK6D7538B0CF7E4672 
         foreign key (MapId) 
         references ProjectParameter;
 
     alter table QualityResult 
-        add constraint FKE9E7A9DC7E8A4226 
+        add constraint FKE9E7A9DCCAD1505B 
         foreign key (AuditId) 
         references AuditBO
-		on delete cascade;
+        on delete cascade;
 
     alter table QualityResult 
-        add constraint FKE9E7A9DC83596FA2 
+        add constraint FKE9E7A9DCDA15C497 
         foreign key (ProjectId) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table QualityResult 
-        add constraint FKE9E7A9DC330CF5F3 
+        add constraint FKE9E7A9DC6FA7AE5E 
         foreign key (QualityRuleId) 
         references QualityRule;
 
+    alter table QualityResult_Comment 
+        add constraint FKD36C3ADCCCF6BB41 
+        foreign key (QualityResultId) 
+        references QualityResult
+        on delete cascade;
+
     alter table QualityRule 
-        add constraint FK420ADC7B883C760C 
+        add constraint FK420ADC7BE9F00F7 
         foreign key (Formula) 
         references Formula;
 
     alter table Rule 
-        add constraint FK270B1CE5BC5FE3 
+        add constraint FK270B1C6C1EEACE 
         foreign key (RuleSetId) 
         references RuleSet
-		on delete cascade;
+        on delete cascade;
 
     alter table RuleCheckingTransgressionItem 
-        add constraint FKDF0D4973B5ECF9F1 
+        add constraint FKDF0D4973CA94EE6 
         foreign key (RuleId) 
         references Rule;
 
     alter table RuleCheckingTransgressionItem 
-        add constraint FKDF0D4973B26EE3F8 
+        add constraint FKDF0D4973979AE76D 
         foreign key (MeasureId) 
         references Measure
-		on delete cascade;
+        on delete cascade;
 
     alter table RuleCheckingTransgressionItem 
-        add constraint FKDF0D497363D3E5E8 
+        add constraint FKDF0D49739164C9D 
         foreign key (ComponentId) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table RuleCheckingTransgressionItem 
-        add constraint FKDF0D4973C617EA6F 
+        add constraint FKDF0D49736B5A5124 
         foreign key (ComponentInvolvedId) 
         references Component;
 
     alter table RuleSet 
-        add constraint FKBF8713A683596FA2 
+        add constraint FKBF8713A6DA15C497 
         foreign key (ProjectId) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table SqualeReference 
-        add constraint FK32FD7E08D0519AC 
+        add constraint FK32FD7E08499FD217 
         foreign key (QualityGrid) 
         references QualityGrid;
 
     alter table Stats_squale_dict 
-        add constraint FK9B3A9E52F53F33A0 
+        add constraint FK9B3A9E52EF730ACB 
         foreign key (Serveur) 
         references Serveur;
 
     alter table Stats_squale_dict_annexe 
-        add constraint FKBC8FB71EF53F33A0 
+        add constraint FKBC8FB71EEF730ACB 
         foreign key (Serveur) 
         references Serveur;
 
-   alter table Tag 
-        add constraint FK1477A5C258AC2 
+    alter table Tag 
+        add constraint FK1477AA86C98F7 
         foreign key (TagCategory) 
         references TagCategory;
 
     alter table Tag_Component 
-        add constraint FKE093EE5863D3E5E8 
+        add constraint FKE093EE589164C9D 
         foreign key (ComponentId) 
         references Component
         on delete cascade;
 
     alter table Tag_Component 
-        add constraint FKE093EE5828B1F3C1 
+        add constraint FKE093EE58FD9106F6 
         foreign key (TagId) 
         references Tag
         on delete cascade;
 
     alter table TaskParameter 
-        add constraint FK16AD3384A096529F 
+        add constraint FK16AD33849ACA29CA 
         foreign key (TaskRefId) 
         references TaskRef
-		on delete cascade;
+        on delete cascade;
 
     alter table TaskRef 
-        add constraint FK797F8AE1ADBED57 
+        add constraint FK797F8AE76E45E0C 
         foreign key (TaskId) 
         references Task
-		on delete cascade;
+        on delete cascade;
 
     alter table Termination_Task 
-        add constraint FKC739A220A096529F 
+        add constraint FKC739A2209ACA29CA 
         foreign key (TaskRefId) 
         references TaskRef;
 
     alter table Termination_Task 
-        add constraint FKC739A220BE3D10F3 
+        add constraint FKC739A220E93A2E5E 
         foreign key (TasksUserId) 
         references Tasks_User;
 
     alter table UserAccess 
-        add constraint FKB60A252F6EEDFC90 
+        add constraint FKB60A252FB4DCCF05 
         foreign key (ApplicationId) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table UserBO 
-        add constraint FK9790197875D5ECAE 
+        add constraint FK97901978C21CFAE3 
         foreign key (ProfileId) 
         references ProfileBO;
 
     alter table User_Rights 
-        add constraint FK21885CCBFDF9038A 
+        add constraint FK21885CCB22FEA975 
         foreign key (UserId) 
         references UserBO;
 
     alter table User_Rights 
-        add constraint FK21885CCB75D5ECAE 
+        add constraint FK21885CCBC21CFAE3 
         foreign key (ProfileId) 
         references ProfileBO;
 
     alter table User_Rights 
-        add constraint FK21885CCB6EEDFC90 
+        add constraint FK21885CCBB4DCCF05 
         foreign key (ApplicationId) 
         references Component
-		on delete cascade;
+        on delete cascade;
 
     alter table Volumetry_Measures 
-        add constraint FK92AE693368A4458F 
+        add constraint FK92AE693393A162FA 
         foreign key (VolumetryId) 
         references displayConf
-		on delete cascade;
+        on delete cascade;
 
     create sequence HomepageComponent_sequence;
 
@@ -1104,6 +1121,8 @@
     create sequence project_parameter_sequence;
 
     create sequence qualitygrid_sequence;
+
+    create sequence qualityres_comment_sequence;
 
     create sequence qualityres_sequence;
 

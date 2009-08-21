@@ -30,6 +30,7 @@ import org.apache.commons.logging.LogFactory;
 
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
+import org.squale.squalecommon.daolayer.result.QualityResultDAOImpl;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
 import org.squale.squalecommon.datatransfertobject.component.AuditGridDTO;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
@@ -1083,6 +1084,22 @@ public class ResultsApplicationComponentAccess
         throws JrafEnterpriseException
     {
         QualityResultDTO result = QualityResultFacade.findManualQualityResult( projectId, ruleId );
+        return result;
+    }
+    
+    /**
+     * This method gets back the last result record for a manual practice and an audit
+     * 
+     * @param projectId The ID of the project
+     * @param ruleId The ID of the practice rule
+     * @param auditId The ID of the audit
+     * @return The last mark for this audit
+     * @throws JrafEnterpriseException exception happen during the serach in the db
+     */
+    public QualityResultDTO lastManualMarkByAudit ( Long projectId, Long ruleId, Long auditId )
+        throws JrafEnterpriseException
+    {
+        QualityResultDTO result = QualityResultFacade.findManualQualityResultByAudit( projectId, ruleId, auditId );
         return result;
     }
 

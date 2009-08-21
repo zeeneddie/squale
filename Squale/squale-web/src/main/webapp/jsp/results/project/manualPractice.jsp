@@ -38,7 +38,7 @@ for display the practice description work --%>
 			<h2><bean:message key="project.result.manualpractice.subtitle"
 				arg0="<%=WebMessages.getString(request, practiceName)%>" /></h2>
 			<br />
-			<table class="tblh" style="width: 20%">
+			<table class="tblh" style="width: 40%">
 				<thead>
 					<tr>
 						<td colspan="2">&nbsp;</td>
@@ -53,6 +53,16 @@ for display the practice description work --%>
 							<squale:picto name="form" property="currentMark" />
 						</td>
 					</tr>
+					<logic:notEmpty name="form" property="lastComments">
+						<tr>
+							<th valign="top"><bean:message key="project.result.practice.comments" /></th>
+							<td>
+								<div id="commentsDiv">
+									<af:write name="form" property="lastComments" />
+								</div>
+							</td>
+						</tr>
+					</logic:notEmpty>
 				</tbody>
 			</table>
 			<br />

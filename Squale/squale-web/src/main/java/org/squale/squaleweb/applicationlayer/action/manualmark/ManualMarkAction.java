@@ -39,6 +39,7 @@ import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
 import org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultCommentBO;
 import org.squale.squalecommon.util.TimeUtil;
 
 import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
@@ -184,6 +185,10 @@ public class ManualMarkAction
                 String tprValue = currentForm.getTemporValue();
                 currentForm.setTemporValue( eltForm.getValue() );
                 eltForm.setValue( tprValue );
+                
+                String tprComment = currentForm.getTemporComments();
+                currentForm.setTemporComments( eltForm.getComments() );
+                eltForm.setComments( tprComment );
             }
             forward = mapping.findForward( "success" );
         }
@@ -213,7 +218,8 @@ public class ManualMarkAction
         ActionErrors errors = new ActionErrors();
         boolean mark = validMark( form, errors );
         boolean date = validDate( form, errors );
-        if ( !mark || !date )
+        boolean comments = validComments( form, errors );
+        if ( !mark || !date || !comments )
         {
             valid = false;
             request.setAttribute( Globals.ERROR_KEY, errors );
@@ -267,7 +273,7 @@ public class ManualMarkAction
      * Validation of the date field
      * 
      * @param form The current form
-     * @param errors The list of error launch by tghe validation
+     * @param errors The list of error launch by the validation
      * @return True if the validation is OK
      */
     private boolean validDate( ManualMarkElementForm form, ActionErrors errors )
@@ -290,6 +296,36 @@ public class ManualMarkAction
                 ActionMessage message = new ActionMessage( "manualMark.action.invalidDate" );
                 errors.add( "msg", message );
                 valid = false;
+            }
+        }
+        return valid;
+    }
+    
+    /***
+     * Validation of the comments field
+     * 
+     * @param form The current form
+     * @param errors The list of error launch by the validation
+     * @return True if the validation is OK
+     */
+    private boolean validComments ( ManualMarkElementForm form, ActionErrors errors )
+    {
+        boolean valid = true;
+        //The field comments should'nt be empty
+        if ( form.getComments().length() == 0 )
+        {
+            ActionMessage message = new ActionMessage( "manualMark.action.nullComments" );
+            errors.add( "msg", message );
+            valid = false;
+        }
+        else
+        {
+            //the field comments should not exceed 'MAXCOMMENTSLENGTH' chars
+            if ( form.getComments().length() >= QualityResultCommentBO.MAXCOMMENTSLENGTH )
+            {
+               ActionMessage message = new ActionMessage( "manualMark.action.invalidComments", QualityResultCommentBO.MAXCOMMENTSLENGTH );
+               errors.add( "msg", message );
+               valid = false;
             }
         }
         return valid;

@@ -52,6 +52,7 @@ import org.squale.squalecommon.enterpriselayer.businessobject.result.FactorResul
 import org.squale.squalecommon.enterpriselayer.businessobject.result.MarkBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.MeasureBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultCommentBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.rule.CriteriumRuleBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
@@ -805,7 +806,7 @@ public final class AuditComputing
             {
                 QualityResultDAOImpl dao = QualityResultDAOImpl.getInstance();
 
-                // For each manual practicewe try to set a mark for the audit
+                // For each manual practice we try to set a mark for the audit
                 Iterator<PracticeRuleBO> practicesIt = manualPractices.iterator();
                 while ( practicesIt.hasNext() )
                 {
@@ -829,6 +830,15 @@ public final class AuditComputing
                         if ( isMarkValid( practice, manualPraticeResult ) )
                         {
                             practiceResult.setMeanMark( manualPraticeResult.getMeanMark() );
+                            practiceResult.setCreationDate( manualPraticeResult.getCreationDate() );
+                            //We add the comments if it exists
+                            if( manualPraticeResult.getManualMarkComment() != null )
+                            {
+                                QualityResultCommentBO practiceResultComments = new QualityResultCommentBO();
+                                practiceResultComments.setQualityResult( practiceResult );
+                                practiceResultComments.setComments( manualPraticeResult.getManualMarkComment().getComments() );
+                                practiceResult.setManualMarkComment( practiceResultComments );
+                            }
                             dao.save( session, practiceResult );
                         }
                         else

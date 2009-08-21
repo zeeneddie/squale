@@ -85,7 +85,8 @@ public class ResultForm
     /** Does the mark is out of date ? */
     private boolean outOfDate;
 
-    
+    /** the last comments  */
+    private String lastComments;
     
     
     
@@ -390,4 +391,23 @@ public class ResultForm
         outOfDate = isoutOfDate;
     }
 
+    /***
+     * Getter for the attribute lastComments
+     * 
+     * @return the last comments
+     */
+    public String getLastComments()
+    {
+        return lastComments;
+    }
+
+    /***
+     * Setter for the attribute lastComments
+     * 
+     * @param pLastComments The new comments
+     */
+    public void setLastComments( String pLastComments )
+    {
+        this.lastComments = pLastComments;
+    }
 }

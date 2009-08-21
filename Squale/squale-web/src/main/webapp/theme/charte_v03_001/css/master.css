@@ -403,3 +403,21 @@ div.homepage > table.formulaire {visibility:hidden}
 div.homepage div.onglet_contenu{background-color:#FFFFFF;} 
 div.ongKiviat {float:left; margin-top:5px;}
 div.frame_border {border: 4px double #F3BA5D; padding:10px; -moz-border-radius:0px 20px 20px 20px}
+/*-- element for manualMarkManagement.jsp --*/
+.manualMarkFieldset{width:400px;padding:5px;-moz-border-radius:5px; margin-bottom: 5px;}
+.manualMarkFormLabel{width: 195px; float: left; margin-top: 5px; padding-top: 2px;}
+.manualMarkFormInput{width: 195px; float: left; margin-top: 5px;}
+.manualMarkFormButton{width: 400px; float: left; margin-top: 5px;}
+.manualMarkComment{height: 70px; background-color: #ffffff; width: 200px; border: 1px solid rgb(170, 170, 170); position: absolute; overflow: auto; padding: 3px; z-index: 2;}
+.manualMarkCommentText{width: 100%; float: left; min-height: 50px;}
+.manualMarkCommentBottom{height: 20px; width: 100%; float: left; text-align: right;}
+/*-- element for reviewManualMark.jsp --*/
+#commentsHistoryBloc{float: right; width: 350px; margin-right: 0px; font-weight: bold; border-color: #BBBBBB; padding: 4px; background-color: #FFFFFF;}
+.commentsHistoryBlocRow{width: 342px; float: left; border: 1px solid #BBBBBB; margin: 4px;}
+.commentsHistoryBlocRowHeader{width: 342px; float: left; background-color: #BBBBBB;}
+.commentsHistoryBlocValue{width: 70px; float: left; padding: 3px; text-align: right;}
+.commentsHistoryBlocDate{width: 200; float: left; padding: 3px;}
+.commentsHistoryBlocComment{width: 335px; float: left; margin: 2px 0 2px 0; padding: 3px; font-weight: normal;}
+.commentsHistoryBlocComment div{margin-bottom: 2px;}
+/*-- element for manualPractice.jsp --*/
+#commentsDiv{height: auto; padding-bottom: 5px;}

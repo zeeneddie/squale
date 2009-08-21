@@ -11,26 +11,33 @@ function filter(textField, event) {
 	var filterValue = textField.value;
 	
 	var row = document.getElementById("li-" + 0);
+	//add the form row 
+	var formRow = document.getElementById("rowform-" + 0);
+	
 	var index = 0;
 	while (row != null) {
-		setVisibility(row, filterValue);
+		setVisibility(row, filterValue, formRow);
 		// go next
 		index++;
 		row = document.getElementById("li-" + index);
+		formRow = document.getElementById("rowform-" + index);
 	}
 }
 
-function setVisibility(row, filterValue) {
+function setVisibility(row, filterValue, formRow) {
 	if (filterValue == '') {
 		show(row.id);
+		show(formRow.id);
 		return;
 	}
 	
 	var found = containsString(row, filterValue);
 	if (found == true) {
 		show(row.id);
+		show(formRow.id);
 	} else {
 		hide(row.id);
+		hide(formRow.id);
 	}
 }
 

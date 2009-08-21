@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="QualityResult_Comment" name="org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultCommentBO">
+    <id unsaved-value="-1" name="id" type="long" column="QR_CommentId" length="19">
+      <generator class="native">
+        <param name="sequence">qualityres_comment_sequence</param>
+      </generator>
+    </id>
+    <property name="comments" column="Comments" update="true" unique="false" not-null="false" type="string" insert="true"/>
+    <many-to-one unique="true" column="QualityResultId" cascade="none" class="org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO" name="qualityResult"/>
+  </class>
+</hibernate-mapping>

@@ -726,6 +726,9 @@ public class ProjectResultsAction
     }
 
     /**
+     * This method can recover the basic informations for the form such as the 
+     * mark, the practice legend, etc.
+     * 
      * @param pMapping le mapping
      * @param pRequest la requête
      * @param pForm le form
@@ -837,25 +840,62 @@ public class ProjectResultsAction
             // If the practice is a manual practice
             if ( practice.getFormula() == null || practice.getFormulaType() == null )
             {
-                ResultForm curForm = (ResultForm) result;
-                QualityResultDTO lastMark =
-                    (QualityResultDTO) ac.execute( "lastManualMark", new Object[] { project.getID(), practiceId } );
-                Date creationDate = lastMark.getCreationDate();
-                AuditDTO curAudit = (AuditDTO) auditsDTO.get( 0 );
-                if ( creationDate.before( curAudit.getRealDate() ) )
-                {
-                    curForm.setLast( true );
-                    PracticeRuleDTO rule = (PracticeRuleDTO) lastMark.getRule();
-                    boolean markValid = TimeLimitationParser.isMarkValid( rule.getTimeLimitation(), creationDate );
-                    if ( !markValid )
-                    {
-                        curForm.setOutOfDate( true );
-                    }
-                }
+                manualMarkSpecificFormImplementation( practiceId, result, ac, auditsDTO, project );
             }
             manageTrackerFromPractice( pRequest, paramParent, practiceName, practiceId );
         }
         return result;
+    }
+
+    /***
+     * This method set the specific form implementations in case of manual practice 
+     * 
+     * @param practiceId ID of the practice rule
+     * @param result The current form
+     * @param ac The application component
+     * @param auditsDTO The selected audit
+     * @param project The selected project
+     * @throws JrafEnterpriseException Exception happened during the process
+     */
+    private void manualMarkSpecificFormImplementation( Long practiceId, WActionForm result, IApplicationComponent ac,
+                                                       List auditsDTO, ComponentDTO project )
+        throws JrafEnterpriseException
+    {
+        ResultForm curForm = (ResultForm) result;
+        AuditDTO curAudit = (AuditDTO) auditsDTO.get( 0 );
+        //The mark from the audit
+        QualityResultDTO lastMarkFromAudit =
+            (QualityResultDTO) ac.execute( "lastManualMarkByAudit", new Object[] { project.getID(), practiceId, curAudit.getID() } );
+        //Last mark outside audit
+        QualityResultDTO lastMark = (QualityResultDTO) ac.execute( "lastManualMark", new Object[] { project.getID(), practiceId } );
+        //Mark date from the audit 
+        Date creationDate = lastMarkFromAudit.getCreationDate();
+        //Last mark date outside audit
+        Date lastMarkDate = lastMark.getCreationDate();
+        //To avoid incorrect message when the date has not been recovered
+        if ( creationDate == null )
+        {
+            curForm.setLast( true );
+        }
+        else
+        {
+            //We check that the audit mark is later than or equal to the last mark
+            if ( creationDate.compareTo( lastMarkDate ) >= 0 )
+            {
+                curForm.setLast( true );
+            }
+            PracticeRuleDTO rule = (PracticeRuleDTO) lastMarkFromAudit.getRule();
+            boolean markValid = TimeLimitationParser.isMarkValid( rule.getTimeLimitation(), creationDate );
+            if ( !markValid )
+            {
+                curForm.setOutOfDate( true );
+            }
+        }
+        //If the comments exist
+        if( lastMarkFromAudit.getManualMarkComment() != null )
+        {
+            curForm.setLastComments( lastMarkFromAudit.getManualMarkComment().getComments() );
+        }
     }
 
     /**

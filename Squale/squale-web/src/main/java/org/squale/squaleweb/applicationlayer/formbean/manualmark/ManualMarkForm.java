@@ -50,7 +50,10 @@ public class ManualMarkForm
 
     /** Keep a mark during the exchange client-server */
     private String temporValue;
-
+    
+    /** Keep a comment during the exchange client-server */
+    private String temporComments;
+    
     /** Number of the line edited (if one is edit) */
     private String editLine;
 
@@ -222,5 +225,25 @@ public class ManualMarkForm
     public void setOutOfDate( String pOutOfDate )
     {
         outOfDate = pOutOfDate;
+    }
+
+    /***
+     * Getter for the attribute temporComments
+     * 
+     * @return The kept comments
+     */
+    public String getTemporComments()
+    {
+        return temporComments;
+    }
+    
+    /***
+     * Setter for the attribute temporComments
+     * 
+     * @param pTemporComments The new value for the kept comments
+     */
+    public void setTemporComments( String pTemporComments )
+    {
+        this.temporComments = pTemporComments;
     }
 }

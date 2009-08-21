@@ -41,7 +41,7 @@ String evolution = WebMessages.getString(request, "tracker.mark.history");
 			<squale:resultsHeader name="paramReviewForm" />
 			<br />
 			<%
-// On récupère le graohe historique
+// On récupère le graphe historique
 GraphMaker histoGraph = (GraphMaker) ((ParamReviewForm) (request.getSession().getAttribute("paramReviewForm"))).getReviewGraph();
 // On l'affiche seulement si il n'est pas nul
 if (null == histoGraph) {
@@ -68,6 +68,36 @@ if (null == histoGraph) {
 						property="reviewGraph.srcName" type="String" />
 					<bean:define id="mapName" name="paramReviewForm"
 						property="reviewGraph.useMapName" type="String" />
+					<%-- comments history --%>
+					<fieldset id="commentsHistoryBloc">
+						<%-- title --%>
+						<legend><bean:message key="reviewManualMark.comments.history"/></legend>
+						<logic:iterate id="commentsHistory" indexId="index" name="paramReviewForm" property="commentsList">
+							<div class="commentsHistoryBlocRow">
+								<div class="commentsHistoryBlocRowHeader">
+									<%-- date of the manual mark --%>
+									<div class="commentsHistoryBlocDate">
+										<bean:message key="reviewManualMark.comments.creationDate"/>
+										<af:write name="commentsHistory" property="manualMarkDate" dateFormatKey="date.format.simple" /><br>
+									</div>
+									<%-- value of the manual mark --%>
+									<div class="commentsHistoryBlocValue">
+										<bean:message key="reviewManualMark.comments.mark"/>
+										<af:write name="commentsHistory" property="value" />
+									</div>
+								</div>
+								<%-- comments of the manual mark --%>
+								<div id="comments<%=index%>" class="commentsHistoryBlocComment">
+									<af:dropDownPanel titleKey="reviewManualMark.comments.show">
+										<logic:empty name="commentsHistory" property="comments">
+											<bean:message key="reviewManualMark.comments.no_comments" />
+										</logic:empty>
+										<af:write name="commentsHistory" property="comments" />
+									</af:dropDownPanel>
+								</div>
+							</div>
+						</logic:iterate>
+					</fieldset>
 					<%-- ligne necessaire --%>
 					<%=histoGraph.getMapDescription()%>
 					<html:img src="<%=srcHistoChart%>" usemap="<%=mapName%>" border="0"

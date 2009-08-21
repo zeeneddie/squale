@@ -38,6 +38,11 @@ public abstract class QualityResultBO
     implements Serializable
 {
 
+    /**
+     * the serial version number
+     */
+    private static final long serialVersionUID = 4020807280107556442L;
+
     /** Constante pour indiquer que la note appartient [2,3] */
     public static final String ACCEPTED = "accepted";
 
@@ -76,6 +81,11 @@ public abstract class QualityResultBO
      * The date of creation of the manual mark
      */
     private Date creationDate;
+    
+    /**
+     * The comment object of the manual mark
+     */
+    private QualityResultCommentBO mManualMarkComment;
 
     /**
      * Getter method for the property creationDate
@@ -250,5 +260,27 @@ public abstract class QualityResultBO
         mMeanMark = pMeanMark;
         mProject = pProject;
         mAudit = pAudit;
+    }
+
+    /***
+     * Getter method for the comment object of the manual mark
+     * 
+     * @return the comment of the manual mark
+     * @hibernate.one-to-one class="org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultCommentBO"
+     *                        property-ref="qualityResult" cascade="all" fetch="join" lazy="no-proxy"
+     */
+    public QualityResultCommentBO getManualMarkComment()
+    {
+        return mManualMarkComment;
+    }
+
+    /***
+     * Setter method for the manual mark comment object
+     * 
+     * @param pManualMarkComment the new value for the comment of the manual mark
+     */
+    public void setManualMarkComment( QualityResultCommentBO pManualMarkComment )
+    {
+        this.mManualMarkComment = pManualMarkComment;
     }
 }

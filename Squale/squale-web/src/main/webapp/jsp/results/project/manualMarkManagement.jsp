@@ -11,6 +11,9 @@
 <script type="text/javascript" src="theme/charte_v03_001/js/manualMark.js"></script>
 <script type="text/javascript" src="theme/charte_v03_001/js/filtering.js"></script>
 
+<script type="text/javascript" src="jslib/jquery.js"></script>
+<script type="text/javascript" src="jslib/jquery-ui.js"></script>
+
 <bean:define id="projectId" name="manualMarkForm" property="projectIdSafe" type="String" />
 <bean:size id="listSize" name="manualMarkForm" property="manualPracticeList"  />
 <bean:define id="localOutOfDate"name="manualMarkForm" property="outOfDate" />
@@ -48,6 +51,7 @@
 					<af:field key="empty" styleId="tprValue"  property="temporValue" />
 					<af:field key="empty" property="temporDate" type="DATE" dateFormatKey="date.format.simple"/>
 					<af:field key="empty" styleId="editPlace" property="editLine" ></af:field>
+					<af:field key="empty" styleId="tprComment" property="temporComments"></af:field>
 				</div>
 				<table class = "formulaire">
 					<thead >
@@ -56,21 +60,22 @@
 							<th><bean:message key="manualMark.table.name" /></th>
 							<th><bean:message key="manualMark.table.mark" /></th>
 							<th><bean:message key="manualMark.table.creationDate" /></th>
+							<th><bean:message key="manualMark.table.comments" /></th>
 							<th><bean:message key="manualMark.table.timelimitation" /></th>
 							<th><bean:message key="manualMark.table.timeleft" /></th>
 						</tr>
 					</thead>
 					<tbody>
 						<logic:iterate id="elt" indexId="index" name="manualMarkForm" property="manualPracticeList" indexId="index" >
-							<tr class="" id="li-<%=index %>">
+							<tr class="" id="li-<%=index%>">
 								<%-- "Check" column. Display only if the user as enough rights --%>
 								<td class="check_col">
 									<logic:equal name="manualMarkForm" property="canModify" value="true">
-										<div id="edit-<%=index %>" >
-											<img border="0" src="theme/charte_v03_001/img/ico/neutre/pen.gif" onclick="edit(<%=index %>,<%=listSize %>,true)" style="cursor:pointer"/>
+										<div id="edit-<%=index%>" >
+											<img border="0" src="theme/charte_v03_001/img/ico/neutre/pen.gif" onclick="edit(<%=index%>,<%=listSize%>,true)" style="cursor:pointer"/>
 										</div>
-										<div id="canceledit-<%=index %>" style="display:none">
-											<img border="0" src="theme/charte_v03_001/img/ico/neutre/cross.gif" onclick="canceledit(<%=index %>,<%=listSize %>)" style="cursor:pointer"/>
+										<div id="canceledit-<%=index%>" style="display:none">
+											<img border="0" src="theme/charte_v03_001/img/ico/neutre/cross.gif" onclick="canceledit(<%=index%>,<%=listSize%>)" style="cursor:pointer"/>
 										</div>
 									</logic:equal>
 								</td>
@@ -80,34 +85,84 @@
 								</td>
 								<%-- Column mark of the manual practice --%>
 								<td>
-									<div id="<%="val-"+index%>" >
+									<div id="<%="val-" + index%>" >
 										<squale:mark name="elt" mark="value" />
 										<squale:picto name="elt" property="value" />
-									</div>
-									<div id='<%="editval-"+index%>' style="display:none">
-										<af:field key="empty" name="manualMarkForm" styleId='<%="editvalValue-"+index%>'
-											property='<%="manualPracticeList[" + index + "].value"%>'
-											 isRequired="true" writeTD="false" />
 									</div>
 								</td>
 								<%-- Column Creation date of the manual practice --%>
 								<td>
-									<div id='<%="date-"+index %>'>
+									<div id='<%="date-" + index%>'>
 										<af:write name="elt" property="creationDate" dateFormatKey="date.format.simple"/>
 									</div>
-									<div id='<%="editdate-"+index %>' style="display:none">
-										<af:field key="empty" name="manualMarkForm" 
-											property='<%="manualPracticeList[" + index + "].creationDate"%>'
-											type="DATE" dateFormatKey="date.format.simple" isRequired="true" writeTD="false"  />
-									</div>
+								</td>
+								<%-- Column comments of the manual practice --%>
+								<td>
+									<logic:notEmpty name="elt" property="comments">
+										<div id="showHideCom-<%=index%>">
+											<img border="0" src="theme/charte_v03_001/img/ico/neutre/oeil.gif" onclick="showHideComments(<%= index %>)" style="cursor:pointer" title='<bean:message key="manualMark.table.eyePict.title" />'/>
+										</div>
+										<div id='<%="comment-" + index%>' class="manualMarkComment" style="display: none; ">
+											<div class="manualMarkCommentText">
+												<af:write name="elt" property="comments" />
+											</div>
+											<div class="manualMarkCommentBottom">
+												<img border="0" src="theme/charte_v03_001/img/ico/neutre/cross.gif" onclick="showHideComments(<%= index %>)" style="cursor:pointer"/>
+											</div>
+										</div>
+									</logic:notEmpty>
 								</td>
 								<%-- Column validity period of the mark --%>
 								<td>
 									<af:write name="elt" property="timeLimitationParse" />
 								</td>
 								<%-- Column time left for the validity of the mark --%>
-								<td id='<%="timeleft-"+index%>'>
+								<td id='<%="timeleft-" + index%>'>
 									<af:write name="elt" property="timeleft"  />
+								</td>
+							</tr>
+							<%-- Row added to display the modification form --%>
+							<tr class="" id="rowform-<%=index%>">
+								<td></td>
+								<td></td>
+								<td colspan="5">
+									<div id='<%="editform-" + index%>' style="display:none">
+										<fieldset class="manualMarkFieldset"><legend>Edition note manuelle</legend>
+											<%-- champ mark --%>
+											<div class="manualMarkFormLabel">
+												<bean:message key="manualMark.table.form.mark"/>
+											</div>
+											<div class="manualMarkFormInput">
+												<af:field key="empty" name="manualMarkForm" styleId='<%="editvalValue-"+index%>'
+												property='<%="manualPracticeList[" + index + "].value"%>'
+												 isRequired="true" writeTD="false" />
+											 </div>
+											 <%-- champ date --%>
+											<div class="manualMarkFormLabel"> 
+												<bean:message key="manualMark.table.form.creationDate"/>
+											</div>
+											<div class="manualMarkFormInput">
+												<af:field key="empty" name="manualMarkForm" 
+												property='<%="manualPracticeList[" + index + "].creationDate"%>'
+												type="DATE" dateFormatKey="date.format.simple" isRequired="true" writeTD="false"  />
+											</div>
+											<%-- champ commentaire --%>
+											<div class="manualMarkFormLabel">
+												<bean:message key="manualMark.table.form.comments"/>
+											</div>
+											<div class="manualMarkFormInput">
+												<af:field name="manualMarkForm" key="empty" styleId='<%="editComm-"+index%>'
+												property='<%="manualPracticeList[" + index + "].comments"%>'
+												isRequired="true" cols="30" rows="5" maxlength="4000" writeTD="false" type="TEXTAREA" />
+											</div>
+											<%-- Button only display if the user has enough right --%>
+											<logic:equal name="manualMarkForm" property="canModify" value="true">
+												<div class="manualMarkFormButton">
+													<af:button type="form" callMethod="saveResult" name="valider" toolTipKey="toolTip.valider" />
+												</div>
+											</logic:equal>
+										</fieldset>
+									</div>
 								</td>
 							</tr>
 						</logic:iterate>
@@ -118,13 +173,10 @@
 							onLoadDisplay(<%=listSize%>,'<%=localOutOfDate%>');
 						</script>
 					</tbody>
+					<tfoot>
+						<tr><td colspan="7">&nbsp;</td></tr>
+					</tfoot>
 				</table>
-				<%-- Button only display if the user as enough right --%>
-				<logic:equal name="manualMarkForm" property="canModify" value="true">
-					<af:buttonBar>
-						<af:button type="form" callMethod="saveResult" name="valider"  toolTipKey="toolTip.valider" />
-					</af:buttonBar>
-				</logic:equal>
 			</af:form>
 		</af:canvasCenter>
 	</af:body>

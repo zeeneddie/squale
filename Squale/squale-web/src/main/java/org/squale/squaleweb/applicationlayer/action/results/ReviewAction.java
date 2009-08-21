@@ -19,6 +19,7 @@
 package org.squale.squaleweb.applicationlayer.action.results;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -41,19 +42,23 @@ import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.helper.AccessDelegateHelper;
 import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
 import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
 import org.squale.squalecommon.datatransfertobject.rule.QualityRuleDTO;
 import org.squale.squaleweb.applicationlayer.action.accessRights.ReaderAction;
 import org.squale.squaleweb.applicationlayer.formbean.results.ComponentForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.ParamReviewCommentsForm;
 import org.squale.squaleweb.applicationlayer.formbean.results.ParamReviewForm;
 import org.squale.squaleweb.applicationlayer.tracker.TrackerStructure;
 import org.squale.squaleweb.resources.WebMessages;
 import org.squale.squaleweb.transformer.ComponentTransformer;
+import org.squale.squaleweb.transformer.ParamReviewCommentsTransform;
 import org.squale.squaleweb.transformer.ParamReviewTransformer;
 import org.squale.squaleweb.util.SqualeWebConstants;
 import org.squale.squaleweb.util.graph.GraphMaker;
 import org.squale.squaleweb.util.graph.HistoMaker;
 import org.squale.welcom.struts.bean.WActionForm;
+import org.squale.welcom.struts.transformer.WTransformerException;
 import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
@@ -128,8 +133,8 @@ public class ReviewAction
             ComponentForm cForm = (ComponentForm) WTransformerFactory.objToForm( ComponentTransformer.class, obj );
             ( (ParamReviewForm) pForm ).setComponentName( cForm.getName() );
             ( (ParamReviewForm) pForm ).setComponentType( cForm.getType() );
-            // Met à jour le champ graph du form
-            getGraph( pForm, pRequest );
+            // Met à jour les champs graph et comments du form
+            setParamsInForm( pForm, pRequest );
 
         }
         catch ( Exception e )
@@ -191,10 +196,10 @@ public class ReviewAction
         {
             forward = pMapping.findForward( "review" );
         }
-        // Met à jour le champ graph du form
+        // Met à jour les champs graph et comments du form
         try
         {
-            getGraph( pForm, pRequest );
+            setParamsInForm( pForm, pRequest );
         }
         catch ( Exception e )
         {
@@ -250,22 +255,21 @@ public class ReviewAction
      * 
      * @param pForm le formulaire à lire.
      * @param pRequest la requête HTTP.
+     * @param pComp le ComponentDTO
+     * @param pResult le résultat de l'appel à la couche métier "Graph"
      * @return l'action à réaliser.
      * @throws JrafEnterpriseException en cas de problème de récupération des donnés
      * @throws IOException en cas de problèmes de création du graph
      */
-    private GraphMaker getGraph( ActionForm pForm, HttpServletRequest pRequest )
+    private GraphMaker getGraph( ActionForm pForm, HttpServletRequest pRequest, ComponentDTO pComp, Object[] pResult )
         throws JrafEnterpriseException, IOException
     {
         // Initialisation
         GraphMaker histoChart = null;
         // Obtention de la couche métier
         IApplicationComponent ac = AccessDelegateHelper.getInstance( "Component" );
-        Object[] paramIn = getParams( pForm, pRequest );
-
         // Récupération du componentDTO
-        ComponentDTO comp = (ComponentDTO) paramIn[0];
-        Object[] paramIn2 = new Object[] { comp };
+        Object[] paramIn2 = new Object[] { pComp };
         ComponentDTO componentDTO = (ComponentDTO) ac.execute( "get", paramIn2 );
         // S'applique uniquement dans le cas d'une méthode
         // on enlève tout ce qui concerne les paramètres de la méthode
@@ -277,20 +281,14 @@ public class ReviewAction
             componentDTO.setName( st.nextToken() );
         }
 
-        // Obtention de la couche métier
-        IApplicationComponent ac2 = AccessDelegateHelper.getInstance( "Graph" );
-        
-        // Appel de la couche métier
-        Object[] result = (Object[]) ac2.execute( "getHistoricGraph", paramIn );
-        
         // On n'affiche le graphe que si on a des résultats
         if(((ParamReviewForm)pForm).isManualMark())
         {
-            histoChart = manualMarkGraph(pRequest,result);
+            histoChart = manualMarkGraph( pRequest, pResult );
         }
         else
         {
-            histoChart = componentGraph(pRequest,result);
+            histoChart = componentGraph( pRequest, pResult );
         }
         
         // Met à jour l'attribut graph dans le form
@@ -355,4 +353,71 @@ public class ReviewAction
         return histoChart;
     }
     
+    /***
+     * Cette méthode sert d'intermédiaire pour lancer la construction
+     * du graph (getGraph) et la récupération des commentaires
+     * de la note manuelle, ces méthodes partageant les mêmes données
+     * 
+     * @param pForm le formulaire à lire.
+     * @param pRequest la requête HTTP.
+     * @throws JrafEnterpriseException en cas de problème de récupération des donnés
+     * @throws IOException IOException en cas de problèmes de création du graph
+     */
+    private void setParamsInForm( ActionForm pForm, HttpServletRequest pRequest ) throws JrafEnterpriseException, IOException
+    {
+        //obtenir les params nécessaires pour lancer getGraph and setComments
+        Object[] paramIn = getParams( pForm, pRequest );
+        
+        // Obtention de la couche métier
+        IApplicationComponent ac2 = AccessDelegateHelper.getInstance( "Graph" );
+
+        // Appel de la couche métier
+        Object[] result = (Object[]) ac2.execute( "getHistoricGraph", paramIn );
+        
+        // Récupération du componentDTO pour getGraph 
+        ComponentDTO comp = (ComponentDTO) paramIn[0];
+        
+        //lancement de getGraph
+        getGraph( pForm, pRequest, comp, result );
+        
+        //lancement de setCommentsInForm à partir de la liste de QualityResultDTO 
+        //si la liste a bien été envoyée
+        ArrayList<QualityResultDTO> listeManualMark = new ArrayList<QualityResultDTO>(); 
+        if ( result.length > 4 ) 
+        {
+            listeManualMark = (ArrayList<QualityResultDTO>) result[4];
+            setCommentsInForm( listeManualMark, pForm );  
+        }
+    }
+    
+    /***
+     * Méthode ajoutant l'historique des commentaires des notes manuelles
+     * au formulaire
+     * 
+     * @param pManualMarkList la liste des commentaires
+     */
+    private void setCommentsInForm( ArrayList<QualityResultDTO> pManualMarkList, ActionForm pForm )
+    {
+        ArrayList<ParamReviewCommentsForm> commentsFormList = new ArrayList<ParamReviewCommentsForm>();
+        //on prépare les formbean commentaire
+        ParamReviewCommentsForm commentsForm;
+        //on compose l'historique à afficher
+        for ( QualityResultDTO dto : pManualMarkList )
+        {
+            commentsForm = new ParamReviewCommentsForm();
+            // Transform the bo into form
+            try
+            {
+                WTransformerFactory.objToForm( ParamReviewCommentsTransform.class, commentsForm, new Object[] { dto } );
+            }
+            catch ( WTransformerException e )
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            commentsFormList.add( commentsForm );
+        }
+        //on ajoute la liste au formbean courant
+        ( (ParamReviewForm) pForm).setCommentsList( commentsFormList ); 
+    }
 }

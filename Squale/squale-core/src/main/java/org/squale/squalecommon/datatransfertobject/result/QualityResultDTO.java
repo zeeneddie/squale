@@ -59,6 +59,11 @@ public class QualityResultDTO
      * The date of creation of the manual mark
      */
     private Date creationDate;
+    
+    /**
+     * The comment object of the manual mark
+     */
+    private QualityResultCommentDTO mManualMarkComment;
 
     /**
      * Getter method for the property creationDate
@@ -188,5 +193,25 @@ public class QualityResultDTO
     public void setId( long id )
     {
         mId = id;
+    }
+
+    /***
+     * Getter method for the comment object of the manual mark
+     * 
+     * @return the comment object of the manual mark
+     */
+    public QualityResultCommentDTO getManualMarkComment()
+    {
+        return mManualMarkComment;
+    }
+
+    /***
+     * Setter method for the comment object of the manual mark 
+     * 
+     * @param pManualMarkComment the new comment of the manual mark
+     */
+    public void setManualMarkComment( QualityResultCommentDTO pManualMarkComment )
+    {
+        this.mManualMarkComment = pManualMarkComment;
     }
 }

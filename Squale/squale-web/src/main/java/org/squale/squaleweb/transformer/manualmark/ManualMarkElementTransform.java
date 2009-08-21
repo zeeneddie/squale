@@ -20,6 +20,9 @@ package org.squale.squaleweb.transformer.manualmark;
 
 import java.util.Locale;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.squale.squalecommon.datatransfertobject.result.QualityResultCommentDTO;
 import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
 import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
 import org.squale.squalecommon.datatransfertobject.rule.QualityRuleDTO;
@@ -30,11 +33,14 @@ import org.squale.welcom.struts.transformer.WITransformer;
 import org.squale.welcom.struts.transformer.WTransformerException;
 
 /**
- * Transformer class Object <=> form for ManaulaMarkElement
+ * Transformer class Object <=> form for ManualMarkElement
  */
 public class ManualMarkElementTransform
     implements WITransformer
 {
+    
+    /** Logger */
+    private static final Log LOGGER = LogFactory.getLog( ManualMarkElementTransform.class );
 
     /**
      * {@inheritDoc}
@@ -55,6 +61,10 @@ public class ManualMarkElementTransform
     {
         ManualMarkElementForm currentForm = (ManualMarkElementForm) form;
         QualityResultDTO dto = new QualityResultDTO();
+        //création du commentaire
+        QualityResultCommentDTO commentDto = new QualityResultCommentDTO();
+        commentDto.setComments( currentForm.getComments() );
+        dto.setManualMarkComment( commentDto );
         dto.setId( currentForm.getResultId() );
         dto.setMeanMark( Float.parseFloat( currentForm.getValue() ) );
         dto.setCreationDate( currentForm.getCreationDate() );
@@ -89,6 +99,15 @@ public class ManualMarkElementTransform
         currentForm.setValue( String.valueOf( dto.getMeanMark() ) );
         currentForm.setCreationDate( dto.getCreationDate() );
         currentForm.setTimelimitation( ruleDTO.getTimeLimitation() );
+        // set the comments
+        if ( dto.getManualMarkComment()!= null )
+        {
+            currentForm.setComments( dto.getManualMarkComment().getComments() );
+        }
+        else 
+        {
+            currentForm.setComments( "" );
+        }
         String limitation = TimelimitationUtil.parseStringWithUnitTranslate( ruleDTO.getTimeLimitation(), local );
         currentForm.setTimeLimitationParse( limitation );
         if ( dto.getCreationDate() != null )

@@ -18,6 +18,8 @@
  */
 package org.squale.squaleweb.applicationlayer.formbean.results;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionError;
@@ -63,8 +65,13 @@ public class ParamReviewForm
 
     /** Le graph */
     private GraphMaker reviewGraph;
+    
+    /** La liste des commentaires */
+    private ArrayList<ParamReviewCommentsForm> commentsList;
 
     /**
+     * Getter de la propriété nbDays
+     * 
      * @return le nombre de jours du graph d'evolution
      */
     public int getNbDays()
@@ -73,6 +80,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Setter de la propriété nbDays
+     * 
      * @param pNbDays le nombre de jours du graph d'evolution
      */
     public void setNbDays( int pNbDays )
@@ -81,6 +90,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Getter de la propriété tre
+     * 
      * @return le type de resultat elementaire
      */
     public String getTre()
@@ -89,6 +100,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Setter de la propriété tre
+     * 
      * @param string type de resultat elementaire
      */
     public void setTre( String string )
@@ -100,6 +113,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Getter de la propriété ruleId 
+     * 
      * @return id de la règle
      */
     public String getRuleId()
@@ -108,6 +123,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Setter de la propriété ruleId
+     * 
      * @param pRuleId id de la règle
      */
     public void setRuleId( String pRuleId )
@@ -116,6 +133,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Getter de la propriété componentId
+     * 
      * @return id de composant
      */
     public String getComponentId()
@@ -124,6 +143,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Setter de la propriété componentId
+     * 
      * @param pString id de composant
      */
     public void setComponentId( String pString )
@@ -132,6 +153,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Getter de la propriété componentName
+     * 
      * @return le nom du composant
      */
     public String getComponentName()
@@ -140,6 +163,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Getter de la propriété componentType
+     * 
      * @return le type du composant
      */
     public String getComponentType()
@@ -148,6 +173,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Setter de la propriété componentName
+     * 
      * @param pComponentName le nom du composant
      */
     public void setComponentName( String pComponentName )
@@ -156,6 +183,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Setter de la propriété componentType
+     * 
      * @param pComponentType le type du composant
      */
     public void setComponentType( String pComponentType )
@@ -164,6 +193,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Getter de la propriété reviewGraph
+     * 
      * @return le graph
      */
     public GraphMaker getReviewGraph()
@@ -172,6 +203,8 @@ public class ParamReviewForm
     }
 
     /**
+     * Setter de la propriété reviewGraph
+     * 
      * @param pGraph le graph
      */
     public void setReviewGraph( GraphMaker pGraph )
@@ -223,5 +256,26 @@ public class ParamReviewForm
     public void setIsManualMark( boolean pIsManualMark )
     {
         isManualMark = pIsManualMark;
+    }
+    
+    /***
+     * Getter de la propriété commentsList
+     * 
+     * @return la liste des commentaires des notes des pratiques manuelles
+     */
+    public ArrayList<ParamReviewCommentsForm> getCommentsList()
+    {
+        return commentsList;
+    }
+
+    /***
+     * Setter de la propriété commentsList
+     * 
+     * @param pCommentsList la nouvelle liste des commentaires 
+     * des notes des pratiques manuelles
+     */
+    public void setCommentsList( ArrayList<ParamReviewCommentsForm> pCommentsList )
+    {
+        this.commentsList = pCommentsList;
     }
 }

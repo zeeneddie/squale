@@ -28,9 +28,8 @@
 		<property name="jdbc.use_streams_for_binary">true</property>
 
 		<!-- <property name="dialect">org.hibernate.dialect.OracleDialect</property> -->
-		<!-- <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property> -->
+		<!-- <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>-->
 		<!-- <property name="dialect">org.hibernate.dialect.HSQLDialect</property>-->
-		<!-- <property name="dialect">org.hibernate.dialect.HSQLDialect</property> -->
 
 		<!-- begin mapping files -->
 		<mapping resource="mapping/access/UserAccessBO.hbm.xml" />
@@ -65,6 +64,7 @@
 		<mapping resource="mapping/result/MeasureBO.hbm.xml" />
 		<mapping resource="mapping/result/MetricBO.hbm.xml" />
 		<mapping resource="mapping/result/QualityResultBO.hbm.xml" />
+		<mapping resource="mapping/result/QualityResultCommentBO.hbm.xml" />
 		<mapping resource="mapping/result/SqualeReferenceBO.hbm.xml" />
 		<mapping resource="mapping/result/rulechecking/RuleCheckingTransgressionItemBO.hbm.xml" />
 		

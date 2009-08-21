@@ -281,6 +281,8 @@
 		
 		<component name="lastManualMark"/>
 		
+		<component name="lastManualMarkByAudit"/>
+		
 		<component name="auditManualMark"/>
 		
 		

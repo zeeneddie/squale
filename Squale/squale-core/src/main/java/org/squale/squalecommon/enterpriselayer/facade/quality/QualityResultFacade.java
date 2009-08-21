@@ -1418,6 +1418,45 @@ public final class QualityResultFacade
         return resultDto;
 
     }
+    
+    /**
+     * This method get back the last manual mark linked to the project, the practice rule and the audit
+     * given in argument 
+     * 
+     * @param projectId ID of the project
+     * @param practiceId ID of the practice rule
+     * @param auditId ID of the audit
+     * @return a QualityResultDTO wich contains the manual mark
+     * @throws JrafEnterpriseException Exception happened during the process
+     */
+    public static QualityResultDTO findManualQualityResultByAudit ( long projectId, long practiceId, long auditId )
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+        QualityResultBO manualPracticeResult = null;
+        QualityResultDTO resultDto = null;
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            QualityResultDAOImpl dao = QualityResultDAOImpl.getInstance();
+            //Search of the last mark for the practice and the audit
+            manualPracticeResult = dao.findLastManualMarkByAudit( session, projectId, practiceId, auditId );
+            if ( manualPracticeResult != null )
+            {
+                //Transform BO into DTO
+                resultDto = QualityResultTransform.bo2Dto( manualPracticeResult );
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, QualityResultFacade.class.getName() + ".findManualQualityResultByAudit" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, QualityResultFacade.class.getName() + ".findManualQualityResultByAudit" );
+        }
+        return resultDto;
+    }
 
     /**
      * This method record in DB mark for a manual practice

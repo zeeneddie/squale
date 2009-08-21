@@ -29,6 +29,7 @@ import org.apache.commons.logging.LogFactory;
 
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
 import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.daolayer.DAOMessages;
 import org.squale.squalecommon.daolayer.DAOUtils;
@@ -464,5 +465,38 @@ public class QualityResultDAOImpl
         Collection<PracticeResultBO> col = findWhere( pSession, whereClause.toString() );
         return col;
     }
-
+    
+    /***
+     * This method return the last manual mark inserted (if there is one) for a manual practice
+     * and a specific audit 
+     * 
+     * @param pSession The hibernate session
+     * @param pProjectId The ID of the project
+     * @param pRuleId The rule ID
+     * @param pAuditId The audit ID
+     * @return The PracticeRsultBO linked to the last manual mark inserted for the rule, the project 
+     * and the audit specified in argument. This method returns null if it finds nothing.
+     * @throws JrafDaoException Exception happen during the hibernate search
+     */
+    public PracticeResultBO findLastManualMarkByAudit ( ISession pSession, Long pProjectId, Long pRuleId, Long pAuditId )
+        throws JrafDaoException
+    {
+        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
+        StringBuffer whereClause = new StringBuffer( "where " );
+        whereClause.append( getAlias() + ".rule.id = " + pRuleId );
+        whereClause.append( " and " + getAlias() + ".project.id = " + pProjectId );
+        whereClause.append( " and " + getAlias() + ".audit.id = " + pAuditId );
+        whereClause.append( " and " + getAlias() + ".meanMark!= -1.0" );
+        
+        List col = findWhere( pSession, whereClause.toString() );
+        PracticeResultBO result = null;
+        if ( col.size() > 0 )
+        {
+            // Recovery the last inserted mark for a specific audit
+            result = (PracticeResultBO) col.get( 0 );
+        }
+        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
+        
+        return result;
+    }
 }

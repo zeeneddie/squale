@@ -58,10 +58,12 @@ import org.squale.squalecommon.daolayer.result.QualityResultDAOImpl;
 import org.squale.squalecommon.daolayer.rule.PracticeRuleAPDAOImpl;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
 import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
 import org.squale.squalecommon.datatransfertobject.transform.component.AuditTransform;
 import org.squale.squalecommon.datatransfertobject.transform.component.ComponentTransform;
 import org.squale.squalecommon.datatransfertobject.transform.result.MeasureTransform;
+import org.squale.squalecommon.datatransfertobject.transform.result.QualityResultTransform;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
@@ -961,7 +963,7 @@ public final class MeasureFacade
                 String timeLimitation = ruleBO.getTimeLimitation();
                 Object[] objectReturn =
                     MeasureFacade.getHistoricManualMark( pComponent, pAuditDate, pRuleId, timeLimitation );
-                result = new Object[] { pTreLabel, objectReturn[0], HISTORIC_TYPE, objectReturn[1] };
+                result = new Object[] { pTreLabel, objectReturn[0], HISTORIC_TYPE, objectReturn[1], objectReturn[2] };
             }
             // If it's not a manual practice
             else
@@ -1071,6 +1073,8 @@ public final class MeasureFacade
         ISession session = null;
         Map values = new HashMap<Date, Float>();
         Map extension = new HashMap<Date, Float>();
+        //List used to display manual mark comments history
+        ArrayList<QualityResultDTO> listForComments = new ArrayList<QualityResultDTO>();
         try
         {
             session = PERSISTENTPROVIDER.getSession();
@@ -1093,6 +1097,8 @@ public final class MeasureFacade
                         for ( PracticeResultBO practice : resultList )
                         {
                             values.put( practice.getCreationDate(), practice.getMeanMark() );
+                            QualityResultDTO manualMarkForCommentsHistory = QualityResultTransform.bo2Dto( practice );
+                            listForComments.add( manualMarkForCommentsHistory );
                         }
                         if ( lastResult.getCreationDate().compareTo( todayCal.getTime() ) < 0 )
                         {
@@ -1121,7 +1127,7 @@ public final class MeasureFacade
         {
             FacadeHelper.closeSession( session, MeasureFacade.class.getName() + ".getHistoricManualMark" );
         }
-        return new Object[] { values, extension };
+        return new Object[] { values, extension, listForComments };
     }
 
     /**

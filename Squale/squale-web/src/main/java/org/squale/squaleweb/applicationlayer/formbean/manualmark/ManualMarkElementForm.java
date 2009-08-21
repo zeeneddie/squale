@@ -55,6 +55,9 @@ public class ManualMarkElementForm
     /** The validity period parse and translate */
     private String timeLimitationParse;
     
+    /** The comment of the manual mark */
+    private String comments;
+    
     /**
      * Getter method for the property timeLimitation
      * 
@@ -227,6 +230,26 @@ public class ManualMarkElementForm
         timeLimitationParse = pTimeLimitationParse;
     }
     
+    /***
+     * Getter for the attribute comments
+     * 
+     * @return the comment 
+     */
+    public String getComments()
+    {
+        return comments;
+    }
+    
+    /***
+     * Setter for the attribute comments
+     * 
+     * @param pComments the new comments
+     */
+    public void setComments( String pComments )
+    {
+        this.comments = pComments;
+    }
+
     /**
      * {@inheritDoc}
      */

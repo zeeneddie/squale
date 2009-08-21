@@ -25,6 +25,7 @@ import org.squale.squalecommon.datatransfertobject.transform.rule.QualityRuleTra
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultCommentBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.rule.PracticeRuleBO;
 
 /**
@@ -57,6 +58,11 @@ public final class QualityResultTransform
         {
             qualityResultDTO.setAudit( AuditTransform.bo2Dto( pQualityResultBO.getAudit() ) );
         }
+        //ajout du commentaire (QualityResultComment)
+        if (pQualityResultBO.getManualMarkComment() != null )
+        {
+            qualityResultDTO.setManualMarkComment( QualityResultCommentTransform.bo2Dto( pQualityResultBO.getManualMarkComment() ) );
+        }
         qualityResultDTO.setProject( ComponentTransform.bo2Dto( pQualityResultBO.getProject() ) );
         qualityResultDTO.setRule( QualityRuleTransform.bo2Dto( pQualityResultBO.getRule(), true ) );
         qualityResultDTO.setCreationDate( pQualityResultBO.getCreationDate() );
@@ -83,6 +89,12 @@ public final class QualityResultTransform
         PracticeRuleBO rule = new PracticeRuleBO();
         rule.setId( resultDto.getRule().getId() );
         bo.setRule( rule );
+        
+        //add the comments
+        QualityResultCommentBO commentsToAdd = new QualityResultCommentBO();
+        commentsToAdd.setComments( resultDto.getManualMarkComment().getComments() );
+        commentsToAdd.setQualityResult( bo );
+        bo.setManualMarkComment( commentsToAdd );
         return bo;
     }
 
