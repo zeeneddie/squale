@@ -63,6 +63,7 @@
 		<mapping resource="mapping/result/MeasureBO.hbm.xml" />
 		<mapping resource="mapping/result/MetricBO.hbm.xml" />
 		<mapping resource="mapping/result/QualityResultBO.hbm.xml" />
+		<mapping resource="mapping/result/QualityResultCommentBO.hbm.xml" />
 		<mapping resource="mapping/result/SqualeReferenceBO.hbm.xml" />
 		<mapping resource="mapping/result/rulechecking/RuleCheckingTransgressionItemBO.hbm.xml" />
 		
