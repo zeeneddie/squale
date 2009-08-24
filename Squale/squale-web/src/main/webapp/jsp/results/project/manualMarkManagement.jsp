@@ -127,7 +127,7 @@
 								<td></td>
 								<td colspan="5">
 									<div id='<%="editform-" + index%>' style="display:none">
-										<fieldset class="manualMarkFieldset"><legend>Edition note manuelle</legend>
+										<fieldset class="manualMarkFieldset"><legend><bean:message key="manualMark.table.form.legend" /></legend>
 											<%-- champ mark --%>
 											<div class="manualMarkFormLabel">
 												<bean:message key="manualMark.table.form.mark"/>
