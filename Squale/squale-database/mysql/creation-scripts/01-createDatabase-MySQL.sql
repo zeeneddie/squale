@@ -470,6 +470,10 @@
         IN_PRODUCTION bit,
         lastUser text,
         Serveur bigint,
+        QualityApproachOnStart bit,
+        InInitialDev bit,
+        GlobalCost integer,
+        DevCost integer,
         LongFileName text,
         ProfileBO bigint,
         ParametersSet bigint,
@@ -671,7 +675,7 @@
 
     create table QualityResult_Comment (
         QR_CommentId bigint not null auto_increment,
-        Comments varchar(4000),
+        Comments text,
         QualityResultId bigint unique,
         primary key (QR_CommentId)
     ) type=InnoDB;

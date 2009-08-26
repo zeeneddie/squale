@@ -115,6 +115,32 @@ public class CreateApplicationForm
 
     /** L'utilisateur ayant fait la dernière modification */
     private String mLastUser;
+    
+    /**
+     * Does the quality approach started at the beginning of the project
+     */
+    private boolean mIsQualityApproachOnStart;
+
+    /**
+     * Does the application is in its initial development phase
+     */
+    private boolean mIsInInitialDev;
+    
+    /**
+     * Does the application is in its initial development phase
+     */
+    private int globalCostMaintenance;
+
+    /**
+     * Global cost of the application
+     */
+    private int globalCostInitial;
+
+    /**
+     * The development cost of the application in its initial development phase. Only available when the project is on
+     * its initial development phase.
+     */
+    private int devCost;
 
     /**
      * @return le booléen indiquant si le dev a été fait en externe ou pas
@@ -291,6 +317,8 @@ public class CreateApplicationForm
         setPublic( false );
         setExternalDev( false );
         setIsInProduction( false );
+        setInInitialDev( false );
+        setQualityApproachOnStart( false );
     }
 
     /**
@@ -409,5 +437,106 @@ public class CreateApplicationForm
     {
         return mAccessListForm;
     }
+    
+    /**
+     * Getter method for the attribute isQualityApproachOnStart
+     * 
+     * @return true if the quality approach started at the beginning of the project
+     */
+    public boolean getQualityApproachOnStart()
+    {
+        return (mIsQualityApproachOnStart);
+    }
+
+    /**
+     * Setter method for the attribute isQualityApproachOnStart
+     * 
+     * @param pIsQualityApproachOnStart The new value for the attribute isQualityApproachOnStart
+     */
+    public void setQualityApproachOnStart( boolean pIsQualityApproachOnStart )
+    {
+        mIsQualityApproachOnStart = pIsQualityApproachOnStart;
+    }
+
+    /**
+     * Getter method for the attribute isInInitialDev
+     * 
+     * @return true if the application is in initial development phase
+     */
+    public boolean getInInitialDev()
+    {
+        return mIsInInitialDev;
+    }
+
+    /**
+     * Setter method for the attribute isInInitialDev
+     * 
+     * @param pIsInInitialDev The new value for the attribute isInInitialDev
+     */
+    public void setInInitialDev( boolean pIsInInitialDev )
+    {
+        mIsInInitialDev = pIsInInitialDev;
+    }
+
+    /**
+     * Getter method for the attribute globalCostMaintenance
+     * 
+     * @return The global cost of the application in maintenance
+     */
+    public int getGlobalCostMaintenance()
+    {
+        return globalCostMaintenance;
+    }
+
+    /**
+     * Setter method for the attribute globalCostMaintenance
+     * 
+     * @param pGlobalCostMaintenance The new value for globalcost attribute
+     */
+    public void setGlobalCostMaintenance( int pGlobalCostMaintenance )
+    {
+        globalCostMaintenance = pGlobalCostMaintenance;
+    }
+    
+    /**
+     * Getter method for the attribute globalCostInitial
+     * 
+     * @return The global cost of the application in initial dev
+     */
+    public int getGlobalCostInitial()
+    {
+        return globalCostInitial;
+    }
+
+    /**
+     * Setter method for the attribute globalCostInitial
+     * 
+     * @param pGlobalCostInitial The new value for globalCostInitial attribute
+     */
+    public void setGlobalCostInitial( int pGlobalCostInitial )
+    {
+        globalCostInitial = pGlobalCostInitial;
+    }
+
+    /**
+     * Getter method for the attribute devCost
+     * 
+     * @return the development cost of the application
+     */
+    public int getDevCost()
+    {
+        return devCost;
+    }
+
+    /**
+     * Setter method for the devCost attribute
+     * 
+     * @param pDevCost The new value for the devcost attribute
+     */
+    public void setDevCost( int pDevCost )
+    {
+        devCost = pDevCost;
+    }
+
 
 }

@@ -263,6 +263,14 @@ public class ManageApplicationAction
             ActionMessage error = new ActionMessage( "error.purge_frequency" );
             pErrors.add( ActionMessages.GLOBAL_MESSAGE, error );
         }
+        if (application.getInInitialDev())
+        {
+            if (application.getDevCost() > application.getGlobalCostInitial())
+            {
+                ActionMessage error = new ActionMessage( "error.dev_cost" );
+                pErrors.add( ActionMessages.GLOBAL_MESSAGE, error );
+            }
+        }
     }
 
     /**

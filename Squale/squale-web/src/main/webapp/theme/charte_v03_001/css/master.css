@@ -402,7 +402,7 @@ div.homepage {border: 4px double #F3BA5D; padding:10px; -moz-border-radius:0px 2
 div.homepage > table.formulaire {visibility:hidden}
 div.homepage div.onglet_contenu{background-color:#FFFFFF;} 
 div.ongKiviat {float:left; margin-top:5px;}
-div.frame_border {border: 4px double #F3BA5D; padding:10px; -moz-border-radius:0px 20px 20px 20px}
+div.frame_border {border: 1px solid #F3BA5D; padding:10px; -moz-border-radius:0px 20px 20px 20px}
 /*-- element for manualMarkManagement.jsp --*/
 .manualMarkFieldset{width:400px;padding:5px;-moz-border-radius:5px; margin-bottom: 5px;}
 .manualMarkFormLabel{width: 195px; float: left; margin-top: 5px; padding-top: 2px;}
@@ -421,3 +421,5 @@ div.frame_border {border: 4px double #F3BA5D; padding:10px; -moz-border-radius:0
 .commentsHistoryBlocComment div{margin-bottom: 2px;}
 /*-- element for manualPractice.jsp --*/
 #commentsDiv{height: auto; padding-bottom: 5px;}
+
+.td1Ext {text-align:right;font-weight:bold; width:50%; height:25px }

@@ -457,6 +457,10 @@ public class ApplicationDAOImpl
     				", app_comp.IN_PRODUCTION" +
     				", app_comp.lastUser" +
     				", app_comp.Serveur" +
+    				", app_comp.QualityApproachOnStart" +
+    				", app_comp.InInitialDev" +
+    				", app_comp.GlobalCost" +
+    				", app_comp.DevCost" +
     				" FROM Component app_comp";
     		fullquery += " WHERE app_comp.subclass = 'Application'" +
     				" AND EXISTS " +

@@ -66,6 +66,10 @@ public class ApplicationConfTransform
         applicationBO.setResultsStorageOptions( pApplicationConfDTO.getResultsStorageOptions() );
         applicationBO.setExternalDev( pApplicationConfDTO.getExternalDev() );
         applicationBO.setInProduction( pApplicationConfDTO.getInProduction() );
+        applicationBO.setQualityApproachOnStart( pApplicationConfDTO.getQualityApproachOnStart() );
+        applicationBO.setInInitialDev( pApplicationConfDTO.getInInitialDev() );
+        applicationBO.setGlobalCost( pApplicationConfDTO.getGlobalCost() );
+        applicationBO.setDevCost( pApplicationConfDTO.getDevCost() );
         if ( pApplicationConfDTO.getServeurDTO() != null )
         {
             applicationBO.setServeurBO( (ServeurBO) ServeurTransform.dto2bo( pApplicationConfDTO.getServeurDTO() ) );
@@ -100,6 +104,10 @@ public class ApplicationConfTransform
         applicationConfDTO.setPublic( pApplicationBO.getPublic() );
         applicationConfDTO.setExternalDev( pApplicationBO.getExternalDev() );
         applicationConfDTO.setInProduction( pApplicationBO.getInProduction() );
+        applicationConfDTO.setInInitialDev( pApplicationBO.getInInitialDev() );
+        applicationConfDTO.setQualityApproachOnStart( pApplicationBO.getQualityApproachOnStart() );
+        applicationConfDTO.setGlobalCost( pApplicationBO.getGlobalCost() );
+        applicationConfDTO.setDevCost( pApplicationBO.getDevCost() );
         if ( null != pApplicationBO.getUserAccesses() )
         {
             applicationConfDTO.setAccesses( UserAccessTransform.bo2dto( pApplicationBO.getUserAccesses() ) );
@@ -175,6 +183,10 @@ public class ApplicationConfTransform
         applicationConfDTO.setPublic( pApplicationBO.getPublic() );
         applicationConfDTO.setExternalDev( pApplicationBO.getExternalDev() );
         applicationConfDTO.setInProduction( pApplicationBO.getInProduction() );
+        applicationConfDTO.setInInitialDev( pApplicationBO.getInInitialDev() );
+        applicationConfDTO.setQualityApproachOnStart( pApplicationBO.getQualityApproachOnStart() );
+        applicationConfDTO.setGlobalCost( pApplicationBO.getGlobalCost() );
+        applicationConfDTO.setDevCost( pApplicationBO.getDevCost() );
         if ( pApplicationBO.getServeurBO() != null )
         {
             applicationConfDTO.setServeurDTO( (ServeurDTO) ServeurTransform.bo2dto( pApplicationBO.getServeurBO() ) );
@@ -221,6 +233,10 @@ public class ApplicationConfTransform
         pApplicationBO.setInProduction( pApplicationConfDTO.getInProduction() );
         pApplicationBO.setLastUpdate( pApplicationConfDTO.getLastUpdate() );
         pApplicationBO.setLastUser( pApplicationConfDTO.getLastUser() );
+        pApplicationBO.setQualityApproachOnStart( pApplicationConfDTO.getQualityApproachOnStart() );
+        pApplicationBO.setInInitialDev( pApplicationConfDTO.getInInitialDev() );
+        pApplicationBO.setGlobalCost( pApplicationConfDTO.getGlobalCost() );
+        pApplicationBO.setDevCost( pApplicationConfDTO.getDevCost() );
         if ( pApplicationConfDTO.getServeurDTO() != null )
         {
             pApplicationBO.setServeurBO( (ServeurBO) ServeurTransform.dto2bo( pApplicationConfDTO.getServeurDTO() ) );

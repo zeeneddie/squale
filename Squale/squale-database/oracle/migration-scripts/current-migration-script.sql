@@ -14,3 +14,14 @@ alter table QualityResult_Comment
     references QualityResult;
 --Add the sequence
     create sequence qualityres_comment_sequence;
+
+-- Modification for #208
+alter table Component add QualityApproachOnStart number(1,0);
+alter table Component add InInitialDev number(1,0);
+alter table Component add GlobalCost number(10,0);
+alter table Component add DevCost number(10,0);
+alter table component modify InInitialDev default 1;
+alter table component modify QualityApproachOnStart default 1;
+alter table component modify GlobalCost default 0;
+alter table component modify DevCost default 0;
+update Component set InInitialDev=1, QualityApproachOnStart=0 , GlobalCost=0 , DevCost=0;

@@ -98,6 +98,19 @@ public class ApplicationConfTransformer
         HashMap hm = new HashMap();
         form.setIsInProduction( dto.getInProduction() );
         form.setExternalDev( dto.getExternalDev() );
+        form.setInInitialDev( dto.getInInitialDev() );
+        form.setQualityApproachOnStart( dto.getQualityApproachOnStart() );
+        if (dto.getInInitialDev())
+        {
+            form.setGlobalCostInitial( dto.getGlobalCost() );
+            form.setDevCost( dto.getDevCost() );
+        }
+        else
+        {
+            form.setGlobalCostMaintenance( dto.getGlobalCost() );
+            form.setDevCost( 0 );
+        }
+        
 
         // Prise en compte des utilisateurs déclarés sur l'application
         if ( null != dto.getUsers() )
@@ -182,6 +195,20 @@ public class ApplicationConfTransformer
         dto.setPublic( form.isPublic() );
         dto.setInProduction( form.getIsInProduction() );
         dto.setExternalDev( form.getExternalDev() );
+        dto.setInInitialDev( form.getInInitialDev() );
+        dto.setQualityApproachOnStart( form.getQualityApproachOnStart() );
+        if (form.getInInitialDev())
+        {
+            dto.setGlobalCost( form.getGlobalCostInitial() );
+            dto.setDevCost( form.getDevCost() );
+        }
+        else
+        {
+            dto.setGlobalCost( form.getGlobalCostMaintenance() );
+            dto.setDevCost( 0 );
+        }
+        
+        
         HashMap hm = new HashMap();
         if ( null != form.getRights() )
         {
