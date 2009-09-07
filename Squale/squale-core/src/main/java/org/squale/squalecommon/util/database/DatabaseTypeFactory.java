@@ -67,23 +67,15 @@ public final class DatabaseTypeFactory
         Dialect dial = hibSession.getDialect();
         String dialectUsed = dial.toString();
 
-        if ( dialectUsed.equals( "org.hibernate.dialect.MySQLDialect" ) )
+        if ( dialectUsed.startsWith( "org.hibernate.dialect.MySQL" ) )
         {
             databaseInstance = new MySQLType();
         }
-        else if ( dialectUsed.equals( "org.hibernate.dialect.MySQLInnoDBDialect" ) )
-        {
-            databaseInstance = new MySQLType();
-        }
-        else if ( dialectUsed.equals( "org.hibernate.dialect.OracleDialect" ) )
+        else if ( dialectUsed.startsWith( "org.hibernate.dialect.Oracle" ) )
         {
             databaseInstance = new OracleType();
         }
-        else if ( dialectUsed.equals( "org.hibernate.dialect.Oracle9Dialect" ) )
-        {
-            databaseInstance = new OracleType();
-        }
-        else if (dialectUsed.equals( "org.hibernate.dialect.HSQLDialect" ))
+        else if (dialectUsed.startsWith( "org.hibernate.dialect.HSQL" ))
         {
             databaseInstance = new HsqldbType();
         }
