@@ -24,15 +24,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+import org.codehaus.plexus.util.DirectoryScanner;
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.jspvolumetry.JSPVolumetryProjectBO;
 import org.squale.squalix.core.AbstractTask;
 import org.squale.squalix.core.TaskData;
@@ -42,6 +42,7 @@ import org.squale.squalix.util.process.ProcessManager;
 import org.squale.squalix.util.process.ProcessOutputHandler;
 
 /**
+ * This class is the task for jsp metrics (number of jsp files and jsp loc)
  */
 public class JSPVolumetryTask
     extends AbstractTask
@@ -60,10 +61,10 @@ public class JSPVolumetryTask
     private ProcessManager mProcess;
 
     /** le nb de jsps */
-    private int mNbJsps = 0;
+    private int mNbJsps;
 
     /** le nombre de lignes de jsps */
-    private int mNbJSPLoc = 0;
+    private int mNbJSPLoc;
 
     /**
      * Logger
@@ -124,11 +125,7 @@ public class JSPVolumetryTask
         {
             int execResult = 0;
             List jspDir = null;
-
             initialize();
-            // String nbJspsCommand = mConfiguration.getNbJspsCommand();
-            // String nbJspsLocCommand = mConfiguration.getNbJspsLocCommand();
-            File script = new File( mConfiguration.getScriptPath() );
             // chargement du nom des répertoires contenant les pages JSP à analyser
             ListParameterBO lListParameterBO = (ListParameterBO) ( mProject.getParameter( ParametersConstants.JSP ) );
             if ( lListParameterBO != null )
@@ -136,21 +133,15 @@ public class JSPVolumetryTask
                 jspDir = lListParameterBO.getParameters();
             }
             String viewPath = (String) mData.getData( TaskData.VIEW_PATH );
-
             // exécution de la tâche si un répertoire JSP au moins a été défini par l'utilisateur
             if ( jspDir != null )
             {
                 for ( int i = 0; i < jspDir.size(); i++ )
                 {
                     String jspDirPath = viewPath + ( (StringParameterBO) jspDir.get( i ) ).getValue();
-                    // exécute le script
-                    execResult =
-                        process( new String[] { script.getAbsolutePath(), jspDirPath,
-                            mConfiguration.getResultFilePath() } );
-                    // Les résultats sont inscrits dans le fichier de résultats
-                    parseFile();
+                    //launch the java tool to count : the number of jsp fiels and the jsp loc
+                    getJspNumberAndLoc( jspDirPath );
                 }
-
                 // crée l'objet à persister
                 JSPVolumetryProjectBO volumetry = new JSPVolumetryProjectBO();
                 // positionne les champs
@@ -173,52 +164,8 @@ public class JSPVolumetryTask
     }
 
     /**
-     * Parse le fichier pour récupérer les résultats
+     * This method is used to save the jsp volumetry results
      * 
-     * @throws NumberFormatException si le résultat n'est pas un entier
-     * @throws IOException si le fichier n'est pas trouvé ou si la lecture des résultats se passe mal
-     * @throws TaskException en cas d'échec de récupération des résultats
-     */
-    private void parseFile()
-        throws NumberFormatException, IOException, TaskException
-    {
-        File resultFile = mConfiguration.getResultFile();
-        if ( resultFile.exists() )
-        {
-            BufferedReader br = new BufferedReader( new FileReader( resultFile ) );
-            // on ajoute les valeurs obtenus sur les différents répertoires
-            // contenant les jsps fourni
-            mNbJsps += Integer.parseInt( br.readLine().trim() );
-            mNbJSPLoc += Integer.parseInt( br.readLine().trim() );
-            br.close();
-            // delete file
-            resultFile.delete();
-        }
-        else
-        {
-            throw new TaskException( "exception.resultFile.not_exists" );
-        }
-
-    }
-
-    /**
-     * @param pCommand la commande a exécuter
-     * @return le résultat de l'exécution de la commande
-     * @throws IOException en cas d'éche de lecture
-     * @throws InterruptedException si le processus est uinterrompu anormalement
-     */
-    private int process( String[] pCommand )
-        throws IOException, InterruptedException
-    {
-        mProcess = createProcessManager( pCommand, mConfiguration.getWorkspace() );
-        // On veut gérer les informations lancées par le processus en sortie
-        mProcess.setOutputHandler( this );
-        // On cherche à avoir un comportement synchrone pour être sûr de ne pas
-        // avoir un état des données incohérent
-        return mProcess.startProcess( this );
-    }
-
-    /**
      * @param volumetry l'objet à persister
      * @throws JrafDaoException en cas d'échec de la sauvegarde des résultats
      */
@@ -254,5 +201,79 @@ public class JSPVolumetryTask
     public void processError( String pErrorMessage )
     {
         // TODO Auto-generated method stub
+    }
+    
+    /***
+     * This methods is used to read all the jsp files in the specified directory,
+     * to calculate and to set the number of jsp files and the jsp LOC
+     * 
+     * @param pJspDirPath the path for the jsp files directory
+     * @throws TaskException could be thrown if the jsp directory does not exist
+     */
+    private void getJspNumberAndLoc(String pJspDirPath) 
+        throws TaskException
+    {
+        //the directory scanner
+        DirectoryScanner ds = new DirectoryScanner();
+        //the pattern
+        String [] includes = { "**" + File.separator + "*.jsp" };
+        //the directory path
+        File baseDir = new File( pJspDirPath );
+        //Verifying if baseDir exists and is a Directory
+        if ( baseDir.exists() && baseDir.isDirectory() )
+        {
+            //Setting the Directory Scanner parameters
+            ds.setBasedir( baseDir );
+            ds.setIncludes( includes );
+            //launch the scan
+            ds.scan();
+            //read all the files gathered
+            String [] filesToScan = ds.getIncludedFiles();
+            for ( String file : filesToScan )
+            {
+                //start the counter for the jsp loc
+                int count = 0;
+                //the path to the file to read
+                String filePath = baseDir.toString() + File.separator + file;
+                try 
+                {
+                    FileReader fr = new FileReader( new File( filePath ) );
+                    BufferedReader br = new BufferedReader( fr );
+                    //counting the number of lines
+                    String ligne;
+                    while ( ( ligne = br.readLine() ) != null )
+                    {
+                        //excluding the empty lines
+                        if( ligne.trim().length() > 0 )
+                        {
+                            count++;
+                        }
+                    }
+                    //set the jspLoc value. If the last line is empty, it's not taken into account
+                    mNbJSPLoc += count;
+                    LOGGER.debug( mProject.getName() + " STATS FOR THE FILE " + filePath + " : " + count + " lines" );
+                }
+                catch ( IOException e )
+                {
+                    String message = mProject.getName() + ", " + filePath + " : " + JSPVolumetryMessages.getString( "exception.jspFile.not_exists" );
+                    // Logging the error
+                    LOGGER.error( message );
+                    //set the status to failed as the jsp file was not found 
+                    mStatus = FAILED;
+                    initError( message, ErrorBO.CRITICITY_FATAL );
+                }
+            }
+            //set the jsp number value
+            mNbJsps += filesToScan.length;
+        }
+        else
+        {
+            String message = mProject.getName() + ", " + baseDir + " : " + JSPVolumetryMessages.getString( "exception.dir.not_exists" ) ;
+            // Logging the error
+            LOGGER.error( message );
+            //set the status to failed as the directory was not correctly set 
+            mStatus = FAILED;
+            initError( message, ErrorBO.CRITICITY_FATAL );
+        }
     }
 }

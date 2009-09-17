@@ -31,9 +31,6 @@ import org.squale.squalix.core.TaskData;
 public class JSPVolumetryConfiguration
 {
 
-    /** le chemin du fichier où sont écrits les résultats */
-    private File mResultFile;
-
     /**
      * Projet à analyser
      */
@@ -43,9 +40,6 @@ public class JSPVolumetryConfiguration
      * Espace de travail autorisé (voire réservé) à RSM : il permet d'accueillir tous les fichiers générés par RSM
      */
     private File mWorkspace = null;
-
-    /** l'emplacement su script */
-    private String mScriptPath;
 
     /**
      * @return le workspace
@@ -75,50 +69,7 @@ public class JSPVolumetryConfiguration
                       ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
                                                                                                  root,
                                                                                                  JSPVolumetryMessages.getString( "configuration.workspace" ) ).getFirstChild().getNodeValue().trim() ) );
-        // Emplacement du fichier de résultat
-        config.mResultFile =
-            new File(
-                      ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
-                                                                                                 root,
-                                                                                                 JSPVolumetryMessages.getString( "configuration.resultfile" ) ).getFirstChild().getNodeValue().trim() ) );
-        // Emplacement du fichier de résultat
-        config.mScriptPath =
-            ConfigUtility.filterStringWithSystemProps( ConfigUtility.getNodeByTagName(
-                                                                                       root,
-                                                                                       JSPVolumetryMessages.getString( "configuration.script" ) ).getFirstChild().getNodeValue().trim() );
         return config;
-    }
-
-    /**
-     * @return le chemin du fichier ou sont écrits les résultats
-     */
-    public File getResultFile()
-    {
-        return mResultFile;
-    }
-
-    /**
-     * @return le chemin du fichier ou sont écrits les résultats
-     */
-    public String getResultFilePath()
-    {
-        return mResultFile.getPath();
-    }
-
-    /**
-     * @return l'emplacement du script
-     */
-    public String getScriptPath()
-    {
-        return mScriptPath;
-    }
-
-    /**
-     * @param pScritpPath le nouveau chemin
-     */
-    public void setScriptPath( String pScritpPath )
-    {
-        mScriptPath = pScritpPath;
     }
 
 }

@@ -102,8 +102,6 @@ public class JSPVolumetryConfigurationTest
         config = JSPVolumetryConfiguration.build( sp, "config/jspvolumetry-config.xml", datas );
 
         // assertions
-        assertEquals( "D:\\temp\\resultFile.txt", config.getResultFilePath() );
-        assertEquals( "D:\\temp\\script.sh", config.getScriptPath() );
         assertEquals( "D:\\temp", config.getWorkspace().getPath() );
     }
 }

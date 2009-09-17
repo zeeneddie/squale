@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- <!DOCTYPE configuration SYSTEM "rsm-config.dtd"> -->
 <configuration>
 	<workspace>${squale.home}/Squalix/data/jspvolumetry</workspace>
-	<script>${squale.home}/Squalix/bin/resources/script.sh</script>
-	<resultfile>${squale.home}/Squalix/data/jspvolumetry/resultFile.txt</resultfile>
 </configuration>

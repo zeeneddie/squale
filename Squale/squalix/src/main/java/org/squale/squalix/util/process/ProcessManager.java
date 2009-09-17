@@ -74,7 +74,7 @@ public class ProcessManager
      * @param pCommand commande à lancer
      * @param pEnvp environnement d'exécution
      * @param pDir répertoire d'exécution
-     * @param pLog le fichiee de log
+     * @param pLog le fichier de log
      */
     public ProcessManager( String[] pCommand, String pEnvp[], File pDir, File pLog )
     {
