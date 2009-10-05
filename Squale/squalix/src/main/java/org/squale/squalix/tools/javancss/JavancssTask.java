@@ -43,12 +43,14 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javancss.Javancss;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.squale.jraf.commons.exception.JrafDaoException;
@@ -113,6 +115,15 @@ public class JavancssTask
 
     /** Number of classes */
     private int numberOfClasses;
+
+    /** Map of classes results to persist */
+    private Map<String, JavancssClassMetricsBO> classMap = new HashMap<String, JavancssClassMetricsBO>();
+
+    /** Map of package results to persist */
+    private Map<String, JavancssPackageMetricsBO> packageMap = new HashMap<String, JavancssPackageMetricsBO>();
+
+    /** List of method results to persist */
+    private List<JavancssMethodMetricsBO> methodList = new ArrayList<JavancssMethodMetricsBO>();
 
     /**
      * Defaults constructor
@@ -235,7 +246,7 @@ public class JavancssTask
         {
             configuration.parse( new FileInputStream( "config/javancss-config.xml" ) );
             outputFilename = configuration.getResultFilePath();
-            File outputFile = new File(outputFilename);
+            File outputFile = new File( outputFilename );
             File ouputDirectory = outputFile.getParentFile();
             if ( !ouputDirectory.exists() )
             {
@@ -300,22 +311,29 @@ public class JavancssTask
     private String[] getCommandLineArgument()
     {
         List argumentList = new ArrayList();
+
         // creation of package level metrics
         argumentList.add( "-package" );
+
         // creation of classes level metrics
         argumentList.add( "-object" );
+
         // creation of methods level metrics
         argumentList.add( "-function" );
+
         // the kind of output is xml
         argumentList.add( "-xml" );
+
         // Creation of a file with the result
         argumentList.add( "-out" );
+
         // Path of the file to create
         argumentList.add( outputFilename );
+
         // Add of all the file to analyze
         for ( int i = 0; i < includedFileNames.size(); i++ )
         {
-            argumentList.add( new File((String)includedFileNames.get( i )).getPath());
+            argumentList.add( new File( (String) includedFileNames.get( i ) ).getPath() );
         }
 
         return (String[]) argumentList.toArray( new String[argumentList.size()] );
@@ -340,13 +358,19 @@ public class JavancssTask
             packageMetrics.setAudit( getAudit() );
             packageMetrics.setComponent( repository.persisteComponent( packBO ) );
             packageMetrics.setTaskName( getName() );
+            packageMap.put( repository.buildKey( packageMetrics.getComponent() ), packageMetrics );
         }
 
-        // Completion of classes level BO and creation of new components
+        // Completion of classes level results and creation of new components
         completeClassesMeasures();
 
-        // Completion and recording of methods level results and creation of new components
-        completeAndRecordMethodsMeasures();
+        // Completion of methods level results and creation of new components
+        completeMethodsMeasures();
+
+        MeasureDAOImpl dao = MeasureDAOImpl.getInstance();
+
+        // Save method results
+        dao.saveAll( getSession(), methodList );
 
         // Completion and recording of project level results
         JavancssProjectMetricsBO projectResults = parsingResult.getProjectMetrics();
@@ -358,13 +382,14 @@ public class JavancssTask
         projectResults.setAudit( getAudit() );
         projectResults.setComponent( getProject() );
         projectResults.setTaskName( getName() );
-        MeasureDAOImpl.getInstance().create( getSession(), projectResults );
 
-        // Recording of the package level results
-        MeasureDAOImpl.getInstance().saveAll( getSession(), parsingResult.getPackageResult() );
+        dao.create( getSession(), projectResults );
 
-        // Recording of the class level results
-        MeasureDAOImpl.getInstance().saveAll( getSession(), parsingResult.getClassesResult() );
+        // Save package level results
+        dao.saveAll( getSession(), packageMap.values() );
+
+        // Save class level results
+        dao.saveAll( getSession(), classMap.values() );
 
         LOGGER.info( JavancssMessages.getString( "javancss.persistence.end" ) );
     }
@@ -407,6 +432,7 @@ public class JavancssTask
                 classesMetrics.setComponent( repository.persisteComponent( classBO ) );
                 classesMetrics.setTaskName( getName() );
                 numberOfClasses = numberOfClasses + classesMetrics.getClasses().intValue() + 1;
+                classMap.put( repository.buildKey( classesMetrics.getComponent() ), classesMetrics );
             }
             else
             {
@@ -424,7 +450,7 @@ public class JavancssTask
      * @throws JrafDaoException Exception happen during the persistence
      * @throws TaskException exception happened during the persistence in the base
      */
-    private void completeAndRecordMethodsMeasures()
+    private void completeMethodsMeasures()
         throws JrafDaoException, TaskException
     {
         ArrayList methodsResults = parsingResult.getMethodsResult();
@@ -477,10 +503,12 @@ public class JavancssTask
             ClassBO classBo = (ClassBO) repository.getComponent( compoBo );
             methBO.setLongFileName( classBo.getFileName() );
             ( (ClassBO) methBO.getParent() ).setFileName( classBo.getFileName() );
+
             // As javancss doesn't give the full name for arguments type, we search correspondence between the
             // method name give by javancss and those we have in the database.
             // If there is no match found, then we don't modify methBO, and we persist it.
             methodMatch = MethodBOHelper.searchMethodBO( methBO, allMethods, repository );
+
             if ( methodMatch.size() == 1 )
             {
                 methBO = (MethodBO) methodMatch.get( 0 );
@@ -501,9 +529,11 @@ public class JavancssTask
         methodMetrics.setTaskName( getName() );
         int ccn = methodMetrics.getCcn().intValue();
         AbstractComplexComponentBO compo = methodMetrics.getComponent().getParent();
+
         computeClass( ccn, compo );
+
         methodMetrics.setComponent( repository.persisteComponent( methBO ) );
-        MeasureDAOImpl.getInstance().create( getSession(), methodMetrics );
+        methodList.add( methodMetrics );
     }
 
     /**
@@ -525,7 +555,7 @@ public class JavancssTask
             ClassBO clazzBO = parser.getClass( pathName );
             repoclazzBO = (ClassBO) repository.getComponent( clazzBO );
         }
-        while ( repoclazzBO == null );
+        while ( repoclazzBO == null && pathName.contains( "." ) );
         computeClass( ccn, repoclazzBO );
     }
 
@@ -542,15 +572,9 @@ public class JavancssTask
         {
             compo = compo.getParent();
         }
-        JavancssClassMetricsBO metricClassCompo = null;
-        ArrayList classesResults = parsingResult.getClassesResult();
-        int i = 0;
-        do
-        {
-            metricClassCompo = (JavancssClassMetricsBO) classesResults.get( i );
-            i++;
-        }
-        while ( !repository.compare( compo, metricClassCompo.getComponent() ) );
+
+        JavancssClassMetricsBO metricClassCompo = classMap.get( repository.buildKey( compo ) );
+
         if ( metricClassCompo.getSumVg() == null )
         {
             metricClassCompo.setSumVg( ccn );
@@ -577,15 +601,9 @@ public class JavancssTask
     private void computePackage( int ccn, AbstractComplexComponentBO component )
     {
         PackageBO compo = (PackageBO) component.getParent();
-        JavancssPackageMetricsBO metricPackageCompo = null;
-        ArrayList packageResults = parsingResult.getPackageResult();
-        int i = 0;
-        do
-        {
-            metricPackageCompo = (JavancssPackageMetricsBO) packageResults.get( i );
-            i++;
-        }
-        while ( !repository.compare( compo, metricPackageCompo.getComponent() ) );
+
+        JavancssPackageMetricsBO metricPackageCompo = packageMap.get( repository.buildKey( compo ) );
+
         if ( metricPackageCompo.getSumVg() == null )
         {
             metricPackageCompo.setSumVg( ccn );
