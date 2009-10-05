@@ -48,7 +48,7 @@ public class RepositoryLocal
     {
         this.setScmManager( new BasicScmManager() );
         this.getScmManager().setScmProvider( "local", new LocalScmProvider() );
-        this.setScmTemporaryDirectory( pTemporaryDirectory );
+        this.setScmTemporaryDirectory( createModuleTempDir( pPath, pTemporaryDirectory ) );
         this.setLocation( pLocation );
         this.setLogin( pLogin );
         this.setPassword( pPassword );

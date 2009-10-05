@@ -50,7 +50,7 @@ public class RepositorySvn
     {
         this.setScmManager( new BasicScmManager() );
         this.getScmManager().setScmProvider( "svn", new SvnExeScmProvider() );
-        this.setScmTemporaryDirectory( pTemporaryDirectory );
+        this.setScmTemporaryDirectory( createModuleTempDir( pPath, pTemporaryDirectory ) );
         this.setLocation( pLocation );
         this.setLogin( pLogin );
         this.setPassword( pPassword );

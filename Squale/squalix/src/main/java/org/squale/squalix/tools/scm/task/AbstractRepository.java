@@ -287,4 +287,22 @@ public abstract class AbstractRepository
             }
         }
     }
+
+    /**
+     * Define a local temporary directory for the module
+     * 
+     * @param pPath path to analyse
+     * @param pTemporaryDirectory temporary directory when check out is performed
+     * @return local temporary directory for the module
+     */
+    protected String createModuleTempDir( String pPath, String pTemporaryDirectory )
+    {
+        String moduleTempDirectory = null;
+        int rank = pPath.lastIndexOf( ":" );
+        if ( rank > 0 && rank < pPath.length() )
+        {
+            moduleTempDirectory = pTemporaryDirectory + pPath.substring( rank + 1 ) + "/";
+        }
+        return moduleTempDirectory;
+    }
 }
