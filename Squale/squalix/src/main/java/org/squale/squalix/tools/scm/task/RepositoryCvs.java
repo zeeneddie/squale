@@ -48,7 +48,7 @@ public class RepositoryCvs
     {
         this.setScmManager( new BasicScmManager() );
         this.getScmManager().setScmProvider( "cvs", new CvsJavaScmProvider() );
-        this.setScmTemporaryDirectory( createModuleTempDir( pPath, pTemporaryDirectory ) );
+        this.setScmTemporaryDirectory( createModuleTempDirFromPipeOrColon( pPath, pTemporaryDirectory ) );
         this.setLocation( pLocation );
         this.setLogin( pLogin );
         this.setPassword( pPassword );

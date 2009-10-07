@@ -289,20 +289,62 @@ public abstract class AbstractRepository
     }
 
     /**
-     * Define a local temporary directory for the module
+     * Define a local temporary directory for the module. This method must be used for SCM like SVN, Git, Mercurial, ...
      * 
      * @param pPath path to analyse
      * @param pTemporaryDirectory temporary directory when check out is performed
      * @return local temporary directory for the module
      */
-    protected String createModuleTempDir( String pPath, String pTemporaryDirectory )
+    protected String createModuleTempDirFromSlash( String pPath, String pTemporaryDirectory )
     {
-        String moduleTempDirectory = null;
-        int rank = pPath.lastIndexOf( ":" );
+        StringBuffer moduleTempDirectory = new StringBuffer( pTemporaryDirectory );
+        int rank = pPath.lastIndexOf( "/" );
         if ( rank > 0 && rank < pPath.length() )
         {
-            moduleTempDirectory = pTemporaryDirectory + pPath.substring( rank + 1 ) + "/";
+            computeTempDirPath( moduleTempDirectory, pPath, rank );
         }
-        return moduleTempDirectory;
+        return moduleTempDirectory.toString();
+    }
+
+    /**
+     * Define a local temporary directory for the module. This method must be used for SCM like CVS, local, ...
+     * 
+     * @param pPath path to analyse
+     * @param pTemporaryDirectory temporary directory when check out is performed
+     * @return local temporary directory for the module
+     */
+    protected String createModuleTempDirFromPipeOrColon( String pPath, String pTemporaryDirectory )
+    {
+        StringBuffer moduleTempDirectory = new StringBuffer( pTemporaryDirectory );
+        int rank = pPath.lastIndexOf( "|" );
+        if ( rank > 0 && rank < pPath.length() )
+        {
+            // pipe is used on Windows when the URL has a colon
+            computeTempDirPath( moduleTempDirectory, pPath, rank );
+        }
+        else
+        {
+            // no pipe, then look for the colon
+            rank = pPath.lastIndexOf( ":" );
+            if ( rank > 0 && rank < pPath.length() )
+            {
+                // pipe is used on Windows when the URL has a colon
+                computeTempDirPath( moduleTempDirectory, pPath, rank );
+            }
+
+        }
+        return moduleTempDirectory.toString();
+    }
+
+    /**
+     * Adds a last segment to the temp directory. This segment is the name of the module.
+     * 
+     * @param moduleTempDirectory the base temp directory
+     * @param pPath the SCM URL
+     * @param rank the index of the last separator after which we can find the module name
+     */
+    private void computeTempDirPath( StringBuffer moduleTempDirectory, String pPath, int rank )
+    {
+        moduleTempDirectory.append( pPath.substring( rank + 1 ) + "/" );
     }
 }
