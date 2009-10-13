@@ -354,11 +354,16 @@ public class JavancssTask
         for ( int i = 0; i < packageResults.size(); i++ )
         {
             JavancssPackageMetricsBO packageMetrics = (JavancssPackageMetricsBO) packageResults.get( i );
-            PackageBO packBO = parser.getPackage( packageMetrics.getComponentName() );
-            packageMetrics.setAudit( getAudit() );
-            packageMetrics.setComponent( repository.persisteComponent( packBO ) );
-            packageMetrics.setTaskName( getName() );
-            packageMap.put( repository.buildKey( packageMetrics.getComponent() ), packageMetrics );
+            
+            //Test if the package name is not "." (See issue #217)
+            if ( !packageMetrics.getComponentName().equals( "." ) )
+            {
+                PackageBO packBO = parser.getPackage( packageMetrics.getComponentName() );
+                packageMetrics.setAudit( getAudit() );
+                packageMetrics.setComponent( repository.persisteComponent( packBO ) );
+                packageMetrics.setTaskName( getName() );
+                packageMap.put( repository.buildKey( packageMetrics.getComponent() ), packageMetrics );
+            }
         }
 
         // Completion of classes level results and creation of new components
