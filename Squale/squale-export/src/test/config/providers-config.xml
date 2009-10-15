@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<providers>
+
+	<!-- Provider bootstrap -->
+	<provider id="bootstrap"
+		class="org.squale.jraf.bootstrap.BootstrapInitializer"
+		description="Initializer du bootstrap">
+	</provider>
+
+
+	<!-- Provider hibernate -->
+	<provider id="persistence"
+		class="org.squale.jraf.provider.persistence.hibernate.Initializer"
+		description="">
+		<init-param>
+			<param-name>configFile</param-name>
+			<param-value>/src/test/config/hibernate.cfg.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>containerManagedTransaction</param-name>
+			<param-value>false</param-value>
+		</init-param>
+
+		<load-on-startup>2</load-on-startup>
+	</provider>
+
+	<!-- Provider d'envoi de mail -->
+	<provider id="mailer" class="org.squale.squalecommon.util.mail.javamail.Initializer" description="Envoi de mail">
+	</provider>
+
+</providers>
