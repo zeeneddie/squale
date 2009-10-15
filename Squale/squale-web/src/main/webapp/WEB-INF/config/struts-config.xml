@@ -136,6 +136,12 @@
         </form-bean>
         <form-bean name="manualMarkForm" type="org.squale.squaleweb.applicationlayer.formbean.manualmark.ManualMarkForm">
         </form-bean>
+        
+        <form-bean name="sharedRepositoryExportForm" type="org.squale.squaleweb.applicationlayer.formbean.sharedrepository.SharedRepositoryExportForm">
+        </form-bean>
+        <form-bean name="sharedRepositoryImportForm" type="org.squale.squaleweb.applicationlayer.formbean.sharedrepository.SharedRepositoryImportForm">
+        </form-bean>
+        
 	</form-beans>
 
 
@@ -741,6 +747,17 @@
 		<action path="/manual_mark" type="org.squale.squaleweb.applicationlayer.action.manualmark.ManualMarkAction" name="manualMarkForm" scope="session" parameter="action">
 			<forward name="success" path="/jsp/results/project/manualMark.jsp"/>
 		</action>
+		
+		<action path="/sharedRepositoryImport" type="org.squale.squaleweb.applicationlayer.action.sharedrepository.SharedRepositoryImportAction" name="sharedRepositoryImportForm" scope="session" >
+			<forward name="enter_import" path="/jsp/admin/sharedRepository/sharedRepositoryImport.jsp"  />
+		</action>
+		
+		<action path="/sharedRepositoryExport" type="org.squale.squaleweb.applicationlayer.action.sharedrepository.SharedRepositoryExportAction" name="sharedRepositoryExportForm" scope="session" >
+			<forward name="enter_export" path="/jsp/admin/sharedRepository/sharedRepositoryExport.jsp"/>
+			<forward name="export_ask" path="/jsp/admin/sharedRepository/sharedRepositoryExportAsk.jsp"/>
+			<forward name="export_in_progress" path="/jsp/admin/sharedRepository/sharedRepositoryExportInProgress.jsp"/>
+		</action>
+		
 	</action-mappings>
 	
 	<message-resources parameter="org.squale.squaleweb.resources.ApplicationResources" factory="org.squale.squaleweb.resources.MessageResourcesFactory" null="false"/>

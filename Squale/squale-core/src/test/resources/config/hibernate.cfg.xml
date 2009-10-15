@@ -51,6 +51,8 @@
 		<mapping resource="mapping/config/web/AbstractDisplayConfBO.hbm.xml" />
 		<mapping resource="mapping/config/web/HomepageComponentBO.hbm.xml"/>
 		
+		<mapping resource="mapping/exportimport/ApplicationLastExportBO.hbm.xml"/>
+		
 		<mapping resource="mapping/message/MessageBO.hbm.xml" />
 		<mapping resource="mapping/message/NewsBO.hbm.xml" />
 		

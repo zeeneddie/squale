@@ -1,6 +1,8 @@
 
     drop table Analysis_Task cascade constraints;
 
+    drop table ApplicationLastExport cascade constraints;
+
     drop table AtomicRights cascade constraints;
 
     drop table AuditBO cascade constraints;
@@ -137,6 +139,8 @@
 
     drop sequence formula_sequence;
 
+    drop sequence lastExport_sequence;
+
     drop sequence mark_sequence;
 
     drop sequence measure_sequence;
@@ -192,6 +196,13 @@
         TaskRefId number(19,0) not null,
         AnalysisTaskIndex number(10,0) not null,
         primary key (TasksUserId, AnalysisTaskIndex)
+    );
+
+    create table ApplicationLastExport (
+        lastExportId number(19,0) not null,
+        ComponentId number(19,0) unique,
+        auditDate date,
+        primary key (lastExportId)
     );
 
     create table AtomicRights (
@@ -697,6 +708,11 @@
         foreign key (TasksUserId) 
         references Tasks_User;
 
+    alter table ApplicationLastExport 
+        add constraint FK1E3E973AB660AF72 
+        foreign key (ComponentId) 
+        references Component;
+
     alter table AuditDisplayConfBO 
         add constraint FKBF5515D8CAD1505B 
         foreign key (AuditId) 
@@ -1108,6 +1124,8 @@
     create sequence error_sequence;
 
     create sequence formula_sequence;
+
+    create sequence lastExport_sequence;
 
     create sequence mark_sequence;
 

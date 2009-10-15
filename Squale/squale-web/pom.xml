@@ -59,6 +59,11 @@
 			<version>${pom.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>${pom.groupId}</groupId>
+			<artifactId>squale-export</artifactId>
+			<version>${pom.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.squale.welcom</groupId>
 			<artifactId>welcom</artifactId>
 		</dependency>
@@ -69,10 +74,6 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.scm</groupId>

@@ -93,7 +93,7 @@ public final class AdminParamsDAOImpl
      * @return The list of adminsParamsBO found
      * @throws JrafDaoException Exception happened during the search by hibernate
      */
-    public List findByKeyLike( ISession session, String paramKey )
+    public Collection<AdminParamsBO> findByKeyLike( ISession session, String paramKey )
         throws JrafDaoException
     {
         StringBuffer whereClause = new StringBuffer( "where " );
@@ -102,7 +102,7 @@ public final class AdminParamsDAOImpl
         whereClause.append( paramKey );
         whereClause.append( "%" );
         whereClause.append( "'" );
-        List resultFind = findWhere( session, whereClause.toString() );
+        Collection<AdminParamsBO> resultFind = findWhere( session, whereClause.toString() );
         return resultFind;
     }
     
@@ -152,6 +152,4 @@ public final class AdminParamsDAOImpl
         return onlyOneMatch;
     }
     
-    
-
 }

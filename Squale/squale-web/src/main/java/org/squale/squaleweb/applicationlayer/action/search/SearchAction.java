@@ -30,11 +30,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessages;
-
 import org.squale.jraf.helper.AccessDelegateHelper;
 import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
 import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
-import org.squale.squaleweb.applicationlayer.formbean.search.SearchProjectForm;
 import org.squale.squaleweb.transformer.SearchProjectTransformer;
 import org.squale.welcom.struts.bean.WActionForm;
 import org.squale.welcom.struts.transformer.WTransformerFactory;

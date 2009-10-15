@@ -35,6 +35,7 @@ import org.squale.squalecommon.enterpriselayer.businessobject.UnexpectedRelation
 import org.squale.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.exportimport.ApplicationLastExportBO;
 
 /**
  * Représente une application
@@ -133,6 +134,11 @@ public class ApplicationBO
      * its initial development phase.
      */
     private int devCost;
+
+    /**
+     * The last export of the application
+     */
+    private ApplicationLastExportBO lastExport;
 
     /**
      * Instancie un nouveau composant.
@@ -587,7 +593,7 @@ public class ApplicationBO
      */
     public boolean getQualityApproachOnStart()
     {
-        return (mIsQualityApproachOnStart);
+        return ( mIsQualityApproachOnStart );
     }
 
     /**
@@ -664,6 +670,29 @@ public class ApplicationBO
     public void setDevCost( int pDevCost )
     {
         devCost = pDevCost;
+    }
+
+    /**
+     * Getter for the attribute last export
+     * 
+     * @hibernate.one-to-one 
+     *                       class="org.squale.squalecommon.enterpriselayer.businessobject.exportimport.ApplicationLastExportBO"
+     *                       property-ref="application" cascade="all" lazy="no-proxy" fetch="join"
+     * @return information on the last export
+     */
+    public ApplicationLastExportBO getLastExport()
+    {
+        return lastExport;
+    }
+
+    /**
+     * Setter for the attribut last export
+     * 
+     * @param pLastExport The new information set of the last export
+     */
+    public void setLastExport( ApplicationLastExportBO pLastExport )
+    {
+        lastExport = pLastExport;
     }
 
 }

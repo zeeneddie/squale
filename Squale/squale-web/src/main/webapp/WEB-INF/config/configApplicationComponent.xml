@@ -358,6 +358,8 @@
 		
 		<component name="getConfigurableTasks" />
 		
+		<component name="getExportAdminParams" />
+		
 	</applicationComponent>
 	
 	<applicationComponent name="CppTestAdmin" description="Administration de CppTest" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.CppTestAdminComponentAccess">

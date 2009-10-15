@@ -278,18 +278,64 @@ public class SqualixConfigFacade
         }
         return tasks;
     }
-    
+
     /**
      * return the collection of adminParamsDTO set in the database
      * 
      * @param session hiberntae session
      * @return The collection of all adminParmas record in the database
-     * @throws JrafDaoException Exception happened during the search
+     * @throws JrafEnterpriseException Exception happened during the search
      */
-    private static Collection<AdminParamsDTO> getAdminParams (ISession session) throws JrafDaoException
+    private static Collection<AdminParamsDTO> getAdminParams( ISession session )
+        throws JrafEnterpriseException
     {
-        AdminParamsDAOImpl dao = AdminParamsDAOImpl.getInstance();
-        Collection<AdminParamsBO> adminParamsCollection= dao.findAll( session );
-        return AdminParamsTransform.bo2dto( adminParamsCollection );
+        Collection<AdminParamsDTO> adminParamsDtoList = null;
+        try
+        {
+            AdminParamsDAOImpl dao = AdminParamsDAOImpl.getInstance();
+            Collection<AdminParamsBO> adminParamsCollection = dao.findAll( session );
+            adminParamsDtoList = AdminParamsTransform.bo2dto( adminParamsCollection );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, "getAdminParamstartsWith" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, "getAdminParamstartsWith" );
+        }
+        return adminParamsDtoList;
+    }
+
+    /**
+     * This method return a collection of adminParamsDTO set in the database which keys start with the String given in
+     * argument
+     * 
+     * @param beginKey The String to search
+     * @return The collection of all adminParmas record in the database
+     * @throws JrafEnterpriseException Exception happened during the search
+     */
+    public static Collection<AdminParamsDTO> getAdminParamsStartWith( String beginKey )
+        throws JrafEnterpriseException
+    {
+
+        Collection<AdminParamsDTO> adminParamsDtoList = null;
+        ISession session = null;
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            AdminParamsDAOImpl dao = AdminParamsDAOImpl.getInstance();
+            Collection<AdminParamsBO> adminParamsBoList = dao.findByKeyLike( session, beginKey );
+            adminParamsDtoList = AdminParamsTransform.bo2dto( adminParamsBoList );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, "getAdminParamstartsWith" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, "getAdminParamstartsWith" );
+        }
+        return adminParamsDtoList;
     }
 }

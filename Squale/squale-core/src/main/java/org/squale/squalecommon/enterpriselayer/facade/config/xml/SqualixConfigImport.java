@@ -44,13 +44,13 @@ public class SqualixConfigImport
     private static Log LOG = LogFactory.getLog( SqualixConfigImport.class );
 
     /** Nom publique de la DTD */
-    final static String PUBLIC_DTD = "-//Squale//DTD Squalix Configuration 1.1//EN";
+    static final String PUBLIC_DTD = "-//Squale//DTD Squalix Configuration 1.2//EN";
 
     /** Localisation de la DTD */
-    final static String DTD_LOCATION = "/org/squale/squalecommon/dtd/squalix-config-1.1.dtd";
+    static final String DTD_LOCATION = "/org/squale/squalecommon/dtd/squalix-config-1.2.dtd";
 
     /** Nom du fichier xml contenant les règles */
-    final static String RULES_FILE_NAME =
+    static final String RULES_FILE_NAME =
         "/org/squale/squalecommon/enterpriselayer/facade/config/xml/configRules.xml";
 
     /**
@@ -210,6 +210,54 @@ public class SqualixConfigImport
         configDigester.addCallParam( "configuration/admin-params/mail/smtp-password", 1 );
         configDigester.addSetNext( "configuration/admin-params/mail/smtp-password", "addAdminParam" );
 
+        // shared repository - mapping java - project - loc
+        configDigester.addObjectCreate( "configuration/admin-params/shared-repository-export/mapping/java/project/loc", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/shared-repository-export/mapping/java/project/loc", "setAdminParam", 2, new Class[] {
+            String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/shared-repository-export/mapping/java/project/loc", 0 );
+        configDigester.addCallParam( "configuration/admin-params/shared-repository-export/mapping/java/project/loc", 1 );
+        configDigester.addSetNext( "configuration/admin-params/shared-repository-export/mapping/java/project/loc", "addAdminParam" );
+        
+        // shared repository - mapping java - project - number of classes
+        configDigester.addObjectCreate( "configuration/admin-params/shared-repository-export/mapping/java/project/number-of-classes", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/shared-repository-export/mapping/java/project/number-of-classes", "setAdminParam", 2, new Class[] {
+            String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/shared-repository-export/mapping/java/project/number-of-classes", 0 );
+        configDigester.addCallParam( "configuration/admin-params/shared-repository-export/mapping/java/project/number-of-classes", 1 );
+        configDigester.addSetNext( "configuration/admin-params/shared-repository-export/mapping/java/project/number-of-classes", "addAdminParam" );
+        
+        // shared repository - mapping java - class - loc
+        configDigester.addObjectCreate( "configuration/admin-params/shared-repository-export/mapping/java/class/loc", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/shared-repository-export/mapping/java/class/loc", "setAdminParam", 2, new Class[] {
+            String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/shared-repository-export/mapping/java/class/loc", 0 );
+        configDigester.addCallParam( "configuration/admin-params/shared-repository-export/mapping/java/class/loc", 1 );
+        configDigester.addSetNext( "configuration/admin-params/shared-repository-export/mapping/java/class/loc", "addAdminParam" );
+        
+        // shared repository - mapping java - class - number of methods
+        configDigester.addObjectCreate( "configuration/admin-params/shared-repository-export/mapping/java/class/number-of-methods", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/shared-repository-export/mapping/java/class/number-of-methods", "setAdminParam", 2, new Class[] {
+            String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/shared-repository-export/mapping/java/class/number-of-methods", 0 );
+        configDigester.addCallParam( "configuration/admin-params/shared-repository-export/mapping/java/class/number-of-methods", 1 );
+        configDigester.addSetNext( "configuration/admin-params/shared-repository-export/mapping/java/class/number-of-methods", "addAdminParam" );
+        
+        // shared repository - mapping java - method - loc
+        configDigester.addObjectCreate( "configuration/admin-params/shared-repository-export/mapping/java/method/loc", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/shared-repository-export/mapping/java/method/loc", "setAdminParam", 2, new Class[] {
+            String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/shared-repository-export/mapping/java/method/loc", 0 );
+        configDigester.addCallParam( "configuration/admin-params/shared-repository-export/mapping/java/method/loc", 1 );
+        configDigester.addSetNext( "configuration/admin-params/shared-repository-export/mapping/java/method/loc", "addAdminParam" );
+        
+        // shared repository - mapping java - method - vg
+        configDigester.addObjectCreate( "configuration/admin-params/shared-repository-export/mapping/java/method/vg", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/shared-repository-export/mapping/java/method/vg", "setAdminParam", 2, new Class[] {
+            String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/shared-repository-export/mapping/java/method/vg", 0 );
+        configDigester.addCallParam( "configuration/admin-params/shared-repository-export/mapping/java/method/vg", 1 );
+        configDigester.addSetNext( "configuration/admin-params/shared-repository-export/mapping/java/method/vg", "addAdminParam" );
+        
         return configDigester;
     }
 

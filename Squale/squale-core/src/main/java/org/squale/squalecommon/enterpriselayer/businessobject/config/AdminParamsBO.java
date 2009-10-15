@@ -31,37 +31,83 @@ public class AdminParamsBO
      * Default mail paramKey
      */
     public static final String MAIL = "configuration/admin-params/mail/";
-    
+
     /**
      * Smtp server paramKey
      */
     public static final String MAIL_SMTP_SERVER = "configuration/admin-params/mail/smtp-server";
-    
+
     /**
      * Sender address paramKey
      */
     public static final String MAIL_SENDER_ADDRESS = "configuration/admin-params/mail/sender-address";
-    
+
     /**
      * Admin mailing list paramKey
      */
     public static final String MAIL_ADMIN_MAILING_LIST = "configuration/admin-params/mail/admin-mailing-list";
-    
+
     /**
      * Admin mailing list paramKey
      */
     public static final String MAIL_SMTP_USERNAME = "configuration/admin-params/mail/smtp-username";
-    
+
     /**
      * Admin mailing list paramKey
      */
     public static final String MAIL_SMTP_PASSWORD = "configuration/admin-params/mail/smtp-password";
-    
+
     /**
      * Admin mailing list paramKey
      */
     public static final String MAIL_SMTP_AUTHENT_NEEDED = "configuration/admin-params/mail/smtp-authent-needed";
-    
+
+    /**
+     * Entity_Id
+     */
+    public static final String ENTITY_ID = "entityId";
+
+    /**
+     * Mapping
+     */
+    public static final String MAPPING = "configuration/admin-params/shared-repository-export/mapping";
+
+    /**
+     * Key for mapping : language java, level project, metric loc
+     */
+    public static final String MAPPING_JAVA_PROJECT_LOC =
+        "configuration/admin-params/shared-repository-export/mapping/java/project/loc";
+
+    /**
+     * Key for mapping : language java, level project, metric number of classes
+     */
+    public static final String MAPPING_JAVA_PROJECT_NB_CLASSES =
+        "configuration/admin-params/shared-repository-export/mapping/java/project/number-of-classes";
+
+    /**
+     * Key for mapping : language java, level class, metric loc
+     */
+    public static final String MAPPING_JAVA_CLASS_LOC =
+        "configuration/admin-params/shared-repository-export/mapping/java/class/loc";
+
+    /**
+     * Key for mapping : language java, level class, metric number of methods
+     */
+    public static final String MAPPING_JAVA_CLASS_NB_METHODS =
+        "configuration/admin-params/shared-repository-export/mapping/java/class/number-of-methods";
+
+    /**
+     * Key for mapping : language java, level method, metric loc
+     */
+    public static final String MAPPING_JAVA_METHOD_LOC =
+        "configuration/admin-params/shared-repository-export/mapping/java/method/loc";
+
+    /**
+     * Key for mapping : language java, level method, metric cyclomatic complexity
+     */
+    public static final String MAPPING_JAVA_METHOD_VG =
+        "configuration/admin-params/shared-repository-export/mapping/java/method/vg";
+
     /**
      * Object ID
      */

@@ -79,7 +79,7 @@ public class ComponentDTO
      * Technologie du composant s'il s'agit d'un projet
      */
     private String mTechnology = null;
-    
+
     /**
      * Langage du composant s'il s'agit d'un projet
      */
@@ -108,6 +108,11 @@ public class ComponentDTO
      * Tags concernant ce composant
      */
     private Collection<TagDTO> mTags;
+
+    /**
+     * Date of the last export. Null if not export was done. Only available for component of type application
+     */
+    private Date lastExportDate;
 
     /**
      * @return true si le composant est exclu du plan d'action
@@ -348,7 +353,7 @@ public class ComponentDTO
     {
         mTechnology = pTechnology;
     }
-    
+
     /**
      * @return langage du composant s'il s'agit d'un projet
      */
@@ -512,20 +517,43 @@ public class ComponentDTO
         }
         mTags.remove( pTag );
     }
-    
+
     /**
-     * Verifies if the component already possesses the tag 
+     * Verifies if the component already possesses the tag
+     * 
      * @param pTag The given Tag that is compared with the components tag list
      * @return whether the comonent already possesses the Tag or not
      */
-    public boolean possessTag(TagDTO pTag)
+    public boolean possessTag( TagDTO pTag )
     {
         for ( TagDTO tagDTO : mTags )
         {
-            if (tagDTO.getName().equals( pTag.getName() )){
+            if ( tagDTO.getName().equals( pTag.getName() ) )
+            {
                 return true;
             }
         }
         return false;
     }
+
+    /**
+     * Getter for the attribute lastExportDate
+     * 
+     * @return The last export date
+     */
+    public Date getLastExportDate()
+    {
+        return lastExportDate;
+    }
+
+    /**
+     * Setter for the attribute lastExportDate
+     * 
+     * @param pLastExportDate The new export date
+     */
+    public void setLastExportDate( Date pLastExportDate )
+    {
+        lastExportDate = pLastExportDate;
+    }
+
 }

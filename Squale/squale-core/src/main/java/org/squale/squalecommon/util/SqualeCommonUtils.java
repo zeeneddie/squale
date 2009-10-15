@@ -65,11 +65,11 @@ public class SqualeCommonUtils
 
     /**
      * @param pProvider le fournisser de service mail
+     * @param pSender le nom de l'expéditeur
      * @param pDestList la liste des destinataires
      * @param pApplicationId l'id de l'application concernée
      * @param pObject l'objet du mail
      * @param pContent le contenu du mail
-     * @param pSender le nom de l'expéditeur
      * @param pUnsubscribed true si on veut récupérer aussi les utilisateur qui se sont désabonnés de l'envoi
      *            automatique d'email.
      * @return true si le mail a été envoyé

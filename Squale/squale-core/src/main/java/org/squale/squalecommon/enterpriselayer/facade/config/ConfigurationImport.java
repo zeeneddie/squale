@@ -20,7 +20,9 @@ package org.squale.squalecommon.enterpriselayer.facade.config;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -167,6 +169,7 @@ public class ConfigurationImport
 
             // Insert the adminParams
             adminParamsDTO = createAdminParams( session, configBO.getAdminParams() );
+            managedEntityId( session );
             configDTO.setAdminParams( adminParamsDTO );
             session.commitTransactionWithoutClose();
 
@@ -626,6 +629,7 @@ public class ConfigurationImport
         throws JrafDaoException
     {
         AdminParamsDAOImpl adminParamDAO = AdminParamsDAOImpl.getInstance();
+
         boolean oneMatch;
         oneMatch = adminParamDAO.createOrUpdate( session, allAdminParams );
         if ( !oneMatch )
@@ -634,5 +638,42 @@ public class ConfigurationImport
             throw new JrafDaoException( message );
         }
         return AdminParamsTransform.bo2dto( allAdminParams );
+    }
+
+    /**
+     * This method managed the entity id when a squale config file is import. During the first load this method create
+     * the entity Id. This id will never be change
+     * 
+     * @param session The hibernate session
+     * @throws JrafEnterpriseException Exception occur during search in db
+     */
+    private static void managedEntityId( ISession session )
+        throws JrafEnterpriseException
+    {
+
+        AdminParamsDAOImpl adminParamDAO = AdminParamsDAOImpl.getInstance();
+
+        try
+        {
+            List<AdminParamsBO> resultFind = adminParamDAO.findByKey( session, AdminParamsBO.ENTITY_ID );
+            if ( resultFind.size() > 1 )
+            {
+                String message = ConfigMessages.getString( "mail.manyMatch" );
+                throw new JrafEnterpriseException( message );
+            }
+
+            // If no record with this paramKey exist then we create it
+            else if ( resultFind.size() == 0 )
+            {
+                AdminParamsBO paramBo = new AdminParamsBO();
+                Calendar cal = GregorianCalendar.getInstance();
+                paramBo.setAdminParam( AdminParamsBO.ENTITY_ID, String.valueOf( cal.getTimeInMillis() ) );
+                adminParamDAO.create( session, paramBo );
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            throw new JrafEnterpriseException( e );
+        }
     }
 }

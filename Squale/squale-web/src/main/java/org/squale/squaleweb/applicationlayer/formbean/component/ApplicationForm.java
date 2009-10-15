@@ -53,6 +53,9 @@ public class ApplicationForm
     /** L'utilisateur ayant fait la dernière modification */
     private String mLastUser;
 
+    /** Date of the last export. Null if not export was done */
+    private Date lastExportDate;
+
     /**
      * @return true si le composant est exclu du plan d'action
      */
@@ -99,8 +102,8 @@ public class ApplicationForm
     }
 
     /**
-     * Redefinition of the hashCode method
-     * {@inheritDoc} 
+     * Redefinition of the hashCode method {@inheritDoc}
+     * 
      * @return return the hash number of the object
      */
     public int hashCode()
@@ -129,6 +132,7 @@ public class ApplicationForm
 
     /**
      * Access method for the mHasResults property.
+     * 
      * @return true si le composant a des résultats
      */
     public boolean getHasResults()
@@ -138,6 +142,7 @@ public class ApplicationForm
 
     /**
      * Sets the value of the mHasResults property.
+     * 
      * @param pHasResults indique si le composant a des résultats
      */
     public void setHasResults( boolean pHasResults )
@@ -147,6 +152,7 @@ public class ApplicationForm
 
     /**
      * Access method for the mLastUpdate property.
+     * 
      * @return la date de la dernière modification
      */
     public Date getLastUpdate()
@@ -156,6 +162,7 @@ public class ApplicationForm
 
     /**
      * Sets the value of the mLastUpdate property.
+     * 
      * @param pDate la date de la dernière modification
      */
     public void setLastUpdate( Date pDate )
@@ -165,6 +172,7 @@ public class ApplicationForm
 
     /**
      * Access method for the mLastUser property.
+     * 
      * @return l'utilisateur ayant fait la dernière modification
      */
     public String getLastUser()
@@ -174,10 +182,31 @@ public class ApplicationForm
 
     /**
      * Sets the value of the mLastUser property.
+     * 
      * @param pMatricule l'utilisateur ayant fait la dernière modification
      */
     public void setLastUser( String pMatricule )
     {
         mLastUser = pMatricule;
+    }
+
+    /**
+     * Getter for the attribute lastExportDate
+     * 
+     * @return The last export date
+     */
+    public Date getLastExportDate()
+    {
+        return lastExportDate;
+    }
+
+    /**
+     * Setter for the attribute lastExportDate
+     * 
+     * @param pLastExportDate The new export date
+     */
+    public void setLastExportDate( Date pLastExportDate )
+    {
+        lastExportDate = pLastExportDate;
     }
 }

@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding="UTF-8"?>
+
+<!ELEMENT configuration
+   (stoptimes, frequencies?,tasks,sourcemanagements,profiles,admin-params)
+>
+<!ELEMENT admin-params
+   (mail,shared-repository-export?)
+>
+
+
+<!-- ###### The shared repository export section ###### -->
+<!ELEMENT shared-repository-export
+   (mapping)
+>
+<!ELEMENT mapping
+   (java)
+>
+<!ELEMENT java
+   (project,class,method)
+>
+<!ELEMENT project
+	(loc,number-of-classes)
+>
+<!ELEMENT class
+	(loc,number-of-methods)
+>
+<!ELEMENT method
+	(loc,vg)
+>
+<!ELEMENT loc
+	(#PCDATA)
+>
+<!ELEMENT vg
+	(#PCDATA)
+>    
+<!ELEMENT line-rate
+	(#PCDATA)
+>
+<!ELEMENT line-branch
+	(#PCDATA)
+>
+<!ELEMENT number-of-classes
+	(#PCDATA)
+>
+<!ELEMENT number-of-methods
+	(#PCDATA)
+>
+<!-- ### End of the shared repository export section ### -->
+
+<!-- ###### The mail section ###### -->
+<!ELEMENT mail
+   (smtp-server?,sender-address?,admin-mailing-list,smtp-authent-needed?,smtp-username?,smtp-password?)
+>
+
+<!ELEMENT smtp-server
+	(#PCDATA)
+>
+
+<!ELEMENT sender-address
+	(#PCDATA)
+>
+
+<!ELEMENT admin-mailing-list
+	(#PCDATA)
+>
+
+<!ELEMENT smtp-authent-needed
+	(#PCDATA)
+>
+
+<!ELEMENT smtp-username
+	(#PCDATA)
+>
+
+<!ELEMENT smtp-password
+	(#PCDATA)
+>
+<!-- ### End of the mail section ### -->
+
+<!ELEMENT stoptimes
+   (stoptime*)
+>
+<!ELEMENT stoptime
+   EMPTY
+>
+
+<!ATTLIST stoptime
+day CDATA #REQUIRED
+>
+
+<!ATTLIST stoptime
+time CDATA #REQUIRED
+>
+
+<!ELEMENT frequencies
+   (frequency*)
+>
+<!ELEMENT frequency
+   EMPTY
+>
+
+<!ATTLIST frequency
+days CDATA #REQUIRED
+>
+
+<!ATTLIST frequency
+frequency CDATA #REQUIRED
+>
+
+<!ELEMENT tasks
+   (task+)
+>
+
+<!ELEMENT task
+   EMPTY
+>
+
+<!ATTLIST task
+class CDATA #REQUIRED
+>
+<!ATTLIST task
+configurable (true|false) "true"
+>
+
+<!ATTLIST task
+standard (true|false) "false"
+>
+
+<!ATTLIST task
+mandatory (true|false) "true"
+>
+
+<!ATTLIST task
+name CDATA #REQUIRED
+>
+
+<!ELEMENT sourcemanagements
+   (sourcemanagement+)
+>
+
+<!ELEMENT sourcemanagement
+   (analysis,termination)
+>
+<!ATTLIST sourcemanagement
+name CDATA #REQUIRED
+>
+<!ATTLIST sourcemanagement
+milestoneAudit (true|false) "true"
+>
+<!ATTLIST sourcemanagement
+normalAudit (true|false) "true"
+>
+<!ELEMENT profiles
+   (profile+)
+>
+
+<!ELEMENT profile
+   (integrityConstraints?, analysis,termination)
+>
+<!ATTLIST profile
+name CDATA #REQUIRED
+>
+<!ATTLIST profile
+exportIDE (true|false) "true"
+>
+<!ATTLIST profile
+language CDATA #REQUIRED
+>
+
+<!ELEMENT integrityConstraints
+   (grids, displayConfigurations?)
+>
+
+<!ELEMENT grids
+   (grid+)
+>
+
+<!ELEMENT grid
+ 	EMPTY
+>
+
+<!ATTLIST grid
+name CDATA #REQUIRED
+>
+
+<!ELEMENT displayConfigurations
+   (bubble?, volumetries?)
+>
+
+<!ELEMENT volumetries
+ 	(volumetry+)
+>
+
+<!ELEMENT volumetry
+ 	(tre+)
+>
+
+<!ATTLIST volumetry
+component CDATA #REQUIRED
+>
+
+<!ELEMENT tre
+ 	EMPTY
+>
+
+<!ATTLIST tre
+name CDATA #REQUIRED
+>
+
+<!ATTLIST bubble
+xtre CDATA #REQUIRED
+>
+<!ATTLIST bubble
+ytre CDATA #REQUIRED
+>
+
+<!ATTLIST bubble
+xPos CDATA #REQUIRED
+>
+
+<!ATTLIST bubble
+yPos CDATA #REQUIRED
+>
+
+<!ELEMENT bubble
+  	EMPTY
+>
+
+<!ELEMENT analysis
+   (task-ref*)
+>
+
+<!ELEMENT termination
+   (task-ref*)
+>
+
+<!ELEMENT task-ref
+	(parameter*)
+>
+
+<!ATTLIST task-ref
+name CDATA #REQUIRED
+>
+
+<!ELEMENT parameter
+	EMPTY
+>
+
+<!ATTLIST parameter
+name CDATA #REQUIRED
+value CDATA #REQUIRED
+>

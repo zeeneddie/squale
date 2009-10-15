@@ -129,7 +129,7 @@ public final class AuditDAOImpl
         Integer indexDepart = new Integer( 0 );
         AuditBO audit = null;
 
-        List list = findWhereApplication( pSession, pIDApplication, nbLigne, indexDepart, pType, pStatus );
+        List list = findWhereComponent( pSession, pIDApplication, nbLigne, indexDepart, pType, pStatus );
         if ( null != list )
         {
             if ( list.size() > 0 )

@@ -20,10 +20,13 @@ package org.squale.squalecommon.enterpriselayer.applicationcomponent.administrat
 
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.List;
 
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
+import org.squale.squalecommon.datatransfertobject.config.AdminParamsDTO;
 import org.squale.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
 import org.squale.squalecommon.enterpriselayer.facade.config.ConfigurationImport;
 import org.squale.squalecommon.enterpriselayer.facade.config.SqualixConfigFacade;
 
@@ -117,6 +120,37 @@ public class ConfigurationApplicationComponentAccess
      */
     public ConfigurationApplicationComponentAccess()
     {
+    }
+
+    /**
+     * This method search all the admin-params useful for the mapping in the export function
+     * 
+     * @return The list of admin-params useful for the mapping
+     * @throws JrafEnterpriseException If an error occurs during the search
+     */
+    public Collection<AdminParamsDTO> getExportAdminParams()
+        throws JrafEnterpriseException
+    {
+        Collection<AdminParamsDTO> adminParamsList;
+        adminParamsList = SqualixConfigFacade.getAdminParamsStartWith( AdminParamsBO.MAPPING );
+        List<AdminParamsDTO> entityId =
+            (List<AdminParamsDTO>) SqualixConfigFacade.getAdminParamsStartWith( AdminParamsBO.ENTITY_ID );
+        if ( entityId.size() == 1 )
+        {
+            adminParamsList.add( entityId.get( 0 ) );
+        }
+        else if ( entityId.size() == 0 )
+        {
+            String message = "";
+            throw new JrafEnterpriseException( message );
+        }
+        else
+        {
+            String message = "";
+            throw new JrafEnterpriseException( message );
+        }
+
+        return adminParamsList;
     }
 
 }

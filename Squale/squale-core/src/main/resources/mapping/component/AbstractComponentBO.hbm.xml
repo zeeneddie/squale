@@ -46,6 +46,7 @@
         <property name="inInitialDev" column="InInitialDev" update="true" unique="false" type="boolean" insert="true"/>
         <property name="globalCost" length="10" column="GlobalCost" update="true" unique="false" type="integer" insert="true"/>
         <property name="devCost" length="10" column="DevCost" update="true" unique="false" type="integer" insert="true"/>
+        <one-to-one fetch="join" name="lastExport" lazy="no-proxy" class="org.squale.squalecommon.enterpriselayer.businessobject.exportimport.ApplicationLastExportBO" property-ref="application" cascade="all"/>
       </subclass>
       <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO" lazy="true" discriminator-value="Class">
         <property name="fileName" length="2048" column="LongFileName" update="true" type="string" insert="true"/>

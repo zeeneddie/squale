@@ -7,6 +7,10 @@
         drop 
         foreign key FK91CAC908E93A2E5E;
 
+    alter table ApplicationLastExport 
+        drop 
+        foreign key FK1E3E973AB660AF72;
+
     alter table AuditDisplayConfBO 
         drop 
         foreign key FKBF5515D8CAD1505B;
@@ -293,6 +297,8 @@
 
     drop table if exists Analysis_Task;
 
+    drop table if exists ApplicationLastExport;
+
     drop table if exists AtomicRights;
 
     drop table if exists AuditBO;
@@ -406,6 +412,13 @@
         TaskRefId bigint not null,
         AnalysisTaskIndex integer not null,
         primary key (TasksUserId, AnalysisTaskIndex)
+    ) type=InnoDB;
+
+    create table ApplicationLastExport (
+        lastExportId bigint not null auto_increment,
+        ComponentId bigint unique,
+        auditDate datetime,
+        primary key (lastExportId)
     ) type=InnoDB;
 
     create table AtomicRights (
@@ -912,6 +925,12 @@
         add constraint FK91CAC908E93A2E5E 
         foreign key (TasksUserId) 
         references Tasks_User (AbstractTasksUserId);
+
+    alter table ApplicationLastExport 
+        add index FK1E3E973AB660AF72 (ComponentId), 
+        add constraint FK1E3E973AB660AF72 
+        foreign key (ComponentId) 
+        references Component (ComponentId);
 
     alter table AuditDisplayConfBO 
         add index FKBF5515D8CAD1505B (AuditId), 

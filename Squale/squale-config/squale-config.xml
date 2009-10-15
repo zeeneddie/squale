@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.1//EN" "file:../org/squale/squalecommon/dtd/squalix-config-1.1.dtd">
+<!DOCTYPE configuration PUBLIC "-//Squale//DTD Squalix Configuration 1.2//EN" "file:../org/squale/squalecommon/dtd/squalix-config-1.2.dtd">
 <!-- Squale configuration file -->
 <configuration>
 	<stoptimes>
@@ -159,5 +159,23 @@
 			<!--<smtp-username></smtp-username>-->
 			<!--<smtp-password></smtp-password>-->
 		</mail>
+		<shared-repository-export>
+			<mapping>
+				<java>
+					<project>
+						<loc>JavancssTask.ncss</loc>
+						<number-of-classes>JavancssTask.numberOfClasses</number-of-classes>
+					</project>
+					<class>
+						<loc>JavancssTask.ncss</loc>
+						<number-of-methods>JavancssTask.methods</number-of-methods>
+					</class>
+					<method>
+						<loc>JavancssTask.ncss</loc>
+						<vg>JavancssTask.ccn</vg>
+					</method>
+				</java>
+			</mapping>
+		</shared-repository-export>
 	</admin-params>
 </configuration>
