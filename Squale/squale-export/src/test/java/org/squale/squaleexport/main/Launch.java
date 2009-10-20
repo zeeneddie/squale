@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.squale.jraf.commons.exception.JrafPersistenceException;
 import org.squale.jraf.helper.PersistenceHelper;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
 import org.squale.jraf.spi.persistence.ISession;
@@ -53,47 +52,41 @@ public class Launch
 
         ISession session = null;
         IMailerProvider mailer = null;
-        try
-        {
-            session = PERSISTENTPROVIDER.getSession();
-            mailer = MailerHelper.getMailerProvider();
-            IExporter exporter = ExporterFactory.createExporter( session, mailer, Locale.FRENCH );
-            List<Long> applications = new ArrayList<Long>();
-            applications.add( 3182L );
-            // applications.add( 1L );
 
-            List<AdminParamsDTO> listMapping = new ArrayList<AdminParamsDTO>();
-            AdminParamsDTO param = new AdminParamsDTO();
-            param.setAdminParam( AdminParamsBO.MAPPING_JAVA_PROJECT_LOC, "JavancssTask.ncss" );
-            listMapping.add( param );
+        // session = PERSISTENTPROVIDER.getSession();
+        mailer = MailerHelper.getMailerProvider();
+        IExporter exporter = ExporterFactory.createExporter( PERSISTENTPROVIDER, mailer, Locale.FRENCH );
+        List<Long> applications = new ArrayList<Long>();
+        applications.add( 3182L );
+        // applications.add( 1L );
 
-            param = new AdminParamsDTO();
-            param.setAdminParam( AdminParamsBO.MAPPING_JAVA_PROJECT_NB_CLASSES, "JavancssTask.numberOfClasses" );
-            listMapping.add( param );
+        List<AdminParamsDTO> listMapping = new ArrayList<AdminParamsDTO>();
+        AdminParamsDTO param = new AdminParamsDTO();
+        param.setAdminParam( AdminParamsBO.MAPPING_JAVA_PROJECT_LOC, "JavancssTask.ncss" );
+        listMapping.add( param );
 
-            param = new AdminParamsDTO();
-            param.setAdminParam( AdminParamsBO.MAPPING_JAVA_CLASS_LOC, "JavancssTask.ncss" );
-            listMapping.add( param );
+        param = new AdminParamsDTO();
+        param.setAdminParam( AdminParamsBO.MAPPING_JAVA_PROJECT_NB_CLASSES, "JavancssTask.numberOfClasses" );
+        listMapping.add( param );
 
-            param = new AdminParamsDTO();
-            param.setAdminParam( AdminParamsBO.MAPPING_JAVA_CLASS_NB_METHODS, "JavancssTask.methods" );
-            listMapping.add( param );
+        param = new AdminParamsDTO();
+        param.setAdminParam( AdminParamsBO.MAPPING_JAVA_CLASS_LOC, "JavancssTask.ncss" );
+        listMapping.add( param );
 
-            param = new AdminParamsDTO();
-            param.setAdminParam( AdminParamsBO.MAPPING_JAVA_METHOD_LOC, "JavancssTask.ncss" );
-            listMapping.add( param );
+        param = new AdminParamsDTO();
+        param.setAdminParam( AdminParamsBO.MAPPING_JAVA_CLASS_NB_METHODS, "JavancssTask.methods" );
+        listMapping.add( param );
 
-            param = new AdminParamsDTO();
-            param.setAdminParam( AdminParamsBO.MAPPING_JAVA_METHOD_VG, "JavancssTask.ccn" );
-            listMapping.add( param );
+        param = new AdminParamsDTO();
+        param.setAdminParam( AdminParamsBO.MAPPING_JAVA_METHOD_LOC, "JavancssTask.ncss" );
+        listMapping.add( param );
 
-            exporter.exportData( applications, listMapping );
-        }
-        catch ( JrafPersistenceException e )
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        param = new AdminParamsDTO();
+        param.setAdminParam( AdminParamsBO.MAPPING_JAVA_METHOD_VG, "JavancssTask.ccn" );
+        listMapping.add( param );
+
+        exporter.exportData( applications, listMapping );
+
     }
 
 }

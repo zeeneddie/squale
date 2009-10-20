@@ -38,6 +38,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.squale.jraf.commons.exception.JrafDaoException;
+import org.squale.jraf.commons.exception.JrafPersistenceException;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
 import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.datatransfertobject.config.AdminParamsDTO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
@@ -95,12 +97,15 @@ class ExporterImpl
     /** Buffer size (needed to create the zip) */
     static final int BUFFER = 2048;
 
+    /** Persistence provider */
+    private IPersistenceProvider persistenceProvider;
+
     /** Hibernate session */
     private ISession session;
-    
+
     /** Mail provider */
     private IMailerProvider mailer;
-    
+
     /** The current local */
     private Locale local;
 
@@ -138,13 +143,14 @@ class ExporterImpl
     /**
      * Constructor
      * 
-     * @param pSession Hibernate session
+     * @param pPersistenceprovider Persistence provider
      * @param pMailer Mail provider
      * @param pLocal The current local
      */
-    public ExporterImpl( ISession pSession,IMailerProvider pMailer, Locale pLocal )
+    public ExporterImpl( IPersistenceProvider pPersistenceprovider, IMailerProvider pMailer, Locale pLocal )
     {
-        session = pSession;
+
+        persistenceProvider = pPersistenceprovider;
         mailer = pMailer;
         local = pLocal;
     }
@@ -154,7 +160,6 @@ class ExporterImpl
      */
     public void exportData( List<Long> listApplicationId, List<AdminParamsDTO> mappingList )
     {
-
         exportSuccessful = false;
 
         // First we initiate the action.
@@ -166,18 +171,43 @@ class ExporterImpl
             // For each application to export we create an export file
             for ( Long applicationId : listApplicationId )
             {
-                // First we create the companyEx object
-                CompanyEx company = createCompany();
-                // We create the applicationEx component
-                ApplicationEx application = createBasicApplication( applicationId );
+                try
+                {
+                    session = persistenceProvider.getSession();
+                    // First we create the companyEx object
+                    CompanyEx company = createCompany();
+                    // We create the applicationEx component
+                    ApplicationEx application = createBasicApplication( applicationId );
 
-                // Fill the basic application
-                fillApplication( applicationId, application );
+                    // Fill the basic application
+                    fillApplication( applicationId, application );
 
-                // We add the application to the companyEx object
-                company.addApplication( application );
-                // We create the export file
-                createFile( applicationId, company );
+                    // We add the application to the companyEx object
+                    company.addApplication( application );
+                    // We create the export file
+                    createFile( applicationId, company );
+                }
+                catch ( JrafPersistenceException e )
+                {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                finally
+                {
+                    if (session!=null)
+                    {
+                        try
+                        {
+                            session.closeSession();
+                        }
+                        catch ( JrafPersistenceException e )
+                        {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                
             }
             // We put all the export file in a zip
             zipExportFile();
@@ -354,8 +384,8 @@ class ExporterImpl
 
         // Level method
         mapping = new HashMap<JavaMetric, String>();
-        mapping.put( JavaMetric.LOC, mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_METHOD_LOC) );
-        mapping.put( JavaMetric.VG, mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_METHOD_VG) );
+        mapping.put( JavaMetric.LOC, mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_METHOD_LOC ) );
+        mapping.put( JavaMetric.VG, mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_METHOD_VG ) );
         metricMapping.put( JavaComponentType.METHOD, mapping );
 
         return isInitOk;

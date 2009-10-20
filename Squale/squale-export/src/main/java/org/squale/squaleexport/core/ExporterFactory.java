@@ -20,7 +20,7 @@ package org.squale.squaleexport.core;
 
 import java.util.Locale;
 
-import org.squale.jraf.spi.persistence.ISession;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
 import org.squale.squalecommon.util.mail.IMailerProvider;
 
 /**
@@ -40,13 +40,14 @@ public final class ExporterFactory
     /**
      * This method instanciate the exporter implementation and return this instance
      * 
-     * @param session The Hibernate session
+     * @param persistenceProvider The persistence provider
      * @param mailer The mail provider
+     * @param local The current local
      * @return An instance of the exporter implementation
      */
-    public static IExporter createExporter( ISession session,IMailerProvider mailer, Locale local )
+    public static IExporter createExporter( IPersistenceProvider persistenceProvider,IMailerProvider mailer, Locale local )
     {
-        IExporter exporter = new ExporterImpl( session,mailer,local );
+        IExporter exporter = new ExporterImpl( persistenceProvider,mailer,local );
         return exporter;
     }
 

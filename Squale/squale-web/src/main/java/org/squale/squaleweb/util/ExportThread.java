@@ -23,21 +23,14 @@ import java.util.Locale;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionServlet;
-import org.squale.jraf.commons.exception.JrafPersistenceException;
 import org.squale.jraf.helper.PersistenceHelper;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
-import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.datatransfertobject.config.AdminParamsDTO;
-import org.squale.squalecommon.util.SqualeCommonConstants;
-import org.squale.squalecommon.util.SqualeCommonUtils;
 import org.squale.squalecommon.util.mail.IMailerProvider;
 import org.squale.squalecommon.util.mail.MailerHelper;
 import org.squale.squaleexport.core.ExporterFactory;
 import org.squale.squaleexport.core.IExporter;
-import org.squale.squaleweb.resources.WebMessages;
 
 /**
  * This class launch an export of application for the shared repository. This launch is done in a new thread. For that
@@ -46,9 +39,6 @@ import org.squale.squaleweb.resources.WebMessages;
 public class ExportThread
     implements Runnable
 {
-
-    /** Logger */
-    private static final Log LOGGER = LogFactory.getLog( ExportThread.class );
 
     /**
      * Persistence provider
@@ -98,33 +88,16 @@ public class ExportThread
     public void run()
     {
 
-        ISession session;
         IMailerProvider mailer;
         mailer = MailerHelper.getMailerProvider();
-        try
-        {
-            session = PERSISTENTPROVIDER.getSession();
 
-            IExporter exporter = ExporterFactory.createExporter( session, mailer, local );
+        IExporter exporter = ExporterFactory.createExporter( PERSISTENTPROVIDER, mailer, local );
 
-            // Launch of the export
-            exporter.exportData( applicationToExport, configMappingList );
+        // Launch of the export
+        exporter.exportData( applicationToExport, configMappingList );
 
-        }
-        catch ( JrafPersistenceException e )
-        {
-            LOGGER.error( e );
-            String object = WebMessages.getString( local, "shared_repository.export.thread.mail.failed.object" );
-            String content = WebMessages.getString( local, "shared_repository.export.thread.mail.failed.content" );
-            SqualeCommonUtils.notifyByEmail( mailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content,
-                                             false );
-        }
-        finally
-        {
-            // When the export is done the "export_in_progress" attribute is set to false
-            ServletContext ctx = servlet.getServletContext();
-            ctx.setAttribute( "export_in_progress", "false" );
-        }
+        ServletContext ctx = servlet.getServletContext();
+        ctx.setAttribute( "export_in_progress", "false" );
 
     }
 
