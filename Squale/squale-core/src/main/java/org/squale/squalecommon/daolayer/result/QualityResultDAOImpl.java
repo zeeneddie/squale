@@ -89,12 +89,10 @@ public class QualityResultDAOImpl
     public void removeWhereProject( ISession pSession, ProjectBO pProject )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = "where ";
         whereClause += getAlias() + ".project.id = " + pProject.getId();
 
         removeWhere( pSession, whereClause );
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
     }
 
     /**
@@ -110,7 +108,6 @@ public class QualityResultDAOImpl
     public List findWhere( ISession pSession, List pProjectIDs, Long pAuditID, Long pRuleId )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         List marks = new ArrayList();
         Iterator it = pProjectIDs.iterator();
         while ( it.hasNext() )
@@ -118,7 +115,6 @@ public class QualityResultDAOImpl
             Long componentId = (Long) it.next();
             marks.add( load( pSession, componentId, pAuditID, pRuleId ) );
         }
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return marks;
     }
 
@@ -135,7 +131,6 @@ public class QualityResultDAOImpl
     public List findWhere( ISession pSession, Long pProjectID, List pAuditIDs, Long pRuleId )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         List marks = new ArrayList();
         Iterator it = pAuditIDs.iterator();
         while ( it.hasNext() )
@@ -143,7 +138,6 @@ public class QualityResultDAOImpl
             Long auditId = (Long) it.next();
             marks.add( load( pSession, pProjectID, auditId, pRuleId ) );
         }
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return marks;
     }
 
@@ -160,7 +154,6 @@ public class QualityResultDAOImpl
     public QualityResultBO load( ISession pSession, Long pProjectID, Long pAuditID, Long pRuleId )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = "where ";
         whereClause += getAlias() + ".rule.id = " + pRuleId;
         whereClause += " and ";
@@ -179,8 +172,6 @@ public class QualityResultDAOImpl
                 LOG.warn( DAOMessages.getString( "qualityresult.many.audit_project_tre", tab ) );
             }
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return result;
     }
 
@@ -196,7 +187,6 @@ public class QualityResultDAOImpl
     public Collection findWhere( ISession pSession, Long pProjectID, Long pAuditID )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = "where ";
         whereClause += getAlias() + ".project.id = '" + pProjectID + "'";
         whereClause += " and ";
@@ -207,8 +197,6 @@ public class QualityResultDAOImpl
 
         QualityResultBO result = null;
         Collection col = findWhere( pSession, whereClause );
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return col;
     }
 
@@ -224,7 +212,6 @@ public class QualityResultDAOImpl
     public Collection findPracticesWhere( ISession pSession, Long pProjectID, Long pAuditID )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = "where ";
         whereClause += getAlias() + ".project.id = '" + pProjectID + "'";
         whereClause += " and ";
@@ -235,8 +222,6 @@ public class QualityResultDAOImpl
 
         QualityResultBO result = null;
         Collection col = findWhere( pSession, whereClause );
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return col;
     }
 
@@ -415,7 +400,6 @@ public class QualityResultDAOImpl
     public PracticeResultBO findLastManualMark( ISession pSession, Long pProjectID, Long pRuleId )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         StringBuffer whereClause = new StringBuffer( "where " );
         whereClause.append( getAlias() + ".rule.id = " + pRuleId );
         whereClause.append( " and " + getAlias() + ".project.id = " + pProjectID );
@@ -433,7 +417,6 @@ public class QualityResultDAOImpl
             // Recovery the last inserted mark
             result = (PracticeResultBO) col.get( 0 );
         }
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
 
         return result;
     }
@@ -452,7 +435,6 @@ public class QualityResultDAOImpl
     public Collection<PracticeResultBO> findManualMarkSince( ISession pSession, Long pProjectID, Long pRuleId, Date date )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         StringBuffer whereClause = new StringBuffer( "where " );
         whereClause.append( getAlias() + ".rule.id = " + pRuleId );
         whereClause.append( " and " + getAlias() + ".project.id = " + pProjectID );
@@ -481,7 +463,6 @@ public class QualityResultDAOImpl
     public PracticeResultBO findLastManualMarkByAudit ( ISession pSession, Long pProjectId, Long pRuleId, Long pAuditId )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         StringBuffer whereClause = new StringBuffer( "where " );
         whereClause.append( getAlias() + ".rule.id = " + pRuleId );
         whereClause.append( " and " + getAlias() + ".project.id = " + pProjectId );
@@ -495,7 +476,6 @@ public class QualityResultDAOImpl
             // Recovery the last inserted mark for a specific audit
             result = (PracticeResultBO) col.get( 0 );
         }
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         
         return result;
     }

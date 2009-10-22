@@ -206,7 +206,6 @@ public class ApplicationDAOImpl
     public Collection findtagged( ISession pSession, Long[] ptagIds )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = "where ";
         if (ptagIds.length>1){
             whereClause += ptagIds[0] + " in elements(" + getAlias() + ".tags)";
@@ -220,7 +219,6 @@ public class ApplicationDAOImpl
         
 
         Collection ret = findWhere( pSession, whereClause );
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return ret;
     }
     
@@ -369,7 +367,6 @@ public class ApplicationDAOImpl
         whereClause += getAlias() + ".status != '" + ApplicationBO.DELETED + "'";
 
         int ret = countWhere( pSession, whereClause ).intValue();
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return ret;
     }
 

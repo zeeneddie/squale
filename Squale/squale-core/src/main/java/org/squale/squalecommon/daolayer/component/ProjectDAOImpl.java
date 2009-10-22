@@ -97,12 +97,10 @@ public class ProjectDAOImpl
     public Collection findWhere( ISession pSession, Long pAuditId )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = "where ";
         whereClause += pAuditId + " in elements(" + getAlias() + ".audits)";
 
         Collection ret = findWhere( pSession, whereClause );
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return ret;
     }
 
@@ -118,7 +116,6 @@ public class ProjectDAOImpl
     public ProjectBO save( ISession pSession, ProjectBO pProject )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         Long idProject = new Long( pProject.getId() );
         ProjectBO newProject = null;
 
@@ -128,7 +125,6 @@ public class ProjectDAOImpl
             super.save( pSession, pProject );
             newProject = pProject;
         }
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return newProject;
     }
     
@@ -143,7 +139,6 @@ public class ProjectDAOImpl
     public Collection findtagged( ISession pSession, Long[] ptagIds )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = "where ";
         if (ptagIds.length>1){
             whereClause += ptagIds[0] + " in elements(" + getAlias() + ".tags)";
@@ -157,7 +152,6 @@ public class ProjectDAOImpl
         
 
         Collection ret = findWhere( pSession, whereClause );
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return ret;
     }
 
@@ -173,7 +167,6 @@ public class ProjectDAOImpl
     public ProjectBO create( ISession pSession, ProjectBO pProject )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         int existantProject = countWhereParentName( pSession, pProject );
         ProjectBO newProject = null;
 
@@ -182,8 +175,6 @@ public class ProjectDAOImpl
             super.create( pSession, pProject );
             newProject = pProject;
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return newProject;
     }
 
@@ -216,7 +207,6 @@ public class ProjectDAOImpl
     private int countWhereParentName( ISession pSession, ProjectBO pProject )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = "where ";
         whereClause += getAlias() + ".parent.id = " + pProject.getParent().getId();
         whereClause += " AND ";
@@ -226,7 +216,6 @@ public class ProjectDAOImpl
         whereClause += getAlias() + ".status != " + ProjectBO.DELETED;
 
         int ret = countWhere( pSession, whereClause ).intValue();
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return ret;
     }
 

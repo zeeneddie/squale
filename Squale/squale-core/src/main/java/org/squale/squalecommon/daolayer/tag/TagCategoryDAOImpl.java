@@ -93,12 +93,10 @@ public class TagCategoryDAOImpl
     public Collection findNamedTagCategories( ISession pSession, String pTagCategoryName )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         Collection<TagCategoryBO> tagCats = new ArrayList<TagCategoryBO>();
 
         //récupération des component possédant le même tag
         String whereClause = "where ";
-//        whereClause += pTag.getId() + " in elements(" + getAlias() + ".tags)";
         whereClause += getAlias() + ".name like(\'" + pTagCategoryName + "%\') order by " + getAlias() + ".name";
 
         Iterator it = findWhere( pSession, whereClause ).iterator();
@@ -109,8 +107,6 @@ public class TagCategoryDAOImpl
             TagCategoryBO tagCat = (TagCategoryBO) it.next();
             tagCats.add( tagCat );
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return tagCats;
     }
     
@@ -124,7 +120,6 @@ public class TagCategoryDAOImpl
     public Collection findTagCategories( ISession pSession )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         Collection<TagCategoryBO> tagCats = new ArrayList<TagCategoryBO>();
 
         //récupération des component possédant le même tag
@@ -138,8 +133,6 @@ public class TagCategoryDAOImpl
             TagCategoryBO tagCat = (TagCategoryBO) it.next();
             tagCats.add( tagCat );
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return tagCats;
     }
     
@@ -154,7 +147,6 @@ public class TagCategoryDAOImpl
     public TagCategoryBO createTagCategory( ISession pSession, TagCategoryBO pTagCategoryToCreate )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         TagCategoryBO createdTagCategory = null; 
 
         // Verification que le nom du tag n'existe pas déjà
@@ -164,8 +156,6 @@ public class TagCategoryDAOImpl
             super.create( pSession, pTagCategoryToCreate );
             createdTagCategory = pTagCategoryToCreate;
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return createdTagCategory;
     }
     
@@ -180,13 +170,10 @@ public class TagCategoryDAOImpl
     public TagCategoryBO modifyTagCategory( ISession pSession, TagCategoryBO pTagCategoryToModify )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         TagCategoryBO modifiedTagCategory = null; 
 
         super.save( pSession, pTagCategoryToModify );
         modifiedTagCategory = pTagCategoryToModify;
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return modifiedTagCategory;
     }
     
@@ -201,8 +188,6 @@ public class TagCategoryDAOImpl
     public boolean deleteTagCategories( ISession pSession, Collection<String> pNamesToDelete )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
-
         String whereClause = "where ";
         // porte le même nom
         boolean first = true;
@@ -218,8 +203,6 @@ public class TagCategoryDAOImpl
         whereClause += ")";
         
         int nbremoves = super.removeWhere( pSession, whereClause );
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         
         return nbremoves == pNamesToDelete.size();
     }

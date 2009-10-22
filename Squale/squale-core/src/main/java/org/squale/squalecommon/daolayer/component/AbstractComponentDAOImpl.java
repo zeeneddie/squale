@@ -102,7 +102,6 @@ public class AbstractComponentDAOImpl
     public Collection findProjectChildren( ISession pSession, ProjectBO pProjet, AuditBO pAudit, Class pClass )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         Collection children = new ArrayList();
 
         // si la type d'enfant demandé est ApplicationBO, on retourne le projet
@@ -147,7 +146,6 @@ public class AbstractComponentDAOImpl
                 }
             }
         }
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return children;
     }
 
@@ -163,7 +161,6 @@ public class AbstractComponentDAOImpl
     public AbstractComponentBO findChild( ISession pSession, AbstractComponentBO pParent, String pName )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) + " findChild" );
         AbstractComponentBO child = null;
         String whereClause = "where ";
         whereClause += getAlias() + ".parent=" + pParent.getId();
@@ -173,7 +170,6 @@ public class AbstractComponentDAOImpl
         {
             child = (AbstractComponentBO) it.next();
         }
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) + " findChild" );
         return child;
     }
 

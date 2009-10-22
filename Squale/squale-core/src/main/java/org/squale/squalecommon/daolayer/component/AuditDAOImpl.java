@@ -108,7 +108,6 @@ public final class AuditDAOImpl
          */
         pAudit.setStatus( AuditBO.DELETED );
         save( pSession, pAudit );
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
     }
 
     /**
@@ -124,7 +123,6 @@ public final class AuditDAOImpl
     public AuditBO getLastAuditByApplication( ISession pSession, long pIDApplication, String pType, int pStatus )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         Integer nbLigne = new Integer( 1 );
         Integer indexDepart = new Integer( 0 );
         AuditBO audit = null;
@@ -137,8 +135,6 @@ public final class AuditDAOImpl
                 audit = (AuditBO) list.get( 0 );
             }
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return audit;
     }
 
@@ -229,7 +225,6 @@ public final class AuditDAOImpl
     public List findAfter( ISession pSession, long pIdComponent, Date pDate )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = "where ";
         whereClause += pIdComponent + " in elements(" + getAlias() + ".components)";
 
@@ -242,7 +237,6 @@ public final class AuditDAOImpl
 
         whereClause += " order by coalesce(" + getAlias() + ".historicalDate," + getAlias() + ".date) desc";
 
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return (List) findWhere( pSession, whereClause );
     }
 
@@ -259,7 +253,6 @@ public final class AuditDAOImpl
     public List findDeleted( ISession pSession, long pSite, Collection pForbiddenApplis )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = " where ";
 
         // Recupération du nom de classe et de l'alias pour l' application
@@ -299,8 +292,6 @@ public final class AuditDAOImpl
         LOG.debug( "requete = " + requete + whereClause );
         List result = find( pSession, requete + whereClause );
         LOG.debug( "Found " + result.size() + " audit()s to delete." );
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return result;
     }
 
@@ -321,7 +312,6 @@ public final class AuditDAOImpl
                                     String pType, int pStatus )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         // Initialisation
         List result = new ArrayList();
         // Création de la clause where :
@@ -366,7 +356,6 @@ public final class AuditDAOImpl
             // on retourne tous les audits concernés
             result = (List) findWhere( pSession, whereClause );
         }
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return result;
     }
 
@@ -387,7 +376,6 @@ public final class AuditDAOImpl
                                             Integer pIndexDepart, String pType )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         // Initialisation
         List result = new ArrayList();
         // Création de la clause where :
@@ -426,7 +414,6 @@ public final class AuditDAOImpl
             // on retourne tous les audits concernés
             result = (List) findWhere( pSession, whereClause );
         }
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return result;
     }
 
@@ -445,7 +432,6 @@ public final class AuditDAOImpl
                                       String pType )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         AuditBO result = null;
         // On va sélectionner la date de réalisation de l'audit courant
         // ou sa date historique si celle-ci n'est pas nulle
@@ -490,7 +476,6 @@ public final class AuditDAOImpl
         {
             result = (AuditBO) r.get( 0 );
         }
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return result;
     }
 
@@ -526,12 +511,10 @@ public final class AuditDAOImpl
     public Object load( ISession pSession, long pID )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         // Initialisation de la variable temporaire
         Long projectID = new Long( pID );
         // Appel à la méthode load
         Object ret = load( pSession, projectID );
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return ret;
     }
 
@@ -548,7 +531,6 @@ public final class AuditDAOImpl
     public Collection findBeforeBySiteAndStatus( ISession pSession, long pSite, int pStatus, Date pDate )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = "where ";
         Collection result = null;
 
@@ -598,8 +580,6 @@ public final class AuditDAOImpl
         result.addAll( find( pSession, requete + whereClause + orderClause ) );
 
         LOG.debug( "Found " + result.size() + " audit(s) to launch now." );
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return result;
     }
 

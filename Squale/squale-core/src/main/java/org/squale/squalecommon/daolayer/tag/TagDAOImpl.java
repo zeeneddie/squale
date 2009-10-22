@@ -97,7 +97,6 @@ public class TagDAOImpl
     public Collection findTaggedComponents( ISession pSession, TagBO pTag, Class pClass )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         Collection components = new ArrayList();
 
         //récupération des component possédant le même tag
@@ -117,8 +116,6 @@ public class TagDAOImpl
                 components.add( component );
             }
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return components;
     }
     
@@ -133,7 +130,6 @@ public class TagDAOImpl
     public Collection findNamedTags( ISession pSession, String[] pTagNames )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         Collection<TagBO> tags = new ArrayList();
 
         if (pTagNames!=null && pTagNames.length>0 && !"".equals(pTagNames[0])){
@@ -157,8 +153,6 @@ public class TagDAOImpl
                 tags.add( tag );
             }
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return tags;
     }
     
@@ -173,7 +167,6 @@ public class TagDAOImpl
     public Collection findExactNamedTags( ISession pSession, String[] pTagNames )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         Collection<TagBO> tags = new ArrayList();
 
         if (pTagNames!=null && pTagNames.length>0 && !"".equals(pTagNames[0])){
@@ -197,8 +190,6 @@ public class TagDAOImpl
                 tags.add( tag );
             }
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return tags;
     }
     
@@ -213,7 +204,6 @@ public class TagDAOImpl
     public Collection<TagBO> findCategoryTags( ISession pSession, TagCategoryBO pTagCategory )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         Collection<TagBO> tags = new ArrayList<TagBO>();
 
         //retrieval of the tags with the current tagcategory
@@ -227,8 +217,6 @@ public class TagDAOImpl
             TagBO tag = (TagBO) it.next();
             tags.add( tag );
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return tags;
     }
     
@@ -242,7 +230,6 @@ public class TagDAOImpl
     public Collection findTags( ISession pSession )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         Collection<TagBO> tags = new ArrayList();
 
         //récupération des component possédant le même tag
@@ -256,8 +243,6 @@ public class TagDAOImpl
             TagBO tag = (TagBO) it.next();
             tags.add( tag );
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return tags;
     }
     
@@ -272,7 +257,6 @@ public class TagDAOImpl
     public TagBO createTag( ISession pSession, TagBO pTagToCreate )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         TagBO createdTag = null; 
 
         // Verification que le nom du tag n'existe pas déjà
@@ -282,8 +266,6 @@ public class TagDAOImpl
             super.create( pSession, pTagToCreate );
             createdTag = pTagToCreate;
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return createdTag;
     }
     
@@ -298,13 +280,10 @@ public class TagDAOImpl
     public TagBO modifyTag( ISession pSession, TagBO pTagToModify )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         TagBO modifiedTag = null; 
 
         super.save( pSession, pTagToModify );
         modifiedTag = pTagToModify;
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return modifiedTag;
     }
     
@@ -319,8 +298,6 @@ public class TagDAOImpl
     public boolean deleteTags( ISession pSession, Collection<String> pNamesToDelete )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
-
         String whereClause = "where ";
         // porte le même nom
         boolean first = true;
@@ -336,8 +313,6 @@ public class TagDAOImpl
         whereClause += ")";
         
         int nbremoves = super.removeWhere( pSession, whereClause );
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         
         return nbremoves == pNamesToDelete.size();
     }

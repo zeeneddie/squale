@@ -95,7 +95,6 @@ public class SqualeReferenceDAOImpl
                                            boolean pIsAdmin, Long pUserId )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         Collection result = null;
         StringBuffer whereClause = new StringBuffer();
         // si l'utilisateur est admin on récupère tout le référentiel sans
@@ -132,7 +131,6 @@ public class SqualeReferenceDAOImpl
                 (Collection) super.findWhereScrollable( pSession, whereClause.toString(), pNbLignes.intValue(),
                                                         pIndexDepart.intValue(), false );
         }
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return result;
     }
 
@@ -148,7 +146,6 @@ public class SqualeReferenceDAOImpl
     public SqualeReferenceBO loadByName( ISession pSession, String pAppName, String pProjName )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         SqualeReferenceBO ref = null;
         String whereClause = "where ";
         whereClause += getAlias() + ".applicationName = '" + pAppName + "'";
@@ -165,8 +162,6 @@ public class SqualeReferenceDAOImpl
         {
             throw new JrafDaoException( "Too many line in referentiel" );
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return ref;
     }
 

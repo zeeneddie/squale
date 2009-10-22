@@ -90,7 +90,6 @@ public class ProfileDAOImpl
     public ProfileBO loadByKey( ISession pSession, String pKey )
         throws JrafDaoException
     {
-        LOG.debug( DAOMessages.getString( "dao.entry_method" ) );
         String whereClause = "where ";
         whereClause += getAlias() + ".name = '" + pKey + "'";
 
@@ -105,8 +104,6 @@ public class ProfileDAOImpl
                 LOG.warn( DAOMessages.getString( "profile.many.key", tab ) );
             }
         }
-
-        LOG.debug( DAOMessages.getString( "dao.exit_method" ) );
         return profile;
     }
 }
