@@ -45,6 +45,8 @@ public class EclipseCompilerImpl
         throws Exception
     {
         eclipseCompiler.runCompilation();
+        // On vérifie les variables
+        eclipseCompiler.checkOutputVariables();
         // On modifie les erreurs
         setErrors( eclipseCompiler.getErrors() );
     }

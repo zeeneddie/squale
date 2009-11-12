@@ -66,12 +66,21 @@ public class EclipseCompiler
 
     /** Log de niveau WARNING */
     private static final String WARNING_LOG = "ATTENTION: ";
+    
+    /** Log de niveau WARNING */
+    private static final String[] WARNING_LOG_ARRAY = {"ATTENTION: ","WARNING: "};
 
     /** Log de niveau GRAVE */
     private static final String ERROR_LOG = "GRAVE: ";
+    
+    /** Log de niveau GRAVE */
+    private static final String[] ERROR_LOG_ARRAY = {"GRAVE: ","SEVERE: ","ERROR: "};
 
     /** Log de niveau INFO */
     private static final String INFO_LOG = "INFO: ";
+    
+    /** Log de niveau INFO */
+    private static final String[] INFO_LOG_ARRAY = {"INFO: ","INFORMATION: "};
 
     /** Le nombre max d'erreurs à sauvegarder par type */
     private static final int MAX_ERRORS = 100;
@@ -246,7 +255,11 @@ public class EclipseCompiler
                 command.add( curOption );
             }
         }
-
+        
+        // On supprime le fichier org.eclipse.wst.common.project.facet.core.xml
+        FileUtility.deleteFilesinPath( new File ( mViewPath ) , "org.eclipse.wst.common.project.facet.core.xml" );
+        FileUtility.deleteFilesinPath( new File ( mViewPath ) , "org.eclipse.jst.common.project.facet.core.prefs" );
+        
         // On crée le process
         ProcessManager compileProcess =
             new ProcessManager( (String[]) command.toArray( new String[command.size()] ), null, workspaceDir );
@@ -529,17 +542,17 @@ public class EclipseCompiler
     {
         LOGGER.info( pMessage );
         // Le niveau de criticité dépend du niveau de criticité du log
-        if ( pMessage.startsWith( WARNING_LOG ) )
+        if ( arrayStartsWith( pMessage, WARNING_LOG_ARRAY ) )
         {
             createError( pMessage.replaceFirst( WARNING_LOG, "" ), ErrorBO.CRITICITY_WARNING, nbWarning );
             nbWarning++;
         }
-        else if ( pMessage.startsWith( ERROR_LOG ) )
+        else if ( arrayStartsWith( pMessage, ERROR_LOG_ARRAY ) )
         {
             createError( pMessage.replaceFirst( ERROR_LOG, "" ), ErrorBO.CRITICITY_FATAL, nbErrors );
             nbErrors++;
         }
-        else if ( pMessage.startsWith( INFO_LOG ) )
+        else if ( arrayStartsWith( pMessage, INFO_LOG_ARRAY ) )
         {
             // On récupère le classpath écrit en log
             if ( pMessage.startsWith( CLASSPATH_LOG ) )
@@ -635,6 +648,59 @@ public class EclipseCompiler
     public List getOutputDirs()
     {
         return outputDirs;
+    }
+    
+    /**
+     * checks that Classpath and OutputDirs are correctly set
+     */
+    public void checkOutputVariables()
+    {
+        // Vérif de la longueur du Classpath
+        if (classpath.length() == 0)
+        {
+            ErrorBO error = new ErrorBO();
+            error.setMessage( "Compiled ClassPath is empty." );
+            error.setInitialMessage( "Compiled ClassPath is empty." );
+            error.setLevel( ErrorBO.CRITICITY_WARNING );
+            errors.add( error );
+            nbWarning++;   
+        }
+        // Vérif de la liste des répertoires de compilation
+        if (outputDirs.isEmpty())
+        {
+            ErrorBO error = new ErrorBO();
+            error.setMessage( "Compiled Output Directories are empty." );
+            error.setInitialMessage( "Compiled Output Directories are empty." );
+            error.setLevel( ErrorBO.CRITICITY_WARNING );
+            errors.add( error );
+            nbWarning++; 
+        }
+        // Vérif inverse et affichage d'une info si c'est bon
+        if ( (classpath.length()!=0) && (!outputDirs.isEmpty()) )
+        {
+            LOGGER.info( "Compiled Variables have been fulfilled." );
+        }
+    }
+    
+    /**
+     * arrayStartsWith checks if pStringToCheck starts with at least one of the pPatternArray elements
+     * 
+     * @param pStringToCheck string to be checked
+     * @param pPatternArray String[] with the list of start pattern to check
+     * @return boolean true if pStringToCheck starts with any of the pPatternArray element
+     */
+    private boolean arrayStartsWith(String pStringToCheck ,String[] pPatternArray)
+    {
+        boolean output = false;
+        for (int i=0 ; i < pPatternArray.length ; i++)
+        {
+            if (pStringToCheck.startsWith( pPatternArray[i] ))
+            {
+                output = true;
+                break;
+            }
+        }
+        return output;
     }
 
 }

@@ -569,6 +569,8 @@ public final class AuditDAOImpl
         // Attention, les applications qui n'ont pas eu d'accès, ne seront pas prises en compte!
         // On appelle donc une fois en triant par accès, une autre pour les applications sans accès et dans ce
         // cas on trie par date d'exécution.
+        
+        /* Requête retirée suite à bug        
         String orderClause =
             " order by " + appAlias + ".userAccesses[minindex(" + appAlias + ".userAccesses)].date desc";
 
@@ -577,7 +579,10 @@ public final class AuditDAOImpl
 
         orderClause = " and size(" + appAlias + ".userAccesses)=0 order by " + getAlias() + ".date";
         LOG.debug( "requete = " + requete + whereClause + orderClause );
-        result.addAll( find( pSession, requete + whereClause + orderClause ) );
+        result.addAll( find( pSession, requete + whereClause + orderClause ) );  */
+        
+        LOG.info( "requete = " + requete + whereClause );
+        result = find( pSession, requete + whereClause );
 
         LOG.debug( "Found " + result.size() + " audit(s) to launch now." );
         return result;
