@@ -754,8 +754,7 @@
 		
 		<action path="/sharedRepositoryExport" type="org.squale.squaleweb.applicationlayer.action.sharedrepository.SharedRepositoryExportAction" name="sharedRepositoryExportForm" scope="session" >
 			<forward name="enter_export" path="/jsp/admin/sharedRepository/sharedRepositoryExport.jsp"/>
-			<forward name="export_ask" path="/jsp/admin/sharedRepository/sharedRepositoryExportAsk.jsp"/>
-			<forward name="export_in_progress" path="/jsp/admin/sharedRepository/sharedRepositoryExportInProgress.jsp"/>
+			<forward name="export_ask" path="/sharedRepositoryExport.do?action=detail"/>
 		</action>
 		
 	</action-mappings>

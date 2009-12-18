@@ -124,6 +124,9 @@
 			<!--<smtp-password></smtp-password>-->
 		</mail>
 		<shared-repository-export>
+			<squalix-server>
+				<name>squaleSrv</name>
+			</squalix-server>
 			<mapping>
 				<java>
 					<project>

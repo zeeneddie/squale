@@ -258,6 +258,14 @@ public class SqualixConfigImport
         configDigester.addCallParam( "configuration/admin-params/shared-repository-export/mapping/java/method/vg", 1 );
         configDigester.addSetNext( "configuration/admin-params/shared-repository-export/mapping/java/method/vg", "addAdminParam" );
         
+        // shared repository - squalix server name which will done the export
+        configDigester.addObjectCreate( "configuration/admin-params/shared-repository-export/squalix-server/name", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/shared-repository-export/squalix-server/name", "setAdminParam", 2, new Class[] {
+            String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/shared-repository-export/squalix-server/name", 0 );
+        configDigester.addCallParam( "configuration/admin-params/shared-repository-export/squalix-server/name", 1 );
+        configDigester.addSetNext( "configuration/admin-params/shared-repository-export/squalix-server/name", "addAdminParam" );
+        
         return configDigester;
     }
 

@@ -21,31 +21,55 @@ package org.squale.squaleexport.object;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
-@XStreamAlias("segment")
+/**
+ * Segment class used for the export
+ */
+@XStreamAlias( "segment" )
 public class SegmentEx
 {
 
+    /**
+     * The name of the segment
+     */
     @XStreamAsAttribute
     private String name;
 
+    /**
+     * Default constructor
+     */
     public SegmentEx()
     {
-        
+
     }
 
+    /**
+     * Full constructor
+     *  
+     * @param pName The name of the segment
+     */
     public SegmentEx( String pName )
     {
         name = pName;
     }
 
+    /**
+     * Getter method for the attribute name
+     * 
+     * @return The attribute name
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Getter method for the attribute name
+     * 
+     * @param pName The attribute name
+     */
     public void setName( String pName )
     {
         name = pName;
     }
-    
+
 }

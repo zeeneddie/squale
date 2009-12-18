@@ -22,33 +22,32 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 /**
- * 
- *
+ * Data class used for the export
  */
 @XStreamAlias( "data" )
 public class DataEx
 {
 
     /**
-     * 
+     * The type of the data
      */
     @XStreamAsAttribute
     private String type;
 
     /**
-     * 
+     * The name of the data
      */
     @XStreamAsAttribute
     private String genericName;
 
     /**
-     * 
+     * The value of the data
      */
     @XStreamAsAttribute
     private String value;
 
     /**
-     * 
+     * Default constructor
      */
     public DataEx()
     {
@@ -56,9 +55,11 @@ public class DataEx
     }
 
     /**
-     * @param pType
-     * @param pGenericName
-     * @param pValue
+     * Full constructor
+     * 
+     * @param pType The type of the data
+     * @param pGenericName The name of the data
+     * @param pValue The value of the data
      */
     public DataEx( String pType, String pGenericName, String pValue )
     {
@@ -68,7 +69,9 @@ public class DataEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute type
+     * 
+     * @return The type of the component
      */
     public String getType()
     {
@@ -76,7 +79,9 @@ public class DataEx
     }
 
     /**
-     * @param pType
+     * Setter method for the attribute type
+     * 
+     * @param pType The new type of the data
      */
     public void setType( String pType )
     {
@@ -84,7 +89,9 @@ public class DataEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute genericName
+     * 
+     * @return The generic name of the data
      */
     public String getGenericName()
     {
@@ -92,7 +99,9 @@ public class DataEx
     }
 
     /**
-     * @param pGenericName
+     * Setter method for the attribute genericName
+     * 
+     * @param pGenericName The new generic name of the data
      */
     public void setGenericName( String pGenericName )
     {
@@ -100,7 +109,9 @@ public class DataEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute value
+     * 
+     * @return The value of the data
      */
     public String getValue()
     {
@@ -108,7 +119,9 @@ public class DataEx
     }
 
     /**
-     * @param pValue
+     * Setter method for the attribute value
+     * 
+     * @param pValue The new value of the data
      */
     public void setValue( String pValue )
     {

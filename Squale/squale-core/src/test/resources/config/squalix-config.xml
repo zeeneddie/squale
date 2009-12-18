@@ -179,22 +179,25 @@
 			<!--<smtp-password></smtp-password>-->
 		</mail>
 		<shared-repository-export>
-				<mapping>
-					<java>
-						<project>
-							<loc>JavancssTask.ncss</loc>
-							<number-of-classes>JavancssTask.numberOfClasses</number-of-classes>
-						</project>
-						<class>
-							<loc>JavancssTask.ncss</loc>
-							<number-of-methods>JavancssTask.methods</number-of-methods>
-						</class>
-						<method>
-							<loc>JavancssTask.ncss</loc>
-							<vg>JavancssTask.ccn</vg>
-						</method>
-					</java>
-				</mapping>
-			</shared-repository-export>
-		</admin-params>
+			<squalix-server>
+				<name>squaleSrv</name>
+			</squalix-server>
+			<mapping>
+				<java>
+					<project>
+						<loc>JavancssTask.ncss</loc>
+						<number-of-classes>JavancssTask.numberOfClasses</number-of-classes>
+					</project>
+					<class>
+						<loc>JavancssTask.ncss</loc>
+						<number-of-methods>JavancssTask.methods</number-of-methods>
+					</class>
+					<method>
+						<loc>JavancssTask.ncss</loc>
+						<vg>JavancssTask.ccn</vg>
+					</method>
+				</java>
+			</mapping>
+		</shared-repository-export>
+	</admin-params>
 </configuration>

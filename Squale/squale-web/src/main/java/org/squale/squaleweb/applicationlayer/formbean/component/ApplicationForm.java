@@ -53,9 +53,6 @@ public class ApplicationForm
     /** L'utilisateur ayant fait la dernière modification */
     private String mLastUser;
 
-    /** Date of the last export. Null if not export was done */
-    private Date lastExportDate;
-
     /**
      * @return true si le composant est exclu du plan d'action
      */
@@ -188,25 +185,5 @@ public class ApplicationForm
     public void setLastUser( String pMatricule )
     {
         mLastUser = pMatricule;
-    }
-
-    /**
-     * Getter for the attribute lastExportDate
-     * 
-     * @return The last export date
-     */
-    public Date getLastExportDate()
-    {
-        return lastExportDate;
-    }
-
-    /**
-     * Setter for the attribute lastExportDate
-     * 
-     * @param pLastExportDate The new export date
-     */
-    public void setLastExportDate( Date pLastExportDate )
-    {
-        lastExportDate = pLastExportDate;
     }
 }

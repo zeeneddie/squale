@@ -25,44 +25,44 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
- * 
- *
+ * Component class used for the export
  */
-@XStreamAlias("component")
+@XStreamAlias( "component" )
 public class ComponentEx
 {
- 
+
     /**
-     * 
+     * Type of the component
      */
     @XStreamAsAttribute
     private String type;
-    
+
     /**
-     * 
+     * List of the data linked to the component
      */
     @XStreamImplicit
     private List<DataEx> datas;
-    
+
     /**
-     * 
+     * List of the components linked to the component
      */
     @XStreamImplicit
     private List<ComponentEx> components;
-    
+
     /**
-     * 
+     * Default constructor
      */
     public ComponentEx()
     {
-        
+
     }
 
     /**
+     * Full constructor
      * 
-     * @param pType
-     * @param pDatas
-     * @param pComponents
+     * @param pType The type of the component
+     * @param pDatas The list of data
+     * @param pComponents The list of components
      */
     public ComponentEx( String pType, List<DataEx> pDatas, List<ComponentEx> pComponents )
     {
@@ -72,17 +72,19 @@ public class ComponentEx
     }
 
     /**
+     * Add a new child component({@link ComponentEx} to the component
      * 
-     * @param compo
+     * @param compo The new child component
      */
-    public void addComponent(ComponentEx compo)
+    public void addComponent( ComponentEx compo )
     {
         components.add( compo );
     }
-    
+
     /**
+     * Getter method for the attribute type
      * 
-     * @return
+     * @return The type of the component
      */
     public String getType()
     {
@@ -90,8 +92,9 @@ public class ComponentEx
     }
 
     /**
+     * Setter method for the attribute type
      * 
-     * @param pType
+     * @param pType The new type of the component
      */
     public void setType( String pType )
     {
@@ -99,8 +102,9 @@ public class ComponentEx
     }
 
     /**
+     * Getter method for the attribute datas
      * 
-     * @return
+     * @return The list of data linked to the component
      */
     public List<DataEx> getDatas()
     {
@@ -108,8 +112,9 @@ public class ComponentEx
     }
 
     /**
+     * Setter method for the attribute datas
      * 
-     * @param pDatas
+     * @param pDatas The new list of data linked to the component
      */
     public void setDatas( List<DataEx> pDatas )
     {
@@ -117,8 +122,9 @@ public class ComponentEx
     }
 
     /**
+     * Getter method for the attribute components
      * 
-     * @return
+     * @return The list of child components linked to the component
      */
     public List<ComponentEx> getComponents()
     {
@@ -126,13 +132,13 @@ public class ComponentEx
     }
 
     /**
+     * Setter method for the attribute components
      * 
-     * @param pComponents
+     * @param pComponents The new list of child components linked to the component
      */
     public void setComponents( List<ComponentEx> pComponents )
     {
         components = pComponents;
     }
-    
-    
+
 }

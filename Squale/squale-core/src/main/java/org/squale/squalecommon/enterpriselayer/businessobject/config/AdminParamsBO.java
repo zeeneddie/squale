@@ -27,6 +27,16 @@ package org.squale.squalecommon.enterpriselayer.businessobject.config;
 public class AdminParamsBO
 {
 
+    /*
+     * !!! BE CAREFUL !!! If you want that the admin Params will be removed before being recreate when a new
+     * squale-config.xml file is upload, then its key should start with : configuration/admin-params 
+     */
+
+    /**
+     * Default name
+     */
+    public static final String ADMIN_PARAMS = "configuration/admin-params";
+    
     /**
      * Default mail paramKey
      */
@@ -61,11 +71,6 @@ public class AdminParamsBO
      * Admin mailing list paramKey
      */
     public static final String MAIL_SMTP_AUTHENT_NEEDED = "configuration/admin-params/mail/smtp-authent-needed";
-
-    /**
-     * Entity_Id
-     */
-    public static final String ENTITY_ID = "entityId";
 
     /**
      * Mapping
@@ -107,6 +112,17 @@ public class AdminParamsBO
      */
     public static final String MAPPING_JAVA_METHOD_VG =
         "configuration/admin-params/shared-repository-export/mapping/java/method/vg";
+
+    /**
+     * Key for mapping : language java, level method, metric cyclomatic complexity
+     */
+    public static final String SQUALIX_SERVER_NAME =
+        "configuration/admin-params/shared-repository-export/squalix-server/name";
+
+    /**
+     * Entity_Id This attribute is not removed when a new squale-config.xml file is upload
+     */
+    public static final String ENTITY_ID = "entityId";
 
     /**
      * Object ID

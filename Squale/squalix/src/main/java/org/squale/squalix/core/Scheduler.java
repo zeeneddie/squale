@@ -27,7 +27,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.commons.exception.JrafPersistenceException;
@@ -40,8 +39,8 @@ import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
 import org.squale.squalecommon.daolayer.result.MarkDAOImpl;
 import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
 import org.squale.squalecommon.daolayer.result.rulechecking.RuleCheckingTransgressionDAOImpl;
-import org.squale.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
 import org.squale.squalecommon.datatransfertobject.config.ServeurDTO;
+import org.squale.squalecommon.datatransfertobject.config.SqualixConfigurationDTO;
 import org.squale.squalecommon.datatransfertobject.result.SqualeReferenceDTO;
 import org.squale.squalecommon.datatransfertobject.transform.component.AuditTransform;
 import org.squale.squalecommon.datatransfertobject.transform.config.AuditFrequencyTransform;
@@ -49,18 +48,18 @@ import org.squale.squalecommon.enterpriselayer.businessobject.component.Applicat
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.roi.RoiMetricsBO;
-import org.squale.squalecommon.enterpriselayer.facade.config.SqualixConfigFacade;
 import org.squale.squalecommon.enterpriselayer.facade.config.ServeurFacade;
+import org.squale.squalecommon.enterpriselayer.facade.config.SqualixConfigFacade;
 import org.squale.squalecommon.enterpriselayer.facade.quality.SqualeReferenceFacade;
-
 import org.squale.squalecommon.util.SqualeCommonConstants;
 import org.squale.squalecommon.util.SqualeCommonUtils;
 import org.squale.squalecommon.util.mail.IMailerProvider;
 import org.squale.squalecommon.util.mail.MailerHelper;
 import org.squale.squalix.core.exception.ConfigurationException;
+import org.squale.squalix.core.export.Export;
 import org.squale.squalix.core.purge.Purge;
-import org.squale.squalix.messages.Messages;
 import org.squale.squalix.messages.MessageMailManager;
+import org.squale.squalix.messages.Messages;
 import org.squale.squalix.stats.ComputeStats;
 import org.squale.squalix.util.sourcesrecovering.SourcesRecoveringOptimisation;
 import org.squale.squalix.util.stoptime.StopTimeHelper;
@@ -81,12 +80,11 @@ import org.squale.squalix.util.stoptime.StopTimeHelper;
  * </ul>
  * <br />
  * Tous les audits et tâches sont exécutés via des pools de threads, gérés par le gestionnaire de ressources.<br />
- * Voir la documentation de la classe <code>ResourcesManager</code> pour plus de renseignements sur son
- * fonctionnement. <br />
+ * Voir la documentation de la classe <code>ResourcesManager</code> pour plus de renseignements sur son fonctionnement. <br />
  * <br />
  * Lorsque tous les audits ont été lancés, les scheduler est bloqué tant que les pools sont ouverts.<br />
- * Pour s'assurer que ceux-ci sont ouverts, on utilise un <code>CountDownLatch</code> décrémenté par le gestionnaire
- * de ressources lorsqu'il ferme ses pools. <br />
+ * Pour s'assurer que ceux-ci sont ouverts, on utilise un <code>CountDownLatch</code> décrémenté par le gestionnaire de
+ * ressources lorsqu'il ferme ses pools. <br />
  * <br />
  * Les tâches non liées à un projet et les exécuteurs d'analyse sont associés au scheduler par un pattern
  * Observateur-Observable, dans lequel le scheduler est l'observateur. Sa méthode <code>update()</code> est appelée
@@ -171,7 +169,6 @@ public class Scheduler
                 SqualeCommonUtils.notifyByEmail( mMailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object,
                                                  content, false );
             }
-
         }
         catch ( JrafEnterpriseException e )
         {
@@ -276,6 +273,11 @@ public class Scheduler
 
             List audits = getAudits( stop );
 
+            // Launch the export for the shared repository 
+            Thread export = null;
+            Export exportTools = new Export();
+            export = exportTools.launchExport( mSiteId );
+
             // purge dans un thread parallele
             Purge prg = new Purge( mSiteId, audits );
             prg.start();
@@ -314,6 +316,10 @@ public class Scheduler
 
             // Wait the end of the purge thread
             prg.join();
+            if ( export != null )
+            {
+                export.join();
+            }
 
             LOGGER.info( CoreMessages.getString( "endofexec" ) );
             // Fermeture de la session
@@ -864,4 +870,5 @@ public class Scheduler
             SqualeReferenceFacade.insertAudit( AuditTransform.bo2Dto( pAudit, pAppliId ), mSession );
         }
     }
+
 }

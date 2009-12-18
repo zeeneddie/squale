@@ -18,9 +18,14 @@
  */
 package org.squale.squaleweb.transformer.sharedrepository;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
-import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
+import org.squale.squalecommon.datatransfertobject.job.JobDTO;
+import org.squale.squalecommon.datatransfertobject.sharedrepository.ApplicationExportDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.job.JobStatus;
 import org.squale.squaleweb.applicationlayer.formbean.sharedrepository.SharedRepositoryExportApplicationForm;
 import org.squale.squaleweb.applicationlayer.formbean.sharedrepository.SharedRepositoryExportForm;
 import org.squale.welcom.struts.bean.WActionForm;
@@ -28,7 +33,7 @@ import org.squale.welcom.struts.transformer.WITransformer;
 import org.squale.welcom.struts.transformer.WTransformerException;
 
 /**
- *  Transformer form <=> object implementation ({@link WITransformer} for the form {@link SharedRepositoryExportForm }
+ * Transformer form <=> object implementation ({@link WITransformer} for the form {@link SharedRepositoryExportForm }
  */
 public class ExportTransformer
     implements WITransformer
@@ -40,7 +45,7 @@ public class ExportTransformer
     public Object[] formToObj( WActionForm form )
         throws WTransformerException
     {
-        Object[] object = { new ArrayList<Long>() };
+        Object[] object = { new ArrayList<ApplicationExportDTO>()};
         formToObj( form, object );
         return object;
     }
@@ -51,29 +56,25 @@ public class ExportTransformer
     public void formToObj( WActionForm form, Object[] object )
         throws WTransformerException
     {
-        //List for selected application
-        ArrayList<Long> applicationsToExport = (ArrayList<Long>) object[0];
-        //list for all application
-        ArrayList<Long> allApplications = (ArrayList<Long>) object[1];
-        
-        SharedRepositoryExportForm currentForm = (SharedRepositoryExportForm)form;
+        ArrayList<ApplicationExportDTO> applications = (ArrayList<ApplicationExportDTO>) object[0];
+        SharedRepositoryExportForm currentForm = (SharedRepositoryExportForm) form;
         ArrayList<SharedRepositoryExportApplicationForm> applicationList = currentForm.getListApp();
-        
-        // For each application in the form
-        for ( SharedRepositoryExportApplicationForm application : applicationList )
-        {
-            // We add the id of the application to the "all applications" list
-            allApplications.add( application.getApplicationId() );
-            
-            // If the current application is selected then we add its id to the list of selected applications 
-            if (application.isSelected())
-            {
-                applicationsToExport.add( application.getApplicationId() );
-            }
-        }
 
+        ApplicationExportDTO appDto;
+        for ( SharedRepositoryExportApplicationForm applicationForm : applicationList )
+        {
+            appDto =
+                new ApplicationExportDTO( applicationForm.getApplicationLastExportId(),
+                                          applicationForm.getApplicationId(), applicationForm.getLastExportDate(),
+                                          applicationForm.isSelected() );
+            if(applicationForm.isSelected())
+            {
+                currentForm.setOneToExport( true );
+            }
+            applications.add( appDto );
+        }
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -81,7 +82,7 @@ public class ExportTransformer
         throws WTransformerException
     {
         SharedRepositoryExportForm form = new SharedRepositoryExportForm();
-        
+
         return form;
     }
 
@@ -91,17 +92,50 @@ public class ExportTransformer
     public void objToForm( Object[] object, WActionForm form )
         throws WTransformerException
     {
-        ArrayList<SharedRepositoryExportApplicationForm> applicationWithResults = new ArrayList<SharedRepositoryExportApplicationForm>();
-        SharedRepositoryExportForm currentForm = (SharedRepositoryExportForm)form;
-        ArrayList<ApplicationForm> allApplication =(ArrayList<ApplicationForm>)object[0];
-        for ( ApplicationForm application : allApplication )
+        
+        ArrayList<SharedRepositoryExportApplicationForm> applicationWithResults =
+            new ArrayList<SharedRepositoryExportApplicationForm>();
+        SharedRepositoryExportForm currentForm = (SharedRepositoryExportForm) form;
+        
+        ArrayList<ApplicationExportDTO> allApplication = (ArrayList<ApplicationExportDTO>) object[0];
+        ArrayList<String> selectedApplications = new ArrayList<String>();
+        for ( ApplicationExportDTO application : allApplication )
         {
-            if (application.getHasResults())
+            applicationWithResults.add( new SharedRepositoryExportApplicationForm( application.getId(),
+                                                                                   application.getApplicationId(),
+                                                                                   application.getApplicationName(),
+                                                                                   application.getLastExportDate(),
+                                                                                   application.getToExport() ) );
+            if ( application.getToExport() )
             {
-                applicationWithResults.add( new SharedRepositoryExportApplicationForm( application.getId(), application.getApplicationName(), application.getLastExportDate() ) );
+                selectedApplications.add( application.getApplicationName() );
             }
         }
         currentForm.setListApp( applicationWithResults );
+        currentForm.setSelectedApp( selectedApplications );
+        List<JobDTO> job = (List<JobDTO>) object[1];
+        for ( JobDTO jobDTO : job )
+        {
+            if(jobDTO.getJobStatus().equals( JobStatus.FAILED.getLabel() ))
+            {
+                currentForm.setFailedJob( jobDTO );
+            }
+            else if(jobDTO.getJobStatus().equals( JobStatus.SUCCESSFUL.getLabel() ))
+            {
+                currentForm.setSuccessfulJob( jobDTO );
+                SimpleDateFormat formater = new SimpleDateFormat( "dd/MM/yyyy" );
+                currentForm.setLastSuccessfulDate( formater.format( jobDTO.getJobDate() ) );
+                
+                
+            }
+            else if(jobDTO.getJobStatus().equals( JobStatus.SCHEDULED.getLabel() ))
+            {
+                currentForm.setScheduledJob( true );
+            }
+            else
+            {
+                currentForm.setInProgressJob( true );
+            }
+        }        
     }
-
 }

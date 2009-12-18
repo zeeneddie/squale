@@ -331,6 +331,8 @@
 
     drop table if exists HomepageComponent;
 
+    drop table if exists Job;
+
     drop table if exists Mark;
 
     drop table if exists Measure;
@@ -415,10 +417,11 @@
     ) type=InnoDB;
 
     create table ApplicationLastExport (
-        lastExportId bigint not null auto_increment,
+        LastExportId bigint not null auto_increment,
         ComponentId bigint unique,
-        auditDate datetime,
-        primary key (lastExportId)
+        LastExportDate datetime,
+        ToExport bit,
+        primary key (LastExportId)
     ) type=InnoDB;
 
     create table AtomicRights (
@@ -568,6 +571,14 @@
         ComponentPosition integer not null,
         ComponentValue varchar(255),
         primary key (HomepageComponentId)
+    ) type=InnoDB;
+
+    create table Job (
+        JobId bigint not null auto_increment,
+        JobName varchar(100),
+        JobStatus varchar(100),
+        JobDate datetime,
+        primary key (JobId)
     ) type=InnoDB;
 
     create table Mark (

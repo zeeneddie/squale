@@ -2,15 +2,27 @@
 -- Modifications for the exporter for the shared repositiory
 
 -- New sequence
+create sequence job_sequence;
 create sequence lastExport_sequence;
-    
+
 -- New table for the date of the last export for each application
 create table ApplicationLastExport (
-	lastExportId number(19,0) not null,
+	LastExportId number(19,0) not null,
   	ComponentId number(19,0) unique,
-    auditDate date,
-    primary key (lastExportId)
-    );
+    LastExportDate date,
+    ToExport number(1,0),
+    primary key (LastExportId)
+);
+
+create table Job (
+    JobId number(19,0) not null,
+    JobName varchar2(100),
+    JobStatus varchar2(100),
+    JobDate date,
+    primary key (JobId)
+);
+
+alter table ApplicationLastExport modify ToExport default 0 ;
     
 -- Constrain between the table component(application) and the table lastexport
 alter table ApplicationLastExport 
@@ -18,5 +30,4 @@ alter table ApplicationLastExport
     foreign key (ComponentId) 
     references Component;
     
-
 --########################################

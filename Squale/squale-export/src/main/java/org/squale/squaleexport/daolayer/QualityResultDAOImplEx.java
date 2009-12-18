@@ -28,23 +28,23 @@ import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
 
 /**
- * 
- *
+ * This class is an implementation of the abstract class {@link AbstractDAOImpl}. This class is a dao linked to the
+ * business object {@link QualityResultBO } specific to SqualeExport.
  */
 public final class QualityResultDAOImplEx
     extends AbstractDAOImpl
 {
 
     /**
-     * Instance singleton
+     * Singleton
      */
     private static QualityResultDAOImplEx instance;
 
-    /** log */
+    /** Log */
     private static Log LOG;
 
     /**
-     * Constructeur prive
+     * Private constructor
      */
     private QualityResultDAOImplEx()
     {
@@ -53,9 +53,9 @@ public final class QualityResultDAOImplEx
     }
 
     /**
-     * Retourne un singleton du DAO
+     * Return the single instance of the dao
      * 
-     * @return singleton du DAO
+     * @return The singleton of the DAO
      */
     public static QualityResultDAOImplEx getInstance()
     {
@@ -67,11 +67,19 @@ public final class QualityResultDAOImplEx
     }
 
     /**
-     * @param session
-     * @param moduleId
-     * @param auditId
-     * @return
-     * @throws JrafDaoException
+     *  <p>
+     * This method search in the db all the factor which :
+     * <ul>
+     * <li>are factor of the module : moduleId</li>
+     * <li>are involved in the audit : auditId</li>
+     * </ul>
+     * </p>
+     * 
+     * @param session The hibernate session
+     * @param moduleId The module id
+     * @param auditId The audit id
+     * @return The list of factor find
+     * @throws JrafDaoException Exception occurs during the search in the db
      */
     public List<QualityResultBO> findFactor( ISession session, Long moduleId, Long auditId )
         throws JrafDaoException
@@ -99,11 +107,19 @@ public final class QualityResultDAOImplEx
     }
 
     /**
-     * @param session
-     * @param moduleId
-     * @param auditId
-     * @return
-     * @throws JrafDaoException
+     *  <p>
+     * This method search in the db all the criterium which :
+     * <ul>
+     * <li>are factor of the module : moduleId</li>
+     * <li>are involved in the audit : auditId</li>
+     * </ul>
+     * </p>
+     * 
+     * @param session The hibernate session
+     * @param moduleId The module id
+     * @param auditId The audit id
+     * @return The list of criterium find
+     * @throws JrafDaoException Exception occurs during the search in the db
      */
     public List<QualityResultBO> findCriterium( ISession session, Long moduleId, Long auditId )
         throws JrafDaoException

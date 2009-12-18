@@ -18,11 +18,15 @@
  */
 package org.squale.squaleweb.applicationlayer.action.sharedrepository;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,13 +37,13 @@ import org.apache.struts.action.ActionMapping;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.helper.AccessDelegateHelper;
 import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
-import org.squale.squalecommon.datatransfertobject.config.AdminParamsDTO;
+import org.squale.squalecommon.datatransfertobject.job.JobDTO;
+import org.squale.squalecommon.datatransfertobject.sharedrepository.ApplicationExportDTO;
 import org.squale.squaleweb.applicationlayer.action.accessRights.AdminAction;
 import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
 import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
 import org.squale.squaleweb.applicationlayer.formbean.sharedrepository.SharedRepositoryExportForm;
 import org.squale.squaleweb.transformer.sharedrepository.ExportTransformer;
-import org.squale.squaleweb.util.ExportThread;
 import org.squale.welcom.struts.transformer.WTransformerException;
 import org.squale.welcom.struts.transformer.WTransformerFactory;
 import org.squale.welcom.struts.util.WConstants;
@@ -67,45 +71,92 @@ public class SharedRepositoryExportAction
         ActionForward forward = mapping.findForward( "total_failure" );
         ActionErrors actionErrors = new ActionErrors();
 
-        ServletContext ctx = getServlet().getServletContext();
-        Object attribute = ctx.getAttribute( "export_in_progress" );
-        if ( attribute != null && attribute.toString().equals( "true" ) )
+        try
         {
-            forward = mapping.findForward( "export_in_progress" );
+            SharedRepositoryExportForm pageForm = (SharedRepositoryExportForm) form;
+
+            LogonBean logonBean = (LogonBean) request.getSession().getAttribute( WConstants.USER_KEY );
+            List<ApplicationForm> allApplication = logonBean.getApplicationsList();
+
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "sharedRepositoryExport" );
+            ArrayList<ApplicationExportDTO> allApplicationWithResult = selectApplicationWithResult( allApplication, ac );
+
+            Object[] param = new Object[] {};
+            List<JobDTO> jobs = (List<JobDTO>) ac.execute( "getLastJobs", param );
+            param = new Object[] { allApplicationWithResult, jobs };
+            // pageForm.reset( mapping, request );
+            // SharedRepositoryExportForm newForm = new SharedRepositoryExportForm();
+            pageForm.init();
+            WTransformerFactory.objToForm( ExportTransformer.class, pageForm, param );
+
+            if ( pageForm.getSuccessfulJob() != null )
+            {
+                File exportFile = retrieveExportFile();
+                if ( exportFile != null )
+                {
+                    pageForm.setExportFile( true );
+                }
+            }
+            // pageForm = newForm;
+            forward = mapping.findForward( "enter_export" );
         }
-        else
+        catch ( WTransformerException e )
         {
-            try
-            {
-                SharedRepositoryExportForm pageForm = (SharedRepositoryExportForm) form;
-
-                LogonBean logonBean = (LogonBean) request.getSession().getAttribute( WConstants.USER_KEY );
-                List<ApplicationForm> allAppliWithResult = logonBean.getApplicationsList();
-
-                Object[] param = { allAppliWithResult };
-                WTransformerFactory.objToForm( ExportTransformer.class, pageForm, param );
-                forward = mapping.findForward( "enter_export" );
-            }
-            catch ( WTransformerException e )
-            {
-                handleException( e, actionErrors, request );
-            }
-
-            // If there are error informations, we display them
-            if ( !actionErrors.isEmpty() )
-            {
-                // Messages backup
-                saveMessages( request, actionErrors );
-                // Redirect to the error page
-                forward = mapping.findForward( "total_failure" );
-            }
+            handleException( e, actionErrors, request );
         }
+        catch ( JrafEnterpriseException e )
+        {
+            handleException( e, actionErrors, request );
+        }
+
+        // If there are error informations, we display them
+        if ( !actionErrors.isEmpty() )
+        {
+            // Messages backup
+            saveMessages( request, actionErrors );
+            // Redirect to the error page
+            forward = mapping.findForward( "total_failure" );
+        }
+        // }
 
         return forward;
     }
 
     /**
-     * Action done when the user clic on the button export
+     * This method select the applications which have results among the application given in argument and then create a
+     * list of ApplicationExportDTO
+     * 
+     * @param allApplication The list of application
+     * @param ac The sharedRepositoryExport application component
+     * @return The list of application selected
+     * @throws JrafEnterpriseException exception occurs during the creation of the applicationExportDTO
+     */
+    private ArrayList<ApplicationExportDTO> selectApplicationWithResult( List<ApplicationForm> allApplication,
+                                                                         IApplicationComponent ac )
+        throws JrafEnterpriseException
+    {
+        ArrayList<ApplicationExportDTO> allApplicationWithResult = new ArrayList<ApplicationExportDTO>();
+        for ( ApplicationForm applicationForm : allApplication )
+        {
+            if ( applicationForm.getHasResults() )
+            {
+                Object[] param = new Object[] { applicationForm.getApplicationId() };
+                ApplicationExportDTO appDto = (ApplicationExportDTO) ac.execute( "getExportApplication", param );
+
+                if ( appDto == null )
+                {
+                    appDto = new ApplicationExportDTO();
+                    appDto.setApplicationId( Long.parseLong( applicationForm.getApplicationId() ) );
+                    appDto.setApplicationName( applicationForm.getApplicationName() );
+                }
+                allApplicationWithResult.add( appDto );
+            }
+        }
+        return allApplicationWithResult;
+    }
+
+    /**
+     * Action done when the user click on the button export
      * 
      * @param mapping The mapping
      * @param form The form
@@ -118,10 +169,27 @@ public class SharedRepositoryExportAction
     {
         ActionForward forward = mapping.findForward( "total_failure" );
         ActionErrors actionErrors = new ActionErrors();
-
+        ArrayList<ApplicationExportDTO> applicationToExport;
+        SharedRepositoryExportForm currentForm = (SharedRepositoryExportForm) form;
         try
         {
-            launchExport( form, false, request.getLocale() );
+            Object[] transform = WTransformerFactory.formToObj( ExportTransformer.class, currentForm );
+            applicationToExport = (ArrayList<ApplicationExportDTO>) transform[0];
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "sharedRepositoryExport" );
+            Object[] param = { applicationToExport };
+            ac.execute( "applicationToExport", param );
+            // If there is no application selected and one export scheduled, then we delete this scheduled export
+            if ( !currentForm.getOneToExport() && currentForm.getScheduledJob() )
+            {
+                param = new Object[] {};
+                ac.execute( "cancelJob", param );
+            }
+            // If there is no audit scheduled then we scheduled an export
+            else if ( !currentForm.getScheduledJob() )
+            {
+                param = new Object[] {};
+                ac.execute( "scheduledJob", param );
+            }
             forward = mapping.findForward( "export_ask" );
         }
         catch ( WTransformerException e )
@@ -146,7 +214,7 @@ public class SharedRepositoryExportAction
     }
 
     /**
-     * Action done when the user clic on the button export
+     * This method create the download of the export file
      * 
      * @param mapping The mapping
      * @param form The form
@@ -154,78 +222,93 @@ public class SharedRepositoryExportAction
      * @param response The http response
      * @return The next action to do
      */
-    public ActionForward exportAll( ActionMapping mapping, ActionForm form, HttpServletRequest request,
-                                    HttpServletResponse response )
+    public ActionForward downloadExportFile( ActionMapping mapping, ActionForm form, HttpServletRequest request,
+                                             HttpServletResponse response )
     {
-        ActionForward forward = mapping.findForward( "total_failure" );
+
         ActionErrors actionErrors = new ActionErrors();
+        SharedRepositoryExportForm pageForm = (SharedRepositoryExportForm) form;
+        if ( pageForm.getSuccessfulJob() != null )
+        {
+            File exportFile = retrieveExportFile();
+            // We should have only one export file
+            if ( exportFile != null )
+            {
+                String filename = exportFile.getName();
+                response.setContentType( "multipart/zip" );
+                response.setHeader( "Content-Disposition", "attachment; filename=\"" + filename + "\";" );
+                response.setContentLength( (int) exportFile.length() );
 
-        try
-        {
-            launchExport( form, true, request.getLocale() );
-            forward = mapping.findForward( "export_ask" );
-        }
-        catch ( WTransformerException e )
-        {
-            handleException( e, actionErrors, request );
-        }
-        catch ( JrafEnterpriseException e )
-        {
-            handleException( e, actionErrors, request );
+                try
+                {
+                    writeExport( response, exportFile );
+                }
+                catch ( JrafEnterpriseException e )
+                {
+                    handleException( e, actionErrors, request );
+                }
+            }
         }
 
-        // If there are error informations, we display them
-        if ( !actionErrors.isEmpty() )
-        {
-            // Messages backup
-            saveMessages( request, actionErrors );
-            // Redirect to the error page
-            forward = mapping.findForward( "total_failure" );
-        }
-
-        return forward;
+        return null;
     }
 
     /**
-     * This method launch the export. The boolean argument indicate if we export all applications (true) or only those
-     * selected (false)
+     * This method write the export file into the servlet response
      * 
-     * @param form The form
-     * @param all This boolean indicate if we export all the application
-     * @param local The current local
-     * @throws WTransformerException exception occurs during the transformation form to object
-     * @throws JrafEnterpriseException Exception occurs during the recover of the export configuration parameters
+     * @param response The servlet response
+     * @param exportFile The export file
+     * @throws JrafEnterpriseException Exception occurs during the writing
      */
-    private void launchExport( ActionForm form, boolean all, Locale local )
-        throws WTransformerException, JrafEnterpriseException
+    private void writeExport( HttpServletResponse response, File exportFile )
+        throws JrafEnterpriseException
     {
-        SharedRepositoryExportForm pageForm = (SharedRepositoryExportForm) form;
-
-        // List of selected applications
-        ArrayList<Long> listSelectedApplicationsId = new ArrayList<Long>();
-        // List of all applications
-        ArrayList<Long> listApplicationsId = new ArrayList<Long>();
-
-        Object[] param = { listSelectedApplicationsId, listApplicationsId };
-        WTransformerFactory.formToObj( ExportTransformer.class, pageForm, param );
-
-        // Recover mapping
-        IApplicationComponent ac = AccessDelegateHelper.getInstance( "SqualixConfig" );
-        Object[] param2 = new Object[] {};
-        List<AdminParamsDTO> mappingList = (List<AdminParamsDTO>) ac.execute( "getExportAdminParams", param2 );
-        ExportThread export = null;
-        if ( all )
+        OutputStream os = null;
+        InputStream is = null;
+        try
         {
-            export = new ExportThread( listApplicationsId, mappingList, getServlet(), local );
+            try
+            {
+                os = response.getOutputStream();
+                FileInputStream stream = new FileInputStream( exportFile );
+                BufferedInputStream bis = new BufferedInputStream( stream );
+                is = new BufferedInputStream( bis );
+                int count;
+                byte buf[] = new byte[4096];
+                while ( ( count = is.read( buf ) ) > -1 )
+                {
+                    os.write( buf, 0, count );
+                }
+            }
+            finally
+            {
+                is.close();
+                os.close();
+            }
         }
-        else
+        catch ( IOException e )
         {
-            export = new ExportThread( listSelectedApplicationsId, mappingList, getServlet(), local );
+            throw new JrafEnterpriseException( e );
         }
-        Thread exportThread = new Thread( export );
-        exportThread.start();
-        ServletContext ctx = getServlet().getServletContext();
-        ctx.setAttribute( "export_in_progress", "true" );
+    }
+
+    /**
+     * this method retrieve the export file
+     * 
+     * @return The export file
+     */
+    private File retrieveExportFile()
+    {
+        File exportFile = null;
+        String squaleHome = System.getenv( "SQUALE_HOME" );
+        File exportDir = new File( squaleHome + "/Squalix/export" );
+        File[] listFile = exportDir.listFiles();
+        // We should have only one export file
+        if ( listFile != null && listFile.length == 1 )
+        {
+            exportFile = listFile[0];
+        }
+        return exportFile;
     }
 
 }

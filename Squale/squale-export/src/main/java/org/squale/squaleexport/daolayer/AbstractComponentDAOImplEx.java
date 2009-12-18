@@ -75,7 +75,7 @@ public final class AbstractComponentDAOImplEx
      * <ul>
      * <li>have for parent : parentId</li>
      * <li>are involved in the audit : auditId</li>
-     * <li>are component of type : type (clas, method, ...)</li>
+     * <li>are components of type : type (clas, method, ...)</li>
      * </ul>
      * </p>
      * 

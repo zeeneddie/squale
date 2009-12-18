@@ -28,22 +28,23 @@ import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.MetricBO;
 
 /**
- *
+ * This class is an implementation of the abstract class {@link AbstractDAOImpl}. This class is a dao linked to the
+ * business object {@link MetricBO } specific to SqualeExport.
  */
 public final class MetricDAOImplEx
     extends AbstractDAOImpl
 {
 
     /**
-     * Instance singleton
+     * Singleton
      */
     private static MetricDAOImplEx instance;
 
-    /** log */
+    /** Log */
     private static Log LOG;
 
     /**
-     * Constructeur prive
+     * Private constructor
      */
     private MetricDAOImplEx()
     {
@@ -52,9 +53,9 @@ public final class MetricDAOImplEx
     }
 
     /**
-     * Retourne un singleton du DAO
+     * Return the single instance of the DAO
      * 
-     * @return singleton du DAO
+     * @return The singleton of the DAO
      */
     public static MetricDAOImplEx getInstance()
     {
@@ -66,53 +67,21 @@ public final class MetricDAOImplEx
     }
 
     /**
+     * <p>
+     * This method search in the db all the metric which :
+     * <ul>
+     * <li>are involved in the audit : auditId</li>
+     * <li>come from the task whose name is : taskName</li>
+     * <li>whose name is : metricName</li>
+     * </ul>
+     * </p>
      * 
-     * @param session
-     * @param compId
-     * @param auditId
-     * @param taskName
-     * @param metricName
-     * @return
-     * @throws JrafDaoException
-     */
-    public List<MetricBO> findMetric( ISession session, Long compId, Long auditId, String taskName, String metricName )
-        throws JrafDaoException
-    {
-
-        List<MetricBO> result = null;
-
-        StringBuffer whereClause = new StringBuffer( " where " );
-        whereClause.append( getAlias() );
-        whereClause.append( ".measure.component.id = " );
-        whereClause.append( compId );
-        whereClause.append( " and " );
-        whereClause.append( getAlias() );
-        whereClause.append( ".measure.audit.id = " );
-        whereClause.append( auditId );
-        whereClause.append( " and " );
-        whereClause.append( getAlias() );
-        whereClause.append( ".measure.taskName = '" );
-        whereClause.append( taskName );
-        whereClause.append( "' and " );
-        whereClause.append( getAlias() );
-        whereClause.append( ".name ='" );
-        whereClause.append( metricName );
-        whereClause.append( "'" );
-        LOG.debug( whereClause.toString() );
-        result = (List<MetricBO>) findWhere( session, whereClause.toString() );
-
-        return result;
-
-    }
-
-    /**
-     * 
-     * @param session
-     * @param auditId
-     * @param taskName
-     * @param metricName
-     * @return
-     * @throws JrafDaoException
+     * @param session The hibernate session
+     * @param auditId The audit id
+     * @param taskName The name of the task
+     * @param metricName The name of the metric
+     * @return The list of metric which correspond to the element given in argument
+     * @throws JrafDaoException Exception occurs during the search in the datbase
      */
     public List<MetricBO> findMetricByMetricName( ISession session, Long auditId, String taskName, String metricName )
         throws JrafDaoException

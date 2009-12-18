@@ -24,9 +24,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
-
 import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
-import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 
 /**
  * Composant
@@ -108,11 +106,6 @@ public class ComponentDTO
      * Tags concernant ce composant
      */
     private Collection<TagDTO> mTags;
-
-    /**
-     * Date of the last export. Null if not export was done. Only available for component of type application
-     */
-    private Date lastExportDate;
 
     /**
      * @return true si le composant est exclu du plan d'action
@@ -534,26 +527,6 @@ public class ComponentDTO
             }
         }
         return false;
-    }
-
-    /**
-     * Getter for the attribute lastExportDate
-     * 
-     * @return The last export date
-     */
-    public Date getLastExportDate()
-    {
-        return lastExportDate;
-    }
-
-    /**
-     * Setter for the attribute lastExportDate
-     * 
-     * @param pLastExportDate The new export date
-     */
-    public void setLastExportDate( Date pLastExportDate )
-    {
-        lastExportDate = pLastExportDate;
     }
 
 }

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.squale.squalecommon.enterpriselayer.businessobject.exportimport;
+package org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -28,7 +28,7 @@ import org.squale.squalecommon.enterpriselayer.businessobject.component.Applicat
  * 
  * @hibernate.class table="ApplicationLastExport"
  */
-public class ApplicationLastExportBO
+public class ApplicationExportBO
     implements Serializable
 {
     /**
@@ -39,7 +39,7 @@ public class ApplicationLastExportBO
     /**
      * Thecnical id
      */
-    private long id;
+    private long id=-1;
 
     /**
      * The application
@@ -50,12 +50,17 @@ public class ApplicationLastExportBO
      * The date of the last export for the application
      */
     private Date lastExportDate;
+    
+    /**
+     * Does the application should be export
+     */
+    private boolean toExport;
 
     /**
      * Getter for the thecnical id
      * 
      * @return the id of this ApplicationLastExport
-     * @hibernate.id generator-class="native" type="long" column="lastExportId" unsaved-value="-1" length="19"
+     * @hibernate.id generator-class="native" type="long" column="LastExportId" unsaved-value="-1" length="19"
      * @hibernate.generator-param name="sequence" value="lastExport_sequence"
      */
     public long getId()
@@ -100,7 +105,7 @@ public class ApplicationLastExportBO
      * Getter for the attribute date
      * 
      * @return The date of the last export for the application
-     * @hibernate.property name="date" column="auditDate" type="timestamp" update="true" insert="true"
+     * @hibernate.property name="date" column="LastExportDate" type="timestamp" update="true" insert="true"
      */
     public Date getLastExportDate()
     {
@@ -108,13 +113,34 @@ public class ApplicationLastExportBO
     }
 
     /**
-     * Setter for the attribute
+     * Setter for the attribute date
      * 
      * @param pLastExportDate The new date of the last export
      */
     public void setLastExportDate( Date pLastExportDate )
     {
         lastExportDate = pLastExportDate;
+    }
+    
+    /**
+     * Getter for the attribute toExport 
+     * 
+     * @return  true if this application should be export
+     * @hibernate.property name="export" column="ToExport" type="boolean" update="true" insert="true"
+     */
+    public boolean getToExport()
+    {
+        return toExport;
+    }
+
+    /**
+     * Setter for the attribute toExport
+     * 
+     * @param pToExport The new export status for the application 
+     */
+    public void setToExport( boolean pToExport )
+    {
+        toExport = pToExport;
     }
 
 }

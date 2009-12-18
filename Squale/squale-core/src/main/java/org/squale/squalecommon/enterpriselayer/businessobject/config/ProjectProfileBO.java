@@ -92,7 +92,7 @@ public class ProjectProfileBO
 
     /**
      * @hibernate.property name="language" column="language" type="string" unique="false" update="true"
-     *                     insert="true"
+     *                     insert="true" length="255"
      * @return le langage du profil du projet
      */
     public String getLanguage()

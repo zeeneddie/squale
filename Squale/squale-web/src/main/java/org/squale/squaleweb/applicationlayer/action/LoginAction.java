@@ -129,6 +129,7 @@ public class LoginAction
 
             // Set the Squale's administrator mailing list
             configAdminMailingList( pRequest.getSession() );
+            configSahredRepository(pRequest.getSession());
         }
         catch ( Exception e )
         {
@@ -193,6 +194,27 @@ public class LoginAction
         UserSqualeSessionContext sessionContext = UserSqualeSessionContext.getContext( session );
         sessionContext.setSqualeAdminsMailingList( mailingList );
         UserSqualeSessionContext.setContext( session, sessionContext );
+    }
+    
+    /**
+     * This method set in session a variable which indicate if the shared repository is configured
+     * 
+     * @param session The http session
+     * @throws JrafEnterpriseException Error happen during the search in the database
+     */
+    private void configSahredRepository( HttpSession session ) throws JrafEnterpriseException
+    {
+        
+        IApplicationComponent ac = AccessDelegateHelper.getInstance( "SqualixConfig" );
+        //We search in the db the adminParamsBo which define to the squalix server to perform the export
+        Object sharedRepositoryServerConfig = ac.execute( "getSharedRepositoryExportServer" );
+        //If we found it that means the the shared repository is configured
+        if (sharedRepositoryServerConfig != null)
+        {
+            UserSqualeSessionContext sessionContext = UserSqualeSessionContext.getContext( session );
+            sessionContext.setSharedRepositoryConfigured( "true" );
+            UserSqualeSessionContext.setContext( session, sessionContext );
+        }
     }
 
 }

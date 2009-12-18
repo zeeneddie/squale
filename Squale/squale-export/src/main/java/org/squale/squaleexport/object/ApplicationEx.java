@@ -90,7 +90,9 @@ public class ApplicationEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute name
+     * 
+     * @return The application name
      */
     public String getName()
     {
@@ -98,7 +100,9 @@ public class ApplicationEx
     }
 
     /**
-     * @param pName
+     * Setter method for the attribute name
+     * 
+     * @param pName The new name of the application
      */
     public void setName( String pName )
     {
@@ -106,7 +110,9 @@ public class ApplicationEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute segmentation
+     * 
+     * @return The list of segmentEx
      */
     public List<SegmentEx> getSegmentation()
     {
@@ -114,7 +120,9 @@ public class ApplicationEx
     }
 
     /**
-     * @param pSegmentation
+     * Setter method for the attribute segmentation
+     * 
+     * @param pSegmentation The new list of segmentEx
      */
     public void setSegmentation( List<SegmentEx> pSegmentation )
     {
@@ -122,7 +130,9 @@ public class ApplicationEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute datas
+     * 
+     * @return The list of dataEx
      */
     public List<DataEx> getDatas()
     {
@@ -130,7 +140,9 @@ public class ApplicationEx
     }
 
     /**
-     * @param pDatas
+     * Setter method for the attribute datas
+     * 
+     * @param pDatas The new list of dataEx
      */
     public void setDatas( List<DataEx> pDatas )
     {
@@ -138,7 +150,9 @@ public class ApplicationEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute modules
+     * 
+     * @return The list of moduleEx
      */
     public List<ModuleEx> getModules()
     {
@@ -146,7 +160,9 @@ public class ApplicationEx
     }
 
     /**
-     * @param pModules
+     * Setter method for the attribute modules
+     * 
+     * @param pModules The new list of moduleEx
      */
     public void setModules( List<ModuleEx> pModules )
     {

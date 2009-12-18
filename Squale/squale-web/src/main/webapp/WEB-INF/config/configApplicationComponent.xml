@@ -358,7 +358,7 @@
 		
 		<component name="getConfigurableTasks" />
 		
-		<component name="getExportAdminParams" />
+		<component name="getSharedRepositoryExportServer" />
 		
 	</applicationComponent>
 	
@@ -421,6 +421,20 @@
 		<component name="getHomepageConfig"></component>
 		
 		<component name="saveHomepageConfig"></component>
+		
+	</applicationComponent>
+	
+	<applicationComponent name="sharedRepositoryExport" description="Export for the shared repository" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.ApplicationExportComponentAccess">
+		
+		<component name="getExportApplication"></component>
+		
+		<component name="getLastJobs"></component>
+		
+		<component name="applicationToExport"></component>
+		
+		<component name="cancelJob"></component>
+		
+		<component name="scheduledJob"></component>
 		
 	</applicationComponent>
 	

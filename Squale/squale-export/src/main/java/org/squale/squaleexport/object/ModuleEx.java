@@ -25,39 +25,38 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
- * 
- *
+ * Module class used for the export
  */
 @XStreamAlias( "module" )
 public class ModuleEx
 {
 
     /**
-     * 
+     * The name of the module
      */
     @XStreamAsAttribute
     private String name;
 
     /**
-     * 
+     * The list of segment of the module
      */
     @XStreamImplicit
     private List<SegmentEx> segmentation;
 
     /**
-     * 
+     * The list of data of the module
      */
     @XStreamImplicit
     private List<DataEx> datas;
 
     /**
-     * 
+     * The list of components of the module
      */
     @XStreamImplicit
     private List<ComponentEx> components;
 
     /**
-     * 
+     * Default constructor
      */
     public ModuleEx()
     {
@@ -65,10 +64,12 @@ public class ModuleEx
     }
 
     /**
-     * @param pName
-     * @param pSegmentation
-     * @param pDatas
-     * @param pComponents
+     * Full constructor
+     * 
+     * @param pName The name of the module
+     * @param pSegmentation The list of segment linked to module
+     * @param pDatas The list of data linked to the module
+     * @param pComponents The list of component linked to the module
      */
     public ModuleEx( String pName, List<SegmentEx> pSegmentation, List<DataEx> pDatas, List<ComponentEx> pComponents )
     {
@@ -79,7 +80,9 @@ public class ModuleEx
     }
 
     /**
-     * @param compo
+     * This method add a component {@link ComponentEx} to the module
+     * 
+     * @param compo The component to add
      */
     public void addComponent( ComponentEx compo )
     {
@@ -87,7 +90,9 @@ public class ModuleEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute name
+     * 
+     * @return The name of the module
      */
     public String getName()
     {
@@ -95,7 +100,9 @@ public class ModuleEx
     }
 
     /**
-     * @param pName
+     * Setter method for the attribute name
+     * 
+     * @param pName The new name of the module
      */
     public void setName( String pName )
     {
@@ -103,7 +110,9 @@ public class ModuleEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute segmentation
+     * 
+     * @return The list of segment linked to the module
      */
     public List<SegmentEx> getSegmentation()
     {
@@ -111,7 +120,9 @@ public class ModuleEx
     }
 
     /**
-     * @param pSegmentation
+     * Setter method for the attribute segmentation
+     * 
+     * @param pSegmentation The new list of segment linked to the module
      */
     public void setSegmentation( List<SegmentEx> pSegmentation )
     {
@@ -119,7 +130,9 @@ public class ModuleEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute datas
+     * 
+     * @return The list of data linked to the module
      */
     public List<DataEx> getDatas()
     {
@@ -127,7 +140,9 @@ public class ModuleEx
     }
 
     /**
-     * @param pDatas
+     * Setter method for the attribute datas
+     * 
+     * @param pDatas The new list of data linked to the module
      */
     public void setDatas( List<DataEx> pDatas )
     {
@@ -135,7 +150,9 @@ public class ModuleEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute components
+     * 
+     * @return The list of component linked to the module
      */
     public List<ComponentEx> getComponents()
     {
@@ -143,7 +160,9 @@ public class ModuleEx
     }
 
     /**
-     * @param pComponents
+     * Setter method for the attribute components
+     * 
+     * @param pComponents The new list of component linked to the module
      */
     public void setComponents( List<ComponentEx> pComponents )
     {

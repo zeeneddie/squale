@@ -34,6 +34,8 @@ public class SharedRepositoryExportApplicationForm
      */
     private static final long serialVersionUID = 3686628389255608416L;
 
+    private long applicationLastExportId;
+
     /**
      * Id of the application.
      */
@@ -56,19 +58,49 @@ public class SharedRepositoryExportApplicationForm
     {
         super();
     }
+    
+    public void init()
+    {
+        
+    }
 
     /**
      * Full constructor
      * 
+     * @param pApplicationLastExportId The applicationLastExport id
      * @param pApplicationId The id of the application
      * @param pApplicationName The name of the application
      * @param pLastExportDate The last export date of the application
+     * @param selected Does the application is selected ?
      */
-    public SharedRepositoryExportApplicationForm( long pApplicationId, String pApplicationName, Date pLastExportDate )
+    public SharedRepositoryExportApplicationForm( long pApplicationLastExportId ,long pApplicationId, String pApplicationName, Date pLastExportDate,
+                                                  boolean selected )
     {
+        applicationLastExportId = pApplicationLastExportId;
         applicationId = pApplicationId;
         applicationName = pApplicationName;
         lastExportDate = pLastExportDate;
+        setSelected( selected );
+    }
+
+    /**
+     * Getter method for the attribute applicationLastExportId
+     * 
+     * @return The id of the applicationLastExport
+     */
+    public long getApplicationLastExportId()
+    {
+        return applicationLastExportId;
+    }
+
+    /**
+     * Setter method for the attribute applicationLastExportId
+     * 
+     * @param pApplicationLastExportId The new Id of the applicationLastExport
+     */
+    public void setApplicationLastExportId( long pApplicationLastExportId )
+    {
+        applicationLastExportId = pApplicationLastExportId;
     }
 
     /**

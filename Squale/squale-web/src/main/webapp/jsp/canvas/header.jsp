@@ -178,12 +178,15 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 				action="stats.do?action=displayAdmin" accessKey="admin" />
 		</af:menuItem>
 		--%>
+		
+		<logic:equal name="userSqualeSessionContext" property="sharedRepositoryConfigured" scope="session" value="true">
 		<af:menuItem key="menu.administration.shared_repository" color="2">
 			<af:menuItem key="menu.administration.shared_repository.export" color="2"
 			action="sharedRepositoryExport.do?action=detail" accessKey="admin" />
 			<af:menuItem key="menu.administration.shared_repository.import" color="2"
 			action="sharedRepositoryImport.do?action=detail" accessKey="admin" />
 		</af:menuItem>
+		</logic:equal>
 		<af:menuItem key="menu.administration.messages" color="2"
 			action="utilLink.do?action=message" accessKey="admin" />
 	</af:menuItem>

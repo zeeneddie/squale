@@ -45,8 +45,8 @@
 		<mapping resource="mapping/config/TaskRefBO.hbm.xml" />
 		<mapping resource="mapping/config/web/AbstractDisplayConfBO.hbm.xml" />
 		<mapping resource="mapping/config/web/HomepageComponentBO.hbm.xml"/>
-		
-		<mapping resource="mapping/exportimport/ApplicationLastExportBO.hbm.xml"/>
+
+		<mapping resource="mapping/job/JobBO.hbm.xml" />
 		
 		<mapping resource="mapping/message/MessageBO.hbm.xml" />
 		<mapping resource="mapping/message/NewsBO.hbm.xml" />
@@ -71,6 +71,8 @@
 		<mapping resource="mapping/rulechecking/RuleBO.hbm.xml" />		
 		<mapping resource="mapping/rulechecking/RuleSetBO.hbm.xml" />		
 		<mapping resource="mapping/rulechecking/checkstyle/CheckstyleModuleBO.hbm.xml" />
+
+		<mapping resource="mapping/sharedrepository/ApplicationExportBO.hbm.xml"/>
 		
 		<mapping resource="mapping/stats/SiteStatsDICTBO.hbm.xml" />
 		<mapping resource="mapping/stats/SiteAndProfilStatsDICTBO.hbm.xml" />

@@ -78,7 +78,6 @@ public class ApplicationTransformer
         {
             form.setTags( new ArrayList<TagDTO>() );
         }
-        form.setLastExportDate( dto.getLastExportDate() );
     }
 
     /**

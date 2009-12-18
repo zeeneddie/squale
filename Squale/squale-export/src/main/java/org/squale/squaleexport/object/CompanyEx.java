@@ -32,7 +32,7 @@ public class CompanyEx
 {
 
     /**
-     * The id name of the company
+     * The id / name of the company
      */
     @XStreamAsAttribute
     private String name;
@@ -50,13 +50,13 @@ public class CompanyEx
     private List<DataEx> datas;
 
     /**
-     * 
+     * The list of applications of the company
      */
     @XStreamImplicit
     private List<ApplicationEx> applications;
 
     /**
-     * 
+     * Default constructor
      */
     public CompanyEx()
     {
@@ -64,10 +64,12 @@ public class CompanyEx
     }
 
     /**
-     * @param name
-     * @param segmentation
-     * @param datas
-     * @param applications
+     * Full constructor
+     * 
+     * @param pName The id / name of the company
+     * @param pSegmentation The list of segment linked to the company
+     * @param pDatas The list of data linked to the company
+     * @param pApplications The list of application linked to the company
      */
     public CompanyEx( String pName, List<SegmentEx> pSegmentation, List<DataEx> pDatas,
                       List<ApplicationEx> pApplications )
@@ -80,15 +82,19 @@ public class CompanyEx
     }
 
     /**
-     * @param app
+     * Add a new application {@link ApplicationEx} to the company
+     * 
+     * @param application The application to add
      */
-    public void addApplication( ApplicationEx app )
+    public void addApplication( ApplicationEx application )
     {
-        applications.add( app );
+        applications.add( application );
     }
 
     /**
-     * @return
+     * Getter method for the attribute name
+     * 
+     * @return The name / id of the company
      */
     public String getName()
     {
@@ -96,7 +102,9 @@ public class CompanyEx
     }
 
     /**
-     * @param pName
+     * Setter method for the attribute name
+     * 
+     * @param pName The name / id of the company
      */
     public void setName( String pName )
     {
@@ -104,7 +112,9 @@ public class CompanyEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute segmentation
+     * 
+     * @return The list of segment linked to the company
      */
     public List<SegmentEx> getSegmentation()
     {
@@ -112,7 +122,9 @@ public class CompanyEx
     }
 
     /**
-     * @param pSegmentation
+     * Setter method for the attribute segmentation
+     * 
+     * @param pSegmentation The new list of segment linked to the company
      */
     public void setSegmentation( List<SegmentEx> pSegmentation )
     {
@@ -120,7 +132,9 @@ public class CompanyEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute datas
+     * 
+     * @return The list of data linked to the company
      */
     public List<DataEx> getDatas()
     {
@@ -128,7 +142,9 @@ public class CompanyEx
     }
 
     /**
-     * @param pDatas
+     * Setter method for the attribute datas
+     * 
+     * @param pDatas The new list of data linked to the company
      */
     public void setDatas( List<DataEx> pDatas )
     {
@@ -136,7 +152,9 @@ public class CompanyEx
     }
 
     /**
-     * @return
+     * Getter method for the attribute applications
+     * 
+     * @return The list of application linked to the company
      */
     public List<ApplicationEx> getApplications()
     {
@@ -144,7 +162,9 @@ public class CompanyEx
     }
 
     /**
-     * @param pApplications
+     * Setter method for the attribute applications
+     * 
+     * @param pApplications The new list of application linked to the company
      */
     public void setApplications( List<ApplicationEx> pApplications )
     {

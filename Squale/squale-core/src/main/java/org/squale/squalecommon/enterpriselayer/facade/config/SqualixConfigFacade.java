@@ -286,14 +286,14 @@ public class SqualixConfigFacade
      * @return The collection of all adminParmas record in the database
      * @throws JrafEnterpriseException Exception happened during the search
      */
-    private static Collection<AdminParamsDTO> getAdminParams( ISession session )
+    private static List<AdminParamsDTO> getAdminParams( ISession session )
         throws JrafEnterpriseException
     {
-        Collection<AdminParamsDTO> adminParamsDtoList = null;
+        List<AdminParamsDTO> adminParamsDtoList = null;
         try
         {
             AdminParamsDAOImpl dao = AdminParamsDAOImpl.getInstance();
-            Collection<AdminParamsBO> adminParamsCollection = dao.findAll( session );
+            List<AdminParamsBO> adminParamsCollection = dao.findAll( session );
             adminParamsDtoList = AdminParamsTransform.bo2dto( adminParamsCollection );
         }
         catch ( JrafDaoException e )
@@ -315,18 +315,52 @@ public class SqualixConfigFacade
      * @return The collection of all adminParmas record in the database
      * @throws JrafEnterpriseException Exception happened during the search
      */
-    public static Collection<AdminParamsDTO> getAdminParamsStartWith( String beginKey )
+    public static List<AdminParamsDTO> getAdminParamsStartWith( String beginKey )
         throws JrafEnterpriseException
     {
 
-        Collection<AdminParamsDTO> adminParamsDtoList = null;
+        List<AdminParamsDTO> adminParamsDtoList = null;
         ISession session = null;
         try
         {
             session = PERSISTENTPROVIDER.getSession();
             AdminParamsDAOImpl dao = AdminParamsDAOImpl.getInstance();
-            Collection<AdminParamsBO> adminParamsBoList = dao.findByKeyLike( session, beginKey );
+            List<AdminParamsBO> adminParamsBoList = dao.findByKeyLike( session, beginKey );
             adminParamsDtoList = AdminParamsTransform.bo2dto( adminParamsBoList );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, "getAdminParamstartsWith" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, "getAdminParamstartsWith" );
+        }
+        return adminParamsDtoList;
+    }
+
+    /**
+     * This method recover the list of adminparmasDto which have for key the key given in argument
+     * 
+     * @param key The key to found
+     * @return The list of adminparams found
+     * @throws JrafEnterpriseException exception occurs during the serach of the key
+     */
+    public static List<AdminParamsDTO> getAdminParamsByKey( String key )
+        throws JrafEnterpriseException
+    {
+
+        List<AdminParamsDTO> adminParamsDtoList = null;
+        ISession session = null;
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            AdminParamsDAOImpl dao = AdminParamsDAOImpl.getInstance();
+            List<AdminParamsBO> adminParamsBoList = dao.findByKey( session, key );
+            if(adminParamsBoList.size()>0)
+            {
+                adminParamsDtoList = AdminParamsTransform.bo2dto( adminParamsBoList );
+            }
         }
         catch ( JrafDaoException e )
         {

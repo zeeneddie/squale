@@ -14,4 +14,5 @@ alter table TASK modify STANDARD default 0 ;
 alter table TASK modify MANDATORY default 0 ;
 alter table TASKS_USER modify EXPORT_IDE default 1 ;
 alter table USERBO modify UNSUBSCRIBED default 0 ;
+alter table ApplicationLastExport modify ToExport default 0 ;
 commit;

@@ -18,10 +18,7 @@
  */
 package org.squale.squaleexport.core;
 
-import java.util.Locale;
-
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
-import org.squale.squalecommon.util.mail.IMailerProvider;
 
 /**
  * Factory for create the exporter implementation. Implementation which implements the {@link IExport} interface
@@ -41,13 +38,11 @@ public final class ExporterFactory
      * This method instanciate the exporter implementation and return this instance
      * 
      * @param persistenceProvider The persistence provider
-     * @param mailer The mail provider
-     * @param local The current local
      * @return An instance of the exporter implementation
      */
-    public static IExporter createExporter( IPersistenceProvider persistenceProvider,IMailerProvider mailer, Locale local )
+    public static IExporter createExporter( IPersistenceProvider persistenceProvider)
     {
-        IExporter exporter = new ExporterImpl( persistenceProvider,mailer,local );
+        IExporter exporter = new ExporterImpl( persistenceProvider );
         return exporter;
     }
 

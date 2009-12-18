@@ -100,10 +100,6 @@ public class ComponentTransform
         ComponentDTO componentDTO = setCommonComplexAttributes( pApplication );
         componentDTO.setLastUpdate( pApplication.getLastUpdate() );
         componentDTO.setLastUser( pApplication.getLastUser() );
-        if (pApplication.getLastExport() != null)
-        {
-            componentDTO.setLastExportDate( pApplication.getLastExport().getLastExportDate() );
-        }
         return componentDTO;
     }
 

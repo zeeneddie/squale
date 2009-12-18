@@ -19,10 +19,6 @@
 //Source file: D:\\cc_views\\squale_v0_0_act\\squale\\src\\squalix\\src\\org\\squale\\squalix\\core\\Squalix.java
 package org.squale.squalix.core;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Option;
@@ -32,10 +28,9 @@ import org.apache.commons.cli.PosixParser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.impl.StdSchedulerFactory;
-
 import org.squale.jraf.bootstrap.initializer.Initializer;
-import org.squale.squalix.messages.Messages;
 import org.squale.squalix.core.quartz.QuartzSqualixScheduler;
+import org.squale.squalix.messages.Messages;
 
 /**
  * Lance l'application Squalix. <br /> Ceci consiste en quelques opérations simples :

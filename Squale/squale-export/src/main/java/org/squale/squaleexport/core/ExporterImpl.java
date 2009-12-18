@@ -30,13 +30,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.commons.logging.Log;
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.commons.exception.JrafPersistenceException;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
@@ -51,12 +52,12 @@ import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProf
 import org.squale.squalecommon.enterpriselayer.businessobject.result.MetricBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO;
-import org.squale.squalecommon.util.mail.IMailerProvider;
 import org.squale.squaleexport.daolayer.AbstractComponentDAOImplEx;
 import org.squale.squaleexport.daolayer.ApplicationDAOImplEx;
-import org.squale.squaleexport.daolayer.AuditDAOImplEx;
 import org.squale.squaleexport.daolayer.MetricDAOImplEx;
 import org.squale.squaleexport.daolayer.QualityResultDAOImplEx;
+import org.squale.squaleexport.exception.ExportException;
+import org.squale.squaleexport.message.ExportMessages;
 import org.squale.squaleexport.object.ApplicationEx;
 import org.squale.squaleexport.object.CompanyEx;
 import org.squale.squaleexport.object.ComponentEx;
@@ -77,10 +78,10 @@ import com.thoughtworks.xstream.XStream;
  * entry point to do the export. This implementation use xstream to do the export.
  * </p>
  * <p>
- * For each application to export this class should :
+ * For each application to export, this class should :
  * <ul>
  * <li>Recover from the db the element (components and data) to export</li>
- * <li>Create all the objects needed to xstream to do the export</li>
+ * <li>Create all the objects necessary for xstream to do the export</li>
  * <li>Call xstream to create the xml export file</li>
  * </ul>
  * </p>
@@ -91,11 +92,12 @@ import com.thoughtworks.xstream.XStream;
 class ExporterImpl
     implements IExporter
 {
-    /** Status of the export */
-    private boolean exportSuccessful;
 
     /** Buffer size (needed to create the zip) */
     static final int BUFFER = 2048;
+
+    /** Log */
+    private static Log LOG;
 
     /** Persistence provider */
     private IPersistenceProvider persistenceProvider;
@@ -103,20 +105,14 @@ class ExporterImpl
     /** Hibernate session */
     private ISession session;
 
-    /** Mail provider */
-    private IMailerProvider mailer;
+    /** workspace path */
+    private String workspaceDirectoryPath;
 
-    /** The current local */
-    private Locale local;
+    /** Temporary diretory */
+    private String tempDirectoryPath;
 
     /** Id of the company */
     private String companyId;
-
-    /** output path */
-    private String outputDirectoryPath;
-
-    /** Id of the last successful audit for the current application to export */
-    private Long lastSuccessfulAuditId;
 
     /**
      * This map contains one map for each level of component ( project / class / method / ... ). Each "level" map
@@ -144,76 +140,73 @@ class ExporterImpl
      * Constructor
      * 
      * @param pPersistenceprovider Persistence provider
-     * @param pMailer Mail provider
-     * @param pLocal The current local
      */
-    public ExporterImpl( IPersistenceProvider pPersistenceprovider, IMailerProvider pMailer, Locale pLocal )
+    protected ExporterImpl( IPersistenceProvider pPersistenceprovider )
     {
-
         persistenceProvider = pPersistenceprovider;
-        mailer = pMailer;
-        local = pLocal;
     }
 
     /**
      * {@inheritDoc}
      */
-    public void exportData( List<Long> listApplicationId, List<AdminParamsDTO> mappingList )
+    public boolean exportData( HashMap<Long, Long> mapAppAuditToExport, List<AdminParamsDTO> mappingList )
     {
-        exportSuccessful = false;
-
-        // First we initiate the action.
-        exportSuccessful = init( mappingList );
-
-        if ( listApplicationId.size() > 0 )
+        boolean exportSucessful = false;
+        try
         {
+            // First we initiate the action.
+            init( mappingList );
+            Iterator<Long> applicationIterator = mapAppAuditToExport.keySet().iterator();
 
-            // For each application to export we create an export file
-            for ( Long applicationId : listApplicationId )
+            if ( applicationIterator.hasNext() )
             {
-                try
+                // For each application to export we create an export file
+                while ( applicationIterator.hasNext() )
                 {
-                    session = persistenceProvider.getSession();
-                    // First we create the companyEx object
-                    CompanyEx company = createCompany();
-                    // We create the applicationEx component
-                    ApplicationEx application = createBasicApplication( applicationId );
-
-                    // Fill the basic application
-                    fillApplication( applicationId, application );
-
-                    // We add the application to the companyEx object
-                    company.addApplication( application );
-                    // We create the export file
-                    createFile( applicationId, company );
-                }
-                catch ( JrafPersistenceException e )
-                {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                finally
-                {
-                    if (session!=null)
+                    Long applicationId = applicationIterator.next();
+                    try
                     {
                         try
                         {
-                            session.closeSession();
+                            session = persistenceProvider.getSession();
+                            // First we create the companyEx object
+                            CompanyEx company = createCompany();
+                            // We create the applicationEx component
+                            ApplicationEx application = createBasicApplication( applicationId );
+
+                            // Fill the basic application
+                            fillApplication( applicationId, mapAppAuditToExport.get( applicationId ), application );
+
+                            // We add the application to the companyEx object
+                            company.addApplication( application );
+                            // We create the export file
+                            createFile( applicationId, company );
                         }
-                        catch ( JrafPersistenceException e )
+                        finally
                         {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
+                            if ( session != null )
+                            {
+                                session.closeSession();
+                            }
                         }
                     }
+                    catch ( JrafPersistenceException e )
+                    {
+                        throw new ExportException( e );
+                    }
+
                 }
-                
+                // We put all the export file in a zip and we delete the old zip file
+                zipExportFiles();
+                exportSucessful=true;
             }
-            // We put all the export file in a zip
-            zipExportFile();
-            // We delete all the export file created (except the zip obviously)
-            cleanExportFile();
         }
+        catch ( ExportException e )
+        {
+            exportSucessful=false;
+            LOG.error( ExportMessages.getString( "export.failed" ), e );
+        }
+        return exportSucessful;
     }
 
     /**
@@ -221,178 +214,196 @@ class ExporterImpl
      * them to the ApplicationEx
      * 
      * @param applicationId Id of the application to export
+     * @param auditId Id of the audit to export
      * @param application The {@link ApplicationEx} object to fill
+     * @throws ExportException Exception occurs during
      */
-    private void fillApplication( Long applicationId, ApplicationEx application )
+    private void fillApplication( Long applicationId, Long auditId, ApplicationEx application )
+        throws ExportException
     {
-        AuditDAOImplEx auditDao = AuditDAOImplEx.getInstance();
         try
         {
-            /*
-             * We recover the last successful audit for the application. It's the results of this audit that we will
-             * export. We don't care if the audit is a milestone or follow-up audit.
-             */
-            lastSuccessfulAuditId =
-                Long.valueOf( ( auditDao.lastSuccesfullAudit( session, applicationId.longValue() ) ) );
+            AbstractComponentDAOImplEx compoDao = AbstractComponentDAOImplEx.getInstance();
+            // We recover all the module involved in the audit
+            List<AbstractComponentBO> childrenModuleInvolvedInAudit =
+                compoDao.searchModuleByAudit( session, auditId, applicationId );
 
-            // If there is one successful audit
-            if ( lastSuccessfulAuditId > -1 )
+            if ( childrenModuleInvolvedInAudit != null && !childrenModuleInvolvedInAudit.isEmpty() )
             {
-                // We recover all the module implied in the audit
-                AbstractComponentDAOImplEx compoDao = AbstractComponentDAOImplEx.getInstance();
-                List<AbstractComponentBO> childrenModuleInvolvedInAudit =
-                    compoDao.searchModuleByAudit( session, lastSuccessfulAuditId, applicationId );
 
-                if ( childrenModuleInvolvedInAudit != null && !childrenModuleInvolvedInAudit.isEmpty() )
+                // We recover and sort all the results for the current audit
+                recoverAllAuditResults( auditId );
+
+                // We recover all the components involved in the current audit
+                allComponentsInvolvedInAudit( auditId );
+
+                for ( AbstractComponentBO component : childrenModuleInvolvedInAudit )
                 {
 
-                    // We recover and sort all the results for the current audit
-                    recoverAllAuditResults();
+                    ProjectBO module = (ProjectBO) component;
+                    ProjectProfileBO profile = module.getProfile();
+                    String language = profile.getLanguage();
 
-                    // We recover all the components involved in the current audit
-                    allComponentsInvolvedInAudit();
-
-                    for ( AbstractComponentBO component : childrenModuleInvolvedInAudit )
+                    // We create the moduleEx only if the module is a java module
+                    if ( language.equals( Language.JAVA.toString().toLowerCase() ) )
                     {
-
-                        ProjectBO module = (ProjectBO) component;
-                        ProjectProfileBO profile = module.getProfile();
-                        String language = profile.getLanguage();
-
-                        // We create the moduleEx only if the module is a java module
-                        if ( language.equals( Language.JAVA.toString().toLowerCase() ) )
+                        ModuleEx modEx = createModule( component.getId(), auditId );
+                        List<AbstractComponentBO> childCompo =
+                            compoDao.searchChildrenByAuditAndParent( session, auditId, Long.valueOf( component.getId() ) );
+                        for ( AbstractComponentBO abstractComponentBO : childCompo )
                         {
-
-                            ModuleEx modEx = createModule( component.getId() );
-                            List<AbstractComponentBO> childCompo =
-                                compoDao.searchChildrenByAuditAndParent( session, lastSuccessfulAuditId,
-                                                                         Long.valueOf( component.getId() ) );
-                            for ( AbstractComponentBO abstractComponentBO : childCompo )
-                            {
-                                ComponentEx compo = createComponent( abstractComponentBO, compoDao );
-                                modEx.addComponent( compo );
-                            }
-                            application.addModule( modEx );
+                            ComponentEx compo = createComponent( abstractComponentBO, compoDao );
+                            modEx.addComponent( compo );
                         }
+                        application.addModule( modEx );
                     }
                 }
             }
         }
         catch ( JrafDaoException e )
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new ExportException( e );
         }
 
     }
 
     /**
-     * This method recover
+     * This method recover all the components involved in the audit.
      * 
-     * @throws JrafDaoException
+     * @param auditId The audit id
+     * @throws ExportException Errors occurs during the search of the components involved in the audit
      */
-    private void allComponentsInvolvedInAudit()
-        throws JrafDaoException
+    private void allComponentsInvolvedInAudit( Long auditId )
+        throws ExportException
+
     {
-        allComponentIdInvolvedInAudit = new ArrayList<Long>();
-        AbstractComponentDAOImplEx compoDao = AbstractComponentDAOImplEx.getInstance();
-        List<AbstractComponentBO> allCompo = compoDao.allComponentInvolvedInAudit( session, lastSuccessfulAuditId );
-        for ( AbstractComponentBO compo : allCompo )
-        {
-            allComponentIdInvolvedInAudit.add( compo.getId() );
-        }
-
-    }
-
-    /**
-     * @throws JrafDaoException
-     */
-    private void recoverAllAuditResults()
-        throws JrafDaoException
-    {
-        resultsByMetric = new HashMap<JavaMetric, Map<Long, Object>>();
-        MetricDAOImplEx metricDao = MetricDAOImplEx.getInstance();
-        Map<Long, Object> valueMap = null;
-        // Recovery of the levels
-        Set<JavaComponentType> levels = metricMapping.keySet();
-
-        // For each level (project, class, method, ...)
-        for ( JavaComponentType level : levels )
-        {
-
-            // For each metric we want to recover for the level
-            Map<JavaMetric, String> metricMapping4level = metricMapping.get( level );
-            for ( JavaMetric metric : metricMapping4level.keySet() )
-            {
-                valueMap = new HashMap<Long, Object>();
-                String[] split = metricMapping4level.get( metric ).split( "\\." );
-                // We recover the results
-                List<MetricBO> resultList =
-                    metricDao.findMetricByMetricName( session, lastSuccessfulAuditId, split[0], split[1] );
-                for ( MetricBO metricRes : resultList )
-                {
-                    valueMap.put( metricRes.getMeasure().getComponent().getId(), metricRes.getValue() );
-                }
-                // 
-                resultsByMetric.put( metric, valueMap );
-            }
-        }
-    }
-
-    /**
-     * @return
-     */
-    private boolean init( List<AdminParamsDTO> mappingListFromSquale )
-    {
-        boolean isInitOk = false;
-        HashMap<String, String> mappingMapFromSquale = new HashMap<String, String>();
-        for ( AdminParamsDTO adminParams : mappingListFromSquale )
-        {
-            mappingMapFromSquale.put( adminParams.getParamKey(), adminParams.getParamValue() );
-        }
-
         try
         {
-            String tempDirPath = System.getProperty( "java.io.tmpdir" );
-            File tempExportDir = new File( tempDirPath + File.separator + "expor_tmp" );
-            outputDirectoryPath = tempExportDir.getCanonicalPath();
-            tempExportDir.mkdir();
+            allComponentIdInvolvedInAudit = new ArrayList<Long>();
+            AbstractComponentDAOImplEx compoDao = AbstractComponentDAOImplEx.getInstance();
+            List<AbstractComponentBO> allCompo = compoDao.allComponentInvolvedInAudit( session, auditId );
+            for ( AbstractComponentBO compo : allCompo )
+            {
+                allComponentIdInvolvedInAudit.add( compo.getId() );
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            throw new ExportException( e );
+        }
+
+    }
+
+    /**
+     * This method recover all the audit result link to audit given in argument
+     * 
+     * @param auditId The audit id
+     * @throws ExportException Exception occurs during the search of the audit results
+     */
+    private void recoverAllAuditResults( Long auditId )
+        throws ExportException
+
+    {
+        try
+        {
+            resultsByMetric = new HashMap<JavaMetric, Map<Long, Object>>();
+            MetricDAOImplEx metricDao = MetricDAOImplEx.getInstance();
+            Map<Long, Object> valueMap = null;
+            // Recovery of the levels
+            Set<JavaComponentType> levels = metricMapping.keySet();
+
+            // For each level (project, class, method, ...)
+            for ( JavaComponentType level : levels )
+            {
+
+                // For each metric we want to recover for the level
+                Map<JavaMetric, String> metricMapping4level = metricMapping.get( level );
+                for ( JavaMetric metric : metricMapping4level.keySet() )
+                {
+                    valueMap = new HashMap<Long, Object>();
+                    String[] split = metricMapping4level.get( metric ).split( "\\." );
+                    // We recover the results
+                    List<MetricBO> resultList = metricDao.findMetricByMetricName( session, auditId, split[0], split[1] );
+                    for ( MetricBO metricRes : resultList )
+                    {
+                        valueMap.put( metricRes.getMeasure().getComponent().getId(), metricRes.getValue() );
+                    }
+                    // 
+                    resultsByMetric.put( metric, valueMap );
+                }
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            throw new ExportException( e );
+        }
+    }
+
+    /**
+     * This method initialize the export It creates (if not already exists) the export workspace and use the
+     * configuration from Squalix to iniate the export
+     * 
+     * @param mappingListFromSquale The configuration from Squalix
+     * @throws ExportException Exception occurs during the initialization of the export
+     */
+    private void init( List<AdminParamsDTO> mappingListFromSquale )
+        throws ExportException
+    {
+        try
+        {
+            // Creation of the export workspace directory
+            String squaleHome = System.getenv( "SQUALE_HOME" );
+            String dirPath = squaleHome + "/Squalix/export";
+            File exportDir = new File( dirPath );
+            workspaceDirectoryPath = exportDir.getCanonicalPath();
+            exportDir.mkdir();
+            dirPath = workspaceDirectoryPath + "/tmp";
+            File tempDir = new File( dirPath );
+            tempDirectoryPath = tempDir.getCanonicalPath();
+            tempDir.mkdir();
+
+            // Create a Map from the list of adminParamsDTO (given by Squalix)
+            HashMap<String, String> mappingMapFromSquale = new HashMap<String, String>();
+            for ( AdminParamsDTO adminParams : mappingListFromSquale )
+            {
+                mappingMapFromSquale.put( adminParams.getParamKey(), adminParams.getParamValue() );
+            }
+
+            // The company Id
+            companyId = mappingMapFromSquale.get( AdminParamsBO.ENTITY_ID );
+
+            metricMapping = new HashMap<JavaComponentType, Map<JavaMetric, String>>();
+
+            // Level project
+            Map<JavaMetric, String> mapping = new HashMap<JavaMetric, String>();
+            mapping.put( JavaMetric.LOC, mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_PROJECT_LOC ) );
+            mapping.put( JavaMetric.NUMBER_OF_CLASSES,
+                         mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_PROJECT_NB_CLASSES ) );
+            metricMapping.put( JavaComponentType.PROJECT, mapping );
+
+            // Level class
+            mapping = new HashMap<JavaMetric, String>();
+            mapping.put( JavaMetric.LOC, mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_CLASS_LOC ) );
+            mapping.put( JavaMetric.NUMBER_OF_METHODS,
+                         mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_CLASS_NB_METHODS ) );
+            metricMapping.put( JavaComponentType.CLASS, mapping );
+
+            // Level method
+            mapping = new HashMap<JavaMetric, String>();
+            mapping.put( JavaMetric.LOC, mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_METHOD_LOC ) );
+            mapping.put( JavaMetric.VG, mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_METHOD_VG ) );
+            metricMapping.put( JavaComponentType.METHOD, mapping );
         }
         catch ( IOException e )
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new ExportException( e );
         }
-
-        companyId = mappingMapFromSquale.get( AdminParamsBO.ENTITY_ID );
-
-        metricMapping = new HashMap<JavaComponentType, Map<JavaMetric, String>>();
-
-        // Level project
-        Map<JavaMetric, String> mapping = new HashMap<JavaMetric, String>();
-        mapping.put( JavaMetric.LOC, mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_PROJECT_LOC ) );
-        mapping.put( JavaMetric.NUMBER_OF_CLASSES,
-                     mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_PROJECT_NB_CLASSES ) );
-        metricMapping.put( JavaComponentType.PROJECT, mapping );
-
-        // Level class
-        mapping = new HashMap<JavaMetric, String>();
-        mapping.put( JavaMetric.LOC, mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_CLASS_LOC ) );
-        mapping.put( JavaMetric.NUMBER_OF_METHODS,
-                     mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_CLASS_NB_METHODS ) );
-        metricMapping.put( JavaComponentType.CLASS, mapping );
-
-        // Level method
-        mapping = new HashMap<JavaMetric, String>();
-        mapping.put( JavaMetric.LOC, mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_METHOD_LOC ) );
-        mapping.put( JavaMetric.VG, mappingMapFromSquale.get( AdminParamsBO.MAPPING_JAVA_METHOD_VG ) );
-        metricMapping.put( JavaComponentType.METHOD, mapping );
-
-        return isInitOk;
     }
 
     /**
-     * @return
+     * This method create an object CompanyEx which has only its name attribute completed
+     * 
+     * @return A basic CompanyEx object
      */
     private CompanyEx createCompany()
     {
@@ -403,10 +414,14 @@ class ExporterImpl
     }
 
     /**
-     * @param applicationId
-     * @return
+     * This method create an ApplicationEx object.
+     * 
+     * @param applicationId The id of the application
+     * @return An ApplicationEx object
+     * @throws ExportException Exception occurs during the creation of the ApplicationEx
      */
     private ApplicationEx createBasicApplication( Long applicationId )
+        throws ExportException
     {
         ApplicationEx appliToReturn = null;
         List<DataEx> datas = recoverAppData( applicationId );
@@ -416,20 +431,27 @@ class ExporterImpl
     }
 
     /**
-     * @param applicationId
-     * @return
+     * This method recover all the segment linked
+     * 
+     * @param applicationId The id of the application
+     * @return The list of segments linked to the the application
      */
     private List<SegmentEx> recoverAppSegment( Long applicationId )
     {
         List<SegmentEx> segments = new ArrayList<SegmentEx>();
+        // TODO : To be completed when the segment will be implements
         return segments;
     }
 
     /**
-     * @param applicationId
-     * @return
+     * This method recover the application data
+     * 
+     * @param applicationId The application id
+     * @return The list of dataEx linked to the application given in argument
+     * @throws ExportException Exception occurs during the search of the data
      */
     private List<DataEx> recoverAppData( Long applicationId )
+        throws ExportException
     {
         ApplicationDAOImplEx appliDao = ApplicationDAOImplEx.getInstance();
         List<DataEx> datas = null;
@@ -460,45 +482,59 @@ class ExporterImpl
         }
         catch ( JrafDaoException e )
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new ExportException( e );
         }
         return datas;
     }
 
     /**
-     * @param moduleId
-     * @return
+     * This method create the moduleEx linked to the module given in argument with the data from the audit given in
+     * argument
+     * 
+     * @param moduleId The module id
+     * @param auditId The audit id
+     * @return The moduleEx filled
+     * @throws ExportException Exception occurs during the creation of the moduleEx
      */
-    private ModuleEx createModule( Long moduleId )
+    private ModuleEx createModule( Long moduleId, Long auditId )
+        throws ExportException
     {
         ModuleEx modul = null;
-        List<DataEx> datas = recoverModData( moduleId );
-        List<SegmentEx> segments = recoverModSegment();
+        List<DataEx> datas = recoverModData( moduleId, auditId );
+        List<SegmentEx> segments = recoverModSegment( moduleId );
         modul = new ModuleEx( Long.toString( moduleId ), segments, datas, new ArrayList<ComponentEx>() );
         return modul;
     }
 
     /**
-     * @return
+     * This method recover the list of segment linked to the module given in argument
+     * 
+     * @param moduleId The module id
+     * @return The list of segmentEx linked to the module given in argument
      */
-    private List<SegmentEx> recoverModSegment()
+    private List<SegmentEx> recoverModSegment( Long moduleId )
     {
         List<SegmentEx> segments = null;
+        // TODO : To be completed when the segment will be implements
         return segments;
     }
 
     /**
-     * @param moduleId
-     * @return
+     * This method create the list of dataEx linked to the module given in argument
+     * 
+     * @param moduleId The module id
+     * @param auditId The id of the audit
+     * @return list of Data linked to the module
+     * @throws ExportException Exception occurs during the serach of the data
      */
-    private List<DataEx> recoverModData( Long moduleId )
+    private List<DataEx> recoverModData( Long moduleId, Long auditId )
+        throws ExportException
     {
         List<DataEx> datas = new ArrayList<DataEx>();
         QualityResultDAOImplEx resultDao = QualityResultDAOImplEx.getInstance();
         try
         {
-            List<QualityResultBO> result = resultDao.findFactor( session, moduleId, lastSuccessfulAuditId );
+            List<QualityResultBO> result = resultDao.findFactor( session, moduleId, auditId );
             for ( QualityResultBO qualityResultBO : result )
             {
                 QualityRuleBO ruleBo = qualityResultBO.getRule();
@@ -507,7 +543,7 @@ class ExporterImpl
                     new DataEx( DataType.FACTOR.toString(), ruleName, Float.toString( qualityResultBO.getMeanMark() ) );
                 datas.add( data );
             }
-            result = resultDao.findCriterium( session, moduleId, lastSuccessfulAuditId );
+            result = resultDao.findCriterium( session, moduleId, auditId );
             for ( QualityResultBO qualityResultBO : result )
             {
                 QualityRuleBO ruleBo = qualityResultBO.getRule();
@@ -531,23 +567,21 @@ class ExporterImpl
         }
         catch ( JrafDaoException e )
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new ExportException( e );
         }
 
         return datas;
     }
 
     /**
-     * @param compoBo
-     * @param compoDao
-     * @return
-     * @throws JrafDaoException
+     * This method take the component BO and create recursively all the tree of component
+     * 
+     * @param compoBo The parent component BO
+     * @param compoDao The dao
+     * @return The componentEx with all its children full filled
      */
     private ComponentEx createComponent( AbstractComponentBO compoBo, AbstractComponentDAOImplEx compoDao )
-        throws JrafDaoException
     {
-
         // Type of the component (package, class, method)
         String compoType = compoBo.getType();
         String[] splitCompoType = compoType.split( "\\." );
@@ -575,21 +609,28 @@ class ExporterImpl
     }
 
     /**
-     * @param compoId
-     * @param metricType
-     * @return
+     * This method recover the data for the component given in argument
+     * 
+     * @param compoId The id of the component
+     * @param componentType The type of the componet
+     * @return The list of component data to export
      */
     private List<DataEx> searchData4Compo( Long compoId, String componentType )
     {
         List<DataEx> datas = new ArrayList<DataEx>();
 
+        // we recover the type of the component
         JavaComponentType definedComponentType = JavaComponentType.valueOf( componentType.toUpperCase() );
 
+        // The list of data/metric to recover according to component type
         Map<JavaMetric, String> metricMapping4level = metricMapping.get( definedComponentType );
+
+        // If there is at least one data/metric to recover
         if ( metricMapping4level != null && !metricMapping4level.isEmpty() )
         {
             for ( JavaMetric metric : metricMapping4level.keySet() )
             {
+                // For each data to recover, We create the DataEx element
                 Map<Long, Object> metricMap = resultsByMetric.get( metric );
                 Object value = metricMap.get( compoId );
                 if ( value != null )
@@ -603,10 +644,15 @@ class ExporterImpl
     }
 
     /**
-     * @param appId
-     * @param company
+     * This method create the export file of the application given in argument. The CompanyEx object given in argument
+     * contains all the information of the application to export
+     * 
+     * @param appId The application id
+     * @param company The companyEx object (fully filled)
+     * @throws ExportException Exception occurs during the creation of the application export file
      */
     private void createFile( Long appId, CompanyEx company )
+        throws ExportException
     {
         XStream xstream = new XStream();
         xstream.processAnnotations( CompanyEx.class );
@@ -615,86 +661,144 @@ class ExporterImpl
         FileWriter writer = null;
         try
         {
-            path = new File( outputDirectoryPath + File.separator + appId + ".xml" ).getCanonicalPath();
-            writer = new FileWriter( path );
-            xstream.toXML( company, writer );
+            try
+            {
+                path = new File( tempDirectoryPath + File.separator + appId + ".xml" ).getCanonicalPath();
+                writer = new FileWriter( path );
+                xstream.toXML( company, writer );
+            }
+            finally
+            {
+                writer.close();
+
+            }
         }
         catch ( IOException e )
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new ExportException( e );
         }
-        finally
-        {
-            try
-            {
-                writer.close();
-                exportFileList.add( path );
-            }
-            catch ( IOException e )
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-        }
+        exportFileList.add( path );
     }
 
     /**
+     * This method create the new zip file and delete the old zip file. This zip file contains an xml file for each
+     * application exported
      * 
+     * @throws ExportException Errors occurs the creation of the zip file
      */
-    private void zipExportFile()
+    private void zipExportFiles()
+        throws ExportException
     {
         try
         {
-            BufferedInputStream origin = null;
+
+            // The name of the new zip file
             Calendar cal = GregorianCalendar.getInstance();
             SimpleDateFormat format = new SimpleDateFormat( "yyyy_MM_dd" );
             String dateStr = format.format( cal.getTime() );
             String zipName = "export" + dateStr;
-            String path = new File( outputDirectoryPath + File.separator + zipName + ".zip" ).getCanonicalPath();
-            FileOutputStream dest = new FileOutputStream( path );
-            ZipOutputStream out = new ZipOutputStream( new BufferedOutputStream( dest ) );
-            // out.setMethod(ZipOutputStream.DEFLATED);
-            byte data[] = new byte[BUFFER];
-            // get a list of files from current directory
-            // File f = new File( "." );
-            // String files[] = f.list();
+            File resultFileTmp = new File( tempDirectoryPath + File.separator + zipName + ".zip" );
 
-            for ( String file : exportFileList )
+            // Creation of the zip (which contains all the application export file)
+            FileOutputStream dest = new FileOutputStream( resultFileTmp.getCanonicalPath() );
+            byte[] data = new byte[BUFFER];
+            ZipOutputStream out = null;
+            try
             {
-                // System.out.println( "Adding: " + files[i] );
-                String filename = zipName + File.separator + new File( file ).getName();
-                FileInputStream fi = new FileInputStream( file );
-                origin = new BufferedInputStream( fi, BUFFER );
-                ZipEntry entry = new ZipEntry( filename );
-                out.putNextEntry( entry );
-                int count;
-                while ( ( count = origin.read( data, 0, BUFFER ) ) != -1 )
+                out = new ZipOutputStream( new BufferedOutputStream( dest ) );
+                BufferedInputStream origin = null;
+                for ( String file : exportFileList )
                 {
-                    out.write( data, 0, count );
+                    String filename = zipName + File.separator + new File( file ).getName();
+                    FileInputStream fi = new FileInputStream( file );
+                    try
+                    {
+                        origin = new BufferedInputStream( fi, BUFFER );
+                        ZipEntry entry = new ZipEntry( filename );
+                        out.putNextEntry( entry );
+                        int count;
+                        while ( ( count = origin.read( data, 0, BUFFER ) ) != -1 )
+                        {
+                            out.write( data, 0, count );
+                        }
+                    }
+                    finally
+                    {
+                        origin.close();
+                    }
                 }
-                origin.close();
             }
-            out.close();
+            finally
+            {
+                out.close();
+            }
+            cleaning( resultFileTmp );
         }
-        catch ( Exception e )
+        catch ( IOException e )
         {
-            e.printStackTrace();
+            throw new ExportException( e );
         }
-
     }
 
     /**
-     * 
+     * This method delete each application export file create during the export task
      */
     private void cleanExportFile()
     {
-        for ( String path : exportFileList )
+        File tempDirectory = new File( tempDirectoryPath );
+        // Listing of the files of the temp export directory
+        File[] listFile = tempDirectory.listFiles();
+        // We delete each file of the temp export directory
+        for ( int index = 0; index < listFile.length; index++ )
         {
-            File file = new File( path );
+            File file = listFile[index];
             file.delete();
         }
+        // Finaly we delete the export temp directory
+        tempDirectory.delete();
+    }
+
+    /**
+     * This method delete the old zip file
+     */
+    private void cleanZipFile()
+    {
+        File workspaceDirectory = new File( workspaceDirectoryPath );
+
+        File[] listFile = workspaceDirectory.listFiles();
+        for ( int index = 0; index < listFile.length; index++ )
+        {
+            File file = listFile[index];
+            if ( !file.isDirectory() )
+            {
+                file.delete();
+            }
+        }
+    }
+
+    /**
+     * This method remove the previous zip file and put the new zip file at its place Then this method clean all the
+     * temp files and directory created
+     * 
+     * @param resultFileTmp The new zip file
+     */
+    public void cleaning( File resultFileTmp )
+    {
+
+        /*
+         * We verify that the new zip file exist. If yes we can delete the previous zip file and put the new one at its
+         * place
+         */
+        if ( resultFileTmp.exists() )
+        {
+            // We delete the old zip file
+            cleanZipFile();
+            // We put the new one at its place
+            File resultFile = new File( workspaceDirectoryPath + File.separator + resultFileTmp.getName());
+            resultFileTmp.renameTo( resultFile );
+        }
+        // We delete all the export file created (except the zip obviously)
+        cleanExportFile();
     }
 
 }

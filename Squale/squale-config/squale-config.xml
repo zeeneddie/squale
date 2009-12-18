@@ -159,7 +159,10 @@
 			<!--<smtp-username></smtp-username>-->
 			<!--<smtp-password></smtp-password>-->
 		</mail>
-		<shared-repository-export>
+		<!-- shared-repository-export>
+			<squalix-server>
+				<name>squaleSrv</name>
+			</squalix-server>
 			<mapping>
 				<java>
 					<project>
@@ -176,6 +179,6 @@
 					</method>
 				</java>
 			</mapping>
-		</shared-repository-export>
+		</shared-repository-export-->
 	</admin-params>
 </configuration>

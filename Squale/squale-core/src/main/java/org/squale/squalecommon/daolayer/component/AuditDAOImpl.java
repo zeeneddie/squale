@@ -962,5 +962,43 @@ public final class AuditDAOImpl
 
         return find( pSession, selectClause + whereClause.toString() + orderClause );
     }
+    
+    /**
+     * Recover the id of the last successful audit (milestone or follow up) for the application
+     * 
+     * @param session The hibernate session
+     * @param applicationId The id of the application for which we search the audit
+     * @return The id of the last successful
+     * @throws JrafDaoException Error happened during the request in the db
+     */
+    public List<AuditBO> lastSuccesfullAudit( ISession session, Long applicationId )
+        throws JrafDaoException
+    {
+        long auditId = -1;
+
+        StringBuffer whereClause = new StringBuffer( " where " );
+        // The audit should be associate to our application
+        whereClause.append( applicationId );
+        whereClause.append( " in elements( " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".components )" );
+        // The audit should be successful
+        whereClause.append( " and " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".status = " );
+        whereClause.append( AuditBO.TERMINATED );
+        // The result should be ordered
+        whereClause.append( " order by coalesce( " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".historicalDate, " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".date) desc" );
+
+        LOG.debug( whereClause.toString() );
+
+        List<AuditBO> result = (List<AuditBO>) findWhere( session, whereClause.toString() );
+
+        return result;
+    }
 
 }

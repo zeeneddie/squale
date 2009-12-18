@@ -38,6 +38,13 @@ public class ConfigurationApplicationComponentAccess
 {
 
     /**
+     * Constructeur par défaut
+     */
+    public ConfigurationApplicationComponentAccess()
+    {
+    }
+
+    /**
      * Obtention de la configuration
      * 
      * @return la configuration Squalix actuelle
@@ -116,41 +123,21 @@ public class ConfigurationApplicationComponentAccess
     }
 
     /**
-     * Constructeur par défaut
-     */
-    public ConfigurationApplicationComponentAccess()
-    {
-    }
-
-    /**
-     * This method search all the admin-params useful for the mapping in the export function
+     * This method search the admin-params linked to the export server
      * 
-     * @return The list of admin-params useful for the mapping
+     * @return The export server found
      * @throws JrafEnterpriseException If an error occurs during the search
      */
-    public Collection<AdminParamsDTO> getExportAdminParams()
+    public String getSharedRepositoryExportServer()
         throws JrafEnterpriseException
     {
-        Collection<AdminParamsDTO> adminParamsList;
-        adminParamsList = SqualixConfigFacade.getAdminParamsStartWith( AdminParamsBO.MAPPING );
-        List<AdminParamsDTO> entityId =
-            (List<AdminParamsDTO>) SqualixConfigFacade.getAdminParamsStartWith( AdminParamsBO.ENTITY_ID );
-        if ( entityId.size() == 1 )
+        String adminParam = null;
+        List<AdminParamsDTO> adminParamsList;
+        adminParamsList = SqualixConfigFacade.getAdminParamsByKey( AdminParamsBO.SQUALIX_SERVER_NAME );
+        if ( adminParamsList != null && adminParamsList.size() == 1 )
         {
-            adminParamsList.add( entityId.get( 0 ) );
+            adminParam = adminParamsList.get( 0 ).getParamValue();
         }
-        else if ( entityId.size() == 0 )
-        {
-            String message = "";
-            throw new JrafEnterpriseException( message );
-        }
-        else
-        {
-            String message = "";
-            throw new JrafEnterpriseException( message );
-        }
-
-        return adminParamsList;
+        return adminParam;
     }
-
 }

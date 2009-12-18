@@ -88,10 +88,18 @@ public class ConfigCreationAction
                 }
                 else
                 {
+                    // For the admin mailing list
                     IApplicationComponent ac1 = AccessDelegateHelper.getInstance( "Mail" );
                     String mailingList = ac1.execute( "getAdminMailingList" ).toString();
                     UserSqualeSessionContext sessionContext = UserSqualeSessionContext.getContext( pRequest.getSession() );
                     sessionContext.setSqualeAdminsMailingList( mailingList );
+                    // For the shared repository
+                    IApplicationComponent ac2 = AccessDelegateHelper.getInstance( "SqualixConfig" );
+                    Object sharedRepositoryServerConfig = ac2.execute( "getSharedRepositoryExportServer" );
+                    if (sharedRepositoryServerConfig != null)
+                    {
+                        sessionContext.setSharedRepositoryConfigured( "true" );
+                    }
                     UserSqualeSessionContext.setContext( pRequest.getSession(), sessionContext );
                     forward = pMapping.findForward( "success" );
                 }

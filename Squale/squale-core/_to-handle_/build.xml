@@ -68,6 +68,9 @@
 		    	<xdoclet2> 
 		    		<fileset dir="${project.srcdir}">
 						<include name="**/*.java" />
+						<!--exclusion of the Enum class -->
+		    			<exclude name="**/job/JobName.java"/>
+		    			<exclude name="**/job/JobStatus.java"/>
 					</fileset>
 		        <component
 		            classname="org.xdoclet.plugin.hibernate.HibernateMappingPlugin"

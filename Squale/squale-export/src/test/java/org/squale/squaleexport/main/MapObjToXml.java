@@ -18,6 +18,9 @@
  */
 package org.squale.squaleexport.main;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.squale.jraf.bootstrap.initializer.Initializer;
@@ -48,9 +51,8 @@ public final class MapObjToXml
      */
     public static void main( String[] args )
     {
-
-        //GregorianCalendar cal = new GregorianCalendar();
-        //System.out.println( "launch@"+cal.get( Calendar.HOUR_OF_DAY )+"H"+cal.get( Calendar.MINUTE )+"min "+cal.get( Calendar.SECOND )+"s" );
+        GregorianCalendar cal = new GregorianCalendar();
+        System.out.println( "launch@"+cal.get( Calendar.HOUR_OF_DAY )+"H"+cal.get( Calendar.MINUTE )+"min "+cal.get( Calendar.SECOND )+"s" );
         String rootPath = System.getProperty( "user.dir" );
 
         String configFile = "/src/test/config/providers-config.xml";
@@ -61,12 +63,10 @@ public final class MapObjToXml
         mLOGGER = LogFactory.getLog( MapObjToXml.class );
         
         Launch launch= new Launch();
-        //cal = new GregorianCalendar();
-        //System.out.println( "start@"+cal.get( Calendar.HOUR_OF_DAY )+"H"+cal.get( Calendar.MINUTE )+"min "+cal.get( Calendar.SECOND )+"s" );
+        cal = new GregorianCalendar();
+        System.out.println( "start@"+cal.get( Calendar.HOUR_OF_DAY )+"H"+cal.get( Calendar.MINUTE )+"min "+cal.get( Calendar.SECOND )+"s" );
         launch.exec();
-        //cal = new GregorianCalendar();
-        //System.out.println( "finish@"+cal.get( Calendar.HOUR_OF_DAY )+"H"+cal.get( Calendar.MINUTE )+"min "+cal.get( Calendar.SECOND )+"s" );
-
+        cal = new GregorianCalendar();
+        System.out.println( "finish@"+cal.get( Calendar.HOUR_OF_DAY )+"H"+cal.get( Calendar.MINUTE )+"min "+cal.get( Calendar.SECOND )+"s" );
     }
-
 }

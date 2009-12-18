@@ -21,6 +21,7 @@ package org.squale.squalecommon.datatransfertobject.transform.config;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.squale.squalecommon.datatransfertobject.config.AdminParamsDTO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
@@ -59,9 +60,9 @@ public final class AdminParamsTransform
      * @param adminParams The collection of adminParamsBO to convert
      * @return The collection of adminParamsDTO
      */
-    public static Collection<AdminParamsDTO> bo2dto( Collection<AdminParamsBO> adminParams )
+    public static List<AdminParamsDTO> bo2dto( Collection<AdminParamsBO> adminParams )
     {
-        Collection<AdminParamsDTO> collectionsDTO = new ArrayList<AdminParamsDTO>();
+        List<AdminParamsDTO> collectionsDTO = new ArrayList<AdminParamsDTO>();
         AdminParamsDTO dto;
         AdminParamsBO bo;
         Iterator<AdminParamsBO> it = adminParams.iterator();

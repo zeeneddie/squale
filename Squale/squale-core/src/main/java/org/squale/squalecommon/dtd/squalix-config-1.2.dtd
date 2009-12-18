@@ -10,7 +10,13 @@
 
 <!-- ###### The shared repository export section ###### -->
 <!ELEMENT shared-repository-export
-   (mapping)
+   (squalix-server,mapping)
+>
+<!ELEMENT squalix-server
+   (name)
+>
+<!ELEMENT name
+	(#PCDATA)
 >
 <!ELEMENT mapping
    (java)

@@ -30,6 +30,7 @@ import java.util.Set;
 
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.commons.exception.JrafException;
 import org.squale.jraf.helper.PersistenceHelper;
 import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
@@ -105,7 +106,7 @@ public class ConfigurationImport
         Collection profilesDTO = ProjectProfileTransform.bo2dto( configBO.getProfiles() );
         configDTO.setProfiles( profilesDTO );
         // The adminParams
-        Collection<AdminParamsDTO> adminParamsDTO = AdminParamsTransform.bo2dto( configBO.getAdminParams() );
+        List<AdminParamsDTO> adminParamsDTO = AdminParamsTransform.bo2dto( configBO.getAdminParams() );
         configDTO.setAdminParams( adminParamsDTO );
         return configDTO;
     }
@@ -168,8 +169,9 @@ public class ConfigurationImport
             }
 
             // Insert the adminParams
+            removeAdminParams();
             adminParamsDTO = createAdminParams( session, configBO.getAdminParams() );
-            managedEntityId( session );
+            manageEntityId( session );
             configDTO.setAdminParams( adminParamsDTO );
             session.commitTransactionWithoutClose();
 
@@ -629,12 +631,11 @@ public class ConfigurationImport
         throws JrafDaoException
     {
         AdminParamsDAOImpl adminParamDAO = AdminParamsDAOImpl.getInstance();
+        boolean oneMatch = adminParamDAO.createOrUpdate( session, allAdminParams );
 
-        boolean oneMatch;
-        oneMatch = adminParamDAO.createOrUpdate( session, allAdminParams );
         if ( !oneMatch )
         {
-            String message = ConfigMessages.getString( "mail.manyMatch" );
+            String message = ConfigMessages.getString( "admin_params.manyMatch" );
             throw new JrafDaoException( message );
         }
         return AdminParamsTransform.bo2dto( allAdminParams );
@@ -647,18 +648,19 @@ public class ConfigurationImport
      * @param session The hibernate session
      * @throws JrafEnterpriseException Exception occur during search in db
      */
-    private static void managedEntityId( ISession session )
+    private static void manageEntityId( ISession session )
         throws JrafEnterpriseException
     {
 
         AdminParamsDAOImpl adminParamDAO = AdminParamsDAOImpl.getInstance();
-
         try
         {
+            // We search in the db if there is already an admin-params which key is entityId
             List<AdminParamsBO> resultFind = adminParamDAO.findByKey( session, AdminParamsBO.ENTITY_ID );
+            // If there is many match then we launch an error
             if ( resultFind.size() > 1 )
             {
-                String message = ConfigMessages.getString( "mail.manyMatch" );
+                String message = ConfigMessages.getString( "admin_params.manyMatch" );
                 throw new JrafEnterpriseException( message );
             }
 
@@ -670,10 +672,47 @@ public class ConfigurationImport
                 paramBo.setAdminParam( AdminParamsBO.ENTITY_ID, String.valueOf( cal.getTimeInMillis() ) );
                 adminParamDAO.create( session, paramBo );
             }
+
+            // Else the entityId admin param already exist and is unique so we do nothing
+
         }
         catch ( JrafDaoException e )
         {
             throw new JrafEnterpriseException( e );
+        }
+    }
+
+    /**
+     * This method delete all the admin params in the db which ley start with "configuration/admin-params"
+     * 
+     * @throws JrafEnterpriseException Exception occurs during the deletion of the adminParams
+     */
+    private static void removeAdminParams()
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+        try
+        {
+            // Hibernate session
+            session = PERSISTENTPROVIDER.getSession();
+
+            // We retrieve all the admin params bo which key start with "configuration/admin-params"
+            // -->This means we don't retriev entityId
+            AdminParamsDAOImpl adminParamDAO = AdminParamsDAOImpl.getInstance();
+            List<AdminParamsBO> allAdminParams = adminParamDAO.findByKeyLike( session, AdminParamsBO.ADMIN_PARAMS );
+            // We delete all the admin params retieve
+            for ( AdminParamsBO adminParamsBO : allAdminParams )
+            {
+                adminParamDAO.remove( session, adminParamsBO );
+            }
+        }
+        catch ( JrafException e )
+        {
+            FacadeHelper.convertException( e, ConfigurationImport.class.getName() + ".removeTasks" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, ConfigurationImport.class.getName() + ".removeTasks" );
         }
     }
 }

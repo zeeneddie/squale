@@ -19,8 +19,8 @@
 package org.squale.squaleexport.main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import org.squale.jraf.helper.PersistenceHelper;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
@@ -28,7 +28,6 @@ import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.datatransfertobject.config.AdminParamsDTO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
 import org.squale.squalecommon.util.mail.IMailerProvider;
-import org.squale.squalecommon.util.mail.MailerHelper;
 import org.squale.squaleexport.core.ExporterFactory;
 import org.squale.squaleexport.core.IExporter;
 
@@ -54,11 +53,10 @@ public class Launch
         IMailerProvider mailer = null;
 
         // session = PERSISTENTPROVIDER.getSession();
-        mailer = MailerHelper.getMailerProvider();
-        IExporter exporter = ExporterFactory.createExporter( PERSISTENTPROVIDER, mailer, Locale.FRENCH );
-        List<Long> applications = new ArrayList<Long>();
-        applications.add( 3182L );
-        // applications.add( 1L );
+        IExporter exporter = ExporterFactory.createExporter( PERSISTENTPROVIDER);
+        HashMap<Long, Long> applicationsAudit = new HashMap<Long, Long>();
+        applicationsAudit.put( 3182L, 511L );
+        applicationsAudit.put( 1L, 664L);
 
         List<AdminParamsDTO> listMapping = new ArrayList<AdminParamsDTO>();
         AdminParamsDTO param = new AdminParamsDTO();
@@ -85,7 +83,7 @@ public class Launch
         param.setAdminParam( AdminParamsBO.MAPPING_JAVA_METHOD_VG, "JavancssTask.ccn" );
         listMapping.add( param );
 
-        exporter.exportData( applications, listMapping );
+        exporter.exportData( applicationsAudit, listMapping );
 
     }
 

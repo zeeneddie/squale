@@ -25,9 +25,15 @@ import javax.servlet.http.HttpSession;
 /**
  * Utility class for set variable in an http session
  */
-public class UserSqualeSessionContext implements Serializable
+public class UserSqualeSessionContext
+    implements Serializable
 {
-    
+
+    /**
+     * UID
+     */
+    private static final long serialVersionUID = 1729256194480504259L;
+
     /**
      * The name
      */
@@ -38,6 +44,11 @@ public class UserSqualeSessionContext implements Serializable
      * The Squale's administrator mailing list
      */
     private String squaleAdminsMailingList;
+
+    /**
+     * Indicate if the shared reposiroy is configured
+     */
+    private String sharedRepositoryConfigured = "false";
 
     /**
      * This method recover the object UserSqualeSessionContext put in session. If there is not, this method creates one
@@ -90,5 +101,25 @@ public class UserSqualeSessionContext implements Serializable
     public void setSqualeAdminsMailingList( String pSqualeAdminsMailingList )
     {
         squaleAdminsMailingList = pSqualeAdminsMailingList;
+    }
+
+    /**
+     * Getter method for the parameter sharedRepositoryConfigured
+     * 
+     * @return "true" if the Shared repository is configured
+     */
+    public String getSharedRepositoryConfigured()
+    {
+        return sharedRepositoryConfigured;
+    }
+
+    /**
+     * Setter method for the parameter sharedRepositoryConfigured. The attribute could take the value "true" or false"
+     * 
+     * @param pSharedRepositoryConfigured The new state of the shared repository
+     */
+    public void setSharedRepositoryConfigured( String pSharedRepositoryConfigured )
+    {
+        sharedRepositoryConfigured = pSharedRepositoryConfigured;
     }
 }

@@ -33,12 +33,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
 import org.squale.jraf.spi.persistence.ISession;
-import org.squale.squalecommon.daolayer.DAOMessages;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;

@@ -35,7 +35,7 @@ import org.squale.squalecommon.enterpriselayer.businessobject.UnexpectedRelation
 import org.squale.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
-import org.squale.squalecommon.enterpriselayer.businessobject.exportimport.ApplicationLastExportBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.ApplicationExportBO;
 
 /**
  * Représente une application
@@ -46,6 +46,11 @@ import org.squale.squalecommon.enterpriselayer.businessobject.exportimport.Appli
 public class ApplicationBO
     extends AbstractComplexComponentBO
 {
+
+    /**
+     * Generated UID
+     */
+    private static final long serialVersionUID = 3347680528535207656L;
 
     /**
      * Fréquence d'audit en nombre de jour
@@ -138,7 +143,7 @@ public class ApplicationBO
     /**
      * The last export of the application
      */
-    private ApplicationLastExportBO lastExport;
+    private ApplicationExportBO lastExport;
 
     /**
      * Instancie un nouveau composant.
@@ -676,11 +681,11 @@ public class ApplicationBO
      * Getter for the attribute last export
      * 
      * @hibernate.one-to-one 
-     *                       class="org.squale.squalecommon.enterpriselayer.businessobject.exportimport.ApplicationLastExportBO"
+     *                       class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.ApplicationExportBO"
      *                       property-ref="application" cascade="all" lazy="no-proxy" fetch="join"
      * @return information on the last export
      */
-    public ApplicationLastExportBO getLastExport()
+    public ApplicationExportBO getLastExport()
     {
         return lastExport;
     }
@@ -690,7 +695,7 @@ public class ApplicationBO
      * 
      * @param pLastExport The new information set of the last export
      */
-    public void setLastExport( ApplicationLastExportBO pLastExport )
+    public void setLastExport( ApplicationExportBO pLastExport )
     {
         lastExport = pLastExport;
     }

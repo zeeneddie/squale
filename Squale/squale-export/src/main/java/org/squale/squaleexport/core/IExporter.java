@@ -18,6 +18,7 @@
  */
 package org.squale.squaleexport.core;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.squale.squalecommon.datatransfertobject.config.AdminParamsDTO;
@@ -32,9 +33,10 @@ public interface IExporter
      * This method do the export. It takes the list of applications to export as entry then it creates the xml file(s)
      * which contains the exported data
      * 
-     * @param applications The list of id of the applications to export
+     * @param mapAppAuditToExport The list of applications id and audits id to export
      * @param mappingList The list of mapping generic metric / metric in the local squale
+     * @return null if the export failed else the path to the export file
      */
-    void exportData( List<Long> applications, List<AdminParamsDTO> mappingList );
+    boolean exportData( HashMap<Long, Long> mapAppAuditToExport, List<AdminParamsDTO> mappingList );
 
 }

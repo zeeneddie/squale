@@ -35,6 +35,8 @@
 
     drop table HomepageComponent cascade constraints;
 
+    drop table Job cascade constraints;
+
     drop table Mark cascade constraints;
 
     drop table Measure cascade constraints;
@@ -139,6 +141,8 @@
 
     drop sequence formula_sequence;
 
+    drop sequence job_sequence;
+
     drop sequence lastExport_sequence;
 
     drop sequence mark_sequence;
@@ -199,10 +203,11 @@
     );
 
     create table ApplicationLastExport (
-        lastExportId number(19,0) not null,
+        LastExportId number(19,0) not null,
         ComponentId number(19,0) unique,
-        auditDate date,
-        primary key (lastExportId)
+        LastExportDate date,
+        ToExport number(1,0),
+        primary key (LastExportId)
     );
 
     create table AtomicRights (
@@ -352,6 +357,14 @@
         ComponentPosition number(10,0) not null,
         ComponentValue varchar2(255),
         primary key (HomepageComponentId)
+    );
+
+    create table Job (
+        JobId number(19,0) not null,
+        JobName varchar2(100),
+        JobStatus varchar2(100),
+        JobDate date,
+        primary key (JobId)
     );
 
     create table Mark (
@@ -1124,6 +1137,8 @@
     create sequence error_sequence;
 
     create sequence formula_sequence;
+
+    create sequence job_sequence;
 
     create sequence lastExport_sequence;
 

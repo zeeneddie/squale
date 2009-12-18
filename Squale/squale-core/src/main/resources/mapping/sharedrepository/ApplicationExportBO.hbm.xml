@@ -2,13 +2,14 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class table="ApplicationLastExport" name="org.squale.squalecommon.enterpriselayer.businessobject.exportimport.ApplicationLastExportBO">
-    <id unsaved-value="-1" name="id" type="long" column="lastExportId" length="19">
+  <class table="ApplicationLastExport" name="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.ApplicationExportBO">
+    <id unsaved-value="-1" name="id" type="long" column="LastExportId" length="19">
       <generator class="native">
         <param name="sequence">lastExport_sequence</param>
       </generator>
     </id>
     <many-to-one unique="true" column="ComponentId" cascade="none" class="org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO" name="application"/>
-    <property name="lastExportDate" column="auditDate" update="true" type="timestamp" insert="true"/>
+    <property name="lastExportDate" column="LastExportDate" update="true" type="timestamp" insert="true"/>
+    <property name="toExport" column="ToExport" update="true" type="boolean" insert="true"/>
   </class>
 </hibernate-mapping>
