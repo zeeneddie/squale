@@ -7,8 +7,6 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="org.squale.squaleweb.applicationlayer.formbean.config.ServeurForm" %>
 
-
-
 <script type="text/javascript" src="jslib/jquery.js"></script>
 <script>
 function setEnabledCost()

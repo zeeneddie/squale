@@ -4,6 +4,7 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
+<%@taglib uri="http://www.squale.org/squale/security" prefix="sec"%>
 
 <%@ page import="org.squale.squaleweb.resources.WebMessages" %>
 <%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
@@ -15,6 +16,7 @@
 <script type="text/javascript" src="jslib/jquery-ui.js"></script>
 
 <bean:define id="projectId" name="manualMarkForm" property="projectIdSafe" type="String" />
+<bean:define id="applicationId" name="manualMarkForm" property="applicationId" type="String" />
 <bean:size id="listSize" name="manualMarkForm" property="manualPracticeList"  />
 <bean:define id="localOutOfDate"name="manualMarkForm" property="outOfDate" />
 	
@@ -70,14 +72,14 @@
 							<tr class="" id="li-<%=index%>">
 								<%-- "Check" column. Display only if the user as enough rights --%>
 								<td class="check_col">
-									<logic:equal name="manualMarkForm" property="canModify" value="true">
+									<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.AUDITOR_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 										<div id="edit-<%=index%>" >
 											<img border="0" src="theme/charte_v03_001/img/ico/neutre/pen.gif" onclick="edit(<%=index%>,<%=listSize%>,true)" style="cursor:pointer"/>
 										</div>
 										<div id="canceledit-<%=index%>" style="display:none">
 											<img border="0" src="theme/charte_v03_001/img/ico/neutre/cross.gif" onclick="canceledit(<%=index%>,<%=listSize%>)" style="cursor:pointer"/>
 										</div>
-									</logic:equal>
+									</sec:ifHasProfile>
 								</td>
 								<%-- Column name of the manual practice --%>
 								<td>
@@ -156,11 +158,15 @@
 												isRequired="true" cols="30" rows="5" maxlength="4000" writeTD="false" type="TEXTAREA" />
 											</div>
 											<%-- Button only display if the user has enough right --%>
-											<logic:equal name="manualMarkForm" property="canModify" value="true">
+											<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.AUDITOR_PROFILE_NAME%>" applicationId="<%=applicationId%>">
+												<%-- page rendering breaks if we forget not to reset the form bean when submitting a mark --%>
+												<input type="hidden"
+													name="<%=org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_RESET_FORM%>"
+													value="true" />
 												<div class="manualMarkFormButton">
 													<af:button type="form" callMethod="saveResult" name="valider" toolTipKey="toolTip.valider" />
 												</div>
-											</logic:equal>
+											</sec:ifHasProfile>
 										</fieldset>
 									</div>
 								</td>

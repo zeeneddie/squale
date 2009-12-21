@@ -2,6 +2,7 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/squale/security" prefix="sec"%>
 
 <%@ page import="org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm"%>
 <%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
@@ -170,10 +171,9 @@
 					property="projects">
 					<af:cols id="project">
 						<!-- on n'affiche les checkboxes que si l'utilisateur n'est pas que lecteur -->
-						<logic:notEqual name="profile"
-							value="<%=ProfileBO.READER_PROFILE_NAME%>">
+						<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 							<af:colSelect />
-						</logic:notEqual>
+						</sec:ifHasProfile>
 						<!-- Dans ce càs là il faut passer à la fois l'id du projet et de l'application car on va modifier
 						la conf d'un projet en vérifiant que l'utilisateur à les droits sur l'appli -->
 						<af:col property="projectName"
@@ -193,8 +193,7 @@
 						</af:col>
 					</af:cols>
 				</af:table>
-				<logic:notEqual name="profile"
-					value="<%=ProfileBO.READER_PROFILE_NAME%>">
+				<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 					<af:buttonBar>
 						<af:button name="add.project"
 							onclick="<%=\"location.href='config_project.do?action=newProject&applicationId=\"+applicationId+\"'\"%>" />
@@ -206,11 +205,11 @@
 							toolTipKey="toolTip.disactivate.projects"
 							callMethod='disactiveOrReactiveProjects' />
 					</af:buttonBar>
-				</logic:notEqual>
+				</sec:ifHasProfile>
 			</af:form>
 			<br />
 			<%-- Affichage pour les administrateur SQUALE uniquement --%>
-			<logic:equal name="profile" value="<%=ProfileBO.ADMIN_PROFILE_NAME%>">
+			<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 				<bean:size name="createApplicationForm"
 					property="accessListForm.list" id="nbAccesses" />
 				<logic:greaterThan name="nbAccesses" value="0">
@@ -235,7 +234,7 @@
 					</table>
 					</fieldset>
 				</logic:greaterThan>
-			</logic:equal>
+			</sec:ifHasProfile>
 			<br />
 		</af:canvasCenter>
 	</af:body>

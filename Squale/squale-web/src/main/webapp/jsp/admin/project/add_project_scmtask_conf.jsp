@@ -2,6 +2,7 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
+<%@taglib uri="http://www.squale.org/squale/security" prefix="sec"%>
 
 <%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
 
@@ -11,15 +12,7 @@
 	property="applicationId" type="String" />
 
 <%-- Readers can't update the configuration --%>
-<bean:define id="userProfile"
-	name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
-	property='<%="profile("+applicationId+")"%>' />
-<%-- All the fields --%>
-<%boolean disabled = false; // Used to grant writing %>
-<logic:equal name="userProfile"
-	value="<%=ProfileBO.READER_PROFILE_NAME%>">
-	<%disabled = true;%>
-</logic:equal>
+<sec:notHasProfile var="disabled" profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>" />
 
 <br />
 <br />
@@ -63,12 +56,11 @@
 			isRequired="true" disabled="<%=disabled%>" />
 	</table>	
 
-	<logic:notEqual name="userProfile"
-		value="<%=ProfileBO.READER_PROFILE_NAME%>">
+	<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 		<af:buttonBar>
 			<af:button name="add.scmPath" toolTipKey="toolTip.add.vob"
 				onclick="addField('locationsTable', 1);" singleSend="false" />
 		</af:buttonBar>	
 		<jsp:include page="common_parameters_buttons.jsp" />
-	</logic:notEqual>
+	</sec:ifHasProfile>
 </af:form>

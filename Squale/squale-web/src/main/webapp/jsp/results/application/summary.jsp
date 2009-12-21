@@ -4,6 +4,7 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic"	prefix="logic"%>
 <%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
+<%@taglib uri="http://www.squale.org/squale/security" prefix="sec"%>
 
 <%@ page import="org.squale.welcom.struts.util.WConstants"%>
 <%@ page import="org.squale.squaleweb.applicationlayer.formbean.LogonBean"%>

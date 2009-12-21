@@ -2,6 +2,7 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/squale/security" prefix="sec"%>
 <%@ page import="org.apache.struts.action.ActionMessages" %>
 <%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO" %>
 <%@ page import="org.squale.squaleweb.util.SqualeWebActionUtils" %>
@@ -13,18 +14,9 @@
 	property="projectId" type="String" />
 <bean:define id="gridInit" name="createProjectForm"
     property="qualityGrid" type="String" />
-	
 
 <%-- On va interdire l'ecriture pour les lecteurs --%>
-<bean:define id="userProfile"
-	name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
-	property="<%=\"profile(\"+applicationId+\")\"%>" />
-<%-- Pour les champs --%>
-<%boolean disabled = false;%>
-<logic:equal name="userProfile"
-	value="<%=ProfileBO.READER_PROFILE_NAME%>">
-	<%disabled = true;%>
-</logic:equal>
+<sec:notHasProfile var="disabled" profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>" />
 
 <%
 // On récupère l'attribut qui indique si on modifie l'application
@@ -88,10 +80,11 @@ if (modification != null) {
 	<af:body onload='<%="initGrids(\'"+gridInit+"\')"%>'>
 		<af:canvasCenter titleKey="application_modification.title"
 			subTitleKey="<%=subtitle%>">
-			<div style="color: #f00"><logic:equal name="userProfile"
-				value="<%=ProfileBO.READER_PROFILE_NAME%>">
+			<div style="color: #f00">
+			<sec:ifNotHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME %>" applicationId="<%=applicationId%>">
 				<bean:message key="page.readonly" />
-			</logic:equal> <html:messages id="message"
+			</sec:ifNotHasProfile>
+			<html:messages id="message"
 				property="<%=org.apache.struts.action.ActionMessages.GLOBAL_MESSAGE%>"
 				message="true">
 				<bean:write name="message" />
@@ -187,8 +180,7 @@ String href = "location.href='" + action + "'";%>
 					<input type="hidden"
 						name="<%=org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction.DO_NOT_UPDATE_PROJECT_NAME%>"
 						value="true">
-					<logic:notEqual name="userProfile"
-						value="<%=ProfileBO.READER_PROFILE_NAME%>">
+					<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME %>" applicationId="<%=applicationId%>">
 						<logic:notEmpty name="modification">
 							<input type="hidden" name="projectId" value="<%=projectId%>">
 							<af:button type="form" name="save.configuration"
@@ -198,15 +190,14 @@ String href = "location.href='" + action + "'";%>
 						<af:button type="form" name="continue"
 							toolTipKey="toolTip.configure.parameters" callMethod="addProject"
 							singleSend="true" />
-					</logic:notEqual>
+					</sec:ifHasProfile>
 					<%-- Dans le cas ou l'utilisateur est seulement lecteur, il n'a rien modifié
 					On utilise donc une action beaucoup plus simple qui ne rafraichit rien --%>
-					<logic:equal name="userProfile"
-						value="<%=ProfileBO.READER_PROFILE_NAME%>">
+					<sec:ifNotHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME %>" applicationId="<%=applicationId%>">
 						<af:button type="form" name="continue"
 							toolTipKey="toolTip.configure.parameters"
 							callMethod="viewProjectConfig" singleSend="true" />
-					</logic:equal>
+					</sec:ifNotHasProfile>
 				</af:buttonBar>
 			</af:form>
 		</af:canvasCenter>

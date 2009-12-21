@@ -2,6 +2,7 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/squale/security" prefix="sec"%>
 
 <%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants" %>
 
@@ -13,16 +14,7 @@
 	property="applicationId" type="String" />
 
 <%-- On va interdire l'ecriture pour les lecteurs --%>
-<bean:define id="userProfile"
-	name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
-	property="<%=\"profile(\"+applicationId+\")\"%>" />
-<%-- Pour les champs --%>
-<%boolean disabled = false;%>
-<logic:equal name="userProfile"
-	value="<%=ProfileBO.READER_PROFILE_NAME%>">
-	<%disabled = true; // Pour indiquer la lecture seule des champs%>
-</logic:equal>
-
+<sec:notHasProfile var="disabled" profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>" />
 
 <br />
 <bean:message key="project_creation.cpptest.details"/>
@@ -53,9 +45,8 @@
 	</table>
 	<br />
 	<br />
-	<logic:notEqual name="userProfile"
-		value="<%=ProfileBO.READER_PROFILE_NAME%>">
+	<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 		<jsp:include page="common_parameters_buttons.jsp" />
-	</logic:notEqual>
+	</sec:ifHasProfile>
 
 </af:form>

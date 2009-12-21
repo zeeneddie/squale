@@ -2,6 +2,7 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://www.squale.org/squale/security" prefix="sec"%>
 
 <%@ page import="org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm"%>
 <%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
@@ -127,7 +128,7 @@ session.removeAttribute("modification");
 					</tr>
 				</table>
 			</div>
-			<logic:notEqual name="profile" 	value="<%=ProfileBO.READER_PROFILE_NAME%>">
+			<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 				<af:buttonBar>
 					<logic:greaterThan name="nbUsers" value="0">
 						<af:button name="supprimer" messageConfirmationKey="application_purge.confirm"
@@ -138,21 +139,22 @@ session.removeAttribute("modification");
 					<af:button name="modify.configuration"
 						onclick='<%="utilLink.do?action=configApplication&applicationId=" + applicationId + "&modification=true"%>' />
 				</af:buttonBar>
-			</logic:notEqual>
+			</sec:ifHasProfile>				
 			<br/>
-			<logic:equal name="profile" value="<%=ProfileBO.READER_PROFILE_NAME%>">
+			<sec:ifNotHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 				<br/>
 				<div style="color: #f00">
 					<bean:message key="page.readonly" />
 				</div>
 				<br/>
-			</logic:equal>
+			</sec:ifNotHasProfile>
 			<br/>
 			<%-- affichage des sections de programmation d'audits --%>
 			<bean:define id="status" name="createApplicationForm" property="status" scope="session" />
 			<%Integer statusValidated = new Integer(org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO.VALIDATED);%>
 			<%-- affichage de la section de programmation d'un audit de jalon --%>
 			<%-- cette section est disponible aux administrateurs et aux gestionnaires de l'application si celle-ci est validée --%>
+			<%--rem : la "complexité" du test ne permet pas d'utiliser <sec:ifHasProfile> --%>
 			<%if (profile.equals(ProfileBO.ADMIN_PROFILE_NAME) || (profile.equals(ProfileBO.MANAGER_PROFILE_NAME) && status.equals(statusValidated))) {%>
 			<div class="frame_border">
 				<bean:define name="createApplicationForm" property="milestoneAudit" id="milestoneAuditForm" />
@@ -274,11 +276,10 @@ session.removeAttribute("modification");
 						emptyKey="application_creation.list.project.empty" pageLength="30"
 						property="projects">
 						<af:cols id="project">
-							<!-- on n'affiche les checkboxes que si l'utilisateur n'est pas que lecteur -->
-							<logic:notEqual name="profile"
-								value="<%=ProfileBO.READER_PROFILE_NAME%>">
+							<!-- on n'affiche les checkboxes que si l'utilisateur est admin ou manager -->
+							<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 								<af:colSelect />
-							</logic:notEqual>
+							</sec:ifHasProfile>
 							<!-- Dans ce càs là il faut passer à la fois l'id du projet et de l'application car on va modifier
 							la conf d'un projet en vérifiant que l'utilisateur à les droits sur l'appli -->
 							<af:col property="projectName"
@@ -298,8 +299,7 @@ session.removeAttribute("modification");
 							</af:col>
 						</af:cols>
 					</af:table>
-					<logic:notEqual name="profile"
-						value="<%=ProfileBO.READER_PROFILE_NAME%>">
+					<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 						<af:buttonBar>
 							<af:button name="add.project"
 								onclick="<%=\"location.href='config_project.do?action=newProject&applicationId=\"+applicationId+\"'\"%>" />
@@ -311,12 +311,12 @@ session.removeAttribute("modification");
 								toolTipKey="toolTip.disactivate.projects"
 								callMethod='disactiveOrReactiveProjects' />
 						</af:buttonBar>
-					</logic:notEqual>
+					</sec:ifHasProfile>
 				</af:form>
 			</div>
 			<br />
 			<%-- Affichage pour les administrateur SQUALE uniquement --%>
-			<logic:equal name="profile" value="<%=ProfileBO.ADMIN_PROFILE_NAME%>">
+			<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 				<bean:size name="createApplicationForm"
 					property="accessListForm.list" id="nbAccesses" />
 				<logic:greaterThan name="nbAccesses" value="0">
@@ -341,7 +341,7 @@ session.removeAttribute("modification");
 					</table>
 					</fieldset>
 				</logic:greaterThan>
-			</logic:equal>
+			</sec:ifHasProfile>
 			<br />
 		</af:canvasCenter>
 	</af:body>

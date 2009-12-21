@@ -37,16 +37,19 @@ public class ProfileBO
 {
 
     /** Nom du profil administrateur */
-    static final public String ADMIN_PROFILE_NAME = "bo.profile.name.admin";
+    public static final String ADMIN_PROFILE_NAME = "bo.profile.name.admin";
 
     /** Nom du profil manager */
-    static final public String MANAGER_PROFILE_NAME = "bo.profile.name.manager";
+    public static final String MANAGER_PROFILE_NAME = "bo.profile.name.manager";
+
+    /** Name of auditor profile */
+    public static final String AUDITOR_PROFILE_NAME = "bo.profile.name.auditor";
 
     /** Nom du profil reader */
-    static final public String READER_PROFILE_NAME = "bo.profile.name.reader";
+    public static final String READER_PROFILE_NAME = "bo.profile.name.reader";
 
     /** Nom du profil default */
-    static final public String DEFAULT_PROFILE_NAME = "bo.profile.name.default";
+    public static final String DEFAULT_PROFILE_NAME = "bo.profile.name.default";
 
     /**
      * Identifiant (au sens technique) de l'objet

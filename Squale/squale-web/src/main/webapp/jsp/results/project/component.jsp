@@ -5,6 +5,7 @@
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic"%>
 <%@taglib uri="/squale" prefix="squale"%>
+<%@taglib uri="http://www.squale.org/squale/security" prefix="sec"%>
 
 <%@ page
 	import="org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentType"%>
@@ -48,14 +49,10 @@
 	value="<%=new Integer(resultsList.size()).toString()%>" />
 
 <%-- On va interdire l'ecriture pour les lecteurs --%>
-<bean:define id="userProfile"
-	name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>"
-	property="<%=\"profile(\"+applicationId+\")\"%>" />
+<sec:notHasProfile var="disabled" profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>" />
 
 <%-- Pour les champs --%>
 <%
-// Pour indiquer si les champs sont en lecture seul ou pas en fonction du profile de l'utilisateur
-boolean disabled = !(userProfile.equals(ProfileBO.MANAGER_PROFILE_NAME) || userProfile.equals(ProfileBO.ADMIN_PROFILE_NAME));
 // On gère un message d'erreur dans le cas où le nombre de composants est trop important
 String errorMsg = (String) request.getSession().getAttribute(org.squale.squaleweb.applicationlayer.action.results.project.ProjectComponentsAction.TOO_MUCH_COMPONENTS_MSG);
 if (null != errorMsg) {

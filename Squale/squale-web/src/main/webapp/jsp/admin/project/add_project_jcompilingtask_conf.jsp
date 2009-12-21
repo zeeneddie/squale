@@ -3,6 +3,7 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
+<%@taglib uri="http://www.squale.org/squale/security" prefix="sec"%>
 
 <%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants"%>
 <%@ page import="org.squale.squaleweb.applicationlayer.formbean.LogonBean"%>
@@ -18,14 +19,7 @@
 <bean:define id="userProfile" name="user" property="<%=\"profile(\"+applicationId+\")\"%>" />
 
 <%-- Pour les champs --%>
-<%
-// On indique que les champs sont en read/write par défaut
-boolean disabled = false;
-%>
-
-<logic:equal name="userProfile"	value="<%=ProfileBO.READER_PROFILE_NAME%>">
-	<%disabled = true; //L'utilisateur n'a que les droits de lecture sur la page %>
-</logic:equal>
+<sec:notHasProfile var="disabled" profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>" />
 
 <%-- Pour les paramètres eclipse --%>
 <bean:define id="eclipseCompilation" name="jCompilingForm" property="eclipseCompilation" type="Boolean" />
@@ -67,7 +61,7 @@ boolean disabled = false;
 <%-- Displayed only if the kind of compilation hasn't been done --%>
 <logic:equal name="currentKindOfCompil" value="<%=ParametersConstants.NOT_DEFINED%>">
 	<%-- This block is not displayed if the user is only a reader for the application --%>	
-	<logic:notEqual name="userProfile" value="<%=ProfileBO.READER_PROFILE_NAME%>">
+	<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 		<af:form action="create_project_list_compiling.do">	
 			<br/>
 			<bean:message key="project_creation.compiling.java.details" />
@@ -85,7 +79,7 @@ boolean disabled = false;
 							onclick="<%=\"submitWithAction('jCompilingForm', 'addParameters', '\"+rsa_wsad+\"');\"%>" />
 			</af:buttonBar>
 		</af:form>
-	</logic:notEqual>
+	</sec:ifHasProfile>
 </logic:equal>
 
 <%-- Bloc displayed when the kind of compilation has been chosen --%>
@@ -267,7 +261,7 @@ boolean disabled = false;
 		
 			<%-- the button for displays the add compilation rule table are displayed only if the user is 
 			not a reader for the application --%>
-			<logic:notEqual name="userProfile" value="<%=ProfileBO.READER_PROFILE_NAME%>">
+			<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 				<af:buttonBar>
 
 					<%-- Displays table for add an ANT compilation rule --%>
@@ -290,7 +284,7 @@ boolean disabled = false;
 						type="form" />
 
 				</af:buttonBar>
-			</logic:notEqual>
+			</sec:ifHasProfile>
 		</logic:greaterThan>
 		<br />
 	
@@ -344,12 +338,12 @@ boolean disabled = false;
 		</table>
 
 		<%-- If the user is not a reader for the application, we display the add exclusion path button --%>
-		<logic:notEqual name="userProfile" value="<%=ProfileBO.READER_PROFILE_NAME%>">
+		<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 			<af:buttonBar>
 				<af:button onclick="addField('excludedDirTable', 2);"
 					name="add_ex_compil_line" singleSend="false" />
 			</af:buttonBar>
-		</logic:notEqual>
+		</sec:ifHasProfile>
 
 		<%-- End General compilation settings --%>
 	
@@ -479,7 +473,7 @@ boolean disabled = false;
 						<af:col property="name" key="project_creation.java.eclipse.var.name" />
 						<af:col property="lib" key="project_creation.java.eclipse.var.lib" />
 					</af:cols>
-					<logic:notEqual name="userProfile" value="<%=ProfileBO.READER_PROFILE_NAME%>">
+					<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 						<af:buttonBar>
 							<af:button
 								onclick="<%=\"submitWithAction('jCompilingForm', 'addParameters', '\"+ParametersConstants.ECLIPSE_VARS+\"');\"%>"
@@ -491,7 +485,7 @@ boolean disabled = false;
 									type="form" />
 							</logic:greaterThan>
 						</af:buttonBar>
-					</logic:notEqual>
+					</sec:ifHasProfile>
 				</af:table>	
 			<%-- End eclipse variables--%>
 				<br/>
@@ -511,7 +505,7 @@ boolean disabled = false;
 						<af:col property="name" key="project_creation.java.eclipse.lib.name" />
 						<af:col property="libsStr" key="project_creation.java.eclipse.lib.libs" />
 					</af:cols>
-					<logic:notEqual name="userProfile" value="<%=ProfileBO.READER_PROFILE_NAME%>">
+					<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 						<af:buttonBar>
 							<af:button
 								onclick="<%=\"submitWithAction('jCompilingForm', 'addParameters', '\"+ParametersConstants.ECLIPSE_LIBS+\"');\"%>"
@@ -523,7 +517,7 @@ boolean disabled = false;
 									type="form" />
 							</logic:greaterThan>
 						</af:buttonBar>
-					</logic:notEqual>
+					</sec:ifHasProfile>
 				</af:table> 
 				<%-- End eclipse libraries--%>
 				<br/>
@@ -531,7 +525,7 @@ boolean disabled = false;
 	
 				<%-- Advanced options visible only by administrators --%> 
 			
-				<logic:equal name="userProfile" value="<%=ProfileBO.ADMIN_PROFILE_NAME%>">
+				<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 					<h3>
 						<bean:message
 							key="project_creation.compiling.java.eclipse.advanced_options.title" />
@@ -557,7 +551,7 @@ boolean disabled = false;
 							</tr>
 						</tbody>
 					</table>
-				</logic:equal>
+				</sec:ifHasProfile>
 			</af:dropDownPanel>
 			<br/>
 			<br/>
@@ -566,8 +560,8 @@ boolean disabled = false;
 		<br/>
 		<%-- General task configuration button --%>
 		<%-- Displayed only if the user is not a reader for the application--%>
-		<logic:notEqual name="userProfile" value="<%=ProfileBO.READER_PROFILE_NAME%>">
+		<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 			<jsp:include page="common_parameters_buttons.jsp" />
-		</logic:notEqual>
+		</sec:ifHasProfile>
 	</af:form>
 </logic:notEqual>

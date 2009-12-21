@@ -3,6 +3,7 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="/WEB-INF/tlds/c-1_0.tld" prefix="c"%>
+<%@taglib uri="http://www.squale.org/squale/security" prefix="sec"%>
 <%@ page import="org.squale.squaleweb.applicationlayer.formbean.creation.CreateProjectForm"%>
 <%@ page import="org.squale.squaleweb.applicationlayer.formbean.component.parameters.GeneralParametersForm"%>
 <%@ page import="org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO"%>
@@ -34,13 +35,6 @@ it into a scripting variable called "projectId" --%>
 
 <%-- Duplicating an attribute of a bean and declaring a scripting variable --%>
 <bean:define id="toolBean" name="tool" />
-
-<%-- 
-	Defining a new 'page scope attribute' called "profile" by accessing the "profile+applicationId" value stored in
-	the "logonBean" (see org.squale.welcom.struts.util.WConstants.USER_KEY  for more info)
---%>
-<bean:define id="profile" name="<%=org.squale.welcom.struts.util.WConstants.USER_KEY%>" 
-property="<%=\"profile(\"+applicationId+\")\"%>" />
 
 <%-- Starting here the page --%>
 <af:page>
@@ -81,9 +75,9 @@ property="<%=\"profile(\"+applicationId+\")\"%>" />
 			
 			<div style="color: #f00">			
 				<%-- Displays a message if the connected user is a simple user and not an admin --%>
-				<logic:equal name="profile" value="<%=ProfileBO.READER_PROFILE_NAME%>">
+				<sec:ifNotHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 					<bean:message key="page.readonly" />
-				</logic:equal>
+				</sec:ifNotHasProfile>
 				
 				<html:messages id="message" property="<%=org.apache.struts.action.ActionMessages.GLOBAL_MESSAGE%>"
 					message="true">
@@ -224,11 +218,10 @@ property="<%=\"profile(\"+applicationId+\")\"%>" />
 				</logic:notEmpty>
 				
 				<%-- If the user is not a simple reader--%>
-				<logic:notEqual name="profile" value="<%=ProfileBO.READER_PROFILE_NAME%>">
+				<sec:ifHasProfile profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>">
 					<af:button type="form" name="end.configuration" toolTipKey="toolTip.end.project.configuration"
 					onclick="<%=\"manageApplication.do?action=selectApplicationToConfig&applicationId=\"+applicationId%>" />
-				</logic:notEqual>
-				
+				</sec:ifHasProfile>
 			</af:buttonBar>
 		</af:canvasCenter>
 	</af:body>

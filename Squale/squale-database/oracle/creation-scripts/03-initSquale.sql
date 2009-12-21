@@ -37,6 +37,10 @@ Insert into ProfileBO
  Values
    (profile_sequence.NextVal, 'bo.profile.name.manager');
 Insert into ProfileBO
+   (NAME)
+ Values
+   ('bo.profile.name.auditor');
+Insert into ProfileBO
    (PROFILEID, NAME)
  Values
    (profile_sequence.NextVal, 'bo.profile.name.reader');
@@ -98,6 +102,31 @@ Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
    ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.manager'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.documentation'));
+
+Insert into Profile_Rights
+   (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
+ Values
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.auditor'), 'bo.profile.action.readonly', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.portal_administration'));
+Insert into Profile_Rights
+   (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
+ Values
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.auditor'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_quality_result'));
+Insert into Profile_Rights
+   (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
+ Values
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.auditor'), 'bo.profile.action.none', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_administration'));
+Insert into Profile_Rights
+   (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
+ Values
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.auditor'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_component_result'));
+Insert into Profile_Rights
+   (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
+ Values
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.auditor'), 'bo.profile.action.readonly', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.project_creation'));
+Insert into Profile_Rights
+   (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
+ Values
+   ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.auditor'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.documentation'));
 
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
