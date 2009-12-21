@@ -36,9 +36,9 @@ alter table ApplicationLastExport
 -- Modifications needed to add the auditor role
 
 Insert into ProfileBO
-   (NAME)
+   (PROFILEID, NAME)
  Values
-   ('bo.profile.name.auditor');
+   (profile_sequence.NextVal, 'bo.profile.name.auditor');
 
 Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
@@ -64,3 +64,8 @@ Insert into Profile_Rights
    (PROFILEID, RIGHTS_VALUE, ATOMICRIGHTSID)
  Values
    ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.auditor'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.documentation'));
+
+Insert into UserBO
+   (USERID, MATRICULE, PASSWORD,PROFILEID)
+ Values
+   (user_sequence.NextVal, 'squaleauditor','audit',(select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'));   

@@ -105,3 +105,7 @@ Insert into Profile_Rights
  Values
    ((select PROFILEID from ProfileBO where NAME ='bo.profile.name.auditor'), 'bo.profile.action.readwrite', (select ATOMICRIGHTSID from AtomicRights where NAME = 'atomicright.type.documentation'));
 
+Insert into UserBO
+   ( MATRICULE, PASSWORD,PROFILEID)
+ Values
+   ( 'squaleauditor','audit',(select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'));

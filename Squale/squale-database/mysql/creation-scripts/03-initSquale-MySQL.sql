@@ -203,3 +203,8 @@ Insert into UserBO
    ( MATRICULE, PASSWORD,PROFILEID)
  Values
    ( 'user2','user2',(select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'));
+
+Insert into UserBO
+   ( MATRICULE, PASSWORD,PROFILEID)
+ Values
+   ( 'squaleauditor','audit',(select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'));

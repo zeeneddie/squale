@@ -37,9 +37,9 @@ Insert into ProfileBO
  Values
    (profile_sequence.NextVal, 'bo.profile.name.manager');
 Insert into ProfileBO
-   (NAME)
+   (PROFILEID, NAME)
  Values
-   ('bo.profile.name.auditor');
+   (profile_sequence.NextVal, 'bo.profile.name.auditor');
 Insert into ProfileBO
    (PROFILEID, NAME)
  Values
@@ -203,4 +203,10 @@ Insert into UserBO
    (USERID, MATRICULE, PASSWORD,PROFILEID)
  Values
    (user_sequence.NextVal, 'user2','user2',(select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'));
+   
+Insert into UserBO
+   (USERID, MATRICULE, PASSWORD,PROFILEID)
+ Values
+   (user_sequence.NextVal, 'squaleauditor','audit',(select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'));   
+   
 COMMIT;
