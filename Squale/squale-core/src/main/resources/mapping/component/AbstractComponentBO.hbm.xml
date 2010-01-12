@@ -14,8 +14,9 @@
     <property name="name" length="1024" column="Name" update="true" unique="false" not-null="true" type="string" insert="true"/>
     <many-to-one insert="true" column="Parent" cascade="save-update" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO" name="parent"/>
     <set inverse="false" cascade="none" lazy="true" table="Components_Audits" sort="unsorted" name="audits">
+	  <cache usage="read-write"/>
       <key column="ComponentId"/>
-      <many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO" column="AuditId" outer-join="auto"/>
+      <many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO" column="AuditId" outer-join="auto" fetch="join"/>
     </set>
     <many-to-one insert="true" column="ProjectId" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO" name="project"/>
     <set inverse="false" cascade="none" lazy="false" table="Tag_Component" sort="unsorted" name="tags">

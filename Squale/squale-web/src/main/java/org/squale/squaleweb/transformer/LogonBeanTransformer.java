@@ -75,44 +75,50 @@ public class LogonBeanTransformer
      *      java.lang.Object[]) {@inheritDoc}
      */
     public void formToObj( WActionForm pForm, Object[] pObject )
-        throws WTransformerException
-    {
-        // Extraction des paramètres
-        UserForm pUser = (UserForm) pForm;
-        LogonBean bean = (LogonBean) pObject[0];
-        boolean pIsAdmin = ( (Boolean) pObject[1] ).booleanValue();
-        bean.setId( pUser.getId() );
-        bean.setName( pUser.getName() );
-        bean.setEmail( pUser.getEmail() );
-        bean.setMatricule( pUser.getMatricule() );
-        // Traitement des profils
-        Iterator profilesEntries = pUser.getProfiles().entrySet().iterator();
-        HashMap idProfiles = new HashMap();
-        while ( profilesEntries.hasNext() )
-        {
-            Map.Entry entry = (Entry) profilesEntries.next();
-            // On stocke l'id ainsi que le nom du profile dans la map
-            idProfiles.put( new Long( ( (ApplicationForm) entry.getKey() ).getId() ),
-                            ( (ProfileForm) entry.getValue() ).getName() );
-        }
-        bean.setProfiles( idProfiles ); // Contient la liste des applications et les profils associés
-        bean.setApplicationsList( pUser.getApplicationsList() );
-        // recupere la liste des applications avec droit administrateurs
-        ArrayList mAdminList = new ArrayList();
-        // Les applications validées ou en cours de validation pour les gestionnaires
-        addManagerProfile( pUser, pIsAdmin, mAdminList, pUser.getApplicationsList() );
-        // Les applications en cours de validation
-        bean.setAdminList( mAdminList );
-        // Liste des applications seulement consultables
-        // cad les applications qui sont accessibles mais pas administrables
-        ArrayList readOnly = new ArrayList( pUser.getApplicationsList() );
-        readOnly.removeAll( bean.getAdminList() );
-        bean.setReadOnlyList( readOnly );
-        bean.setDefaultAccess( pUser.getDefaultAccess().getName() );
-        bean.setAdmin( pIsAdmin );
-        bean.setCurrentAccess( pUser.getDefaultAccess().getName() );
-        bean.setPublicList( pUser.getPublicApplicationsList() );
-    }
+    throws WTransformerException
+	{
+	    // Extraction des paramètres
+	    UserForm pUser = (UserForm) pForm;
+	    LogonBean bean = (LogonBean) pObject[0];
+	    boolean pIsAdmin = ( (Boolean) pObject[1] ).booleanValue();
+	    bean.setId( pUser.getId() );
+	    bean.setName( pUser.getName() );
+	    bean.setEmail( pUser.getEmail() );
+	    bean.setMatricule( pUser.getMatricule() );
+	    bean.setUnsubscribed(pUser.getUnsubscribed());
+	    // Traitement des profils
+	    Iterator profilesEntries = pUser.getProfiles().entrySet().iterator();
+	    HashMap idProfiles = new HashMap();
+	    HashMap idProfilesPerApplication = new HashMap();
+	    while ( profilesEntries.hasNext() )
+	    {
+	        Map.Entry entry = (Entry) profilesEntries.next();
+	        // On stocke l'id ainsi que le nom du profile dans la map
+	        idProfiles.put( new Long( ( (ApplicationForm) entry.getKey() ).getId() ),
+	                        ( (ProfileForm) entry.getValue() ).getName() );
+	        idProfilesPerApplication.put((ApplicationForm) entry.getKey(),
+	                ( (ProfileForm) entry.getValue() ).getName() );
+	    }
+	    bean.setProfiles( idProfiles ); // Contient la liste des applications et les profils associés
+	    bean.setProfilesFullApp(idProfilesPerApplication);
+	    bean.setApplicationsList( pUser.getApplicationsList() );
+	    bean.setInCreationList(pUser.getOnlyAdminApplicationsList());
+	    // recupere la liste des applications avec droit administrateurs
+	    ArrayList mAdminList = new ArrayList();
+	    // Les applications validées ou en cours de validation pour les gestionnaires
+	    addManagerProfile( pUser, pIsAdmin, mAdminList, pUser.getApplicationsList() );
+	    // Les applications en cours de validation
+	    bean.setAdminList( mAdminList );
+	    // Liste des applications seulement consultables
+	    // cad les applications qui sont accessibles mais pas administrables
+	    ArrayList readOnly = new ArrayList( pUser.getApplicationsList() );
+	    readOnly.removeAll( bean.getAdminList() );
+	    bean.setReadOnlyList( readOnly );
+	    bean.setDefaultAccess( pUser.getDefaultAccess().getName() );
+	    bean.setAdmin( pIsAdmin );
+	    bean.setCurrentAccess( pUser.getDefaultAccess().getName() );
+	    bean.setPublicList( pUser.getPublicApplicationsList() );
+	}
 
     /**
      * Ajoute à la liste des applications avec droit administrateurs les applications ayant ce droit se trouvant

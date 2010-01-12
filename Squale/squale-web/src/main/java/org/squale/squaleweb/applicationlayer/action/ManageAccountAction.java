@@ -18,6 +18,11 @@
  */
 package org.squale.squaleweb.applicationlayer.action;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,6 +39,8 @@ import org.squale.squalecommon.util.mail.MailException;
 import org.squale.squalecommon.util.mail.MailerHelper;
 import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
 import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.ProfileForm;
 import org.squale.squaleweb.applicationlayer.formbean.component.UserForm;
 import org.squale.squaleweb.resources.WebMessages;
 import org.squale.squaleweb.transformer.LogonBeanTransformer;
@@ -73,16 +80,28 @@ public class ManageAccountAction
         {
             // On récupère les informations du user connecté
             LogonBean logonBeanSecurity = (LogonBean) pRequest.getSession().getAttribute( WConstants.USER_KEY );
-            // On récupère les informations de l'utilisateur
-            UserDTO user = new UserDTO();
-            user.setMatricule( logonBeanSecurity.getMatricule() );
-
-            IApplicationComponent ac = AccessDelegateHelper.getInstance( "Login" );
-            Object[] paramIn = { user, Boolean.valueOf( logonBeanSecurity.isAdmin() ) };
-
-            user = (UserDTO) ac.execute( "verifyUser", paramIn );
-            // On met à jour le formulaire
-            WTransformerFactory.objToForm( UserTransformer.class, (WActionForm) pForm, user );
+            // On récupère les informations de l'utilisateur et remplit le formbean           
+            UserForm form = (UserForm) pForm;
+            form.setEmail(logonBeanSecurity.getEmail());
+            form.setMatricule(logonBeanSecurity.getMatricule());
+            form.setName(logonBeanSecurity.getUserName());
+            form.setId(logonBeanSecurity.getId());
+            form.setUnsubscribed(logonBeanSecurity.getUnsubscribed());
+            form.setApplicationsList(logonBeanSecurity.getApplicationsList());
+            form.setOnlyAdminApplicationsList(logonBeanSecurity.getInCreationList());
+            
+            Iterator profilesEntries = logonBeanSecurity.getProfilesFullApp().entrySet().iterator();
+            form.setProfiles(new HashMap());
+            while ( profilesEntries.hasNext() )
+            {
+            	Map.Entry entry = (Entry) profilesEntries.next();
+            	ApplicationForm aForm = (ApplicationForm) entry.getKey();
+            	String profileName = (String) entry.getValue();
+            	ProfileForm prForm = new ProfileForm();
+            	prForm.setName(profileName);
+            	form.getProfiles().put(aForm, prForm);
+            }
+            
             forward = pMapping.findForward( "detail" );
         }
         catch ( Exception e )

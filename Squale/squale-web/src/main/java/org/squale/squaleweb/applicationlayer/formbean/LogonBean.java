@@ -63,6 +63,11 @@ public class LogonBean
     private List mReadOnlyList = null;
 
     /**
+     * Liste des applications en cours de création (ApplicationDTO).
+     */
+    private List mInCreationList = null;
+
+    /**
      * Liste des applications publiques (ApplicationDTO).
      */
     private List mPublicList = null;
@@ -97,8 +102,19 @@ public class LogonBean
      * du profil associé (String).
      */
     private Map mProfiles = null;
-
+    
     /**
+     * La liste des applications accessibles à l'utilisateur. La clé ici est l'ApplicationForm, la valeur le nom
+     * du profil associé (String).
+     */
+    private Map mProfilesFullApp = null;
+    
+    /**
+     * Indique si l'utilisateur ne souhaite pas recevoir d'emails automatiques
+     */
+    private boolean mUnsubscribed = false;
+
+	/**
      * Id de l'utilisateur
      */
     private long mId = -1;
@@ -168,7 +184,21 @@ public class LogonBean
     {
         return mId;
     }
-
+    
+    /**
+     * @return la liste des applications accessibles à l'utilisateur
+     */
+    public Map getProfilesFullApp() {
+		return mProfilesFullApp;
+	}
+    
+	/**
+	 * @return si l'utilisateur ne souhaite pas recevoir d'emails automatiques
+	 */
+    public boolean getUnsubscribed() {
+		return mUnsubscribed;
+	}
+    
     /**
      * @param pId le nouvel ID
      */
@@ -232,6 +262,14 @@ public class LogonBean
     {
         return mReadOnlyList;
     }
+    
+    /**
+     * @return la liste des applications en cours de création
+     */
+    public List getInCreationList ()
+    {
+    	return mInCreationList;
+    }
 
     /**
      * @return la liste des applications publiques dont les résultats sont consutables
@@ -252,7 +290,7 @@ public class LogonBean
     }
 
     /**
-     * @see org.squale.welcom.struts.bean.WIResultAction#setResultAction(java.lang.String) {@inheritDoc}
+     * @see com.airfrance.welcom.struts.bean.WIResultAction#setResultAction(java.lang.String) {@inheritDoc}
      */
     public void setResultAction( String pResultAction )
     {
@@ -261,7 +299,7 @@ public class LogonBean
     }
 
     /**
-     * @see org.squale.welcom.struts.bean.WIResultAction#getResultAction() {@inheritDoc}
+     * @see com.airfrance.welcom.struts.bean.WIResultAction#getResultAction() {@inheritDoc}
      */
     public String getResultAction()
     {
@@ -299,6 +337,14 @@ public class LogonBean
     {
         mReadOnlyList = pList;
     }
+    
+    /**
+     * @param pList list des applications en cours de création
+     */
+    public void setInCreationList( List pList )
+    {
+    	mInCreationList = pList;
+    }
 
     /**
      * @param pList list des applications publiques ayant des résultats
@@ -323,6 +369,20 @@ public class LogonBean
     {
         mCurrentAccess = pCurrentAccess;
     }
+    
+    /** 
+     * @param profilesFullApp liste des applications accessibles à l'utilisateur
+     */
+	public void setProfilesFullApp(Map profilesFullApp) {
+		this.mProfilesFullApp = profilesFullApp;
+	}
+	
+	/**
+	 * @param unsubscribed si l'utilisateur ne souhaite pas recevoir d'emails automatiques
+	 */
+	public void setUnsubscribed(boolean unsubscribed) {
+		this.mUnsubscribed = unsubscribed;
+	}
 
     /**
      * Retourne l'accès associé.<br>
@@ -367,6 +427,11 @@ public class LogonBean
     {
         Long key = new Long( Long.parseLong( pAppliId ) );
         return mProfiles.get( key );
+    }
+    
+    public Map getProfiles()
+    {
+    	return mProfiles;
     }
 
     /**

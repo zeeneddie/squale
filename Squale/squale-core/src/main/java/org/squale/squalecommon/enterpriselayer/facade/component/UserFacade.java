@@ -307,14 +307,11 @@ public class UserFacade
                 Long applicationId = null;
                 Iterator applicationIterator = null;
                 // on ne veut pas les applications à supprimer
-                // Récupération de toutes les applications validées
-                applicationIterator = applicationDAO.findWhereStatus( pSession, ApplicationBO.VALIDATED ).iterator();
-                // Affectation des droits admin sur les applications validées
-                fillRights( pSession, applicationIterator, ProfileBO.ADMIN_PROFILE_NAME, rights, null );
-                // Récupération de toutes les applications a valider
-                applicationIterator = applicationDAO.findWhereStatus( pSession, ApplicationBO.IN_CREATION ).iterator();
-                // Affectation des droits pour l'utilisateur courant admin sur les applications à valider
-                fillRights( pSession, applicationIterator, ProfileBO.ADMIN_PROFILE_NAME, rights, null );
+                // Récupération de toutes les applications validées et a valider
+                int[] status = {ApplicationBO.VALIDATED, ApplicationBO.IN_CREATION};
+                applicationIterator = applicationDAO.findWhereStatus( pSession, status ).iterator();
+                // Affectation des droits admin sur les applications validées et a valider
+                fillRights( pSession, applicationIterator, ProfileBO.ADMIN_PROFILE_NAME, rights, null );                
             }
             else
             {
@@ -392,9 +389,7 @@ public class UserFacade
         ApplicationDAOImpl applicationDAO = ApplicationDAOImpl.getInstance();
         while ( pApplicationIterator.hasNext() )
         {
-            // Chargement de l'application
-            Long applicationId = new Long( ( (ApplicationBO) pApplicationIterator.next() ).getId() );
-            ApplicationBO rightKey = (ApplicationBO) applicationDAO.get( pSession, applicationId );
+        	ApplicationBO rightKey = (ApplicationBO) pApplicationIterator.next();
             if ( rightKey.getStatus() != ApplicationBO.DELETED )
             {
                 pRights.put( ComponentTransform.bo2Dto( rightKey ), adminProfile );

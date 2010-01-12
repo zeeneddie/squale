@@ -30,6 +30,8 @@
 		<!-- property name="dialect">org.hibernate.dialect.OracleDialect</property-->
 		<!-- property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property-->
 		<!-- property name="dialect">org.hibernate.dialect.HSQLDialect</property-->
+		
+		<property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
 
 		<!-- begin mapping files -->
 		<mapping resource="mapping/access/UserAccessBO.hbm.xml" />
@@ -51,7 +53,7 @@
 		<mapping resource="mapping/config/TaskRefBO.hbm.xml" />
 		<mapping resource="mapping/config/web/AbstractDisplayConfBO.hbm.xml" />
 		<mapping resource="mapping/config/web/HomepageComponentBO.hbm.xml"/>
-
+		
 		<mapping resource="mapping/job/JobBO.hbm.xml" />
 		
 		<mapping resource="mapping/message/MessageBO.hbm.xml" />
@@ -77,7 +79,7 @@
 		<mapping resource="mapping/rulechecking/RuleBO.hbm.xml" />		
 		<mapping resource="mapping/rulechecking/RuleSetBO.hbm.xml" />		
 		<mapping resource="mapping/rulechecking/checkstyle/CheckstyleModuleBO.hbm.xml" />
-
+		
 		<mapping resource="mapping/sharedrepository/ApplicationExportBO.hbm.xml"/>
 		
 		<mapping resource="mapping/stats/SiteStatsDICTBO.hbm.xml" />

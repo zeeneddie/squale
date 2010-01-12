@@ -278,6 +278,38 @@ public class ApplicationDAOImpl
     }
 
     /**
+     * Permet de recuperer tous les projets ayant comme status pStatusArray
+     * 
+     * @param pSession session Hibernate
+     * @param pStatusArray array de status d'un projet
+     * @return une liste d'applications ayant comme statut pStatusArray
+     * @throws JrafDaoException si une erreur à lieu
+     */
+    public List findWhereStatus( ISession pSession, int[] pStatusArray)
+    	throws JrafDaoException
+    {
+    	if ((pStatusArray == null) || (pStatusArray.length == 0))
+    	{
+    		LOG.error("pStatusArray est vide!");
+    	}
+    	StringBuffer inClause = new StringBuffer(); 
+    	for (int i = 0; i < pStatusArray.length; i++)
+    	{
+    		if (i > 0)
+    		{
+    			inClause.append(", ");
+    		}
+    		inClause.append(pStatusArray[i]);
+    	}
+        String whereClause = "where ";
+        whereClause += getAlias() + ".status in (" + inClause.toString() + ")";
+        whereClause += " order by lower(" + getAlias() + ".name)";
+        LOG.info( "query(findWhereStatus) = " + whereClause );
+        List ret = (List) findWhere( pSession, whereClause );
+        return ret;
+    }    
+    
+    /**
      * Permet de recuperer tous les projets ayant un caractère public
      * 
      * @param pSession session Hibernate

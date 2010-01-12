@@ -25,6 +25,8 @@
 		<property name="jdbc.use_streams_for_binary">true</property>
 
 		<property name="dialect">${squale.db.dialect}</property>
+		
+		<property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
 
 		<!-- begin mapping files -->
 		<mapping resource="mapping/access/UserAccessBO.hbm.xml" />
@@ -46,7 +48,7 @@
 		<mapping resource="mapping/config/TaskRefBO.hbm.xml" />
 		<mapping resource="mapping/config/web/AbstractDisplayConfBO.hbm.xml" />
 		<mapping resource="mapping/config/web/HomepageComponentBO.hbm.xml"/>
-
+		
 		<mapping resource="mapping/job/JobBO.hbm.xml" />
 		
 		<mapping resource="mapping/message/MessageBO.hbm.xml" />
@@ -72,9 +74,9 @@
 		<mapping resource="mapping/rulechecking/RuleBO.hbm.xml" />		
 		<mapping resource="mapping/rulechecking/RuleSetBO.hbm.xml" />		
 		<mapping resource="mapping/rulechecking/checkstyle/CheckstyleModuleBO.hbm.xml" />
-
+		
 		<mapping resource="mapping/sharedrepository/ApplicationExportBO.hbm.xml"/>
-				
+		
 		<mapping resource="mapping/stats/SiteStatsDICTBO.hbm.xml" />
 		<mapping resource="mapping/stats/SiteAndProfilStatsDICTBO.hbm.xml" />
 		
