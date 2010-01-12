@@ -16,7 +16,9 @@
 	      	<entetes></entetes>
 	      	<parameters>
 	      		<!-- CSV output mode -->
-	        	<parameter>-A</parameter>
+	        	<parameter>-C</parameter>
+	        	<!-- Pour afficher le nom de fichier input -->
+	        	<parameter>-fa</parameter>
 	        	<!-- les options pour récupérer le type de données voulues -->
 	        	<parameter>-Tf</parameter>
 	        	<!-- Pour avoir les métriques orientés objets -->
@@ -32,7 +34,9 @@
 	      	<entetes></entetes>
 	      	<parameters>
 	      		<!-- CSV output mode -->
-	        	<parameter>-A</parameter>
+	        	<parameter>-C</parameter>
+	        	<!-- Pour afficher le nom de fichier input -->
+	        	<parameter>-fa</parameter>
 	        	<!-- les options pour récupérer le type de données voulues -->
 	        	<parameter>-Tf</parameter>
 	        	<!-- Pour avoir les métriques orientés objets -->
@@ -48,7 +52,9 @@
 	      	<entetes></entetes>
 	      	<parameters>
 	      		<!-- CSV output mode -->
-	        	<parameter>-A</parameter>
+	        	<parameter>-C</parameter>
+	        	<!-- Pour afficher le nom de fichier input -->
+	        	<parameter>-fa</parameter>
 	        	<!-- les options pour récupérer le type de données voulues -->
 	        	<parameter>-Tf</parameter>
 	        	<!-- Pour avoir les métriques orientés objets -->
@@ -64,7 +70,9 @@
 	      	<entetes></entetes>
 	      	<parameters>
 	      		<!-- CSV output mode -->
-	        	<parameter>-A</parameter>
+	        	<parameter>-C</parameter>
+	        	<!-- Pour afficher le nom de fichier input -->
+	        	<parameter>-fa</parameter>
 	        	<!-- les options pour récupérer le type de données voulues -->
 	        	<parameter>-Tf</parameter>
 	        	<!-- Pour avoir les métriques orientés objets -->
@@ -80,7 +88,9 @@
 	      	<entetes>.h,.hh,.hxx,.hpp</entetes>
 	     	<parameters>
 		      	<!-- CSV output mode -->
-	        	<parameter>-A</parameter>
+	        	<parameter>-C</parameter>
+	        	<!-- Pour afficher le nom de fichier input -->
+	        	<parameter>-fa</parameter>
 	        	<!-- les options pour récupérer le type de données voulues -->
 	        	<parameter>-Tf</parameter>
 	        	<!-- Pour avoir les métriques orientés objets -->

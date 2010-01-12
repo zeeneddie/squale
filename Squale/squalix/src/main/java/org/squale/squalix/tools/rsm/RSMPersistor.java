@@ -127,7 +127,7 @@ public class RSMPersistor
     private final static String CLASS_LOCATOR = "Class,";
 
     /** Le marqueur pour préprocesser le rapport généré et en extraire les métriques de méthodes */
-    private final static String METHOD_LOCATOR = "f(),";
+    private final static String METHOD_LOCATOR = "Function,";
 
     /** Marqueur pour signaler la fin de la zone doublon */
     private final static String FILE_LOCATOR = "File,";
@@ -137,6 +137,16 @@ public class RSMPersistor
 
     /** Marqueur pour signaler la fin de la zone doublon */
     private final static String RESTART_WRITE = "ProjectClassMetrics";
+    
+    /**
+     * Chaîne contenant l'expression régulière permettant de effacer les paramètres 3 à 5 de la ligne méthode
+     */
+    private String mREGEXPREMOVEPARAMS = ",[^,]*\\([^,]*\\),[^,]*,[^,]*";
+    
+    /**
+     * Chaîne contenant l'expression régulière permettant de effacer les paramètres function point attaché aux champs LOC, ELOC, LLOC
+     */    
+    private String mREGEXPREMOVEFUNCTIONPOINT = ",([^,]*)/[^,]*";
 
     /**
      * Constructeur.
@@ -256,11 +266,15 @@ public class RSMPersistor
                         // on écrit la ligne
                         for ( int i = 0; i < results.size(); i++ )
                         {
-                            // efface le retour à la ligne
+                        	// efface le retour à la ligne
                             String result = ( (String) ( results.get( i ) ) ).replaceAll( "\n", "" );
+
+                            // efface paramètres 3 à 5 et function points
+                            result = result.replaceFirst(mREGEXPREMOVEPARAMS, "").replaceAll(mREGEXPREMOVEFUNCTIONPOINT, ",$1");
+                            
                             // Dans ce cas il faut rajouter un " " sinon le parser ne tient pas compte de la colonne
                             if ( result.charAt( result.length() - 1 ) != ' ' )
-                            {
+                            {                        
                                 bw.write( result + " ," + fileName + "\n" );
                             }
                             else
@@ -466,8 +480,12 @@ public class RSMPersistor
             bo.setAudit( mAudit );
             // Le nom du fichier est mis en relatif par rapport à la racine du projet
             String completFileName = bo.getFileName();
-            String fileName = completFileName.substring( completFileName.indexOf( "vobs" ), completFileName.length() );
-            bo.setFileName( fileName );
+            if (completFileName.indexOf( "vobs" ) != -1) {
+            	String fileName = completFileName.substring( completFileName.indexOf( "vobs" ), completFileName.length() );
+            	bo.setFileName( fileName );
+        	} else {
+        		bo.setFileName( completFileName );
+        	}
             bo.setTaskName( mTaskName );
             mNumberOfMethods++;
             // Problème RSM avec le polymorphisme, si plusieurs méthodes de meme nom présentes

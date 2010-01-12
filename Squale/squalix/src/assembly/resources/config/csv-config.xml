@@ -148,9 +148,9 @@
 		<footer size="0" />
 		<fields>
 			<field name="componentName" type="java.lang.String" column="1"></field>
-			<field name="comments" type="java.lang.Integer" column="7"></field>
-			<field name="sloc" type="java.lang.Integer" column="9"></field>
-			<field name="fileName" type="java.lang.String" column="19"></field>
+			<field name="comments" type="java.lang.Integer" column="5"></field>
+			<field name="sloc" type="java.lang.Integer" column="2"></field>
+			<field name="fileName" type="java.lang.String" column="17"></field>
 		</fields>
 	</template>		
 	
