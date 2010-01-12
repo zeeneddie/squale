@@ -65,6 +65,9 @@
 								<descriptor>
 									src/assembly/squalix-batch-package.xml
 								</descriptor>
+								<descriptor>
+									src/assembly/server-package.xml
+								</descriptor>
 							</descriptors>
 						</configuration>
 					</execution>
@@ -82,7 +85,7 @@
 			<groupId>${pom.groupId}</groupId>
 			<artifactId>squale-export</artifactId>
 			<version>${pom.version}</version>
-		</dependency>
+		</dependency>		
 		<dependency>
 			<groupId>org.squale.jraf</groupId>
 			<artifactId>jraf-bootstrap</artifactId>
