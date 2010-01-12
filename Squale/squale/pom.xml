@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.squale.app</groupId>
 	<artifactId>squale</artifactId>
-	<version>6.0-SNAPSHOT</version>
+	<version>5.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Squale Project</name>
 	<description>Software QUALity Enhancement</description>
@@ -35,6 +35,8 @@
 	<properties>
 		<squale.props.jraf.version>2.7.0</squale.props.jraf.version>
 		<squale.props.welcom.version>2.6.0</squale.props.welcom.version>
+		<!-- Important !! Source Encoding is cp1252 normally, but ISO-8859-1 is the closest on Linux -->
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 	</properties>
 	<build>
 		<resources>
