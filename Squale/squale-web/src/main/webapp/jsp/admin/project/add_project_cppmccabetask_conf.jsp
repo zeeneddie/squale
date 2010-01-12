@@ -14,7 +14,8 @@
 	property="applicationId" type="String" />
 
 <%-- On va interdire l'ecriture pour les lecteurs --%>
-<sec:notHasProfile var="disabled" profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>" />
+<sec:notHasProfile var="disabledObj" profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>" />
+<%boolean disabled = ((Boolean)pageContext.getAttribute("disabledObj")).booleanValue();%>
 
 <br />
 <bean:message key="project_creation.cpptest.details"/>

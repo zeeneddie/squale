@@ -18,7 +18,8 @@
 	property="applicationId" type="String" />
 
 <%-- Getting the property of userProfile variable so as to define the authorisation --%>
-<sec:notHasProfile var="disabled" profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>" />
+<sec:notHasProfile var="disabledObj" profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>" />
+<%boolean disabled = ((Boolean)pageContext.getAttribute("disabledObj")).booleanValue();%>
 
 <%-- 
 	Main configuration of the generic tool thanks to a form :

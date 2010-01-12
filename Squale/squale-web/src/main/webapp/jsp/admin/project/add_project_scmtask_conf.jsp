@@ -12,7 +12,8 @@
 	property="applicationId" type="String" />
 
 <%-- Readers can't update the configuration --%>
-<sec:notHasProfile var="disabled" profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>" />
+<sec:notHasProfile var="disabledObj" profiles="<%=ProfileBO.ADMIN_PROFILE_NAME + ',' + ProfileBO.MANAGER_PROFILE_NAME%>" applicationId="<%=applicationId%>" />
+<%boolean disabled = ((Boolean)pageContext.getAttribute("disabledObj")).booleanValue();%>
 
 <br />
 <br />
