@@ -215,6 +215,12 @@
 				<groupId>org.squale.welcom</groupId>
 				<artifactId>welcom</artifactId>
 				<version>${squale.props.welcom.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>eclipse</groupId>
+						<artifactId>jdtcore</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>asm</groupId>
