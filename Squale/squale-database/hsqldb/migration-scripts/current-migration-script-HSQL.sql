@@ -109,3 +109,14 @@ Insert into UserBO
    ( MATRICULE, PASSWORD,PROFILEID)
  Values
    ( 'squaleauditor','audit',(select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'));
+-- #####################################################
+-- Modification for #228 
+   
+alter table QualityResult_Comment 
+		drop constraint FKD36C3ADCCCF6BB41;            
+        
+alter table QualityResult_Comment 
+        add constraint FKD36C3ADCCCF6BB41 
+        foreign key (QualityResultId) 
+        references QualityResult
+        on delete cascade;

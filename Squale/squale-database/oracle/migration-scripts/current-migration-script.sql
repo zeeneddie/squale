@@ -68,4 +68,16 @@ Insert into Profile_Rights
 Insert into UserBO
    (USERID, MATRICULE, PASSWORD,PROFILEID)
  Values
-   (user_sequence.NextVal, 'squaleauditor','audit',(select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'));   
+   (user_sequence.NextVal, 'squaleauditor','audit',(select PROFILEID from ProfileBO where NAME ='bo.profile.name.default'));
+
+-- #####################################################
+--Modifications for [#228]
+alter table qualityresult_comment
+	drop constraint FKD36C3ADCCCF6BB41;
+
+alter table qualityresult_comment add constraint FKD36C3ADCCCF6BB41 
+	foreign key (QUALITYRESULTID)
+    references qualityresult
+	on delete cascade;
+
+-- #####################################################

@@ -1247,7 +1247,8 @@
         add index FKD36C3ADCCCF6BB41 (QualityResultId), 
         add constraint FKD36C3ADCCCF6BB41 
         foreign key (QualityResultId) 
-        references QualityResult (QualityResultId);
+        references QualityResult (QualityResultId)
+        on delete cascade;
 
     alter table QualityRule 
         add index FK420ADC7BE9F00F7 (Formula), 
