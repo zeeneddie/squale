@@ -151,6 +151,8 @@
 		</profile>
 	</profiles>
 	<admin-params>
+		<!--  need at least two values to compute criterias or factors : true or false. True by default  -->
+		<two-to-compute>true</two-to-compute>
 		<mail>
 			<!--<smtp-server></smtp-server>-->
 			<!--<sender-address></sender-address>-->

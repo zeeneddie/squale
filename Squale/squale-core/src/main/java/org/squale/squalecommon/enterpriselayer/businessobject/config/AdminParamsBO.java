@@ -38,6 +38,11 @@ public class AdminParamsBO
     public static final String ADMIN_PARAMS = "configuration/admin-params";
     
     /**
+     * Need at least two values to compute criterias or factors : true or false
+     */
+    public static final String TWO_TO_COMPUTE = "configuration/admin-params/two-to-compute";
+    
+    /**
      * Default mail paramKey
      */
     public static final String MAIL = "configuration/admin-params/mail/";

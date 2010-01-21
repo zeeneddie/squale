@@ -162,6 +162,14 @@ public class SqualixConfigImport
 
         configDigester.addSetNext( "configuration/profiles/profile", "addProfile" );
 
+        // two-to-compute - value
+        configDigester.addObjectCreate( "configuration/admin-params/two-to-compute", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/two-to-compute", "setAdminParam", 2, 
+                                      new Class[] { String.class, String.class } );
+        configDigester.addCallParamPath( "configuration/admin-params/two-to-compute", 0 );
+        configDigester.addCallParam( "configuration/admin-params/two-to-compute", 1 );
+        configDigester.addSetNext( "configuration/admin-params/two-to-compute", "addAdminParam" );
+        
         // mail - smtp server
         configDigester.addObjectCreate( "configuration/admin-params/mail/smtp-server", AdminParamsBO.class );
         configDigester.addCallMethod( "configuration/admin-params/mail/smtp-server", "setAdminParam", 2, new Class[] {

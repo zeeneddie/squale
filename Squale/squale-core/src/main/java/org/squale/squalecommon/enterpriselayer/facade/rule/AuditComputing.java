@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -38,6 +39,7 @@ import org.squale.squalecommon.daolayer.component.AbstractComponentDAOImpl;
 import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
 import org.squale.squalecommon.daolayer.component.AuditDisplayConfDAOImpl;
 import org.squale.squalecommon.daolayer.component.AuditGridDAOImpl;
+import org.squale.squalecommon.daolayer.config.AdminParamsDAOImpl;
 import org.squale.squalecommon.daolayer.result.MarkDAOImpl;
 import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
 import org.squale.squalecommon.daolayer.result.QualityResultDAOImpl;
@@ -46,6 +48,7 @@ import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditGridBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.Profile_DisplayConfBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.CriteriumResultBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.FactorResultBO;
@@ -69,6 +72,13 @@ public final class AuditComputing
 {
     /** Log */
     private static Log LOG = LogFactory.getLog( AuditComputing.class );
+    
+    /**
+     * Define whether or not we need at least two values to compute criterias or factors.
+     * 1 if we need two values. 
+     * 0 if one is enough
+     */
+    private static int MIN_NUMBER_OF_PRACTICES_OR_CRITERIAS = 1;
 
     /**
      * Define private constructor for utility class
@@ -104,7 +114,22 @@ public final class AuditComputing
             // Le traitement se fait dans l'ordre hiérarchique inverse
             // celà permet d'éviter les calculs multiples pour des facteurs
             // ou des critères plusieurs fois présents
-
+            // first : do we need at least two practices or two criterias to compute criterias or factors
+            List adminParamsList = AdminParamsDAOImpl.getInstance().findByKey( pSession, AdminParamsBO.TWO_TO_COMPUTE );
+            //we check if the parameter TWO_TO_COMPUTE exists
+            if ( adminParamsList.size() > 0 )
+            {
+                AdminParamsBO paramsBO = (AdminParamsBO) adminParamsList.get( 0 );
+                //we check the value and change the min number of criterias / practices if necessary
+                if ( paramsBO.getParamValue().equals( "false" ) )
+                {
+                    MIN_NUMBER_OF_PRACTICES_OR_CRITERIAS = 0;
+                }
+                else 
+                {
+                    MIN_NUMBER_OF_PRACTICES_OR_CRITERIAS = 1;
+                }
+            }
             // Traitement des pratiques
             warning = computePracticesResults( pSession, pProject, pAudit, practices );
             // Traitement des criteres
@@ -255,8 +280,9 @@ public final class AuditComputing
                     nbCriteria++;
                 }
             }
-            // Calcul seulement s'il existe au moins deux résultats
-            if ( nbCriteria > 1 )
+         // the value of MIN_NUMBER_OF_PRACTICES_OR_CRITERIAS depends on whether or not we 
+         // need at least two values to compute factors. This param is set in squale-config file
+            if ( nbCriteria > MIN_NUMBER_OF_PRACTICES_OR_CRITERIAS )
             {
                 // calcul de la note du facteur
                 result.setMeanMark( criteriaSum / sumOfCriteriaWeight );
@@ -309,8 +335,9 @@ public final class AuditComputing
                     nbPractices++;
                 }
             }
-            // Calcul seulement s'il existe au moins deux résultats
-            if ( nbPractices > 1 )
+            // the value of MIN_NUMBER_OF_PRACTICES_OR_CRITERIAS depends on whether or not we 
+            // need at least two values to compute criterias. This param is set in squale-config file 
+            if ( nbPractices > MIN_NUMBER_OF_PRACTICES_OR_CRITERIAS )
             {
                 // calcul de la note du facteur
                 result.setMeanMark( practicesSum / sumOfPracticesWeight );

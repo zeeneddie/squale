@@ -169,7 +169,7 @@ public class ConfigurationImport
             }
 
             // Insert the adminParams
-            removeAdminParams();
+            removeAdminParams( session );
             adminParamsDTO = createAdminParams( session, configBO.getAdminParams() );
             manageEntityId( session );
             configDTO.setAdminParams( adminParamsDTO );
@@ -685,25 +685,22 @@ public class ConfigurationImport
     /**
      * This method delete all the admin params in the db which ley start with "configuration/admin-params"
      * 
+     * @param pSession la session hibernate
      * @throws JrafEnterpriseException Exception occurs during the deletion of the adminParams
      */
-    private static void removeAdminParams()
+    private static void removeAdminParams( ISession pSession )
         throws JrafEnterpriseException
     {
-        ISession session = null;
         try
         {
-            // Hibernate session
-            session = PERSISTENTPROVIDER.getSession();
-
             // We retrieve all the admin params bo which key start with "configuration/admin-params"
             // -->This means we don't retriev entityId
             AdminParamsDAOImpl adminParamDAO = AdminParamsDAOImpl.getInstance();
-            List<AdminParamsBO> allAdminParams = adminParamDAO.findByKeyLike( session, AdminParamsBO.ADMIN_PARAMS );
+            List<AdminParamsBO> allAdminParams = adminParamDAO.findByKeyLike( pSession, AdminParamsBO.ADMIN_PARAMS );
             // We delete all the admin params retieve
             for ( AdminParamsBO adminParamsBO : allAdminParams )
             {
-                adminParamDAO.remove( session, adminParamsBO );
+                adminParamDAO.remove( pSession, adminParamsBO );
             }
         }
         catch ( JrafException e )
@@ -712,7 +709,7 @@ public class ConfigurationImport
         }
         finally
         {
-            FacadeHelper.closeSession( session, ConfigurationImport.class.getName() + ".removeTasks" );
+            FacadeHelper.closeSession( pSession, ConfigurationImport.class.getName() + ".removeTasks" );
         }
     }
 }

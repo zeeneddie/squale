@@ -4,7 +4,7 @@
    (stoptimes, frequencies?,tasks,sourcemanagements,profiles,admin-params)
 >
 <!ELEMENT admin-params
-   (mail,shared-repository-export?)
+   (two-to-compute, mail,shared-repository-export?)
 >
 
 
@@ -82,7 +82,11 @@
 	(#PCDATA)
 >
 <!-- ### End of the mail section ### -->
-
+<!-- ### two to compute section ### -->
+<!ELEMENT two-to-compute
+	(#PCDATA)
+>
+<!-- ###  End of two to compute section ### -->
 <!ELEMENT stoptimes
    (stoptime*)
 >
