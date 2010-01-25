@@ -170,6 +170,8 @@
 		</profile>
 	</profiles>
 	<admin-params>
+		<!--  need at least two values to compute criterias or factors : true or false. True by default  -->
+		<two-to-compute>true</two-to-compute>
 		<mail>
 			<admin-mailing-list>--</admin-mailing-list><!-- mandatory -->
 			<!--<smtp-server></smtp-server>-->
