@@ -1,0 +1,19 @@
+div.dm-box {
+	border: solid 1px black;
+	margin: 5px;
+	float: left;
+}
+
+div.big-box {
+	border: solid 1px black;
+	background-color : red;
+	margin: 5px;
+	float: left;
+}
+
+div.small-box {
+	border: solid 1px black;
+	background-color : blue;
+	margin: 5px;
+	float: left;
+}
