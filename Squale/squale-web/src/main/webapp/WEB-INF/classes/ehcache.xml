@@ -15,11 +15,4 @@
  timeToLiveSeconds="360"
  overflowToDisk="false"
  />
-<cache name = "com.airfrance.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO.audits"
- maxElementsInMemory="10000"
- eternal="false"
- overflowToDisk="false"
- timeToIdleSeconds="20"
- timeToLiveSeconds="1800"
-/>
 </ehcache>

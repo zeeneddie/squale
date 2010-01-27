@@ -31,8 +31,6 @@
 		<!-- property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property-->
 		<!-- property name="dialect">org.hibernate.dialect.HSQLDialect</property-->
 		
-		<property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
-
 		<!-- begin mapping files -->
 		<mapping resource="mapping/access/UserAccessBO.hbm.xml" />
 		
