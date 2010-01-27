@@ -3,37 +3,46 @@
  */
 package org.squale.test.gwt.client.widget;
 
+import org.squale.test.gwt.client.widget.data.Child;
+import org.squale.test.gwt.client.widget.data.Parent;
+
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOverEvent;
-import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.FlowPanel;
 
 /**
  * @author fabrice
- * 
  */
-public class BigBox extends AbstractBox {
+class BigBox
+    extends AbstractBox
+{
 
-	public BigBox(DistributionMap dm, String name) {
-		super(dm, name);
+    private Parent parentData;
 
-		FlowPanel mainPanel = new FlowPanel();
-		for (int i = 0; i < (Random.nextInt(30) + 1); i++) {
-			mainPanel.add(new SmallBox(dm, "Small BOX #" + i));
-		}
-		initWidget(mainPanel);
+    public BigBox( DistributionMap dm, Parent parent )
+    {
+        super( dm, parent.getName() );
+        this.parentData = parent;
 
-		setWidth("100px");
-		setStylePrimaryName("big-box");
-	}
+        FlowPanel mainPanel = new FlowPanel();
+        for ( Child child : parentData.getChildren() )
+        {
+            mainPanel.add( new SmallBox( dm, child ) );
+        }
+        initWidget( mainPanel );
 
-	public void onMouseOut(MouseOutEvent event) {
-		getDistributionMap().hideDetailPopupForBigBox();
-	}
+        setWidth( "100px" );
+        setStylePrimaryName( "big-box" );
+    }
 
-	public void onMouseOver(MouseOverEvent event) {
-		getDistributionMap().showDetailPopupForBigBox("Hi from " + getName(),
-				event.getClientX(), event.getClientY());
-	}
+    public void onMouseOut( MouseOutEvent event )
+    {
+        getDistributionMap().hideDetailPopupForBigBox();
+    }
+
+    public void onMouseOver( MouseOverEvent event )
+    {
+        getDistributionMap().showDetailPopupForBigBox( "Component " + getName(), event.getClientX(), event.getClientY() );
+    }
 
 }

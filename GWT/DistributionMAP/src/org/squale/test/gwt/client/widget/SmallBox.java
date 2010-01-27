@@ -3,33 +3,58 @@
  */
 package org.squale.test.gwt.client.widget;
 
+import org.squale.test.gwt.client.widget.data.Child;
+
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.user.client.ui.HTML;
 
 /**
  * @author fabrice
- * 
  */
-public class SmallBox extends AbstractBox {
+class SmallBox
+    extends AbstractBox
+{
 
-	public SmallBox(DistributionMap dm, String name) {
-		super(dm, name);
+    private Child childData;
 
-		HTML divElement = new HTML();
-		divElement.setSize("10px", "10px");
-		divElement.setStylePrimaryName("small-box");
+    public SmallBox( DistributionMap dm, Child child )
+    {
+        super( dm, child.getName() );
+        this.childData = child;
 
-		initWidget(divElement);
-	}
+        HTML divElement = new HTML();
+        divElement.setSize( "10px", "10px" );
+        divElement.setStylePrimaryName( "small-box" );
 
-	public void onMouseOut(MouseOutEvent event) {
-		getDistributionMap().hideDetailPopupForSmallBox();
-	}
+        float grade = childData.getGrade();
+        if ( grade >= 2 )
+        {
+            divElement.addStyleName( "top-grade" );
+        }
+        else if ( grade >= 1 )
+        {
+            divElement.addStyleName( "mid-grade" );
+        }
+        else
+        {
+            divElement.addStyleName( "low-grade" );
+        }
 
-	public void onMouseOver(MouseOverEvent event) {
-		getDistributionMap().showDetailPopupForSmallBox("Hi from " + getName(),
-				event.getClientX(), event.getClientY());
-	}
+        initWidget( divElement );
+    }
+
+    public void onMouseOut( MouseOutEvent event )
+    {
+        getDistributionMap().hideDetailPopupForSmallBox();
+    }
+
+    public void onMouseOver( MouseOverEvent event )
+    {
+        getDistributionMap().showDetailPopupForSmallBox(
+                                                         "Element " + childData.getName() + "<br/>Grade: "
+                                                             + childData.getGrade(), event.getClientX(),
+                                                         event.getClientY() );
+    }
 
 }

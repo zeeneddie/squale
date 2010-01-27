@@ -3,7 +3,11 @@
  */
 package org.squale.test.gwt.client.widget;
 
-import com.google.gwt.user.client.Random;
+import java.util.ArrayList;
+
+import org.squale.test.gwt.client.widget.data.Parent;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -12,57 +16,89 @@ import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author fabrice
- * 
  */
-public class DistributionMap extends Composite {
+public class DistributionMap
+    extends Composite
+{
+    final AsyncCallback<ArrayList<Parent>> callback = new AsyncCallback<ArrayList<Parent>>()
+    {
+        public void onSuccess( ArrayList<Parent> result )
+        {
+            displayBoxes( result );
+        }
 
-	final private DecoratedPopupPanel detailPopup = new DecoratedPopupPanel(
-			true);
-	private String bigBoxDetailPopupMessage;
-	private String smallBoxDetailPopupMessage;
+        public void onFailure( Throwable caught )
+        {
+            mainPanel.clear();
+            mainPanel.add( new HTML( caught.toString() ) );
+        }
+    };
 
-	public DistributionMap() {
-		FlowPanel mainPanel = new FlowPanel();
+    final private FlowPanel mainPanel = new FlowPanel();
 
-		for (int i = 0; i < 30; i++) {
-			mainPanel.add(createBigBox());
-		}
+    final private Widget loadingLabel = new HTML( "<div class='loading-label'></div>" );
 
-		detailPopup.setWidth("150px");
+    final private DecoratedPopupPanel detailPopup = new DecoratedPopupPanel( true );
 
-		initWidget(mainPanel);
-	}
+    private String bigBoxDetailPopupMessage;
 
-	private Widget createBigBox() {
-		BigBox box = new BigBox(this, "Big BOX #" + Random.nextInt(100));
-		return box;
-	}
+    private String smallBoxDetailPopupMessage;
 
-	public void updateDetailPopup(int xPosition, int yPosition) {
-		detailPopup.setPopupPosition(xPosition + 1, yPosition + 1);
-	}
+    public DistributionMap()
+    {
+        detailPopup.setWidth( "150px" );
 
-	public void hideDetailPopupForSmallBox() {
-		detailPopup.setWidget(new HTML(bigBoxDetailPopupMessage));
-	}
+        initWidget( mainPanel );
+    }
 
-	public void showDetailPopupForSmallBox(String message, int xPosition,
-			int yPosition) {
-		smallBoxDetailPopupMessage = message;
-		detailPopup.setWidget(new HTML(smallBoxDetailPopupMessage));
-		detailPopup.show();
-		updateDetailPopup(xPosition, yPosition);
-	}
+    public void startLoading()
+    {
+        mainPanel.clear();
+        mainPanel.add( loadingLabel );
+    }
 
-	public void hideDetailPopupForBigBox() {
-		detailPopup.hide();
-	}
+    public AsyncCallback<ArrayList<Parent>> getCallback()
+    {
+        return callback;
+    }
 
-	public void showDetailPopupForBigBox(String message, int xPosition,
-			int yPosition) {
-		bigBoxDetailPopupMessage = message;
-		detailPopup.setWidget(new HTML(bigBoxDetailPopupMessage));
-		detailPopup.show();
-		updateDetailPopup(xPosition, yPosition);
-	}
+    private void displayBoxes( ArrayList<Parent> parents )
+    {
+        mainPanel.clear();
+        for ( Parent parent : parents )
+        {
+            mainPanel.add( new BigBox( this, parent ) );
+        }
+    }
+
+    void updateDetailPopup( int xPosition, int yPosition )
+    {
+        detailPopup.setPopupPosition( xPosition + 1, yPosition + 1 );
+    }
+
+    void hideDetailPopupForSmallBox()
+    {
+        detailPopup.setWidget( new HTML( bigBoxDetailPopupMessage ) );
+    }
+
+    void showDetailPopupForSmallBox( String message, int xPosition, int yPosition )
+    {
+        smallBoxDetailPopupMessage = message;
+        detailPopup.setWidget( new HTML( smallBoxDetailPopupMessage ) );
+        detailPopup.show();
+        updateDetailPopup( xPosition, yPosition );
+    }
+
+    void hideDetailPopupForBigBox()
+    {
+        detailPopup.hide();
+    }
+
+    void showDetailPopupForBigBox( String message, int xPosition, int yPosition )
+    {
+        bigBoxDetailPopupMessage = message;
+        detailPopup.setWidget( new HTML( bigBoxDetailPopupMessage ) );
+        detailPopup.show();
+        updateDetailPopup( xPosition, yPosition );
+    }
 }

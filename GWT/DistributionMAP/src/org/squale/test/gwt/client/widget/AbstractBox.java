@@ -10,43 +10,48 @@ import com.google.gwt.user.client.ui.Composite;
 
 /**
  * @author fabrice
- * 
  */
-abstract public class AbstractBox extends Composite implements
-		MouseMoveHandler, MouseOutHandler, MouseOverHandler {
+abstract class AbstractBox
+    extends Composite
+    implements MouseMoveHandler, MouseOutHandler, MouseOverHandler
+{
 
-	final private DistributionMap distributionMap;
+    final private DistributionMap distributionMap;
 
-	private String name;
+    private String name;
 
-	public AbstractBox(DistributionMap dm, String name) {
-		this.distributionMap = dm;
-		this.name = name;
+    public AbstractBox( DistributionMap dm, String name )
+    {
+        this.distributionMap = dm;
+        this.name = name;
 
-		setupMouseEvents();
-	}
+        setupMouseEvents();
+    }
 
-	private void setupMouseEvents() {
-		addDomHandler(this, MouseMoveEvent.getType());
-		addDomHandler(this, MouseOverEvent.getType());
-		addDomHandler(this, MouseOutEvent.getType());
-	}
+    private void setupMouseEvents()
+    {
+        addDomHandler( this, MouseMoveEvent.getType() );
+        addDomHandler( this, MouseOverEvent.getType() );
+        addDomHandler( this, MouseOutEvent.getType() );
+    }
 
-	protected DistributionMap getDistributionMap() {
-		return distributionMap;
-	}
+    protected DistributionMap getDistributionMap()
+    {
+        return distributionMap;
+    }
 
-	protected String getName() {
-		return name;
-	}
+    protected String getName()
+    {
+        return name;
+    }
 
-	public void onMouseMove(MouseMoveEvent event) {
-		distributionMap.updateDetailPopup(event.getClientX(), event
-				.getClientY());
-	}
+    public void onMouseMove( MouseMoveEvent event )
+    {
+        distributionMap.updateDetailPopup( event.getClientX(), event.getClientY() );
+    }
 
-	abstract public void onMouseOut(MouseOutEvent event);
+    abstract public void onMouseOut( MouseOutEvent event );
 
-	abstract public void onMouseOver(MouseOverEvent event);
+    abstract public void onMouseOver( MouseOverEvent event );
 
 }

@@ -1,19 +1,30 @@
-div.dm-box {
-	border: solid 1px black;
-	margin: 5px;
-	float: left;
-}
-
 div.big-box {
-	border: solid 1px black;
-	background-color : red;
+	border: dashed 1px black;
 	margin: 5px;
 	float: left;
 }
 
 div.small-box {
 	border: solid 1px black;
-	background-color : blue;
 	margin: 5px;
 	float: left;
+}
+
+div.top-grade {
+	background-color: green;
+}
+
+div.mid-grade {
+	background-color: yellow;
+}
+
+div.low-grade {
+	background-color: red;
+}
+
+div.loading-label {
+	margin: 10px;
+	background: url("/images/loading.gif") no-repeat left;
+	width: 100%;
+	height: 20px;
 }
