@@ -179,8 +179,12 @@ public class Export
             List<AuditBO> listAuditsToPurge =
                 (List<AuditBO>) AuditDAOImpl.getInstance().findDeleted( session, siteId, new ArrayList() );
             // Obsoleted audit
-            listAuditsToPurge.addAll( AuditDAOImpl.getInstance().findObsoleteAuditsToDelete( session, siteId,
-                                                                                             new ArrayList() ) );
+            List<Object[]> obsoleteAudit = AuditDAOImpl.getInstance().findObsoleteAuditsToDelete( session, siteId,
+                                                                                                new ArrayList() );
+            for ( Object[] objects : obsoleteAudit )
+            {
+                listAuditsToPurge.add( ( AuditBO ) objects[0] );
+            }
 
             setAuditIdToPurge = new HashSet<Long>();
             for ( AuditBO audit : listAuditsToPurge )

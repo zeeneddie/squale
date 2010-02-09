@@ -58,7 +58,7 @@ public class ExportThread
     /**
      * Logger
      */
-    private static final Log LOGGER = LogFactory.getLog( Export.class );
+    private static final Log LOGGER = LogFactory.getLog( ExportThread.class );
 
     /** set of audit id to purge */
     private HashMap<Long, Long> mapAppAuditToExport;

@@ -219,20 +219,20 @@ public class SqualixConfigImport
         configDigester.addSetNext( "configuration/admin-params/mail/smtp-password", "addAdminParam" );
 
         // shared repository - mapping java - project - loc
-        configDigester.addObjectCreate( "configuration/admin-params/shared-repository-export/mapping/java/project/loc", AdminParamsBO.class );
-        configDigester.addCallMethod( "configuration/admin-params/shared-repository-export/mapping/java/project/loc", "setAdminParam", 2, new Class[] {
+        configDigester.addObjectCreate( "configuration/admin-params/shared-repository-export/mapping/java/module/loc", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/shared-repository-export/mapping/java/module/loc", "setAdminParam", 2, new Class[] {
             String.class, String.class } );
-        configDigester.addCallParamPath( "configuration/admin-params/shared-repository-export/mapping/java/project/loc", 0 );
-        configDigester.addCallParam( "configuration/admin-params/shared-repository-export/mapping/java/project/loc", 1 );
-        configDigester.addSetNext( "configuration/admin-params/shared-repository-export/mapping/java/project/loc", "addAdminParam" );
+        configDigester.addCallParamPath( "configuration/admin-params/shared-repository-export/mapping/java/module/loc", 0 );
+        configDigester.addCallParam( "configuration/admin-params/shared-repository-export/mapping/java/module/loc", 1 );
+        configDigester.addSetNext( "configuration/admin-params/shared-repository-export/mapping/java/module/loc", "addAdminParam" );
         
         // shared repository - mapping java - project - number of classes
-        configDigester.addObjectCreate( "configuration/admin-params/shared-repository-export/mapping/java/project/number-of-classes", AdminParamsBO.class );
-        configDigester.addCallMethod( "configuration/admin-params/shared-repository-export/mapping/java/project/number-of-classes", "setAdminParam", 2, new Class[] {
+        configDigester.addObjectCreate( "configuration/admin-params/shared-repository-export/mapping/java/module/number-of-classes", AdminParamsBO.class );
+        configDigester.addCallMethod( "configuration/admin-params/shared-repository-export/mapping/java/module/number-of-classes", "setAdminParam", 2, new Class[] {
             String.class, String.class } );
-        configDigester.addCallParamPath( "configuration/admin-params/shared-repository-export/mapping/java/project/number-of-classes", 0 );
-        configDigester.addCallParam( "configuration/admin-params/shared-repository-export/mapping/java/project/number-of-classes", 1 );
-        configDigester.addSetNext( "configuration/admin-params/shared-repository-export/mapping/java/project/number-of-classes", "addAdminParam" );
+        configDigester.addCallParamPath( "configuration/admin-params/shared-repository-export/mapping/java/module/number-of-classes", 0 );
+        configDigester.addCallParam( "configuration/admin-params/shared-repository-export/mapping/java/module/number-of-classes", 1 );
+        configDigester.addSetNext( "configuration/admin-params/shared-repository-export/mapping/java/module/number-of-classes", "addAdminParam" );
         
         // shared repository - mapping java - class - loc
         configDigester.addObjectCreate( "configuration/admin-params/shared-repository-export/mapping/java/class/loc", AdminParamsBO.class );

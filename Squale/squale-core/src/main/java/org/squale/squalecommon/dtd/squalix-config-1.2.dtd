@@ -22,9 +22,9 @@
    (java)
 >
 <!ELEMENT java
-   (project,class,method)
+   (module,class,method)
 >
-<!ELEMENT project
+<!ELEMENT module
 	(loc,number-of-classes)
 >
 <!ELEMENT class
@@ -42,7 +42,7 @@
 <!ELEMENT line-rate
 	(#PCDATA)
 >
-<!ELEMENT line-branch
+<!ELEMENT branch-rate
 	(#PCDATA)
 >
 <!ELEMENT number-of-classes

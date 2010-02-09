@@ -131,10 +131,10 @@
 			</squalix-server>
 			<mapping>
 				<java>
-					<project>
+					<module>
 						<loc>JavancssTask.ncss</loc>
 						<number-of-classes>JavancssTask.numberOfClasses</number-of-classes>
-					</project>
+					</module>
 					<class>
 						<loc>JavancssTask.ncss</loc>
 						<number-of-methods>JavancssTask.methods</number-of-methods>
