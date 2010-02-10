@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.squale</groupId>
+		<artifactId>project-root</artifactId>
+		<version>1.2</version>
+	</parent>
+	<groupId>org.squale.gwt</groupId>
+	<artifactId>distribution-map</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>GWT Distribution Map</name>
+	<description>GWT Distribution Map Widget</description>
+	<scm>
+		<connection>
+			scm:svn:https://svn.squale.org/squale/squale/trunk/GWT/DistributionMAP/
+		</connection>
+		<developerConnection>
+			scm:svn:https://svn.squale.org/squale/squale/trunk/GWT/DistributionMAP/
+		</developerConnection>
+		<url>
+			https://svn.squale.org/squale/squale/trunk/GWT/DistributionMAP/
+		</url>
+	</scm>
+	<properties>
+		<gwt.version>2.0.0</gwt.version>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+	</properties>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>1.3-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwt.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>
