@@ -13,7 +13,7 @@
   
   <servlet-mapping>
     <servlet-name>dataServlet</servlet-name>
-    <url-pattern>/org.squale.gwt.distributionmap.DistributionMap/data</url-pattern>
+    <url-pattern>/gwt.distributionmap/data</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
