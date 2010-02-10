@@ -40,6 +40,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
+					<!-- GWT needs to have the webapp source folder in "war", so this breaks Maven conventions -->
+					<warSourceDirectory>war</warSourceDirectory>
 					<webResources>
 						<resource>
 							<directory>
