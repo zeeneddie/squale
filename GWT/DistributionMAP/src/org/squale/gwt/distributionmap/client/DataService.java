@@ -1,8 +1,8 @@
-package org.squale.test.gwt.client;
+package org.squale.gwt.distributionmap.client;
 
 import java.util.ArrayList;
 
-import org.squale.test.gwt.client.widget.data.Parent;
+import org.squale.gwt.distributionmap.client.widget.data.Parent;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;

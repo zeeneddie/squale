@@ -1,6 +1,6 @@
-package org.squale.test.gwt.client;
+package org.squale.gwt.distributionmap.client;
 
-import org.squale.test.gwt.client.widget.DistributionMap;
+import org.squale.gwt.distributionmap.client.widget.DistributionMap;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;

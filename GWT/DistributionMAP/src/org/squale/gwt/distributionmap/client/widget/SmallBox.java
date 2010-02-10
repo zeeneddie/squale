@@ -1,9 +1,9 @@
 /**
  * 
  */
-package org.squale.test.gwt.client.widget;
+package org.squale.gwt.distributionmap.client.widget;
 
-import org.squale.test.gwt.client.widget.data.Child;
+import org.squale.gwt.distributionmap.client.widget.data.Child;
 
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOverEvent;

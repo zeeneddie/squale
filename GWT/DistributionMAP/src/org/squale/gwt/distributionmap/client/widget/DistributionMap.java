@@ -1,11 +1,11 @@
 /**
  * 
  */
-package org.squale.test.gwt.client.widget;
+package org.squale.gwt.distributionmap.client.widget;
 
 import java.util.ArrayList;
 
-import org.squale.test.gwt.client.widget.data.Parent;
+import org.squale.gwt.distributionmap.client.widget.data.Parent;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
