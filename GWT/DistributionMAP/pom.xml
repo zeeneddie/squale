@@ -7,7 +7,7 @@
 		<artifactId>project-root</artifactId>
 		<version>1.2</version>
 	</parent>
-	<groupId>org.squale.gwt</groupId>
+	<groupId>org.squale.gwt.widget</groupId>
 	<artifactId>distribution-map</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>GWT Distribution Map</name>
@@ -29,20 +29,17 @@
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<version>1.3-SNAPSHOT</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>resources</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<excludes>
+					<exclude>log4j.properties</exclude>
+				</excludes>
+			</resource>
+		</resources>
 	</build>
 	<dependencies>
 		<dependency>
