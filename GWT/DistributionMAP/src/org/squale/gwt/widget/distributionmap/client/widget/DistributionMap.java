@@ -9,6 +9,7 @@ import org.squale.gwt.widget.distributionmap.client.bundle.DMResources;
 import org.squale.gwt.widget.distributionmap.client.widget.data.Parent;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratedPopupPanel;
@@ -82,7 +83,7 @@ public class DistributionMap
 
     void updateDetailPopup( int xPosition, int yPosition )
     {
-        detailPopup.setPopupPosition( xPosition + 1, yPosition + 1 );
+        detailPopup.setPopupPosition( xPosition + 1 + Window.getScrollLeft(), yPosition + 1 + Window.getScrollTop() );
     }
 
     void hideDetailPopupForSmallBox()
