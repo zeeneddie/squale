@@ -3,6 +3,7 @@
 <module rename-to="gwt.widget.distributionmap">
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
+	<inherits name="com.google.gwt.resources.Resources" />
 	<source path="client" />
 	<entry-point class="org.squale.gwt.widget.distributionmap.client.DistributionMapEntryPoint" />
 </module>

@@ -5,8 +5,10 @@ package org.squale.gwt.widget.distributionmap.client.widget;
 
 import java.util.ArrayList;
 
+import org.squale.gwt.widget.distributionmap.client.bundle.DMResources;
 import org.squale.gwt.widget.distributionmap.client.widget.data.Parent;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratedPopupPanel;
@@ -34,9 +36,11 @@ public class DistributionMap
         }
     };
 
+    final public static DMResources resources = GWT.create( DMResources.class );
+
     final private FlowPanel mainPanel = new FlowPanel();
 
-    final private Widget loadingLabel = new HTML( "<div class='loading-label'></div>" );
+    final private Widget loadingLabel = new HTML();
 
     final private DecoratedPopupPanel detailPopup = new DecoratedPopupPanel( true );
 
@@ -46,6 +50,9 @@ public class DistributionMap
 
     public DistributionMap()
     {
+        resources.css().ensureInjected();
+
+        loadingLabel.setStylePrimaryName( resources.css().loadingLabel() );
         detailPopup.setWidth( "150px" );
 
         initWidget( mainPanel );

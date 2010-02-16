@@ -32,7 +32,7 @@ class BigBox
         initWidget( mainPanel );
 
         setWidth( "100px" );
-        setStylePrimaryName( "big-box" );
+        setStylePrimaryName( DistributionMap.resources.css().bigBox() );
     }
 
     public void onMouseOut( MouseOutEvent event )

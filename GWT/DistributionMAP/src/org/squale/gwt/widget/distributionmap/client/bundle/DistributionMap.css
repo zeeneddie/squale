@@ -1,30 +1,30 @@
-div.big-box {
+div.bigBox {
 	border: dashed 1px black;
 	margin: 5px;
 	float: left;
 }
 
-div.small-box {
+div.smallBox {
 	border: solid 1px black;
 	margin: 5px;
 	float: left;
 }
 
-div.top-grade {
+div.topGrade {
 	background-color: green;
 }
 
-div.mid-grade {
+div.midGrade {
 	background-color: yellow;
 }
 
-div.low-grade {
+div.lowGrade {
 	background-color: red;
 }
 
-div.loading-label {
+@sprite div.loadingLabel {
+	gwt-image: "loading";
 	margin: 10px;
-	background: url("/images/spinner.gif") no-repeat left;
 	width: 100%;
 	height: 20px;
 }
