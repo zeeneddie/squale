@@ -1,3 +1,10 @@
+div.distributionMap {
+	border: dotted 1px lightgrey;
+	padding: 10px;
+	height: auto;
+	overflow: auto;
+}
+
 div.bigBox {
 	border: dashed 1px black;
 	margin: 5px;

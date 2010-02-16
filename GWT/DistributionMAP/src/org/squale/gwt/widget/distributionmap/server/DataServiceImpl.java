@@ -25,9 +25,9 @@ public class DataServiceImpl
     {
         ArrayList<Parent> result = new ArrayList<Parent>();
 
-        handleTime();
+//        handleTime();
 
-        pause();
+//        pause();
 
         Random r = new Random();
         int parentNumber = r.nextInt( 30 ) + 1;
@@ -43,7 +43,7 @@ public class DataServiceImpl
             result.add( p );
         }
 
-        handleTime();
+//        handleTime();
 
         return result;
     }

@@ -55,6 +55,8 @@ public class DistributionMap
         loadingLabel.setStylePrimaryName( resources.css().loadingLabel() );
         detailPopup.setWidth( "150px" );
 
+        mainPanel.setStylePrimaryName( resources.css().distributionMap() );
+        
         initWidget( mainPanel );
     }
 

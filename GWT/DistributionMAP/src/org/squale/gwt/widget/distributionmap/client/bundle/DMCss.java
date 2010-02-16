@@ -11,6 +11,8 @@ import com.google.gwt.resources.client.CssResource;
 public interface DMCss
     extends CssResource
 {
+    String distributionMap();
+    
     String bigBox();
 
     String smallBox();
