@@ -1,12 +1,12 @@
-package org.squale.gwt.distributionmap.server;
+package org.squale.gwt.widget.distributionmap.server;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-import org.squale.gwt.distributionmap.client.DataService;
-import org.squale.gwt.distributionmap.client.widget.data.Child;
-import org.squale.gwt.distributionmap.client.widget.data.Parent;
+import org.squale.gwt.widget.distributionmap.client.DataService;
+import org.squale.gwt.widget.distributionmap.client.widget.data.Child;
+import org.squale.gwt.widget.distributionmap.client.widget.data.Parent;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 

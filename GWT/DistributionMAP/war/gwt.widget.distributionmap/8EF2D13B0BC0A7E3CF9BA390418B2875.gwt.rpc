@@ -4,6 +4,6 @@ java.lang.RuntimeException, true, false, true, false, java.lang.RuntimeException
 java.lang.String, true, true, true, true, java.lang.String/2004016611, 2004016611
 java.lang.Throwable, true, false, true, false, java.lang.Throwable/2953622131, 2953622131
 java.util.ArrayList, true, true, false, false, java.util.ArrayList/3821976829, 3821976829
-org.squale.gwt.distributionmap.client.DataService, false, false, false, false, _, 1441174921
-org.squale.gwt.distributionmap.client.widget.data.Child, true, true, false, false, org.squale.gwt.distributionmap.client.widget.data.Child/3612986947, 3612986947
-org.squale.gwt.distributionmap.client.widget.data.Parent, true, true, false, false, org.squale.gwt.distributionmap.client.widget.data.Parent/4018030045, 4018030045
+org.squale.gwt.widget.distributionmap.client.DataService, false, false, false, false, _, 4032590436
+org.squale.gwt.widget.distributionmap.client.widget.data.Child, true, true, false, false, org.squale.gwt.widget.distributionmap.client.widget.data.Child/1031812329, 1031812329
+org.squale.gwt.widget.distributionmap.client.widget.data.Parent, true, true, false, false, org.squale.gwt.widget.distributionmap.client.widget.data.Parent/2930534863, 2930534863

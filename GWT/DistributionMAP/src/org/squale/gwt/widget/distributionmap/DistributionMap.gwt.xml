@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.0.0/distro-source/core/src/gwt-module.dtd">
-<module rename-to="gwt.distributionmap">
+<module rename-to="gwt.widget.distributionmap">
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
 	<source path="client" />
-	<entry-point class="org.squale.gwt.distributionmap.client.DistributionMapEntryPoint" />
+	<entry-point class="org.squale.gwt.widget.distributionmap.client.DistributionMapEntryPoint" />
 </module>

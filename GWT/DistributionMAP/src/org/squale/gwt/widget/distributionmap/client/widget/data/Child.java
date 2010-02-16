@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.squale.gwt.distributionmap.client.widget.data;
+package org.squale.gwt.widget.distributionmap.client.widget.data;
 
 import java.io.Serializable;
 

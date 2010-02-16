@@ -8,12 +8,12 @@
   <!-- Servlets -->  
   <servlet>
     <servlet-name>dataServlet</servlet-name>
-    <servlet-class>org.squale.gwt.distributionmap.server.DataServiceImpl</servlet-class>
+    <servlet-class>org.squale.gwt.widget.distributionmap.server.DataServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
     <servlet-name>dataServlet</servlet-name>
-    <url-pattern>/gwt.distributionmap/data</url-pattern>
+    <url-pattern>/gwt.widget.distributionmap/data</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

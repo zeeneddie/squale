@@ -1,10 +1,10 @@
 /**
  * 
  */
-package org.squale.gwt.distributionmap.client.widget;
+package org.squale.gwt.widget.distributionmap.client.widget;
 
-import org.squale.gwt.distributionmap.client.widget.data.Child;
-import org.squale.gwt.distributionmap.client.widget.data.Parent;
+import org.squale.gwt.widget.distributionmap.client.widget.data.Child;
+import org.squale.gwt.widget.distributionmap.client.widget.data.Parent;
 
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOverEvent;
