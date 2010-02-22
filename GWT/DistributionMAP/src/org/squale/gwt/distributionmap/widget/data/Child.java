@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.squale.gwt.widget.distributionmap.client.widget.data;
+package org.squale.gwt.distributionmap.widget.data;
 
 import java.io.Serializable;
 
@@ -14,6 +14,8 @@ public class Child
 
     private static final long serialVersionUID = 3710225568047601168L;
 
+    private long id;
+
     private String name;
 
     private float grade;
@@ -23,10 +25,19 @@ public class Child
 
     }
 
-    public Child( String name, float grade )
+    public Child( long id, String name, float grade )
     {
+        this.id = id;
         this.name = name;
         this.grade = grade;
+    }
+
+    /**
+     * @return the id
+     */
+    public long getId()
+    {
+        return id;
     }
 
     public String getName()
@@ -42,7 +53,7 @@ public class Child
     @Override
     public String toString()
     {
-        return name;
+        return "#" + id + " - " + name;
     }
 
 }

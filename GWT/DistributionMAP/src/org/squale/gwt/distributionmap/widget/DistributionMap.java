@@ -1,12 +1,12 @@
 /**
  * 
  */
-package org.squale.gwt.widget.distributionmap.client.widget;
+package org.squale.gwt.distributionmap.widget;
 
 import java.util.ArrayList;
 
-import org.squale.gwt.widget.distributionmap.client.bundle.DMResources;
-import org.squale.gwt.widget.distributionmap.client.widget.data.Parent;
+import org.squale.gwt.distributionmap.widget.bundle.DMResources;
+import org.squale.gwt.distributionmap.widget.data.Parent;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -48,6 +48,8 @@ public class DistributionMap
     private String bigBoxDetailPopupMessage;
 
     private String smallBoxDetailPopupMessage;
+    
+    private String detailURL = "";
 
     public DistributionMap()
     {
@@ -110,5 +112,21 @@ public class DistributionMap
         detailPopup.setWidget( new HTML( bigBoxDetailPopupMessage ) );
         detailPopup.show();
         updateDetailPopup( xPosition, yPosition );
+    }
+
+    /**
+     * @return the detailURL
+     */
+    public String getDetailURL()
+    {
+        return detailURL;
+    }
+
+    /**
+     * @param detailURL the detailURL to set
+     */
+    public void setDetailURL( String detailURL )
+    {
+        this.detailURL = detailURL;
     }
 }

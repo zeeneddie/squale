@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.squale.gwt.widget.distributionmap.client.bundle;
+package org.squale.gwt.distributionmap.widget.bundle;
 
 import com.google.gwt.resources.client.CssResource;
 

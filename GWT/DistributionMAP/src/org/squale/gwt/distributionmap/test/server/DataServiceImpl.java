@@ -1,12 +1,12 @@
-package org.squale.gwt.widget.distributionmap.server;
+package org.squale.gwt.distributionmap.test.server;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-import org.squale.gwt.widget.distributionmap.client.DataService;
-import org.squale.gwt.widget.distributionmap.client.widget.data.Child;
-import org.squale.gwt.widget.distributionmap.client.widget.data.Parent;
+import org.squale.gwt.distributionmap.test.client.DataService;
+import org.squale.gwt.distributionmap.widget.data.Child;
+import org.squale.gwt.distributionmap.widget.data.Parent;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -37,7 +37,7 @@ public class DataServiceImpl
             int childNumber = r.nextInt( 20 ) + 1;
             for ( int j = 0; j < childNumber; j++ )
             {
-                Child c = new Child( "Method #" + j, ( (float) r.nextInt( 31 ) ) / 10 );
+                Child c = new Child( j, "Method #" + j, ( (float) r.nextInt( 31 ) ) / 10 );
                 p.addChild( c );
             }
             result.add( p );

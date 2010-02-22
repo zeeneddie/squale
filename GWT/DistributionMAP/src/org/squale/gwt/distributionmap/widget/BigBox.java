@@ -1,10 +1,10 @@
 /**
  * 
  */
-package org.squale.gwt.widget.distributionmap.client.widget;
+package org.squale.gwt.distributionmap.widget;
 
-import org.squale.gwt.widget.distributionmap.client.widget.data.Child;
-import org.squale.gwt.widget.distributionmap.client.widget.data.Parent;
+import org.squale.gwt.distributionmap.widget.data.Child;
+import org.squale.gwt.distributionmap.widget.data.Parent;
 
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOverEvent;
@@ -42,7 +42,7 @@ class BigBox
 
     public void onMouseOver( MouseOverEvent event )
     {
-        getDistributionMap().showDetailPopupForBigBox( "Component " + getName(), event.getClientX(), event.getClientY() );
+        getDistributionMap().showDetailPopupForBigBox( getName(), event.getClientX(), event.getClientY() );
     }
 
 }

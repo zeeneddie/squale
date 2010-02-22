@@ -1,6 +1,6 @@
-package org.squale.gwt.widget.distributionmap.client;
+package org.squale.gwt.distributionmap.test.client;
 
-import org.squale.gwt.widget.distributionmap.client.widget.DistributionMap;
+import org.squale.gwt.distributionmap.widget.DistributionMap;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -21,6 +21,7 @@ public class DistributionMapEntryPoint
 
     public void onModuleLoad()
     {
+        dmWidget.setDetailURL( "/testURL?id=" );
         initButton();
         RootPanel.get( "main" ).add( sendButton );
         RootPanel.get( "distributionmap" ).add( dmWidget );

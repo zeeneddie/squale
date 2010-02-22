@@ -1,4 +1,4 @@
-package org.squale.gwt.widget.distributionmap.client.widget;
+package org.squale.gwt.distributionmap.widget;
 
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;

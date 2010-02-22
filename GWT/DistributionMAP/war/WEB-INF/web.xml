@@ -8,17 +8,17 @@
   <!-- Servlets -->  
   <servlet>
     <servlet-name>dataServlet</servlet-name>
-    <servlet-class>org.squale.gwt.widget.distributionmap.server.DataServiceImpl</servlet-class>
+    <servlet-class>org.squale.gwt.distributionmap.test.server.DataServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
     <servlet-name>dataServlet</servlet-name>
-    <url-pattern>/gwt.widget.distributionmap/data</url-pattern>
+    <url-pattern>/gwt.dm.test/data</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>TestGWT.html</welcome-file>
+    <welcome-file>DistributionMap.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
