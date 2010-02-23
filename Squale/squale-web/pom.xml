@@ -100,6 +100,10 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-scratchpad</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+		</dependency>
 		<!-- PROVIDED DEPENDENCIES -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -108,6 +112,10 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jsp-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
 		</dependency>
 		<!-- TEST DEPENDENCIES -->
 		<!-- To generate test reports: -->

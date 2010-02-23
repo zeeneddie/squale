@@ -58,7 +58,11 @@
 	<servlet>
   		<servlet-name>DisplayChart</servlet-name> 
 		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class> 
-	</servlet>		
+	</servlet>
+	<servlet>
+		<servlet-name>dataServlet</servlet-name>
+		<servlet-class>org.squale.squaleweb.gwt.distributionmap.server.DataServiceImpl</servlet-class>
+	</servlet>
 	
 	
 	<!-- Action Servlet Mapping -->
@@ -69,7 +73,11 @@
 	<servlet-mapping>
   		<servlet-name>DisplayChart</servlet-name> 
 		<url-pattern>/servlet/DisplayChart</url-pattern> 
-	</servlet-mapping>	
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>dataServlet</servlet-name>
+		<url-pattern>/gwt.dm/data</url-pattern>
+	</servlet-mapping>
 	
 	
 	<!-- Page de démarrage -->
