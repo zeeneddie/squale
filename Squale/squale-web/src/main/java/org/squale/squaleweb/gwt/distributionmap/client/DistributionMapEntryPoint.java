@@ -16,9 +16,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-/**
- * 
- */
 package org.squale.squaleweb.gwt.distributionmap.client;
 
 import org.squale.gwt.distributionmap.widget.DistributionMap;
@@ -93,8 +90,8 @@ public class DistributionMapEntryPoint
         String stringAuditId = Window.Location.getParameter( "currentAuditId" );
         String stringProjectId = Window.Location.getParameter( "projectId" );
         String stringPracticeId = Window.Location.getParameter( "which" );
-        if ( stringAuditId == null || stringAuditId.isEmpty() || stringProjectId == null || stringProjectId.isEmpty()
-            || stringPracticeId == null || stringPracticeId.isEmpty() )
+        if ( stringAuditId == null || stringAuditId.length() == 0 || stringProjectId == null
+            || stringProjectId.length() == 0 || stringPracticeId == null || stringPracticeId.length() == 0 )
         {
             // TODO : handle this case
 

@@ -16,9 +16,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-/**
- * 
- */
 package org.squale.squaleweb.gwt.distributionmap.client;
 
 import java.util.ArrayList;
