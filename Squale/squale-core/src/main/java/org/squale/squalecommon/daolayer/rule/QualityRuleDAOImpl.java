@@ -24,8 +24,13 @@
  */
 package org.squale.squalecommon.daolayer.rule;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
+import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO;
 
 /**
@@ -63,5 +68,37 @@ public class QualityRuleDAOImpl
     public static QualityRuleDAOImpl getInstance()
     {
         return instance;
+    }
+
+    /**
+     * Returns the level of the components that are used for the practice corresponding to the given ID
+     * 
+     * @param session the session
+     * @param practiceId the id of the practice
+     * @return the name of the component level, e.g. "method" or "class", as it is specified in the quality model
+     * @throws JrafDaoException if it is not possible to get the component level
+     */
+    @SuppressWarnings( "unchecked" )
+    public String getComponentLevelForPractice( ISession session, long practiceId )
+        throws JrafDaoException
+    {
+        String componentLevel = "";
+
+        String requete =
+            "select formula.componentLevel from AbstractFormulaBO formula, QualityRuleBO rule where rule.formula=formula.id and rule.id="
+                + practiceId;
+        Query query = ( (SessionImpl) session ).getSession().createQuery( requete );
+        List resultList = query.list();
+        if ( resultList.size() != 1 )
+        {
+            throw new JrafDaoException( "Error while trying to identify the component level for the practice "
+                + practiceId );
+        }
+        else
+        {
+            componentLevel = (String) resultList.get( 0 );
+        }
+
+        return componentLevel;
     }
 }

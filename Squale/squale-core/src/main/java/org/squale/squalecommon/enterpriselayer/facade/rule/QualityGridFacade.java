@@ -581,12 +581,12 @@ public final class QualityGridFacade
             ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
             ProjectBO project = (ProjectBO) projectDAO.get( session, projectId );
             Iterator<FactorRuleBO> factorsIt = project.getQualityGrid().getFactors().iterator();
-            // For each factor 
+            // For each factor
             while ( factorsIt.hasNext() )
             {
                 FactorRuleBO factor = factorsIt.next();
                 Iterator<CriteriumRuleBO> criteriumIt = factor.getCriteria().keySet().iterator();
-                //For each criterium
+                // For each criterium
                 while ( criteriumIt.hasNext() )
                 {
                     CriteriumRuleBO criterium = criteriumIt.next();
@@ -600,7 +600,7 @@ public final class QualityGridFacade
                         if ( practiceBO.getFormula() == null )
                         {
                             PracticeRuleDTO practiceDTO = new PracticeRuleDTO();
-                            //We add the practice to the list
+                            // We add the practice to the list
                             practicesRuleList.add( (PracticeRuleDTO) QualityRuleTransform.bo2Dto( practiceBO, true ) );
                         }
                     }
@@ -617,6 +617,36 @@ public final class QualityGridFacade
         }
 
         return practicesRuleList;
+    }
+
+    /**
+     * Returns the level of the components that are used for the practice corresponding to the given ID
+     * 
+     * @param practiceId the id of the practice
+     * @return the name of the component level, e.g. "method" or "class", as it is specified in the quality model
+     * @throws JrafDaoException if it is not possible to get the component level
+     */
+    public static String getComponentLevelForPractice( long practiceId )
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+        String componentLevel = "";
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            QualityRuleDAOImpl qualityRuleDAOImpl = QualityRuleDAOImpl.getInstance();
+            componentLevel = qualityRuleDAOImpl.getComponentLevelForPractice( session, practiceId );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, QualityGridFacade.class.getName() + ".getComponentLevelForPractice" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, QualityGridFacade.class.getName() + ".getComponentLevelForPractice" );
+        }
+
+        return componentLevel;
     }
 
 }

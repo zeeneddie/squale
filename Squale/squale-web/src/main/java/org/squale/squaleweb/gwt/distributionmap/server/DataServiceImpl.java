@@ -22,26 +22,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.squale.gwt.distributionmap.widget.data.Child;
 import org.squale.gwt.distributionmap.widget.data.Parent;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
-import org.squale.jraf.helper.PersistenceHelper;
-import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
-import org.squale.jraf.spi.persistence.IPersistenceProvider;
-import org.squale.jraf.spi.persistence.ISession;
-import org.squale.squalecommon.daolayer.rule.QualityRuleDAOImpl;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 import org.squale.squalecommon.datatransfertobject.result.MarkDTO;
-import org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentType;
-import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityRuleBO;
 import org.squale.squalecommon.enterpriselayer.facade.component.ComponentFacade;
 import org.squale.squalecommon.enterpriselayer.facade.quality.QualityResultFacade;
+import org.squale.squalecommon.enterpriselayer.facade.rule.QualityGridFacade;
 import org.squale.squaleweb.gwt.distributionmap.client.DataService;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -54,15 +47,21 @@ public class DataServiceImpl
     extends RemoteServiceServlet
     implements DataService
 {
+    /**
+     * Logger
+     */
+    private static Log log = LogFactory.getLog( DataServiceImpl.class );
 
     private Date initialDate;
 
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings( "unchecked" )
     public ArrayList<Parent> getData( long auditId, long projectId, long practiceId )
     {
         handleTime();
 
-        ArrayList<Parent> parentList = new ArrayList<Parent>();
         Map<Long, Parent> parentMap = new HashMap<Long, Parent>();
 
         AuditDTO audit = new AuditDTO();
@@ -72,77 +71,90 @@ public class DataServiceImpl
 
         try
         {
-            IPersistenceProvider persistenceProvider = PersistenceHelper.getPersistenceProvider();
-            ISession session = persistenceProvider.getSession();
+            String componentLevel = QualityGridFacade.getComponentLevelForPractice( practiceId );
+            String upperComponentLevel = upperLevel( componentLevel );
 
-            QualityRuleBO ruleBO = (QualityRuleBO) QualityRuleDAOImpl.getInstance().load( session, practiceId );
-
-            Session hibernateSession = ( (SessionImpl) session ).getSession();
-
-            String requete =
-                "select formula.componentLevel from AbstractFormulaBO formula, QualityRuleBO rule where rule.formula=formula.id and rule.id="
-                    + practiceId;
-            Query query = hibernateSession.createQuery( requete );
-            List resultList = query.list();
-            String componentLevel = (String) resultList.get( 0 );
-
+            // Find all the components for the level of the practice
             Collection<ComponentDTO> components =
                 ComponentFacade.getProjectChildren( project, "component." + componentLevel, audit );
-            for ( ComponentDTO component : components )
+
+            // Find all the components for the level above the practice level
+            Map<Long, ComponentDTO> potentialParentComponentMap = new HashMap<Long, ComponentDTO>();
+            Collection<ComponentDTO> potentialParentComponents =
+                ComponentFacade.getProjectChildren( project, "component." + upperComponentLevel, audit );
+            for ( ComponentDTO potentialParentDTO : potentialParentComponents )
             {
-                MarkDTO mark =
-                    QualityResultFacade.getPracticeByAuditRuleProject( component.getID(), auditId, practiceId );
-                Child child =
-                    new Child( component.getID(), component.getName(), ( mark == null ? -1 : mark.getValue() ) );
-                attachToParent( parentMap, child, component.getIDParent() );
+                potentialParentComponentMap.put( potentialParentDTO.getID(), potentialParentDTO );
             }
 
+            // Find all the mark for the practice
+            Map<Long, Float> markMap = new HashMap<Long, Float>();
+            Collection<MarkDTO> marks = QualityResultFacade.getPracticeByAuditRule( auditId, practiceId );
+            for ( MarkDTO markDTO : marks )
+            {
+                markMap.put( markDTO.getComponent().getID(), markDTO.getValue() );
+            }
+
+            // and now, build the parent-child tree for the DistributionMap
+            for ( ComponentDTO component : components )
+            {
+                Float componentMark = markMap.get( component.getID() );
+                if ( componentMark != null )
+                {
+                    Child child = new Child( component.getID(), component.getName(), componentMark );
+                    // attach the child to its parent
+                    long idParent = component.getIDParent();
+                    Parent parent = parentMap.get( idParent );
+                    if ( parent == null )
+                    {
+                        ComponentDTO parentComponent = potentialParentComponentMap.get( idParent );
+                        parent = new Parent( parentComponent.getName() );
+                        parentMap.put( idParent, parent );
+                    }
+                    parent.addChild( child );
+                }
+            }
         }
-        catch ( Exception e )
+        catch ( JrafEnterpriseException e )
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.error( "Error while building the data needed to display the Dsitribution Map", e );
+            // we do not need to do more, we return an empty array
         }
 
         handleTime();
 
-        parentList.addAll( parentMap.values() );
-        return parentList;
+        return new ArrayList<Parent>( parentMap.values() );
     }
 
-    private void attachToParent( Map<Long, Parent> parentMap, Child child, long idParent )
+    private String upperLevel( String componentLevel )
     {
-        try
+        String upperLevel = "package";
+        if ( "method".equals( componentLevel ) )
         {
-            Parent parent = parentMap.get( idParent );
-            if ( parent == null )
-            {
-                ComponentDTO comp = new ComponentDTO();
-                comp.setID( idParent );
-                comp = ComponentFacade.get( comp );
-                parent = new Parent( comp.getName() );
-                parentMap.put( idParent, parent );
-            }
-            parent.addChild( child );
+            upperLevel = "class";
         }
-        catch ( JrafEnterpriseException e )
+        else if ( "class".equals( componentLevel ) )
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            upperLevel = "package";
         }
+        return upperLevel;
     }
 
     private void handleTime()
     {
-        if ( initialDate == null )
+        if ( log.isDebugEnabled() )
         {
-            initialDate = new Date();
-        }
-        else
-        {
-            Date current = new Date();
-            System.out.println( "Temps d'ex�cution : " + ( current.getTime() - initialDate.getTime() ) );
-            initialDate = null;
+            if ( initialDate == null )
+            {
+                initialDate = new Date();
+            }
+            else
+            {
+                Date current = new Date();
+                log.debug( "Distribution Map data service execution time: "
+                    + ( current.getTime() - initialDate.getTime() ) );
+                initialDate = null;
+            }
         }
     }
 }

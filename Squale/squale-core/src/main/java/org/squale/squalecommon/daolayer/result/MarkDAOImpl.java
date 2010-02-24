@@ -173,6 +173,27 @@ public final class MarkDAOImpl
     }
 
     /**
+     * Permet de récupérer la liste des notes d'une pratique pour d'un audit donné
+     * 
+     * @param pSession session Hibernate
+     * @param pAuditID identifiant de l'audit
+     * @param pRuleId id du TRE
+     * @return la liste des notes associées au type de résultat et à l'audit
+     * @throws JrafDaoException exception DAO
+     */
+    @SuppressWarnings( "unchecked" )
+    public Collection<MarkBO> load( ISession pSession, Long pAuditID, Long pRuleId )
+        throws JrafDaoException
+    {
+        String whereClause = "where ";
+        whereClause += getAlias() + ".practice.rule.id = " + pRuleId;
+        whereClause += " and ";
+        whereClause += getAlias() + ".practice.audit.id = '" + pAuditID + "'";
+
+        return (Collection<MarkBO>) findWhere( pSession, whereClause );
+    }
+
+    /**
      * Retrouve les notes qui ont pour type pTreClass, pour id d'audit pauditId et pour valeur pValue
      * 
      * @param pSession session Hibernate

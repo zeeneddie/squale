@@ -9,7 +9,7 @@
 
 		<property name="show_sql">
 <!-- ENV-HIBERNATE-SHOW-SQL -->
-		true
+		false
 		</property>
 		<property name="format_sql">true</property>
 		

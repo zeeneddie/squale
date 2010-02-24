@@ -811,10 +811,12 @@ public final class QualityResultFacade
      * @param pAudits liste des AuditDTOs
      * @param pProject ComponentDTO relatif a un projet
      * @param pPratice pratique
-     * @return ResultsDTO avec les deux Map renseignes ResultsMap : <br/> -- Clé : null -- Valeur : Liste d'AuditDTO
-     *         <br/> -- Clé : ComponentDTO -- Valeurs : notes associées aux audits dans le même ordre que la liste
-     *         d'audit de type java.lang.Float<br/> PracticeMap : n lignes de la forme suivante :<br/> -- Clé :
-     *         AuditDTO -- Valeur : map de <RuleCheckingDTO,java.lang.Integer>
+     * @return ResultsDTO avec les deux Map renseignes ResultsMap : <br/>
+     *         -- Clé : null -- Valeur : Liste d'AuditDTO <br/>
+     *         -- Clé : ComponentDTO -- Valeurs : notes associées aux audits dans le même ordre que la liste d'audit de
+     *         type java.lang.Float<br/>
+     *         PracticeMap : n lignes de la forme suivante :<br/>
+     *         -- Clé : AuditDTO -- Valeur : map de <RuleCheckingDTO,java.lang.Integer>
      * @throws JrafEnterpriseException exception Jraf
      */
     public static ResultsDTO getRuleChecking( List pAudits, ComponentDTO pProject, PracticeRuleDTO pPratice )
@@ -1031,8 +1033,8 @@ public final class QualityResultFacade
     }
 
     /**
-     * La table retournée est de la forme : <br/> key : ComponentDTO value : ResultDTO représentant la liste des
-     * pratiques qui ont changées
+     * La table retournée est de la forme : <br/>
+     * key : ComponentDTO value : ResultDTO représentant la liste des pratiques qui ont changées
      * 
      * @param firstAudit l'audit le plus récent
      * @param secondAudit l'audit le plus ancien
@@ -1040,8 +1042,8 @@ public final class QualityResultFacade
      * @param filter le filtre à utiliser
      * @param pLimit le nombre max de résultats à récupérer
      * @throws JrafEnterpriseException si erreur
-     * @return une table des pratiques qui ont changées entre <code>firstAudit</code> et <code>secondAudit</code>
-     *         pour les composants de type <code>componentType</code>
+     * @return une table des pratiques qui ont changées entre <code>firstAudit</code> et <code>secondAudit</code> pour
+     *         les composants de type <code>componentType</code>
      */
     public static Collection getChangedComponents( AuditDTO firstAudit, AuditDTO secondAudit, ComponentDTO project,
                                                    Object[] filter, Integer pLimit )
@@ -1112,8 +1114,8 @@ public final class QualityResultFacade
      * @param filter le filtre
      * @param limit le nombre max de composants à récupérer
      * @throws JrafDaoException si erreur
-     * @return une table des pratiques qui ont changées entre <code>firstAudit</code> et <code>secondAudit</code>
-     *         pour les composants de type <code>componentType</code> et filtrés avec <code>filtre</code>
+     * @return une table des pratiques qui ont changées entre <code>firstAudit</code> et <code>secondAudit</code> pour
+     *         les composants de type <code>componentType</code> et filtrés avec <code>filtre</code>
      */
     private static Collection getFilterComponents( ISession session, Long auditId1, Long auditId2, Long projectId,
                                                    Object[] filter, int limit )
@@ -1399,11 +1401,11 @@ public final class QualityResultFacade
         {
             session = PERSISTENTPROVIDER.getSession();
             QualityResultDAOImpl dao = QualityResultDAOImpl.getInstance();
-            //Search of the last mark for the practice
+            // Search of the last mark for the practice
             manualPraticeResult = dao.findLastManualMark( session, projectId, practiceId );
             if ( manualPraticeResult != null )
             {
-                //Transform the BO into DTO
+                // Transform the BO into DTO
                 resultDto = QualityResultTransform.bo2Dto( manualPraticeResult );
             }
         }
@@ -1418,10 +1420,10 @@ public final class QualityResultFacade
         return resultDto;
 
     }
-    
+
     /**
-     * This method get back the last manual mark linked to the project, the practice rule and the audit
-     * given in argument 
+     * This method get back the last manual mark linked to the project, the practice rule and the audit given in
+     * argument
      * 
      * @param projectId ID of the project
      * @param practiceId ID of the practice rule
@@ -1429,7 +1431,7 @@ public final class QualityResultFacade
      * @return a QualityResultDTO wich contains the manual mark
      * @throws JrafEnterpriseException Exception happened during the process
      */
-    public static QualityResultDTO findManualQualityResultByAudit ( long projectId, long practiceId, long auditId )
+    public static QualityResultDTO findManualQualityResultByAudit( long projectId, long practiceId, long auditId )
         throws JrafEnterpriseException
     {
         ISession session = null;
@@ -1439,11 +1441,11 @@ public final class QualityResultFacade
         {
             session = PERSISTENTPROVIDER.getSession();
             QualityResultDAOImpl dao = QualityResultDAOImpl.getInstance();
-            //Search of the last mark for the practice and the audit
+            // Search of the last mark for the practice and the audit
             manualPracticeResult = dao.findLastManualMarkByAudit( session, projectId, practiceId, auditId );
             if ( manualPracticeResult != null )
             {
-                //Transform BO into DTO
+                // Transform BO into DTO
                 resultDto = QualityResultTransform.bo2Dto( manualPracticeResult );
             }
         }
@@ -1474,9 +1476,9 @@ public final class QualityResultFacade
         {
             session = PERSISTENTPROVIDER.getSession();
             session.beginTransaction();
-            //Transform the DTO into BO
+            // Transform the DTO into BO
             QualityResultBO resultToSave = QualityResultTransform.simplifyDto2Bo( resultDto );
-            //Save of the result 
+            // Save of the result
             dao.create( session, resultToSave );
             session.commitTransaction();
         }
@@ -1501,7 +1503,7 @@ public final class QualityResultFacade
      * @param projectId The id of the project
      * @param auditId The id of the audit
      * @param ruleId the id of the rule
-     * @return a markDto
+     * @return a markDto or NULL if no mark is found
      * @throws JrafEnterpriseException Exception happen during the serach
      */
     public static MarkDTO getPracticeByAuditRuleProject( long projectId, long auditId, long ruleId )
@@ -1509,14 +1511,17 @@ public final class QualityResultFacade
     {
         ISession session = null;
         MarkDAOImpl dao = MarkDAOImpl.getInstance();
-        MarkDTO dto=null;
+        MarkDTO dto = null;
         try
         {
             session = PERSISTENTPROVIDER.getSession();
             // Search of the markBO
             MarkBO bo = dao.load( session, projectId, auditId, ruleId );
             // Transform the markBO into markDTO
-            dto = MarkTransform.bo2Dto( bo );
+            if ( bo != null )
+            {
+                dto = MarkTransform.bo2Dto( bo );
+            }
         }
         catch ( JrafDaoException e )
         {
@@ -1527,6 +1532,39 @@ public final class QualityResultFacade
             FacadeHelper.closeSession( session, QualityResultFacade.class.getName() + ".updateManualResult" );
         }
         return dto;
+    }
+
+    /**
+     * This method return the list of marks link to the given audit and the given rule
+     * 
+     * @param auditId The id of the audit
+     * @param ruleId the id of the rule
+     * @return a list of markDTO
+     * @throws JrafEnterpriseException Exception happen during the serach
+     */
+    public static Collection<MarkDTO> getPracticeByAuditRule( long auditId, long ruleId )
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+        MarkDAOImpl dao = MarkDAOImpl.getInstance();
+        Collection<MarkDTO> dtoCollection = new ArrayList<MarkDTO>();
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            // Search of the markBO
+            Collection<MarkBO> boCollection = dao.load( session, auditId, ruleId );
+            // Transform the markBO into markDTO
+            dtoCollection = (Collection<MarkDTO>) MarkTransform.bo2Dto( boCollection );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, QualityResultFacade.class.getName() + ".updateManualResult" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, QualityResultFacade.class.getName() + ".updateManualResult" );
+        }
+        return dtoCollection;
     }
 
 }
