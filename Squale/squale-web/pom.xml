@@ -65,6 +65,10 @@
 			<artifactId>welcom</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.squale.gwt.widget</groupId>
+			<artifactId>distribution-map</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 		</dependency>
