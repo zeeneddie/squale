@@ -68,9 +68,11 @@ request.setAttribute("practiceInformationForm", infoForm);
 				<tbody>
 					<tr>
 						<th><bean:message key="project.result.practice.value" /></th>
-						<td><squale:mark mark="currentMark" name="form" /> <squale:trend
-							name="form" current="currentMark" predecessor="predecessorMark" /><squale:picto
-							name="form" property="currentMark" /></td>
+						<td class="weatherInfo">
+							<squale:mark name="form" mark="currentMark" /> 
+							<squale:picto name="form" property="currentMark" /> 
+							<squale:trend name="form" current="currentMark" predecessor="predecessorMark" />
+						</td>
 					</tr>
 				</tbody>
 			</table>

@@ -66,13 +66,14 @@
 									type="String" />
 								<bean:define id="factorId" name="factor" property="id"
 									type="Long" />
-								<af:col property="value" key="<%=name%>">
+								<af:col property="value" key="<%=name%>" contentClass="weatherInfo">
 									<%String link = "project.do?action=factor&projectId=" + projectId + "&which=" + factorId.longValue() + "&currentAuditId=" + currentAuditId;%>
-									<a href="<%=link%>" class="nobottom"> <squale:mark
-										name="factor" mark="currentMark" /> &nbsp; <squale:trend
-										name="factor" current="currentMark"
-										predecessor="predecessorMark" /> &nbsp;&nbsp; <squale:picto
-										name="factor" property="currentMark" /> </a>
+									<a href="<%=link%>" class="nobottom"> 
+										<squale:mark name="factor" mark="currentMark" /> 
+										<squale:picto name="factor" property="currentMark" /> 
+										&nbsp; 
+										<squale:trend name="factor" current="currentMark" predecessor="predecessorMark" /> 
+									</a>
 								</af:col>
 							</logic:iterate>
 						</af:cols>

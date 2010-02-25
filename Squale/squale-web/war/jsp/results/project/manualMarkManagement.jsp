@@ -87,7 +87,7 @@
 								</td>
 								<%-- Column mark of the manual practice --%>
 								<td>
-									<div id="<%="val-" + index%>" >
+									<div id="<%="val-" + index%>" class="weatherInfo">
 										<squale:mark name="elt" mark="value" />
 										<squale:picto name="elt" property="value" />
 									</div>

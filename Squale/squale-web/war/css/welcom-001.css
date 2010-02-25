@@ -142,6 +142,10 @@ p {
 	margin: 0 0 0 0;
 }
 
+.weatherInfo, .weatherInfo img {
+	vertical-align: middle;
+}
+
 /* ----------------- CSS for tag management ----------------- */
 .doubleBarre {
 	border: 4px double #F3BA5D;

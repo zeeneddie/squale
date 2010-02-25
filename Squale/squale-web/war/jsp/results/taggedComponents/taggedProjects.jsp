@@ -72,17 +72,17 @@
 							<bean:define id="factorId" name="factor" property="id" />
 							<af:col
 								property='<%="factors.factors[" + index + "].currentMark"%>'
-								key="<%=factorName%>">
+								key="<%=factorName%>" contentClass="weatherInfo">
 								<%
 								String link = factorLink + "&projectId=" + projectId.toString() + "&which=" + factorId.toString();
 								%>
-								<a href="<%=link%>" class="nobottom"> <squale:mark
-									name="factor" mark="currentMark" /> <squale:trend
-									name="factor" current="currentMark"
-									predecessor="predecessorMark" /> <squale:picto name="factor"
-									property="currentMark" />
+								<a href="<%=link%>" class="nobottom"> 
+									<squale:mark name="factor" mark="currentMark" /> 
+									<squale:picto name="factor" property="currentMark" /> 
+									&nbsp; 
+									<squale:trend name="factor" current="currentMark" predecessor="predecessorMark" /> 
+								</a>
 							</af:col>
-							</a>
 						</logic:iterate>
 					</af:cols>
 				</af:table>

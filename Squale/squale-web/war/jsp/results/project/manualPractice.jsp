@@ -47,10 +47,10 @@ for display the practice description work --%>
 				<tbody>
 					<tr>
 						<th><bean:message key="project.result.practice.value" /></th>
-						<td>
-							<squale:mark mark="currentMark" name="form" />
-							<squale:trend name="form" current="currentMark" predecessor="predecessorMark" />
+						<td class="weatherInfo">
+							<squale:mark name="form" mark="currentMark" /> 
 							<squale:picto name="form" property="currentMark" />
+							<squale:trend name="form" current="currentMark" predecessor="predecessorMark" />
 						</td>
 					</tr>
 					<logic:notEmpty name="form" property="lastComments">
