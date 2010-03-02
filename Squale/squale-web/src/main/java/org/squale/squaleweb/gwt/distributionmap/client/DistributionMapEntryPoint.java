@@ -22,54 +22,71 @@ import org.squale.gwt.distributionmap.widget.DistributionMap;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
+ * Entry point for the Distribution Map displayed on the practice result page.
+ * 
  * @author Fabrice BELLINGARD
  */
 public class DistributionMapEntryPoint
     implements EntryPoint
 {
 
+    /**
+     * Service used to retrieve the data to display
+     */
     final private DataServiceAsync dataService = GWT.create( DataService.class );
 
-    final private Button sendButton = new Button( "Load distribution map!" );
-
+    /**
+     * The Distribution Map widget
+     */
     final private DistributionMap dmWidget = new DistributionMap();
 
+    /**
+     * Parameter that identifies the practice to display
+     */
     private long practiceId;
 
+    /**
+     * Parameter that identifies the project for which we want to display the DMap
+     */
     private long projectId;
 
+    /**
+     * Parameter that identifies the audit for which we want to display the DMap
+     */
     private long auditId;
 
+    /**
+     * Parameter that identifies the previous audit for which we want to display the DMap (needed to build the URL that
+     * links the DMap boxes to the components)
+     */
     private String previousAuditId;
 
+    /**
+     * @see EntryPoint#onModuleLoad()
+     */
     public void onModuleLoad()
     {
-        initButton();
-        RootPanel.get( "mainButton" ).add( sendButton );
-
         initDistributionMap();
         RootPanel.get( "distributionmap" ).add( dmWidget );
+        populateDistributionMap();
     }
 
-    private void initButton()
+    /**
+     * Calls the RPC service to get the data to display
+     */
+    private void populateDistributionMap()
     {
-        sendButton.addClickHandler( new ClickHandler()
-        {
-            public void onClick( ClickEvent event )
-            {
-                dmWidget.startLoading();
-                dataService.getData( auditId, projectId, practiceId, dmWidget.getCallback() );
-            }
-        } );
+        dmWidget.startLoading();
+        dataService.getData( auditId, projectId, practiceId, dmWidget.getCallback() );
     }
 
+    /**
+     * Initializes the DMap
+     */
     private void initDistributionMap()
     {
         retrieveParamsFromURL();
@@ -85,6 +102,9 @@ public class DistributionMapEntryPoint
         dmWidget.setDetailURL( detailURL.toString() );
     }
 
+    /**
+     * Retrieves request parameters form the URL to pass them to the DMap Widget
+     */
     private void retrieveParamsFromURL()
     {
         String stringAuditId = Window.Location.getParameter( "currentAuditId" );

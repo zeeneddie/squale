@@ -211,7 +211,6 @@ if(selectedTab == null) {
 					isTabSelected='<%=""+selectedTab.equals("dmap")%>'>
 					<div style="background-color: white; padding: 10px; width: auto; height: auto; overflow: auto">
 						<script type="text/javascript" language="javascript" src="gwt.dm/gwt.dm.nocache.js"></script>
-						<div id="mainButton"></div>
 						<div id="distributionmap"></div>
 					</div>
 				</af:tab>

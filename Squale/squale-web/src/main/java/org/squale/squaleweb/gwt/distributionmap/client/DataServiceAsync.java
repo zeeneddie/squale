@@ -32,7 +32,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface DataServiceAsync
 {
     /**
-     * 
      * @see org.squale.squaleweb.gwt.distributionmap.client.DataService#getData(long, long)
      */
     void getData( long auditId, long projectId, long practiceId, AsyncCallback<ArrayList<Parent>> callback );
