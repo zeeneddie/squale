@@ -146,6 +146,24 @@ p {
 	vertical-align: middle;
 }
 
+/* ----------------- GWT related CSS ----------------- */
+.gwt-PopupPanelGlass {
+}
+
+.gwt-PopupPanel {
+	padding: 6px;
+}
+	
+.gwt-PopupPanel .popupContent {
+	padding: 10px;
+	background: lightgrey url(../images/gwt/popup-bg.gif) repeat-x;
+	border: solid 1px #c5d8ed;
+	color: black;
+	font-weight: bold;
+	font-size: 11px;
+	min-width: 100px;
+}
+
 /* ----------------- CSS for tag management ----------------- */
 .doubleBarre {
 	border: 4px double #F3BA5D;
