@@ -100,10 +100,16 @@ public class DataServiceImpl
                     if ( parent == null )
                     {
                         ComponentDTO parentComponent = potentialParentComponentMap.get( idParent );
-                        parent = new Parent( parentComponent.getName() );
-                        parentMap.put( idParent, parent );
+                        if ( parentComponent != null )
+                        {
+                            parent = new Parent( parentComponent.getName() );
+                            parentMap.put( idParent, parent );
+                        }
                     }
-                    parent.addChild( child );
+                    if ( parent != null )
+                    {
+                        parent.addChild( child );
+                    }
                 }
             }
         }
