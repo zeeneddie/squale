@@ -8,7 +8,7 @@
         <param name="sequence">segmentation_sequence</param>
       </generator>
     </id>
-    <set inverse="false" cascade="none" lazy="false" table="Tag_Segementation" sort="unsorted" name="tagList">
+    <set inverse="false" cascade="none" lazy="false" table="Tag_Segmentation" sort="unsorted" name="tagList">
       <key column="segmentationId"/>
       <many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO" column="TagId" outer-join="auto"/>
     </set>

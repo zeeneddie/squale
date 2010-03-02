@@ -91,7 +91,7 @@
 
     drop table Tag_Component cascade constraints;
 
-    drop table Tag_Segementation cascade constraints;
+    drop table Tag_Segmentation cascade constraints;
 
     drop table Task cascade constraints;
 
@@ -632,7 +632,7 @@
         primary key (ComponentId, TagId)
     );
 
-    create table Tag_Segementation (
+    create table Tag_Segmentation (
         segmentationId number(19,0) not null,
         TagId number(19,0) not null,
         primary key (segmentationId, TagId)
@@ -746,7 +746,7 @@
         max float,
         min float,
         deviation float,
-        elements float,
+        elements number(10,0),
         segmentationId number(19,0) not null,
         primary key (StatsId)
     );
@@ -1103,13 +1103,13 @@
         references Tag
         on delete cascade;
 
-    alter table Tag_Segementation 
-        add constraint FK328D3382BBF32679 
+    alter table Tag_Segmentation 
+        add constraint FK9CA21067BBF32679 
         foreign key (segmentationId) 
         references segmentation;
 
-    alter table Tag_Segementation 
-        add constraint FK328D3382FD9106F6 
+    alter table Tag_Segmentation 
+        add constraint FK9CA21067FD9106F6 
         foreign key (TagId) 
         references Tag
         on delete cascade;

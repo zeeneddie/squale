@@ -191,11 +191,11 @@
     alter table Tag_Component 
         drop constraint FKE093EE58FD9106F6;
 
-    alter table Tag_Segementation 
-        drop constraint FK328D3382BBF32679;
+    alter table Tag_Segmentation 
+        drop constraint FK9CA21067BBF32679;
 
-    alter table Tag_Segementation 
-        drop constraint FK328D3382FD9106F6;
+    alter table Tag_Segmentation 
+        drop constraint FK9CA21067FD9106F6;
 
     alter table TaskParameter 
         drop constraint FK16AD33849ACA29CA;
@@ -322,7 +322,7 @@
 
     drop table Tag_Component if exists;
 
-    drop table Tag_Segementation if exists;
+    drop table Tag_Segmentation if exists;
 
     drop table Task if exists;
 
@@ -781,7 +781,7 @@
         primary key (ComponentId, TagId)
     );
 
-    create table Tag_Segementation (
+    create table Tag_Segmentation (
         segmentationId bigint not null,
         TagId bigint not null,
         primary key (segmentationId, TagId)
@@ -897,7 +897,7 @@
         max float,
         min float,
         deviation float,
-        elements float,
+        elements integer,
         segmentationId bigint not null,
         primary key (StatsId)
     );
@@ -1254,14 +1254,13 @@
         references Tag
         on delete cascade;
 
-    alter table Tag_Segementation 
-        add constraint FK328D3382BBF32679 
+    alter table Tag_Segmentation 
+        add constraint FK9CA21067BBF32679 
         foreign key (segmentationId) 
-        references segmentation
-        on delete cascade;
+        references segmentation;
 
-    alter table Tag_Segementation 
-        add constraint FK328D3382FD9106F6 
+    alter table Tag_Segmentation 
+        add constraint FK9CA21067FD9106F6 
         foreign key (TagId) 
         references Tag
         on delete cascade;

@@ -72,7 +72,7 @@ public class SegmentationBO
      * Getter method for the attribute tagList
      * 
      * @return The tag list 
-     * @hibernate.set table="Tag_Segementation" lazy="false" cascade="none" inverse="false" sort="unsorted"
+     * @hibernate.set table="Tag_Segmentation" lazy="false" cascade="none" inverse="false" sort="unsorted"
      * @hibernate.key column="segmentationId"
      * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO"
      *                         column="TagId" outer-join="auto"
@@ -98,7 +98,7 @@ public class SegmentationBO
      * @return The stat list
      * @hibernate.set table="shared_repo_stats" lazy="true" cascade="all" inverse="true" sort="unsorted"
      * @hibernate.key column="segmentationId"
-     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.StatsBO"
+     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SharedRepoStatsBO"
      */
     public Set<SharedRepoStatsBO> getStatsList()
     {

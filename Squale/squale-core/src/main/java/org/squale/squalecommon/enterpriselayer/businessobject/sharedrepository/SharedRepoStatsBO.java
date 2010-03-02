@@ -290,7 +290,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute elements
      * 
      * @return The number of elements computed
-     * @hibernate.property name="elements" column="elements" type="int" update="true" insert="true"
+     * @hibernate.property name="elements" column="elements" type="integer" update="true" insert="true"
      */
     public int getElements()
     {

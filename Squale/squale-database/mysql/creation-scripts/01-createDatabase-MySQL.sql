@@ -255,13 +255,13 @@
         drop 
         foreign key FKE093EE58FD9106F6;
 
-    alter table Tag_Segementation 
+    alter table Tag_Segmentation 
         drop 
-        foreign key FK328D3382BBF32679;
+        foreign key FK9CA21067BBF32679;
 
-    alter table Tag_Segementation 
+    alter table Tag_Segmentation 
         drop 
-        foreign key FK328D3382FD9106F6;
+        foreign key FK9CA21067FD9106F6;
 
     alter table TaskParameter 
         drop 
@@ -399,7 +399,7 @@
 
     drop table if exists Tag_Component;
 
-    drop table if exists Tag_Segementation;
+    drop table if exists Tag_Segmentation;
 
     drop table if exists Task;
 
@@ -852,7 +852,7 @@
         primary key (ComponentId, TagId)
     ) type=InnoDB;
 
-    create table Tag_Segementation (
+    create table Tag_Segmentation (
         segmentationId bigint not null,
         TagId bigint not null,
         primary key (segmentationId, TagId)
@@ -966,7 +966,7 @@
         max float,
         min float,
         deviation float,
-        elements float,
+        elements integer,
         segmentationId bigint not null,
         primary key (StatsId)
     ) type=InnoDB;
@@ -1387,15 +1387,15 @@
         references Tag (TagId)
         on delete cascade;
 
-    alter table Tag_Segementation 
-        add index FK328D3382BBF32679 (segmentationId), 
-        add constraint FK328D3382BBF32679 
+    alter table Tag_Segmentation 
+        add index FK9CA21067BBF32679 (segmentationId), 
+        add constraint FK9CA21067BBF32679 
         foreign key (segmentationId) 
         references segmentation (segmentationId);
 
-    alter table Tag_Segementation 
-        add index FK328D3382FD9106F6 (TagId), 
-        add constraint FK328D3382FD9106F6 
+    alter table Tag_Segmentation 
+        add index FK9CA21067FD9106F6 (TagId), 
+        add constraint FK9CA21067FD9106F6 
         foreign key (TagId) 
         references Tag (TagId)
         on delete cascade;

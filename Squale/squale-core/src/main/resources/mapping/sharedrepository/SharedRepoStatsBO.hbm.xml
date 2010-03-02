@@ -16,7 +16,7 @@
     <property name="max" column="max" update="true" type="float" insert="true"/>
     <property name="min" column="min" update="true" type="float" insert="true"/>
     <property name="deviation" column="deviation" update="true" type="float" insert="true"/>
-    <property name="elements" column="elements" update="true" type="int" insert="true"/>
+    <property name="elements" column="elements" update="true" type="integer" insert="true"/>
     <many-to-one insert="true" unique="false" column="segmentationId" cascade="all" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SegmentationBO" not-null="true" name="segmentation"/>
   </class>
 </hibernate-mapping>
