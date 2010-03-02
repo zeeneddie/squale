@@ -22,6 +22,8 @@
 package org.squale.gwt.distributionmap.widget;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import org.squale.gwt.distributionmap.widget.bundle.DMResources;
 import org.squale.gwt.distributionmap.widget.data.Parent;
@@ -41,10 +43,11 @@ import com.google.gwt.user.client.ui.Widget;
 public class DistributionMap
     extends Composite
 {
-    final AsyncCallback<ArrayList<Parent>> callback = new AsyncCallback<ArrayList<Parent>>()
+    final private AsyncCallback<ArrayList<Parent>> callback = new AsyncCallback<ArrayList<Parent>>()
     {
         public void onSuccess( ArrayList<Parent> result )
         {
+            Collections.sort( result, parentComparator );
             displayBoxes( result );
         }
 
@@ -52,6 +55,15 @@ public class DistributionMap
         {
             mainPanel.clear();
             mainPanel.add( new HTML( caught.toString() ) );
+        }
+    };
+
+    final private Comparator<Parent> parentComparator = new Comparator<Parent>()
+    {
+        @Override
+        public int compare( Parent p1, Parent p2 )
+        {
+            return p1.getChildren().size() - p2.getChildren().size();
         }
     };
 
@@ -66,7 +78,7 @@ public class DistributionMap
     private String bigBoxDetailPopupMessage;
 
     private String smallBoxDetailPopupMessage;
-    
+
     private String detailURL = "";
 
     public DistributionMap()
@@ -77,7 +89,7 @@ public class DistributionMap
         detailPopup.setWidth( "150px" );
 
         mainPanel.setStylePrimaryName( resources.css().distributionMap() );
-        
+
         initWidget( mainPanel );
     }
 
