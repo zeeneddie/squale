@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -73,7 +74,7 @@ public class DistributionMap
 
     final private Widget loadingLabel = new HTML();
 
-    final private DecoratedPopupPanel detailPopup = new DecoratedPopupPanel( true );
+    final private PopupPanel detailPopup = new PopupPanel( true );
 
     private String bigBoxDetailPopupMessage;
 
@@ -86,7 +87,6 @@ public class DistributionMap
         resources.css().ensureInjected();
 
         loadingLabel.setStylePrimaryName( resources.css().loadingLabel() );
-        detailPopup.setWidth( "150px" );
 
         mainPanel.setStylePrimaryName( resources.css().distributionMap() );
 
