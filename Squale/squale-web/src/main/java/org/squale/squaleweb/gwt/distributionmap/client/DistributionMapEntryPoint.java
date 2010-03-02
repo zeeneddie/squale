@@ -29,7 +29,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
- * @author fabrice
+ * @author Fabrice BELLINGARD
  */
 public class DistributionMapEntryPoint
     implements EntryPoint

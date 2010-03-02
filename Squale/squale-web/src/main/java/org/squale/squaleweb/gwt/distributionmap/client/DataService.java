@@ -27,10 +27,20 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
  * The client side stub for the RPC service.
+ * 
+ * @author Fabrice BELLINGARD
  */
 @RemoteServiceRelativePath( "data" )
 public interface DataService
     extends RemoteService
 {
-    ArrayList<Parent> getData(long auditId, long projectId, long practiceId);
+    /**
+     * Returns a list of Parent objects used by the Distribution Map widget to populate its content.
+     * 
+     * @param auditId the audit for which the DMap will display the results
+     * @param projectId the project for which the DMap will display the results
+     * @param practiceId the practice for which the DMap will display the results
+     * @return the list of Parent objects used by the DMap
+     */
+    ArrayList<Parent> getData( long auditId, long projectId, long practiceId );
 }

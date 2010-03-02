@@ -40,7 +40,9 @@ import org.squale.squaleweb.gwt.distributionmap.client.DataService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
- * The server side implementation of the RPC service.
+ * The server side implementation of the RPC service that provides data to the distribution map.
+ * 
+ * @author Fabrice BELLINGARD
  */
 @SuppressWarnings( "serial" )
 public class DataServiceImpl
@@ -52,12 +54,14 @@ public class DataServiceImpl
      */
     private static Log log = LogFactory.getLog( DataServiceImpl.class );
 
+    /**
+     * Date used for logging purposes
+     */
     private Date initialDate;
 
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings( "unchecked" )
     public ArrayList<Parent> getData( long auditId, long projectId, long practiceId )
     {
         handleTime();
@@ -72,28 +76,16 @@ public class DataServiceImpl
         try
         {
             String componentLevel = QualityGridFacade.getComponentLevelForPractice( practiceId );
-            String upperComponentLevel = upperLevel( componentLevel );
 
             // Find all the components for the level of the practice
-            Collection<ComponentDTO> components =
-                ComponentFacade.getProjectChildren( project, "component." + componentLevel, audit );
+            Collection<ComponentDTO> components = getComponentsOfSpecificLevel( audit, project, componentLevel );
 
             // Find all the components for the level above the practice level
-            Map<Long, ComponentDTO> potentialParentComponentMap = new HashMap<Long, ComponentDTO>();
-            Collection<ComponentDTO> potentialParentComponents =
-                ComponentFacade.getProjectChildren( project, "component." + upperComponentLevel, audit );
-            for ( ComponentDTO potentialParentDTO : potentialParentComponents )
-            {
-                potentialParentComponentMap.put( potentialParentDTO.getID(), potentialParentDTO );
-            }
+            Map<Long, ComponentDTO> potentialParentComponentMap =
+                getComponentsOfUpperLevel( audit, project, componentLevel );
 
             // Find all the mark for the practice
-            Map<Long, Float> markMap = new HashMap<Long, Float>();
-            Collection<MarkDTO> marks = QualityResultFacade.getPracticeByAuditRule( auditId, practiceId );
-            for ( MarkDTO markDTO : marks )
-            {
-                markMap.put( markDTO.getComponent().getID(), markDTO.getValue() );
-            }
+            Map<Long, Float> markMap = getMarksForSpecificPractice( auditId, practiceId );
 
             // and now, build the parent-child tree for the DistributionMap
             for ( ComponentDTO component : components )
@@ -126,6 +118,76 @@ public class DataServiceImpl
         return new ArrayList<Parent>( parentMap.values() );
     }
 
+    /**
+     * For a specific audit, returns all the marks of a specific practice.
+     * 
+     * @param auditId the audit id
+     * @param practiceId the practice is
+     * @return a map containing the value of the marks with the component ID for these marks as the key
+     * @throws JrafEnterpriseException if there's a problem while retrieving this collection
+     */
+    private Map<Long, Float> getMarksForSpecificPractice( long auditId, long practiceId )
+        throws JrafEnterpriseException
+    {
+        Map<Long, Float> markMap = new HashMap<Long, Float>();
+        Collection<MarkDTO> marks = QualityResultFacade.getPracticeByAuditRule( auditId, practiceId );
+        for ( MarkDTO markDTO : marks )
+        {
+            markMap.put( markDTO.getComponent().getID(), markDTO.getValue() );
+        }
+        return markMap;
+    }
+
+    /**
+     * For a specific audit and a specific project, returns all the components of the upper level of a specific level.
+     * 
+     * @param audit the audit
+     * @param project the project
+     * @param componentLevel the lower level of the components we want to get
+     * @return a map containing the components of the upper level with their IDs as keys of the map
+     * @throws JrafEnterpriseException if there's a problem while retrieving this collection
+     */
+    private Map<Long, ComponentDTO> getComponentsOfUpperLevel( AuditDTO audit, ComponentDTO project,
+                                                               String componentLevel )
+        throws JrafEnterpriseException
+    {
+        Map<Long, ComponentDTO> potentialParentComponentMap = new HashMap<Long, ComponentDTO>();
+        String upperComponentLevel = upperLevel( componentLevel );
+        Collection<ComponentDTO> potentialParentComponents =
+            getComponentsOfSpecificLevel( audit, project, upperComponentLevel );
+        for ( ComponentDTO potentialParentDTO : potentialParentComponents )
+        {
+            potentialParentComponentMap.put( potentialParentDTO.getID(), potentialParentDTO );
+        }
+        return potentialParentComponentMap;
+    }
+
+    /**
+     * For a specific audit and a specific project, returns all the components of a specific level.
+     * 
+     * @param audit the audit
+     * @param project the project
+     * @param componentLevel the level of the components we want to get
+     * @return the collection of components of the specific level
+     * @throws JrafEnterpriseException if there's a problem while retrieving this collection
+     */
+    @SuppressWarnings( "unchecked" )
+    private Collection<ComponentDTO> getComponentsOfSpecificLevel( AuditDTO audit, ComponentDTO project,
+                                                                   String componentLevel )
+        throws JrafEnterpriseException
+    {
+        Collection<ComponentDTO> components =
+            ComponentFacade.getProjectChildren( project, "component." + componentLevel, audit );
+        return components;
+    }
+
+    /**
+     * Returns the name of the upper level of the given level. For instance, for "method", "class" is returned. Note:
+     * this is really basic, and should be handled better somewhere else...
+     * 
+     * @param componentLevel the level for which we want to know the upper level
+     * @return the name of the upper level
+     */
     private String upperLevel( String componentLevel )
     {
         String upperLevel = "package";
@@ -140,6 +202,9 @@ public class DataServiceImpl
         return upperLevel;
     }
 
+    /**
+     * Used for logging purposes only: prints the execution time
+     */
     private void handleTime()
     {
         if ( log.isDebugEnabled() )
