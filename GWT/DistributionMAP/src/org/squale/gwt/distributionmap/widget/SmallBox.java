@@ -26,7 +26,7 @@ import org.squale.gwt.distributionmap.widget.data.Child;
 
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOverEvent;
-import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.ui.HTML;
 
 /**
@@ -36,12 +36,18 @@ class SmallBox
     extends AbstractBox
 {
 
+    private static final NumberFormat decimalFormat = NumberFormat.getFormat( "#.#" );
+
     private Child childData;
+
+    private String displayableGrade;
 
     public SmallBox( DistributionMap dm, Child child )
     {
         super( dm, child.getName() );
         this.childData = child;
+        //displayableGrade = child.getGrade()+"";
+        displayableGrade = decimalFormat.format( child.getGrade() );
 
         HTML divElement = createBox();
 
@@ -97,7 +103,7 @@ class SmallBox
 
     public void onMouseOver( MouseOverEvent event )
     {
-        getDistributionMap().showDetailPopupForSmallBox( childData.getName() + "<br/>Grade: " + childData.getGrade(),
+        getDistributionMap().showDetailPopupForSmallBox( childData.getName() + "<br/>Grade: " + displayableGrade,
                                                          event.getClientX(), event.getClientY() );
     }
 

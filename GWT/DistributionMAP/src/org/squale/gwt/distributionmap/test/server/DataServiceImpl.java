@@ -55,7 +55,7 @@ public class DataServiceImpl
             int childNumber = r.nextInt( 20 ) + 1;
             for ( int j = 0; j < childNumber; j++ )
             {
-                Child c = new Child( j, "Method #" + j, ( (float) r.nextInt( 31 ) ) / 10 );
+                Child c = new Child( j, "Method #" + j, ( (float) r.nextInt( 30001 ) ) / 10000 );
                 p.addChild( c );
             }
             result.add( p );
