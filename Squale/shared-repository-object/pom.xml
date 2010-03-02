@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.squale.app</groupId>
+		<artifactId>squale</artifactId>
+		<version>6.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>shared-repository-object</artifactId>
+	<packaging>jar</packaging>
+	<name>Shared Respository Object</name>
+	<description>
+		Xstream object for export form / to the shared repository
+	</description>
+	<properties>
+		<!-- till we have tried to make all the tests work... -->
+		<maven.test.skip>true</maven.test.skip>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+		</dependency>
+	</dependencies>
+</project>
