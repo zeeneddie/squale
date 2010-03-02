@@ -1,4 +1,235 @@
 
+    alter table Analysis_Task 
+        drop constraint FK91CAC9089ACA29CA;
+
+    alter table Analysis_Task 
+        drop constraint FK91CAC908E93A2E5E;
+
+    alter table ApplicationLastExport 
+        drop constraint FK1E3E973AB660AF72;
+
+    alter table AuditDisplayConfBO 
+        drop constraint FKBF5515D8CAD1505B;
+
+    alter table AuditDisplayConfBO 
+        drop constraint FKBF5515D8DA15C497;
+
+    alter table AuditDisplayConfBO 
+        drop constraint FKBF5515D8DD868E9C;
+
+    alter table AuditGridBO 
+        drop constraint FK71AB79AECAD1505B;
+
+    alter table AuditGridBO 
+        drop constraint FK71AB79AEDA15C497;
+
+    alter table AuditGridBO 
+        drop constraint FK71AB79AE49C5C1F2;
+
+    alter table Component 
+        drop constraint FK24013CDDEF730ACB;
+
+    alter table Component 
+        drop constraint FK24013CDDCF3F6BD7;
+
+    alter table Component 
+        drop constraint FK24013CDDECE51913;
+
+    alter table Component 
+        drop constraint FK24013CDDB2C13533;
+
+    alter table Component 
+        drop constraint FK24013CDDBEC27BED;
+
+    alter table Component 
+        drop constraint FK24013CDD499FD217;
+
+    alter table Component 
+        drop constraint FK24013CDDE6E62BC9;
+
+    alter table Components_Audits 
+        drop constraint FK5D3B0141CAD1505B;
+
+    alter table Components_Audits 
+        drop constraint FK5D3B01419164C9D;
+
+    alter table CriteriumPractice_Rule 
+        drop constraint FK8ADDE8664749294;
+
+    alter table CriteriumPractice_Rule 
+        drop constraint FK8ADDE8615B7FE16;
+
+    alter table Error 
+        drop constraint FK401E1E8CAD1505B;
+
+    alter table Error 
+        drop constraint FK401E1E8DA15C497;
+
+    alter table FactorCriterium_Rule 
+        drop constraint FK897340301C18583E;
+
+    alter table FactorCriterium_Rule 
+        drop constraint FK8973403064749294;
+
+    alter table FactorRef 
+        drop constraint FK2854B0A4A4AEA807;
+
+    alter table FactorRef 
+        drop constraint FK2854B0A497209814;
+
+    alter table Formula_Conditions 
+        drop constraint FKB3141771EB17C0F9;
+
+    alter table Formula_Measures 
+        drop constraint FK7A19C1CEA4104C92;
+
+    alter table GridFactor_Rule 
+        drop constraint FKBC5A70C61C18583E;
+
+    alter table GridFactor_Rule 
+        drop constraint FKBC5A70C649C5C1F2;
+
+    alter table HomepageComponent 
+        drop constraint FK8D93B88F22FEA8A7;
+
+    alter table Mark 
+        drop constraint FK247AED4AA85BD7;
+
+    alter table Mark 
+        drop constraint FK247AED9164C9D;
+
+    alter table Measure 
+        drop constraint FK9B263D3ECAD1505B;
+
+    alter table Measure 
+        drop constraint FK9B263D3E6C1EEACE;
+
+    alter table Measure 
+        drop constraint FK9B263D3E9164C9D;
+
+    alter table Metric 
+        drop constraint FK892AE1D029D429E5;
+
+    alter table Module 
+        drop constraint FK89B0928C7729BC88;
+
+    alter table PracticeResult_Repartition 
+        drop constraint FK84B2F9904AA85BD7;
+
+    alter table Profile_DisplayConfBO 
+        drop constraint FKC122A97DEA5281F2;
+
+    alter table Profile_DisplayConfBO 
+        drop constraint FKC122A97DBEC27CBB;
+
+    alter table Profile_Rights 
+        drop constraint FK62F82D6D21CAA303;
+
+    alter table Profile_Rights 
+        drop constraint FK62F82D6DC21CFAE3;
+
+    alter table Profiles_Grids 
+        drop constraint FK9949B158212FFC33;
+
+    alter table Profiles_Grids 
+        drop constraint FK9949B158BEC27CBB;
+
+    alter table ProjectParameter 
+        drop constraint FK6D7538B020F36050;
+
+    alter table ProjectParameter 
+        drop constraint FK6D7538B0CF7E4672;
+
+    alter table QualityResult 
+        drop constraint FKE9E7A9DCCAD1505B;
+
+    alter table QualityResult 
+        drop constraint FKE9E7A9DCDA15C497;
+
+    alter table QualityResult 
+        drop constraint FKE9E7A9DC6FA7AE5E;
+
+    alter table QualityResult_Comment 
+        drop constraint FKD36C3ADCCCF6BB41;
+
+    alter table QualityRule 
+        drop constraint FK420ADC7BE9F00F7;
+
+    alter table Rule 
+        drop constraint FK270B1C6C1EEACE;
+
+    alter table RuleCheckingTransgressionItem 
+        drop constraint FKDF0D4973CA94EE6;
+
+    alter table RuleCheckingTransgressionItem 
+        drop constraint FKDF0D4973979AE76D;
+
+    alter table RuleCheckingTransgressionItem 
+        drop constraint FKDF0D49739164C9D;
+
+    alter table RuleCheckingTransgressionItem 
+        drop constraint FKDF0D49736B5A5124;
+
+    alter table RuleSet 
+        drop constraint FKBF8713A6DA15C497;
+
+    alter table SqualeReference 
+        drop constraint FK32FD7E08499FD217;
+
+    alter table Stats_squale_dict 
+        drop constraint FK9B3A9E52EF730ACB;
+
+    alter table Stats_squale_dict_annexe 
+        drop constraint FKBC8FB71EEF730ACB;
+
+    alter table Tag 
+        drop constraint FK1477AA86C98F7;
+
+    alter table Tag_Component 
+        drop constraint FKE093EE589164C9D;
+
+    alter table Tag_Component 
+        drop constraint FKE093EE58FD9106F6;
+
+    alter table Tag_Segementation 
+        drop constraint FK328D3382BBF32679;
+
+    alter table Tag_Segementation 
+        drop constraint FK328D3382FD9106F6;
+
+    alter table TaskParameter 
+        drop constraint FK16AD33849ACA29CA;
+
+    alter table TaskRef 
+        drop constraint FK797F8AE76E45E0C;
+
+    alter table Termination_Task 
+        drop constraint FKC739A2209ACA29CA;
+
+    alter table Termination_Task 
+        drop constraint FKC739A220E93A2E5E;
+
+    alter table UserAccess 
+        drop constraint FKB60A252FB4DCCF05;
+
+    alter table UserBO 
+        drop constraint FK97901978C21CFAE3;
+
+    alter table User_Rights 
+        drop constraint FK21885CCB22FEA975;
+
+    alter table User_Rights 
+        drop constraint FK21885CCBC21CFAE3;
+
+    alter table User_Rights 
+        drop constraint FK21885CCBB4DCCF05;
+
+    alter table Volumetry_Measures 
+        drop constraint FK92AE693393A162FA;
+
+    alter table shared_repo_stats 
+        drop constraint FK2F1F0DACBBF32679;
+
     drop table Analysis_Task if exists;
 
     drop table ApplicationLastExport if exists;
@@ -91,6 +322,8 @@
 
     drop table Tag_Component if exists;
 
+    drop table Tag_Segementation if exists;
+
     drop table Task if exists;
 
     drop table TaskParameter if exists;
@@ -112,6 +345,12 @@
     drop table adminParams if exists;
 
     drop table displayConf if exists;
+
+    drop table segmentation if exists;
+
+    drop table shared_repo_stats if exists;
+
+    drop table squale_params if exists;
 
     create table Analysis_Task (
         TasksUserId bigint not null,
@@ -542,6 +781,12 @@
         primary key (ComponentId, TagId)
     );
 
+    create table Tag_Segementation (
+        segmentationId bigint not null,
+        TagId bigint not null,
+        primary key (segmentationId, TagId)
+    );
+
     create table Task (
         TaskId bigint generated by default as identity (start with 1),
         Name varchar(255) not null,
@@ -635,6 +880,33 @@
         Y_POS bigint,
         componentType varchar(255),
         primary key (ConfId)
+    );
+
+    create table segmentation (
+        segmentationId bigint generated by default as identity (start with 1),
+        primary key (segmentationId)
+    );
+
+    create table shared_repo_stats (
+        StatsId bigint generated by default as identity (start with 1),
+        elementType varchar(255),
+        dataType varchar(255),
+        dataName varchar(255),
+        language varchar(255),
+        mean float,
+        max float,
+        min float,
+        deviation float,
+        elements float,
+        segmentationId bigint not null,
+        primary key (StatsId)
+    );
+
+    create table squale_params (
+        SqualeParamsId bigint generated by default as identity (start with 1),
+        paramKey varchar(255) not null,
+        paramaValue varchar(255) not null,
+        primary key (SqualeParamsId)
     );
 
     alter table Analysis_Task 
@@ -982,6 +1254,18 @@
         references Tag
         on delete cascade;
 
+    alter table Tag_Segementation 
+        add constraint FK328D3382BBF32679 
+        foreign key (segmentationId) 
+        references segmentation
+        on delete cascade;
+
+    alter table Tag_Segementation 
+        add constraint FK328D3382FD9106F6 
+        foreign key (TagId) 
+        references Tag
+        on delete cascade;
+
     alter table TaskParameter 
         add constraint FK16AD33849ACA29CA 
         foreign key (TaskRefId) 
@@ -1035,4 +1319,10 @@
         add constraint FK92AE693393A162FA 
         foreign key (VolumetryId) 
         references displayConf
+        on delete cascade;
+
+    alter table shared_repo_stats 
+        add constraint FK2F1F0DACBBF32679 
+        foreign key (segmentationId) 
+        references segmentation
         on delete cascade;

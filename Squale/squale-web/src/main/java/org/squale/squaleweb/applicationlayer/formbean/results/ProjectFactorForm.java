@@ -36,6 +36,9 @@ public class ProjectFactorForm
     /** Note précédante du facteur */
     private String mPredeccesorMark = "";
 
+    /** The mean for this factor on the segmentation linked to the application */
+    private SharedRepoStatForm statForm;
+
     /**
      * @return nom
      */
@@ -89,4 +92,25 @@ public class ProjectFactorForm
             mPredeccesorMark = pString;
         }
     }
+
+    /**
+     * Getter method for the attribute statForm
+     * 
+     * @return The statForm
+     */
+    public SharedRepoStatForm getStatForm()
+    {
+        return statForm;
+    }
+
+    /**
+     * Setter method for the attribute statForm
+     * 
+     * @param pStatForm The new statForm
+     */
+    public void setStatForm( SharedRepoStatForm pStatForm )
+    {
+        statForm = pStatForm;
+    }
+
 }

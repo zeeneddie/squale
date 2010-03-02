@@ -26,9 +26,14 @@ import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 /**
  * Transforme les composants en bo<->ComponentDTO
  */
-public class TagTransform
+public final class TagTransform
     implements Serializable
 {
+
+    /**
+     * UID
+     */
+    private static final long serialVersionUID = -7300972719072399802L;
 
     /**
      * Constructeur prive

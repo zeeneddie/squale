@@ -43,6 +43,11 @@ public abstract class AbstractComponentBO
 {
 
     /**
+     * UID
+     */
+    private static final long serialVersionUID = 2723758346601512862L;
+
+    /**
      * Identifiant (au sens technique) de l'objet
      */
     protected long mId;
@@ -66,7 +71,7 @@ public abstract class AbstractComponentBO
      * Collection des audits liés à ce composant
      */
     protected Collection mAudits;
-    
+
     /**
      * Collection des Tags associés à ce composant
      */
@@ -245,9 +250,8 @@ public abstract class AbstractComponentBO
      */
     // * @throws UnexpectedRelationException si la relation ne peut etre ajouté
     public AbstractComponentBO( String pName, AbstractComplexComponentBO pParent ) /*
-                                                                                     * throws
-                                                                                     * UnexpectedRelationException
-                                                                                     */
+                                                                                    * throws UnexpectedRelationException
+                                                                                    */
     {
         mId = -1;
         Collection emptyCol = new HashSet();
@@ -310,7 +314,7 @@ public abstract class AbstractComponentBO
      * @hibernate.set table="Components_Audits" lazy="true" cascade="none" inverse="false" sort="unsorted"
      * @hibernate.key column="ComponentId"
      * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO"
-     *                         column="AuditId" outer-join="auto"
+     *                         column="AuditId" outer-join="auto" fetch="join"
      */
     public Collection getAudits()
     {
@@ -340,8 +344,7 @@ public abstract class AbstractComponentBO
     /**
      * vérifie si un audit est rattaché au composant
      * 
-     * @param pIdAudit id de l'audit à vérifier, <b>Attention</b>, si l'id passé est -1, le résultat ne sera pas
-     *            valide.
+     * @param pIdAudit id de l'audit à vérifier, <b>Attention</b>, si l'id passé est -1, le résultat ne sera pas valide.
      * @return <code>true</code> si l'audit est rattaché à ce composant
      */
     public boolean containsAuditById( long pIdAudit )
@@ -421,15 +424,15 @@ public abstract class AbstractComponentBO
      * @return objet
      */
     public abstract Object accept( ComponentVisitor pVisitor, Object pArgument );
-    
+
     /**
      * Access method for the mTags property.
      * 
      * @return the current value of the mTags property
      * @hibernate.set table="Tag_Component" lazy="false" cascade="none" inverse="false" sort="unsorted"
      * @hibernate.key column="ComponentId"
-     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO"
-     *                         column="TagId" outer-join="auto"
+     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO" column="TagId"
+     *                         outer-join="auto"
      */
     public Collection<TagBO> getTags()
     {
@@ -445,7 +448,7 @@ public abstract class AbstractComponentBO
     {
         mTags = pTags;
     }
-    
+
     /**
      * adds the value of pTag to the mTags list.
      * 

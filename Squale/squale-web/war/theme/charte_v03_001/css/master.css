@@ -394,9 +394,10 @@ div#conteneur div.contenuModulable div.c1 {width:230px;}
 div#conteneur div.contenuModulable div.c2 {width:479px;}
 div#conteneur div.contenuModulable div.c3 {width:729px;}
 /*-- element for the homepageManagement.jsp, manaualMark.jsp--*/
-table.formulaire td.check_col {width:20px; height:25px }
-table.formulaire th.check_col {width:20px; height:25px; text-align:center;}
-table.formulaire th.height_col{height:25px; }
+td.check_col {width:20px; height:25px }
+th.check_col {width:20px; height:25px; text-align:center;}
+th.height_col{height:25px; }
+td.height_col{height:25px; }
 /*-- element for the homepage.jsp --*/
 div.homepage {border: 4px double #F3BA5D; padding:10px; -moz-border-radius:0px 20px 20px 20px}
 div.homepage > table.formulaire {visibility:hidden}
@@ -421,5 +422,4 @@ div.frame_border {border: 1px solid #F3BA5D; padding:10px; -moz-border-radius:0p
 .commentsHistoryBlocComment div{margin-bottom: 2px;}
 /*-- element for manualPractice.jsp --*/
 #commentsDiv{height: auto; padding-bottom: 5px;}
-
 .td1Ext {text-align:right;font-weight:bold; width:50%; height:25px }

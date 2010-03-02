@@ -35,7 +35,7 @@ public final class ExportMessages
      */
     private ExportMessages()
     {
-        super( "org.squale.squaleexport.messages.exportMessages" );
+        super( "org.squale.squaleexport.message.exportMessages" );
     }
 
     /**

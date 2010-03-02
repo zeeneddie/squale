@@ -44,6 +44,7 @@
 		<mapping resource="mapping/config/AuditFrequencyBO.hbm.xml" />
 		<mapping resource="mapping/config/Profile_DisplayConfBO.hbm.xml" />
 		<mapping resource="mapping/config/ServeurBO.hbm.xml" />
+		<mapping resource="mapping/config/SqualeParamsBO.hbm.xml"/>
 		<mapping resource="mapping/config/StopTimeBO.hbm.xml" />
 		<mapping resource="mapping/config/TaskBO.hbm.xml" />
 		<mapping resource="mapping/config/TaskParameterBO.hbm.xml" />
@@ -78,6 +79,8 @@
 		<mapping resource="mapping/rulechecking/checkstyle/CheckstyleModuleBO.hbm.xml" />
 		
 		<mapping resource="mapping/sharedrepository/ApplicationExportBO.hbm.xml"/>
+		<mapping resource="mapping/sharedrepository/SegmentationBO.hbm.xml"/>
+		<mapping resource="mapping/sharedrepository/SharedRepoStatsBO.hbm.xml"/>
 		
 		<mapping resource="mapping/stats/SiteStatsDICTBO.hbm.xml" />
 		<mapping resource="mapping/stats/SiteAndProfilStatsDICTBO.hbm.xml" />

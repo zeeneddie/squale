@@ -1,26 +1,50 @@
 <%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
+<%@taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
 
 <af:page>
 	<af:body>
-		<af:canvasCenter titleKey="homepage_management.title" subTitleKey="homepage_management.subtitle">
+		<af:canvasCenter titleKey="shared_repository.reference.title">
 		<br/>
-		<af:dropDownPanel titleKey="buttonTag.menu.aide">
-			<br/>
-			<p>
-				<bean:message key="homepage_management.help.l1" />
-			</p>
-			<br/>
-		</af:dropDownPanel>
-		<br/>
-		<af:form action="sharedRepositoryImport.do">
 		<div class="frame_border">
+			<h3><bean:message key="shared_repository.reference.current_version.title"/></h3>
 			<br/>
-			<af:buttonBar>
-				<af:button name="impor"></af:button>
-			</af:buttonBar>
+			<logic:notEmpty name="sharedRepositoryImportForm" property="currentReferenceVersion">
+				<bean:message key="shared_repository.reference.current_version"/>
+				<bean:write name="sharedRepositoryImportForm" property="currentReferenceVersion" />
+			</logic:notEmpty>
+			<logic:empty name="sharedRepositoryImportForm" property="currentReferenceVersion">
+				<bean:message key="shared_repository.reference.no_version"/>
+			</logic:empty>
+			<br/>
 			<br/>
 		</div>
-		</af:form>
+		<br/>
+		<div class="frame_border">
+			<h3><bean:message key="shared_repository.reference.new_reference.title"/></h3>
+			<br/>
+			<div style="color: #f00">
+				<html:messages id="msg" message="true">
+				<bean:write name="msg" />
+				<br>
+				</html:messages>
+			</div>
+			<af:form action="sharedRepositoryImport.do" method="POST" enctype="multipart/form-data">
+				<table width="100%" class="formulaire" cellpadding="0" cellspacing="0" border="0">
+					<tbody>
+					<%--File to download --%>
+					<tr>
+						<td class="td1" width="45%"><bean:message key="shared_repository.reference.file"/></td>
+						<td><html:file property="file"/></td>
+					</tr>
+					</tbody>
+				</table>
+				<af:buttonBar>
+					<af:button name="import" callMethod="impor"></af:button>
+				</af:buttonBar>
+			</af:form>
+		</div>
 		<br/>
 		</af:canvasCenter>
 	</af:body>

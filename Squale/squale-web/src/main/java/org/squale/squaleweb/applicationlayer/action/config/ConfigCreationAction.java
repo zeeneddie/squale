@@ -29,10 +29,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-
 import org.squale.jraf.helper.AccessDelegateHelper;
 import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
-import org.squale.squalecommon.enterpriselayer.facade.config.adminParams.MailConfigFacade;
 import org.squale.squaleweb.applicationlayer.action.accessRights.AdminAction;
 import org.squale.squaleweb.applicationlayer.formbean.UploadFileForm;
 import org.squale.squaleweb.servlet.UserSqualeSessionContext;

@@ -60,27 +60,33 @@ public class Launch
 
         List<AdminParamsDTO> listMapping = new ArrayList<AdminParamsDTO>();
         AdminParamsDTO param = new AdminParamsDTO();
-        param.setAdminParam( AdminParamsBO.MAPPING_JAVA_PROJECT_LOC, "JavancssTask.ncss" );
+        String metricKey = AdminParamsBO.MAPPING+"/java/module/loc";
+        param.setAdminParam( metricKey.toLowerCase(), "JavancssTask.ncss" );
         listMapping.add( param );
 
         param = new AdminParamsDTO();
-        param.setAdminParam( AdminParamsBO.MAPPING_JAVA_PROJECT_NB_CLASSES, "JavancssTask.numberOfClasses" );
+        metricKey = AdminParamsBO.MAPPING+"/java/module/number-of-classes";
+        param.setAdminParam( metricKey.toLowerCase(), "JavancssTask.numberOfClasses" );
         listMapping.add( param );
 
         param = new AdminParamsDTO();
-        param.setAdminParam( AdminParamsBO.MAPPING_JAVA_CLASS_LOC, "JavancssTask.ncss" );
+        metricKey = AdminParamsBO.MAPPING+"/java/class/loc";
+        param.setAdminParam( metricKey.toLowerCase(), "JavancssTask.ncss" );
         listMapping.add( param );
 
         param = new AdminParamsDTO();
-        param.setAdminParam( AdminParamsBO.MAPPING_JAVA_CLASS_NB_METHODS, "JavancssTask.methods" );
+        metricKey = AdminParamsBO.MAPPING+"/java/class/number-of-methods";
+        param.setAdminParam( metricKey.toLowerCase(), "JavancssTask.methods" );
         listMapping.add( param );
 
         param = new AdminParamsDTO();
-        param.setAdminParam( AdminParamsBO.MAPPING_JAVA_METHOD_LOC, "JavancssTask.ncss" );
+        metricKey = AdminParamsBO.MAPPING+"/java/method/loc";
+        param.setAdminParam( metricKey.toLowerCase(), "JavancssTask.ncss" );
         listMapping.add( param );
 
         param = new AdminParamsDTO();
-        param.setAdminParam( AdminParamsBO.MAPPING_JAVA_METHOD_VG, "JavancssTask.ccn" );
+        metricKey = AdminParamsBO.MAPPING+"/java/method/vg";
+        param.setAdminParam( metricKey.toLowerCase(), "JavancssTask.ccn" );
         listMapping.add( param );
 
         exporter.exportData( applicationsAudit, listMapping );

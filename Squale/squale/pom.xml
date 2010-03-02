@@ -30,6 +30,8 @@
 		<module>../squale-export</module>
 		<module>../squale-web</module>
 		<module>../squalix</module>
+		<module>../squale-model</module>
+		<module>../shared-repository-object</module>
 		<!--module>../squale-ear</module-->
 	</modules>
 	<properties>

@@ -255,6 +255,14 @@
         drop 
         foreign key FKE093EE58FD9106F6;
 
+    alter table Tag_Segementation 
+        drop 
+        foreign key FK328D3382BBF32679;
+
+    alter table Tag_Segementation 
+        drop 
+        foreign key FK328D3382FD9106F6;
+
     alter table TaskParameter 
         drop 
         foreign key FK16AD33849ACA29CA;
@@ -294,6 +302,10 @@
     alter table Volumetry_Measures 
         drop 
         foreign key FK92AE693393A162FA;
+
+    alter table shared_repo_stats 
+        drop 
+        foreign key FK2F1F0DACBBF32679;
 
     drop table if exists Analysis_Task;
 
@@ -387,6 +399,8 @@
 
     drop table if exists Tag_Component;
 
+    drop table if exists Tag_Segementation;
+
     drop table if exists Task;
 
     drop table if exists TaskParameter;
@@ -408,6 +422,12 @@
     drop table if exists adminParams;
 
     drop table if exists displayConf;
+
+    drop table if exists segmentation;
+
+    drop table if exists shared_repo_stats;
+
+    drop table if exists squale_params;
 
     create table Analysis_Task (
         TasksUserId bigint not null,
@@ -832,6 +852,12 @@
         primary key (ComponentId, TagId)
     ) type=InnoDB;
 
+    create table Tag_Segementation (
+        segmentationId bigint not null,
+        TagId bigint not null,
+        primary key (segmentationId, TagId)
+    ) type=InnoDB;
+
     create table Task (
         TaskId bigint not null auto_increment,
         Name varchar(255) not null unique,
@@ -923,6 +949,33 @@
         Y_POS bigint,
         componentType varchar(255),
         primary key (ConfId)
+    ) type=InnoDB;
+
+    create table segmentation (
+        segmentationId bigint not null auto_increment,
+        primary key (segmentationId)
+    ) type=InnoDB;
+
+    create table shared_repo_stats (
+        StatsId bigint not null auto_increment,
+        elementType varchar(255),
+        dataType varchar(255),
+        dataName varchar(255),
+        language varchar(255),
+        mean float,
+        max float,
+        min float,
+        deviation float,
+        elements float,
+        segmentationId bigint not null,
+        primary key (StatsId)
+    ) type=InnoDB;
+
+    create table squale_params (
+        SqualeParamsId bigint not null auto_increment,
+        paramKey varchar(255) not null,
+        paramaValue varchar(255) not null,
+        primary key (SqualeParamsId)
     ) type=InnoDB;
 
     alter table Analysis_Task 
@@ -1334,6 +1387,19 @@
         references Tag (TagId)
         on delete cascade;
 
+    alter table Tag_Segementation 
+        add index FK328D3382BBF32679 (segmentationId), 
+        add constraint FK328D3382BBF32679 
+        foreign key (segmentationId) 
+        references segmentation (segmentationId);
+
+    alter table Tag_Segementation 
+        add index FK328D3382FD9106F6 (TagId), 
+        add constraint FK328D3382FD9106F6 
+        foreign key (TagId) 
+        references Tag (TagId)
+        on delete cascade;
+
     alter table TaskParameter 
         add index FK16AD33849ACA29CA (TaskRefId), 
         add constraint FK16AD33849ACA29CA 
@@ -1397,4 +1463,11 @@
         add constraint FK92AE693393A162FA 
         foreign key (VolumetryId) 
         references displayConf (ConfId)
+        on delete cascade;
+        
+    alter table shared_repo_stats 
+        add index FK2F1F0DACBBF32679 (segmentationId), 
+        add constraint FK2F1F0DACBBF32679 
+        foreign key (segmentationId) 
+        references segmentation (segmentationId)
         on delete cascade;

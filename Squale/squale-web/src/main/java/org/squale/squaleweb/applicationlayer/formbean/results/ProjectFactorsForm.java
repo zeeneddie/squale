@@ -52,7 +52,7 @@ public class ProjectFactorsForm
     private String mApplicationName = "";
 
     /** Liste des facteurs */
-    private Collection mFactors = new ArrayList();
+    private Collection<ProjectFactorForm> mFactors = new ArrayList<ProjectFactorForm>();
 
     /**
      * Attribute not in use Attribute needed for prevent an error in the console which happen with the tag af:col
@@ -146,7 +146,7 @@ public class ProjectFactorsForm
     /**
      * @return facteurs
      */
-    public Collection getFactors()
+    public Collection<ProjectFactorForm> getFactors()
     {
         return mFactors;
     }
@@ -154,7 +154,7 @@ public class ProjectFactorsForm
     /**
      * @param pList facteurs
      */
-    public void setFactors( Collection pList )
+    public void setFactors( Collection<ProjectFactorForm> pList )
     {
         mFactors = pList;
     }

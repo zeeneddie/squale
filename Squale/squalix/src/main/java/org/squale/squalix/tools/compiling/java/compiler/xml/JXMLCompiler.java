@@ -25,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tools.ant.Project;
@@ -34,7 +35,6 @@ import org.squale.squalix.core.TaskData;
 import org.squale.squalix.tools.compiling.CompilingMessages;
 import org.squale.squalix.tools.compiling.java.JCompilingTask;
 import org.squale.squalix.tools.compiling.java.beans.JXMLProject;
-import org.squale.squalix.tools.compiling.java.configuration.JCompilingConfiguration;
 
 /**
  * Ant Compilation

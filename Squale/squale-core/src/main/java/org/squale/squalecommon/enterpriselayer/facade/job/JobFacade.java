@@ -138,4 +138,37 @@ public final class JobFacade
             FacadeHelper.closeSession( session, SqualixConfigFacade.class.getName() + ".getLastExportJob" );
         }
     }
+
+    /**
+     * This method determine if the export is in progress
+     * 
+     * @param session The hibernate session
+     * @return true if the export is in progress
+     * @throws JrafEnterpriseException Exception occurs during the work with the database
+     */
+    public static boolean isInProgress( ISession session )
+        throws JrafEnterpriseException
+    {
+        boolean jobInProgress = false;
+        try
+        {
+            JobBO jobBo = new JobBO( JobName.APPLICATION_EXPORT.getLabel(), JobStatus.IN_PROGESS.getLabel() );
+            List<JobBO> jobsFound;
+            JobDAOImpl jobDao = JobDAOImpl.getInstance();
+            jobsFound = jobDao.findByExample( session, jobBo );
+            if ( jobsFound.size() > 0 )
+            {
+                jobInProgress = true;
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, SqualixConfigFacade.class.getName() + ".isInProgress" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, SqualixConfigFacade.class.getName() + ".isInProgress" );
+        }
+        return jobInProgress;
+    }
 }

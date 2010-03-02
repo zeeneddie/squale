@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- <!DOCTYPE listApplicationComponent PUBLIC "-//Squale Software,Inc.//DTD squalecommon Configuration 1.0//EN" "configApplicationComponent.dtd" > -->
+<!-- <!DOCTYPE listApplicationComponent PUBLIC "-//Squale Software,Inc.//DTD squalecommon Configuration 1.0//EN" "configApplicationComponent.dtd" >
+-->
 
 <listApplicationComponent> 
   
@@ -424,7 +425,7 @@
 		
 	</applicationComponent>
 	
-	<applicationComponent name="sharedRepositoryExport" description="Export for the shared repository" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.ApplicationExportComponentAccess">
+	<applicationComponent name="sharedRepositoryExport" description="Export for the shared repository" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.sharedrepository.ApplicationExportComponentAccess">
 		
 		<component name="getExportApplication"></component>
 		
@@ -435,6 +436,22 @@
 		<component name="cancelJob"></component>
 		
 		<component name="scheduledJob"></component>
+		
+		<component name="isInProgress"></component>
+		
+	</applicationComponent>
+	
+	<applicationComponent name="sharedRepositoryImport" description="Import reference from the shared repository" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.sharedrepository.ReferenceImportComponentAccess">
+		
+		<component name="importReference"></component>
+		
+		<component name="currentReferenceVersion"></component>
+		
+	</applicationComponent>
+	
+	<applicationComponent name="sharedRepoStats" description="Work around the shared repository stats" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.sharedrepository.SharedRepoStatsComponentAccess">
+		
+		<component name="retrieveStatsByDataType"></component>
 		
 	</applicationComponent>
 	

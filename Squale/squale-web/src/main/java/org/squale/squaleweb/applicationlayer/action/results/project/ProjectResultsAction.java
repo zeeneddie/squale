@@ -45,7 +45,6 @@ import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.servlet.ServletUtilities;
-
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.helper.AccessDelegateHelper;
 import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
@@ -56,11 +55,13 @@ import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
 import org.squale.squalecommon.datatransfertobject.rule.CriteriumRuleDTO;
 import org.squale.squalecommon.datatransfertobject.rule.FactorRuleDTO;
 import org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO;
+import org.squale.squalecommon.datatransfertobject.sharedrepository.SharedRepoStatsDTO;
 import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.PracticeResultBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.rule.AbstractFormulaBO;
 import org.squale.squalecommon.util.manualmark.TimeLimitationParser;
+import org.squale.squalemodel.definition.DataType;
 import org.squale.squaleweb.applicationlayer.action.ActionUtils;
 import org.squale.squaleweb.applicationlayer.action.accessRights.BaseDispatchAction;
 import org.squale.squaleweb.applicationlayer.action.accessRights.ReaderAction;
@@ -84,6 +85,7 @@ import org.squale.squaleweb.applicationlayer.formbean.results.ResultRulesCheckin
 import org.squale.squaleweb.applicationlayer.formbean.results.RuleCheckingItemsListForm;
 import org.squale.squaleweb.applicationlayer.formbean.results.RuleCheckingPDFForm;
 import org.squale.squaleweb.applicationlayer.formbean.results.RulesCheckingForm;
+import org.squale.squaleweb.applicationlayer.formbean.results.SharedRepoStatForm;
 import org.squale.squaleweb.applicationlayer.tracker.TrackerStructure;
 import org.squale.squaleweb.comparator.AuditComparator;
 import org.squale.squaleweb.comparator.AuditGridComparator;
@@ -95,6 +97,7 @@ import org.squale.squaleweb.transformer.ProjectSummaryTransformer;
 import org.squale.squaleweb.transformer.ProjectTransformer;
 import org.squale.squaleweb.transformer.RuleCheckingItemsListTransformer;
 import org.squale.squaleweb.transformer.RulesCheckingResultTransformer;
+import org.squale.squaleweb.transformer.sharedrepository.SharedReposStatTransformer;
 import org.squale.squaleweb.util.SqualeWebActionUtils;
 import org.squale.squaleweb.util.SqualeWebConstants;
 import org.squale.squaleweb.util.graph.BubbleMaker;
@@ -330,6 +333,25 @@ public class ProjectResultsAction
             // Conversion du formulaire
             Object[] params = { project, factors, volumetries, haveErrors, canBeExportedToIDE };
             WTransformerFactory.objToForm( ProjectSummaryTransformer.class, (ProjectSummaryForm) pForm, params );
+
+            IApplicationComponent acSegmentation = AccessDelegateHelper.getInstance( "sharedRepoStats" );
+            Object[] params2 = { applicationDTO.getTags(), DataType.FACTOR };
+            Map<String, SharedRepoStatsDTO> statsDtoMap =
+                (Map<String, SharedRepoStatsDTO>) acSegmentation.execute( "retrieveStatsByDataType", params2 );
+
+            Iterator<ProjectFactorForm> it = ( (ProjectSummaryForm) pForm ).getFactors().getFactors().iterator();
+            while ( it.hasNext() )
+            {
+                ProjectFactorForm projectFactorForm = (ProjectFactorForm) it.next();
+                String factorName = projectFactorForm.getName().split( "\\.", 2)[1];
+                SharedRepoStatsDTO statsDto = statsDtoMap.get( factorName );
+                if ( statsDto != null )
+                {
+                    SharedRepoStatForm statForm =
+                        (SharedRepoStatForm) WTransformerFactory.objToForm( SharedReposStatTransformer.class, new Object[] {statsDto} );
+                    projectFactorForm.setStatForm( statForm );
+                }
+            }
 
             // On récupère l'attribut indiquant si l'on veut tous les facteurs
             Boolean allFactors = (Boolean) pRequest.getSession().getAttribute( ALL_FACTORS );
@@ -726,8 +748,7 @@ public class ProjectResultsAction
     }
 
     /**
-     * This method can recover the basic informations for the form such as the 
-     * mark, the practice legend, etc.
+     * This method can recover the basic informations for the form such as the mark, the practice legend, etc.
      * 
      * @param pMapping le mapping
      * @param pRequest la requête
@@ -848,7 +869,7 @@ public class ProjectResultsAction
     }
 
     /***
-     * This method set the specific form implementations in case of manual practice 
+     * This method set the specific form implementations in case of manual practice
      * 
      * @param practiceId ID of the practice rule
      * @param result The current form
@@ -863,23 +884,25 @@ public class ProjectResultsAction
     {
         ResultForm curForm = (ResultForm) result;
         AuditDTO curAudit = (AuditDTO) auditsDTO.get( 0 );
-        //The mark from the audit
+        // The mark from the audit
         QualityResultDTO lastMarkFromAudit =
-            (QualityResultDTO) ac.execute( "lastManualMarkByAudit", new Object[] { project.getID(), practiceId, curAudit.getID() } );
-        //Last mark outside audit
-        QualityResultDTO lastMark = (QualityResultDTO) ac.execute( "lastManualMark", new Object[] { project.getID(), practiceId } );
-        //Mark date from the audit 
+            (QualityResultDTO) ac.execute( "lastManualMarkByAudit", new Object[] { project.getID(), practiceId,
+                curAudit.getID() } );
+        // Last mark outside audit
+        QualityResultDTO lastMark =
+            (QualityResultDTO) ac.execute( "lastManualMark", new Object[] { project.getID(), practiceId } );
+        // Mark date from the audit
         Date creationDate = lastMarkFromAudit.getCreationDate();
-        //Last mark date outside audit
+        // Last mark date outside audit
         Date lastMarkDate = lastMark.getCreationDate();
-        //To avoid incorrect message when the date has not been recovered
+        // To avoid incorrect message when the date has not been recovered
         if ( creationDate == null )
         {
             curForm.setLast( true );
         }
         else
         {
-            //We check that the audit mark is later than or equal to the last mark
+            // We check that the audit mark is later than or equal to the last mark
             if ( creationDate.compareTo( lastMarkDate ) >= 0 )
             {
                 curForm.setLast( true );
@@ -891,8 +914,8 @@ public class ProjectResultsAction
                 curForm.setOutOfDate( true );
             }
         }
-        //If the comments exist
-        if( lastMarkFromAudit.getManualMarkComment() != null )
+        // If the comments exist
+        if ( lastMarkFromAudit.getManualMarkComment() != null )
         {
             curForm.setLastComments( lastMarkFromAudit.getManualMarkComment().getComments() );
         }
@@ -1366,9 +1389,9 @@ public class ProjectResultsAction
                                               HttpServletResponse response )
         throws ServletException
     {
-       
-        //1. On récupère les plus mauvaises pratiques triées par l'effort à fournir pour progresser 
-        //2. Pour chaque pratique, on remonte le nombre des pires composants (ou transgressions)
+
+        // 1. On récupère les plus mauvaises pratiques triées par l'effort à fournir pour progresser
+        // 2. Pour chaque pratique, on remonte le nombre des pires composants (ou transgressions)
         Collection badPractices;
         // On récupère l'id du projet et de l'audit
         ProjectSummaryForm theForm = (ProjectSummaryForm) form;
@@ -1456,8 +1479,8 @@ public class ProjectResultsAction
             parameters.put( "practicesResults", practicesResults.values() );
             PDFDataJasperReports pdfData =
                 new PDFDataJasperReports( request.getLocale(), getResources( request ), data,
-                                          "/org/squale/squaleweb/resources/jasperreport/ProjectSummary.jasper",
-                                          false, parameters );
+                                          "/org/squale/squaleweb/resources/jasperreport/ProjectSummary.jasper", false,
+                                          parameters );
             PDFFactory.generatePDFToHTTPResponse( pdfData, response, "", PDFEngine.JASPERREPORTS );
         }
         catch ( Exception e )
@@ -1518,8 +1541,8 @@ public class ProjectResultsAction
             HashMap parameters = new HashMap();
             PDFDataJasperReports pdfData =
                 new PDFDataJasperReports( request.getLocale(), getResources( request ), data,
-                                          "/org/squale/squaleweb/resources/jasperreport/metricsResults.jasper",
-                                          false, parameters );
+                                          "/org/squale/squaleweb/resources/jasperreport/metricsResults.jasper", false,
+                                          parameters );
 
             // Le nom des métriques
             parameters.put( "treNames", theForm.getTreNames() );
@@ -1601,8 +1624,8 @@ public class ProjectResultsAction
 
             PDFDataJasperReports pdfData =
                 new PDFDataJasperReports( request.getLocale(), getResources( request ), data,
-                                          "/org/squale/squaleweb/resources/jasperreport/transgressions.jasper",
-                                          false, parameters );
+                                          "/org/squale/squaleweb/resources/jasperreport/transgressions.jasper", false,
+                                          parameters );
             PDFFactory.generatePDFToHTTPResponse( pdfData, response, "", PDFEngine.JASPERREPORTS );
         }
         catch ( Exception e )

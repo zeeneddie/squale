@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.squale.squalecommon.enterpriselayer.applicationcomponent.administration;
+package org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.sharedrepository;
 
 import java.util.List;
 
@@ -30,6 +30,7 @@ import org.squale.jraf.spi.persistence.IPersistenceProvider;
 import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.datatransfertobject.job.JobDTO;
 import org.squale.squalecommon.datatransfertobject.sharedrepository.ApplicationExportDTO;
+import org.squale.squalecommon.enterpriselayer.applicationcomponent.ACMessages;
 import org.squale.squalecommon.enterpriselayer.businessobject.job.JobName;
 import org.squale.squalecommon.enterpriselayer.businessobject.job.JobStatus;
 import org.squale.squalecommon.enterpriselayer.facade.job.JobFacade;
@@ -119,16 +120,6 @@ public class ApplicationExportComponentAccess
         try
         {
             session = PERSISTENTPROVIDER.getSession();
-            // ArrayList<ApplicationExportDTO> listApplicationToExport = new ArrayList<ApplicationExportDTO>();
-            // for ( ApplicationExportDTO dto : listDto )
-            // {
-            // If the application is selected then we add it in the list of application to set as "to export"
-            // if ( dto.getToExport() )
-            // {
-            // listApplicationToExport.add( dto );
-            // }
-            // }
-            // ApplicationExportFacade.saveOrUpdateList( session, listApplicationToExport );
             ApplicationExportFacade.saveOrUpdateList( session, listDto );
         }
         catch ( JrafPersistenceException e )
@@ -137,19 +128,6 @@ public class ApplicationExportComponentAccess
             throw new JrafEnterpriseException( e );
         }
     }
-
-    /**
-     * In this method all the application are marked as to export
-     * 
-     * @param listDto The list of application
-     * @throws JrafEnterpriseException Exception occurs during the treatment
-     */
-    /*
-     * public void exportAllApplication( List<ApplicationExportDTO> listDto ) throws JrafEnterpriseException { ISession
-     * session; try { session = PERSISTENTPROVIDER.getSession(); ApplicationExportFacade.saveOrUpdateList( session,
-     * listDto ); } catch ( JrafPersistenceException e ) { LOG.error( e.getMessage() ); throw new
-     * JrafEnterpriseException( e ); } }
-     */
 
     /**
      * This method record a new scheduled job
@@ -192,5 +170,30 @@ public class ApplicationExportComponentAccess
             LOG.error( e.getMessage() );
             throw new JrafEnterpriseException( e );
         }
+    }
+
+    /**
+     * This method determine if an export is in progress
+     * 
+     * @return true if an export is in progress
+     * @throws JrafEnterpriseException Exception occurs during the search
+     */
+    public boolean isInProgress()
+        throws JrafEnterpriseException
+    {
+        ISession session;
+        boolean inProgress = true;
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            inProgress = JobFacade.isInProgress( session );
+        }
+        catch ( JrafPersistenceException e )
+        {
+            String message = ACMessages.getString( "ac.exception.generic.retrieveHibernateSession" );
+            LOG.error( message, e );
+            throw new JrafEnterpriseException( message, e );
+        }
+        return inProgress;
     }
 }

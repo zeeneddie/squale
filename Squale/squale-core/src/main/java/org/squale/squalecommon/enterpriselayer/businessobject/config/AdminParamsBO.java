@@ -29,19 +29,19 @@ public class AdminParamsBO
 
     /*
      * !!! BE CAREFUL !!! If you want that the admin Params will be removed before being recreate when a new
-     * squale-config.xml file is upload, then its key should start with : configuration/admin-params 
+     * squale-config.xml file is upload, then its key should start with : configuration/admin-params
      */
 
     /**
      * Default name
      */
     public static final String ADMIN_PARAMS = "configuration/admin-params";
-    
+
     /**
      * Need at least two values to compute criterias or factors : true or false
      */
     public static final String TWO_TO_COMPUTE = "configuration/admin-params/two-to-compute";
-    
+
     /**
      * Default mail paramKey
      */
@@ -81,42 +81,6 @@ public class AdminParamsBO
      * Mapping
      */
     public static final String MAPPING = "configuration/admin-params/shared-repository-export/mapping";
-
-    /**
-     * Key for mapping : language java, level project, metric loc
-     */
-    public static final String MAPPING_JAVA_PROJECT_LOC =
-        "configuration/admin-params/shared-repository-export/mapping/java/project/loc";
-
-    /**
-     * Key for mapping : language java, level project, metric number of classes
-     */
-    public static final String MAPPING_JAVA_PROJECT_NB_CLASSES =
-        "configuration/admin-params/shared-repository-export/mapping/java/project/number-of-classes";
-
-    /**
-     * Key for mapping : language java, level class, metric loc
-     */
-    public static final String MAPPING_JAVA_CLASS_LOC =
-        "configuration/admin-params/shared-repository-export/mapping/java/class/loc";
-
-    /**
-     * Key for mapping : language java, level class, metric number of methods
-     */
-    public static final String MAPPING_JAVA_CLASS_NB_METHODS =
-        "configuration/admin-params/shared-repository-export/mapping/java/class/number-of-methods";
-
-    /**
-     * Key for mapping : language java, level method, metric loc
-     */
-    public static final String MAPPING_JAVA_METHOD_LOC =
-        "configuration/admin-params/shared-repository-export/mapping/java/method/loc";
-
-    /**
-     * Key for mapping : language java, level method, metric cyclomatic complexity
-     */
-    public static final String MAPPING_JAVA_METHOD_VG =
-        "configuration/admin-params/shared-repository-export/mapping/java/method/vg";
 
     /**
      * Key for mapping : language java, level method, metric cyclomatic complexity

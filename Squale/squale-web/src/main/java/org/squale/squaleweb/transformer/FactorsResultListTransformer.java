@@ -32,7 +32,6 @@ import org.squale.squalecommon.datatransfertobject.component.AuditGridDTO;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
 import org.squale.squalecommon.datatransfertobject.rule.QualityGridDTO;
-import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
 import org.squale.squaleweb.applicationlayer.formbean.results.FactorsResultListForm;
 import org.squale.squaleweb.applicationlayer.formbean.results.ProjectFactorsForm;
 import org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm;

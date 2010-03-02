@@ -13,7 +13,7 @@
 	<property name="project.targetdir.ddl" value="${project.targetdir}/generated-ddl" />
 	<property name="project.targetdir.hbm" value="${project.targetdir}/generated-hbm/mapping" />
 	<!-- TODO: should find a way to prevent the use of a path relative to the web project -->
-	<property name="hibernate.cfg.file.path" value="${project.basedir}/../squale-web/src/main/webapp/WEB-INF/config/hibernate.cfg.xml" />
+	<property name="hibernate.cfg.file.path" value="${project.basedir}/../squale-web/war/WEB-INF/config/hibernate.cfg.xml" />
 	
 	<!-- ================================================================== -->
 	<!-- Retrieves all required libs thanks to Maven						-->

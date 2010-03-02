@@ -51,34 +51,34 @@ public class ProjectSummaryTransformer
      * @see org.squale.welcom.struts.transformer.WITransformer#objToForm(java.lang.Object[],
      *      org.squale.welcom.struts.bean.WForm) {@inheritDoc}
      */
-    public void objToForm( Object[] arg0, WActionForm arg1 )
+    public void objToForm( Object[] pObject, WActionForm pForm )
         throws WTransformerException
     {
-        ProjectSummaryForm form = (ProjectSummaryForm) arg1;
+        ProjectSummaryForm form = (ProjectSummaryForm) pForm;
         // Positionnement des facteurs
         ProjectFactorsForm factors =
             (ProjectFactorsForm) WTransformerFactory.objToForm( ProjectFactorsTransformer.class, new Object[] {
-                arg0[0], arg0[1] } );
+                pObject[0], pObject[1]} );
         form.setFactors( factors );
         form.setComparableAudits( factors.getComparableAudits() );
 
         // Positionnement de la volumétrie
-        Map volumetryData = (Map) arg0[2];
+        Map volumetryData = (Map) pObject[2];
         // Récupération des clefs
         List measureKeys = (List) volumetryData.get( null );
-        List measureValues = (List) volumetryData.get( arg0[0] );
+        List measureValues = (List) volumetryData.get( pObject[0] );
         if ( measureValues != null )
         {
             Object obj[] = { measureKeys, measureValues };
-            ComponentDTO project = (ComponentDTO) arg0[0];
+            ComponentDTO project = (ComponentDTO) pObject[0];
             String programLanguage = project.getLanguage();
             ResultListForm volumetry = ResultListTransformer.objToFormWithLanguage( obj , programLanguage);
             form.setVolumetry( volumetry );
         }
         final int errors_id = 3;
-        form.setHaveErrors( (Boolean) arg0[errors_id] );
+        form.setHaveErrors( (Boolean) pObject[errors_id] );
         final int ide_id = 4;
-        form.setExportIDE( (Boolean) arg0[ide_id] );
+        form.setExportIDE( (Boolean) pObject[ide_id] );
     }
 
     /**

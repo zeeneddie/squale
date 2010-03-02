@@ -51,6 +51,11 @@ public class UserSqualeSessionContext
     private String sharedRepositoryConfigured = "false";
 
     /**
+     * This attribute indicate if a reference file has been import or no
+     */
+    private Integer importReferenceVersion;
+
+    /**
      * This method recover the object UserSqualeSessionContext put in session. If there is not, this method creates one
      * 
      * @param session The http session
@@ -121,5 +126,25 @@ public class UserSqualeSessionContext
     public void setSharedRepositoryConfigured( String pSharedRepositoryConfigured )
     {
         sharedRepositoryConfigured = pSharedRepositoryConfigured;
+    }
+
+    /**
+     * Getter method for the attribute importReferenceVersion
+     * 
+     * @return The version of the reference imported or null if no reference has been imported 
+     */ 
+    public Integer getImportReferenceVersion()
+    {
+        return importReferenceVersion;
+    }
+
+    /**
+     * Setter method for the attribute importReferenceVersion
+     * 
+     * @param pImportReferenceVersion The new reference version 
+     */
+    public void setImportReferenceVersion( Integer pImportReferenceVersion )
+    {
+        importReferenceVersion = pImportReferenceVersion;
     }
 }

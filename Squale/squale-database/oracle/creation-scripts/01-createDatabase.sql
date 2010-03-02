@@ -91,6 +91,8 @@
 
     drop table Tag_Component cascade constraints;
 
+    drop table Tag_Segementation cascade constraints;
+
     drop table Task cascade constraints;
 
     drop table TaskParameter cascade constraints;
@@ -112,6 +114,12 @@
     drop table adminParams cascade constraints;
 
     drop table displayConf cascade constraints;
+
+    drop table segmentation cascade constraints;
+
+    drop table shared_repo_stats cascade constraints;
+
+    drop table squale_params cascade constraints;
 
     drop sequence HomepageComponent_sequence;
 
@@ -171,7 +179,13 @@
 
     drop sequence rigth_sequence;
 
+    drop sequence segmentation_sequence;
+
     drop sequence serveur_sequence;
+
+    drop sequence shared_repo_stats_sequence;
+
+    drop sequence squaleparams_sequence;
 
     drop sequence stats_annexe_sequence;
 
@@ -618,6 +632,12 @@
         primary key (ComponentId, TagId)
     );
 
+    create table Tag_Segementation (
+        segmentationId number(19,0) not null,
+        TagId number(19,0) not null,
+        primary key (segmentationId, TagId)
+    );
+
     create table Task (
         TaskId number(19,0) not null,
         Name varchar2(255) not null unique,
@@ -709,6 +729,33 @@
         Y_POS number(19,0),
         componentType varchar2(255),
         primary key (ConfId)
+    );
+
+    create table segmentation (
+        segmentationId number(19,0) not null,
+        primary key (segmentationId)
+    );
+
+    create table shared_repo_stats (
+        StatsId number(19,0) not null,
+        elementType varchar2(255),
+        dataType varchar2(255),
+        dataName varchar2(255),
+        language varchar2(255),
+        mean float,
+        max float,
+        min float,
+        deviation float,
+        elements float,
+        segmentationId number(19,0) not null,
+        primary key (StatsId)
+    );
+
+    create table squale_params (
+        SqualeParamsId number(19,0) not null,
+        paramKey varchar2(255) not null,
+        paramaValue varchar2(255) not null,
+        primary key (SqualeParamsId)
     );
 
     alter table Analysis_Task 
@@ -1056,6 +1103,17 @@
         references Tag
         on delete cascade;
 
+    alter table Tag_Segementation 
+        add constraint FK328D3382BBF32679 
+        foreign key (segmentationId) 
+        references segmentation;
+
+    alter table Tag_Segementation 
+        add constraint FK328D3382FD9106F6 
+        foreign key (TagId) 
+        references Tag
+        on delete cascade;
+
     alter table TaskParameter 
         add constraint FK16AD33849ACA29CA 
         foreign key (TaskRefId) 
@@ -1109,6 +1167,12 @@
         add constraint FK92AE693393A162FA 
         foreign key (VolumetryId) 
         references displayConf
+        on delete cascade;
+
+    alter table shared_repo_stats 
+        add constraint FK2F1F0DACBBF32679 
+        foreign key (segmentationId) 
+        references segmentation
         on delete cascade;
 
     create sequence HomepageComponent_sequence;
@@ -1169,7 +1233,13 @@
 
     create sequence rigth_sequence;
 
+    create sequence segmentation_sequence;
+
     create sequence serveur_sequence;
+
+    create sequence shared_repo_stats_sequence;
+
+    create sequence squaleparams_sequence;
 
     create sequence stats_annexe_sequence;
 

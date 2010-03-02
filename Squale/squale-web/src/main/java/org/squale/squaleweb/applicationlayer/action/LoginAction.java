@@ -128,8 +128,9 @@ public class LoginAction
             success = true;
 
             // Set the Squale's administrator mailing list
-            configAdminMailingList( pRequest.getSession() );
-            configSahredRepository(pRequest.getSession());
+            configUserSessionContext( pRequest.getSession() );
+            // configAdminMailingList( pRequest.getSession());
+            // configSahredRepository(pRequest.getSession());
         }
         catch ( Exception e )
         {
@@ -184,37 +185,69 @@ public class LoginAction
      * this variable come from the database
      * 
      * @param session The http session
+     * @param userSessionContext The user session context
      * @throws JrafEnterpriseException Error happen during the search in the database
      */
-    private void configAdminMailingList( HttpSession session )
+    private void configAdminMailingList( HttpSession session, UserSqualeSessionContext userSessionContext )
         throws JrafEnterpriseException
     {
         IApplicationComponent ac = AccessDelegateHelper.getInstance( "Mail" );
         String mailingList = ac.execute( "getAdminMailingList" ).toString();
-        UserSqualeSessionContext sessionContext = UserSqualeSessionContext.getContext( session );
-        sessionContext.setSqualeAdminsMailingList( mailingList );
-        UserSqualeSessionContext.setContext( session, sessionContext );
+        userSessionContext.setSqualeAdminsMailingList( mailingList );
+        UserSqualeSessionContext.setContext( session, userSessionContext );
     }
-    
+
     /**
      * This method set in session a variable which indicate if the shared repository is configured
      * 
      * @param session The http session
+     * @param userSessionContext The user session context
      * @throws JrafEnterpriseException Error happen during the search in the database
      */
-    private void configSahredRepository( HttpSession session ) throws JrafEnterpriseException
+    private void configSahredRepository( HttpSession session, UserSqualeSessionContext userSessionContext )
+        throws JrafEnterpriseException
     {
-        
+
         IApplicationComponent ac = AccessDelegateHelper.getInstance( "SqualixConfig" );
-        //We search in the db the adminParamsBo which define to the squalix server to perform the export
+        // We search in the db the adminParamsBo which define to the squalix server to perform the export
         Object sharedRepositoryServerConfig = ac.execute( "getSharedRepositoryExportServer" );
-        //If we found it that means the the shared repository is configured
-        if (sharedRepositoryServerConfig != null)
+        // If we found it that means the the shared repository is configured
+        if ( sharedRepositoryServerConfig != null )
         {
-            UserSqualeSessionContext sessionContext = UserSqualeSessionContext.getContext( session );
-            sessionContext.setSharedRepositoryConfigured( "true" );
-            UserSqualeSessionContext.setContext( session, sessionContext );
+            userSessionContext.setSharedRepositoryConfigured( "true" );
+            UserSqualeSessionContext.setContext( session, userSessionContext );
         }
+    }
+
+    /**
+     * This method config the user session context
+     * 
+     * @param session the http session
+     * @throws JrafEnterpriseException exception occurs during the config of the user session
+     */
+    private void configUserSessionContext( HttpSession session )
+        throws JrafEnterpriseException
+    {
+        UserSqualeSessionContext userSessionContext = UserSqualeSessionContext.getContext( session );
+        configAdminMailingList( session, userSessionContext );
+        configSahredRepository( session, userSessionContext );
+        configReferenceVersion( session, userSessionContext );
+    }
+
+    /**
+     * This method configure the reference version
+     * 
+     * @param session The http session
+     * @param userSessionContext The user session context
+     * @throws JrafEnterpriseException exception occurs during the config of the reference version
+     */
+    private void configReferenceVersion( HttpSession session, UserSqualeSessionContext userSessionContext )
+        throws JrafEnterpriseException
+    {
+        IApplicationComponent ac = AccessDelegateHelper.getInstance( "sharedRepositoryImport" );
+        Integer referenceVersion = (Integer) ac.execute( "currentReferenceVersion" );
+        userSessionContext.setImportReferenceVersion( referenceVersion );
+        UserSqualeSessionContext.setContext( session, userSessionContext );
     }
 
 }

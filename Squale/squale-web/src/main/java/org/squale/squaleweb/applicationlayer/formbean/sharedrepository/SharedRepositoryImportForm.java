@@ -19,15 +19,49 @@
 package org.squale.squaleweb.applicationlayer.formbean.sharedrepository;
 
 import org.squale.squaleweb.applicationlayer.formbean.AbstractUploadForm;
-import org.squale.squaleweb.applicationlayer.formbean.RootForm;
 
+/**
+ * Form for the sharedRepository import page
+ */
 public class SharedRepositoryImportForm
     extends AbstractUploadForm
 {
+    /**
+     * UID
+     */
+    private static final long serialVersionUID = -5517447058713400425L;
 
+    /**
+     * The current reference version
+     */
+    private Integer currentReferenceVersion;
+
+    /**
+     * Constructor
+     */
     public SharedRepositoryImportForm()
     {
         super();
+    }
+
+    /**
+     * Getter method for the attribute currentReferenceVersion
+     * 
+     * @return The current reference version insert in Squale
+     */
+    public Integer getCurrentReferenceVersion()
+    {
+        return currentReferenceVersion;
+    }
+
+    /**
+     * Setter method for the attribute currentReferenceVersion
+     * 
+     * @param pCurrentReferenceVersion The new reference version insert in Squale
+     */
+    public void setCurrentReferenceVersion( Integer pCurrentReferenceVersion )
+    {
+        currentReferenceVersion = pCurrentReferenceVersion;
     }
 
 }

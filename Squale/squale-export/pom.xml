@@ -18,6 +18,23 @@
 		<!-- till we have tried to make all the tests work... -->
 		<maven.test.skip>true</maven.test.skip>
 	</properties>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources-filtered</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>${pom.groupId}</groupId>
@@ -25,8 +42,14 @@
 			<version>${pom.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
+			<groupId>${pom.groupId}</groupId>
+			<artifactId>shared-repository-object</artifactId>
+			<version>${pom.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${pom.groupId}</groupId>
+			<artifactId>squale-model</artifactId>
+			<version>${pom.version}</version>
 		</dependency>
 	</dependencies>
 </project>

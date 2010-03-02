@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="segmentation" name="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SegmentationBO">
+    <id unsaved-value="-1" name="segmentationId" type="long" column="segmentationId" length="19">
+      <generator class="native">
+        <param name="sequence">segmentation_sequence</param>
+      </generator>
+    </id>
+    <set inverse="false" cascade="none" lazy="false" table="Tag_Segementation" sort="unsorted" name="tagList">
+      <key column="segmentationId"/>
+      <many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO" column="TagId" outer-join="auto"/>
+    </set>
+    <set inverse="true" cascade="all" lazy="true" table="shared_repo_stats" sort="unsorted" name="statsList">
+      <key column="segmentationId"/>
+      <one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SharedRepoStatsBO"/>
+    </set>
+  </class>
+</hibernate-mapping>

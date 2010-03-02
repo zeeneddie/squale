@@ -8,7 +8,7 @@
 
 <af:page>
 	<af:body onload="showDiv();lineStyle();">
-		<af:canvasCenter titleKey="shared_repository.export.title" subTitleKey="shared_repository.export.subtitle" >
+		<af:canvasCenter titleKey="shared_repository.export.title">
 		<br/>
 		<af:dropDownPanel titleKey="buttonTag.menu.aide">
 			<br/>
@@ -50,7 +50,7 @@
 								</tr>
 							</logic:iterate>
 						</tbody>
-						</table>
+					</table>
 					</div>	
 					<br/>
 					<af:button name="sharedrepository.export.selectAll" onclick="selectAllCB();"></af:button>
