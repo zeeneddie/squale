@@ -61,7 +61,6 @@ public class DistributionMap
 
     final private Comparator<Parent> parentComparator = new Comparator<Parent>()
     {
-        @Override
         public int compare( Parent p1, Parent p2 )
         {
             return p1.getChildren().size() - p2.getChildren().size();
