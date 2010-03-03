@@ -227,7 +227,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute max
      * 
      * @return The max value
-     * @hibernate.property name="max" column="max" type="float" update="true" insert="true"
+     * @hibernate.property name="max" column="maxValue" type="float" update="true" insert="true"
      */
     public float getMax()
     {
@@ -248,7 +248,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute min
      * 
      * @return The min value
-     * @hibernate.property name="min" column="min" type="float" update="true" insert="true"
+     * @hibernate.property name="min" column="minValue" type="float" update="true" insert="true"
      */
     public float getMin()
     {
