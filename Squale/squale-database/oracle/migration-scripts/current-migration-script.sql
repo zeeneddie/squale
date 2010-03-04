@@ -1,3 +1,6 @@
+--###########################################################
+-- Modifications for the shared repository : import reference
+
     create table Tag_Segmentation (
         segmentationId number(19,0) not null,
         TagId number(19,0) not null,
@@ -53,4 +56,6 @@
         
     create sequence shared_repo_stats_sequence;
 
-    create sequence squaleparams_sequence;    
+    create sequence squaleparams_sequence;
+    
+--###########################################################
