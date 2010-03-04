@@ -1,32 +1,34 @@
 div.distributionMap {
-	border: dotted 1px lightgrey;
 	padding: 10px;
 	height: auto;
 	overflow: auto;
 }
 
 div.bigBox {
-	border: dashed 1px black;
+	border: solid 1px lightgrey;
+	background-color: #f6f6ff;
 	margin: 5px;
 	float: left;
+	border-radius: 5px 5px 5px 5px;
 }
 
 div.smallBox {
-	border: solid 1px black;
+	width: 12px;
+	height: 12px;
 	margin: 5px;
 	float: left;
 }
 
-div.topGrade {
-	background-color: green;
+@sprite div.topGrade {
+	gwt-image: "greenBox";
 }
 
-div.midGrade {
-	background-color: yellow;
+@sprite div.midGrade {
+	gwt-image: "yellowBox";
 }
 
-div.lowGrade {
-	background-color: red;
+@sprite div.lowGrade {
+	gwt-image: "redBox";
 }
 
 @sprite div.loadingLabel {

@@ -35,5 +35,14 @@ public interface DMResources
     
     @Source("images/spinner.gif")
     ImageResource loading();
+    
+    @Source("images/green-box.png")
+    ImageResource greenBox();
+    
+    @Source("images/yellow-box.png")
+    ImageResource yellowBox();
+    
+    @Source("images/red-box.png")
+    ImageResource redBox();
 
 }

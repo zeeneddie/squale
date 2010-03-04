@@ -59,7 +59,6 @@ class SmallBox
         DMCss css = DistributionMap.resources.css();
 
         HTML divElement = new HTML();
-        divElement.setSize( "10px", "10px" );
         divElement.setStylePrimaryName( css.smallBox() );
 
         handleDetailLink( divElement );
