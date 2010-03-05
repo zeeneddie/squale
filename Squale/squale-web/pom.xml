@@ -121,6 +121,13 @@
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
 		</dependency>
+		<!-- JASPER REPORTS COMPILATION -->
+		<!-- Needed to generate the compiled version of the jrxml files -->
+		<dependency>
+			<groupId>jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>1.3.0</version>
+		</dependency>
 		<!-- TEST DEPENDENCIES -->
 		<!-- To generate test reports: -->
 		<!-- clean test site -Dmaven.test.failure.ignore=true -Preports -->
@@ -143,4 +150,51 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<profiles>
+		<profile>
+			<!-- Profile used to compile Jasper report JRXML files -->
+			<id>jasper</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>jasperreports-maven-plugin</artifactId>
+						<version>1.0-beta-2</version>
+						<configuration>
+							<sourceDirectory>
+								src/main/java/org/squale/squaleweb/resources/ireport
+							</sourceDirectory>
+							<outputDirectory>
+								src/main/java/org/squale/squaleweb/resources/jasperreport
+							</outputDirectory>
+						</configuration>
+						<executions>
+							<execution>
+								<!-- binding to the compile phase as the mojo report use classes under target/classes.. -->
+								<phase>compile</phase>
+								<goals>
+									<goal>compile-reports</goal>
+								</goals>
+							</execution>
+						</executions>
+						<dependencies>
+							<!--note : this must be repeated here to pick up correct xml validation -->
+							<dependency>
+								<groupId>jasperreports</groupId>
+								<artifactId>jasperreports</artifactId>
+								<version>1.3.0</version>
+							</dependency>
+							<!--note : Log4j must be repeated here to avoid FATAL ERROR on Compilation-->
+							<!-- However, there's still an ERROR, but that does not break the compilation -->
+							<dependency>
+								<groupId>log4j</groupId>
+								<artifactId>log4j</artifactId>
+								<version>1.2.8</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
