@@ -27,6 +27,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 
+/**
+ * Entry point used to testing purposes. This can be used as an example of how to use the DMap.
+ * 
+ * @author Fabrice BELLINGARD
+ */
 public class DistributionMapEntryPoint
     implements EntryPoint
 {

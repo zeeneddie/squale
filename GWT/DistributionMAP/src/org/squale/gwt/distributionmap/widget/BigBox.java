@@ -25,18 +25,31 @@ import org.squale.gwt.distributionmap.widget.data.Child;
 import org.squale.gwt.distributionmap.widget.data.Parent;
 
 import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 
 /**
- * @author fabrice
+ * Box that displays the parent of an element in the DMap.
+ * 
+ * @author Fabrice BELLINGARD
  */
 class BigBox
     extends AbstractBox
 {
 
+    /**
+     * The parent element displayed in the DMap
+     */
     private Parent parentData;
 
+    /**
+     * The default constructor.
+     * 
+     * @param dm the DMap
+     * @param parent the parent element
+     */
     public BigBox( DistributionMap dm, Parent parent )
     {
         super( dm, parent.getName() );
@@ -53,11 +66,17 @@ class BigBox
         setStylePrimaryName( DistributionMap.resources.css().bigBox() );
     }
 
+    /**
+     * @see MouseOutHandler#onMouseOut(MouseOutEvent)
+     */
     public void onMouseOut( MouseOutEvent event )
     {
         getDistributionMap().hideDetailPopupForBigBox();
     }
 
+    /**
+     * @see MouseOverHandler#onMouseOver(MouseOverEvent)
+     */
     public void onMouseOver( MouseOverEvent event )
     {
         getDistributionMap().showDetailPopupForBigBox( getName(), event.getClientX(), event.getClientY() );

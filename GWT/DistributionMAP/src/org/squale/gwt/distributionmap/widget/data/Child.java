@@ -24,25 +24,49 @@ package org.squale.gwt.distributionmap.widget.data;
 import java.io.Serializable;
 
 /**
- * @author fabrice
+ * A data class that represents an element of the DMap.
+ * 
+ * @author Fabrice BELLINGARD
  */
 public class Child
     implements Serializable
 {
 
+    /**
+     * UID for serialization
+     */
     private static final long serialVersionUID = 3710225568047601168L;
 
+    /**
+     * ID of the element
+     */
     private long id;
 
+    /**
+     * Name of the element
+     */
     private String name;
 
+    /**
+     * Grade of the element
+     */
     private float grade;
 
+    /**
+     * Default constructor (needed by GWT)
+     */
     public Child()
     {
 
     }
 
+    /**
+     * Main constructor
+     * 
+     * @param id ID
+     * @param name name
+     * @param grade grade
+     */
     public Child( long id, String name, float grade )
     {
         this.id = id;
@@ -58,11 +82,17 @@ public class Child
         return id;
     }
 
+    /**
+     * @return the name
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * @return the grade
+     */
     public float getGrade()
     {
         return grade;

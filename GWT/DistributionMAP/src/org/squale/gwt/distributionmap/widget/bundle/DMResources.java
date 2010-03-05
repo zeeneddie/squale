@@ -25,24 +25,26 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
 /**
- * @author fabrice
+ * GWT resources used by the DMap widget
+ * 
+ * @author Fabrice BELLINGARD
  */
 public interface DMResources
     extends ClientBundle
 {
     @Source( "DistributionMap.css" )
     DMCss css();
-    
-    @Source("images/spinner.gif")
+
+    @Source( "images/spinner.gif" )
     ImageResource loading();
-    
-    @Source("images/green-box.png")
+
+    @Source( "images/green-box.png" )
     ImageResource greenBox();
-    
-    @Source("images/yellow-box.png")
+
+    @Source( "images/yellow-box.png" )
     ImageResource yellowBox();
-    
-    @Source("images/red-box.png")
+
+    @Source( "images/red-box.png" )
     ImageResource redBox();
 
 }

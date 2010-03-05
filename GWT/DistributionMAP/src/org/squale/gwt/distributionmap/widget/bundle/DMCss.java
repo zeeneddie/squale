@@ -24,13 +24,15 @@ package org.squale.gwt.distributionmap.widget.bundle;
 import com.google.gwt.resources.client.CssResource;
 
 /**
- * @author fabrice
+ * GWT CSS resource.
+ * 
+ * @author Fabrice BELLINGARD
  */
 public interface DMCss
     extends CssResource
 {
     String distributionMap();
-    
+
     String bigBox();
 
     String smallBox();

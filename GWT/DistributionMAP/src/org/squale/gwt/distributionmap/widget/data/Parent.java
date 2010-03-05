@@ -26,38 +26,69 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author fabrice
+ * A data class that represents the parent of an element of the DMap.
+ * 
+ * @author Fabrice BELLINGARD
  */
 public class Parent
     implements Serializable
 {
-
+    /**
+     * UID for serialization
+     */
     private static final long serialVersionUID = 1691475443808497741L;
 
+    /**
+     * Name of the parent element
+     */
     private String name;
 
+    /**
+     * The list of children of this parent
+     */
     private ArrayList<Child> children;
 
+    /**
+     * Default constructor (needed by GWT)
+     */
     public Parent()
     {
     }
 
+    /**
+     * Main constructor
+     * 
+     * @param name
+     */
     public Parent( String name )
     {
         this.name = name;
         children = new ArrayList<Child>();
     }
 
+    /**
+     * Adds a child to this parent.
+     * 
+     * @param child the child to add
+     */
     public void addChild( Child child )
     {
         children.add( child );
     }
 
+    /**
+     * Gets the children of this element
+     * 
+     * @return the chid collection
+     */
     public Collection<Child> getChildren()
     {
         return children;
     }
 
+    /**
+     * @return the name
+     */
     public String getName()
     {
         return name;

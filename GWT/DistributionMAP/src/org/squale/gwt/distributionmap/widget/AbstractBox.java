@@ -27,18 +27,31 @@ import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.user.client.ui.Composite;
 
 /**
- * @author fabrice
+ * Super class of the small and big boxes used by the DMap.
+ * 
+ * @author Fabrice BELLINGARD
  */
 abstract class AbstractBox
     extends Composite
     implements MouseMoveHandler, MouseOutHandler, MouseOverHandler
 {
-
+    /**
+     * A reference to the widget that contains the box
+     */
     final private DistributionMap distributionMap;
 
+    /**
+     * Name of the element that is displayed as a box in the DMap
+     */
     private String name;
 
-    public AbstractBox( DistributionMap dm, String name )
+    /**
+     * Default constructor.
+     * 
+     * @param dm the DMap that contains the box
+     * @param name the name of the element to display
+     */
+    AbstractBox( DistributionMap dm, String name )
     {
         this.distributionMap = dm;
         this.name = name;
@@ -46,6 +59,9 @@ abstract class AbstractBox
         setupMouseEvents();
     }
 
+    /**
+     * Creates handlers to listen to mouse events.
+     */
     private void setupMouseEvents()
     {
         addDomHandler( this, MouseMoveEvent.getType() );
@@ -53,23 +69,42 @@ abstract class AbstractBox
         addDomHandler( this, MouseOutEvent.getType() );
     }
 
+    /**
+     * Returns the DMap
+     * 
+     * @return the DMap
+     */
     protected DistributionMap getDistributionMap()
     {
         return distributionMap;
     }
 
+    /**
+     * Returns the name of the element displayed in this box
+     * 
+     * @return the name of the element
+     */
     protected String getName()
     {
         return name;
     }
 
+    /**
+     * @see MouseMoveHandler#onMouseMove(MouseMoveEvent)
+     */
     public void onMouseMove( MouseMoveEvent event )
     {
         distributionMap.updateDetailPopup( event.getClientX(), event.getClientY() );
     }
 
+    /**
+     * @see MouseOutHandler#onMouseOut(MouseOutEvent)
+     */
     abstract public void onMouseOut( MouseOutEvent event );
 
+    /**
+     * @see MouseOverHandler#onMouseOver(MouseOverEvent)
+     */
     abstract public void onMouseOver( MouseOverEvent event );
 
 }

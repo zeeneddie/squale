@@ -24,9 +24,17 @@ import org.squale.gwt.distributionmap.widget.data.Parent;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Async interface of the RPC service.
+ * 
+ * @author Fabrice BELLINGARD
+ */
 public interface DataServiceAsync
 {
 
+    /**
+     * @see DataService#getData()
+     */
     void getData( AsyncCallback<ArrayList<Parent>> callback );
 
 }
