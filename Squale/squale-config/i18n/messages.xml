@@ -114,7 +114,7 @@
 	<message lang="en" key="rule.swissarmyknife">Swiss army knife</message>
 	<message lang="fr" key="rule.swissarmyknife.description">Traque les classes dites « utilitaires », généralement très complexes parce qu'elles comprennent un grand nombre de méthodes sans relations. En conséquence, elles ne respectent pas les principes objet d'héritage et d'encapsulation et augmentent fortement le couplage entre les objets. Il s'agit généralement de classes sans parents ni enfants, avec peu voir pas d'attribut, et un nombre relativement important de méthodes,parfois complexes.</message>
 	<message lang="en" key="rule.swissarmyknife.description">Hunts down "Swiss army knife" approach to address problems such as "utility class" which performs a huge number of unrelated tasks between them.</message>	
-	<message lang="en" key="rule.swissarmyknife.correction">Le périmètre fonctionnel de la classe doit être circonscrit aux exigences métiers et aux exigences de traitement des données. Redécouper et redispatcher les méthodes vers les classes pouvant les accueillir ou créer de nouvelles classes à ce titre.</message>
+	<message lang="fr" key="rule.swissarmyknife.correction">Le périmètre fonctionnel de la classe doit être circonscrit aux exigences métiers et aux exigences de traitement des données. Redécouper et redispatcher les méthodes vers les classes pouvant les accueillir ou créer de nouvelles classes à ce titre.</message>
 	<message lang="en" key="rule.swissarmyknife.correction">All methods (and attributs) must be as far as possible contained in specific classes. Rewrite/restructure your source code so as to dispatch the methods or create new classes.</message>
 		
 	<!-- +++++++++++++++++++    EFFERENTCOUPLING    ++++++++++++++++++ -->
