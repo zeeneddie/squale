@@ -21,6 +21,10 @@
  */
 package org.squale.gwt.distributionmap.widget;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import org.squale.gwt.distributionmap.widget.data.Child;
 import org.squale.gwt.distributionmap.widget.data.Parent;
 
@@ -45,6 +49,17 @@ class BigBox
     private Parent parentData;
 
     /**
+     * Comparator to sort children by grade
+     */
+    final private Comparator<Child> childComparator = new Comparator<Child>()
+    {
+        public int compare( Child c1, Child c2 )
+        {
+            return Math.round( c1.getGrade() * 1000 - c2.getGrade() * 1000 );
+        }
+    };
+
+    /**
      * The default constructor.
      * 
      * @param dm the DMap
@@ -56,7 +71,9 @@ class BigBox
         this.parentData = parent;
 
         FlowPanel mainPanel = new FlowPanel();
-        for ( Child child : parentData.getChildren() )
+        ArrayList<Child> children = new ArrayList<Child>( parentData.getChildren() );
+        Collections.sort( children, childComparator );
+        for ( Child child : children )
         {
             mainPanel.add( new SmallBox( dm, child ) );
         }
