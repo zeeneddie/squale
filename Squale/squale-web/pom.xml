@@ -121,6 +121,10 @@
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.google.gwt.google-apis</groupId>
+			<artifactId>gwt-visualization</artifactId>
+		</dependency>
 		<!-- JASPER REPORTS COMPILATION -->
 		<!-- Needed to generate the compiled version of the jrxml files -->
 		<dependency>
