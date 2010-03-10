@@ -23,6 +23,13 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.squale.gwt.distributionmap.widget.data.Child;
+import org.squale.gwt.distributionmap.widget.data.Parent;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
 import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
 import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
 import org.squale.squaleweb.gwt.motionchart.client.DataService;
@@ -44,22 +51,48 @@ public class DataServiceImpl
     public String getData()
     {
         ServletContext context = getServletContext();
-        HttpSession session = getThreadLocalRequest().getSession();
+        HttpSession httpSession = getThreadLocalRequest().getSession();
 
-        LogonBean userLogonBean = (LogonBean) session.getAttribute( WConstants.USER_KEY );
+        LogonBean userLogonBean = (LogonBean) httpSession.getAttribute( WConstants.USER_KEY );
         List<ApplicationForm> apps = userLogonBean.getApplicationsList();
-        for ( ApplicationForm app : apps )
+
+        try
         {
-            System.out.println( app.getId() + " - " + app.getApplicationName() );
+            IPersistenceProvider persistenceProvider = PersistenceHelper.getPersistenceProvider();
+            Session session = ( (SessionImpl) persistenceProvider.getSession() ).getSession();
+
+            for ( ApplicationForm app : apps )
+            {
+                System.out.println( app.getId() + " - " + app.getApplicationName() );
+
+                String requete =
+                    "select component.id, component.name, audit.id "
+                        + "from AbstractComponentBO component, AuditBO audit "
+                        + "where component.class='Application' and audit.id in elements(component.audits)";
+                Query query = session.createQuery( requete );
+                List resultList = query.list();
+
+                // ----- CREATION du tree Parent-Child -----
+                for ( Object object : resultList )
+                {
+                    Object[] result = (Object[]) object;
+                    long applicationId = (Long) result[0];
+                    String applicationName = (String) result[1];
+                    long auditId = (Long) result[2];
+
+                    System.out.println( "\t Audit #" + auditId + " pour l'application " + applicationName + " #"
+                        + applicationId );
+                }
+
+            }
+        }
+        catch ( Exception e )
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
-        String data =
-            "[" + "['Apples',new Date (1988,0,1),1000,300,'East'],"
-                + "['Oranges',new Date (1988,0,1),1150,200,'West'],"
-                + "['Bananas',new Date (1988,0,1),300,250,'West']," + "['Apples',new Date (1988,5,9),200,100,'East'],"
-                + "['Oranges',new Date (1988,5,9),250,100,'West']," + "['Bananas',new Date (1988,5,9),100,50,'West'],"
-                + "['Apples',new Date (1989,6,1),1200,400,'East']," + "['Oranges',new Date (1989,6,1),750,150,'West'],"
-                + "['Bananas',new Date (1989,6,1),788,617,'West']" + "]";
+        String data = "";
         return data;
     }
 
