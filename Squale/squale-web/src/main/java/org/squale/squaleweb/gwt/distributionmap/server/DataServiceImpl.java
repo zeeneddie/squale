@@ -20,15 +20,23 @@ package org.squale.squaleweb.gwt.distributionmap.server;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.squale.gwt.distributionmap.widget.data.Child;
 import org.squale.gwt.distributionmap.widget.data.Parent;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.PersistenceHelper;
+import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
+import org.squale.jraf.spi.persistence.IPersistenceProvider;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 import org.squale.squalecommon.datatransfertobject.result.MarkDTO;
@@ -63,6 +71,117 @@ public class DataServiceImpl
      * {@inheritDoc}
      */
     public ArrayList<Parent> getData( long auditId, long projectId, long practiceId )
+    {
+        return getDataOptimized( auditId, projectId, practiceId );
+        // return getDataNonOptimized( auditId, projectId, practiceId );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public ArrayList<Parent> getDataOptimized( long auditId, long projectId, long practiceId )
+    {
+        handleTime();
+
+        Map<Long, Parent> parentMap = new HashMap<Long, Parent>();
+
+        try
+        {
+            // ----- RECUPERATION Component Level -----
+            String componentLevel = QualityGridFacade.getComponentLevelForPractice( practiceId );
+
+            // ----- RECUPERATION Component Informations -----
+            IPersistenceProvider persistenceProvider = PersistenceHelper.getPersistenceProvider();
+            Session session = ( (SessionImpl) persistenceProvider.getSession() ).getSession();
+
+            String requete =
+                "select component.id, component.name, component.parent.id, component.parent.name, mark.value from AbstractComponentBO component, MarkBO mark where lower(component.class)='"
+                    + componentLevel.toLowerCase()
+                    + "' and component.project.id="
+                    + projectId
+                    + " and "
+                    + auditId
+                    + " in elements(component.audits) and mark.practice.rule.id="
+                    + practiceId
+                    + "and mark.practice.audit.id=" + auditId + " and mark.component.id=component.id";
+            Query query = session.createQuery( requete );
+            List componentInformationList = query.list();
+
+            // ----- CREATION du tree Parent-Child -----
+            for ( Object object : componentInformationList )
+            {
+                Object[] componentInfo = (Object[]) object;
+                long componentId = (Long) componentInfo[0];
+                String componentName = (String) componentInfo[1];
+                long parentId = (Long) componentInfo[2];
+                String parentName = (String) componentInfo[3];
+                float mark = (Float) componentInfo[4];
+
+                Child child = new Child( componentId, componentName, mark );
+                // attach the child to its parent
+                Parent parent = parentMap.get( parentId );
+                if ( parent == null )
+                {
+
+                    parent = new Parent( parentName );
+                    parentMap.put( parentId, parent );
+
+                }
+                parent.addChild( child );
+            }
+
+        }
+        catch ( Exception e )
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        handleTime();
+
+        // printOutTree( parentMap.values() );
+
+        return new ArrayList<Parent>( parentMap.values() );
+    }
+
+    /*
+     * Used only for debugging purposes. // TODO : remove this later
+     */
+    private void printOutTree( Collection<Parent> values )
+    {
+        if ( log.isDebugEnabled() )
+        {
+            ArrayList<Parent> parents = new ArrayList<Parent>( values );
+            Collections.sort( parents, new Comparator<Parent>()
+            {
+                public int compare( Parent p1, Parent p2 )
+                {
+                    return p1.getName().compareTo( p2.getName() );
+                }
+            } );
+            for ( Parent parent : parents )
+            {
+                ArrayList<Child> children = new ArrayList<Child>( parent.getChildren() );
+                Collections.sort( children, new Comparator<Child>()
+                {
+                    public int compare( Child c1, Child c2 )
+                    {
+                        return c1.getName().compareTo( c2.getName() );
+                    }
+                } );
+                System.out.println( parent.getName() );
+                for ( Child child : children )
+                {
+                    System.out.println( "\t" + child.getName() + " : " + child.getGrade() );
+                }
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public ArrayList<Parent> getDataNonOptimized( long auditId, long projectId, long practiceId )
     {
         handleTime();
 
@@ -120,6 +239,8 @@ public class DataServiceImpl
         }
 
         handleTime();
+
+        // printOutTree( parentMap.values() );
 
         return new ArrayList<Parent>( parentMap.values() );
     }
