@@ -64,14 +64,20 @@ public class DistributionMap
     {
         public void onSuccess( ArrayList<Parent> result )
         {
-            Collections.sort( result, parentComparator );
-            displayBoxes( result );
+            if ( result.isEmpty() )
+            {
+                displayErrorMessage();
+            }
+            else
+            {
+                Collections.sort( result, parentComparator );
+                displayBoxes( result );
+            }
         }
 
         public void onFailure( Throwable caught )
         {
-            mainPanel.clear();
-            mainPanel.add( new HTML( caught.toString() ) );
+            displayErrorMessage();
         }
     };
 
@@ -100,6 +106,11 @@ public class DistributionMap
      * A temporary widget that shows a turning wheel to indicate that the widget is waiting for the servers's response
      */
     final private Widget loadingLabel = new HTML();
+
+    /**
+     * Label displayed when an error occurs
+     */
+    final private Widget errorLabel = new HTML( "Error while trying to display the Distribution Map..." );
 
     /**
      * The popup panel used to display the details of each element box
@@ -149,6 +160,15 @@ public class DistributionMap
     {
         mainPanel.clear();
         mainPanel.add( loadingLabel );
+    }
+
+    /**
+     * Display the error label
+     */
+    public void displayErrorMessage()
+    {
+        mainPanel.clear();
+        mainPanel.add( errorLabel );
     }
 
     /**
