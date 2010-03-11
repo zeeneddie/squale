@@ -98,8 +98,10 @@ public class DistributionMapEntryPoint
         detailURL.append( "&previousAuditId=" );
         detailURL.append( previousAuditId );
         detailURL.append( "&fromMarkPage=true&component=" );
-        // and set this URL to the DM widget
+        // set this URL to the DM widget
         dmWidget.setDetailURL( detailURL.toString() );
+        // and tell the DMap to optimize the space
+        dmWidget.setLayoutOptimized( true );
     }
 
     /**
