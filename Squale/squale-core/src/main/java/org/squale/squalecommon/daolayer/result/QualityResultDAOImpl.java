@@ -26,7 +26,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
@@ -105,10 +106,10 @@ public class QualityResultDAOImpl
      * @return liste des valeurs ordonnés par raopport a la liste des composants
      * @throws JrafDaoException exception DAO
      */
-    public List findWhere( ISession pSession, List pProjectIDs, Long pAuditID, Long pRuleId )
+    public List<QualityResultBO> findWhere( ISession pSession, List pProjectIDs, Long pAuditID, Long pRuleId )
         throws JrafDaoException
     {
-        List marks = new ArrayList();
+        List<QualityResultBO> marks = new ArrayList<QualityResultBO>();
         Iterator it = pProjectIDs.iterator();
         while ( it.hasNext() )
         {
@@ -128,10 +129,10 @@ public class QualityResultDAOImpl
      * @return liste des valeurs ordonnés par raopport a la liste des composants
      * @throws JrafDaoException exception DAO
      */
-    public List findWhere( ISession pSession, Long pProjectID, List pAuditIDs, Long pRuleId )
+    public List<QualityResultBO> findWhere( ISession pSession, Long pProjectID, List pAuditIDs, Long pRuleId )
         throws JrafDaoException
     {
-        List marks = new ArrayList();
+        List<QualityResultBO> marks = new ArrayList<QualityResultBO>();
         Iterator it = pAuditIDs.iterator();
         while ( it.hasNext() )
         {
@@ -447,20 +448,19 @@ public class QualityResultDAOImpl
         Collection<PracticeResultBO> col = findWhere( pSession, whereClause.toString() );
         return col;
     }
-    
+
     /***
-     * This method return the last manual mark inserted (if there is one) for a manual practice
-     * and a specific audit 
+     * This method return the last manual mark inserted (if there is one) for a manual practice and a specific audit
      * 
      * @param pSession The hibernate session
      * @param pProjectId The ID of the project
      * @param pRuleId The rule ID
      * @param pAuditId The audit ID
-     * @return The PracticeRsultBO linked to the last manual mark inserted for the rule, the project 
-     * and the audit specified in argument. This method returns null if it finds nothing.
+     * @return The PracticeRsultBO linked to the last manual mark inserted for the rule, the project and the audit
+     *         specified in argument. This method returns null if it finds nothing.
      * @throws JrafDaoException Exception happen during the hibernate search
      */
-    public PracticeResultBO findLastManualMarkByAudit ( ISession pSession, Long pProjectId, Long pRuleId, Long pAuditId )
+    public PracticeResultBO findLastManualMarkByAudit( ISession pSession, Long pProjectId, Long pRuleId, Long pAuditId )
         throws JrafDaoException
     {
         StringBuffer whereClause = new StringBuffer( "where " );
@@ -468,7 +468,7 @@ public class QualityResultDAOImpl
         whereClause.append( " and " + getAlias() + ".project.id = " + pProjectId );
         whereClause.append( " and " + getAlias() + ".audit.id = " + pAuditId );
         whereClause.append( " and " + getAlias() + ".meanMark!= -1.0" );
-        
+
         List col = findWhere( pSession, whereClause.toString() );
         PracticeResultBO result = null;
         if ( col.size() > 0 )
@@ -476,7 +476,57 @@ public class QualityResultDAOImpl
             // Recovery the last inserted mark for a specific audit
             result = (PracticeResultBO) col.get( 0 );
         }
-        
+
+        return result;
+    }
+
+    /**
+     * Returns raw data that will be used by the Distribution Map to display, for a specific practice, the marks of all
+     * the components related to this practice, for the given audit and project. <br>
+     * The raw data that is returned is a list of arrays, each array containing the following data:
+     * <ul>
+     * <li>0 - the component ID [long]</li>
+     * <li>1 - the component name [String]</li>
+     * <li>2 - the ID of the component's parent [long]</li>
+     * <li>3 - the name of the component's parent [String]</li>
+     * <li>4 - the mark of this component for the practice [float]</li>
+     * </ul>
+     * 
+     * @param session The hibernate session
+     * @param auditId the audit
+     * @param projectId the project
+     * @param practiceId the practice
+     * @param componentLevel the level of components for this practice
+     * @return a list of object arrays, each array corresponding to the data of a component related to the practice
+     * @throws JrafDaoException if the method fails to retrieve the data
+     */
+    @SuppressWarnings( "unchecked" )
+    public List<Object[]> findMarkDistribution( ISession session, long auditId, long projectId, long practiceId,
+                                               String componentLevel )
+        throws JrafDaoException
+    {
+        List<Object[]> result = new ArrayList<Object[]>();
+        try
+        {
+            String requete =
+                "select component.id, component.name, component.parent.id, component.parent.name, mark.value from AbstractComponentBO component, MarkBO mark where lower(component.class)='"
+                    + componentLevel.toLowerCase()
+                    + "' and component.project.id="
+                    + projectId
+                    + " and "
+                    + auditId
+                    + " in elements(component.audits) and mark.practice.rule.id="
+                    + practiceId
+                    + "and mark.practice.audit.id=" + auditId + " and mark.component.id=component.id";
+            Query query = ( (SessionImpl) session ).getSession().createQuery( requete );
+            result = query.list();
+        }
+        catch ( HibernateException e )
+        {
+            throw new JrafDaoException( "Database problem while retrieving data for " + getClass().getName()
+                + ".getMarkDistribution", e );
+        }
+
         return result;
     }
 }

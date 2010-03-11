@@ -37,12 +37,12 @@ public class DistributionMapEntryPoint
     /**
      * Service used to retrieve the data to display
      */
-    final private DataServiceAsync dataService = GWT.create( DataService.class );
+    private final DataServiceAsync dataService = GWT.create( DataService.class );
 
     /**
      * The Distribution Map widget
      */
-    final private DistributionMap dmWidget = new DistributionMap();
+    private final DistributionMap dmWidget = new DistributionMap();
 
     /**
      * Parameter that identifies the practice to display
@@ -66,13 +66,23 @@ public class DistributionMapEntryPoint
     private String previousAuditId;
 
     /**
+     * ${@inheritDoc}
+     * 
      * @see EntryPoint#onModuleLoad()
      */
     public void onModuleLoad()
     {
-        initDistributionMap();
+        boolean paramsOK = retrieveParamsFromURL();
+        if ( paramsOK )
+        {
+            initDistributionMap();
+            populateDistributionMap();
+        }
+        else
+        {
+            dmWidget.displayErrorMessage();
+        }
         RootPanel.get( "distributionmap" ).add( dmWidget );
-        populateDistributionMap();
     }
 
     /**
@@ -89,7 +99,6 @@ public class DistributionMapEntryPoint
      */
     private void initDistributionMap()
     {
-        retrieveParamsFromURL();
         // build the URL that is needed to display the component details
         StringBuffer detailURL = new StringBuffer( "project_component.do?action=component&projectId=" );
         detailURL.append( projectId );
@@ -106,28 +115,36 @@ public class DistributionMapEntryPoint
 
     /**
      * Retrieves request parameters form the URL to pass them to the DMap Widget
+     * 
+     * @return true if the mandatory parameters are all successfully retrieved
      */
-    private void retrieveParamsFromURL()
+    private boolean retrieveParamsFromURL()
     {
+        Boolean paramsOK;
+
         String stringAuditId = Window.Location.getParameter( "currentAuditId" );
         String stringProjectId = Window.Location.getParameter( "projectId" );
         String stringPracticeId = Window.Location.getParameter( "which" );
         if ( stringAuditId == null || stringAuditId.length() == 0 || stringProjectId == null
             || stringProjectId.length() == 0 || stringPracticeId == null || stringPracticeId.length() == 0 )
         {
-            // TODO : handle this case
-
+            paramsOK = false;
         }
         else
         {
             auditId = Long.parseLong( stringAuditId );
             projectId = Long.parseLong( stringProjectId );
             practiceId = Long.parseLong( stringPracticeId );
+
+            // ok for the mandatory params
+            paramsOK = true;
+
+            // optional parameter that does not need to be translated into a long
+            previousAuditId = ""; // default value
+            previousAuditId = Window.Location.getParameter( "previousAuditId" ); // correct value if it exists
         }
 
-        // optional parameter that does not need to be translated into a long
-        previousAuditId = ""; // default value
-        previousAuditId = Window.Location.getParameter( "previousAuditId" ); // correct value if it exists
+        return paramsOK;
     }
 
 }

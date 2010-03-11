@@ -28,7 +28,6 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.commons.exception.JrafPersistenceException;
@@ -84,6 +83,7 @@ import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleS
 import org.squale.squalecommon.enterpriselayer.facade.FacadeMessages;
 import org.squale.squalecommon.enterpriselayer.facade.component.ComponentFacade;
 import org.squale.squalecommon.enterpriselayer.facade.component.ProjectFacade;
+import org.squale.squalecommon.enterpriselayer.facade.rule.QualityGridFacade;
 import org.squale.squalecommon.util.ConstantRulesChecking;
 import org.squale.squalecommon.util.mapping.Mapping;
 
@@ -1565,6 +1565,52 @@ public final class QualityResultFacade
             FacadeHelper.closeSession( session, QualityResultFacade.class.getName() + ".updateManualResult" );
         }
         return dtoCollection;
+    }
+
+    /**
+     * Returns raw data that will be used by the Distribution Map to display, for a specific practice, the marks of all
+     * the components related to this practice, for the given audit and project. <br>
+     * The raw data that is returned is a list of arrays, each array containing the following data:
+     * <ul>
+     * <li>0 - the component ID [long]</li>
+     * <li>1 - the component name [String]</li>
+     * <li>2 - the ID of the component's parent [long]</li>
+     * <li>3 - the name of the component's parent [String]</li>
+     * <li>4 - the mark of this component for the practice [float]</li>
+     * </ul>
+     * 
+     * @param auditId the audit
+     * @param projectId the project
+     * @param practiceId the practice
+     * @return a list of object arrays, each array corresponding to the data of a component related to the practice
+     * @throws JrafEnterpriseException if the method fails to retrieve the data
+     */
+    public static List<Object[]> getMarkDistribution( long auditId, long projectId, long practiceId )
+        throws JrafEnterpriseException
+    {
+        // Find the component level for this practice
+        String componentLevel = QualityGridFacade.getComponentLevelForPractice( practiceId );
+
+        // And look for the desired data
+        ISession session = null;
+        List<Object[]> result = new ArrayList<Object[]>();
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            result =
+                QualityResultDAOImpl.getInstance().findMarkDistribution( session, auditId, projectId, practiceId,
+                                                                         componentLevel );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, QualityResultFacade.class.getName() + ".getMarkDistribution" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, QualityResultFacade.class.getName() + ".getMarkDistribution" );
+        }
+
+        return result;
     }
 
 }
