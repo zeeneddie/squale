@@ -5,17 +5,19 @@ div.distributionMap {
 }
 
 div.bigBox {
+	width: 100px;
 	border: solid 1px lightgrey;
 	background-color: #f6f6ff;
-	margin: 5px;
+	margin: 4px;
+	padding: 2px;
 	float: left;
 	border-radius: 5px 5px 5px 5px;
 }
 
 div.smallBox {
-	width: 12px;
-	height: 12px;
-	margin: 5px;
+	width: 8px;
+	height: 8px;
+	margin: 2px;
 	float: left;
 }
 

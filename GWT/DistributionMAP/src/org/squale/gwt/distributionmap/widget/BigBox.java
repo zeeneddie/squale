@@ -79,8 +79,26 @@ class BigBox
         }
         initWidget( mainPanel );
 
-        setWidth( "100px" );
         setStylePrimaryName( DistributionMap.resources.css().bigBox() );
+
+        optimizeLayout( dm );
+    }
+
+    /**
+     * If the DMap has been configured to optimize the layout, this method computes the best size for the current box.
+     * 
+     * @param dm the DMap
+     */
+    private void optimizeLayout( DistributionMap dm )
+    {
+        if ( dm.isLayoutOptimized() )
+        {
+            int iconClipSize = 12;
+            int extraSpace = 10;
+            double appropriateSize = extraSpace + iconClipSize * Math.sqrt( parentData.getChildren().size() );
+            setWidth( appropriateSize + "px" );
+            setHeight( appropriateSize + "px" );
+        }
     }
 
     /**

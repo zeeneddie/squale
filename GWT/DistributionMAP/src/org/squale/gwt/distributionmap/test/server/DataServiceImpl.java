@@ -51,11 +51,11 @@ public class DataServiceImpl
         pause();
 
         Random r = new Random();
-        int parentNumber = r.nextInt( 30 ) + 1;
+        int parentNumber = r.nextInt( 30 ) + 50;
         for ( int i = 0; i < parentNumber; i++ )
         {
             Parent p = new Parent( "Class #" + i );
-            int childNumber = r.nextInt( 20 ) + 1;
+            int childNumber = r.nextInt( 50 ) + 1;
             for ( int j = 0; j < childNumber; j++ )
             {
                 Child c = new Child( j, "Method #" + j, ( (float) r.nextInt( 30001 ) ) / 10000 );

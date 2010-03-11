@@ -122,6 +122,11 @@ public class DistributionMap
     private String detailURL = "";
 
     /**
+     * Boolean that tells if the widget tries to optimize the big boxes sizes
+     */
+    private boolean layoutOptimized;
+
+    /**
      * Default constructor. <br>
      * The principle is to create the widget with this constructor, then to call {@link #startLoading()}, and finally to
      * call the RPC service that will generate the data (and give it the DMap callback).
@@ -246,5 +251,25 @@ public class DistributionMap
     public void setDetailURL( String detailURL )
     {
         this.detailURL = detailURL;
+    }
+
+    /**
+     * Tells the widget tries to optimize or not the big boxes sizes.
+     * 
+     * @param layoutOptimized set to true if the layout should be optimized
+     */
+    public void setLayoutOptimized( boolean layoutOptimized )
+    {
+        this.layoutOptimized = layoutOptimized;
+    }
+
+    /**
+     * Tells if the widget tries to optimize the big boxes sizes.
+     * 
+     * @return true if the layout is optimized
+     */
+    public boolean isLayoutOptimized()
+    {
+        return layoutOptimized;
     }
 }
