@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.squale.gwt.distributionmap.widget.bundle.DMMessages;
 import org.squale.gwt.distributionmap.widget.bundle.DMResources;
 import org.squale.gwt.distributionmap.widget.data.Parent;
 
@@ -98,6 +99,11 @@ public class DistributionMap
     final public static DMResources resources = GWT.create( DMResources.class );
 
     /**
+     * Internationalized messages
+     */
+    final public static DMMessages messages = GWT.create( DMMessages.class );
+
+    /**
      * Main panel where the boxes will be placed
      */
     final private FlowPanel mainPanel = new FlowPanel();
@@ -110,7 +116,7 @@ public class DistributionMap
     /**
      * Label displayed when an error occurs
      */
-    final private Widget errorLabel = new HTML( "Error while trying to display the Distribution Map..." );
+    final private Widget errorLabel = new HTML( messages.errorDisplayingDMap() );
 
     /**
      * The popup panel used to display the details of each element box

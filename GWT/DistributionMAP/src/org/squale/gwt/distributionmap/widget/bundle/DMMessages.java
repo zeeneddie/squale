@@ -18,28 +18,19 @@
  */
 package org.squale.gwt.distributionmap.widget.bundle;
 
-import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.i18n.client.Constants;
 
 /**
- * GWT CSS resource.
+ * I18n interface for the DMap
  * 
  * @author Fabrice BELLINGARD
  */
-public interface DMCss
-    extends CssResource
+public interface DMMessages
+    extends Constants
 {
-    String distributionMap();
+    @DefaultStringValue("Grade")
+    String grade();
 
-    String bigBox();
-
-    String smallBox();
-
-    String topGrade();
-
-    String midGrade();
-
-    String lowGrade();
-
-    String loadingLabel();
-
+    @DefaultStringValue("Error while trying to display the Distribution Map...")
+    String errorDisplayingDMap();
 }

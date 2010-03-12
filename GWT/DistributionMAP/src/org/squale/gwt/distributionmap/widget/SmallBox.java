@@ -141,8 +141,10 @@ class SmallBox
      */
     public void onMouseOver( MouseOverEvent event )
     {
-        getDistributionMap().showDetailPopupForSmallBox( childData.getName() + "<br/>Grade: " + displayableGrade,
-                                                         event.getClientX(), event.getClientY() );
+        getDistributionMap().showDetailPopupForSmallBox(
+                                                         childData.getName() + "<br/>"
+                                                             + DistributionMap.messages.grade() + ": "
+                                                             + displayableGrade, event.getClientX(), event.getClientY() );
     }
 
 }
