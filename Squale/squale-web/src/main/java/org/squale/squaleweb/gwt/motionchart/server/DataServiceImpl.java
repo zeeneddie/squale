@@ -36,6 +36,7 @@ import org.squale.jraf.helper.PersistenceHelper;
 import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
 import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
 import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
 import org.squale.squaleweb.gwt.motionchart.client.DataService;
@@ -84,28 +85,61 @@ public class DataServiceImpl
             // lets' now retrieve the data that is needed for the Motion Chart
             for ( ApplicationForm app : apps )
             {
-                System.out.println( app.getId() + " - " + app.getApplicationName() );
+                System.out.println( "---------------- " + app.getId() + " - " + app.getApplicationName()
+                    + " ----------------" );
 
+                // Metriques
                 String requete =
-                    "select component.id, component.name, audit.id, audit.historicalDate, audit.date "
-                        + "from AbstractComponentBO component, AuditBO audit " + "where component.class='Application' "
-                        + "and component.id=" + app.getId() + " and audit.id in elements(component.audits)"
-                        + " and audit.status=" + AuditBO.TERMINATED;
+                    "select component.id, component.name, audit.id, audit.historicalDate, audit.date, metric.name, metric"
+                        + " from AbstractComponentBO component, AuditBO audit, MeasureBO measure, MetricBO metric"
+                        + " where component.class='Project' and component.parent.id=" + app.getId()
+                        + " and audit.id in elements(component.audits)" + " and audit.status=" + AuditBO.TERMINATED
+                        + " and measure.audit.id=audit.id and measure.component.id=component.id"
+                        + " and metric.measure.id=measure.id and metric.class='Int'"
+                        + " and (metric.name='numberOfCodeLines' or metric.name='sumVg')";
+
                 Query query = session.createQuery( requete );
                 List resultList = query.list();
 
                 for ( Object object : resultList )
                 {
                     Object[] result = (Object[]) object;
-                    long applicationId = (Long) result[0];
-                    String applicationName = (String) result[1];
+                    long projectId = (Long) result[0];
+                    String projectName = (String) result[1];
                     long auditId = (Long) result[2];
                     Date auditHistoricalDate = (Date) result[3];
                     Date auditStartDate = (Date) result[4];
                     Date auditDate = ( auditHistoricalDate == null ) ? auditStartDate : auditHistoricalDate;
+                    String metricName = (String) result[5];
+                    int metricValue = (Integer) ( (IntegerMetricBO) result[6] ).getValue();
 
-                    System.out.println( "\t Audit #" + auditId + " - "
-                        + DateFormat.getInstance().format( auditStartDate ) );
+                    System.out.println( "\t Project " + projectName + ", audit #" + auditId + " - "
+                        + DateFormat.getInstance().format( auditStartDate ) + " : " + metricName + "=" + metricValue );
+                }
+
+                // Factors
+                requete =
+                    "select component.id, component.name, audit.id, factorResult.rule.name, factorResult.meanMark"
+                        + " from AbstractComponentBO component, AuditBO audit, QualityResultBO factorResult"
+                        + " where component.class='Project' and component.parent.id=" + app.getId()
+                        + " and audit.id in elements(component.audits)" + " and audit.status=" + AuditBO.TERMINATED
+                        + " and factorResult.class='FactorResult' and factorResult.project.id=component.id"
+                        + " and factorResult.audit.id=audit.id";
+
+                query = session.createQuery( requete );
+                resultList = query.list();
+
+                for ( Object object : resultList )
+                {
+                    Object[] result = (Object[]) object;
+                    long projectId = (Long) result[0];
+                    String projectName = (String) result[1];
+                    long auditId = (Long) result[2];
+                    String factorName = (String) result[3];
+                    float factorValue = (Float) result[4];
+
+                    System.out.println( "\t Project " + projectName + ", audit #" + auditId + " - " + factorName + "="
+                        + factorValue );
                 }
 
             }
