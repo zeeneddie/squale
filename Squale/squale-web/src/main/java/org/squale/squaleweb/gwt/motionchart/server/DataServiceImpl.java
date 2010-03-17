@@ -18,6 +18,11 @@
  */
 package org.squale.squaleweb.gwt.motionchart.server;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -30,9 +35,11 @@ import org.squale.gwt.distributionmap.widget.data.Parent;
 import org.squale.jraf.helper.PersistenceHelper;
 import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
 import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
 import org.squale.squaleweb.gwt.motionchart.client.DataService;
+import org.squale.squaleweb.resources.WebMessages;
 import org.squale.welcom.struts.util.WConstants;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -61,27 +68,44 @@ public class DataServiceImpl
             IPersistenceProvider persistenceProvider = PersistenceHelper.getPersistenceProvider();
             Session session = ( (SessionImpl) persistenceProvider.getSession() ).getSession();
 
+            // let's find the factors that exist in the database
+            String requete1 =
+                "select rule.id, rule.name " + "from QualityRuleBO rule " + "where rule.class='FactorRule'";
+            Query query1 = session.createQuery( requete1 );
+            List<Object[]> factorsList = query1.list();
+            System.out.println( "Factors: " );
+            for ( Object[] factorInfos : factorsList )
+            {
+                long factorId = (Long) factorInfos[0];
+                String factorName = WebMessages.getString( getThreadLocalRequest(), "rule." + (String) factorInfos[1] );
+                System.out.println( "\t- " + factorName );
+            }
+
+            // lets' now retrieve the data that is needed for the Motion Chart
             for ( ApplicationForm app : apps )
             {
                 System.out.println( app.getId() + " - " + app.getApplicationName() );
 
                 String requete =
-                    "select component.id, component.name, audit.id "
-                        + "from AbstractComponentBO component, AuditBO audit "
-                        + "where component.class='Application' and audit.id in elements(component.audits)";
+                    "select component.id, component.name, audit.id, audit.historicalDate, audit.date "
+                        + "from AbstractComponentBO component, AuditBO audit " + "where component.class='Application' "
+                        + "and component.id=" + app.getId() + " and audit.id in elements(component.audits)"
+                        + " and audit.status=" + AuditBO.TERMINATED;
                 Query query = session.createQuery( requete );
                 List resultList = query.list();
 
-                // ----- CREATION du tree Parent-Child -----
                 for ( Object object : resultList )
                 {
                     Object[] result = (Object[]) object;
                     long applicationId = (Long) result[0];
                     String applicationName = (String) result[1];
                     long auditId = (Long) result[2];
+                    Date auditHistoricalDate = (Date) result[3];
+                    Date auditStartDate = (Date) result[4];
+                    Date auditDate = ( auditHistoricalDate == null ) ? auditStartDate : auditHistoricalDate;
 
-                    System.out.println( "\t Audit #" + auditId + " pour l'application " + applicationName + " #"
-                        + applicationId );
+                    System.out.println( "\t Audit #" + auditId + " - "
+                        + DateFormat.getInstance().format( auditStartDate ) );
                 }
 
             }
