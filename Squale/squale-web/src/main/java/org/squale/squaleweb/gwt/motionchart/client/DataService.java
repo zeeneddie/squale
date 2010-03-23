@@ -18,6 +18,8 @@
  */
 package org.squale.squaleweb.gwt.motionchart.client;
 
+import org.squale.squaleweb.gwt.motionchart.client.data.MotionChartData;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -30,5 +32,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface DataService
     extends RemoteService
 {
-    String getData();
+    MotionChartData getData();
 }

@@ -78,9 +78,9 @@ import org.squale.welcom.struts.util.WConstants;
 public class IndexAction
     extends DefaultAction
 {
-	/** Default Number of days for displaying in initUserSession for portlet */
+    /** Default Number of days for displaying in initUserSession for portlet */
     public static final int NUMBER_OF_DAYS_FOR_NEWS = 15;
-    
+
     /** Use default page */
     private boolean defaultConfig;
 
@@ -89,6 +89,9 @@ public class IndexAction
 
     /** Display the news ? */
     private boolean isDisplayNews;
+
+    /** Display the motion chart ? */
+    private boolean isDisplayMotionChart;
 
     /** Display the audits */
     private boolean isDisplayAudits;
@@ -128,7 +131,7 @@ public class IndexAction
 
     /** The widtg of one kiviat */
     private int kiviatWidth;
-    
+
     /** Display Kiviat With All Factors ? */
     private boolean isDisplayResultKiviatAllFactors;
 
@@ -222,6 +225,11 @@ public class IndexAction
                                                                                                       HomepageComponentDTO.NEWS ).getComponentValue() )
                             : false;
 
+        isDisplayMotionChart =
+            compoList.get( HomepageComponentDTO.MOTION_CHART ) != null ? Boolean.parseBoolean( compoList.get(
+                                                                                                              HomepageComponentDTO.MOTION_CHART ).getComponentValue() )
+                            : false;
+
         isDisplayAudits =
             compoList.get( HomepageComponentDTO.AUDIT ) != null ? Boolean.parseBoolean( compoList.get(
                                                                                                        HomepageComponentDTO.AUDIT ).getComponentValue() )
@@ -312,10 +320,10 @@ public class IndexAction
             compoList.get( HomepageComponentDTO.KIVIAT_WIDTH ) != null ? Integer.parseInt( compoList.get(
                                                                                                           HomepageComponentDTO.KIVIAT_WIDTH ).getComponentValue() )
                             : Integer.parseInt( HomepageComponentDTO.DEFAULT_KIVIAT_WIDTH );
-            
+
         isDisplayResultKiviatAllFactors =
             compoList.get( HomepageComponentDTO.KIVIAT_ALL_FACTORS ) != null ? Boolean.parseBoolean( compoList.get(
-                                                                                                               HomepageComponentDTO.KIVIAT_ALL_FACTORS ).getComponentValue() )
+                                                                                                                    HomepageComponentDTO.KIVIAT_ALL_FACTORS ).getComponentValue() )
                             : false;
 
     }
@@ -354,6 +362,15 @@ public class IndexAction
         if ( isDisplayNews )
         {
             temporCompo = compoList.get( HomepageComponentDTO.NEWS );
+            elementToDisplay[temporCompo.getComponentPosition() - 1] =
+                "/jsp/homepage/" + temporCompo.getComponentName() + ".jsp";
+            news( mapping, form, request, response );
+        }
+
+        // For the motion chart part
+        if ( isDisplayMotionChart )
+        {
+            temporCompo = compoList.get( HomepageComponentDTO.MOTION_CHART );
             elementToDisplay[temporCompo.getComponentPosition() - 1] =
                 "/jsp/homepage/" + temporCompo.getComponentName() + ".jsp";
             news( mapping, form, request, response );
@@ -722,9 +739,9 @@ public class IndexAction
 
                 // Recovering the list of values needed for built the graph
                 Long pCurrentAuditId = new Long( auditsDTO.get( 0 ).getID() );
-                
-                Boolean allFactors = new Boolean (isDisplayResultKiviatAllFactors);
-                Object[] paramAuditId = { pCurrentAuditId , String.valueOf( allFactors )};
+
+                Boolean allFactors = new Boolean( isDisplayResultKiviatAllFactors );
+                Object[] paramAuditId = { pCurrentAuditId, String.valueOf( allFactors ) };
                 Map projectsValues = (Map) ac2.execute( "getApplicationKiviatGraph", paramAuditId );
                 Set keysSet = projectsValues.keySet();
                 Iterator it = keysSet.iterator();
@@ -865,7 +882,7 @@ public class IndexAction
          */
         defaultConfig = true;
     }
-    
+
     /**
      * Enregistre l'utilisateur en session
      * 

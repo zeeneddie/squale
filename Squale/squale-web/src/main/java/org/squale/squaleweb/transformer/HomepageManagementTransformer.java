@@ -63,16 +63,19 @@ public class HomepageManagementTransformer
 
         // Form to object for introduction part
         ftoIntro( list, currentForm, elementNotChecked, elementChecked );
-        
+
         // form to object for news part
         ftoNews( list, currentForm, elementNotChecked, elementChecked );
-        
-        //Form to object for audit part
+
+        // form to object for motion chart part
+        ftoMotionChart( list, currentForm, elementNotChecked, elementChecked );
+
+        // Form to object for audit part
         ftoAudit( list, currentForm, elementNotChecked, elementChecked );
-        
+
         // Form to object for result part
         ftoResult( list, currentForm, elementNotChecked, elementChecked );
-        
+
         // Form to object for statistics part
         ftoStat( list, currentForm, elementNotChecked, elementChecked );
 
@@ -113,16 +116,19 @@ public class HomepageManagementTransformer
 
         // object to form for introduction part
         otfIntro( element, currentForm, elementNotChecked, elementChecked );
-        
+
         // object to form for news part
         otfNews( element, currentForm, elementNotChecked, elementChecked );
-        
+
+        // object to form for motion chart part
+        otfMotionChart( element, currentForm, elementNotChecked, elementChecked );
+
         // object to form for audit part
         otfAudit( element, currentForm, elementNotChecked, elementChecked );
-        
+
         // object to form for result part
         otfResult( element, currentForm, elementNotChecked, elementChecked );
-        
+
         // object to form for statistics part
         otfStat( element, currentForm, elementNotChecked, elementChecked );
 
@@ -331,13 +337,13 @@ public class HomepageManagementTransformer
         component = element.get( HomepageComponentDTO.KIVIAT_WIDTH );
         if ( component != null && component.getComponentValue() != null )
         {
-            currentForm.setKiviatWidth(component.getComponentValue());
+            currentForm.setKiviatWidth( component.getComponentValue() );
         }
         else
         {
             currentForm.setKiviatWidth( HomepageComponentDTO.DEFAULT_KIVIAT_WIDTH );
         }
-        
+
         component = element.get( HomepageComponentDTO.KIVIAT_ALL_FACTORS );
         if ( component != null && component.getComponentValue().equals( "true" ) )
         {
@@ -399,6 +405,33 @@ public class HomepageManagementTransformer
         else
         {
             currentForm.setNewsCheck( false );
+            elementNotChecked.add( jspName );
+        }
+    }
+
+    /**
+     * Fill the form for the motion chart bloc
+     * 
+     * @param element The map of element
+     * @param currentForm The form to fill
+     * @param elementNotChecked The list of element not checked
+     * @param elementChecked The list of element checked
+     */
+    private void otfMotionChart( HashMap<String, HomepageComponentDTO> element, HomepageManagementForm currentForm,
+                                 List<String> elementNotChecked, String[] elementChecked )
+    {
+        HomepageComponentDTO component;
+        component = element.get( HomepageComponentDTO.MOTION_CHART );
+        String jspName = jspName( HomepageComponentDTO.MOTION_CHART );
+        if ( component != null && component.getComponentValue().equals( "true" ) )
+        {
+            currentForm.setMotionChartCheck( true );
+            currentForm.setPositionMotionChart( component.getComponentPosition() );
+            elementChecked[component.getComponentPosition() - 1] = jspName;
+        }
+        else
+        {
+            currentForm.setMotionChartCheck( false );
             elementNotChecked.add( jspName );
         }
     }
@@ -485,6 +518,33 @@ public class HomepageManagementTransformer
     }
 
     /**
+     * Transform the information from the motion chart bloc of the form in a list of homepgeComponentDTO
+     * 
+     * @param list The list of HomepageComponentDTO to save in the database
+     * @param currentForm The form used for recover the information
+     * @param elementNotChecked The list of element not checked
+     * @param elementChecked The list of element checked
+     */
+    private void ftoMotionChart( ArrayList<HomepageComponentDTO> list, HomepageManagementForm currentForm,
+                                 List<String> elementNotChecked, String[] elementChecked )
+    {
+        HomepageComponentDTO component;
+        component = new HomepageComponentDTO( HomepageComponentDTO.MOTION_CHART, "false" );
+        String jspName = jspName( HomepageComponentDTO.MOTION_CHART );
+        if ( currentForm.isMotionChartCheck() )
+        {
+            component.setComponentValue( "true" );
+            component.setComponentPosition( currentForm.getPositionMotionChart() );
+            elementChecked[component.getComponentPosition() - 1] = jspName;
+        }
+        else
+        {
+            elementNotChecked.add( jspName );
+        }
+        list.add( component );
+    }
+
+    /**
      * Transform the information from the audit bloc of the form in a list of homepgeComponentDTO
      * 
      * @param list The list of HomepageComponentDTO to save in the database
@@ -526,7 +586,8 @@ public class HomepageManagementTransformer
         }
         list.add( component );
 
-        component = new HomepageComponentDTO( HomepageComponentDTO.AUDIT_NB_JOURS, HomepageComponentDTO.DEFAULT_AUDIT_NB_JOURS );
+        component =
+            new HomepageComponentDTO( HomepageComponentDTO.AUDIT_NB_JOURS, HomepageComponentDTO.DEFAULT_AUDIT_NB_JOURS );
         if ( currentForm.getAuditNbJours() != null )
         {
             component.setComponentValue( currentForm.getAuditNbJours() );
@@ -612,8 +673,9 @@ public class HomepageManagementTransformer
             component.setComponentValue( "true" );
         }
         list.add( component );
-        
-        component = new HomepageComponentDTO( HomepageComponentDTO.KIVIAT_WIDTH, HomepageComponentDTO.DEFAULT_KIVIAT_WIDTH );
+
+        component =
+            new HomepageComponentDTO( HomepageComponentDTO.KIVIAT_WIDTH, HomepageComponentDTO.DEFAULT_KIVIAT_WIDTH );
         if ( currentForm.getKiviatWidth() != null )
         {
             component.setComponentValue( currentForm.getKiviatWidth() );

@@ -36,6 +36,13 @@ public class HomepageManagementForm
     /** Position of the introduction */
     private int positionIntro;
 
+    // The Motion Chart part
+    /** State of the checkbox for the Motion Chart part */
+    private boolean motionChartCheck;
+
+    /** Position of the Motion Chart */
+    private int positionMotionChart;
+
     // The news part
     /** State of the checkbox for the news part */
     private boolean newsCheck;
@@ -572,6 +579,46 @@ public class HomepageManagementForm
     public void setKiviatWidth( String mKiviatWidth )
     {
         kiviatWidth = mKiviatWidth;
+    }
+
+    /**
+     * Tells if the Motion Chart should be displayed.
+     * 
+     * @return the motionChartCheck
+     */
+    public boolean isMotionChartCheck()
+    {
+        return motionChartCheck;
+    }
+
+    /**
+     * Sets if the Motion Chart should be displayed.
+     * 
+     * @param motionChartCheck the motionChartCheck to set
+     */
+    public void setMotionChartCheck( boolean motionChartCheck )
+    {
+        this.motionChartCheck = motionChartCheck;
+    }
+
+    /**
+     * Returns the position of the Motion Chart box.
+     * 
+     * @return the positionMotionChart
+     */
+    public int getPositionMotionChart()
+    {
+        return positionMotionChart;
+    }
+
+    /**
+     * Sets the position of the Motion Chart box.
+     * 
+     * @param positionMotionChart the positionMotionChart to set
+     */
+    public void setPositionMotionChart( int positionMotionChart )
+    {
+        this.positionMotionChart = positionMotionChart;
     }
 
 }

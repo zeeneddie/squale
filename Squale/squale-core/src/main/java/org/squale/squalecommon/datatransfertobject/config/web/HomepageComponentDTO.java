@@ -31,7 +31,7 @@ public class HomepageComponentDTO implements IDTO
     /**
      * The number of component displayable
      */
-    public static final int ELEMENT = 5;
+    public static final int ELEMENT = 6;
 
     // ELEMENT 1 The introduction part
     /**
@@ -119,6 +119,12 @@ public class HomepageComponentDTO implements IDTO
      * The name in base of the statistics element
      */
     public static final String STAT = "statistics";
+
+    // ELEMENT 6 The Motion Chart part
+    /**
+     * The name in base of the motion chart element
+     */
+    public static final String MOTION_CHART = "motionchart";
 
     /**
      * Technical id

@@ -265,7 +265,7 @@ function maskElement()
 {	
 	if (position <3)
 	{
-		for (var index = 1 ; index < 6; index = index +1 )
+		for (var index = 1 ; index < 7; index = index +1 )
 		{
 			document.getElementById("down"+index).style.display="none";
 			document.getElementById("up"+index).style.display="none";
@@ -280,7 +280,7 @@ function maskElement()
 		document.getElementById("up1").style.display="none";
 		document.getElementById("down"+(position-1)).style.display="none";
 		
-		for (var index = position ; index < 6; index = index +1 )
+		for (var index = position ; index < 7; index = index +1 )
 		{
 			document.getElementById("down"+index).style.display="none";
 			document.getElementById("up"+index).style.display="none";	
@@ -294,7 +294,7 @@ function setPosition()
 {
 	var index=1;
 	var elementCheck = true;
-	while(index < 6 && elementCheck)
+	while(index < 7 && elementCheck)
 	{
 		elementName = document.getElementById('htmlText'+index).value;
 		elementCheck = document.getElementById(elementName).checked;

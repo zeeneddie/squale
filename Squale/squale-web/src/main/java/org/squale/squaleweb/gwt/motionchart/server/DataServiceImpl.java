@@ -19,10 +19,8 @@
 package org.squale.squaleweb.gwt.motionchart.server;
 
 import java.text.DateFormat;
-import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -30,8 +28,6 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.squale.gwt.distributionmap.widget.data.Child;
-import org.squale.gwt.distributionmap.widget.data.Parent;
 import org.squale.jraf.helper.PersistenceHelper;
 import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
@@ -40,6 +36,9 @@ import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetr
 import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
 import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
 import org.squale.squaleweb.gwt.motionchart.client.DataService;
+import org.squale.squaleweb.gwt.motionchart.client.data.Application;
+import org.squale.squaleweb.gwt.motionchart.client.data.AuditValues;
+import org.squale.squaleweb.gwt.motionchart.client.data.MotionChartData;
 import org.squale.squaleweb.resources.WebMessages;
 import org.squale.welcom.struts.util.WConstants;
 
@@ -56,8 +55,10 @@ public class DataServiceImpl
 {
     private static final long serialVersionUID = -8491108470852437054L;
 
-    public String getData()
+    public MotionChartData getData()
     {
+        MotionChartData data = new MotionChartData();
+        
         ServletContext context = getServletContext();
         HttpSession httpSession = getThreadLocalRequest().getSession();
 
@@ -71,15 +72,16 @@ public class DataServiceImpl
 
             // let's find the factors that exist in the database
             String requete1 =
-                "select rule.id, rule.name " + "from QualityRuleBO rule " + "where rule.class='FactorRule'";
+                "select distinct rule.name " + "from QualityRuleBO rule " + "where rule.class='FactorRule'";
             Query query1 = session.createQuery( requete1 );
-            List<Object[]> factorsList = query1.list();
+            List<Object> factorsList = query1.list();
             System.out.println( "Factors: " );
-            for ( Object[] factorInfos : factorsList )
+            for ( Object factorInfos : factorsList )
             {
-                long factorId = (Long) factorInfos[0];
-                String factorName = WebMessages.getString( getThreadLocalRequest(), "rule." + (String) factorInfos[1] );
+                String factorDatabaseName = (String) factorInfos;
+                String factorName = WebMessages.getString( getThreadLocalRequest(), "rule." + factorDatabaseName );
                 System.out.println( "\t- " + factorName );
+                data.addFactor(factorDatabaseName, factorName);
             }
 
             // lets' now retrieve the data that is needed for the Motion Chart
@@ -87,8 +89,9 @@ public class DataServiceImpl
             {
                 System.out.println( "---------------- " + app.getId() + " - " + app.getApplicationName()
                     + " ----------------" );
+                Application applicationData = data.createApplication(app.getApplicationName());
 
-                // Metriques
+                // Metriques                
                 String requete =
                     "select component.id, component.name, audit.id, audit.historicalDate, audit.date, metric.name, metric"
                         + " from AbstractComponentBO component, AuditBO audit, MeasureBO measure, MetricBO metric"
@@ -96,7 +99,8 @@ public class DataServiceImpl
                         + " and audit.id in elements(component.audits)" + " and audit.status=" + AuditBO.TERMINATED
                         + " and measure.audit.id=audit.id and measure.component.id=component.id"
                         + " and metric.measure.id=measure.id and metric.class='Int'"
-                        + " and (metric.name='numberOfCodeLines' or metric.name='sumVg')";
+                        + " and (metric.name='numberOfCodeLines' or metric.name='sumVg')"
+                        + " order by audit.id, metric.name";
 
                 Query query = session.createQuery( requete );
                 List resultList = query.list();
@@ -115,6 +119,14 @@ public class DataServiceImpl
 
                     System.out.println( "\t Project " + projectName + ", audit #" + auditId + " - "
                         + DateFormat.getInstance().format( auditStartDate ) + " : " + metricName + "=" + metricValue );
+                    
+                    AuditValues audit = applicationData.getAudit(auditId, auditDate);
+                    if (metricName.equals( "numberOfCodeLines" )) {
+                        audit.addLinesOfCode(metricValue);
+                    } else {
+                        // this is sumVg for the moment
+                        audit.addVg(metricValue);
+                    }
                 }
 
                 // Factors
@@ -124,7 +136,7 @@ public class DataServiceImpl
                         + " where component.class='Project' and component.parent.id=" + app.getId()
                         + " and audit.id in elements(component.audits)" + " and audit.status=" + AuditBO.TERMINATED
                         + " and factorResult.class='FactorResult' and factorResult.project.id=component.id"
-                        + " and factorResult.audit.id=audit.id";
+                        + " and factorResult.audit.id=audit.id" + " order by audit.id, factorResult.rule.name";
 
                 query = session.createQuery( requete );
                 resultList = query.list();
@@ -140,6 +152,9 @@ public class DataServiceImpl
 
                     System.out.println( "\t Project " + projectName + ", audit #" + auditId + " - " + factorName + "="
                         + factorValue );
+                    
+                    AuditValues audit = applicationData.getAudit(auditId);
+                    audit.addFactorValue(factorName, factorValue);
                 }
 
             }
@@ -149,8 +164,21 @@ public class DataServiceImpl
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        String data = "";
+        
+        System.out.println("=============================================================");
+        Collection<Application> computedApps = data.getApplications();
+        for ( Application application : computedApps )
+        {
+            System.out.println(application.getName());
+            Collection<AuditValues> audits = application.getAuditValues();
+            for ( AuditValues auditValues : audits )
+            {
+                System.out.println("\t" + DateFormat.getInstance().format( auditValues.getDate()));
+                System.out.println("\t\tLOC : " + auditValues.getLinesOfCode());
+                System.out.println("\t\tvG  : " + auditValues.getComplexity());
+            }
+        }
+        
         return data;
     }
 

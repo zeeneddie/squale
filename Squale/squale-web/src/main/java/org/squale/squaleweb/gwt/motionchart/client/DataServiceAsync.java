@@ -18,6 +18,8 @@
  */
 package org.squale.squaleweb.gwt.motionchart.client;
 
+import org.squale.squaleweb.gwt.motionchart.client.data.MotionChartData;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
@@ -27,5 +29,5 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface DataServiceAsync
 {
-    void getData( AsyncCallback<String> callback );
+    void getData( AsyncCallback<MotionChartData> callback );
 }
