@@ -26,6 +26,8 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.squale.jraf.helper.PersistenceHelper;
@@ -54,6 +56,11 @@ public class DataServiceImpl
     implements DataService
 {
     private static final long serialVersionUID = -8491108470852437054L;
+    
+    /**
+     * Logger
+     */
+    private static Log log = LogFactory.getLog( DataServiceImpl.class );
 
     public MotionChartData getData()
     {
@@ -75,19 +82,19 @@ public class DataServiceImpl
                 "select distinct rule.name " + "from QualityRuleBO rule " + "where rule.class='FactorRule'";
             Query query1 = session.createQuery( requete1 );
             List<Object> factorsList = query1.list();
-            System.out.println( "Factors: " );
+            log.debug( "Factors: " );
             for ( Object factorInfos : factorsList )
             {
                 String factorDatabaseName = (String) factorInfos;
                 String factorName = WebMessages.getString( getThreadLocalRequest(), "rule." + factorDatabaseName );
-                System.out.println( "\t- " + factorName );
+                log.debug( "\t- " + factorName );
                 data.addFactor(factorDatabaseName, factorName);
             }
 
             // lets' now retrieve the data that is needed for the Motion Chart
             for ( ApplicationForm app : apps )
             {
-                System.out.println( "---------------- " + app.getId() + " - " + app.getApplicationName()
+                log.debug( "---------------- " + app.getId() + " - " + app.getApplicationName()
                     + " ----------------" );
                 Application applicationData = data.createApplication(app.getApplicationName());
 
@@ -117,7 +124,7 @@ public class DataServiceImpl
                     String metricName = (String) result[5];
                     int metricValue = (Integer) ( (IntegerMetricBO) result[6] ).getValue();
 
-                    System.out.println( "\t Project " + projectName + ", audit #" + auditId + " - "
+                    log.debug( "\t Project " + projectName + ", audit #" + auditId + " - "
                         + DateFormat.getInstance().format( auditStartDate ) + " : " + metricName + "=" + metricValue );
                     
                     AuditValues audit = applicationData.getAudit(auditId, auditDate);
@@ -150,7 +157,7 @@ public class DataServiceImpl
                     String factorName = (String) result[3];
                     float factorValue = (Float) result[4];
 
-                    System.out.println( "\t Project " + projectName + ", audit #" + auditId + " - " + factorName + "="
+                    log.debug( "\t Project " + projectName + ", audit #" + auditId + " - " + factorName + "="
                         + factorValue );
                     
                     AuditValues audit = applicationData.getAudit(auditId);
@@ -165,17 +172,17 @@ public class DataServiceImpl
             e.printStackTrace();
         }
         
-        System.out.println("=============================================================");
+        log.debug("=============================================================");
         Collection<Application> computedApps = data.getApplications();
         for ( Application application : computedApps )
         {
-            System.out.println(application.getName());
+            log.debug(application.getName());
             Collection<AuditValues> audits = application.getAuditValues();
             for ( AuditValues auditValues : audits )
             {
-                System.out.println("\t" + DateFormat.getInstance().format( auditValues.getDate()));
-                System.out.println("\t\tLOC : " + auditValues.getLinesOfCode());
-                System.out.println("\t\tvG  : " + auditValues.getComplexity());
+                log.debug("\t" + DateFormat.getInstance().format( auditValues.getDate()));
+                log.debug("\t\tLOC : " + auditValues.getLinesOfCode());
+                log.debug("\t\tvG  : " + auditValues.getComplexity());
             }
         }
         
