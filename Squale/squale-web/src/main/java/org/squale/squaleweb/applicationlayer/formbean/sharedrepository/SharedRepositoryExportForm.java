@@ -41,9 +41,12 @@ public class SharedRepositoryExportForm
      */
     private ArrayList<SharedRepositoryExportApplicationForm> listApp;
 
-    /** The last export job */
+    /** The last export job failed*/
     private JobDTO failedJob;
 
+    /** The last export job has nothing to export */
+    private JobDTO nothingToExportJob;
+    
     /** The last successful export job */
     private JobDTO successfulJob;
 
@@ -58,6 +61,9 @@ public class SharedRepositoryExportForm
 
     /** Is there a job in progress */
     private boolean inProgressJob;
+
+    /** Modification of the export asked */
+    private boolean modify;
 
     /** Is there at least one application selected */
     private boolean oneToExport;
@@ -170,6 +176,26 @@ public class SharedRepositoryExportForm
     }
 
     /**
+     * Getter method for the attribute modify
+     * 
+     * @return true if an modification of the export is asked
+     */
+    public boolean isModify()
+    {
+        return modify;
+    }
+
+    /**
+     * Setter method for the attribute modify
+     * 
+     * @param pModify new state of the asked modification 
+     */
+    public void setModify( boolean pModify )
+    {
+        modify = pModify;
+    }
+
+    /**
      * Getter method for the attribute failedJob
      * 
      * @return The failed Job
@@ -187,6 +213,26 @@ public class SharedRepositoryExportForm
     public void setFailedJob( JobDTO pFailedJob )
     {
         failedJob = pFailedJob;
+    }
+
+    /**
+     * Getter method for the attribute nothingToExportJob
+     * 
+     * @return The job
+     */
+    public JobDTO getNothingToExportJob()
+    {
+        return nothingToExportJob;
+    }
+
+    /**
+     * Setter method for the attribute nothingToExportJob
+     * 
+     * @param pNothingToExportJob The job
+     */
+    public void setNothingToExportJob( JobDTO pNothingToExportJob )
+    {
+        nothingToExportJob = pNothingToExportJob;
     }
 
     /**

@@ -35,8 +35,8 @@ public interface IExporter
      * 
      * @param mapAppAuditToExport The list of applications id and audits id to export
      * @param mappingList The list of mapping generic metric / metric in the local squale
-     * @return null if the export failed else the path to the export file
+     * @return The export status
      */
-    boolean exportData( HashMap<Long, Long> mapAppAuditToExport, List<AdminParamsDTO> mappingList );
+    ExportStatus exportData( HashMap<Long, Long> mapAppAuditToExport, List<AdminParamsDTO> mappingList );
 
 }

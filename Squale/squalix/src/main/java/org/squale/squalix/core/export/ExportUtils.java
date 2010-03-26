@@ -19,6 +19,7 @@
 package org.squale.squalix.core.export;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.squale.jraf.commons.exception.JrafDaoException;
@@ -46,9 +47,9 @@ public final class ExportUtils
      */
     private ExportUtils()
     {
-        
+
     }
-    
+
     /**
      * This method search if there is one job scheduled
      * 
@@ -80,7 +81,6 @@ public final class ExportUtils
             String message = Messages.getString( "export.job.searchScheduled.error" );
             throw new JrafEnterpriseException( message, e );
         }
-
         return jobScheduled;
     }
 
@@ -92,40 +92,14 @@ public final class ExportUtils
      */
     public static void setJobAsSuccessful( ISession session )
         throws JrafEnterpriseException
-
     {
-        try
-        {
-            List<JobBO> jobsFound = search( session );
-            JobDAOImpl jobDao = JobDAOImpl.getInstance();
-
-            for ( JobBO jobBO : jobsFound )
-            {
-                if ( jobBO.getJobStatus().equals( JobStatus.IN_PROGESS.getLabel() ) )
-                {
-                    jobBO.setJobStatus( JobStatus.SUCCESSFUL.getLabel() );
-                    jobBO.setJobDate( new Date() );
-                    jobDao.save( session, jobBO );
-                }
-                else if ( jobBO.getJobStatus().equals( JobStatus.SUCCESSFUL.getLabel() )
-                    || jobBO.getJobStatus().equals( JobStatus.FAILED.getLabel() ) )
-                {
-                    jobDao.remove( session, jobBO );
-                }
-            }
-            String mailObject = Messages.getString( "export.mail.successful.object" );
-            String mailContent = "export.mail.successful.content" ;
-            sendMail( mailObject, mailContent );
-        }
-        catch ( JrafDaoException e )
-        {
-            String message = Messages.getString( "export.job.setAsSuccessful.error" );
-            throw new JrafEnterpriseException( message, e );
-        }
+        String mailObject = Messages.getString( "export.mail.successful.object" );
+        String mailContent = "export.mail.successful.content";
+        setJobAs( session, JobStatus.SUCCESSFUL, mailObject, mailContent );
     }
 
     /**
-     * This method set the export job to the status failed
+     * This method set the export job to the status failed ans send an email
      * 
      * @param session The hibernate session
      * @throws JrafEnterpriseException Exception occurs during the change of the status
@@ -133,30 +107,65 @@ public final class ExportUtils
     public static void setJobAsFailed( ISession session )
         throws JrafEnterpriseException
     {
+        String mailObject = Messages.getString( "export.mail.failed.object" );
+        String mailContent = "export.mail.failed.content";
+        setJobAs( session, JobStatus.FAILED, mailObject, mailContent );
+    }
+
+    /**
+     * This method sets the status job to failed and send an email which indicate that there is nothing to export
+     * 
+     * @param session The hibernate session
+     * @throws JrafEnterpriseException Exception occurs
+     */
+    public static void nothingToExport( ISession session )
+        throws JrafEnterpriseException
+    {
+        String mailObject = Messages.getString( "export.mail.nothingToExport.object" );
+        String mailContent = "export.mail.nothingToExport.content";
+        setJobAs( session, JobStatus.NOTHING_TO_EXPORT, mailObject, mailContent );
+    }
+
+    /**
+     * This method sets the current job in its new status, clean the previous job and send a mail to the admin
+     * 
+     * @param session The hibernate session
+     * @param newStatus The new status of the current job
+     * @param mailObject The mail object
+     * @param mailContent The mail content
+     * @throws JrafEnterpriseException Exception occurs
+     */
+    private static void setJobAs( ISession session, JobStatus newStatus, String mailObject, String mailContent )
+        throws JrafEnterpriseException
+    {
         try
         {
             List<JobBO> jobsFound = search( session );
             JobDAOImpl jobDao = JobDAOImpl.getInstance();
+
             for ( JobBO jobBO : jobsFound )
             {
-                if ( jobBO.getJobStatus().equals( JobStatus.IN_PROGESS.getLabel() ) )
+                String jobStatus = jobBO.getJobStatus();
+                // If the job as the status in_progress, that means is the one that has just been done. So it's status
+                // pass to successful
+                if ( JobStatus.IN_PROGESS.same( jobStatus ) )
                 {
-                    jobBO.setJobStatus( JobStatus.FAILED.getLabel() );
+                    jobBO.setJobStatus( newStatus.getLabel() );
                     jobBO.setJobDate( new Date() );
                     jobDao.save( session, jobBO );
                 }
-                else if ( jobBO.getJobStatus().equals( JobStatus.FAILED.getLabel() ) )
+                // We remove the other job
+                else if ( ( newStatus.equals( JobStatus.SUCCESSFUL ) && JobStatus.SUCCESSFUL.same( jobStatus ) )
+                    || JobStatus.FAILED.same( jobStatus ) || JobStatus.NOTHING_TO_EXPORT.same( jobStatus ) )
                 {
                     jobDao.remove( session, jobBO );
                 }
             }
-            String mailObject = Messages.getString( "export.mail.failed.object" );
-            String mailContent = "export.mail.failed.content";
-            sendMail( mailObject, mailContent );
+            sendMail( mailObject, mailContent, null );
         }
         catch ( JrafDaoException e )
         {
-            String message = Messages.getString( "export.job.setAsFailed.error" );
+            String message = Messages.getString( "export.job.error.setStatus" );
             throw new JrafEnterpriseException( message, e );
         }
     }
@@ -176,25 +185,49 @@ public final class ExportUtils
         List<JobBO> jobsFound = jobDao.findByExample( session, jobBo );
         return jobsFound;
     }
-    
+
     /**
      * This method launch an e mail to the admin
      * 
      * @param objectExt The specific object
      * @param contentExt The specific content
+     * @param contentValues The values to replace in the content
      */
-    private static void sendMail(String objectExt, String contentExt)
+    private static void sendMail( String objectExt, String contentExt, String[] contentValues )
     {
         IMailerProvider mailer = MailerHelper.getMailerProvider();
         String sender = Messages.getString( "mail.sender.squalix" );
         MessageMailManager mail = new MessageMailManager();
         String object = sender + objectExt;
         mail.addContent( "mail.header", null );
-        mail.addContent( contentExt, null );
+        mail.addContent( contentExt, contentValues );
         String content = mail.getContent();
-        SqualeCommonUtils.notifyByEmail( mailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object,
-                                         content, false );
+        SqualeCommonUtils.notifyByEmail( mailer, null, SqualeCommonConstants.ONLY_ADMINS, null, object, content, false );
 
     }
-    
+
+    /**
+     * This method sends a mail to the admin to indicate that some applications will not be exported
+     * 
+     * @param applicationNotExported the list of name of the not exported application
+     */
+    public static void applicationNotExported( List<String> applicationNotExported )
+    {
+        StringBuffer appList = new StringBuffer();
+        Iterator<String> it = applicationNotExported.iterator();
+        while ( it.hasNext() )
+        {
+            String application = (String) it.next();
+            appList.append( application );
+            if ( it.hasNext() )
+            {
+                appList.append( ", " );
+            }
+        }
+        String message = appList.toString();
+        String mailObject = Messages.getString( "export.mail.notExported.object" );
+        String mailContent = "export.mail.notExported.content";
+        sendMail( mailObject, mailContent, new String[] { message } );
+    }
+
 }

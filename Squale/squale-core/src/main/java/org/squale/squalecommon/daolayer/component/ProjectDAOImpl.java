@@ -31,11 +31,10 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import org.squale.jraf.spi.persistence.ISession;
-import org.squale.squalecommon.daolayer.DAOMessages;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ProjectParameterBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.ProjectProfileBO;
@@ -127,7 +126,7 @@ public class ProjectDAOImpl
         }
         return newProject;
     }
-    
+
     /**
      * Retourne les projets taggés par un tag donné
      * 
@@ -140,16 +139,18 @@ public class ProjectDAOImpl
         throws JrafDaoException
     {
         String whereClause = "where ";
-        if (ptagIds.length>1){
+        if ( ptagIds.length > 1 )
+        {
             whereClause += ptagIds[0] + " in elements(" + getAlias() + ".tags)";
             for ( int i = 1; i < ptagIds.length; i++ )
             {
                 whereClause += " and " + ptagIds[i] + " in elements(" + getAlias() + ".tags)";
             }
-        } else {
+        }
+        else
+        {
             whereClause += ptagIds[0] + " in elements(" + getAlias() + ".tags)";
         }
-        
 
         Collection ret = findWhere( pSession, whereClause );
         return ret;
@@ -228,12 +229,12 @@ public class ProjectDAOImpl
     {
         super.remove( pSession, pObj );
     }
-    
+
     /**
      * @see org.squale.jraf.spi.persistence.IPersistenceDAO#remove(org.squale.jraf.spi.persistence.ISession,
      *      java.lang.Object)
      */
-    public void setStatusDelete( ISession pSession, ProjectBO pProject)
+    public void setStatusDelete( ISession pSession, ProjectBO pProject )
         throws JrafDaoException
     {
         // Supprime "logiquement" le projet lui-même
@@ -338,9 +339,9 @@ public class ProjectDAOImpl
     }
 
     /**
-     * Returns the list of projects with the name beginning with <code>pProjectName</code>, with their application's name
-     * beginning with <code>pAppliName</code>, posessing the tags wanted in <code>pTagNames</code> and included in the
-     * list <code>pUserAppli</code> associated with their last audit (may be null)
+     * Returns the list of projects with the name beginning with <code>pProjectName</code>, with their application's
+     * name beginning with <code>pAppliName</code>, posessing the tags wanted in <code>pTagNames</code> and included in
+     * the list <code>pUserAppli</code> associated with their last audit (may be null)
      * 
      * @param pSession the session
      * @param pAppliIds the ids of the current users's applications
@@ -350,7 +351,8 @@ public class ProjectDAOImpl
      * @throws JrafDaoException if an error occurs
      * @return the list of retrieved projects
      */
-    public Collection findProjects( ISession pSession, long[] pAppliIds, String pAppliName, String pProjectName, long[] pTagIds )
+    public Collection findProjects( ISession pSession, long[] pAppliIds, String pAppliName, String pProjectName,
+                                    long[] pTagIds )
         throws JrafDaoException
     {
         Collection projects = null;
@@ -379,15 +381,19 @@ public class ProjectDAOImpl
                 whereClause += ", " + pAppliIds[i];
             }
             whereClause += ")";
-            if (pTagIds!=null){
+            if ( pTagIds != null )
+            {
                 whereClause += " and ";
-                if (pTagIds.length>1){
+                if ( pTagIds.length > 1 )
+                {
                     whereClause += pTagIds[0] + " in elements(" + getAlias() + ".tags)";
                     for ( int i = 1; i < pTagIds.length; i++ )
                     {
                         whereClause += " and " + pTagIds[i] + " in elements(" + getAlias() + ".tags)";
                     }
-                } else {
+                }
+                else
+                {
                     whereClause += pTagIds[0] + " in elements(" + getAlias() + ".tags)";
                 }
             }
@@ -472,4 +478,44 @@ public class ProjectDAOImpl
         }
         return result;
     }
+
+    /**
+     * This method retrieves each module of the application (represented by its technical id given in argument). This
+     * method returns a list of array and each array represents one module
+     * 
+     * @param session The hibernate session
+     * @param appTechnicalId The technical id of the parent application
+     * @return A list of array [module technical id (Long), module name (String)]
+     * @throws JrafDaoException Exception occurs during the search in the database
+     */
+    public List<Object[]> getChildren( ISession session, Long appTechnicalId )
+        throws JrafDaoException
+    {
+        List<Object[]> listToReturnList = null;
+        StringBuffer request = new StringBuffer( "select mod.id, mod.name from ProjectBO mod where mod.parent.id = " );
+        request.append( appTechnicalId );
+        listToReturnList = find( session, request.toString() );
+        return listToReturnList;
+    }
+
+    /**
+     * This method retrieves the list of modules linked to an audit
+     * 
+     * @param session The hibernate session
+     * @param audit The audit
+     * @return The list of module linked to audit given in argument
+     * @throws JrafDaoException Exception occurs during the serach
+     */
+    public List<ProjectBO> getModuleslinkedToAudit( ISession session, AuditBO audit )
+        throws JrafDaoException
+    {
+        List<ProjectBO> moduleList = new ArrayList<ProjectBO>();
+        StringBuilder whereClause = new StringBuilder( "where " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".audits.id = " );
+        whereClause.append( audit.getId() );
+        moduleList = findWhere( session, whereClause.toString() );
+        return moduleList;
+    }
+
 }

@@ -24,30 +24,33 @@ package org.squale.squalecommon.enterpriselayer.businessobject.job;
 public enum JobStatus
 {
     /** The job is Scheduled */
-    SCHEDULED("scheduled"),
-    
+    SCHEDULED( "scheduled" ),
+
     /** The job is in progress */
-    IN_PROGESS("inProgress"),
-    
+    IN_PROGESS( "inProgress" ),
+
     /** The Job failed */
-    FAILED("failed"),
-    
+    FAILED( "failed" ),
+
+    /** There was nothing to export */
+    NOTHING_TO_EXPORT( "nothingToExport" ),
+
     /** The job succeed */
-    SUCCESSFUL("sucessful");
-    
+    SUCCESSFUL( "sucessful" );
+
     /** The enum label */
     protected String label;
-    
+
     /**
      * Constructor
      * 
      * @param pLabel The label of the enum
      */
-    private JobStatus(String pLabel)
+    private JobStatus( String pLabel )
     {
         this.label = pLabel;
     }
-    
+
     /**
      * Getter method for the label of the enum
      * 
@@ -57,5 +60,15 @@ public enum JobStatus
     {
         return label;
     }
-    
+
+    /**
+     * Compare the status label given in argument with the label of the current JobStatus
+     * 
+     * @param compStatus The label to compare
+     * @return True if the String given in argument is equal to the label of the current JobStatus
+     */
+    public boolean same( String compStatus )
+    {
+        return compStatus.equals( label );
+    }
 }

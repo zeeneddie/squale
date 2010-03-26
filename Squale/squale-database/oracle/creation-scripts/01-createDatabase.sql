@@ -75,7 +75,21 @@
 
     drop table RuleSet cascade constraints;
 
+    drop table Segment cascade constraints;
+
+    drop table SegmentCategory cascade constraints;
+
+    drop table Segment_Module cascade constraints;
+
+    drop table Segment_Segmentation cascade constraints;
+
+    drop table Segmentation cascade constraints;
+
     drop table Serveur cascade constraints;
+
+    drop table SharedRepoStats cascade constraints;
+
+    drop table SqualeParams cascade constraints;
 
     drop table SqualeReference cascade constraints;
 
@@ -90,8 +104,6 @@
     drop table TagCategory cascade constraints;
 
     drop table Tag_Component cascade constraints;
-
-    drop table Tag_Segmentation cascade constraints;
 
     drop table Task cascade constraints;
 
@@ -114,12 +126,6 @@
     drop table adminParams cascade constraints;
 
     drop table displayConf cascade constraints;
-
-    drop table segmentation cascade constraints;
-
-    drop table shared_repo_stats cascade constraints;
-
-    drop table squale_params cascade constraints;
 
     drop sequence HomepageComponent_sequence;
 
@@ -179,13 +185,17 @@
 
     drop sequence rigth_sequence;
 
+    drop sequence segmentCategory_sequence;
+
+    drop sequence segment_sequence;
+
     drop sequence segmentation_sequence;
 
     drop sequence serveur_sequence;
 
-    drop sequence shared_repo_stats_sequence;
+    drop sequence sharedRepoStats_sequence;
 
-    drop sequence squaleparams_sequence;
+    drop sequence squaleParams_sequence;
 
     drop sequence stats_annexe_sequence;
 
@@ -551,10 +561,67 @@
         primary key (RuleSetId)
     );
 
+    create table Segment (
+        SegmentId number(19,0) not null,
+        Name varchar2(255) not null,
+        Identifier number(19,0) not null,
+        Deprecated number(1,0) not null,
+        CategoryId number(19,0) not null,
+        primary key (SegmentId)
+    );
+
+    create table SegmentCategory (
+        CategoryId number(19,0) not null,
+        Name varchar2(255) not null unique,
+        Identifier number(19,0) not null unique,
+        Type varchar2(255) not null,
+        Deprecated number(1,0) not null,
+        primary key (CategoryId)
+    );
+
+    create table Segment_Module (
+        SegmentId number(19,0) not null,
+        ComponentId number(19,0) not null,
+        primary key (SegmentId, ComponentId)
+    );
+
+    create table Segment_Segmentation (
+        SegmentationId number(19,0) not null,
+        SegmentId number(19,0) not null,
+        primary key (SegmentationId, SegmentId)
+    );
+
+    create table Segmentation (
+        SegmentationId number(19,0) not null,
+        primary key (SegmentationId)
+    );
+
     create table Serveur (
         ServeurId number(19,0) not null,
         Name varchar2(255) not null unique,
         primary key (ServeurId)
+    );
+
+    create table SharedRepoStats (
+        StatsId number(19,0) not null,
+        ElementType varchar2(255),
+        DataType varchar2(255),
+        DataName varchar2(255),
+        Language varchar2(255),
+        Mean float,
+        MaxValue float,
+        MinValue float,
+        Deviation float,
+        Elements number(10,0),
+        SegmentationId number(19,0) not null,
+        primary key (StatsId)
+    );
+
+    create table SqualeParams (
+        SqualeParamsId number(19,0) not null,
+        ParamKey varchar2(255) not null,
+        ParamaValue varchar2(255) not null,
+        primary key (SqualeParamsId)
     );
 
     create table SqualeReference (
@@ -630,12 +697,6 @@
         ComponentId number(19,0) not null,
         TagId number(19,0) not null,
         primary key (ComponentId, TagId)
-    );
-
-    create table Tag_Segmentation (
-        segmentationId number(19,0) not null,
-        TagId number(19,0) not null,
-        primary key (segmentationId, TagId)
     );
 
     create table Task (
@@ -729,33 +790,6 @@
         Y_POS number(19,0),
         componentType varchar2(255),
         primary key (ConfId)
-    );
-
-    create table segmentation (
-        segmentationId number(19,0) not null,
-        primary key (segmentationId)
-    );
-
-    create table shared_repo_stats (
-        StatsId number(19,0) not null,
-        elementType varchar2(255),
-        dataType varchar2(255),
-        dataName varchar2(255),
-        language varchar2(255),
-        mean float,
-        maxValue float,
-        minValue float,
-        deviation float,
-        elements number(10,0),
-        segmentationId number(19,0) not null,
-        primary key (StatsId)
-    );
-
-    create table squale_params (
-        SqualeParamsId number(19,0) not null,
-        paramKey varchar2(255) not null,
-        paramaValue varchar2(255) not null,
-        primary key (SqualeParamsId)
     );
 
     alter table Analysis_Task 
@@ -1071,6 +1105,42 @@
         references Component
         on delete cascade;
 
+    alter table Segment 
+        add constraint FKD8DD37132D40D50F 
+        foreign key (CategoryId) 
+        references SegmentCategory
+        on delete cascade;
+
+    alter table Segment_Module 
+        add constraint FK25FDCD381A146766 
+        foreign key (SegmentId) 
+        references Segment
+        on delete cascade;
+
+    alter table Segment_Module 
+        add constraint FK25FDCD38D4A7AD7B 
+        foreign key (ComponentId) 
+        references Component
+        on delete cascade;
+
+    alter table Segment_Segmentation 
+        add constraint FK4C70016EBBF32679 
+        foreign key (SegmentationId) 
+        references Segmentation
+        on delete cascade;
+
+    alter table Segment_Segmentation 
+        add constraint FK4C70016E1A146766 
+        foreign key (SegmentId) 
+        references Segment
+        on delete cascade;
+
+    alter table SharedRepoStats 
+        add constraint FK3C971D48BBF32679 
+        foreign key (SegmentationId) 
+        references Segmentation
+        on delete cascade;
+
     alter table SqualeReference 
         add constraint FK32FD7E08499FD217 
         foreign key (QualityGrid) 
@@ -1099,17 +1169,6 @@
 
     alter table Tag_Component 
         add constraint FKE093EE58FD9106F6 
-        foreign key (TagId) 
-        references Tag
-        on delete cascade;
-
-    alter table Tag_Segmentation 
-        add constraint FK9CA21067BBF32679 
-        foreign key (segmentationId) 
-        references segmentation;
-
-    alter table Tag_Segmentation 
-        add constraint FK9CA21067FD9106F6 
         foreign key (TagId) 
         references Tag
         on delete cascade;
@@ -1167,12 +1226,6 @@
         add constraint FK92AE693393A162FA 
         foreign key (VolumetryId) 
         references displayConf
-        on delete cascade;
-
-    alter table shared_repo_stats 
-        add constraint FK2F1F0DACBBF32679 
-        foreign key (segmentationId) 
-        references segmentation
         on delete cascade;
 
     create sequence HomepageComponent_sequence;
@@ -1233,13 +1286,17 @@
 
     create sequence rigth_sequence;
 
+    create sequence segmentCategory_sequence;
+
+    create sequence segment_sequence;
+
     create sequence segmentation_sequence;
 
     create sequence serveur_sequence;
 
-    create sequence shared_repo_stats_sequence;
+    create sequence sharedRepoStats_sequence;
 
-    create sequence squaleparams_sequence;
+    create sequence squaleParams_sequence;
 
     create sequence stats_annexe_sequence;
 

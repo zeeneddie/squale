@@ -18,15 +18,11 @@
  */
 package org.squale.squaleweb.applicationlayer.formbean.component;
 
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
-
-import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
 import org.squale.squaleweb.applicationlayer.formbean.ActionIdFormSelectable;
 
 /**
@@ -52,6 +48,9 @@ public class ApplicationForm
 
     /** L'utilisateur ayant fait la dernière modification */
     private String mLastUser;
+
+    /** indicate if the application is hide */
+    private boolean hide;
 
     /**
      * @return true si le composant est exclu du plan d'action
@@ -185,5 +184,25 @@ public class ApplicationForm
     public void setLastUser( String pMatricule )
     {
         mLastUser = pMatricule;
+    }
+
+    /**
+     * Getter method for the attribute hide
+     * 
+     * @return True if the application is hide
+     */
+    public boolean isHide()
+    {
+        return hide;
+    }
+
+    /**
+     * Setter merthod for the attribute hide
+     * 
+     * @param pHide The new hide status of the application
+     */
+    public void setHide( boolean pHide )
+    {
+        hide = pHide;
     }
 }

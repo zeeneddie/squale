@@ -30,6 +30,6 @@ public interface MessageProvider
      * @param pKey clef
      * @return message ou null si non trouvé
      */
-    public String getMessage( String pLang, String pKey );
+    String getMessage( String pLang, String pKey );
 
 }

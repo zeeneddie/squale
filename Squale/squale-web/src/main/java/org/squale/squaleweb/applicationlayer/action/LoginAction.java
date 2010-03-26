@@ -29,13 +29,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.helper.AccessDelegateHelper;
 import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
-
 import org.squale.squalecommon.datatransfertobject.component.UserDTO;
-
 import org.squale.squaleweb.applicationlayer.action.accessRights.DefaultAction;
 import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
 import org.squale.squaleweb.applicationlayer.formbean.component.UserForm;
@@ -47,7 +44,6 @@ import org.squale.squaleweb.servlet.UserSqualeSessionContext;
 import org.squale.squaleweb.transformer.LogonBeanTransformer;
 import org.squale.squaleweb.transformer.UserTransformer;
 import org.squale.squaleweb.util.ExceptionWrapper;
-
 import org.squale.welcom.struts.transformer.WTransformerException;
 import org.squale.welcom.struts.transformer.WTransformerFactory;
 import org.squale.welcom.struts.util.WConstants;
@@ -127,10 +123,8 @@ public class LoginAction
             pRequest.getSession().setAttribute( WConstants.USER_KEY, logonBeanSecurity );
             success = true;
 
-            // Set the Squale's administrator mailing list
+            // Set the squale user session
             configUserSessionContext( pRequest.getSession() );
-            // configAdminMailingList( pRequest.getSession());
-            // configSahredRepository(pRequest.getSession());
         }
         catch ( Exception e )
         {

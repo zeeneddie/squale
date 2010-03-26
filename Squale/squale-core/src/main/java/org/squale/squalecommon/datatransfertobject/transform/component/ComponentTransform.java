@@ -100,6 +100,13 @@ public class ComponentTransform
         ComponentDTO componentDTO = setCommonComplexAttributes( pApplication );
         componentDTO.setLastUpdate( pApplication.getLastUpdate() );
         componentDTO.setLastUser( pApplication.getLastUser() );
+        componentDTO.setHasResults( pApplication.hasResults() );
+        boolean isHide = false;
+        if ( pApplication.getUserList().size() == 0 )
+        {
+            isHide = true;
+        }
+        componentDTO.setHide( isHide );
         return componentDTO;
     }
 
@@ -113,7 +120,7 @@ public class ComponentTransform
     {
         ComponentDTO componentDTO = setCommonComplexAttributes( pProject );
         componentDTO.setTechnology( pProject.getProfile().getName() );
-        componentDTO.setLanguage(pProject.getProfile().getLanguage());
+        componentDTO.setLanguage( pProject.getProfile().getLanguage() );
         return componentDTO;
     }
 

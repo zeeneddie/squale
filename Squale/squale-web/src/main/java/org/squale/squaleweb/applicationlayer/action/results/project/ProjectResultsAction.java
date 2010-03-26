@@ -335,7 +335,7 @@ public class ProjectResultsAction
             WTransformerFactory.objToForm( ProjectSummaryTransformer.class, (ProjectSummaryForm) pForm, params );
 
             IApplicationComponent acSegmentation = AccessDelegateHelper.getInstance( "sharedRepoStats" );
-            Object[] params2 = { applicationDTO.getTags(), DataType.FACTOR };
+            Object[] params2 = { project, DataType.FACTOR };
             Map<String, SharedRepoStatsDTO> statsDtoMap =
                 (Map<String, SharedRepoStatsDTO>) acSegmentation.execute( "retrieveStatsByDataType", params2 );
 

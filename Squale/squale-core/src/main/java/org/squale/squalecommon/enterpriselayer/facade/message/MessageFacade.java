@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
@@ -354,5 +355,35 @@ public class MessageFacade
             FacadeHelper.closeSession( session, MessageFacade.class.getName() + ".modifyNews" );
         }
         return new Boolean( coll.size() != 0 );
+    }
+
+    /**
+     * This method inserts the segment message in the database
+     * 
+     * @param session The hibernate session
+     * @param messageList The list of segment message to import
+     * @throws JrafEnterpriseException exception occurs during the insert
+     */
+    public static void importSegmentMessage( ISession session, List<MessageDTO> messageList )
+        throws JrafEnterpriseException
+    {
+        try
+        {
+            MessageDAOImpl messageDao = MessageDAOImpl.getInstance();
+            MessageBO messageBo;
+            for ( MessageDTO messageDTO : messageList )
+            {
+                messageBo = MessageTransform.dto2Bo( messageDTO );
+                messageDao.save( session, messageBo );
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, MessageFacade.class.getName() + ".importSegmentMessage" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, MessageFacade.class.getName() + ".importSegmentMessage" );
+        }
     }
 }

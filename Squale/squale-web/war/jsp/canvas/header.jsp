@@ -185,6 +185,8 @@ int nbMinAppli = SqualeWebActionUtils.getApplicationMenuKey(request);
 			action="sharedRepositoryExport.do?action=detail" accessKey="admin" />
 			<af:menuItem key="menu.administration.shared_repository.import" color="2"
 			action="sharedRepositoryImport.do?action=detail" accessKey="admin" />
+			<af:menuItem key="menu.administration.shared_repository.segementation" color="2"
+			action="sharedRepositorySegmentation.do?action=detail" accessKey="admin" />
 		</af:menuItem>
 		</logic:equal>
 		<af:menuItem key="menu.administration.messages" color="2"

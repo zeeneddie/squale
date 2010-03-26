@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.squale.sharedrepository.segment;
+package org.squale.sharedrepository.export;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
@@ -29,10 +29,10 @@ public class SegmentEx
 {
 
     /**
-     * The name of the segment
+     * The identifier of the segment
      */
     @XStreamAsAttribute
-    private String name;
+    private Long segmentId;
 
     /**
      * Default constructor
@@ -44,32 +44,32 @@ public class SegmentEx
 
     /**
      * Full constructor
-     *  
-     * @param pName The name of the segment
+     * 
+     * @param pSegmentId The identifier of the segment
      */
-    public SegmentEx( String pName )
+    public SegmentEx( Long pSegmentId )
     {
-        name = pName;
+        segmentId = pSegmentId;
     }
 
     /**
-     * Getter method for the attribute name
+     * Getter method for the attribute segmentId
      * 
-     * @return The attribute name
+     * @return The segment id
      */
-    public String getName()
+    public Long getSegmentId()
     {
-        return name;
+        return segmentId;
     }
 
     /**
-     * Getter method for the attribute name
+     * Getter method for the attribute segmentId
      * 
-     * @param pName The attribute name
+     * @param pSegmentId The new segment identifier
      */
-    public void setName( String pName )
+    public void setSegmentId( Long pSegmentId )
     {
-        name = pName;
+        segmentId = pSegmentId;
     }
 
 }

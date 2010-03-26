@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class lazy="true" table="Segment" name="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.segment.SegmentBO">
+    <id unsaved-value="-1" name="technicalId" type="long" column="SegmentId" length="19">
+      <generator class="native">
+        <param name="sequence">segment_sequence</param>
+      </generator>
+    </id>
+    <property name="segmentName" column="Name" update="true" not-null="true" type="string" insert="true"/>
+    <property name="identifier" column="Identifier" update="true" not-null="true" type="long" insert="true"/>
+    <property name="deprecated" column="Deprecated" update="true" not-null="true" type="boolean" insert="true"/>
+    <many-to-one insert="true" column="CategoryId" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.segment.SegmentCategoryBO" not-null="true" name="segmentCategory"/>
+    <set inverse="false" cascade="none" lazy="true" table="Segment_Module" sort="unsorted" name="moduleList">
+      <key not-null="true" column="SegmentId"/>
+      <many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO" column="ComponentId" outer-join="auto"/>
+    </set>
+  </class>
+</hibernate-mapping>

@@ -21,12 +21,12 @@ package org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.segment.SegmentBO;
 
 /**
- * This class represent a segmentation ( a list of segment ) 
+ * This class represent a segmentation ( a list of segment )
  * 
- * @hibernate.class table="segmentation"
+ * @hibernate.class table="Segmentation"
  */
 public class SegmentationBO
 {
@@ -39,7 +39,7 @@ public class SegmentationBO
     /**
      * List of tags
      */
-    private Set<TagBO> tagList = new HashSet<TagBO>();
+    private Set<SegmentBO> segmentList = new HashSet<SegmentBO>();
 
     /**
      * List of stats
@@ -50,7 +50,7 @@ public class SegmentationBO
      * Getter method for the attribute segmentationId
      * 
      * @return The technical id
-     * @hibernate.id generator-class="native" type="long" column="segmentationId" unsaved-value="-1" length="19"
+     * @hibernate.id generator-class="native" type="long" column="SegmentationId" unsaved-value="-1" length="19"
      * @hibernate.generator-param name="sequence" value="segmentation_sequence"
      */
     public long getSegmentationId()
@@ -71,34 +71,56 @@ public class SegmentationBO
     /**
      * Getter method for the attribute tagList
      * 
-     * @return The tag list 
-     * @hibernate.set table="Tag_Segmentation" lazy="false" cascade="none" inverse="false" sort="unsorted"
-     * @hibernate.key column="segmentationId"
-     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO"
-     *                         column="TagId" outer-join="auto"
+     * @return The tag list
+     * @hibernate.set table="Segment_Segmentation" lazy="true" cascade="none" inverse="false" sort="unsorted"
+     * @hibernate.key column="SegmentationId"
+     * @hibernate.many-to-many 
+     *                         class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.segment.SegmentBO"
+     *                         column="SegmentId" outer-join="auto"
      */
-    public Set<TagBO> getTagList()
+    public Set<SegmentBO> getSegmentList()
     {
-        return tagList;
+        return segmentList;
+    }
+
+    /**
+     * Setter method for the attribute segmentList
+     * 
+     * @param pSegmentList the new list of segment linked to this segmentation
+     */
+    public void setSegmentList( Set<SegmentBO> pSegmentList )
+    {
+        segmentList = pSegmentList;
     }
 
     /**
      * Setter method for the attribute tagList
      * 
-     * @param pTagList The new tag list
+     * @param pSegmentList The new tag list
      */
-    public void setTagList( Set<TagBO> pTagList )
+    /*public void setSegementList( Set<SegmentBO> pSegmentList )
     {
-        tagList = pTagList;
+        segmentList = pSegmentList;
+    }*/
+    
+    /**
+     * This method adds a segment to the list of segment
+     * 
+     * @param segment The segment to add
+     */
+    public void addSegment( SegmentBO segment )
+    {
+        segmentList.add( segment );
     }
 
     /**
      * Getter method for the attribute statsList
      * 
      * @return The stat list
-     * @hibernate.set table="shared_repo_stats" lazy="true" cascade="all" inverse="true" sort="unsorted"
-     * @hibernate.key column="segmentationId"
-     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SharedRepoStatsBO"
+     * @hibernate.set table="SharedRepoStats" lazy="true" cascade="all" inverse="true" sort="unsorted"
+     * @hibernate.key column="SegmentationId"
+     * @hibernate.one-to-many 
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SharedRepoStatsBO"
      */
     public Set<SharedRepoStatsBO> getStatsList()
     {

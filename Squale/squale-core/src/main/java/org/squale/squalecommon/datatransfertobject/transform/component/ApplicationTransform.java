@@ -20,7 +20,6 @@ package org.squale.squalecommon.datatransfertobject.transform.component;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 import org.squale.squalecommon.datatransfertobject.tag.TagDTO;

@@ -28,6 +28,11 @@ public class TagDTO
 {
 
     /**
+     * UID
+     */
+    private static final long serialVersionUID = -4115112039963461614L;
+
+    /**
      * ID en base du tag
      */
     private long mID = -1;
@@ -35,17 +40,17 @@ public class TagDTO
     /**
      * Nom complet du tag
      */
-    private String mName = null;
+    private String mName;
 
     /**
      * la description rapide du tag
      */
-    private String mDescription = null;
+    private String mDescription;
 
     /**
      * La catégorie correspondant au Tag
      */
-    private TagCategoryDTO mTagCategoryDTO = null;
+    private TagCategoryDTO mTagCategoryDTO;
 
     /**
      * Constructeur par défaut

@@ -34,12 +34,10 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
 import org.squale.jraf.spi.persistence.ISession;
-import org.squale.squalecommon.daolayer.DAOMessages;
 import org.squale.squalecommon.daolayer.DAOUtils;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
@@ -144,8 +142,8 @@ public final class AuditDAOImpl
      * @param pType le type des audits
      * @param pStatus le status des audits
      * @return une liste de tableau d'objets à 3 éléments représentants les derniers audits des composants de type
-     *         <pComponentType</code> de type <code>pType</code> dont le status est <code>pStatus</code> Le tableau
-     *         est de la forme {auditApplicationId, auditApplicationName, auditBO}
+     *         <pComponentType</code> de type <code>pType</code> dont le status est <code>pStatus</code> Le tableau est
+     *         de la forme {auditApplicationId, auditApplicationName, auditBO}
      * @throws JrafDaoException si erreur
      */
     public List findAllLastAudits( ISession pSession, Class pComponentClass, String pType, int pStatus )
@@ -569,18 +567,15 @@ public final class AuditDAOImpl
         // Attention, les applications qui n'ont pas eu d'accès, ne seront pas prises en compte!
         // On appelle donc une fois en triant par accès, une autre pour les applications sans accès et dans ce
         // cas on trie par date d'exécution.
-        
-        /* Requête retirée suite à bug        
-        String orderClause =
-            " order by " + appAlias + ".userAccesses[minindex(" + appAlias + ".userAccesses)].date desc";
 
-        LOG.debug( "requete = " + requete + whereClause + orderClause );
-        result = find( pSession, requete + whereClause + orderClause );
+        /*
+         * Requête retirée suite à bug String orderClause = " order by " + appAlias + ".userAccesses[minindex(" +
+         * appAlias + ".userAccesses)].date desc"; LOG.debug( "requete = " + requete + whereClause + orderClause );
+         * result = find( pSession, requete + whereClause + orderClause ); orderClause = " and size(" + appAlias +
+         * ".userAccesses)=0 order by " + getAlias() + ".date"; LOG.debug( "requete = " + requete + whereClause +
+         * orderClause ); result.addAll( find( pSession, requete + whereClause + orderClause ) );
+         */
 
-        orderClause = " and size(" + appAlias + ".userAccesses)=0 order by " + getAlias() + ".date";
-        LOG.debug( "requete = " + requete + whereClause + orderClause );
-        result.addAll( find( pSession, requete + whereClause + orderClause ) );  */
-        
         LOG.info( "requete = " + requete + whereClause );
         result = find( pSession, requete + whereClause );
 
@@ -962,16 +957,16 @@ public final class AuditDAOImpl
 
         return find( pSession, selectClause + whereClause.toString() + orderClause );
     }
-    
+
     /**
-     * Recover the id of the last successful audit (milestone or follow up) for the application
+     * Recover the id of all successful audit (milestone or follow up) for the application given in argument and ordered by decreasing date
      * 
      * @param session The hibernate session
      * @param applicationId The id of the application for which we search the audit
-     * @return The id of the last successful
+     * @return The id list of successful audit for the application
      * @throws JrafDaoException Error happened during the request in the db
      */
-    public List<AuditBO> lastSuccesfullAudit( ISession session, Long applicationId )
+    public List<AuditBO> succesfullAudit( ISession session, Long applicationId )
         throws JrafDaoException
     {
         long auditId = -1;

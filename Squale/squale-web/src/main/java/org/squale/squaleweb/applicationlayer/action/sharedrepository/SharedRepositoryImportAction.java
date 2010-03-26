@@ -36,7 +36,10 @@ import org.squale.jraf.helper.AccessDelegateHelper;
 import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
 import org.squale.squaleweb.applicationlayer.action.accessRights.AdminAction;
 import org.squale.squaleweb.applicationlayer.formbean.sharedrepository.SharedRepositoryImportForm;
+import org.squale.squaleweb.messages.MessageProvider;
+import org.squale.squaleweb.resources.DataBaseMessages;
 import org.squale.squaleweb.servlet.UserSqualeSessionContext;
+import org.squale.squaleweb.transformer.message.MessagesDTOTransformer;
 
 /**
  * Action linked to the shared repository import reference page
@@ -91,6 +94,9 @@ public class SharedRepositoryImportAction
             {
                 // We try to import the new reference file
                 tryToImport( currentForm, is, actionErrors, request );
+                IApplicationComponent ac = AccessDelegateHelper.getInstance( "Messages" );
+                MessageProvider messages = MessagesDTOTransformer.transform( ac.execute( "getMessages" ) );
+                DataBaseMessages.update( messages );
             }
             else
             {

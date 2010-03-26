@@ -281,6 +281,8 @@
 		
 		<component name="lastManualMark"/>
 		
+		<component name="lastManualMarkByAudit"/>
+		
 		<component name="auditManualMark"/>
 		
 		
@@ -356,6 +358,8 @@
 		
 		<component name="getConfigurableTasks" />
 		
+		<component name="getSharedRepositoryExportServer" />
+		
 	</applicationComponent>
 	
 	<applicationComponent name="CppTestAdmin" description="Administration de CppTest" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.CppTestAdminComponentAccess">
@@ -417,6 +421,48 @@
 		<component name="getHomepageConfig"></component>
 		
 		<component name="saveHomepageConfig"></component>
+		
+	</applicationComponent>
+	
+	<applicationComponent name="sharedRepositoryExport" description="Export for the shared repository" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.sharedrepository.ApplicationExportComponentAccess">
+		
+		<component name="getExportApplication"></component>
+		
+		<component name="getLastJobs"></component>
+		
+		<component name="applicationToExport"></component>
+		
+		<component name="cancelJob"></component>
+		
+		<component name="scheduledJob"></component>
+		
+		<component name="isInProgress"></component>
+		
+	</applicationComponent>
+	
+	<applicationComponent name="sharedRepositoryImport" description="Import reference from the shared repository" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.sharedrepository.ReferenceImportComponentAccess">
+		
+		<component name="importReference"></component>
+		
+		<component name="currentReferenceVersion"></component>
+		
+	</applicationComponent>
+	
+	<applicationComponent name="sharedRepoStats" description="Work around the shared repository stats" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.sharedrepository.SharedRepoStatsComponentAccess">
+		
+		<component name="retrieveStatsByDataType"></component>
+		
+	</applicationComponent>
+	
+	<applicationComponent name="sharedRepoSegmentation" description="Work around the shared repository stats" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.sharedrepository.DoSegmentationComponentAccess">
+		
+		<component name="retrieveAppAndModule"></component>
+		
+		<component name="allCategory"></component>
+		
+		<component name="retrieveLinkedSegments"></component>
+		
+		<component name="updateSegments"></component>
 		
 	</applicationComponent>
 	

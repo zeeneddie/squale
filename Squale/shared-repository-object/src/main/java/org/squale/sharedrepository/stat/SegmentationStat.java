@@ -21,7 +21,7 @@ package org.squale.sharedrepository.stat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.squale.sharedrepository.segment.SegmentEx;
+import org.squale.sharedrepository.export.SegmentEx;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
@@ -38,7 +38,7 @@ public class SegmentationStat
      * The list of segment which compose the reference
      */
     @XStreamImplicit
-    private List<SegmentEx> segmentList;
+    private List<SegmentEx> segmentIdList;
 
     /**
      * Statistics for the module
@@ -57,20 +57,20 @@ public class SegmentationStat
      */
     public SegmentationStat()
     {
-        segmentList = new ArrayList<SegmentEx>();
+        segmentIdList = new ArrayList<SegmentEx>();
         components = new ArrayList<ComponentStat>();
     }
 
     /**
      * Full constructor
      * 
-     * @param pSegmentList List of SegmentEx
+     * @param pSegmentList List of SegmentEx (segment identifier)
      * @param pModule The ModuleStat
      * @param pComponentStats The list of ComponentStat
      */
     public SegmentationStat( List<SegmentEx> pSegmentList, ModuleStat pModule, List<ComponentStat> pComponentStats )
     {
-        segmentList = pSegmentList;
+        segmentIdList = pSegmentList;
         module = pModule;
         components = pComponentStats;
     }
@@ -80,9 +80,19 @@ public class SegmentationStat
      * 
      * @return The list of segment
      */
-    public List<SegmentEx> getSegmentList()
+    public List<SegmentEx> getSegmentIdList()
     {
-        return segmentList;
+        return segmentIdList;
+    }
+
+    /**
+     * Getter method for the attribute segmentList
+     * 
+     * @param pSegmentIdList The list of segmentEx
+     */
+    public void setSegmentIdList( List<SegmentEx> pSegmentIdList )
+    {
+        segmentIdList = pSegmentIdList;
     }
 
     /**
@@ -92,7 +102,7 @@ public class SegmentationStat
      */
     public void addSegment( SegmentEx segment )
     {
-        segmentList.add( segment );
+        segmentIdList.add( segment );
     }
 
     /**

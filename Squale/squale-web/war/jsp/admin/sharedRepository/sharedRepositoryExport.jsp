@@ -19,6 +19,7 @@
 		<logic:notEqual name="sharedRepositoryExportForm" property="inProgressJob" value="true">
 			<html:hidden styleId="isSchedduled" name="sharedRepositoryExportForm" property="scheduledJob" />
 			<af:form action="sharedRepositoryExport.do">
+				<html:hidden styleId="modify" name="sharedRepositoryExportForm" property="modify"/>
 				<div class="frame_border" style="display:none" id="choiceDiv">
 					<h3><bean:message key="shared_repository.export.chooseAppliToExport.title"/></h3>
 					<br/>
@@ -27,8 +28,7 @@
 				<input type="text" onkeyup="filter(this, event);lineStyle();"  name="search" size="60"/>
 				<br/>
 				<br/>
-					<%-- table name="sharedRepositoryExportForm" property="listApp" displayFooter="false" totalLabelPos="bottom" scrollHeight="140"--%>
-					<div style="overflow: auto; height: 180px;">
+					<div class="export_application">
 					<table class = "formulaire">	
 						<thead>
 							<tr>
@@ -37,7 +37,6 @@
 								<th><bean:message key="shared_repository.export.last_export" /></th>
 							</tr>
 						</thead>
-					
 						<tbody>
 							<logic:iterate id="elt" indexId="index" name="sharedRepositoryExportForm" property="listApp">
 								<tr class="" id="li-<%=index%>">
@@ -51,10 +50,11 @@
 							</logic:iterate>
 						</tbody>
 					</table>
-					</div>	
 					<br/>
 					<af:button name="sharedrepository.export.selectAll" onclick="selectAllCB();"></af:button>
 					<af:button name="sharedrepository.export.unSelectAll" onclick="unSelectAllCB();"></af:button>
+					</div>	
+					<br/>
 					<af:buttonBar>
 						<div id="buttonSave" style="display:none" ><af:button name="sharedrepository.export.save" callMethod="export"></af:button></div>
 						<div id="buttonExport" style="display:none" ><af:button name="sharedrepository.export.export" callMethod="export"></af:button></div>
@@ -66,37 +66,41 @@
 				<div class="frame_border" style="display:none" id="listDiv">
 					<h3><bean:message key="shared_repository.export.listAppliToExport.title"/></h3>
 					<bean:size id="listSize" name="sharedRepositoryExportForm" property="selectedApp"/>
-						<div style="overflow: auto; height: 180px;" >
-							<logic:greaterThan name="listSize" value="0">
-								<ul>
+					<div class="export_application">
+						<logic:greaterThan name="listSize" value="0">
+							<ul>
 								<logic:iterate id="app" name="sharedRepositoryExportForm" property="selectedApp" >
 									<li>
 										<bean:write name="app"/>
 									</li>
 								</logic:iterate>
-								</ul>
-							</logic:greaterThan>
-						</div>
-						<af:buttonBar>
-							<af:button name="sharedrepository.export.change" onclick="modif();"></af:button>
-						</af:buttonBar>
+							</ul>
+						</logic:greaterThan>
+					</div>
+					<af:buttonBar>
+						<af:button name="sharedrepository.export.change" callMethod="modify"></af:button>
+					</af:buttonBar>
 					<br/>
 				</div>
 			</af:form>
 			<div class="frame_border">
 				<h3><bean:message key="shared_repository.export.status.title"/></h3>
 				<logic:notEmpty name="sharedRepositoryExportForm" property="failedJob">
+					<bean:write name="sharedRepositoryExportForm" property="failedJob.jobDate"/>
 					<bean:message key="shared_repository.export.failed"/>
 					<br/>
-					<bean:write name="sharedRepositoryExportForm" property="failedJob.jobDate"/>
+				</logic:notEmpty>	
+				<br/>
+				<logic:notEmpty name="sharedRepositoryExportForm" property="nothingToExportJob">
+					<bean:write name="sharedRepositoryExportForm" property="nothingToExportJob.jobDate"/>
+					<bean:message key="shared_repository.export.nothingToExport"/>
+					<br/>
 				</logic:notEmpty>	
 				<br/>
 				<logic:notEmpty name="sharedRepositoryExportForm" property="successfulJob">
 					<bean:message key="shared_repository.export.successful"/>
 					<bean:write name="sharedRepositoryExportForm" property="lastSuccessfulDate"/>
 					<logic:notEmpty name="sharedRepositoryExportForm" property="exportFilePath" >
-						<%--bean:define id="exportPath" name="sharedRepositoryExportForm" property="exportFilePath" type="String"></bean:define--%>
-						<%-- html:link href="<%=exportPath"><bean:write name="sharedRepositoryExportForm" property="exportFileName"/></html:link--%>
 						<html:link indexId="exportFile" href="sharedRepositoryExport.do?action=downloadExportFile"><bean:message key="shared_repository.export.download"/></html:link>
 					</logic:notEmpty>
 				</logic:notEmpty>

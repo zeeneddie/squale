@@ -1,58 +1,110 @@
 --###########################################################
 -- Modifications for the shared repository : import reference
-
-create table Tag_Segmentation (
-    segmentationId bigint not null,
-    TagId bigint not null,
-    primary key (segmentationId, TagId)
+create table Segment (
+    SegmentId bigint not null auto_increment,
+    Name varchar(255) not null,
+    Identifier bigint not null,
+    Deprecated bit not null,
+    CategoryId bigint not null,
+    primary key (SegmentId)
 ) type=InnoDB;
 
-
-create table segmentation (
-    segmentationId bigint not null auto_increment,
-    primary key (segmentationId)
+create table SegmentCategory (
+    CategoryId bigint not null auto_increment,
+    Name varchar(255) not null unique,
+    Identifier bigint not null unique,
+    Type varchar(255) not null,
+    Deprecated bit not null,
+    primary key (CategoryId)
 ) type=InnoDB;
 
-create table shared_repo_stats (
+create table Segment_Module (
+    SegmentId bigint not null,
+    ComponentId bigint not null,
+    primary key (SegmentId, ComponentId)
+) type=InnoDB;
+
+create table Segment_Segmentation (
+    SegmentationId bigint not null,
+    SegmentId bigint not null,
+    primary key (SegmentationId, SegmentId)
+) type=InnoDB;
+
+create table Segmentation (
+    SegmentationId bigint not null auto_increment,
+    primary key (SegmentationId)
+) type=InnoDB;
+
+    
+create table SharedRepoStats (
     StatsId bigint not null auto_increment,
-    elementType varchar(255),
-    dataType varchar(255),
-    dataName varchar(255),
-    language varchar(255),
-    mean float,
-    maxValue float,
-    minValue float,
-    deviation float,
-    elements integer,
-    segmentationId bigint not null,
+    ElementType varchar(255),
+    DataType varchar(255),
+    DataName varchar(255),
+    Language varchar(255),
+    Mean float,
+    MaxValue float,
+    MinValue float,
+    Deviation float,
+    Elements integer,
+    SegmentationId bigint not null,
     primary key (StatsId)
 ) type=InnoDB;
 
-create table squale_params (
+create table SqualeParams (
     SqualeParamsId bigint not null auto_increment,
-    paramKey varchar(255) not null,
-    paramaValue varchar(255) not null,
+    ParamKey varchar(255) not null,
+    ParamaValue varchar(255) not null,
     primary key (SqualeParamsId)
-) type=InnoDB;
+) type=InnoDB;    
 
-alter table Tag_Segmentation 
-    add index FK9CA21067BBF32679 (segmentationId), 
-    add constraint FK9CA21067BBF32679 
-    foreign key (segmentationId) 
-    references segmentation (segmentationId);
 
-alter table Tag_Segmentation 
-    add index FK9CA21067FD9106F6 (TagId), 
-    add constraint FK9CA21067FD9106F6 
-    foreign key (TagId) 
-    references Tag (TagId)
+
+alter table Segment 
+    add index FKD8DD37132D40D50F (CategoryId), 
+    add constraint FKD8DD37132D40D50F 
+    foreign key (CategoryId) 
+    references SegmentCategory (CategoryId)
     on delete cascade;
 
-alter table shared_repo_stats 
-    add index FK2F1F0DACBBF32679 (segmentationId), 
-    add constraint FK2F1F0DACBBF32679 
-    foreign key (segmentationId) 
-    references segmentation (segmentationId)
+alter table Segment_Module 
+    add index FK25FDCD381A146766 (SegmentId), 
+    add constraint FK25FDCD381A146766 
+    foreign key (SegmentId) 
+    references Segment (SegmentId)
+    on delete cascade;
+
+alter table Segment_Module 
+    add index FK25FDCD38D4A7AD7B (ComponentId), 
+    add constraint FK25FDCD38D4A7AD7B 
+    foreign key (ComponentId) 
+    references Component (ComponentId)
+    on delete cascade;
+
+alter table Segment_Segmentation 
+    add index FK4C70016EBBF32679 (SegmentationId), 
+    add constraint FK4C70016EBBF32679 
+    foreign key (SegmentationId) 
+    references Segmentation (SegmentationId)
+    on delete cascade;
+
+alter table Segment_Segmentation 
+    add index FK4C70016E1A146766 (SegmentId), 
+    add constraint FK4C70016E1A146766 
+    foreign key (SegmentId) 
+    references Segment (SegmentId)
+    on delete cascade;
+
+alter table SharedRepoStats 
+    add index FK3C971D48BBF32679 (SegmentationId), 
+    add constraint FK3C971D48BBF32679 
+    foreign key (SegmentationId) 
+    references Segmentation (SegmentationId)
     on delete cascade;
     
+    
+--###########################################################
+-- Modify the squale version
+alter table AuditBO alter SQUALE_VERSION set default '6.0' ;
+
 --###########################################################

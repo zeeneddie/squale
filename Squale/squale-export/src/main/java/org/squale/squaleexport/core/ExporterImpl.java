@@ -51,7 +51,7 @@ import org.squale.sharedrepository.export.ComponentEx;
 import org.squale.sharedrepository.export.DataEx;
 import org.squale.sharedrepository.export.ExporterEx;
 import org.squale.sharedrepository.export.ModuleEx;
-import org.squale.sharedrepository.segment.SegmentEx;
+import org.squale.sharedrepository.export.SegmentEx;
 import org.squale.squalecommon.datatransfertobject.config.AdminParamsDTO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
@@ -68,6 +68,7 @@ import org.squale.squaleexport.daolayer.ApplicationDAOImplEx;
 import org.squale.squaleexport.daolayer.AuditDAOImplEx;
 import org.squale.squaleexport.daolayer.MetricDAOImplEx;
 import org.squale.squaleexport.daolayer.QualityResultDAOImplEx;
+import org.squale.squaleexport.daolayer.SegmentDAOImplEx;
 import org.squale.squaleexport.exception.ExportException;
 import org.squale.squaleexport.message.ExportMessages;
 import org.squale.squaleexport.model.Model;
@@ -153,9 +154,9 @@ class ExporterImpl
     /**
      * {@inheritDoc}
      */
-    public boolean exportData( HashMap<Long, Long> mapAppAuditToExport, List<AdminParamsDTO> mappingList )
+    public ExportStatus exportData( HashMap<Long, Long> mapAppAuditToExport, List<AdminParamsDTO> mappingList )
     {
-        boolean exportSucessful = false;
+        ExportStatus status = ExportStatus.failed;
         try
         {
             // First we initiate the action.
@@ -170,30 +171,36 @@ class ExporterImpl
                 {
                     Long applicationId = applicationIterator.next();
                     Long auditId = mapAppAuditToExport.get( applicationId );
-                    exportFileList.add( exportApplication( applicationId, auditId ));
+                    exportFileList.add( exportApplication( applicationId, auditId ) );
                 }
                 // We put all the export file in a zip and we delete the old zip file
                 zipExportFiles( exportFileList );
-                exportSucessful = true;
+                status = ExportStatus.successful;
+            }
+            else
+            {
+                // Nothing to export
+                status = ExportStatus.nothingToExport;
             }
         }
         catch ( ExportException e )
         {
-            exportSucessful = false;
+            status = ExportStatus.failed;
             LOG.error( ExportMessages.getString( "export.failed" ), e );
         }
-        return exportSucessful;
+        return status;
     }
 
     /**
      * This application do the export for application and audit given in argument
      * 
-     * @param applicationId The id of the application to export 
-     * @param auditId The id of the audit to export 
-     * @return The path of the export file 
+     * @param applicationId The id of the application to export
+     * @param auditId The id of the audit to export
+     * @return The path of the export file
      * @throws ExportException exception occurs during the application export
      */
-    private String exportApplication(Long applicationId, Long auditId) throws ExportException
+    private String exportApplication( Long applicationId, Long auditId )
+        throws ExportException
     {
         String filePath = null;
         try
@@ -222,9 +229,7 @@ class ExporterImpl
                 }
                 catch ( IOException e )
                 {
-                    throw new ExportException(
-                                               ExportMessages.getString( "squale.export.properties.notfound" ),
-                                               e );
+                    throw new ExportException( ExportMessages.getString( "squale.export.properties.notfound" ), e );
                 }
 
                 String squaleExportVersion = prop.get( "squale.export.version" ).toString();
@@ -232,7 +237,6 @@ class ExporterImpl
                 ExporterEx exporter = new ExporterEx( squaleExportVersion, company );
                 // We create the export file
                 filePath = createFile( applicationId, exporter );
-                //exportFileList.add( filePath );
             }
             finally
             {
@@ -267,7 +271,7 @@ class ExporterImpl
             // We recover all the module involved in the audit
             List<AbstractComponentBO> childrenModuleInvolvedInAudit =
                 compoDao.searchModuleByAudit( session, auditId, applicationId );
-
+            
             if ( childrenModuleInvolvedInAudit != null && !childrenModuleInvolvedInAudit.isEmpty() )
             {
 
@@ -372,9 +376,11 @@ class ExporterImpl
                         if ( metricFromTool != null )
                         {
                             String[] split = metricFromTool.split( "\\." );
+                            
                             // We recover the results
                             List<MetricBO> resultList =
                                 metricDao.findMetricByMetricName( session, auditId, split[0], split[1] );
+                            
                             for ( MetricBO metricRes : resultList )
                             {
                                 valueMap.put( metricRes.getMeasure().getComponent().getId(), metricRes.getValue() );
@@ -465,9 +471,8 @@ class ExporterImpl
         ApplicationEx appliToReturn = null;
         AuditEx audit = createAuditEx( auditId );
         List<DataEx> datas = recoverAppData( applicationId );
-        List<SegmentEx> segments = recoverAppSegment( applicationId );
         appliToReturn =
-            new ApplicationEx( Long.toString( applicationId ), segments, audit, datas, new ArrayList<ModuleEx>() );
+            new ApplicationEx( Long.toString( applicationId ), new ArrayList<SegmentEx>(), audit, datas, new ArrayList<ModuleEx>() );
         return appliToReturn;
     }
 
@@ -493,19 +498,6 @@ class ExporterImpl
             throw new ExportException( e );
         }
         return audiEx;
-    }
-
-    /**
-     * This method recover all the segment linked
-     * 
-     * @param applicationId The id of the application
-     * @return The list of segments linked to the the application
-     */
-    private List<SegmentEx> recoverAppSegment( Long applicationId )
-    {
-        List<SegmentEx> segments = new ArrayList<SegmentEx>();
-        // TODO : To be completed when the segment will be implements
-        return segments;
     }
 
     /**
@@ -578,12 +570,26 @@ class ExporterImpl
      * 
      * @param moduleId The module id
      * @return The list of segmentEx linked to the module given in argument
+     * @throws ExportException Exception occurs during the search
      */
-    private List<SegmentEx> recoverModSegment( Long moduleId )
+    private List<SegmentEx> recoverModSegment( Long moduleId ) throws ExportException
     {
-        List<SegmentEx> segments = null;
-        // TODO : To be completed when the segment will be implements
-        return segments;
+        List<SegmentEx> segmentsList = new ArrayList<SegmentEx>();
+        try
+        {
+            SegmentDAOImplEx segDao = SegmentDAOImplEx.getInstance();
+            List<Long> segmentIdentifierList = segDao.retrieveSegmentIdentifierByComponent( session, moduleId );
+            for ( Long identifier : segmentIdentifierList )
+            {
+                SegmentEx segment = new SegmentEx( identifier );
+                segmentsList.add( segment );
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            throw new ExportException( e );
+        }
+        return segmentsList;
     }
 
     /**
@@ -602,13 +608,13 @@ class ExporterImpl
         QualityResultDAOImplEx resultDao = QualityResultDAOImplEx.getInstance();
         try
         {
-            
-            List<QualityResultBO> result = resultDao.findFactor( session, moduleId, auditId );
-            datas.addAll( createDatas(DataType.FACTOR, result));
-            
-            result = resultDao.findCriterium( session, moduleId, auditId );
-            datas.addAll( createDatas(DataType.CRITERIUM, result));
 
+            List<QualityResultBO> result = resultDao.findFactor( session, moduleId, auditId );
+            datas.addAll( createDatas( DataType.FACTOR, result ) );
+
+            result = resultDao.findCriterium( session, moduleId, auditId );
+            datas.addAll( createDatas( DataType.CRITERIUM, result ) );
+                        
             Map<ElementType, ArrayList<Metric>> componentTypesForLanguage =
                 mapLanguageComponentMetric.get( Language.valueOf( language.toUpperCase() ) );
 
@@ -653,8 +659,7 @@ class ExporterImpl
             QualityRuleBO ruleBo = qualityResultBO.getRule();
             String ruleName = ruleBo.getName();
             DataEx data =
-                DataEx.createData( dataType.toString(), ruleName,
-                                   Float.toString( qualityResultBO.getMeanMark() ) );
+                DataEx.createData( dataType.toString(), ruleName, Float.toString( qualityResultBO.getMeanMark() ) );
             datas.add( data );
         }
         return datas;

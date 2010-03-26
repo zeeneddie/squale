@@ -30,8 +30,8 @@ import org.squale.jraf.helper.PersistenceHelper;
 import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
 import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 import org.squale.squalecommon.datatransfertobject.sharedrepository.SharedRepoStatsDTO;
-import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
 import org.squale.squalecommon.enterpriselayer.applicationcomponent.ACMessages;
 import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SharedRepoStatsBO;
 import org.squale.squalecommon.enterpriselayer.facade.sharedrepository.SharedRepoStatsFacade;
@@ -61,20 +61,20 @@ public class SharedRepoStatsComponentAccess
 
     /**
      * <p>
-     * This method recovers the statistics for a given segmentation (which corresponding to the list of tag given in
-     * argument)and data type.
+     * This method recovers the statistics for a given component and data type.
      * </p>
      * <p>
-     * This method return a map of statistics for one segmentation (the one given in argument). This map has for keys
-     * data types and for values the list of statistics linked to the data type for the current segmentation.
+     * This method return a map of statistics for one segmentation (the one linked to the component given in argument).
+     * This map has for keys data types and for values the list of statistics linked to the data type for the current
+     * segmentation.
      * </p>
      * 
-     * @param tagList The list of tag which represents the segmentation
+     * @param component The component for which the method searches the statistics
      * @param dataType The type of data
      * @return A map : data type <=> statistics linked to the data type for the segmentation given in argument
      * @throws JrafEnterpriseException Exception occurs during the retrieve operation
      */
-    public Map<String, SharedRepoStatsDTO> retrieveStatsByDataType( List<TagDTO> tagList, DataType dataType )
+    public Map<String, SharedRepoStatsDTO> retrieveStatsByDataType( ComponentDTO component, DataType dataType )
         throws JrafEnterpriseException
     {
         ISession session;
@@ -82,8 +82,11 @@ public class SharedRepoStatsComponentAccess
         try
         {
             session = PERSISTENTPROVIDER.getSession();
+            
+            
+            
             // we retrieve the all the statistics for the current segmentation
-            List<SharedRepoStatsDTO> retrievedStatsList = SharedRepoStatsFacade.retrieveStats( session, tagList );
+            List<SharedRepoStatsDTO> retrievedStatsList = SharedRepoStatsFacade.retrieveStats( session, component );
             // We create the map to return : data type <=> statistics linked to the data type
             for ( SharedRepoStatsDTO sharedRepoStatsDTO : retrievedStatsList )
             {

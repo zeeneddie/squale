@@ -16,60 +16,53 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Squale.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.squale.squaleexport.object;
+package org.squale.sharedrepository.segmentref;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
- * Segment class used for the export
+ * This class represent a segment reference
  */
-@XStreamAlias( "segment" )
-public class SegmentEx
+@XStreamAlias( "segments-reference" )
+public class SegmentsReference
 {
 
     /**
-     * The name of the segment
+     * The list of category
      */
-    @XStreamAsAttribute
-    private String name;
+    @XStreamImplicit
+    private List<SegmentCategoryRef> categoryList;
 
     /**
-     * Default constructor
+     * Constructor
      */
-    public SegmentEx()
+    public SegmentsReference()
     {
-
+        categoryList = new ArrayList<SegmentCategoryRef>();
     }
 
     /**
-     * Full constructor
-     *  
-     * @param pName The name of the segment
-     */
-    public SegmentEx( String pName )
-    {
-        name = pName;
-    }
-
-    /**
-     * Getter method for the attribute name
+     * Getter method for the attribute categoryList
      * 
-     * @return The attribute name
+     * @return The list of category
      */
-    public String getName()
+    public List<SegmentCategoryRef> getCategoryList()
     {
-        return name;
+        return categoryList;
     }
 
     /**
-     * Getter method for the attribute name
+     * Add a category to the list of category
      * 
-     * @param pName The attribute name
+     * @param pCategory The category to add
      */
-    public void setName( String pName )
+    public void addCategory( SegmentCategoryRef pCategory )
     {
-        name = pName;
+        categoryList.add( pCategory );
     }
 
 }

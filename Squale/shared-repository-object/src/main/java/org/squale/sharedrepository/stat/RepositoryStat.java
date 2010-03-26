@@ -21,6 +21,8 @@ package org.squale.sharedrepository.stat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.squale.sharedrepository.segmentref.SegmentsReference;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
@@ -45,6 +47,13 @@ public class RepositoryStat
     private String sharedRepositoryVersion;
 
     /**
+     * The current segment reference
+     */
+    @XStreamAsAttribute
+    @XStreamAlias( "segments-reference" )
+    private SegmentsReference segmentReference;
+    
+    /**
      * The list of segmentation
      */
     @XStreamImplicit
@@ -63,12 +72,14 @@ public class RepositoryStat
      * 
      * @param pVersion The reference version
      * @param pSharedRepositoryVersion The shared repository version
+     * @param segRef The segment reference
      * @param pSegmentationList The segmentation list
      */
-    public RepositoryStat( int pVersion, String pSharedRepositoryVersion, List<SegmentationStat> pSegmentationList )
+    public RepositoryStat( int pVersion, String pSharedRepositoryVersion, SegmentsReference segRef ,List<SegmentationStat> pSegmentationList )
     {
         version = pVersion;
         sharedRepositoryVersion = pSharedRepositoryVersion;
+        segmentReference = segRef;
         segmentationList = pSegmentationList;
     }
 
@@ -130,6 +141,26 @@ public class RepositoryStat
     public void addSegmentation( SegmentationStat segmentation )
     {
         segmentationList.add( segmentation );
+    }
+
+    /**
+     * Getter method for the attribute segmentReference
+     * 
+     * @return The segmentRefrence
+     */
+    public SegmentsReference getSegmentReference()
+    {
+        return segmentReference;
+    }
+
+    /**
+     * Setter method for the attribute segmentReference
+     * 
+     * @param pSegmentReference The new segment reference
+     */
+    public void setSegmentReference( SegmentsReference pSegmentReference )
+    {
+        segmentReference = pSegmentReference;
     }
 
 }

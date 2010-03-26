@@ -24,16 +24,12 @@ import java.util.Collection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.helper.PersistenceHelper;
 import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
-import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.datatransfertobject.tag.TagCategoryDTO;
 import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
-import org.squale.squalecommon.enterpriselayer.facade.component.ProjectFacade;
 import org.squale.squalecommon.enterpriselayer.facade.tag.TagFacade;
 
 /**
@@ -66,7 +62,7 @@ public class TagAdminTagComponentAccess
     public TagAdminTagComponentAccess()
     {
     }
-    
+
     /**
      * Retrieves the tag from the database with its Id
      * 
@@ -74,12 +70,12 @@ public class TagAdminTagComponentAccess
      * @return the tag if it exists, null otherwise
      * @throws JrafEnterpriseException if an error occurs
      */
-    public TagDTO getTag ( Long pTagId )
+    public TagDTO getTag( Long pTagId )
         throws JrafEnterpriseException
     {
         return TagFacade.getTag( pTagId );
     }
-    
+
     /**
      * Retrieves the tags from the given name
      * 
@@ -87,12 +83,12 @@ public class TagAdminTagComponentAccess
      * @return the list of tag if there is at least one, null otherwise
      * @throws JrafEnterpriseException if an error occurs
      */
-    public Collection<TagDTO> getTagsByName ( String[] pStringFirstChars )
+    public Collection<TagDTO> getTagsByName( String[] pStringFirstChars )
         throws JrafEnterpriseException
     {
         return TagFacade.getTagsByName( pStringFirstChars );
     }
-    
+
     /**
      * Retrieves all the existing tags
      * 
@@ -104,7 +100,7 @@ public class TagAdminTagComponentAccess
     {
         return TagFacade.getTags();
     }
-    
+
     /**
      * Retrieves all the existing tag categories
      * 
@@ -116,7 +112,7 @@ public class TagAdminTagComponentAccess
     {
         return TagFacade.getTagCategories();
     }
-    
+
     /**
      * Retrieves the tag categories from the given name
      * 
@@ -124,12 +120,12 @@ public class TagAdminTagComponentAccess
      * @return the list of tag categories if there is at least one, null otherwise
      * @throws JrafEnterpriseException if an error occurs
      */
-    public Collection<TagCategoryDTO> getTagCategoriesByName ( String pStringFirstChars )
+    public Collection<TagCategoryDTO> getTagCategoriesByName( String pStringFirstChars )
         throws JrafEnterpriseException
     {
         return TagFacade.getTagCategoriesByName( pStringFirstChars );
     }
-    
+
     /**
      * creates a Tag in the database from a given object tag
      * 
@@ -137,12 +133,12 @@ public class TagAdminTagComponentAccess
      * @return the TagDTO once it is created
      * @throws JrafEnterpriseException exception JRAF
      */
-    public TagDTO createTag ( TagDTO pTagDTO )
+    public TagDTO createTag( TagDTO pTagDTO )
         throws JrafEnterpriseException
     {
         return TagFacade.createTag( pTagDTO );
     }
-    
+
     /**
      * modifies a Tag in the database from a given object tag
      * 
@@ -150,12 +146,12 @@ public class TagAdminTagComponentAccess
      * @return the TagDTO once it has been modified
      * @throws JrafEnterpriseException exception JRAF
      */
-    public TagDTO modifyTag ( TagDTO pTagDTO )
+    public TagDTO modifyTag( TagDTO pTagDTO )
         throws JrafEnterpriseException
     {
         return TagFacade.modifyTag( pTagDTO );
     }
-    
+
     /**
      * creates a TagCategory in the database from a given object tagCategory
      * 
@@ -163,12 +159,12 @@ public class TagAdminTagComponentAccess
      * @return the TagCategoryDTO once it is created
      * @throws JrafEnterpriseException exception JRAF
      */
-    public TagCategoryDTO createTagCategory ( TagCategoryDTO pTagCategoryDTO )
+    public TagCategoryDTO createTagCategory( TagCategoryDTO pTagCategoryDTO )
         throws JrafEnterpriseException
     {
         return TagFacade.createTagCategory( pTagCategoryDTO );
     }
-    
+
     /**
      * modifies a TagCategory in the database from a given object tag category
      * 
@@ -176,12 +172,12 @@ public class TagAdminTagComponentAccess
      * @return the TagCategoryDTO once it has been modified
      * @throws JrafEnterpriseException exception JRAF
      */
-    public TagCategoryDTO modifyTagCategory ( TagCategoryDTO pTagCategoryDTO )
+    public TagCategoryDTO modifyTagCategory( TagCategoryDTO pTagCategoryDTO )
         throws JrafEnterpriseException
     {
         return TagFacade.modifyTagCategory( pTagCategoryDTO );
     }
-    
+
     /**
      * deletes one or more tags from the database with the naves given as a parameter
      * 
@@ -189,12 +185,12 @@ public class TagAdminTagComponentAccess
      * @return boolean if the number of removals from the database equals the number wanted
      * @throws JrafEnterpriseException exception JRAF
      */
-    public Boolean deleteTags ( Collection<String> pNamesToDelete )
+    public Boolean deleteTags( Collection<String> pNamesToDelete )
         throws JrafEnterpriseException
     {
         return TagFacade.deleteTags( pNamesToDelete );
     }
-    
+
     /**
      * deletes one or more tag categories from the database with the naves given as a parameter
      * 
@@ -202,7 +198,7 @@ public class TagAdminTagComponentAccess
      * @return boolean if the number of removals from the database equals the number wanted
      * @throws JrafEnterpriseException exception JRAF
      */
-    public Boolean deleteTagCategories ( Collection<String> pNamesToDelete )
+    public Boolean deleteTagCategories( Collection<String> pNamesToDelete )
         throws JrafEnterpriseException
     {
         return TagFacade.deleteTagCategories( pNamesToDelete );

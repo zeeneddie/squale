@@ -20,7 +20,6 @@ package org.squale.squalix.core.export;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -31,13 +30,18 @@ import org.squale.jraf.commons.exception.JrafPersistenceException;
 import org.squale.jraf.helper.PersistenceHelper;
 import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
+import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
 import org.squale.squalecommon.daolayer.config.AdminParamsDAOImpl;
 import org.squale.squalecommon.daolayer.config.ServeurDAOImpl;
 import org.squale.squalecommon.daolayer.sharedrepository.ApplicationExportDAOImpl;
+import org.squale.squalecommon.daolayer.sharedrepository.segment.SegmentDAOImpl;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.ApplicationExportBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.segment.SegmentBO;
 import org.squale.squalix.messages.Messages;
 
 /**
@@ -74,12 +78,8 @@ public class Export
                 boolean jobScheduled = ExportUtils.isJobScheduled( session );
                 if ( goodServer && jobScheduled )
                 {
-                    // This list contain the id of all the audit marked as to be purged or obsoleted. So we will exclude
-                    // them from the export
-                    HashSet<Long> setAuditIdToPurge = excludedAudit( session, siteId );
-
                     // We search now all the audit to export
-                    HashMap<Long, Long> mapAppAuditToExport = auditToExport( session, setAuditIdToPurge );
+                    HashMap<Long, Long> mapAppAuditToExport = auditToExport( session );
 
                     ExportThread export = new ExportThread( mapAppAuditToExport );
                     exportThread = new Thread( export );
@@ -102,7 +102,7 @@ public class Export
             }
             finally
             {
-                if(session!=null)
+                if ( session != null )
                 {
                     session.closeSession();
                 }
@@ -110,9 +110,9 @@ public class Export
         }
         catch ( JrafPersistenceException e )
         {
-            String  message = Messages.getString( "export.launch.failed" );
+            String message = Messages.getString( "export.launch.failed" );
             LOGGER.error( message, e );
-        }        
+        }
         return exportThread;
     }
 
@@ -146,10 +146,6 @@ public class Export
                     goodServer = true;
                 }
             }
-            else
-            {
-                LOGGER.warn( Messages.getString( "export.config.server" ) );
-            }
         }
         catch ( JrafDaoException e )
         {
@@ -160,60 +156,19 @@ public class Export
     }
 
     /**
-     * This method list all the audit which are marked as to be purged or obsoleted
-     * 
-     * @param session The hibernate session
-     * @param siteId The id of the Squalix site
-     * @return The list of audit id to exclude
-     * @throws JrafEnterpriseException Exception occurs during the search of the excluded audit for the export
-     */
-    private HashSet<Long> excludedAudit( ISession session, long siteId )
-        throws JrafEnterpriseException
-
-    {
-        // Set of Audit Id that will be exclude from the export
-        HashSet<Long> setAuditIdToPurge;
-        try
-        {
-            // Audit marked to purge
-            List<AuditBO> listAuditsToPurge =
-                (List<AuditBO>) AuditDAOImpl.getInstance().findDeleted( session, siteId, new ArrayList() );
-            // Obsoleted audit
-            List<Object[]> obsoleteAudit = AuditDAOImpl.getInstance().findObsoleteAuditsToDelete( session, siteId,
-                                                                                                new ArrayList() );
-            for ( Object[] objects : obsoleteAudit )
-            {
-                listAuditsToPurge.add( ( AuditBO ) objects[0] );
-            }
-
-            setAuditIdToPurge = new HashSet<Long>();
-            for ( AuditBO audit : listAuditsToPurge )
-            {
-                setAuditIdToPurge.add( audit.getId() );
-            }
-        }
-        catch ( JrafDaoException e )
-        {
-            String message = Messages.getString( "export.init.excludedAudit.error" );
-            throw new JrafEnterpriseException( message, e );
-        }
-        return setAuditIdToPurge;
-    }
-
-    /**
      * This method recover the list of audit to export
      * 
      * @param session The hibernate session
-     * @param setAuditIdToPurge The list of audit id to exclude
-     * @return the list of audit/application to export
+     * @return the list of audit (technical id)/application (technical id) to export
      * @throws JrafEnterpriseException Exception occurs during the search
      */
-    private HashMap<Long, Long> auditToExport( ISession session, HashSet<Long> setAuditIdToPurge )
+    private HashMap<Long, Long> auditToExport( ISession session )
         throws JrafEnterpriseException
     {
         HashMap<Long, Long> mapAppAuditToExport;
         try
         {
+            // We retrieve all the application to export
             ApplicationExportBO exampleBo = new ApplicationExportBO();
             exampleBo.setToExport( true );
             ApplicationExportDAOImpl dao = ApplicationExportDAOImpl.getInstance();
@@ -226,30 +181,17 @@ public class Export
                 applicationExportBO.setToExport( false );
                 dao.save( session, applicationExportBO );
             }
-            AuditDAOImpl auditDao = AuditDAOImpl.getInstance();
             mapAppAuditToExport = new HashMap<Long, Long>();
+            List<String> notExported = new ArrayList<String>();
             for ( ApplicationExportBO applicationExportBO : listAppToExport )
             {
-                // We search all the audit successful for the application ordered by date
-                List<AuditBO> allSuccessfulAudit =
-                    auditDao.lastSuccesfullAudit( session, applicationExportBO.getApplication().getId() );
-                // If there is at least one successful audit then we check if this audit is in the list of audit to
-                // purge
-                if ( allSuccessfulAudit != null && allSuccessfulAudit.size() > 0 )
-                {
-                    boolean valid = false;
-                    int index = 0;
-                    while ( !valid )
-                    {
-                        AuditBO audit = allSuccessfulAudit.get( index );
-                        if ( !setAuditIdToPurge.contains( audit.getId() ) )
-                        {
-                            valid = true;
-                            mapAppAuditToExport.put( applicationExportBO.getApplication().getId(), audit.getId() );
-                        }
-                        index++;
-                    }
-                }
+                ApplicationBO application = applicationExportBO.getApplication();
+                auditForApplication( session, application, mapAppAuditToExport, notExported );
+
+            }
+            if ( notExported.size() > 0 )
+            {
+                ExportUtils.applicationNotExported( notExported );
             }
         }
         catch ( JrafDaoException e )
@@ -258,6 +200,88 @@ public class Export
             throw new JrafEnterpriseException( message, e );
         }
         return mapAppAuditToExport;
+    }
+
+    /**
+     * This method searches for the application given in argument the audit that will be exported. If one valid audit is
+     * found then it is add to the map of application to export. else the application name is add to the list of
+     * application will not be exported.
+     * 
+     * @param session The hibernate session
+     * @param application the application for which we search the audit
+     * @param mapAppAuditToExport The map of audit to export
+     * @param notExported The list of application that will not be exported
+     * @throws JrafDaoException Exception occurs during the audit search
+     */
+    private void auditForApplication( ISession session, ApplicationBO application,
+                                      HashMap<Long, Long> mapAppAuditToExport, List<String> notExported )
+        throws JrafDaoException
+    {
+        // We search all the audit successful for the application ordered by date
+        AuditDAOImpl auditDao = AuditDAOImpl.getInstance();
+        List<AuditBO> allSuccessfulAudit = auditDao.succesfullAudit( session, application.getId() );
+
+        // If there is at least one successful audit then we check if this audit is in the list of audit to
+        // purge
+        if ( allSuccessfulAudit != null && allSuccessfulAudit.size() > 0 )
+        {
+            boolean isValid = false;
+            int auditIndex = 0;
+            while ( !isValid && allSuccessfulAudit.size() > auditIndex )
+            {
+                AuditBO audit = allSuccessfulAudit.get( auditIndex );
+
+                if ( !application.isAuditObsolete( audit ) )
+                {
+                    isValid = true;
+                    boolean hasSegment = isSegmented( session, audit );
+                    if ( hasSegment )
+                    {
+                        mapAppAuditToExport.put( application.getId(), audit.getId() );
+                    }
+                    else
+                    {
+                        isValid = false;
+                    }
+                }
+                auditIndex++;
+            }
+            if ( !isValid )
+            {
+                notExported.add( application.getName() );
+            }
+        }
+    }
+
+    /**
+     * This method verifies that all the modules linked to the audit are segmented
+     * 
+     * @param session The hibernate session
+     * @param audit The audit
+     * @return True if all the module linked to the audit has segment
+     * @throws JrafDaoException exception occurs during the search
+     */
+    private boolean isSegmented( ISession session, AuditBO audit )
+        throws JrafDaoException
+    {
+        // Retrieve of the module linked to the audit
+        ProjectDAOImpl componentDao = ProjectDAOImpl.getInstance();
+        List<ProjectBO> modulesList = componentDao.getModuleslinkedToAudit( session, audit );
+        SegmentDAOImpl segDao = SegmentDAOImpl.getInstance();
+        // Each module should had segment
+        int moduleIndex = 0;
+        boolean hasSegment = true;
+        while ( hasSegment && moduleIndex < modulesList.size() )
+        {
+            ProjectBO module = modulesList.get( moduleIndex );
+            List<SegmentBO> allLinkedSegment = segDao.findModuleSegments( session, module.getId() );
+            if ( allLinkedSegment.size() == 0 )
+            {
+                hasSegment = false;
+            }
+            moduleIndex++;
+        }
+        return hasSegment;
     }
 
 }

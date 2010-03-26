@@ -29,11 +29,13 @@ import org.squale.jraf.spi.enterpriselayer.IFacade;
 import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.daolayer.sharedrepository.SegmentationDAOImpl;
 import org.squale.squalecommon.daolayer.sharedrepository.SharedRepoStatsDAOImpl;
+import org.squale.squalecommon.daolayer.sharedrepository.segment.SegmentDAOImpl;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 import org.squale.squalecommon.datatransfertobject.sharedrepository.SharedRepoStatsDTO;
-import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
 import org.squale.squalecommon.datatransfertobject.transform.sharedrepository.SharedRepoStatsTransform;
 import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SegmentationBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SharedRepoStatsBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.segment.SegmentBO;
 
 /**
  * This class is the facade linked to the {@link SharedRepoStatsBO}
@@ -80,21 +82,28 @@ public final class SharedRepoStatsFacade
     }
 
     /**
-     * This methods retrieve the statistics which are linked to the segmentation (tag list) given in argument
+     * This methods retrieve the statistics which are linked the component given in argument
      * 
      * @param session The hibernate session
-     * @param tagList the list of tags which represent the segmentation
+     * @param component The component for which the method searches the statistics
      * @return The list of statistics linked to the segmentation
      * @throws JrafEnterpriseException Exception occurs during the retrieve work
      */
-    public static List<SharedRepoStatsDTO> retrieveStats( ISession session, List<TagDTO> tagList )
+    public static List<SharedRepoStatsDTO> retrieveStats( ISession session, ComponentDTO component )
         throws JrafEnterpriseException
     {
         List<SharedRepoStatsDTO> listStatsDto = new ArrayList<SharedRepoStatsDTO>();
         try
         {
+            // The method retrieves the segment linked to the component
+            SegmentDAOImpl segmentDao = SegmentDAOImpl.getInstance();
+            List<SegmentBO> segmentlist = segmentDao.findModuleSegments(session, component.getID() );
+            
+            // The method retrieves the segmentation corresponding to the list of segment
             SegmentationDAOImpl dao = SegmentationDAOImpl.getInstance();
-            List<SegmentationBO> segmentList = (List<SegmentationBO>) dao.findAll( session );
+            List<SegmentationBO> segmentList = (List<SegmentationBO>) dao.findContainsSegments( session, segmentlist );
+            
+            
             if ( segmentList.size() > 0 )
             {
                 SegmentationBO segmentationBo = segmentList.get( 0 );
@@ -107,7 +116,11 @@ public final class SharedRepoStatsFacade
         }
         catch ( JrafDaoException e )
         {
-            FacadeHelper.convertException( e, "create" );
+            FacadeHelper.convertException( e, "retrieveStats" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, SharedRepoStatsFacade.class.getName() + ".retrieveStats" );
         }
         return listStatsDto;
     }

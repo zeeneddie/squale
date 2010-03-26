@@ -34,6 +34,9 @@ public class SharedRepositoryExportApplicationForm
      */
     private static final long serialVersionUID = 3686628389255608416L;
 
+    /**
+     * Last export identifier
+     */
     private long applicationLastExportId;
 
     /**
@@ -59,11 +62,6 @@ public class SharedRepositoryExportApplicationForm
         super();
     }
     
-    public void init()
-    {
-        
-    }
-
     /**
      * Full constructor
      * 

@@ -28,14 +28,14 @@ import org.squale.squaleweb.messages.MessageProvider;
  * Messages enregistrés dans la base de données Cette classe permet de stocker sous la forme d'un cache les messages
  * dynamiques enregistrés dans la base de données
  */
-public class DataBaseMessages
+public final class DataBaseMessages
     extends Observable
 {
     /** Objet observable */
-    static private DataBaseMessages mInstance = new DataBaseMessages();
+    private static DataBaseMessages mInstance = new DataBaseMessages();
 
     /** Messages */
-    static private MessageProvider mMessages = new MessageProvider()
+    private static MessageProvider mMessages = new MessageProvider()
     {
         public String getMessage( String pLang, String pKey )
         {

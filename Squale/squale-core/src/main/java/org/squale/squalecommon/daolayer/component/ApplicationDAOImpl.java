@@ -25,11 +25,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.type.Type;
-
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
@@ -194,7 +191,6 @@ public class ApplicationDAOImpl
         return coll.size();
     }
 
-
     /**
      * Retourne les projets taggés par un tag donné
      * 
@@ -207,21 +203,23 @@ public class ApplicationDAOImpl
         throws JrafDaoException
     {
         String whereClause = "where ";
-        if (ptagIds.length>1){
+        if ( ptagIds.length > 1 )
+        {
             whereClause += ptagIds[0] + " in elements(" + getAlias() + ".tags)";
             for ( int i = 1; i < ptagIds.length; i++ )
             {
                 whereClause += " and " + ptagIds[i] + " in elements(" + getAlias() + ".tags)";
             }
-        } else {
+        }
+        else
+        {
             whereClause += ptagIds[0] + " in elements(" + getAlias() + ".tags)";
         }
-        
 
         Collection ret = findWhere( pSession, whereClause );
         return ret;
     }
-    
+
     /**
      * Permet de connaitre les applications pour un site
      * 
@@ -285,30 +283,30 @@ public class ApplicationDAOImpl
      * @return une liste d'applications ayant comme statut pStatusArray
      * @throws JrafDaoException si une erreur à lieu
      */
-    public List findWhereStatus( ISession pSession, int[] pStatusArray)
-    	throws JrafDaoException
+    public List findWhereStatus( ISession pSession, int[] pStatusArray )
+        throws JrafDaoException
     {
-    	if ((pStatusArray == null) || (pStatusArray.length == 0))
-    	{
-    		LOG.error("pStatusArray est vide!");
-    	}
-    	StringBuffer inClause = new StringBuffer(); 
-    	for (int i = 0; i < pStatusArray.length; i++)
-    	{
-    		if (i > 0)
-    		{
-    			inClause.append(", ");
-    		}
-    		inClause.append(pStatusArray[i]);
-    	}
+        if ( ( pStatusArray == null ) || ( pStatusArray.length == 0 ) )
+        {
+            LOG.error( "pStatusArray est vide!" );
+        }
+        StringBuffer inClause = new StringBuffer();
+        for ( int i = 0; i < pStatusArray.length; i++ )
+        {
+            if ( i > 0 )
+            {
+                inClause.append( ", " );
+            }
+            inClause.append( pStatusArray[i] );
+        }
         String whereClause = "where ";
         whereClause += getAlias() + ".status in (" + inClause.toString() + ")";
         whereClause += " order by lower(" + getAlias() + ".name)";
         LOG.info( "query(findWhereStatus) = " + whereClause );
         List ret = (List) findWhere( pSession, whereClause );
         return ret;
-    }    
-    
+    }
+
     /**
      * Permet de recuperer tous les projets ayant un caractère public
      * 
@@ -465,47 +463,34 @@ public class ApplicationDAOImpl
      * @throws JrafDaoException si une erreur à lieu
      */
     public ApplicationBO loadByAuditId( ISession pSession, Long pAuditId )
-	    throws JrafDaoException
-	{
-    	ApplicationBO app = null;
-	    SessionImpl sessionHibernate = (SessionImpl) pSession;
-    	try
-    	{
-    		String fullquery = "SELECT app_comp.ComponentId" +
-    				", app_comp.Excluded" +
-    				", app_comp.Justification" +
-    				", app_comp.Name" +
-    				", app_comp.Parent" +
-    				", app_comp.ProjectId" +
-    				", app_comp.AuditFrequency" +
-    				", app_comp.ResultsStorageOptions" +
-    				", app_comp.Status" +
-    				", app_comp.PublicApplication" +
-    				", app_comp.LastUpdate" +
-    				", app_comp.EXTERNAL_DEV" +
-    				", app_comp.IN_PRODUCTION" +
-    				", app_comp.lastUser" +
-    				", app_comp.Serveur" +
-    				", app_comp.QualityApproachOnStart" +
-    				", app_comp.InInitialDev" +
-    				", app_comp.GlobalCost" +
-    				", app_comp.DevCost" +
-    				" FROM Component app_comp";
-    		fullquery += " WHERE app_comp.subclass = 'Application'" +
-    				" AND EXISTS " +
-    				"( SELECT 'X' FROM Components_Audits compaudits" +
-    				" WHERE app_comp.ComponentId = compaudits.ComponentId AND compaudits.AuditId = ?)";
-    	    Query q = sessionHibernate.getSession().createSQLQuery(fullquery).addEntity(ApplicationBO.class);
-    	    q.setLong(0, pAuditId);
-    	    app = (ApplicationBO) q.uniqueResult();
-    	}
-	    catch ( HibernateException e )
+        throws JrafDaoException
+    {
+        ApplicationBO app = null;
+        SessionImpl sessionHibernate = (SessionImpl) pSession;
+        try
+        {
+            String fullquery =
+                "SELECT app_comp.ComponentId" + ", app_comp.Excluded" + ", app_comp.Justification" + ", app_comp.Name"
+                    + ", app_comp.Parent" + ", app_comp.ProjectId" + ", app_comp.AuditFrequency"
+                    + ", app_comp.ResultsStorageOptions" + ", app_comp.Status" + ", app_comp.PublicApplication"
+                    + ", app_comp.LastUpdate" + ", app_comp.EXTERNAL_DEV" + ", app_comp.IN_PRODUCTION"
+                    + ", app_comp.lastUser" + ", app_comp.Serveur" + ", app_comp.QualityApproachOnStart"
+                    + ", app_comp.InInitialDev" + ", app_comp.GlobalCost" + ", app_comp.DevCost"
+                    + " FROM Component app_comp";
+            fullquery +=
+                " WHERE app_comp.subclass = 'Application'" + " AND EXISTS "
+                    + "( SELECT 'X' FROM Components_Audits compaudits"
+                    + " WHERE app_comp.ComponentId = compaudits.ComponentId AND compaudits.AuditId = ?)";
+            Query q = sessionHibernate.getSession().createSQLQuery( fullquery ).addEntity( ApplicationBO.class );
+            q.setLong( 0, pAuditId );
+            app = (ApplicationBO) q.uniqueResult();
+        }
+        catch ( HibernateException e )
         {
             throw new JrafDaoException( e );
         }
-	    return app;
-	}
-    
+        return app;
+    }
 
     /**
      * @param pSession la session hibernate
@@ -687,4 +672,26 @@ public class ApplicationDAOImpl
         whereClause.append( selectWhereAuditIn );
         return findWhere( pSession, whereClause.toString() );
     }
+
+    /**
+     * This method retrieves each application available for the shared repository. That means that these applications have
+     * at least one successfull audit and are not hide. This method return a list of array. Each array represent one
+     * available application
+     * 
+     * @param session The hibernate session
+     * @return A list of array [application technical id (Long), application name (String)]
+     * @throws JrafDaoException Exception occurs during the search in the database
+     */
+    public List<Object[]> getAvailableForSharedRepository( ISession session )
+        throws JrafDaoException
+    {
+        List<Object[]> listToReturn = null;
+        StringBuffer request = new StringBuffer( "Select app.id, app.name from ApplicationBO app where " );
+        request.append( "app.id in (select app2.id from ApplicationBO app2, AuditBO audit where audit.components.id = app2.id and audit.status = " );
+        request.append( AuditBO.TERMINATED );
+        request.append( " ) and app.userList is not empty " );
+        listToReturn = find( session, request.toString() );
+        return listToReturn;
+    }
+
 }

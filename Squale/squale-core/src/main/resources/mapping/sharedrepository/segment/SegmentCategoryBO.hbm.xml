@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="SegmentCategory" name="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.segment.SegmentCategoryBO">
+    <id unsaved-value="-1" name="technicalId" type="long" column="CategoryId" length="19">
+      <generator class="native">
+        <param name="sequence">segmentCategory_sequence</param>
+      </generator>
+    </id>
+    <property name="categoryName" column="Name" update="true" unique="true" not-null="true" type="string" insert="true"/>
+    <property name="identifier" column="Identifier" update="true" unique="true" not-null="true" type="long" insert="true"/>
+    <property name="type" column="Type" update="true" not-null="true" type="string" insert="true"/>
+    <property name="deprecated" column="Deprecated" update="true" not-null="true" type="boolean" insert="true"/>
+    <set inverse="true" lazy="true" name="segmentList">
+      <key column="CategoryId"/>
+      <one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.segment.SegmentBO"/>
+    </set>
+  </class>
+</hibernate-mapping>

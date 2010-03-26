@@ -27,7 +27,6 @@ import java.util.Iterator;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-
 import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 import org.squale.squalecommon.util.mapping.Mapping;
 

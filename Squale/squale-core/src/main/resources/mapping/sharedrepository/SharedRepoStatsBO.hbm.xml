@@ -2,21 +2,21 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class table="shared_repo_stats" name="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SharedRepoStatsBO">
+  <class table="SharedRepoStats" name="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SharedRepoStatsBO">
     <id unsaved-value="-1" name="statsId" type="long" column="StatsId" length="19">
       <generator class="native">
-        <param name="sequence">shared_repo_stats_sequence</param>
+        <param name="sequence">sharedRepoStats_sequence</param>
       </generator>
     </id>
-    <property name="elementType" column="elementType" update="true" type="string" insert="true"/>
-    <property name="dataType" column="dataType" update="true" type="string" insert="true"/>
-    <property name="dataName" column="dataName" update="true" type="string" insert="true"/>
-    <property name="language" column="language" update="true" type="string" insert="true"/>
-    <property name="mean" column="mean" update="true" type="float" insert="true"/>
-    <property name="max" column="maxValue" update="true" type="float" insert="true"/>
-    <property name="min" column="minValue" update="true" type="float" insert="true"/>
-    <property name="deviation" column="deviation" update="true" type="float" insert="true"/>
-    <property name="elements" column="elements" update="true" type="integer" insert="true"/>
-    <many-to-one insert="true" unique="false" column="segmentationId" cascade="all" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SegmentationBO" not-null="true" name="segmentation"/>
+    <property name="elementType" column="ElementType" update="true" type="string" insert="true"/>
+    <property name="dataType" column="DataType" update="true" type="string" insert="true"/>
+    <property name="dataName" column="DataName" update="true" type="string" insert="true"/>
+    <property name="language" column="Language" update="true" type="string" insert="true"/>
+    <property name="mean" column="Mean" update="true" type="float" insert="true"/>
+    <property name="max" column="MaxValue" update="true" type="float" insert="true"/>
+    <property name="min" column="MinValue" update="true" type="float" insert="true"/>
+    <property name="deviation" column="Deviation" update="true" type="float" insert="true"/>
+    <property name="elements" column="Elements" update="true" type="integer" insert="true"/>
+    <many-to-one insert="true" unique="false" column="SegmentationId" cascade="all" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SegmentationBO" not-null="true" name="segmentation"/>
   </class>
 </hibernate-mapping>

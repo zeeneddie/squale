@@ -18,7 +18,6 @@
  */
 package org.squale.squaleweb.transformer.sharedrepository;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +58,6 @@ public class ExportTransformer
         ArrayList<ApplicationExportDTO> applications = (ArrayList<ApplicationExportDTO>) object[0];
         SharedRepositoryExportForm currentForm = (SharedRepositoryExportForm) form;
         ArrayList<SharedRepositoryExportApplicationForm> applicationList = currentForm.getListApp();
-
         ApplicationExportDTO appDto;
         for ( SharedRepositoryExportApplicationForm applicationForm : applicationList )
         {
@@ -116,19 +114,22 @@ public class ExportTransformer
         List<JobDTO> job = (List<JobDTO>) object[1];
         for ( JobDTO jobDTO : job )
         {
-            if(jobDTO.getJobStatus().equals( JobStatus.FAILED.getLabel() ))
+            String currentJobStatus = jobDTO.getJobStatus();
+            if( JobStatus.FAILED.same( currentJobStatus ))
             {
                 currentForm.setFailedJob( jobDTO );
             }
-            else if(jobDTO.getJobStatus().equals( JobStatus.SUCCESSFUL.getLabel() ))
+            else if(JobStatus.NOTHING_TO_EXPORT.same( currentJobStatus ))
+            {
+                currentForm.setNothingToExportJob( jobDTO );
+            }
+            else if(JobStatus.SUCCESSFUL.same( currentJobStatus ))
             {
                 currentForm.setSuccessfulJob( jobDTO );
                 SimpleDateFormat formater = new SimpleDateFormat( "dd/MM/yyyy" );
                 currentForm.setLastSuccessfulDate( formater.format( jobDTO.getJobDate() ) );
-                
-                
             }
-            else if(jobDTO.getJobStatus().equals( JobStatus.SCHEDULED.getLabel() ))
+            else if( JobStatus.SCHEDULED.same( currentJobStatus ))
             {
                 currentForm.setScheduledJob( true );
             }

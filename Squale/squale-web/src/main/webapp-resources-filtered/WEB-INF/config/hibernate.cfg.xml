@@ -77,6 +77,8 @@
 		<mapping resource="mapping/sharedrepository/ApplicationExportBO.hbm.xml"/>
 		<mapping resource="mapping/sharedrepository/SegmentationBO.hbm.xml"/>
 		<mapping resource="mapping/sharedrepository/SharedRepoStatsBO.hbm.xml"/>
+		<mapping resource="mapping/sharedrepository/segment/SegmentBO.hbm.xml"/>
+		<mapping resource="mapping/sharedrepository/segment/SegmentCategoryBO.hbm.xml"/>
 		
 		<mapping resource="mapping/stats/SiteStatsDICTBO.hbm.xml" />
 		<mapping resource="mapping/stats/SiteAndProfilStatsDICTBO.hbm.xml" />

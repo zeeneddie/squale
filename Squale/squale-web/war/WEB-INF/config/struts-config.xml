@@ -136,12 +136,12 @@
         </form-bean>
         <form-bean name="manualMarkForm" type="org.squale.squaleweb.applicationlayer.formbean.manualmark.ManualMarkForm">
         </form-bean>
-        
         <form-bean name="sharedRepositoryExportForm" type="org.squale.squaleweb.applicationlayer.formbean.sharedrepository.SharedRepositoryExportForm">
         </form-bean>
         <form-bean name="sharedRepositoryImportForm" type="org.squale.squaleweb.applicationlayer.formbean.sharedrepository.SharedRepositoryImportForm">
         </form-bean>
-        
+        <form-bean name="sharedRepositorySegmentationForm" type="org.squale.squaleweb.applicationlayer.formbean.sharedrepository.SharedRepositorySegmentationForm">
+        </form-bean>
 	</form-beans>
 
 
@@ -756,6 +756,11 @@
 		<action path="/sharedRepositoryExport" type="org.squale.squaleweb.applicationlayer.action.sharedrepository.SharedRepositoryExportAction" name="sharedRepositoryExportForm" scope="session" >
 			<forward name="enter_export" path="/jsp/admin/sharedRepository/sharedRepositoryExport.jsp"/>
 			<forward name="export_ask" path="/sharedRepositoryExport.do?action=detail"/>
+		</action>
+		
+		<action path="/sharedRepositorySegmentation" type="org.squale.squaleweb.applicationlayer.action.sharedrepository.SharedRepositorySegmentationAction" name="sharedRepositorySegmentationForm" scope="session" >
+			<forward name="segmentation" path="/jsp/admin/sharedRepository/segmentation.jsp"/>
+			<forward name="detail" path="/sharedRepositorySegmentation.do?action=detail"/>
 		</action>
 		
 	</action-mappings>

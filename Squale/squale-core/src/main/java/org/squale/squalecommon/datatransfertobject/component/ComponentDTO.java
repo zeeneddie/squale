@@ -108,6 +108,11 @@ public class ComponentDTO
     private Collection<TagDTO> mTags;
 
     /**
+     * Indicate if the application is hide
+     */
+    private boolean hide;
+
+    /**
      * @return true si le composant est exclu du plan d'action
      */
     public boolean getExcludedFromActionPlan()
@@ -527,6 +532,26 @@ public class ComponentDTO
             }
         }
         return false;
+    }
+
+    /**
+     * This method return true if the aplication is hide
+     * 
+     * @return true if the application is hide
+     */
+    public boolean isHide()
+    {
+        return hide;
+    }
+
+    /**
+     * Setter method for the attribute hide
+     * 
+     * @param pHide The new status of hide attribute
+     */
+    public void setHide( boolean pHide )
+    {
+        hide = pHide;
     }
 
 }

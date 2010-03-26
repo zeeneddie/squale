@@ -30,27 +30,23 @@ import java.util.Iterator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.squale.jraf.commons.exception.JrafDaoException;
-import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import org.squale.jraf.spi.persistence.ISession;
-import org.squale.squalecommon.daolayer.DAOMessages;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO;
-import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagCategoryBO;
 
 /**
- * @author M400843
+ * The dao implementation for the tag
  */
-public class TagDAOImpl
+public final class TagDAOImpl
     extends AbstractDAOImpl
 {
     /**
      * Instance singleton
      */
-    private static TagDAOImpl instance = null;
+    private static TagDAOImpl instance;
 
     /** log */
     private static Log LOG;
@@ -99,26 +95,26 @@ public class TagDAOImpl
     {
         Collection components = new ArrayList();
 
-        //récupération des component possédant le même tag
+        // récupération des component possédant le même tag
         String whereClause = "where ";
         whereClause += pTag.getId() + " in elements(" + getAlias() + ".tags)";
 
         Iterator it = findWhere( pSession, whereClause ).iterator();
         while ( it.hasNext() )
         {
-            //pour chaque component renvoyé, on va verifier qu'il correspond bien à 
-            //la même classe que la classe demandée
+            // pour chaque component renvoyé, on va verifier qu'il correspond bien à
+            // la même classe que la classe demandée
             AbstractComponentBO component = (AbstractComponentBO) it.next();
             if ( pClass.isInstance( component ) )
             {
-                //Si le comosant correspond bien à celui demandé, on 
-                //va l'ajouter à la liste des composants à renvoyer
+                // Si le comosant correspond bien à celui demandé, on
+                // va l'ajouter à la liste des composants à renvoyer
                 components.add( component );
             }
         }
         return components;
     }
-    
+
     /**
      * Retrieves the tags with their name starting with the given string
      * 
@@ -130,32 +126,28 @@ public class TagDAOImpl
     public Collection findNamedTags( ISession pSession, String[] pTagNames )
         throws JrafDaoException
     {
-        Collection<TagBO> tags = new ArrayList();
+        Collection<TagBO> tags = new ArrayList<TagBO>();
 
-        if (pTagNames!=null && pTagNames.length>0 && !"".equals(pTagNames[0])){
-            //récupération des component possédant le même tag
+        if ( pTagNames != null && pTagNames.length > 0 && !"".equals( pTagNames[0] ) )
+        {
+            // récupération des component possédant le même tag
             String whereClause = "where ";
-    
+
             whereClause += getAlias() + ".name like(\'" + pTagNames[0] + "%\')";
-            if (pTagNames.length > 1){
-                for (int i=1; i<pTagNames.length; ++i){
+            if ( pTagNames.length > 1 )
+            {
+                for ( int i = 1; i < pTagNames.length; ++i )
+                {
                     whereClause += "or " + getAlias() + ".name like(\'" + pTagNames[i] + "%\')";
                 }
             }
             whereClause += "order by " + getAlias() + ".name";
-    
-            Iterator it = findWhere( pSession, whereClause ).iterator();
-            while ( it.hasNext() )
-            {
-                //pour chaque component renvoyé, on va verifier qu'il correspond bien à 
-                //la même classe que la classe demandée
-                TagBO tag = (TagBO) it.next();
-                tags.add( tag );
-            }
+
+            tags = (Collection<TagBO>) findWhere( pSession, whereClause );
         }
         return tags;
     }
-    
+
     /**
      * Retrieves the tags with their name equal to the given string
      * 
@@ -167,32 +159,28 @@ public class TagDAOImpl
     public Collection findExactNamedTags( ISession pSession, String[] pTagNames )
         throws JrafDaoException
     {
-        Collection<TagBO> tags = new ArrayList();
+        Collection<TagBO> tags = new ArrayList<TagBO>();
 
-        if (pTagNames!=null && pTagNames.length>0 && !"".equals(pTagNames[0])){
-            //récupération des component possédant le même tag
+        if ( pTagNames != null && pTagNames.length > 0 && !"".equals( pTagNames[0] ) )
+        {
+            // récupération des component possédant le même tag
             String whereClause = "where ";
-    
+
             whereClause += getAlias() + ".name = (\'" + pTagNames[0] + "\')";
-            if (pTagNames.length > 1){
-                for (int i=1; i<pTagNames.length; ++i){
+            if ( pTagNames.length > 1 )
+            {
+                for ( int i = 1; i < pTagNames.length; ++i )
+                {
                     whereClause += "or " + getAlias() + ".name = (\'" + pTagNames[i] + "\')";
                 }
             }
             whereClause += "order by " + getAlias() + ".name";
-    
-            Iterator it = findWhere( pSession, whereClause ).iterator();
-            while ( it.hasNext() )
-            {
-                //pour chaque component renvoyé, on va verifier qu'il correspond bien à 
-                //la même classe que la classe demandée
-                TagBO tag = (TagBO) it.next();
-                tags.add( tag );
-            }
+
+            tags = (Collection<TagBO>) findWhere( pSession, whereClause );
         }
         return tags;
     }
-    
+
     /**
      * Retrieves the tags of the wanted tagcategory
      * 
@@ -206,20 +194,20 @@ public class TagDAOImpl
     {
         Collection<TagBO> tags = new ArrayList<TagBO>();
 
-        //retrieval of the tags with the current tagcategory
+        // retrieval of the tags with the current tagcategory
         String whereClause = "where ";
         whereClause += getAlias() + ".tagCategoryBO = " + pTagCategory.getId();
 
         Iterator<TagBO> it = findWhere( pSession, whereClause ).iterator();
         while ( it.hasNext() )
         {
-            //every tag is individually added to the return collection
+            // every tag is individually added to the return collection
             TagBO tag = (TagBO) it.next();
             tags.add( tag );
         }
         return tags;
     }
-    
+
     /**
      * retrieves the existing tags from the database
      * 
@@ -232,20 +220,20 @@ public class TagDAOImpl
     {
         Collection<TagBO> tags = new ArrayList();
 
-        //récupération des component possédant le même tag
+        // récupération des component possédant le même tag
         String whereClause = "order by " + getAlias() + ".id";
 
         Iterator it = findWhere( pSession, whereClause ).iterator();
         while ( it.hasNext() )
         {
-            //pour chaque component renvoyé, on va verifier qu'il correspond bien à 
-            //la même classe que la classe demandée
+            // pour chaque component renvoyé, on va verifier qu'il correspond bien à
+            // la même classe que la classe demandée
             TagBO tag = (TagBO) it.next();
             tags.add( tag );
         }
         return tags;
     }
-    
+
     /**
      * Creates the wanted tag
      * 
@@ -257,7 +245,7 @@ public class TagDAOImpl
     public TagBO createTag( ISession pSession, TagBO pTagToCreate )
         throws JrafDaoException
     {
-        TagBO createdTag = null; 
+        TagBO createdTag = null;
 
         // Verification que le nom du tag n'existe pas déjà
         int existantTag = countWhereName( pSession, pTagToCreate );
@@ -268,7 +256,7 @@ public class TagDAOImpl
         }
         return createdTag;
     }
-    
+
     /**
      * Modifies the wanted tag
      * 
@@ -280,13 +268,13 @@ public class TagDAOImpl
     public TagBO modifyTag( ISession pSession, TagBO pTagToModify )
         throws JrafDaoException
     {
-        TagBO modifiedTag = null; 
+        TagBO modifiedTag = null;
 
         super.save( pSession, pTagToModify );
         modifiedTag = pTagToModify;
         return modifiedTag;
     }
-    
+
     /**
      * deletes one or more TagBOs from the database with the naves given as a parameter
      * 
@@ -301,22 +289,23 @@ public class TagDAOImpl
         String whereClause = "where ";
         // porte le même nom
         boolean first = true;
-        whereClause += getAlias() + ".name in ("; 
+        whereClause += getAlias() + ".name in (";
         for ( String tagName : pNamesToDelete )
         {
-            if (!first){
+            if ( !first )
+            {
                 whereClause += ",";
             }
             whereClause += "'" + tagName + "'";
             first = false;
         }
         whereClause += ")";
-        
+
         int nbremoves = super.removeWhere( pSession, whereClause );
-        
+
         return nbremoves == pNamesToDelete.size();
     }
-    
+
     /**
      * returns the number of tags with the given name
      * 

@@ -28,7 +28,7 @@ import java.io.Serializable;
  * The parameters which come from the squale-config.xml are not managed by this BO but by {@link AdminParamsBO}
  *</p>
  * 
- * @hibernate.class table="squale_params" lazy="true"
+ * @hibernate.class table="SqualeParams" lazy="true"
  */
 public class SqualeParamsBO
     implements Serializable
@@ -84,7 +84,7 @@ public class SqualeParamsBO
      * Getter method for the paramKey variable.
      * 
      * @return the key of the parameter
-     * @hibernate.property name="paramKey" column="paramKey" type="string" not-null="true" update="true" insert="true"
+     * @hibernate.property name="paramKey" column="ParamKey" type="string" not-null="true" update="true" insert="true"
      */
     public String getParamKey()
     {
@@ -105,7 +105,7 @@ public class SqualeParamsBO
      * Getter method for the paramValue variable
      * 
      * @return the value of the parameter
-     * @hibernate.property name="paramValue" column="paramaValue" type="string" not-null="true" update="true"
+     * @hibernate.property name="paramValue" column="ParamaValue" type="string" not-null="true" update="true"
      *                     insert="true"
      */
 
@@ -129,7 +129,7 @@ public class SqualeParamsBO
      * 
      * @return the ID of the object
      * @hibernate.id generator-class="native" type="long" column="SqualeParamsId" unsaved-value="-1" length="19"
-     * @hibernate.generator-param name="sequence" value="squaleparams_sequence"
+     * @hibernate.generator-param name="sequence" value="squaleParams_sequence"
      */
     public long getId()
     {

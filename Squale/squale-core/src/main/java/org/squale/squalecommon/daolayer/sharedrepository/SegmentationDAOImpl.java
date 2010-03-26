@@ -18,8 +18,15 @@
  */
 package org.squale.squalecommon.daolayer.sharedrepository;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
+import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SegmentationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.segment.SegmentBO;
 
 /**
  * DAO implementation for the business object : {@link SegmentationBO}
@@ -55,6 +62,32 @@ public final class SegmentationDAOImpl
     public static SegmentationDAOImpl getInstance()
     {
         return instance;
+    }
+
+    /**
+     * This method retrieves the segmentation corresponding to the list of segments given in argument
+     * 
+     * @param session The hibernate session
+     * @param segmentlist The list of segment
+     * @return The corresponding segmentation
+     * @throws JrafDaoException Exception occurs during the search
+     */
+    public List<SegmentationBO> findContainsSegments( ISession session, List<SegmentBO> segmentlist )
+        throws JrafDaoException
+    {
+        List<SegmentationBO> segmentationList = new ArrayList<SegmentationBO>();
+        StringBuffer request = new StringBuffer( "select seg from SegmentationBO seg where " );
+        Iterator<SegmentBO> segmentIt = segmentlist.iterator();
+        for ( SegmentBO segmentBO : segmentlist )
+        {
+            request.append( segmentBO.getTechnicalId() );
+            request.append( " member of seg.segmentList" );
+            request.append( " and " );
+        }
+        request.append( " size ( seg.segmentList ) = " );
+        request.append( segmentlist.size() );
+        segmentationList = find( session, request.toString() );
+        return segmentationList;
     }
 
 }

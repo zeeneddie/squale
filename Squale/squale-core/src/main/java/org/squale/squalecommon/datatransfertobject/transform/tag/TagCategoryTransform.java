@@ -26,9 +26,14 @@ import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagCategoryBO;
 /**
  * Transforme les composants en bo<->ComponentDTO
  */
-public class TagCategoryTransform
+public final class TagCategoryTransform
     implements Serializable
 {
+
+    /**
+     * UID
+     */
+    private static final long serialVersionUID = -4642628877553181296L;
 
     /**
      * Constructeur prive
@@ -49,7 +54,6 @@ public class TagCategoryTransform
         tagCategoryDTO.setID( pTagCategoryBO.getId() );
         tagCategoryDTO.setName( pTagCategoryBO.getName() );
         tagCategoryDTO.setDescription( pTagCategoryBO.getDescription() );
-
         return tagCategoryDTO;
     }
 
@@ -67,7 +71,6 @@ public class TagCategoryTransform
         tagCategoryBO.setId( pTagCategoryDTO.getID() );
         tagCategoryBO.setName( pTagCategoryDTO.getName() );
         tagCategoryBO.setDescription( pTagCategoryDTO.getDescription() );
-
         return tagCategoryBO;
     }
 }

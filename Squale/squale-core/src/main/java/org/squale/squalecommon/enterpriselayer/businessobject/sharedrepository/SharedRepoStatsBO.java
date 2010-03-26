@@ -23,7 +23,7 @@ import java.io.Serializable;
 /**
  * This class represents some statistics for a specific data
  * 
- * @hibernate.class table="shared_repo_stats"
+ * @hibernate.class table="SharedRepoStats"
  */
 public class SharedRepoStatsBO
     implements Serializable
@@ -101,7 +101,7 @@ public class SharedRepoStatsBO
      * 
      * @return The technical id
      * @hibernate.id generator-class="native" type="long" column="StatsId" unsaved-value="-1" length="19"
-     * @hibernate.generator-param name="sequence" value="shared_repo_stats_sequence"
+     * @hibernate.generator-param name="sequence" value="sharedRepoStats_sequence"
      */
     public long getStatsId()
     {
@@ -122,7 +122,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute elementType
      * 
      * @return The element type
-     * @hibernate.property name="elementType" column="elementType" type="string" update="true" insert="true"
+     * @hibernate.property name="elementType" column="ElementType" type="string" update="true" insert="true"
      */
     public String getElementType()
     {
@@ -143,7 +143,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute dataType
      * 
      * @return The data type
-     * @hibernate.property name="dataType" column="dataType" type="string" update="true" insert="true"
+     * @hibernate.property name="dataType" column="DataType" type="string" update="true" insert="true"
      */
     public String getDataType()
     {
@@ -164,7 +164,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute dataName
      * 
      * @return The data name
-     * @hibernate.property name="dataName" column="dataName" type="string" update="true" insert="true"
+     * @hibernate.property name="dataName" column="DataName" type="string" update="true" insert="true"
      */
     public String getDataName()
     {
@@ -185,7 +185,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute language
      * 
      * @return The language
-     * @hibernate.property name="language" column="language" type="string" update="true" insert="true"
+     * @hibernate.property name="language" column="Language" type="string" update="true" insert="true"
      */
     public String getLanguage()
     {
@@ -206,7 +206,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute mean
      * 
      * @return The mean value
-     * @hibernate.property name="mean" column="mean" type="float" update="true" insert="true"
+     * @hibernate.property name="mean" column="Mean" type="float" update="true" insert="true"
      */
     public float getMean()
     {
@@ -227,7 +227,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute max
      * 
      * @return The max value
-     * @hibernate.property name="max" column="maxValue" type="float" update="true" insert="true"
+     * @hibernate.property name="max" column="MaxValue" type="float" update="true" insert="true"
      */
     public float getMax()
     {
@@ -248,7 +248,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute min
      * 
      * @return The min value
-     * @hibernate.property name="min" column="minValue" type="float" update="true" insert="true"
+     * @hibernate.property name="min" column="MinValue" type="float" update="true" insert="true"
      */
     public float getMin()
     {
@@ -269,7 +269,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute deviation
      * 
      * @return The deviation for the current data
-     * @hibernate.property name="deviation" column="deviation" type="float" update="true" insert="true"
+     * @hibernate.property name="deviation" column="Deviation" type="float" update="true" insert="true"
      */
     public float getDeviation()
     {
@@ -290,7 +290,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute elements
      * 
      * @return The number of elements computed
-     * @hibernate.property name="elements" column="elements" type="integer" update="true" insert="true"
+     * @hibernate.property name="elements" column="Elements" type="integer" update="true" insert="true"
      */
     public int getElements()
     {
@@ -311,7 +311,7 @@ public class SharedRepoStatsBO
      * Getter method for the attribute segmentation
      * 
      * @return The segmentation linked to the current stat
-     * @hibernate.many-to-one column="segmentationId"
+     * @hibernate.many-to-one column="SegmentationId"
      *                        class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SegmentationBO"
      *                        update="true" insert="true" outer-join="auto" cascade="all" not-null="true" unique="false"
      */

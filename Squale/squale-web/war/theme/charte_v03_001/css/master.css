@@ -396,8 +396,9 @@ div#conteneur div.contenuModulable div.c3 {width:729px;}
 /*-- element for the homepageManagement.jsp, manaualMark.jsp--*/
 td.check_col {width:20px; height:25px }
 th.check_col {width:20px; height:25px; text-align:center;}
-th.height_col{height:25px; }
-td.height_col{height:25px; }
+.height_col{height:25px; }
+/*th.height_col{height:25px; }*/
+/*td.height_col{height:25px; }*/
 /*-- element for the homepage.jsp --*/
 div.homepage {border: 4px double #F3BA5D; padding:10px; -moz-border-radius:0px 20px 20px 20px}
 div.homepage > table.formulaire {visibility:hidden}
@@ -422,4 +423,13 @@ div.frame_border {border: 1px solid #F3BA5D; padding:10px; -moz-border-radius:0p
 .commentsHistoryBlocComment div{margin-bottom: 2px;}
 /*-- element for manualPractice.jsp --*/
 #commentsDiv{height: auto; padding-bottom: 5px;}
-.td1Ext {text-align:right;font-weight:bold; width:50%; height:25px }
+.td1Ext {text-align:right;font-weight:bold; width:50%; height:25px; }
+/*-- segmentation.jsp --*/
+div.application{float:left; width:300px; overflow: auto; height: 550px;}
+div.segment{margin-left:300px; overflow: auto; height: 550px;}
+.text_red{color: #f00;}
+.segment_deprecated{color: grey; font-style: italic}
+.segmentation_title{margin-left: 20px;}
+.masked{display: none;}
+.application_reminder{text-decoration: underline; font-style: italic}
+.export_application{overflow: auto; height: 180px;}

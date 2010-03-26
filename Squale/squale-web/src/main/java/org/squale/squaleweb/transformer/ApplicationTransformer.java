@@ -70,6 +70,7 @@ public class ApplicationTransformer
         form.setHasResults( dto.getHasResults() );
         form.setLastUpdate( dto.getLastUpdate() );
         form.setLastUser( dto.getLastUser() );
+        form.setHide( dto.isHide() );
         if ( dto.getTags() != null && dto.getTags().size() > 0 )
         {
             form.setTags( dto.getTags() );

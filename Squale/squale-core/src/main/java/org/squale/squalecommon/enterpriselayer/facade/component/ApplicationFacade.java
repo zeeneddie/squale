@@ -21,6 +21,7 @@ package org.squale.squalecommon.enterpriselayer.facade.component;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -30,7 +31,6 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.helper.PersistenceHelper;
@@ -46,8 +46,10 @@ import org.squale.squalecommon.daolayer.profile.UserDAOImpl;
 import org.squale.squalecommon.daolayer.result.SqualeReferenceDAOImpl;
 import org.squale.squalecommon.daolayer.tag.TagDAOImpl;
 import org.squale.squalecommon.datatransfertobject.component.ApplicationConfDTO;
+import org.squale.squalecommon.datatransfertobject.component.ApplicationLightDTO;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.component.ModuleLightDTO;
 import org.squale.squalecommon.datatransfertobject.component.UserDTO;
 import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
 import org.squale.squalecommon.datatransfertobject.transform.component.ApplicationConfTransform;
@@ -61,11 +63,15 @@ import org.squale.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.SqualeReferenceBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 import org.squale.squalecommon.enterpriselayer.facade.FacadeMessages;
+import org.squale.squalecommon.enterpriselayer.facade.config.SqualixConfigFacade;
 import org.squale.squalecommon.util.messages.CommonMessages;
 
 /**
- * Façade responsable de la gestion d'une application :<br /> - suppression, <br /> - tests d'existence, <br /> -
- * récupération, <br /> - insertion, mise à jour, ...<br />
+ * Façade responsable de la gestion d'une application :<br />
+ * - suppression, <br />
+ * - tests d'existence, <br />
+ * - récupération, <br />
+ * - insertion, mise à jour, ...<br />
  * d'une application.
  * 
  * @author ABOZ
@@ -200,8 +206,12 @@ public class ApplicationFacade
     /**
      * - Transforme les DTO en objets métiers via des transformeurs.
      * 
-     * @dev-squale Demande à la partie DAO de sauvegarder / mettre à jour les objets métiers : <br /> - Un ApplicationBO<br /> -
-     *             Des ProjectBO<br /> - Des UserBO<br /> - 0 ou 1 AuditBO<br /> - Des RightsBO<br />
+     * @dev-squale Demande à la partie DAO de sauvegarder / mettre à jour les objets métiers : <br />
+     *             - Un ApplicationBO<br />
+     *             - Des ProjectBO<br />
+     *             - Des UserBO<br />
+     *             - 0 ou 1 AuditBO<br />
+     *             - Des RightsBO<br />
      * @use by ApplicationAdministratorComponent
      * @param pApplicationConf configuration de l'application courante
      * @throws JrafEnterpriseException exception JRAF
@@ -215,8 +225,12 @@ public class ApplicationFacade
 
     /**
      * Transforme les DTO en objets métiers via des transformeurs. Demande à la partie DAO de sauvegarder / mettre à
-     * jour les objets métiers :<br /> - Un ApplicationBO<br /> - Des ProjectBO<br /> - Des UserBO<br /> - 0 ou 1
-     * AuditBO<br /> - Des RightsBO<br />
+     * jour les objets métiers :<br />
+     * - Un ApplicationBO<br />
+     * - Des ProjectBO<br />
+     * - Des UserBO<br />
+     * - 0 ou 1 AuditBO<br />
+     * - Des RightsBO<br />
      * 
      * @param pApplicationConf configuration de l'application courante
      * @param pSession session JRAF
@@ -1100,7 +1114,7 @@ public class ApplicationFacade
             appliDAO.save( pSession, appliBO );
         }
     }
-    
+
     /**
      * adds a tag to an application
      * 
@@ -1119,8 +1133,8 @@ public class ApplicationFacade
         TagBO tagBO = null;
         // On récupère l'application
         appliBO = (ApplicationBO) appliDAO.get( pSession, pApplicationId );
-        //On récupère le TAG
-        tagBO = (TagBO) tagDAO.get(pSession, pTag.getId());
+        // On récupère le TAG
+        tagBO = (TagBO) tagDAO.get( pSession, pTag.getId() );
         if ( null != appliBO && null != tagBO )
         { // code défensif
             appliBO.addTag( tagBO );
@@ -1128,7 +1142,7 @@ public class ApplicationFacade
             appliDAO.save( pSession, appliBO );
         }
     }
-    
+
     /**
      * removes a tag from an application
      * 
@@ -1147,8 +1161,8 @@ public class ApplicationFacade
         TagBO tagBO = null;
         // On récupère l'application
         appliBO = (ApplicationBO) appliDAO.get( pSession, pApplicationId );
-        //On récupère le TAG
-        tagBO = (TagBO) tagDAO.get(pSession, pTag.getId());
+        // On récupère le TAG
+        tagBO = (TagBO) tagDAO.get( pSession, pTag.getId() );
         if ( null != appliBO && null != tagBO )
         { // code défensif
             appliBO.removeTag( tagBO );
@@ -1262,6 +1276,47 @@ public class ApplicationFacade
         {
             FacadeHelper.closeSession( pSession, ApplicationFacade.class.getName() + ".hideApplication" );
         }
+    }
+
+    /**
+     * This method return the list of application ( {@link ApplicationLightDTO} ) available for the shared repository
+     * 
+     * @param session The hibernate session
+     * @return A list of availabble application
+     * @throws JrafEnterpriseException exception occurs during the retrieve treatment
+     */
+    public static List<ApplicationLightDTO> availableForSharedRepository( ISession session )
+        throws JrafEnterpriseException
+    {
+        List<ApplicationLightDTO> listToReturn = new ArrayList<ApplicationLightDTO>();
+        try
+        {
+            ApplicationDAOImpl appDao = ApplicationDAOImpl.getInstance();
+            List<Object[]> availableApp = appDao.getAvailableForSharedRepository( session );
+            for ( Object[] objects : availableApp )
+            {
+                ApplicationLightDTO appDto = new ApplicationLightDTO( (Long) objects[0], (String) objects[1] );
+                ProjectDAOImpl projectDao = ProjectDAOImpl.getInstance();
+                List<Object[]> module = projectDao.getChildren( session, (Long) objects[0] );
+                for ( Object[] objectsModule : module )
+                {
+                    ModuleLightDTO moduleDto = new ModuleLightDTO( (Long) objectsModule[0], (String) objectsModule[1] );
+                    appDto.addModule( moduleDto );
+                }
+                Collections.sort( appDto.getModuleList() );
+                listToReturn.add( appDto );
+            }
+            Collections.sort( listToReturn );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, "getSegmentIdentifierTechnicalIdForACategory" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, ApplicationFacade.class.getName() + ".availableForSharedRepository" );
+        }
+        return listToReturn;
     }
 
 }

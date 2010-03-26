@@ -24,7 +24,7 @@
 		<div class="frame_border">
 			<h3><bean:message key="shared_repository.reference.new_reference.title"/></h3>
 			<br/>
-			<div style="color: #f00">
+			<div class="text_red">
 				<html:messages id="msg" message="true">
 				<bean:write name="msg" />
 				<br>

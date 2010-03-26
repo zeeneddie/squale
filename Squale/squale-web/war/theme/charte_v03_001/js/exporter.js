@@ -4,8 +4,15 @@
  */
 function showDiv()
 {
-	schedduled = document.getElementById('isSchedduled').value
-	if( schedduled == 'true')
+	schedduled = document.getElementById('isSchedduled').value;
+	modify =  document.getElementById('modify').value;
+	if(modify == 'true')
+	{
+		document.getElementById('choiceDiv').style.display = '';
+		document.getElementById('buttonSave').style.display='';
+		document.getElementById('buttonCancel').style.display='';
+	}
+	else if( schedduled == 'true')
 	{
 		document.getElementById('listDiv').style.display = '';
 	}
@@ -17,17 +24,6 @@ function showDiv()
 }
 
 /*
- * Switch from the div which contains the list of selected application to the slection div 
- */
-function modif()
-{
-	document.getElementById('listDiv').style.display = 'none';
-	document.getElementById('choiceDiv').style.display = '';
-	document.getElementById('buttonSave').style.display='';
-	document.getElementById('buttonCancel').style.display='';
-}
-
-/*
  * This method check all the checkbox in the selection div
  * --> All the application are selected 
  */
@@ -35,7 +31,8 @@ function selectAllCB()
 {
 	var check = document.getElementById("check-" + 0);
 	var index = 0;
-	while (check != null) {
+	while (check != null) 
+	{
 		check.checked='checked';
 		// go next
 		index++;

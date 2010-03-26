@@ -19,7 +19,6 @@
 package org.squale.squalecommon.datatransfertobject.tag;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 /**
  * Composant
@@ -29,6 +28,11 @@ public class TagCategoryDTO
 {
 
     /**
+     * UID
+     */
+    private static final long serialVersionUID = 5416096006460314046L;
+
+    /**
      * the ID of the tagCategory
      */
     private long mID = -1;
@@ -36,13 +40,13 @@ public class TagCategoryDTO
     /**
      * Name of the tag category
      */
-    private String mName = null;
+    private String mName;
 
     /**
      * Short description of the TagCategory
      */
-    private String mDescription = null;
-    
+    private String mDescription;
+
     /**
      * default constructor
      */
@@ -91,7 +95,7 @@ public class TagCategoryDTO
     }
 
     /**
-     * Constructs a TagCategoryDTO from a given Id and name 
+     * Constructs a TagCategoryDTO from a given Id and name
      * 
      * @param pID ID of the component
      * @param pName Name of the component
@@ -138,6 +142,7 @@ public class TagCategoryDTO
 
     /**
      * Access method for the mDescription property.
+     * 
      * @return the short description of the tag category
      */
     public String getDescription()
@@ -147,10 +152,12 @@ public class TagCategoryDTO
 
     /**
      * Sets the value of the mDescription property.
+     * 
      * @param pDescription le nom raccourcis
      */
     public void setDescription( String pDescription )
     {
         mDescription = pDescription;
     }
+
 }

@@ -18,15 +18,20 @@
  */
 package org.squale.squalecommon.enterpriselayer.facade.sharedrepository;
 
+import java.util.List;
+
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
 import org.squale.jraf.spi.enterpriselayer.IFacade;
 import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.daolayer.sharedrepository.SegmentationDAOImpl;
+import org.squale.squalecommon.daolayer.sharedrepository.segment.SegmentDAOImpl;
 import org.squale.squalecommon.datatransfertobject.sharedrepository.SegmentationDTO;
+import org.squale.squalecommon.datatransfertobject.sharedrepository.segment.SegmentDTO;
 import org.squale.squalecommon.datatransfertobject.transform.sharedrepository.SegmentationTransform;
 import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.SegmentationBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.segment.SegmentBO;
 
 /**
  * Facade for the component {@link SegmentationBO}
@@ -63,7 +68,7 @@ public final class SegmentationFacade
         }
         finally
         {
-            FacadeHelper.closeSession( session, "removeAll" );
+            FacadeHelper.closeSession( session, SegmentationFacade.class.getName() + ".removeAll" );
         }
     }
 
@@ -79,14 +84,27 @@ public final class SegmentationFacade
     {
         try
         {
-            SegmentationBO bo = SegmentationTransform.dto2bo( dto );
-            SegmentationDAOImpl dao = SegmentationDAOImpl.getInstance();
-            dao.create( session, bo );
-            dto.setSegmentationId( bo.getSegmentationId() );
+            SegmentationBO segmentationBo = SegmentationTransform.dto2bo( dto );
+            SegmentationDAOImpl segmentationDao = SegmentationDAOImpl.getInstance();
+            SegmentDAOImpl segmentDao = SegmentDAOImpl.getInstance();
+            for ( SegmentDTO segmentdto : dto.getSegmentList() )
+            {
+                SegmentBO example = new SegmentBO();
+                example.setIdentifier( segmentdto.getIdentifier() );
+                List<SegmentBO> segmentList = segmentDao.findByExample( session, example );
+                if(segmentList.size()>0)
+                {
+                    SegmentBO segmentBo = segmentList.get( 0 );
+                    segmentationBo.addSegment( segmentBo );
+                }
+            }
+            segmentationDao.create( session, segmentationBo );
+            dto.setSegmentationId( segmentationBo.getSegmentationId() );
         }
         catch ( JrafDaoException e )
         {
             FacadeHelper.convertException( e, "create" );
         }
     }
+
 }

@@ -25,7 +25,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.helper.PersistenceHelper;
@@ -41,7 +40,6 @@ import org.squale.squalecommon.daolayer.config.SourceManagementDAOImpl;
 import org.squale.squalecommon.daolayer.rule.QualityGridDAOImpl;
 import org.squale.squalecommon.daolayer.tag.TagDAOImpl;
 import org.squale.squalecommon.datatransfertobject.component.ApplicationConfDTO;
-import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 import org.squale.squalecommon.datatransfertobject.component.ProjectConfDTO;
 import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
 import org.squale.squalecommon.datatransfertobject.transform.component.ComponentTransform;

@@ -455,4 +455,16 @@
 		
 	</applicationComponent>
 	
+	<applicationComponent name="sharedRepoSegmentation" description="Work around the shared repository stats" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.administration.sharedrepository.DoSegmentationComponentAccess">
+		
+		<component name="retrieveAppAndModule"></component>
+		
+		<component name="allCategory"></component>
+		
+		<component name="retrieveLinkedSegments"></component>
+		
+		<component name="updateSegments"></component>
+		
+	</applicationComponent>
+	
 </listApplicationComponent>

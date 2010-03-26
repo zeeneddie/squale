@@ -20,8 +20,6 @@ package org.squale.sharedrepository.export;
 
 import java.util.List;
 
-import org.squale.sharedrepository.segment.SegmentEx;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
@@ -79,16 +77,6 @@ public class CompanyEx
         segmentation = pSegmentation;
         datas = pDatas;
     }
-
-    /**
-     * Add a new application {@link ApplicationEx} to the company
-     * 
-     * @param application The application to add
-     */
-    /*public void addApplication( ApplicationEx application )
-    {
-        applications.add( application );
-    }*/
 
     /**
      * Getter method for the attribute name

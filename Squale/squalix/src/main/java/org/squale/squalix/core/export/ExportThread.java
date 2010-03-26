@@ -38,6 +38,7 @@ import org.squale.squalecommon.datatransfertobject.config.AdminParamsDTO;
 import org.squale.squalecommon.datatransfertobject.transform.config.AdminParamsTransform;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.AdminParamsBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.ApplicationExportBO;
+import org.squale.squaleexport.core.ExportStatus;
 import org.squale.squaleexport.core.ExporterFactory;
 import org.squale.squaleexport.core.IExporter;
 import org.squale.squalix.messages.Messages;
@@ -60,7 +61,7 @@ public class ExportThread
      */
     private static final Log LOGGER = LogFactory.getLog( ExportThread.class );
 
-    /** set of audit id to purge */
+    /** Map of audit to export */
     private HashMap<Long, Long> mapAppAuditToExport;
 
     /**
@@ -87,21 +88,26 @@ public class ExportThread
             ArrayList<AdminParamsDTO> adminParamsDTOList = searchAdminParams( session );
 
             // Launch of the export
-            boolean exportSuccessful = false;
+            ExportStatus status = ExportStatus.failed;
             try
             {
                 LOGGER.info( Messages.getString( "export.job.start" ) );
-                exportSuccessful = exporter.exportData( mapAppAuditToExport, adminParamsDTOList );
+                status = exporter.exportData( mapAppAuditToExport, adminParamsDTOList );
             }
             finally
             {
                 try
                 {
-                    if ( exportSuccessful )
+                    if ( ExportStatus.successful.equals( status ) )
                     {
                         ExportUtils.setJobAsSuccessful( session );
                         setExportDate( session );
                         LOGGER.info( Messages.getString( "export.job.successful" ) );
+                    }
+                    else if(ExportStatus.nothingToExport.equals( status ))
+                    {
+                        ExportUtils.nothingToExport( session );
+                        LOGGER.info( Messages.getString( "export.job.nothingToExport" ));
                     }
                     else
                     {
@@ -118,13 +124,11 @@ public class ExportThread
         }
         catch ( JrafPersistenceException e )
         {
-            String message = Messages.getString( "export.job.failed" );
-            LOGGER.error( message, e );
+            LOGGER.error( Messages.getString( "export.job.failed" ), e );
         }
         catch ( JrafEnterpriseException e )
-        {
-            String message = Messages.getString( "export.job.failed" );
-            LOGGER.error( message, e );
+        { 
+            LOGGER.error( Messages.getString( "export.job.failed" ), e );
         }
     }
 

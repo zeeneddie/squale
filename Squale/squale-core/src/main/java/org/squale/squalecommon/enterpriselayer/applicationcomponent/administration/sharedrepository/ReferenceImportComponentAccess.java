@@ -21,6 +21,7 @@ package org.squale.squalecommon.enterpriselayer.applicationcomponent.administrat
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -32,6 +33,11 @@ import org.squale.jraf.helper.PersistenceHelper;
 import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
 import org.squale.jraf.spi.persistence.ISession;
+import org.squale.sharedrepository.export.SegmentEx;
+import org.squale.sharedrepository.segmentref.Label;
+import org.squale.sharedrepository.segmentref.SegmentCategoryRef;
+import org.squale.sharedrepository.segmentref.SegmentRef;
+import org.squale.sharedrepository.segmentref.SegmentsReference;
 import org.squale.sharedrepository.stat.ComponentStat;
 import org.squale.sharedrepository.stat.DataStat;
 import org.squale.sharedrepository.stat.ModuleStat;
@@ -39,13 +45,19 @@ import org.squale.sharedrepository.stat.RepositoryStat;
 import org.squale.sharedrepository.stat.SegmentationStat;
 import org.squale.sharedrepository.stat.Statistic;
 import org.squale.squalecommon.datatransfertobject.config.SqualeParamsDTO;
+import org.squale.squalecommon.datatransfertobject.message.MessageDTO;
 import org.squale.squalecommon.datatransfertobject.sharedrepository.SegmentationDTO;
 import org.squale.squalecommon.datatransfertobject.sharedrepository.SharedRepoStatsDTO;
+import org.squale.squalecommon.datatransfertobject.sharedrepository.segment.SegmentCategoryDTO;
+import org.squale.squalecommon.datatransfertobject.sharedrepository.segment.SegmentDTO;
 import org.squale.squalecommon.enterpriselayer.applicationcomponent.ACMessages;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.SqualeParamsBO.SqualeParams;
 import org.squale.squalecommon.enterpriselayer.facade.config.SqualeParamsFacade;
+import org.squale.squalecommon.enterpriselayer.facade.message.MessageFacade;
 import org.squale.squalecommon.enterpriselayer.facade.sharedrepository.SegmentationFacade;
 import org.squale.squalecommon.enterpriselayer.facade.sharedrepository.SharedRepoStatsFacade;
+import org.squale.squalecommon.enterpriselayer.facade.sharedrepository.segment.SegmentCategoryFacade;
+import org.squale.squalecommon.enterpriselayer.facade.sharedrepository.segment.SegmentFacade;
 import org.squale.squalemodel.definition.ElementType;
 import org.squale.squalemodel.definition.StatisticType;
 
@@ -53,8 +65,6 @@ import com.thoughtworks.xstream.XStream;
 
 /**
  * This class is the component access for all works around the reference import
- * 
- * @author bfranchet
  */
 public class ReferenceImportComponentAccess
     extends DefaultExecuteComponent
@@ -100,12 +110,157 @@ public class ReferenceImportComponentAccess
         Integer newRefrenceVersion = null;
         if ( currentReferenceVersion == null || currentReferenceVersion.intValue() < reference.getVersion() )
         {
+            // Update the segment reference
+            updateSegmentsReference( reference );
+            // Remove previous stats reference
             removeReference();
+            // Insert the new stat reference
             addReference( reference );
+            // Update the reference version number
             updateVersion( reference.getVersion() );
             newRefrenceVersion = Integer.valueOf( reference.getVersion() );
         }
         return newRefrenceVersion;
+    }
+
+    /**
+     * This method create or update the segments reference
+     * 
+     * @param reference the new reference
+     * @throws JrafEnterpriseException Exception occurs during the update
+     */
+    private void updateSegmentsReference( RepositoryStat reference )
+        throws JrafEnterpriseException
+    {
+        ISession session;
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            session.beginTransaction();
+            HashMap<Long, Long> mapCategory = createMapCategory( session );
+            SegmentsReference ref = reference.getSegmentReference();
+
+            List<MessageDTO> messageList = new ArrayList<MessageDTO>();
+            // for each segment category of the reference file
+            for ( SegmentCategoryRef catRef : ref.getCategoryList() )
+            {
+                boolean newCategory = true;
+                SegmentCategoryDTO category =
+                    new SegmentCategoryDTO( catRef.getKeyName(), catRef.getCatId(), catRef.getType(),
+                                            catRef.isDeprecated() );
+                messageList.addAll( messageToAdd( category.getFullKey(), catRef.getLabelList() ) );
+                // We search if the segment category already exist in the database. If yes the method updates it, else
+                // the method creates it
+
+                if ( mapCategory.containsKey( catRef.getCatId() ) )
+                {
+                    category.setTechnicalId( mapCategory.get( catRef.getCatId() ) );
+                    newCategory = false;
+
+                }
+                // The method saves or updates the category
+                SegmentCategoryFacade.saveOrUpdate( session, category );
+                HashMap<Long, Long> mapSegment = new HashMap<Long, Long>();
+                if ( !newCategory )
+                {
+                    mapSegment = createMapSegment( session, category );
+                }
+
+                // For each segment of the category the method tests if the segment already exist. If yes, we update it
+                // else we create it
+                List<SegmentDTO> segmentDtoToUpdate = new ArrayList<SegmentDTO>();
+                for ( SegmentRef segRef : catRef.getSegmentList() )
+                {
+                    SegmentDTO seg =
+                        new SegmentDTO( segRef.getKeyName(), segRef.getSegmentId(), segRef.isDeprecated(), category );
+                    messageList.addAll( messageToAdd( seg.getFullKey(), segRef.getLabelList() ) );
+                    if ( mapSegment.containsKey( segRef.getSegmentId() ) )
+                    {
+                        seg.setTechnicalId( mapSegment.get( segRef.getSegmentId() ) );
+                    }
+                    segmentDtoToUpdate.add( seg );
+                }
+                // The method execute the update
+                SegmentFacade.saveOrUpdateForACategory( session, segmentDtoToUpdate );
+            }
+            MessageFacade.importSegmentMessage( session, messageList );
+            session.commitTransaction();
+        }
+        catch ( JrafPersistenceException e )
+        {
+            String message = ACMessages.getString( "ac.exception.generic.retrieveHibernateSession" );
+            LOG.error( message, e );
+            throw new JrafEnterpriseException( message, e );
+        }
+
+    }
+
+    /**
+     * This methods creates a list of MessageDTO for each label of a category
+     * 
+     * @param keyName The key name
+     * @param labelList The list of label ( one per language ) for the category
+     * @return The list of messageDTO for the category
+     * @throws JrafEnterpriseException Exception launched when labeList is empty
+     */
+    private List<MessageDTO> messageToAdd( String keyName, List<Label> labelList )
+        throws JrafEnterpriseException
+    {
+        List<MessageDTO> messageList = new ArrayList<MessageDTO>();
+        MessageDTO message;
+        if ( labelList != null && labelList.size() > 0 )
+        {
+            for ( Label label : labelList )
+            {
+                message = new MessageDTO();
+                message.setKey( keyName );
+                message.setLang( label.getLang() );
+                message.setText( label.getLabel() );
+                messageList.add( message );
+            }
+        }
+        else
+        {
+            String msg = ACMessages.getString( "ac.exception.reference.import.segment.nolabel" );
+            LOG.error( msg );
+            throw new JrafEnterpriseException( msg );
+
+        }
+        return messageList;
+    }
+
+    /**
+     * This method create a map. Each entry of the map represents a segment category. The key is the identifier of the
+     * category and the value is the technical id of the segment category
+     * 
+     * @param session The hibernate session
+     * @return A map category identifier <=> category technical id
+     * @throws JrafEnterpriseException Exception occurs during the creation of the map
+     */
+    private HashMap<Long, Long> createMapCategory( ISession session )
+        throws JrafEnterpriseException
+    {
+        HashMap<Long, Long> mapCatIdentifierTechnicalId = new HashMap<Long, Long>();
+        mapCatIdentifierTechnicalId = SegmentCategoryFacade.getAllIdentifier( session );
+        return mapCatIdentifierTechnicalId;
+    }
+
+    /**
+     * This method create a map. This map contains the list of segment for a category. Each entry of the map represents
+     * a segment. The key is the identifier of the segment and the value is the technical id of the segment
+     * 
+     * @param session The hibernate session
+     * @param category The parent category
+     * @return The segment identifier <=> segment technical id for a category
+     * @throws JrafEnterpriseException exception occurs during the search
+     */
+    private HashMap<Long, Long> createMapSegment( ISession session, SegmentCategoryDTO category )
+        throws JrafEnterpriseException
+    {
+        HashMap<Long, Long> mapSegIdentifierTechnicalId = new HashMap<Long, Long>();
+        mapSegIdentifierTechnicalId =
+            SegmentFacade.getSegmentIdentifierTechnicalIdForACategory( session, category.getTechnicalId() );
+        return mapSegIdentifierTechnicalId;
     }
 
     /**
@@ -129,7 +284,7 @@ public class ReferenceImportComponentAccess
         }
         catch ( IOException e )
         {
-            String message = ACMessages.getString( "ac.exception.referenceImport" );
+            String message = ACMessages.getString( "ac.exception.reference.import.fileinputstream" );
             throw new JrafEnterpriseException( message, e );
         }
         return reference;
@@ -148,7 +303,7 @@ public class ReferenceImportComponentAccess
         {
             session = PERSISTENTPROVIDER.getSession();
             /*
-             * This method remove all the segmentation. By cascade the stats and the segmentation_tag linked to tyhe
+             * This method remove all the segmentation. By cascade the stats and the segmentation_tag linked to the
              * segmentation are also remove
              */
             SegmentationFacade.removeAll( session );
@@ -181,10 +336,15 @@ public class ReferenceImportComponentAccess
             {
                 // For each segmentation of the reference we create the segmentation in the database.
                 SegmentationDTO segmentation = new SegmentationDTO();
-                SegmentationFacade.create( session, segmentation );
-                segmentationStat.getSegmentList();
+                for ( SegmentEx segmentEx : segmentationStat.getSegmentIdList() )
+                {
+                    SegmentDTO segmentDto = new SegmentDTO( segmentEx.getSegmentId() );
+                    segmentation.addSegment( segmentDto );
+                }
 
-                // for this segmentation we create the statistic at the module Level
+                SegmentationFacade.create( session, segmentation );
+
+                // For this segmentation we create the statistic at the module Level
                 ModuleStat moduleStat = segmentationStat.getModule();
                 String elementType = ElementType.MODULE.toString();
 

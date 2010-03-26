@@ -54,14 +54,14 @@ import org.squale.welcom.struts.util.WConstants;
 public class SharedRepositoryExportAction
     extends AdminAction
 {
-    
+
     /**
      * The buffer size
      */
     private final int bufferSize = 4096;
 
     /**
-     * Action done on the access to the export page
+     * Action done when the user accesses to the export page
      * 
      * @param mapping The mapping
      * @param form The form
@@ -79,38 +79,8 @@ public class SharedRepositoryExportAction
         try
         {
             SharedRepositoryExportForm pageForm = (SharedRepositoryExportForm) form;
-            IApplicationComponent ac = AccessDelegateHelper.getInstance( "sharedRepositoryExport" );
-            boolean exportInProgress = ( (Boolean) ac.execute( "isInProgress", new Object[] {} ) ).booleanValue();
-            if ( exportInProgress )
-            {
-                pageForm.setInProgressJob( true );
-            }
-            else
-            {
-                LogonBean logonBean = (LogonBean) request.getSession().getAttribute( WConstants.USER_KEY );
-                List<ApplicationForm> allApplication = logonBean.getApplicationsList();
-
-                ArrayList<ApplicationExportDTO> allApplicationWithResult =
-                    selectApplicationWithResult( allApplication, ac );
-
-                Object[] param = new Object[] {};
-                List<JobDTO> jobs = (List<JobDTO>) ac.execute( "getLastJobs", param );
-                param = new Object[] { allApplicationWithResult, jobs };
-                // pageForm.reset( mapping, request );
-                // SharedRepositoryExportForm newForm = new SharedRepositoryExportForm();
-                pageForm.init();
-                WTransformerFactory.objToForm( ExportTransformer.class, pageForm, param );
-
-                if ( pageForm.getSuccessfulJob() != null )
-                {
-                    File exportFile = retrieveExportFile();
-                    if ( exportFile != null )
-                    {
-                        pageForm.setExportFile( true );
-                    }
-                }
-            }
-            // pageForm = newForm;
+            fillDetailAction( pageForm, request );
+            pageForm.setModify( false );
             forward = mapping.findForward( "enter_export" );
         }
         catch ( WTransformerException e )
@@ -135,6 +105,90 @@ public class SharedRepositoryExportAction
     }
 
     /**
+     * Action done when a user ask to modify a scheduled export
+     * 
+     * @param mapping The mapping
+     * @param form The form
+     * @param request The http request
+     * @param response The http response
+     * @return The next action to do
+     */
+    public ActionForward modify( ActionMapping mapping, ActionForm form, HttpServletRequest request,
+                                 HttpServletResponse response )
+    {
+        ActionForward forward = mapping.findForward( "total_failure" );
+        ActionErrors actionErrors = new ActionErrors();
+        try
+        {
+            SharedRepositoryExportForm pageForm = (SharedRepositoryExportForm) form;
+            fillDetailAction( pageForm, request );
+            pageForm.setModify( true );
+            forward = mapping.findForward( "enter_export" );
+        }
+        catch ( WTransformerException e )
+        {
+            handleException( e, actionErrors, request );
+        }
+        catch ( JrafEnterpriseException e )
+        {
+            handleException( e, actionErrors, request );
+        }
+
+        // If there are error informations, we display them
+        if ( !actionErrors.isEmpty() )
+        {
+            // Messages backup
+            saveMessages( request, actionErrors );
+            // Redirect to the error page
+            forward = mapping.findForward( "total_failure" );
+        }
+
+        return forward;
+    }
+
+    /**
+     * Common code for modify action and detail action
+     * 
+     * @param pageForm The current struts pform
+     * @param request The http request
+     * @throws JrafEnterpriseException Exception occurs during the treatment
+     * @throws WTransformerException Exception during the transformation dto --> form
+     */
+    private void fillDetailAction( SharedRepositoryExportForm pageForm, HttpServletRequest request )
+        throws JrafEnterpriseException, WTransformerException
+    {
+
+        IApplicationComponent ac = AccessDelegateHelper.getInstance( "sharedRepositoryExport" );
+        boolean exportInProgress = ( (Boolean) ac.execute( "isInProgress", new Object[] {} ) ).booleanValue();
+        if ( exportInProgress )
+        {
+            pageForm.setInProgressJob( true );
+        }
+        else
+        {
+            LogonBean logonBean = (LogonBean) request.getSession().getAttribute( WConstants.USER_KEY );
+            List<ApplicationForm> allApplication = logonBean.getApplicationsList();
+
+            ArrayList<ApplicationExportDTO> allApplicationWithResult = selectApplicationWithResult( allApplication, ac );
+
+            Object[] param = new Object[] {};
+            List<JobDTO> jobs = (List<JobDTO>) ac.execute( "getLastJobs", param );
+            param = new Object[] { allApplicationWithResult, jobs };
+            pageForm.init();
+            WTransformerFactory.objToForm( ExportTransformer.class, pageForm, param );
+
+            if ( pageForm.getSuccessfulJob() != null )
+            {
+                File exportFile = retrieveExportFile();
+                if ( exportFile != null )
+                {
+                    pageForm.setExportFile( true );
+                }
+            }
+        }
+    }
+
+    /**
      * This method select the applications which have results among the application given in argument and then create a
      * list of ApplicationExportDTO
      * 
@@ -150,7 +204,7 @@ public class SharedRepositoryExportAction
         ArrayList<ApplicationExportDTO> allApplicationWithResult = new ArrayList<ApplicationExportDTO>();
         for ( ApplicationForm applicationForm : allApplication )
         {
-            if ( applicationForm.getHasResults() )
+            if ( applicationForm.getHasResults() && !applicationForm.isHide() )
             {
                 Object[] param = new Object[] { applicationForm.getApplicationId() };
                 ApplicationExportDTO appDto = (ApplicationExportDTO) ac.execute( "getExportApplication", param );
@@ -183,6 +237,7 @@ public class SharedRepositoryExportAction
         ActionErrors actionErrors = new ActionErrors();
         ArrayList<ApplicationExportDTO> applicationToExport;
         SharedRepositoryExportForm currentForm = (SharedRepositoryExportForm) form;
+        currentForm.setModify( false );
         try
         {
             IApplicationComponent ac = AccessDelegateHelper.getInstance( "sharedRepositoryExport" );
@@ -205,7 +260,7 @@ public class SharedRepositoryExportAction
                     ac.execute( "cancelJob", param );
                 }
                 // If there is no audit scheduled then we scheduled an export
-                else if ( !currentForm.getScheduledJob() )
+                else if ( !currentForm.getScheduledJob() && currentForm.getOneToExport() )
                 {
                     param = new Object[] {};
                     ac.execute( "scheduledJob", param );

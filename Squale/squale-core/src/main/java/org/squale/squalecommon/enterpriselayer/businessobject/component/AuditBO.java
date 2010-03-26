@@ -29,7 +29,6 @@ import java.util.Iterator;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-
 import org.squale.squalecommon.util.messages.CommonMessages;
 
 /**
@@ -295,7 +294,7 @@ public class AuditBO
      * 
      * @return the current value of the mQualityResults property
      * @hibernate.bag lazy="true" cascade="none" inverse="true"
-     * @hibernate.key column="AuditId" 
+     * @hibernate.key column="AuditId"
      * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.result.QualityResultBO"
      * @roseuid 42BACEF503B0
      */
@@ -431,7 +430,8 @@ public class AuditBO
      * @return la liste des composants
      * @hibernate.bag table="Components_Audits" lazy="true" cascade="none" inverse="true"
      * @hibernate.key column="AuditId"
-     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
+     * @hibernate.many-to-many 
+     *                         class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComponentBO"
      *                         column="ComponentId" outer-join="auto"
      */
     public Collection getComponents()
@@ -683,7 +683,8 @@ public class AuditBO
     }
 
     /**
-     * @hibernate.property name="squaleVersion" column="squale_version" type="string" update="true" insert="true" length="100"
+     * @hibernate.property name="squaleVersion" column="squale_version" type="string" update="true" insert="true"
+     *                     length="100"
      * @return la version de SQUALE
      */
     public String getSqualeVersion()
@@ -704,14 +705,15 @@ public class AuditBO
      */
     public static String getCurrentSqualeVersion()
     {
-        return CommonMessages.getString( "audit.squale.version" ) ;
+        return CommonMessages.getString( "audit.squale.version" );
     }
 
     /**
      * @return les configurations
      * @hibernate.bag lazy="true" inverse="true" cascade="none"
      * @hibernate.key column="AuditId"
-     * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO"
+     * @hibernate.one-to-many 
+     *                        class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO"
      */
     public Collection getAuditDisplayConfs()
     {

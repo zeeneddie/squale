@@ -28,13 +28,14 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-
 import org.squale.squalecommon.enterpriselayer.businessobject.UnexpectedRelationException;
 import org.squale.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.AuditFrequencyBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.config.ServeurBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.profile.UserBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.ApplicationExportBO;
 
 /**
@@ -53,22 +54,6 @@ public class ApplicationBO
     private static final long serialVersionUID = 3347680528535207656L;
 
     /**
-     * Fréquence d'audit en nombre de jour
-     */
-    private int mAuditFrequency;
-
-    /**
-     * Règle de purge
-     */
-    private int mResultsStorageOptions;
-
-    /** indique si l'application était déja en production au moment de sa création dans SQUALE */
-    private boolean mIsInProduction;
-
-    /** indique si l'application a été développé en externe */
-    private boolean mExternalDev;
-
-    /**
      * L'application est en création (non validée)
      */
     public static final int IN_CREATION = 0;
@@ -82,6 +67,26 @@ public class ApplicationBO
      * L'application est supprimée.
      */
     public static final int DELETED = 2;
+
+    /**
+     * Fréquence d'audit en nombre de jour
+     */
+    private int mAuditFrequency;
+
+    /**
+     * Règle de purge
+     */
+    private int mResultsStorageOptions;
+
+    /**
+     * indique si l'application était déja en production au moment de sa création dans SQUALE
+     */
+    private boolean mIsInProduction;
+
+    /**
+     * Indique si l'application a été développé en externe
+     */
+    private boolean mExternalDev;
 
     /**
      * Contient le status du projet (non validé, en création, ...)
@@ -144,6 +149,11 @@ public class ApplicationBO
      * The last export of the application
      */
     private ApplicationExportBO lastExport;
+
+    /**
+     * Set of user which have rights for this application
+     */
+    private Set<UserBO> userList = new HashSet<UserBO>();
 
     /**
      * Instancie un nouveau composant.
@@ -698,6 +708,50 @@ public class ApplicationBO
     public void setLastExport( ApplicationExportBO pLastExport )
     {
         lastExport = pLastExport;
+    }
+
+    /**
+     * Verify if the audit given in argument is obsolete. The audit should be an audit of the current application
+     * 
+     * @param audit The audit to verify
+     * @return true if the audit is obsolete
+     */
+    public boolean isAuditObsolete( AuditBO audit )
+    {
+        boolean obsolete = true;
+        Calendar cal = GregorianCalendar.getInstance();
+        Calendar calAuditDate = GregorianCalendar.getInstance();
+        calAuditDate.setTime( audit.getRealBeginningDate() );
+        calAuditDate.add( Calendar.DATE, mResultsStorageOptions );
+        if ( calAuditDate.after( cal ) )
+        {
+            obsolete = false;
+        }
+        return obsolete;
+    }
+
+    /**
+     * Getter method for the attribute userList
+     * 
+     * @return the list of user which have rights for this application
+     * @hibernate.set cascade="none" lazy="true" table="User_Rights" inverse="true" sort="unsorted"
+     * @hibernate.key column="ApplicationId"
+     * @hibernate.many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.profile.UserBO"
+     *                         column="UserId" outer-join="auto"
+     */
+    public Set<UserBO> getUserList()
+    {
+        return userList;
+    }
+
+    /**
+     * Setter method for the attribute userList
+     * 
+     * @param pUserList The new list of user which have rights for the application
+     */
+    public void setUserList( Set<UserBO> pUserList )
+    {
+        userList = pUserList;
     }
 
 }

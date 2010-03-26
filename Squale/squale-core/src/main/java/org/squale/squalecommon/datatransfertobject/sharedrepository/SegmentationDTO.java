@@ -21,7 +21,7 @@ package org.squale.squalecommon.datatransfertobject.sharedrepository;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
+import org.squale.squalecommon.datatransfertobject.sharedrepository.segment.SegmentDTO;
 
 /**
  * This class represent a segmentation ( a list of segment )
@@ -37,7 +37,7 @@ public class SegmentationDTO
     /**
      * List of tags
      */
-    private Set<TagDTO> tagList = new HashSet<TagDTO>();
+    private Set<SegmentDTO> segmentList = new HashSet<SegmentDTO>();
 
     /**
      * List of stats
@@ -69,19 +69,29 @@ public class SegmentationDTO
      * 
      * @return The tag list
      */
-    public Set<TagDTO> getTagList()
+    public Set<SegmentDTO> getSegmentList()
     {
-        return tagList;
+        return segmentList;
     }
 
     /**
      * Setter method for the attribute tagList
      * 
-     * @param pTagList The new tag list
+     * @param pSegmentList The new tag list
      */
-    public void setTagList( Set<TagDTO> pTagList )
+    public void setSegmentList( Set<SegmentDTO> pSegmentList )
     {
-        tagList = pTagList;
+        segmentList = pSegmentList;
+    }
+
+    /**
+     * This method adds a segment to the list of segment
+     * 
+     * @param segment The segment to add
+     */
+    public void addSegment( SegmentDTO segment )
+    {
+        segmentList.add( segment );
     }
 
     /**

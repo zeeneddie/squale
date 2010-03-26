@@ -10,7 +10,7 @@
 	</parent>
 	<artifactId>shared-repository-object</artifactId>
 	<packaging>jar</packaging>
-	<name>Shared Respository Object</name>
+	<name>Shared Repository Object</name>
 	<description>
 		Xstream object for export form / to the shared repository
 	</description>

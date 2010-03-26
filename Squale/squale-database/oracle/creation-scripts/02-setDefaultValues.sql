@@ -1,10 +1,10 @@
-alter table AUDITBO modify SQUALE_VERSION default '5.3' ;
+alter table AUDITBO modify SQUALE_VERSION default '6.0' ;
 alter table COMPONENT modify STARTLINE default 0 ;
 alter table COMPONENT modify EXTERNAL_DEV default 1 ;
 alter table COMPONENT modify IN_PRODUCTION default 1 ;
 alter table COMPONENT modify InInitialDev default 1;
 alter table COMPONENT modify QualityApproachOnStart default 1;
-alter table COMONENT modify GlobalCost default 0;
+alter table COMPONENT modify GlobalCost default 0;
 alter table COMPONENT modify DevCost default 0;
 alter table CRITERIUMPRACTICE_RULE modify WEIGHT default 1 ;
 alter table FACTORCRITERIUM_RULE modify WEIGHT default 1 ;

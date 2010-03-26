@@ -2,13 +2,13 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class lazy="true" table="squale_params" name="org.squale.squalecommon.enterpriselayer.businessobject.config.SqualeParamsBO">
+  <class lazy="true" table="SqualeParams" name="org.squale.squalecommon.enterpriselayer.businessobject.config.SqualeParamsBO">
     <id unsaved-value="-1" name="id" type="long" column="SqualeParamsId" length="19">
       <generator class="native">
-        <param name="sequence">squaleparams_sequence</param>
+        <param name="sequence">squaleParams_sequence</param>
       </generator>
     </id>
-    <property name="paramKey" column="paramKey" update="true" not-null="true" type="string" insert="true"/>
-    <property name="paramValue" column="paramaValue" update="true" not-null="true" type="string" insert="true"/>
+    <property name="paramKey" column="ParamKey" update="true" not-null="true" type="string" insert="true"/>
+    <property name="paramValue" column="ParamaValue" update="true" not-null="true" type="string" insert="true"/>
   </class>
 </hibernate-mapping>

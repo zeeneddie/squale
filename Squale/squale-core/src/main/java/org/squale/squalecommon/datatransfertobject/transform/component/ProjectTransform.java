@@ -66,10 +66,10 @@ public class ProjectTransform
                 projectBO.addTag( TagTransform.dto2Bo( tagDTO ) );
             }
         }
-        else
+        /*else
         {
             projectBO.setTags( new ArrayList() );
-        }
+        }*/
         return projectBO;
     }
 

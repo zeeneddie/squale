@@ -15,7 +15,7 @@
     <many-to-one insert="true" column="Parent" cascade="save-update" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO" name="parent"/>
     <set inverse="false" cascade="none" lazy="true" table="Components_Audits" sort="unsorted" name="audits">
       <key column="ComponentId"/>
-      <many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO" column="AuditId" outer-join="auto" fetch="join"/>
+      <many-to-many fetch="join" class="org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO" column="AuditId" outer-join="auto"/>
     </set>
     <many-to-one insert="true" column="ProjectId" cascade="none" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.component.AbstractComplexComponentBO" name="project"/>
     <set inverse="false" cascade="none" lazy="false" table="Tag_Component" sort="unsorted" name="tags">
@@ -47,6 +47,10 @@
         <property name="globalCost" length="10" column="GlobalCost" update="true" unique="false" type="integer" insert="true"/>
         <property name="devCost" length="10" column="DevCost" update="true" unique="false" type="integer" insert="true"/>
         <one-to-one fetch="join" name="lastExport" lazy="no-proxy" class="org.squale.squalecommon.enterpriselayer.businessobject.sharedrepository.ApplicationExportBO" property-ref="application" cascade="all"/>
+        <set inverse="true" cascade="none" lazy="true" table="User_Rights" sort="unsorted" name="userList">
+	      <key column="ApplicationId"/>
+	      <many-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.profile.UserBO" column="UserId" outer-join="auto"/>
+    	</set>
       </subclass>
       <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO" lazy="true" discriminator-value="Class">
         <property name="fileName" length="2048" column="LongFileName" update="true" type="string" insert="true"/>
