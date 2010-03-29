@@ -115,7 +115,7 @@ public class CreateApplicationForm
 
     /** L'utilisateur ayant fait la dernière modification */
     private String mLastUser;
-    
+
     /**
      * Does the quality approach started at the beginning of the project
      */
@@ -125,7 +125,7 @@ public class CreateApplicationForm
      * Does the application is in its initial development phase
      */
     private boolean mIsInInitialDev;
-    
+
     /**
      * Does the application is in its initial development phase
      */
@@ -407,6 +407,30 @@ public class CreateApplicationForm
     }
 
     /**
+     * <p>
+     * Inspired from the wValidate method. < /br> Needed to validate renamming of an application
+     * </p>
+     * 
+     * @param pMapping the ActionMapping Object
+     * @param pRequest pRequest the request send by the application
+     * @return An ActionError if the name is not valid (empty String or not compliant with the naming pattern) or null
+     *         if the name is valid
+     */
+    public ActionError validateName( ActionMapping pMapping, HttpServletRequest pRequest )
+    {
+        ActionError returnedError = null;
+        if ( getApplicationName().trim().length() == 0 )
+        {
+            returnedError = new ActionError( "error.application.name.empty" );
+        }
+        else if ( !isAValidName( getApplicationName() ) )
+        {
+            returnedError = new ActionError( "error.name.containsInvalidCharacter" );
+        }
+        return returnedError;
+    }
+
+    /**
      * @return le formulaire du Serveur
      */
     public ServeurForm getServeurForm()
@@ -437,7 +461,7 @@ public class CreateApplicationForm
     {
         return mAccessListForm;
     }
-    
+
     /**
      * Getter method for the attribute isQualityApproachOnStart
      * 
@@ -445,7 +469,7 @@ public class CreateApplicationForm
      */
     public boolean getQualityApproachOnStart()
     {
-        return (mIsQualityApproachOnStart);
+        return ( mIsQualityApproachOnStart );
     }
 
     /**
@@ -497,7 +521,7 @@ public class CreateApplicationForm
     {
         globalCostMaintenance = pGlobalCostMaintenance;
     }
-    
+
     /**
      * Getter method for the attribute globalCostInitial
      * 
@@ -537,6 +561,5 @@ public class CreateApplicationForm
     {
         devCost = pDevCost;
     }
-
 
 }
