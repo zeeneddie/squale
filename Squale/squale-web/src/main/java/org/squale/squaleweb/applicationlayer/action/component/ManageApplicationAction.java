@@ -104,7 +104,7 @@ public class ManageApplicationAction
         {
             // On récupère l'aplication courante
             CreateApplicationForm application = (CreateApplicationForm) pForm;
-            validateConfig( pForm, errors );
+            validateConfig( pForm, errors, pMapping, pRequest );
             // Renvoi vers la page d'attribution des droits
             forward = pMapping.findForward( "add_rights" );
             if ( pRequest.getParameter( "modification" ) != null && errors.isEmpty() )
@@ -190,7 +190,7 @@ public class ManageApplicationAction
 
         try
         {
-            validateConfig( pForm, errors );
+            validateConfig( pForm, errors, pMapping, pRequest );
             forward = pMapping.findForward( "add_rights" );
         }
         catch ( Exception e )
@@ -228,7 +228,8 @@ public class ManageApplicationAction
      * @param pForm le formulaire
      * @param pErrors les erreurs
      */
-    private void validateConfig( ActionForm pForm, ActionMessages pErrors )
+    private void validateConfig( ActionForm pForm, ActionMessages pErrors, ActionMapping pMapping,
+                                 HttpServletRequest pRequest )
     {
         // On récupère l'aplication courante
         CreateApplicationForm application = (CreateApplicationForm) pForm;
@@ -263,13 +264,18 @@ public class ManageApplicationAction
             ActionMessage error = new ActionMessage( "error.purge_frequency" );
             pErrors.add( ActionMessages.GLOBAL_MESSAGE, error );
         }
-        if (application.getInInitialDev())
+        if ( application.getInInitialDev() )
         {
-            if (application.getDevCost() > application.getGlobalCostInitial())
+            if ( application.getDevCost() > application.getGlobalCostInitial() )
             {
                 ActionMessage error = new ActionMessage( "error.dev_cost" );
                 pErrors.add( ActionMessages.GLOBAL_MESSAGE, error );
             }
+        }
+        // Validation of the pattern used to rename the application
+        if ( application.validateName( pMapping, pRequest ) != null )
+        {
+            pErrors.add( ActionMessages.GLOBAL_MESSAGE, application.validateName( pMapping, pRequest ) );
         }
     }
 
