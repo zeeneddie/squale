@@ -39,14 +39,18 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
+import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.helper.AccessDelegateHelper;
 import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
 import org.squale.squalecommon.datatransfertobject.component.AuditGridDTO;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 import org.squale.squalecommon.datatransfertobject.component.UserDTO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.result.SqualeReferenceBO;
+import org.squale.squalecommon.enterpriselayer.facade.quality.SqualeReferenceFacade;
 import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
 import org.squale.squaleweb.applicationlayer.formbean.RootForm;
 import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
@@ -472,9 +476,10 @@ public abstract class BaseDispatchAction
      * @throws JrafEnterpriseException en cas d'échec
      * @throws NumberFormatException en cas de problème de conversion
      * @throws WTransformerException si erreur lors de la transformation
+     * @throws JrafDaoException
      */
     private void initCacheAndForm( HttpServletRequest pRequest, RootForm pForm )
-        throws NumberFormatException, JrafEnterpriseException, WTransformerException
+        throws NumberFormatException, JrafEnterpriseException, WTransformerException, JrafDaoException
     {
         // on vérifie que les informations ne sont pas présentes ni dans
         // les paramètres de la requete ni dans les attributs de la requete.
@@ -483,7 +488,8 @@ public abstract class BaseDispatchAction
         String projectId = getParameterOrAttribute( pRequest, "projectId" );
         String currentAuditId = getParameterOrAttribute( pRequest, "currentAuditId" );
         String previousAuditId = getParameterOrAttribute( pRequest, "previousAuditId" );
-        // On récupère le nom du projet courant, car sinon dans le cas d'une modification
+        // Getting the application name
+        String applicationName = pForm.getApplicationName();
         // on perd la modification
         String currentProjectName = pForm.getProjectName();
         // boite noire avec gestion en cache
@@ -501,6 +507,13 @@ public abstract class BaseDispatchAction
             pForm.setApplicationId( "" + appliDTO.getID() );
             pForm.setApplicationName( appliDTO.getName() );
             pForm.setNumberOfChildren( "" + appliDTO.getNumberOfChildren() );
+            // Setting the name of the application if it is in configuration mode
+            // Keep in mind that the parameter DO_NOT_RESET_FORM has been set in the config_application.jsp
+            if ( pRequest.getParameter( DO_NOT_RESET_FORM ) != null )
+            {
+                pForm.setApplicationName( applicationName );
+                SqualeReferenceFacade.updateApplicationName( appliId, applicationName, null );
+            }
         }
         // Création du projet
         ComponentDTO projectDTO = (ComponentDTO) map.get( PROJECT_DTO );
@@ -546,12 +559,12 @@ public abstract class BaseDispatchAction
         pRequest.getSession().setAttribute( PROJECT_DTO, projectDTO );
         pRequest.getSession().setAttribute( CURRENT_AUDIT_DTO, curAudit );
         pRequest.getSession().setAttribute( PREVIOUS_AUDIT_DTO, precAudit );
-        
+
         // récupère en session le TopMenu, le place dans le FormBean et le retire de la session
         HashMap TopMenu = (HashMap) pRequest.getSession().getAttribute( SqualeWebConstants.TOP_KEY );
         pForm.setTopMenu( TopMenu );
         pRequest.getSession().removeAttribute( SqualeWebConstants.TOP_KEY );
-               
+
         // Construit la liste des projets de l'application
         // et les met en session
         buildChildrenList( appliDTO, pRequest );
@@ -966,28 +979,27 @@ public abstract class BaseDispatchAction
             // On construit ensuite le menu des grilles
             IApplicationComponent acGrid = AccessDelegateHelper.getInstance( "QualityGrid" );
             topMenu = (HashMap) acGrid.execute( "getGridMetrics", new Object[] { auditGridDto.getGrid() } );
-            
-            // Modification des valeurs de la HashMap TopMenu suivant le langage                    
-           	Set keys = topMenu.keySet();
-           	Iterator it = keys.iterator();
-           	// Rajout du langage dans la requête pour les sous-menus
-           	pRequest.setAttribute(SqualeWebConstants.LANGUAGE, projectDTO.getLanguage());
-           	//Parcours des clés de la HashMap
-           	while ( it.hasNext() )
+
+            // Modification des valeurs de la HashMap TopMenu suivant le langage
+            Set keys = topMenu.keySet();
+            Iterator it = keys.iterator();
+            // Rajout du langage dans la requête pour les sous-menus
+            pRequest.setAttribute( SqualeWebConstants.LANGUAGE, projectDTO.getLanguage() );
+            // Parcours des clés de la HashMap
+            while ( it.hasNext() )
             {
-            	Object key = it.next();
-            	String skey = key.toString();
-            	Object pTemp = topMenu.get(key);
-            	// On va vérifier que la clé débute par component. et qu'elle existe bien avec le langage en plus
-            	if ( skey.startsWith("component.") & 
-            			WebMessages.existString( skey + "." + projectDTO.getLanguage())  )
-            	{
-            		languageCustomizedTopMenu.put( key + "." + projectDTO.getLanguage(), pTemp);
-            	}
-            	else
-            	{
-            		languageCustomizedTopMenu.put( key, pTemp);
-            	}
+                Object key = it.next();
+                String skey = key.toString();
+                Object pTemp = topMenu.get( key );
+                // On va vérifier que la clé débute par component. et qu'elle existe bien avec le langage en plus
+                if ( skey.startsWith( "component." ) & WebMessages.existString( skey + "." + projectDTO.getLanguage() ) )
+                {
+                    languageCustomizedTopMenu.put( key + "." + projectDTO.getLanguage(), pTemp );
+                }
+                else
+                {
+                    languageCustomizedTopMenu.put( key, pTemp );
+                }
             }
         }
         pRequest.getSession().setAttribute( SqualeWebConstants.TOP_KEY, languageCustomizedTopMenu );
