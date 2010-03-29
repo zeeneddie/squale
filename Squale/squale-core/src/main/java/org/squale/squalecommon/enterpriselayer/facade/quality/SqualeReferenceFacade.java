@@ -20,7 +20,6 @@ package org.squale.squalecommon.enterpriselayer.facade.quality;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -36,14 +35,13 @@ import org.squale.squalecommon.daolayer.component.ApplicationDAOImpl;
 import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
 import org.squale.squalecommon.daolayer.component.AuditDisplayConfDAOImpl;
 import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
-import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
 import org.squale.squalecommon.daolayer.result.MetricDAOImpl;
 import org.squale.squalecommon.daolayer.result.QualityResultDAOImpl;
 import org.squale.squalecommon.daolayer.result.SqualeReferenceDAOImpl;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
-import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
 import org.squale.squalecommon.datatransfertobject.result.SqualeReferenceDTO;
 import org.squale.squalecommon.datatransfertobject.transform.result.SqualeReferenceTransform;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditDisplayConfBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
@@ -52,11 +50,8 @@ import org.squale.squalecommon.enterpriselayer.businessobject.config.web.Volumet
 import org.squale.squalecommon.enterpriselayer.businessobject.result.FactorResultBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.SqualeReferenceBO;
-import org.squale.squalecommon.enterpriselayer.businessobject.result.mccabe.McCabeQAProjectMetricsBO;
-import org.squale.squalecommon.enterpriselayer.businessobject.result.rsm.RSMProjectMetricsBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.rule.FactorRuleBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.rule.QualityGridBO;
-import org.squale.squalecommon.enterpriselayer.facade.export.audit.AuditReportFacade;
 import org.squale.squalecommon.util.mapping.Mapping;
 
 /**
@@ -524,6 +519,61 @@ public class SqualeReferenceFacade
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * <p>
+     * Update the name of an application which has been modified by an authorized user.
+     * </p>
+     * <p>
+     * An application could be renamed in the config page (config_application.jsp). Thus once the name has been changed,
+     * it has to be updated in DB regarding the system of reference
+     * </p>
+     * 
+     * @param pAppliId Id of the application in DB
+     * @param pUpdatedAppliName The updated name
+     * @param session The current hibernate session could be null
+     * @throws JrafEnterpriseException if an exception is generated while updating the name
+     * @throws JrafDaoException if an exception is generated while getting the application in DB
+     */
+    public static void updateApplicationName( String pAppliId, String pUpdatedAppliName, ISession session )
+        throws JrafEnterpriseException, JrafDaoException
+    {
+        // Init the persistence session if null
+        if ( session == null )
+        {
+            // CHECKSTYLE:OFF
+            session = PERSISTENCEPROVIDER.getSession();
+            // CHECKSTYLE:ON
+        }
+        try
+        {
+            // Getting the application in DB as the name has not been updated at this point
+            ApplicationBO currentApp = (ApplicationBO) ApplicationDAOImpl.getInstance().get( session, Long.parseLong( pAppliId ));
+            // DAO instance
+            SqualeReferenceDAOImpl referenceDao = SqualeReferenceDAOImpl.getInstance();
+            // A single application could have several references as it depends on the projects/modules
+            Collection<SqualeReferenceBO> knownReferences = referenceDao.findReferencesByAppliName( session, currentApp.getName() );
+            //SqualeReferenceBO currentReference = SqualeReferenceDAOImpl.getInstance().findReferencesByAppliName( session, currentApp.getName() );
+            if ( knownReferences.size() >= 0 )
+            {
+                // Iterating over the collection
+                for ( Iterator<SqualeReferenceBO> iterator = knownReferences.iterator(); iterator.hasNext(); )
+                {
+                    SqualeReferenceBO squaleReferenceBO = (SqualeReferenceBO) iterator.next();
+                    // Removing
+                    SqualeReferenceDAOImpl.getInstance().remove( session, squaleReferenceBO );
+                    // Setting the updated name
+                    squaleReferenceBO.setApplicationName( pUpdatedAppliName );
+                    // Saving
+                    referenceDao.create( session, squaleReferenceBO );
+                }
+            }
+        }
+        catch ( JrafDaoException jrafExcep )
+        {
+            FacadeHelper.convertException( jrafExcep, SqualeReferenceFacade.class.getName() + ".updateApplicationName" );
         }
     }
 }
