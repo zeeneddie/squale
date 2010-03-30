@@ -18,11 +18,15 @@
  */
 package org.squale.squaleweb.applicationlayer.formbean;
 
+import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Properties;
 import java.util.regex.Pattern;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
 import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
@@ -33,6 +37,27 @@ import org.squale.welcom.struts.bean.WActionFormSelectable;
 public class RootForm
     extends WActionFormSelectable
 {
+    /**
+     * Logger for this class
+     */
+    private static Log log = LogFactory.getLog( RootForm.class );
+
+    /** Regexp used to validate application or project names */
+    private static String VALIDATION_REGEXP;
+
+    static
+    {
+        Properties props = new Properties();
+        try
+        {
+            props.load( RootForm.class.getResourceAsStream( "RootForm.properties" ) );
+            VALIDATION_REGEXP = props.getProperty( "applicationAndProjectNameRegexp" );
+        }
+        catch ( IOException e )
+        {
+            log.fatal( "Impossible to load the \"RootForm.properties\" file.", e );
+        }
+    }
 
     /** id de l'application */
     protected String mApplicationId = "";
@@ -72,13 +97,13 @@ public class RootForm
 
     /** Version de squale pour l'audit courant */
     protected String mAuditSqualeVersion = "";
-    
+
     /** Liste des tags éventuels associés à l'application */
     protected Collection<TagDTO> mTags;
 
-    /** Map du TopMenu pour le projet courant*/
+    /** Map du TopMenu pour le projet courant */
     protected HashMap mTopMenu = null;
-    
+
     /**
      * @return l'id de l'application
      */
@@ -286,9 +311,8 @@ public class RootForm
      */
     protected boolean isAValidName( String pName )
     {
-        String regexp = "[a-zA-Z0-9]+[a-zA-Z0-9_ \\.]*[a-zA-Z0-9]+$|[a-zA-Z0-9]+$";
         // Si ça matche, alors c'est un nom valide
-        return Pattern.matches( regexp, pName );
+        return Pattern.matches( VALIDATION_REGEXP, pName );
     }
 
     /**
@@ -369,7 +393,7 @@ public class RootForm
         setProjectId( "" );
         setProjectName( "" );
         // Le menu Top du projet
-        setTopMenu ( null );
+        setTopMenu( null );
         // Les audits
         resetAudits();
     }
@@ -389,9 +413,10 @@ public class RootForm
     {
         mAuditSqualeVersion = pVersion;
     }
-    
+
     /**
      * Access method for the mTags property.
+     * 
      * @return l'utilisateur ayant fait la dernière modification
      */
     public Collection<TagDTO> getTags()
@@ -401,14 +426,15 @@ public class RootForm
 
     /**
      * Sets the value of the mTags property.
+     * 
      * @param pTags l'utilisateur ayant fait la dernière modification
      */
     public void setTags( Collection<TagDTO> pTags )
     {
         mTags = pTags;
     }
-	
-	/**
+
+    /**
      * @return le TopMenu du projet
      */
     public HashMap getTopMenu()
@@ -423,7 +449,7 @@ public class RootForm
     {
         mTopMenu = pTopMenu;
     }
-    
+
     /**
      * @return true si les audits sont comparables
      */

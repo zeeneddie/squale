@@ -16,6 +16,9 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>rebel.xml</exclude>
+				</excludes>
 			</resource>
 			<resource>
 				<directory>src/main/java</directory>
@@ -42,6 +45,7 @@
 				<configuration>
 					<!-- GWT needs to have the webapp source folder in "war", so this breaks Maven conventions -->
 					<warSourceDirectory>war</warSourceDirectory>
+					<warSourceExcludes>WEB-INF/classes/**,WEB-INF/lib/**</warSourceExcludes>
 					<webResources>
 						<resource>
 							<directory>
