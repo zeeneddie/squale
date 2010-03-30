@@ -555,25 +555,20 @@ public class SqualeReferenceFacade
             SqualeReferenceDAOImpl referenceDao = SqualeReferenceDAOImpl.getInstance();
             // A single application could have several references as it depends on the projects/modules
             Collection<SqualeReferenceBO> knownReferences = referenceDao.findReferencesByAppliName( session, currentApp.getName() );
-            //SqualeReferenceBO currentReference = SqualeReferenceDAOImpl.getInstance().findReferencesByAppliName( session, currentApp.getName() );
-            if ( knownReferences.size() >= 0 )
+            // Rename every instance
+            for ( SqualeReferenceBO squaleReferenceBO : knownReferences )
             {
-                // Iterating over the collection
-                for ( Iterator<SqualeReferenceBO> iterator = knownReferences.iterator(); iterator.hasNext(); )
-                {
-                    SqualeReferenceBO squaleReferenceBO = (SqualeReferenceBO) iterator.next();
-                    // Removing
-                    SqualeReferenceDAOImpl.getInstance().remove( session, squaleReferenceBO );
-                    // Setting the updated name
-                    squaleReferenceBO.setApplicationName( pUpdatedAppliName );
-                    // Saving
-                    referenceDao.create( session, squaleReferenceBO );
-                }
+                squaleReferenceBO.setApplicationName( pUpdatedAppliName );
+                referenceDao.save( session, squaleReferenceBO );
             }
         }
         catch ( JrafDaoException jrafExcep )
         {
             FacadeHelper.convertException( jrafExcep, SqualeReferenceFacade.class.getName() + ".updateApplicationName" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, SqualeReferenceFacade.class.getName() + ".updateApplicationName" );
         }
     }
 }
