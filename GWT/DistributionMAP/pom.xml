@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>org.squale.gwt.widget</groupId>
 	<artifactId>distribution-map</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>GWT Distribution Map</name>
 	<description>GWT Distribution Map Widget</description>
 	<scm>
