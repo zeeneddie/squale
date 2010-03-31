@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- 
+	Fichier permettant à l'outil de qualimetrie Squale
+	de construire le projet avec maven a partir d'un 
+	appel ant.
+-->
+<project basedir="." default="build-all">
+
+	<!-- Répertoire fake pour que Squale soit OK -->
+	<property name="SqualeClassesDir" location="${basedir}/target/classes" />
+
+	<path id="SqualeClasspath">
+	</path>
+	
+	<!-- Appel du build avec valeur MvnExecutable deja attribue -->
+	<target name="build-all" depends="CheckOs">
+		<mkdir dir="${SqualeClassesDir}"/>
+		<exec executable="${MvnExecutable}" dir="${basedir}" failonerror="true">
+			<arg value="clean" />
+			<arg value="package" />
+			<arg value="cobertura:cobertura" />
+			<arg value="-Dcobertura.report.format=xml" />
+			<arg value="-Dmaven.test.failure.ignore=true" />
+		</exec>
+	</target>
+
+	<!-- Target permettant de definir le type de l'os. Est appele avant le build-all -->
+	<target name="CheckOs">
+		<condition property="MvnExecutable" value="mvn.bat" else="mvn">
+			<os family="windows" />
+		</condition>
+	</target>
+
+</project>
