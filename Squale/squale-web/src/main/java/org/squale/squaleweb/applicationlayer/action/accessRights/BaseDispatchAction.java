@@ -512,7 +512,6 @@ public abstract class BaseDispatchAction
             if ( pRequest.getParameter( DO_NOT_RESET_FORM ) != null )
             {
                 pForm.setApplicationName( applicationName );
-                SqualeReferenceFacade.updateApplicationName( appliId, applicationName, null );
             }
         }
         // Création du projet

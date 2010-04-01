@@ -44,6 +44,7 @@ import org.squale.squalecommon.enterpriselayer.applicationcomponent.ACMessages;
 import org.squale.squalecommon.enterpriselayer.facade.component.ApplicationFacade;
 import org.squale.squalecommon.enterpriselayer.facade.component.AuditFacade;
 import org.squale.squalecommon.enterpriselayer.facade.component.ProjectFacade;
+import org.squale.squalecommon.enterpriselayer.facade.quality.SqualeReferenceFacade;
 
 /**
  * <p>
@@ -132,8 +133,11 @@ public class ApplicationAdminApplicationComponentAccess
         ISession session = null;
         try
         {
+            
             session = PERSISTENTPROVIDER.getSession();
             session.beginTransaction();
+            //Update the application name in the squalereference table
+            SqualeReferenceFacade.updateApplicationName( Long.toString( pApplicationConf.getId() ), pApplicationConf.getName(), session );
             // Utilisation de ApplicationFacade pour modifier l'application
             ApplicationFacade.update( pApplicationConf, session );
             session.commitTransaction();
@@ -531,7 +535,7 @@ public class ApplicationAdminApplicationComponentAccess
             LOG.fatal( e, e );
         }
     }
-    
+
     /**
      * adds a tag to an application
      * 
@@ -539,7 +543,7 @@ public class ApplicationAdminApplicationComponentAccess
      * @param pTag The tag that will be added to the application
      * @throws JrafEnterpriseException if an error occurs
      */
-    public void addTag ( Long pApplicationId, TagDTO pTag )
+    public void addTag( Long pApplicationId, TagDTO pTag )
         throws JrafEnterpriseException
     {
         try
@@ -554,7 +558,7 @@ public class ApplicationAdminApplicationComponentAccess
             LOG.fatal( e, e );
         }
     }
-    
+
     /**
      * removes a tag from an application
      * 
@@ -562,7 +566,7 @@ public class ApplicationAdminApplicationComponentAccess
      * @param pTag The tag that will be removed from the application
      * @throws JrafEnterpriseException if an error occurs
      */
-    public void removeTag ( Long pApplicationId, TagDTO pTag )
+    public void removeTag( Long pApplicationId, TagDTO pTag )
         throws JrafEnterpriseException
     {
         try

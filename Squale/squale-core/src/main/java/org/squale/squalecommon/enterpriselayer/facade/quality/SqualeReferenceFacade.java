@@ -535,20 +535,20 @@ public class SqualeReferenceFacade
      * @param pUpdatedAppliName The updated name
      * @param session The current hibernate session could be null
      * @throws JrafEnterpriseException if an exception is generated while updating the name
-     * @throws JrafDaoException if an exception is generated while getting the application in DB
      */
     public static void updateApplicationName( String pAppliId, String pUpdatedAppliName, ISession session )
-        throws JrafEnterpriseException, JrafDaoException
+        throws JrafEnterpriseException
     {
-        // Init the persistence session if null
-        if ( session == null )
-        {
-            // CHECKSTYLE:OFF
-            session = PERSISTENCEPROVIDER.getSession();
-            // CHECKSTYLE:ON
-        }
+        
         try
         {
+         // Init the persistence session if null
+            if ( session == null )
+            {
+                // CHECKSTYLE:OFF
+                session = PERSISTENCEPROVIDER.getSession();
+                // CHECKSTYLE:ON
+            }
             // Getting the application in DB as the name has not been updated at this point
             ApplicationBO currentApp = (ApplicationBO) ApplicationDAOImpl.getInstance().get( session, Long.parseLong( pAppliId ));
             // DAO instance
