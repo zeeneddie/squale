@@ -19,12 +19,12 @@
 package org.squale.squalix.tools.cobertura;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.squalecommon.daolayer.result.MeasureDAOImpl;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
@@ -63,6 +63,11 @@ import org.squale.squalix.util.repository.ComponentRepository;
 public class CoberturaTask
     extends AbstractGenericTask
 {
+    /**
+     * Instance of MeasureDAO used during the processing
+     */
+    private static final MeasureDAOImpl MEASURE_DAO = MeasureDAOImpl.getInstance();
+
     /** Logger */
     private static final Log LOGGER = LogFactory.getLog( CoberturaTask.class );
 
@@ -77,6 +82,16 @@ public class CoberturaTask
 
     /** Java parser */
     private JavaParser jParser;
+
+    /**
+     * List of ClassMetrics
+     */
+    private List<List<AbstractCoberturaMetricsBO>> classesMetrics = new ArrayList<List<AbstractCoberturaMetricsBO>>();
+
+    /**
+     * List of sorted out methods
+     */
+    private List<CoberturaMethodMetricsBO> sortedMethods = new ArrayList<CoberturaMethodMetricsBO>();
 
     /** Default constructor */
     public CoberturaTask()
@@ -104,49 +119,55 @@ public class CoberturaTask
     public void parseResults( List<File> results )
         throws JrafDaoException
     {
-        /* Logging to indicate that Squale has started CoberturaTask parsing */
+        // Logging to indicate that Squale has started CoberturaTask parsing
         LOGGER.info( new String( CoberturaMessages.getMessage( "cobertura.task.beginsParsing", mProject.getName() ) ) );
-        /* Iterating the list to recover result file(s) */
+        // Iterating the list to recover result file(s)
         for ( Iterator<File> iterator = results.iterator(); iterator.hasNext(); )
         {
-            /* Creating a File on each iteration */
+            // Creating a File on each iteration
             File file = (File) iterator.next();
-            /* If the file exists */
+            // If the file exists
             if ( file.exists() )
             {
-                /* Parsing the content of if */
+                LOGGER.info( new String(
+                                         CoberturaMessages.getMessage( "cobertura.task.parsingFileName", file.getName() ) ) );
+                // Parsing the content of if it
                 parsedResults = coberturaParser.parse( file );
             }
             else
             {
-                /* Logging a "no file found" error and cancelling the task */
+                // Logging a "no file found" error and cancelling the task
                 LOGGER.error( new String( CoberturaMessages.getMessage( "cobertura.task.noFileFound", file.getName() ) ) );
                 mStatus = FAILED;
             }
         }
-        /* Persisting the values resulting from the parsing */
-        this.persistResults();
+        // Logging to indicate end of parsing
+        LOGGER.info( new String( CoberturaMessages.getMessage( "cobertura.task.parsingSuccessfull", mProject.getName() ) ) );
+        this.extractProjectMetrics();
     }
 
     /**
      * <p>
-     * Method used to recover and push the results in DB.
+     * Extract the metrics associated to each level (Package, class, method) so as to save collections
      * </p>
      * 
-     * @throws JrafDaoException is thrown if an error occurs when creating the values in DB
+     * @throws JrafDaoException is thrown if an error occurs when manipulating the data
      */
-    public void persistResults()
+    private void extractProjectMetrics()
         throws JrafDaoException
     {
-        /* Instance of the repository which will be used */
+        LOGGER.info( new String( CoberturaMessages.getMessage( "cobertura.task.startExtracting", mProject.getName() ) ) );
+        // Instance of the repository which will be used
         repository = new ComponentRepository( mProject, getSession() );
-        /* Persisting project level values in the DB */
+        // Setting name, audit and component
         parsedResults.setAudit( this.getAudit() );
         parsedResults.setComponent( this.getProject() );
         parsedResults.setTaskName( this.getName() );
-        MeasureDAOImpl.getInstance().create( getSession(), parsedResults );
-        /* Persisting the package level values */
-        extractPackageMetrics( parsedResults );
+        // Persisting project level values
+        MEASURE_DAO.create( getSession(), parsedResults );
+        LOGGER.info( new String( CoberturaMessages.getMessage( "cobertura.task.projectLevelPushed", mProject.getName() ) ) );
+        // Starting processing of package level metrics
+        extractChildrenMetrics( parsedResults );
     }
 
     /**
@@ -158,28 +179,33 @@ public class CoberturaTask
      * @throws JrafDaoException is thrown if an error occurs when creating the values in DB or while persisting the
      *             values
      */
-    public void extractPackageMetrics( CoberturaProjectMetricsBO pProjectMetrics )
+    public void extractChildrenMetrics( CoberturaProjectMetricsBO pProjectMetrics )
         throws JrafDaoException
     {
-        /* Getting the list of packages */
+        LOGGER.info( new String(
+                                 CoberturaMessages.getMessage( "cobertura.task.packageLevelStarted", mProject.getName() ) ) );
+        // Getting the list of packages
         List<AbstractCoberturaMetricsBO> packagesResults = pProjectMetrics.getPackages();
-        /* Iterating to get single package metrics */
+        // Iterating to get single package metrics and set the value of audit and reference properties
         for ( Iterator<AbstractCoberturaMetricsBO> iterator = packagesResults.iterator(); iterator.hasNext(); )
         {
-            /* Getting a package */
+            // Getting a package
             CoberturaPackageMetricsBO singlePackageMetrics = (CoberturaPackageMetricsBO) iterator.next();
-            /* Setting the audit reference */
-            singlePackageMetrics.setAudit( this.getAudit() );
-            /* Setting the task reference */
-            singlePackageMetrics.setTaskName( this.getName() );
-            /* Creating the packageBO object thanks to the getPackage method of the JavaParser */
+            // Creating the packageBO object thanks to the getPackage method of the JavaParser
             PackageBO packageBO = jParser.getPackage( singlePackageMetrics.getName() );
-            /* Persisting the values */
+            // Setting the audit reference
+            singlePackageMetrics.setAudit( this.getAudit() );
+            // Setting the task reference
+            singlePackageMetrics.setTaskName( this.getName() );
+            // Setting the mComponent property
             singlePackageMetrics.setComponent( repository.persisteComponent( packageBO ) );
-            /* Extracting and persisting the class level metrics */
-            extractClassMetrics( (CoberturaPackageMetricsBO) singlePackageMetrics );
-            MeasureDAOImpl.getInstance().create( getSession(), singlePackageMetrics );
+            // Adding the classes related to the packages to the list for post-processing
+            classesMetrics.add( singlePackageMetrics.getClasses() );
         }
+        // Persisting the package level values
+        MEASURE_DAO.saveAll( getSession(), packagesResults );
+        LOGGER.info( new String( CoberturaMessages.getMessage( "cobertura.task.packageLevelPushed", mProject.getName() ) ) );
+        this.extractClassMetrics( classesMetrics );
     }
 
     /**
@@ -187,32 +213,64 @@ public class CoberturaTask
      * This method is used to extract and iterate the measurements of the class results
      * </p>
      * 
-     * @param pPackageMetrics the package level result that contains the package level measurements
+     * @param pClassesMetrics List of classes associated to the packages
      * @throws JrafDaoException is thrown if an error occurs when creating the values in DB or while persisting the
      *             values
      */
-    public void extractClassMetrics( CoberturaPackageMetricsBO pPackageMetrics )
+    public void extractClassMetrics( List<List<AbstractCoberturaMetricsBO>> pClassesMetrics )
         throws JrafDaoException
     {
-        /* Getting the list of classes */
-        List<AbstractCoberturaMetricsBO> classesResults = pPackageMetrics.getClasses();
-        /* Iterating to get single class metrics */
-        for ( Iterator<AbstractCoberturaMetricsBO> iterator = classesResults.iterator(); iterator.hasNext(); )
+        LOGGER.info( new String( CoberturaMessages.getMessage( "cobertura.task.classLevelStarted", mProject.getName() ) ) );
+        // Getting the list of classes
+        List<AbstractCoberturaMetricsBO> classesResults = new ArrayList<AbstractCoberturaMetricsBO>();
+        // Getting the lists of classes one by one
+        for ( List<AbstractCoberturaMetricsBO> classesList : pClassesMetrics )
         {
-            /* Getting a class */
-            CoberturaClassMetricsBO singleClassMetrics = (CoberturaClassMetricsBO) iterator.next();
-            /* Setting the audit reference */
-            singleClassMetrics.setAudit( this.getAudit() );
-            /* Setting the task reference */
-            singleClassMetrics.setTaskName( this.getName() );
-            /* Creating the classBO object thanks to the getClass method of the JavaParser */
-            ClassBO classBO = jParser.getClass( singleClassMetrics.getName() );
-            /* Persisting the values */
-            singleClassMetrics.setComponent( repository.persisteComponent( classBO ) );
-            /* Extracting and persisting the class level metrics */
-            extractMethodMetrics( (CoberturaClassMetricsBO) singleClassMetrics );
-            MeasureDAOImpl.getInstance().create( getSession(), singleClassMetrics );
+            for ( AbstractCoberturaMetricsBO classMetricsBO : classesList )
+            {
+                // Instance of classMetricsBO
+                CoberturaClassMetricsBO singleClassMetrics = (CoberturaClassMetricsBO) classMetricsBO;
+                // Creating the classBO object thanks to the getClass method of the JavaParser
+                ClassBO classBO = jParser.getClass( singleClassMetrics.getName() );
+                // Setting the audit reference
+                singleClassMetrics.setAudit( this.getAudit() );
+                // Setting the task reference
+                singleClassMetrics.setTaskName( this.getName() );
+                // Setting the mComponent property
+                singleClassMetrics.setComponent( repository.persisteComponent( classBO ) );
+                // Adding to the list
+                classesResults.add( singleClassMetrics );
+                // Getting the list of associated methods
+                List<AbstractCoberturaMetricsBO> unsortedMethodMetrics = singleClassMetrics.getMethods();
+                // Preparing the list of methods
+                for ( AbstractCoberturaMetricsBO abstractCoberturaMetricsBO : unsortedMethodMetrics )
+                {
+                    // Instance of methodBO
+                    CoberturaMethodMetricsBO singleMethodMetrics =
+                        (CoberturaMethodMetricsBO) abstractCoberturaMetricsBO;
+                    // Checking if the method comes from an anonymous class or is an early init. If not executing
+                    // the statements
+                    if ( !this.isIdentifiable( singleClassMetrics ) && !this.isEarlyInit( singleMethodMetrics )
+                        && !this.isIdentifiable( singleMethodMetrics ) )
+                    {
+                        // Recombining the name of the method and its signature
+                        String originalMethodName =
+                            singleClassMetrics.getName()
+                                + '.'
+                                + jParser.getConstructorFromByte( singleMethodMetrics.getName(),
+                                                                  singleClassMetrics.getName() ) + '('
+                                + jParser.getSignatureFromBytecode( singleMethodMetrics.getSignature() ) + ')';
+                        // Setting the name of the method to the original one
+                        singleMethodMetrics.setName( originalMethodName );
+                        sortedMethods.add( singleMethodMetrics );
+                    }
+                }
+            }
         }
+        // Persisting the package level values
+        MEASURE_DAO.saveAll( getSession(), classesResults );
+        this.extractMethodMetrics( sortedMethods );
+        LOGGER.info( new String( CoberturaMessages.getMessage( "cobertura.task.classLevelPushed", mProject.getName() ) ) );
     }
 
     /**
@@ -220,63 +278,50 @@ public class CoberturaTask
      * This method is used to extract and iterate the measurements of method results
      * </p>
      * 
-     * @param pClassMetrics the class level result that contains the package level measurements
+     * @param pMethodMetrics List of sorted out CoberturaMetricsBO
      * @throws JrafDaoException is thrown if an error occurs when creating the values in DB or while persisting the
      *             values
      */
-    public void extractMethodMetrics( CoberturaClassMetricsBO pClassMetrics )
+    public void extractMethodMetrics( List<CoberturaMethodMetricsBO> pMethodMetrics )
         throws JrafDaoException
     {
-        /* Getting the list of methods */
-        List<AbstractCoberturaMetricsBO> methodMetrics = pClassMetrics.getMethods();
-        /* Iterating to get single method metrics */
-        for ( Iterator<AbstractCoberturaMetricsBO> iterator = methodMetrics.iterator(); iterator.hasNext(); )
+        LOGGER.info( new String( CoberturaMessages.getMessage( "cobertura.task.methodLevelStarted", mProject.getName() ) ) );
+        // Getting the list of methods
+        List<CoberturaMethodMetricsBO> methodToPush = new ArrayList<CoberturaMethodMetricsBO>();
+        // Getting the method
+        for ( AbstractCoberturaMetricsBO abstractCoberturaMetricsBO : pMethodMetrics )
         {
-
-            /* Getting a method */
-            CoberturaMethodMetricsBO singleMethodMetrics = (CoberturaMethodMetricsBO) iterator.next();
-            /*
-             * Checking if the method comes from an anonymous class or is an early init. If not executing the statements
-             */
-            if ( !this.isIdentifiable( pClassMetrics ) && !this.isEarlyInit( singleMethodMetrics )
-                && !this.isIdentifiable( singleMethodMetrics ) )
+            // Instance of methodBO
+            CoberturaMethodMetricsBO singleMethodMetrics = (CoberturaMethodMetricsBO) abstractCoberturaMetricsBO;
+            // Setting the audit reference */
+            singleMethodMetrics.setAudit( this.getAudit() );
+            // Setting the task reference */
+            singleMethodMetrics.setTaskName( this.getName() );
+            // Creating the methodBO object thanks to the getMethod method of the JavaParser
+            MethodBO methodBO = jParser.getMethod( singleMethodMetrics.getName(), "" );
+            // Setting the mComponent
+            singleMethodMetrics.setComponent( repository.persisteComponent( methodBO ) );
+            // Checking if the component already exists in the map of components
+            if ( null != repository.getComponent( methodBO ) )
             {
-                /* Setting the audit reference */
-                singleMethodMetrics.setAudit( this.getAudit() );
-                /* Setting the task reference */
-                singleMethodMetrics.setTaskName( this.getName() );
-                /* Recombining the name of the method and its signature */
-                String originalMethodName =
-                    pClassMetrics.getName() + '.'
-                        + jParser.getConstructorFromByte( singleMethodMetrics.getName(), pClassMetrics.getName() )
-                        + '(' + jParser.getSignatureFromBytecode( singleMethodMetrics.getSignature() ) + ')';
-                /* Setting the name of the method to the original one */
-                singleMethodMetrics.setName( originalMethodName );
-                /* Creating the methodBO object thanks to the getMethod method of the JavaParser */
-                MethodBO methodBO = jParser.getMethod( singleMethodMetrics.getName(), "" );
-                /* Checking if the component already exists in the map of components */
-                if ( null != repository.getComponent( methodBO ) )
-                {
-                    /* Persisting the values */
-                    singleMethodMetrics.setComponent( repository.persisteComponent( methodBO ) );
-                    MeasureDAOImpl.getInstance().findWhere( getSession(), singleMethodMetrics.getId(),
-                                                            singleMethodMetrics.getAudit().getId() );
-                    /* Pushing in DB */
-                    MeasureDAOImpl.getInstance().create( getSession(), singleMethodMetrics );
-                }
+                // Adding to the list used to collect the methods to push
+                methodToPush.add( singleMethodMetrics );
             }
         }
+        // Persisting the method level values
+        MEASURE_DAO.saveAll( getSession(), methodToPush );
+        LOGGER.info( new String( CoberturaMessages.getMessage( "cobertura.task.methodLevelPushed", mProject.getName() ) ) );
     }
 
     /**
      * <p>
-     * Before aggregating metrics and pushing them in DB one must check if a method or a class could be identified in case of
-     * regular audits. As Squale purposes are to audit projects over a middle to long time period it is for now not
-     * possible to integrate method from anonymous class or static class calls.
+     * Before aggregating metrics and pushing them in DB one must check if a method or a class could be identified in
+     * case of regular audits. As Squale purposes are to audit projects over a middle to long time period it is for now
+     * not possible to integrate method from anonymous class or static class calls.
      * </p>
      * <p>
-     * This method checks if the audited method comes from an anonymous class or is a static class call so as to decide whether or not to
-     * save data in DB.
+     * This method checks if the audited method comes from an anonymous class or is a static class call so as to decide
+     * whether or not to save data in DB.
      * </p>
      * 
      * @param pMetricBO the metrics that has to be checked
