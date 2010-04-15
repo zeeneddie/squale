@@ -17,17 +17,15 @@
 		</practice>
 
 		<practice name="copypaste" effort="30">
-			<simpleformula>
-				<level>project</level>
-				<measures>
-					<measure>copypaste</measure>
-					<measure>javancss</measure>
-				</measures>
-				<trigger></trigger>
-				<formula>
-					3*(2./3.)**(100.*copypaste.duplicateLinesNumber/javancss.ncss)
-				</formula>
-			</simpleformula>
+            <simpleformula>
+                <level>project</level>
+                <measures>
+                    <measure>copypaste</measure>
+                    <measure>javancss</measure>
+                </measures>
+                <trigger></trigger>
+                <formula>3*(2./3.)**(100.*copypaste.duplicateLinesNumber/javancss.ncss)</formula>
+            </simpleformula>
 		</practice>
 
 		<practice name="dependencycycle" effort="10">
@@ -45,7 +43,7 @@
 				</conditions>
 			</conditionformula>
 		</practice>
-
+		
 		<practice name="documentationquality"></practice>
 
 		<practice name="documentationstandard" effort="6">
@@ -55,12 +53,8 @@
 					<measure>javancss</measure>
 					<measure>checkstyle</measure>
 				</measures>
-				<trigger>
-					checkstyle.hasRule("documentationstandard")
-				</trigger>
-				<formula>
-					3*(2./3.)**((500.*checkstyle.getTotalErrorNumberForCategory("documentationstandard")+30.*checkstyle.getTotalWarningNumberForCategory("documentationstandard")+5.*checkstyle.getTotalInfoNumberForCategory("documentationstandard"))/javancss.ncss)
-				</formula>
+				<trigger>checkstyle.hasRule("documentationstandard")</trigger>
+				<formula>3*(2./3.)**((500.*checkstyle.getTotalErrorNumberForCategory("documentationstandard")+30.*checkstyle.getTotalWarningNumberForCategory("documentationstandard")+5.*checkstyle.getTotalInfoNumberForCategory("documentationstandard"))/javancss.ncss)</formula>
 			</simpleformula>
 		</practice>
 
@@ -83,12 +77,8 @@
 					<measure>javancss</measure>
 					<measure>checkstyle</measure>
 				</measures>
-				<trigger>
-					checkstyle.hasRule("formatingstandard")
-				</trigger>
-				<formula>
-					3*(2./3.)**((100.*(checkstyle.getTotalErrorNumberForCategory("formatingstandard"))+20.*(checkstyle.getTotalWarningNumberForCategory("formatingstandard"))+5.*(checkstyle.getTotalInfoNumberForCategory("formatingstandard")))/javancss.ncss)
-				</formula>
+				<trigger>checkstyle.hasRule("formatingstandard")</trigger>
+				<formula>3*(2./3.)**((100.*(checkstyle.getTotalErrorNumberForCategory("formatingstandard"))+20.*(checkstyle.getTotalWarningNumberForCategory("formatingstandard"))+5.*(checkstyle.getTotalInfoNumberForCategory("formatingstandard")))/javancss.ncss)</formula>
 			</simpleformula>
 		</practice>
 
@@ -108,10 +98,10 @@
 			</conditionformula>
 		</practice>
 
-		<practice name="jspdocumentation"></practice>
-
+        <practice name="jspdocumentation"></practice>
+        
 		<practice name="jspsize" effort="15"></practice>
-
+		
 		<practice name="jspstandard" effort="15">
 			<simpleformula>
 				<level>project</level>
@@ -119,27 +109,25 @@
 					<measure>jsppmd</measure>
 				</measures>
 				<trigger>jsppmd.hasRule("jspstandard")</trigger>
-				<formula>
-					3*(2./3.)**(100*(jsppmd.getTotalErrorNumberForCategory("jspstandard"))+20*(jsppmd.getTotalWarningNumberForCategory("jspstandard"))+5*(jsppmd.getTotalInfoNumberForCategory("jspstandard")))
-				</formula>
-			</simpleformula>
+				<formula>3*(2./3.)**(100*(jsppmd.getTotalErrorNumberForCategory("jspstandard"))+20*(jsppmd.getTotalWarningNumberForCategory("jspstandard"))+5*(jsppmd.getTotalInfoNumberForCategory("jspstandard")))</formula>
+			</simpleformula>		
 		</practice>
-
+		
 		<practice name="lackofcohesioninmethod" effort="20">
 			<weight>lambda x:9.**-x</weight>
-			<conditionformula>
-				<level>class</level>
-				<measures>
-					<measure>ckjm</measure>
-				</measures>
-				<trigger></trigger>
-				<conditions>
-					<condition>ckjm.lcom >= 100</condition>
-					<condition>ckjm.lcom > 50</condition>
-					<condition>ckjm.lcom > 0</condition>
-				</conditions>
-			</conditionformula>
-		</practice>
+            <conditionformula>
+                <level>class</level>
+                <measures>
+                    <measure>ckjm</measure>
+                </measures>
+                <trigger></trigger>
+                <conditions>
+                    <condition>ckjm.lcom >= 100</condition>
+                    <condition>ckjm.lcom > 50</condition>
+                    <condition>ckjm.lcom > 0</condition>
+                </conditions>
+            </conditionformula>
+        </practice>
 
 		<practice name="methodsize" effort="20">
 			<weight>lambda x:9.**-x</weight>
@@ -161,10 +149,8 @@
 					<measure>checkstyle</measure>
 				</measures>
 				<trigger>checkstyle.hasRule("namingstandard")</trigger>
-				<formula>
-					3*(2./3.)**((200.*(checkstyle.getTotalErrorNumberForCategory("namingstandard"))+25.*(checkstyle.getTotalWarningNumberForCategory("namingstandard"))+5.*(checkstyle.getTotalInfoNumberForCategory("namingstandard")))/javancss.ncss)
-				</formula>
-			</simpleformula>
+				<formula>3*(2./3.)**((200.*(checkstyle.getTotalErrorNumberForCategory("namingstandard"))+25.*(checkstyle.getTotalWarningNumberForCategory("namingstandard"))+5.*(checkstyle.getTotalInfoNumberForCategory("namingstandard")))/javancss.ncss)</formula>
+			</simpleformula>		
 		</practice>
 
 		<practice name="numberofmethods" effort="20">
@@ -175,19 +161,12 @@
 					<measure>javancss</measure>
 				</measures>
 				<trigger></trigger>
-				<formula>
-					(javancss.sumVg>=80) and
-					exp((30-javancss.methods)/15.) or
-					(javancss.sumVg>=50 and javancss.methods>=15) and
-					(2+(20-javancss.methods)/30.) or
-					(javancss.sumVg>=30) and
-					(3+(15-javancss.methods)/15.) or 3.
-				</formula>
-			</simpleformula>
+				<formula>(javancss.sumVg>=80) and exp((30-javancss.methods)/15.) or (javancss.sumVg>=50 and javancss.methods>=15) and (2+(20-javancss.methods)/30.) or (javancss.sumVg>=30) and (3+(15-javancss.methods)/15.) or 3.</formula>
+			</simpleformula>		
 		</practice>
-
+		
 		<practice name="packagingcompliance"></practice>
-
+		
 		<practice name="portability"></practice>
 
 		<practice name="programmingstandard" effort="15">
@@ -198,14 +177,9 @@
 					<measure>checkstyle</measure>
 					<measure>javapmd</measure>
 				</measures>
-				<trigger>
-					checkstyle.hasRule("programmingstandard") or
-					javapmd.hasRule("programmingstandard")
-				</trigger>
-				<formula>
-					3*(2./3.)**((200.*(checkstyle.getTotalErrorNumberForCategory("programmingstandard")+javapmd.getTotalErrorNumberForCategory("programmingstandard"))+25.*(checkstyle.getTotalWarningNumberForCategory("programmingstandard")+javapmd.getTotalWarningNumberForCategory("programmingstandard"))+5.*(checkstyle.getTotalInfoNumberForCategory("programmingstandard")+javapmd.getTotalInfoNumberForCategory("programmingstandard")))/javancss.ncss)
-				</formula>
-			</simpleformula>
+				<trigger>checkstyle.hasRule("programmingstandard") or javapmd.hasRule("programmingstandard")</trigger>
+				<formula>3*(2./3.)**((200.*(checkstyle.getTotalErrorNumberForCategory("programmingstandard")+javapmd.getTotalErrorNumberForCategory("programmingstandard"))+25.*(checkstyle.getTotalWarningNumberForCategory("programmingstandard")+javapmd.getTotalWarningNumberForCategory("programmingstandard"))+5.*(checkstyle.getTotalInfoNumberForCategory("programmingstandard")+javapmd.getTotalInfoNumberForCategory("programmingstandard")))/javancss.ncss)</formula>
+			</simpleformula>		
 		</practice>
 
 		<practice name="spaghetticode" effort="30">
@@ -241,18 +215,14 @@
 				</measures>
 				<trigger></trigger>
 				<conditions>
-					<!--condition>(javancss.sumVg >= 10)and(ckjm.noc==0)and(ckjm.rfc>=40)and(ckjm.dit==1)</condition-->
-					<!-- Ancienne formule AF -->
-					<condition>
-						(ckjm.ca > 20) and (ckjm.lcom > 50) and
-						(ckjm.rfc > 30)
-					</condition>
+					<!--condition>(javancss.sumVg >= 10)and(ckjm.noc==0)and(ckjm.rfc>=40)and(ckjm.dit==1)</condition--> <!-- Ancienne formule AF -->
+					<condition>(ckjm.ca > 20) and (ckjm.lcom > 50) and (ckjm.rfc > 30)</condition>
 					<condition>0</condition>
 					<condition>0</condition>
 				</conditions>
 			</conditionformula>
 		</practice>
-
+		
 		<practice name="tracingstandard" effort="8">
 			<simpleformula>
 				<level>project</level>
@@ -260,15 +230,11 @@
 					<measure>javancss</measure>
 					<measure>checkstyle</measure>
 				</measures>
-				<trigger>
-					checkstyle.hasRule("documentationstandard")
-				</trigger>
-				<formula>
-					3*(2./3.)**((500.*checkstyle.getTotalErrorNumberForCategory("tracingstandard")+30.*checkstyle.getTotalWarningNumberForCategory("tracingstandard")+5.*checkstyle.getTotalInfoNumberForCategory("tracingstandard"))/javancss.ncss)
-				</formula>
+				<trigger>checkstyle.hasRule("documentationstandard")</trigger>
+				<formula>3*(2./3.)**((500.*checkstyle.getTotalErrorNumberForCategory("tracingstandard")+30.*checkstyle.getTotalWarningNumberForCategory("tracingstandard")+5.*checkstyle.getTotalInfoNumberForCategory("tracingstandard"))/javancss.ncss)</formula>
 			</simpleformula>
 		</practice>
-
+		
 		<practice name="unittestcoverage">
 			<weight>lambda x:3.**-x</weight>
 			<simpleformula>
@@ -278,14 +244,7 @@
 					<measure>javancss</measure>
 				</measures>
 				<trigger>javancss.ccn>=2</trigger>
-				<formula>
-					(javancss.ccn>=2) and
-					(3*(1-exp(-3*(5./6*cobertura.lineRate+1./6*cobertura.branchRate))))
-					or (javancss.ccn>=6) and
-					(3*(1-exp(-3*(cobertura.lineRate +
-					cobertura.branchRate)/2))) or (javancss.ccn>=15) and
-					(3*(1-exp(-3*(1./3*cobertura.lineRate+2./3*cobertura.branchRate))))
-				</formula>
+				<formula>(javancss.ccn>=2) and (3*(1-exp(-3*(5./6*cobertura.lineRate+1./6*cobertura.branchRate)))) or (javancss.ccn>=6) and (3*(1-exp(-3*(cobertura.lineRate + cobertura.branchRate)/2))) or (javancss.ccn>=15) and (3*(1-exp(-3*(1./3*cobertura.lineRate+2./3*cobertura.branchRate))))</formula>
 			</simpleformula>
 		</practice>
 
@@ -295,7 +254,7 @@
 
 		<criterium name="comprehension">
 			<practice-ref name="inheritancedepth" weight="1" />
-			<practice-ref name="documentationquality" weight="1" />
+			<practice-ref name="documentationquality" weight="1" />			
 			<practice-ref name="documentationstandard" weight="1" />
 			<practice-ref name="jspdocumentation" weight="1" />
 		</criterium>
@@ -305,7 +264,7 @@
 			<practice-ref name="packagingcompliance" weight="1" />
 			<practice-ref name="tracingstandard" weight="1" />
 			<practice-ref name="unittestcoverage" weight="1" />
-		</criterium>
+		</criterium> 
 
 		<criterium name="homogeneity">
 			<practice-ref name="formatingstandard" weight="1" />
