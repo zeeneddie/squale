@@ -757,7 +757,7 @@ public final class AuditComputing
                 {
                     measuresNotNull = false;
                     // On indique le type de mesure qui n'est pas trouvé ainsi que le composant concerné
-                    LOG.warn( RuleMessages.getString( "missingmeasure", new Object[] { measureKinds[i], componentId,
+                    LOG.debug( RuleMessages.getString( "missingmeasure", new Object[] { measureKinds[i], componentId,
                         auditId } ) );
                 }
             }
