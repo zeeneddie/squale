@@ -160,6 +160,7 @@ public class DataServiceImpl
                     log.debug( "\t\tvG  : " + auditValues.getComplexity() );
                 }
             }
+            log.debug( "=============================================================" );
         }
     }
 

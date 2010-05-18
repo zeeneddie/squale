@@ -100,28 +100,42 @@ public class MotionChartEntryPoint
 
         Collection<Application> computedApps = motionChartData.getApplications();
         int index = 0;
+        final Date today = new Date();
         for ( Application application : computedApps )
         {
             String appName = application.getName();
             Collection<AuditValues> audits = application.getAuditValues();
+            AuditValues lastAuditValues = null;
             for ( AuditValues auditValues : audits )
             {
-                data.addRow();
+                Date auditDate = auditValues.getDate();
 
-                int rowIndex = 0;
-                data.setValue( index, rowIndex++, appName );
-                data.setValue( index, rowIndex++, auditValues.getDate() );
-                data.setValue( index, rowIndex++, auditValues.getComplexity() );
-                data.setValue( index, rowIndex++, auditValues.getLinesOfCode() );
-                for ( String factorId : factorIdList )
-                {
-                    data.setValue( index, rowIndex++, auditValues.getFactorValue( factorId ) );
-                }
+                addRowForMotionChart( data, factorIdList, index, appName, auditValues, auditDate );
 
                 index++;
+                lastAuditValues = auditValues;
             }
+            addRowForMotionChart( data, factorIdList, index, appName, lastAuditValues, today );
+
+            index++;
         }
         return data;
+    }
+
+    private void addRowForMotionChart( DataTable data, List<String> factorIdList, int index, String appName,
+                                       AuditValues auditValues, Date auditDate )
+    {
+        data.addRow();
+
+        int rowIndex = 0;
+        data.setValue( index, rowIndex++, appName );
+        data.setValue( index, rowIndex++, auditDate );
+        data.setValue( index, rowIndex++, auditValues.getComplexity() );
+        data.setValue( index, rowIndex++, auditValues.getLinesOfCode() );
+        for ( String factorId : factorIdList )
+        {
+            data.setValue( index, rowIndex++, auditValues.getFactorValue( factorId ) );
+        }
     }
 
     protected Options createOptions()
