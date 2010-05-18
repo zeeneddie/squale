@@ -20,21 +20,18 @@ package org.squale.squaleweb.gwt.motionchart.server;
 
 import java.text.DateFormat;
 import java.util.Collection;
-import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.squale.jraf.helper.PersistenceHelper;
-import org.squale.jraf.provider.persistence.hibernate.SessionImpl;
-import org.squale.jraf.spi.persistence.IPersistenceProvider;
-import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
-import org.squale.squalecommon.enterpriselayer.businessobject.result.IntegerMetricBO;
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.squalecommon.enterpriselayer.facade.quality.FactorResultFacade;
+import org.squale.squalecommon.enterpriselayer.facade.quality.QualityResultFacade;
+import org.squale.squalecommon.enterpriselayer.facade.quality.FactorResultFacade.MotionChartApplicationFactorData;
+import org.squale.squalecommon.enterpriselayer.facade.quality.QualityResultFacade.MotionChartApplicationMetricData;
 import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
 import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
 import org.squale.squaleweb.gwt.motionchart.client.DataService;
@@ -56,7 +53,7 @@ public class DataServiceImpl
     implements DataService
 {
     private static final long serialVersionUID = -8491108470852437054L;
-    
+
     /**
      * Logger
      */
@@ -65,128 +62,105 @@ public class DataServiceImpl
     public MotionChartData getData()
     {
         MotionChartData data = new MotionChartData();
-        
-        ServletContext context = getServletContext();
-        HttpSession httpSession = getThreadLocalRequest().getSession();
-
-        LogonBean userLogonBean = (LogonBean) httpSession.getAttribute( WConstants.USER_KEY );
-        List<ApplicationForm> apps = userLogonBean.getApplicationsList();
 
         try
         {
-            IPersistenceProvider persistenceProvider = PersistenceHelper.getPersistenceProvider();
-            Session session = ( (SessionImpl) persistenceProvider.getSession() ).getSession();
-
             // let's find the factors that exist in the database
-            String requete1 =
-                "select distinct rule.name " + "from QualityRuleBO rule " + "where rule.class='FactorRule'";
-            Query query1 = session.createQuery( requete1 );
-            List<Object> factorsList = query1.list();
-            log.debug( "Factors: " );
-            for ( Object factorInfos : factorsList )
+            List<String> factorsList = FactorResultFacade.findFactorNames();
+            for ( String factorDatabaseName : factorsList )
             {
-                String factorDatabaseName = (String) factorInfos;
                 String factorName = WebMessages.getString( getThreadLocalRequest(), "rule." + factorDatabaseName );
-                log.debug( "\t- " + factorName );
-                data.addFactor(factorDatabaseName, factorName);
+                data.addFactor( factorDatabaseName, factorName );
             }
 
             // lets' now retrieve the data that is needed for the Motion Chart
-            for ( ApplicationForm app : apps )
+            for ( ApplicationForm app : findApplicationsForUser() )
             {
-                log.debug( "---------------- " + app.getId() + " - " + app.getApplicationName()
-                    + " ----------------" );
-                Application applicationData = data.createApplication(app.getApplicationName());
+                Application applicationData = data.createApplication( app.getApplicationName() );
 
-                // Metriques                
-                String requete =
-                    "select component.id, component.name, audit.id, audit.historicalDate, audit.date, metric.name, metric"
-                        + " from AbstractComponentBO component, AuditBO audit, MeasureBO measure, MetricBO metric"
-                        + " where component.class='Project' and component.parent.id=" + app.getId()
-                        + " and audit.id in elements(component.audits)" + " and audit.status=" + AuditBO.TERMINATED
-                        + " and measure.audit.id=audit.id and measure.component.id=component.id"
-                        + " and metric.measure.id=measure.id and metric.class='Int'"
-                        + " and (metric.name='numberOfCodeLines' or metric.name='sumVg')"
-                        + " order by audit.id, metric.name";
-
-                Query query = session.createQuery( requete );
-                List resultList = query.list();
-
-                for ( Object object : resultList )
+                // Metriques
+                MotionChartApplicationMetricData metricsAppData =
+                    QualityResultFacade.findMetricsForMotionChart( app.getId() );
+                for ( Iterator<Object[]> iterator = metricsAppData.iterator(); iterator.hasNext(); )
                 {
-                    Object[] result = (Object[]) object;
-                    long projectId = (Long) result[0];
-                    String projectName = (String) result[1];
-                    long auditId = (Long) result[2];
-                    Date auditHistoricalDate = (Date) result[3];
-                    Date auditStartDate = (Date) result[4];
-                    Date auditDate = ( auditHistoricalDate == null ) ? auditStartDate : auditHistoricalDate;
-                    String metricName = (String) result[5];
-                    int metricValue = (Integer) ( (IntegerMetricBO) result[6] ).getValue();
+                    Object[] metricData = (Object[]) iterator.next();
 
-                    log.debug( "\t Project " + projectName + ", audit #" + auditId + " - "
-                        + DateFormat.getInstance().format( auditStartDate ) + " : " + metricName + "=" + metricValue );
-                    
-                    AuditValues audit = applicationData.getAudit(auditId, auditDate);
-                    if (metricName.equals( "numberOfCodeLines" )) {
-                        audit.addLinesOfCode(metricValue);
-                    } else {
+                    AuditValues audit =
+                        applicationData.getAudit( metricsAppData.getAuditId( metricData ),
+                                                  metricsAppData.getAuditDate( metricData ) );
+                    if ( metricsAppData.getMetricName( metricData ).equals( "numberOfCodeLines" ) )
+                    {
+                        audit.addLinesOfCode( metricsAppData.getMetricValue( metricData ) );
+                    }
+                    else
+                    {
                         // this is sumVg for the moment
-                        audit.addVg(metricValue);
+                        audit.addVg( metricsAppData.getMetricValue( metricData ) );
                     }
                 }
 
                 // Factors
-                requete =
-                    "select component.id, component.name, audit.id, factorResult.rule.name, factorResult.meanMark"
-                        + " from AbstractComponentBO component, AuditBO audit, QualityResultBO factorResult"
-                        + " where component.class='Project' and component.parent.id=" + app.getId()
-                        + " and audit.id in elements(component.audits)" + " and audit.status=" + AuditBO.TERMINATED
-                        + " and factorResult.class='FactorResult' and factorResult.project.id=component.id"
-                        + " and factorResult.audit.id=audit.id" + " order by audit.id, factorResult.rule.name";
-
-                query = session.createQuery( requete );
-                resultList = query.list();
-
-                for ( Object object : resultList )
+                MotionChartApplicationFactorData factorsAppData =
+                    FactorResultFacade.findFactorsForMotionChart( app.getId() );
+                for ( Iterator<Object[]> iterator = factorsAppData.iterator(); iterator.hasNext(); )
                 {
-                    Object[] result = (Object[]) object;
-                    long projectId = (Long) result[0];
-                    String projectName = (String) result[1];
-                    long auditId = (Long) result[2];
-                    String factorName = (String) result[3];
-                    float factorValue = (Float) result[4];
+                    Object[] factorData = (Object[]) iterator.next();
 
-                    log.debug( "\t Project " + projectName + ", audit #" + auditId + " - " + factorName + "="
-                        + factorValue );
-                    
-                    AuditValues audit = applicationData.getAudit(auditId);
-                    audit.addFactorValue(factorName, factorValue);
+                    AuditValues audit = applicationData.getAudit( factorsAppData.getAuditId( factorData ) );
+                    audit.addFactorValue( factorsAppData.getFactorName( factorData ),
+                                          factorsAppData.getFactorValue( factorData ) );
                 }
+            }
+        }
+        catch ( JrafEnterpriseException e )
+        {
+            log.warn( "Error while generating data needed for the Motion Chart:" + e.getMessage(), e );
+        }
 
-            }
-        }
-        catch ( Exception e )
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
-        log.debug("=============================================================");
-        Collection<Application> computedApps = data.getApplications();
-        for ( Application application : computedApps )
-        {
-            log.debug(application.getName());
-            Collection<AuditValues> audits = application.getAuditValues();
-            for ( AuditValues auditValues : audits )
-            {
-                log.debug("\t" + DateFormat.getInstance().format( auditValues.getDate()));
-                log.debug("\t\tLOC : " + auditValues.getLinesOfCode());
-                log.debug("\t\tvG  : " + auditValues.getComplexity());
-            }
-        }
-        
+        // just for debug purposes
+        printMotionChartDataInLog( data );
+
         return data;
+    }
+
+    /**
+     * Finds the application that the user can see
+     * 
+     * @return the list of applications
+     */
+    @SuppressWarnings( "unchecked" )
+    private List<ApplicationForm> findApplicationsForUser()
+    {
+        HttpSession httpSession = getThreadLocalRequest().getSession();
+
+        LogonBean userLogonBean = (LogonBean) httpSession.getAttribute( WConstants.USER_KEY );
+        List<ApplicationForm> apps = userLogonBean.getApplicationsList();
+        return apps;
+    }
+
+    /**
+     * Just for debugging purposes
+     * 
+     * @param data the data generated for the Motion Chart
+     */
+    private void printMotionChartDataInLog( MotionChartData data )
+    {
+        if ( log.isDebugEnabled() )
+        {
+            log.debug( "=============================================================" );
+            Collection<Application> computedApps = data.getApplications();
+            for ( Application application : computedApps )
+            {
+                log.debug( application.getName() );
+                Collection<AuditValues> audits = application.getAuditValues();
+                for ( AuditValues auditValues : audits )
+                {
+                    log.debug( "\t" + DateFormat.getInstance().format( auditValues.getDate() ) );
+                    log.debug( "\t\tLOC : " + auditValues.getLinesOfCode() );
+                    log.debug( "\t\tvG  : " + auditValues.getComplexity() );
+                }
+            }
+        }
     }
 
 }

@@ -20,6 +20,7 @@ package org.squale.squalecommon.enterpriselayer.facade.quality;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -82,7 +83,6 @@ import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleB
 import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO;
 import org.squale.squalecommon.enterpriselayer.facade.FacadeMessages;
 import org.squale.squalecommon.enterpriselayer.facade.component.ComponentFacade;
-import org.squale.squalecommon.enterpriselayer.facade.component.ProjectFacade;
 import org.squale.squalecommon.enterpriselayer.facade.rule.QualityGridFacade;
 import org.squale.squalecommon.util.ConstantRulesChecking;
 import org.squale.squalecommon.util.mapping.Mapping;
@@ -95,7 +95,7 @@ public final class QualityResultFacade
 {
 
     /** log */
-    private static Log LOG = LogFactory.getLog( ProjectFacade.class );
+    private static Log LOG = LogFactory.getLog( QualityResultFacade.class );
 
     /**
      * provider de persistence
@@ -1611,6 +1611,86 @@ public final class QualityResultFacade
         }
 
         return result;
+    }
+
+    /**
+     * Returns raw data that will be used by the Motion Chart. <br>
+     * 
+     * @param applicationId the id of the application that must be displayed in the Motion Chart
+     * @return a MotionChartApplicationData object that can be used to iterate through the data
+     * @throws JrafEnterpriseException if the method fails to get the data
+     */
+    public static MotionChartApplicationMetricData findMetricsForMotionChart( long applicationId )
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+        List<Object[]> result = new ArrayList<Object[]>();
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            result = QualityResultDAOImpl.getInstance().findMetricsForMotionChart( session, applicationId );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, QualityResultFacade.class.getName() + ".findMetricsForMotionChart" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, QualityResultFacade.class.getName() + ".findMetricsForMotionChart" );
+        }
+
+        return new MotionChartApplicationMetricData( result );
+    }
+
+    /**
+     * Convenience class to iterate through the results used for the Motion Chart
+     */
+    public static class MotionChartApplicationMetricData
+    {
+        private List<Object[]> applicationData;
+
+        public MotionChartApplicationMetricData( List<Object[]> data )
+        {
+            this.applicationData = data;
+        }
+
+        public Iterator<Object[]> iterator()
+        {
+            return applicationData.iterator();
+        }
+
+        public long getProjectId( Object[] currentData )
+        {
+            return (Long) currentData[0];
+        }
+
+        public String getProjectName( Object[] currentData )
+        {
+            return (String) currentData[1];
+        }
+
+        public long getAuditId( Object[] currentData )
+        {
+            return (Long) currentData[2];
+        }
+
+        public Date getAuditDate( Object[] currentData )
+        {
+            Date auditHistoricalDate = (Date) currentData[3];
+            Date auditStartDate = (Date) currentData[4];
+            Date auditDate = ( auditHistoricalDate == null ) ? auditStartDate : auditHistoricalDate;
+            return auditDate;
+        }
+
+        public String getMetricName( Object[] currentData )
+        {
+            return (String) currentData[5];
+        }
+
+        public int getMetricValue( Object[] currentData )
+        {
+            return (Integer) ( (IntegerMetricBO) currentData[6] ).getValue();
+        }
     }
 
 }

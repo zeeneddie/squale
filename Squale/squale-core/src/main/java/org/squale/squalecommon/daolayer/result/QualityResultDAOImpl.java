@@ -502,7 +502,7 @@ public class QualityResultDAOImpl
      */
     @SuppressWarnings( "unchecked" )
     public List<Object[]> findMarkDistribution( ISession session, long auditId, long projectId, long practiceId,
-                                               String componentLevel )
+                                                String componentLevel )
         throws JrafDaoException
     {
         List<Object[]> result = new ArrayList<Object[]>();
@@ -525,6 +525,52 @@ public class QualityResultDAOImpl
         {
             throw new JrafDaoException( "Database problem while retrieving data for " + getClass().getName()
                 + ".getMarkDistribution", e );
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns raw data that will be used by the Motion Chart. <br>
+     * The raw data that is returned is a list of arrays, each array containing the following data:
+     * <ul>
+     * <li>0 - the project ID [long]</li>
+     * <li>1 - the project name [String]</li>
+     * <li>2 - the audit ID [long]</li>
+     * <li>3 - the audit historical date [Date] - can be NULL</li>
+     * <li>4 - the audit start date [Date]</li>
+     * <li>5 - the metric name [String]</li>
+     * <li>6 - the metric value [IntegerMetricBO]</li>
+     * </ul>
+     * 
+     * @param session The hibernate session
+     * @param applicationId the application DB identifier
+     * @return a list of object arrays, each array corresponding to the data described above
+     * @throws JrafDaoException if the method fails to retrieve the data
+     */
+    @SuppressWarnings( "unchecked" )
+    public List<Object[]> findMetricsForMotionChart( ISession session, long applicationId )
+        throws JrafDaoException
+    {
+        List<Object[]> result = new ArrayList<Object[]>();
+        try
+        {
+            String requete =
+                "select component.id, component.name, audit.id, audit.historicalDate, audit.date, metric.name, metric"
+                    + " from AbstractComponentBO component, AuditBO audit, MeasureBO measure, MetricBO metric"
+                    + " where component.class='Project' and component.parent.id=" + applicationId
+                    + " and audit.id in elements(component.audits)" + " and audit.status=" + AuditBO.TERMINATED
+                    + " and measure.audit.id=audit.id and measure.component.id=component.id"
+                    + " and metric.measure.id=measure.id and metric.class='Int'"
+                    + " and (metric.name='numberOfCodeLines' or metric.name='sumVg')"
+                    + " order by audit.id, metric.name";
+            Query query = ( (SessionImpl) session ).getSession().createQuery( requete );
+            result = query.list();
+        }
+        catch ( HibernateException e )
+        {
+            throw new JrafDaoException( "Database problem while retrieving data for " + getClass().getName()
+                + ".findMetricsForMotionChart", e );
         }
 
         return result;
