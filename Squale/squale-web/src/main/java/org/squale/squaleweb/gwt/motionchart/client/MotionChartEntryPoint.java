@@ -65,7 +65,8 @@ public class MotionChartEntryPoint
                 public void run()
                 {
                     Panel panel = RootPanel.get( "motionchart" );
-                    MotionChart motionChart = new MotionChart( updateTable( motionChartData ), createOptions() );
+                    MotionChart motionChart =
+                        new MotionChart( updateTable( motionChartData ), createOptions( motionChartData ) );
                     panel.add( motionChart );
                 }
 
@@ -138,15 +139,41 @@ public class MotionChartEntryPoint
         }
     }
 
-    protected Options createOptions()
+    protected Options createOptions( MotionChartData motionChartData )
     {
+        // find which factor is the maintainability
+        Map<String, String> factors = motionChartData.getFactors();
+        List<String> factorIdList = new ArrayList<String>( factors.keySet() );
+        final int FIRST_FACTOR_INDEX = 4; // 4 is the index of the first factor
+        int maintainabilityIndex = FIRST_FACTOR_INDEX;
+        boolean found = false;
+        for ( String factorId : factorIdList )
+        {
+            if ( "maintainability".equals( factorId ) )
+            {
+                found = true;
+                break;
+            }
+            maintainabilityIndex++;
+        }
+        if ( !found )
+        {
+            // let's take the first factor...
+            maintainabilityIndex = FIRST_FACTOR_INDEX;
+        }
+
+        // and create the options for the MChart
         Options options = Options.create();
         Panel panel = RootPanel.get( "motionchart" );
         options.setWidth( panel.getOffsetWidth() );
         options.setHeight( panel.getOffsetHeight() );
         options.setOption( "showXScalePicker", false );
         options.setOption( "showYScalePicker", false );
+        options.setOption(
+                           "state",
+                           "{\"sizeOption\":\"3\",\"yAxisOption\":\""
+                               + maintainabilityIndex
+                               + "\",\"dimensions\":{\"iconDimensions\":[\"dim0\"]},\"yZoomedDataMax\":3.0,\"yZoomedDataMin\":0.0,\"colorOption\":\"_UNIQUE_COLOR\",\"yZoomedIn\":true}" );
         return options;
     }
-
 }
