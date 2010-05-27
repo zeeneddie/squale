@@ -106,19 +106,22 @@ public class MotionChartEntryPoint
         {
             String appName = application.getName();
             Collection<AuditValues> audits = application.getAuditValues();
-            AuditValues lastAuditValues = null;
-            for ( AuditValues auditValues : audits )
+            if ( !audits.isEmpty() )
             {
-                Date auditDate = auditValues.getDate();
+                AuditValues lastAuditValues = null;
+                for ( AuditValues auditValues : audits )
+                {
+                    Date auditDate = auditValues.getDate();
 
-                addRowForMotionChart( data, factorIdList, index, appName, auditValues, auditDate );
+                    addRowForMotionChart( data, factorIdList, index, appName, auditValues, auditDate );
+
+                    index++;
+                    lastAuditValues = auditValues;
+                }
+                addRowForMotionChart( data, factorIdList, index, appName, lastAuditValues, today );
 
                 index++;
-                lastAuditValues = auditValues;
             }
-            addRowForMotionChart( data, factorIdList, index, appName, lastAuditValues, today );
-
-            index++;
         }
         return data;
     }
