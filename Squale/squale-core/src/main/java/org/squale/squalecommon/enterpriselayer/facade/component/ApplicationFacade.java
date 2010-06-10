@@ -1319,4 +1319,49 @@ public class ApplicationFacade
         return listToReturn;
     }
 
+    /**
+     * This method retrieves the applications which has at lesat one successful audit and are public or the user gievn
+     * in arguement has rights on it
+     * 
+     * @param userDto The current user
+     * @return The list of application visible for the user
+     * @throws JrafEnterpriseException Exception occurs during the retrieves of the applications 
+     */
+    public static List<ApplicationLightDTO> visibleApplication( UserDTO userDto )
+        throws JrafEnterpriseException
+    {
+        List<ApplicationLightDTO> listToReturn = new ArrayList<ApplicationLightDTO>();
+        ISession session = null;
+
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            ApplicationDAOImpl appDao = ApplicationDAOImpl.getInstance();
+            List<Object[]> availableApp = null;
+            if ( userDto.getDefaultProfile().getName().equals( ProfileBO.ADMIN_PROFILE_NAME ) )
+            {
+                availableApp = appDao.getAvailableForSharedRepository( session );
+            }
+            else
+            {
+                availableApp = appDao.getVisibleApplicationForUser( session, userDto.getID() );
+            }
+            for ( Object[] objects : availableApp )
+            {
+                ApplicationLightDTO appDto = new ApplicationLightDTO( (Long) objects[0], (String) objects[1] );
+                listToReturn.add( appDto );
+            }
+            Collections.sort( listToReturn );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, "getSegmentIdentifierTechnicalIdForACategory" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, ApplicationFacade.class.getName() + ".availableForSharedRepository" );
+        }
+        return listToReturn;
+    }
+
 }

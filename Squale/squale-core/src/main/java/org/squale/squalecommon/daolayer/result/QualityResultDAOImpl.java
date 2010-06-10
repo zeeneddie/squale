@@ -575,4 +575,40 @@ public class QualityResultDAOImpl
 
         return result;
     }
+
+    /**
+     * This method retrieves the factor linked to the audit and the application given in argument
+     * 
+     * @param session The hibernate session
+     * @param applicationId the application id
+     * @param auditId Then audit id
+     * @return The list of factor linked to the current audit
+     * @throws JrafDaoException Exception occurs during the retrieve of the factors
+     */
+    public List<QualityResultBO> findFactor( ISession session, Long applicationId, Long auditId )
+        throws JrafDaoException
+    {
+
+        StringBuffer whereClause = new StringBuffer( " where " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".project.parent.id = " );
+        whereClause.append( applicationId );
+        whereClause.append( " and " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".audit.id = " );
+        whereClause.append( auditId );
+        whereClause.append( " and " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".rule.class='FactorRule' order by " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".project.name ," );
+        whereClause.append( getAlias() );
+        whereClause.append( ".rule.name" );
+
+        List<QualityResultBO> result = null;
+        result = (List<QualityResultBO>) findWhere( session, whereClause.toString() );
+
+        LOG.debug( whereClause.toString() );
+        return result;
+    }
 }

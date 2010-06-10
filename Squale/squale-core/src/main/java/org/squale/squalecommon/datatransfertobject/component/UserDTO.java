@@ -90,6 +90,19 @@ public class UserDTO
     {
         mProfiles = new HashMap();
     }
+    
+    /**
+     * Constructor
+     * 
+     * @param login The login
+     * @param password The password
+     */
+    public UserDTO(String login, String password)
+    {
+        mProfiles = new HashMap();
+        mMatricule = login;
+        mPassword = password;
+    }
 
     /**
      * Access method for the mMatricule property.

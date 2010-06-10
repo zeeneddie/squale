@@ -83,6 +83,7 @@ import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleB
 import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO;
 import org.squale.squalecommon.enterpriselayer.facade.FacadeMessages;
 import org.squale.squalecommon.enterpriselayer.facade.component.ComponentFacade;
+import org.squale.squalecommon.enterpriselayer.facade.component.ProjectFacade;
 import org.squale.squalecommon.enterpriselayer.facade.rule.QualityGridFacade;
 import org.squale.squalecommon.util.ConstantRulesChecking;
 import org.squale.squalecommon.util.mapping.Mapping;
@@ -1611,6 +1612,43 @@ public final class QualityResultFacade
         }
 
         return result;
+    }
+
+    /**
+     * This method retrieves the factor linked to the audit and the application given in argument
+     * 
+     * @param auditId The audit id
+     * @param applicationId The application id
+     * @return The list of factor linked to the current audit
+     * @throws JrafEnterpriseException Exception occurs during the search of the factors
+     */
+    public static List<QualityResultDTO> getFactor( long auditId, long applicationId )
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+        List<QualityResultBO> result = new ArrayList<QualityResultBO>();
+        List<QualityResultDTO> dataToreturn = new ArrayList<QualityResultDTO>();
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            result = QualityResultDAOImpl.getInstance().findFactor( session, applicationId, auditId );
+            QualityResultDTO resultDto = null;
+            for ( QualityResultBO qualityResultBO : result )
+            {
+                resultDto = QualityResultTransform.bo2Dto( qualityResultBO );
+                dataToreturn.add( resultDto );
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, QualityResultFacade.class.getName() + ".getMarkDistribution" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, QualityResultFacade.class.getName() + ".getMarkDistribution" );
+        }
+
+        return dataToreturn;
     }
 
     /**

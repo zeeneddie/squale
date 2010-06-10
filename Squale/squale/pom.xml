@@ -32,6 +32,7 @@
 		<module>../squalix</module>
 		<module>../squale-model</module>
 		<module>../shared-repository-object</module>
+		<module>../squale-rest</module>
 		<!--module>../squale-ear</module-->
 	</modules>
 	<properties>
@@ -510,6 +511,11 @@
 				<artifactId>gwt-visualization</artifactId>
 				<version>1.0.2</version>
 				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>4.0.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

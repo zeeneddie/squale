@@ -674,9 +674,9 @@ public class ApplicationDAOImpl
     }
 
     /**
-     * This method retrieves each application available for the shared repository. That means that these applications have
-     * at least one successfull audit and are not hide. This method return a list of array. Each array represent one
-     * available application
+     * This method retrieves each application available for the shared repository. That means that these applications
+     * have at least one successfull audit and are not hide. This method return a list of array. Each array represent
+     * one available application
      * 
      * @param session The hibernate session
      * @return A list of array [application technical id (Long), application name (String)]
@@ -690,6 +690,29 @@ public class ApplicationDAOImpl
         request.append( "app.id in (select app2.id from ApplicationBO app2, AuditBO audit where audit.components.id = app2.id and audit.status = " );
         request.append( AuditBO.TERMINATED );
         request.append( " ) and app.userList is not empty " );
+        listToReturn = find( session, request.toString() );
+        return listToReturn;
+    }
+
+    /**
+     * This method retrieve all the aplications which has at least one succesful audit and is public or the user given
+     * in arguments has rights on it
+     * 
+     * @param session The hibernate session
+     * @param userId The user id
+     * @return the list of applications visible for the user given in argument
+     * @throws JrafDaoException Exceptions occurs during the search
+     */
+    public List<Object[]> getVisibleApplicationForUser( ISession session, long userId )
+        throws JrafDaoException
+    {
+        List<Object[]> listToReturn = null;
+        StringBuffer request = new StringBuffer( "Select app.id, app.name from ApplicationBO app where " );
+        request.append( "(app.id in (select app2.id from ApplicationBO app2, AuditBO audit where audit.components.id = app2.id and audit.status = " );
+        request.append( AuditBO.TERMINATED );
+        request.append( " and ( app.userList.id = " );
+        request.append( userId );
+        request.append( " or (app.public = true and app.userList is not empty)))) " );
         listToReturn = find( session, request.toString() );
         return listToReturn;
     }

@@ -35,6 +35,7 @@ import org.apache.maven.scm.repository.ScmRepository;
 import org.apache.maven.scm.repository.ScmRepositoryException;
 import org.codehaus.plexus.util.StringUtils;
 
+import org.squale.squalix.core.TaskException;
 import org.squale.squalix.util.file.FileUtility;
 
 /**
@@ -233,9 +234,10 @@ public abstract class AbstractRepository
      * @param defaultTemporaryDirectory default temporary directory where check out are performed
      * @throws ScmException Scm exception
      * @throws IOException Exception in files
+     * @throws TaskException Exceptions occurs
      */
     public void checkOut( File defaultTemporaryDirectory, ScmRepository scmRepository, File workingDirectory )
-        throws ScmException, IOException
+        throws ScmException, IOException, TaskException
     {
         File temporaryDirectory = new File( this.getScmTemporaryDirectory() );
 
@@ -243,46 +245,46 @@ public abstract class AbstractRepository
         // Temporary directory already exists !!
         if ( temporaryDirectory.exists() )
         {
+            this.checkOut = false;
             LOGGER.error( ScmMessages.getString( "exception.task.existing_directory",
                                                  workingDirectory.getAbsolutePath() ) );
-            this.checkOut = false;
+            throw new TaskException();
         }
         // Creation of the directory where sources are analyzed
         if ( !temporaryDirectory.mkdirs() )
         {
+            this.checkOut = false;
             LOGGER.error( ScmMessages.getString( "exception.task.creation_directory",
                                                  workingDirectory.getAbsolutePath() ) );
-            this.checkOut = false;
+            throw new TaskException();
         }
+        // Check-out sources into the temporary directory
+        CheckOutScmResult result = scmManager.checkOut( scmRepository, new ScmFileSet( temporaryDirectory ) );
 
-        if ( this.checkOut )
+        // Copy local check out directory into local source code directory
+        FileUtility.copyDirContentIntoDir( defaultTemporaryDirectory, workingDirectory );
+
+        // Deletion of the temporary directory
+        FileUtility.deleteRecursively( defaultTemporaryDirectory );
+
+        // Display logs following to the scm connection in a remote repository
+        if ( !result.isSuccess() && result.getProviderMessage() != null )
         {
-            // Check-out sources into the temporary directory
-            CheckOutScmResult result = scmManager.checkOut( scmRepository, new ScmFileSet( temporaryDirectory ) );
-
-            // Copy local check out directory into local source code directory
-            FileUtility.copyDirContentIntoDir( defaultTemporaryDirectory, workingDirectory );
-
-            // Deletion of the temporary directory
-            FileUtility.deleteRecursively( defaultTemporaryDirectory );
-
-            // Display logs following to the scm connection in a remote repository
-            if ( !result.isSuccess() && result.getProviderMessage() != null )
+            this.checkOut = false;
+            LOGGER.warn( ScmMessages.getString( "exception.task.provider", result.getProviderMessage() ) );
+            LOGGER.warn( ScmMessages.getString( "exception.task.provider", result.getCommandOutput() ) );
+            throw new TaskException();
+        }
+        if ( LOGGER.isDebugEnabled() )
+        {
+            List checkedOutFiles = result.getCheckedOutFiles();
+            if ( checkedOutFiles != null )
             {
-                LOGGER.warn( ScmMessages.getString( "exception.task.provider", result.getProviderMessage() ) );
-            }
-
-            if ( LOGGER.isDebugEnabled() )
-            {
-                List checkedOutFiles = result.getCheckedOutFiles();
-                if ( checkedOutFiles != null )
+                // Display all objects in check-out
+                for ( Iterator it = checkedOutFiles.iterator(); it.hasNext(); )
                 {
-                    // Display all objects in check-out
-                    for ( Iterator it = checkedOutFiles.iterator(); it.hasNext(); )
-                    {
-                        ScmFile file = (ScmFile) it.next();
-                        LOGGER.debug( ScmMessages.getString( "logs.task.checkout" ) + file.getPath() );
-                    }
+                    ScmFile file = (ScmFile) it.next();
+                    LOGGER.debug( ScmMessages.getString( "logs.task.checkout" ) + file.getPath() );
                 }
             }
         }

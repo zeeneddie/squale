@@ -1068,7 +1068,10 @@ public class AuditFacade
             AuditDAOImpl auditDAO = AuditDAOImpl.getInstance();
             // Chargement de l'objet AuditBO + transformation
             AuditBO auditBO = (AuditBO) auditDAO.load( session, pAuditId );
-            auditDTO = AuditTransform.bo2Dto( auditBO );
+            if ( auditBO!= null )
+            {
+                auditDTO = AuditTransform.bo2Dto( auditBO );
+            }
         }
         catch ( JrafDaoException e )
         {
@@ -1139,5 +1142,67 @@ public class AuditFacade
             FacadeHelper.closeSession( session, AuditFacade.class.getName() + ".getLastAudits" );
         }
         return audits;
+    }
+
+    /**
+     * This method retrieves all the successful audit for the application given in argument
+     * 
+     * @param appId The application id
+     * @return The list of successful audit
+     * @throws JrafEnterpriseException Ecpetion occurs during the retrieve of the audits
+     */
+    public static List<AuditDTO> getAllSuccessfulAudits( long appId )
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+        List<AuditDTO> listAuditDTO = new ArrayList<AuditDTO>();
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            AuditDAOImpl auditDAO = AuditDAOImpl.getInstance();
+            List<AuditBO> succesfullAudits = auditDAO.succesfullAudit( session, appId );
+            for ( AuditBO auditBO : succesfullAudits )
+            {
+                AuditDTO auditDTO = AuditTransform.bo2Dto( auditBO );
+                listAuditDTO.add( auditDTO );
+            }
+        }
+        catch ( JrafDaoException e )
+        {
+            LOG.error( AuditFacade.class.getName() + ".getLastAudits", e );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, AuditFacade.class.getName() + ".getLastAudits" );
+        }
+        return listAuditDTO;
+    }
+
+    /**
+     * This method retrieves the application linked to the audit given in argument
+     * 
+     * @param auditId the current audit
+     * @return the aplication linked to the current audit
+     * @throws JrafEnterpriseException Exception occurs during the retrieve of the audit
+     */
+    public static ComponentDTO getLinkedApplication( long auditId )
+        throws JrafEnterpriseException
+    {
+        ISession session = null;
+        ComponentDTO compo = null;
+        try
+        {
+            session = PERSISTENTPROVIDER.getSession();
+            compo = ApplicationFacade.loadByAuditId( auditId, session );
+        }
+        catch ( JrafDaoException e )
+        {
+            LOG.error( AuditFacade.class.getName() + ".getLinkedApplication", e );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, AuditFacade.class.getName() + ".getLinkedApplication" );
+        }
+        return compo;
     }
 }

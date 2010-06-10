@@ -467,4 +467,18 @@
 		
 	</applicationComponent>
 	
+	<applicationComponent name="rest" description="Work around the shared repository stats" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.rest.RestComponentAccess">
+		
+		<component name="userAuthentication"></component>
+		
+		<component name="visibleApplication"></component>
+		
+		<component name="availableAudits"></component>
+		
+		<component name="factorList"></component>
+		
+		<component name="audit"></component>
+		
+	</applicationComponent>
+	
 </listApplicationComponent>

@@ -67,7 +67,10 @@
 		<servlet-name>motionChartServlet</servlet-name>
 		<servlet-class>org.squale.squaleweb.gwt.motionchart.server.DataServiceImpl</servlet-class>
 	</servlet>
-	
+	<servlet>
+  		<servlet-name>REST</servlet-name> 
+		<servlet-class>org.squale.squaleweb.servlet.RestServlet</servlet-class> 
+	</servlet>
 	
 	<!-- Action Servlet Mapping -->
 	<servlet-mapping>
@@ -85,6 +88,10 @@
 	<servlet-mapping>
 		<servlet-name>motionChartServlet</servlet-name>
 		<url-pattern>/gwt.mc/data</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>REST</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 	
 	

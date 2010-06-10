@@ -332,32 +332,36 @@ public class ReferenceImportComponentAccess
             session = PERSISTENTPROVIDER.getSession();
             session.beginTransaction();
             List<SegmentationStat> segmentationList = reference.getSegmentationList();
-            for ( SegmentationStat segmentationStat : segmentationList )
+            if ( segmentationList != null )
             {
-                // For each segmentation of the reference we create the segmentation in the database.
-                SegmentationDTO segmentation = new SegmentationDTO();
-                for ( SegmentEx segmentEx : segmentationStat.getSegmentIdList() )
+                for ( SegmentationStat segmentationStat : segmentationList )
                 {
-                    SegmentDTO segmentDto = new SegmentDTO( segmentEx.getSegmentId() );
-                    segmentation.addSegment( segmentDto );
+                    // For each segmentation of the reference we create the segmentation in the database.
+                    SegmentationDTO segmentation = new SegmentationDTO();
+                    for ( SegmentEx segmentEx : segmentationStat.getSegmentIdList() )
+                    {
+                        SegmentDTO segmentDto = new SegmentDTO( segmentEx.getSegmentId() );
+                        segmentation.addSegment( segmentDto );
+                    }
+
+                    SegmentationFacade.create( session, segmentation );
+
+                    // For this segmentation we create the statistic at the module Level
+                    ModuleStat moduleStat = segmentationStat.getModule();
+                    String elementType = ElementType.MODULE.toString();
+
+                    List<SharedRepoStatsDTO> statsList =
+                        createStatList( moduleStat.getDatas(), elementType, segmentation );
+
+                    // For this segmentation we create the statistic at the component level (class, method, ...)
+                    List<ComponentStat> componentStatList = segmentationStat.getComponents();
+                    for ( ComponentStat componentStat : componentStatList )
+                    {
+                        elementType = ElementType.valueOf( componentStat.getType() ).toString();
+                        statsList.addAll( createStatList( componentStat.getDatas(), elementType, segmentation ) );
+                    }
+                    SharedRepoStatsFacade.saveAll( session, statsList );
                 }
-
-                SegmentationFacade.create( session, segmentation );
-
-                // For this segmentation we create the statistic at the module Level
-                ModuleStat moduleStat = segmentationStat.getModule();
-                String elementType = ElementType.MODULE.toString();
-
-                List<SharedRepoStatsDTO> statsList = createStatList( moduleStat.getDatas(), elementType, segmentation );
-
-                // For this segmentation we create the statistic at the component level (class, method, ...)
-                List<ComponentStat> componentStatList = segmentationStat.getComponents();
-                for ( ComponentStat componentStat : componentStatList )
-                {
-                    elementType = ElementType.valueOf( componentStat.getType() ).toString();
-                    statsList.addAll( createStatList( componentStat.getDatas(), elementType, segmentation ) );
-                }
-                SharedRepoStatsFacade.saveAll( session, statsList );
             }
             session.commitTransaction();
         }
