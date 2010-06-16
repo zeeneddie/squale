@@ -122,6 +122,7 @@ public class CoberturaTask
         // Logging to indicate that Squale has started CoberturaTask parsing
         LOGGER.info( new String( CoberturaMessages.getMessage( "cobertura.task.beginsParsing", mProject.getName() ) ) );
         // Iterating the list to recover result file(s)
+        parsedResults = new CoberturaProjectMetricsBO();
         for ( Iterator<File> iterator = results.iterator(); iterator.hasNext(); )
         {
             // Creating a File on each iteration
@@ -130,9 +131,15 @@ public class CoberturaTask
             if ( file.exists() )
             {
                 LOGGER.info( new String(
-                                         CoberturaMessages.getMessage( "cobertura.task.parsingFileName", file.getName() ) ) );
-                // Parsing the content of if it
-                parsedResults = coberturaParser.parse( file );
+                                        CoberturaMessages.getMessage( "cobertura.task.parsingFileName", file.getName() ) ) );
+               // Parsing the content of if it
+               List<AbstractCoberturaMetricsBO> packageList = coberturaParser.parse( file ).getPackages();
+               for (AbstractCoberturaMetricsBO abstractCoberturaMetricsBO : packageList) {
+                   if(abstractCoberturaMetricsBO instanceof CoberturaPackageMetricsBO)
+                   {
+                       parsedResults.addPackage((CoberturaPackageMetricsBO)abstractCoberturaMetricsBO);
+                   }
+               }
             }
             else
             {
