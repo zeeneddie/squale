@@ -113,9 +113,8 @@ public class AbstractGenericTaskConfTransformer
 
         // Getting the result files location see method bellow
         ListParameterDTO resultsLocation = new ListParameterDTO();
-        /* Modif temp en attente de résolution */
-        resultsLocation.getParameters().add( new StringParameterDTO( genericTaskForm.getResultsLocation()[1] ) );
-        // fillListFromArray( resultsLocation, genericTaskForm.getResultsLocation() );
+        
+        fillListFromArray( resultsLocation, genericTaskForm.getResultsLocation() );
         genericTaskParams.put( ParametersConstants.GENERICTASK_RESULTSLOCATIONS, resultsLocation );
 
         // Finalising the map for the task
