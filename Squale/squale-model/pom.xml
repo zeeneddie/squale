@@ -7,6 +7,7 @@
 		<groupId>org.squale.app</groupId>
 		<artifactId>squale</artifactId>
 		<version>7.0-SNAPSHOT</version>
+		<relativePath>../squale/pom.xml</relativePath>
 	</parent>
 	<artifactId>squale-model</artifactId>
 	<packaging>jar</packaging>

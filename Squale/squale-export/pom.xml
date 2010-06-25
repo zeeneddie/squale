@@ -7,6 +7,7 @@
 		<groupId>org.squale.app</groupId>
 		<artifactId>squale</artifactId>
 		<version>7.0-SNAPSHOT</version>
+		<relativePath>../squale/pom.xml</relativePath>
 	</parent>
 	<artifactId>squale-export</artifactId>
 	<packaging>jar</packaging>
@@ -37,19 +38,19 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>${pom.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>squale-core</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>${pom.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>shared-repository-object</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>${pom.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>squale-model</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 </project>
