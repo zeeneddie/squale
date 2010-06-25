@@ -19,18 +19,23 @@
 package org.squale.squalecommon.enterpriselayer.applicationcomponent.rest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.provider.accessdelegate.DefaultExecuteComponent;
-import org.squale.squalecommon.datatransfertobject.component.ApplicationLightDTO;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.component.ModuleLightDTO;
 import org.squale.squalecommon.datatransfertobject.component.UserDTO;
 import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
+import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
+import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
 import org.squale.squalecommon.enterpriselayer.facade.component.ApplicationFacade;
 import org.squale.squalecommon.enterpriselayer.facade.component.AuditFacade;
 import org.squale.squalecommon.enterpriselayer.facade.component.UserFacade;
+import org.squale.squalecommon.enterpriselayer.facade.quality.MeasureFacade;
 import org.squale.squalecommon.enterpriselayer.facade.quality.QualityResultFacade;
 
 /**
@@ -79,10 +84,10 @@ public class RestComponentAccess
      * @return The applications visible by the user
      * @throws JrafEnterpriseException Exception ocuurs during the search
      */
-    public List<ApplicationLightDTO> visibleApplication( UserDTO userDto )
+    public List<ComponentDTO> visibleApplication( UserDTO userDto )
         throws JrafEnterpriseException
     {
-        List<ApplicationLightDTO> listApp = new ArrayList<ApplicationLightDTO>();
+        List<ComponentDTO> listApp = new ArrayList<ComponentDTO>();
         listApp = ApplicationFacade.visibleApplication( userDto );
         return listApp;
     }
@@ -102,18 +107,53 @@ public class RestComponentAccess
     }
 
     /**
-     * This methods retrieves the factors linked to current audit. The factor are order by module and by factor name
+     * This methods retrieve for the current audit the list of modules involved in the audit. For each module the method
+     * retrieves its factor for the current audit, its tags, and its volumetry information for the current audit.
      * 
      * @param applicationId The application id
      * @param auditId The audit id
-     * @return the list of factor for the current audit
+     * @return The list of module fully filled for the current audit
      * @throws JrafEnterpriseException The exception occurs during the search of the factors
      */
-    public List<QualityResultDTO> factorList( Long applicationId, Long auditId )
+    public List<ModuleLightDTO> moduleList( Long applicationId, Long auditId )
         throws JrafEnterpriseException
     {
+        List<ModuleLightDTO> listModule = new ArrayList<ModuleLightDTO>();
+
+        // We retrieve the factors for the current audit and applications
         List<QualityResultDTO> listFactor = QualityResultFacade.getFactor( auditId, applicationId );
-        return listFactor;
+        ModuleLightDTO module;
+        Map<Long, ModuleLightDTO> moduleMap = new HashMap<Long, ModuleLightDTO>();
+        /*
+         * For each factor, if its related module doesn't exist then we create it and we retrieve its tags and volumetry
+         * informations else we only add the new factor to the list of factor of the module
+         */
+        for ( QualityResultDTO factor : listFactor )
+        {
+            ComponentDTO compo = factor.getProject();
+            module = moduleMap.get( Long.valueOf( compo.getID() ) );
+            if ( module == null )
+            {
+                module = new ModuleLightDTO( compo.getID(), compo.getName() );
+                module.setTags( new ArrayList<TagDTO>( compo.getTags() ) );
+                module.addFactor( factor );
+                ResultsDTO res = MeasureFacade.getProjectVolumetry( auditId, compo );
+                Map volumetryData = res.getResultMap();
+                List<String> measureKeys = (List<String>) volumetryData.get( null );
+                List<Integer> measureValues = (List<Integer>) volumetryData.get( compo );
+                for ( int index = 0; index < measureKeys.size(); index++ )
+                {
+                    module.putVolumetry( measureKeys.get( index ), measureValues.get( index ) );
+                }
+                listModule.add( module );
+                moduleMap.put( Long.valueOf( compo.getID() ), module );
+            }
+            else
+            {
+                module.addFactor( factor );
+            }
+        }
+        return listModule;
     }
 
     /**

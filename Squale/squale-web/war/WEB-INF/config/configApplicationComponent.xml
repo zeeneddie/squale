@@ -475,7 +475,7 @@
 		
 		<component name="availableAudits"></component>
 		
-		<component name="factorList"></component>
+		<component name="moduleList"></component>
 		
 		<component name="audit"></component>
 		

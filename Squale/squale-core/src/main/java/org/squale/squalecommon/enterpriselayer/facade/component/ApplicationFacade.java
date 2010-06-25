@@ -38,6 +38,7 @@ import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
 import org.squale.jraf.spi.enterpriselayer.IFacade;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
 import org.squale.jraf.spi.persistence.ISession;
+import org.squale.squalecommon.daolayer.component.AbstractComponentDAOImpl;
 import org.squale.squalecommon.daolayer.component.ApplicationDAOImpl;
 import org.squale.squalecommon.daolayer.component.AuditDAOImpl;
 import org.squale.squalecommon.daolayer.component.ProjectDAOImpl;
@@ -54,6 +55,7 @@ import org.squale.squalecommon.datatransfertobject.component.UserDTO;
 import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
 import org.squale.squalecommon.datatransfertobject.transform.component.ApplicationConfTransform;
 import org.squale.squalecommon.datatransfertobject.transform.component.ComponentTransform;
+import org.squale.squalecommon.datatransfertobject.transform.tag.TagTransform;
 import org.squale.squalecommon.enterpriselayer.businessobject.access.UserAccessBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
@@ -1325,12 +1327,12 @@ public class ApplicationFacade
      * 
      * @param userDto The current user
      * @return The list of application visible for the user
-     * @throws JrafEnterpriseException Exception occurs during the retrieves of the applications 
+     * @throws JrafEnterpriseException Exception occurs during the retrieves of the applications
      */
-    public static List<ApplicationLightDTO> visibleApplication( UserDTO userDto )
+    public static List<ComponentDTO> visibleApplication( UserDTO userDto )
         throws JrafEnterpriseException
     {
-        List<ApplicationLightDTO> listToReturn = new ArrayList<ApplicationLightDTO>();
+        List<ComponentDTO> listToReturn = new ArrayList<ComponentDTO>();
         ISession session = null;
 
         try
@@ -1346,9 +1348,16 @@ public class ApplicationFacade
             {
                 availableApp = appDao.getVisibleApplicationForUser( session, userDto.getID() );
             }
+            AbstractComponentDAOImpl compoDao = AbstractComponentDAOImpl.getInstance();
             for ( Object[] objects : availableApp )
             {
-                ApplicationLightDTO appDto = new ApplicationLightDTO( (Long) objects[0], (String) objects[1] );
+                ComponentDTO appDto = new ComponentDTO( (Long) objects[0], (String) objects[1] );
+                List<TagBO> listTagBo = compoDao.getTags( session, (Long) objects[0] );
+                for ( TagBO tagBO : listTagBo )
+                {
+                    TagDTO tag = TagTransform.bo2Dto( tagBO );
+                    appDto.addTag( tag );
+                }
                 listToReturn.add( appDto );
             }
             Collections.sort( listToReturn );

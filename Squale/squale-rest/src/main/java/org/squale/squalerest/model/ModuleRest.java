@@ -45,10 +45,21 @@ public class ModuleRest
     private String id;
 
     /**
-     * The list of data of the module
+     * The list of factor of the module
      */
     @XStreamImplicit
     private List<FactorRest> datas;
+
+    /**
+     * The list of tag of the module
+     */
+    private List<TagRest> tags;
+
+    /**
+     * The list of volumetry measure linked to the module
+     */
+    @XStreamImplicit
+    private List<VolumetryRest> volumetry;
 
     /**
      * Default constructor
@@ -56,6 +67,8 @@ public class ModuleRest
     public ModuleRest()
     {
         datas = new ArrayList<FactorRest>();
+        tags = new ArrayList<TagRest>();
+        volumetry = new ArrayList<VolumetryRest>();
     }
 
     /**
@@ -69,6 +82,8 @@ public class ModuleRest
         id = pId;
         name = pName;
         datas = new ArrayList<FactorRest>();
+        tags = new ArrayList<TagRest>();
+        volumetry = new ArrayList<VolumetryRest>();
     }
 
     /**
@@ -129,6 +144,46 @@ public class ModuleRest
     public void addDatas( FactorRest factor )
     {
         datas.add( factor );
+    }
+
+    /**
+     * Getter method for the attribute tags
+     * 
+     * @return The list of tags linked to the module
+     */
+    public List<TagRest> getTags()
+    {
+        return tags;
+    }
+
+    /**
+     * Setter method for the attribute tags
+     * 
+     * @param pTags The new list of tags
+     */
+    public void setTags( List<TagRest> pTags )
+    {
+        tags = pTags;
+    }
+
+    /**
+     * Getter method for the attribute volumetry
+     * 
+     * @return The volumetry The list of volumetry informations
+     */
+    public List<VolumetryRest> getVolumetry()
+    {
+        return volumetry;
+    }
+
+    /**
+     * Add a volumetry value
+     * 
+     * @param volumetryValue A volumetry value
+     */
+    public void addVolumetry( VolumetryRest volumetryValue )
+    {
+        volumetry.add( volumetryValue );
     }
 
 }

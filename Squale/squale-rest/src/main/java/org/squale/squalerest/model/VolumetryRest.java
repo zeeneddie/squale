@@ -24,8 +24,8 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 /**
  * Data class used for the export
  */
-@XStreamAlias( "factor" )
-public class FactorRest
+@XStreamAlias( "volumetry" )
+public class VolumetryRest
 {
 
     /**
@@ -44,7 +44,7 @@ public class FactorRest
     /**
      * Default constructor
      */
-    public FactorRest()
+    public VolumetryRest()
     {
 
     }
@@ -55,7 +55,7 @@ public class FactorRest
      * @param pGenericName The name of the data
      * @param pValue The value of the data
      */
-    public FactorRest( String pGenericName, String pValue )
+    public VolumetryRest( String pGenericName, String pValue )
     {
         genericName = pGenericName;
         value = pValue;

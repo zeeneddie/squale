@@ -18,7 +18,16 @@
  */
 package org.squale.squalecommon.datatransfertobject.component;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.squale.jraf.spi.dto.IDTO;
+import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
+import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
 
 /**
  * This class is a light dto for the module (ProjectBO). This dto contains the name and the technical id of the module
@@ -36,15 +45,32 @@ public class ModuleLightDTO
      * The module name
      */
     private String name;
-    
+
     /**
-     * Constructor 
+     * The list of tags linked to the module
+     */
+    private List<TagDTO> tags;
+
+    /**
+     * The list of factor results linked to the module
+     */
+    private List<QualityResultDTO> factors;
+
+    /**
+     * The list of volumetry informations linked to the module
+     */
+    private Map<String, Integer> volumetry;
+
+    /**
+     * Constructor
      */
     public ModuleLightDTO()
     {
-         
+        factors = new ArrayList<QualityResultDTO>();
+        tags = new ArrayList<TagDTO>();
+        volumetry = new HashMap<String, Integer>();
     }
-    
+
     /**
      * Constructor
      * 
@@ -55,6 +81,9 @@ public class ModuleLightDTO
     {
         technicalId = pTechnicalId;
         name = pName;
+        factors = new ArrayList<QualityResultDTO>();
+        tags = new ArrayList<TagDTO>();
+        volumetry = new HashMap<String, Integer>();
     }
 
     /**
@@ -88,7 +117,7 @@ public class ModuleLightDTO
     }
 
     /**
-     * Setter method for the attribute
+     * Setter method for the attribute name
      * 
      * @param pName The new name of the application
      */
@@ -98,12 +127,99 @@ public class ModuleLightDTO
     }
 
     /**
+     * Getter method for the attribute tags
+     * 
+     * @return the list of tags linked to the module
+     */
+    public List<TagDTO> getTags()
+    {
+        return tags;
+    }
+
+    /**
+     * Setter method for the attribute
+     * 
+     * @param pTags The new list of tags linked to the module
+     */
+    public void setTags( List<TagDTO> pTags )
+    {
+        tags = pTags;
+    }
+
+    /**
+     * Getter method for the attribute factors
+     * 
+     * @return The list of factor results linked to the module
+     */
+    public List<QualityResultDTO> getFactor()
+    {
+        return factors;
+    }
+
+    /**
+     * This method adds the factor given in argument to the list of factor
+     * 
+     * @param factor Add a new factor results to the list of factors
+     */
+    public void addFactor( QualityResultDTO factor )
+    {
+        factors.add( factor );
+    }
+
+    /**
+     * Getter method for the attribute volumetry
+     * 
+     * @return the volumetry map
+     */
+    public Map<String, Integer> getVolumetry()
+    {
+        return volumetry;
+    }
+
+    /**
+     * This method add a new volumetry informartion to the volumetry map
+     * 
+     * @param key The volumetry information name
+     * @param value The volumetry information value
+     */
+    public void putVolumetry( String key, Integer value )
+    {
+        volumetry.put( key, value );
+    }
+
+    /**
      * {@inheritDoc}
      */
     public int compareTo( ModuleLightDTO o )
     {
-        
         return this.name.compareToIgnoreCase( o.name );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals( Object obj )
+    {
+        if ( !( obj instanceof ModuleLightDTO ) )
+        {
+            return false;
+        }
+        if ( this == obj )
+        {
+            return true;
+        }
+        ModuleLightDTO other = (ModuleLightDTO) obj;
+        return new EqualsBuilder().append( technicalId, other.technicalId ).isEquals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode()
+    {
+        return new HashCodeBuilder().append( technicalId ).append( name ).toHashCode();
     }
 
 }

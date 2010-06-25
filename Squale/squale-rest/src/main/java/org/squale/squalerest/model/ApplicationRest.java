@@ -52,8 +52,19 @@ public class ApplicationRest
     /**
      * List of modules ({@link ModuleRest}) linked to the application
      */
-    @XStreamImplicit
+    @XStreamImplicit 
     private List<ModuleRest> modules;
+
+    /**
+     * The list of tag linked to the application
+     */
+    private List<TagRest> tags;
+
+    /**
+     * The list of volumetry measure linked to the application
+     */
+    @XStreamImplicit
+    private List<VolumetryRest> volumetry;
 
     /**
      * Constructor
@@ -61,6 +72,8 @@ public class ApplicationRest
     public ApplicationRest()
     {
         modules = new ArrayList<ModuleRest>();
+        tags = new ArrayList<TagRest>();
+        volumetry = new ArrayList<VolumetryRest>();
     }
 
     /**
@@ -76,6 +89,8 @@ public class ApplicationRest
         name = pName;
         audit = pAudit;
         modules = new ArrayList<ModuleRest>();
+        tags = new ArrayList<TagRest>();
+        volumetry = new ArrayList<VolumetryRest>();
     }
 
     /**
@@ -166,6 +181,46 @@ public class ApplicationRest
     public void setAudit( AuditRest pAudit )
     {
         audit = pAudit;
+    }
+
+    /**
+     * Getter method for the attribute tags
+     * 
+     * @return The list of tags linked to application
+     */
+    public List<TagRest> getTags()
+    {
+        return tags;
+    }
+
+    /**
+     * Setter method for the attribute tags
+     * 
+     * @param pTags The new list of tags
+     */
+    public void setTags( List<TagRest> pTags )
+    {
+        tags = pTags;
+    }
+
+    /**
+     * Getter method for the attribute volumetry
+     * 
+     * @return The volumetry The list of volumetry informations
+     */
+    public List<VolumetryRest> getVolumetry()
+    {
+        return volumetry;
+    }
+
+    /**
+     * Setter method for the attribute volumetry
+     * 
+     * @param pVolumetry The volumetry The new list of volumetry informations 
+     */
+    public void setVolumetry( List<VolumetryRest> pVolumetry )
+    {
+        volumetry = pVolumetry;
     }
 
 }

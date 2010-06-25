@@ -41,6 +41,7 @@ import org.squale.squalecommon.enterpriselayer.businessobject.component.Abstract
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.tag.TagBO;
 import org.squale.squalecommon.util.mapping.Mapping;
 
 /**
@@ -243,8 +244,8 @@ public class AbstractComponentDAOImpl
      * @param pAuditId l'id de l'audit, peut être <code>null</code>
      * @param pType le type de composants, peut être <code>null</code>
      * @param pFilter le filtre sur le nom, peut être <code>null</code>
-     * @return le nombre d'enfants dont le parent a l'id <code>pParentId</code> de type <code>pType</code> rattachés
-     *         à l'audit d'id <code>pAuditId</code> et dont le nom correspond au pattern <code>*pFilter*</code>
+     * @return le nombre d'enfants dont le parent a l'id <code>pParentId</code> de type <code>pType</code> rattachés à
+     *         l'audit d'id <code>pAuditId</code> et dont le nom correspond au pattern <code>*pFilter*</code>
      * @throws JrafDaoException si erreur
      */
     public Integer countChildrenWhere( ISession pSession, Long pParentId, Long pAuditId, String pType, String pFilter )
@@ -259,8 +260,8 @@ public class AbstractComponentDAOImpl
      * @param pType le type de composants, peut être <code>null</code>
      * @param pFilter le filtre sur le nom, peut être <code>null</code>
      * @return la clause where de recherche des enfants selon les critères passés en paramètre de type
-     *         <code>pType</code> rattachés à l'audit d'id <code>pAuditId</code> et dont le nom correspond au
-     *         pattern <code>*pFilter*</code>
+     *         <code>pType</code> rattachés à l'audit d'id <code>pAuditId</code> et dont le nom correspond au pattern
+     *         <code>*pFilter*</code>
      */
     private String getCommonWhereChildrenRequest( Long pParentId, Long pAuditId, String pType, String pFilter )
     {
@@ -348,4 +349,24 @@ public class AbstractComponentDAOImpl
 
         return results;
     }
+
+    /**
+     * This method returns the list of tags linked to the current component
+     * 
+     * @param session The hibernate session
+     * @param componentId The technical id of the component
+     * @return The list of tags linked to the current component
+     * @throws JrafDaoException exception occurrs during the retrieve
+     */
+    public List<TagBO> getTags( ISession session, long componentId )
+        throws JrafDaoException
+    {
+        List<TagBO> listToReturn = null;
+        StringBuffer request = new StringBuffer( "Select compo.tags from AbstractComponentBO compo where " );
+        request.append( "compo.id = " );
+        request.append( componentId );
+        listToReturn = find( session, request.toString() );
+        return listToReturn;
+    }
+
 }

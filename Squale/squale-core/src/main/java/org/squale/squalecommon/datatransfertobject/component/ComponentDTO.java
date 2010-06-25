@@ -30,7 +30,7 @@ import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
  * Composant
  */
 public class ComponentDTO
-    implements Serializable
+    implements Serializable, Comparable<ComponentDTO>
 {
 
     /**
@@ -552,6 +552,14 @@ public class ComponentDTO
     public void setHide( boolean pHide )
     {
         hide = pHide;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int compareTo( ComponentDTO o )
+    {
+        return this.mName.compareToIgnoreCase( o.mName );
     }
 
 }

@@ -41,10 +41,10 @@ import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
 import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
 import org.squale.jraf.spi.persistence.IPersistenceProvider;
 import org.squale.jraf.spi.persistence.ISession;
-import org.squale.squalecommon.datatransfertobject.component.ApplicationLightDTO;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.component.ModuleLightDTO;
 import org.squale.squalecommon.datatransfertobject.component.UserDTO;
-import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
 import org.squale.squalecommon.enterpriselayer.applicationcomponent.rest.RestComponentAccess;
 import org.squale.squalecommon.enterpriselayer.facade.component.UserFacade;
 import org.squale.squalerest.root.Applications;
@@ -198,25 +198,12 @@ public class RestServlet
         AuditDTO audit = (AuditDTO) ac.execute( "audit", param );
         if ( audit != null && audit.getID() != -1L )
         {
-            Long appId = (Long) audit.getApplicationId();
-            param = new Object[] { userDto };
-            List<ApplicationLightDTO> appList = (List<ApplicationLightDTO>) ac.execute( "visibleApplication", param );
-            Iterator<ApplicationLightDTO> it = appList.iterator();
-            boolean found = false;
-            ApplicationLightDTO app = null;
-            while ( it.hasNext() && !found )
+            ComponentDTO application = searchApp( userDto, Long.toString( audit.getApplicationId() ) );
+            if ( application != null )
             {
-                app = it.next();
-                if ( app.getTechnicalId() == appId.longValue() )
-                {
-                    found = true;
-                }
-            }
-            if ( found )
-            {
-                param = new Object[] { appId, (Long) audit.getID() };
-                List<QualityResultDTO> factorList = (List<QualityResultDTO>) ac.execute( "factorList", param );
-                dataToReturn = TransformToXstreamObject.byAudit( audit, factorList, locale );
+                param = new Object[] { (Long) application.getID(), (Long) audit.getID() };
+                List<ModuleLightDTO> moduleList = (List<ModuleLightDTO>) ac.execute( "moduleList", param );
+                dataToReturn = TransformToXstreamObject.byAudit( audit, application, moduleList, locale );
             }
         }
 
@@ -237,34 +224,48 @@ public class RestServlet
     private ByApplication byApplication( UserDTO userDto, String appId, Locale locale )
         throws JrafEnterpriseException
     {
+        ByApplication data = new ByApplication();
+        ComponentDTO application = searchApp( userDto, appId );
+        if ( application != null )
+        {
+            Object[] param = new Object[] { (Long) application.getID() };
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "rest" );
+            List<AuditDTO> allSuccessfulAudit = (List<AuditDTO>) ac.execute( "availableAudits", param );
+            param = new Object[] { (Long) application.getID(), (Long) allSuccessfulAudit.get( 0 ).getID() };
+            List<ModuleLightDTO> moduleList = (List<ModuleLightDTO>) ac.execute( "moduleList", param );
+            data = TransformToXstreamObject.byApplication( application, allSuccessfulAudit, moduleList, locale );
+        }
+        return data;
+    }
+
+    /**
+     * This method tries to retrieve the application linked the technical given in argument. This method returns null if
+     * the application is not found
+     * 
+     * @param userDto The current authentified user
+     * @param appId The technical id of the application to search
+     * @return The application found, null if it's not found
+     * @throws JrafEnterpriseException exception occurs during the search
+     */
+    private ComponentDTO searchApp( UserDTO userDto, String appId )
+        throws JrafEnterpriseException
+    {
+        ComponentDTO application = null;
+
         IApplicationComponent ac = AccessDelegateHelper.getInstance( "rest" );
         Object[] param = new Object[] { userDto };
-        List<ApplicationLightDTO> appList = (List<ApplicationLightDTO>) ac.execute( "visibleApplication", param );
-        Iterator<ApplicationLightDTO> it = appList.iterator();
+        List<ComponentDTO> appList = (List<ComponentDTO>) ac.execute( "visibleApplication", param );
+        Iterator<ComponentDTO> it = appList.iterator();
         boolean found = false;
-        ApplicationLightDTO app = null;
         while ( it.hasNext() && !found )
         {
-            app = it.next();
-            if ( app.getTechnicalId() == Long.parseLong( appId ) )
+            application = it.next();
+            if ( application.getID() == Long.parseLong( appId ) )
             {
                 found = true;
             }
         }
-        ByApplication data = null;
-        if ( found )
-        {
-            param = new Object[] { (Long) app.getTechnicalId() };
-            List<AuditDTO> allSuccessfulAudit = (List<AuditDTO>) ac.execute( "availableAudits", param );
-            param = new Object[] { (Long) app.getTechnicalId(), (Long) allSuccessfulAudit.get( 0 ).getID() };
-            List<QualityResultDTO> factorList = (List<QualityResultDTO>) ac.execute( "factorList", param );
-            data = TransformToXstreamObject.byApplication( app, allSuccessfulAudit, factorList, locale );
-        }
-        else
-        {
-            data = new ByApplication();
-        }
-        return data;
+        return application;
     }
 
     /**
@@ -280,7 +281,7 @@ public class RestServlet
     {
         IApplicationComponent ac = AccessDelegateHelper.getInstance( "rest" );
         Object[] param = new Object[] { userDto };
-        List<ApplicationLightDTO> appList = (List<ApplicationLightDTO>) ac.execute( "visibleApplication", param );
+        List<ComponentDTO> appList = (List<ComponentDTO>) ac.execute( "visibleApplication", param );
         Applications data = TransformToXstreamObject.applications( appList );
         return data;
     }
