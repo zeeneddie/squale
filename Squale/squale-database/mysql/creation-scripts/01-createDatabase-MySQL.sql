@@ -1178,13 +1178,15 @@
         add index FK2854B0A4A4AEA807 (ReferencielId), 
         add constraint FK2854B0A4A4AEA807 
         foreign key (ReferencielId) 
-        references SqualeReference (ReferencielId);
+        references SqualeReference (ReferencielId)
+        on delete cascade;
 
     alter table FactorRef 
         add index FK2854B0A497209814 (Rule), 
         add constraint FK2854B0A497209814 
         foreign key (Rule) 
-        references QualityRule (QualityRuleId);
+        references QualityRule (QualityRuleId)
+        on delete cascade;
 
     alter table Formula_Conditions 
         add index FKB3141771EB17C0F9 (FormulaId), 
@@ -1437,7 +1439,8 @@
         add index FK32FD7E08499FD217 (QualityGrid), 
         add constraint FK32FD7E08499FD217 
         foreign key (QualityGrid) 
-        references QualityGrid (QualityGridId);
+        references QualityGrid (QualityGridId)
+        on delete cascade;
 
     alter table Stats_squale_dict 
         add index FK9B3A9E52EF730ACB (Serveur), 
