@@ -1155,7 +1155,8 @@
     alter table Module 
         add constraint FK89B0928C7729BC88 
         foreign key (RuleId) 
-        references Rule;
+        references Rule
+        on delete cascade;
 
     alter table PracticeResult_Repartition 
         add constraint FK84B2F9904AA85BD7 

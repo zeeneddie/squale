@@ -41,8 +41,8 @@ public class CheckstyleRuleBO
      * Access method for the mModules property.
      * 
      * @return the current value of the mModules property
-     * @hibernate.set lazy="true" cascade="all" sort="unsorted"
-     * @hibernate.key column="RuleId"
+     * @hibernate.set lazy="true" cascade="all" sort="unsorted" inverse="true"
+     * @hibernate.key column="RuleId" on-delete="cascade"
      * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleModuleBO"
      */
 

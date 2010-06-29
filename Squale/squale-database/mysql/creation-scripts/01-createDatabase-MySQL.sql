@@ -1263,7 +1263,8 @@
         add index FK89B0928C7729BC88 (RuleId), 
         add constraint FK89B0928C7729BC88 
         foreign key (RuleId) 
-        references Rule (RuleId);
+        references Rule (RuleId)
+        on delete cascade;
 
     alter table PracticeResult_Repartition 
         add index FK84B2F9904AA85BD7 (PracticeResultId), 

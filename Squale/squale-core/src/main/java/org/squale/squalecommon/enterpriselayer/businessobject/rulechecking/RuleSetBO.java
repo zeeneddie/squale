@@ -104,9 +104,9 @@ public abstract class RuleSetBO
      * Access method for the mRules property.
      * 
      * @return the current value of the mRules property
-     * @hibernate.map lazy="true" cascade="all" sort="unsorted"
+     * @hibernate.map lazy="true" cascade="all" sort="unsorted" inverse="true"
      * @hibernate.index column="Code" type="string"
-     * @hibernate.key column="RuleSetId"
+     * @hibernate.key column="RuleSetId" on-delete="cascade"
      * @hibernate.one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"
      */
 

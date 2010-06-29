@@ -27,3 +27,17 @@ alter table SqualeReference
     foreign key (QualityGrid) 
     references QualityGrid (QualityGridId)
     on delete cascade;
+    
+--#############################################
+--# Modifications for #256
+
+alter table Module
+	drop constraint FK89B0928C7729BC88;
+    
+alter table Module 
+    add constraint FK89B0928C7729BC88 
+    foreign key (RuleId) 
+    references Rule
+    on delete cascade;
+    
+--#############################################

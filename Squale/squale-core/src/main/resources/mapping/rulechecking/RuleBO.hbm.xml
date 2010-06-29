@@ -14,8 +14,8 @@
     <many-to-one insert="true" column="RuleSetId" cascade="save-update" update="true" outer-join="auto" class="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO" not-null="true" name="ruleSet"/>
     <property name="severity" column="Severity" update="true" unique="false" not-null="false" type="string" insert="true"/>
     <subclass name="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleRuleBO" discriminator-value="Checkstyle">
-      <set cascade="all" lazy="true" sort="unsorted" name="modules">
-        <key column="RuleId"/>
+      <set cascade="all" lazy="true" sort="unsorted" name="modules" inverse="true">
+        <key column="RuleId" on-delete="cascade"/>
         <one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.checkstyle.CheckstyleModuleBO"/>
       </set>
     </subclass>

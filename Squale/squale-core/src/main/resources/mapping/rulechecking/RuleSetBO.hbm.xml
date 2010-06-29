@@ -9,8 +9,8 @@
       </generator>
     </id>
     <discriminator column="subclass"/>
-    <map cascade="all" lazy="true" sort="unsorted" name="rules">
-      <key column="RuleSetId"/>
+    <map cascade="all" lazy="true" sort="unsorted" name="rules" inverse="true">
+      <key column="RuleSetId" on-delete="cascade"/>
       <index type="string" column="Code"/>
       <one-to-many class="org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleBO"/>
     </map>
