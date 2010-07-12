@@ -20,7 +20,10 @@ package org.squale.squalecommon.daolayer.rule;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
 
@@ -205,15 +208,78 @@ public class QualityGridDAOImpl
      * @param gridsId ids des grilles
      * @throws JrafDaoException si erreur
      */
-    public void removeGrids( ISession pSession, ArrayList gridsId )
+    @SuppressWarnings( "unchecked" )
+    public void removeGrids( ISession pSession, ArrayList<Long> gridsId )
         throws JrafDaoException
     {
+
+        Iterator<QualityGridBO> gridsBoIt = findGridsByIds( pSession, gridsId ).iterator();
+        // Deletion of the grids
+        while ( gridsBoIt.hasNext() )
+        {
+            QualityGridBO grid = gridsBoIt.next();
+            SortedSet<FactorRuleBO> sortFact = grid.getFactors();
+            Set<CriteriumRuleBO> critSet = new HashSet<CriteriumRuleBO>();
+            for ( FactorRuleBO factor : sortFact )
+            {
+                Iterator<CriteriumRuleBO> critIt = factor.getCriteria().keySet().iterator();
+                while ( critIt.hasNext() )
+                {
+                    CriteriumRuleBO criteriumRuleBO = (CriteriumRuleBO) critIt.next();
+                    critSet.add( criteriumRuleBO );
+                }
+            }
+            Set<PracticeRuleBO> pracSet = new HashSet<PracticeRuleBO>();
+            Iterator<CriteriumRuleBO> critIt = critSet.iterator();
+            while ( critIt.hasNext() )
+            {
+                CriteriumRuleBO criteriumRuleBO = (CriteriumRuleBO) critIt.next();
+                Iterator<PracticeRuleBO> pracIt = criteriumRuleBO.getPractices().keySet().iterator();
+                while ( pracIt.hasNext() )
+                {
+                    PracticeRuleBO practiceRuleBO = (PracticeRuleBO) pracIt.next();
+                    pracSet.add( practiceRuleBO );
+                }
+
+            }
+
+            QualityRuleDAOImpl ruleDao = QualityRuleDAOImpl.getInstance();
+
+            Iterator<PracticeRuleBO> pracIt = pracSet.iterator();
+            while ( pracIt.hasNext() )
+            {
+                PracticeRuleBO practiceRuleBO = (PracticeRuleBO) pracIt.next();
+                ruleDao.remove( pSession, practiceRuleBO );
+            }
+
+            critIt = critSet.iterator();
+            while ( critIt.hasNext() )
+            {
+                CriteriumRuleBO criteriumRuleBO = (CriteriumRuleBO) critIt.next();
+                ruleDao.remove( pSession, criteriumRuleBO );
+            }
+            remove( pSession, grid );
+        }
+    }
+
+    /**
+     * This method retrieve the {@link QualityGridBO} corresponding to the list of id given in argument
+     * 
+     * @param pSession tjhe hibernate session
+     * @param gridsId The list of grids id
+     * @return The list of corresponding {@link QualityGridBO}
+     * @throws JrafDaoException Exception occurs during the retrieve
+     */
+    @SuppressWarnings( "unchecked" )
+    public List<QualityGridBO> findGridsByIds( ISession pSession, List<Long> gridsId )
+        throws JrafDaoException
+    {
+        List<QualityGridBO> gridList = new ArrayList<QualityGridBO>();
         StringBuffer whereClause = new StringBuffer( "where " );
         whereClause.append( getAlias() );
         whereClause.append( ".id in(" );
         Iterator gridsIdIt = gridsId.iterator();
         boolean comma = false;
-        // Pracours des ids de grille en vue de leur destruction
         while ( gridsIdIt.hasNext() )
         {
             if ( comma )
@@ -227,13 +293,8 @@ public class QualityGridDAOImpl
             whereClause.append( gridsIdIt.next() );
         }
         whereClause.append( ")" );
-        Iterator gridsIt = findWhere( pSession, whereClause.toString() ).iterator();
-        // Suppression manuelle de chaque grille en attendant
-        // le delete cascade en HQL prévu pour Hibernate 3.2.1
-        while ( gridsIt.hasNext() )
-        {
-            remove( pSession, gridsIt.next() );
-        }
+        gridList = findWhere( pSession, whereClause.toString() );
+        return gridList;
     }
 
     /**
@@ -271,7 +332,7 @@ public class QualityGridDAOImpl
         whereClause.append( getAlias() );
         whereClause.append( ".id= " );
         whereClause.append( gridId );
-        whereClause.append( " AND "  );
+        whereClause.append( " AND " );
         whereClause.append( getAlias() );
         whereClause.append( ".profiles.size > 0" );
         Collection col = findWhere( session, whereClause.toString() );

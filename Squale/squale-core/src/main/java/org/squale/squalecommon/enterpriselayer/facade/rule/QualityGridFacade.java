@@ -340,18 +340,18 @@ public final class QualityGridFacade
      * @return grilles ne pouvant pas être supprimées
      * @throws JrafEnterpriseException si erreur
      */
-    public static Collection deleteGrids( Collection pGrids )
+    public static Collection<QualityGridDTO> deleteGrids( Collection<QualityGridDTO> pGrids )
         throws JrafEnterpriseException
     {
         ISession session = null;
-        Collection result = new ArrayList();
+        Collection<QualityGridDTO> usedGrids = new ArrayList<QualityGridDTO>();
         try
         {
             // récupération d'une session
             session = PERSISTENTPROVIDER.getSession();
             // Parcours des grilles à détruire
-            Iterator gridsIt = pGrids.iterator();
-            ArrayList gridsId = new ArrayList();
+            Iterator<QualityGridDTO> gridsIt = pGrids.iterator();
+            ArrayList<Long> gridsId = new ArrayList<Long>();
             AuditGridDAOImpl auditGridDAO = AuditGridDAOImpl.getInstance();
             ProjectDAOImpl projectDAO = ProjectDAOImpl.getInstance();
             QualityGridDAOImpl qualityGridDAO = QualityGridDAOImpl.getInstance();
@@ -365,7 +365,7 @@ public final class QualityGridFacade
                 if ( projectDAO.isGridUsed( session, gridId ) || auditGridDAO.isGridUsed( session, gridId )
                     || qualityGridDAO.hasProfile( session, gridId ) )
                 {
-                    result.add( gridDTO );
+                    usedGrids.add( gridDTO );
                 }
                 else
                 {
@@ -380,13 +380,13 @@ public final class QualityGridFacade
         }
         catch ( JrafDaoException e )
         {
-            FacadeHelper.convertException( e, QualityGridFacade.class.getName() + ".get" );
+            FacadeHelper.convertException( e, QualityGridFacade.class.getName() + ".deleteGrids" );
         }
         finally
         {
-            FacadeHelper.closeSession( session, QualityGridFacade.class.getName() + ".get" );
+            FacadeHelper.closeSession( session, QualityGridFacade.class.getName() + ".deleteGrids" );
         }
-        return result;
+        return usedGrids;
     }
 
     /**
@@ -624,7 +624,7 @@ public final class QualityGridFacade
      * 
      * @param practiceId the id of the practice
      * @return the name of the component level, e.g. "method" or "class", as it is specified in the quality model
-     * @throws JrafDaoException if it is not possible to get the component level
+     * @throws JrafEnterpriseException if it is not possible to get the component level
      */
     public static String getComponentLevelForPractice( long practiceId )
         throws JrafEnterpriseException
