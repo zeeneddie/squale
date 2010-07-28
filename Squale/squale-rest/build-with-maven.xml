@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- 
+	Fichier permettant à l'outil de qualimetrie Squale
+	de construire le projet avec maven a partir d'un 
+	appel ant.
+-->
+<project basedir="." default="fake">
+
+	<property name="SqualeClassesDir" location="${basedir}/target/classes" />
+
+	<path id="SqualeClasspath">
+	</path>
+
+	<target name="fake">
+		<echo>Getting compiled classes located in "target/classes"...</echo>
+	</target>
+
+</project>
