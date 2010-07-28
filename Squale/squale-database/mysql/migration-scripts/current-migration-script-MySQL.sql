@@ -27,6 +27,7 @@ alter table SqualeReference
     foreign key (QualityGrid) 
     references QualityGrid (QualityGridId)
     on delete cascade;
+
     
 --#############################################
 --# Modifications for #256
@@ -40,4 +41,15 @@ alter table Module
     references Rule (RuleId)
     on delete cascade;
     
+    
 --#############################################
+--# Modifications for #259
+    
+alter table QualityRule add Criticality integer;
+update QualityRule set Criticality = 1 where subclass = 'PracticeRule';
+    
+--###########################################################
+-- Modify the squale version
+alter table AuditBO alter SQUALE_VERSION set default '7.0' ;
+
+--###########################################################

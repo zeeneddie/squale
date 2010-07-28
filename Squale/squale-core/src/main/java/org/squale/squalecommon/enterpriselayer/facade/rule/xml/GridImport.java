@@ -41,10 +41,10 @@ public class GridImport
     private static Log LOG = LogFactory.getLog( GridImport.class );
 
     /** Nom publique de la DTD */
-    static final String PUBLIC_DTD = "-//Squale//DTD Grid Configuration 1.2//EN";
+    static final String PUBLIC_DTD = "-//Squale//DTD Grid Configuration 1.3//EN";
 
     /** Localisation de la DTD */
-    static final String DTD_LOCATION = "/org/squale/squalecommon/dtd/grid-1.2.dtd";
+    static final String DTD_LOCATION = "/org/squale/squalecommon/dtd/grid-1.3.dtd";
 
     /**
      * Constructeur

@@ -50,6 +50,7 @@ import org.squale.jraf.helper.AccessDelegateHelper;
 import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
+import org.squale.squalecommon.datatransfertobject.remediation.ComponentCriticalityDTO;
 import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
 import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
 import org.squale.squalecommon.datatransfertobject.rule.CriteriumRuleDTO;
@@ -2020,4 +2021,56 @@ public class ProjectResultsAction
         }
         return application;
     }
+
+    /**
+     * Exporte le plan d'action synthétique pour le projet
+     * 
+     * @param mapping le actionMapping
+     * @param form le form
+     * @param request la request
+     * @param response la response
+     * @return l'actionForward
+     * @throws ServletException exception pouvant etre levee
+     */
+    public ActionForward exportRemediationByRisk( ActionMapping mapping, ActionForm form, HttpServletRequest request,
+                                              HttpServletResponse response )
+        throws ServletException
+    {
+
+        List<ComponentCriticalityDTO> compoList;
+        ProjectSummaryForm theForm = (ProjectSummaryForm) form;
+        String projectId = theForm.getProjectId();
+        String auditId = theForm.getCurrentAuditId();
+        IApplicationComponent ac;
+        try
+        {
+            
+            ac = AccessDelegateHelper.getInstance( "remediation" );
+            compoList = (ArrayList<ComponentCriticalityDTO>)ac.execute( "remediationByRisk", new Object[] { auditId, projectId } );
+            //We needs only the fitfty firts components
+            final int initialIndex = 0;
+            final int lastIndex = 50;
+            compoList = compoList.subList( initialIndex, lastIndex );
+            
+            HashMap parameters = new HashMap();
+            // The current project name
+            parameters.put( "moduleName", theForm.getProjectName() );
+            // The current audit date
+            parameters.put( "auditDate", theForm.getAuditName() );
+            // The current user name
+            LogonBean logon = (LogonBean) request.getSession().getAttribute( WConstants.USER_KEY );
+            parameters.put( "userName", logon.getMatricule() );
+            PDFDataJasperReports data =
+                new PDFDataJasperReports( request.getLocale(), getResources( request ), compoList,
+                                          "/org/squale/squaleweb/resources/jasperreport/RemediationByRisk.jasper", false,
+                                          parameters );
+            PDFFactory.generatePDFToHTTPResponse( data, response, "", PDFEngine.JASPERREPORTS );
+        }
+        catch ( Exception e )
+        {
+            throw new ServletException( e );
+        }
+        return null;
+    }
+    
 }

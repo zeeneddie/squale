@@ -18,8 +18,11 @@
  */
 package org.squale.squalecommon.enterpriselayer.facade.quality;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -50,6 +53,10 @@ import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
 import org.squale.squalecommon.datatransfertobject.component.AuditGridDTO;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 import org.squale.squalecommon.datatransfertobject.export.ActionPlanDTO;
+import org.squale.squalecommon.datatransfertobject.remediation.ComponentCriticalityComparator;
+import org.squale.squalecommon.datatransfertobject.remediation.ComponentCriticalityDTO;
+import org.squale.squalecommon.datatransfertobject.remediation.PracticeCriticalityComparator;
+import org.squale.squalecommon.datatransfertobject.remediation.PracticeCriticalityDTO;
 import org.squale.squalecommon.datatransfertobject.result.MarkDTO;
 import org.squale.squalecommon.datatransfertobject.result.PracticeEvolutionDTO;
 import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
@@ -83,7 +90,6 @@ import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleB
 import org.squale.squalecommon.enterpriselayer.businessobject.rulechecking.RuleSetBO;
 import org.squale.squalecommon.enterpriselayer.facade.FacadeMessages;
 import org.squale.squalecommon.enterpriselayer.facade.component.ComponentFacade;
-import org.squale.squalecommon.enterpriselayer.facade.component.ProjectFacade;
 import org.squale.squalecommon.enterpriselayer.facade.rule.QualityGridFacade;
 import org.squale.squalecommon.util.ConstantRulesChecking;
 import org.squale.squalecommon.util.mapping.Mapping;
@@ -102,6 +108,11 @@ public final class QualityResultFacade
      * provider de persistence
      */
     private static final IPersistenceProvider PERSISTENTPROVIDER = PersistenceHelper.getPersistenceProvider();
+
+    /**
+     * The ruke prefix
+     */
+    private final static String RULE_PREFIX = "rule.";
 
     /**
      * Obtention des résultats qualité
@@ -1729,6 +1740,112 @@ public final class QualityResultFacade
         {
             return (Integer) ( (IntegerMetricBO) currentData[6] ).getValue();
         }
+    }
+
+    /**
+     * This method searches for the audit and the module given in argument, all the components involved in the audit and
+     * for each component its practice. This method return the list of component sorted by their criticality. And each
+     * component contains the list of its pratice sorted by their criticality
+     * 
+     * @param session The hibernate session
+     * @param auditId The id of the audit
+     * @param moduleId The id of the module
+     * @return The list of component sorted by there criticality. And each component contains it's list of practice
+     *         sorted by their criticality
+     * @throws JrafEnterpriseException exception occurs during the process
+     */
+    public static List<ComponentCriticalityDTO> getRemediationByCriticality( ISession session, long auditId,
+                                                                             long moduleId )
+        throws JrafEnterpriseException
+    {
+        List<ComponentCriticalityDTO> compoList = new ArrayList<ComponentCriticalityDTO>();
+        try
+        {
+            MarkDAOImpl dao = MarkDAOImpl.getInstance();
+            // We retrieve the list of component practice mark linked to the module and the audit
+            final int componentColumn = 0;
+            final int ruleIdColumn = 1;
+            final int ruleNameColumn = 2;
+            final int ruleCriticalityColumn = 3;
+            final int ruleEffortColumn = 4;
+            final int markValueColumn = 5;
+            List<Object[]> markList = dao.getByAudit( session, auditId, moduleId );
+
+            Map<Long, ComponentCriticalityDTO> map = new HashMap<Long, ComponentCriticalityDTO>();
+
+            for ( Object[] mark : markList )
+            {
+                ComponentCriticalityDTO compo = null;
+                AbstractComponentBO componentBO = (AbstractComponentBO) mark[componentColumn];
+                // for each mark we test if the linked component already exist in the map. If yes we retrieve it, else
+                // we create it.
+                if ( !map.containsKey( componentBO.getId() ) )
+                {
+                    compo =
+                        new ComponentCriticalityDTO( componentBO.getId(), componentBO.getName(),
+                                                     componentBO.getFullName(), componentBO.getType() );
+                    map.put( compo.getId(), compo );
+                }
+                else
+                {
+                    compo = map.get( componentBO.getId() );
+                }
+
+                // We create the new PraticeCriticalityDTO
+                // In order to retrieve the real name of the rule defined in the message.xml file, we should prefix the
+                // rule name by : "rule."
+                PracticeCriticalityDTO practice =
+                    new PracticeCriticalityDTO( (Long) mark[ruleIdColumn], RULE_PREFIX + (String) mark[ruleNameColumn],
+                                                (Integer) mark[ruleCriticalityColumn],
+                                                (Integer) mark[ruleEffortColumn], (Float) mark[markValueColumn] );
+                // We compute the criticality of the current practice mark.
+                practice.computePracticeComponentCriticality();
+                // We add the PraticeCriticalityDTO the ComponentCriticalityDTO
+                compo.addPracticeList( practice );
+                // We add the criticality of the pratice to the criticality of the component
+                compo.setCriticality( compo.getCriticality() + practice.getPracticeComponentCriticality() );
+            }
+            compoList = createList( map );
+        }
+        catch ( JrafDaoException e )
+        {
+            FacadeHelper.convertException( e, QualityResultFacade.class.getName() + ".getRemediationByCriticity" );
+        }
+        finally
+        {
+            FacadeHelper.closeSession( session, QualityResultFacade.class.getName() + ".getRemediationByCriticity" );
+        }
+        return compoList;
+    }
+
+    /**
+     * Transform the map values into sorted list
+     * 
+     * @param map the map values
+     * @return sorted list
+     */
+    private static List<ComponentCriticalityDTO> createList( Map<Long, ComponentCriticalityDTO> map )
+    {
+        List<ComponentCriticalityDTO> compoList = new ArrayList<ComponentCriticalityDTO>();
+        compoList = new ArrayList<ComponentCriticalityDTO>( map.values() );
+        // For each ComponentCriticalityDTO, we sort its PracticeCriticality by their criticality
+        Iterator<ComponentCriticalityDTO> compoIt = compoList.iterator();
+        while ( compoIt.hasNext() )
+        {
+            ComponentCriticalityDTO componentCriticalityDTO = (ComponentCriticalityDTO) compoIt.next();
+            if ( componentCriticalityDTO.isHasBadMark() )
+            {
+                Collections.sort( componentCriticalityDTO.getPracticeList(), new PracticeCriticalityComparator() );
+            }
+            else
+            {
+                compoIt.remove();
+            }
+        }
+        // We sort the list of ComponentCriticityDTO by their criticality
+        Collections.sort( compoList, new ComponentCriticalityComparator() );
+        // write( compoList );
+        return compoList;
     }
 
 }

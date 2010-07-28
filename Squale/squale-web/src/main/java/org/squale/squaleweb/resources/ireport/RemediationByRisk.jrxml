@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!-- Modified manually -->
+<!-- Refer to http://jasperreports.sourceforge.net/schema.reference.html for more informations -->
+
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<!-- ##### Global configuration regarding the report ##### -->
+<!-- Root element representing the definition of a report. -->
+<jasperReport name="RemediationByRisk" columnCount="1" printOrder="Vertical"
+	orientation="Portrait" pageWidth="595" pageHeight="842"
+	columnWidth="535" columnSpacing="0" leftMargin="30" rightMargin="30"
+	topMargin="20" bottomMargin="20" whenNoDataType="NoPages"
+	isTitleNewPage="false" isSummaryNewPage="false">
+
+	<!-- ##### iReport specific properties ##### -->
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+
+	<!-- ############################## Import declaration ######################### -->
+	<!-- Translates into an import statement inside the expression class order		 -->
+	<!-- to eliminate the need to use complete class names in the report expressions.-->
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+	<import value="org.squale.squaleweb.resources.WebMessages" />
+	<import value="org.squale.squaleweb.util.JasperReportUtil" />
+	<import value="org.squale.squaleweb.util.SqualeWebActionUtils" />
+
+	<!-- ########################### Parameters used whithin the report ############################## -->
+	<!-- Represents the definition of a report parameter. Parameters are very useful for passing data  -->
+	<!-- to the report engine and can be used in the expressions or in the query string of the report. -->
+	<parameter name="userName" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression><![CDATA["?"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="auditDate" isForPrompting="false" class="java.lang.String">
+		<parameterDescription><![CDATA[la date ou le nom de l'audit courant]]></parameterDescription>
+	</parameter>
+	<parameter name="moduleName" isForPrompting="false" class="java.lang.String" />
+	
+
+	<!-- ################### Field declarations ################### -->
+	<!-- Represents the definition of a data field that will store	-->
+	<!-- values retrieved from the data source of the report.		-->
+	<field name="name" class="java.lang.String" />
+	<field name="fullname" class="java.lang.String" />
+	<field name="type" class="java.lang.String" />
+	<field name="practiceList" class="java.util.List" />
+	
+	<!-- ###################################### Variables declarations #######################################  -->
+	<!-- Represents the definition of a report variable. Variables are objects that store the values of their	-->
+	<!-- associated expressions or perform various calculations on those expression values. Expressions are java-->
+	<!-- expressions build on top of fields and variables declared in the report. They are evaluated at runtime,-->
+	<!-- when filling the report. -->
+	<variable name="date" class="java.lang.String" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></variableExpression>
+		<initialValueExpression><![CDATA[org.squale.squaleweb.util.SqualeWebActionUtils.getFormattedDate(new Date(), $P{REPORT_RESOURCE_BUNDLE}.getLocale())]]></initialValueExpression>
+	</variable>
+	<!--variable name="nbSquale" class="java.lang.Integer" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new Integer((int)(Math.log(((org.squale.squalecommon.datatransfertobject.rule.PracticeRuleDTO)$F{qualityResultDTO}.getRule()).getEffort())/Math.log(10)+1))]]></variableExpression>
+	</variable-->
+
+	<!-- ###################################### Background declaration ######################################### -->
+	<!-- Definition of the page background section for this report. The background section is displayed on every -->
+	<!-- page and cannot overflow to the next page. Elements placed on this section are evaluated at page 		 -->
+	<!-- initialization time and are displayed in the back. All other page elements are displayed on top of the  -->
+	<!-- background elements. This section allows creating watermark or other similar effects in documents.		 -->
+	<background>
+		<band height="0" isSplitAllowed="true"></band>
+	</background>
+
+	<!-- #################### Title declaration ################### -->
+	<!-- Definition of the title section for this report. The title -->
+	<!-- section appears only once at the beginning of the report.  -->
+	<title>
+		<!-- ########### Band declaration ########## -->
+		<!-- Generic definition of a report section. -->
+		<band height="100" isSplitAllowed="false">
+			<!-- The top rectangle which surrounds the top title -->
+			<rectangle radius="0">
+				<reportElement mode="Opaque" x="0" y="0" width="535" height="50" forecolor="#000000" backcolor="#FFFFFF"
+					key="rectangle-1" stretchType="RelativeToTallestObject" />
+				<graphicElement stretchType="RelativeToTallestObject" pen="Thin" fill="Solid" />
+			</rectangle>
+			
+			<!-- ####### Image declaration ###### -->
+			<!-- The Squale logo on the left side -->
+			<image scaleImage="FillFrame" vAlign="Middle" hAlign="Center" isUsingCache="false" evaluationTime="Now" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Opaque" x="7" y="4" width="100" height="39" forecolor="#000000" backcolor="#FFFFFF" key="image-1" />
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None"
+					rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<graphicElement stretchType="NoStretch" pen="None" fill="Solid" />
+				<imageExpression class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/images/logoSquale.gif"]]></imageExpression>
+			</image>
+			
+			<!-- ####### Textfield declaration ###### -->
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Transparent" x="106" y="5" width="429" height="37" forecolor="#000000" backcolor="#FFFFFF" key="textField-h1" positionType="Float"/>
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None"
+					rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<textElement textAlignment="Center"
+					verticalAlignment="Middle" rotation="None" lineSpacing="Single">
+					<font fontName="Arial" pdfFontName="Helvetica" size="24" isBold="false" isItalic="false" isUnderline="false"
+						isPdfEmbedded="false" pdfEncoding="Cp1252" isStrikeThrough="false" />
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[msg($R{export.pdf.remediation_by_component.title}, $P{moduleName})]]></textFieldExpression>
+			</textField>
+			
+			<!-- ####### Textfield declaration ###### -->
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Transparent" x="0" y="60" width="255" height="21" forecolor="#000000" backcolor="#FFFFFF" key="textField-h2" positionType="Float"/>
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None"
+					rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<textElement textAlignment="Justified" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
+					<font fontName="Verdana" pdfFontName="Helvetica" size="12" isBold="true" isItalic="false" isUnderline="false"
+						isPdfEmbedded="false" pdfEncoding="Cp1252" isStrikeThrough="false" />
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[msg($R{description.name.audit}, $P{auditDate})]]></textFieldExpression>
+			</textField>
+			
+			
+			
+		</band>
+	</title>
+	
+	<!-- ######################### PageHeader declaration ##################### -->
+	<!-- Definition of the page header section for this report. The page header -->
+	<!-- is printed at the beginning of each page on the report. 				-->
+	<pageHeader>
+		<band height="0" isSplitAllowed="true"></band>
+	</pageHeader>
+	
+	<!-- ################################# ColumnHeader declaration ############################# -->
+	<!-- Definition of the column header section for this report. The column header is printed	  -->
+	<!-- at the beginning of each column on the report. If the report's column count is 1, column -->
+	<!-- header and footer sections are ignored. 												  -->
+	<columnHeader>
+		<band height="0" isSplitAllowed="true"></band>
+	</columnHeader>
+	
+	<!-- ################################# Detail declaration ############################# -->
+	<!-- Definition of a detail band for this report. A detail band is repeated for each	-->
+	<!-- line of data supplied by the report's data source. There can be multiple detail	-->
+	<!-- bands in a report. -->
+	<detail>
+		<band height="160" isSplitAllowed="true">
+			<!-- ####### Textfield declaration ###### -->
+			<!-- Name of the component -->
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Opaque" x="0" y="0" width="535" height="40" forecolor="#333333" backcolor="#FFFFFF" key="textField-d1" positionType="Float" />
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="5"
+					rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<textElement textAlignment="Justified" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
+					<font fontName="Arial" pdfFontName="Helvetica-Bold" size="14" isBold="true" isItalic="false" isUnderline="false"
+						isPdfEmbedded="false" pdfEncoding="Cp1252" isStrikeThrough="false" />
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{REPORT_COUNT}+ ". "+ $F{name}]]></textFieldExpression>
+			</textField>
+			
+			<!-- ####### Textfield declaration ###### -->
+			<!-- Type of the component -->
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Transparent" x="0" y="40" width="535" height="15" forecolor="#000000" backcolor="#FFFFFF" key="textField-d2" positionType="Float" />
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None"
+					rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<textElement textAlignment="Justified" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+					<font fontName="Arial" pdfFontName="Helvetica" size="12" isBold="false" isItalic="false" isUnderline="false"
+						isPdfEmbedded="false" pdfEncoding="Cp1252" isStrikeThrough="false" />
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$R{export.pdf.component.type}+" "
+					+org.squale.squaleweb.resources.WebMessages.getString($P{REPORT_RESOURCE_BUNDLE}.getLocale(), $F{type})]]>
+				</textFieldExpression>
+			</textField>
+			
+			<!-- ####### Textfield declaration ###### -->
+			<!-- Full name of the component -->
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Transparent" x="0" y="65" width="535" height="15" forecolor="#000000" backcolor="#FFFFFF" key="textField-d3" positionType="Float" />
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None"
+					rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+					<font fontName="Arial" pdfFontName="Helvetica" size="12" isBold="false" isItalic="false" isUnderline="false"
+						isPdfEmbedded="false" pdfEncoding="Cp1252" isStrikeThrough="false" />
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$R{export.pdf.component.fullname}]]>
+				</textFieldExpression>
+			</textField>
+			
+			<!-- ####### Textfield declaration ###### -->
+			<!-- Full name of the component -->
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Transparent" x="0" y="80" width="535" height="15" forecolor="#000000" backcolor="#FFFFFF" key="textField-d4" positionType="Float" />
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None"
+					rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+					<font fontName="Arial" pdfFontName="Helvetica" size="12" isBold="false" isItalic="false" isUnderline="false"
+						isPdfEmbedded="false" pdfEncoding="Cp1252" isStrikeThrough="false" />
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{fullname}]]>
+				</textFieldExpression>
+			</textField>
+			
+			
+			<!-- practice result -->
+			<!-- ####### TextField declaration ###### -->
+			<!-- Title of the practice table -->
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Transparent" x="0" y="110" width="299" height="15" forecolor="#000000" backcolor="#FFFFFF" key="textField-d5" positionType="Float"/>
+				<!-- 	Definition of an image object. -->
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000"
+					rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<!-- ###### Customisation of the textElement ######-->
+				<!-- Element used to specify the common properties -->
+				<!-- of a text object on the report  -->
+				<textElement textAlignment="Justified" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
+					<font fontName="Arial" pdfFontName="Helvetica-Bold" size="13" isBold="true"
+						isItalic="false" isUnderline="false" isPdfEmbedded="false" pdfEncoding="Cp1252" isStrikeThrough="false" />
+				</textElement>
+				<!-- Defines the expression to use for this textField. -->
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{export.pdf.practices}]]></textFieldExpression>
+			</textField>
+			
+			<!-- ####### SubReport declaration ###### -->
+			<!-- practice table -->
+			<!-- jasperreport/practiceCriticality.jasper -->
+			<subreport isUsingCache="true">
+				<reportElement mode="Opaque" x="0" y="130" width="535" height="7" forecolor="#000000" backcolor="#FFFFFF"
+					key="subreport-4" positionType="Float">
+				</reportElement>
+				<subreportParameter name="REPORT_RESOURCE_BUNDLE">
+					<subreportParameterExpression><![CDATA[$P{REPORT_RESOURCE_BUNDLE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="REPORT_LOCALE">
+					<subreportParameterExpression><![CDATA[$P{REPORT_LOCALE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{practiceList})]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA["/org/squale/squaleweb/resources/jasperreport/practiceCriticality.jasper"]]></subreportExpression>
+			</subreport>
+			
+		</band>
+	</detail>
+	
+	<!-- ######################### ColumnFooter declaration ############################ -->
+	<!-- Definition of the column footer section for this report. The column footer is	 -->
+	<!-- printed at the bottom of each column on the report. If the report's column count-->
+	<!-- is 1, column header and footer sections are ignored.							 -->
+	<columnFooter>
+		<band height="0" isSplitAllowed="true"></band>
+	</columnFooter>
+	
+	<!-- ##################### PageFooter declaration ######################### -->
+	<!-- Definition of the page footer section for this report. The page footer -->
+	<!-- is printed at the bottom of each page on the report. 					-->
+	<pageFooter>
+		<band height="42" isSplitAllowed="true">
+		
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="0" y="0" width="536" height="25" forecolor="#000000" backcolor="#FFFFFF" key="rectangle-2" />
+				<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
+			</rectangle>
+			
+			<!-- ####### TextField declaration ###### -->
+			<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Transparent" x="2" y="5" width="189" height="14" forecolor="#000000" backcolor="#FFFFFF" key="textField-f1">
+				</reportElement>
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None"
+					rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<textElement textAlignment="Justified" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
+					<font fontName="Verdana" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false"
+						isPdfEmbedded="false" pdfEncoding="Cp1252" isStrikeThrough="false" />
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[msg($R{description.name.audit}, $P{auditDate})]]></textFieldExpression>
+			</textField>
+			
+			<!-- ####### TextField declaration ###### -->
+			<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Transparent" x="198" y="5" width="181" height="14" forecolor="#000000" backcolor="#FFFFFF" key="textField-f2" />
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None"
+					rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
+					<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false"
+						isPdfEmbedded="false" pdfEncoding="Cp1252" isStrikeThrough="false" />
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{moduleName}]]></textFieldExpression>
+			</textField>
+			
+			<!-- ####### TextField declaration ###### -->
+			<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Transparent" x="458" y="5" width="33" height="14" forecolor="#000000" backcolor="#FFFFFF" key="textField-f3" />
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" 
+					rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
+					<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false"
+						isPdfEmbedded="false" pdfEncoding="Cp1252" isStrikeThrough="false" />
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{PAGE_NUMBER} + " / "]]></textFieldExpression>
+			</textField>
+			
+			<!-- ####### TextField declaration ###### -->
+			<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Transparent" x="491" y="5" width="43" height="14" forecolor="#000000" backcolor="#FFFFFF" key="textField-f4" />
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None"
+					rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<textElement textAlignment="Justified" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
+					<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false"
+						isPdfEmbedded="false" pdfEncoding="Cp1252" isStrikeThrough="false" />
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			
+			<!-- ####### TextField declaration ###### -->
+			<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None" hyperlinkTarget="Self">
+				<reportElement mode="Transparent" x="1" y="30" width="442" height="12" forecolor="#000000" backcolor="#FFFFFF" key="textField-f5" />
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None"
+					rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000" />
+				<textElement textAlignment="Justified" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+					<font fontName="Arial" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false" isUnderline="false"
+						isPdfEmbedded="false" pdfEncoding="Cp1252" isStrikeThrough="false" />
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[msg($R{export.pdf.page.footer}, $V{date}, $P{userName})]]></textFieldExpression>
+			</textField>
+			
+		</band>
+	</pageFooter>
+	
+	<!-- ###################### Summary declaration ################### -->
+	<!-- Definition of the summary section for this report. The summary -->
+	<!-- section is printed only once at the end of the report. 		-->
+	<summary>
+		<band height="0" isSplitAllowed="true"></band>
+	</summary>
+</jasperReport>

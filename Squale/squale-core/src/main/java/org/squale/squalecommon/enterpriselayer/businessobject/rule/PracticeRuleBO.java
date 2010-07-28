@@ -35,6 +35,9 @@ public class PracticeRuleBO
 
     /** Default correction effort to do for improve the practice */
     public static final int EFFORT = 1;
+    
+    /** Default criticality of the practice */
+    public static final int DEFAULT_CRITICALITY = 1;
 
     /**
      * Weighting function to use on the componeenty mark for the calculation of the global mark.
@@ -46,6 +49,9 @@ public class PracticeRuleBO
 
     /** Correction effort to do for improve the practice */
     private int mEffort = EFFORT;
+    
+    /** Criticality of the practice */
+    private int criticality = DEFAULT_CRITICALITY; 
 
     /** Period of validity for a mark */
     private String timeLimitation; // = TIME_LIMITATION;
@@ -185,4 +191,28 @@ public class PracticeRuleBO
     {
         timeLimitation = TimeLimitationParser.periodUnitToString( period, unit );
     }
+
+    /**
+     * Getter method for the attribute criticality
+     * 
+     * 
+     * @return The criticality of the practice
+     * @hibernate.property name="criticality" column="Criticality" type="integer" length="10" unique="false" update="true"
+     *                     insert="true"
+     */
+    public int getCriticality()
+    {
+        return criticality;
+    }
+
+    /**
+     * Setter method for the attribute criticality
+     * 
+     * @param pCriticality The new criticality of the practice
+     */
+    public void setCriticality( int pCriticality )
+    {
+        criticality = pCriticality;
+    }
+
 }

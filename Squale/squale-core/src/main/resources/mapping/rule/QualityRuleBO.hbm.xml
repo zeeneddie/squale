@@ -31,6 +31,7 @@
       <property name="weightFunction" column="WeightFunction" update="true" unique="false" type="string" insert="true"/>
       <property name="effort" length="10" column="effort" update="true" unique="false" type="integer" insert="true"/>
       <property name="timeLimitation" length="6" column="TimeLimitation" update="true" unique="false" type="string" insert="true"/>
+      <property name="criticality" length="10" column="Criticality" update="true" unique="false" type="integer" insert="true"/>
     </subclass>
   </class>
 </hibernate-mapping>

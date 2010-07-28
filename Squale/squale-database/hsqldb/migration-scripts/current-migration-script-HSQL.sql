@@ -40,4 +40,15 @@ alter table Module
     references Rule
     on delete cascade;
     
+    
 --#############################################
+--# Modifications for #259
+   
+alter table QualityRule add Criticality integer;
+update QualityRule set Criticality = 1 where subclass = 'PracticeRule';
+    
+--###########################################################
+--Modify the squale version
+alter table AuditBO alter SQUALE_VERSION set default '7.0' ;
+
+--###########################################################

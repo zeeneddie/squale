@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE squale PUBLIC "-//Squale//DTD Grid Configuration 1.2//EN" "file:../org/squale/squalecommon/dtd/grid-1.2.dtd">
+<!DOCTYPE squale PUBLIC "-//Squale//DTD Grid Configuration 1.3//EN" "file:../org/squale/squalecommon/dtd/grid-1.3.dtd">
 
 <squale>
 	<practiceset>

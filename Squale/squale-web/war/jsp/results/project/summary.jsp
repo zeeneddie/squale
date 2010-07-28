@@ -74,6 +74,7 @@
 		<jsp:include page="/jsp/xiti/xiti_header_common.jsp" />
 	</af:head>
 	<af:body canvasLeftPageInclude="/jsp/canvas/project_menu.jsp" onload="lineStyle();">
+		
 		<%-- une autre valeur que "true" indique qu'on est passé par une autre vue 
 			que celle composant directement --%>
 		<%--<bean:define id="compoName" type="String" property="name"
@@ -315,58 +316,85 @@
 			</af:tabbedPane>
 			<h2><bean:message key="exports.title" /></h2>
 			<br />
-			<af:buttonBar>
-				<%
-				    String urlExportPDF =
-				                        "project.do?action=exportPDF&projectId=" + projectId + "&currentAuditId="
-				                            + currentAuditId + "&previousAuditId=" + previousAuditId;
-				                    String urlExportActionPlan =
-				                        "project.do?action=exportPDFActionPlan&projectId=" + projectId + "&currentAuditId="
-				                            + currentAuditId + "&previousAuditId=" + previousAuditId;
-				                    String urlExportDetailedActionPlan =
-				                        "project.do?action=exportPDFDetailedActionPlan&projectId=" + projectId
-				                            + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId;
-				                    String urlExportPpt =
-				                        "param_audit_report.do?action=param&applicationId=" + applicationId
-				                            + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId
-				                            + "&comparable=" + comparable.toString();
-				%>
-				<af:button type="form" name="export.project.pdf"
-					onclick="<%=\"javascript:xt_clic_AF_v2('T','Rapport::Synthese',null,null);location.href='\"+urlExportPDF+\"'\"%>"
-					toolTipKey="toolTip.export.pdf.project.result" />
-				<af:button type="form" name="export.pdf.plan"
-					onclick="<%=\"javascript:xt_clic_AF_v2('T','Rapport::PlanAction',null,null);location.href='\"+urlExportActionPlan+\"'\"%>"
-					toolTipKey="toolTip.export.pdf.plan" />
-				<af:button type="form" name="export.pdf.detailed.plan"
-					onclick="<%=\"javascript:xt_clic_AF_v2('T','Rapport::PlanActionDetail',null,null);location.href='\"+urlExportDetailedActionPlan+\"'\"%>"
-					toolTipKey="toolTip.export.pdf.detailed.plan" />
-				<%
-				    if ( isAdmin )
-				                    {
-				%>
-				<af:button type="form" name="export.audit_report"
-					onclick="<%=urlExportPpt%>"
-					toolTipKey="toolTip.export.audit_report" accessKey="admin" />
-				<%
-				    } //isAdmin
-				%>
-				<%-- 
-					L'export IDE n'est disponible que pour les versions >= 3.2 et pour les profils
-					qui le permettent 
-				--%>
-				<logic:greaterEqual name="auditSqualeVersion" value="3.2">
-					<logic:equal name="projectSummaryForm" property="exportIDE"
-						value="true">
-						<%
-						    String urlExportIde =
-						                                "project.do?action=exportIDE&projectId=" + projectId + "&currentAuditId="
-						                                    + currentAuditId + "&previousAuditId=" + previousAuditId;
-						%>
-						<af:button type="form" name="export.ide"
-							onclick="<%=urlExportIde%>" toolTipKey="toolTip.export.ide" />
-					</logic:equal>
-				</logic:greaterEqual>
-			</af:buttonBar>
+			
+			<%-- The export tool bar --%>
+			<%
+			    String urlExportPDF = "project.do?action=exportPDF&projectId=" + projectId + "&currentAuditId=" 
+			                    + currentAuditId + "&previousAuditId=" + previousAuditId;
+				String urlExportActionPlan = "project.do?action=exportPDFActionPlan&projectId=" + projectId
+				                + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId;
+			    String urlExportDetailedActionPlan = "project.do?action=exportPDFDetailedActionPlan&projectId=" + projectId
+			                    + "&currentAuditId=" + currentAuditId + "&previousAuditId=" + previousAuditId;
+			    String urlExportPpt = "param_audit_report.do?action=param&applicationId=" + applicationId + "&currentAuditId=" 
+			                    + currentAuditId + "&previousAuditId=" + previousAuditId + "&comparable=" + comparable.toString();
+			 	String remediationRisk = "project.do?action=exportRemediationByRisk&projectId=" + projectId 
+			 	                + "&currentAuditId="+ currentAuditId;
+			 	String urlExportIde = "project.do?action=exportIDE&projectId=" + projectId + "&currentAuditId=" 
+			 	                + currentAuditId + "&previousAuditId=" + previousAuditId;
+			%>
+			<div class="moduleexporttoolbar" >
+				<div class="moduleexporttoolbarbackground" >
+				</div>
+				<ul id="cssdropdown">
+					<li class="exportheadlink" >
+						<img src="theme/charte_v03_001/img/ico/doctype/pdf.gif" >
+						<a href="<%= urlExportPDF %>" >
+							<bean:message key="export.button.pdf.project" />  
+						</a>
+					</li>
+					<li class="exportheadlink" style="width: 200px;">
+						<img src="theme/charte_v03_001/img/ico/blanc/multi.png" >
+						<a>
+							<bean:message key="export.button.pdf.plan" />
+						</a>
+					    <ul>
+							<li>
+								<img src="theme/charte_v03_001/img/ico/doctype/pdf.gif" >
+								<a href="<%= urlExportActionPlan %>" >
+									<bean:message key="export.button.pdf.plan.by_practice"/>
+								</a>
+							</li>
+						  	<li>
+						  		<img src="theme/charte_v03_001/img/ico/doctype/pdf.gif" >
+						  		<a href="<%= urlExportDetailedActionPlan %>" >
+						  			<bean:message key="export.button.pdf.plan.by_practice.detailed"/>
+						  		</a>
+						  	</li>
+						  	<li>
+						  		<img src="theme/charte_v03_001/img/ico/doctype/pdf.gif" >
+						  		<a href="<%=remediationRisk %>" >
+						  			<bean:message key="export.button.pdf.plan.by_component"/>
+						  		</a>
+						  	</li>
+						</ul>
+					</li>
+					<%
+			    		if ( isAdmin )
+			            {
+					%>
+						<li class="exportheadlink">
+							<img src="theme/charte_v03_001/img/ico/doctype/ppt.gif" >
+							<a href="<%= urlExportPpt %>" >
+								<bean:message key="export.button.ppt.audit_report"/>
+							</a>
+						</li>
+					<%
+			    		} //isAdmin
+					%>
+					<logic:greaterEqual name="auditSqualeVersion" value="3.2">
+						<logic:equal name="projectSummaryForm" property="exportIDE"	value="true">
+				  			<li class="exportheadlink">
+				  				<img src="theme/charte_v03_001/img/ico/doctype/fichier.gif" >
+				  				<a href="<%= urlExportIde %>" >
+				  					<bean:message key="export.button.xml.ide" />
+				  				</a>
+							</li>
+						</logic:equal>
+					</logic:greaterEqual>
+				</ul>
+			</div>
+			<%-- END of the export tool bar --%>
 		</af:canvasCenter>
 	</af:body>
+	
 </af:page>

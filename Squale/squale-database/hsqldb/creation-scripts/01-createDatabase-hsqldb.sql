@@ -674,6 +674,7 @@
         WeightFunction varchar(255),
         effort integer,
         TimeLimitation varchar(6),
+        Criticality integer,
         primary key (QualityRuleId)
     );
 

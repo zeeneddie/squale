@@ -83,3 +83,12 @@ function lineStyle()
 		line = document.getElementById("li-" + index);
 	}
 }
+
+$(document).ready(function(){
+	$('li.exportheadlink').hover(
+		function() { $('ul', this).css('display', 'block'); },
+		function() { $('ul', this).css('display', 'none'); });
+	$('li').hover(
+		function() { $(this).css('background-color', '#F3BA5D');  },
+		function() { $(this).css('background-color', '#2E5880');  });
+});

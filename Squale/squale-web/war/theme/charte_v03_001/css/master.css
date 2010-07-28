@@ -433,3 +433,14 @@ div.segment{margin-left:300px; overflow: auto; height: 550px;}
 .masked{display: none;}
 .application_reminder{text-decoration: underline; font-style: italic}
 .export_application{overflow: auto; height: 180px;}
+
+/*-- module results page / export tool bar --*/
+#cssdropdown, #cssdropdown ul {list-style: none; margin: 0; padding: 0; }
+#cssdropdown {margin-top: -22px;}
+#cssdropdown li.exportheadlink ul {display: none; }
+#cssdropdown li.exportheadlink img { vertical-align: top; }
+#cssdropdown li {background-color: #2E5880; border-top: 1px solid #FFFFFF; }
+#cssdropdown li.exportheadlink { float: left; height: 16px; margin-right: 20px;  border-bottom: 1px solid #FFFFFF;}
+#cssdropdown a { color: white; font-size: 0.9em; font-weight: bold; background-repeat: no-repeat; padding-left: 36px; padding-right: 10px; border: 0; background-color: transparent;}
+div.moduleexporttoolbarbackground {background-color: #AFD2F0; height: 26px; width: 100%;}
+div.moduleexporttoolbar {width: 100%; height: 75px;}

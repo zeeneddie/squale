@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding="UTF-8"?>
+
+
+<!ELEMENT squale (practiceset,criteriumset,factorset,gridset)>
+
+	<!ELEMENT practiceset (practice+)>
+		<!ELEMENT practice ((weight?,(timeLimitation|conditionformula|simpleformula),helpKey?)?)>
+			<!ATTLIST practice name CDATA #IMPLIED>
+			<!ATTLIST practice effort CDATA #IMPLIED>
+			<!ATTLIST practice criticality CDATA #IMPLIED>
+			<!ELEMENT weight (#PCDATA)>
+			<!ELEMENT conditionformula (level,measures,trigger,conditions)>
+				<!ELEMENT level (#PCDATA)>
+				<!ELEMENT measures (measure+)>
+					<!ELEMENT measure (#PCDATA)>
+				<!ELEMENT trigger (#PCDATA)>
+				<!ELEMENT conditions (condition+)>
+					<!ELEMENT condition (#PCDATA)>
+			<!ELEMENT simpleformula (level,measures,trigger,formula)>
+				<!ELEMENT formula (#PCDATA)>
+			<!ELEMENT timeLimitation (#PCDATA)>
+				<!ATTLIST timeLimitation unit (DAY | MONTH | YEAR) #REQUIRED>
+			<!ELEMENT helpKey (#PCDATA)>
+	
+	
+	<!ELEMENT criteriumset (criterium+)>
+		<!ATTLIST criterium name CDATA #IMPLIED>
+		<!ELEMENT criterium (practice-ref+)>
+			<!ELEMENT practice-ref EMPTY>
+				<!ATTLIST practice-ref name CDATA #IMPLIED>
+				<!ATTLIST practice-ref weight CDATA #IMPLIED>
+	
+		
+	<!ELEMENT factorset (factor+)>
+		<!ELEMENT factor (criterium-ref+)>
+			<!ATTLIST factor name CDATA #IMPLIED>
+			<!ELEMENT criterium-ref EMPTY>
+				<!ATTLIST criterium-ref name CDATA #IMPLIED>
+				<!ATTLIST criterium-ref weight CDATA #IMPLIED>
+	
+	
+	<!ELEMENT gridset (grid)>
+		<!ELEMENT grid (factor-ref+)>
+			<!ATTLIST grid name CDATA #IMPLIED>
+			<!ELEMENT factor-ref EMPTY>
+				<!ATTLIST factor-ref name CDATA #IMPLIED>

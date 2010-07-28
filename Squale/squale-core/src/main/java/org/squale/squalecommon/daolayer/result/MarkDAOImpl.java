@@ -25,7 +25,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.provider.persistence.hibernate.AbstractDAOImpl;
 import org.squale.jraf.spi.persistence.ISession;
@@ -643,4 +642,42 @@ public final class MarkDAOImpl
         whereClause += " and " + getAlias() + ".value < " + pMark + 1;
         return whereClause;
     }
+
+    /**
+     * This method is specific for the remediation by critcality feature. This method retrieves all the practices
+     * involved in the audit given in argument for the components which belong to the module given in argument and are
+     * not "excluded from the action plan". This method return a list of arrays. Each array contains :
+     * <ul>
+     * <li>0 - The component linked to the practice ({@link AbstractComponentBO})</li>
+     * <li>1 - The practice id (Long)</li>
+     * <li>2 - The practice name (String)</li>
+     * <li>3 - The practice criticality (Integer)</li>
+     * <li>4 - The practice mark (Float)</li>
+     * </ul>
+     * 
+     * @param session The hiberntae session
+     * @param auditId The audit id
+     * @param moduleId The module id
+     * @return a list of arrays
+     * @throws JrafDaoException exception occurs during the search
+     */
+    @SuppressWarnings( "unchecked" )
+    public List<Object[]> getByAudit( ISession session, Long auditId, long moduleId )
+        throws JrafDaoException
+    {
+        List<Object[]> result = new ArrayList<Object[]>();
+        StringBuffer request = new StringBuffer( "select component, rule.id, rule.name, rule.criticality, rule.effort, mark.value " );
+        request.append( "from AbstractComponentBO as component, QualityRuleBO as rule,  MarkBO as mark " );
+        request.append( "where component = mark.component " );
+        request.append( "and rule = mark.practice.rule " );
+        request.append( "and mark.practice.audit.id = " );
+        request.append( auditId );
+        request.append( "and mark.component.project.id = " );
+        request.append( moduleId );
+        request.append( "and component.excludedFromActionPlan = false" );
+        request.append( " order by mark.component.id" );
+        result = find( session, request.toString() );
+        return result;
+    }
+
 }

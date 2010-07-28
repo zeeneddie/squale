@@ -481,4 +481,10 @@
 		
 	</applicationComponent>
 	
+	<applicationComponent name="remediation" description="remediation" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.display.RemediationPlanComponentAccess">
+		
+		<component name="remediationByRisk"></component>
+		
+	</applicationComponent>
+	
 </listApplicationComponent>
