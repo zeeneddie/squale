@@ -20,7 +20,10 @@
 	<target name="executeSQLscripts">
 		<echo>Initializing database...</echo>
 		<sql driver="${database.driver}" url="${database.url}" userid="sa" password="" 
-			src="${basedir}/creation-scripts/01-createDatabase-hsqldb.sql" classpathref="cp.driver" />
+			src="${basedir}/creation-scripts/01-createDatabase-hsqldb.sql" classpathref="cp.driver" onerror="continue"/>
+		<echo>1rst script OK...</echo>
+		<sql driver="${database.driver}" url="${database.url}" userid="sa" password="" 
+			src="${basedir}/creation-scripts/01-createDatabase-hsqldb.sql" classpathref="cp.driver"/>
 		<echo>1rst script OK...</echo>
 		<sql driver="${database.driver}" url="${database.url}" userid="sa" password="" 
 			src="${basedir}/creation-scripts/02-setDefaultValues-hsqldb.sql" classpathref="cp.driver" />
