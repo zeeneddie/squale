@@ -48,7 +48,7 @@
 
 <bean:define id="callbackUrlApp">
 	<html:rewrite
-		page="//add_applicationTag.do?action=findTagForAutocomplete" />
+		page="/add_applicationTag.do?action=findTagForAutocomplete" />
 </bean:define>
 
 <script type="text/javascript"
