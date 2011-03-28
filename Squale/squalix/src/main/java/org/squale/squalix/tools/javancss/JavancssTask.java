@@ -59,6 +59,7 @@ import org.squale.squalecommon.enterpriselayer.businessobject.component.Abstract
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ClassBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.MethodBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.PackageBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 import org.squale.squalecommon.enterpriselayer.businessobject.result.ErrorBO;
@@ -573,7 +574,7 @@ public class JavancssTask
     private void computeClass( int ccn, AbstractComplexComponentBO component )
     {
         AbstractComplexComponentBO compo = component;
-        while ( !( compo.getParent() instanceof PackageBO ) )
+        while ( !( compo.getParent() instanceof PackageBO ) && !( compo.getParent() instanceof ProjectBO) )
         {
             compo = compo.getParent();
         }
@@ -584,7 +585,6 @@ public class JavancssTask
         {
             metricClassCompo.setSumVg( ccn );
             metricClassCompo.setMaxVg( ccn );
-            computePackage( ccn, compo );
         }
         else
         {
@@ -593,8 +593,8 @@ public class JavancssTask
             {
                 metricClassCompo.setMaxVg( ccn );
             }
-            computePackage( ccn, compo );
         }
+        computePackage( ccn, compo );
     }
 
     /**
@@ -605,25 +605,25 @@ public class JavancssTask
      */
     private void computePackage( int ccn, AbstractComplexComponentBO component )
     {
-        PackageBO compo = (PackageBO) component.getParent();
-
-        JavancssPackageMetricsBO metricPackageCompo = packageMap.get( repository.buildKey( compo ) );
-
-        if ( metricPackageCompo.getSumVg() == null )
+        if (component.getParent() instanceof PackageBO)
         {
-            metricPackageCompo.setSumVg( ccn );
-            metricPackageCompo.setMaxVg( ccn );
-            computeProject( ccn );
-        }
-        else
-        {
-            metricPackageCompo.setSumVg( metricPackageCompo.getSumVg().intValue() + ccn );
-            if ( ccn > metricPackageCompo.getMaxVg().intValue() )
+            PackageBO compo = (PackageBO) component.getParent();
+            JavancssPackageMetricsBO metricPackageCompo = packageMap.get( repository.buildKey( compo ) );
+            if ( metricPackageCompo.getSumVg() == null )
             {
+                metricPackageCompo.setSumVg( ccn );
                 metricPackageCompo.setMaxVg( ccn );
             }
-            computeProject( ccn );
+            else
+            {
+                metricPackageCompo.setSumVg( metricPackageCompo.getSumVg().intValue() + ccn );
+                if ( ccn > metricPackageCompo.getMaxVg().intValue() )
+                {
+                    metricPackageCompo.setMaxVg( ccn );
+                }
+            }
         }
+        computeProject( ccn );
     }
 
     /**

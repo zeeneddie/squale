@@ -33,7 +33,6 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.helper.AccessDelegateHelper;
 import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
@@ -54,7 +53,6 @@ import org.squale.squaleweb.transformer.ComponentTransformer;
 import org.squale.squaleweb.transformer.ProjectTransformer;
 import org.squale.squaleweb.transformer.ResultListTransformer;
 import org.squale.squaleweb.util.SqualeWebConstants;
-import org.squale.welcom.struts.bean.WActionForm;
 import org.squale.welcom.struts.transformer.WTransformerFactory;
 
 /**
@@ -113,9 +111,9 @@ public class ProjectComponentsAction
             ComponentDTO projectDTO =
                 (ComponentDTO) WTransformerFactory.formToObj( ProjectTransformer.class,
                                                               ActionUtils.getCurrentProject( pRequest ) )[0];
-            
+
             String language = projectDTO.getLanguage();
-            pRequest.setAttribute(SqualeWebConstants.LANGUAGE, language);
+            pRequest.setAttribute( SqualeWebConstants.LANGUAGE, language );
             String which = pRequest.getParameter( "which" );
             Object[] paramIn;
             Collection dtos = new ArrayList( 0 );
@@ -127,13 +125,14 @@ public class ProjectComponentsAction
             }
             else
             {
-                paramIn =
-                    new Object[] { projectDTO, ComponentType.PACKAGE, auditDTO, ( (ComponentForm) pForm ).getFilter() };
+                paramIn = new Object[] { projectDTO, null, auditDTO, ( (ComponentForm) pForm ).getFilter() };
                 dtos = getChildren( pRequest, ac, paramIn );
+
             }
-            Object obj[] = { dtos };
+
+            Object[] obj = { dtos };
             ComponentListForm packagesList = ComponentListTransformer.objToFormWithLanguage( obj, language );
-            
+
             // s'il n'y a qu'un seul package,
             if ( packagesList.getList().size() == 1
                 && !which.equals( SqualeCommonConstants.EXCLUDED_FROM_PLAN_COMPONENTS ) )
@@ -261,16 +260,16 @@ public class ProjectComponentsAction
                                                 final AuditDTO pAuditDTO )
         throws Exception
     {
-        String language = (String) pRequest.getParameter(SqualeWebConstants.LANGUAGE);
-        if (language==null)
+        String language = (String) pRequest.getParameter( SqualeWebConstants.LANGUAGE );
+        if ( language == null )
         {
-        	language = (String) pRequest.getAttribute(SqualeWebConstants.LANGUAGE);
+            language = (String) pRequest.getAttribute( SqualeWebConstants.LANGUAGE );
         }
         else
         {
-        	pRequest.setAttribute(SqualeWebConstants.LANGUAGE, language);
+            pRequest.setAttribute( SqualeWebConstants.LANGUAGE, language );
         }
-    	
+
         ActionForward forward = null;
         boolean reload = true;
         String which = ( (String) pRequest.getParameter( "which" ) );
@@ -283,16 +282,16 @@ public class ProjectComponentsAction
             Object[] paramIn = { compo };
             compo = (ComponentDTO) ac.execute( "get", paramIn );
             // Initialise le form
-            ComponentTransformer.objToFormWithLanguage(new Object[] {compo}, language, (ComponentForm) pForm);
-            
+            ComponentTransformer.objToFormWithLanguage( new Object[] { compo }, language, (ComponentForm) pForm );
+
             // Récupération des parents et composition du mot complet
             List parentDtoList = getParentList( compo );
 
             // Récupération de la liste pour l'onglet "info générale"
             Object[] infoListTab = new Object[1];
             infoListTab[0] = parentDtoList;
-            
-            ComponentListForm infoList = ComponentListTransformer.objToFormWithLanguage(infoListTab, language);
+
+            ComponentListForm infoList = ComponentListTransformer.objToFormWithLanguage( infoListTab, language );
             infoList.copyValues( (ComponentForm) pForm );
             pRequest.getSession().setAttribute( SqualeWebConstants.GEN_INFO, infoList );
 
@@ -334,7 +333,8 @@ public class ProjectComponentsAction
             {
                 Object[] paramIn3 = { compo, null, pAuditDTO, ( (ComponentForm) pForm ).getFilter() };
                 Collection childrenDTO = getChildren( pRequest, ac, paramIn3 );
-                ComponentListForm childrenList = ComponentListTransformer.objToFormWithLanguage(new Object[] { childrenDTO }, language);
+                ComponentListForm childrenList =
+                    ComponentListTransformer.objToFormWithLanguage( new Object[] { childrenDTO }, language );
                 childrenList.copyValues( (ComponentForm) pForm );
                 ( (ComponentForm) pForm ).setChildren( childrenList );
                 // Dans le cas d'un package avec un seul fils, on descend
@@ -460,8 +460,8 @@ public class ProjectComponentsAction
         ActionErrors errors = new ActionErrors();
         try
         {
-        	// Obtention du langage dans la requête
-        	String language = (String) pRequest.getParameter(SqualeWebConstants.LANGUAGE);
+            // Obtention du langage dans la requête
+            String language = (String) pRequest.getParameter( SqualeWebConstants.LANGUAGE );
             // Obtention de l'id du composant dans la requête
             String param = (String) pRequest.getParameter( "component" );
             ComponentDTO dto = new ComponentDTO();
@@ -490,7 +490,8 @@ public class ProjectComponentsAction
             // remet les bonnes valeurs concernant la justification et l'exclusion dans le form
             ( (ComponentForm) pForm ).setExcludedFromActionPlan( excluded );
             ( (ComponentForm) pForm ).setJustification( justif );
-            ComponentDTO componentToUpdate = (ComponentDTO) ( ComponentTransformer.formToObjWithLanguage( (ComponentForm) pForm, language) )[0];
+            ComponentDTO componentToUpdate =
+                (ComponentDTO) ( ComponentTransformer.formToObjWithLanguage( (ComponentForm) pForm, language ) )[0];
             Object[] paramIn = new Object[] { componentToUpdate };
             ac.execute( "updateComponent", paramIn );
             forward = pMapping.findForward( "component" );
