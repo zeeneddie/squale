@@ -35,6 +35,7 @@ import org.squale.squalecommon.daolayer.DAOMessages;
 import org.squale.squalecommon.daolayer.DAOUtils;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ApplicationBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
 
 /**
  * DAO pour les applications
@@ -689,7 +690,8 @@ public class ApplicationDAOImpl
         StringBuffer request = new StringBuffer( "Select app.id, app.name from ApplicationBO app where " );
         request.append( "app.id in (select app2.id from ApplicationBO app2, AuditBO audit where audit.components.id = app2.id and audit.status = " );
         request.append( AuditBO.TERMINATED );
-        request.append( " ) and app.userList is not empty " );
+        request.append( " ) and app.userList is not empty and app.status = " );
+        request.append( ApplicationBO.VALIDATED );
         listToReturn = find( session, request.toString() );
         return listToReturn;
     }
@@ -710,11 +712,31 @@ public class ApplicationDAOImpl
         StringBuffer request = new StringBuffer( "Select app.id, app.name from ApplicationBO app where " );
         request.append( "(app.id in (select app2.id from ApplicationBO app2, AuditBO audit where audit.components.id = app2.id and audit.status = " );
         request.append( AuditBO.TERMINATED );
-        request.append( " and ( app.userList.id = " );
+        request.append( " and ( app.status = ");
+        request.append( ApplicationBO.VALIDATED );
+        request.append( " ) and ( app.userList.id = " );
         request.append( userId );
-        request.append( " or (app.public = true and app.userList is not empty)))) " );
+        request.append( " or ( app.public = true and app.userList is not empty )))) " );
         listToReturn = find( session, request.toString() );
         return listToReturn;
+    }
+    
+    /**
+     * This method establish if the application given in argument is public 
+     * 
+     * @param session The hibernate session
+     * @param applicationId The application thecnical Id
+     * @return True if the application is public
+     * @throws JrafDaoException exception accurs during the search
+     */
+    public boolean isPublic( ISession session, long applicationId )
+        throws JrafDaoException
+    {
+        StringBuffer request = new StringBuffer( "Select app.public from ApplicationBO app where " );
+        request.append( " app.id = " );
+        request.append( applicationId );
+        List<Boolean> listToReturn = find( session, request.toString() );
+        return listToReturn.get( 0 );   
     }
 
 }

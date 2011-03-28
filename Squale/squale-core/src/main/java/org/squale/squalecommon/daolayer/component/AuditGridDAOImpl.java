@@ -84,13 +84,18 @@ public class AuditGridDAOImpl
     public AuditGridBO findWhere( ISession pSession, Long pProjectID, Long pAuditID )
         throws JrafDaoException
     {
-        String whereClause = "where ";
-        whereClause += getAlias() + ".project.id = '" + pProjectID + "'";
-        whereClause += " and ";
-        whereClause += getAlias() + ".audit.id = '" + pAuditID + "'";
+        StringBuffer whereClause = new StringBuffer(" where ");
+        whereClause.append( getAlias() );
+        whereClause.append( ".project.id = '" );
+        whereClause.append( pProjectID );
+        whereClause.append( "' AND " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".audit.id = '" );
+        whereClause.append( pAuditID );
+        whereClause.append( "'" );
 
         AuditGridBO result = null;
-        Collection col = findWhere( pSession, whereClause );
+        Collection col = findWhere( pSession, whereClause.toString() );
         if ( col.size() == 1 )
         {
             result = (AuditGridBO) col.iterator().next();
@@ -109,7 +114,11 @@ public class AuditGridDAOImpl
     public boolean isGridUsed( ISession pSession, Long pGridId )
         throws JrafDaoException
     {
-        String whereClause = "where " + getAlias() + ".grid.id=" + pGridId;
-        return findWhere( pSession, whereClause ).size() > 0;
+        StringBuffer whereClause = new StringBuffer(" where ");
+        whereClause.append( getAlias() );
+        whereClause.append( ".grid.id = " );
+        whereClause.append( pGridId );
+        return findWhere( pSession, whereClause.toString() ).size() > 0;
     }
+
 }

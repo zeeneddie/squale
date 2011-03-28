@@ -36,22 +36,20 @@ import org.apache.http.HttpStatus;
 import org.squale.jraf.commons.exception.JrafDaoException;
 import org.squale.jraf.commons.exception.JrafEnterpriseException;
 import org.squale.jraf.helper.AccessDelegateHelper;
-import org.squale.jraf.helper.PersistenceHelper;
-import org.squale.jraf.provider.persistence.hibernate.facade.FacadeHelper;
 import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
-import org.squale.jraf.spi.persistence.IPersistenceProvider;
-import org.squale.jraf.spi.persistence.ISession;
 import org.squale.squalecommon.datatransfertobject.component.AuditDTO;
 import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 import org.squale.squalecommon.datatransfertobject.component.ModuleLightDTO;
 import org.squale.squalecommon.datatransfertobject.component.UserDTO;
 import org.squale.squalecommon.enterpriselayer.applicationcomponent.rest.RestComponentAccess;
-import org.squale.squalecommon.enterpriselayer.facade.component.UserFacade;
+import org.squale.squalerest.model.ApplicationRest;
 import org.squale.squalerest.root.Applications;
 import org.squale.squalerest.root.ByApplication;
 import org.squale.squalerest.root.ByAudit;
 import org.squale.squalerest.root.IRootObject;
 import org.squale.squalerest.util.MimeType;
+import org.squale.squaleweb.connection.AuthenticationBean;
+import org.squale.squaleweb.connection.UserBeanAccessorHelper;
 import org.squale.squaleweb.rest.util.TransformToXstreamObject;
 
 import com.thoughtworks.xstream.XStream;
@@ -74,11 +72,6 @@ public class RestServlet
     private static final Log LOG = LogFactory.getLog( RestComponentAccess.class );
 
     /**
-     * Persistence provider
-     */
-    private static final IPersistenceProvider PERSISTENTPROVIDER = PersistenceHelper.getPersistenceProvider();
-
-    /**
      * Get method of http
      * 
      * @param request The http servlet request
@@ -88,46 +81,32 @@ public class RestServlet
     {
         try
         {
-            ISession session = null;
-
-            try
+            // Authentication of the user and retrieve of its informations
+            UserDTO userDto = authent( request );
+            // If the authentication failed then userDto has for id : -1L
+            if ( userDto == null )
             {
-                session = PERSISTENTPROVIDER.getSession();
-                // authentication of the user and retrieve of its informations
-                UserDTO userDto = authent( request );
-                // if the authentication failed then userDto has for id : -1L
-                if ( userDto.getID() == -1L )
+                // If the user authentication failed, then the servlet return a 403 error page
+                String s = "Basic realm=\"Login Test Servlet Users\"";
+                response.setHeader( "WWW-Authenticate", s );
+                response.setStatus( HttpStatus.SC_UNAUTHORIZED );
+            }
+            else
+            {
+                // Else the servlet execute the search
+                String pathInfo = request.getPathInfo();
+                MimeType type = returnType( request );
+                Locale locale = request.getLocale();
+                IRootObject dataToWrite = prepareResponse( pathInfo, userDto, locale );
+                if ( dataToWrite != null )
                 {
-                    // If the user authentication failed, then the servlet return a 403 error page
-                    String s = "Basic realm=\"Login Test Servlet Users\"";
-                    response.setHeader( "WWW-Authenticate", s );
-                    response.setStatus( HttpStatus.SC_UNAUTHORIZED );
+                    response.setCharacterEncoding( "UTF-8" );
+                    writeResponse( response, type, dataToWrite );
                 }
                 else
                 {
-                    // Else the servlet execute the search
-                    String pathInfo = request.getPathInfo();
-                    MimeType type = returnType( request );
-                    Locale locale = request.getLocale();
-                    IRootObject dataToWrite = prepareResponse( pathInfo, userDto, locale );
-                    if ( dataToWrite != null )
-                    {
-                        response.setCharacterEncoding( "UTF-8" );
-                        writeResponse( response, type, dataToWrite );
-                    }
-                    else
-                    {
-                        response.setStatus( HttpStatus.SC_NOT_IMPLEMENTED );
-                    }
+                    response.setStatus( HttpStatus.SC_NOT_IMPLEMENTED );
                 }
-            }
-            catch ( JrafDaoException e )
-            {
-                FacadeHelper.convertException( e, UserFacade.class.getName() );
-            }
-            finally
-            {
-                FacadeHelper.closeSession( session, UserFacade.class.getName() );
             }
         }
         catch ( JrafEnterpriseException e )
@@ -154,30 +133,42 @@ public class RestServlet
         {
             if ( pathInfo.matches( "/applications(/)?+" ) )
             {
-                dataToReturn = applicationList( userDto );
+                dataToReturn = applicationsFullInfo( userDto, locale,false);
+            }
+            else if ( pathInfo.matches( "/applications_full(/)?+" ) )
+            {
+                dataToReturn = applicationsFullInfo( userDto, locale,true) ;
             }
             else if ( pathInfo.matches( "/application/(\\d)++(/)?+" ) )
             {
                 String[] splitPathInfo = pathInfo.split( "/application/" );
-                String info = splitPathInfo[1];
-                if ( info.endsWith( "/" ) )
-                {
-                    info = info.substring( 0, info.length() - 1 );
-                }
+                String info = cleanInfo( splitPathInfo[1] );
                 dataToReturn = byApplication( userDto, info, locale );
             }
             else if ( pathInfo.matches( "/audit/(\\d)++(/)?+" ) )
             {
                 String[] splitPathInfo = pathInfo.split( "/audit/" );
-                String info = splitPathInfo[1];
-                if ( info.endsWith( "/" ) )
-                {
-                    info = info.substring( 0, info.length() - 1 );
-                }
+                String info = cleanInfo( splitPathInfo[1] );
                 dataToReturn = byAudit( userDto, info, locale );
             }
         }
         return dataToReturn;
+    }
+
+    /**
+     * This method removes the slash "/" at the end of the string given in argument if there is one
+     * 
+     * @param info The string to clean
+     * @return The cleaning string
+     */
+    private String cleanInfo( String info )
+    {
+        String cleanInfo = info;
+        if ( cleanInfo.endsWith( "/" ) )
+        {
+            cleanInfo = cleanInfo.substring( 0, info.length() - 1 );
+        }
+        return cleanInfo;
     }
 
     /**
@@ -189,10 +180,10 @@ public class RestServlet
      * @return The data to write
      * @throws JrafEnterpriseException Exceptions occurs during the search
      */
-    private ByAudit byAudit( UserDTO userDto, String auditId, Locale locale )
+    private ByApplication byAudit( UserDTO userDto, String auditId, Locale locale )
         throws JrafEnterpriseException
     {
-        ByAudit dataToReturn = new ByAudit();
+        ByApplication dataToReturn = new ByApplication();
         IApplicationComponent ac = AccessDelegateHelper.getInstance( "rest" );
         Object[] param = new Object[] { Long.parseLong( auditId ) };
         AuditDTO audit = (AuditDTO) ac.execute( "audit", param );
@@ -203,16 +194,16 @@ public class RestServlet
             {
                 param = new Object[] { (Long) application.getID(), (Long) audit.getID() };
                 List<ModuleLightDTO> moduleList = (List<ModuleLightDTO>) ac.execute( "moduleList", param );
-                dataToReturn = TransformToXstreamObject.byAudit( audit, application, moduleList, locale );
+                ApplicationRest applicationRest = TransformToXstreamObject.createFullApplicationRest( audit, application, moduleList, locale );
+                dataToReturn.setApplication( applicationRest );
             }
         }
-
         return dataToReturn;
     }
 
     /**
      * This method retrieves the factor and the list of successful audit for the application which corresponding to the
-     * appId given in argument If the user has no rights for the application or if the application doesbn't exist, then
+     * appId given in argument If the user has no rights for the application or if the application doesn't exist, then
      * the method returns an empty ByApplication object
      * 
      * @param userDto The authenticated user
@@ -228,14 +219,31 @@ public class RestServlet
         ComponentDTO application = searchApp( userDto, appId );
         if ( application != null )
         {
-            Object[] param = new Object[] { (Long) application.getID() };
-            IApplicationComponent ac = AccessDelegateHelper.getInstance( "rest" );
-            List<AuditDTO> allSuccessfulAudit = (List<AuditDTO>) ac.execute( "availableAudits", param );
-            param = new Object[] { (Long) application.getID(), (Long) allSuccessfulAudit.get( 0 ).getID() };
-            List<ModuleLightDTO> moduleList = (List<ModuleLightDTO>) ac.execute( "moduleList", param );
-            data = TransformToXstreamObject.byApplication( application, allSuccessfulAudit, moduleList, locale );
+            ApplicationRest applicationRest = transformFullApplication( application, locale ); 
+            data.setApplication( applicationRest );
         }
         return data;
+    }
+
+    /**
+     * @param application
+     * @param locale
+     * @return
+     * @throws JrafEnterpriseException
+     */
+    private ApplicationRest transformFullApplication( ComponentDTO application, Locale locale )
+        throws JrafEnterpriseException
+    {
+        Object[] param = new Object[] { (Long) application.getID() };
+        IApplicationComponent ac = AccessDelegateHelper.getInstance( "rest" );
+        List<AuditDTO> allSuccessfullAudit = (List<AuditDTO>) ac.execute( "availableAudits", param );
+        Long lastSuccessfulAuditId = (Long) allSuccessfullAudit.get( 0 ).getID();
+        List<AuditDTO> allPartialAudit = (List<AuditDTO>) ac.execute( "partialAudits", param );
+        List<AuditDTO> allFailedAudit = (List<AuditDTO>) ac.execute( "failedAudits", param );
+        param = new Object[] { (Long) application.getID(), lastSuccessfulAuditId };
+        List<ModuleLightDTO> moduleList = (List<ModuleLightDTO>) ac.execute( "moduleList", param );
+        return TransformToXstreamObject.createApplicationRestWithAudits( application, allSuccessfullAudit, allPartialAudit,
+                                                       allFailedAudit, moduleList, locale );
     }
 
     /**
@@ -267,22 +275,38 @@ public class RestServlet
         }
         return application;
     }
+    
 
     /**
      * This method retrieves the list of application available for the authenticated user and which has at least one
      * successful audit
      * 
      * @param userDto The authenticated user
+     * @param locale The current locale
+     * @param full All information for the application
      * @return The list of application available for the authenticated user and which has at least one successful audit
      * @throws JrafEnterpriseException Exceptions occurs during the search
      */
-    private Applications applicationList( UserDTO userDto )
+    private Applications applicationsFullInfo( UserDTO userDto, Locale locale, boolean full )
         throws JrafEnterpriseException
     {
+        Applications data = new Applications();
         IApplicationComponent ac = AccessDelegateHelper.getInstance( "rest" );
         Object[] param = new Object[] { userDto };
         List<ComponentDTO> appList = (List<ComponentDTO>) ac.execute( "visibleApplication", param );
-        Applications data = TransformToXstreamObject.applications( appList );
+        ApplicationRest applicationRest = null;
+        for ( ComponentDTO application : appList )
+        {
+            if(full)
+            {
+                applicationRest = transformFullApplication( application, locale );
+            }
+            else
+            {
+                applicationRest = TransformToXstreamObject.createApplicationRest( application );
+            }
+            data.addApplication( applicationRest );
+        }
         return data;
     }
 
@@ -352,7 +376,7 @@ public class RestServlet
     private UserDTO authent( HttpServletRequest request )
         throws JrafEnterpriseException
     {
-        UserDTO userDto = new UserDTO();
+        UserDTO userDto = null;
         String authHeader = request.getHeader( "Authorization" );
         if ( authHeader != null )
         {
@@ -389,7 +413,7 @@ public class RestServlet
     private UserDTO authentSearch( String userPass )
         throws JrafEnterpriseException
     {
-        UserDTO user = new UserDTO();
+        UserDTO userToReturn = null;
         int p = userPass.indexOf( ":" );
         if ( p != -1 )
         {
@@ -398,12 +422,16 @@ public class RestServlet
             if ( ( !userID.trim().equals( "" ) ) && ( !password.trim().equals( "" ) ) )
             {
                 UserDTO userDto = new UserDTO( userID, password );
-                IApplicationComponent ac = AccessDelegateHelper.getInstance( "rest" );
-                Object[] param = new Object[] { userDto };
-                user = (UserDTO) ac.execute( "userAuthentication", param );
+                AuthenticationBean isUser = UserBeanAccessorHelper.getUserBeanAccessor().isUser( userDto );
+                if ( isUser != null && isUser.getIdentifier() != null )
+                {
+                    IApplicationComponent ac = AccessDelegateHelper.getInstance( "Login" );
+                    Object[] param = new Object[] { userDto };
+                    userToReturn = (UserDTO) ac.execute( "getUserByIdentifier", param );
+                }
             }
         }
-        return user;
+        return userToReturn;
     }
 
 }

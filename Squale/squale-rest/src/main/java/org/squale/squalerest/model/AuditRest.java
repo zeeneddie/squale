@@ -34,8 +34,23 @@ public class AuditRest
     /**
      * The audit date 
      */
+    @XStreamAlias( "date" )
     @XStreamAsAttribute
     private Date auditDate;
+    
+    /**
+     * The audit type 
+     */
+    @XStreamAlias( "type" )
+    @XStreamAsAttribute
+    private String auditType;
+    
+    /**
+     * The audit duration
+     */
+    @XStreamAlias( "duration" )
+    @XStreamAsAttribute
+    private String auditDuration;
     
     /**
      * The audit technical id in the local Squale
@@ -44,15 +59,21 @@ public class AuditRest
     private String id;
 
     
+
     /**
      * Constructor 
      * 
      * @param pAuditDate The audit date
+     * @param pAuditType The audit type (milestone or normal)
+     * @param pAuditDuration The audit duration
+     * @param pAuditStatus The audit status
      * @param pId the technical id of the audit the local Squale
      */
-    public AuditRest( Date pAuditDate, String pId )
+    public AuditRest( Date pAuditDate, String pAuditType , String pAuditDuration, String pId )
     {
         auditDate = pAuditDate;
+        auditType = pAuditType;
+        auditDuration = pAuditDuration;
         id = pId;
     }
 
@@ -94,6 +115,46 @@ public class AuditRest
     public void setId( String pId )
     {
         id = pId;
+    }
+
+    /**
+     * Getter method for the attribute auditType
+     *  
+     * @return The audit type
+     */
+    public String getAuditType()
+    {
+        return auditType;
+    }
+
+    /**
+     * Setter method for the attribute auditType 
+     *  
+     * @param pAuditType The new audit type
+     */
+    public void setAuditType( String pAuditType )
+    {
+        this.auditType = pAuditType;
+    }
+    
+    /**
+     * Getter method for the duration
+     * 
+     * @return The duration of the audit
+     */
+    public String getAuditDuration()
+    {
+        return auditDuration;
+    }
+
+    /**
+     * Setter method for the duration
+     * 
+     * @param pDuration The new duration of the audit
+     */
+    public void setAuditDuration( String pDuration )
+    {
+        this.auditDuration = pDuration;
     }
     
 }

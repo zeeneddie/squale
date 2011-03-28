@@ -18,11 +18,7 @@
  */
 package org.squale.squalerest.root;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.squale.squalerest.model.ApplicationRest;
-import org.squale.squalerest.model.AuditRest;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -41,19 +37,13 @@ public class ByApplication
      */
     @XStreamAlias("application")
     private ApplicationRest application;
-
-    /**
-     * List of audits
-     */
-    @XStreamAlias("audits")
-    private List<AuditRest> audits;
     
     /**
      * Constructor
      */
     public ByApplication()
     {
-        audits = new ArrayList<AuditRest>();
+        
     }
 
     /**
@@ -75,27 +65,5 @@ public class ByApplication
     {
         return application;
     }
-    
-    /**
-     * Add an audit to the list of audit
-     * 
-     * @param audit The audit to add
-     */
-    public void addAudit( AuditRest audit )
-    {
-        audits.add( audit );
-    }
-    
-    /**
-     * Getter method for the attribute audits
-     * 
-     * @return The list of audit
-     */
-    public List<AuditRest> getAudit()
-    {
-        return audits;
-    }
-
-    
-
+   
 }

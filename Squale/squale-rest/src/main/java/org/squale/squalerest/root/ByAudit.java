@@ -18,8 +18,6 @@
  */
 package org.squale.squalerest.root;
 
-import org.squale.squalerest.model.ApplicationRest;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -28,41 +26,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  * @author bfranchet
  */
 @XStreamAlias( "data" )
+@Deprecated
 public class ByAudit
-    implements IRootObject
+    extends ByApplication
 {
-
-    /**
-     * The application
-     */
-    private ApplicationRest application;
-
-    /**
-     * Constructor
-     */
-    public ByAudit()
-    {
-
-    }
-
-    /**
-     * Setter method for the attribute application
-     * 
-     * @param pApplication The application
-     */
-    public void setApplication( ApplicationRest pApplication )
-    {
-        application = pApplication;
-    }
-
-    /**
-     * Getter method for the attribute application
-     * 
-     * @return The application
-     */
-    public ApplicationRest getApplication()
-    {
-        return application;
-    }
 
 }

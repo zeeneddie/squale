@@ -76,6 +76,20 @@ public class LoginApplicationComponentAccess
         userDTO = UserFacade.getUserByMatriculeAndPassword( pUser );
         return userDTO;
     }
+    
+    /**
+     * This method try to retrieve the userDto by its identifier. This method return null if no user has the identifier
+     * 
+     * @param pUser The UserDto with itys identifier filled
+     * @return The UserDto found
+     * @throws JrafEnterpriseException exception occurs the search of the user
+     */
+    public UserDTO getUserByIdentifier(UserDTO pUser) throws JrafEnterpriseException
+    {
+        UserDTO userDTO = null; // Initialisation du retour
+        userDTO = UserFacade.getUserByMatricule( pUser );
+        return userDTO;
+    }
 
     /**
      * Permet de mettre à jour les informations d'un utilisateur Crée l'utilisateur dans la base de données le cas

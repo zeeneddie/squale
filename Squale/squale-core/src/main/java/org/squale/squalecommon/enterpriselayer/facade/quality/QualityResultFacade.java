@@ -1848,4 +1848,18 @@ public final class QualityResultFacade
         return compoList;
     }
 
+    /**
+     * This method retrieve the name of the gris linked to the current audit on the current project
+     * 
+     * @param pProject The current project
+     * @param pAudit The current audit for the project
+     * @return The name of the grid for the audit on the project
+     * @throws JrafEnterpriseException exception occurs duringthe search
+     */
+    public static String getGridName( ComponentDTO pProject, AuditDTO pAudit )
+        throws JrafEnterpriseException
+    {
+        AuditGridDTO grid = getAuditGrid( pProject, pAudit );
+        return grid.getGrid().getName();
+    }
 }

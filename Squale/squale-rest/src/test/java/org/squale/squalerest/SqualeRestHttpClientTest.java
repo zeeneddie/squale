@@ -30,7 +30,6 @@ import org.squale.squalerest.client.SqualeRestHttpClient;
 import org.squale.squalerest.exception.SqualeRestException;
 import org.squale.squalerest.root.Applications;
 import org.squale.squalerest.root.ByApplication;
-import org.squale.squalerest.root.ByAudit;
 
 /**
  * Test class of {@link SqualeRestHttpClient} These tests needs :
@@ -103,6 +102,19 @@ public class SqualeRestHttpClientTest
     }
 
     /**
+     * Try to recover the application available for the current user
+     * 
+     * @throws SqualeRestException Errors occurs
+     */
+    @Test
+    public void testGetApplicationsFull()
+        throws SqualeRestException
+    {
+        Applications availableApplications = httpClient.getApplicationsFull();
+        assertNotNull( availableApplications );
+    }
+    
+    /**
      * Try to recover the data linked to the application id
      * 
      * @throws SqualeRestException Errors occurs
@@ -124,7 +136,7 @@ public class SqualeRestHttpClientTest
     public void testGetAudit()
         throws SqualeRestException
     {
-        ByAudit audit = httpClient.getAudit( auditId );
+        ByApplication audit = httpClient.getAudit( auditId );
         assertNotNull( audit );
     }
 

@@ -47,6 +47,11 @@ public class ModuleLightDTO
     private String name;
 
     /**
+     * The name of the grid linked to the module
+     */
+    private String gridName;
+    
+    /**
      * The list of tags linked to the module
      */
     private List<TagDTO> tags;
@@ -81,6 +86,23 @@ public class ModuleLightDTO
     {
         technicalId = pTechnicalId;
         name = pName;
+        factors = new ArrayList<QualityResultDTO>();
+        tags = new ArrayList<TagDTO>();
+        volumetry = new HashMap<String, Integer>();
+    }
+    
+    /**
+     * Constructor
+     * 
+     * @param pTechnicalId The technical id of the module
+     * @param pName The name of the module
+     * @param pGridName The grid linked to the module
+     */
+    public ModuleLightDTO( long pTechnicalId, String pName, String pGridName )
+    {
+        technicalId = pTechnicalId;
+        name = pName;
+        gridName = pGridName;
         factors = new ArrayList<QualityResultDTO>();
         tags = new ArrayList<TagDTO>();
         volumetry = new HashMap<String, Integer>();
@@ -124,6 +146,26 @@ public class ModuleLightDTO
     public void setName( String pName )
     {
         name = pName;
+    }
+
+    /**
+     * Getter method for the attribute grid 
+     * 
+     * @return The grid linked to the module
+     */
+    public String getGridName()
+    {
+        return gridName;
+    }
+
+    /**
+     * Setter method for the attribute grid
+     * 
+     * @param pGridName The new grid linked to the module
+     */
+    public void setGridName( String pGridName )
+    {
+        this.gridName = pGridName;
     }
 
     /**

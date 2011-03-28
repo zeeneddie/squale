@@ -66,11 +66,6 @@ public class AuditForm
     /** Date de version de l'audit dans le cas d'un audit de jalon. */
     private Date mHistoricalDate;
 
-    /** L'ensemble des clés pour les status sous forme de string */
-    private final String[] mStringStatusTab =
-        { "audit.status.notattempted", "audit.status.terminated", "audit.status.failed", "audit.status.deleted",
-            "audit.status.partial", "audit.status.running" };
-
     /** Pour savoir si l'audit est édité ou non */
     private boolean mEdited;
 
@@ -103,7 +98,7 @@ public class AuditForm
         mType = pAudit.getType();
         setApplicationId( "" + pAudit.getApplicationId() );
         mStatus = pAudit.getStatus();
-        mStringStatus = mStringStatusTab[mStatus];
+        mStringStatus = AuditBO.STATUS_TAB[mStatus];
         if ( null != pAudit.getHistoricalDate() )
         {
             setHistoricalDate( pAudit.getHistoricalDate() );
@@ -198,7 +193,7 @@ public class AuditForm
      */
     public void setStringStatus( int pStatus )
     {
-        mStringStatus = mStringStatusTab[pStatus];
+        mStringStatus = AuditBO.STATUS_TAB[pStatus];
     }
 
     /**

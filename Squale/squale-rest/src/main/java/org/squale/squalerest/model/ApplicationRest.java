@@ -43,6 +43,13 @@ public class ApplicationRest
      */
     @XStreamAsAttribute
     private String name;
+    
+    /**
+     * Is a public application
+     */
+    @XStreamAlias("public")
+    @XStreamAsAttribute
+    private Boolean publicApplication;
 
     /**
      * The audit exported
@@ -65,7 +72,28 @@ public class ApplicationRest
      */
     @XStreamImplicit
     private List<VolumetryRest> volumetry;
+    
+    /**
+     * List of successfull audits
+     */
+    @XStreamAlias("successful-audits")
+    private List<AuditRest> successfulAudits;
 
+    
+    /**
+     * List of successfull audits
+     */
+    @XStreamAlias("partial-audits")
+    private List<AuditRest> partialAudits;
+
+    
+    /**
+     * List of successfull audits
+     */
+    @XStreamAlias("failed-audits")
+    private List<AuditRest> failedAudits;
+    
+    
     /**
      * Constructor
      */
@@ -81,16 +109,13 @@ public class ApplicationRest
      * 
      * @param pId Id of the application
      * @param pName Name of the application
-     * @param pAudit The audit {@link AuditRest}
+     * @param pPublic The public status of the application
      */
-    public ApplicationRest( String pId, String pName, AuditRest pAudit )
+    public ApplicationRest( String pId, String pName, Boolean pPublic )
     {
         id = pId;
         name = pName;
-        audit = pAudit;
-        modules = new ArrayList<ModuleRest>();
-        tags = new ArrayList<TagRest>();
-        volumetry = new ArrayList<VolumetryRest>();
+        publicApplication = pPublic;
     }
 
     /**
@@ -120,6 +145,10 @@ public class ApplicationRest
      */
     public void addModule( ModuleRest module )
     {
+        if(modules == null)
+        {
+            modules = new ArrayList<ModuleRest>();
+        }
         modules.add( module );
     }
 
@@ -221,6 +250,86 @@ public class ApplicationRest
     public void setVolumetry( List<VolumetryRest> pVolumetry )
     {
         volumetry = pVolumetry;
+    }
+    
+    /**
+     * Setter method for the audit attribute
+     * 
+     * @param pAuditList The new audit list
+     */
+    public void setSuccessfulAudits( List<AuditRest> pAuditList )
+    {
+        successfulAudits=pAuditList;
+    }
+    
+    /**
+     * Getter method for the attribute audits
+     * 
+     * @return The list of audit
+     */
+    public List<AuditRest> getSuccessfulAudits()
+    {
+        return successfulAudits;
+    }
+
+    /**
+     * Getter method for the attribute partialAudits
+     * 
+     * @return The list of partial audits 
+     */
+    public List<AuditRest> getPartialAudits()
+    {
+        return partialAudits;
+    }
+
+    /**
+     * Setter method for the attribute  partialAudits
+     * 
+     * @param pPartialAudits The new list of partial audits
+     */
+    public void setPartialAudits( List<AuditRest> pPartialAudits )
+    {
+        this.partialAudits = pPartialAudits;
+    }
+
+    /**
+     * Getter method for the attribute failedAudits
+     * 
+     * @return The list of failed audits
+     */
+    public List<AuditRest> getFailedAudits()
+    {
+        return failedAudits;
+    }
+
+    /**
+     * Setter method for the attribute failedAudits
+     * 
+     * @param pFailedAudits The new list of failed audits
+     */
+    public void setFailedAudits( List<AuditRest> pFailedAudits )
+    {
+        this.failedAudits = pFailedAudits;
+    }
+
+    /**
+     * Getter method for the attribute publicApplication
+     * 
+     * @return True if the application is public
+     */
+    public Boolean getPublicApplication()
+    {
+        return publicApplication;
+    }
+
+    /**
+     * Setter method for the attribute publicApplication
+     * 
+     * @param pPublicApplication The new public status of the application
+     */
+    public void setPublicApplication( Boolean pPublicApplication )
+    {
+        this.publicApplication = pPublicApplication;
     }
 
 }

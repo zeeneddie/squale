@@ -98,6 +98,11 @@ public class AuditBO
     /** Pour qu'on ne prenne pas en compte le type */
     public static final String ALL_TYPES = "audit.type.all";
 
+    /** L'ensemble des clés pour les status sous forme de string */
+    public static final String[] STATUS_TAB =
+        { "audit.status.notattempted", "audit.status.terminated", "audit.status.failed", "audit.status.deleted",
+            "audit.status.partial", "audit.status.running" };
+    
     /**
      * Nom donné à l'audit dans le cas d'un milestone, ou date sérialisée sinon.
      */

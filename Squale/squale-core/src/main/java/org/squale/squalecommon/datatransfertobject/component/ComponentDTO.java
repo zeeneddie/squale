@@ -113,6 +113,11 @@ public class ComponentDTO
     private boolean hide;
 
     /**
+     * Switch for public application
+     */
+    private boolean publicAppication;
+
+    /**
      * @return true si le composant est exclu du plan d'action
      */
     public boolean getExcludedFromActionPlan()
@@ -552,6 +557,26 @@ public class ComponentDTO
     public void setHide( boolean pHide )
     {
         hide = pHide;
+    }
+
+    /**
+     * Getter method for the attribute publicApplication
+     * 
+     * @return True if the application is public
+     */
+    public boolean isPublicAppication()
+    {
+        return publicAppication;
+    }
+
+    /**
+     * Setter method for the attribute publicApplication
+     * 
+     * @param pPublicAppication The new public status of the application
+     */
+    public void setPublicAppication( boolean pPublicAppication )
+    {
+        this.publicAppication = pPublicAppication;
     }
 
     /**

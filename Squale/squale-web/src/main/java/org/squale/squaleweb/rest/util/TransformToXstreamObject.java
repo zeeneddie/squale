@@ -19,6 +19,7 @@
 package org.squale.squaleweb.rest.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -35,9 +36,6 @@ import org.squale.squalerest.model.FactorRest;
 import org.squale.squalerest.model.ModuleRest;
 import org.squale.squalerest.model.TagRest;
 import org.squale.squalerest.model.VolumetryRest;
-import org.squale.squalerest.root.Applications;
-import org.squale.squalerest.root.ByApplication;
-import org.squale.squalerest.root.ByAudit;
 import org.squale.squaleweb.resources.WebMessages;
 
 /**
@@ -57,64 +55,57 @@ public final class TransformToXstreamObject
     }
 
     /**
-     * Transform data to xstream object for the rest call /applications
-     * 
-     * @param appList The data to transform
-     * @return The Xstream object
-     */
-    public static Applications applications( List<ComponentDTO> appList )
-    {
-        Applications dataToReturn = new Applications();
-        ApplicationRest application = null;
-        for ( ComponentDTO compoDTO : appList )
-        {
-            application = createApplication( compoDTO );
-            dataToReturn.addApplication( application );
-        }
-        return dataToReturn;
-    }
-
-    /**
-     * Transform data to xstream object for the rest call /application/id
+     * Transform data into an {@link ApplicationRest} with list of audits (successful, partial, failed)
      * 
      * @param application The application
-     * @param auditList The list of audits
+     * @param sucessfulAuditList The list of successful audits
+     * @param partialAuditList The list of partial audits
+     * @param failedAuditList the list of failed audits
      * @param moduleList The list of modules
      * @param locale The current locale
-     * @return The Xstream object
+     * @return The {@link ApplicationRest} object creates with the elements given in argument
      */
-    public static ByApplication byApplication( ComponentDTO application, List<AuditDTO> auditList,
-                                               List<ModuleLightDTO> moduleList, Locale locale )
+    public static ApplicationRest createApplicationRestWithAudits( ComponentDTO application,
+                                                               List<AuditDTO> sucessfulAuditList,
+                                                               List<AuditDTO> partialAuditList,
+                                                               List<AuditDTO> failedAuditList,
+                                                               List<ModuleLightDTO> moduleList, Locale locale )
     {
-        ByApplication dataToReturn = new ByApplication();
-        AuditRest audit = null;
-        for ( int i = 1; i < auditList.size(); i++ )
-        {
-            AuditDTO auditDto = auditList.get( i );
-            audit = new AuditRest( auditDto.getRealDate(), Long.toString( auditDto.getID() ) );
-            dataToReturn.addAudit( audit );
-        }
-        ApplicationRest applicationRest = createFullApplication( auditList.get( 0 ), application, moduleList, locale );
-        dataToReturn.setApplication( applicationRest );
-        return dataToReturn;
+        List<AuditRest> successfulAuditRestList = createAuditRest( sucessfulAuditList, locale );
+        List<AuditRest> partialAuditRestList = createAuditRest( partialAuditList, locale );
+        List<AuditRest> failedAuditRestList = createAuditRest( failedAuditList, locale );
+        ApplicationRest applicationRest =
+            createFullApplicationRest( sucessfulAuditList.get( 0 ), application, moduleList, locale );
+        applicationRest.setSuccessfulAudits( successfulAuditRestList );
+        applicationRest.setPartialAudits( partialAuditRestList );
+        applicationRest.setFailedAudits( failedAuditRestList );
+        return applicationRest;
     }
 
     /**
-     * Transform data to xstream object for the rest call /audit/id
+     * This method create a list of {@link AuditRest} object based on the elements given in arguments
      * 
-     * @param audit The audit
-     * @param application The application linked to the audit
-     * @param moduleList The list of modules
+     * @param auditDtoList The list of module
      * @param locale The current locale
-     * @return The Xstream object
+     * @return A list of {@link AuditRest} objetc
      */
-    public static ByAudit byAudit( AuditDTO audit, ComponentDTO application, List<ModuleLightDTO> moduleList,
-                                   Locale locale )
+    private static List<AuditRest> createAuditRest( List<AuditDTO> auditDtoList, Locale locale )
     {
-        ByAudit dataToReturn = new ByAudit();
-        ApplicationRest applicationRest = createFullApplication( audit, application, moduleList, locale );
-        dataToReturn.setApplication( applicationRest );
-        return dataToReturn;
+        List<AuditRest> auditRestList = null;
+        if ( auditDtoList != null && auditDtoList.size() > 0 )
+        {
+            auditRestList = new ArrayList<AuditRest>();
+            for ( int i = 0; i < auditDtoList.size(); i++ )
+            {
+                AuditDTO auditDto = auditDtoList.get( i );
+                String type = WebMessages.getString( locale, auditDto.getType() );
+                AuditRest auditRest =
+                    new AuditRest( auditDto.getRealDate(), type, auditDto.getDuration(),
+                                   Long.toString( auditDto.getID() ) );
+                auditRestList.add( auditRest );
+            }
+        }
+        return auditRestList;
     }
 
     /**
@@ -123,15 +114,11 @@ public final class TransformToXstreamObject
      * @param application The application component
      * @return An application rest object
      */
-    private static ApplicationRest createApplication( ComponentDTO application )
+    public static ApplicationRest createApplicationRest( ComponentDTO application )
     {
         ApplicationRest applicationRest =
-            new ApplicationRest( Long.toString( application.getID() ), application.getName(), null );
-        List<TagRest> listTagRest = new ArrayList<TagRest>();
-        if ( application.getTags() != null )
-        {
-            listTagRest = transformTag( new ArrayList<TagDTO>( application.getTags() ) );
-        }
+            new ApplicationRest( Long.toString( application.getID() ), application.getName(), application.isPublicAppication()  );
+        List<TagRest> listTagRest = transformTag( application.getTags() );
         applicationRest.setTags( listTagRest );
         return applicationRest;
     }
@@ -145,11 +132,13 @@ public final class TransformToXstreamObject
      * @param locale The current locale
      * @return the application rest Object fully filled
      */
-    private static ApplicationRest createFullApplication( AuditDTO audit, ComponentDTO application,
-                                                          List<ModuleLightDTO> moduleList, Locale locale )
+    public static ApplicationRest createFullApplicationRest( AuditDTO audit, ComponentDTO application,
+                                                             List<ModuleLightDTO> moduleList, Locale locale )
     {
-        ApplicationRest applicationRest = createApplication( application );
-        AuditRest auditRest = new AuditRest( audit.getRealDate(), Long.toString( audit.getID() ) );
+        ApplicationRest applicationRest = createApplicationRest( application );
+        String type = WebMessages.getString( locale, audit.getType() );
+        AuditRest auditRest =
+            new AuditRest( audit.getRealDate(), type, audit.getDuration(), Long.toString( audit.getID() ) );
         applicationRest.setAudit( auditRest );
         createModulesRest( applicationRest, moduleList, locale );
         return applicationRest;
@@ -166,13 +155,14 @@ public final class TransformToXstreamObject
     {
         for ( ModuleLightDTO module : moduleList )
         {
-            ModuleRest moduleRest = new ModuleRest( Long.toString( module.getTechnicalId() ), module.getName() );
+            ModuleRest moduleRest =
+                new ModuleRest( Long.toString( module.getTechnicalId() ), module.getName(), module.getGridName() );
             List<TagRest> listTagRest = transformTag( module.getTags() );
             moduleRest.setTags( listTagRest );
             for ( QualityResultDTO factorDto : module.getFactor() )
             {
                 String name = WebMessages.getString( locale, factorDto.getRule().getName() );
-                String value = Double.toString( floor( factorDto.getMeanMark(), 1 ));
+                String value = Double.toString( floor( factorDto.getMeanMark(), 1 ) );
                 FactorRest factor = new FactorRest( name, value );
                 moduleRest.addDatas( factor );
             }
@@ -195,17 +185,20 @@ public final class TransformToXstreamObject
      * @param listTagDto The list of tag Dto
      * @return The list of tag rest
      */
-    private static List<TagRest> transformTag( List<TagDTO> listTagDto )
+    private static List<TagRest> transformTag( Collection<TagDTO> listTagDto )
     {
-        List<TagRest> listTag = new ArrayList<TagRest>();
-        for ( TagDTO tagDto : listTagDto )
+        List<TagRest> listTag = null;
+        if ( listTagDto != null && listTagDto.size() > 0 )
         {
-            listTag.add( new TagRest( tagDto.getName() ) );
+            listTag = new ArrayList<TagRest>();
+            for ( TagDTO tagDto : listTagDto )
+            {
+                listTag.add( new TagRest( tagDto.getName(), tagDto.getTagCategoryDTO().getName() ) );
+            }
         }
         return listTag;
     }
-    
-    
+
     /**
      * Rounding a double with n elements after the comma.
      * 

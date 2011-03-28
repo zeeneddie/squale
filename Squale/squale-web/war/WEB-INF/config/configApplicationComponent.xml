@@ -8,6 +8,8 @@
 		
 		<component name="verifyUser" />
 		
+		<component name="getUserByIdentifier" />
+		
 		<component name="userAuthentication" />
 		
 		<component name="getAdminsWithEmails" />
@@ -469,11 +471,13 @@
 	
 	<applicationComponent name="rest" description="Work around the shared repository stats" impl="org.squale.squalecommon.enterpriselayer.applicationcomponent.rest.RestComponentAccess">
 		
-		<component name="userAuthentication"></component>
-		
 		<component name="visibleApplication"></component>
 		
 		<component name="availableAudits"></component>
+		
+		<component name="failedAudits"></component>
+		
+		<component name="partialAudits"></component>
 		
 		<component name="moduleList"></component>
 		

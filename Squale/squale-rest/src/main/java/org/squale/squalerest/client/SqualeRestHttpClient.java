@@ -33,7 +33,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.squale.squalerest.exception.SqualeRestException;
 import org.squale.squalerest.root.Applications;
 import org.squale.squalerest.root.ByApplication;
-import org.squale.squalerest.root.ByAudit;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -122,6 +121,24 @@ public class SqualeRestHttpClient
     }
 
     /**
+     * This method recovers the applications available for the current user. It returns only applications with at least
+     * one successful audit. Moreover, the user should have rights on the application or the application should be
+     * public. This method retrieves many informations on the applications
+     * 
+     * @return The list of available applications
+     * @throws SqualeRestException Exception occurs during the search
+     */
+    public Applications getApplicationsFull()
+        throws SqualeRestException
+    {
+        String path = contextRoot + "/rest/applications_full";
+        XStream xstream = new XStream();
+        xstream.processAnnotations( Applications.class );
+        Applications applications = (Applications) execute( path, xstream );
+        return applications;
+    }
+
+    /**
      * This method recovers the data of the application linked to the application id given in argument. The current user
      * should have rights on this application (or the application should be public) in order to have the informations.
      * The informations returns are
@@ -153,14 +170,14 @@ public class SqualeRestHttpClient
      * @return The data linked to the audit
      * @throws SqualeRestException Exception occurs during the search
      */
-    public ByAudit getAudit( int auditId )
+    public ByApplication getAudit( int auditId )
         throws SqualeRestException
     {
         String path = contextRoot + "/rest/audit/" + auditId;
         XStream xstream = new XStream();
-        xstream.processAnnotations( ByAudit.class );
-        ByAudit audit = (ByAudit) execute( path, xstream );
-        return audit;
+        xstream.processAnnotations( ByApplication.class );
+        ByApplication app = (ByApplication) execute( path, xstream );
+        return app;
     }
 
     /**
@@ -183,7 +200,7 @@ public class SqualeRestHttpClient
             // Create credentials
             UsernamePasswordCredentials creds = new UsernamePasswordCredentials( user, password );
             httpclient.getCredentialsProvider().setCredentials( AuthScope.ANY, creds );
-            
+
             // Define the host
             HttpHost targetHost = new HttpHost( host, port );
 
@@ -216,7 +233,8 @@ public class SqualeRestHttpClient
             }
             else
             {
-                throw new SqualeRestException( response.getStatusLine().getStatusCode()+" : "+response.getStatusLine().getReasonPhrase() );
+                throw new SqualeRestException( response.getStatusLine().getStatusCode() + " : "
+                    + response.getStatusLine().getReasonPhrase() );
             }
         }
         catch ( ClientProtocolException e )

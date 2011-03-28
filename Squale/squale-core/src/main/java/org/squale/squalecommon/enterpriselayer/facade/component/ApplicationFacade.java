@@ -1351,8 +1351,11 @@ public class ApplicationFacade
             AbstractComponentDAOImpl compoDao = AbstractComponentDAOImpl.getInstance();
             for ( Object[] objects : availableApp )
             {
-                ComponentDTO appDto = new ComponentDTO( (Long) objects[0], (String) objects[1] );
-                List<TagBO> listTagBo = compoDao.getTags( session, (Long) objects[0] );
+                Long applicationId = (Long)objects[0];
+                ComponentDTO appDto = new ComponentDTO( applicationId, (String) objects[1] );
+                boolean isPublic = appDao.isPublic( session, applicationId );
+                appDto.setPublicAppication( isPublic );
+                List<TagBO> listTagBo = compoDao.getTags( session, applicationId );
                 for ( TagBO tagBO : listTagBo )
                 {
                     TagDTO tag = TagTransform.bo2Dto( tagBO );

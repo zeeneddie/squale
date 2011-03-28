@@ -32,9 +32,9 @@ import org.squale.squalecommon.datatransfertobject.component.UserDTO;
 import org.squale.squalecommon.datatransfertobject.result.QualityResultDTO;
 import org.squale.squalecommon.datatransfertobject.result.ResultsDTO;
 import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.AuditBO;
 import org.squale.squalecommon.enterpriselayer.facade.component.ApplicationFacade;
 import org.squale.squalecommon.enterpriselayer.facade.component.AuditFacade;
-import org.squale.squalecommon.enterpriselayer.facade.component.UserFacade;
 import org.squale.squalecommon.enterpriselayer.facade.quality.MeasureFacade;
 import org.squale.squalecommon.enterpriselayer.facade.quality.QualityResultFacade;
 
@@ -59,30 +59,14 @@ public class RestComponentAccess
     {
 
     }
-
-    /**
-     * This method try authenticate the user given in argument. If the authentication succeed the method returns a
-     * UserDTO which corresponding to the authenticated user. Else the method returns an empty UserDTO object
-     * 
-     * @param pUser : the user to authenticate
-     * @return A UserDTO object
-     * @throws JrafEnterpriseException exception happened during the search in the data base
-     */
-    public UserDTO userAuthentication( UserDTO pUser )
-        throws JrafEnterpriseException
-    {
-        UserDTO userDTO = null;
-        userDTO = UserFacade.getUserByMatriculeAndPassword( pUser );
-        return userDTO;
-    }
-
+    
     /**
      * This methods retrieves the applications which has at least one successful audit and are visible for the current
      * user
      * 
      * @param userDto The authenticated user
      * @return The applications visible by the user
-     * @throws JrafEnterpriseException Exception ocuurs during the search
+     * @throws JrafEnterpriseException Exception occurs during the search
      */
     public List<ComponentDTO> visibleApplication( UserDTO userDto )
         throws JrafEnterpriseException
@@ -93,7 +77,7 @@ public class RestComponentAccess
     }
 
     /**
-     * This methods retrieves the audits available for the application given in argument
+     * This methods retrieves the successful audits available for the application given in argument
      * 
      * @param appId The application id
      * @return The list of audit available for the current application
@@ -102,12 +86,46 @@ public class RestComponentAccess
     public List<AuditDTO> availableAudits( Long appId )
         throws JrafEnterpriseException
     {
-        List<AuditDTO> listAudit = AuditFacade.getAllSuccessfulAudits( appId );
+        ComponentDTO compo = new ComponentDTO();
+        compo.setID( appId );
+        List<AuditDTO> listAudit = AuditFacade.getAudits( compo, null, null, null, AuditBO.TERMINATED );
+        return listAudit;
+    }
+    
+    /**
+     * This method retrieves the failed audits available for the application given in argument
+     * 
+     * @param appId The application id
+     * @return The list of failed audits available for the current application
+     * @throws JrafEnterpriseException Exception occurs during the search of the audit
+     */
+    public List<AuditDTO> failedAudits( Long appId )
+        throws JrafEnterpriseException
+    {
+        ComponentDTO compo = new ComponentDTO();
+        compo.setID( appId );
+        List<AuditDTO> listAudit = AuditFacade.getAudits( compo, null, null, null, AuditBO.FAILED );
+        return listAudit;
+    }
+    
+    /**
+     * This method retrieves the partial audits available for the application given in argument
+     * 
+     * @param appId The application id
+     * @return The list of partial audits available for the current application
+     * @throws JrafEnterpriseException Exception occurs during the search of the audit
+     */
+    public List<AuditDTO> partialAudits( Long appId )
+        throws JrafEnterpriseException
+    {
+        ComponentDTO compo = new ComponentDTO();
+        compo.setID( appId );
+        List<AuditDTO> listAudit = AuditFacade.getAudits( compo, null, null, null, AuditBO.PARTIAL );
         return listAudit;
     }
 
     /**
-     * This methods retrieve for the current audit the list of modules involved in the audit. For each module the method
+     * This method retrieves for the current audit the list of modules involved in the audit. For each module the method
      * retrieves its factor for the current audit, its tags, and its volumetry information for the current audit.
      * 
      * @param applicationId The application id
@@ -134,7 +152,11 @@ public class RestComponentAccess
             module = moduleMap.get( Long.valueOf( compo.getID() ) );
             if ( module == null )
             {
-                module = new ModuleLightDTO( compo.getID(), compo.getName() );
+                AuditDTO audit = new AuditDTO();
+                audit.setID( auditId );
+                String gridName = QualityResultFacade.getGridName( compo, audit );
+                module = new ModuleLightDTO( compo.getID(), compo.getName(), gridName );
+                
                 module.setTags( new ArrayList<TagDTO>( compo.getTags() ) );
                 module.addFactor( factor );
                 ResultsDTO res = MeasureFacade.getProjectVolumetry( auditId, compo );

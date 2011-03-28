@@ -402,17 +402,34 @@ public class UserFacade
             }
         }
     }
+    
+    /**
+     * Création ou mise à jour de l'utilisateur. La création se fait avec un profil minimal, la mise à jour concerne
+     * que l'adresse email, le nom et .
+     * 
+     * @param pUser utilisateur donné
+     * @param pAdmin indique si le user est un admin
+     * @return UserDTO avec l'identifiant
+     * @throws JrafEnterpriseException exception survenu pendant le traitement
+     */
+    public static UserDTO createOrUpdateUser( UserDTO pUser, Boolean pAdmin )
+    throws JrafEnterpriseException
+    {
+        return createOrUpdateUser( pUser, pAdmin, true );
+    }
+    
 
     /**
-     * Création ou mise à jour de l'utilisateur La création se fait avec un profil minimal, la mise à jour ne concerne
-     * que l'adresse email ou le nom
+     * Création ou mise à jour de l'utilisateur. La création se fait avec un profil minimal, la mise à jour concerne
+     * que l'adresse email et/ou le nom.
      * 
      * @param pUser utilisateur donné
      * @param pAdmin indique si le privilège admin est placé
+     * @param updateUnsubscribed flag pour la mise à jour de l'attribut "email unsubscribed"
      * @return UserDTO avec l'identifiant
      * @throws JrafEnterpriseException exception JRAF
      */
-    public static UserDTO createOrUpdateUser( UserDTO pUser, Boolean pAdmin )
+    public static UserDTO createOrUpdateUser( UserDTO pUser, Boolean pAdmin, Boolean updateUnsubscribed )
         throws JrafEnterpriseException
     {
         // Initialisation
@@ -447,7 +464,10 @@ public class UserFacade
             // Mise à jour des infomations du BO en fonction du DTO
             userBO.setEmail( pUser.getEmail() );
             userBO.setFullName( pUser.getFullName() );
-            userBO.setUnsubscribed( pUser.isUnsubscribed() );
+            if(updateUnsubscribed)
+            {
+                userBO.setUnsubscribed( pUser.isUnsubscribed() );
+            }
             // Update the defauilt profile value
             ProfileDAOImpl profileDAO = ProfileDAOImpl.getInstance();
             ProfileBO profileBO = null;

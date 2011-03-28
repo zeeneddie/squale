@@ -33,6 +33,12 @@ public class TagRest
      */
     @XStreamAsAttribute
     private String name;
+    
+    /**
+     * Name of the tag category
+     */
+    @XStreamAsAttribute
+    private String category;
 
     /**
      * Constructor
@@ -41,15 +47,17 @@ public class TagRest
     {
 
     }
-
+    
     /**
      * Full constructor
      * 
      * @param pName Name of the application
+     * @param pCategoryName Name of the category
      */
-    public TagRest( String pName )
+    public TagRest( String pName, String pCategoryName )
     {
         name = pName;
+        category = pCategoryName;
     }
 
     /**
@@ -70,6 +78,26 @@ public class TagRest
     public void setName( String pName )
     {
         name = pName;
+    }
+
+    /**
+     * Getter method for the attribute categoryName
+     * 
+     * @return The category name
+     */
+    public String getCategoryName()
+    {
+        return category;
+    }
+
+    /**
+     * Setter method for the attribute categoryName
+     * 
+     * @param pCategoryName The new catgory name
+     */
+    public void setCategoryName( String pCategoryName )
+    {
+        this.category = pCategoryName;
     }
 
 }

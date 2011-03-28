@@ -312,30 +312,48 @@ public final class AuditDAOImpl
     {
         // Initialisation
         List result = new ArrayList();
+        
         // Création de la clause where :
-        String whereClause = "where ";
+        StringBuffer whereClause = new StringBuffer(" where ");
         // choix des audits du composant concerné
-        whereClause += pIDComponent + " in elements(" + getAlias() + ".components)";
+        whereClause.append( pIDComponent );
+        whereClause.append( " in elements( " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".components )" );
         if ( null != pType && pType != AuditBO.ALL_TYPES )
         {
             // si un type d'audit a été spécifié on l'insére dans la clause
-            whereClause += " AND ";
-            whereClause += getAlias() + ".type = '" + pType + "'";
+            whereClause.append( " AND " );
+            whereClause.append( getAlias() );
+            whereClause.append( ".type = '" );
+            whereClause.append( pType );
+            whereClause.append( "'" );
         }
         if ( pStatus == AuditBO.ALL_STATUS )
         {
             // on passe ici pour la page d'accueil
             // on affiche tous les audits dans la page d'accueil sauf ceux à effacer
-            whereClause += " AND " + getAlias() + ".status <> " + AuditBO.DELETED;
+            whereClause.append( " AND " );
+            whereClause.append( getAlias() );
+            whereClause.append( ".status <> " );
+            whereClause.append( AuditBO.DELETED );
         }
         else
         {
             // ici c'est pour les autres cas
-            whereClause += " AND " + getAlias() + ".status = " + pStatus;
+            whereClause.append( " AND " );
+            whereClause.append( getAlias() );
+            whereClause.append( ".status = " );
+            whereClause.append( pStatus );
         }
         // tri par date (date historique prioritaire)
-        whereClause += " order by coalesce(" + getAlias() + ".historicalDate, " + getAlias() + ".date) desc";
+        whereClause.append( " order by coalesce( " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".historicalDate, " );
+        whereClause.append( getAlias() );
+        whereClause.append( ".date) desc" );
         LOG.debug( "whereClause = " + whereClause );
+        
         int start = 0;
         int nbLines = 0;
         //
@@ -346,13 +364,13 @@ public final class AuditDAOImpl
             {
                 start = pIndexDepart.intValue();
             }
-            result = (List) findWhereScrollable( pSession, whereClause, nbLines, start, false );
+            result = (List) findWhereScrollable( pSession, whereClause.toString(), nbLines, start, false );
         }
         else
         {
             // si le nombre de ligne ou l'index de départ n'est pas spécifié,
             // on retourne tous les audits concernés
-            result = (List) findWhere( pSession, whereClause );
+            result = (List) findWhere( pSession, whereClause.toString() );
         }
         return result;
     }

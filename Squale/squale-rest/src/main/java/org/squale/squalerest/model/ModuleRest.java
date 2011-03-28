@@ -37,6 +37,12 @@ public class ModuleRest
      */
     @XStreamAsAttribute
     private String name;
+    
+    /**
+     * The grid link to the module
+     */
+    @XStreamAsAttribute
+    private String grid;
 
     /**
      * The id of the module
@@ -76,14 +82,16 @@ public class ModuleRest
      * 
      * @param pId The id of the module
      * @param pName The name of the module
+     * @param pGrid The grid linked to the module
      */
-    public ModuleRest( String pId, String pName )
+    public ModuleRest( String pId, String pName, String pGrid )
     {
         id = pId;
         name = pName;
-        datas = new ArrayList<FactorRest>();
-        tags = new ArrayList<TagRest>();
-        volumetry = new ArrayList<VolumetryRest>();
+        grid = pGrid;
+        //datas = new ArrayList<FactorRest>();
+        //tags = new ArrayList<TagRest>();
+        //volumetry = new ArrayList<VolumetryRest>();
     }
 
     /**
@@ -143,6 +151,10 @@ public class ModuleRest
      */
     public void addDatas( FactorRest factor )
     {
+        if(datas == null)
+        {
+            datas = new ArrayList<FactorRest>();
+        }
         datas.add( factor );
     }
 
@@ -183,7 +195,31 @@ public class ModuleRest
      */
     public void addVolumetry( VolumetryRest volumetryValue )
     {
+        if(volumetry == null)
+        {
+            volumetry =  new ArrayList<VolumetryRest>();
+        }
         volumetry.add( volumetryValue );
+    }
+
+    /**
+     * Getter method for the grid attribute
+     * 
+     * @return The grid linked to the module
+     */
+    public String getGrid()
+    {
+        return grid;
+    }
+
+    /**
+     * Setter method for the grid attribute
+     * 
+     * @param pGrid The new grid linked to the module
+     */
+    public void setGrid( String pGrid )
+    {
+        this.grid = pGrid;
     }
 
 }
