@@ -21,9 +21,8 @@ package org.squale.squaleweb.applicationlayer.formbean.component.parameters;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
-
-import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 import org.squale.squaleweb.transformer.component.parameters.AbstractGenericTaskConfTransformer;
+import org.squale.squaleweb.util.SqualeWebActionUtils;
 
 /**
  * This class instantiate a form-bean which stores data from a submitted client request. This form-bean is directly
@@ -130,6 +129,9 @@ public class AbstractGenericTaskForm
     @Override
     protected void validateConf( ActionMapping mapping, HttpServletRequest request )
     {
+        setCommands( SqualeWebActionUtils.cleanValues( getCommands() ) );
+        setResultsLocation( SqualeWebActionUtils.cleanValues( getResultsLocation()) );
+        
         /* Validation is done in task inheriting from this GenericTaskForm */
     }
 

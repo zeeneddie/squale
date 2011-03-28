@@ -74,8 +74,8 @@
 		
 		<%-- This one is not displayed --%>
 		<tr style="display:none">
-			<af:field key="genericTask.conf.resultsLocation" name="coberturaTaskForm" property="resultsLocation" 
-			styleClassLabel="td1" value="" size="60" disabled="<%=disabled%>" />
+			<af:field key="genericTask.conf.resultsLocation" property="resultsLocation" 
+			styleClassLabel="td1" value="" size="60" />
 		</tr>
 		
 		

@@ -194,6 +194,7 @@ public class CoberturaTask
         // Getting the list of packages
         List<AbstractCoberturaMetricsBO> packagesResults = pProjectMetrics.getPackages();
         // Iterating to get single package metrics and set the value of audit and reference properties
+        List<AbstractCoberturaMetricsBO> listToRemove = new ArrayList<AbstractCoberturaMetricsBO>();
         for ( Iterator<AbstractCoberturaMetricsBO> iterator = packagesResults.iterator(); iterator.hasNext(); )
         {
             // Getting a package
@@ -205,10 +206,19 @@ public class CoberturaTask
             // Setting the task reference
             singlePackageMetrics.setTaskName( this.getName() );
             // Setting the mComponent property
-            singlePackageMetrics.setComponent( repository.persisteComponent( packageBO ) );
+            if(!singlePackageMetrics.getName().equals( "" ))
+            {
+                singlePackageMetrics.setComponent( repository.persisteComponent( packageBO ) );
+            }
+            else
+            {
+                listToRemove.add( singlePackageMetrics );
+            }
             // Adding the classes related to the packages to the list for post-processing
             classesMetrics.add( singlePackageMetrics.getClasses() );
         }
+        // Remove all package which have a name equal to "", because they shouldn't be persit 
+        packagesResults.removeAll( listToRemove );
         // Persisting the package level values
         MEASURE_DAO.saveAll( getSession(), packagesResults );
         LOGGER.info( new String( CoberturaMessages.getMessage( "cobertura.task.packageLevelPushed", mProject.getName() ) ) );
