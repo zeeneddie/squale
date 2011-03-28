@@ -184,11 +184,13 @@ public class JavaStorageListener
                 // On récupère le code de la règle si il existe sinon on met le code
                 // par défaut
                 String code = RuleFactory.CODE;
+                String message = RuleFactory.CODE;
                 Iterator it = violation.getMessages().iterator();
                 if ( it.hasNext() )
                 {
                 	// Delete all spaces in message for future comparison
-                    code = ((String) it.next()).trim();
+                    message = ((String) it.next()).trim();
+                    code = violation.getAccessRule().getMessage().trim();
                 }
                 // On récupère le nombre de transgression pour cette règle
                 Integer nbOcc = (Integer) mNbOcc.get( code );
@@ -205,7 +207,7 @@ public class JavaStorageListener
                 item.setComponent( from );
                 // On modifie le composant en relation avec la transgression
                 item.setComponentInvolved( to );
-                String message = code;
+                
                 // On concatène le nom des classes concernées par la transgression
                 // au message avec des séparateurs universels pour pouvoir les récupèrer
                 // par la suite pour l'affichage web.
