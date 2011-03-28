@@ -75,6 +75,7 @@ Collections.sort(list, new ComponentComparator());
 			<af:menuItem key="menu.application.audits.partial" color="2"
 				action='<%="audits.do?action=list&kind=partial&applicationId=" + applicationId + paramsLink%>' />
 		</af:menuItem>
+		<af:menuItem color="2" key="menu.application.configuration" action='<%="manageApplication.do?action=selectApplicationToConfig&applicationId="+applicationId%>'/>
 	</af:menu>
 	<jsp:include page="left_common.jsp" flush="true" />
 </af:canvasLeft>

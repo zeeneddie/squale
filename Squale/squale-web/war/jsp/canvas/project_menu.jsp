@@ -92,6 +92,7 @@ Collections.sort(list, new ComponentComparator());%>
 			<af:menuItem key="menu.project.evolution" color="2"
 						action="<%=\"evolution.do?action=list&projectId=\"+projectId+paramsLink%>"/>
 		</logic:equal>
+		<af:menuItem color="2" key="menu.application.configuration" action='<%="manageApplication.do?action=selectApplicationToConfig&applicationId="+applicationId%>'/>
 	</af:menu>
 	<jsp:include page="left_common.jsp" flush="true"/>
 </af:canvasLeft>
