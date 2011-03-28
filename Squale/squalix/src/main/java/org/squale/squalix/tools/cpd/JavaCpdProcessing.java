@@ -18,6 +18,9 @@
  */
 package org.squale.squalix.tools.cpd;
 
+import net.sourceforge.pmd.cpd.Language;
+import net.sourceforge.pmd.cpd.LanguageFactory;
+
 
 /**
  * Détection de copier/coller en java
@@ -38,6 +41,15 @@ public class JavaCpdProcessing
         return JAVA_THRESHOLD;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Language getLanguage()
+    {
+        return new LanguageFactory().createLanguage(LanguageFactory.JAVA_KEY);
+    }
+    
     /**
      * {@inheritDoc}
      * 
