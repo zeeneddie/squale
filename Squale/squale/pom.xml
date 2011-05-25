@@ -448,16 +448,6 @@
 				<version>28.49</version>
 			</dependency>
 			<dependency>
-				<groupId>javancss</groupId>
-				<artifactId>ccl</artifactId>
-				<version>28.49</version>
-			</dependency>
-			<dependency>
-				<groupId>javancss</groupId>
-				<artifactId>jhbasic</artifactId>
-				<version>28.49</version>
-			</dependency>
-			<dependency>
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi</artifactId>
 				<version>3.0.2-FINAL</version>
