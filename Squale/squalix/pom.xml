@@ -214,14 +214,6 @@
 			<artifactId>javancss</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javancss</groupId>
-			<artifactId>ccl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javancss</groupId>
-			<artifactId>jhbasic</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>quartz</groupId>
 			<artifactId>quartz</artifactId>
 		</dependency>
