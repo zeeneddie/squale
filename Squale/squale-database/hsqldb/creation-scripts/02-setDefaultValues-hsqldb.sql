@@ -1,4 +1,4 @@
-alter table AuditBO alter SQUALE_VERSION set default '7.0' ;
+alter table AuditBO alter SQUALE_VERSION set default '7.1' ;
 alter table Component alter STARTLINE set default 0 ;
 alter table Component alter EXTERNAL_DEV set default 1 ;
 alter table Component alter IN_PRODUCTION set default 1 ;
