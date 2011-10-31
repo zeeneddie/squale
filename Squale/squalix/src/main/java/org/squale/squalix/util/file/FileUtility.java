@@ -773,6 +773,12 @@ public final class FileUtility
         mchmod.setType( mMode );
         mchmod.setIncludes( "**/*" );
         mchmod.setPerm( "u+rw" );
+        
+        String executeParallelCommand = System.getProperty("executeParallelCommand");
+        if ((executeParallelCommand != null) && executeParallelCommand.equals("false")) {
+        	mchmod.setParallel(false);	
+        }
+        
         mchmod.execute();
     }
 
