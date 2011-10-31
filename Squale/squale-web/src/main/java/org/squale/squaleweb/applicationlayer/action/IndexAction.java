@@ -630,6 +630,8 @@ public class IndexAction
         Integer nbLigne = new Integer( 1 );
         Integer indexDepart = new Integer( 0 );
         Integer status = new Integer( AuditBO.TERMINATED );
+        boolean missingApplicationData = false;
+        List<Stat> applicationVolumetry = new ArrayList<Stat>();
 
         IApplicationComponent ac1 = AccessDelegateHelper.getInstance( "Component" );
 
@@ -650,8 +652,15 @@ public class IndexAction
         for ( ComponentDTO project : projectDTOList )
         {
             Stat projectStat = statLine( auditDTO, application, project, applicationStat );
-            volumetry.add( projectStat );
+            if (projectStat == null) {
+            	missingApplicationData = true;
+            	break;
         }
+            applicationVolumetry.add( projectStat );
+        }
+        
+        if (!missingApplicationData) {
+        	volumetry.addAll(applicationVolumetry);
 
         // if the application has more than one project then we add a line of the stat on the application
         if ( projectDTOList.size() > 1 )
@@ -661,6 +670,7 @@ public class IndexAction
                           String.valueOf( applicationStat[3] ), String.valueOf( applicationStat[0] ),
                           String.valueOf( applicationStat[1] ) );
             volumetry.add( statline );
+        }
         }
 
     }
@@ -684,16 +694,21 @@ public class IndexAction
         IApplicationComponent ac2 = AccessDelegateHelper.getInstance( "Results" );
         ResultsDTO resultDTO = ( (ResultsDTO) ac2.execute( "getProjectVolumetry", paramIn3 ) );
 
+        Stat projectStat = null;
+        
+        if (resultDTO != null) {
         // Recovery of the statistics
         Map volumetries = resultDTO.getResultMap();
+	        if ((volumetries != null) && (!volumetries.isEmpty())) {	        	
         List<Integer> measureValues = (List<Integer>) volumetries.get( project );
+		        if ((measureValues != null) && (measureValues.size() >= 4)) {
         Integer nbMethods = measureValues.get( 2 );
         Integer nbClasses = measureValues.get( 1 );
         Integer nbCommentsLines = measureValues.get( 0 );
         Integer nbCodesLines = measureValues.get( 3 );
 
         // Creation of the staistics line
-        Stat projectStat =
+			        projectStat =
             new Stat( application.getName(), project.getName(), nbCodesLines.toString(), nbCommentsLines.toString(),
                       nbMethods.toString(), nbClasses.toString() );
 
@@ -702,6 +717,10 @@ public class IndexAction
         applicationStat[1] = applicationStat[1] + nbClasses;
         applicationStat[2] = applicationStat[2] + nbCodesLines;
         applicationStat[3] = applicationStat[3] + nbCommentsLines;
+		        }
+	        }
+
+        }
 
         return projectStat;
     }
