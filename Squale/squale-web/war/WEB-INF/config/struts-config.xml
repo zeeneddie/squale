@@ -213,6 +213,8 @@
 			</forward>
 			<forward name="list_terminated" path="/jsp/admin/audit/terminated.jsp">
 			</forward>
+			<forward name="purge" path="/purgeAuditAction.do?action=purge">
+			</forward>
 		</action>
 		 <action path="/auditsFailed" parameter="action" type="org.squale.squaleweb.applicationlayer.action.results.audit.AuditAction" name="splitAuditsListForm" scope="session" >
 			<forward name="displayFailed" path="/jsp/admin/audit/failedOrPartials.jsp"/>
@@ -686,12 +688,14 @@
 		<action path="/create_eclipse_var" type="org.squale.squaleweb.applicationlayer.action.component.parameters.CreateJCompilingParametersAction" input="/jsp/admin/project/config_project.jsp" name="eclipseVarForm" parameter="action" scope="request">
 			<forward name="success" path="/jsp/admin/project/config_project.jsp">
 			</forward>
+			<forward name="success_add" path="/jsp/admin/project/config_project.jsp?kindOfTask= " />
 			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
 			</forward>
 		</action>
 		<action path="/create_eclipse_lib" input="/jsp/admin/project/config_project.jsp" parameter="action" type="org.squale.squaleweb.applicationlayer.action.component.parameters.CreateJCompilingParametersAction" name="eclipseUserLibForm" scope="request">
 			<forward name="success" path="/jsp/admin/project/config_project.jsp">
 			</forward>
+			<forward name="success_add" path="/jsp/admin/project/config_project.jsp?kindOfTask= " />
 			<forward name="failure" path="/jsp/admin/project/config_project.jsp">
 			</forward>
 		</action>
