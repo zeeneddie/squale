@@ -64,7 +64,7 @@ public class ClearCaseTask
     /**
      * Instance de configuration.
      */
-    private ClearCaseConfiguration mConfiguration;
+    protected ClearCaseConfiguration mConfiguration;
 
     /**
      * {@inheritDoc} Constructeur. Initialisation des premiers paramètres. <br />

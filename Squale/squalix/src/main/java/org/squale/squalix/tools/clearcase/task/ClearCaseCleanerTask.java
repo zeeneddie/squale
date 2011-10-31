@@ -51,7 +51,7 @@ public class ClearCaseCleanerTask
     /**
      * Instance de configuration.
      */
-    private ClearCaseConfiguration mConfiguration;
+    protected ClearCaseConfiguration mConfiguration;
 
     /**
      * Constructeur.
