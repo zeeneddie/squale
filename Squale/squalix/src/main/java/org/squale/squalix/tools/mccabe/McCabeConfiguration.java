@@ -35,10 +35,12 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ProjectBO;
+import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ListParameterBO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.ParametersConstants;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.parameters.StringParameterBO;
 import org.squale.squalix.configurationmanager.ConfigUtility;
 import org.squale.squalix.core.TaskData;
+import org.squale.squalix.core.exception.ConfigurationException;
 import org.squale.squalix.util.file.FileUtility;
 
 /**
@@ -629,8 +631,9 @@ public class McCabeConfiguration
      * 
      * @param pConfig configuration à remplir.
      * @param pDatas la liste des paramètres du projet.
+     * @throws ConfigurationException 
      */
-    private static void setParameters( final McCabeConfiguration pConfig, final TaskData pDatas )
+    private static void setParameters( final McCabeConfiguration pConfig, final TaskData pDatas ) throws ConfigurationException
     {
         // On modifie le classpath
         // Lorsqu'on récupère les paramètres, si mClasspath n'est pas null
@@ -665,13 +668,50 @@ public class McCabeConfiguration
         }
         //
         String classPathPattern = McCabeMessages.getString( "key.substition.classpath" );
+        
+        // On remplace le sourcepath par le premiére repértoire source
+        ListParameterBO sources =
+            (ListParameterBO) pConfig.getProject().getParameters().getParameters().get( ParametersConstants.SOURCES );
+        
+        String firstProjectSourcePath = "." + File.separator;
+        
+        if ( (null != sources) && (null != sources.getParameters()) && (!sources.getParameters().isEmpty()) )
+        {
+        	firstProjectSourcePath = ((StringParameterBO) sources.getParameters().get(0)).getValue();
+        }
+        
+        StringBuffer absProjectSourcePath = new StringBuffer();
+        absProjectSourcePath.append(pDatas.getData( TaskData.VIEW_PATH ));
+        
+        if (pDatas.getData( TaskData.SUP_PATH ) != null)
+        {
+        	String supPath = (String) pDatas.getData( TaskData.SUP_PATH );
+        	absProjectSourcePath.append( File.separator ).append(supPath);
+        	firstProjectSourcePath = firstProjectSourcePath.replaceFirst(supPath, "");
+        }
+        
+        absProjectSourcePath.append( File.separator ).append(firstProjectSourcePath);
+        
+        String replaceSourcePath =  (String) pDatas.getData( TaskData.VIEW_PATH );
+        File f2 = new File( absProjectSourcePath.toString() );
+        if ( f2.exists() ) {
+        	replaceSourcePath = f2.getAbsolutePath();
+        }
+        
+        String sourceRootDirPattern = McCabeMessages.getString( "key.substition.sourcerootdir" );
+        
         for ( int i = 0; i < pConfig.mParseParameters.length; i++ )
         {
             if ( pConfig.mParseParameters[i].equals( classPathPattern ) )
             {
                 pConfig.mParseParameters[i] = classpath;
             }
+        	else if( pConfig.mParseParameters[i].contains( sourceRootDirPattern ) )
+            {
+                pConfig.mParseParameters[i] = pConfig.mParseParameters[i].replaceAll(sourceRootDirPattern, replaceSourcePath);
+            }
         }
+
     }
 
     /**

@@ -374,48 +374,54 @@
       </reports>
     </profile>
     <profile name="cobolIbm_341">
-      <parser>cw_COBOL_inst</parser>
+      <parser>cw_COBOL</parser>
       <extensions>cob, COB, txt, TXT</extensions>
 	  <metrics_level>4</metrics_level>
      <parameters>
         <parameter>-MODE</parameter>
         <parameter>VS3</parameter>
+        <parameter>-SRCREF</parameter>
+        <parameter>-COBDATASCOPE</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-EXT</parameter>
+        <parameter>TXT</parameter>
         <parameter>-HALSTEAD</parameter>
-        <parameter>-APPEND</parameter>
         <parameter>-KEEPCOMMENTS</parameter>
         <parameter>-LITERALCALLS</parameter>
-        <parameter>-MAINFRAME</parameter>
         <parameter>-MC</parameter>
         <parameter>-PARSE_REPORT</parameter>
-        <parameter>-PATHVEC</parameter>
         <parameter>-PROGSCOPE</parameter>
-        <parameter>-SRCREF</parameter>
-        <parameter>-DATA</parameter>
+        <parameter>-I</parameter>
+        <parameter>%sourcerootdir%/COPY</parameter>
         <parameter>-NONINST</parameter>
+        <parameter>-NOCASE</parameter>
       </parameters>
       <reports>
         <report>COBOL</report>
       </reports>
     </profile>
     <profile name="cobolIbm_4">
-      <parser>cw_COBOL_inst</parser>
+      <parser>cw_COBOL</parser>
       <extensions>cob, COB, txt, TXT</extensions>
 	  <metrics_level>4</metrics_level>
      <parameters>
         <parameter>-MODE</parameter>
-        <parameter>VS4</parameter>
+        <parameter>VS3</parameter>
+        <parameter>-SRCREF</parameter>
+        <parameter>-COBDATASCOPE</parameter>
+        <parameter>-DATA</parameter>
+        <parameter>-EXT</parameter>
+        <parameter>TXT</parameter>
         <parameter>-HALSTEAD</parameter>
-        <parameter>-APPEND</parameter>
         <parameter>-KEEPCOMMENTS</parameter>
         <parameter>-LITERALCALLS</parameter>
-        <parameter>-MAINFRAME</parameter>
         <parameter>-MC</parameter>
         <parameter>-PARSE_REPORT</parameter>
-        <parameter>-PATHVEC</parameter>
         <parameter>-PROGSCOPE</parameter>
-        <parameter>-SRCREF</parameter>
-        <parameter>-DATA</parameter>
+        <parameter>-I</parameter>
+        <parameter>%sourcerootdir%/COPY</parameter>
         <parameter>-NONINST</parameter>
+        <parameter>-NOCASE</parameter>
       </parameters>
       <reports>
         <report>COBOL</report>

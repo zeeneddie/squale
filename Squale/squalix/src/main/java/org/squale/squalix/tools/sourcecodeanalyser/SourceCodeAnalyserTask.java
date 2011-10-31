@@ -118,12 +118,14 @@ public class SourceCodeAnalyserTask
         // we associate this destination directory to the VIEW_PATH variable
         getData().putData( TaskData.VIEW_PATH, dest.getAbsolutePath() + File.separator );
 
+     // We create the file which is supposed to contain the source code
+        File sourcePath = new File( path.getValue() );
+        
+        getData().putData( TaskData.SUP_PATH, sourcePath.isDirectory()? sourcePath.getAbsoluteFile().getName() : "");
+
         // Does this source code already recovered ?
         if ( !SourcesRecoveringOptimisation.pathAlreadyRecovered( path.getValue(), mApplication ) )
         {
-            // If no we do the recovering
-            // We create the file which is supposed contains the source code
-            File sourcePath = new File( path.getValue() );
             // recovering of the source code
             FileUtility.copyOrExtractInto( sourcePath, dest );
             if ( dest.listFiles().length == 0 )
