@@ -159,6 +159,22 @@ public class AuditAction
                            true );
         return ( forward );
     }
+    
+    /**
+     * Purge des audits
+     * 
+     * @param pMapping le mapping.
+     * @param pForm le formulaire à lire.
+     * @param pRequest la requête HTTP.
+     * @param pResponse la réponse de la servlet.
+     * @return l'action à réaliser.
+     */
+    public ActionForward purge( ActionMapping pMapping, ActionForm pForm, HttpServletRequest pRequest,
+                               HttpServletResponse pResponse )
+    {
+    	ActionForward forward = pMapping.findForward( "purge" );
+    	return ( forward );
+    }
 
     /**
      * Permet la sélection d'audits à afficher.
