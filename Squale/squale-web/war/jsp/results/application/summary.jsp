@@ -60,7 +60,8 @@
 	<af:head>
 		<%-- inclusion pour le marquage XITI --%>
 		<jsp:include page="/jsp/xiti/xiti_header_common.jsp" />
-	</af:head>
+	</af:head>	
+	
 	<af:body canvasLeftPageInclude="/jsp/canvas/application_menu.jsp">
 
 		<af:canvasCenter>
@@ -71,48 +72,7 @@
 
 			<br />
 			<br />
-			<squale:resultsHeader name="resultListForm" displayComparable="true">
-				<div id="tagRemoval">
-					<af:form action="application.do" name="tagMngtForm" type="org.squale.squaleweb.applicationlayer.formbean.results.ResultListForm">
-						<div id="appTagRemoval" style="visibility:hidden">
-							<div id="hidden" style="display:none;">
-								<af:field key="empty" property="applicationId" value='<%= applicationId%>'/>
-							</div>
-							<table>
-								<tr>
-									<td>
-										<bean:define id="listtag" name="resultListForm" property="tags"></bean:define>
-										<af:select property="tagDel">
-											<af:options collection="listtag" property="name"/>
-										</af:select>
-									</td>
-									<td>
-										<af:button type="form" onclick="execSubmit('tagMngtForm','removeTag',this)" name="supprimer" singleSend="true"/>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</af:form>
-				</div>
-				<div id="tagAddition">
-					<div id="appTagAddition" style="visibility:hidden">
-						<af:form action='<%="application.do?action=addTag&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId%>'>
-							<af:field key="empty" name="resultListForm" property="tagSupp"
-								value="" easyCompleteCallBackUrl="<%=callbackUrlApp%>"/>
-						</af:form>
-					</div>
-				</div>
-				<%-- FINISH THIS UP ! https://project.squale.org/ticket/140
-				<logic:present name="unexistingTag" scope="request">
-					<div id="unexistingTagBox" title="Tag does not exist">
-						<bean:write name="unexistingTag"/>
-					</div>
-					<script>
-						showErrorModalBox("unexistingTagBox");
-					</script>
-				</logic:present>
-				--%>
-			</squale:resultsHeader>
+			<squale:resultsHeader name="resultListForm" displayComparable="true" />
 			<br />
 			<h2><bean:message key="application.results.summary.subtitle" /></h2>
 			<br />

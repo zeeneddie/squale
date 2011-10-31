@@ -25,6 +25,9 @@
 <bean:define id="previousAuditId" name="projectSummaryForm"
 	property="previousAuditId" type="String" />
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
 
 <af:page titleKey="project.results.title">
 	<af:head>

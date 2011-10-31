@@ -93,56 +93,6 @@
 			<br />
 			<squale:resultsHeader name="projectSummaryForm"
 				displayComparable="true">
-				<div id="tagRemoval"><af:form action="project.do"
-					name="tagMngtForm"
-					type="org.squale.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm">
-					<div id="appTagRemoval" style="visibility: hidden">
-					<div id="hidden" style="display: none;"><af:field key="empty"
-						property="applicationId" value='<%= applicationId%>' /> <af:field
-						key="empty" property="projectId" value='<%= projectId%>' /></div>
-					<table>
-						<tr>
-							<td><bean:define id="listtagApp" name="projectSummaryForm"
-								property="tagsAppli"></bean:define> <af:select
-								property="tagDelAppli" name="projectSummaryForm">
-								<af:options collection="listtagApp" property="name" />
-							</af:select></td>
-							<td><af:button type="form"
-								onclick="execSubmit('tagMngtForm','removeTagApplication',this)"
-								name="supprimer" singleSend="true" /></td>
-						</tr>
-					</table>
-					</div>
-					<div id="projTagRemoval" style="visibility: hidden">
-					<div id="hidden" style="display: none;"><af:field key="empty"
-						property="applicationId" value='<%= applicationId%>' /> <af:field
-						key="empty" property="projectId" value='<%= projectId%>' /></div>
-					<table>
-						<tr>
-							<td><bean:define id="listtagProj" name="projectSummaryForm"
-								property="tags"></bean:define> <af:select property="tagDel"
-								name="projectSummaryForm">
-								<af:options collection="listtagProj" property="name" />
-							</af:select></td>
-							<td><af:button type="form"
-								onclick="execSubmit('tagMngtForm','removeTag',this)"
-								name="supprimer" singleSend="true" /></td>
-						</tr>
-					</table>
-					</div>
-				</af:form></div>
-				<div id="tagAddition">
-				<div id="appTagAddition" style="visibility: hidden"><af:form
-					action='<%="project.do?action=addTagApplication&applicationId=" + applicationId + "&currentAuditId=" + currentAuditId + "&projectId=" + projectId%>'>
-					<af:field key="empty" name="projectSummaryForm" property="tagSupp"
-						value="" easyCompleteCallBackUrl="<%=callbackUrlApp%>" />
-				</af:form></div>
-				<div id="projTagAddition" style="visibility: hidden"><af:form
-					action='<%="project.do?action=addTag&projectId=" + projectId + "&currentAuditId=" + currentAuditId%>'>
-					<af:field key="empty" name="projectSummaryForm" property="tagSupp"
-						value="" easyCompleteCallBackUrl="<%=callbackUrlProj%>" />
-				</af:form></div>
-				</div>
 				<%-- FINISH THIS UP ! https://project.squale.org/ticket/140
 				<logic:present name="unexistingTag" scope="request">
 					<div id="unexistingTagBox" title="Tag does not exist">
@@ -151,8 +101,8 @@
 					<script>
 						showErrorModalBox("unexistingTagBox");
 					</script>
-				</logic:present>
-				--%>
+				</logic:present>--%>
+				
 			</squale:resultsHeader>
 			<br />
 			<div style="color: #f00"><html:errors property="exportIDE" />

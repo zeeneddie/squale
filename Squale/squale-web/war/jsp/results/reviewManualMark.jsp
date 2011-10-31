@@ -11,6 +11,10 @@
 <%@ page import="org.squale.squaleweb.applicationlayer.formbean.results.ParamReviewForm" %>
 <%@ page import="org.squale.squaleweb.util.graph.GraphMaker"%>
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
+
 <%String imageDetails = WebMessages.getString(request, "image.review");
 String evolution = WebMessages.getString(request, "tracker.mark.history");
 %>

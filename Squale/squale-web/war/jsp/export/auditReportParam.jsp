@@ -6,6 +6,9 @@
 
 <%@ page import="org.squale.squaleweb.util.SqualeWebActionUtils"%>
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
 
 <bean:define id="applicationId" name="auditReportParamForm" property="applicationId" type="String"/>
 <bean:define id="currentAuditId" name="auditReportParamForm" property="currentAuditId" type="String"/>

@@ -20,6 +20,9 @@
 <script type="text/javascript" src="jslib/manage_tab.js"></script>
 <script type="text/javascript"
 	src="jslib/manage_components_comments.js"></script>
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
 
 <bean:define id="form" name="componentForm" type="ComponentForm" />
 <bean:define id="applicationId" name="componentForm"

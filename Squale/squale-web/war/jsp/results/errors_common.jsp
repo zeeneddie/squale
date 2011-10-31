@@ -5,14 +5,38 @@
 <%@taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
 <%@taglib uri="/squale" prefix="squale"%>
 <%@ page import="org.squale.squaleweb.util.SqualeWebActionUtils"%>
+
+<script type="text/javascript" src="jslib/information.js"></script>
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
+<script type="text/javascript" src="jslib/jquery-ui.js"></script>
+<script type="text/javascript" src="theme/charte_v03_001/js/exporter.js"></script>
+
 <bean:define id="applicationId" name="errorListForm"
 	property="applicationId" type="String" />
 <bean:define id="projectId" name="errorListForm" property="projectId"
 	type="String" />
+<bean:define id="currentAuditId" name="errorListForm"
+	property="currentAuditId" type="String" />
+<bean:define id="previousAuditId" name="errorListForm"
+	property="previousAuditId" type="String" />
+<bean:define id="auditSqualeVersion" name="errorListForm"
+	property="auditSqualeVersion" type="String" />
+<bean:define id="comparable" name="errorListForm"
+	property="comparableAudits" type="Boolean" />	
+<bean:define id="callbackUrlApp">
+	<html:rewrite
+		page="/add_applicationTag.do?action=findTagForAutocomplete" />
+</bean:define>
+<bean:define id="callbackUrlProj">
+	<html:rewrite page="/add_projectTag.do?action=findTagForAutocomplete" />
+</bean:define>	
 <squale:tracker directWay="false" projectId="<%=projectId%>" />
 <af:canvasCenter>
 	<h1><bean:message key="project.errors.title" /></h1>
-	<squale:resultsHeader name="errorListForm" />
+	<squale:resultsHeader name="errorListForm">
+	</squale:resultsHeader>
 	<br />
 	<BR>
 	<af:form action='<%=request.getParameter("actionErrorForm")%>'>

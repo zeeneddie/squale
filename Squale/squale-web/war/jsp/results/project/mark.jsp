@@ -12,6 +12,10 @@
 <%@ page import="org.squale.squaleweb.resources.WebMessages"%>
 <%@ page import="org.squale.welcom.taglib.table.InternalTableUtil" %>
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
+
 <bean:define name="markForm" property="practiceId" id="practiceKey"
 	type="String" />
 <bean:define name="markForm" property="practiceName"

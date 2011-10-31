@@ -18,6 +18,10 @@
 <%@ page import="java.util.Collections"%>
 <%@ page import="org.squale.squaleweb.comparator.ComponentComparator"%>
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
+
 <%
             // On récupère les composants
             Object results[] = (Object[]) request.getSession().getAttribute( SqualeWebConstants.CHILDREN_KEY );

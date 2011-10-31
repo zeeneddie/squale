@@ -14,6 +14,10 @@
 <%@ page import="java.util.ListIterator"%>
 <%@ page import="org.squale.squaleweb.util.SqualeWebActionUtils"%>
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
+
 <bean:define id="projectId" name="projectSummaryForm"
 	property="projectId" type="String" />
 <bean:define id="currentAuditId" name="projectSummaryForm"

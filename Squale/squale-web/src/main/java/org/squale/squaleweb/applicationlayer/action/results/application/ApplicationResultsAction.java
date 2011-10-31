@@ -463,7 +463,7 @@ public class ApplicationResultsAction
                     }
                     
                 }
-                forward = pMapping.findForward( "summary" );
+                forward = pMapping.findForward( "summaryAction" );
             }
         }
         catch ( Exception e )
@@ -543,7 +543,7 @@ public class ApplicationResultsAction
                 }
 
             }
-            forward = pMapping.findForward( "summary" );
+            forward = pMapping.findForward( "summaryAction" );
         }
         catch ( Exception e )
         {

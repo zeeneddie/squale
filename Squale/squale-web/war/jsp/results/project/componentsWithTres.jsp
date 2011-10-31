@@ -7,6 +7,10 @@
 <%@ page import="org.squale.squaleweb.util.SqualeWebConstants"%>
 <%@ page import="org.squale.welcom.taglib.table.InternalTableUtil" %>
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
+
 <bean:define id="projectId" name="ComponentResultListForm" property="projectId"
 	type="String" />
 <bean:define id="projectName" name="ComponentResultListForm" property="projectName"

@@ -7,6 +7,10 @@
 <%@ page import="org.squale.squaleweb.util.SqualeWebConstants" %>
 <%@ page import="org.squale.squaleweb.resources.WebMessages" %>
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
+
 <%-- Affiche les détails d'une transgression --%>
 
 <bean:define id="projectId" name="projectSummaryForm"

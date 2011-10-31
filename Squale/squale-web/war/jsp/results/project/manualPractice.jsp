@@ -7,6 +7,10 @@
 <%@ page import="org.squale.squaleweb.applicationlayer.formbean.results.ProjectSummaryForm" %>
 <%@ page import="org.squale.squaleweb.util.graph.GraphMaker"%>
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
+
 <bean:define id="projectId" name="projectSummaryForm" property="projectId" type="String" />
 <bean:define id="currentAuditId" name="projectSummaryForm"	property="currentAuditId" type="String" />
 <bean:define id="previousAuditId" name="projectSummaryForm"	property="previousAuditId" type="String" />

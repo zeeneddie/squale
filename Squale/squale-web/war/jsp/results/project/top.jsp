@@ -9,6 +9,10 @@
 
 <%@ page import="org.squale.squaleweb.resources.WebMessages"%>
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
+
 <bean:define id="projectId" name="topListForm" property="projectId"
 	type="String" />
 <bean:define id="projectName" name="topListForm" property="projectName"

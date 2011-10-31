@@ -15,6 +15,9 @@
 <script type="text/javascript" src="jslib/jquery.js"></script>
 <script type="text/javascript" src="jslib/jquery-ui.js"></script>
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+
 <bean:define id="projectId" name="manualMarkForm" property="projectIdSafe" type="String" />
 <bean:define id="applicationId" name="manualMarkForm" property="applicationId" type="String" />
 <bean:size id="listSize" name="manualMarkForm" property="manualPracticeList"  />

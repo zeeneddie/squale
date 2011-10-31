@@ -13,6 +13,10 @@
 
 <script type="text/javascript" src="jslib/information.js"></script>
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
+
 <bean:define id="projectId" name="resultListForm" property="projectId"
 	type="String" />
 <bean:define id="currentAuditId" name="resultListForm"

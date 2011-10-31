@@ -18,11 +18,16 @@
  */
 package org.squale.squaleweb.tagslib;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Locale;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -30,10 +35,18 @@ import javax.servlet.jsp.tagext.TagSupport;
 import org.apache.struts.util.RequestUtils;
 import org.apache.struts.util.ResponseUtils;
 
+import org.squale.jraf.commons.exception.JrafEnterpriseException;
+import org.squale.jraf.helper.AccessDelegateHelper;
+import org.squale.jraf.spi.accessdelegate.IApplicationComponent;
+import org.squale.squalecommon.datatransfertobject.component.ApplicationConfDTO;
+import org.squale.squalecommon.datatransfertobject.component.ComponentDTO;
 import org.squale.squalecommon.datatransfertobject.tag.TagDTO;
 import org.squale.squalecommon.enterpriselayer.businessobject.component.ComponentType;
 import org.squale.squalecommon.enterpriselayer.businessobject.profile.ProfileBO;
+import org.squale.squaleweb.applicationlayer.action.ActionUtils;
 import org.squale.squaleweb.applicationlayer.formbean.LogonBean;
+import org.squale.squaleweb.applicationlayer.formbean.component.ApplicationForm;
+import org.squale.squaleweb.applicationlayer.formbean.component.ProjectForm;
 import org.squale.squaleweb.resources.WebMessages;
 import org.squale.welcom.struts.util.WConstants;
 
@@ -79,17 +92,23 @@ public class ResultsHeaderTag
         String projectId = (String) RequestUtils.lookup( pageContext, mName, "projectId", null );
         String auditId = (String) RequestUtils.lookup( pageContext, mName, "currentAuditId", null );
         String previousAuditId = (String) RequestUtils.lookup( pageContext, mName, "previousAuditId", null );
-        Collection<TagDTO> tagsApplication = getTagsComponent( ComponentType.APPLICATION );
-        if ( tagsApplication != null )
+        // Collection<TagDTO> tagsApplication = getTagsComponent( ComponentType.APPLICATION );
+        Collection<TagDTO> tagsApplication = getTagsComponent( appliId );
+        if (( tagsApplication != null ) && (!tagsApplication.isEmpty()))
         {
             pageContext.setAttribute( APPLICATION_HAS_TAGS, !tagsApplication.isEmpty() );
         }
-        Collection<TagDTO> tagsProjet = getTagsComponent( ComponentType.PROJECT );
-        if ( tagsProjet != null )
-        {
-            pageContext.setAttribute( PROJECT_HAS_TAGS, !tagsProjet.isEmpty() );
-        }
 
+        Collection<TagDTO> tagsProjet = new ArrayList<TagDTO>();
+        if ( !"".equals( (String) RequestUtils.lookup( pageContext, mName, "projectId", null ) ) )
+        {
+        	tagsProjet = getTagsComponent( projectId );
+        	if (( tagsProjet != null ) && (!tagsProjet.isEmpty()))
+            {
+                pageContext.setAttribute( PROJECT_HAS_TAGS, !tagsProjet.isEmpty() );
+            }
+        }
+        
         String paramsLink = "&currentAuditId=" + auditId + "&previousAuditId=" + previousAuditId;
         String[] param = new String[1];
         // le nom de l'application :
@@ -139,6 +158,21 @@ public class ResultsHeaderTag
 
         // On écrit le début du block
         ResponseUtils.write( pageContext, blockquote.toString() );
+        ServletRequest request = pageContext.getRequest();
+        ServletResponse response = pageContext.getResponse();
+        RequestDispatcher disp = request.getRequestDispatcher("/jsp/results/tags_common.jsp");
+        
+        try {
+        	request.setAttribute("formName", mName);
+        	request.setAttribute("tagsApplication", tagsApplication);
+        	request.setAttribute("tagsProjet", tagsProjet);
+        	pageContext.include("/jsp/results/tags_common.jsp");
+        } catch (ServletException e) {
+            throw new JspException(e);
+        } catch (IOException e) {
+            throw new JspException(e); 
+        }
+        
         return EVAL_BODY_INCLUDE;
     }
 
@@ -290,36 +324,29 @@ public class ResultsHeaderTag
      * @throws JspException si une erreur est levé pendant la récupération des paramètres de la requete
      */
     @SuppressWarnings( "unchecked" )
-    private Collection<TagDTO> getTagsComponent( String pType )
+    private Collection<TagDTO> getTagsComponent( /* String pType, */ String componentId)
         throws JspException
     {
 
-        Collection<TagDTO> tagsApplication = new ArrayList<TagDTO>();
-        Collection<TagDTO> tagsProjet = new ArrayList<TagDTO>();
+    	Collection<TagDTO> tags = new ArrayList<TagDTO>();
 
-        if ( mName.contains( "application" ) || mName.contains( "resultListForm" ) )
-        {
-            tagsApplication = (Collection<TagDTO>) RequestUtils.lookup( pageContext, mName, "tags", null );
-            tagsProjet = new ArrayList<TagDTO>();
-        }
-        else if ( mName.contains( "project" ) )
-        {
-            tagsProjet = (Collection<TagDTO>) RequestUtils.lookup( pageContext, mName, "tags", null );
-            tagsApplication = (Collection<TagDTO>) RequestUtils.lookup( pageContext, mName, "tagsAppli", null );
-        }
-
-        if ( pType.compareTo( ComponentType.APPLICATION ) == 0 )
-        {
-            return tagsApplication;
-        }
-        else if ( pType.compareTo( ComponentType.PROJECT ) == 0 )
-        {
-            return tagsProjet;
-        }
-        else
-        {
-            return new ArrayList<TagDTO>();
-        }
+    	try {
+    		ComponentDTO dto = new ComponentDTO();
+        	dto.setID(Long.parseLong(componentId));
+            IApplicationComponent ac = AccessDelegateHelper.getInstance( "Component" );
+            Object[] paramIn = { dto };
+            // Exécution de l'AC
+            dto = (ComponentDTO) ac.execute( "get", paramIn );
+            tags = dto.getTags();
+    	} catch (JrafEnterpriseException e) {
+    		throw new JspException(e); 
+    	}
+    	
+    	if (tags == null) {
+    		tags = new ArrayList<TagDTO>();
+    	}
+        
+        return tags;
     }
 
     /**
