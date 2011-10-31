@@ -6,6 +6,9 @@
 <%@taglib uri="http://www.squale.org/welcom/tags-welcom" prefix="af"%>
 <%@taglib uri="/squale" prefix="squale"%>
 
+<script type="text/javascript"
+	src="theme/charte_v03_001/js/tagManagement.js"></script>
+<script type="text/javascript" src="jslib/jquery.js"></script>
 
 <%-- recupere le type de list dans le parametre kind du formulaire --%>
 <bean:define name="splitAuditsListForm" property="kind" id="kind"
@@ -47,7 +50,7 @@ String link = "audits.do?action=select&kind=" + kind + "&oldAudit=" + currentAud
 				<bean:write name="message" />
 			</html:messages></div>
 			<br />
-			<af:form action="purgeAuditAction.do" scope="session" method="POST"
+			<af:form action="audits.do" scope="session" method="POST"
 				name="selectForm"
 				type="org.squale.squaleweb.applicationlayer.formbean.component.AuditListForm">
 				<input type="hidden" name="applicationId" value="<%=applicationId%>" />
@@ -73,9 +76,8 @@ String link = "audits.do?action=select&kind=" + kind + "&oldAudit=" + currentAud
 						toolTipKey="toolTip.audit.purger"
 						messageConfirmationKey="audits_purge.confirm" accessKey="manager" />
 					<logic:notEqual name="kind" value="failed">
-						<af:button type="form" name="validate"
-							toolTipKey="toolTip.valider"
-							onclick="<%=\"sendUncheckbox('selectForm');document.selectForm.submit();location.href='audits.do?action=select&applicationId=\"+applicationId+\"'\"%>" />
+						<af:button type="form" callMethod="select" name="validate"
+							toolTipKey="toolTip.valider" />
 					</logic:notEqual>
 				</af:buttonBar>
 			</af:form>
