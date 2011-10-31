@@ -58,6 +58,76 @@
 <bean:define id="kindOfTaskId" value="<%=kindOfTask%>" />
 <bean:define id="currentKindOfCompil" value="<%= curCompil %>"/>
 
+<%-- Ajout d'une variable eclipse --%>
+<logic:equal name="kindOfTaskId"
+	value="<%=ParametersConstants.ECLIPSE_VARS%>">
+	<af:form action="create_eclipse_var.do?addParameters">
+		<%-- attribut projectId pour les droits d'accès --%>
+		<input name="projectId" value="<%=projectId%>" type="hidden">
+		<%-- type de la tâche --%>
+		<input name="kindOfTask" value="<%=kindOfTask%>" type="hidden"
+			id="kindOfTaskInputId" />
+		<table width="100%" class="formulaire">
+			<THEAD>
+				<tr>
+					<bean:message
+						key="project_creation.compiling.java.eclipse.variable.creation" />
+				</tr>
+			</THEAD>
+			<tr>
+				<af:field key="project_creation.java.eclipse.var.creation.name"
+					size="20" property="name" styleClassLabel="td1" isRequired="true" />
+			</tr>
+			<tr class="fondClair">
+				<af:field key="project_creation.java.eclipse.var.creation.lib"
+					property="lib" styleClassLabel="td1" size="90" isRequired="true" />
+			<tr />
+		</table>
+		<af:buttonBar>
+			<af:button name="valider" singleSend="true"
+				callMethod="addEclipseVar" />
+		</af:buttonBar>
+	</af:form>
+</logic:equal>
+
+<%-- Ajout d'une librairie eclipse --%>
+<logic:equal name="kindOfTaskId"
+	value="<%=ParametersConstants.ECLIPSE_LIBS%>">
+	<af:form action="create_eclipse_lib.do?addParameters">
+		<%-- attribut projectId pour les droits d'accès --%>
+		<input name="projectId" value="<%=projectId%>" type="hidden">
+		<%-- type de la tâche --%>
+		<input name="kindOfTask" value="<%=kindOfTask%>" type="hidden"
+			id="kindOfTaskInputId" />
+		<table width="100%" class="formulaire" id="eclipseLibTable">
+			<THEAD>
+				<tr>
+					<bean:message
+						key="project_creation.compiling.java.eclipse.lib.creation" />
+				</tr>
+			</THEAD>
+			<tr>
+				<af:field key="project_creation.java.eclipse.lib.creation.name"
+					size="20" property="name" styleClassLabel="td1" isRequired="true" />
+			</tr>
+			<tr style="display: none">
+				<af:field styleClassLabel="td1"
+					key="project_creation.java.eclipse.lib.creation.lib"
+					property="libs" value="" size="60" />
+			</tr>
+			<squale:iteratePaths name="eclipseUserLibForm"
+				key="project_creation.java.eclipse.lib.creation.lib" property="libs"
+				disabled="<%=disabled%>" isRequired="true" />
+		</table>
+		<af:buttonBar>
+			<af:button onclick="addField('eclipseLibTable', 2);"
+				name="add_lib_path_line" singleSend="false" />
+			<af:button name="valider" singleSend="true"
+				callMethod="addEclipseLib" />
+		</af:buttonBar>
+	</af:form>
+</logic:equal>
+
 <%-- Choice the kind of compilation --%>
 <%-- Displayed only if the kind of compilation hasn't been done --%>
 <logic:equal name="currentKindOfCompil" value="<%=ParametersConstants.NOT_DEFINED%>">
