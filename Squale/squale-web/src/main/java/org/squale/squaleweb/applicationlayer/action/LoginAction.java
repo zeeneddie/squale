@@ -111,7 +111,7 @@ public class LoginAction
      * @param pRequest la requete
      * @return true si l'utilisateur a pu être initialisé et enregistré en session
      */
-    private boolean initUserInSession( HttpServletRequest pRequest )
+    public boolean initUserInSession( HttpServletRequest pRequest )
     {
         ActionMessages errors = new ActionMessages();
         boolean success;
@@ -150,7 +150,7 @@ public class LoginAction
      * @throws JrafEnterpriseException si erreur Jraf
      * @throws WTransformerException si erreur lors de la transformation
      */
-    private LogonBean getUser( HttpServletRequest pRequest )
+    public LogonBean getUser( HttpServletRequest pRequest )
         throws ConnectionException, JrafEnterpriseException, WTransformerException
     {
         // Obtention des informations sur l'utilisateur connecté
