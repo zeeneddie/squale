@@ -1,3 +1,4 @@
+var agt=navigator.userAgent.toLowerCase();
 var is_IE = (agt.indexOf("msie") != -1);
 
 function eraseCanvasLeft(){

@@ -5,8 +5,8 @@
 
 <%@ page import="org.squale.squaleweb.applicationlayer.formbean.homepagemanagement.HomepageManagementForm" %>
  
+<script type="text/javascript" src="theme/charte_v03_001/js/homepageManagement.js"></script> 
 <script type="text/javascript" src="theme/charte_v03_001/js/format_page.js"></script>
-<script type="text/javascript" src="theme/charte_v03_001/js/homepageManagement.js"></script>
 
 <af:page>
 	<af:body>
