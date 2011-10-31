@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -152,8 +154,10 @@ public abstract class AbstractCpdProcessing
         ListParameterBO excluded =
             (ListParameterBO) pProjectParams.getParameters().get( ParametersConstants.EXCLUDED_PATTERNS );
         List srcs = BuildProjectPath.buildProjectPath( viewPath, sources.getParameters() );
+        List srcsNoDuplicates = new ArrayList(new HashSet(srcs));
+
         List includedFileNames =
-            FileUtility.getIncludedFiles( viewPath, srcs, included, excluded, getExcludedDirs( pProjectParams ),
+            FileUtility.getIncludedFiles( viewPath, srcsNoDuplicates, included, excluded, getExcludedDirs( pProjectParams ),
                                           getExtensions() );
 
         // Conversion en fichiers
